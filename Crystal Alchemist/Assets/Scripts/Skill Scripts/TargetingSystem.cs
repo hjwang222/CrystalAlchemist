@@ -10,8 +10,6 @@ public enum TargetingMode
     manual
 }
 
-
-
 public class TargetingSystem : MonoBehaviour
 {
     private List<Character> targetsInRange = new List<Character>();
@@ -46,7 +44,7 @@ public class TargetingSystem : MonoBehaviour
     //TODO: Lock On Cooldown und Combo (Singletarget, 1 press = aktiv, 1 press = do it)
     //TODO: Lock On radius indicator + Duration Time
     //TODO: Lock On Time to lock
-
+    //TODO: NEU IN GIT
 
     void Start()
     {        
