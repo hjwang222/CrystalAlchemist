@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7792743474313937378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7792743474313937377}
+  - component: {fileID: 7792743474313937382}
+  - component: {fileID: 7792743474313937383}
+  - component: {fileID: 8743461609990765899}
+  m_Layer: 0
+  m_Name: Regena
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7792743474313937377
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792743474313937378}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.14899082}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 9.331924, y: 1.9714661}
+  m_SizeDelta: {x: 48, y: 48}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7792743474313937382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792743474313937378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe38f3cb00c4c84ea801bab87a6e5a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffectName: Regena
+  iconSprite: {fileID: 21300020, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
+  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
+  endType: 0
+  statusEffectDescription: 
+  statusEffectDuration: 10
+  statusEffectInterval: 1
+  statusEffectManaDrain: 0
+  statusEffectManaDrainInterval: 1
+  maxStacks: 3
+  canOverride: 1
+  canDeactivateIt: 0
+  canBeDispelled: 1
+  statusEffectType: 0
+  statusEffectColor: {r: 0.29152864, g: 0.77254903, b: 0.12941174, a: 1}
+  script: {fileID: 0}
+  target: {fileID: 0}
+  statusEffectTimeLeft: 0
+  timeDistortion: 1
+--- !u!222 &7792743474313937383
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792743474313937378}
+  m_CullTransparentMesh: 0
+--- !u!114 &8743461609990765899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792743474313937378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04998793ff2ca344aadb3ca8ccb03e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  skill: {fileID: 0}
+  value: 0.25
