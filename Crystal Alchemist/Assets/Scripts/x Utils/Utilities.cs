@@ -58,20 +58,20 @@ public class Utilities : MonoBehaviour
         return activeSkill.GetComponent<Skill>();
     }
 
-    public static bool hasChildWithTag(Character character, string searchTag)
+    public static GameObject hasChildWithTag(Character character, string searchTag)
     {
-        bool found = false;
+        GameObject result = null;
 
         for (int i = 0; i < character.transform.childCount; i++)
         {
             if (character.transform.GetChild(i).tag == searchTag)
             {
-                found = true;
-                break;
+                result = character.transform.GetChild(i).gameObject;
+                return result;
             }
         }
 
-        return found;
+        return result;
     }
 
     public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect, FloatValue soundEffectVolume)

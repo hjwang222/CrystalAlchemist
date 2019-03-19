@@ -41,14 +41,15 @@ public class Skill : MonoBehaviour
     [Header("Zielerfassungsattribute")]
     [Tooltip("Ob das Ziel erfasst werden soll. Wenn NULL, dann nicht.")]
     public GameObject lockOn;
-    public int minAmountOfTargets = 1;
+    [Range(0, Utilities.maxIntSmall)]
     public int maxAmountOfTargets = 1;
+    [Range(0, Utilities.maxFloatInfinite)]
     public float targetingDuration = 6f;
-    public float timeForLockOn = 0;
-    public bool startMultiple = false;
+    public TargetingMode targetingMode = TargetingMode.manual;
     [Tooltip("In welchen Intervallen die Ziele getroffen werden sollen")]
     [Range(0, 10)]
     public float multiHitDelay = 0;
+    public bool showRange = false;
 
     [Header("Basis Attribute (bezogen auf Effekte des Ziels)")]
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]

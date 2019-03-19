@@ -148,7 +148,7 @@ public class PlayerMovement : Character
                 && this.activeLockOnTarget == null)
             {
                 GameObject temp = Instantiate(this.castbar.gameObject, this.transform.position, Quaternion.identity, this.transform);
-                temp.hideFlags = HideFlags.HideInHierarchy;
+                //temp.hideFlags = HideFlags.HideInHierarchy;
                 this.activeCastbar = temp.GetComponent<CastBar>();
                 this.activeCastbar.target = this;
                 this.activeCastbar.skill = skill;
@@ -199,8 +199,8 @@ public class PlayerMovement : Character
             TargetingSystem lockOnScript = this.activeLockOnTarget.GetComponent<TargetingSystem>();
             lockOnScript.button = button;
             lockOnScript.sender = this;
-            lockOnScript.skill = skill;
-            this.activeLockOnTarget.hideFlags = HideFlags.HideInHierarchy; //TODO: Debug Value as Scriptable Object
+            lockOnScript.skill = skill;            
+            //this.activeLockOnTarget.hideFlags = HideFlags.HideInHierarchy; //TODO: Debug Value as Scriptable Object
         }       
     }
 

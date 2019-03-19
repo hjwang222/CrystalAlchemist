@@ -58,11 +58,14 @@ MonoBehaviour:
   scriptActivation: 0
   duration: 10
   cooldown: 3.4
+  cooldownAfterCombo: 0
+  durationCombo: 0
   lockOn: {fileID: 6540191019208669748, guid: 5b2939f613b001c4a9eb3296ae0d2093, type: 3}
-  startMultiple: 0
-  singleTargetOnly: 0
-  multiTargetOnly: 0
+  maxAmountOfTargets: 7
+  targetingDuration: 45
+  targetingMode: 2
   multiHitDelay: 0
+  showRange: 0
   addLifeTarget: -1
   addManaTarget: 0
   statusEffects: []
@@ -89,6 +92,7 @@ MonoBehaviour:
   thrust: 0
   knockbackTime: 0
   maxAmounts: 99
+  comboAmount: 99
   summon: {fileID: 0}
   script: {fileID: 4238057447665557524}
   element: 8
