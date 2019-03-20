@@ -256,6 +256,7 @@ public class Skill : MonoBehaviour
 
         //TODO: AUSLAGERN!
         this.direction = this.sender.direction;
+        if (this.target != null) this.direction = this.target.transform.position - this.sender.transform.position;
 
         Vector2 start = new Vector2(this.sender.transform.position.x + (this.sender.direction.x * this.positionOffset),
                                     this.sender.transform.position.y + (this.sender.direction.y * this.positionOffset));

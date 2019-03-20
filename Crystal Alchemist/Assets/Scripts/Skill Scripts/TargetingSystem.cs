@@ -8,7 +8,9 @@ public enum TargetingMode
 {
     single,
     multi,
-    manual
+    manual, 
+    autoSingle,
+    autoMulti
 }
 
 public class TargetingSystem : MonoBehaviour
@@ -44,7 +46,6 @@ public class TargetingSystem : MonoBehaviour
     
     //TODO: Hold button (z.B. für Mehrfachlaser)
     //TODO: Lock On Cooldown und Combo (Singletarget, 1 press = aktiv, 1 press = do it)
-
 
     void Start()
     {        
@@ -106,7 +107,7 @@ public class TargetingSystem : MonoBehaviour
     private void checkInputs()
     {
         //Button press here
-        if (Input.GetButtonDown(this.button))
+        if (Input.GetButtonDown(this.button) || this.targetMode == TargetingMode.autoSingle)
         {
             this.targetsSet = true;
         }
@@ -134,6 +135,11 @@ public class TargetingSystem : MonoBehaviour
         {
             StartCoroutine(selectionMode(1));
         }
+        else if (this.targetMode == TargetingMode.autoMulti)
+        {
+            StartCoroutine(selectionMode(1));
+            this.targetsSet = true;
+        }       
     }
 
 

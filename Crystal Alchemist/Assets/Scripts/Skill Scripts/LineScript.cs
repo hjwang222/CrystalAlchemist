@@ -60,7 +60,16 @@ public class LineScript : Script
     private void renderLine(bool updateRotation)
     {
         //TODO: AUSLAGERN!
-        if (updateRotation) this.direction = this.skill.sender.direction;
+        if (updateRotation)
+        {
+            this.direction = this.skill.sender.direction;
+            if (this.skill.target != null)
+            {
+                this.direction = this.skill.target.transform.position - this.skill.sender.transform.position;
+                float temp_angle = Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg;
+                this.direction = DegreeToVector2(temp_angle);
+            }
+        }
 
         Vector2 startpoint = new Vector2(this.skill.sender.transform.position.x + (this.direction.x * this.skill.positionOffset),
                                          this.skill.sender.transform.position.y + (this.direction.y * this.skill.positionOffset));

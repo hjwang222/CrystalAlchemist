@@ -46,11 +46,11 @@ public class PlayerMovement : Character
         if (this.currentState != CharacterState.attack
             && this.currentState != CharacterState.knockedback)
         {
-            
-            //if (Input.GetButtonDown("A-Button"))            
-                //AButtonPressed();     
 
             
+            //AButtonPressed();     
+
+
 
 
             useSkill("A-Button");
@@ -216,14 +216,20 @@ public class PlayerMovement : Character
 
             TargetingSystem targetingSystem = this.activeLockOnTarget.GetComponent<TargetingSystem>();
 
-            if (targetingSystem.currentTarget == null && targetingSystem.sortedTargets.Count == 0)
-            {                
+            if (targetingSystem.currentTarget == null 
+                && targetingSystem.sortedTargets.Count == 0
+                && skill.targetingMode != TargetingMode.autoMulti
+                && skill.targetingMode != TargetingMode.autoSingle)
+            {                     
                 Destroy(this.activeLockOnTarget);
                 this.activeLockOnTarget = null;
             }
-            else
+            else if(targetingSystem.currentTarget != null
+                || targetingSystem.sortedTargets.Count > 0
+                || skill.targetingMode == TargetingMode.autoMulti
+                || skill.targetingMode == TargetingMode.autoSingle)
             {
-                if (targetingSystem.selectAll)
+                if (targetingSystem.selectAll || skill.targetingMode == TargetingMode.autoMulti)
                 {
                     for (int i = 0; i < targetingSystem.listOfTargetsWithMark.Count; i++)
                     {
@@ -232,8 +238,12 @@ public class PlayerMovement : Character
 
                     //Multihit!
                     StartCoroutine(fireSkillToTarget(targetingSystem, skill));
+
+                    //Fire Skill one time when no target is there
+                    if(skill.targetingMode == TargetingMode.autoMulti && targetingSystem.sortedTargets.Count == 0)
+                        fireSkillToTarget(targetingSystem.currentTarget, 1, true, skill);
                 }
-                else
+                else if (!targetingSystem.selectAll || skill.targetingMode == TargetingMode.autoSingle)
                 {
                     //SingleHit
                     Destroy(targetingSystem.singleTargetWithMark);
