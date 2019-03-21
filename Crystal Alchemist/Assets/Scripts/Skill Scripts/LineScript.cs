@@ -62,17 +62,18 @@ public class LineScript : Script
         //TODO: AUSLAGERN!
         if (updateRotation)
         {
-            this.direction = this.skill.sender.direction;
-            if (this.skill.target != null)
-            {
-                this.direction = this.skill.target.transform.position - this.skill.sender.transform.position;
-                float temp_angle = Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg;
-                this.direction = DegreeToVector2(temp_angle);
-            }
+            this.direction = this.skill.sender.direction;            
         }
 
         Vector2 startpoint = new Vector2(this.skill.sender.transform.position.x + (this.direction.x * this.skill.positionOffset),
-                                         this.skill.sender.transform.position.y + (this.direction.y * this.skill.positionOffset));
+                                         this.skill.sender.transform.position.y + (this.direction.y * this.skill.positionOffset) + this.skill.positionHeight);
+
+        if (this.skill.target != null && updateRotation)
+        {
+            this.direction = (Vector2)this.skill.target.transform.position - startpoint;
+            float temp_angle = Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg;
+            this.direction = DegreeToVector2(temp_angle);
+        }
 
         //Utilities.berechneWinkel(this.sender.transform.position, this.sender.direction, this.positionOffset, this.rotateIt, this.snapRotationInDegrees, out angle, out start, out this.direction);
 
@@ -88,10 +89,16 @@ public class LineScript : Script
         this.lineRenderer.startWidth = this.width * this.animatorWidth;
         this.lineRenderer.endWidth = this.width * this.animatorWidth;
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(startpoint, direction, this.distance);
+        //No hit on itself
+        int layerMask = 1 << this.skill.sender.gameObject.layer;
+        layerMask = ~layerMask;
+
+        RaycastHit2D hitInfo = Physics2D.Raycast(startpoint, direction, this.distance, layerMask);
 
         if (hitInfo && !hitInfo.collider.isTrigger)
         {
+            Debug.Log(hitInfo.transform.gameObject.name);
+
             if (Utilities.checkCollision(hitInfo.collider, this.skill))
             {
                 Character hittedCharacter = hitInfo.transform.GetComponent<Character>();

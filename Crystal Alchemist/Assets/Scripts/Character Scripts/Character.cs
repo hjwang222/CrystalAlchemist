@@ -258,11 +258,13 @@ public class Character : MonoBehaviour
     public void init()
     {
         this.direction = new Vector2(0, -1);
-        //getItems();       
+        //getItems();    
+        
         setComponents();
         spawn();
         Utilities.setItem(this.lootTable, this.multiLoot, this.items);
         if (this.initializeSkill != null) useSkillInstantly(this.initializeSkill);
+        //this.gameObject.layer = LayerMask.NameToLayer(this.gameObject.tag);
     }
 
     private void setComponents()

@@ -170,12 +170,12 @@ public class Utilities : MonoBehaviour
         //if (this.items.Count > 0) this.text = this.text.Replace("%XY%", this.items[0].GetComponent<Item>().amount + " " + this.items[0].GetComponent<Item>().name);
     }
 
-    private static Vector2 RadianToVector2(float radian)
+    public static Vector2 RadianToVector2(float radian)
     {
         return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
     }
 
-    private static Vector2 DegreeToVector2(float degree)
+    public static Vector2 DegreeToVector2(float degree)
     {
         return RadianToVector2(degree * Mathf.Deg2Rad);
     }

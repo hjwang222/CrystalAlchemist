@@ -45,6 +45,7 @@ public class Skill : MonoBehaviour
     public int maxAmountOfTargets = 1;
     [Range(0, Utilities.maxFloatInfinite)]
     public float targetingDuration = 6f;
+    [Tooltip("Manual = Spieler kann Ziele auswählen, Single = näheste Ziel, Multi = Alle in Range, Auto = Sofort ohne Bestätigung")]
     public TargetingMode targetingMode = TargetingMode.manual;
     [Tooltip("In welchen Intervallen die Ziele getroffen werden sollen")]
     [Range(0, 10)]
@@ -97,6 +98,9 @@ public class Skill : MonoBehaviour
     [Range(0, 2)]
     [Tooltip("Positions-Offset, damit es nicht im Character anfängt")]
     public float positionOffset = 1f;
+    [Range(0, 2)]
+    [Tooltip("Positions-Höhe")]
+    public float positionHeight = 0f;
     [Tooltip("Ist das Projektil stationär. True = liegt einfach herum (z.B. Bombe)")]
     public bool isStationary = false;
 
@@ -200,7 +204,7 @@ public class Skill : MonoBehaviour
     {
         this.cooldownTimeLeft = 0;
         setBasicAttributes();
-        updateLifeManaFromSender();               
+        updateLifeManaFromSender();        
 
         this.script = Utilities.setScript(this.GetComponent<Script>(), this.transform, this, this.target);
         
@@ -208,6 +212,8 @@ public class Skill : MonoBehaviour
         {
             throw new System.Exception("No SENDER found! Must be player!");
         }
+
+        //this.gameObject.layer = LayerMask.NameToLayer(this.sender.gameObject.tag + " Skill");
 
         if (this.script != null) this.script.onInitialize();
     }   
@@ -256,10 +262,12 @@ public class Skill : MonoBehaviour
 
         //TODO: AUSLAGERN!
         this.direction = this.sender.direction;
-        if (this.target != null) this.direction = this.target.transform.position - this.sender.transform.position;
+        
 
         Vector2 start = new Vector2(this.sender.transform.position.x + (this.sender.direction.x * this.positionOffset),
-                                    this.sender.transform.position.y + (this.sender.direction.y * this.positionOffset));
+                                    this.sender.transform.position.y + (this.sender.direction.y * this.positionOffset) + this.positionHeight);
+
+        if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;
 
         this.transform.position = start;
         //Utilities.berechneWinkel(this.sender.transform.position, this.sender.direction, this.positionOffset, this.rotateIt, this.snapRotationInDegrees, out angle, out start, out this.direction);

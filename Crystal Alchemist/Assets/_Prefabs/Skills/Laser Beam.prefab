@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3643736897288348028}
   - component: {fileID: 3643736897288348029}
   - component: {fileID: 3643736897288348026}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Laser Beam
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -152,11 +152,11 @@ MonoBehaviour:
   cooldown: 0
   cooldownAfterCombo: 0
   durationCombo: 0
-  lockOn: {fileID: 6540191019208669748, guid: 5b2939f613b001c4a9eb3296ae0d2093, type: 3}
-  maxAmountOfTargets: 9
-  targetingDuration: 6
-  targetingMode: 4
-  multiHitDelay: 0.3
+  lockOn: {fileID: 0}
+  maxAmountOfTargets: 0
+  targetingDuration: 0
+  targetingMode: 0
+  multiHitDelay: 0
   showRange: 0
   addLifeTarget: -0.25
   addManaTarget: 0
@@ -173,7 +173,8 @@ MonoBehaviour:
   rotateEndSprite: 0
   snapRotationInDegrees: 0
   isRapidFire: 0
-  positionOffset: 0.75
+  positionOffset: 0
+  positionHeight: 1
   isStationary: 0
   affectSelf: 0
   affectPlayers: 0
