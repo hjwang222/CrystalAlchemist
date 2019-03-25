@@ -45,7 +45,7 @@ public class ArrowScript : Script
             if (!skill.rotateEndSprite) skill.transform.rotation = Quaternion.Euler(0,0,0);
             if (skill.animator != null) skill.animator.SetBool("Hit", true);
             if (skill.myRigidbody != null) skill.myRigidbody.velocity = Vector2.zero;
-            skill.isNotActive = true;
+            skill.isActive = false;
         }
     }
 

@@ -1,0 +1,254 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5930893801605544000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 646943496310597046}
+  - component: {fileID: 9156133537040866457}
+  - component: {fileID: 7552460943313825279}
+  - component: {fileID: 1271677744717148833}
+  - component: {fileID: 5030363094213464078}
+  - component: {fileID: 9152328833511650418}
+  - component: {fileID: 3064428211138301131}
+  m_Layer: 0
+  m_Name: Breitschwertschlag
+  m_TagString: Attack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &646943496310597046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930893801605544000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9156133537040866457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930893801605544000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Rundumschwung
+  global: {fileID: 11400000, guid: 986022dcee4ee954eaa9f9d283c038e9, type: 2}
+  soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
+  cast: 1.5
+  keepHoldTimer: 0
+  delay: 0
+  scriptActivation: 0
+  duration: 9999
+  cooldown: 1
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  lockOn: {fileID: 0}
+  maxAmountOfTargets: 0
+  targetingDuration: 0
+  targetingMode: 0
+  multiHitDelay: 0
+  showRange: 0
+  addLifeTarget: -2
+  addManaTarget: 0
+  statusEffects: []
+  target: {fileID: 0}
+  addLifeSender: 0
+  addManaSender: 0
+  intervallSender: 0
+  speedDuringCasting: -75
+  speedDuringDuration: -99
+  lockMovementonDuration: 1
+  speed: 0
+  rotateIt: 1
+  rotationModifier: 90
+  rotateEndSprite: 0
+  snapRotationInDegrees: 90
+  isRapidFire: 0
+  positionOffset: 0
+  positionHeight: 0
+  isStationary: 0
+  affectSelf: 0
+  affectPlayers: 0
+  affectEnemies: 1
+  affectObjects: 1
+  affectSkills: 1
+  ignoreInvincibility: 0
+  thrust: 8
+  knockbackTime: 0.5
+  maxAmounts: 1
+  comboAmount: 99
+  summon: {fileID: 0}
+  script: {fileID: 0}
+  element: 8
+  skillDescription: 
+  sender: {fileID: 0}
+  icon: {fileID: 21300000, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  startSoundEffect: {fileID: 8300000, guid: 5524b6e8c3f491c42a39af04a2460765, type: 3}
+  endSoundEffect: {fileID: 0}
+  animSoundeffect: {fileID: 0}
+  showIndicator: 0
+  showCastBar: 0
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  scriptActivationTimeLeft: 0
+  cooldownTimeLeft: -0.013906302
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  playEndEffectAlready: 0
+  spriteRenderer: {fileID: 0}
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 0
+  holdTimer: 0
+--- !u!60 &7552460943313825279
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930893801605544000}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.49651623, y: -0.12630762}
+      - {x: -0.4142286, y: -0.123294875}
+      - {x: -0.74201876, y: -0.8199428}
+      - {x: -0.022732988, y: -1.1119922}
+      - {x: 0.68864053, y: -0.8137875}
+--- !u!212 &1271677744717148833
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930893801605544000}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300108, guid: f3e0ea032db470442af7fcac9d83f1cb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!50 &5030363094213464078
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930893801605544000}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!95 &9152328833511650418
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930893801605544000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: acaa4f50b2272c943a65576191cbb56e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &3064428211138301131
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930893801605544000}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1

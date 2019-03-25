@@ -184,6 +184,8 @@ public class PlayerMovement : Character
 
     private void activateSkill(string button, Skill skill)
     {
+        if (this.activeCastbar != null) this.activeCastbar.destroyIt();
+
         if (skill.lockOn == null)
         {
             //Benutze Skill (ohne Zielerfassung)            

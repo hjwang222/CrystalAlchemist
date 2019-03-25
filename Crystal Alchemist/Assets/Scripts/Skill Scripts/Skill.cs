@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Skill : MonoBehaviour
 {
@@ -88,6 +86,8 @@ public class Skill : MonoBehaviour
     public float speed = 0;
     [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
     public bool rotateIt = false;
+    [Range(-360, 360)]
+    public float rotationModifier = 0;
     [Tooltip("Soll der Hit-Sprite passend zur Flugbahn rotieren?")]
     public bool rotateEndSprite = false;
     [Tooltip("Welche Winkel sollen fest gestellt werden. 0 = frei. 45 = 45° Winkel")]
@@ -185,7 +185,7 @@ public class Skill : MonoBehaviour
     [HideInInspector]
     public Vector2 direction;
     [HideInInspector]
-    public bool isNotActive = false; //damit kein Zeitstop bei einem stumpfen Pfeil gemacht wird
+    public bool isActive = true; //damit kein Zeitstop bei einem stumpfen Pfeil gemacht wird
     private float elapsed;
     [HideInInspector]
     public float holdTimer = 0;
@@ -261,19 +261,11 @@ public class Skill : MonoBehaviour
         }
 
         //TODO: AUSLAGERN!
-        this.direction = this.sender.direction;
-        
+        this.direction = this.sender.direction;        
 
-        Vector2 start = new Vector2(this.sender.transform.position.x + (this.sender.direction.x * this.positionOffset),
-                                    this.sender.transform.position.y + (this.sender.direction.y * this.positionOffset) + this.positionHeight);
-
-        if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;
-
-        this.transform.position = start;
         //Utilities.berechneWinkel(this.sender.transform.position, this.sender.direction, this.positionOffset, this.rotateIt, this.snapRotationInDegrees, out angle, out start, out this.direction);
 
-        float angle = 0;
-        if (this.rotateIt) angle = Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg;
+        float angle = (Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg)+this.rotationModifier;
 
         if (this.snapRotationInDegrees > 0)
         {
@@ -281,14 +273,22 @@ public class Skill : MonoBehaviour
             this.direction = DegreeToVector2(angle);
         }
 
+        Vector2 start = new Vector2(this.sender.transform.position.x + (this.direction.x * this.positionOffset),
+                             this.sender.transform.position.y + (this.direction.y * this.positionOffset) + this.positionHeight);
+
+        if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;
+
+        this.transform.position = start;
+
         Vector3 rotation = new Vector3(0, 0, angle);
 
         if (this.myRigidbody != null)
         {
             this.myRigidbody.velocity = this.direction.normalized * this.speed;
-            this.tempVelocity = this.myRigidbody.velocity;
-            transform.rotation = Quaternion.Euler(rotation);
+            this.tempVelocity = this.myRigidbody.velocity;            
         }
+
+        if(this.rotateIt) transform.rotation = Quaternion.Euler(rotation);
     }
 
     #endregion
@@ -302,68 +302,69 @@ public class Skill : MonoBehaviour
     }
 
     private void doOnUpdate()
-    {
-        if (this.intervallSender > 0)
-        {
-            if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.timeDistortion);
-            else
+    {        
+            if (this.intervallSender > 0)
             {
-                if (this.sender != null)
+                if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.timeDistortion);
+                else
                 {
-                    if (this.sender.mana - this.addManaSender < 0) this.duration = 0;
-                    else
+                    if (this.sender != null)
                     {
-                        this.elapsed = this.intervallSender;
-                        this.sender.updateMana(this.addManaSender);
-                        this.sender.updateLife(this.addLifeSender);
+                        if (this.sender.mana - this.addManaSender < 0) this.duration = 0;
+                        else
+                        {
+                            this.elapsed = this.intervallSender;
+                            this.sender.updateMana(this.addManaSender);
+                            this.sender.updateLife(this.addLifeSender);
+                        }
                     }
                 }
             }
-        }
 
-        if (this.speedDuringDuration != 0) this.sender.updateSpeed(this.speedDuringDuration);
+            if (this.speedDuringDuration != 0) this.sender.updateSpeed(this.speedDuringDuration);
 
-        if (this.animator != null && this.sender != null && !this.lockMovementonDuration)
-        {
-            this.animator.SetFloat("moveX", this.sender.direction.x);
-            this.animator.SetFloat("moveY", this.sender.direction.y);
-        }
-
-        if (this.delayTimeLeft > 0)
-        {
-            this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
-            if (this.animator != null) this.animator.SetFloat("Time", this.delayTimeLeft);
-            //do something here
-        }
-        else
-        {
-            if (this.script != null)
+            if (this.animator != null && this.sender != null && !this.lockMovementonDuration)
             {
-                if (this.scriptActivationTimeLeft > 0)
-                {
-                    this.scriptActivationTimeLeft -= (Time.deltaTime * this.timeDistortion);
-                }
-                else
-                {
-                    this.script.onUpdate();
-                }
+                this.animator.SetFloat("moveX", this.sender.direction.x);
+                this.animator.SetFloat("moveY", this.sender.direction.y);
             }
 
-            //Prüfe ob der Skill eine Maximale Dauer hat
-            if (this.durationTimeLeft < Utilities.maxFloatInfinite)
+            if (this.delayTimeLeft > 0)
             {
-                if (this.durationTimeLeft > 0)
+                this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
+                if (this.animator != null) this.animator.SetFloat("Time", this.delayTimeLeft);
+                //do something here
+            }
+            else
+            {
+                if (this.script != null)
                 {
-                    this.durationTimeLeft -= (Time.deltaTime * this.timeDistortion);
+                    if (this.scriptActivationTimeLeft > 0)
+                    {
+                        this.scriptActivationTimeLeft -= (Time.deltaTime * this.timeDistortion);
+                    }
+                    else
+                    {
+                        this.script.onUpdate();
+                    }
                 }
-                else
-                {
-                    if (this.animator != null) this.animator.SetBool("Explode", true);
 
-                    if (this.animator == null || this.animator.GetBool("Explode") == false) DestroyIt();
+                //Prüfe ob der Skill eine Maximale Dauer hat
+                if (this.durationTimeLeft < Utilities.maxFloatInfinite)
+                {
+                    if (this.durationTimeLeft > 0)
+                    {
+                        this.durationTimeLeft -= (Time.deltaTime * this.timeDistortion);
+                    }
+                    else
+                    {
+                        if (this.animator != null) this.animator.SetBool("Explode", true);
+
+                        if (this.animator == null || this.animator.GetBool("Explode") == false) DestroyIt();
+                    }
                 }
             }
-        }
+        
     }
 
     public void landAttack(Character hittedObject)
@@ -456,11 +457,13 @@ public class Skill : MonoBehaviour
     }
 
     public void DestroyIt()
-    {
+    {        
         if (this.speedDuringDuration != 0) this.sender.updateSpeed(0);
         if (this.script != null) this.script.onDestroy();
-        this.sender.activeSkills.Remove(this);
-        Destroy(this.gameObject, 0.1f);
+        this.sender.activeSkills.Remove(this);        
+        //this.isActive = false;
+        Destroy(this.gameObject);
+
     }
 
     #endregion
@@ -474,7 +477,7 @@ public class Skill : MonoBehaviour
 
         if (this.animator != null) this.animator.speed = this.timeDistortion;
         if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
-        if (this.myRigidbody != null && !this.isNotActive) this.myRigidbody.velocity = this.direction.normalized * this.speed * this.timeDistortion;    
+        if (this.myRigidbody != null && this.isActive) this.myRigidbody.velocity = this.direction.normalized * this.speed * this.timeDistortion;    
     }
 
     #endregion

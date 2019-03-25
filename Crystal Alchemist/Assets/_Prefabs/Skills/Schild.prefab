@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8557586700020975895}
   - component: {fileID: 6086066880683234547}
   m_Layer: 10
-  m_Name: Schild
+  m_Name: zOLD_Schild
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,35 +52,48 @@ MonoBehaviour:
   global: {fileID: 11400000, guid: 986022dcee4ee954eaa9f9d283c038e9, type: 2}
   soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
   cast: 0
+  keepHoldTimer: 0
   delay: 0
   scriptActivation: 0
   duration: 9999
   cooldown: 0
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  lockOn: {fileID: 0}
+  maxAmountOfTargets: 1
+  targetingDuration: 6
+  targetingMode: 2
+  multiHitDelay: 0
+  showRange: 0
   addLifeTarget: 0
   addManaTarget: 0
-  positionOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateEndSprite: 0
-  snapRotationInDegrees: 0
-  isRapidFire: 1
-  isStationary: 0
-  lockDirection: 0
-  affectSelf: 0
-  affectPlayers: 0
-  affectEnemies: 0
-  affectObjects: 0
-  affectSkills: 0
-  ignoreInvincibility: 0
+  statusEffects: []
+  target: {fileID: 0}
   addLifeSender: 0
   addManaSender: 0
+  intervallSender: 0
   speedDuringCasting: 0
-  speedDuringDuration: -1.5
+  speedDuringDuration: -50
   lockMovementonDuration: 1
+  speed: 0
+  rotateIt: 0
+  rotationModifier: 0
+  rotateEndSprite: 0
+  snapRotationInDegrees: 90
+  isRapidFire: 1
+  positionOffset: 0.125
+  positionHeight: 0
+  isStationary: 0
+  affectSelf: 0
+  affectPlayers: 0
+  affectEnemies: 1
+  affectObjects: 1
+  affectSkills: 1
+  ignoreInvincibility: 0
   thrust: 0
   knockbackTime: 0
-  statusEffects: []
   maxAmounts: 1
+  comboAmount: 99
   summon: {fileID: 0}
   script: {fileID: 0}
   element: 8
@@ -89,6 +102,7 @@ MonoBehaviour:
   icon: {fileID: 21300002, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 0}
   endSoundEffect: {fileID: 0}
+  animSoundeffect: {fileID: 0}
   showIndicator: 0
   showCastBar: 0
   delayTimeLeft: 0
@@ -102,7 +116,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   timeDistortion: 1
   direction: {x: 0, y: 0}
-  isNotActive: 0
+  isActive: 1
+  holdTimer: 0
 --- !u!61 &6160399831737830527
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,7 +135,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.625}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

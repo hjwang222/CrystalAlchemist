@@ -460,7 +460,7 @@ public class Character : MonoBehaviour
 
     public void updateSpeed(float addSpeed)
     {
-        this.speed = ((this.startSpeed * this.speedMultiply / 100) + (addSpeed / 100)) * this.timeDistortion;
+        this.speed = ((this.startSpeed / 100) + (addSpeed / 100)) * this.timeDistortion * this.speedMultiply;
         this.animator.speed = this.speed / (this.startSpeed * this.speedMultiply / 100);
     }
 

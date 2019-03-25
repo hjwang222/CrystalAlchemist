@@ -96,9 +96,7 @@ public class LineScript : Script
         RaycastHit2D hitInfo = Physics2D.Raycast(startpoint, direction, this.distance, layerMask);
 
         if (hitInfo && !hitInfo.collider.isTrigger)
-        {
-            Debug.Log(hitInfo.transform.gameObject.name);
-
+        {           
             if (Utilities.checkCollision(hitInfo.collider, this.skill))
             {
                 Character hittedCharacter = hitInfo.transform.GetComponent<Character>();
