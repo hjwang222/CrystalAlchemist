@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8174385160141502716}
-  - component: {fileID: 6136831148478470944}
   - component: {fileID: 103987821612614508}
   - component: {fileID: 925074013887456532}
   - component: {fileID: 999424728463326629}
@@ -38,77 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6136831148478470944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925074013887456554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: Boomerang
-  global: {fileID: 11400000, guid: 986022dcee4ee954eaa9f9d283c038e9, type: 2}
-  soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
-  cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  scriptActivation: 0.5
-  duration: 99
-  cooldown: 0.3
-  lockOnTarget: 0
-  addLifeTarget: -1
-  addManaTarget: 0
-  statusEffects: []
-  speed: 15
-  rotateIt: 1
-  rotateEndSprite: 0
-  snapRotationInDegrees: 90
-  isRapidFire: 0
-  positionOffset: 0.75
-  isStationary: 0
-  affectSelf: 0
-  affectPlayers: 0
-  affectEnemies: 1
-  affectObjects: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
-  addLifeSender: 0
-  addManaSender: 0
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  lockMovementonDuration: 0
-  thrust: 0
-  knockbackTime: 0
-  maxAmounts: 1
-  summon: {fileID: 0}
-  script: {fileID: 0}
-  element: 8
-  skillDescription: 
-  sender: {fileID: 0}
-  icon: {fileID: 21300012, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  startSoundEffect: {fileID: 8300000, guid: d16c88f8218bdea468612a11d5720ce5, type: 3}
-  endSoundEffect: {fileID: 0}
-  animSoundeffect: {fileID: 0}
-  showIndicator: 0
-  showCastBar: 0
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  scriptActivationTimeLeft: 0
-  cooldownTimeLeft: -0.013568943
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
-  audioSource: {fileID: 0}
-  playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
-  timeDistortion: 1
-  direction: {x: 0, y: 0}
-  isNotActive: 0
-  holdTimer: 0
 --- !u!114 &103987821612614508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,10 +49,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa42c778fba1f34f95b55efa883742b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: Boomerang
+  global: {fileID: 11400000, guid: 986022dcee4ee954eaa9f9d283c038e9, type: 2}
+  soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
+  cast: 0
+  keepHoldTimer: 0
+  delay: 0
+  duration: 99
+  cooldown: 0.3
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  lockOn: {fileID: 0}
+  maxAmountOfTargets: 1
+  targetingDuration: 6
+  targetingMode: 2
+  multiHitDelay: 0
+  showRange: 0
+  addLifeTarget: -1
+  addManaTarget: 0
+  statusEffects: []
   target: {fileID: 0}
-  skill: {fileID: 0}
-  value: 0
-  instantiatNewGameObject: {fileID: 0}
+  addLifeSender: 0
+  addManaSender: 0
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  lockMovementonDuration: 0
+  speed: 15
+  rotateIt: 1
+  rotationModifier: 0
+  rotateEndSprite: 0
+  snapRotationInDegrees: 90
+  isRapidFire: 0
+  positionOffset: 0.75
+  positionHeight: 0
+  isStationary: 0
+  affectSelf: 0
+  affectPlayers: 0
+  affectEnemies: 1
+  affectObjects: 1
+  affectSkills: 0
+  ignoreInvincibility: 0
+  thrust: 0
+  knockbackTime: 0
+  maxAmounts: 1
+  comboAmount: 99
+  summon: {fileID: 0}
+  element: 8
+  skillDescription: 
+  sender: {fileID: 0}
+  icon: {fileID: 21300012, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  startSoundEffect: {fileID: 8300000, guid: d16c88f8218bdea468612a11d5720ce5, type: 3}
+  endSoundEffect: {fileID: 0}
+  animSoundeffect: {fileID: 0}
+  showIndicator: 0
+  showCastBar: 0
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  audioSource: {fileID: 0}
+  playEndEffectAlready: 0
+  spriteRenderer: {fileID: 0}
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  timeToMoveBack: 0.75
 --- !u!60 &925074013887456532
 PolygonCollider2D:
   m_ObjectHideFlags: 0

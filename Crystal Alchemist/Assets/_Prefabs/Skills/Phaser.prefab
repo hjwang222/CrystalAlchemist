@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1969711209088018435}
-  - component: {fileID: 1969711209088018433}
   - component: {fileID: 1969711209088018432}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: Phaser
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -33,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1969711209088018433
+--- !u!114 &1969711209088018432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,16 +41,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1969711209088018434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Script: {fileID: 11500000, guid: f11f98c751e773d4abb705eaf65aa040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Phaser
   global: {fileID: 11400000, guid: 986022dcee4ee954eaa9f9d283c038e9, type: 2}
   soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
   cast: 0
-  keepHoldTimer: 1
+  keepHoldTimer: 0
   delay: 0
-  scriptActivation: 0
   duration: 9999
   cooldown: 0
   cooldownAfterCombo: 0
@@ -59,7 +57,7 @@ MonoBehaviour:
   lockOn: {fileID: 0}
   maxAmountOfTargets: 0
   targetingDuration: 0
-  targetingMode: 0
+  targetingMode: 2
   multiHitDelay: 0
   showRange: 0
   addLifeTarget: -0.5
@@ -67,13 +65,14 @@ MonoBehaviour:
   statusEffects: []
   target: {fileID: 0}
   addLifeSender: 0
-  addManaSender: 0
+  addManaSender: -0.25
   intervallSender: 0.5
   speedDuringCasting: 0
-  speedDuringDuration: -1
+  speedDuringDuration: -25
   lockMovementonDuration: 0
   speed: 0
   rotateIt: 1
+  rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
   isRapidFire: 0
@@ -91,49 +90,31 @@ MonoBehaviour:
   maxAmounts: 1
   comboAmount: 99
   summon: {fileID: 0}
-  script: {fileID: 1969711209088018432}
   element: 8
   skillDescription: 
   sender: {fileID: 0}
   icon: {fileID: 21300020, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 8300000, guid: f326318a806fd6642b491ebc8fe68e7a, type: 3}
   endSoundEffect: {fileID: 0}
-  animSoundeffect: {fileID: 8300000, guid: f326318a806fd6642b491ebc8fe68e7a, type: 3}
+  animSoundeffect: {fileID: 0}
   showIndicator: 0
   showCastBar: 0
   delayTimeLeft: 0
   durationTimeLeft: 0
-  scriptActivationTimeLeft: 0
   cooldownTimeLeft: 0
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 3924551678506968721}
   timeDistortion: 1
   direction: {x: 0, y: 0}
-  isNotActive: 0
+  isActive: 1
   holdTimer: 0
---- !u!114 &1969711209088018432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1969711209088018434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f11f98c751e773d4abb705eaf65aa040, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  skill: {fileID: 0}
-  value: 0
-  instantiatNewGameObject: {fileID: 0}
   impactEffect: {fileID: 7205093712895476430, guid: efabcdb5ae4c402409665969345fd7e7,
     type: 3}
   distance: 99
-  spriteRenderer: {fileID: 3924551678506968721}
+  laserSprite: {fileID: 3924551678506968721}
 --- !u!1 &3924551678506968723
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +126,7 @@ GameObject:
   - component: {fileID: 3924551678506968722}
   - component: {fileID: 3924551678506968721}
   - component: {fileID: 3924551678506968720}
-  m_Layer: 14
+  m_Layer: 10
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

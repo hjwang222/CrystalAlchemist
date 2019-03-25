@@ -11,7 +11,7 @@ public class CastBar : MonoBehaviour
     public Image full;
     public TextMeshProUGUI skillName;
     public TextMeshProUGUI percentage;
-    public Skill skill;
+    public StandardSkill skill;
 
     private void Start()
     {

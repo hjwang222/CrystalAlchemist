@@ -2,32 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Analysis : Script
+public class Analysis : StatusEffect
 {
     public GameObject specialGameObject;
     private List<GameObject> gameObjectApplied = new List<GameObject>();
     
-    public override void onDestroy()
+    public override void DestroyIt()
     {
         for (int i = 0; i < this.gameObjectApplied.Count; i++)
         {
             Destroy(this.gameObjectApplied[i]);
         }
         this.gameObjectApplied.Clear();
+        base.DestroyIt();
     }
 
-    public override void onExit(Collider2D hittedCharacter)
+    public override void init()
     {
-
-    }
-
-    public override void onStay(Collider2D hittedCharacter)
-    {
-
-    }
-
-    public override void onInitialize()
-    {
+        base.init();
         if (this.specialGameObject != null)
         {
             //TODO: Bug, dass es doppelt hinzugefügt wird
@@ -51,15 +43,5 @@ public class Analysis : Script
                 this.gameObjectApplied.Add(tmp);
             }
         }
-    }
-
-    public override void onUpdate()
-    {
-        
-    }
-
-    public override void onEnter(Collider2D hittedCharacter)
-    {
-
     }
 }

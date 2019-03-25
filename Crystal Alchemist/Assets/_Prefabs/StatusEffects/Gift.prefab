@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7363475295885747724}
-  - component: {fileID: 7363475295885747723}
   - component: {fileID: 5555283332739299535}
   - component: {fileID: 7363475295885747722}
   m_Layer: 0
@@ -38,7 +37,7 @@ RectTransform:
   m_AnchoredPosition: {x: 97, y: 480.00003}
   m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7363475295885747723
+--- !u!114 &5555283332739299535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,7 +46,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7363475295885747727}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fe38f3cb00c4c84ea801bab87a6e5a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 04998793ff2ca344aadb3ca8ccb03e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffectName: Gift
@@ -64,27 +63,11 @@ MonoBehaviour:
   canDeactivateIt: 0
   canBeDispelled: 1
   statusEffectType: 1
-  statusEffectColor: {r: 0.65984666, g: 0.12771447, b: 0.7735849, a: 1}
-  script: {fileID: 0}
+  statusEffectColor: {r: 0.65882355, g: 0.12941177, b: 0.7725491, a: 1}
   target: {fileID: 0}
   statusEffectTimeLeft: 0
   timeDistortion: 1
---- !u!114 &5555283332739299535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7363475295885747727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04998793ff2ca344aadb3ca8ccb03e74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  skill: {fileID: 0}
-  value: -0.25
-  instantiatNewGameObject: {fileID: 0}
+  life: -0.25
 --- !u!222 &7363475295885747722
 CanvasRenderer:
   m_ObjectHideFlags: 0

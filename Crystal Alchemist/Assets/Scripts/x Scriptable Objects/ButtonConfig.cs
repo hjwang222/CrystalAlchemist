@@ -12,22 +12,22 @@ public class ButtonConfig : ScriptableObject, ISerializationCallbackReceiver
     [Header("Skill A-Button")]
     [Tooltip("Name")]
     public Sprite buttonAIcon;
-    public Skill buttonA;
+    public StandardSkill buttonA;
 
     [Header("Skill B-Button")]
     [Tooltip("Name")]
     public Sprite buttonBIcon;
-    public Skill buttonB;
+    public StandardSkill buttonB;
 
     [Header("Skill X-Button")]
     [Tooltip("Name")]
     public Sprite buttonXIcon;
-    public Skill buttonX;
+    public StandardSkill buttonX;
 
     [Header("Skill Y-Button")]
     [Tooltip("Name")]
     public Sprite buttonYIcon;
-    public Skill buttonY;
+    public StandardSkill buttonY;
     #endregion
 
     #region Functions  
@@ -53,7 +53,7 @@ public class ButtonConfig : ScriptableObject, ISerializationCallbackReceiver
         }
     }
 
-    public Skill getSkillByButton(string inputName)
+    public StandardSkill getSkillByButton(string inputName)
     {
         switch (inputName)
         {

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 680506914304237523}
-  - component: {fileID: 680506914304237521}
   - component: {fileID: 680506914304237524}
   - component: {fileID: 4229681705441237260}
   - component: {fileID: 4229681705441237250}
@@ -36,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &680506914304237521
+--- !u!114 &680506914304237524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,16 +44,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 680506914304237522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Script: {fileID: 11500000, guid: f11f98c751e773d4abb705eaf65aa040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Stromschlag
   global: {fileID: 11400000, guid: 986022dcee4ee954eaa9f9d283c038e9, type: 2}
   soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
   cast: 0
-  keepHoldTimer: 1
+  keepHoldTimer: 0
   delay: 0
-  scriptActivation: 0
   duration: 9999
   cooldown: 0
   cooldownAfterCombo: 0
@@ -73,10 +71,11 @@ MonoBehaviour:
   addManaSender: 0
   intervallSender: 0.5
   speedDuringCasting: 0
-  speedDuringDuration: -1
+  speedDuringDuration: 0
   lockMovementonDuration: 0
   speed: 0
   rotateIt: 1
+  rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
   isRapidFire: 1
@@ -94,48 +93,30 @@ MonoBehaviour:
   maxAmounts: 1
   comboAmount: 99
   summon: {fileID: 0}
-  script: {fileID: 680506914304237524}
   element: 8
   skillDescription: 
   sender: {fileID: 0}
   icon: {fileID: 21300028, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 8300000, guid: a9880e2410cffa044936162b476e2b5b, type: 3}
   endSoundEffect: {fileID: 0}
-  animSoundeffect: {fileID: 8300000, guid: a9880e2410cffa044936162b476e2b5b, type: 3}
+  animSoundeffect: {fileID: 0}
   showIndicator: 0
   showCastBar: 0
   delayTimeLeft: 0
   durationTimeLeft: 0
-  scriptActivationTimeLeft: 0
   cooldownTimeLeft: 0
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 6508292816955024436}
   timeDistortion: 1
   direction: {x: 0, y: 0}
-  isNotActive: 0
+  isActive: 1
   holdTimer: 0
---- !u!114 &680506914304237524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680506914304237522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f11f98c751e773d4abb705eaf65aa040, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  skill: {fileID: 0}
-  value: 0
-  instantiatNewGameObject: {fileID: 0}
   impactEffect: {fileID: 0}
-  distance: 99
-  spriteRenderer: {fileID: 6508292816955024436}
+  distance: 50
+  laserSprite: {fileID: 6508292816955024436}
 --- !u!212 &4229681705441237260
 SpriteRenderer:
   m_ObjectHideFlags: 0

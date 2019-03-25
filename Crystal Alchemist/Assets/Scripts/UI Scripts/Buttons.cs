@@ -46,7 +46,7 @@ public class Buttons : MonoBehaviour
         updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.buttonConfig.buttonY);
     }
 
-    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI text, Skill skill)
+    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI text, StandardSkill skill)
     {
         float cooldownLeft = skill.cooldownTimeLeft / (player.timeDistortion * player.spellspeed);
         float cooldown = skill.cooldown / (player.timeDistortion * player.spellspeed);

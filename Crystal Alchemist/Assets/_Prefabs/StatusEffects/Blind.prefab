@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4381141778963013572}
-  - component: {fileID: 4381141778963013571}
   - component: {fileID: 4381141778963013570}
   - component: {fileID: 6981784530255214311}
   m_Layer: 0
@@ -38,37 +37,6 @@ RectTransform:
   m_AnchoredPosition: {x: 97, y: 480.00003}
   m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4381141778963013571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4381141778963013575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fe38f3cb00c4c84ea801bab87a6e5a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statusEffectName: Blind
-  iconSprite: {fileID: 21300012, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
-  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
-  endType: 0
-  statusEffectDescription: ist erblindet
-  statusEffectDuration: 10
-  statusEffectInterval: 0
-  statusEffectManaDrain: 0
-  statusEffectManaDrainInterval: 0
-  maxStacks: 1
-  canOverride: 1
-  canDeactivateIt: 0
-  canBeDispelled: 1
-  statusEffectType: 1
-  statusEffectColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
-  script: {fileID: 0}
-  target: {fileID: 0}
-  statusEffectTimeLeft: 0
-  timeDistortion: 1
 --- !u!222 &4381141778963013570
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -89,8 +57,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d781262add0ec548af8fd007a17677a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statusEffectName: Blind
+  iconSprite: {fileID: 21300012, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
+  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
+  endType: 0
+  statusEffectDescription: ist erblindet
+  statusEffectDuration: 10
+  statusEffectInterval: 0
+  statusEffectManaDrain: 0
+  statusEffectManaDrainInterval: 0
+  maxStacks: 1
+  canOverride: 1
+  canDeactivateIt: 0
+  canBeDispelled: 1
+  statusEffectType: 1
+  statusEffectColor: {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}
   target: {fileID: 0}
-  skill: {fileID: 0}
-  value: 0
+  statusEffectTimeLeft: 0
+  timeDistortion: 1
   instantiatNewGameObject: {fileID: 3875153507443885169, guid: c07991eef82d315498cda38ca7ec8df0,
     type: 3}

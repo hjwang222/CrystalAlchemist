@@ -13,7 +13,7 @@ public class Utilities : MonoBehaviour
     public const float maxFloatPercent = 1000;
     public const float minFloatPercent = -100;
 
-    public static void fireSkill(Skill skill, Character sender)
+    public static void fireSkill(StandardSkill skill, Character sender)
     {
         instantiateSkill(skill, sender, null, 1);
     }       
@@ -41,21 +41,21 @@ public class Utilities : MonoBehaviour
         return Mathf.RoundToInt(value).ToString("0");
     }
 
-    public static Skill instantiateSkill(Skill skill, Character sender, Character target, float reduce)
+    public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target, float reduce)
     {
         GameObject activeSkill = Instantiate(skill.gameObject, sender.transform.position, Quaternion.identity);
 
         if (!skill.isStationary) activeSkill.transform.parent = sender.transform;
 
-        if(target != null) activeSkill.GetComponent<Skill>().target = target;
-        activeSkill.GetComponent<Skill>().sender = sender;
-        activeSkill.GetComponent<Skill>().addLifeTarget /= reduce;
-        activeSkill.GetComponent<Skill>().addManaTarget /= reduce;
-        activeSkill.GetComponent<Skill>().addLifeSender /= reduce;
-        activeSkill.GetComponent<Skill>().addManaSender /= reduce;
-        sender.activeSkills.Add(activeSkill.GetComponent<Skill>());
+        if(target != null) activeSkill.GetComponent<StandardSkill>().target = target;
+        activeSkill.GetComponent<StandardSkill>().sender = sender;
+        activeSkill.GetComponent<StandardSkill>().addLifeTarget /= reduce;
+        activeSkill.GetComponent<StandardSkill>().addManaTarget /= reduce;
+        activeSkill.GetComponent<StandardSkill>().addLifeSender /= reduce;
+        activeSkill.GetComponent<StandardSkill>().addManaSender /= reduce;
+        sender.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
 
-        return activeSkill.GetComponent<Skill>();
+        return activeSkill.GetComponent<StandardSkill>();
     }
 
     public static GameObject hasChildWithTag(Character character, string searchTag)
@@ -88,13 +88,13 @@ public class Utilities : MonoBehaviour
         }
     }
 
-    public static bool checkCollision(Collider2D hittedCharacter, Skill skill)
+    public static bool checkCollision(Collider2D hittedCharacter, StandardSkill skill)
     {
         if (skill != null)
         {
             if (skill.affectSkills
                 && hittedCharacter.CompareTag("Skill")
-                && hittedCharacter.GetComponent<Skill>().skillName != skill.skillName)
+                && hittedCharacter.GetComponent<StandardSkill>().skillName != skill.skillName)
             {
                 return true;
             }
@@ -115,31 +115,6 @@ public class Utilities : MonoBehaviour
         }
 
         return false;
-    }
-
-    public static Script setScript(Script addScript, Transform parent)
-    {        
-        return setScript(addScript, parent, null, null);
-    }
-
-    public static Script setScript(Script addScript, Transform parent, Character target)
-    {        
-        return setScript(addScript, parent, null, target);
-    }
-
-    public static Script setScript(Script addScript, Transform parent, Skill skill, Character target)
-    {
-        Script result = null;
-
-        if (addScript != null)
-        {
-            result = addScript;
-            if(skill != null) result.setSkill(skill);
-            if(target != null) result.setTarget(target);
-            result.onInitialize();
-        }
-
-        return result;
     }
 
     public static void setItem(LootTable[] lootTable, bool multiLoot, List<GameObject> items)

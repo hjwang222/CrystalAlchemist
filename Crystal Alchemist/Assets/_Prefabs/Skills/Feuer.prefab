@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300154, guid: b0b8d75b616ba6e42aa4ea4103267705, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -119,7 +119,6 @@ MonoBehaviour:
   cast: 0
   keepHoldTimer: 0
   delay: 0
-  scriptActivation: 0
   duration: 3
   cooldown: 0
   cooldownAfterCombo: 0
@@ -142,6 +141,7 @@ MonoBehaviour:
   lockMovementonDuration: 0
   speed: 0
   rotateIt: 0
+  rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
   isRapidFire: 0
@@ -159,7 +159,6 @@ MonoBehaviour:
   maxAmounts: 9999
   comboAmount: 99
   summon: {fileID: 0}
-  script: {fileID: 0}
   element: 8
   skillDescription: 
   sender: {fileID: 0}
@@ -171,7 +170,6 @@ MonoBehaviour:
   showCastBar: 0
   delayTimeLeft: 0
   durationTimeLeft: 0
-  scriptActivationTimeLeft: 0
   cooldownTimeLeft: 0
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -180,7 +178,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   timeDistortion: 1
   direction: {x: 0, y: 0}
-  isNotActive: 0
+  isActive: 1
   holdTimer: 0
 --- !u!58 &1485117890447238215
 CircleCollider2D:

@@ -79,7 +79,7 @@ public class PlayerMovement : Character
     {
         if (this.currentState != CharacterState.interact && this.currentState != CharacterState.inDialog)
         {
-            Skill skill = this.playerInputSkillConfig.getSkillByButton(button);            
+            StandardSkill skill = this.playerInputSkillConfig.getSkillByButton(button);            
             
             if (skill.cooldownTimeLeft > 0)
             {
@@ -105,7 +105,7 @@ public class PlayerMovement : Character
         }
     }
 
-    private bool isSkillReadyToUse(string button, Skill skill)
+    private bool isSkillReadyToUse(string button, StandardSkill skill)
     {
         if (Input.GetButtonDown(button) && (skill.isRapidFire || skill.cast == 0))
         {
@@ -182,7 +182,7 @@ public class PlayerMovement : Character
         return false;
     }
 
-    private void activateSkill(string button, Skill skill)
+    private void activateSkill(string button, StandardSkill skill)
     {
         if (this.activeCastbar != null) this.activeCastbar.destroyIt();
 
@@ -206,7 +206,7 @@ public class PlayerMovement : Character
         }       
     }
 
-    private void activateSkillFromTargetingSystem(Skill skill)
+    private void activateSkillFromTargetingSystem(StandardSkill skill)
     {
         if (this.activeLockOnTarget != null
             && this.activeLockOnTarget.GetComponent<TargetingSystem>().targetsSet
@@ -258,7 +258,7 @@ public class PlayerMovement : Character
         }
     }
 
-    private void deactivateSkill(string button, Skill skill)
+    private void deactivateSkill(string button, StandardSkill skill)
     {
         //Skill deaktivieren
         bool destroyit = false;
@@ -276,7 +276,7 @@ public class PlayerMovement : Character
         {
             for (int i = 0; i < this.activeSkills.Count; i++)
             {
-                Skill activeSkill = this.activeSkills[i];
+                StandardSkill activeSkill = this.activeSkills[i];
                 if (activeSkill.skillName == skill.skillName)
                 {
                     if (activeSkill.delay > 0) activeSkill.delayTimeLeft = 0; //C4
@@ -286,7 +286,7 @@ public class PlayerMovement : Character
         }
     }
 
-    private IEnumerator fireSkillToTarget(TargetingSystem targetingSystem, Skill skill)
+    private IEnumerator fireSkillToTarget(TargetingSystem targetingSystem, StandardSkill skill)
     {
         float damageReduce = targetingSystem.sortedTargets.Count;
 
@@ -305,14 +305,14 @@ public class PlayerMovement : Character
         this.activeLockOnTarget = null;
     }
 
-    private void fireSkillToTarget(Character target, float damageReduce, bool playSoundeffect, Skill skill)
+    private void fireSkillToTarget(Character target, float damageReduce, bool playSoundeffect, StandardSkill skill)
     {
-        Skill temp = Utilities.instantiateSkill(skill, this, target, damageReduce);
+        StandardSkill temp = Utilities.instantiateSkill(skill, this, target, damageReduce);
         //Vermeidung, dass Audio zu stark abgespielt wird
         if (!playSoundeffect) temp.startSoundEffect = null;
     }
 
-    private void setLastButtonPressed(string button, Skill skill)
+    private void setLastButtonPressed(string button, StandardSkill skill)
     {
         if (this.lastButtonPressed != button)
         {
@@ -359,7 +359,7 @@ public class PlayerMovement : Character
             
             bool lockAnimation = false;
 
-            foreach (Skill skill in this.activeSkills)
+            foreach (StandardSkill skill in this.activeSkills)
             {
                 if (skill.lockMovementonDuration)
                 {

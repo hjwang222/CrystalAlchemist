@@ -99,11 +99,11 @@ public class Character : MonoBehaviour
 
     [Header("Skills")]
     [Tooltip("Skills, welcher der Character verwenden kann")]
-    public List<Skill> skills = new List<Skill>();
+    public List<StandardSkill> skills = new List<StandardSkill>();
     [Tooltip("Skill, welcher der Character sofort verwendet")]
-    public Skill initializeSkill;
+    public StandardSkill initializeSkill;
     [Tooltip("Skill, welcher der Character bei seinem Tod verwendet")]
-    public Skill deathSkill;
+    public StandardSkill deathSkill;
 
 
 
@@ -230,7 +230,7 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public List<StatusEffect> debuffs = new List<StatusEffect>();
     [HideInInspector]
-    public List<Skill> activeSkills = new List<Skill>();
+    public List<StandardSkill> activeSkills = new List<StandardSkill>();
     [HideInInspector]
     private float lifeTime;
     [HideInInspector]
@@ -329,8 +329,8 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void useSkillInstantly(Skill skill)
-    { 
+    private void useSkillInstantly(StandardSkill skill)
+    {        
         if (this.activeCastbar != null && skill.holdTimer == 0) this.activeCastbar.destroyIt();
 
         if (skill.cooldownTimeLeft > 0)
@@ -353,15 +353,15 @@ public class Character : MonoBehaviour
                     {
                     //Place it in World 
                         GameObject activeSkill = Instantiate(skill.gameObject, this.transform.position, Quaternion.identity);
-                        activeSkill.GetComponent<Skill>().sender = this;
-                        this.activeSkills.Add(activeSkill.GetComponent<Skill>());
+                        activeSkill.GetComponent<StandardSkill>().sender = this;
+                        this.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
                     }
                     else
                     {
                     //Place it as Child
                         GameObject activeSkill = Instantiate(skill.gameObject, this.transform.position, Quaternion.identity, this.transform);
-                        activeSkill.GetComponent<Skill>().sender = this;
-                        this.activeSkills.Add(activeSkill.GetComponent<Skill>());
+                        activeSkill.GetComponent<StandardSkill>().sender = this;
+                        this.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
                     }                
             }
         }
@@ -385,13 +385,13 @@ public class Character : MonoBehaviour
 
     #region Utils
 
-    public int getAmountOfSameSkills(Skill skill)
+    public int getAmountOfSameSkills(StandardSkill skill)
     {
         int result = 0;
 
         for (int i = 0; i < this.activeSkills.Count; i++)
         {
-            Skill activeSkill = this.activeSkills[i];
+            StandardSkill activeSkill = this.activeSkills[i];
             if (activeSkill.skillName == skill.skillName) result++;
         }
 
@@ -426,7 +426,8 @@ public class Character : MonoBehaviour
     {
         if (addLife != 0)
         {
-            if (this.life + addLife > this.attributeMaxLife) addLife = 0;
+            if (this.life + addLife > this.attributeMaxLife) addLife = this.attributeMaxLife - this.life;
+
             this.life += addLife;
 
             if (this.healthSignal != null) this.healthSignal.Raise();
@@ -450,7 +451,7 @@ public class Character : MonoBehaviour
     {
         if (addMana != 0)
         {
-            if (this.mana + addMana > this.attributeMaxMana) addMana = 0;
+            if (this.mana + addMana > this.attributeMaxMana) addMana = this.attributeMaxMana - this.mana;
             else if (this.mana + addMana < 0) this.mana = 0;
             else this.mana += addMana;
 
@@ -497,7 +498,7 @@ public class Character : MonoBehaviour
 
     #region Damage Functions (hit, statuseffect, knockback)
 
-    public void gotHit(Skill skill)
+    public void gotHit(StandardSkill skill)
     {
         if (this.currentState != CharacterState.inDialog)
         {
@@ -551,7 +552,7 @@ public class Character : MonoBehaviour
 
         foreach (StatusEffect effect in dispellStatusEffects)
         {
-            effect.destroy();
+            effect.DestroyIt();
         }
 
         dispellStatusEffects.Clear();
@@ -609,7 +610,7 @@ public class Character : MonoBehaviour
                     {
                         //Wenn der Effekt überschreiben kann, soll der Effekt mit der kürzesten Dauer entfernt werden
                         StatusEffect toDestroy = result[0];
-                        toDestroy.destroy();
+                        toDestroy.DestroyIt();
 
                         GameObject statusEffectClone = Instantiate(statusEffect.gameObject, this.transform.position, Quaternion.identity, this.transform);
                         StatusEffect statusEffectScript = statusEffectClone.GetComponent<StatusEffect>();
@@ -622,7 +623,7 @@ public class Character : MonoBehaviour
                     else if (statusEffect.canDeactivateIt && statusEffect.endType == StatusEffectEndType.mana)
                     {
                         StatusEffect toDestroy = result[0];
-                        toDestroy.destroy();
+                        toDestroy.DestroyIt();
                     }
                 }
             }       

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5149620842045144517}
-  - component: {fileID: 7146218973303250457}
   - component: {fileID: 4238057447665557524}
   - component: {fileID: 7598260003657270786}
   - component: {fileID: 472408628079672325}
@@ -37,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7146218973303250457
+--- !u!114 &4238057447665557524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,7 +45,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4238057447665557523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Script: {fileID: 11500000, guid: 17e861f9e10adff419a8515889134065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Hitzeblitz
@@ -55,7 +54,6 @@ MonoBehaviour:
   cast: 0
   keepHoldTimer: 0
   delay: 0
-  scriptActivation: 0
   duration: 10
   cooldown: 1
   cooldownAfterCombo: 0
@@ -78,6 +76,7 @@ MonoBehaviour:
   lockMovementonDuration: 0
   speed: 5
   rotateIt: 0
+  rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
   isRapidFire: 0
@@ -95,7 +94,6 @@ MonoBehaviour:
   maxAmounts: 99
   comboAmount: 99
   summon: {fileID: 0}
-  script: {fileID: 4238057447665557524}
   element: 8
   skillDescription: 
   sender: {fileID: 0}
@@ -116,24 +114,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   timeDistortion: 1
   direction: {x: 0, y: 0}
-  isNotActive: 0
+  isActive: 1
   holdTimer: 0
---- !u!114 &4238057447665557524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4238057447665557523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17e861f9e10adff419a8515889134065, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  skill: {fileID: 0}
-  value: 0
-  instantiatNewGameObject: {fileID: 0}
   offSetTime: 10
   offSetStrength: 25
 --- !u!212 &7598260003657270786

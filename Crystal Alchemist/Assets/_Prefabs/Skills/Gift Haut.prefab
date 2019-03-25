@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224756837918827972}
   - component: {fileID: 224756837918827970}
-  - component: {fileID: 224756837918827973}
   - component: {fileID: 2574719380784309251}
   m_Layer: 0
   m_Name: Gift Haut
@@ -59,7 +58,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.81126523, y: 0.75761247}
   m_EdgeRadius: 0
---- !u!114 &224756837918827973
+--- !u!114 &2574719380784309251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,7 +67,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 224756837918827975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Script: {fileID: 11500000, guid: c58017665bc47f34a8164611dde67d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Gift Haut
@@ -77,7 +76,6 @@ MonoBehaviour:
   cast: 0
   keepHoldTimer: 0
   delay: 0
-  scriptActivation: 0
   duration: 99
   cooldown: 0
   cooldownAfterCombo: 0
@@ -91,7 +89,7 @@ MonoBehaviour:
   addLifeTarget: -0.5
   addManaTarget: 0
   statusEffects:
-  - {fileID: 7363475295885747723, guid: 12a1cb7dbe7ad25478c6b067a17a4884, type: 3}
+  - {fileID: 5555283332739299535, guid: 12a1cb7dbe7ad25478c6b067a17a4884, type: 3}
   target: {fileID: 0}
   addLifeSender: 0
   addManaSender: 0
@@ -116,10 +114,9 @@ MonoBehaviour:
   ignoreInvincibility: 0
   thrust: 6
   knockbackTime: 0.4
-  maxAmounts: 1
+  maxAmounts: 9999
   comboAmount: 99
   summon: {fileID: 0}
-  script: {fileID: 2574719380784309251}
   element: 8
   skillDescription: 
   sender: {fileID: 0}
@@ -131,7 +128,6 @@ MonoBehaviour:
   showCastBar: 0
   delayTimeLeft: 0
   durationTimeLeft: 0
-  scriptActivationTimeLeft: 0
   cooldownTimeLeft: 0
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -142,19 +138,3 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
---- !u!114 &2574719380784309251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 224756837918827975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c58017665bc47f34a8164611dde67d7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  skill: {fileID: 0}
-  value: 0
-  instantiatNewGameObject: {fileID: 0}

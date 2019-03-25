@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2537374611990174651}
-  - component: {fileID: 535304177139398759}
   - component: {fileID: 4500866824247064267}
   - component: {fileID: 6888541797719318242}
   - component: {fileID: 951316342886391932}
@@ -37,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &535304177139398759
+--- !u!114 &4500866824247064267
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,7 +45,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6814274785137477229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Script: {fileID: 11500000, guid: e333cb7d9eccdf149a75af3b5ca70b72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Arkaner Impuls
@@ -55,7 +54,6 @@ MonoBehaviour:
   cast: 0
   keepHoldTimer: 0
   delay: 0
-  scriptActivation: 0
   duration: 2
   cooldown: 0.05
   cooldownAfterCombo: 0
@@ -78,6 +76,7 @@ MonoBehaviour:
   lockMovementonDuration: 0
   speed: 40
   rotateIt: 1
+  rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
   isRapidFire: 1
@@ -95,7 +94,6 @@ MonoBehaviour:
   maxAmounts: 9999
   comboAmount: 99
   summon: {fileID: 0}
-  script: {fileID: 0}
   element: 8
   skillDescription: 
   sender: {fileID: 0}
@@ -107,8 +105,7 @@ MonoBehaviour:
   showCastBar: 0
   delayTimeLeft: 0
   durationTimeLeft: 0
-  scriptActivationTimeLeft: 0
-  cooldownTimeLeft: -0.013568943
+  cooldownTimeLeft: 0
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
@@ -116,24 +113,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   timeDistortion: 1
   direction: {x: 0, y: 0}
-  isNotActive: 0
+  isActive: 1
   holdTimer: 0
---- !u!114 &4500866824247064267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814274785137477229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e333cb7d9eccdf149a75af3b5ca70b72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  skill: {fileID: 0}
-  value: 0
-  instantiatNewGameObject: {fileID: 0}
 --- !u!61 &6888541797719318242
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -321,7 +302,7 @@ Rigidbody2D:
   m_AngularDrag: 0.5
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4

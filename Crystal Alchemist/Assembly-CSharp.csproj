@@ -80,17 +80,16 @@
     <Compile Include="Assets\Scripts\Object Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\Object Scripts\Sign.cs" />
     <Compile Include="Assets\Scripts\Object Scripts\Treasure.cs" />
-    <Compile Include="Assets\Scripts\Skill Scripts\ArrowScript.cs" />
-    <Compile Include="Assets\Scripts\Skill Scripts\BoomerangScript.cs" />
-    <Compile Include="Assets\Scripts\Skill Scripts\HomingScript.cs" />
-    <Compile Include="Assets\Scripts\Skill Scripts\LaserScript.cs" />
-    <Compile Include="Assets\Scripts\Skill Scripts\LineScript.cs" />
-    <Compile Include="Assets\Scripts\Skill Scripts\OrbitalScript.cs" />
-    <Compile Include="Assets\Scripts\Skill Scripts\SelfScript.cs" />
-    <Compile Include="Assets\Scripts\Skill Scripts\Skill.cs" />
+    <Compile Include="Assets\Scripts\Skill Scripts\BoomerangSkill.cs" />
+    <Compile Include="Assets\Scripts\Skill Scripts\BuffSkill.cs" />
+    <Compile Include="Assets\Scripts\Skill Scripts\HomingSkill.cs" />
+    <Compile Include="Assets\Scripts\Skill Scripts\LaserSkill.cs" />
+    <Compile Include="Assets\Scripts\Skill Scripts\OrbitalSkill.cs" />
+    <Compile Include="Assets\Scripts\Skill Scripts\ProjectileSkill.cs" />
+    <Compile Include="Assets\Scripts\Skill Scripts\StandardSkill.cs" />
     <Compile Include="Assets\Scripts\Skill Scripts\TargetingSystem.cs" />
-    <Compile Include="Assets\Scripts\Skill Scripts\TimeScript.cs" />
-    <Compile Include="Assets\Scripts\Skill Scripts\TouchScript.cs" />
+    <Compile Include="Assets\Scripts\Skill Scripts\TimeSkill.cs" />
+    <Compile Include="Assets\Scripts\Skill Scripts\TouchSkill.cs" />
     <Compile Include="Assets\Scripts\StatusEffect Scripts\affectLife.cs" />
     <Compile Include="Assets\Scripts\StatusEffect Scripts\affectMana.cs" />
     <Compile Include="Assets\Scripts\StatusEffect Scripts\affectSpeed.cs" />
@@ -106,7 +105,6 @@
     <Compile Include="Assets\Scripts\x Scriptable Objects\Globals.cs" />
     <Compile Include="Assets\Scripts\x Scriptable Objects\Signal.cs" />
     <Compile Include="Assets\Scripts\x Utils\GlobalValues.cs" />
-    <Compile Include="Assets\Scripts\x Utils\Script.cs" />
     <Compile Include="Assets\Scripts\x Utils\SignalListener.cs" />
     <Compile Include="Assets\Scripts\x Utils\Utilities.cs" />
     <Compile Include="Assets\Tilemap\Brushes\Tint Brush Smooth\Scripts\TintTextureGenerator.cs" />
@@ -141,20 +139,32 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
+    <Reference Include="Cinemachine">
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>E:/Github/Crystal Alchemist/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>E:/Github/Crystal Alchemist/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>E:/Github/Crystal Alchemist/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>E:/Github/Crystal Alchemist/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>E:/Github/Crystal Alchemist/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -358,13 +368,13 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>E:/Github/Crystal Alchemist/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>E:/Github/Crystal Alchemist/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>E:/Github/Crystal Alchemist/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>E:/Projekte/[Github] Repository/Crystal Alchemist/CrystalAlchemist/Crystal Alchemist/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

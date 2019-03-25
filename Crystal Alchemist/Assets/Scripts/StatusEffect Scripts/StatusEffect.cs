@@ -59,9 +59,6 @@ public class StatusEffect : MonoBehaviour
     public StatusEffectType statusEffectType = StatusEffectType.debuff;
     [Tooltip("Farbe während der Dauer des Statuseffekts")]
     public Color statusEffectColor;
-
-    [Header("Statuseffekt Wirkung")]
-    public Script script;  
     
     [HideInInspector]
     public Character target;
@@ -76,7 +73,7 @@ public class StatusEffect : MonoBehaviour
 
 
     #region Start Funktionen (Init)
-    void Start()
+    public void Start()
     {
         init();
     }
@@ -88,7 +85,7 @@ public class StatusEffect : MonoBehaviour
         this.timeDistortion = 1 + (distortion/100);
     }
 
-    private void init()
+    public virtual void init()
     {
         if (this.endType == StatusEffectEndType.time) this.statusEffectTimeLeft = this.statusEffectDuration;
         if (this.endType == StatusEffectEndType.mana) this.statusEffectTimeLeft = Mathf.Infinity;
@@ -105,9 +102,7 @@ public class StatusEffect : MonoBehaviour
             //erste Wirkung
             this.elapsed = this.statusEffectInterval;
             this.elapsedMana = this.statusEffectManaDrainInterval;
-        }
-
-        this.script = Utilities.setScript(this.GetComponent<Script>(), this.transform, this.target);        
+        }         
     }
 
     #endregion
@@ -115,13 +110,18 @@ public class StatusEffect : MonoBehaviour
 
     #region Update
 
-    private void Update()
+    public void Update()
+    {
+        doOnUpdate();
+    }
+
+    public virtual void doOnUpdate()
     {
         //TODO: Performance?
         this.updateUI.Raise();
 
-        if(this.endType == StatusEffectEndType.time) this.statusEffectTimeLeft -= (Time.deltaTime * this.timeDistortion);
-        
+        if (this.endType == StatusEffectEndType.time) this.statusEffectTimeLeft -= (Time.deltaTime * this.timeDistortion);
+
         this.elapsed += (Time.deltaTime * this.timeDistortion);
         this.elapsedMana += (Time.deltaTime * this.timeDistortion);
 
@@ -136,9 +136,9 @@ public class StatusEffect : MonoBehaviour
             this.elapsedMana = 0;
         }
 
-        if ((this.endType == StatusEffectEndType.time 
-            && this.statusEffectInterval > 0 
-            && this.statusEffectTimeLeft > 0 
+        if ((this.endType == StatusEffectEndType.time
+            && this.statusEffectInterval > 0
+            && this.statusEffectTimeLeft > 0
             && this.elapsed >= statusEffectInterval)
             ||
             (this.endType == StatusEffectEndType.mana
@@ -150,19 +150,19 @@ public class StatusEffect : MonoBehaviour
             //solange der Effekt aktiv ist und das Intervall erreicht ist, soll etwas passieren. Intervall zurück setzen
             doEffect();
             this.elapsed = 0;
-        }        
-        else if ((this.endType == StatusEffectEndType.time 
+        }
+        else if ((this.endType == StatusEffectEndType.time
                  && this.statusEffectTimeLeft <= 0)
                  || (this.endType == StatusEffectEndType.mana
             && this.target != null
             && this.target.mana - this.statusEffectManaDrain < 0))
         {
             //Zerstöre Effekt, wenn die Zeit abgelaufen ist
-            destroy();
-        }        
+            DestroyIt();
+        }
     }
 
-    public void destroy()
+    public virtual void DestroyIt()
     {
         if (this.target != null)
         {
@@ -177,9 +177,7 @@ public class StatusEffect : MonoBehaviour
             else if (this.statusEffectType == StatusEffectType.buff)
             {
                 this.target.GetComponent<Character>().buffs.Remove(this);
-            }
-
-            if(this.script != null) this.script.onDestroy();
+            }            
         }
 
         //GUI updaten und Objekt kurz danach zerstören
@@ -187,13 +185,11 @@ public class StatusEffect : MonoBehaviour
         Destroy(this.gameObject, 0.2f);
     }
 
-    private void doEffect()
+    public virtual void doEffect()
     {
         //Wirkung abhängig vom Script!
         if (this.target != null)
-        {             
-            if (this.script != null) this.script.onUpdate();
-
+        {                         
             this.target.spriteRenderer.color = this.statusEffectColor;
         }
     }

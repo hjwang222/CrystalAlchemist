@@ -2,41 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeDistortion : Script
+public class TimeDistortion : StatusEffect
 {
     //STATUSEFFEKT SCRIPT "ZEIT STASE"
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     public float time;
 
-    public override void onDestroy()
+    public new void DestroyIt()
     {
         //Zeit wieder normalisieren
         target.updateTimeDistortion(0);
+        base.DestroyIt();
     }
 
-    public override void onUpdate()
+    public override void init()
     {
-
-    }
-
-    public override void onInitialize()
-    {
+        base.init();
         //Charakter mit einem Zeitdebuff versehen
-            target.updateTimeDistortion(this.time);   
-    }
-
-    public override void onExit(Collider2D hittedCharacter)
-    {
-
-    }
-
-    public override void onStay(Collider2D hittedCharacter)
-    {
-
-    }
-
-    public override void onEnter(Collider2D hittedCharacter)
-    {
-        
+        target.updateTimeDistortion(this.time);   
     }
 }
