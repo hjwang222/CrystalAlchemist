@@ -5,6 +5,8 @@ using UnityEngine;
 public class affectSpeed : Script
 {
     //STATUSEFFEKT SCRIPT "SPEED UPDATE"
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    public float speed;
 
     public override void onDestroy()
     {
@@ -13,7 +15,7 @@ public class affectSpeed : Script
 
     public override void onUpdate()
     {
-        this.target.updateSpeed(this.value); 
+        this.target.updateSpeed(this.speed); 
     }
 
     public override void onInitialize()

@@ -10,16 +10,6 @@ abstract public class Script : MonoBehaviour
     [HideInInspector]
     public Skill skill;
 
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    public float value;
-
-    public GameObject instantiatNewGameObject;
-
-    public void setValue(float value)
-    {
-        this.value = value;
-    }
-
     public void setSkill(Skill skill)
     {
         this.skill = skill;

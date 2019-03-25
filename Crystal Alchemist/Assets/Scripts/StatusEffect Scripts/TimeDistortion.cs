@@ -5,6 +5,8 @@ using UnityEngine;
 public class TimeDistortion : Script
 {
     //STATUSEFFEKT SCRIPT "ZEIT STASE"
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    public float time;
 
     public override void onDestroy()
     {
@@ -20,12 +22,7 @@ public class TimeDistortion : Script
     public override void onInitialize()
     {
         //Charakter mit einem Zeitdebuff versehen
-            target.updateTimeDistortion(this.value);            
-
-            if (target.CompareTag("Player"))
-            {
-                target.GetComponent<PlayerMovement>().music.GetComponent<AudioSource>().pitch = this.value;
-            }   
+            target.updateTimeDistortion(this.time);   
     }
 
     public override void onExit(Collider2D hittedCharacter)

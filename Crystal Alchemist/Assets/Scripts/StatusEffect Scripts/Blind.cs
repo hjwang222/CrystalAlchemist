@@ -5,7 +5,7 @@ using UnityEngine;
 public class Blind : Script
 {
     //STATUSEFFEKT SCRIPT "Blind"
-
+    public GameObject instantiatNewGameObject;
     private GameObject panel;
 
     public override void onDestroy()

@@ -5,6 +5,8 @@ using UnityEngine;
 public class affectLife : Script
 {
     //STATUSEFFEKT SCRIPT "LIFE UPDATE"
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    public float life;
 
     public override void onDestroy()
     {
@@ -13,7 +15,7 @@ public class affectLife : Script
 
     public override void onUpdate()
     {
-        this.target.updateLife(this.value);
+        this.target.updateLife(this.life);
     }
 
     public override void onInitialize()

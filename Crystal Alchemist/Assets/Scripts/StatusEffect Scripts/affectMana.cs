@@ -5,6 +5,8 @@ using UnityEngine;
 public class affectMana : Script
 {
     //STATUSEFFEKT SCRIPT "MANA UPDATE"
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    public float mana;
 
     public override void onDestroy()
     {
@@ -13,7 +15,7 @@ public class affectMana : Script
 
     public override void onUpdate()
     {
-        this.target.updateMana(this.value);
+        this.target.updateMana(this.mana);
     }
 
     public override void onInitialize()
