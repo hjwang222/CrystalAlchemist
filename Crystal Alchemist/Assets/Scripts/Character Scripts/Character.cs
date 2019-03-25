@@ -473,6 +473,11 @@ public class Character : MonoBehaviour
     {
         this.timeDistortion = 1 + (distortion/100);
 
+        if (this.CompareTag("Player"))
+        {
+            this.GetComponent<PlayerMovement>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
+        }
+
         if (this.animator != null) this.animator.speed = this.timeDistortion;
         if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
 
