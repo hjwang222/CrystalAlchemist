@@ -8,7 +8,7 @@ public class Blind : StatusEffect
     public GameObject instantiatNewGameObject;
     private GameObject panel;
 
-    public new void DestroyIt()
+    public override void DestroyIt()
     {
         Animator anim = this.panel.transform.GetChild(0).GetComponent<Animator>();
         if (anim != null) anim.SetBool("Explode", true);

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OrbitalSkill : StandardSkill
 {
+    #region Overrides
     public override void doOnUpdate()
     {
         base.doOnUpdate();
@@ -15,4 +16,5 @@ public class OrbitalSkill : StandardSkill
         base.init();
         if (this.target != null) this.transform.position = this.target.transform.position;
     }
+    #endregion
 }

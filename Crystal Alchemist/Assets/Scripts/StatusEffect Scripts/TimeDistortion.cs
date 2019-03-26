@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class TimeDistortion : StatusEffect
 {
-    //STATUSEFFEKT SCRIPT "ZEIT STASE"
+    #region Attributes
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     public float time;
+    #endregion
 
-    public new void DestroyIt()
+
+    #region Overrides
+    public override void DestroyIt()
     {
         //Zeit wieder normalisieren
         target.updateTimeDistortion(0);
@@ -21,4 +24,5 @@ public class TimeDistortion : StatusEffect
         //Charakter mit einem Zeitdebuff versehen
         target.updateTimeDistortion(this.time);   
     }
+    #endregion
 }

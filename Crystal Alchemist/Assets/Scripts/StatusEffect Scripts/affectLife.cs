@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class affectLife : StatusEffect
 {
-    //STATUSEFFEKT SCRIPT "LIFE UPDATE"
+    #region Attributes
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     public float life;
+    #endregion
 
+
+    #region Overrides
     public override void doEffect()
     {
         base.doEffect();
         this.target.updateLife(this.life);
     }
+    #endregion
 }

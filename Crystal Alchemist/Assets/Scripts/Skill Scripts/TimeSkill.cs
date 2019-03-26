@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class TimeSkill : StandardSkill
 {
-    //SKILL SCRIPT "ZEIT STASE"
-
+    #region Attributes
     private List<Character> affectedCharacters = new List<Character>();
     private List<StandardSkill> affectedSkills = new List<StandardSkill>();
 
@@ -19,7 +18,11 @@ public class TimeSkill : StandardSkill
     public float invertColor = 0f;    
     private bool isDestroyed = false;
 
-    public new void DestroyIt()
+    #endregion
+
+
+    #region Overrides
+    public override void DestroyIt()
     {        
         //Zeit normalisieren wenn Skill zerstört/beendet wird
         isDestroyed = true; 
@@ -65,6 +68,10 @@ public class TimeSkill : StandardSkill
             setTimeDistorion(hittedCharacter.gameObject, this.TimeDistortion);
     }
 
+    #endregion
+
+
+    #region Functions (private)
     private void removeTimeDistorion(GameObject hittedCharacter)
     {
         StandardSkill skill = hittedCharacter.GetComponent<StandardSkill>();
@@ -101,4 +108,5 @@ public class TimeSkill : StandardSkill
             this.affectedSkills.Add(skill);
         }
     }
+    #endregion
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProjectileSkill : StandardSkill
 {
+    #region Overrides
     public override void OnTriggerExit2D(Collider2D hittedCharacter)
     {
         base.OnTriggerExit2D(hittedCharacter);
@@ -25,6 +26,5 @@ public class ProjectileSkill : StandardSkill
         }
     }
 
-
-
+    #endregion
 }

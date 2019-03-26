@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class affectSpeed : StatusEffect
 {
-    //STATUSEFFEKT SCRIPT "SPEED UPDATE"
+    #region Attributes
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     public float speed;
+    #endregion
 
+
+    #region Overrides
     public override void doEffect()
     {
         base.doEffect();
         this.target.updateSpeed(this.speed); 
     }
+    #endregion
 }

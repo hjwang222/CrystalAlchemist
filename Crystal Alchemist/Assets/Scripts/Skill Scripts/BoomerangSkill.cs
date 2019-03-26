@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class BoomerangSkill : StandardSkill
 {
+    #region Attributes
     [Tooltip("Zeitpunkt der Scriptaktivierung")]
     [Range(0, Utilities.maxFloatSmall)]
     public float timeToMoveBack = 0;
     private float durationThenBackToSender = 0;
+    #endregion
 
+
+    #region Overrides
     public override void init()
     {
         base.init();
@@ -25,7 +29,7 @@ public class BoomerangSkill : StandardSkill
         }
         else
         {
-            moveToTarget();
+            moveBackToSender();
         }        
     }
 
@@ -47,11 +51,16 @@ public class BoomerangSkill : StandardSkill
             hittedCharacter.transform.position = this.transform.position;
         }
     }
+    #endregion
 
-    private void moveToTarget()
+
+    #region Functions (private)
+    private void moveBackToSender()
     {
         if (this.sender != null)
         {
+            //Bewege den Skill zurück zum Sender
+
             this.myRigidbody.velocity = Vector2.zero;
             if (Vector3.Distance(this.sender.transform.position, this.transform.position) > 0.25f)
             {
@@ -66,4 +75,5 @@ public class BoomerangSkill : StandardSkill
             }
         }
     }
+    #endregion
 }

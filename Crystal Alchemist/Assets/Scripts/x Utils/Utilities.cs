@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Utilities : MonoBehaviour
 {
+    #region Konstanten
     public const float maxFloatInfinite = 9999;
     public const int maxIntInfinite = 9999;
 
@@ -12,33 +13,14 @@ public class Utilities : MonoBehaviour
 
     public const float maxFloatPercent = 1000;
     public const float minFloatPercent = -100;
+    #endregion
+
+
+    #region Character and Skill Utils
 
     public static void fireSkill(StandardSkill skill, Character sender)
     {
         instantiateSkill(skill, sender, null, 1);
-    }       
-
-    public static void changeMaterial(SpriteRenderer spriteRenderer, bool showOutline, Color outlineColor, Color mainColor, float invert)
-    {
-        MaterialPropertyBlock mpb = new MaterialPropertyBlock();
-        spriteRenderer.GetPropertyBlock(mpb);
-        mpb.SetFloat("_ShowOutline", showOutline ? 1f : 0);
-        if(outlineColor != null) mpb.SetColor("_OutlineColor", outlineColor);
-        if(mainColor != null) mpb.SetColor("_Color", mainColor);
-        if(invert >= 0 && invert <= 1) mpb.SetFloat("_Threshold", invert);
-        spriteRenderer.SetPropertyBlock(mpb);
-    }
-
-    public static string setDamageNumber(float value, float schwelle)
-    {
-        if (Mathf.Abs(value) < schwelle) return value.ToString("0.0");
-        if (Mathf.Abs(value) >= 10) return value.ToString("#");
-        else return value.ToString("#.0");
-    }
-
-    public static string setDurationToString(float value)
-    {
-        return Mathf.RoundToInt(value).ToString("0");
     }
 
     public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target, float reduce)
@@ -47,7 +29,7 @@ public class Utilities : MonoBehaviour
 
         if (!skill.isStationary) activeSkill.transform.parent = sender.transform;
 
-        if(target != null) activeSkill.GetComponent<StandardSkill>().target = target;
+        if (target != null) activeSkill.GetComponent<StandardSkill>().target = target;
         activeSkill.GetComponent<StandardSkill>().sender = sender;
         activeSkill.GetComponent<StandardSkill>().addLifeTarget /= reduce;
         activeSkill.GetComponent<StandardSkill>().addManaTarget /= reduce;
@@ -57,23 +39,7 @@ public class Utilities : MonoBehaviour
 
         return activeSkill.GetComponent<StandardSkill>();
     }
-
-    public static GameObject hasChildWithTag(Character character, string searchTag)
-    {
-        GameObject result = null;
-
-        for (int i = 0; i < character.transform.childCount; i++)
-        {
-            if (character.transform.GetChild(i).tag == searchTag)
-            {
-                result = character.transform.GetChild(i).gameObject;
-                return result;
-            }
-        }
-
-        return result;
-    }
-
+    
     public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect, FloatValue soundEffectVolume)
     {
         float volume = 1f;
@@ -87,6 +53,56 @@ public class Utilities : MonoBehaviour
             audioSource.PlayOneShot(soundeffect, volume);
         }
     }
+
+    public static void setItem(LootTable[] lootTable, bool multiLoot, List<GameObject> items)
+    {
+        int rng = Random.Range(1, Utilities.maxIntSmall);
+        int lowestDropRate = 101;
+
+        foreach (LootTable loot in lootTable)
+        {
+            if (rng <= loot.dropRate)
+            {
+                if (!multiLoot)
+                {
+                    if (lowestDropRate > loot.dropRate)
+                    {
+                        lowestDropRate = loot.dropRate;
+                        items.Clear();
+                        items.Add(loot.item);
+                    }
+                }
+                else
+                {
+                    items.Add(loot.item);
+                }
+            }
+        }
+
+        //if (this.items.Count > 0) this.text = this.text.Replace("%XY%", this.items[0].GetComponent<Item>().amount + " " + this.items[0].GetComponent<Item>().name);
+    }
+    
+    #endregion
+
+
+    #region UI Utils
+
+    public static string setDamageNumber(float value, float schwelle)
+    {
+        if (Mathf.Abs(value) < schwelle) return value.ToString("0.0");
+        if (Mathf.Abs(value) >= 10) return value.ToString("#");
+        else return value.ToString("#.0");
+    }
+
+    public static string setDurationToString(float value)
+    {
+        return Mathf.RoundToInt(value).ToString("0");
+    }
+
+    #endregion
+
+
+    #region Check Utils
 
     public static bool checkCollision(Collider2D hittedCharacter, StandardSkill skill)
     {
@@ -117,33 +133,26 @@ public class Utilities : MonoBehaviour
         return false;
     }
 
-    public static void setItem(LootTable[] lootTable, bool multiLoot, List<GameObject> items)
+    public static GameObject hasChildWithTag(Character character, string searchTag)
     {
-        int rng = Random.Range(1, Utilities.maxIntSmall);
-        int lowestDropRate = 101;
+        GameObject result = null;
 
-        foreach (LootTable loot in lootTable)
+        for (int i = 0; i < character.transform.childCount; i++)
         {
-            if (rng <= loot.dropRate)
+            if (character.transform.GetChild(i).tag == searchTag)
             {
-                if (!multiLoot)
-                {
-                    if (lowestDropRate > loot.dropRate)
-                    {
-                        lowestDropRate = loot.dropRate;
-                        items.Clear();
-                        items.Add(loot.item);
-                    }
-                }
-                else
-                {
-                    items.Add(loot.item);
-                }
+                result = character.transform.GetChild(i).gameObject;
+                return result;
             }
         }
 
-        //if (this.items.Count > 0) this.text = this.text.Replace("%XY%", this.items[0].GetComponent<Item>().amount + " " + this.items[0].GetComponent<Item>().name);
+        return result;
     }
+
+    #endregion
+
+
+    #region Direction and Rotation Utils
 
     public static Vector2 RadianToVector2(float radian)
     {
@@ -181,5 +190,23 @@ public class Utilities : MonoBehaviour
 
         rotation = new Vector3(0, 0, angle);
     }
+
+    #endregion
+
+
+    #region Later Used Utils
+
+    public static void changeMaterial(SpriteRenderer spriteRenderer, bool showOutline, Color outlineColor, Color mainColor, float invert)
+    {
+        MaterialPropertyBlock mpb = new MaterialPropertyBlock();
+        spriteRenderer.GetPropertyBlock(mpb);
+        mpb.SetFloat("_ShowOutline", showOutline ? 1f : 0);
+        if (outlineColor != null) mpb.SetColor("_OutlineColor", outlineColor);
+        if (mainColor != null) mpb.SetColor("_Color", mainColor);
+        if (invert >= 0 && invert <= 1) mpb.SetFloat("_Threshold", invert);
+        spriteRenderer.SetPropertyBlock(mpb);
+    }
+
+    #endregion
 
 }

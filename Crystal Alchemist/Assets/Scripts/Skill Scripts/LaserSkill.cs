@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LaserSkill : StandardSkill
 {
+    #region Attributes
+
     public GameObject impactEffect;   
     [Range(0, Utilities.maxFloatSmall)]
     public float distance = 0;
@@ -11,7 +13,12 @@ public class LaserSkill : StandardSkill
     private bool placeFire = true;
     public SpriteRenderer laserSprite;
 
-    public new void DestroyIt()
+    #endregion
+
+
+    #region Overrides
+
+    public override void DestroyIt()
     {        
         this.placeFire = false;        
         this.fire = null;
@@ -30,15 +37,10 @@ public class LaserSkill : StandardSkill
         drawLine(true);
     }
 
-    private Vector2 RadianToVector2(float radian)
-    {
-        return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
-    }
+    #endregion
 
-    private Vector2 DegreeToVector2(float degree)
-    {
-        return RadianToVector2(degree * Mathf.Deg2Rad);
-    }
+
+    #region Functions (private)
 
     private void drawLine(bool updateRotation)
     {
@@ -130,4 +132,5 @@ public class LaserSkill : StandardSkill
         }
     }
 
+    #endregion
 }

@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class HomingSkill : StandardSkill
 {
+    #region Attributes
     public float offSetTime;
     public float offSetStrength;
+    #endregion
 
+
+    #region Overrides
     public override void doOnUpdate()
     {
         base.doOnUpdate();
         moveToTarget();
     }
+    #endregion
+
+
+    #region Functions (private)
 
     private void moveToTarget()
     {
@@ -59,4 +67,6 @@ public class HomingSkill : StandardSkill
             this.DestroyIt();
         }
     }
+
+    #endregion
 }

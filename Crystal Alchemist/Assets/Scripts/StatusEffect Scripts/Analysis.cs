@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Analysis : StatusEffect
 {
+    #region Attributes
     public GameObject specialGameObject;
     private List<GameObject> gameObjectApplied = new List<GameObject>();
-    
+    #endregion
+
+
+    #region Overrides
     public override void DestroyIt()
     {
         for (int i = 0; i < this.gameObjectApplied.Count; i++)
@@ -44,4 +48,5 @@ public class Analysis : StatusEffect
             }
         }
     }
+    #endregion
 }
