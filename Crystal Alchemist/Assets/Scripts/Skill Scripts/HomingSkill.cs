@@ -16,12 +16,14 @@ public class HomingSkill : StandardSkill
     private void moveToTarget()
     {
         if (this.target != null)
-        {            
+        {                        
             this.myRigidbody.velocity = Vector2.zero;
             if (Vector3.Distance(this.target.transform.position, this.transform.position) > 0.25f)
             {
+                //Ermittle Position des Ziels
                 Vector2 targetPosition = this.target.transform.position;                
 
+                //offSetTime und offSetStrength lassen den Skill nicht direkt, sondern in einer Kurve fliegen
                 if (this.offSetTime >= 0)
                 {
                     this.offSetTime -= Time.deltaTime;
@@ -38,20 +40,22 @@ public class HomingSkill : StandardSkill
                     this.offSetStrength -= (this.offSetStrength / this.offSetTime);
                 }
 
+                //Bewege Skill zum Ziel
                 Vector3 temp = Vector3.MoveTowards(this.transform.position, targetPosition, this.speed * (Time.deltaTime * this.timeDistortion));
 
                 this.myRigidbody.MovePosition(temp);
                 this.myRigidbody.velocity = Vector2.zero;
             }
             else
-            {
-                //this.skill.landAttack(this.skill.target);
-                if (this.animator != null) this.animator.SetBool("Explode", true);
-                //else skill.DestroyIt();
+            {                
+                //Starte End-Animation wenn der Skill sein Ziel erreicht hat
+                if (this.animator != null) this.animator.SetBool("Explode", true);                
             }
         }
         else
         {
+            //Zerstöre Skill, wenn das Ziel nicht mehr vorhanden ist. 
+            //TODO: Weiter fliegen lassen?
             this.DestroyIt();
         }
     }

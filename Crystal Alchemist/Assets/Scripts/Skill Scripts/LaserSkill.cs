@@ -21,68 +21,52 @@ public class LaserSkill : StandardSkill
     public override void doOnUpdate()
     {
         base.doOnUpdate();
-        renderLine(this.rotateIt);
+        drawLine(this.rotateIt);
     }
 
     public override void init()
     {
         base.init();
-        renderLine(true);
+        drawLine(true);
     }
 
-    private Vector2 RadianToVector2(float radian)
+    private void drawLine(bool updateRotation)
     {
-        return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
-    }
+        //Bestimme Winkel und Position
 
-    private Vector2 DegreeToVector2(float degree)
-    {
-        return RadianToVector2(degree * Mathf.Deg2Rad);
-    }
+        float angle;
+        Vector2 startpoint;
+        Vector3 rotation;
 
-    private void renderLine(bool updateRotation)
-    {
-        //TODO: AUSLAGERN!
-        if (updateRotation)
-        {
-            this.direction = this.sender.direction;
-        }
-
-        Vector2 startpoint = new Vector2(this.sender.transform.position.x + (this.direction.x * this.positionOffset),
-                                         this.sender.transform.position.y + (this.direction.y * this.positionOffset) + this.positionHeight);
+        Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
+                                          out angle, out startpoint, out this.direction, out rotation);
 
         if (this.target != null && updateRotation)
         {
             this.direction = (Vector2)this.target.transform.position - startpoint;
             float temp_angle = Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg;
-            this.direction = DegreeToVector2(temp_angle);
-        }
-        
-        //Utilities.berechneWinkel(this.sender.transform.position, this.sender.direction, this.positionOffset, this.rotateIt, this.snapRotationInDegrees, out angle, out start, out this.direction);
-
-        float angle = 0;
-        angle = Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg;
-
-        if (this.snapRotationInDegrees > 0)
-        {
-            angle = Mathf.Round(angle / this.snapRotationInDegrees) * this.snapRotationInDegrees;
-            this.direction = DegreeToVector2(angle);
+            this.direction = Utilities.DegreeToVector2(temp_angle);
         }
 
-        Vector3 rotation = new Vector3(0, 0, angle);
+        renderLine(startpoint, rotation);        
+    }
 
+    private void renderLine(Vector2 startpoint, Vector3 rotation)
+    {
         //No hit on itself
         int layerMask = 1 << this.sender.gameObject.layer;
         layerMask = ~layerMask;
 
-        RaycastHit2D hitInfo = Physics2D.CircleCast(startpoint, this.laserSprite.size.y/5, direction, distance, layerMask);
+        RaycastHit2D hitInfo = Physics2D.CircleCast(startpoint, this.laserSprite.size.y / 5, direction, distance, layerMask);
 
         if ((hitInfo && !hitInfo.collider.isTrigger) || target != null)
         {
+            //Ziel bzw. Collider wurde getroffen, zeichne Linie bis zum Ziel
+
             Collider2D hitted = hitInfo.collider;
             Vector2 hitpoint = hitInfo.point;
 
-            if(this.target != null)
+            if (this.target != null)
             {
                 //Übernehme Position, wenn ein Ziel vorhanden ist
                 hitted = target.GetComponent<Collider2D>();
@@ -95,14 +79,16 @@ public class LaserSkill : StandardSkill
                 if (hittedCharacter != null) hittedCharacter.gotHit(this);
             }
 
-            Vector2 temp = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y- startpoint.y) / 2)+ startpoint;
-            
+            Vector2 temp = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y - startpoint.y) / 2) + startpoint;
+
             this.laserSprite.transform.position = temp;
             this.laserSprite.size = new Vector2(Vector3.Distance(hitpoint, startpoint), this.laserSprite.size.y);
             this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
 
             if (this.impactEffect != null)
             {
+                //Generiere einen Treffer
+
                 if (this.fire == null && this.placeFire)
                 {
                     this.fire = Instantiate(this.impactEffect, hitpoint, Quaternion.identity);
@@ -114,21 +100,17 @@ public class LaserSkill : StandardSkill
                     }
 
                     fire.hideFlags = HideFlags.HideInHierarchy;
-                    //Destroy(fire, 0.5f);
                 }
                 else if (this.fire != null && this.placeFire)
                 {
                     this.fire.transform.position = hitpoint;
                 }
             }
-
-            //HIT
-            //1. Height anpassen 
-            //2. Position anpassen
         }
         else
         {
-            //NO HIT
+            //Kein Ziel getroffen, zeichne Linie mit max Länge
+
             Vector2 temp = new Vector2(this.direction.x * (this.distance / 2), this.direction.y * (this.distance / 2)) + startpoint;
 
             this.laserSprite.transform.position = temp;

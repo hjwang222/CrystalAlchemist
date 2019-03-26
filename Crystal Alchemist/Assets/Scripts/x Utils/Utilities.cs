@@ -155,21 +155,23 @@ public class Utilities : MonoBehaviour
         return RadianToVector2(degree * Mathf.Deg2Rad);
     }
 
-    public static void berechneWinkel(Vector2 startPosition, Vector2 senderDirection, float offset, bool rotateIt, float snapRotationInDegrees, out float angle, out Vector2 start, out Vector2 direction)
+    public static void setDirectionAndRotation(Vector2 senderPosition, Vector2 senderDirection, float positionOffset, float positionHeight, float snapRotationInDegrees, float rotationModifier,
+                                               out float angle, out Vector2 start, out Vector2 direction, out Vector3 rotation)
     {
-        start = new Vector2(startPosition.x + (startPosition.x * offset),
-                            startPosition.y + (startPosition.y * offset));
-
         direction = senderDirection;
 
-        angle = 0;
-        if (rotateIt) angle = Mathf.Atan2(senderDirection.y, senderDirection.x) * Mathf.Rad2Deg;
+        angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) + rotationModifier;
 
         if (snapRotationInDegrees > 0)
         {
             angle = Mathf.Round(angle / snapRotationInDegrees) * snapRotationInDegrees;
-            direction = DegreeToVector2(angle);
+            direction = Utilities.DegreeToVector2(angle);
         }
+
+        start = new Vector2(senderPosition.x + (direction.x * positionOffset),
+                            senderPosition.y + (direction.y * positionOffset) + positionHeight);
+
+        rotation = new Vector3(0, 0, angle);
     }
 
 }

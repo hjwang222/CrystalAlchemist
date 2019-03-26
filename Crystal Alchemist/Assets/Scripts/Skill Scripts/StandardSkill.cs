@@ -244,33 +244,24 @@ public class StandardSkill : MonoBehaviour
 
     private void setPostionAndDirection()
     {
+        //Bestimme Winkel und Position
+
         if (this.animator != null)
         {
             this.animator.SetFloat("moveX", this.sender.direction.x);
             this.animator.SetFloat("moveY", this.sender.direction.y);
         }
 
-        //TODO: AUSLAGERN!
-        this.direction = this.sender.direction;        
+        float angle;
+        Vector2 start;
+        Vector3 rotation;
 
-        //Utilities.berechneWinkel(this.sender.transform.position, this.sender.direction, this.positionOffset, this.rotateIt, this.snapRotationInDegrees, out angle, out start, out this.direction);
-
-        float angle = (Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg)+this.rotationModifier;
-
-        if (this.snapRotationInDegrees > 0)
-        {
-            angle = Mathf.Round(angle / this.snapRotationInDegrees) * this.snapRotationInDegrees;
-            this.direction = DegreeToVector2(angle);
-        }
-
-        Vector2 start = new Vector2(this.sender.transform.position.x + (this.direction.x * this.positionOffset),
-                             this.sender.transform.position.y + (this.direction.y * this.positionOffset) + this.positionHeight);
+        Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
+                                          out angle, out start, out this.direction, out rotation);   
 
         if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;
 
         this.transform.position = start;
-
-        Vector3 rotation = new Vector3(0, 0, angle);
 
         if (this.myRigidbody != null)
         {
@@ -459,19 +450,5 @@ public class StandardSkill : MonoBehaviour
 
     #endregion
 
-
-    #region Functions
-
-    private Vector2 RadianToVector2(float radian)
-    {
-        return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
-    }
-
-    private Vector2 DegreeToVector2(float degree)
-    {
-        return RadianToVector2(degree * Mathf.Deg2Rad);
-    }
-
-    #endregion
 }
 
