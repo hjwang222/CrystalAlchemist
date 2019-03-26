@@ -499,7 +499,7 @@ MonoBehaviour:
   cooldownAfterCombo: 0
   durationCombo: 0
   lockOn: {fileID: 6540191019208669748, guid: 5b2939f613b001c4a9eb3296ae0d2093, type: 3}
-  maxAmountOfTargets: 3
+  maxAmountOfTargets: 99
   targetingDuration: 30
   targetingMode: 1
   multiHitDelay: 0.5
@@ -545,7 +545,6 @@ MonoBehaviour:
   showCastBar: 0
   delayTimeLeft: 0
   durationTimeLeft: 0
-  scriptActivationTimeLeft: 0
   cooldownTimeLeft: 0
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -556,6 +555,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
+  triggerIsActive: 1
 --- !u!1001 &5335493528809116075
 PrefabInstance:
   m_ObjectHideFlags: 0

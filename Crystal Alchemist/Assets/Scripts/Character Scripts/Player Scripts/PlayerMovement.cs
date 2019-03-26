@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,7 @@ public class PlayerMovement : Character
         healthSignal.Raise();
         manaSignal.Raise();
         this.currentState = CharacterState.walk;
-        
+
         animator.SetFloat("moveX", 0);
         animator.SetFloat("moveY", -1);
 
@@ -47,7 +48,7 @@ public class PlayerMovement : Character
             && this.currentState != CharacterState.knockedback)
         {
 
-            
+
             //AButtonPressed();     
 
 
@@ -79,8 +80,8 @@ public class PlayerMovement : Character
     {
         if (this.currentState != CharacterState.interact && this.currentState != CharacterState.inDialog)
         {
-            StandardSkill skill = this.playerInputSkillConfig.getSkillByButton(button);            
-            
+            StandardSkill skill = this.playerInputSkillConfig.getSkillByButton(button);
+
             if (skill.cooldownTimeLeft > 0)
             {
                 skill.cooldownTimeLeft -= (Time.deltaTime * this.timeDistortion * this.spellspeed);
@@ -92,11 +93,11 @@ public class PlayerMovement : Character
                 if (currentAmountOfSameSkills < skill.maxAmounts
                     && (this.mana + skill.addManaSender >= 0 || skill.addManaSender == -Utilities.maxFloatInfinite)
                     && this.life + skill.addLifeSender > 0)
-                {                    
+                {
                     if (isSkillReadyToUse(button, skill)) activateSkill(button, skill);
                     activateSkillFromTargetingSystem(skill);
                 }
-                else if (currentAmountOfSameSkills >= skill.maxAmounts 
+                else if (currentAmountOfSameSkills >= skill.maxAmounts
                      && (skill.duration == Utilities.maxFloatInfinite || skill.delay == Utilities.maxFloatInfinite))
                 {
                     deactivateSkill(button, skill);
@@ -201,9 +202,9 @@ public class PlayerMovement : Character
             TargetingSystem lockOnScript = this.activeLockOnTarget.GetComponent<TargetingSystem>();
             lockOnScript.button = button;
             lockOnScript.sender = this;
-            lockOnScript.skill = skill;            
+            lockOnScript.skill = skill;
             //this.activeLockOnTarget.hideFlags = HideFlags.HideInHierarchy; //TODO: Debug Value as Scriptable Object
-        }       
+        }
     }
 
     private void activateSkillFromTargetingSystem(StandardSkill skill)
@@ -218,15 +219,15 @@ public class PlayerMovement : Character
 
             TargetingSystem targetingSystem = this.activeLockOnTarget.GetComponent<TargetingSystem>();
 
-            if (targetingSystem.currentTarget == null 
+            if (targetingSystem.currentTarget == null
                 && targetingSystem.sortedTargets.Count == 0
                 && skill.targetingMode != TargetingMode.autoMulti
                 && skill.targetingMode != TargetingMode.autoSingle)
-            {                     
+            {
                 Destroy(this.activeLockOnTarget);
                 this.activeLockOnTarget = null;
             }
-            else if(targetingSystem.currentTarget != null
+            else if (targetingSystem.currentTarget != null
                 || targetingSystem.sortedTargets.Count > 0
                 || skill.targetingMode == TargetingMode.autoMulti
                 || skill.targetingMode == TargetingMode.autoSingle)
@@ -242,7 +243,7 @@ public class PlayerMovement : Character
                     StartCoroutine(fireSkillToTarget(targetingSystem, skill));
 
                     //Fire Skill one time when no target is there
-                    if(skill.targetingMode == TargetingMode.autoMulti && targetingSystem.sortedTargets.Count == 0)
+                    if (skill.targetingMode == TargetingMode.autoMulti && targetingSystem.sortedTargets.Count == 0)
                         fireSkillToTarget(targetingSystem.currentTarget, 1, true, skill);
                 }
                 else if (!targetingSystem.selectAll || skill.targetingMode == TargetingMode.autoSingle)
@@ -250,7 +251,7 @@ public class PlayerMovement : Character
                     //SingleHit
                     Destroy(targetingSystem.singleTargetWithMark);
                     fireSkillToTarget(targetingSystem.currentTarget, 1, true, skill);
-                                        
+
                     Destroy(this.activeLockOnTarget);
                     this.activeLockOnTarget = null;
                 }
@@ -290,17 +291,37 @@ public class PlayerMovement : Character
     {
         float damageReduce = targetingSystem.sortedTargets.Count;
 
-        for (int i = 0; i < targetingSystem.sortedTargets.Count; i++)
+        if (targetingSystem.sortedTargets.Count > 0 && targetingSystem.lastID == 0)
         {
-            bool playSoundEffect = false;
-            if (i == 0 || skill.multiHitDelay > 0.3f) playSoundEffect = true;
+            targetingSystem.lastID = targetingSystem.sortedTargets[targetingSystem.sortedTargets.Count - 1].gameObject.GetInstanceID();
 
-            Character target = targetingSystem.sortedTargets[i];
-            fireSkillToTarget(target, damageReduce, playSoundEffect, skill);
+            int ID = 1;
 
-            yield return new WaitForSeconds(skill.multiHitDelay);
+            for (int i = 0; ID != targetingSystem.lastID;)
+            {
+                if (targetingSystem.sortedTargets[i] == null) i++; //Springe weiter, wenn das Ziel nicht mehr existiert
+                else
+                {
+                    Character target = targetingSystem.sortedTargets[i];
+                    ID = target.gameObject.GetInstanceID();
+
+                    if (targetingSystem.hittedIDs.Contains(ID))
+                    {
+                        i++; //Springe weiter, wenn das Ziel bereits getroffen wurde und noch existiert
+                    }
+                    else
+                    {
+                        bool playSoundEffect = false;
+                        if (i == 0 || skill.multiHitDelay > 0.3f) playSoundEffect = true;
+
+                        fireSkillToTarget(target, damageReduce, playSoundEffect, skill);
+                        targetingSystem.hittedIDs.Add(target.gameObject.GetInstanceID());
+                        yield return new WaitForSeconds(skill.multiHitDelay);
+                    }
+                }
+            }
         }
-       
+
         Destroy(this.activeLockOnTarget);
         this.activeLockOnTarget = null;
     }
@@ -356,7 +377,7 @@ public class PlayerMovement : Character
         if (change != Vector3.zero)
         {
             MoveCharacter();
-            
+
             bool lockAnimation = false;
 
             foreach (StandardSkill skill in this.activeSkills)
@@ -383,7 +404,7 @@ public class PlayerMovement : Character
     void MoveCharacter()
     {
         change.Normalize(); //Diagonal-Laufen fixen
-        this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime*this.timeDistortion));
+        this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
         this.myRigidbody.velocity = Vector2.zero;
 
         //Slide

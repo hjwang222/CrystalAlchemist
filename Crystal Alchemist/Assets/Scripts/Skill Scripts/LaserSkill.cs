@@ -105,10 +105,13 @@ public class LaserSkill : StandardSkill
                 if (this.fire == null && this.placeFire)
                 {
                     this.fire = Instantiate(this.impactEffect, hitpoint, Quaternion.identity);
+                    this.fire.transform.position = hitpoint;
                     StandardSkill fireSkill = this.fire.GetComponent<StandardSkill>();
 
                     if (fireSkill != null)
                     {
+                        //Position nicht überschreiben
+                        fireSkill.setPositionAtStart = false;
                         fireSkill.sender = this.sender;
                     }
 

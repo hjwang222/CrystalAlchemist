@@ -8,7 +8,7 @@ public enum TargetingMode
 {
     single,
     multi,
-    manual, 
+    manual,
     autoSingle,
     autoMulti
 }
@@ -43,9 +43,11 @@ public class TargetingSystem : MonoBehaviour
     public TextMeshProUGUI text;
     private float elapsed = 0;
     public List<GameObject> RangeIndicators = new List<GameObject>();
-    
+    public List<int> hittedIDs = new List<int>();
+    public int lastID = 0;
+
     void Start()
-    {        
+    {
         if (this.sender == null || this.skill == null) throw new System.Exception("Sender oder Skill nicht übergeben.\nSender: " + this.sender + "\nSkill: " + this.skill);
 
         this.durationTime = this.skill.targetingDuration;
@@ -56,7 +58,7 @@ public class TargetingSystem : MonoBehaviour
 
         if (!skill.showRange)
         {
-            foreach(GameObject obj in this.RangeIndicators)
+            foreach (GameObject obj in this.RangeIndicators)
             {
                 obj.SetActive(false);
             }
@@ -65,39 +67,50 @@ public class TargetingSystem : MonoBehaviour
 
     void Update()
     {
-        if(this.durationTime < Utilities.maxFloatInfinite)
+        if (!targetsSet)
         {
-            this.text.text = "LOCK ON\n"+Utilities.setDurationToString(this.elapsed);
-        }
-
-        if(elapsed <= 0)
-        {
-            for(int i = 0; i< this.listOfTargetsWithMark.Count; i++)
+            if (this.durationTime < Utilities.maxFloatInfinite)
             {
-                Destroy(this.listOfTargetsWithMark[i].gameObject);
+                this.text.text = "LOCK ON\n" + Utilities.setDurationToString(this.elapsed);
             }
 
-            if(this.singleTargetWithMark != null) Destroy(singleTargetWithMark.gameObject);
-            this.sortedTargets.Clear();
-            this.currentTarget = null;
-            this.sender.activeLockOnTarget = null;
-            Destroy(this.gameObject);
+            if (elapsed <= 0)
+            {
+                for (int i = 0; i < this.listOfTargetsWithMark.Count; i++)
+                {
+                    Destroy(this.listOfTargetsWithMark[i].gameObject);
+                }
+
+                if (this.singleTargetWithMark != null) Destroy(singleTargetWithMark.gameObject);
+                this.sortedTargets.Clear();
+                this.currentTarget = null;
+                this.sender.activeLockOnTarget = null;
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                this.elapsed -= Time.deltaTime;
+            }
+
+            removeNullCharacters();
+
+            sortNearestTargets();
+            setLockOnNearestTarget();
+
+            if (this.sortedTargets.Count > 0
+                && (this.currentTarget == null || !this.buttonPressed))
+                this.currentTarget = this.sortedTargets[0];
+
+            checkInputs();
+            setActiveLockOn();
         }
         else
         {
-            this.elapsed -= Time.deltaTime;
+            foreach (GameObject obj in this.RangeIndicators)
+            {
+                obj.SetActive(false);
+            }
         }
-
-        removeNullCharacters();
-        sortNearestTargets();
-        setLockOnNearestTarget();
-
-        if (this.sortedTargets.Count > 0 
-            && (this.currentTarget == null || !this.buttonPressed))
-            this.currentTarget = this.sortedTargets[0];
-
-        checkInputs();
-        setActiveLockOn();
     }
 
 
@@ -109,7 +122,7 @@ public class TargetingSystem : MonoBehaviour
             this.targetsSet = true;
         }
         else if (!Input.GetButtonDown(this.button) && this.targetMode == TargetingMode.manual)
-        {            
+        {
             //Switch targets
             float valueX = Input.GetAxisRaw("Cursor Horizontal");
             float valueY = Input.GetAxisRaw("Cursor Vertical");
@@ -117,17 +130,17 @@ public class TargetingSystem : MonoBehaviour
             if (this.inputPossible)
             {
                 if (valueY != 0)
-                {                    
+                {
                     this.buttonPressed = true;
                     StartCoroutine(selectionMode((int)valueY));
                 }
                 else if (valueX != 0)
-                {                   
+                {
                     this.buttonPressed = true;
                     StartCoroutine(selectTarget((int)valueX));
                 }
             }
-        }        
+        }
         else if (!Input.GetButtonDown(this.button) && this.targetMode == TargetingMode.multi)
         {
             StartCoroutine(selectionMode(1));
@@ -136,7 +149,7 @@ public class TargetingSystem : MonoBehaviour
         {
             StartCoroutine(selectionMode(1));
             this.targetsSet = true;
-        }       
+        }
     }
 
 
@@ -201,7 +214,7 @@ public class TargetingSystem : MonoBehaviour
             {
                 this.currentTarget = this.sortedTargets[this.index];
 
-                if(this.singleTargetWithMark != null)
+                if (this.singleTargetWithMark != null)
                 {
                     Destroy(this.singleTargetWithMark);
                     this.singleTargetWithMark = null;
@@ -233,16 +246,16 @@ public class TargetingSystem : MonoBehaviour
         this.sortedTargets.Clear();
         List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
 
-        for(int i = 0; i< this.maxAmountOfTargets && i < sorted.Count; i++)
+        for (int i = 0; i < this.maxAmountOfTargets && i < sorted.Count; i++)
         {
             this.sortedTargets.Add(sorted[i]);
         }
     }
 
     private void setLockOnNearestTarget()
-    {       
+    {
         if (this.sortedTargets.Count > 0 && this.listOfTargetsWithMark.Count == 0)
-        {            
+        {
             if (this.currentTarget != null)
             {
                 if (Utilities.hasChildWithTag(this.currentTarget, "LockOn") == null)

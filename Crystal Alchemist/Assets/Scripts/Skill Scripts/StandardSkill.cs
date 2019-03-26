@@ -184,6 +184,8 @@ public class StandardSkill : MonoBehaviour
     public float holdTimer = 0;
     [HideInInspector]
     public bool triggerIsActive = true;
+    [HideInInspector]
+    public bool setPositionAtStart = true;
 
     #endregion
 
@@ -240,7 +242,7 @@ public class StandardSkill : MonoBehaviour
             this.sender.updateLife(this.addLifeSender);
             setPostionAndDirection();
         }
-    }
+    }    
 
     private void setPostionAndDirection()
     {
@@ -258,11 +260,11 @@ public class StandardSkill : MonoBehaviour
 
         Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
                                           this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
-                                          out angle, out start, out this.direction, out rotation);   
+                                          out angle, out start, out this.direction, out rotation);
 
         //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;
 
-        this.transform.position = start;
+        if (setPositionAtStart) this.transform.position = start;
 
         if (this.myRigidbody != null)
         {

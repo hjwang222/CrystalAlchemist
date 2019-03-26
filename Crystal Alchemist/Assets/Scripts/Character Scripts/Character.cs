@@ -82,11 +82,11 @@ public class Character : MonoBehaviour
 
     [Header("Character Stats")]
     [Tooltip("Leben, mit dem der Spieler startet")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float startLife;
+    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
+    public float startLife = Utilities.minFloat;
     [Tooltip("Mana, mit dem der Spieler startet")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float startMana;
+    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
+    public float startMana = Utilities.minFloat;
     [Tooltip("Movement-Speed in %, mit dem der Spieler startet")]
     [Range(Utilities.minFloatPercent, Utilities.maxFloatPercent)]
     public float startSpeed = 100;
@@ -123,11 +123,11 @@ public class Character : MonoBehaviour
 
     [Header("Character Max Values")]
     [Tooltip("Maximales Life")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float attributeMaxLife;
+    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
+    public float attributeMaxLife = Utilities.minFloat;
     [Tooltip("Maximales Mana")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float attributeMaxMana;
+    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
+    public float attributeMaxMana = Utilities.minFloat;
 
     [Header("Damage Behavior")]
     [Tooltip("Wie stark (-) oder schwach (+) kann das Objekt zurück gestoßen werden?")]
@@ -229,7 +229,7 @@ public class Character : MonoBehaviour
     public List<StatusEffect> buffs = new List<StatusEffect>();
     [HideInInspector]
     public List<StatusEffect> debuffs = new List<StatusEffect>();
-    [HideInInspector]
+    
     public List<StandardSkill> activeSkills = new List<StandardSkill>();
     [HideInInspector]
     private float lifeTime;

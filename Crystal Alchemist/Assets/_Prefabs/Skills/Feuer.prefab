@@ -149,7 +149,7 @@ MonoBehaviour:
   positionHeight: 0
   isStationary: 0
   affectSelf: 0
-  affectPlayers: 0
+  affectPlayers: 1
   affectEnemies: 1
   affectObjects: 1
   affectSkills: 0
@@ -180,6 +180,8 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
+  triggerIsActive: 1
+  setPositionAtStart: 1
 --- !u!58 &1485117890447238215
 CircleCollider2D:
   m_ObjectHideFlags: 0

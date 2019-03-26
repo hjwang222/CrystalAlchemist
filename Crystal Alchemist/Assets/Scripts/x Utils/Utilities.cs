@@ -7,6 +7,7 @@ public class Utilities : MonoBehaviour
     #region Konstanten
     public const float maxFloatInfinite = 9999;
     public const int maxIntInfinite = 9999;
+    public const float minFloat = 0.1f;
 
     public const float maxFloatSmall = 99;
     public const int maxIntSmall = 99;
@@ -124,11 +125,7 @@ public class Utilities : MonoBehaviour
                     return true;
                 }
             }
-        }
-        else
-        {
-            Debug.Log("Skill ist NULL bei checkCollsion (Utilities)");
-        }
+        }       
 
         return false;
     }
