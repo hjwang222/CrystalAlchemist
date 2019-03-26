@@ -155,10 +155,21 @@ public class Utilities : MonoBehaviour
         return RadianToVector2(degree * Mathf.Deg2Rad);
     }
 
-    public static void setDirectionAndRotation(Vector2 senderPosition, Vector2 senderDirection, float positionOffset, float positionHeight, float snapRotationInDegrees, float rotationModifier,
+    public static void setDirectionAndRotation(Vector2 senderPosition, Vector2 senderDirection, Character target,
+                                                float positionOffset, float positionHeight, float snapRotationInDegrees, float rotationModifier,
                                                out float angle, out Vector2 start, out Vector2 direction, out Vector3 rotation)
     {
         direction = senderDirection;
+
+        start = new Vector2(senderPosition.x + (direction.x * positionOffset),
+                            senderPosition.y + (direction.y * positionOffset) + positionHeight);
+
+        if (target != null)
+        {
+            direction = (Vector2)target.transform.position - start;
+            float temp_angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            direction = Utilities.DegreeToVector2(temp_angle);
+        }
 
         angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) + rotationModifier;
 
@@ -167,9 +178,6 @@ public class Utilities : MonoBehaviour
             angle = Mathf.Round(angle / snapRotationInDegrees) * snapRotationInDegrees;
             direction = Utilities.DegreeToVector2(angle);
         }
-
-        start = new Vector2(senderPosition.x + (direction.x * positionOffset),
-                            senderPosition.y + (direction.y * positionOffset) + positionHeight);
 
         rotation = new Vector3(0, 0, angle);
     }

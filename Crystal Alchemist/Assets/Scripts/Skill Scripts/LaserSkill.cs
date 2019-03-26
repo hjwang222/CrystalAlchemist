@@ -30,6 +30,16 @@ public class LaserSkill : StandardSkill
         drawLine(true);
     }
 
+    private Vector2 RadianToVector2(float radian)
+    {
+        return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
+    }
+
+    private Vector2 DegreeToVector2(float degree)
+    {
+        return RadianToVector2(degree * Mathf.Deg2Rad);
+    }
+
     private void drawLine(bool updateRotation)
     {
         //Bestimme Winkel und Position
@@ -38,7 +48,8 @@ public class LaserSkill : StandardSkill
         Vector2 startpoint;
         Vector3 rotation;
 
-        Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
+        Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
+                                          this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
                                           out angle, out startpoint, out this.direction, out rotation);
 
         if (this.target != null && updateRotation)
@@ -48,7 +59,7 @@ public class LaserSkill : StandardSkill
             this.direction = Utilities.DegreeToVector2(temp_angle);
         }
 
-        renderLine(startpoint, rotation);        
+        renderLine(startpoint, rotation);
     }
 
     private void renderLine(Vector2 startpoint, Vector3 rotation)

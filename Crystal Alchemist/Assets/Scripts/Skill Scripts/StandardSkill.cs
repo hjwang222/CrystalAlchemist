@@ -256,10 +256,11 @@ public class StandardSkill : MonoBehaviour
         Vector2 start;
         Vector3 rotation;
 
-        Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
+        Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
+                                          this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
                                           out angle, out start, out this.direction, out rotation);   
 
-        if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;
+        //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;
 
         this.transform.position = start;
 
