@@ -45,7 +45,7 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("In welchen Intervallen die Ziele getroffen werden sollen")]
     [Range(0, 10)]
     public float multiHitDelay = 0;
-    public bool showRange = false;
+    public bool showRange = false;    
 
     [Header("Basis Attribute (bezogen auf Effekte des Ziels)")]
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
@@ -100,7 +100,7 @@ public class StandardSkill : MonoBehaviour
     public float positionHeight = 0f;
     [Tooltip("Ist das Projektil stationär. True = liegt einfach herum (z.B. Bombe)")]
     public bool isStationary = false;
-
+    
     [Header("Wirkungsbereich")]
     [Tooltip("wirkt nur auf sich selbst")]
     public bool affectSelf = false;
@@ -182,6 +182,8 @@ public class StandardSkill : MonoBehaviour
     private float elapsed;
     [HideInInspector]
     public float holdTimer = 0;
+    [HideInInspector]
+    public bool triggerIsActive = true;
 
     #endregion
 
@@ -422,7 +424,13 @@ public class StandardSkill : MonoBehaviour
 
     public void ActivateIt()
     {
-        this.delayTimeLeft = 0;
+        this.delayTimeLeft = 0;        
+    }
+
+    public void SetTriggerActive(int value)
+    {
+        if(value == 0) this.triggerIsActive = false;
+        else this.triggerIsActive = true;
     }
 
     public virtual void DestroyIt()

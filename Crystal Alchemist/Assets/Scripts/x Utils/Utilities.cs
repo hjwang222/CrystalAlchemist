@@ -90,7 +90,7 @@ public class Utilities : MonoBehaviour
 
     public static bool checkCollision(Collider2D hittedCharacter, StandardSkill skill)
     {
-        if (skill != null)
+        if (skill != null && skill.triggerIsActive)
         {
             if (skill.affectSkills
                 && hittedCharacter.CompareTag("Skill")

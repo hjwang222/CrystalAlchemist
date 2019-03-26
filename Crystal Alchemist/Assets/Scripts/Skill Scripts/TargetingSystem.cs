@@ -44,9 +44,6 @@ public class TargetingSystem : MonoBehaviour
     private float elapsed = 0;
     public List<GameObject> RangeIndicators = new List<GameObject>();
     
-    //TODO: Hold button (z.B. für Mehrfachlaser)
-    //TODO: Lock On Cooldown und Combo (Singletarget, 1 press = aktiv, 1 press = do it)
-
     void Start()
     {        
         if (this.sender == null || this.skill == null) throw new System.Exception("Sender oder Skill nicht übergeben.\nSender: " + this.sender + "\nSkill: " + this.skill);
