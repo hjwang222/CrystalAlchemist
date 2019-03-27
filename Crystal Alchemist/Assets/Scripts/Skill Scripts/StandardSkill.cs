@@ -45,6 +45,7 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("In welchen Intervallen die Ziele getroffen werden sollen")]
     [Range(0, 10)]
     public float multiHitDelay = 0;
+    [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
     public bool showRange = false;    
 
     [Header("Basis Attribute (bezogen auf Effekte des Ziels)")]

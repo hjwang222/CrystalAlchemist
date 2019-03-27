@@ -45,6 +45,8 @@ public class TargetingSystem : MonoBehaviour
     public List<GameObject> RangeIndicators = new List<GameObject>();
     public List<int> hittedIDs = new List<int>();
     public int lastID = 0;
+    private bool showTargetIndicator = true;
+
 
     void Start()
     {
@@ -63,6 +65,8 @@ public class TargetingSystem : MonoBehaviour
                 obj.SetActive(false);
             }
         }
+
+        if (this.targetMode == TargetingMode.autoMulti || this.targetMode == TargetingMode.autoSingle) this.showTargetIndicator = false;
     }
 
     void Update()
@@ -175,7 +179,7 @@ public class TargetingSystem : MonoBehaviour
         {
             foreach (Character character in this.sortedTargets)
             {
-                if (Utilities.hasChildWithTag(character, "LockOn") == null)
+                if (Utilities.hasChildWithTag(character, "LockOn") == null && this.showTargetIndicator)
                 {
                     GameObject multipleLockOns = Instantiate(this.lockon, character.transform.position, Quaternion.identity, character.transform);
                     multipleLockOns.hideFlags = HideFlags.HideInHierarchy;
@@ -258,7 +262,7 @@ public class TargetingSystem : MonoBehaviour
         {
             if (this.currentTarget != null)
             {
-                if (Utilities.hasChildWithTag(this.currentTarget, "LockOn") == null)
+                if (Utilities.hasChildWithTag(this.currentTarget, "LockOn") == null && this.showTargetIndicator)
                 {
                     this.singleTargetWithMark = Instantiate(this.lockon, currentTarget.transform.position, Quaternion.identity, currentTarget.transform);
                     this.singleTargetWithMark.name = this.singleTargetWithMark.name + currentTarget.characterName + Time.deltaTime;
