@@ -42,7 +42,7 @@ public class Interactable : MonoBehaviour
     public GameObject character;
 
     [HideInInspector]
-    public Animator anim;
+    public Animator animator;
 
     [HideInInspector]
     public AudioSource audioSource;
@@ -76,7 +76,7 @@ public class Interactable : MonoBehaviour
             this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
             this.audioSource.loop = false;
             this.audioSource.playOnAwake = false;
-            this.anim = GetComponent<Animator>();
+            this.animator = GetComponent<Animator>();
             this.dialogScript = this.gameObject.GetComponent<Dialog>();
             setContext();
             Utilities.setItem(this.lootTable, this.multiLoot, this.items);        

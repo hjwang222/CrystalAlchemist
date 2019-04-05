@@ -251,8 +251,8 @@ public class StandardSkill : MonoBehaviour
 
         if (this.animator != null)
         {
-            this.animator.SetFloat("moveX", this.sender.direction.x);
-            this.animator.SetFloat("moveY", this.sender.direction.y);
+            Utilities.SetParameter(this.animator, "moveX", this.sender.direction.x);
+            Utilities.SetParameter(this.animator, "moveY", this.sender.direction.y);
         }
 
         float angle;
@@ -312,14 +312,15 @@ public class StandardSkill : MonoBehaviour
 
             if (this.animator != null && this.sender != null && !this.lockMovementonDuration)
             {
-                this.animator.SetFloat("moveX", this.sender.direction.x);
-                this.animator.SetFloat("moveY", this.sender.direction.y);
+                Utilities.SetParameter(this.animator, "moveX", this.sender.direction.x);
+                Utilities.SetParameter(this.animator, "moveY", this.sender.direction.y);
             }
 
             if (this.delayTimeLeft > 0)
             {
                 this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
-                if (this.animator != null) this.animator.SetFloat("Time", this.delayTimeLeft);
+                
+                Utilities.SetParameter(this.animator, "Time", this.delayTimeLeft);
                 //do something here
             }
             else
@@ -333,9 +334,9 @@ public class StandardSkill : MonoBehaviour
                     }
                     else
                     {
-                        if (this.animator != null) this.animator.SetBool("Explode", true);
+                        Utilities.SetParameter(this.animator, "Explode", true);
 
-                        if (this.animator == null || this.animator.GetBool("Explode") == false) DestroyIt();
+                        if (this.animator == null || !Utilities.HasParameter(this.animator, "Explode")) DestroyIt();
                     }
                 }
             }

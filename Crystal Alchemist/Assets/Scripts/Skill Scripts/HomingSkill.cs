@@ -57,7 +57,7 @@ public class HomingSkill : StandardSkill
             else
             {                
                 //Starte End-Animation wenn der Skill sein Ziel erreicht hat
-                if (this.animator != null) this.animator.SetBool("Explode", true);                
+                Utilities.SetParameter(this.animator, "Explode", true);             
             }
         }
         else

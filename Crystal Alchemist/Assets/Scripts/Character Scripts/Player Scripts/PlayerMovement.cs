@@ -21,8 +21,8 @@ public class PlayerMovement : Character
         manaSignal.Raise();
         this.currentState = CharacterState.walk;
 
-        animator.SetFloat("moveX", 0);
-        animator.SetFloat("moveY", -1);
+        Utilities.SetParameter(this.animator, "moveX", 0);
+        Utilities.SetParameter(this.animator, "moveY", -1);
 
         this.direction = new Vector2(0, -1);
     }
@@ -36,7 +36,7 @@ public class PlayerMovement : Character
 
         if (currentState == CharacterState.inDialog)
         {
-            animator.SetBool("isWalking", false);
+            Utilities.SetParameter(this.animator, "isWalking", false);
             return;
         }
 
@@ -357,11 +357,13 @@ public class PlayerMovement : Character
         if (currentState != CharacterState.interact)
         {
             Utilities.playSoundEffect(this.audioSource, this.attackClip, this.soundEffectVolume);
-            animator.SetBool("isAttacking", true);
+            
+            Utilities.SetParameter(this.animator, "isAttacking", true);
             this.currentState = CharacterState.attack;
             yield return null;
         }
-        animator.SetBool("isAttacking", false);
+        
+        Utilities.SetParameter(this.animator, "isAttacking", false);
         yield return new WaitForSeconds(0.3f);
 
         if (currentState != CharacterState.inDialog)
@@ -392,13 +394,15 @@ public class PlayerMovement : Character
             if (!lockAnimation)
             {
                 this.direction = change;
-                animator.SetFloat("moveX", change.x);
-                animator.SetFloat("moveY", change.y);
+
+                Utilities.SetParameter(this.animator, "moveX", change.x);
+                Utilities.SetParameter(this.animator, "moveY", change.y);
             }
 
-            animator.SetBool("isWalking", true);
+            
+            Utilities.SetParameter(this.animator, "isWalking", true);
         }
-        else animator.SetBool("isWalking", false);
+        else Utilities.SetParameter(this.animator, "isWalking", false);
     }
 
     void MoveCharacter()

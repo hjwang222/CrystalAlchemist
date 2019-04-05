@@ -40,7 +40,7 @@ public class Utilities : MonoBehaviour
 
         return activeSkill.GetComponent<StandardSkill>();
     }
-    
+
     public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect, FloatValue soundEffectVolume)
     {
         float volume = 1f;
@@ -82,7 +82,7 @@ public class Utilities : MonoBehaviour
 
         //if (this.items.Count > 0) this.text = this.text.Replace("%XY%", this.items[0].GetComponent<Item>().amount + " " + this.items[0].GetComponent<Item>().name);
     }
-    
+
     #endregion
 
 
@@ -125,7 +125,7 @@ public class Utilities : MonoBehaviour
                     return true;
                 }
             }
-        }       
+        }
 
         return false;
     }
@@ -144,6 +144,41 @@ public class Utilities : MonoBehaviour
         }
 
         return result;
+    }
+
+    public static void SetParameter(Animator animator, string parameter, bool value)
+    {
+        if (animator != null)
+        {
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.name == parameter) animator.SetBool(parameter, value);
+            }
+        }
+    }
+
+    public static void SetParameter(Animator animator, string parameter, float value)
+    {
+        if (animator != null)
+        {
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.name == parameter) animator.SetFloat(parameter, value);
+            }
+        }
+    }
+
+    public static bool HasParameter(Animator animator, string parameter)
+    {
+        if(animator != null)
+        {
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.name == parameter) return true;
+            }
+        }
+
+        return false;
     }
 
     #endregion

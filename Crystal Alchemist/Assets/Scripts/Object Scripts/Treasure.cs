@@ -17,8 +17,7 @@ public class Treasure : Interactable
 
     private void Start()
     {
-        init();
-        //if (this.isOpen) this.anim.SetBool("isOpened", true);
+        init();        
     }
 
     #endregion
@@ -66,8 +65,8 @@ public class Treasure : Interactable
     #region Treasure Chest Funktionen (open, show Item)
 
     private void OpenChest()
-    {
-        this.anim.SetBool("isOpened", true);
+    {        
+        Utilities.SetParameter(this.animator, "isOpened", true);
         this.currentState = objectState.opened;
 
         if (this.soundEffect != null && this.items.Count > 0)

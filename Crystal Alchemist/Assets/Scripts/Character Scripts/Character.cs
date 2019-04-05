@@ -670,7 +670,7 @@ public class Character : MonoBehaviour
             
             if (this.deathType != DeathType.immortal)
             {
-                if (this.animator != null) this.animator.SetBool("isDead", true);
+                Utilities.SetParameter(this.animator, "isDead", true);
                                
                 this.GetComponent<BoxCollider2D>().enabled = false;
                 

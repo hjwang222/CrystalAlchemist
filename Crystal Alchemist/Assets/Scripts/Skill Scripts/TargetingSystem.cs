@@ -162,7 +162,7 @@ public class TargetingSystem : MonoBehaviour
     {
         if (this.currentTarget != null && this.singleTargetWithMark != null)
         {
-            this.singleTargetWithMark.transform.parent = this.currentTarget.transform;
+            this.singleTargetWithMark.transform.SetParent(this.currentTarget.transform);
             this.singleTargetWithMark.transform.position = this.currentTarget.transform.position;
             this.singleTargetWithMark.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = this.currentTarget.characterName;
         }
