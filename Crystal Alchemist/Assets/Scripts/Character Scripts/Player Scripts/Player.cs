@@ -2,23 +2,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
-    private Vector3 change;
-    public ButtonConfig playerInputSkillConfig;
-    private string lastButtonPressed = "";
-    public GameObject music;
-
-    private PlayerValues localPlayerData;
     public StringSignal dialogBoxSignal;
+
+    [Header("Button Config")]
+    public ButtonConfig playerInputSkillConfig;
+
+    private Vector3 change;
+    private string lastButtonPressed = "";
+    //public GameObject music;    
 
     // Start is called before the first frame update
     private void Start()
     {        
-        this.init();       
-       
+        this.init();
+
+        PlayerData data = SaveSystem.loadPlayer();
+
+        if (data != null)
+        {
+            this.life = data.health;
+            this.mana = data.mana;
+            this.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+        }
+
         this.currentState = CharacterState.walk;
 
         Utilities.SetParameter(this.animator, "moveX", 0);
@@ -61,6 +71,12 @@ public class Player : Character
     public void showDialogBox(string text)
     {
         if(this.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
+    }
+
+    public string getScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        return scene.name;
     }
 
     

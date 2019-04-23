@@ -30,12 +30,19 @@ public class SceneTransition : MonoBehaviour
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            other.GetComponent<Player>().currentState = CharacterState.idle;
-            other.GetComponent<Player>().transform.position = playerPositionInNewScene;
-            StartCoroutine(this.FadeCo(other.GetComponent<Player>()));      
+            load(other.GetComponent<Player>());      
         }
     }
 
+    private void load(Player player)
+    {
+        SceneManager.LoadScene(this.targetScene);
+       
+        player.currentState = CharacterState.idle;
+        player.transform.position = playerPositionInNewScene;
+    }
+
+    /*
     public IEnumerator FadeCo(Player player)
     {
         if (fadeOutPanel != null)
@@ -45,12 +52,12 @@ public class SceneTransition : MonoBehaviour
         yield return new WaitForSeconds(this.fadeWait);
 
         //if(player != null) player.SavePlayer();
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.targetScene);
+        
 
         while (!asyncOperation.isDone)
         {
             yield return null;
         }
-    }
+    }*/
 }
 

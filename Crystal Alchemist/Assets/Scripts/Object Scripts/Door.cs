@@ -32,11 +32,10 @@ public class Door : Interactable
     {
         if (this.doorType != DoorType.enemy && this.doorType != DoorType.button)
         {
-            if (this.isPlayerInRange && !this.isOpen && Input.GetButtonDown("A-Button"))
+            if (this.isPlayerInRange && !this.isOpen && Input.GetButtonDown("Submit"))
             {
                 if (this.doorType == DoorType.key)
                 {
-
                     //check if Player has keys
                     //if so, OpenDoor();
                     //reduce keys by 1

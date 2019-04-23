@@ -60,7 +60,12 @@ public class TitleScreen : MonoBehaviour
             }
             else if (text.Contains("starten"))
             {
-                SceneManager.LoadScene(1);
+                string scene = "Dorf";
+                PlayerData data = SaveSystem.loadPlayer();
+
+                if (data != null && data.scene != null && data.scene != "") scene = data.scene;
+
+                SceneManager.LoadScene(scene);
             }
             else if (text.Contains("Zurück"))
             {

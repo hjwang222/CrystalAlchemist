@@ -172,6 +172,9 @@ public class Character : MonoBehaviour
     [Tooltip("Soundeffekt, wenn Gegner getötet wurde")]
     public AudioClip killSoundEffect;
 
+    [Header("Signals")]
+    public Signal healthSignal;
+    public Signal manaSignal;
     #endregion
 
 
@@ -417,7 +420,7 @@ public class Character : MonoBehaviour
 
             this.life += addLife;
 
-           // if (this.healthSignal != null) this.healthSignal.Raise();
+            if (this.healthSignal != null) this.healthSignal.Raise();
 
             if (this.damageNumber != null)
             {
@@ -442,7 +445,7 @@ public class Character : MonoBehaviour
             else if (this.mana + addMana < 0) this.mana = 0;
             else this.mana += addMana;
 
-            //if (this.manaSignal != null) this.manaSignal.Raise();
+            if (this.manaSignal != null) this.manaSignal.Raise();
         }
     }
 
@@ -461,10 +464,10 @@ public class Character : MonoBehaviour
     {
         this.timeDistortion = 1 + (distortion/100);
 
-        if (this.CompareTag("Player"))
+       /* if (this.CompareTag("Player"))
         {
             this.GetComponent<Player>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
-        }
+        }*/
 
         if (this.animator != null) this.animator.speed = this.timeDistortion;
         if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;

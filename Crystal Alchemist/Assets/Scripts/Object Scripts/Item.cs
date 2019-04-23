@@ -65,6 +65,12 @@ public class Item : MonoBehaviour
     #endregion
 
 
+    public Sprite getSprite()
+    {
+        return this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+    }
+
+
     #region Treasure specific Function
     public void showFromTreasure()
     {

@@ -41,13 +41,16 @@ public class DialogBox : MonoBehaviour
             //Wenn DialogBox aktiv ist
             //TODO: B-Button einfügen
 
-            if (Input.GetButtonDown("Submit") && this.inputPossible)
-            {               
-                if (this.index+2 < this.texts.Count)
+            if (this.inputPossible && (Input.GetButtonDown("Submit") || Input.GetButtonDown("Cancel")))
+            {
+                if (Input.GetButtonDown("Submit")) this.index += 2;
+                else if (Input.GetButtonDown("Cancel")) this.index -= 2;
+
+                if (this.index < 0) this.index = 0;
+
+                if (this.index < this.texts.Count)
                 {
-                    //Blättere weiter
-                    Utilities.playSoundEffect(this.audioSource, this.dialogSoundEffect);
-                    this.index+=2;
+                    //Blättere weiter                                       
                     showText();
                     StartCoroutine(delayInputCO());
                 }
@@ -85,10 +88,7 @@ public class DialogBox : MonoBehaviour
         this.index = 0;
         this.dialogBox.SetActive(false);
 
-        if (this.player != null)
-        {
-            this.player.currentState = CharacterState.interact;
-        }
+        StartCoroutine(delayInputPlayerCO());
     }
 
     private IEnumerator delayInputCO()
@@ -96,6 +96,17 @@ public class DialogBox : MonoBehaviour
         this.inputPossible = false;
         yield return new WaitForSeconds(this.delay);
         this.inputPossible = true;
+    }
+
+    private IEnumerator delayInputPlayerCO()
+    {        
+        //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
+        yield return new WaitForSeconds(this.delay);
+
+        if (this.player != null)
+        {
+            this.player.currentState = CharacterState.interact;
+        }
     }
 
     private List<string> formatText(string text)
@@ -131,6 +142,8 @@ public class DialogBox : MonoBehaviour
 
     private void showText()
     {
+        Utilities.playSoundEffect(this.audioSource, this.dialogSoundEffect);
+
         if (this.index + 1 < this.texts.Count) this.textMesh.text = this.texts[this.index] + "\n" + this.texts[this.index + 1];
         else this.textMesh.text = this.texts[this.index];
     }

@@ -351,7 +351,6 @@ MonoBehaviour:
   dialogBox: {fileID: 3279744577954030739}
   textMesh: {fileID: 2582603404291709282}
   dialogSoundEffect: {fileID: 8300000, guid: 4ef89ff25bc0cbd48a8e5cb65460d8e5, type: 3}
-  player: {fileID: 0}
 --- !u!114 &8695059769820482007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,6 +653,7 @@ MonoBehaviour:
   lowSoundEffect: {fileID: 8300000, guid: 219ca0edf849a9743b6ee20119564e10, type: 3}
   audioInterval: 1.5
   warning: {fileID: 0}
+  scaler: {fileID: 0}
 --- !u!114 &2582603402918917157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1220,6 +1220,7 @@ GameObject:
   - component: {fileID: 2582603403262895078}
   - component: {fileID: 2582603403262895077}
   - component: {fileID: 2582603403262895076}
+  - component: {fileID: 431969092772009884}
   m_Layer: 5
   m_Name: Heart Containers
   m_TagString: Untagged
@@ -1294,6 +1295,7 @@ MonoBehaviour:
   lowSoundEffect: {fileID: 8300000, guid: 9bf2104425ada604aa8fc9fa047dbfec, type: 3}
   audioInterval: 1.5
   warning: {fileID: 2582603402985390516}
+  scaler: {fileID: 2582603403795691387}
 --- !u!114 &2582603403262895077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1419,6 +1421,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!223 &431969092772009884
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582603403262894873}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &2582603403501939206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,6 +1892,7 @@ MonoBehaviour:
   lowSoundEffect: {fileID: 0}
   audioInterval: 1.5
   warning: {fileID: 0}
+  scaler: {fileID: 0}
 --- !u!114 &2582603403788041412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3130,6 +3154,7 @@ MonoBehaviour:
   lowSoundEffect: {fileID: 0}
   audioInterval: 1.5
   warning: {fileID: 0}
+  scaler: {fileID: 0}
 --- !u!114 &2582603404419122684
 MonoBehaviour:
   m_ObjectHideFlags: 0

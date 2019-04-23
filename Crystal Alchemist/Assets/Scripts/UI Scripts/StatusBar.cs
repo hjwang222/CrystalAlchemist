@@ -21,8 +21,7 @@ public enum UIType
 public class StatusBar : MonoBehaviour
 {
     #region Attribute
-    [Header("Ziel der Anzeige (Spieler)")]
-    private Player player;
+
 
     [Header("Art der GUI")]
     public UIType type = UIType.health;
@@ -38,12 +37,14 @@ public class StatusBar : MonoBehaviour
     public AudioClip lowSoundEffect;
     public float audioInterval = 1.5f;
     public GameObject warning;
+    public CanvasScaler scaler;
 
     private AudioSource audioSource;
     private float maximum;
     private float current;
     private bool playLow;
     private float elapsed;
+    private Player player;
     #endregion
 
 
@@ -205,7 +206,7 @@ public class StatusBar : MonoBehaviour
             this.playLow = false;
             if (this.warning != null) this.warning.SetActive(false);
         }
-        
+
     }
     #endregion
 }
