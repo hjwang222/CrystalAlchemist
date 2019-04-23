@@ -41,16 +41,14 @@ public class Utilities : MonoBehaviour
         return activeSkill.GetComponent<StandardSkill>();
     }
 
-    public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect, FloatValue soundEffectVolume)
+    public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect)
     {
         float volume = 1f;
         if (soundeffect != null && audioSource != null)
         {
-            if (soundEffectVolume != null)
-            {
-                volume = soundEffectVolume.value;
-                audioSource.pitch = soundEffectVolume.pitchValue;
-            }
+            volume = GlobalValues.soundEffectVolume;
+            audioSource.pitch = GlobalValues.soundEffectPitch;
+
             audioSource.PlayOneShot(soundeffect, volume);
         }
     }

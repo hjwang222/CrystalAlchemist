@@ -63,15 +63,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Character Scripts\Character.cs" />
+    <Compile Include="Assets\Scripts\Character Scripts\CharacterAttributes.cs" />
     <Compile Include="Assets\Scripts\Character Scripts\Enemy Scripts\ChasingEnemy.cs" />
     <Compile Include="Assets\Scripts\Character Scripts\Enemy Scripts\Enemy.cs" />
-    <Compile Include="Assets\Scripts\Character Scripts\Player Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Character Scripts\Player Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Game Scripts\AnalyseUI.cs" />
     <Compile Include="Assets\Scripts\Game Scripts\BackgroundMusic.cs" />
     <Compile Include="Assets\Scripts\Game Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Game Scripts\DamageNumbers.cs" />
     <Compile Include="Assets\Scripts\Game Scripts\DayNightColor.cs" />
-    <Compile Include="Assets\Scripts\Game Scripts\Dialog.cs" />
     <Compile Include="Assets\Scripts\Game Scripts\Room.cs" />
     <Compile Include="Assets\Scripts\Game Scripts\SceneTransition.cs" />
     <Compile Include="Assets\Scripts\Game Scripts\StatusBar.cs" />
@@ -103,11 +103,14 @@
     <Compile Include="Assets\Scripts\UI Scripts\BlindUIManager.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\Buttons.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\CastBar.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\DialogBox.cs" />
     <Compile Include="Assets\Scripts\x Scriptable Objects\ButtonConfig.cs" />
     <Compile Include="Assets\Scripts\x Scriptable Objects\FloatValue.cs" />
     <Compile Include="Assets\Scripts\x Scriptable Objects\Globals.cs" />
+    <Compile Include="Assets\Scripts\x Scriptable Objects\PlayerValues.cs" />
     <Compile Include="Assets\Scripts\x Scriptable Objects\Signal.cs" />
-    <Compile Include="Assets\Scripts\x Utils\CustomInspector.cs" />
+    <Compile Include="Assets\Scripts\x Utils\DontDestroyHandler.cs" />
+    <Compile Include="Assets\Scripts\x Utils\GlobalPlayer.cs" />
     <Compile Include="Assets\Scripts\x Utils\GlobalValues.cs" />
     <Compile Include="Assets\Scripts\x Utils\SignalListener.cs" />
     <Compile Include="Assets\Scripts\x Utils\Utilities.cs" />

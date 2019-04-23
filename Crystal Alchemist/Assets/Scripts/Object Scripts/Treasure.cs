@@ -36,14 +36,10 @@ public class Treasure : Interactable
             //Wenn Truhe geöffnet wurde und der Dialog weggeklickt wird
             //TODO, geht noch besser
 
-            if (this.dialogScript != null)
-            {
-                this.dialogScript.showDialog(this.character, "");
-                this.dialogScript = null;                
-            }
+            if (this.character.GetComponent<Player>() != null) this.character.GetComponent<Player>().showDialogBox(this.text);
 
             //Entferne Item aus der Welt und leere die Liste
-            foreach(GameObject item in this.items)
+            foreach (GameObject item in this.items)
             {
                 Destroy(item);
             }
@@ -72,15 +68,15 @@ public class Treasure : Interactable
         if (this.soundEffect != null && this.items.Count > 0)
         {
             //Spiele Soundeffekte ab
-            Utilities.playSoundEffect(this.audioSource, this.soundEffect, this.soundEffectVolume);
-            Utilities.playSoundEffect(this.audioSource, this.soundEffectTreasure, this.soundEffectVolume);
+            Utilities.playSoundEffect(this.audioSource, this.soundEffect);
+            Utilities.playSoundEffect(this.audioSource, this.soundEffectTreasure);
 
             //Zeige Item
             this.showTreasureItem();
 
             //OLD, muss besser gehen!
             //Gebe Item dem Spieler
-            foreach (GameObject item in this.items) item.GetComponent<Item>().collect(this.character.GetComponent<PlayerMovement>(), false);
+            foreach (GameObject item in this.items) item.GetComponent<Item>().collect(this.character.GetComponent<Player>(), false);
         }
         else
         {
@@ -88,10 +84,7 @@ public class Treasure : Interactable
             this.text = "Die Kiste ist leer... .";
         }
 
-        if (this.dialogScript != null)
-        {
-            this.dialogScript.showDialog(this.character, this.text);
-        }        
+        if (this.character.GetComponent<Player>() != null) this.character.GetComponent<Player>().showDialogBox("");
     }
 
     public void showTreasureItem()

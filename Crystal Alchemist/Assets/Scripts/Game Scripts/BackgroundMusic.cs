@@ -7,7 +7,6 @@ public class BackgroundMusic : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip startMusic;
     public AudioClip loopMusic;
-    public FloatValue backgroundMusicVolume;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +16,7 @@ public class BackgroundMusic : MonoBehaviour
         if (this.startMusic != null)
         {
             this.audioSource.loop = false;
-            this.audioSource.PlayOneShot(this.startMusic, this.backgroundMusicVolume.value);
+            this.audioSource.PlayOneShot(this.startMusic, GlobalValues.backgroundMusicVolume);
 
             StartCoroutine(playLoopMusic());
         }
@@ -38,7 +37,7 @@ public class BackgroundMusic : MonoBehaviour
         if (this.loopMusic != null)
         {
             this.audioSource.clip = this.loopMusic;
-            this.audioSource.volume = this.backgroundMusicVolume.value;
+            this.audioSource.volume = GlobalValues.backgroundMusicVolume;
             this.audioSource.loop = true;
             this.audioSource.Play();
         }

@@ -8,8 +8,6 @@ public class StandardSkill : MonoBehaviour
     [Header("Identifizierung")]
     [Tooltip("Name des Angriffs")]
     public string skillName;
-    public Globals global;
-    public FloatValue soundEffectVolume;
 
     [Header("Zeit-Attribute")]
     [Tooltip("Castzeit bis zur Instanziierung (für Außen)")]
@@ -222,7 +220,7 @@ public class StandardSkill : MonoBehaviour
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
         this.spriteRenderer = GetComponent<SpriteRenderer>();
-        if (this.spriteRenderer != null && this.global != null) this.spriteRenderer.color = this.global.color;
+        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
         this.animator = GetComponent<Animator>();
 
         this.delayTimeLeft = this.delay;
@@ -230,7 +228,7 @@ public class StandardSkill : MonoBehaviour
 
         this.elapsed = this.intervallSender;
 
-        if (this.startSoundEffect != null) Utilities.playSoundEffect(this.audioSource, this.startSoundEffect, this.soundEffectVolume);
+        if (this.startSoundEffect != null) Utilities.playSoundEffect(this.audioSource, this.startSoundEffect);
         
         if (this.sender == null) this.sender = this.transform.parent.GetComponent<Character>(); //SET SENDER IF NULL (IMPORTANT!)
     }
@@ -415,7 +413,7 @@ public class StandardSkill : MonoBehaviour
 
     private void playSoundEffect(AudioClip clip)
     {
-        if (clip != null) Utilities.playSoundEffect(this.audioSource, clip, this.soundEffectVolume);
+        if (clip != null) Utilities.playSoundEffect(this.audioSource, clip);
     }
 
     public void ActivateIt()

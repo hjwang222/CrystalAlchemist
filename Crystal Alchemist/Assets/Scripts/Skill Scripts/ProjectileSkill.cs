@@ -15,7 +15,7 @@ public class ProjectileSkill : StandardSkill
         {       
             if (!this.playEndEffectAlready && this.endSoundEffect != null)
             {
-                Utilities.playSoundEffect(this.audioSource, this.endSoundEffect, this.soundEffectVolume);
+                Utilities.playSoundEffect(this.audioSource, this.endSoundEffect);
                 this.playEndEffectAlready = true;
             }
 

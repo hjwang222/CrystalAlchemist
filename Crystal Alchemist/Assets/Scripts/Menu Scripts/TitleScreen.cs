@@ -17,8 +17,6 @@ public class TitleScreen : MonoBehaviour
     public Color cursorColor;
     public float cursorOffset = 35f;
     public AudioClip cursorSound;
-    public FloatValue soundEffectVolume;
-    public FloatValue musicVolume;
 
     private AudioSource audioSource;
     private AudioSource musicSource;
@@ -42,7 +40,7 @@ public class TitleScreen : MonoBehaviour
         {
             this.musicSource = this.transform.gameObject.AddComponent<AudioSource>();
             this.musicSource.clip = this.music;
-            this.musicSource.volume = this.musicVolume.value;
+            this.musicSource.volume = GlobalValues.backgroundMusicVolume;
             this.musicSource.loop = true;
             this.musicSource.Play();
         }
@@ -142,32 +140,34 @@ public class TitleScreen : MonoBehaviour
 
         if (ugui.text.Contains("Effekt"))
         {
-            if (marker) addVolume(this.soundEffectVolume, changeX);
-            showVolume(ugui, this.soundEffectVolume, marker);
+            if (marker) GlobalValues.soundEffectVolume = addVolume(GlobalValues.soundEffectVolume, changeX);
+            showVolume(ugui, GlobalValues.soundEffectVolume, marker);
         }
         else if (ugui.text.Contains("Musik"))
         {
-            if (marker) addVolume(this.musicVolume, changeX);
-            showVolume(ugui, this.musicVolume, marker);
-            this.musicSource.volume = this.musicVolume.value;
+            if (marker) GlobalValues.backgroundMusicVolume = addVolume(GlobalValues.backgroundMusicVolume, changeX);
+            showVolume(ugui, GlobalValues.backgroundMusicVolume, marker);
+            this.musicSource.volume = GlobalValues.backgroundMusicVolume;
         }
     }
 
-    private void showVolume(TextMeshProUGUI ugui, FloatValue volume, bool marker)
+    private void showVolume(TextMeshProUGUI ugui, float volume, bool marker)
     {
-        if (marker) ugui.text = ugui.text.Split(' ')[0] + " < " + Mathf.RoundToInt(volume.value * 100) + "% >";
-        else ugui.text = ugui.text.Split(' ')[0] + " " + Mathf.RoundToInt(volume.value * 100) + "%";
+        if (marker) ugui.text = ugui.text.Split(' ')[0] + " < " + Mathf.RoundToInt(volume * 100) + "% >";
+        else ugui.text = ugui.text.Split(' ')[0] + " " + Mathf.RoundToInt(volume * 100) + "%";
     }
 
-    private void addVolume(FloatValue volume, float addvolume)
+    private float addVolume(float volume, float addvolume)
     {
         if (addvolume != 0)
         {
-            if (this.cursorSound != null) Utilities.playSoundEffect(this.audioSource, this.cursorSound, this.soundEffectVolume);
-            volume.value += (addvolume / 100);
-            if (volume.value < 0) volume.value = 0;
-            else if (volume.value > 2f) volume.value = 2f;
+            if (this.cursorSound != null) Utilities.playSoundEffect(this.audioSource, this.cursorSound);
+            volume += (addvolume / 100);
+            if (volume < 0) volume = 0;
+            else if (volume > 2f) volume = 2f;
         }
+
+        return volume;
     }
 
     private void changeLayer(GameObject newActiveMenu)
@@ -202,8 +202,8 @@ public class TitleScreen : MonoBehaviour
 
             //Bei Sound-Optionen
             TextMeshProUGUI ugui = child.GetComponent<TextMeshProUGUI>();
-            if (ugui.text.Contains("Effekt")) showVolume(ugui, this.soundEffectVolume, false);
-            else if (ugui.text.Contains("Musik")) showVolume(ugui, this.musicVolume, false);
+            if (ugui.text.Contains("Effekt")) showVolume(ugui, GlobalValues.soundEffectVolume, false);
+            else if (ugui.text.Contains("Musik")) showVolume(ugui, GlobalValues.backgroundMusicVolume, false);
         }
     }
 
@@ -212,7 +212,7 @@ public class TitleScreen : MonoBehaviour
         if (this.currentChoice != null)
         {
             this.currentChoice.GetComponent<TextMeshProUGUI>().color = this.cursorColor;
-            if (this.cursorSound != null) Utilities.playSoundEffect(this.audioSource, this.cursorSound, this.soundEffectVolume);
+            if (this.cursorSound != null) Utilities.playSoundEffect(this.audioSource, this.cursorSound);
         }
 
         this.currentChoice = this.activeMenuChildren[this.index];

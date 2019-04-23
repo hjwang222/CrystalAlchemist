@@ -84,17 +84,17 @@ public class Item : MonoBehaviour
     {
         if (character.CompareTag("Player") && !character.isTrigger)
         {
-            collect(character.GetComponent<PlayerMovement>(), true);
+            collect(character.GetComponent<Player>(), true);
         }
     }
 
-    public void collect(PlayerMovement player, bool canBeCollected)
+    public void collect(Player player, bool canBeCollected)
     {
         //TODO: Signal und auslagern
         //Signal?
 
-        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect, this.effectVolume);
-        Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect, this.effectVolume);
+        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect);
+        Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect);
 
         //TODO das geht noch besser
         switch (this.itemType)

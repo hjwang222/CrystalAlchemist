@@ -7,7 +7,7 @@ using TMPro;
 public class Buttons : MonoBehaviour
 {
     public ButtonConfig buttonConfig;
-    public Character player;
+    private Player player;
 
     [Header("A Button UI")]
     public Image iconAButton;
@@ -30,8 +30,14 @@ public class Buttons : MonoBehaviour
     public TextMeshProUGUI cooldownY;
 
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
+        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+    }
+
+    void Start()
+    {       
         setButton(this.buttonConfig.buttonA.icon, this.buttonConfig.buttonAIcon, this.skillIconAButton, this.iconAButton);
         setButton(this.buttonConfig.buttonB.icon, this.buttonConfig.buttonBIcon, this.skillIconBButton, this.iconBButton);
         setButton(this.buttonConfig.buttonX.icon, this.buttonConfig.buttonXIcon, this.skillIconXButton, this.iconXButton);
@@ -40,10 +46,14 @@ public class Buttons : MonoBehaviour
 
     private void Update()
     {
-        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.buttonConfig.buttonA);
-        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.buttonConfig.buttonB);
-        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.buttonConfig.buttonX);
-        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.buttonConfig.buttonY);
+        try
+        {
+            updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.buttonConfig.buttonA);
+            updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.buttonConfig.buttonB);
+            updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.buttonConfig.buttonX);
+            updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.buttonConfig.buttonY);
+        }
+        catch { }
     }
 
     private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI text, StandardSkill skill)

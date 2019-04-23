@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class DayNightColor : MonoBehaviour
 {
-    public Globals global;
     private SpriteRenderer spRenderer;
     private Tilemap spTilemap;
 
@@ -15,14 +14,14 @@ public class DayNightColor : MonoBehaviour
         this.spRenderer = this.GetComponent<SpriteRenderer>();
         this.spTilemap = this.GetComponent<Tilemap>();
 
-        if (this.spRenderer != null) this.spRenderer.color = this.global.color;
-        if (this.spTilemap != null) this.spTilemap.color = this.global.color;
+        if (this.spRenderer != null) this.spRenderer.color = GlobalValues.color;
+        if (this.spTilemap != null) this.spTilemap.color = GlobalValues.color;
     }
 
     public void updateColor()
     {
-        if (this.spRenderer != null) this.spRenderer.color = this.global.color;
-        if (this.spTilemap != null) this.spTilemap.color = this.global.color;
+        if (this.spRenderer != null) this.spRenderer.color = GlobalValues.color;
+        if (this.spTilemap != null) this.spTilemap.color = GlobalValues.color;
     }
 
     // Update is called once per frame

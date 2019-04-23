@@ -66,7 +66,6 @@ public struct LootTable
 
 public class Character : MonoBehaviour
 {
-
     #region Basic Attributes
     [Header("Character Information")]
     [Tooltip("Name")]
@@ -104,7 +103,6 @@ public class Character : MonoBehaviour
     public StandardSkill initializeSkill;
     [Tooltip("Skill, welcher der Character bei seinem Tod verwendet")]
     public StandardSkill deathSkill;
-
 
 
     [Header("Character Regeneration")]
@@ -173,22 +171,11 @@ public class Character : MonoBehaviour
     public AudioClip hitSoundEffect;
     [Tooltip("Soundeffekt, wenn Gegner getötet wurde")]
     public AudioClip killSoundEffect;
-    [Tooltip("Scriptable Object für die Lautstärke der Effekte")]
-    public FloatValue soundEffectVolume;
 
     #endregion
-    
+
+
     #region Attributes
-
-    [Header("Charakter Attribute (Scriptable Object)")]
-    [Tooltip("Pflichtfeld! Ohne Attribute funktioniert es nicht!")]
-    public Globals global;
-
-    [Header("Signale")]
-    [Tooltip("GUI Update Signal für Life")]
-    public Signal healthSignal;
-    [Tooltip("GUI Update Signal für Mana")]
-    public Signal manaSignal;
 
     [HideInInspector]
     public Rigidbody2D myRigidbody;
@@ -274,7 +261,7 @@ public class Character : MonoBehaviour
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
         this.spriteRenderer = GetComponent<SpriteRenderer>();
-        if (this.spriteRenderer != null) this.spriteRenderer.color = this.global.color;
+        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
         this.animator = GetComponent<Animator>();
         this.transform.gameObject.tag = this.characterType.ToString();
     }
@@ -374,7 +361,7 @@ public class Character : MonoBehaviour
 
     public void updateColor()
     {
-        if (this.spriteRenderer != null) this.spriteRenderer.color = this.global.color;
+        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
     }
 
     #endregion
@@ -430,7 +417,7 @@ public class Character : MonoBehaviour
 
             this.life += addLife;
 
-            if (this.healthSignal != null) this.healthSignal.Raise();
+           // if (this.healthSignal != null) this.healthSignal.Raise();
 
             if (this.damageNumber != null)
             {
@@ -455,7 +442,7 @@ public class Character : MonoBehaviour
             else if (this.mana + addMana < 0) this.mana = 0;
             else this.mana += addMana;
 
-            if (this.manaSignal != null) this.manaSignal.Raise();
+            //if (this.manaSignal != null) this.manaSignal.Raise();
         }
     }
 
@@ -476,7 +463,7 @@ public class Character : MonoBehaviour
 
         if (this.CompareTag("Player"))
         {
-            this.GetComponent<PlayerMovement>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
+            this.GetComponent<Player>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
         }
 
         if (this.animator != null) this.animator.speed = this.timeDistortion;
@@ -516,7 +503,7 @@ public class Character : MonoBehaviour
                 if (skill.addLifeTarget < 0)
                 {
                     //Charakter-Treffer (Schaden) animieren
-                    Utilities.playSoundEffect(this.audioSource, this.hitSoundEffect, this.soundEffectVolume);
+                    Utilities.playSoundEffect(this.audioSource, this.hitSoundEffect);
                     StartCoroutine(hitCo());
                 }
 
@@ -596,13 +583,7 @@ public class Character : MonoBehaviour
                 if (result.Count < statusEffect.maxStacks)
                 {
                     //Wenn der Effekte die maximale Anzahl Stacks nicht überschritten hat -> Hinzufügen
-                    GameObject statusEffectClone = Instantiate(statusEffect.gameObject, this.transform.position, Quaternion.identity, this.transform);
-                    StatusEffect statusEffectScript = statusEffectClone.GetComponent<StatusEffect>();
-                    statusEffectScript.target = this;
-                    statusEffectClone.hideFlags = HideFlags.HideInHierarchy;
-
-                    //add to list for better reference
-                    statusEffects.Add(statusEffectClone.GetComponent<StatusEffect>());
+                    instantiateStatusEffect(statusEffect, statusEffects);
                 }
                 else
                 {
@@ -612,13 +593,7 @@ public class Character : MonoBehaviour
                         StatusEffect toDestroy = result[0];
                         toDestroy.DestroyIt();
 
-                        GameObject statusEffectClone = Instantiate(statusEffect.gameObject, this.transform.position, Quaternion.identity, this.transform);
-                        StatusEffect statusEffectScript = statusEffectClone.GetComponent<StatusEffect>();
-                        statusEffectScript.target = this;
-                        statusEffectClone.hideFlags = HideFlags.HideInHierarchy;
-
-                        //add to list for better reference
-                        statusEffects.Add(statusEffectClone.GetComponent<StatusEffect>());
+                        instantiateStatusEffect(statusEffect, statusEffects);
                     }
                     else if (statusEffect.canDeactivateIt && statusEffect.endType == StatusEffectEndType.mana)
                     {
@@ -628,6 +603,18 @@ public class Character : MonoBehaviour
                 }
             }       
         }
+    }
+
+    private void instantiateStatusEffect(StatusEffect statusEffect, List<StatusEffect> statusEffects)
+    {
+        GameObject statusEffectClone = Instantiate(statusEffect.gameObject, this.transform.position, Quaternion.identity, this.transform);
+        DontDestroyOnLoad(statusEffectClone);
+        StatusEffect statusEffectScript = statusEffectClone.GetComponent<StatusEffect>();
+        statusEffectScript.target = this;
+        //statusEffectClone.hideFlags = HideFlags.HideInHierarchy;
+
+        //add to list for better reference
+        statusEffects.Add(statusEffectClone.GetComponent<StatusEffect>());
     }
 
     private void knockBack(float knockTime, float thrust, Transform attack)
@@ -654,7 +641,7 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(this.cannotBeHitTime);
 
         this.isInvincible = false;
-        this.spriteRenderer.color = this.global.color;
+        this.spriteRenderer.color = GlobalValues.color;
     }
 
     public IEnumerator killCo()
@@ -664,7 +651,7 @@ public class Character : MonoBehaviour
             this.killOnce = true;
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
 
-            Utilities.playSoundEffect(this.audioSource, this.killSoundEffect, this.soundEffectVolume);
+            Utilities.playSoundEffect(this.audioSource, this.killSoundEffect);
 
             this.currentState = CharacterState.dead;
             

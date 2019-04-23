@@ -54,7 +54,7 @@ public class Door : Interactable
                 }
                 else
                 {
-                    if (this.dialogScript != null) this.dialogScript.showDialog(this.character,this.text);
+                    if (this.character.GetComponent<Player>() != null) this.character.GetComponent<Player>().showDialogBox(this.text);
                 }
             }
             else if (!this.isPlayerInRange && this.isOpen && this.doorType == DoorType.normal)
@@ -92,7 +92,7 @@ public class Door : Interactable
             else contextClueChild.SetActive(false);
         }
 
-        Utilities.playSoundEffect(this.audioSource, this.soundEffect, this.soundEffectVolume);
+        Utilities.playSoundEffect(this.audioSource, this.soundEffect);
 
     }
 }

@@ -9,7 +9,7 @@ public class Sign : Interactable
     {
         if (this.isPlayerInRange && Input.GetButtonDown("A-Button"))
         {
-            if(this.dialogScript != null) this.dialogScript.showDialog(this.character, this.text);
+            if (this.character.GetComponent<Player>() != null) this.character.GetComponent<Player>().showDialogBox(this.text);
         }
     }
 }

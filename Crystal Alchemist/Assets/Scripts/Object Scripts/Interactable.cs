@@ -12,8 +12,6 @@ public class Interactable : MonoBehaviour
 {
     #region Attribute
 
-    [Header("Attribute")]
-    public Globals global;
     [Tooltip("Anzeige-Text für die Dialog-Box")]
     public string text;
 
@@ -34,9 +32,6 @@ public class Interactable : MonoBehaviour
 
     [HideInInspector]
     public bool isPlayerInRange;
-
-    [HideInInspector]
-    public Dialog dialogScript;
 
     [HideInInspector]
     public GameObject character;
@@ -71,13 +66,12 @@ public class Interactable : MonoBehaviour
     public void init()
     {
         this.spriteRenderer = GetComponent<SpriteRenderer>();
-        if (this.spriteRenderer != null) this.spriteRenderer.color = this.global.color;
+        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
 
             this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
             this.audioSource.loop = false;
             this.audioSource.playOnAwake = false;
-            this.animator = GetComponent<Animator>();
-            this.dialogScript = this.gameObject.GetComponent<Dialog>();
+            this.animator = GetComponent<Animator>();            
             setContext();
             Utilities.setItem(this.lootTable, this.multiLoot, this.items);        
     }    
@@ -95,7 +89,7 @@ public class Interactable : MonoBehaviour
 
     public void updateColor()
     {
-        if (this.spriteRenderer != null) this.spriteRenderer.color = this.global.color;
+        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
     }
 
 
@@ -108,7 +102,7 @@ public class Interactable : MonoBehaviour
         if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
         {            
             this.character = characterCollisionBox.gameObject;
-            if(this.character != null) this.character.GetComponent<PlayerMovement>().currentState = CharacterState.interact;
+            if(this.character != null) this.character.GetComponent<Player>().currentState = CharacterState.interact;
             this.isPlayerInRange = true;
             this.context.SetActive(true);
         }
@@ -120,7 +114,7 @@ public class Interactable : MonoBehaviour
 
         if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
         {
-            if (this.character != null) this.character.GetComponent<PlayerMovement>().currentState = CharacterState.idle;
+            if (this.character != null) this.character.GetComponent<Player>().currentState = CharacterState.idle;
             this.character = null;            
             this.isPlayerInRange = false;
             this.context.SetActive(false);

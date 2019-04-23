@@ -22,7 +22,7 @@ public class StatusBar : MonoBehaviour
 {
     #region Attribute
     [Header("Ziel der Anzeige (Spieler)")]
-    public Character character;
+    private Player player;
 
     [Header("Art der GUI")]
     public UIType type = UIType.health;
@@ -38,7 +38,6 @@ public class StatusBar : MonoBehaviour
     public AudioClip lowSoundEffect;
     public float audioInterval = 1.5f;
     public GameObject warning;
-    public FloatValue soundEffectValue;
 
     private AudioSource audioSource;
     private float maximum;
@@ -50,13 +49,14 @@ public class StatusBar : MonoBehaviour
 
     #region Start Funktionen (Awake, Init, SetValues)
 
-    void Awake()
+    void Start()
     {
         init();
     }
 
     private void init()
     {
+        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         setValues();
 
         for (int i = 0; i < (int)this.maximum-1; i++)
@@ -64,7 +64,7 @@ public class StatusBar : MonoBehaviour
             setStatusBar();            
         }
 
-        UpdateGUIHealthMana();
+        if(this.type == UIType.mana || this.type == UIType.health) UpdateGUIHealthMana();
     }
 
     private void LateUpdate()
@@ -74,7 +74,7 @@ public class StatusBar : MonoBehaviour
             if (elapsed <= 0)
             {
                 elapsed = audioInterval;
-                Utilities.playSoundEffect(this.audioSource, this.lowSoundEffect, this.soundEffectValue);
+                Utilities.playSoundEffect(this.audioSource, this.lowSoundEffect);
             }
             else
             {
@@ -89,13 +89,13 @@ public class StatusBar : MonoBehaviour
 
         if (this.type == UIType.mana)
         {
-            this.maximum = this.character.attributeMaxMana;
-            this.current = this.character.mana;
+            this.maximum = this.player.attributeMaxMana;
+            this.current = this.player.mana;
         }
         else if (this.type == UIType.health)
         {
-            this.maximum = this.character.attributeMaxLife;
-            this.current = this.character.life;
+            this.maximum = this.player.attributeMaxLife;
+            this.current = this.player.life;
         }
     }
 
@@ -123,17 +123,17 @@ public class StatusBar : MonoBehaviour
 
         //füge ggf. beide Listen hinzu oder selektiere nur eine
         List<StatusEffect> effectList = new List<StatusEffect>();
-        if (this.type == UIType.buffsOnly) effectList = this.character.buffs;
-        else if (this.type == UIType.debuffsOnly) effectList = this.character.debuffs;
+        if (this.type == UIType.buffsOnly) effectList = this.player.buffs;
+        else if (this.type == UIType.debuffsOnly) effectList = this.player.debuffs;
         else if (this.type == UIType.BuffsAndDebuffs)
         {
-            effectList.AddRange(this.character.buffs);
-            effectList.AddRange(this.character.debuffs);
+            effectList.AddRange(this.player.buffs);
+            effectList.AddRange(this.player.debuffs);
         }
         else if (this.type == UIType.DebuffsAndBuffs)
         {
-            effectList.AddRange(this.character.debuffs);
-            effectList.AddRange(this.character.buffs);
+            effectList.AddRange(this.player.debuffs);
+            effectList.AddRange(this.player.buffs);
         }
 
         for (int i = 0; i < effectList.Count; i++)
@@ -182,9 +182,17 @@ public class StatusBar : MonoBehaviour
             {
                 sprite = this.empty;
             }
+
+            try
+            {
+                Transform temp = this.gameObject.transform.GetChild(i);
+                temp.GetComponent<Image>().sprite = sprite;
+            }
+            catch(Exception ex)
+            {
+                string temp = ex.ToString();
+            }
             
-            Transform temp = this.gameObject.transform.GetChild(i);
-            temp.GetComponent<Image>().sprite = sprite;
         }
 
         if (this.current <= 0.5f)
