@@ -12,16 +12,12 @@ public class Player : Character
     public GameObject music;
 
     private PlayerValues localPlayerData;
-
-    public StringSignal signal;
+    public StringSignal dialogBoxSignal;
 
     // Start is called before the first frame update
     private void Start()
     {        
-        this.init();
-
-        //SavePlayer();
-        //LoadPlayer();
+        this.init();       
        
         this.currentState = CharacterState.walk;
 
@@ -29,37 +25,7 @@ public class Player : Character
         Utilities.SetParameter(this.animator, "moveY", -1);
 
         this.direction = new Vector2(0, -1);
-    }
-    /*
-    private void LoadPlayer()
-    {
-        this.localPlayerData = GlobalPlayer.Instance.savedPlayerData;
-
-        this.life = this.localPlayerData.life;
-        this.attributeMaxLife = this.localPlayerData.maxLife;
-        this.mana = this.localPlayerData.mana;
-        this.attributeMaxMana = this.localPlayerData.maxMana;
-        this.speed = this.localPlayerData.speed;
-        this.spellspeed = this.localPlayerData.spellspeed;
-        this.buffs = this.localPlayerData.buffs;
-        this.debuffs = this.localPlayerData.debuffs;
-    }
-
-    public void SavePlayer()
-    {
-        this.localPlayerData = GlobalPlayer.Instance.savedPlayerData;
-        this.localPlayerData.life = this.life;
-        this.localPlayerData.maxLife = this.attributeMaxLife;
-        this.localPlayerData.mana = this.mana;
-        this.localPlayerData.maxMana = this.attributeMaxMana;
-        this.localPlayerData.speed = this.speed;
-        this.localPlayerData.spellspeed = this.spellspeed;
-        this.localPlayerData.buffs = this.buffs;
-        this.localPlayerData.debuffs = this.debuffs;
-
-        GlobalPlayer.Instance.savedPlayerData = this.localPlayerData;
-    }*/
-
+    }   
 
     // Update is called once per frame
     private void Update()
@@ -94,9 +60,7 @@ public class Player : Character
 
     public void showDialogBox(string text)
     {
-        if(this.currentState != CharacterState.inDialog) this.signal.Raise(text);
-        //this.dialogText = text;
-        //this.showDialog = true;
+        if(this.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
     }
 
     
