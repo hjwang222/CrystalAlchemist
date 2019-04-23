@@ -13,13 +13,13 @@ public class Player : Character
 
     private PlayerValues localPlayerData;
 
-    public bool showDialog = false;
-    public string dialogText = "";
+    public StringSignal signal;
 
     // Start is called before the first frame update
     private void Start()
     {        
         this.init();
+
         //SavePlayer();
         //LoadPlayer();
        
@@ -94,8 +94,9 @@ public class Player : Character
 
     public void showDialogBox(string text)
     {
-        this.dialogText = text;
-        this.showDialog = true;
+        if(this.currentState != CharacterState.inDialog) this.signal.Raise(text);
+        //this.dialogText = text;
+        //this.showDialog = true;
     }
 
     

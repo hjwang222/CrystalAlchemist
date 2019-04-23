@@ -32,12 +32,7 @@ public class Treasure : Interactable
             OpenChest();           
         }
         else if (this.isPlayerInRange && Input.GetButtonDown("A-Button"))
-        {
-            //Wenn Truhe geöffnet wurde und der Dialog weggeklickt wird
-            //TODO, geht noch besser
-
-            if (this.character.GetComponent<Player>() != null) this.character.GetComponent<Player>().showDialogBox(this.text);
-
+        {   
             //Entferne Item aus der Welt und leere die Liste
             foreach (GameObject item in this.items)
             {
@@ -48,7 +43,7 @@ public class Treasure : Interactable
 
         if (this.context != null)
         {
-            //Wenn Spieler in Reichweite ist und Tür zu ist -> Context Clue anzeigen! Ansonsten nicht.
+            //Wenn Spieler in Reichweite ist und Truhe zu ist -> Context Clue anzeigen! Ansonsten nicht.
             if (this.currentState == objectState.opened) this.context.SetActive(false);
             else if (this.currentState != objectState.opened && this.isPlayerInRange) this.context.SetActive(true);
             else this.context.SetActive(false);
@@ -84,7 +79,7 @@ public class Treasure : Interactable
             this.text = "Die Kiste ist leer... .";
         }
 
-        if (this.character.GetComponent<Player>() != null) this.character.GetComponent<Player>().showDialogBox("");
+        if (this.character.GetComponent<Player>() != null) this.character.GetComponent<Player>().showDialogBox(this.text);
     }
 
     public void showTreasureItem()

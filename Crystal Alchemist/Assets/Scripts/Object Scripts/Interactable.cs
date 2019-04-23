@@ -13,6 +13,7 @@ public class Interactable : MonoBehaviour
     #region Attribute
 
     [Tooltip("Anzeige-Text für die Dialog-Box")]
+    [TextAreaAttribute]
     public string text;
 
     [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]

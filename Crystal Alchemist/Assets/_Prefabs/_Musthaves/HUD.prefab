@@ -308,6 +308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2582603402690894347}
   - component: {fileID: 2550277417680559143}
+  - component: {fileID: 8695059769820482007}
   m_Layer: 5
   m_Name: DialogBox
   m_TagString: Untagged
@@ -349,8 +350,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogBox: {fileID: 3279744577954030739}
   textMesh: {fileID: 2582603404291709282}
-  dialogSoundEffect: {fileID: 0}
+  dialogSoundEffect: {fileID: 8300000, guid: 4ef89ff25bc0cbd48a8e5cb65460d8e5, type: 3}
   player: {fileID: 0}
+--- !u!114 &8695059769820482007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2582603402690894348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3fc66ef9f32f2944bc30facf4600ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
+  signalEventString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2550277417680559143}
+        m_MethodName: showDialogBox
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Single, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &2582603402753173115
 GameObject:
   m_ObjectHideFlags: 0
