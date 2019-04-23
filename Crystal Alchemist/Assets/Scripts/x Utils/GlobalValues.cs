@@ -9,5 +9,5 @@ public class GlobalValues : MonoBehaviour
     public static float backgroundMusicVolume = 0.3f;
     public static Color color = Color.white;
 
-    
+    public static string version = "2.0 Alpha";
 }

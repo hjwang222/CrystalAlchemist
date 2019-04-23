@@ -27,11 +27,11 @@ public class Treasure : Interactable
 
     private void Update()
     {
-        if (this.isPlayerInRange && this.currentState != objectState.opened && Input.GetButtonDown("A-Button"))
+        if (this.isPlayerInRange && this.currentState != objectState.opened && Input.GetButtonDown("Submit"))
         {
             OpenChest();           
         }
-        else if (this.isPlayerInRange && Input.GetButtonDown("A-Button"))
+        else if (this.isPlayerInRange && Input.GetButtonDown("Submit"))
         {   
             //Entferne Item aus der Welt und leere die Liste
             foreach (GameObject item in this.items)

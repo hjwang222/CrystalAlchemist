@@ -41,7 +41,7 @@ public class DialogBox : MonoBehaviour
             //Wenn DialogBox aktiv ist
             //TODO: B-Button einfügen
 
-            if (Input.GetButtonDown("Submit-Button") && this.inputPossible)
+            if (Input.GetButtonDown("Submit") && this.inputPossible)
             {               
                 if (this.index+2 < this.texts.Count)
                 {
