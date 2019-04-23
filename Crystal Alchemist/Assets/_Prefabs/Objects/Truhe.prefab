@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1555326793583579600}
   - component: {fileID: 1555326793583579601}
   - component: {fileID: 1555326793583579607}
-  - component: {fileID: 1555326793583579605}
   - component: {fileID: 1555326793583579606}
   - component: {fileID: 1555326793583579604}
   m_Layer: 0
@@ -122,7 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040b39ba79f34c942bf518bba9ed7818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  global: {fileID: 11400000, guid: 986022dcee4ee954eaa9f9d283c038e9, type: 2}
   text: Du hast %XY% erhalten!
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
@@ -135,9 +133,8 @@ MonoBehaviour:
     dropRate: 25
   multiLoot: 0
   soundEffect: {fileID: 8300000, guid: 4f7be5fca72aed945b5adc95e382a719, type: 3}
-  soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
+  soundEffectVolume: {fileID: 0}
   isPlayerInRange: 0
-  dialogScript: {fileID: 0}
   character: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
@@ -146,23 +143,6 @@ MonoBehaviour:
   items: []
   currentState: 0
   soundEffectTreasure: {fileID: 8300000, guid: 59d34d1df831b0449a4e2f413b1dda3d, type: 3}
---- !u!114 &1555326793583579605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555326793583579603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5796ec76785c7be4594b862e3e65b0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogBox: {fileID: 0}
-  textMesh: {fileID: 0}
-  dialogSoundEffect: {fileID: 0}
-  soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
-  player: {fileID: 0}
 --- !u!61 &1555326793583579606
 BoxCollider2D:
   m_ObjectHideFlags: 0
