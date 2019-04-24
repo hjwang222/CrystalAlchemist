@@ -434,7 +434,8 @@ public class Character : MonoBehaviour
         {
             if (this.mana + addMana > this.attributeMaxMana) addMana = this.attributeMaxMana - this.mana;
             else if (this.mana + addMana < 0) this.mana = 0;
-            else this.mana += addMana;
+
+            this.mana += addMana;
 
             if (this.manaSignal != null && addMana != 0) this.manaSignal.Raise();
         }

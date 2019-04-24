@@ -10,7 +10,7 @@ public enum ItemType
     crystal,
     coin,
     key,
-    heart,
+    health,
     mana,
     bosskey
 }
@@ -93,41 +93,20 @@ public class Item : MonoBehaviour
     {
         if (character.CompareTag("Player") && !character.isTrigger)
         {
-            collectByPlayer(character.GetComponent<Player>(), true);
+            Player player = character.GetComponent<Player>();
+            if (player != null) player.collect(this, true);
         }
-    }
+    }   
 
-    public void collectByPlayer(Player player, bool canBeCollected)
-    {
-        //TODO: Signal und auslagern
-        //Signal?
-
-        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect);
-        Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect);
-
-        //TODO das geht noch besser
-        switch (this.itemType)
-        {
-            case ItemType.coin: player.coins += this.amount; break;
-            case ItemType.crystal: player.crystals += this.amount; break;
-            case ItemType.key: player.keys += this.amount; break;
-            case ItemType.heart: player.updateLife(this.amount); break;
-            default: break;
-        }
-
-        if (canBeCollected) StartCoroutine(destroyCo());
-    }
-
-    IEnumerator destroyCo()
+    public void DestroyIt()
     {
         this.GetComponent<BoxCollider2D>().enabled = false;
         foreach (Transform child in transform)
         {
-            GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
-        yield return new WaitForSeconds(2f);
-        Destroy(this.gameObject);
-    }
 
-    #endregion
+        Destroy(this.gameObject, 2f);
+    }
+        #endregion
 }

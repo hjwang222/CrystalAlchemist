@@ -79,6 +79,25 @@ public class Player : Character
         return scene.name;
     }
 
+
+    public void collect(Item item, bool destroyIt)
+    {
+        Utilities.playSoundEffect(item.audioSource, item.collectSoundEffect);
+        Utilities.playSoundEffect(item.audioSource, item.raiseSoundEffect);
+
+        switch (item.itemType)
+        {
+            case ItemType.coin: this.coins += item.amount; break;
+            case ItemType.crystal: this.crystals += item.amount; break;
+            case ItemType.key: this.keys += item.amount; break;
+            case ItemType.health: this.updateLife(item.amount); break;
+            case ItemType.mana: this.updateMana(item.amount); break;
+            default: break;
+        }
+
+        if (destroyIt) item.DestroyIt();
+    }
+
     
 
     #region Using Skill

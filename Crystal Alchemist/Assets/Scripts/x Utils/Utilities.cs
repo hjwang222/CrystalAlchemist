@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 #region Objects
 [System.Serializable]
@@ -247,6 +248,18 @@ public class Utilities : MonoBehaviour
         }
 
         return false;
+    }
+
+    public static void set3DText(TextMeshPro tmp, string text, bool bold, Color fontColor, Color outlineColor, float outlineWidth)
+    {
+        if (tmp != null)
+        {
+            if(text != null) tmp.text = text + "";
+            if(bold) tmp.fontStyle = FontStyles.Bold;
+            if(outlineColor != null) tmp.outlineColor = outlineColor;
+            if(fontColor != null) tmp.color = fontColor;
+            if(outlineWidth != null) tmp.outlineWidth = outlineWidth;
+        }
     }
 
     #endregion

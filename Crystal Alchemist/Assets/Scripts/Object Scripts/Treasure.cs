@@ -17,8 +17,12 @@ public class Treasure : Interactable
     public AudioClip soundEffectTreasure;
     public TreasureType treasureType = TreasureType.normal;
 
-    [Header("Lootbox-Attribute")]
-    public TextMeshProUGUI priceText;
+    [Header("Text-Attribute")]
+    public TextMeshPro priceText;
+    public Color fontColor;
+    public Color outlineColor;
+    public float outlineWidth = 0.25f;
+    public Animator anim;
     #endregion
 
 
@@ -27,7 +31,8 @@ public class Treasure : Interactable
     private void Start()
     {
         init();
-        this.priceText.text = price + "";
+
+        Utilities.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
     }
 
     #endregion
@@ -59,7 +64,7 @@ public class Treasure : Interactable
 
             if (this.treasureType == TreasureType.lootbox)
             {
-                Utilities.SetParameter(this.animator, "isOpened", false);
+                Utilities.SetParameter(this.anim, "isOpened", false);
                 this.currentState = objectState.normal;
                 Utilities.setItem(this.lootTable, this.multiLoot, this.items);
             }
@@ -81,7 +86,7 @@ public class Treasure : Interactable
 
     private void OpenChest()
     {        
-        Utilities.SetParameter(this.animator, "isOpened", true);
+        Utilities.SetParameter(this.anim, "isOpened", true);
         this.currentState = objectState.opened;
 
         string text = this.text;
@@ -99,7 +104,7 @@ public class Treasure : Interactable
             //Gebe Item dem Spieler
             foreach (Item item in this.items)
             {
-                item.collectByPlayer(this.player, false);
+                this.player.collect(item, false);
                 text = text.Replace("%XY%", item.itemName);
             }
         }
