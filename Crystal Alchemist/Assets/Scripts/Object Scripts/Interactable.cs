@@ -8,6 +8,14 @@ public enum objectState
     opened
 }
 
+public enum Currency
+{
+    none,
+    crystal,
+    coin,
+    key
+}
+
 public class Interactable : MonoBehaviour
 {
     #region Attribute
@@ -23,6 +31,10 @@ public class Interactable : MonoBehaviour
     public LootTable[] lootTable;
     [Tooltip("Multiloot = alle Items. Ansonsten nur das seltenste Item")]
     public bool multiLoot = false;
+    [Tooltip("Was benötigt wird um zu öffnen")]
+    public Currency currencyNeeded = Currency.none;
+    [Range(0,Utilities.maxIntInfinite)]
+    public int price = 0;
 
     [Header("Sound Effects")]
     [Tooltip("Standard-Soundeffekt")]
@@ -35,7 +47,7 @@ public class Interactable : MonoBehaviour
     public bool isPlayerInRange;
 
     [HideInInspector]
-    public GameObject character;
+    public Player player;
 
     [HideInInspector]
     public Animator animator;
@@ -49,8 +61,8 @@ public class Interactable : MonoBehaviour
     [HideInInspector]
     public GameObject context;
 
-    //[HideInInspector]
-    public List<GameObject> items = new List<GameObject>();
+    [HideInInspector]    
+    public List<Item> items = new List<Item>();
 
     public objectState currentState = objectState.normal;
 
@@ -102,8 +114,8 @@ public class Interactable : MonoBehaviour
 
         if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
         {            
-            this.character = characterCollisionBox.gameObject;
-            if(this.character != null) this.character.GetComponent<Player>().currentState = CharacterState.interact;
+            this.player = characterCollisionBox.gameObject.GetComponent<Player>();
+            if(this.player != null) this.player.currentState = CharacterState.interact;
             this.isPlayerInRange = true;
             this.context.SetActive(true);
         }
@@ -115,8 +127,8 @@ public class Interactable : MonoBehaviour
 
         if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
         {
-            if (this.character != null) this.character.GetComponent<Player>().currentState = CharacterState.idle;
-            this.character = null;            
+            if (this.player != null) this.player.currentState = CharacterState.idle;
+            this.player = null;            
             this.isPlayerInRange = false;
             this.context.SetActive(false);
         }

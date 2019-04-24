@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3692160304636444062}
   - component: {fileID: 3692160304636444063}
   - component: {fileID: 3692160304636444060}
+  - component: {fileID: 3543170482876931689}
   m_Layer: 0
   m_Name: "Kleiner Schl\xFCssel"
   m_TagString: Item
@@ -54,7 +55,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   collectSoundEffect: {fileID: 8300000, guid: 9b5ba739b40650e49ba43eb4d7ec56fb, type: 3}
   raiseSoundEffect: {fileID: 0}
-  effectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
+  effectVolume: {fileID: 0}
 --- !u!61 &3692160304636444063
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -100,6 +101,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!210 &3543170482876931689
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3692160304636444061}
+  m_Enabled: 1
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0
 --- !u!1 &3692160304863819281
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,8 +178,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -264,8 +276,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300366, guid: b0b8d75b616ba6e42aa4ea4103267705, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

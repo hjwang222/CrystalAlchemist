@@ -59,11 +59,7 @@ public class StatusBar : MonoBehaviour
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         setValues();
-
-        for (int i = 0; i < (int)this.maximum-1; i++)
-        {
-            setStatusBar();            
-        }
+        setStatusBar();
 
         if(this.type == UIType.mana || this.type == UIType.health) UpdateGUIHealthMana();
     }
@@ -100,16 +96,13 @@ public class StatusBar : MonoBehaviour
         }
     }
 
-    private GameObject setStatusBar()
+    private void setStatusBar()
     {
-        GameObject temp;
-
-        temp = (GameObject)GameObject.Instantiate(icon);
-        temp.transform.SetParent(this.gameObject.transform);
-        temp.SetActive(true);
-        temp.hideFlags = HideFlags.HideInHierarchy;
-
-        return temp;
+        for (int i = 0; i < (int)this.maximum - 1; i++)
+        {
+            GameObject temp = Instantiate(icon, this.gameObject.transform);
+            //temp.hideFlags = HideFlags.HideInHierarchy;
+        }
     }
     #endregion
 

@@ -7,13 +7,11 @@ public class Savepoint : Interactable
     private void Update()
     {
         if (this.isPlayerInRange && Input.GetButtonDown("Submit"))
-        {
-            Player player = this.character.GetComponent<Player>();
-            
-            if (player != null)
+        {            
+            if (this.player != null)
             {
-                SaveSystem.Save(player);
-                player.showDialogBox(this.text);
+                SaveSystem.Save(this.player);
+                this.player.showDialogBox(this.text);
             }
         }
     }

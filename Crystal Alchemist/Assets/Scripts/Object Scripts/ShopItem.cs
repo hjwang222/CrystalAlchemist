@@ -5,39 +5,35 @@ using TMPro;
 
 public class ShopItem : Interactable
 {
-    public Item item;
-    public int price;
+
+    [Header("Shop-Item Attribute")]
     public TextMeshProUGUI priceText;
+    public TextMeshProUGUI amountText;
     public SpriteRenderer childSprite;
+
+    private int index = 0;
+    private int amount = 1;
     
     private void Start()
     {
         init();
 
         this.priceText.text = price + "";
-        this.childSprite.sprite = this.item.getSprite();
+
+        this.items.Add(this.lootTable[this.index].item);
+
+        //this.amountText.text = this.amount + "";
+        this.childSprite.sprite = this.items[this.index].getSprite();
     }
 
     private void Update()
     {
         if (this.isPlayerInRange && Input.GetButtonDown("Submit"))
         {
-            Player player = this.character.GetComponent<Player>();
-
-            if (player != null)
+            if (Utilities.canOpen(this.currencyNeeded, this.player, this.price))
             {
-                if (player.crystals >= price)
-                {                   
-                    //TODO: Zu viele Käufe pro Klicks
-                    //TODO: Lootbox
-                    player.showDialogBox("Du hast 1 "+this.item.itemName+" für "+this.price+" Kristalle gekauft!");
-                    player.crystals -= price;
-                    item.GetComponent<Item>().collect(player, false);
-                }
-                else
-                {
-                    player.showDialogBox("No money, no funny");
-                }
+                this.player.showDialogBox("Du hast 1 " + this.items[this.index].itemName + " für " + this.price + " gekauft!");
+                items[this.index].collectByPlayer(this.player, false);
             }
         }
     }

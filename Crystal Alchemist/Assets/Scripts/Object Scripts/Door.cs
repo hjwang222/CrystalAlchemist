@@ -4,11 +4,9 @@ using UnityEngine;
 
 public enum DoorType
 {    
-    normal,
-    key,
+    normal,    
     enemy,
     button,
-    bosskey,
     closed
 }
 
@@ -34,26 +32,17 @@ public class Door : Interactable
         {
             if (this.isPlayerInRange && !this.isOpen && Input.GetButtonDown("Submit"))
             {
-                if (this.doorType == DoorType.key)
-                {
-                    //check if Player has keys
-                    //if so, OpenDoor();
-                    //reduce keys by 1
-                    //ansonsten zeige Nachricht an
-                }
-                else if (this.doorType == DoorType.bosskey)
-                {                    
-                    //check if Player had specific boss key
-                    //if so, OpenDoor();
-                }
-                else if (this.doorType == DoorType.normal)
+                 if (this.doorType == DoorType.normal)
                 {
                     //Normale Tür, einfach aufmachen
-                    OpenCloseDoor(true, this.context);
+                    if (Utilities.canOpen(this.currencyNeeded, this.player, this.price))
+                    {
+                        OpenCloseDoor(true, this.context);
+                    }
                 }
                 else
                 {
-                    if (this.character.GetComponent<Player>() != null) this.character.GetComponent<Player>().showDialogBox(this.text);
+                    if (this.player != null) this.player.showDialogBox(this.text);
                 }
             }
             else if (!this.isPlayerInRange && this.isOpen && this.doorType == DoorType.normal)

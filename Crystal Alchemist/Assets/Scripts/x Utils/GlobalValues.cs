@@ -10,4 +10,5 @@ public class GlobalValues : MonoBehaviour
     public static Color color = Color.white;
 
     public static string version = "2.0 Alpha";
+    public static string noMoneyText = "Du hast nicht genügend Geld.\nGeh arbeiten!";
 }

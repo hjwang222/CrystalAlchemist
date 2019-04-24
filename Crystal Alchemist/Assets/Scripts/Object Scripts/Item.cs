@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 #region Enums
 
@@ -77,6 +78,8 @@ public class Item : MonoBehaviour
         //Als Kisten-Item darf es nicht einsammelbar sein und muss als Position die Kiste haben
 
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f);
+        SortingGroup group = this.GetComponent<SortingGroup>();
+        if (group != null) group.sortingOrder = 1;
         this.GetComponent<BoxCollider2D>().enabled = false;   
         this.anim.enabled = true;  
     }
@@ -90,11 +93,11 @@ public class Item : MonoBehaviour
     {
         if (character.CompareTag("Player") && !character.isTrigger)
         {
-            collect(character.GetComponent<Player>(), true);
+            collectByPlayer(character.GetComponent<Player>(), true);
         }
     }
 
-    public void collect(Player player, bool canBeCollected)
+    public void collectByPlayer(Player player, bool canBeCollected)
     {
         //TODO: Signal und auslagern
         //Signal?

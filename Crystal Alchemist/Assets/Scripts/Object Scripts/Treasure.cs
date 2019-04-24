@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+public enum TreasureType
+{
+    normal,
+    lootbox
+}
+
 public class Treasure : Interactable
 {
     #region Attribute   
 
     [Header("Truhen-Attribute")]
     public AudioClip soundEffectTreasure;
+    public TreasureType treasureType = TreasureType.normal;
 
+    [Header("Lootbox-Attribute")]
+    public TextMeshProUGUI priceText;
     #endregion
 
 
@@ -17,7 +26,8 @@ public class Treasure : Interactable
 
     private void Start()
     {
-        init();        
+        init();
+        this.priceText.text = price + "";
     }
 
     #endregion
@@ -29,17 +39,31 @@ public class Treasure : Interactable
     {
         if (this.isPlayerInRange && this.currentState != objectState.opened && Input.GetButtonDown("Submit"))
         {
-            OpenChest();           
+            if (this.treasureType == TreasureType.normal)
+            {
+                canOpenChest();
+            }
+            else if (this.treasureType == TreasureType.lootbox)
+            {
+                canOpenChest();
+            }
         }
-        else if (this.isPlayerInRange && Input.GetButtonDown("Submit"))
+        else if (this.isPlayerInRange && this.currentState == objectState.opened && Input.GetButtonDown("Submit"))
         {   
             //Entferne Item aus der Welt und leere die Liste
-            foreach (GameObject item in this.items)
+            foreach (Item item in this.items)
             {
-                Destroy(item);
+                Destroy(item.gameObject);
             }
             this.items.Clear();
-        }
+
+            if (this.treasureType == TreasureType.lootbox)
+            {
+                Utilities.SetParameter(this.animator, "isOpened", false);
+                this.currentState = objectState.normal;
+                Utilities.setItem(this.lootTable, this.multiLoot, this.items);
+            }
+        }   
 
         if (this.context != null)
         {
@@ -60,6 +84,8 @@ public class Treasure : Interactable
         Utilities.SetParameter(this.animator, "isOpened", true);
         this.currentState = objectState.opened;
 
+        string text = this.text;
+
         if (this.soundEffect != null && this.items.Count > 0)
         {
             //Spiele Soundeffekte ab
@@ -71,15 +97,25 @@ public class Treasure : Interactable
 
             //OLD, muss besser gehen!
             //Gebe Item dem Spieler
-            foreach (GameObject item in this.items) item.GetComponent<Item>().collect(this.character.GetComponent<Player>(), false);
+            foreach (Item item in this.items)
+            {
+                item.collectByPlayer(this.player, false);
+                text = text.Replace("%XY%", item.itemName);
+            }
         }
         else
         {
             //Kein Item drin
-            this.text = "Die Kiste ist leer... .";
+            text = "Die Kiste ist leer... .";
         }
 
-        if (this.character.GetComponent<Player>() != null) this.character.GetComponent<Player>().showDialogBox(this.text);
+        if (this.player != null) this.player.showDialogBox(text);
+    }
+
+
+    private void canOpenChest()
+    {
+        if (Utilities.canOpen(this.currencyNeeded, this.player, this.price)) OpenChest();
     }
 
     public void showTreasureItem()

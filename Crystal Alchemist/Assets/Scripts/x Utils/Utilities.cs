@@ -2,6 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#region Objects
+[System.Serializable]
+public struct LootTable
+{
+    public Item item;
+
+    [Range(0, 100)]
+    public int dropRate;
+
+    [Range(1, 99)]
+    public int amount;
+}
+
+#endregion
+
 public class Utilities : MonoBehaviour
 {
     #region Konstanten
@@ -53,7 +68,7 @@ public class Utilities : MonoBehaviour
         }
     }
 
-    public static void setItem(LootTable[] lootTable, bool multiLoot, List<GameObject> items)
+    public static void setItem(LootTable[] lootTable, bool multiLoot, List<Item> items)
     {
         int rng = Random.Range(1, Utilities.maxIntSmall);
         int lowestDropRate = 101;
@@ -67,6 +82,7 @@ public class Utilities : MonoBehaviour
                     if (lowestDropRate > loot.dropRate)
                     {
                         lowestDropRate = loot.dropRate;
+
                         items.Clear();
                         items.Add(loot.item);
                     }
@@ -168,11 +184,65 @@ public class Utilities : MonoBehaviour
 
     public static bool HasParameter(Animator animator, string parameter)
     {
-        if(animator != null)
+        if (animator != null)
         {
             foreach (AnimatorControllerParameter param in animator.parameters)
             {
                 if (param.name == parameter) return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool hasEnoughCurrency(Currency currency, Player player, int price)
+    {
+        bool result = false;
+
+        if (currency == Currency.none)
+        {
+            result = true;
+        }
+        else if (currency == Currency.crystal)
+        {
+            player.crystals = pay(player.crystals, price, out result);
+        }
+        else if (currency == Currency.coin)
+        {
+            player.coins = pay(player.coins, price, out result);
+        }
+        else if (currency == Currency.key)
+        {
+            player.keys = pay(player.keys, price, out result);
+        }
+
+        return result;
+    }
+
+    private static int pay(int currency, int price, out bool paid)
+    {
+        if (currency >= price)
+        {
+            currency -= price;
+            paid = true;            
+        }
+        else
+        {
+            paid = false;            
+        }
+
+        return currency;
+    }
+
+    public static bool canOpen(Currency currency, Player player, int price)
+    {
+        if (player != null && player.currentState != CharacterState.inDialog)
+        {
+            if (hasEnoughCurrency(currency, player, price)) return true;
+            else
+            {
+                player.showDialogBox(GlobalValues.noMoneyText);
+                return false;
             }
         }
 

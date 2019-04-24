@@ -53,16 +53,7 @@ public enum DeathType
 }
 #endregion
 
-#region Objects
-[System.Serializable]
-public struct LootTable
-{
-    public GameObject item;
 
-    [Range(0, 100)]
-    public int dropRate;
-}
-#endregion
 
 public class Character : MonoBehaviour
 {
@@ -214,7 +205,7 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public bool isHit;
     [HideInInspector]
-    public List<GameObject> items = new List<GameObject>();
+    public List<Item> items = new List<Item>();
     [HideInInspector]
     public List<StatusEffect> buffs = new List<StatusEffect>();
     [HideInInspector]
@@ -399,9 +390,9 @@ public class Character : MonoBehaviour
 
     public void dropItem()
     {
-        foreach (GameObject itemObject in this.items)
+        foreach (Item itemObject in this.items)
         {
-            GameObject itemClone = Instantiate(itemObject, this.transform.position, Quaternion.identity);
+            GameObject itemClone = Instantiate(itemObject.gameObject, this.transform.position, Quaternion.identity);
         }
     }
 
@@ -420,7 +411,7 @@ public class Character : MonoBehaviour
 
             this.life += addLife;
 
-            if (this.healthSignal != null) this.healthSignal.Raise();
+            if (this.healthSignal != null && addLife != 0) this.healthSignal.Raise();
 
             if (this.damageNumber != null)
             {
@@ -445,7 +436,7 @@ public class Character : MonoBehaviour
             else if (this.mana + addMana < 0) this.mana = 0;
             else this.mana += addMana;
 
-            if (this.manaSignal != null) this.manaSignal.Raise();
+            if (this.manaSignal != null && addMana != 0) this.manaSignal.Raise();
         }
     }
 
