@@ -39,9 +39,6 @@ public class Interactable : MonoBehaviour
     [Header("Sound Effects")]
     [Tooltip("Standard-Soundeffekt")]
     public AudioClip soundEffect;
-    [Tooltip("Scriptable Object für die Lautstärke der Effekte")]
-    public FloatValue soundEffectVolume;
-
 
     [HideInInspector]
     public bool isPlayerInRange;
