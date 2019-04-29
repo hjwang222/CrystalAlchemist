@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : Character
 {
-    public StringSignal dialogBoxSignal;
+    public StringSignal dialogBoxSignal;    
 
     [Header("Button Config")]
     public ButtonConfig playerInputSkillConfig;
