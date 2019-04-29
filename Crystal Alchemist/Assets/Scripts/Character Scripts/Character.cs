@@ -13,7 +13,8 @@ public enum CharacterState
     idle,
     frozen, //kann sich nicht bewegen und angreifen
     silent, //kann nicht angreifen
-    dead
+    dead, 
+    respawning
 }
 
 public enum CharacterType
@@ -44,13 +45,6 @@ public enum Gender
     none
 }
 
-public enum DeathType
-{
-    destroy,
-    //respawn,
-    //rest,
-    immortal
-}
 #endregion
 
 
@@ -85,7 +79,9 @@ public class Character : MonoBehaviour
     public float startSpellSpeed = 100;
     [Tooltip("Immunität von Statuseffekten")]
     public List<StatusEffect> immunityToStatusEffects = new List<StatusEffect>();
-
+    [Tooltip("Respawn-Zeit")]
+    [Range(0, Utilities.maxFloatInfinite)]
+    public float respawnTime = 30;
 
     [Header("Skills")]
     [Tooltip("Skills, welcher der Character verwenden kann")]
@@ -127,8 +123,6 @@ public class Character : MonoBehaviour
     public float cannotBeHitTime = 0.3f;
     [Tooltip("Kann das Objekt berührt werden?")]
     public bool isTouchable = true;
-    [Tooltip("Zusätzlicher Effekt bei Tod, ansonsten Animator benutzen")]
-    public GameObject DeathEffect;
 
     [Header("Character Inventory")]
     [Range(0, Utilities.maxFloatInfinite)]
@@ -143,10 +137,11 @@ public class Character : MonoBehaviour
     public LootTable[] lootTable;
     [Tooltip("Multiloot = alle Items. Ansonsten nur das seltenste Item")]
     public bool multiLoot = false;
+    [Tooltip("Was darf der Charakter einsammeln. All = alles, ansonsten nur anhand der Liste")]
+    public bool canCollectAll = false;
+    public List<ItemType> canCollect = new List<ItemType>();
 
     [Header("Objekt-Values")]
-    [Tooltip("Art des Todes. Rest, wenn Überreste. Destroy, ohne Respawn. Respawn.")]
-    public DeathType deathType = DeathType.destroy;
     [Tooltip("Farbe, wenn Gegner getroffen wurde")]
     public bool showHitcolor = true;
     public Color hitColor = Color.white;
@@ -189,8 +184,6 @@ public class Character : MonoBehaviour
     public CastBar activeCastbar;
 
     [HideInInspector]
-    public Transform homePosition;
-    [HideInInspector]
     public CharacterState currentState;
     [HideInInspector]
     public float life;
@@ -221,11 +214,12 @@ public class Character : MonoBehaviour
     public Vector2 direction;
     [HideInInspector]
     public bool lockAnimation = false;
-    private bool killOnce = false;
     [HideInInspector]
     public float timeDistortion = 1;
     private float speedMultiply = 5;
     public GameObject activeLockOnTarget = null;
+
+    private Vector3 spawnPosition;
 
     #endregion
 
@@ -238,12 +232,13 @@ public class Character : MonoBehaviour
 
     public void init()
     {
+        this.spawnPosition = this.transform.position;
         this.direction = new Vector2(0, -1);
         //getItems();    
         
         setComponents();
         spawn();
-        Utilities.setItem(this.lootTable, this.multiLoot, this.items);
+        
         if (this.initializeSkill != null) useSkillInstantly(this.initializeSkill);
         //this.gameObject.layer = LayerMask.NameToLayer(this.gameObject.tag);
     }
@@ -260,19 +255,32 @@ public class Character : MonoBehaviour
         this.transform.gameObject.tag = this.characterType.ToString();
     }
 
+
     public void spawn()
     {        
+        if(this.currentState == CharacterState.respawning) Utilities.SetParameter(this.animator, "isRespawn", true);
+
         this.life = this.startLife;
         this.mana = this.startMana;
-        this.speed = (this.startSpeed*this.speedMultiply / 100);
-        this.spellspeed = (this.startSpellSpeed / 100);
+
+        //TODO
+        this.speed = (this.startSpeed / 100) * this.speedMultiply;
+        this.animator.speed = 1;
+
+        this.updateTimeDistortion(0);
+        //this.updateSpeed(0);
+        this.updateSpellSpeed(0);
+
+        this.buffs.Clear();
+        this.debuffs.Clear();
         
         this.currentState = CharacterState.idle;
         this.animator.enabled = true;
         this.spriteRenderer.enabled = true;
         this.GetComponent<BoxCollider2D>().enabled = true;
-        if (this.homePosition != null) this.transform.position = this.homePosition.position;
+        this.transform.position = this.spawnPosition;
 
+        Utilities.setItem(this.lootTable, this.multiLoot, this.items);
     }
     #endregion
 
@@ -284,30 +292,33 @@ public class Character : MonoBehaviour
 
     public void regeneration()
     {
-        if (this.lifeRegeneration != 0 && this.lifeRegenerationInterval != 0)
+        if (this.currentState != CharacterState.dead && this.currentState != CharacterState.respawning)
         {
-            if (this.lifeTime >= this.lifeRegenerationInterval)
+            if (this.lifeRegeneration != 0 && this.lifeRegenerationInterval != 0)
             {
-                this.lifeTime = 0;
-                updateLife(this.lifeRegeneration);
+                if (this.lifeTime >= this.lifeRegenerationInterval)
+                {
+                    this.lifeTime = 0;
+                    updateLife(this.lifeRegeneration);
+                }
+                else
+                {
+                    this.lifeTime += (Time.deltaTime * this.timeDistortion);
+                }
             }
-            else
+            if (this.manaRegeneration != 0 && this.manaRegenerationInterval != 0)
             {
-                this.lifeTime += (Time.deltaTime * this.timeDistortion);
+                if (this.manaTime >= this.manaRegenerationInterval)
+                {
+                    this.manaTime = 0;
+                    updateMana(this.manaRegeneration);
+                }
+                else
+                {
+                    this.manaTime += (Time.deltaTime * this.timeDistortion);
+                }
             }
-        }
-        if (this.manaRegeneration != 0 && this.manaRegenerationInterval != 0)
-        {
-            if (this.manaTime >= this.manaRegenerationInterval)
-            {
-                this.manaTime = 0;
-                updateMana(this.manaRegeneration);
-            }
-            else
-            {
-                this.manaTime += (Time.deltaTime * this.timeDistortion);
-            }
-        }
+       }
     }
 
     private void useSkillInstantly(StandardSkill skill)
@@ -405,32 +416,57 @@ public class Character : MonoBehaviour
 
     public void updateLife(float addLife)
     {
-        if (addLife != 0)
-        {
-            if (this.life + addLife > this.attributeMaxLife) addLife = this.attributeMaxLife - this.life;
-
-            this.life += addLife;
-
-            if (this.healthSignal != null && addLife != 0) this.healthSignal.Raise();
-
-            if (this.damageNumber != null)
+        if (this.currentState != CharacterState.dead && addLife != 0)
             {
-                GameObject damageNumberClone = Instantiate(this.damageNumber, this.transform.position, Quaternion.identity, this.transform);
-                damageNumberClone.GetComponent<DamageNumbers>().number = addLife;
-                damageNumberClone.hideFlags = HideFlags.HideInHierarchy;
-            }
+                if (this.life + addLife > this.attributeMaxLife) addLife = this.attributeMaxLife - this.life;
 
-            if (this.life <= 0)
-            {
-                //Charakter töten
-                StartCoroutine(killCo());
-            }
-        }
+                this.life += addLife;
+
+                if (this.healthSignal != null && addLife != 0) this.healthSignal.Raise();
+
+                if (this.damageNumber != null)
+                {
+                    GameObject damageNumberClone = Instantiate(this.damageNumber, this.transform.position, Quaternion.identity, this.transform);
+                    damageNumberClone.GetComponent<DamageNumbers>().number = addLife;
+                    damageNumberClone.hideFlags = HideFlags.HideInHierarchy;
+                }
+
+                if (this.life <= 0)
+                {
+                    //Charakter töten
+                    killIt();
+                }
+            }        
     }
+
+    private void killIt()
+    {
+        Utilities.SetParameter(this.animator, "isDead", true);
+
+        this.currentState = CharacterState.dead;
+
+        if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
+        this.GetComponent<BoxCollider2D>().enabled = false;        
+    }
+
+    public void PlayDeathSoundEffect()
+    {
+        Utilities.playSoundEffect(this.audioSource, this.killSoundEffect);
+    }
+
+    public void DestroyIt()
+    {
+        dropItem();
+        //Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+    }
+
+
+
 
     public void updateMana(float addMana)
     {
-        if (addMana != 0)
+        if (this.currentState != CharacterState.dead && addMana != 0)
         {
             if (this.mana + addMana > this.attributeMaxMana) addMana = this.attributeMaxMana - this.mana;
             else if (this.mana + addMana < 0) this.mana = 0;
@@ -478,6 +514,32 @@ public class Character : MonoBehaviour
     #endregion
 
 
+    #region Item Collect
+
+    public void collect(Item item, bool destroyIt)
+    {
+        if (this.canCollectAll || this.canCollect.Contains(item.itemType))
+        {
+            Utilities.playSoundEffect(item.audioSource, item.collectSoundEffect);
+            Utilities.playSoundEffect(item.audioSource, item.raiseSoundEffect);
+
+            switch (item.itemType)
+            {
+                case ItemType.coin: this.coins += item.amount; break;
+                case ItemType.crystal: this.crystals += item.amount; break;
+                case ItemType.key: this.keys += item.amount; break;
+                case ItemType.health: this.updateLife(item.amount); break;
+                case ItemType.mana: this.updateMana(item.amount); break;
+                default: break;
+            }
+
+            if (destroyIt) item.DestroyIt();
+        }
+    }
+
+    #endregion
+
+
     #region Damage Functions (hit, statuseffect, knockback)
 
     public void gotHit(StandardSkill skill)
@@ -495,17 +557,17 @@ public class Character : MonoBehaviour
                     }
                 }
 
-                if (skill.addLifeTarget < 0)
-                {
-                    //Charakter-Treffer (Schaden) animieren
-                    Utilities.playSoundEffect(this.audioSource, this.hitSoundEffect);
-                    StartCoroutine(hitCo());
-                }
-
-                updateLife(skill.addLifeTarget);
+                updateLife(skill.addLifeTarget);                                
 
                 if(this.life > 0)
                 {
+                    if (skill.addLifeTarget < 0)
+                    {
+                        //Charakter-Treffer (Schaden) animieren
+                        Utilities.playSoundEffect(this.audioSource, this.hitSoundEffect);
+                        StartCoroutine(hitCo());
+                    }
+
                     //Rückstoß ermitteln
                     float knockbackTrust = skill.thrust - antiKnockback;
                     knockBack(skill.knockbackTime, knockbackTrust, skill.transform);
@@ -638,43 +700,7 @@ public class Character : MonoBehaviour
         this.isInvincible = false;
         this.spriteRenderer.color = GlobalValues.color;
     }
-
-    public IEnumerator killCo()
-    {
-        if (!this.killOnce)
-        {
-            this.killOnce = true;
-            if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
-
-            Utilities.playSoundEffect(this.audioSource, this.killSoundEffect);
-
-            this.currentState = CharacterState.dead;
-            
-            if (this.deathType != DeathType.immortal)
-            {
-                Utilities.SetParameter(this.animator, "isDead", true);
-                               
-                this.GetComponent<BoxCollider2D>().enabled = false;
-                
-                if (this.DeathEffect != null)
-                {
-                    //Todes-Effekt abspielen und anschließend zerstören
-                    GameObject effect = Instantiate(this.DeathEffect, transform.position, Quaternion.identity, this.transform);
-                    Destroy(effect, 0.5f);
-                }
-
-                //Drop Item
-                dropItem();
-                yield return new WaitForSeconds(0.5f);
-
-                if (this.deathType == DeathType.destroy)
-                {
-                    //zerstöre das Objekt für immer
-                    Destroy(this.gameObject);
-                }               
-            }
-        }
-    }
+    
 
     public IEnumerator knockCo(float knockTime)
     {        

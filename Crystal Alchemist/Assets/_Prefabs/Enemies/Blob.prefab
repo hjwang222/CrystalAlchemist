@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2246077131478480992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.763466, y: -1.2280701, z: 0}
+  m_LocalPosition: {x: -9.763466, y: -1.22807, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -171,6 +171,7 @@ MonoBehaviour:
   startSpeed: 25
   startSpellSpeed: 100
   immunityToStatusEffects: []
+  respawnTime: 25
   skills: []
   initializeSkill: {fileID: 2574719380784309251, guid: 65b268bfda2fa0e4bb41978a974d71d5,
     type: 3}
@@ -184,8 +185,6 @@ MonoBehaviour:
   antiKnockback: 0
   cannotBeHitTime: 0.3
   isTouchable: 1
-  DeathEffect: {fileID: 4220056755316982758, guid: 9da6f091d2577074f840d6451b39dd05,
-    type: 3}
   coins: 0
   crystals: 0
   keys: 0
@@ -200,7 +199,6 @@ MonoBehaviour:
     dropRate: 30
     amount: 0
   multiLoot: 0
-  deathType: 0
   showHitcolor: 1
   hitColor: {r: 0.6320754, g: 0, b: 0, a: 1}
   dialog: []
@@ -217,7 +215,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   castbar: {fileID: 0}
   activeCastbar: {fileID: 0}
-  homePosition: {fileID: 2246077131478480998}
   currentState: 0
   life: 0
   spellspeed: 0

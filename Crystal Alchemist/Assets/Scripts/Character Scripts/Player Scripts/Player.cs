@@ -80,23 +80,7 @@ public class Player : Character
     }
 
 
-    public void collect(Item item, bool destroyIt)
-    {
-        Utilities.playSoundEffect(item.audioSource, item.collectSoundEffect);
-        Utilities.playSoundEffect(item.audioSource, item.raiseSoundEffect);
 
-        switch (item.itemType)
-        {
-            case ItemType.coin: this.coins += item.amount; break;
-            case ItemType.crystal: this.crystals += item.amount; break;
-            case ItemType.key: this.keys += item.amount; break;
-            case ItemType.health: this.updateLife(item.amount); break;
-            case ItemType.mana: this.updateMana(item.amount); break;
-            default: break;
-        }
-
-        if (destroyIt) item.DestroyIt();
-    }
 
     
 
@@ -124,7 +108,7 @@ public class Player : Character
                     activateSkillFromTargetingSystem(skill);
                 }
                 else if (currentAmountOfSameSkills >= skill.maxAmounts
-                     && (skill.duration == Utilities.maxFloatInfinite || skill.delay == Utilities.maxFloatInfinite))
+                     && (skill.deactivateByButtonUp || skill.delay == Utilities.maxFloatInfinite))
                 {
                     deactivateSkill(button, skill);
                 }
@@ -236,11 +220,10 @@ public class Player : Character
     private void activateSkillFromTargetingSystem(StandardSkill skill)
     {
         if (this.activeLockOnTarget != null
-            && this.activeLockOnTarget.GetComponent<TargetingSystem>().targetsSet
+            && this.activeLockOnTarget.GetComponent<TargetingSystem>().skillReadyForActivation
             && this.activeLockOnTarget.GetComponent<TargetingSystem>().skill == skill)
         {
-            //Benutze Skill (mit Zielerfassung)           
-            skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
+            //Benutze Skill (mit Zielerfassung)   
             if (!skill.isRapidFire) skill.holdTimer = 0;
 
             TargetingSystem targetingSystem = this.activeLockOnTarget.GetComponent<TargetingSystem>();
@@ -258,6 +241,8 @@ public class Player : Character
                 || skill.targetingMode == TargetingMode.autoMulti
                 || skill.targetingMode == TargetingMode.autoSingle)
             {
+                skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
+
                 if (targetingSystem.selectAll || skill.targetingMode == TargetingMode.autoMulti)
                 {
                     for (int i = 0; i < targetingSystem.listOfTargetsWithMark.Count; i++)
@@ -316,36 +301,20 @@ public class Player : Character
     private IEnumerator fireSkillToMultipleTargets(TargetingSystem targetingSystem, StandardSkill skill)
     {
         float damageReduce = targetingSystem.sortedTargets.Count;
+        int i = 0;
 
-        if (targetingSystem.sortedTargets.Count > 0 && targetingSystem.lastID == 0)
+        foreach(Character target in targetingSystem.sortedTargets)
         {
-            targetingSystem.lastID = targetingSystem.sortedTargets[targetingSystem.sortedTargets.Count - 1].gameObject.GetInstanceID();
-
-            int ID = 1;
-
-            for (int i = 0; ID != targetingSystem.lastID;)
+            if (target.currentState != CharacterState.dead && target.currentState != CharacterState.respawning)
             {
-                if (targetingSystem.sortedTargets[i] == null) i++; //Springe weiter, wenn das Ziel nicht mehr existiert
-                else
-                {
-                    Character target = targetingSystem.sortedTargets[i];
-                    ID = target.gameObject.GetInstanceID();
+                bool playSoundEffect = false;
+                if (i == 0 || skill.multiHitDelay > 0.3f) playSoundEffect = true;
 
-                    if (targetingSystem.hittedIDs.Contains(ID))
-                    {
-                        i++; //Springe weiter, wenn das Ziel bereits getroffen wurde und noch existiert
-                    }
-                    else
-                    {
-                        bool playSoundEffect = false;
-                        if (i == 0 || skill.multiHitDelay > 0.3f) playSoundEffect = true;
+                fireSkillToSingleTarget(target, damageReduce, playSoundEffect, skill);
 
-                        fireSkillToSingleTarget(target, damageReduce, playSoundEffect, skill);
-                        targetingSystem.hittedIDs.Add(target.gameObject.GetInstanceID());
-                        yield return new WaitForSeconds(skill.multiHitDelay);
-                    }
-                }
+                yield return new WaitForSeconds(skill.multiHitDelay);
             }
+            i++;
         }
 
         Destroy(this.activeLockOnTarget);

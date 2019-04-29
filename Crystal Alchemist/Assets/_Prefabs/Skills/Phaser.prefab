@@ -48,7 +48,8 @@ MonoBehaviour:
   cast: 0
   keepHoldTimer: 0
   delay: 0
-  duration: 9999
+  duration: 2
+  deactivateByButtonUp: 1
   cooldown: 0
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -63,8 +64,8 @@ MonoBehaviour:
   statusEffects: []
   target: {fileID: 0}
   addLifeSender: 0
-  addManaSender: -0.25
-  intervallSender: 0.5
+  addManaSender: -1
+  intervallSender: 9999
   speedDuringCasting: 0
   speedDuringDuration: -25
   lockMovementonDuration: 0

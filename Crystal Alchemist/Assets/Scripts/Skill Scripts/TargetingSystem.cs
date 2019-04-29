@@ -35,7 +35,7 @@ public class TargetingSystem : MonoBehaviour
     private bool buttonPressed = false;
     public bool selectAll = false;
     private bool inputPossible = true;
-    public bool targetsSet = false;
+    public bool skillReadyForActivation = false;
 
     public float durationTime = 0;
     public int maxAmountOfTargets = 1;
@@ -43,8 +43,8 @@ public class TargetingSystem : MonoBehaviour
     public TextMeshProUGUI text;
     private float elapsed = 0;
     public List<GameObject> RangeIndicators = new List<GameObject>();
-    public List<int> hittedIDs = new List<int>();
-    public int lastID = 0;
+    //public List<int> hittedIDs = new List<int>();
+    //public int lastID = 0;
     private bool showTargetIndicator = true;
 
 
@@ -71,7 +71,7 @@ public class TargetingSystem : MonoBehaviour
 
     void Update()
     {
-        if (!targetsSet)
+        if (!skillReadyForActivation)
         {
             if (this.durationTime < Utilities.maxFloatInfinite)
             {
@@ -123,7 +123,7 @@ public class TargetingSystem : MonoBehaviour
         //Button press here
         if (Input.GetButtonDown(this.button) || this.targetMode == TargetingMode.autoSingle)
         {
-            this.targetsSet = true;
+            this.skillReadyForActivation = true;
         }
         else if (!Input.GetButtonDown(this.button) && this.targetMode == TargetingMode.manual)
         {
@@ -152,7 +152,7 @@ public class TargetingSystem : MonoBehaviour
         else if (this.targetMode == TargetingMode.autoMulti)
         {
             StartCoroutine(selectionMode(1));
-            this.targetsSet = true;
+            this.skillReadyForActivation = true;
         }
     }
 

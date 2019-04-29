@@ -131,6 +131,7 @@ MonoBehaviour:
   startSpeed: 0
   startSpellSpeed: 100
   immunityToStatusEffects: []
+  respawnTime: 25
   skills: []
   initializeSkill: {fileID: 0}
   deathSkill: {fileID: 0}
@@ -143,7 +144,6 @@ MonoBehaviour:
   antiKnockback: 0
   cannotBeHitTime: 0.3
   isTouchable: 1
-  DeathEffect: {fileID: 0}
   coins: 0
   crystals: 0
   keys: 0
@@ -152,7 +152,6 @@ MonoBehaviour:
     dropRate: 25
     amount: 0
   multiLoot: 0
-  deathType: 0
   showHitcolor: 1
   hitColor: {r: 1, g: 1, b: 1, a: 1}
   dialog: []
@@ -168,7 +167,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   castbar: {fileID: 0}
   activeCastbar: {fileID: 0}
-  homePosition: {fileID: 0}
   currentState: 0
   life: 0
   spellspeed: 0

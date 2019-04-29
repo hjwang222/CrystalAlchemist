@@ -12,7 +12,8 @@ public enum ItemType
     key,
     health,
     mana,
-    bosskey
+    bosskey, 
+    skill
 }
 
 public enum Rarity
