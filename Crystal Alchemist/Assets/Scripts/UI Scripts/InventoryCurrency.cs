@@ -23,9 +23,6 @@ public class InventoryCurrency : MonoBehaviour
      * 5. Stats?
      */
 
-
-
-
     // Start is called before the first frame update
     void Start()
     {
