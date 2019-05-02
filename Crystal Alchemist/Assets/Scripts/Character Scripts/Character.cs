@@ -159,8 +159,8 @@ public class Character : MonoBehaviour
     public AudioClip killSoundEffect;
 
     [Header("Signals")]
-    public Signal healthSignal;
-    public Signal manaSignal;
+    public SimpleSignal healthSignal;
+    public SimpleSignal manaSignal;
     #endregion
 
 

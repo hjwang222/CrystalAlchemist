@@ -27,7 +27,7 @@ public class StatusEffect : MonoBehaviour
     [Tooltip("Icon des Statuseffekts für das UI")]
     public Sprite iconSprite;
     [Tooltip("Signal zum Update der UI")]
-    public Signal updateUI;
+    public SimpleSignal updateUI;
     [Tooltip("Wann endet der Statuseffekt?")]
     public StatusEffectEndType endType = StatusEffectEndType.time;
 
