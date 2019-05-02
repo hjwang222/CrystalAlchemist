@@ -21,6 +21,7 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Dauer des Angriffs. 0 = Animation, max bis Trigger")]
     [Range(0, Utilities.maxFloatInfinite)]
     public float duration = 1;
+    public bool deactivateByButtonUp = false;
     [Tooltip("Abklingzeit nach Aktivierung (für Außen)")]
     [Range(0, Utilities.maxFloatSmall)]
     public float cooldown = 1;
@@ -55,6 +56,7 @@ public class StandardSkill : MonoBehaviour
     public float addManaTarget = 0;
     [Tooltip("Statuseffekte")]
     public List<StatusEffect> statusEffects;
+    [HideInInspector]
     public Character target;
 
     [Header("Basis Attribute (bezogen auf Effekte des Senders)")]
@@ -64,7 +66,7 @@ public class StandardSkill : MonoBehaviour
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     [Tooltip("Manaveränderung des Senders. Negativ = Schaden, Positiv = Heilung")]
     public float addManaSender = 0;
-    [Range(0, Utilities.maxFloatSmall)]
+    [Range(0, Utilities.maxFloatInfinite)]
     [Tooltip("Intervall während der Dauer des Skills Leben oder Mana verändert werden.")]
     public float intervallSender = 0;
     [Tooltip("Bewegungsgeschwindigkeit während eines Casts")]
@@ -285,9 +287,7 @@ public class StandardSkill : MonoBehaviour
     }
 
     public virtual void doOnUpdate()
-    {
-        if(this.addManaSender+this.sender.mana > 0)
-        {
+    {        
             if (this.intervallSender > 0)
             {
                 if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.timeDistortion);
@@ -295,7 +295,8 @@ public class StandardSkill : MonoBehaviour
                 {
                     if (this.sender != null)
                     {
-                        if (this.sender.mana - this.addManaSender < 0) this.duration = 0;
+                        if (this.sender.mana + this.addManaSender < 0)
+                            this.durationTimeLeft = 0;
                         else
                         {
                             this.elapsed = this.intervallSender;
@@ -338,11 +339,9 @@ public class StandardSkill : MonoBehaviour
                     }
                 }
             }
-        }
-        else
-        {
-            DestroyIt();
-        }
+
+        if (this.target != null && !this.target.gameObject.activeInHierarchy) this.durationTimeLeft = 0;
+              
     }
 
     public void landAttack(Character hittedObject)

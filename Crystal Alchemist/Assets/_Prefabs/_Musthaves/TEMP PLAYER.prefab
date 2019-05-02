@@ -152,25 +152,26 @@ MonoBehaviour:
   startSpeed: 100
   startSpellSpeed: 100
   immunityToStatusEffects: []
+  respawnTime: 30
   skills: []
   initializeSkill: {fileID: 0}
   deathSkill: {fileID: 0}
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
-  manaRegeneration: 0
-  manaRegenerationInterval: 0
+  manaRegeneration: 0.25
+  manaRegenerationInterval: 0.5
   attributeMaxLife: 4
   attributeMaxMana: 3
   antiKnockback: 0
   cannotBeHitTime: 1
   isTouchable: 1
-  DeathEffect: {fileID: 0}
   coins: 50
   crystals: 500
   keys: 10
   lootTable: []
   multiLoot: 0
-  deathType: 0
+  canCollectAll: 1
+  canCollect: 000000000100000002000000030000000400000005000000
   showHitcolor: 1
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   dialog: []
@@ -187,7 +188,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   activeCastbar: {fileID: 0}
-  homePosition: {fileID: 0}
   currentState: 0
   life: 0
   spellspeed: 0

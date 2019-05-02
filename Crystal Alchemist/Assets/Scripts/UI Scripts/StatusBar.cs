@@ -82,17 +82,20 @@ public class StatusBar : MonoBehaviour
 
     private void setValues()
     {
-        this.audioSource = GetComponent<AudioSource>();
+        if (this.player != null)
+        {
+            this.audioSource = GetComponent<AudioSource>();
 
-        if (this.type == UIType.mana)
-        {
-            this.maximum = this.player.attributeMaxMana;
-            this.current = this.player.mana;
-        }
-        else if (this.type == UIType.health)
-        {
-            this.maximum = this.player.attributeMaxLife;
-            this.current = this.player.life;
+            if (this.type == UIType.mana)
+            {
+                this.maximum = this.player.attributeMaxMana;
+                this.current = this.player.mana;
+            }
+            else if (this.type == UIType.health)
+            {
+                this.maximum = this.player.attributeMaxLife;
+                this.current = this.player.life;
+            }
         }
     }
 
