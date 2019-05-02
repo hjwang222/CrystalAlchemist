@@ -14,9 +14,9 @@ public class CharacterAttributes : MonoBehaviour
 
     [Header("Signale")]
     [Tooltip("GUI Update Signal für Life")]
-    public Signal healthSignal;
+    public SimpleSignal healthSignal;
     [Tooltip("GUI Update Signal für Mana")]
-    public Signal manaSignal;
+    public SimpleSignal manaSignal;
 
     
     [HideInInspector]

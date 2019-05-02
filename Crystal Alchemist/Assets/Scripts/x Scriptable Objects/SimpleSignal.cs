@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class Signal : ScriptableObject
+public class SimpleSignal : ScriptableObject
 {
     public List<SignalListener> listeners = new List<SignalListener>();
 
