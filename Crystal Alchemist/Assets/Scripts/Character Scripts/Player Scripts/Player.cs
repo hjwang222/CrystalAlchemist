@@ -99,7 +99,7 @@ public class Player : Character
             useSkill("Y-Button");
         }
 
-        if (Input.GetButtonDown("Escape"))
+        if (Input.GetButtonDown("Quit"))
         {
             SceneManager.LoadScene(0);
         }

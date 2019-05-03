@@ -15,6 +15,10 @@ public class Treasure : Interactable
     #region Attribute   
 
     [FoldoutGroup("Treasure Options", expanded: false)]
+    [Required]
+    public Animator anim;
+
+    [FoldoutGroup("Treasure Options", expanded: false)]
     public AudioClip soundEffectTreasure;
 
     [FoldoutGroup("Treasure Options", expanded: false)]
@@ -33,8 +37,7 @@ public class Treasure : Interactable
     [FoldoutGroup("TextMeshPro Options", expanded: false)]
     public float outlineWidth = 0.25f;
 
-    [FoldoutGroup("TextMeshPro Options", expanded: false)]
-    public Animator anim;
+
     #endregion
 
 

@@ -8230,16 +8230,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1521932912}
     m_Modifications:
-    - target: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659,
-        type: 3}
-      propertyPath: collectSoundEffect
-      value: 
-      objectReference: {fileID: 8300000, guid: ec4c06267ecfbc94ca8f84ce329e2910, type: 3}
     - target: {fileID: 330836146565999745, guid: 98cff32a40d85d94cb5938ce950a2659,
         type: 3}
       propertyPath: m_Name
       value: "M\xFCnze"
       objectReference: {fileID: 0}
+    - target: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659,
+        type: 3}
+      propertyPath: collectSoundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: ec4c06267ecfbc94ca8f84ce329e2910, type: 3}
     - target: {fileID: 330836146565999749, guid: 98cff32a40d85d94cb5938ce950a2659,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11249,6 +11249,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1301488769302884364, guid: fc23bdea94e836e448a33ca313d7172e,
     type: 3}
   m_PrefabInstance: {fileID: 322521110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &800778675 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1555326793583579604, guid: 857105bf9e86080429fabf97d54c34d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7328701346443027257}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &810685294
 GameObject:
@@ -19697,6 +19703,21 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1555326793583579607, guid: 857105bf9e86080429fabf97d54c34d6,
+        type: 3}
+      propertyPath: currencyNeeded
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1555326793583579607, guid: 857105bf9e86080429fabf97d54c34d6,
+        type: 3}
+      propertyPath: price
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1555326793583579607, guid: 857105bf9e86080429fabf97d54c34d6,
+        type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 800778675}
     m_RemovedComponents:
     - {fileID: 1555326793583579605, guid: 857105bf9e86080429fabf97d54c34d6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 857105bf9e86080429fabf97d54c34d6, type: 3}
@@ -19893,7 +19914,7 @@ PrefabInstance:
     - target: {fileID: 2186908886390952264, guid: 12a4fc3ce47a23948a398b288322d9ae,
         type: 3}
       propertyPath: doorType
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3536326584310434845, guid: 12a4fc3ce47a23948a398b288322d9ae, type: 3}

@@ -43,7 +43,7 @@ public class TitleScreen : MonoBehaviour
             this.musicSource.volume = GlobalValues.backgroundMusicVolume;
             this.musicSource.loop = true;
             this.musicSource.Play();
-        }
+        }        
     }
 
     // Update is called once per frame
