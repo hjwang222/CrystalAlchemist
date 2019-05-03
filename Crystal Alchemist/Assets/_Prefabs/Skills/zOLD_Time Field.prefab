@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2736543033070227845}
   - component: {fileID: 2736543033070227867}
   m_Layer: 0
-  m_Name: Time Field
+  m_Name: zOLD_Time Field
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,58 +51,70 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Zeitfeld
-  global: {fileID: 0}
-  soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
+  skillDescription: 
   cast: 3
+  keepHoldTimer: 0
   delay: 0
-  scriptActivation: 0
   duration: 10
+  deactivateByButtonUp: 0
   cooldown: 2
+  cooldownAfterCombo: 0
+  durationCombo: 0
   addLifeTarget: 0
   addManaTarget: 0
-  positionOffset: 0
-  speed: 0
-  rotateIt: 0
-  snapRotationInDegrees: 0
+  statusEffects: []
+  addLifeSender: 0
+  addManaSender: -1
+  intervallSender: 0
+  speedDuringCasting: -2
+  speedDuringDuration: 0
+  lockMovementonDuration: 0
   isRapidFire: 0
   isStationary: 1
-  lockDirection: 0
+  speed: 0
+  rotateIt: 0
+  rotationModifier: 0
+  rotateEndSprite: 0
+  snapRotationInDegrees: 0
+  positionOffset: 0
+  positionHeight: 0
+  lockOn: {fileID: 0}
+  targetingMode: 1
+  maxAmountOfTargets: 21
+  targetingDuration: 6
+  multiHitDelay: 0
+  showRange: 0
   affectSelf: 0
   affectPlayers: 1
   affectEnemies: 1
   affectObjects: 0
   affectSkills: 1
   ignoreInvincibility: 0
-  addLifeSender: 0
-  addManaSender: -1
-  speedDuringCasting: -2
-  speedDuringDuration: 0
-  lockMovementonDuration: 0
   thrust: 0
   knockbackTime: 0
-  statusEffects: []
   maxAmounts: 1
+  comboAmount: 99
   summon: {fileID: 0}
-  script: {fileID: 2736543033070227866}
-  element: 8
-  skillDescription: 
-  sender: {fileID: 0}
   icon: {fileID: 21300016, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 8300000, guid: ede0da1dfd787c14c9ed656c8920460c, type: 3}
   endSoundEffect: {fileID: 0}
-  showIndicator: 0
-  showCastBar: 0
+  animSoundeffect: {fileID: 0}
+  sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  scriptActivationTimeLeft: 0
   cooldownTimeLeft: -0.0044638608
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
+  target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
   spriteRenderer: {fileID: 0}
   timeDistortion: 1
-  isNotActive: 0
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setPositionAtStart: 1
 --- !u!114 &2736543033070227866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,9 +127,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f87d115901e90746a9d743582453de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: 
+  skillDescription: 
+  cast: 0
+  keepHoldTimer: 0
+  delay: 0
+  duration: 1
+  deactivateByButtonUp: 0
+  cooldown: 1
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  addLifeTarget: -1
+  addManaTarget: 0
+  statusEffects: []
+  addLifeSender: 0
+  addManaSender: 0
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  lockMovementonDuration: 0
+  isRapidFire: 0
+  isStationary: 0
+  speed: 0
+  rotateIt: 0
+  rotationModifier: 0
+  rotateEndSprite: 0
+  snapRotationInDegrees: 0
+  positionOffset: 1
+  positionHeight: 0
+  lockOn: {fileID: 0}
+  targetingMode: 2
+  maxAmountOfTargets: 1
+  targetingDuration: 6
+  multiHitDelay: 0
+  showRange: 0
+  affectSelf: 0
+  affectPlayers: 0
+  affectEnemies: 0
+  affectObjects: 0
+  affectSkills: 0
+  ignoreInvincibility: 0
+  thrust: 4
+  knockbackTime: 0.2
+  maxAmounts: 9999
+  comboAmount: 99
+  summon: {fileID: 0}
+  icon: {fileID: 0}
+  startSoundEffect: {fileID: 0}
+  endSoundEffect: {fileID: 0}
+  animSoundeffect: {fileID: 0}
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
   target: {fileID: 0}
-  skill: {fileID: 0}
+  audioSource: {fileID: 0}
+  playEndEffectAlready: 0
+  spriteRenderer: {fileID: 0}
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setPositionAtStart: 1
   TimeDistortion: 0.5
+  timeEffect: {fileID: 0}
+  invertColor: 0
 --- !u!212 &8527790881631745941
 SpriteRenderer:
   m_ObjectHideFlags: 0
