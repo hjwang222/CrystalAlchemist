@@ -54,6 +54,19 @@ public class Utilities : MonoBehaviour
 
     #region Character and Skill Utils
 
+    public static float setResource(float resource, float max, float addResource)
+    {
+        if (addResource != 0)
+        {
+            if (resource + addResource > max) addResource = max - resource;
+            else if (resource + addResource < 0) resource = 0;
+
+            resource += addResource;
+        }
+
+        return resource;
+    }
+
     public static void fireSkill(StandardSkill skill, Character sender)
     {
         instantiateSkill(skill, sender, null, 1);
@@ -239,7 +252,7 @@ public class Utilities : MonoBehaviour
     {
         if (player != null && player.currentState != CharacterState.inDialog)
         {
-            if (hasEnoughCurrency(currency, player, price)) return true;
+            if (hasEnoughCurrency(currency, player, -price)) return true;
             else
             {
                 player.showDialogBox(GlobalValues.noMoneyText);

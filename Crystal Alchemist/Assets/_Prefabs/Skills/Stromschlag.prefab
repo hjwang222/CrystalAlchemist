@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Stromschlag
+  skillDescription: 
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -56,31 +57,30 @@ MonoBehaviour:
   cooldown: 0
   cooldownAfterCombo: 0
   durationCombo: 0
-  lockOn: {fileID: 6540191019208669748, guid: 5b2939f613b001c4a9eb3296ae0d2093, type: 3}
-  maxAmountOfTargets: 3
-  targetingDuration: 6
-  targetingMode: 4
-  multiHitDelay: 0
-  showRange: 0
   addLifeTarget: -0.25
   addManaTarget: 0
   statusEffects: []
-  target: {fileID: 0}
-  addLifeSender: 0
-  addManaSender: -0.25
+  resourceType: 2
+  addResourceSender: -0.25
   intervallSender: 0.5
   speedDuringCasting: 0
   speedDuringDuration: 0
   lockMovementonDuration: 0
+  isRapidFire: 1
+  isStationary: 0
   speed: 0
   rotateIt: 1
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
-  isRapidFire: 1
   positionOffset: 0
   positionHeight: 1
-  isStationary: 0
+  lockOn: {fileID: 6540191019208669748, guid: 5b2939f613b001c4a9eb3296ae0d2093, type: 3}
+  targetingMode: 4
+  maxAmountOfTargets: 3
+  targetingDuration: 6
+  multiHitDelay: 0
+  showRange: 0
   affectSelf: 0
   affectPlayers: 0
   affectEnemies: 1
@@ -92,20 +92,17 @@ MonoBehaviour:
   maxAmounts: 1
   comboAmount: 99
   summon: {fileID: 0}
-  element: 8
-  skillDescription: 
-  sender: {fileID: 0}
   icon: {fileID: 21300028, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 8300000, guid: a9880e2410cffa044936162b476e2b5b, type: 3}
   endSoundEffect: {fileID: 0}
   animSoundeffect: {fileID: 0}
-  showIndicator: 0
-  showCastBar: 0
+  sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
+  target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
   spriteRenderer: {fileID: 6508292816955024436}

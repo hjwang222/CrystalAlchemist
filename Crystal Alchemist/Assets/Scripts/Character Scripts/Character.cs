@@ -96,12 +96,32 @@ public class Character : MonoBehaviour
     [TabGroup("Max-Values")]
     [Tooltip("Maximales Life")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
-    public float attributeMaxLife = Utilities.minFloat;
+    public float maxLife = Utilities.minFloat;
 
     [TabGroup("Max-Values")]
     [Tooltip("Maximales Mana")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
-    public float attributeMaxMana = Utilities.minFloat;
+    public float maxMana = Utilities.minFloat;
+
+    [TabGroup("Max-Values")]
+    [Tooltip("Maximale Anzahl")]
+    [Range(0, Utilities.maxIntInfinite)]
+    public int maxCrystals = Utilities.maxIntInfinite;
+
+    [TabGroup("Max-Values")]
+    [Tooltip("Maximale Anzahl")]
+    [Range(0, Utilities.maxIntSmall)]
+    public int maxCoins = Utilities.maxIntSmall;
+
+    [TabGroup("Max-Values")]
+    [Tooltip("Maximale Anzahl")]
+    [Range(0, Utilities.maxIntSmall)]
+    public int maxKeys = Utilities.maxIntSmall;
+
+    [TabGroup("Max-Values")]
+    [Tooltip("Maximale Anzahl")]
+    [Range(0, Utilities.maxIntSmall)]
+    public int maxAmmo = Utilities.maxIntSmall;
 
 
 
@@ -236,8 +256,14 @@ public class Character : MonoBehaviour
     private float lifeTime;
     private float manaTime;
     private float speedMultiply = 5;
-    private SimpleSignal manaSignalPrivate;
-    private SimpleSignal healthSignalPrivate;
+    private SimpleSignal healthSignal;
+    private SimpleSignal manaSignal;
+    private SimpleSignal keySignal;
+    private SimpleSignal coinSignal;
+    private SimpleSignal crystalSignal;
+    private SimpleSignal woodSignal;
+    private SimpleSignal stoneSignal;
+    private SimpleSignal metalSignal;
     private Vector3 spawnPosition;
 
     [HideInInspector]
@@ -366,14 +392,18 @@ public class Character : MonoBehaviour
         regeneration();        
     }
 
-    public void setHealthSignal(SimpleSignal signal)
+    public void setResourceSignal(SimpleSignal health, SimpleSignal mana, 
+                                  SimpleSignal key, SimpleSignal coin, SimpleSignal crystal, 
+                                  SimpleSignal wood, SimpleSignal stone, SimpleSignal metal)
     {
-        this.healthSignalPrivate = signal;
-    }
-
-    public void setManaSignal(SimpleSignal signal)
-    {
-        this.manaSignalPrivate = signal;
+        this.healthSignal = health;
+        this.manaSignal = mana;
+        this.keySignal = key;
+        this.coinSignal = coin;
+        this.crystalSignal = crystal;
+        this.woodSignal = wood;
+        this.stoneSignal = stone;
+        this.metalSignal = metal;
     }
 
     public void regeneration()
@@ -385,7 +415,7 @@ public class Character : MonoBehaviour
                 if (this.lifeTime >= this.lifeRegenerationInterval)
                 {
                     this.lifeTime = 0;
-                    updateLife(this.lifeRegeneration);
+                    updateResource(ResourceType.life, this.lifeRegeneration);
                 }
                 else
                 {
@@ -397,7 +427,7 @@ public class Character : MonoBehaviour
                 if (this.manaTime >= this.manaRegenerationInterval)
                 {
                     this.manaTime = 0;
-                    updateResource(this.mana, this.manaRegeneration);
+                    updateResource(ResourceType.mana, this.manaRegeneration);
                 }
                 else
                 {
@@ -499,29 +529,14 @@ public class Character : MonoBehaviour
 
     //Signal?
 
-    public void updateLife(float addLife)
+    private void showDamageNumber(float addLife)
     {
-        if (this.currentState != CharacterState.dead && addLife != 0)
-            {
-                if (this.life + addLife > this.attributeMaxLife) addLife = this.attributeMaxLife - this.life;
-
-                this.life += addLife;
-
-                if (this.healthSignalPrivate != null && addLife != 0) this.healthSignalPrivate.Raise();
-
-                if (this.damageNumber != null)
-                {
-                    GameObject damageNumberClone = Instantiate(this.damageNumber, this.transform.position, Quaternion.identity, this.transform);
-                    damageNumberClone.GetComponent<DamageNumbers>().number = addLife;
-                    damageNumberClone.hideFlags = HideFlags.HideInHierarchy;
-                }
-
-                if (this.life <= 0)
-                {
-                    //Charakter töten
-                    killIt();
-                }
-            }        
+        if (this.damageNumber != null)
+        {
+            GameObject damageNumberClone = Instantiate(this.damageNumber, this.transform.position, Quaternion.identity, this.transform);
+            damageNumberClone.GetComponent<DamageNumbers>().number = addLife;
+            damageNumberClone.hideFlags = HideFlags.HideInHierarchy;
+        }
     }
 
     private void killIt()
@@ -552,20 +567,60 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life:
                 {
-                    updateResource(this.life, addResource);
-                    if (this.healthSignalPrivate != null && addResource != 0)
-                        this.healthSignalPrivate.Raise(); break;
+                    this.life = Utilities.setResource(this.life, this.maxLife, addResource);  
+                    showDamageNumber(addResource);
+                    if (this.life <= 0) killIt();
+                    callSignal(this.healthSignal, addResource);
+                    break;
                 }
             case ResourceType.mana:
                 {
-                    updateResource(this.mana, addResource);
-                    if (this.manaSignalPrivate != null && addResource != 0)
-                        this.manaSignalPrivate.Raise(); break;
+                    this.mana = Utilities.setResource(this.mana, this.maxMana, addResource);
+                    callSignal(this.manaSignal, addResource);
+                    break;
                 }
-            case ResourceType.wood: updateResource(this.wood, addResource); break;
-            case ResourceType.stone: updateResource(this.stone, addResource); break;
-            case ResourceType.metal: updateResource(this.metal, addResource); break;
-        }
+            case ResourceType.wood:
+                {
+                    this.wood = Mathf.RoundToInt(Utilities.setResource(this.wood, this.maxAmmo, addResource));
+                    callSignal(this.woodSignal, addResource);
+                    break;
+                }
+            case ResourceType.stone:
+                {
+                    this.stone = Mathf.RoundToInt(Utilities.setResource(this.stone, this.maxAmmo, addResource));
+                    callSignal(this.stoneSignal, addResource);
+                    break;
+                }
+            case ResourceType.metal:
+                {
+                    this.metal = Mathf.RoundToInt(Utilities.setResource(this.metal, this.maxAmmo, addResource));
+                    callSignal(this.metalSignal, addResource);
+                    break;
+                }
+            case ResourceType.coin:
+                {
+                    this.coins = Mathf.RoundToInt(Utilities.setResource(this.coins, this.maxCoins, addResource));
+                    callSignal(this.coinSignal, addResource);
+                    break;
+                }
+            case ResourceType.key:
+                {
+                    this.keys = Mathf.RoundToInt(Utilities.setResource(this.keys, this.maxKeys, addResource));
+                    callSignal(this.keySignal, addResource);
+                    break;
+                }
+            case ResourceType.crystal:
+                {
+                    this.crystals = Mathf.RoundToInt(Utilities.setResource(this.crystals, this.maxCrystals, addResource));
+                    callSignal(this.crystalSignal, addResource);
+                    break;
+                }
+        }        
+    }
+
+    private void callSignal(SimpleSignal signal, float addResource)
+    {
+        if (signal != null && addResource != 0) signal.Raise();
     }
 
     public float getResource(ResourceType type)
@@ -577,22 +632,31 @@ public class Character : MonoBehaviour
             case ResourceType.wood: return this.wood;
             case ResourceType.stone: return this.stone;
             case ResourceType.metal: return this.metal;
+            case ResourceType.coin: return this.coins;
+            case ResourceType.key: return this.keys;
+            case ResourceType.crystal: return this.crystals;
         }
 
         return 0;
     }
 
-
-    private void updateResource(float resource, float addResource)
+    public float getMaxResource(ResourceType type)
     {
-        if (this.currentState != CharacterState.dead && addResource != 0)
+        switch (type)
         {
-            if (resource + addResource > this.attributeMaxMana) addResource = this.attributeMaxMana - resource;
-            else if (resource + addResource < 0) resource = 0;
-
-            resource += addResource;            
+            case ResourceType.life: return this.maxLife;
+            case ResourceType.mana: return this.maxMana;
+            case ResourceType.wood: return this.maxAmmo;
+            case ResourceType.stone: return this.maxAmmo;
+            case ResourceType.metal: return this.maxAmmo;
+            case ResourceType.coin: return this.maxCoins;
+            case ResourceType.key: return this.maxKeys;
+            case ResourceType.crystal: return this.maxCrystals;
         }
+
+        return 0;
     }
+
 
     public void updateSpeed(float addSpeed)
     {
@@ -669,8 +733,8 @@ public class Character : MonoBehaviour
                     }
                 }
 
-                updateLife(skill.addLifeTarget);                                
-
+                updateResource(ResourceType.life, skill.addLifeTarget);
+                
                 if(this.life > 0)
                 {
                     if (skill.addLifeTarget < 0)

@@ -28,20 +28,19 @@ public class InventoryCurrency : MonoBehaviour
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
-        loadInventory();
+        LoadInventory();
     }
 
     private void OnEnable()
     {
-        loadInventory();
+        //loadInventory();
     }
 
-    private void loadInventory()
+    public void LoadInventory()
     {
         if (this.player != null)
         {
             string text = this.player.getResource(this.resourceType) + "";
-
             Utilities.set3DText(this.TMPObject, text, this.bold, this.fontColor, this.outlineColor, this.outlineWidth);
         }
     }

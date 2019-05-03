@@ -13,11 +13,35 @@ public class Player : Character
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal healthSignal;
+    public SimpleSignal healthSignalUI;
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal manaSignal;
+    public SimpleSignal manaSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal keySignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal crystalSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal coinSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal woodSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal stoneSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal metalSignalUI;
 
     [Required]
     [Header("Button Config")]
@@ -31,8 +55,7 @@ public class Player : Character
     private void Start()
     {        
         this.init();
-        this.setHealthSignal(this.healthSignal);
-        this.setManaSignal(this.manaSignal);
+        this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.keySignalUI, this.coinSignalUI, this.crystalSignalUI, this.woodSignalUI, this.stoneSignalUI, this.metalSignalUI);
         PlayerData data = SaveSystem.loadPlayer();
 
         if (data != null)
@@ -74,6 +97,11 @@ public class Player : Character
             useSkill("B-Button");
             useSkill("X-Button");
             useSkill("Y-Button");
+        }
+
+        if (Input.GetButtonDown("Escape"))
+        {
+            SceneManager.LoadScene(0);
         }
 
         if (currentState == CharacterState.walk || this.currentState == CharacterState.idle || this.currentState == CharacterState.interact)

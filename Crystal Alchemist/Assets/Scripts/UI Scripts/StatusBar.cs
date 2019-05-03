@@ -5,12 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using System.Reflection;
+using Sirenix.OdinInspector;
 
 #region Enums
 public enum UIType
 {
-    health,             //Life-Anzeige
-    mana,               //Mana-Anzeige
+    resource,           
     buffsOnly,          //Nur Buffs
     debuffsOnly,        //Nur Debuffs
     BuffsAndDebuffs,    //Buffs und Debuffs
@@ -23,21 +23,32 @@ public class StatusBar : MonoBehaviour
     #region Attribute
 
 
-    [Header("Art der GUI")]
-    public UIType type = UIType.health;
+    [BoxGroup("UI Typ")]
+    public UIType UIType = UIType.resource;
 
-    [Header("Sprites für Mana und Leben")]
+    [BoxGroup("UI Typ")]
+    [ShowIf("UIType", UIType.resource)]
+    public ResourceType resourceType;
+
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public Sprite full;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public Sprite quarterhalf;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public Sprite half;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public Sprite quarter;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public Sprite empty;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public GameObject icon;
-
-    public AudioClip lowSoundEffect;
-    public float audioInterval = 1.5f;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public GameObject warning;
-    public CanvasScaler scaler;
+
+    [FoldoutGroup("Sound", expanded: false)]
+    public AudioClip lowSoundEffect;
+    [FoldoutGroup("Sound", expanded: false)]
+    public float audioInterval = 1.5f;
 
     private AudioSource audioSource;
     private float maximum;
@@ -58,10 +69,11 @@ public class StatusBar : MonoBehaviour
     private void init()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.audioSource = GetComponent<AudioSource>();
         setValues();
         setStatusBar();
 
-        if(this.type == UIType.mana || this.type == UIType.health) UpdateGUIHealthMana();
+        if(this.UIType == UIType.resource) UpdateGUIHealthMana();
     }
 
     private void LateUpdate()
@@ -84,18 +96,8 @@ public class StatusBar : MonoBehaviour
     {
         if (this.player != null)
         {
-            this.audioSource = GetComponent<AudioSource>();
-
-            if (this.type == UIType.mana)
-            {
-                this.maximum = this.player.attributeMaxMana;
-                this.current = this.player.mana;
-            }
-            else if (this.type == UIType.health)
-            {
-                this.maximum = this.player.attributeMaxLife;
-                this.current = this.player.life;
-            }
+            this.maximum = this.player.getMaxResource(this.resourceType);
+            this.current = this.player.getResource(this.resourceType);
         }
     }
 
@@ -120,14 +122,14 @@ public class StatusBar : MonoBehaviour
 
         //füge ggf. beide Listen hinzu oder selektiere nur eine
         List<StatusEffect> effectList = new List<StatusEffect>();
-        if (this.type == UIType.buffsOnly) effectList = this.player.buffs;
-        else if (this.type == UIType.debuffsOnly) effectList = this.player.debuffs;
-        else if (this.type == UIType.BuffsAndDebuffs)
+        if (this.UIType == UIType.buffsOnly) effectList = this.player.buffs;
+        else if (this.UIType == UIType.debuffsOnly) effectList = this.player.debuffs;
+        else if (this.UIType == UIType.BuffsAndDebuffs)
         {
             effectList.AddRange(this.player.buffs);
             effectList.AddRange(this.player.debuffs);
         }
-        else if (this.type == UIType.DebuffsAndBuffs)
+        else if (this.UIType == UIType.DebuffsAndBuffs)
         {
             effectList.AddRange(this.player.debuffs);
             effectList.AddRange(this.player.buffs);

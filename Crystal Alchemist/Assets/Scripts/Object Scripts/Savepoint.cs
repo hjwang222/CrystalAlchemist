@@ -11,7 +11,7 @@ public class Savepoint : Interactable
             if (this.player != null)
             {
                 SaveSystem.Save(this.player);
-                this.player.showDialogBox(this.text);
+                //this.player.showDialogBox(this.text);
             }
         }
     }
