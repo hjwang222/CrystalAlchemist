@@ -167,10 +167,10 @@ public class StatusEffect : MonoBehaviour
             && this.statusEffectManaDrainInterval > 0
             && this.elapsedMana >= statusEffectManaDrainInterval
             && this.target != null
-            && this.target.mana - this.statusEffectManaDrain >= 0)
+            && this.target.getResource(ResourceType.mana) - this.statusEffectManaDrain >= 0)
         {
             //Reduziere Mana solange der Effekt aktiv ist   
-            this.target.updateMana(-this.statusEffectManaDrain);
+            this.target.updateResource(ResourceType.mana, -this.statusEffectManaDrain);
             this.elapsedMana = 0;
         }
 
@@ -183,7 +183,7 @@ public class StatusEffect : MonoBehaviour
             && this.statusEffectInterval > 0
             && this.elapsed >= statusEffectInterval
             && this.target != null
-            && this.target.mana - this.statusEffectManaDrain >= 0))
+            && this.target.getResource(ResourceType.mana) - this.statusEffectManaDrain >= 0))
         {
             //solange der Effekt aktiv ist und das Intervall erreicht ist, soll etwas passieren. Intervall zurück setzen
             doEffect();
@@ -193,7 +193,7 @@ public class StatusEffect : MonoBehaviour
                  && this.statusEffectTimeLeft <= 0)
                  || (this.endType == StatusEffectEndType.mana
             && this.target != null
-            && this.target.mana - this.statusEffectManaDrain < 0))
+            && this.target.getResource(ResourceType.mana) - this.statusEffectManaDrain < 0))
         {
             //Zerstöre Effekt, wenn die Zeit abgelaufen ist
             DestroyIt();

@@ -111,8 +111,7 @@ public class Player : Character
                 int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
 
                 if (currentAmountOfSameSkills < skill.maxAmounts
-                    && (this.mana + skill.addManaSender >= 0 || skill.addManaSender == -Utilities.maxFloatInfinite)
-                    && this.life + skill.addLifeSender > 0)
+                    && (this.getResource(skill.resourceType) + skill.addResourceSender >= 0 || skill.addResourceSender == -Utilities.maxFloatInfinite))
                 {
                     if (isSkillReadyToUse(button, skill)) activateSkill(button, skill);
                     activateSkillFromTargetingSystem(skill);

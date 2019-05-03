@@ -259,6 +259,12 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public int keys;
     [HideInInspector]
+    public int wood;
+    [HideInInspector]
+    public int stone;
+    [HideInInspector]
+    public int metal;
+    [HideInInspector]
     public CharacterState currentState;
     [HideInInspector]
     public float life;
@@ -391,7 +397,7 @@ public class Character : MonoBehaviour
                 if (this.manaTime >= this.manaRegenerationInterval)
                 {
                     this.manaTime = 0;
-                    updateMana(this.manaRegeneration);
+                    updateResource(this.mana, this.manaRegeneration);
                 }
                 else
                 {
@@ -414,8 +420,7 @@ public class Character : MonoBehaviour
             int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
 
             if (currentAmountOfSameSkills < skill.maxAmounts
-                && this.mana + skill.addManaSender >= 0
-                && this.life + skill.addLifeSender > 0)
+                && this.getResource(skill.resourceType) + skill.addResourceSender >= 0)
             {
                     if (!skill.isRapidFire && !skill.keepHoldTimer) skill.holdTimer = 0;
                     
@@ -541,19 +546,51 @@ public class Character : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-
-
-
-    public void updateMana(float addMana)
+    public void updateResource(ResourceType type, float addResource)
     {
-        if (this.currentState != CharacterState.dead && addMana != 0)
+        switch (type)
         {
-            if (this.mana + addMana > this.attributeMaxMana) addMana = this.attributeMaxMana - this.mana;
-            else if (this.mana + addMana < 0) this.mana = 0;
+            case ResourceType.life:
+                {
+                    updateResource(this.life, addResource);
+                    if (this.healthSignalPrivate != null && addResource != 0)
+                        this.healthSignalPrivate.Raise(); break;
+                }
+            case ResourceType.mana:
+                {
+                    updateResource(this.mana, addResource);
+                    if (this.manaSignalPrivate != null && addResource != 0)
+                        this.manaSignalPrivate.Raise(); break;
+                }
+            case ResourceType.wood: updateResource(this.wood, addResource); break;
+            case ResourceType.stone: updateResource(this.stone, addResource); break;
+            case ResourceType.metal: updateResource(this.metal, addResource); break;
+        }
+    }
 
-            this.mana += addMana;
+    public float getResource(ResourceType type)
+    {
+        switch (type)
+        {
+            case ResourceType.life: return this.life;                
+            case ResourceType.mana: return this.mana;
+            case ResourceType.wood: return this.wood;
+            case ResourceType.stone: return this.stone;
+            case ResourceType.metal: return this.metal;
+        }
 
-            if (this.manaSignalPrivate != null && addMana != 0) this.manaSignalPrivate.Raise();
+        return 0;
+    }
+
+
+    private void updateResource(float resource, float addResource)
+    {
+        if (this.currentState != CharacterState.dead && addResource != 0)
+        {
+            if (resource + addResource > this.attributeMaxMana) addResource = this.attributeMaxMana - resource;
+            else if (resource + addResource < 0) resource = 0;
+
+            resource += addResource;            
         }
     }
 
@@ -604,11 +641,7 @@ public class Character : MonoBehaviour
 
             switch (item.itemType)
             {
-                case ItemType.coin: this.coins += item.amount; break;
-                case ItemType.crystal: this.crystals += item.amount; break;
-                case ItemType.key: this.keys += item.amount; break;
-                case ItemType.health: this.updateLife(item.amount); break;
-                case ItemType.mana: this.updateMana(item.amount); break;
+                case ItemType.resource: this.updateResource(item.resourceType, item.amount); break;
                 default: break;
             }
 
