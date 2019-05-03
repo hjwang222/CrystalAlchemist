@@ -9,14 +9,6 @@ public enum objectState
     opened
 }
 
-public enum Currency
-{
-    none,
-    crystal,
-    coin,
-    key
-}
-
 public class Interactable : MonoBehaviour
 {
     #region Attribute
@@ -41,7 +33,7 @@ public class Interactable : MonoBehaviour
     [FoldoutGroup("Activation Requirements", expanded: false)]
     [EnumToggleButtons]
     [Tooltip("Was benötigt wird um zu öffnen")]
-    public Currency currencyNeeded = Currency.none;
+    public ResourceType currencyNeeded = ResourceType.none;
 
     [FoldoutGroup("Activation Requirements", expanded: false)]
     [Range(0,Utilities.maxIntInfinite)]

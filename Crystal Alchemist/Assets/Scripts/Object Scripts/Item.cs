@@ -8,23 +8,10 @@ using Sirenix.OdinInspector;
 
 public enum ItemType
 {
-    crystal,
-    coin,
-    key,
-    health,
-    mana,
-    bosskey, 
+    resource,
     skill
 }
 
-public enum Rarity
-{
-    common,
-    uncommon,
-    rare,
-    epic,
-    legendary
-}
 
 #endregion
 
@@ -42,6 +29,10 @@ public class Item : MonoBehaviour
     [FoldoutGroup("Item Attributes", expanded: false)]
     [EnumToggleButtons]
     public ItemType itemType;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [EnumToggleButtons]
+    public ResourceType resourceType;
 
     [FoldoutGroup("Sound", expanded: false)]
     public AudioClip collectSoundEffect;

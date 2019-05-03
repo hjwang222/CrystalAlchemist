@@ -2,6 +2,8 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+
+
 public class StandardSkill : MonoBehaviour
 {
     #region Attribute
@@ -79,14 +81,14 @@ public class StandardSkill : MonoBehaviour
     ////////////////////////////////////////////////////////////////
 
     [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    [Tooltip("Manaveränderung des Senders. Negativ = Schaden, Positiv = Heilung")]
-    public float addLifeSender = 0;
+    [EnumToggleButtons]
+    [Tooltip("Art der Resource")]
+    public ResourceType resourceType = ResourceType.mana;
 
     [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    [Tooltip("Manaveränderung des Senders. Negativ = Schaden, Positiv = Heilung")]
-    public float addManaSender = 0;
+    [Tooltip("Höhe der Resource des Senders. Negativ = Schaden, Positiv = Heilung")]
+    public float addResourceSender = 0;
 
     [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
     [Range(0, Utilities.maxFloatInfinite)]
@@ -312,7 +314,7 @@ public class StandardSkill : MonoBehaviour
     {
         this.cooldownTimeLeft = 0;
         setBasicAttributes();
-        updateLifeManaFromSender();        
+        updateResourceSender();        
         
         if(this.sender == null)
         {
@@ -345,12 +347,11 @@ public class StandardSkill : MonoBehaviour
         if (this.sender == null) this.sender = this.transform.parent.GetComponent<Character>(); //SET SENDER IF NULL (IMPORTANT!)
     }
 
-    private void updateLifeManaFromSender()
+    private void updateResourceSender()
     {
         if (this.sender != null)
         {
-            this.sender.updateMana(this.addManaSender);
-            this.sender.updateLife(this.addLifeSender);
+            this.sender.updateResource(this.resourceType, this.addResourceSender);
             setPostionAndDirection();
         }
     }    
@@ -405,13 +406,12 @@ public class StandardSkill : MonoBehaviour
                 {
                     if (this.sender != null)
                     {
-                        if (this.sender.mana + this.addManaSender < 0)
+                        if (this.sender.getResource(this.resourceType) + this.addResourceSender < 0)
                             this.durationTimeLeft = 0;
                         else
                         {
                             this.elapsed = this.intervallSender;
-                            this.sender.updateMana(this.addManaSender);
-                            this.sender.updateLife(this.addLifeSender);
+                            this.sender.updateResource(this.resourceType, this.addResourceSender);
                         }
                     }
                 }

@@ -11,7 +11,7 @@ public class InventoryCurrency : MonoBehaviour
     public Color outlineColor;
     public float outlineWidth = 0.25f;
     public bool bold = false;
-    public ItemType type;
+    public ResourceType resourceType;
 
     private Player player;
 
@@ -40,14 +40,7 @@ public class InventoryCurrency : MonoBehaviour
     {
         if (this.player != null)
         {
-            string text = "";
-
-            switch (this.type)
-            {
-                case ItemType.crystal: text = this.player.crystals + ""; break;
-                case ItemType.coin: text = this.player.coins + ""; break;
-                case ItemType.key: text = this.player.keys + ""; break;
-            }
+            string text = this.player.getResource(this.resourceType) + "";
 
             Utilities.set3DText(this.TMPObject, text, this.bold, this.fontColor, this.outlineColor, this.outlineWidth);
         }

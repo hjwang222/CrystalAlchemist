@@ -22,6 +22,19 @@ public struct LootTable
     public int amount;
 }
 
+public enum ResourceType
+{
+    none,
+    life,
+    mana,
+    wood,
+    stone,
+    metal, 
+    key,
+    coin,
+    crystal
+}
+
 #endregion
 
 public class Utilities : MonoBehaviour
@@ -56,8 +69,7 @@ public class Utilities : MonoBehaviour
         activeSkill.GetComponent<StandardSkill>().sender = sender;
         activeSkill.GetComponent<StandardSkill>().addLifeTarget /= reduce;
         activeSkill.GetComponent<StandardSkill>().addManaTarget /= reduce;
-        activeSkill.GetComponent<StandardSkill>().addLifeSender /= reduce;
-        activeSkill.GetComponent<StandardSkill>().addManaSender /= reduce;
+        activeSkill.GetComponent<StandardSkill>().addResourceSender /= reduce;
         sender.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
 
         return activeSkill.GetComponent<StandardSkill>();
@@ -202,46 +214,28 @@ public class Utilities : MonoBehaviour
         return false;
     }
 
-    private static bool hasEnoughCurrency(Currency currency, Player player, int price)
+    private static bool hasEnoughCurrency(ResourceType currency, Player player, int price)
     {
         bool result = false;
 
-        if (currency == Currency.none)
+        if (currency == ResourceType.none) result = true;
+        else
         {
-            result = true;
-        }
-        else if (currency == Currency.crystal)
-        {
-            player.crystals = pay(player.crystals, price, out result);
-        }
-        else if (currency == Currency.coin)
-        {
-            player.coins = pay(player.coins, price, out result);
-        }
-        else if (currency == Currency.key)
-        {
-            player.keys = pay(player.keys, price, out result);
+            if (player.getResource(currency) >= price)
+            {
+                player.updateResource(currency, price);
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
         }
 
         return result;
     }
 
-    private static int pay(int currency, int price, out bool paid)
-    {
-        if (currency >= price)
-        {
-            currency -= price;
-            paid = true;            
-        }
-        else
-        {
-            paid = false;            
-        }
-
-        return currency;
-    }
-
-    public static bool canOpen(Currency currency, Player player, int price)
+    public static bool canOpen(ResourceType currency, Player player, int price)
     {
         if (player != null && player.currentState != CharacterState.inDialog)
         {

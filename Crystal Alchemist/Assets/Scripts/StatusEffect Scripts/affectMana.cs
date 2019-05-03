@@ -1,20 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+
+[System.Serializable]
+public struct affectedResource
+{
+    public ResourceType resourceType;
+
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    public float amount;
+}
 
 public class affectMana : StatusEffect
 {
     #region Attributes
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    public float mana;
+    public List<affectedResource> affectedResources;
     #endregion
 
 
     #region Overrides
     public override void doEffect()
     {
-        base.doEffect();
-        this.target.updateMana(this.mana);
+        foreach (affectedResource resource in this.affectedResources)
+        {
+            base.doEffect();
+            this.target.updateResource(resource.resourceType, resource.amount);
+        }
     }
     #endregion
 }
