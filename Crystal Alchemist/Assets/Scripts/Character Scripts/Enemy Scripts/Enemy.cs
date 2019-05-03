@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    //[HideInInspector]
+    [HideInInspector]
     public Character target;
 
 

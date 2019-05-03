@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Sirenix.OdinInspector;
 
 #region Enums
 
@@ -32,17 +33,23 @@ public class Item : MonoBehaviour
 
     #region Attribute
 
-    public int amount;
+    [FoldoutGroup("Item Attributes", expanded: false)]
     public string itemName;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    public int amount;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [EnumToggleButtons]
     public ItemType itemType;
-    public Rarity rarity;
 
-    public AudioSource audioSource;
-
+    [FoldoutGroup("Sound", expanded: false)]
     public AudioClip collectSoundEffect;
-    public AudioClip raiseSoundEffect;
-    public FloatValue effectVolume;
 
+    [FoldoutGroup("Sound", expanded: false)]
+    public AudioClip raiseSoundEffect;
+
+    private AudioSource audioSource;
     private Animator anim;
 
     #endregion
@@ -70,6 +77,12 @@ public class Item : MonoBehaviour
     public Sprite getSprite()
     {
         return this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+    }
+
+    public void playSounds()
+    {
+        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect);
+        Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect);
     }
 
 

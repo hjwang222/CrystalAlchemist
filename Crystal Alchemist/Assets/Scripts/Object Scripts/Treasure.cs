@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public enum TreasureType
 {
@@ -13,15 +14,26 @@ public class Treasure : Interactable
 {
     #region Attribute   
 
-    [Header("Truhen-Attribute")]
+    [FoldoutGroup("Treasure Options", expanded: false)]
     public AudioClip soundEffectTreasure;
+
+    [FoldoutGroup("Treasure Options", expanded: false)]
+    [EnumToggleButtons]
     public TreasureType treasureType = TreasureType.normal;
 
-    [Header("Text-Attribute")]
+    [FoldoutGroup("TextMeshPro Options", expanded: false)]
     public TextMeshPro priceText;
+
+    [FoldoutGroup("TextMeshPro Options", expanded: false)]
     public Color fontColor;
+
+    [FoldoutGroup("TextMeshPro Options", expanded: false)]
     public Color outlineColor;
+
+    [FoldoutGroup("TextMeshPro Options", expanded: false)]
     public float outlineWidth = 0.25f;
+
+    [FoldoutGroup("TextMeshPro Options", expanded: false)]
     public Animator anim;
     #endregion
 

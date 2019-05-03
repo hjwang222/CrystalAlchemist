@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sirenix.OdinInspector;
 
 #region Objects
 [System.Serializable]
 public struct LootTable
 {
+    [VerticalGroup("Split")]
     public Item item;
 
+    [HorizontalGroup("Split/Box", 50)]
+    [ShowIf("item")]
     [Range(0, 100)]
     public int dropRate;
 
+    [ShowIf("item")]
+    [HorizontalGroup("Split/Box", 50)]
     [Range(1, 99)]
     public int amount;
 }

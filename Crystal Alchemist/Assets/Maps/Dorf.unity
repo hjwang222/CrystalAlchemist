@@ -187,6 +187,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: lootTable.Array.data[0].amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: lootTable.Array.data[1].amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: lootTable.Array.data[2].amount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d6332d8d9d7c9c438540f3999e42183, type: 3}
 --- !u!1 &105692395
@@ -8215,16 +8230,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1521932912}
     m_Modifications:
-    - target: {fileID: 330836146565999745, guid: 98cff32a40d85d94cb5938ce950a2659,
-        type: 3}
-      propertyPath: m_Name
-      value: "M\xFCnze"
-      objectReference: {fileID: 0}
     - target: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659,
         type: 3}
       propertyPath: collectSoundEffect
       value: 
       objectReference: {fileID: 8300000, guid: ec4c06267ecfbc94ca8f84ce329e2910, type: 3}
+    - target: {fileID: 330836146565999745, guid: 98cff32a40d85d94cb5938ce950a2659,
+        type: 3}
+      propertyPath: m_Name
+      value: "M\xFCnze"
+      objectReference: {fileID: 0}
     - target: {fileID: 330836146565999749, guid: 98cff32a40d85d94cb5938ce950a2659,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14351,6 +14366,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1301488769302884366, guid: fc23bdea94e836e448a33ca313d7172e,
+        type: 3}
+      propertyPath: startLife
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301488769302884366, guid: fc23bdea94e836e448a33ca313d7172e,
+        type: 3}
+      propertyPath: startMana
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc23bdea94e836e448a33ca313d7172e, type: 3}
 --- !u!4 &1060683241 stripped
@@ -14495,6 +14520,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: lootTable.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: lootTable.Array.data[0].amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: lootTable.Array.data[1].amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: lootTable.Array.data[2].amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: canCollectAll
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d6332d8d9d7c9c438540f3999e42183, type: 3}
 --- !u!1001 &1243374015
@@ -14632,6 +14682,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378207659174940500, guid: 8b5e4506eaf351344a4780bbb62c9b06,
+        type: 3}
+      propertyPath: startMana
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b5e4506eaf351344a4780bbb62c9b06, type: 3}
@@ -14985,6 +15040,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301488769302884366, guid: fc23bdea94e836e448a33ca313d7172e,
+        type: 3}
+      propertyPath: startLife
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301488769302884366, guid: fc23bdea94e836e448a33ca313d7172e,
+        type: 3}
+      propertyPath: startMana
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc23bdea94e836e448a33ca313d7172e, type: 3}
@@ -18985,6 +19050,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1301488769302884366, guid: fc23bdea94e836e448a33ca313d7172e,
+        type: 3}
+      propertyPath: startLife
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301488769302884366, guid: fc23bdea94e836e448a33ca313d7172e,
+        type: 3}
+      propertyPath: startMana
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc23bdea94e836e448a33ca313d7172e, type: 3}
 --- !u!1 &1419983683857211723
@@ -19171,9 +19246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a116d261d2820141849459fec4b1def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
+  text: 
   lootTable: []
   multiLoot: 0
   currencyNeeded: 0
@@ -19528,6 +19603,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4378207659174940500, guid: 8b5e4506eaf351344a4780bbb62c9b06,
+        type: 3}
+      propertyPath: startMana
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4378207659174940500, guid: 8b5e4506eaf351344a4780bbb62c9b06,
+        type: 3}
+      propertyPath: attributeMaxMana
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b5e4506eaf351344a4780bbb62c9b06, type: 3}
 --- !u!1001 &7328701346443027257
@@ -19804,6 +19889,11 @@ PrefabInstance:
         type: 3}
       propertyPath: text
       value: "Verschlossen...\nDu brauchst einen Schl\xFCssel.\nOder Hilfe vom Dev!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186908886390952264, guid: 12a4fc3ce47a23948a398b288322d9ae,
+        type: 3}
+      propertyPath: doorType
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3536326584310434845, guid: 12a4fc3ce47a23948a398b288322d9ae, type: 3}

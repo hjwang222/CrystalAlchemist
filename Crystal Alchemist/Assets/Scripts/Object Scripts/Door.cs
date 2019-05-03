@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public enum DoorType
 {    
@@ -12,9 +13,11 @@ public enum DoorType
 
 public class Door : Interactable
 {
-    
-    [Header("Tür-Attribute")]
+
+    [FoldoutGroup("Tür-Attribute", expanded: false)]
+    [EnumToggleButtons]
     public DoorType doorType = DoorType.closed;
+
     private bool isOpen;
     private BoxCollider2D boxCollider;
 

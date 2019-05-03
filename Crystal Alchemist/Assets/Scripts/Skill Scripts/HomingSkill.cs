@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class HomingSkill : StandardSkill
 {
     #region Attributes
+
+    [FoldoutGroup("Homing-spezifische Attribute", expanded: false)]
     public float offSetTime;
+
+    [FoldoutGroup("Homing-spezifische Attribute", expanded: false)]
     public float offSetStrength;
     #endregion
 

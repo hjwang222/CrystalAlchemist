@@ -3,11 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sirenix.OdinInspector;
 
 public class Player : Character
 {
-    public StringSignal dialogBoxSignal;    
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public StringSignal dialogBoxSignal;
 
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal healthSignal;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal manaSignal;
+
+    [Required]
     [Header("Button Config")]
     public ButtonConfig playerInputSkillConfig;
 
@@ -19,7 +31,8 @@ public class Player : Character
     private void Start()
     {        
         this.init();
-
+        this.setHealthSignal(this.healthSignal);
+        this.setManaSignal(this.manaSignal);
         PlayerData data = SaveSystem.loadPlayer();
 
         if (data != null)
@@ -41,6 +54,8 @@ public class Player : Character
     private void Update()
     {       
         regeneration();
+
+
 
         if (currentState == CharacterState.inDialog)
         {
@@ -78,11 +93,6 @@ public class Player : Character
         Scene scene = SceneManager.GetActiveScene();
         return scene.name;
     }
-
-
-
-
-    
 
     #region Using Skill
 

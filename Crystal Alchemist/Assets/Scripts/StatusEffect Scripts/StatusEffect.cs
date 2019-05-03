@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
 
 #region Enums
 public enum StatusEffectType
@@ -21,52 +22,89 @@ public enum StatusEffectEndType
 public class StatusEffect : MonoBehaviour
 {
     #region Attribute
-    [Header("Statuseffekt Pflichtfelder")]
+    [BoxGroup("Statuseffekt Pflichtfelder")]
+    [Required]
     [Tooltip("Name des Statuseffekts")]
     public string statusEffectName;
-    [Tooltip("Icon des Statuseffekts für das UI")]
-    public Sprite iconSprite;
-    [Tooltip("Signal zum Update der UI")]
-    public SimpleSignal updateUI;
-    [Tooltip("Wann endet der Statuseffekt?")]
-    public StatusEffectEndType endType = StatusEffectEndType.time;
 
-    [Header("Statuseffekt Attribute")]
+    [FoldoutGroup("RPG Elemente")]
+    [TextArea]
     [Tooltip("Beschreibung des Statuseffekts")]
     public string statusEffectDescription;
-    [Tooltip("Dauer des Statuseffekts (nur bei Typ Time)")]
-    [Range(1, Utilities.maxFloatSmall)]
-    public float statusEffectDuration = 1;
-    [Tooltip("Intervall, wann der Effekt eintrifft. 0 = 1x nur am Anfang")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float statusEffectInterval = 1;
-    [Tooltip("Mana-Kosten des Effekts (nur bei Typ Mana)")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float statusEffectManaDrain = 0;
-    [Tooltip("Intervall des Mana-Entzugs (nur bei Typ Mana)")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float statusEffectManaDrainInterval = 1;
+
+    [FoldoutGroup("Basis Attribute")]
     [Tooltip("Anzahl der maximalen gleichen Effekte (Stacks)")]
     [Range(1, Utilities.maxFloatSmall)]
     public float maxStacks = 1;
-    [Tooltip("Darf der Statuseffekt einen gleichen Effekt überschreiben? (nur bei Typ Time)")]
-    public bool canOverride = false;
-    [Tooltip("Darf der Statuseffekt den gleichen Effekt deaktivieren? (nur bei Typ Mana)")]
-    public bool canDeactivateIt = false;
+
+    [FoldoutGroup("Basis Attribute")]
     [Tooltip("Darf der Statuseffekt geheilt werden?")]
     public bool canBeDispelled = true;
+
+    [FoldoutGroup("Basis Attribute")]
+    [EnumToggleButtons]
     [Tooltip("Handelt es sich um einen positiven oder negativen Effekt?")]
-    public StatusEffectType statusEffectType = StatusEffectType.debuff;
+    public StatusEffectType statusEffectType = StatusEffectType.debuff;    
+
+    [BoxGroup("Statuseffekt Attribute")]
+    [Tooltip("Wann endet der Statuseffekt?")]
+    [EnumToggleButtons]
+    public StatusEffectEndType endType = StatusEffectEndType.time;
+
+    [BoxGroup("Statuseffekt Attribute")]
+    [ShowIf("endType", StatusEffectEndType.time)]
+    [Tooltip("Dauer des Statuseffekts (nur bei Typ Time)")]
+    [Range(1, Utilities.maxFloatSmall)]
+    public float statusEffectDuration = 1;
+
+    [BoxGroup("Statuseffekt Attribute")]
+    [ShowIf("endType", StatusEffectEndType.time)]
+    [Tooltip("Intervall, wann der Effekt eintrifft. 0 = 1x nur am Anfang")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float statusEffectInterval = 1;
+
+    [BoxGroup("Statuseffekt Attribute")]
+    [ShowIf("endType", StatusEffectEndType.time)]
+    [Tooltip("Darf der Statuseffekt einen gleichen Effekt überschreiben? (nur bei Typ Time)")]
+    public bool canOverride = false;
+
+    [BoxGroup("Statuseffekt Attribute")]
+    [ShowIf("endType",StatusEffectEndType.mana)]
+    [Tooltip("Mana-Kosten des Effekts (nur bei Typ Mana)")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float statusEffectManaDrain = 0;
+
+    [BoxGroup("Statuseffekt Attribute")]
+    [ShowIf("endType", StatusEffectEndType.mana)]
+    [Tooltip("Intervall des Mana-Entzugs (nur bei Typ Mana)")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float statusEffectManaDrainInterval = 1;
+
+    [BoxGroup("Statuseffekt Attribute")]
+    [ShowIf("endType", StatusEffectEndType.mana)]
+    [Tooltip("Darf der Statuseffekt den gleichen Effekt deaktivieren? (nur bei Typ Mana)")]
+    public bool canDeactivateIt = false;
+
+    [FoldoutGroup("Visuals", expanded: false)]
     [Tooltip("Farbe während der Dauer des Statuseffekts")]
     public Color statusEffectColor;
-    
-    [HideInInspector]
-    public Character target;
 
-    [HideInInspector]
-    public float statusEffectTimeLeft;
+    [FoldoutGroup("Visuals", expanded: false)]
+    [Tooltip("Icon des Statuseffekts für das UI")]
+    public Sprite iconSprite;
+
+    [FoldoutGroup("Visuals", expanded: false)]
+    [Tooltip("Signal zum Update der UI")]
+    public SimpleSignal updateUI;
+
+
     private float elapsed;
     private float elapsedMana;
+
+    [HideInInspector]
+    public Character target;
+    [HideInInspector]
+    public float statusEffectTimeLeft;
     [HideInInspector]
     public float timeDistortion = 1;
     #endregion

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public enum objectState
 {
@@ -20,47 +21,54 @@ public class Interactable : MonoBehaviour
 {
     #region Attribute
 
+    [Required]
+    [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]
+    public GameObject contextClueChild;
+
+    [FoldoutGroup("Dialog", expanded: false)]
     [Tooltip("Anzeige-Text für die Dialog-Box")]
     [TextAreaAttribute]
     public string text;
 
-    [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]
-    public GameObject contextClueChild;
-    [Header("Loot")]
+    [FoldoutGroup("Loot", expanded:false)]
     [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
     public LootTable[] lootTable;
+
+    [FoldoutGroup("Loot", expanded: false)]
     [Tooltip("Multiloot = alle Items. Ansonsten nur das seltenste Item")]
     public bool multiLoot = false;
+
+    [FoldoutGroup("Activation Requirements", expanded: false)]
+    [EnumToggleButtons]
     [Tooltip("Was benötigt wird um zu öffnen")]
     public Currency currencyNeeded = Currency.none;
+
+    [FoldoutGroup("Activation Requirements", expanded: false)]
     [Range(0,Utilities.maxIntInfinite)]
     public int price = 0;
 
-    [Header("Sound Effects")]
+    [FoldoutGroup("Sound", expanded: false)]
     [Tooltip("Standard-Soundeffekt")]
     public AudioClip soundEffect;
 
+
+
+
     [HideInInspector]
     public bool isPlayerInRange;
-
     [HideInInspector]
     public Player player;
-
     [HideInInspector]
     public Animator animator;
-
     [HideInInspector]
     public AudioSource audioSource;
-
     [HideInInspector]
     public SpriteRenderer spriteRenderer;
-
     [HideInInspector]
     public GameObject context;
-
     [HideInInspector]    
     public List<Item> items = new List<Item>();
-
+    [HideInInspector]
     public objectState currentState = objectState.normal;
 
     #endregion

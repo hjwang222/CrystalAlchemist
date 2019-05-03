@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 #region Enums
 public enum CharacterState
@@ -52,137 +53,211 @@ public enum Gender
 public class Character : MonoBehaviour
 {
     #region Basic Attributes
-    [Header("Character Information")]
+    [Required("Name muss gesetzt sein!")]
+    [BoxGroup("Pflichtfelder")]
     [Tooltip("Name")]
     public string characterName;
-    [Tooltip("Rasse")]
-    public string characterSpecies;
-    [Tooltip("Geschlecht")]
-    public Gender characterGender = Gender.none;
-    [Tooltip("Um welchen Typ handelt es sich?")]
-    public CharacterType characterType = CharacterType.Object;
-    [Tooltip("Elementar des Charakters")]
-    public Element element = Element.none;
 
-    [Header("Character Stats")]
+    ////////////////////////////////////////////////////////////////
+
+    [TabGroup("Start-Values")]
     [Tooltip("Leben, mit dem der Spieler startet")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
     public float startLife = Utilities.minFloat;
+
+    [TabGroup("Start-Values")]
     [Tooltip("Mana, mit dem der Spieler startet")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
     public float startMana = Utilities.minFloat;
+
+    [TabGroup("Start-Values")]
     [Tooltip("Movement-Speed in %, mit dem der Spieler startet")]
     [Range(Utilities.minFloatPercent, Utilities.maxFloatPercent)]
     public float startSpeed = 100;
+
+    [TabGroup("Start-Values")]
     [Tooltip("Geschwindigkeitsmodifier in % von Cooldown und Castzeit")]
     [Range(Utilities.minFloatPercent, Utilities.maxFloatPercent)]
     public float startSpellSpeed = 100;
-    [Tooltip("Immunität von Statuseffekten")]
-    public List<StatusEffect> immunityToStatusEffects = new List<StatusEffect>();
+
+    [Space(10)]
+    [TabGroup("Start-Values")]
     [Tooltip("Respawn-Zeit")]
     [Range(0, Utilities.maxFloatInfinite)]
     public float respawnTime = 30;
 
-    [Header("Skills")]
-    [Tooltip("Skills, welcher der Character verwenden kann")]
-    public List<StandardSkill> skills = new List<StandardSkill>();
-    [Tooltip("Skill, welcher der Character sofort verwendet")]
-    public StandardSkill initializeSkill;
-    [Tooltip("Skill, welcher der Character bei seinem Tod verwendet")]
-    public StandardSkill deathSkill;
+    [Space(10)]
+    [TabGroup("Start-Values")]
+    [Tooltip("Immunität von Statuseffekten")]
+    public List<StatusEffect> immunityToStatusEffects = new List<StatusEffect>();
 
 
-    [Header("Character Regeneration")]
-    [Tooltip("Höhe der Lebensregeneration")]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    public float lifeRegeneration = 0;
-    [Tooltip("Intervall der Lebensregeneration")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float lifeRegenerationInterval = 0;
-    [Tooltip("Höhe der Manaregeneration")]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    public float manaRegeneration = 0;
-    [Tooltip("Intervall der Manaregeneration")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float manaRegenerationInterval = 0;
 
-    [Header("Character Max Values")]
+    [TabGroup("Max-Values")]
     [Tooltip("Maximales Life")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
     public float attributeMaxLife = Utilities.minFloat;
+
+    [TabGroup("Max-Values")]
     [Tooltip("Maximales Mana")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
     public float attributeMaxMana = Utilities.minFloat;
 
-    [Header("Damage Behavior")]
-    [Tooltip("Wie stark (-) oder schwach (+) kann das Objekt zurück gestoßen werden?")]
-    [Range(-Utilities.maxFloatSmall, Utilities.maxFloatSmall)]
-    public float antiKnockback = 0;
-    [Tooltip("Unverwundbarkeitszeit")]
-    [Range(0, 10)]
-    public float cannotBeHitTime = 0.3f;
-    [Tooltip("Kann das Objekt berührt werden?")]
-    public bool isTouchable = true;
 
-    [Header("Character Inventory")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public int coins;
-    [Range(0, Utilities.maxFloatInfinite)]
-    public int crystals;
-    [Range(0, Utilities.maxFloatInfinite)]
-    public int keys;
 
-    [Header("Loot")]
-    [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
-    public LootTable[] lootTable;
-    [Tooltip("Multiloot = alle Items. Ansonsten nur das seltenste Item")]
-    public bool multiLoot = false;
-    [Tooltip("Was darf der Charakter einsammeln. All = alles, ansonsten nur anhand der Liste")]
-    public bool canCollectAll = false;
-    public List<ItemType> canCollect = new List<ItemType>();
+    [TabGroup("Regeneration")]
+    [Tooltip("Höhe der Lebensregeneration")]
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    public float lifeRegeneration = 0;
 
-    [Header("Objekt-Values")]
-    [Tooltip("Farbe, wenn Gegner getroffen wurde")]
-    public bool showHitcolor = true;
-    public Color hitColor = Color.white;
-    [Tooltip("Dialog-Texte als Liste")]
-    public List<string> dialog = new List<string>();
-    [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]
-    public GameObject contextClueChild;
+    [TabGroup("Regeneration")]
+    [Tooltip("Intervall der Lebensregeneration")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float lifeRegenerationInterval = 0;
+
+    [Space(10)]
+    [TabGroup("Regeneration")]
+    [Tooltip("Höhe der Manaregeneration")]
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    public float manaRegeneration = 0;
+
+    [TabGroup("Regeneration")]
+    [Tooltip("Intervall der Manaregeneration")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float manaRegenerationInterval = 0;
+
+
+
+    ////////////////////////////////////////////////////////////////
+
+        
+    [FoldoutGroup("Skills", expanded: false)]
+    [Tooltip("Skills, welcher der Character verwenden kann")]
+    public List<StandardSkill> skills = new List<StandardSkill>();
+
+    [Space(10)]
+    [FoldoutGroup("Skills", expanded: false)]
+    [Tooltip("Skill, welcher der Character sofort verwendet")]
+    public StandardSkill initializeSkill;
+
+    [FoldoutGroup("Skills", expanded: false)]
+    [Tooltip("Skill, welcher der Character bei seinem Tod verwendet")]
+    public StandardSkill deathSkill;
+
+    ////////////////////////////////////////////////////////////////
+
+    [FoldoutGroup("Schaden", expanded: false)]
+    [Required]
     [Tooltip("DamageNumber-Objekt hier rein (nur für zerstörbare Objekte)")]
     public GameObject damageNumber;
 
-    [Header("Sound Effects")]
+    [Space(10)]
+    [FoldoutGroup("Schaden", expanded: false)]
+    [Tooltip("Wie stark (-) oder schwach (+) kann das Objekt zurück gestoßen werden?")]
+    [Range(-Utilities.maxFloatSmall, Utilities.maxFloatSmall)]
+    public float antiKnockback = 0;
+
+    [FoldoutGroup("Schaden", expanded: false)]
+    [Tooltip("Unverwundbarkeitszeit")]
+    [Range(0, 10)]
+    public float cannotBeHitTime = 0.3f;
+
+    [FoldoutGroup("Schaden", expanded: false)]
+    [Tooltip("Kann das Objekt berührt werden?")]
+    public bool isTouchable = true;
+
+    [Space(10)]
+    [FoldoutGroup("Schaden", expanded: false)]
+    [Tooltip("Farbe, wenn Gegner getroffen wurde")]
+    public bool showHitcolor = true;
+
+    [FoldoutGroup("Schaden", expanded: false)]
+    [ShowIf("showHitcolor")]
+    public Color hitColor = Color.white;
+
+
+    ////////////////////////////////////////////////////////////////
+
+
+    [FoldoutGroup("Loot", expanded: false)]
+    [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
+    public LootTable[] lootTable;
+
+    [Space(10)]
+    [FoldoutGroup("Loot", expanded: false)]
+    [Tooltip("Multiloot = alle Items. Ansonsten nur das seltenste Item")]
+    public bool multiLoot = false;
+
+    [Space(10)]
+    [FoldoutGroup("Loot", expanded: false)]
+    [Tooltip("Was darf der Charakter einsammeln. All = alles, ansonsten nur anhand der Liste")]
+    public bool canCollectAll = false;
+
+    [FoldoutGroup("Loot", expanded: false)]
+    [HideIf("canCollectAll")]
+    public List<ItemType> canCollect = new List<ItemType>();
+
+
+    ////////////////////////////////////////////////////////////////
+    
+
+    [FoldoutGroup("Sound", expanded: false)]
     [Tooltip("Soundeffekt, wenn Gegner getroffen wurde")]
     public AudioClip hitSoundEffect;
+
+    [FoldoutGroup("Sound", expanded: false)]
     [Tooltip("Soundeffekt, wenn Gegner getötet wurde")]
     public AudioClip killSoundEffect;
 
-    [Header("Signals")]
-    public SimpleSignal healthSignal;
-    public SimpleSignal manaSignal;
+
+    ////////////////////////////////////////////////////////////////
+
+
+    [FoldoutGroup("RPG Elements", expanded: false)]
+    [Tooltip("Rasse")]
+    public string characterSpecies;
+
+    [FoldoutGroup("RPG Elements", expanded: false)]
+    [Tooltip("Geschlecht")]
+    [EnumToggleButtons]
+    public Gender characterGender = Gender.none;
+
+    [FoldoutGroup("RPG Elements", expanded: false)]
+    [Tooltip("Um welchen Typ handelt es sich?")]
+    [EnumToggleButtons]
+    public CharacterType characterType = CharacterType.Object;
+
+
     #endregion
 
 
     #region Attributes
 
+    private float lifeTime;
+    private float manaTime;
+    private float speedMultiply = 5;
+    private SimpleSignal manaSignalPrivate;
+    private SimpleSignal healthSignalPrivate;
+    private Vector3 spawnPosition;
+
     [HideInInspector]
     public Rigidbody2D myRigidbody;
-
     [HideInInspector]
     public Animator animator;
-
     [HideInInspector]
     public AudioSource audioSource;
-
     [HideInInspector]
     public SpriteRenderer spriteRenderer;
-
     [HideInInspector]
     public CastBar castbar;
     [HideInInspector]
     public CastBar activeCastbar;
-
+    [HideInInspector]
+    public int coins;
+    [HideInInspector]
+    public int crystals;
+    [HideInInspector]
+    public int keys;
     [HideInInspector]
     public CharacterState currentState;
     [HideInInspector]
@@ -203,23 +278,17 @@ public class Character : MonoBehaviour
     public List<StatusEffect> buffs = new List<StatusEffect>();
     [HideInInspector]
     public List<StatusEffect> debuffs = new List<StatusEffect>();
-    
+    [HideInInspector]
     public List<StandardSkill> activeSkills = new List<StandardSkill>();
-    [HideInInspector]
-    private float lifeTime;
-    [HideInInspector]
-    private float manaTime;
-
     [HideInInspector]
     public Vector2 direction;
     [HideInInspector]
     public bool lockAnimation = false;
     [HideInInspector]
     public float timeDistortion = 1;
-    private float speedMultiply = 5;
+    [HideInInspector]
     public GameObject activeLockOnTarget = null;
 
-    private Vector3 spawnPosition;
 
     #endregion
 
@@ -285,9 +354,20 @@ public class Character : MonoBehaviour
     #endregion
 
 
+
     private void Update()
     {
         regeneration();        
+    }
+
+    public void setHealthSignal(SimpleSignal signal)
+    {
+        this.healthSignalPrivate = signal;
+    }
+
+    public void setManaSignal(SimpleSignal signal)
+    {
+        this.manaSignalPrivate = signal;
     }
 
     public void regeneration()
@@ -422,7 +502,7 @@ public class Character : MonoBehaviour
 
                 this.life += addLife;
 
-                if (this.healthSignal != null && addLife != 0) this.healthSignal.Raise();
+                if (this.healthSignalPrivate != null && addLife != 0) this.healthSignalPrivate.Raise();
 
                 if (this.damageNumber != null)
                 {
@@ -473,7 +553,7 @@ public class Character : MonoBehaviour
 
             this.mana += addMana;
 
-            if (this.manaSignal != null && addMana != 0) this.manaSignal.Raise();
+            if (this.manaSignalPrivate != null && addMana != 0) this.manaSignalPrivate.Raise();
         }
     }
 
@@ -520,8 +600,7 @@ public class Character : MonoBehaviour
     {
         if (this.canCollectAll || this.canCollect.Contains(item.itemType))
         {
-            Utilities.playSoundEffect(item.audioSource, item.collectSoundEffect);
-            Utilities.playSoundEffect(item.audioSource, item.raiseSoundEffect);
+            item.playSounds();
 
             switch (item.itemType)
             {
