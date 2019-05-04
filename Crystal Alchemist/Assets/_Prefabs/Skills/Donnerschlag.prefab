@@ -518,7 +518,7 @@ MonoBehaviour:
   positionHeight: 0
   lockOn: {fileID: 6540191019208669748, guid: 5b2939f613b001c4a9eb3296ae0d2093, type: 3}
   targetingMode: 1
-  maxAmountOfTargets: 99
+  maxAmountOfTargets: 3
   targetingDuration: 30
   multiHitDelay: 0.5
   showRange: 0
@@ -560,6 +560,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 619960818180383821}
     m_Modifications:
+    - target: {fileID: 822386160285104016, guid: 7125f1409d0689b4d80b6ab7179979c8,
+        type: 3}
+      propertyPath: m_Name
+      value: Flash
+      objectReference: {fileID: 0}
     - target: {fileID: 822386160285104020, guid: 7125f1409d0689b4d80b6ab7179979c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -664,11 +669,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 822386160285104016, guid: 7125f1409d0689b4d80b6ab7179979c8,
-        type: 3}
-      propertyPath: m_Name
-      value: Flash
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7125f1409d0689b4d80b6ab7179979c8, type: 3}

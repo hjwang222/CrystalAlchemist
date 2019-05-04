@@ -568,7 +568,7 @@ public class Character : MonoBehaviour
             case ResourceType.life:
                 {
                     this.life = Utilities.setResource(this.life, this.maxLife, addResource);  
-                    showDamageNumber(addResource);
+                    if(this.life > 0 && this.currentState != CharacterState.dead) showDamageNumber(addResource);
                     if (this.life <= 0) killIt();
                     callSignal(this.healthSignal, addResource);
                     break;
