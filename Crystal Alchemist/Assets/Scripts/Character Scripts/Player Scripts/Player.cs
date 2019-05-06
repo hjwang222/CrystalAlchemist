@@ -62,6 +62,15 @@ public class Player : Character
         {
             this.life = data.health;
             this.mana = data.mana;
+
+            this.coins = data.coins;
+            this.crystals = data.crystals;
+            this.keys = data.keys;
+
+            this.wood = data.wood;
+            this.stone = data.stone;
+            this.metal = data.metal;
+
             this.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
         }
 

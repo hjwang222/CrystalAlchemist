@@ -18,6 +18,8 @@ public class TitleScreen : MonoBehaviour
     public float cursorOffset = 35f;
     public AudioClip cursorSound;
 
+    public SimpleSignal destroySignal;
+
     private AudioSource audioSource;
     private AudioSource musicSource;
 
@@ -31,6 +33,7 @@ public class TitleScreen : MonoBehaviour
     void Start()
     {
         changeLayer(this.mainMenu);
+        SaveSystem.loadOptions();
 
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
@@ -43,7 +46,9 @@ public class TitleScreen : MonoBehaviour
             this.musicSource.volume = GlobalValues.backgroundMusicVolume;
             this.musicSource.loop = true;
             this.musicSource.Play();
-        }        
+        }
+
+        destroySignal.Raise();
     }
 
     // Update is called once per frame
@@ -67,9 +72,10 @@ public class TitleScreen : MonoBehaviour
 
                 SceneManager.LoadScene(scene);
             }
-            else if (text.Contains("Zurück"))
+            else if (text.Contains("Speichern und zurück"))
             {
                 this.currentChoice.GetComponent<TextMeshProUGUI>().color = this.cursorColor;
+                SaveSystem.SaveOptions();
                 changeLayer(this.mainMenu);
             }
             else if (text.Contains("beenden"))

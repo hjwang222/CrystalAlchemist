@@ -19,6 +19,19 @@ public static class SaveSystem
         stream.Dispose();
     }
 
+    public static void SaveOptions()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/options.fun";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        GameOptions data = new GameOptions();
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+        stream.Dispose();
+    }
+
     public static PlayerData loadPlayer()
     {
         string path = Application.persistentDataPath + "/player.fun";
@@ -39,5 +52,25 @@ public static class SaveSystem
         {
             return null;
         }
+    }
+
+
+    public static void loadOptions()
+    {
+        string path = Application.persistentDataPath + "/options.fun";
+
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            GameOptions data = formatter.Deserialize(stream) as GameOptions;
+
+            stream.Close();
+            stream.Dispose();
+
+            GlobalValues.backgroundMusicVolume = data.musicVolume;
+            GlobalValues.soundEffectVolume = data.soundVolume;
+        }        
     }
 }

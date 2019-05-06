@@ -5,6 +5,8 @@ using UnityEngine;
 public class DontDestroyHandler : MonoBehaviour
 {
     public List<GameObject> dontDestroy = new List<GameObject>();
+    private List<GameObject> activeObjects = new List<GameObject>();
+
     public static DontDestroyHandler Instance;
 
     // Start is called before the first frame update
@@ -20,6 +22,7 @@ public class DontDestroyHandler : MonoBehaviour
                 GameObject temp = Instantiate(gameObject);
                 temp.name = temp.name.Replace("(Clone)", "");
                 DontDestroyOnLoad(temp);
+                this.activeObjects.Add(temp);
             }
         }
         else if (Instance != this)
@@ -27,5 +30,17 @@ public class DontDestroyHandler : MonoBehaviour
             Destroy(this.gameObject);
         }        
     }    
+
+    public void DestroyAll()
+    {
+        foreach(GameObject temp in this.activeObjects)
+        {
+            Destroy(temp);
+        }
+        this.activeObjects.Clear();
+        Instance = null;
+
+        Destroy(this.gameObject);
+    }
     
 }
