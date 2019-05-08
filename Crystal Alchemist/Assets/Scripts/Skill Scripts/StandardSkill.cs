@@ -243,8 +243,8 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Beschwörungen")]
     public GameObject summon;
 
-    private bool showIndicator = false;
-    private bool showCastBar = false;
+    //private bool showIndicator = false;
+    //private bool showCastBar = false;
 
     ////////////////////////////////////////////////////////////////
 

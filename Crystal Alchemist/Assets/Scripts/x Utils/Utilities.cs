@@ -234,7 +234,7 @@ public class Utilities : MonoBehaviour
         if (currency == ResourceType.none) result = true;
         else
         {
-            if (player.getResource(currency) >= price)
+            if (player.getResource(currency) + price >= 0)
             {
                 player.updateResource(currency, price);
                 result = true;

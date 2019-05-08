@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public class TitleScreen : MonoBehaviour
 {
     private GameObject activeMenu;
     private List<GameObject> activeMenuChildren = new List<GameObject>();
 
+    [Required]
+    public Canvas canvas;
     public GameObject mainMenu;
     public GameObject optionMenu;
     public AudioClip music;
 
-    public GameObject cursor = null;
+    [Required]
+    public GameObject cursor;
     public Color cursorColor;
     public float cursorOffset = 35f;
     public AudioClip cursorSound;
@@ -228,7 +232,7 @@ public class TitleScreen : MonoBehaviour
 
         this.currentChoice = this.activeMenuChildren[this.index];
 
-        this.cursor.transform.position = new Vector3(this.cursor.transform.position.x, this.currentChoice.transform.position.y + this.cursorOffset);
+        this.cursor.transform.position = new Vector3(this.cursor.transform.position.x, this.currentChoice.transform.position.y + (this.cursorOffset*this.canvas.scaleFactor));
         this.currentChoice.GetComponent<TextMeshProUGUI>().color = Color.white;
     }
 }

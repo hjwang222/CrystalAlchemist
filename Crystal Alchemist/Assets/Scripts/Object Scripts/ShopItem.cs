@@ -17,7 +17,7 @@ public class ShopItem : Interactable
     public Animator anim;
 
     private int index = 0;
-    private int amount = 1;
+    //private int amount = 1;
     
     private void Start()
     {
