@@ -38,7 +38,7 @@ public class Door : Interactable
                  if (this.doorType == DoorType.normal)
                 {
                     //Normale Tür, einfach aufmachen
-                    if (Utilities.canOpen(this.currencyNeeded, this.player, this.price))
+                    if (Utilities.canOpen(this.currencyNeeded, this.item, this.player, this.price))
                     {
                         OpenCloseDoor(true, this.context);
                     }

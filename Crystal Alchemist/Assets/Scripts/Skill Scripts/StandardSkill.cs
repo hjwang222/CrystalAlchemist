@@ -86,6 +86,11 @@ public class StandardSkill : MonoBehaviour
     public ResourceType resourceType = ResourceType.mana;
 
     [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [ShowIf("resourceType", ResourceType.item)]
+    [Tooltip("Benötigtes Item")]
+    public Item item;
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     [Tooltip("Höhe der Resource des Senders. Negativ = Schaden, Positiv = Heilung")]
     public float addResourceSender = 0;
@@ -351,7 +356,7 @@ public class StandardSkill : MonoBehaviour
     {
         if (this.sender != null)
         {
-            this.sender.updateResource(this.resourceType, this.addResourceSender);
+            this.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
             setPostionAndDirection();
         }
     }    
@@ -406,12 +411,12 @@ public class StandardSkill : MonoBehaviour
                 {
                     if (this.sender != null)
                     {
-                        if (this.sender.getResource(this.resourceType) + this.addResourceSender < 0)
+                        if (this.sender.getResource(this.resourceType, this.item) + this.addResourceSender < 0)
                             this.durationTimeLeft = 0;
                         else
                         {
                             this.elapsed = this.intervallSender;
-                            this.sender.updateResource(this.resourceType, this.addResourceSender);
+                            this.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
                         }
                     }
                 }

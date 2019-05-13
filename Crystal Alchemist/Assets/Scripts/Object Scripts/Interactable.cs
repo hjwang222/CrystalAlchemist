@@ -36,6 +36,11 @@ public class Interactable : MonoBehaviour
     public ResourceType currencyNeeded = ResourceType.none;
 
     [FoldoutGroup("Activation Requirements", expanded: false)]
+    [ShowIf("resourceType", ResourceType.item)]
+    [Tooltip("Benötigtes Item")]
+    public Item item;
+
+    [FoldoutGroup("Activation Requirements", expanded: false)]
     [Range(0,Utilities.maxIntInfinite)]
     public int price = 0;
 

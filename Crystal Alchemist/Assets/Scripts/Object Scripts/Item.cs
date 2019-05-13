@@ -6,12 +6,19 @@ using Sirenix.OdinInspector;
 
 #region Enums
 
-public enum ItemType
+public enum ItemGroup
 {
-    resource,
+    wood,
+    stone,
+    metal,
+    key,
+    coin,
+    crystal,
     skill
 }
 
+//Resource = Mana oder Life
+//Rest = Items
 
 #endregion
 
@@ -27,12 +34,16 @@ public class Item : MonoBehaviour
     public int amount;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
-    [EnumToggleButtons]
-    public ItemType itemType;
-
+    public int maxAmount;
+       
     [FoldoutGroup("Item Attributes", expanded: false)]
     [EnumToggleButtons]
     public ResourceType resourceType;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("resourceType", ResourceType.item)]
+    [EnumToggleButtons]
+    public ItemGroup itemGroup;
 
     [FoldoutGroup("Sound", expanded: false)]
     public AudioClip collectSoundEffect;

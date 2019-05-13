@@ -26,19 +26,6 @@ public enum CharacterType
     Object
 }
 
-public enum Element
-{
-    fire,
-    water,
-    earth,
-    wind,
-    thunder,
-    ice,
-    light,
-    darkness,
-    none
-}
-
 public enum Gender
 {
     male,
@@ -101,27 +88,7 @@ public class Character : MonoBehaviour
     [TabGroup("Max-Values")]
     [Tooltip("Maximales Mana")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
-    public float maxMana = Utilities.minFloat;
-
-    [TabGroup("Max-Values")]
-    [Tooltip("Maximale Anzahl")]
-    [Range(0, Utilities.maxIntInfinite)]
-    public int maxCrystals = Utilities.maxIntInfinite;
-
-    [TabGroup("Max-Values")]
-    [Tooltip("Maximale Anzahl")]
-    [Range(0, Utilities.maxIntSmall)]
-    public int maxCoins = Utilities.maxIntSmall;
-
-    [TabGroup("Max-Values")]
-    [Tooltip("Maximale Anzahl")]
-    [Range(0, Utilities.maxIntSmall)]
-    public int maxKeys = Utilities.maxIntSmall;
-
-    [TabGroup("Max-Values")]
-    [Tooltip("Maximale Anzahl")]
-    [Range(0, Utilities.maxIntSmall)]
-    public int maxAmmo = Utilities.maxIntSmall;
+    public float maxMana = Utilities.minFloat;    
 
 
 
@@ -215,7 +182,7 @@ public class Character : MonoBehaviour
 
     [FoldoutGroup("Loot", expanded: false)]
     [HideIf("canCollectAll")]
-    public List<ItemType> canCollect = new List<ItemType>();
+    public List<ItemGroup> canCollect = new List<ItemGroup>();
 
 
     ////////////////////////////////////////////////////////////////
@@ -246,7 +213,6 @@ public class Character : MonoBehaviour
     [Tooltip("Um welchen Typ handelt es sich?")]
     [EnumToggleButtons]
     public CharacterType characterType = CharacterType.Object;
-
 
     #endregion
 
@@ -279,18 +245,6 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public CastBar activeCastbar;
     [HideInInspector]
-    public int coins;
-    [HideInInspector]
-    public int crystals;
-    [HideInInspector]
-    public int keys;
-    [HideInInspector]
-    public int wood;
-    [HideInInspector]
-    public int stone;
-    [HideInInspector]
-    public int metal;
-    [HideInInspector]
     public CharacterState currentState;
     [HideInInspector]
     public float life;
@@ -320,6 +274,8 @@ public class Character : MonoBehaviour
     public float timeDistortion = 1;
     [HideInInspector]
     public GameObject activeLockOnTarget = null;
+    [HideInInspector]
+    public List<Item> inventory = new List<Item>();
 
 
     #endregion
@@ -415,7 +371,7 @@ public class Character : MonoBehaviour
                 if (this.lifeTime >= this.lifeRegenerationInterval)
                 {
                     this.lifeTime = 0;
-                    updateResource(ResourceType.life, this.lifeRegeneration);
+                    updateResource(ResourceType.life, null, this.lifeRegeneration);
                 }
                 else
                 {
@@ -427,7 +383,7 @@ public class Character : MonoBehaviour
                 if (this.manaTime >= this.manaRegenerationInterval)
                 {
                     this.manaTime = 0;
-                    updateResource(ResourceType.mana, this.manaRegeneration);
+                    updateResource(ResourceType.mana, null, this.manaRegeneration);
                 }
                 else
                 {
@@ -450,7 +406,7 @@ public class Character : MonoBehaviour
             int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
 
             if (currentAmountOfSameSkills < skill.maxAmounts
-                && this.getResource(skill.resourceType) + skill.addResourceSender >= 0)
+                && this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0)
             {
                     if (!skill.isRapidFire && !skill.keepHoldTimer) skill.holdTimer = 0;
                     
@@ -561,7 +517,7 @@ public class Character : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public void updateResource(ResourceType type, float addResource)
+    public void updateResource(ResourceType type, Item item, float addResource)
     {
         switch (type)
         {
@@ -579,42 +535,21 @@ public class Character : MonoBehaviour
                     callSignal(this.manaSignal, addResource);
                     break;
                 }
-            case ResourceType.wood:
+            case ResourceType.item:
                 {
-                    this.wood = Mathf.RoundToInt(Utilities.setResource(this.wood, this.maxAmmo, addResource));
-                    callSignal(this.woodSignal, addResource);
+                    if (item != null)
+                    {
+                        Utilities.updateInventory(item, this.inventory);
+                        callSignal(this.woodSignal, addResource);  //TODO Single Signal?
+                    }
                     break;
-                }
-            case ResourceType.stone:
-                {
-                    this.stone = Mathf.RoundToInt(Utilities.setResource(this.stone, this.maxAmmo, addResource));
-                    callSignal(this.stoneSignal, addResource);
-                    break;
-                }
-            case ResourceType.metal:
-                {
-                    this.metal = Mathf.RoundToInt(Utilities.setResource(this.metal, this.maxAmmo, addResource));
-                    callSignal(this.metalSignal, addResource);
-                    break;
-                }
-            case ResourceType.coin:
-                {
-                    this.coins = Mathf.RoundToInt(Utilities.setResource(this.coins, this.maxCoins, addResource));
-                    callSignal(this.coinSignal, addResource);
-                    break;
-                }
-            case ResourceType.key:
-                {
-                    this.keys = Mathf.RoundToInt(Utilities.setResource(this.keys, this.maxKeys, addResource));
-                    callSignal(this.keySignal, addResource);
-                    break;
-                }
-            case ResourceType.crystal:
+                }           
+            /*case ResourceType.crystal:
                 {
                     this.crystals = Mathf.RoundToInt(Utilities.setResource(this.crystals, this.maxCrystals, addResource));
                     callSignal(this.crystalSignal, addResource);
                     break;
-                }
+                }*/
         }        
     }
 
@@ -623,35 +558,27 @@ public class Character : MonoBehaviour
         if (signal != null && addResource != 0) signal.Raise();
     }
 
-    public float getResource(ResourceType type)
+    public float getResource(ResourceType type, Item item)
     {
+        //TODO ItemGroup?
+
         switch (type)
         {
             case ResourceType.life: return this.life;                
             case ResourceType.mana: return this.mana;
-            case ResourceType.wood: return this.wood;
-            case ResourceType.stone: return this.stone;
-            case ResourceType.metal: return this.metal;
-            case ResourceType.coin: return this.coins;
-            case ResourceType.key: return this.keys;
-            case ResourceType.crystal: return this.crystals;
+            case ResourceType.item: return Utilities.getAmountFromInventory(item.itemGroup, this.inventory, false);
         }
 
         return 0;
     }
 
-    public float getMaxResource(ResourceType type)
+    public float getMaxResource(ResourceType type, Item item)
     {
         switch (type)
         {
             case ResourceType.life: return this.maxLife;
             case ResourceType.mana: return this.maxMana;
-            case ResourceType.wood: return this.maxAmmo;
-            case ResourceType.stone: return this.maxAmmo;
-            case ResourceType.metal: return this.maxAmmo;
-            case ResourceType.coin: return this.maxCoins;
-            case ResourceType.key: return this.maxKeys;
-            case ResourceType.crystal: return this.maxCrystals;
+            case ResourceType.item: return Utilities.getAmountFromInventory(item.itemGroup, this.inventory, true);
         }
 
         return 0;
@@ -699,16 +626,12 @@ public class Character : MonoBehaviour
 
     public void collect(Item item, bool destroyIt)
     {
-        if (this.canCollectAll || this.canCollect.Contains(item.itemType))
+        if (this.canCollectAll || this.canCollect.Contains(item.itemGroup))
         {
             item.playSounds();
 
-            switch (item.itemType)
-            {
-                case ItemType.resource: this.updateResource(item.resourceType, item.amount); break;
-                default: break;
-            }
-
+            this.updateResource(item.resourceType, item, item.amount);         
+            
             if (destroyIt) item.DestroyIt();
         }
     }
@@ -733,7 +656,8 @@ public class Character : MonoBehaviour
                     }
                 }
 
-                updateResource(ResourceType.life, skill.addLifeTarget);
+                //TODO ADDTARGET ITEM
+                updateResource(ResourceType.life, null, skill.addLifeTarget);
                 
                 if(this.life > 0)
                 {

@@ -24,13 +24,14 @@ public class PlayerData
         this.health = player.life;
         this.mana = player.mana;
 
+        /*
         this.coins = player.coins;
         this.keys = player.keys;
         this.crystals = player.crystals;
 
         this.wood = player.wood;
         this.stone = player.stone;
-        this.metal = player.metal;
+        this.metal = player.metal;*/
 
         this.position = new float[3];
 
