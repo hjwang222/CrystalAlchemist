@@ -27,12 +27,7 @@ public enum ResourceType
     none,
     life,
     mana,
-    wood,
-    stone,
-    metal, 
-    key,
-    coin,
-    crystal
+    item
 }
 
 #endregion
@@ -227,16 +222,20 @@ public class Utilities : MonoBehaviour
         return false;
     }
 
-    private static bool hasEnoughCurrency(ResourceType currency, Player player, int price)
+    private static bool hasEnoughCurrency(ResourceType currency, Player player, Item item, int price)
     {
         bool result = false;
 
         if (currency == ResourceType.none) result = true;
+        else if (currency == ResourceType.item && item != null)
+        {
+
+        }
         else
         {
-            if (player.getResource(currency) + price >= 0)
+            if (player.getResource(currency, null) + price >= 0)
             {
-                player.updateResource(currency, price);
+                player.updateResource(currency, null, price);
                 result = true;
             }
             else
@@ -248,11 +247,53 @@ public class Utilities : MonoBehaviour
         return result;
     }
 
-    public static bool canOpen(ResourceType currency, Player player, int price)
+    public static int getAmountFromInventory(ItemGroup itemgroup, List<Item> inventory, bool maxAmount)
+    {
+        
+            foreach (Item elem in inventory)
+            {
+                if (itemgroup == elem.itemGroup)
+                {
+                    if (!maxAmount) return elem.amount;
+                    else return elem.maxAmount;
+                }
+            }
+        
+
+        return 0;
+    }
+
+    public static void updateInventory(Item item, List<Item> inventory)
+    {
+        if (item != null)
+        {
+            Item found = null;
+
+            foreach (Item elem in inventory)
+            {
+                if (item.resourceType == elem.resourceType)
+                {
+                    found = elem;
+                }
+            }
+
+            if (found == null)
+            {
+                inventory.Add(Instantiate(item));
+            }
+            else
+            {
+                found.amount += item.amount;
+            }
+        }
+    }
+
+
+    public static bool canOpen(ResourceType currency, Item item, Player player, int price)
     {
         if (player != null && player.currentState != CharacterState.inDialog)
         {
-            if (hasEnoughCurrency(currency, player, -price)) return true;
+            if (hasEnoughCurrency(currency, player, item, -price)) return true;
             else
             {
                 player.showDialogBox(GlobalValues.noMoneyText);
@@ -346,5 +387,7 @@ public class Utilities : MonoBehaviour
     }
 
     #endregion
+    
+
 
 }

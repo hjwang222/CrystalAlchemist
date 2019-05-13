@@ -49,6 +49,8 @@ public class Player : Character
 
     private Vector3 change;
     private string lastButtonPressed = "";
+
+
     //public GameObject music;    
 
     // Start is called before the first frame update
@@ -63,13 +65,13 @@ public class Player : Character
             this.life = data.health;
             this.mana = data.mana;
 
-            this.coins = data.coins;
+            /*this.coins = data.coins;
             this.crystals = data.crystals;
             this.keys = data.keys;
 
             this.wood = data.wood;
             this.stone = data.stone;
-            this.metal = data.metal;
+            this.metal = data.metal;*/
 
             this.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
         }
@@ -81,6 +83,9 @@ public class Player : Character
 
         this.direction = new Vector2(0, -1);
     }   
+
+
+    
 
     // Update is called once per frame
     private void Update()
@@ -148,7 +153,7 @@ public class Player : Character
                 int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
 
                 if (currentAmountOfSameSkills < skill.maxAmounts
-                    && (this.getResource(skill.resourceType) + skill.addResourceSender >= 0 || skill.addResourceSender == -Utilities.maxFloatInfinite))
+                    && (this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0 || skill.addResourceSender == -Utilities.maxFloatInfinite))
                 {
                     if (isSkillReadyToUse(button, skill)) activateSkill(button, skill);
                     activateSkillFromTargetingSystem(skill);

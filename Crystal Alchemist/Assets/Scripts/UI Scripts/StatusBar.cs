@@ -96,8 +96,8 @@ public class StatusBar : MonoBehaviour
     {
         if (this.player != null)
         {
-            this.maximum = this.player.getMaxResource(this.resourceType);
-            this.current = this.player.getResource(this.resourceType);
+            this.maximum = this.player.getMaxResource(this.resourceType, null);
+            this.current = this.player.getResource(this.resourceType, null);
         }
     }
 

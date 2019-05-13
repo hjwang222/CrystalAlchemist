@@ -61,7 +61,7 @@ public class Buttons : MonoBehaviour
         float cooldownLeft = skill.cooldownTimeLeft / (player.timeDistortion * player.spellspeed);
         float cooldown = skill.cooldown / (player.timeDistortion * player.spellspeed);
 
-        if ((player.getResource(skill.resourceType) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite) 
+        if ((player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite) 
             || player.getAmountOfSameSkills(skill) >= skill.maxAmounts
             || cooldownLeft == Utilities.maxFloatInfinite)
         {

@@ -502,6 +502,7 @@ MonoBehaviour:
   addManaTarget: 0
   statusEffects: []
   resourceType: 2
+  item: {fileID: 0}
   addResourceSender: -1
   intervallSender: 0
   speedDuringCasting: 0
@@ -540,7 +541,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: -0.008988535
+  cooldownTimeLeft: -0.008373611
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 0}
@@ -560,11 +561,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 619960818180383821}
     m_Modifications:
-    - target: {fileID: 822386160285104016, guid: 7125f1409d0689b4d80b6ab7179979c8,
-        type: 3}
-      propertyPath: m_Name
-      value: Flash
-      objectReference: {fileID: 0}
     - target: {fileID: 822386160285104020, guid: 7125f1409d0689b4d80b6ab7179979c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -669,6 +665,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 822386160285104016, guid: 7125f1409d0689b4d80b6ab7179979c8,
+        type: 3}
+      propertyPath: m_Name
+      value: Flash
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7125f1409d0689b4d80b6ab7179979c8, type: 3}
