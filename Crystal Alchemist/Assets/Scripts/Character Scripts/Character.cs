@@ -539,7 +539,7 @@ public class Character : MonoBehaviour
                 {
                     if (item != null)
                     {
-                        Utilities.updateInventory(item, this.inventory);
+                        Utilities.updateInventory(item, this, Mathf.RoundToInt(addResource));
                         callSignal(this.woodSignal, addResource);  //TODO Single Signal?
                     }
                     break;

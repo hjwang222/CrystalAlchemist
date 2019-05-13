@@ -122,16 +122,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 040b39ba79f34c942bf518bba9ed7818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Du hast %XY% erhalten!
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
+  text: Du hast %XY% erhalten!
   lootTable:
   - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
     dropRate: 100
     amount: 0
   multiLoot: 0
+  currencyNeeded: 3
+  item: {fileID: 3692160304636444062, guid: 0aea2ca1a4e017d4d9f7b1ccd427e54a, type: 3}
+  price: 1
   soundEffect: {fileID: 8300000, guid: 4f7be5fca72aed945b5adc95e382a719, type: 3}
-  soundEffectVolume: {fileID: 0}
   isPlayerInRange: 0
   player: {fileID: 0}
   animator: {fileID: 0}
@@ -140,10 +142,13 @@ MonoBehaviour:
   context: {fileID: 0}
   items: []
   currentState: 0
+  anim: {fileID: 0}
   soundEffectTreasure: {fileID: 8300000, guid: 59d34d1df831b0449a4e2f413b1dda3d, type: 3}
-  type: 0
-  price: 0
-  priceText: {fileID: 5693850386700575020}
+  treasureType: 0
+  priceText: {fileID: 0}
+  fontColor: {r: 0, g: 0, b: 0, a: 0}
+  outlineColor: {r: 0, g: 0, b: 0, a: 0}
+  outlineWidth: 0.25
 --- !u!61 &1555326793583579606
 BoxCollider2D:
   m_ObjectHideFlags: 0

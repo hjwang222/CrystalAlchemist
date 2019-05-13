@@ -226,16 +226,12 @@ public class Utilities : MonoBehaviour
     {
         bool result = false;
 
-        if (currency == ResourceType.none) result = true;
-        else if (currency == ResourceType.item && item != null)
-        {
-
-        }
+        if (currency == ResourceType.none) result = true;        
         else
         {
-            if (player.getResource(currency, null) + price >= 0)
+            if (player.getResource(currency, item) + price >= 0)
             {
-                player.updateResource(currency, null, price);
+                player.updateResource(currency, item, price);
                 result = true;
             }
             else
@@ -248,8 +244,7 @@ public class Utilities : MonoBehaviour
     }
 
     public static int getAmountFromInventory(ItemGroup itemgroup, List<Item> inventory, bool maxAmount)
-    {
-        
+    {        
             foreach (Item elem in inventory)
             {
                 if (itemgroup == elem.itemGroup)
@@ -257,21 +252,20 @@ public class Utilities : MonoBehaviour
                     if (!maxAmount) return elem.amount;
                     else return elem.maxAmount;
                 }
-            }
-        
+            }        
 
         return 0;
     }
 
-    public static void updateInventory(Item item, List<Item> inventory)
+    public static void updateInventory(Item item, Character character, int amount)
     {
         if (item != null)
         {
             Item found = null;
 
-            foreach (Item elem in inventory)
+            foreach (Item elem in character.inventory)
             {
-                if (item.resourceType == elem.resourceType)
+                if (item.itemGroup == elem.itemGroup)
                 {
                     found = elem;
                 }
@@ -279,11 +273,14 @@ public class Utilities : MonoBehaviour
 
             if (found == null)
             {
-                inventory.Add(Instantiate(item));
+                GameObject temp = Instantiate(item.gameObject, character.transform);
+                temp.SetActive(false);
+                temp.hideFlags = HideFlags.HideInHierarchy;
+                character.inventory.Add(temp.GetComponent<Item>());
             }
             else
             {
-                found.amount += item.amount;
+                found.amount += amount;
             }
         }
     }
