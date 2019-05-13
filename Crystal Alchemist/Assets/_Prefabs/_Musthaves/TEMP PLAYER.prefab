@@ -125,7 +125,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.5
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: becbfa83e7612c948a966b7d5b5649fd, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -151,10 +151,6 @@ MonoBehaviour:
   immunityToStatusEffects: []
   maxLife: 4
   maxMana: 3
-  maxCrystals: 9999
-  maxCoins: 99
-  maxKeys: 99
-  maxAmmo: 99
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
   manaRegeneration: 0.25
@@ -184,12 +180,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   activeCastbar: {fileID: 0}
-  coins: 50
-  crystals: 500
-  keys: 10
-  wood: 0
-  stone: 0
-  metal: 0
   currentState: 0
   life: 0
   spellspeed: 0
@@ -205,6 +195,7 @@ MonoBehaviour:
   lockAnimation: 0
   timeDistortion: 1
   activeLockOnTarget: {fileID: 0}
+  inventory: []
   dialogBoxSignal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
   healthSignalUI: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
   manaSignalUI: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}

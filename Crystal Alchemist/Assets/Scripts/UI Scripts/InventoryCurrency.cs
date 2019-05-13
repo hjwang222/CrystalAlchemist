@@ -12,7 +12,7 @@ public class InventoryCurrency : MonoBehaviour
     public float outlineWidth = 0.25f;
     public bool bold = false;
     public ResourceType resourceType;
-    public ItemGroup ItemGroup;
+    public Item item;
 
     private Player player;
 
@@ -41,7 +41,7 @@ public class InventoryCurrency : MonoBehaviour
     {
         if (this.player != null)
         {
-            string text = this.player.getResource(this.resourceType, null) + "";
+            string text = this.player.getResource(this.resourceType, this.item) + "";
             Utilities.set3DText(this.TMPObject, text, this.bold, this.fontColor, this.outlineColor, this.outlineWidth);
         }
     }
