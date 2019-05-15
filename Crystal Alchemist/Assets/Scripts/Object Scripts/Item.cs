@@ -13,8 +13,7 @@ public enum ItemGroup
     metal,
     key,
     coin,
-    crystal,
-    skill
+    crystal
 }
 
 //Resource = Mana oder Life
@@ -45,6 +44,11 @@ public class Item : MonoBehaviour
     [EnumToggleButtons]
     public ItemGroup itemGroup;
 
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("resourceType", ResourceType.skill)]
+    [EnumToggleButtons]    
+    public StandardSkill skill;
+
     [FoldoutGroup("Sound", expanded: false)]
     public AudioClip collectSoundEffect;
 
@@ -61,6 +65,8 @@ public class Item : MonoBehaviour
 
     private void Awake()
     {
+
+        //TODO: set Sprite if Skill != null
         init();
     }
 

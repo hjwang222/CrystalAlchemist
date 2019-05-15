@@ -27,7 +27,8 @@ public enum ResourceType
     none,
     life,
     mana,
-    item
+    item, 
+    skill
 }
 
 #endregion
@@ -227,7 +228,7 @@ public class Utilities : MonoBehaviour
         bool result = false;
 
         if (currency == ResourceType.none) result = true;        
-        else
+        else if(currency != ResourceType.skill)
         {
             if (player.getResource(currency, item) + price >= 0)
             {
@@ -284,6 +285,25 @@ public class Utilities : MonoBehaviour
             }
         }
     }
+
+
+    public static void updateSkillset(StandardSkill skill, Character character)
+    {
+        if (skill != null)
+        {
+            bool found = false;
+
+            foreach (StandardSkill elem in character.skillSet)
+            {
+                if (elem.skillName == skill.skillName) { found = true; break; }
+            }
+
+            if (!found) character.skillSet.Add(skill);
+        }
+    }
+
+
+
 
 
     public static bool canOpen(ResourceType currency, Item item, Player player, int price)

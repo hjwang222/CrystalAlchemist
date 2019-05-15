@@ -274,9 +274,12 @@ public class Character : MonoBehaviour
     public float timeDistortion = 1;
     [HideInInspector]
     public GameObject activeLockOnTarget = null;
+
+
     [HideInInspector]
     public List<Item> inventory = new List<Item>();
-
+    [HideInInspector]
+    public List<StandardSkill> skillSet = new List<StandardSkill>();
 
     #endregion
 
@@ -543,7 +546,16 @@ public class Character : MonoBehaviour
                         callSignal(this.woodSignal, addResource);  //TODO Single Signal?
                     }
                     break;
-                }           
+                }
+            case ResourceType.skill:
+                {
+                    if (item != null && item.skill != null)
+                    {
+                        Utilities.updateSkillset(item.skill, this);
+                        //callSignal(this.woodSignal, addResource);  //TODO Single Signal?
+                    }
+                    break;
+                }
             /*case ResourceType.crystal:
                 {
                     this.crystals = Mathf.RoundToInt(Utilities.setResource(this.crystals, this.maxCrystals, addResource));
