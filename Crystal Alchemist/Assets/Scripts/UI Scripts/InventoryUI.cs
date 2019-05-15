@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -17,7 +19,8 @@ public class InventoryUI : MonoBehaviour
         int i = 0;
         while(i < boxes.Count && i < this.player.inventory.Count)
         {
-            boxes[i] = this.player.inventory[i].gameObject;
+            boxes[i].GetComponent<Image>().sprite = this.player.inventory[i].getSprite();
+            boxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "x"+this.player.inventory[i].amount + "";
             i++;
         }
     }
