@@ -5,6 +5,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
+
+public enum Button
+{
+   AButton,
+   BButton,
+   XButton,
+   YButton,
+   RBButton
+}
+
+
 public class Player : Character
 {
     [Required]
@@ -44,19 +55,30 @@ public class Player : Character
     public SimpleSignal metalSignalUI;
 
     [Required]
-    [Header("Button Config")]
-    public ButtonConfig playerInputSkillConfig;
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal openInventorySignal;
+
+
+    public StandardSkill AButton;    
+    public StandardSkill BButton;   
+    public StandardSkill XButton;    
+    public StandardSkill YButton;    
+    public StandardSkill RBButton;
+
 
     private Vector3 change;
     private string lastButtonPressed = "";
+
+
 
 
     //public GameObject music;    
 
     // Start is called before the first frame update
     private void Start()
-    {        
+    {
         this.init();
+        loadSkillsFromSkillSet("Boomerang", Button.AButton);
         this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.keySignalUI, this.coinSignalUI, this.crystalSignalUI, this.woodSignalUI, this.stoneSignalUI, this.metalSignalUI);
         PlayerData data = SaveSystem.loadPlayer();
 
@@ -82,17 +104,33 @@ public class Player : Character
         Utilities.SetParameter(this.animator, "moveY", -1);
 
         this.direction = new Vector2(0, -1);
-    }   
+    }
 
+    public void loadSkillsFromSkillSet(string name, Button button)
+    {
+        foreach(StandardSkill skill in this.skillSet)
+        {
+            if(skill.skillName == name)
+            {
+                switch (button)
+                {
+                    case Button.AButton: this.AButton = skill; break;
+                    case Button.BButton: this.BButton = skill; break;
+                    case Button.XButton: this.XButton = skill; break;
+                    case Button.YButton: this.YButton = skill; break;
+                    case Button.RBButton: this.RBButton = skill; break;
+                }
 
-    
+                break;
+            }
+        }
+    }
+
 
     // Update is called once per frame
     private void Update()
-    {       
+    {
         regeneration();
-
-
 
         if (currentState == CharacterState.inDialog)
         {
@@ -115,7 +153,12 @@ public class Player : Character
 
         if (Input.GetButtonDown("Quit"))
         {
-            SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(0);
+        }
+
+        if (Input.GetButtonDown("Inventory"))
+        {
+            this.openInventorySignal.Raise();
         }
 
         if (currentState == CharacterState.walk || this.currentState == CharacterState.idle || this.currentState == CharacterState.interact)
@@ -127,7 +170,7 @@ public class Player : Character
 
     public void showDialogBox(string text)
     {
-        if(this.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
+        if (this.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
     }
 
     public string getScene()
@@ -138,30 +181,47 @@ public class Player : Character
 
     #region Using Skill
 
+    private StandardSkill getSkillFromButton(string button)
+    {
+        //TODO: GEHT BESSER!
+
+        switch (button)
+        {
+            case "A-Button": return this.AButton;
+            case "B-Button": return this.BButton;
+            case "X-Button": return this.XButton;
+            case "Y-Button": return this.YButton;
+            default: return null;
+        }
+    }
+
     private void useSkill(string button)
     {
         if (this.currentState != CharacterState.interact && this.currentState != CharacterState.inDialog)
-        {
-            StandardSkill skill = this.playerInputSkillConfig.getSkillByButton(button);
+        {            
+            StandardSkill skill = this.getSkillFromButton(button);
 
-            if (skill.cooldownTimeLeft > 0)
+            if (skill != null)
             {
-                skill.cooldownTimeLeft -= (Time.deltaTime * this.timeDistortion * this.spellspeed);
-            }
-            else
-            {
-                int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
-
-                if (currentAmountOfSameSkills < skill.maxAmounts
-                    && (this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0 || skill.addResourceSender == -Utilities.maxFloatInfinite))
+                if (skill.cooldownTimeLeft > 0)
                 {
-                    if (isSkillReadyToUse(button, skill)) activateSkill(button, skill);
-                    activateSkillFromTargetingSystem(skill);
+                    skill.cooldownTimeLeft -= (Time.deltaTime * this.timeDistortion * this.spellspeed);
                 }
-                else if (currentAmountOfSameSkills >= skill.maxAmounts
-                     && (skill.deactivateByButtonUp || skill.delay == Utilities.maxFloatInfinite))
+                else
                 {
-                    deactivateSkill(button, skill);
+                    int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
+
+                    if (currentAmountOfSameSkills < skill.maxAmounts
+                        && (this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0 || skill.addResourceSender == -Utilities.maxFloatInfinite))
+                    {
+                        if (isSkillReadyToUse(button, skill)) activateSkill(button, skill);
+                        activateSkillFromTargetingSystem(skill);
+                    }
+                    else if (currentAmountOfSameSkills >= skill.maxAmounts
+                         && (skill.deactivateByButtonUp || skill.delay == Utilities.maxFloatInfinite))
+                    {
+                        deactivateSkill(button, skill);
+                    }
                 }
             }
         }
@@ -354,7 +414,7 @@ public class Player : Character
         float damageReduce = targetingSystem.sortedTargets.Count;
         int i = 0;
 
-        foreach(Character target in targetingSystem.sortedTargets)
+        foreach (Character target in targetingSystem.sortedTargets)
         {
             if (target.currentState != CharacterState.dead && target.currentState != CharacterState.respawning)
             {
@@ -419,7 +479,7 @@ public class Player : Character
                 Utilities.SetParameter(this.animator, "moveY", change.y);
             }
 
-            
+
             Utilities.SetParameter(this.animator, "isWalking", true);
         }
         else Utilities.SetParameter(this.animator, "isWalking", false);
@@ -438,5 +498,5 @@ public class Player : Character
 
     #endregion
 
-    
+
 }

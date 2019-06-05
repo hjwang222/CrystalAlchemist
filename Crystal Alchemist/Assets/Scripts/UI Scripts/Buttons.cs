@@ -6,7 +6,6 @@ using TMPro;
 
 public class Buttons : MonoBehaviour
 {
-    public ButtonConfig buttonConfig;
     private Player player;
 
     [Header("A Button UI")]
@@ -37,21 +36,26 @@ public class Buttons : MonoBehaviour
     }
 
     void Start()
-    {       
-        setButton(this.buttonConfig.buttonA.icon, this.buttonConfig.buttonAIcon, this.skillIconAButton, this.iconAButton);
-        setButton(this.buttonConfig.buttonB.icon, this.buttonConfig.buttonBIcon, this.skillIconBButton, this.iconBButton);
-        setButton(this.buttonConfig.buttonX.icon, this.buttonConfig.buttonXIcon, this.skillIconXButton, this.iconXButton);
-        setButton(this.buttonConfig.buttonY.icon, this.buttonConfig.buttonYIcon, this.skillIconYButton, this.iconYButton);
+    {
+        setButtonSkillImages();
+    }
+
+    public void setButtonSkillImages()
+    {
+        setButton(this.player.AButton, this.skillIconAButton, this.iconAButton);
+        setButton(this.player.BButton, this.skillIconBButton, this.iconBButton);
+        setButton(this.player.XButton, this.skillIconXButton, this.iconXButton);
+        setButton(this.player.YButton, this.skillIconYButton, this.iconYButton);
     }
 
     private void Update()
     {
         try
         {
-            updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.buttonConfig.buttonA);
-            updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.buttonConfig.buttonB);
-            updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.buttonConfig.buttonX);
-            updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.buttonConfig.buttonY);
+            updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton);
+            updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton);
+            updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton);
+            updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton);
         }
         catch { }
     }
@@ -117,24 +121,16 @@ public class Buttons : MonoBehaviour
         }
     }
 
-    private void setButton(Sprite skillIcon, Sprite buttonIcon, Image skillUI, Image buttonUI)
+    private void setButton(StandardSkill skill, Image skillUI, Image buttonUI)
     {
-        if(skillIcon == null)
+        if(skill == null)
         {
-            skillUI.enabled = false;
+            skillUI.gameObject.SetActive(false);
         }
         else
         {
-            skillUI.sprite = skillIcon;
-        }
-
-        if (buttonIcon == null)
-        {
-            buttonUI.enabled = false;
-        }
-        else
-        {
-            buttonUI.sprite = buttonIcon;
+            skillUI.gameObject.SetActive(true);
+            skillUI.sprite = skill.icon;
         }
     }
 

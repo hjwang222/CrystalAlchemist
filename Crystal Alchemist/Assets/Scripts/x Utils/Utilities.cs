@@ -305,6 +305,16 @@ public class Utilities : MonoBehaviour
 
 
 
+    public static float getInputMenu(string axis)
+    {        
+            float changeAnalogStick = Mathf.RoundToInt(Input.GetAxisRaw(axis));
+            float changeDPad = Input.GetAxisRaw("Cursor " + axis);
+            if (changeAnalogStick != 0) return changeAnalogStick;
+            else if (changeDPad != 0) return changeDPad;
+            return 0;        
+    }
+
+
 
     public static bool canOpen(ResourceType currency, Item item, Player player, int price)
     {
