@@ -10422,16 +10422,7 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  m_AnimatedTiles:
-  - first: {x: -27, y: 18, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21302156, guid: af3975fb0612c694ca878a94225da95f, type: 3}
-      - {fileID: 21302158, guid: af3975fb0612c694ca878a94225da95f, type: 3}
-      - {fileID: 21302160, guid: af3975fb0612c694ca878a94225da95f, type: 3}
-      m_AnimationSpeed: 6
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
+  m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: b3f6196f508b1bf4698faa2e6511c044, type: 2}
@@ -11200,6 +11191,7 @@ CompositeCollider2D:
       - {x: -26.723, y: 15.984}
       - {x: -26.2855, y: 15.984}
   m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.000005
 --- !u!50 &561791737
 Rigidbody2D:
   serializedVersion: 4
@@ -11236,6 +11228,7 @@ TilemapCollider2D:
   m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!114 &561791739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15699,6 +15692,7 @@ CompositeCollider2D:
       - {x: -26.848, y: 12.1755}
       - {x: -26.2855, y: 12.1755}
   m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.000005
 --- !u!50 &1938352049
 Rigidbody2D:
   serializedVersion: 4
@@ -15735,6 +15729,7 @@ TilemapCollider2D:
   m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!114 &1938352051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18253,88 +18248,7 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  m_AnimatedTiles:
-  - first: {x: -25, y: 12, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21300334, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300332, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300434, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      m_AnimationSpeed: 3
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
-  - first: {x: -23, y: 12, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21300334, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300332, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300434, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      m_AnimationSpeed: 3
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
-  - first: {x: -23, y: 13, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21300334, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300332, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300434, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      m_AnimationSpeed: 3
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
-  - first: {x: -29, y: 14, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21300334, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300332, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300434, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      m_AnimationSpeed: 3
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
-  - first: {x: -22, y: 14, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21300334, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300332, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300434, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      m_AnimationSpeed: 3
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
-  - first: {x: -7, y: 16, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21300334, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300332, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300434, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      m_AnimationSpeed: 3
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
-  - first: {x: -15, y: 18, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21300334, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300332, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300434, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      m_AnimationSpeed: 3
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
-  - first: {x: -24, y: 22, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21300334, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300332, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300434, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      m_AnimationSpeed: 3
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
-  - first: {x: -22, y: 22, z: 0}
-    second:
-      m_AnimatedSprites:
-      - {fileID: 21300334, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300332, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      - {fileID: 21300434, guid: 4d5c9afac8f0adf4bbfaadac52a21161, type: 3}
-      m_AnimationSpeed: 3
-      m_AnimationTimeOffset: 0
-      m_IsLooping: 1
+  m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
