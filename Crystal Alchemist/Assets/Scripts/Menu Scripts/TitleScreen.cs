@@ -116,9 +116,8 @@ public class TitleScreen : MonoBehaviour
             else
             {
                 soundOptions(false);
-
                 
-                int change = (int)(getInput("Vertical"));
+                int change = (int)(Utilities.getInputMenu("Vertical"));
 
                 if (this.tempChange != change)
                 {
@@ -138,20 +137,13 @@ public class TitleScreen : MonoBehaviour
         }
     }
 
-    private float getInput(string axis)
-    {
-        float changeAnalogStick = Mathf.RoundToInt(Input.GetAxisRaw(axis));
-        float changeDPad = Input.GetAxisRaw("Cursor "+axis);
-        if (changeAnalogStick != 0) return changeAnalogStick;
-        else if (changeDPad != 0) return changeDPad;
-        return 0;
-    }
+
 
     private void soundOptions(bool marker)
     {
         TextMeshProUGUI ugui = this.currentChoice.GetComponent<TextMeshProUGUI>();
 
-        float changeX = getInput("Horizontal");
+        float changeX = Utilities.getInputMenu("Horizontal");
 
         if (ugui.text.Contains("Effekt"))
         {

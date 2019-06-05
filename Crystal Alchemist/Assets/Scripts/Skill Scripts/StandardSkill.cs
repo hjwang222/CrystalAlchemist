@@ -2,7 +2,12 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-
+public enum SkillType
+{
+    physical,
+    magical,
+    item
+}
 
 public class StandardSkill : MonoBehaviour
 {
@@ -12,6 +17,11 @@ public class StandardSkill : MonoBehaviour
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Name des Angriffs")]    
     public string skillName;
+
+    [BoxGroup("Pflichtfelder")]
+    [Tooltip("Beschreibung des Skills")]
+    [EnumToggleButtons]
+    public SkillType skillType = SkillType.magical;
 
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]

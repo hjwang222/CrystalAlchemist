@@ -13,15 +13,4 @@ public class InventoryUI : MonoBehaviour
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
-
-    private void OnEnable()
-    {
-        int i = 0;
-        while(i < boxes.Count && i < this.player.inventory.Count)
-        {
-            boxes[i].GetComponent<Image>().sprite = this.player.inventory[i].getSprite();
-            boxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "x"+this.player.inventory[i].amount + "";
-            i++;
-        }
-    }
 }

@@ -120,7 +120,7 @@ public class Character : MonoBehaviour
         
     [FoldoutGroup("Skills", expanded: false)]
     [Tooltip("Skills, welcher der Character verwenden kann")]
-    public List<StandardSkill> skills = new List<StandardSkill>();
+    public List<StandardSkill> skillSet = new List<StandardSkill>();
 
     [Space(10)]
     [FoldoutGroup("Skills", expanded: false)]
@@ -278,8 +278,7 @@ public class Character : MonoBehaviour
 
     [HideInInspector]
     public List<Item> inventory = new List<Item>();
-    [HideInInspector]
-    public List<StandardSkill> skillSet = new List<StandardSkill>();
+
 
     #endregion
 
