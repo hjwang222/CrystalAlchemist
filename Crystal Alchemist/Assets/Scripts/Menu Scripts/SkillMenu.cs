@@ -3,138 +3,78 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using Sirenix.OdinInspector;
 
 public class SkillMenu : MonoBehaviour
 {
     private Player player;
 
+    [BoxGroup("Dummy")]
+    [Required]
     [SerializeField]
-    private GameObject skillSetSlot;
+    private GameObject dummySlot;
+
+    [BoxGroup("Tabs")]
     [SerializeField]
-    private GameObject cursor;
-    private SkillType category = SkillType.magical;
+    private GameObject physicalSkills;
+    [BoxGroup("Tabs")]
     [SerializeField]
-    private int maxRows = 2;
+    private GameObject magicalSkills;
+    [BoxGroup("Tabs")]
     [SerializeField]
-    private int maxColumns = 5;
-    [SerializeField]
-    private float spacing = 10;
-    private Vector2 size;
-    [SerializeField]
-    private TextMeshProUGUI titleField;
+    private GameObject itemSkills;
+
+    [BoxGroup("Detail-Ansicht")]
     [SerializeField]
     private TextMeshProUGUI skillDetailsName;
+    [BoxGroup("Detail-Ansicht")]
     [SerializeField]
     private TextMeshProUGUI skillDetailsStrength;
+    [BoxGroup("Detail-Ansicht")]
     [SerializeField]
     private TextMeshProUGUI skillDetailsCost;
+    [BoxGroup("Detail-Ansicht")]
     [SerializeField]
     private Image StatusEffects;
-    private List<GameObject> slots = new List<GameObject>();
+
+    [BoxGroup("UI Signal")]
     [SerializeField]
     private SimpleSignal signal;
+
+    [BoxGroup("Skill Slots")]
     [SerializeField]
     private GameObject slotA;
+    [BoxGroup("Skill Slots")]
     [SerializeField]
     private GameObject slotB;
+    [BoxGroup("Skill Slots")]
     [SerializeField]
     private GameObject slotX;
+    [BoxGroup("Skill Slots")]
     [SerializeField]
     private GameObject slotY;
+    [BoxGroup("Skill Slots")]
     [SerializeField]
-    private GameObject slotRB;
+    private GameObject slotRB;    
 
 
-    private StandardSkill selectedSkill;
-    private int index = 0;
-    private bool isInputPossible = true;
-    private int tempChange;
-    private bool setSkill = false;
+    //TODO:
+    //1. Set Skills and Save them
+    //2. Change Title Screen (use other Scripts)
+    //3. Change Button Inputs (skills and interactions)
+
 
     private void Awake()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        setSlots();
+        showCategory(1);
     }
 
     private void Update()
     {
-        input();
-    }
-
-    private void input()
-    {
-        if (this.isInputPossible)
-        {
-            if (Input.GetButtonDown("Inventory"))
-            {
-                exitMenu();
-            }
-
-            if (!this.setSkill)
-            {
-                int change = (int)Utilities.getInputMenu("Horizontal");
-                change += (int)Utilities.getInputMenu("Vertical") * this.maxColumns;
-
-                if (this.tempChange != change)
-                {
-                    this.tempChange = change;
-
-                    this.index += change;
-                    if (this.index < 0) this.index = 0;
-                    if (this.index >= this.slots.Count) this.index = this.slots.Count - 1;
-
-                    setCursor();
-                    StartCoroutine(temp());
-                }
-
-                if (Input.GetButtonDown("Cancel"))
-                {
-                    exitMenu();
-                }
-            }
-            else
-            {
-                int change = (int)Utilities.getInputMenu("Horizontal");
-
-                if (this.tempChange != change)
-                {
-                    this.tempChange = change;
-
-                    this.index += change;
-                    if (this.index < 0) this.index = 0;
-                    if (this.index >= 4) this.index = 4;
-
-                    switch (this.index)
-                    {
-                        case 0: this.cursor.transform.position = this.slotA.transform.position; break;
-                        case 1: this.cursor.transform.position = this.slotB.transform.position; break;
-                        case 2: this.cursor.transform.position = this.slotX.transform.position; break;
-                        case 3: this.cursor.transform.position = this.slotY.transform.position; break;
-                        case 4: this.cursor.transform.position = this.slotRB.transform.position; break;
-                    }
-                   
-                    StartCoroutine(temp());
-                }
-            }
-
-            if (Input.GetButtonDown("Submit"))
-            {
-                if (!this.setSkill)
-                {
-                    setSkillToButton();
-                }
-                else
-                {
-                    setSkillToButtonConfirm(this.index);
-                }
-
-                StartCoroutine(temp());
-            }
-            else if (Input.GetButtonDown("Cancel"))
-            {
-                goBack();
-            }
-        }
+        if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Inventory")) exitMenu();
     }
 
     public void exitMenu()
@@ -142,55 +82,9 @@ public class SkillMenu : MonoBehaviour
         this.transform.parent.gameObject.SetActive(false);
     }
 
-    public void setSkillToButton()
-    {
-        this.setSkill = true;
-        this.index = 0;
-        this.cursor.transform.position = this.slotA.transform.position;
-    }
-
-    public void getSkillbyButtonPress(SkillSlot slot)
-    {
-        this.selectedSkill = slot.skill;
-    }
-
-    public void setSkillToButtonConfirm(int indexButton)
-    {
-        switch (indexButton)
-        {
-            case 0: this.player.AButton = this.selectedSkill; break;
-            case 1: this.player.BButton = this.selectedSkill; break;
-            case 2: this.player.XButton = this.selectedSkill; break;
-            case 3: this.player.YButton = this.selectedSkill; break;
-            case 4: this.player.RBButton = this.selectedSkill; break;
-        }
-
-        this.signal.Raise();
-
-        goBack();
-    }
-
-    private void goBack()
-    {
-        this.index = 0;
-        this.setSkill = false;
-        setCursor();
-    }
-
-    private IEnumerator temp()
-    {
-        this.isInputPossible = false;
-        yield return new WaitForSeconds(0.1f);
-        this.isInputPossible = true;
-    }
-
-    // Start is called before the first frame update
     private void OnEnable()
     {
         this.player.currentState = CharacterState.inDialog;        
-        updateUI();
-        goBack();
-        StartCoroutine(temp());
     }
 
     private void OnDisable()
@@ -198,121 +92,57 @@ public class SkillMenu : MonoBehaviour
         this.player.currentState = CharacterState.idle;
     }
 
-    private void updateUI()
+
+    public void showSkillDetails(SkillSlot slot)
     {        
-        this.skillSetSlot.SetActive(true);
-        setSlots();
-        setCursor();
-        this.updateTextField();
-        this.skillSetSlot.SetActive(false);
+            this.skillDetailsName.text = slot.skill.skillName;
+            this.skillDetailsStrength.text = "Stärke: " + Mathf.Abs(slot.skill.addLifeTarget) + "";
+            this.skillDetailsCost.text = "Kosten: " + Mathf.Abs(slot.skill.addResourceSender) + "";
+
+            if (slot.skill.statusEffects.Count > 0) this.StatusEffects.sprite = slot.skill.statusEffects[0].iconSprite;
+            else this.StatusEffects.sprite = null;        
     }
 
-    private void updateTextField()
+    public void hideSkillDetails()
     {
-        switch (this.category)
-        {
-            case SkillType.physical: this.titleField.text = "Waffen (physisch)"; break;
-            case SkillType.magical: this.titleField.text = "Zauber (magisch)"; break;
-            case SkillType.item: this.titleField.text = "Gegenstände"; break;
-            default: break;
-        }        
+        this.skillDetailsName.text = "-";
+        this.skillDetailsStrength.text = "Stärke: ";
+        this.skillDetailsCost.text = "Kosten: ";
+
+        this.StatusEffects.sprite = null;
     }
 
-    private void updateSkillDetails()
-    {
-        if (this.selectedSkill != null)
+    public void showCategory(int category)
+    {        
+        this.physicalSkills.SetActive(false);
+        this.magicalSkills.SetActive(false);
+        this.itemSkills.SetActive(false);
+        
+        switch (category)
         {
-            this.skillDetailsName.text = this.selectedSkill.skillName;
-            this.skillDetailsStrength.text = "Stärke: " + Mathf.Abs(this.selectedSkill.addLifeTarget) + "";
-            this.skillDetailsCost.text = "Kosten: " + Mathf.Abs(this.selectedSkill.addResourceSender) + "";
-
-            if (this.selectedSkill.statusEffects.Count > 0) this.StatusEffects.sprite = this.selectedSkill.statusEffects[0].iconSprite;
-            else this.StatusEffects.sprite = null;
+            case 1: this.physicalSkills.SetActive(true); break;
+            case 2: this.magicalSkills.SetActive(true); break;
+            default: this.itemSkills.SetActive(true); break;
         }
-        else
-        {
-            this.skillDetailsName.text = "-";
-            this.skillDetailsStrength.text = "Stärke: ";
-            this.skillDetailsCost.text = "Kosten: ";
-
-            this.StatusEffects.sprite = null;
-        }
-    }
-
-    public void changeCategory(int value)
-    {
-        if ((int)this.category + value >= System.Enum.GetValues(typeof(SkillType)).Length)
-        {
-            this.category = (SkillType)0;
-        }
-        else if ((int)this.category + value < 0)
-        {
-            this.category = (SkillType)System.Enum.GetValues(typeof(SkillType)).Length - 1;
-        }
-        else
-        {
-            this.category = (SkillType)((int)this.category + value);
-        }
-
-        this.index = 0;
-
-        updateUI();
     }
 
     private void setSlots()
     {
+        this.dummySlot.SetActive(true);
 
-
-        if (this.slots.Count > 0)
+        for(int i = 0; i < this.player.skillSet.Count; i++)
         {
-            for (int i = 0; i < this.slots.Count; i++)
-            {
-                Destroy(this.slots[i].gameObject);
-            }
+            StandardSkill skill = this.player.skillSet[i];
+            GameObject categoryGameobject = this.itemSkills;
+
+            if (skill.category == SkillType.physical) categoryGameobject = this.physicalSkills;
+            else if (skill.category == SkillType.magical) categoryGameobject = this.magicalSkills;
+
+            GameObject temp = Instantiate(this.dummySlot, categoryGameobject.transform);
+            temp.GetComponent<SkillSlot>().setSkill(skill);
+            temp.name = skill.skillName + "-Slot";
         }
 
-        this.selectedSkill = null;
-        this.slots.Clear();
-
-        RectTransform rt = (RectTransform)this.skillSetSlot.transform;
-        this.size = new Vector2(rt.rect.width, rt.rect.height);
-
-        foreach (StandardSkill skill in this.player.skillSet)
-        {
-            if (skill.skillType == this.category)
-            {
-                GameObject temp = Instantiate(this.skillSetSlot, this.transform);
-                temp.GetComponent<SkillSlot>().setSkill(skill);
-                temp.name = skill.skillName + "-Slot";
-                this.slots.Add(temp);
-                temp.transform.position = setPosition(this.slots.Count - 1);
-            }
-        }
-
-
-    }
-
-    private Vector2 setPosition(int index)
-    {
-        float posX = (index % this.maxColumns) * (size.x + this.spacing);
-        float posY = ((int)(index / this.maxColumns)) * (size.y + this.spacing);
-
-        return new Vector2(this.skillSetSlot.transform.position.x + posX, this.skillSetSlot.transform.position.y + posY);
-    }
-
-    private void setCursor()
-    {
-        if (this.slots.Count > 0)
-        {
-            GameObject temp = this.slots[this.index];
-            this.cursor.transform.position = new Vector2(temp.transform.position.x - (this.size.x / 2), temp.transform.position.y + (this.size.y / 2)); ///????        
-            this.selectedSkill = this.slots[this.index].GetComponent<SkillSlot>().skill;
-        }
-        else
-        {
-            this.cursor.transform.position = new Vector2(this.skillSetSlot.transform.position.x - (this.size.x / 2), this.skillSetSlot.transform.position.y + (this.size.y / 2)); ///????    
-        }
-
-        updateSkillDetails();
+        this.dummySlot.SetActive(false);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class SkillSlot : MonoBehaviour
 {
     [SerializeField]
@@ -14,6 +15,5 @@ public class SkillSlot : MonoBehaviour
     {
         this.skill = skill;
         this.image.sprite = this.skill.icon;
-    }
-
+    }   
 }

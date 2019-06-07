@@ -21,7 +21,7 @@ public class StandardSkill : MonoBehaviour
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
     [EnumToggleButtons]
-    public SkillType skillType = SkillType.magical;
+    public SkillType category = SkillType.magical;
 
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
