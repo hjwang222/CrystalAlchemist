@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class FloatValue : ScriptableObject, ISerializationCallbackReceiver
+public class FloatValue : ScriptableObject//, ISerializationCallbackReceiver
 {
+    /*
     [SerializeField]
     private float startValue;
 
@@ -22,6 +23,6 @@ public class FloatValue : ScriptableObject, ISerializationCallbackReceiver
         this.pitchValue = this.pitch;
     }
 
-    public void OnBeforeSerialize() { }
+    public void OnBeforeSerialize() { }*/
 
 }

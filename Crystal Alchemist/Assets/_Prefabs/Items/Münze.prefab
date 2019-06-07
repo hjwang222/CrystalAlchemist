@@ -66,8 +66,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300204, guid: b0b8d75b616ba6e42aa4ea4103267705, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -165,8 +165,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 330836146565999746}
   - component: {fileID: 330836146565999747}
   - component: {fileID: 330836146565999744}
+  - component: {fileID: 8537824016139638883}
   m_Layer: 0
   m_Name: "M\xFCnze"
   m_TagString: Item
@@ -245,14 +246,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391cf88577f64ab4bbdc5818b55f6a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 1
   itemName: "Goldene M\xFCnze"
-  itemType: 1
-  rarity: 1
-  audioSource: {fileID: 0}
+  amount: 1
+  maxAmount: 0
+  resourceType: 3
+  itemGroup: 4
   collectSoundEffect: {fileID: 0}
   raiseSoundEffect: {fileID: 0}
-  effectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
 --- !u!61 &330836146565999747
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -298,3 +298,14 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!210 &8537824016139638883
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330836146565999745}
+  m_Enabled: 1
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0

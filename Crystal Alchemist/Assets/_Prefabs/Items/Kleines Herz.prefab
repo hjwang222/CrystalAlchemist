@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8525589707579411224}
   - component: {fileID: 8525589707579411225}
   - component: {fileID: 8525589707579411222}
+  - component: {fileID: 3928213745636417567}
   m_Layer: 0
   m_Name: Kleines Herz
   m_TagString: Item
@@ -47,14 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391cf88577f64ab4bbdc5818b55f6a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 1
   itemName: Kleines Herz
-  itemType: 3
-  rarity: 0
-  audioSource: {fileID: 0}
+  amount: 1
+  maxAmount: 0
+  resourceType: 1
+  itemGroup: 0
   collectSoundEffect: {fileID: 8300000, guid: 36888cf2843c6ae49962b01f67e19050, type: 3}
   raiseSoundEffect: {fileID: 0}
-  effectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
 --- !u!61 &8525589707579411225
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -100,6 +100,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!210 &3928213745636417567
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525589707579411223}
+  m_Enabled: 1
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0
 --- !u!1 &8525589707868760081
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,8 +177,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300146, guid: b0b8d75b616ba6e42aa4ea4103267705, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -265,8 +276,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

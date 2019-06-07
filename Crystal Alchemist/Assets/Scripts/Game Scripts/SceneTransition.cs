@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class SceneTransition : MonoBehaviour
 {
@@ -9,12 +10,12 @@ public class SceneTransition : MonoBehaviour
     [Tooltip("Name der nächsten Map")]
     public string targetScene;
     [Tooltip("Spawnpunkt des Spielers")]
-    public Vector2 playerPosition;
+    public Vector2 playerPositionInNewScene;
 
     [Header("Fading")]
     public GameObject fadeInPanel;
     public GameObject fadeOutPanel;
-    public float fadeWait;
+    public float fadeWait;    
 
     public void Awake()
     {
@@ -29,11 +30,20 @@ public class SceneTransition : MonoBehaviour
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            StartCoroutine(this.FadeCo());      
+            load(other.GetComponent<Player>());      
         }
     }
 
-    public IEnumerator FadeCo()
+    private void load(Player player)
+    {
+        SceneManager.LoadScene(this.targetScene);
+       
+        player.currentState = CharacterState.idle;
+        player.transform.position = playerPositionInNewScene;
+    }
+
+    /*
+    public IEnumerator FadeCo(Player player)
     {
         if (fadeOutPanel != null)
         {
@@ -41,12 +51,13 @@ public class SceneTransition : MonoBehaviour
         }
         yield return new WaitForSeconds(this.fadeWait);
 
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.targetScene);
+        //if(player != null) player.SavePlayer();
+        
 
         while (!asyncOperation.isDone)
         {
             yield return null;
         }
-    }
+    }*/
 }
 

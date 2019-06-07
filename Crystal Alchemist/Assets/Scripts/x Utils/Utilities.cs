@@ -1,6 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using Sirenix.OdinInspector;
+
+#region Objects
+[System.Serializable]
+public struct LootTable
+{
+    [VerticalGroup("Split")]
+    public Item item;
+
+    [HorizontalGroup("Split/Box", 50)]
+    [ShowIf("item")]
+    [Range(0, 100)]
+    public int dropRate;
+
+    [ShowIf("item")]
+    [HorizontalGroup("Split/Box", 50)]
+    [Range(1, 99)]
+    public int amount;
+}
+
+public enum ResourceType
+{
+    none,
+    life,
+    mana,
+    item, 
+    skill
+}
+
+#endregion
 
 public class Utilities : MonoBehaviour
 {
@@ -19,6 +50,19 @@ public class Utilities : MonoBehaviour
 
     #region Character and Skill Utils
 
+    public static float setResource(float resource, float max, float addResource)
+    {
+        if (addResource != 0)
+        {
+            if (resource + addResource > max) addResource = max - resource;
+            else if (resource + addResource < 0) resource = 0;
+
+            resource += addResource;
+        }
+
+        return resource;
+    }
+
     public static void fireSkill(StandardSkill skill, Character sender)
     {
         instantiateSkill(skill, sender, null, 1);
@@ -34,28 +78,25 @@ public class Utilities : MonoBehaviour
         activeSkill.GetComponent<StandardSkill>().sender = sender;
         activeSkill.GetComponent<StandardSkill>().addLifeTarget /= reduce;
         activeSkill.GetComponent<StandardSkill>().addManaTarget /= reduce;
-        activeSkill.GetComponent<StandardSkill>().addLifeSender /= reduce;
-        activeSkill.GetComponent<StandardSkill>().addManaSender /= reduce;
+        activeSkill.GetComponent<StandardSkill>().addResourceSender /= reduce;
         sender.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
 
         return activeSkill.GetComponent<StandardSkill>();
     }
-    
-    public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect, FloatValue soundEffectVolume)
+
+    public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect)
     {
         float volume = 1f;
         if (soundeffect != null && audioSource != null)
         {
-            if (soundEffectVolume != null)
-            {
-                volume = soundEffectVolume.value;
-                audioSource.pitch = soundEffectVolume.pitchValue;
-            }
+            volume = GlobalValues.soundEffectVolume;
+            audioSource.pitch = GlobalValues.soundEffectPitch;
+
             audioSource.PlayOneShot(soundeffect, volume);
         }
     }
 
-    public static void setItem(LootTable[] lootTable, bool multiLoot, List<GameObject> items)
+    public static void setItem(LootTable[] lootTable, bool multiLoot, List<Item> items)
     {
         int rng = Random.Range(1, Utilities.maxIntSmall);
         int lowestDropRate = 101;
@@ -69,6 +110,7 @@ public class Utilities : MonoBehaviour
                     if (lowestDropRate > loot.dropRate)
                     {
                         lowestDropRate = loot.dropRate;
+
                         items.Clear();
                         items.Add(loot.item);
                     }
@@ -82,7 +124,7 @@ public class Utilities : MonoBehaviour
 
         //if (this.items.Count > 0) this.text = this.text.Replace("%XY%", this.items[0].GetComponent<Item>().amount + " " + this.items[0].GetComponent<Item>().name);
     }
-    
+
     #endregion
 
 
@@ -125,7 +167,7 @@ public class Utilities : MonoBehaviour
                     return true;
                 }
             }
-        }       
+        }
 
         return false;
     }
@@ -144,6 +186,173 @@ public class Utilities : MonoBehaviour
         }
 
         return result;
+    }
+
+    public static void SetParameter(Animator animator, string parameter, bool value)
+    {
+        if (animator != null)
+        {
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.name == parameter) animator.SetBool(parameter, value);
+            }
+        }
+    }
+
+    public static void SetParameter(Animator animator, string parameter, float value)
+    {
+        if (animator != null)
+        {
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.name == parameter) animator.SetFloat(parameter, value);
+            }
+        }
+    }
+
+    public static bool HasParameter(Animator animator, string parameter)
+    {
+        if (animator != null)
+        {
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.name == parameter) return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool hasEnoughCurrency(ResourceType currency, Player player, Item item, int price)
+    {
+        bool result = false;
+
+        if (currency == ResourceType.none) result = true;        
+        else if(currency != ResourceType.skill)
+        {
+            if (player.getResource(currency, item) + price >= 0)
+            {
+                player.updateResource(currency, item, price);
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }
+        }
+
+        return result;
+    }
+
+    public static int getAmountFromInventory(ItemGroup itemgroup, List<Item> inventory, bool maxAmount)
+    {        
+            foreach (Item elem in inventory)
+            {
+                if (itemgroup == elem.itemGroup)
+                {
+                    if (!maxAmount) return elem.amount;
+                    else return elem.maxAmount;
+                }
+            }        
+
+        return 0;
+    }
+
+    public static void updateInventory(Item item, Character character, int amount)
+    {
+        if (item != null)
+        {
+            Item found = null;
+
+            foreach (Item elem in character.inventory)
+            {
+                if (item.itemGroup == elem.itemGroup)
+                {
+                    found = elem;
+                }
+            }
+
+            if (found == null)
+            {
+                GameObject temp = Instantiate(item.gameObject, character.transform);
+                temp.SetActive(false);
+                temp.hideFlags = HideFlags.HideInHierarchy;
+                character.inventory.Add(temp.GetComponent<Item>());
+            }
+            else
+            {
+                found.amount += amount;
+            }
+        }
+    }
+
+
+    public static void updateSkillset(StandardSkill skill, Character character)
+    {
+        if (skill != null)
+        {
+            bool found = false;
+
+            foreach (StandardSkill elem in character.skillSet)
+            {
+                if (elem.skillName == skill.skillName) { found = true; break; }
+            }
+
+            if (!found) character.skillSet.Add(skill);
+        }
+    }
+
+
+
+
+    public static float getInputMenu(string axis)
+    {        
+            float changeAnalogStick = Mathf.RoundToInt(Input.GetAxisRaw(axis));
+            float changeDPad = Input.GetAxisRaw("Cursor " + axis);
+            if (changeAnalogStick != 0) return changeAnalogStick;
+            else if (changeDPad != 0) return changeDPad;
+            return 0;        
+    }
+
+
+
+    public static bool canOpen(ResourceType currency, Item item, Player player, int price)
+    {
+        if (player != null && player.currentState != CharacterState.inDialog)
+        {
+            if (hasEnoughCurrency(currency, player, item, -price)) return true;
+            else
+            {
+                player.showDialogBox(GlobalValues.noMoneyText);
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public static void set3DText(TextMeshPro tmp, string text, bool bold, Color fontColor, Color outlineColor, float outlineWidth)
+    {
+        if (tmp != null)
+        {
+            if(text != null) tmp.text = text + "";
+            if(bold) tmp.fontStyle = FontStyles.Bold;
+            if(outlineColor != null) tmp.outlineColor = outlineColor;
+            if(fontColor != null) tmp.color = fontColor;
+            if(outlineWidth > 0) tmp.outlineWidth = outlineWidth;
+        }
+    }
+
+    public static void set3DText(TextMeshProUGUI tmp, string text, bool bold, Color fontColor, Color outlineColor, float outlineWidth)
+    {
+        if (tmp != null)
+        {
+            if (text != null) tmp.text = text + "";
+            if (bold) tmp.fontStyle = FontStyles.Bold;
+            if (outlineColor != null) tmp.outlineColor = outlineColor;
+            if (fontColor != null) tmp.color = fontColor;
+            if (outlineWidth > 0) tmp.outlineWidth = outlineWidth;
+        }
     }
 
     #endregion
@@ -205,5 +414,7 @@ public class Utilities : MonoBehaviour
     }
 
     #endregion
+    
+
 
 }

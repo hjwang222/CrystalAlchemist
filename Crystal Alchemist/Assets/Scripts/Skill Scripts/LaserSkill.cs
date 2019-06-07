@@ -72,10 +72,9 @@ public class LaserSkill : StandardSkill
 
         RaycastHit2D hitInfo = Physics2D.CircleCast(startpoint, this.laserSprite.size.y / 5, direction, distance, layerMask);
 
-        if ((hitInfo && !hitInfo.collider.isTrigger) || target != null)
+        if ((this.lockOn != null && target != null) || (this.lockOn == null && hitInfo && !hitInfo.collider.isTrigger))
         {
             //Ziel bzw. Collider wurde getroffen, zeichne Linie bis zum Ziel
-
             Collider2D hitted = hitInfo.collider;
             Vector2 hitpoint = hitInfo.point;
 
@@ -122,16 +121,23 @@ public class LaserSkill : StandardSkill
                     this.fire.transform.position = hitpoint;
                 }
             }
-        }
+        }        
         else
         {
-            //Kein Ziel getroffen, zeichne Linie mit max Länge
+            if (this.lockOn == null)
+            {
+                //Kein Ziel getroffen, zeichne Linie mit max Länge            
+                Vector2 temp = new Vector2(this.direction.x * (this.distance / 2), this.direction.y * (this.distance / 2)) + startpoint;
 
-            Vector2 temp = new Vector2(this.direction.x * (this.distance / 2), this.direction.y * (this.distance / 2)) + startpoint;
-
-            this.laserSprite.transform.position = temp;
-            this.laserSprite.size = new Vector2(this.distance, this.laserSprite.size.y);
-            this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
+                this.laserSprite.transform.position = temp;
+                this.laserSprite.size = new Vector2(this.distance, this.laserSprite.size.y);
+                this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
+            }
+            else
+            {
+                //Wenn ein Lockon vorhanden aber kein Ziel existiert, kein Laser!
+                this.laserSprite.size = new Vector2(0, 0);
+            }
         }
     }
 

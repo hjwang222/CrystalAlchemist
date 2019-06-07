@@ -1,22 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public enum DoorType
 {    
-    normal,
-    key,
+    normal,    
     enemy,
     button,
-    bosskey,
     closed
 }
 
 public class Door : Interactable
 {
-    
-    [Header("Tür-Attribute")]
+
+    [FoldoutGroup("Tür-Attribute", expanded: false)]
+    [EnumToggleButtons]
     public DoorType doorType = DoorType.closed;
+
     private bool isOpen;
     private BoxCollider2D boxCollider;
 
@@ -25,36 +26,26 @@ public class Door : Interactable
         init();
         this.boxCollider = GetComponent<BoxCollider2D>();
 
-        if (this.isOpen) this.anim.SetBool("isOpened", true);
+        if (this.isOpen) Utilities.SetParameter(this.animator, "isOpened", true);
     }
 
     private void Update()
     {
         if (this.doorType != DoorType.enemy && this.doorType != DoorType.button)
         {
-            if (this.isPlayerInRange && !this.isOpen && Input.GetButtonDown("A-Button"))
+            if (this.isPlayerInRange && !this.isOpen && Input.GetButtonDown("Submit"))
             {
-                if (this.doorType == DoorType.key)
-                {
-
-                    //check if Player has keys
-                    //if so, OpenDoor();
-                    //reduce keys by 1
-                    //ansonsten zeige Nachricht an
-                }
-                else if (this.doorType == DoorType.bosskey)
-                {                    
-                    //check if Player had specific boss key
-                    //if so, OpenDoor();
-                }
-                else if (this.doorType == DoorType.normal)
+                 if (this.doorType == DoorType.normal)
                 {
                     //Normale Tür, einfach aufmachen
-                    OpenCloseDoor(true, this.context);
+                    if (Utilities.canOpen(this.currencyNeeded, this.item, this.player, this.price))
+                    {
+                        OpenCloseDoor(true, this.context);
+                    }
                 }
                 else
                 {
-                    if (this.dialogScript != null) this.dialogScript.showDialog(this.character,this.text);
+                    if (this.player != null) this.player.showDialogBox(this.text);
                 }
             }
             else if (!this.isPlayerInRange && this.isOpen && this.doorType == DoorType.normal)
@@ -81,7 +72,7 @@ public class Door : Interactable
     private void OpenCloseDoor(bool isOpen, GameObject contextClueChild)
     {
         this.isOpen = isOpen;
-        this.anim.SetBool("isOpened", this.isOpen);        
+        Utilities.SetParameter(this.animator, "isOpened", this.isOpen);
         this.boxCollider.enabled = !this.isOpen;
 
         if (contextClueChild != null)
@@ -92,7 +83,7 @@ public class Door : Interactable
             else contextClueChild.SetActive(false);
         }
 
-        Utilities.playSoundEffect(this.audioSource, this.soundEffect, this.soundEffectVolume);
+        Utilities.playSoundEffect(this.audioSource, this.soundEffect);
 
     }
 }

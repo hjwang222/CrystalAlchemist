@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    //[HideInInspector]
+    [HideInInspector]
     public Character target;
 
 
@@ -14,7 +14,7 @@ public class Enemy : Character
     {
         init();
         //this.target = GameObject.FindWithTag("Player").transform;   //Position und Size
-        this.animator.SetBool("isWakeUp", true);
+        Utilities.SetParameter(this.animator, "isWakeUp", true);
     }
 
     #endregion
@@ -43,8 +43,8 @@ public class Enemy : Character
     {
         this.direction = setVector;
 
-        this.animator.SetFloat("moveX", setVector.x);
-        this.animator.SetFloat("moveY", setVector.y);
+        Utilities.SetParameter(this.animator, "moveX", setVector.x);
+        Utilities.SetParameter(this.animator, "moveY", setVector.y);
     }
 
     public void changeAnim(Vector2 direction)
