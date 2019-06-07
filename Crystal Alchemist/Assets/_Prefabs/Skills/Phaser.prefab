@@ -45,40 +45,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Phaser
-  global: {fileID: 11400000, guid: 986022dcee4ee954eaa9f9d283c038e9, type: 2}
-  soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
+  skillType: 1
+  skillDescription: 
   cast: 0
   keepHoldTimer: 0
   delay: 0
-  duration: 9999
+  duration: 1
+  deactivateByButtonUp: 1
   cooldown: 0
   cooldownAfterCombo: 0
   durationCombo: 0
-  lockOn: {fileID: 0}
-  maxAmountOfTargets: 0
-  targetingDuration: 0
-  targetingMode: 2
-  multiHitDelay: 0
-  showRange: 0
   addLifeTarget: -0.5
   addManaTarget: 0
   statusEffects: []
-  target: {fileID: 0}
-  addLifeSender: 0
-  addManaSender: -0.25
-  intervallSender: 0.5
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: -1
+  intervallSender: 9999
   speedDuringCasting: 0
   speedDuringDuration: -25
   lockMovementonDuration: 0
+  isRapidFire: 0
+  isStationary: 0
   speed: 0
   rotateIt: 1
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
-  isRapidFire: 0
   positionOffset: 0.25
   positionHeight: 0
-  isStationary: 0
+  lockOn: {fileID: 0}
+  targetingMode: 2
+  maxAmountOfTargets: 0
+  targetingDuration: 0
+  multiHitDelay: 0
+  showRange: 0
   affectSelf: 0
   affectPlayers: 0
   affectEnemies: 1
@@ -90,20 +91,17 @@ MonoBehaviour:
   maxAmounts: 1
   comboAmount: 99
   summon: {fileID: 0}
-  element: 8
-  skillDescription: 
-  sender: {fileID: 0}
   icon: {fileID: 21300020, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 8300000, guid: f326318a806fd6642b491ebc8fe68e7a, type: 3}
   endSoundEffect: {fileID: 0}
   animSoundeffect: {fileID: 0}
-  showIndicator: 0
-  showCastBar: 0
+  sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
+  target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
   spriteRenderer: {fileID: 3924551678506968721}
@@ -111,6 +109,8 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
+  triggerIsActive: 1
+  setPositionAtStart: 1
   impactEffect: {fileID: 7205093712895476430, guid: efabcdb5ae4c402409665969345fd7e7,
     type: 3}
   distance: 99

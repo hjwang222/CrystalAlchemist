@@ -50,59 +50,72 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: C4
-  global: {fileID: 11400000, guid: 986022dcee4ee954eaa9f9d283c038e9, type: 2}
-  soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
+  category: 0
+  skillDescription: 
   cast: 0
+  keepHoldTimer: 0
   delay: 9999
-  scriptActivation: 0
   duration: 0.75
+  deactivateByButtonUp: 0
   cooldown: 0.5
+  cooldownAfterCombo: 0
+  durationCombo: 0
   addLifeTarget: -2
   addManaTarget: 0
-  positionOffset: 1
-  speed: 0
-  rotateIt: 0
-  rotateEndSprite: 0
-  snapRotationInDegrees: 0
+  statusEffects: []
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: 0
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  lockMovementonDuration: 0
   isRapidFire: 0
   isStationary: 1
-  lockDirection: 0
+  speed: 0
+  rotateIt: 0
+  rotationModifier: 0
+  rotateEndSprite: 0
+  snapRotationInDegrees: 0
+  positionOffset: 1
+  positionHeight: 0
+  lockOn: {fileID: 0}
+  targetingMode: 2
+  maxAmountOfTargets: 1
+  targetingDuration: 6
+  multiHitDelay: 0
+  showRange: 0
   affectSelf: 0
   affectPlayers: 1
   affectEnemies: 1
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
-  addLifeSender: 0
-  addManaSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  lockMovementonDuration: 0
   thrust: 4
   knockbackTime: 0.2
-  statusEffects: []
   maxAmounts: 4
+  comboAmount: 99
   summon: {fileID: 0}
-  script: {fileID: 0}
-  element: 8
-  skillDescription: 
-  sender: {fileID: 0}
   icon: {fileID: 21300018, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 8300000, guid: 92a86637bcb06fb479605b2e0f50fdf4, type: 3}
   endSoundEffect: {fileID: 8300000, guid: 8b9bb0d08cae2024baaa7b9c3240d989, type: 3}
-  showIndicator: 0
-  showCastBar: 0
+  animSoundeffect: {fileID: 0}
+  sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  scriptActivationTimeLeft: 0
   cooldownTimeLeft: -0.013568943
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
+  target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
   spriteRenderer: {fileID: 0}
   timeDistortion: 1
-  isNotActive: 0
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setPositionAtStart: 1
 --- !u!58 &8049845814608725521
 CircleCollider2D:
   m_ObjectHideFlags: 0

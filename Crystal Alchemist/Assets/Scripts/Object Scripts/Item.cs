@@ -1,27 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using Sirenix.OdinInspector;
 
 #region Enums
 
-public enum ItemType
+public enum ItemGroup
 {
-    crystal,
-    coin,
+    wood,
+    stone,
+    metal,
     key,
-    heart,
-    mana,
-    bosskey
+    coin,
+    crystal
 }
 
-public enum Rarity
-{
-    common,
-    uncommon,
-    rare,
-    epic,
-    legendary
-}
+//Resource = Mana oder Life
+//Rest = Items
 
 #endregion
 
@@ -30,17 +26,36 @@ public class Item : MonoBehaviour
 
     #region Attribute
 
-    public int amount;
+    [FoldoutGroup("Item Attributes", expanded: false)]
     public string itemName;
-    public ItemType itemType;
-    public Rarity rarity;
 
-    public AudioSource audioSource;
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    public int amount;
 
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    public int maxAmount;
+       
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [EnumToggleButtons]
+    public ResourceType resourceType;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("resourceType", ResourceType.item)]
+    [EnumToggleButtons]
+    public ItemGroup itemGroup;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("resourceType", ResourceType.skill)]
+    [EnumToggleButtons]    
+    public StandardSkill skill;
+
+    [FoldoutGroup("Sound", expanded: false)]
     public AudioClip collectSoundEffect;
-    public AudioClip raiseSoundEffect;
-    public FloatValue effectVolume;
 
+    [FoldoutGroup("Sound", expanded: false)]
+    public AudioClip raiseSoundEffect;
+
+    private AudioSource audioSource;
     private Animator anim;
 
     #endregion
@@ -50,6 +65,8 @@ public class Item : MonoBehaviour
 
     private void Awake()
     {
+
+        //TODO: set Sprite if Skill != null
         init();
     }
 
@@ -65,12 +82,26 @@ public class Item : MonoBehaviour
     #endregion
 
 
+    public Sprite getSprite()
+    {
+        return this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+    }
+
+    public void playSounds()
+    {
+        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect);
+        Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect);
+    }
+
+
     #region Treasure specific Function
     public void showFromTreasure()
     {
         //Als Kisten-Item darf es nicht einsammelbar sein und muss als Position die Kiste haben
 
         this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f);
+        SortingGroup group = this.GetComponent<SortingGroup>();
+        if (group != null) group.sortingOrder = 1;
         this.GetComponent<BoxCollider2D>().enabled = false;   
         this.anim.enabled = true;  
     }
@@ -84,41 +115,20 @@ public class Item : MonoBehaviour
     {
         if (character.CompareTag("Player") && !character.isTrigger)
         {
-            collect(character.GetComponent<PlayerMovement>(), true);
+            Player player = character.GetComponent<Player>();
+            if (player != null) player.collect(this, true);
         }
-    }
+    }   
 
-    public void collect(PlayerMovement player, bool canBeCollected)
-    {
-        //TODO: Signal und auslagern
-        //Signal?
-
-        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect, this.effectVolume);
-        Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect, this.effectVolume);
-
-        //TODO das geht noch besser
-        switch (this.itemType)
-        {
-            case ItemType.coin: player.coins += this.amount; break;
-            case ItemType.crystal: player.crystals += this.amount; break;
-            case ItemType.key: player.keys += this.amount; break;
-            case ItemType.heart: player.updateLife(this.amount); break;
-            default: break;
-        }
-
-        if (canBeCollected) StartCoroutine(destroyCo());
-    }
-
-    IEnumerator destroyCo()
+    public void DestroyIt()
     {
         this.GetComponent<BoxCollider2D>().enabled = false;
         foreach (Transform child in transform)
         {
-            GameObject.Destroy(child.gameObject);
+            Destroy(child.gameObject);
         }
-        yield return new WaitForSeconds(2f);
-        Destroy(this.gameObject);
-    }
 
-    #endregion
+        Destroy(this.gameObject, 2f);
+    }
+        #endregion
 }

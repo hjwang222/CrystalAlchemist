@@ -9,11 +9,20 @@ public class Room : MonoBehaviour
     // OnTriggerEnter2D is a built in Unity function
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) this.virtualCamera.SetActive(true);
+        if (other.CompareTag("Player"))
+        {
+            this.virtualCamera.SetActive(true);
+
+            Cinemachine.CinemachineVirtualCamera vcam = this.virtualCamera.GetComponent<Cinemachine.CinemachineVirtualCamera>();
+            if(vcam.Follow == null) vcam.Follow = other.transform;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.CompareTag("Player")) this.virtualCamera.SetActive(false);
+        if (other.CompareTag("Player"))
+        {
+            this.virtualCamera.SetActive(false);
+        }
     }
 }

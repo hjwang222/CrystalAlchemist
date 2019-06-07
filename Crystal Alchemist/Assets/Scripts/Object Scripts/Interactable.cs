@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public enum objectState
 {
@@ -12,50 +13,59 @@ public class Interactable : MonoBehaviour
 {
     #region Attribute
 
-    [Header("Attribute")]
-    public Globals global;
-    [Tooltip("Anzeige-Text für die Dialog-Box")]
-    public string text;
-
+    [Required]
     [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]
     public GameObject contextClueChild;
-    [Header("Loot")]
+
+    [FoldoutGroup("Dialog", expanded: false)]
+    [Tooltip("Anzeige-Text für die Dialog-Box")]
+    [TextAreaAttribute]
+    public string text;
+
+    [FoldoutGroup("Loot", expanded:false)]
     [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
     public LootTable[] lootTable;
+
+    [FoldoutGroup("Loot", expanded: false)]
     [Tooltip("Multiloot = alle Items. Ansonsten nur das seltenste Item")]
     public bool multiLoot = false;
 
-    [Header("Sound Effects")]
+    [FoldoutGroup("Activation Requirements", expanded: false)]
+    [EnumToggleButtons]
+    [Tooltip("Was benötigt wird um zu öffnen")]
+    public ResourceType currencyNeeded = ResourceType.none;
+
+    [FoldoutGroup("Activation Requirements", expanded: false)]
+    [ShowIf("currencyNeeded", ResourceType.item)]
+    [Tooltip("Benötigtes Item")]
+    public Item item;
+
+    [FoldoutGroup("Activation Requirements", expanded: false)]
+    [Range(0,Utilities.maxIntInfinite)]
+    public int price = 0;
+
+    [FoldoutGroup("Sound", expanded: false)]
     [Tooltip("Standard-Soundeffekt")]
     public AudioClip soundEffect;
-    [Tooltip("Scriptable Object für die Lautstärke der Effekte")]
-    public FloatValue soundEffectVolume;
+
+
 
 
     [HideInInspector]
     public bool isPlayerInRange;
-
     [HideInInspector]
-    public Dialog dialogScript;
-
+    public Player player;
     [HideInInspector]
-    public GameObject character;
-
-    [HideInInspector]
-    public Animator anim;
-
+    public Animator animator;
     [HideInInspector]
     public AudioSource audioSource;
-
     [HideInInspector]
     public SpriteRenderer spriteRenderer;
-
     [HideInInspector]
     public GameObject context;
-
-    //[HideInInspector]
-    public List<GameObject> items = new List<GameObject>();
-
+    [HideInInspector]    
+    public List<Item> items = new List<Item>();
+    [HideInInspector]
     public objectState currentState = objectState.normal;
 
     #endregion
@@ -71,13 +81,12 @@ public class Interactable : MonoBehaviour
     public void init()
     {
         this.spriteRenderer = GetComponent<SpriteRenderer>();
-        if (this.spriteRenderer != null) this.spriteRenderer.color = this.global.color;
+        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
 
             this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
             this.audioSource.loop = false;
             this.audioSource.playOnAwake = false;
-            this.anim = GetComponent<Animator>();
-            this.dialogScript = this.gameObject.GetComponent<Dialog>();
+            this.animator = GetComponent<Animator>();            
             setContext();
             Utilities.setItem(this.lootTable, this.multiLoot, this.items);        
     }    
@@ -95,7 +104,7 @@ public class Interactable : MonoBehaviour
 
     public void updateColor()
     {
-        if (this.spriteRenderer != null) this.spriteRenderer.color = this.global.color;
+        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
     }
 
 
@@ -107,8 +116,8 @@ public class Interactable : MonoBehaviour
 
         if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
         {            
-            this.character = characterCollisionBox.gameObject;
-            if(this.character != null) this.character.GetComponent<PlayerMovement>().currentState = CharacterState.interact;
+            this.player = characterCollisionBox.gameObject.GetComponent<Player>();
+            if(this.player != null) this.player.currentState = CharacterState.interact;
             this.isPlayerInRange = true;
             this.context.SetActive(true);
         }
@@ -120,8 +129,8 @@ public class Interactable : MonoBehaviour
 
         if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
         {
-            if (this.character != null) this.character.GetComponent<PlayerMovement>().currentState = CharacterState.idle;
-            this.character = null;            
+            if (this.player != null) this.player.currentState = CharacterState.idle;
+            this.player = null;            
             this.isPlayerInRange = false;
             this.context.SetActive(false);
         }

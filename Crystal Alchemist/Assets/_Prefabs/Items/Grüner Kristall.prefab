@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6543087420962035893}
   - component: {fileID: 6543087420962035894}
   - component: {fileID: 6543087420962035892}
+  - component: {fileID: 1083909403}
   m_Layer: 0
   m_Name: "Gr\xFCner Kristall"
   m_TagString: Item
@@ -47,14 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391cf88577f64ab4bbdc5818b55f6a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 1
   itemName: "Gr\xFCner Kristall"
-  itemType: 0
-  rarity: 0
-  audioSource: {fileID: 0}
+  amount: 1
+  maxAmount: 0
+  resourceType: 3
+  itemGroup: 5
+  skill: {fileID: 0}
   collectSoundEffect: {fileID: 8300000, guid: ec4c06267ecfbc94ca8f84ce329e2910, type: 3}
   raiseSoundEffect: {fileID: 8300000, guid: 50429a3af42ed134fadb73aa7a4a18ef, type: 3}
-  effectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
 --- !u!61 &6543087420962035894
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -100,6 +101,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!210 &1083909403
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6543087420962035896}
+  m_Enabled: 1
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0
 --- !u!1 &6543087421468060305
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,8 +178,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300392, guid: b0b8d75b616ba6e42aa4ea4103267705, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -265,8 +277,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

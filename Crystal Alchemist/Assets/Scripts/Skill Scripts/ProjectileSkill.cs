@@ -15,12 +15,12 @@ public class ProjectileSkill : StandardSkill
         {       
             if (!this.playEndEffectAlready && this.endSoundEffect != null)
             {
-                Utilities.playSoundEffect(this.audioSource, this.endSoundEffect, this.soundEffectVolume);
+                Utilities.playSoundEffect(this.audioSource, this.endSoundEffect);
                 this.playEndEffectAlready = true;
             }
 
             if (!this.rotateEndSprite) this.transform.rotation = Quaternion.Euler(0,0,0);
-            if (this.animator != null) this.animator.SetBool("Hit", true);
+            Utilities.SetParameter(this.animator, "Hit", true);
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
             this.isActive = false;
         }

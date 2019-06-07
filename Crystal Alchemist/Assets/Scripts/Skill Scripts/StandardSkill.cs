@@ -1,186 +1,313 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+
+public enum SkillType
+{
+    physical,
+    magical,
+    item
+}
 
 public class StandardSkill : MonoBehaviour
 {
     #region Attribute
 
-    [Header("Identifizierung")]
-    [Tooltip("Name des Angriffs")]
+    [Required("Name muss gesetzt sein!")]
+    [BoxGroup("Pflichtfelder")]
+    [Tooltip("Name des Angriffs")]    
     public string skillName;
-    public Globals global;
-    public FloatValue soundEffectVolume;
 
-    [Header("Zeit-Attribute")]
-    [Tooltip("Castzeit bis zur Instanziierung (für Außen)")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float cast = 0;
-    [Tooltip("Soll die Castzeit gespeichert bleiben. True = ja. Ansonsten reset bei Abbruch ")]
-    public bool keepHoldTimer = false;
-    [Tooltip("Verzögerung bis Aktivierung")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float delay = 0;
-    [Tooltip("Dauer des Angriffs. 0 = Animation, max bis Trigger")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float duration = 1;
-    [Tooltip("Abklingzeit nach Aktivierung (für Außen)")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float cooldown = 1;
-    [Tooltip("Abklingzeit nach Kombo")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float cooldownAfterCombo = 0;
-    [Tooltip("Zeit für eine Kombo")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float durationCombo = 0;
+    [BoxGroup("Pflichtfelder")]
+    [Tooltip("Beschreibung des Skills")]
+    [EnumToggleButtons]
+    public SkillType category = SkillType.magical;
 
-    [Header("Zielerfassungsattribute")]
-    [Tooltip("Ob das Ziel erfasst werden soll. Wenn NULL, dann nicht.")]
-    public GameObject lockOn;
-    [Range(0, Utilities.maxIntSmall)]
-    public int maxAmountOfTargets = 1;
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float targetingDuration = 6f;
-    [Tooltip("Manual = Spieler kann Ziele auswählen, Single = näheste Ziel, Multi = Alle in Range, Auto = Sofort ohne Bestätigung")]
-    public TargetingMode targetingMode = TargetingMode.manual;
-    [Tooltip("In welchen Intervallen die Ziele getroffen werden sollen")]
-    [Range(0, 10)]
-    public float multiHitDelay = 0;
-    [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
-    public bool showRange = false;    
-
-    [Header("Basis Attribute (bezogen auf Effekte des Ziels)")]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    [Tooltip("Lebensveränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
-    public float addLifeTarget = -1;
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    [Tooltip("Manaveränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
-    public float addManaTarget = 0;
-    [Tooltip("Statuseffekte")]
-    public List<StatusEffect> statusEffects;
-    public Character target;
-
-    [Header("Basis Attribute (bezogen auf Effekte des Senders)")]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    [Tooltip("Manaveränderung des Senders. Negativ = Schaden, Positiv = Heilung")]
-    public float addLifeSender = 0;
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    [Tooltip("Manaveränderung des Senders. Negativ = Schaden, Positiv = Heilung")]
-    public float addManaSender = 0;
-    [Range(0, Utilities.maxFloatSmall)]
-    [Tooltip("Intervall während der Dauer des Skills Leben oder Mana verändert werden.")]
-    public float intervallSender = 0;
-    [Tooltip("Bewegungsgeschwindigkeit während eines Casts")]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    public float speedDuringCasting = 0;
-    [Tooltip("Bewegungsgeschwindigkeit während des Angriffs")]
-    [Range(-Utilities.maxFloatSmall, Utilities.maxFloatSmall)]
-    public float speedDuringDuration = 0;
-    [Tooltip("Soll der Charakter während des Schießens weiterhin in die gleiche Richtung schauen?")]
-    public bool lockMovementonDuration = false;
-
-    [Header("Projektil Attribute")]
-    [Tooltip("Geschwindigkeit des Projektils")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float speed = 0;
-    [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
-    public bool rotateIt = false;
-    [Range(-360, 360)]
-    public float rotationModifier = 0;
-    [Tooltip("Soll der Hit-Sprite passend zur Flugbahn rotieren?")]
-    public bool rotateEndSprite = false;
-    [Tooltip("Welche Winkel sollen fest gestellt werden. 0 = frei. 45 = 45° Winkel")]
-    [Range(0, 90)]
-    public float snapRotationInDegrees = 0f;
-    [Tooltip("Kann der Knopf gedrückt gehalten werden für weitere Schüsse?")]
-    public bool isRapidFire = false;
-    [Range(0, 2)]
-    [Tooltip("Positions-Offset, damit es nicht im Character anfängt")]
-    public float positionOffset = 1f;
-    [Range(0, 2)]
-    [Tooltip("Positions-Höhe")]
-    public float positionHeight = 0f;
-    [Tooltip("Ist das Projektil stationär. True = liegt einfach herum (z.B. Bombe)")]
-    public bool isStationary = false;
-    
-    [Header("Wirkungsbereich")]
-    [Tooltip("wirkt nur auf sich selbst")]
-    public bool affectSelf = false;
-    [Tooltip("wirkt auf alle Spieler")]
-    public bool affectPlayers = false;
-    [Tooltip("wirkt auf alle Gegner")]
-    public bool affectEnemies = false;
-    [Tooltip("wirkt auf alle Objekte")]
-    public bool affectObjects = false;
-    [Tooltip("wirkt auf alle Skills")]
-    public bool affectSkills = false;
-    [Tooltip("Unverwundbarkeit ignorieren (z.B. für Heals)?")]
-    public bool ignoreInvincibility = false;
-
-    [Header("Knockback-Attribute")]
-    [Range(0, Utilities.maxFloatSmall)]
-    [Tooltip("Stärke des Knockbacks")]
-    public float thrust = 4;
-    [Range(0, Utilities.maxFloatSmall)]
-    [Tooltip("Dauer des Knockbacks")]
-    public float knockbackTime = 0.2f;
-
-    [Header("Special Behaviors")]
-    [Range(1, Utilities.maxIntInfinite)]
-    [Tooltip("Maximale Anzahl aktiver gleicher Angriffe")]
-    public int maxAmounts = Utilities.maxIntInfinite;
-    [Tooltip("Maximale Anzahl aktiver gleicher Angriffe in einer Combo")]
-    public int comboAmount = Utilities.maxIntSmall;
-    [Tooltip("Beschwörungen")]
-    public GameObject summon;
-
-    [Header("RPG-Attribute")]
-    [Tooltip("Elementar des Skills")]
-    public Element element = Element.none;
+    [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
     [TextArea]
     public string skillDescription;
-    [Tooltip("Von wem stammt der Skill?")]
-    public Character sender;
+
+
+    ////////////////////////////////////////////////////////////////
+
+
+    [FoldoutGroup("Zeit-Attribute", expanded: false)]
+    [Tooltip("Castzeit bis zur Instanziierung (für Außen)")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float cast = 0;
+
+    [FoldoutGroup("Zeit-Attribute", expanded: false)]
+    [Tooltip("Soll die Castzeit gespeichert bleiben. True = ja. Ansonsten reset bei Abbruch ")]
+    public bool keepHoldTimer = false;
+
+    [Space(10)]
+    [FoldoutGroup("Zeit-Attribute", expanded: false)]
+    [Tooltip("Verzögerung bis Aktivierung")]
+    [Range(0, Utilities.maxFloatInfinite)]
+    public float delay = 0;
+
+    [FoldoutGroup("Zeit-Attribute", expanded: false)]
+    [Tooltip("Dauer des Angriffs. 0 = Animation, max bis Trigger")]
+    [Range(0, Utilities.maxFloatInfinite)]
+    public float duration = 1;
+
+    [FoldoutGroup("Zeit-Attribute", expanded: false)]
+    public bool deactivateByButtonUp = false;
+
+    [Space(10)]
+    [FoldoutGroup("Zeit-Attribute", expanded: false)]
+    [Tooltip("Abklingzeit nach Aktivierung (für Außen)")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float cooldown = 1;
+
+    [FoldoutGroup("Zeit-Attribute", expanded: false)]
+    [Tooltip("Abklingzeit nach Kombo")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float cooldownAfterCombo = 0;
+
+    [FoldoutGroup("Zeit-Attribute", expanded: false)]
+    [Tooltip("Zeit für eine Kombo")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float durationCombo = 0;
+       
+
+    ////////////////////////////////////////////////////////////////
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Ziels)", expanded: false)]
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    [Tooltip("Lebensveränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
+    public float addLifeTarget = -1;
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Ziels)", expanded: false)]
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    [Tooltip("Manaveränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
+    public float addManaTarget = 0;
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Ziels)", expanded: false)]
+    [Tooltip("Statuseffekte")]
+    public List<StatusEffect> statusEffects;
+
+    ////////////////////////////////////////////////////////////////
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [EnumToggleButtons]
+    [Tooltip("Art der Resource")]
+    public ResourceType resourceType = ResourceType.mana;
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [ShowIf("resourceType", ResourceType.item)]
+    [Tooltip("Benötigtes Item")]
+    public Item item;
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    [Tooltip("Höhe der Resource des Senders. Negativ = Schaden, Positiv = Heilung")]
+    public float addResourceSender = 0;
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [Range(0, Utilities.maxFloatInfinite)]
+    [Tooltip("Intervall während der Dauer des Skills Leben oder Mana verändert werden.")]
+    public float intervallSender = 0;
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [Tooltip("Bewegungsgeschwindigkeit während eines Casts")]
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    public float speedDuringCasting = 0;
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [Tooltip("Bewegungsgeschwindigkeit während des Angriffs")]
+    [Range(-Utilities.maxFloatSmall, Utilities.maxFloatSmall)]
+    public float speedDuringDuration = 0;
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [Tooltip("Soll der Charakter während des Schießens weiterhin in die gleiche Richtung schauen?")]
+    public bool lockMovementonDuration = false;
+
+    ////////////////////////////////////////////////////////////////
+
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Kann der Knopf gedrückt gehalten werden für weitere Schüsse?")]
+    public bool isRapidFire = false;
+
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Ist das Projektil stationär. True = liegt einfach herum (z.B. Bombe)")]
+    public bool isStationary = false;
+
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Geschwindigkeit des Projektils")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float speed = 0;
+
+    [Space(10)]
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
+    public bool rotateIt = false;
+
+    [ShowIf("rotateIt")]
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Range(-360, 360)]
+    public float rotationModifier = 0;
+
+    [ShowIf("rotateIt")]
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Soll der Hit-Sprite passend zur Flugbahn rotieren?")]
+    public bool rotateEndSprite = false;
+
+    [ShowIf("rotateIt")]
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Welche Winkel sollen fest gestellt werden. 0 = frei. 45 = 45° Winkel")]
+    [Range(0, 90)]
+    public float snapRotationInDegrees = 0f;
+
+    [Space(10)]
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Range(0, 2)]
+    [Tooltip("Positions-Offset, damit es nicht im Character anfängt")]
+    public float positionOffset = 1f;
+
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Range(0, 2)]
+    [Tooltip("Positions-Höhe")]
+    public float positionHeight = 0f;
+
+    ////////////////////////////////////////////////////////////////
+
+    [FoldoutGroup("Zielerfassung", expanded: false)]
+    [Tooltip("Ob das Ziel erfasst werden soll. Wenn NULL, dann nicht.")]
+    public GameObject lockOn;
+
+    [FoldoutGroup("Zielerfassung", expanded: false)]
+    [ShowIf("lockOn")]
+    [Tooltip("Manual = Spieler kann Ziele auswählen, Single = näheste Ziel, Multi = Alle in Range, Auto = Sofort ohne Bestätigung")]
+    [EnumToggleButtons]
+    public TargetingMode targetingMode = TargetingMode.manual;
+
+    [FoldoutGroup("Zielerfassung", expanded: false)]
+    [ShowIf("lockOn")]
+    [Range(0, Utilities.maxIntSmall)]
+    public int maxAmountOfTargets = 1;
+
+    [FoldoutGroup("Zielerfassung", expanded: false)]
+    [ShowIf("lockOn")]
+    [Range(0, Utilities.maxFloatInfinite)]
+    public float targetingDuration = 6f;
+
+    [FoldoutGroup("Zielerfassung", expanded: false)]
+    [ShowIf("lockOn")]
+    [Tooltip("In welchen Intervallen die Ziele getroffen werden sollen")]
+    [Range(0, 10)]
+    public float multiHitDelay = 0;
+
+    [FoldoutGroup("Zielerfassung", expanded: false)]
+    [ShowIf("lockOn")]
+    [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
+    public bool showRange = false;
+
+    ////////////////////////////////////////////////////////////////
+
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("wirkt nur auf sich selbst")]
+    public bool affectSelf = false;
+
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("wirkt auf alle Spieler")]
+    public bool affectPlayers = false;
+
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("wirkt auf alle Gegner")]
+    public bool affectEnemies = false;
+
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("wirkt auf alle Objekte")]
+    public bool affectObjects = false;
+
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("wirkt auf alle Skills")]
+    public bool affectSkills = false;
+
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("Unverwundbarkeit ignorieren (z.B. für Heals)?")]
+    public bool ignoreInvincibility = false;
+
+    ////////////////////////////////////////////////////////////////
+
+    [FoldoutGroup("Knockback", expanded: false)]
+    [Range(0, Utilities.maxFloatSmall)]
+    [Tooltip("Stärke des Knockbacks")]
+    public float thrust = 4;
+
+    [FoldoutGroup("Knockback", expanded: false)]
+    [Range(0, Utilities.maxFloatSmall)]
+    [Tooltip("Dauer des Knockbacks")]
+    [HideIf("thrust", 0f)]
+    public float knockbackTime = 0.2f;
+
+    ////////////////////////////////////////////////////////////////
+
+    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [Range(1, Utilities.maxIntInfinite)]
+    [Tooltip("Maximale Anzahl aktiver gleicher Angriffe")]
+    public int maxAmounts = Utilities.maxIntInfinite;
+
+    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [Tooltip("Maximale Anzahl aktiver gleicher Angriffe in einer Combo")]
+    public int comboAmount = Utilities.maxIntSmall;
+
+    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [Tooltip("Beschwörungen")]
+    public GameObject summon;
+
+    //private bool showIndicator = false;
+    //private bool showCastBar = false;
+
+    ////////////////////////////////////////////////////////////////
+
+    [FoldoutGroup("Sound und Icons", expanded: false)]
     [Tooltip("Icon für den Spieler")]
     public Sprite icon;
 
+    [FoldoutGroup("Sound und Icons", expanded: false)]
     public AudioClip startSoundEffect;
-    private bool playStartEffectAlready = false;
+
+    [FoldoutGroup("Sound und Icons", expanded: false)]
     public AudioClip endSoundEffect;
+
+    [FoldoutGroup("Sound und Icons", expanded: false)]
     public AudioClip animSoundeffect;
 
-    public bool showIndicator = false;
-    public bool showCastBar = false;
+    ////////////////////////////////////////////////////////////////
 
+    private bool playStartEffectAlready = false;
+    private Vector2 tempVelocity;
+    private float elapsed;
+
+    [HideInInspector]
+    public Character sender;
     [HideInInspector]
     public float delayTimeLeft;
     [HideInInspector]
     public float durationTimeLeft;
     [HideInInspector]
     public float cooldownTimeLeft;
-
     [HideInInspector]
     public Rigidbody2D myRigidbody;
-
     [HideInInspector]
     public Animator animator;
-
+    [HideInInspector]
+    public Character target;
     [HideInInspector]
     public AudioSource audioSource;
     [HideInInspector]
     public bool playEndEffectAlready = false;
-
     [HideInInspector]
     public SpriteRenderer spriteRenderer;
-    private Vector2 tempVelocity;
-
     [HideInInspector]
     public float timeDistortion = 1;
     [HideInInspector]
     public Vector2 direction;
     [HideInInspector]
     public bool isActive = true; //damit kein Zeitstop bei einem stumpfen Pfeil gemacht wird
-    private float elapsed;
     [HideInInspector]
     public float holdTimer = 0;
     [HideInInspector]
@@ -202,7 +329,7 @@ public class StandardSkill : MonoBehaviour
     {
         this.cooldownTimeLeft = 0;
         setBasicAttributes();
-        updateLifeManaFromSender();        
+        updateResourceSender();        
         
         if(this.sender == null)
         {
@@ -222,7 +349,7 @@ public class StandardSkill : MonoBehaviour
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
         this.spriteRenderer = GetComponent<SpriteRenderer>();
-        if (this.spriteRenderer != null && this.global != null) this.spriteRenderer.color = this.global.color;
+        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
         this.animator = GetComponent<Animator>();
 
         this.delayTimeLeft = this.delay;
@@ -230,17 +357,16 @@ public class StandardSkill : MonoBehaviour
 
         this.elapsed = this.intervallSender;
 
-        if (this.startSoundEffect != null) Utilities.playSoundEffect(this.audioSource, this.startSoundEffect, this.soundEffectVolume);
+        if (this.startSoundEffect != null) Utilities.playSoundEffect(this.audioSource, this.startSoundEffect);
         
         if (this.sender == null) this.sender = this.transform.parent.GetComponent<Character>(); //SET SENDER IF NULL (IMPORTANT!)
     }
 
-    private void updateLifeManaFromSender()
+    private void updateResourceSender()
     {
         if (this.sender != null)
         {
-            this.sender.updateMana(this.addManaSender);
-            this.sender.updateLife(this.addLifeSender);
+            this.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
             setPostionAndDirection();
         }
     }    
@@ -251,8 +377,8 @@ public class StandardSkill : MonoBehaviour
 
         if (this.animator != null)
         {
-            this.animator.SetFloat("moveX", this.sender.direction.x);
-            this.animator.SetFloat("moveY", this.sender.direction.y);
+            Utilities.SetParameter(this.animator, "moveX", this.sender.direction.x);
+            Utilities.SetParameter(this.animator, "moveY", this.sender.direction.y);
         }
 
         float angle;
@@ -287,9 +413,7 @@ public class StandardSkill : MonoBehaviour
     }
 
     public virtual void doOnUpdate()
-    {
-        if(this.addManaSender+this.sender.mana > 0)
-        {
+    {        
             if (this.intervallSender > 0)
             {
                 if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.timeDistortion);
@@ -297,12 +421,12 @@ public class StandardSkill : MonoBehaviour
                 {
                     if (this.sender != null)
                     {
-                        if (this.sender.mana - this.addManaSender < 0) this.duration = 0;
+                        if (this.sender.getResource(this.resourceType, this.item) + this.addResourceSender < 0)
+                            this.durationTimeLeft = 0;
                         else
                         {
                             this.elapsed = this.intervallSender;
-                            this.sender.updateMana(this.addManaSender);
-                            this.sender.updateLife(this.addLifeSender);
+                            this.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
                         }
                     }
                 }
@@ -312,14 +436,15 @@ public class StandardSkill : MonoBehaviour
 
             if (this.animator != null && this.sender != null && !this.lockMovementonDuration)
             {
-                this.animator.SetFloat("moveX", this.sender.direction.x);
-                this.animator.SetFloat("moveY", this.sender.direction.y);
+                Utilities.SetParameter(this.animator, "moveX", this.sender.direction.x);
+                Utilities.SetParameter(this.animator, "moveY", this.sender.direction.y);
             }
 
             if (this.delayTimeLeft > 0)
             {
                 this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
-                if (this.animator != null) this.animator.SetFloat("Time", this.delayTimeLeft);
+                
+                Utilities.SetParameter(this.animator, "Time", this.delayTimeLeft);
                 //do something here
             }
             else
@@ -333,17 +458,15 @@ public class StandardSkill : MonoBehaviour
                     }
                     else
                     {
-                        if (this.animator != null) this.animator.SetBool("Explode", true);
+                        Utilities.SetParameter(this.animator, "Explode", true);
 
-                        if (this.animator == null || this.animator.GetBool("Explode") == false) DestroyIt();
+                        if (this.animator == null || !Utilities.HasParameter(this.animator, "Explode")) DestroyIt();
                     }
                 }
             }
-        }
-        else
-        {
-            DestroyIt();
-        }
+
+        if (this.target != null && !this.target.gameObject.activeInHierarchy) this.durationTimeLeft = 0;
+              
     }
 
     public void landAttack(Character hittedObject)
@@ -414,7 +537,7 @@ public class StandardSkill : MonoBehaviour
 
     private void playSoundEffect(AudioClip clip)
     {
-        if (clip != null) Utilities.playSoundEffect(this.audioSource, clip, this.soundEffectVolume);
+        if (clip != null) Utilities.playSoundEffect(this.audioSource, clip);
     }
 
     public void ActivateIt()

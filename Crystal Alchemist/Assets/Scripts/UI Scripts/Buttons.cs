@@ -6,8 +6,7 @@ using TMPro;
 
 public class Buttons : MonoBehaviour
 {
-    public ButtonConfig buttonConfig;
-    public Character player;
+    private Player player;
 
     [Header("A Button UI")]
     public Image iconAButton;
@@ -30,20 +29,35 @@ public class Buttons : MonoBehaviour
     public TextMeshProUGUI cooldownY;
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+    }
+
     void Start()
     {
-        setButton(this.buttonConfig.buttonA.icon, this.buttonConfig.buttonAIcon, this.skillIconAButton, this.iconAButton);
-        setButton(this.buttonConfig.buttonB.icon, this.buttonConfig.buttonBIcon, this.skillIconBButton, this.iconBButton);
-        setButton(this.buttonConfig.buttonX.icon, this.buttonConfig.buttonXIcon, this.skillIconXButton, this.iconXButton);
-        setButton(this.buttonConfig.buttonY.icon, this.buttonConfig.buttonYIcon, this.skillIconYButton, this.iconYButton);
+        setButtonSkillImages();
+    }
+
+    public void setButtonSkillImages()
+    {
+        setButton(this.player.AButton, this.skillIconAButton, this.iconAButton);
+        setButton(this.player.BButton, this.skillIconBButton, this.iconBButton);
+        setButton(this.player.XButton, this.skillIconXButton, this.iconXButton);
+        setButton(this.player.YButton, this.skillIconYButton, this.iconYButton);
     }
 
     private void Update()
     {
-        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.buttonConfig.buttonA);
-        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.buttonConfig.buttonB);
-        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.buttonConfig.buttonX);
-        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.buttonConfig.buttonY);
+        try
+        {
+            updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton);
+            updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton);
+            updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton);
+            updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton);
+        }
+        catch { }
     }
 
     private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI text, StandardSkill skill)
@@ -51,7 +65,7 @@ public class Buttons : MonoBehaviour
         float cooldownLeft = skill.cooldownTimeLeft / (player.timeDistortion * player.spellspeed);
         float cooldown = skill.cooldown / (player.timeDistortion * player.spellspeed);
 
-        if ((player.mana + skill.addManaSender < 0 && skill.addManaSender != -Utilities.maxFloatInfinite) 
+        if ((player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite) 
             || player.getAmountOfSameSkills(skill) >= skill.maxAmounts
             || cooldownLeft == Utilities.maxFloatInfinite)
         {
@@ -107,24 +121,16 @@ public class Buttons : MonoBehaviour
         }
     }
 
-    private void setButton(Sprite skillIcon, Sprite buttonIcon, Image skillUI, Image buttonUI)
+    private void setButton(StandardSkill skill, Image skillUI, Image buttonUI)
     {
-        if(skillIcon == null)
+        if(skill == null)
         {
-            skillUI.enabled = false;
+            skillUI.gameObject.SetActive(false);
         }
         else
         {
-            skillUI.sprite = skillIcon;
-        }
-
-        if (buttonIcon == null)
-        {
-            buttonUI.enabled = false;
-        }
-        else
-        {
-            buttonUI.sprite = buttonIcon;
+            skillUI.gameObject.SetActive(true);
+            skillUI.sprite = skill.icon;
         }
     }
 

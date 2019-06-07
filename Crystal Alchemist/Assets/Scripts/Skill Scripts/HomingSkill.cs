@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class HomingSkill : StandardSkill
 {
     #region Attributes
+
+    [FoldoutGroup("Homing-spezifische Attribute", expanded: false)]
     public float offSetTime;
+
+    [FoldoutGroup("Homing-spezifische Attribute", expanded: false)]
     public float offSetStrength;
     #endregion
 
@@ -57,7 +62,7 @@ public class HomingSkill : StandardSkill
             else
             {                
                 //Starte End-Animation wenn der Skill sein Ziel erreicht hat
-                if (this.animator != null) this.animator.SetBool("Explode", true);                
+                Utilities.SetParameter(this.animator, "Explode", true);             
             }
         }
         else

@@ -29,7 +29,6 @@ public class ChasingEnemy : Enemy
     {
         if (currentState == CharacterState.dead)
         {            
-            //animator.SetBool("isWalking", false);
             //STOP ANIMATION
             return;
         }
@@ -50,12 +49,13 @@ public class ChasingEnemy : Enemy
                     this.myRigidbody.velocity = Vector2.zero;
 
                     changeState(CharacterState.walk); //Gegner bewegt sich gerade
-                    this.animator.SetBool("isWakeUp", true);
+
+                    Utilities.SetParameter(this.animator, "isWakeUp", true);
                 }
             }
             else if (Vector3.Distance(this.target.transform.position, transform.position) > this.chaseRadius)
             {
-                this.animator.SetBool("isWakeUp", false);
+                Utilities.SetParameter(this.animator, "isWakeUp", false);
             }
         }
     }

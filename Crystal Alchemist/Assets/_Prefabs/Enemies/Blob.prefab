@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2246077131478480992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.763466, y: -1.2280701, z: 0}
+  m_LocalPosition: {x: -9.763466, y: -1.22807, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -162,61 +162,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Blob
-  characterSpecies: Gel
-  characterGender: 2
-  characterType: 1
-  element: 8
   startLife: 3
   startMana: 1
   startSpeed: 25
   startSpellSpeed: 100
+  respawnTime: 25
   immunityToStatusEffects: []
-  skills: []
-  initializeSkill: {fileID: 2574719380784309251, guid: 65b268bfda2fa0e4bb41978a974d71d5,
-    type: 3}
-  deathSkill: {fileID: 0}
+  maxLife: 3
+  maxMana: 1
+  maxCrystals: 9999
+  maxCoins: 99
+  maxKeys: 99
+  maxAmmo: 99
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
   manaRegeneration: 0
   manaRegenerationInterval: 0
-  attributeMaxLife: 3
-  attributeMaxMana: 1
+  skills: []
+  initializeSkill: {fileID: 2574719380784309251, guid: 65b268bfda2fa0e4bb41978a974d71d5,
+    type: 3}
+  deathSkill: {fileID: 0}
+  damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
+    type: 3}
   antiKnockback: 0
   cannotBeHitTime: 0.3
   isTouchable: 1
-  DeathEffect: {fileID: 4220056755316982758, guid: 9da6f091d2577074f840d6451b39dd05,
-    type: 3}
-  coins: 0
-  crystals: 0
-  keys: 0
-  lootTable:
-  - item: {fileID: 6543087420962035896, guid: 12e35050d1d118544adfd912092717f1, type: 3}
-    dropRate: 20
-  - item: {fileID: 8069356869073092970, guid: 6b191b04f9a7dbc49920d197f5070449, type: 3}
-    dropRate: 10
-  - item: {fileID: 8525589707579411223, guid: 4f1623ac219c06a40aa2cbe59058c6b2, type: 3}
-    dropRate: 50
-  multiLoot: 0
-  deathType: 0
   showHitcolor: 1
   hitColor: {r: 0.6320754, g: 0, b: 0, a: 1}
-  dialog: []
-  contextClueChild: {fileID: 0}
-  damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
-    type: 3}
+  lootTable:
+  - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
+    dropRate: 20
+    amount: 1
+  - item: {fileID: 8069356869073092967, guid: 6b191b04f9a7dbc49920d197f5070449, type: 3}
+    dropRate: 10
+    amount: 1
+  - item: {fileID: 8525589707579411224, guid: 4f1623ac219c06a40aa2cbe59058c6b2, type: 3}
+    dropRate: 30
+    amount: 1
+  multiLoot: 0
+  canCollectAll: 0
+  canCollect: 
   hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
   killSoundEffect: {fileID: 8300000, guid: a14b852168cb1df49873e07864a34b8f, type: 3}
-  soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
-  global: {fileID: 11400000, guid: 986022dcee4ee954eaa9f9d283c038e9, type: 2}
-  healthSignal: {fileID: 0}
-  manaSignal: {fileID: 0}
+  characterSpecies: Gel
+  characterGender: 2
+  characterType: 1
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
   spriteRenderer: {fileID: 0}
   castbar: {fileID: 0}
   activeCastbar: {fileID: 0}
-  homePosition: {fileID: 2246077131478480998}
+  coins: 0
+  crystals: 0
+  keys: 0
+  wood: 0
+  stone: 0
+  metal: 0
   currentState: 0
   life: 0
   spellspeed: 0
