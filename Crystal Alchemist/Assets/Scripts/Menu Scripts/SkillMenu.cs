@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 
 public class SkillMenu : MonoBehaviour
 {
+    #region Attributes
     private Player player;
 
     [BoxGroup("Dummy")]
@@ -38,10 +39,6 @@ public class SkillMenu : MonoBehaviour
     [SerializeField]
     private Image StatusEffects;
 
-    [BoxGroup("UI Signal")]
-    [SerializeField]
-    private SimpleSignal signal;
-
     [BoxGroup("Skill Slots")]
     [SerializeField]
     private GameObject slotA;
@@ -56,14 +53,17 @@ public class SkillMenu : MonoBehaviour
     private GameObject slotY;
     [BoxGroup("Skill Slots")]
     [SerializeField]
-    private GameObject slotRB;    
+    private GameObject slotRB;
 
-
+    public StandardSkill selectedSkill;
     //TODO:
-    //1. Set Skills and Save them
     //2. Change Title Screen (use other Scripts)
     //3. Change Button Inputs (skills and interactions)
 
+    #endregion
+
+
+    #region Unity Functions
 
     private void Awake()
     {
@@ -77,11 +77,6 @@ public class SkillMenu : MonoBehaviour
         if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Inventory")) exitMenu();
     }
 
-    public void exitMenu()
-    {
-        this.transform.parent.gameObject.SetActive(false);
-    }
-
     private void OnEnable()
     {
         this.player.currentState = CharacterState.inDialog;        
@@ -92,7 +87,10 @@ public class SkillMenu : MonoBehaviour
         this.player.currentState = CharacterState.idle;
     }
 
+    #endregion
 
+
+    #region OnClickTrigger
     public void showSkillDetails(SkillSlot slot)
     {        
             this.skillDetailsName.text = slot.skill.skillName;
@@ -125,6 +123,19 @@ public class SkillMenu : MonoBehaviour
             default: this.itemSkills.SetActive(true); break;
         }
     }
+
+    public void selectSkillFromSkillSet(SkillSlot skillSlot)
+    {
+        this.selectedSkill = skillSlot.skill;
+    }
+
+    public void exitMenu()
+    {
+        this.transform.parent.gameObject.SetActive(false);
+    }
+
+    #endregion
+
 
     private void setSlots()
     {

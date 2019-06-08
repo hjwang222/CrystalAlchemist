@@ -13,6 +13,9 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     [SerializeField]
     private GameObject cursor;
 
+    [SerializeField]
+    private bool setFirstSelected = false;
+
     private void Start()
     {
         RectTransform rt = (RectTransform)this.transform;
@@ -22,6 +25,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     private void OnEnable()
     {
         this.eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        if(this.setFirstSelected) this.eventSystem.firstSelectedGameObject = this.gameObject;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
