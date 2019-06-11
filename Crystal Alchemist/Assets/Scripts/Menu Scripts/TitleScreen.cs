@@ -4,39 +4,31 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Sirenix.OdinInspector;
+using UnityEngine.EventSystems;
 
 public class TitleScreen : MonoBehaviour
 {
-    private GameObject activeMenu;
-    private List<GameObject> activeMenuChildren = new List<GameObject>();
+    [Required]
+    [SerializeField]
+    private Canvas canvas;
+    [SerializeField]
+    private GameObject mainMenu;
+    [SerializeField]
+    private GameObject optionMenu;
+    [SerializeField]
+    private AudioClip music;
 
     [Required]
-    public Canvas canvas;
-    public GameObject mainMenu;
-    public GameObject optionMenu;
-    public AudioClip music;
-
-    [Required]
-    public GameObject cursor;
-    public Color cursorColor;
-    public float cursorOffset = 35f;
-    public AudioClip cursorSound;
-
-    public SimpleSignal destroySignal;
+    [SerializeField]
+    private SimpleSignal destroySignal;
 
     private AudioSource audioSource;
     private AudioSource musicSource;
 
-    private GameObject currentChoice = null;
-    private int index = 0;
-    private bool isInputPossible = true;
-    private bool setVolume = false;
-    private int tempChange = 0;
 
-    // Start is called before the first frame update
     void Start()
     {
-        changeLayer(this.mainMenu);
+        showMenu(this.mainMenu);
         SaveSystem.loadOptions();
 
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
@@ -55,176 +47,74 @@ public class TitleScreen : MonoBehaviour
         destroySignal.Raise();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void startGame(string scene)
     {
-        if (Input.GetButtonDown("Submit"))
-        {
-            string text = this.currentChoice.GetComponent<TextMeshProUGUI>().text;
+        PlayerData data = SaveSystem.loadPlayer();
 
-            if (text.Contains("Optionen"))
-            {
-                this.currentChoice.GetComponent<TextMeshProUGUI>().color = this.cursorColor;
-                changeLayer(this.optionMenu);
-            }
-            else if (text.Contains("starten"))
-            {
-                string scene = "Dorf";
-                PlayerData data = SaveSystem.loadPlayer();
+        if (data != null && data.scene != null && data.scene != "") scene = data.scene;
 
-                if (data != null && data.scene != null && data.scene != "") scene = data.scene;
-
-                SceneManager.LoadScene(scene);
-            }
-            else if (text.Contains("Speichern und zurück"))
-            {
-                this.currentChoice.GetComponent<TextMeshProUGUI>().color = this.cursorColor;
-                SaveSystem.SaveOptions();
-                changeLayer(this.mainMenu);
-            }
-            else if (text.Contains("beenden"))
-            {
-                Application.Quit();
-            }
-            else if (text.Contains("Lautstärke"))
-            {
-                if (!this.setVolume) this.setVolume = true;
-                else this.setVolume = false;
-            }
-        }
-        else if (Input.GetButtonDown("Cancel"))
-        {
-            string text = this.currentChoice.GetComponent<TextMeshProUGUI>().text;
-
-            if (text.Contains("Lautstärke") && this.setVolume)
-            {
-                this.setVolume = false;
-            }
-            else if (this.activeMenu == this.optionMenu)
-            {
-                this.currentChoice.GetComponent<TextMeshProUGUI>().color = this.cursorColor;
-                changeLayer(this.mainMenu);
-            }
-        }
-
-        if (this.isInputPossible)
-        {
-            if (setVolume)
-            {
-                soundOptions(true);
-            }
-            else
-            {
-                soundOptions(false);
-                
-                int change = (int)(Utilities.getInputMenu("Vertical"));
-
-                if (this.tempChange != change)
-                {
-                    this.tempChange = change;
-
-                    if (this.index - change >= 0
-                        && this.index - change < activeMenuChildren.Count
-                        && change != 0)
-                    {
-                        this.index -= change;
-                        setCursor();
-                    }
-                }
-            }
-
-            StartCoroutine(temp());
-        }
+        SceneManager.LoadScene(scene);
     }
 
-
-
-    private void soundOptions(bool marker)
+    public void exitGame()
     {
-        TextMeshProUGUI ugui = this.currentChoice.GetComponent<TextMeshProUGUI>();
+        Application.Quit();
+    }
 
-        float changeX = Utilities.getInputMenu("Horizontal");
+    public void save()
+    {
+        SaveSystem.SaveOptions();        
+    }
 
-        if (ugui.text.Contains("Effekt"))
+    public void showMenu(GameObject newActiveMenu)
+    {
+        this.mainMenu.SetActive(false);
+        this.optionMenu.SetActive(false);
+
+        newActiveMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(newActiveMenu.transform.GetChild(0).gameObject);
+    }
+
+    public void addVolume(TextMeshProUGUI ugui)
+    {
+        changeVolume(ugui, 1);
+    }
+
+    public void reduceVolume(TextMeshProUGUI ugui)
+    {
+        changeVolume(ugui, -1);
+    }
+
+    private void changeVolume(TextMeshProUGUI ugui, int value)
+    {
+         if (ugui.gameObject.transform.parent.GetComponent<TextMeshProUGUI>().text.Contains("Musik"))
         {
-            if (marker) GlobalValues.soundEffectVolume = addVolume(GlobalValues.soundEffectVolume, changeX);
-            showVolume(ugui, GlobalValues.soundEffectVolume, marker);
-        }
-        else if (ugui.text.Contains("Musik"))
-        {
-            if (marker) GlobalValues.backgroundMusicVolume = addVolume(GlobalValues.backgroundMusicVolume, changeX);
-            showVolume(ugui, GlobalValues.backgroundMusicVolume, marker);
+            GlobalValues.backgroundMusicVolume = addVolume(GlobalValues.backgroundMusicVolume, value);
+            showVolume(ugui, GlobalValues.backgroundMusicVolume);
             this.musicSource.volume = GlobalValues.backgroundMusicVolume;
         }
+        else           
+        {
+            GlobalValues.soundEffectVolume = addVolume(GlobalValues.soundEffectVolume, value);
+            showVolume(ugui, GlobalValues.soundEffectVolume);
+        }        
     }
-
-    private void showVolume(TextMeshProUGUI ugui, float volume, bool marker)
+    
+    private void showVolume(TextMeshProUGUI ugui, float volume)
     {
-        if (marker) ugui.text = ugui.text.Split(' ')[0] + " < " + Mathf.RoundToInt(volume * 100) + "% >";
-        else ugui.text = ugui.text.Split(' ')[0] + " " + Mathf.RoundToInt(volume * 100) + "%";
+        ugui.text = Mathf.RoundToInt(volume * 100) + "%";
     }
 
     private float addVolume(float volume, float addvolume)
     {
         if (addvolume != 0)
         {
-            if (this.cursorSound != null) Utilities.playSoundEffect(this.audioSource, this.cursorSound);
+            //if (this.cursorSound != null) Utilities.playSoundEffect(this.audioSource, this.cursorSound);
             volume += (addvolume / 100);
             if (volume < 0) volume = 0;
             else if (volume > 2f) volume = 2f;
         }
 
         return volume;
-    }
-
-    private void changeLayer(GameObject newActiveMenu)
-    {
-        if (this.activeMenu != null) this.activeMenu.SetActive(false);
-
-        this.activeMenu = newActiveMenu;
-        this.activeMenu.SetActive(true);
-        getChildren(this.activeMenu);
-
-        this.index = 0;
-        this.currentChoice = null;
-
-        setCursor();
-    }
-
-    private IEnumerator temp()
-    {
-        this.isInputPossible = false;
-        yield return new WaitForSeconds(0.1f);
-        this.isInputPossible = true;
-    }
-
-    private void getChildren(GameObject parent)
-    {
-        this.activeMenuChildren.Clear();
-
-        for (int i = 0; i < parent.transform.childCount; i++)
-        {
-            GameObject child = parent.transform.GetChild(i).gameObject;
-            this.activeMenuChildren.Add(child);
-
-            //Bei Sound-Optionen
-            TextMeshProUGUI ugui = child.GetComponent<TextMeshProUGUI>();
-            if (ugui.text.Contains("Effekt")) showVolume(ugui, GlobalValues.soundEffectVolume, false);
-            else if (ugui.text.Contains("Musik")) showVolume(ugui, GlobalValues.backgroundMusicVolume, false);
-        }
-    }
-
-    private void setCursor()
-    {
-        if (this.currentChoice != null)
-        {
-            this.currentChoice.GetComponent<TextMeshProUGUI>().color = this.cursorColor;
-            if (this.cursorSound != null) Utilities.playSoundEffect(this.audioSource, this.cursorSound);
-        }
-
-        this.currentChoice = this.activeMenuChildren[this.index];
-
-        this.cursor.transform.position = new Vector3(this.cursor.transform.position.x, this.currentChoice.transform.position.y + (this.cursorOffset*this.canvas.scaleFactor));
-        this.currentChoice.GetComponent<TextMeshProUGUI>().color = Color.white;
-    }
+    }   
 }

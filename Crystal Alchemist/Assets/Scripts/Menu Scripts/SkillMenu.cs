@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
+using System.Linq;
 
 public class SkillMenu : MonoBehaviour
 {
@@ -141,9 +142,12 @@ public class SkillMenu : MonoBehaviour
     {
         this.dummySlot.SetActive(true);
 
-        for(int i = 0; i < this.player.skillSet.Count; i++)
+        List<StandardSkill> sortedByIndex 
+            = this.player.skillSet.ToArray().OrderBy(o => (((int)(o.category)*1000)+o.orderIndex)).ToList<StandardSkill>();
+
+        for (int i = 0; i < sortedByIndex.Count; i++)
         {
-            StandardSkill skill = this.player.skillSet[i];
+            StandardSkill skill = sortedByIndex[i];
             GameObject categoryGameobject = this.itemSkills;
 
             if (skill.category == SkillType.physical) categoryGameobject = this.physicalSkills;

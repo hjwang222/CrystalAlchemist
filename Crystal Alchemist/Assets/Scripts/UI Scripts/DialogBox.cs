@@ -34,31 +34,21 @@ public class DialogBox : MonoBehaviour
         this.audioSource.playOnAwake = false;
     }
 
-    private void Update()
+
+    public void next(int index)
     {
-        if (this.showIt)
+        this.index += index;
+
+        if (this.index < 0) this.index = 0;
+
+        if (this.index < this.texts.Count)
         {
-            //Wenn DialogBox aktiv ist
-            //TODO: B-Button einfügen
-
-            if (this.inputPossible && (Input.GetButtonDown("Submit") || Input.GetButtonDown("Cancel")))
-            {
-                if (Input.GetButtonDown("Submit")) this.index += 2;
-                else if (Input.GetButtonDown("Cancel")) this.index -= 2;
-
-                if (this.index < 0) this.index = 0;
-
-                if (this.index < this.texts.Count)
-                {
-                    //Blättere weiter                                       
-                    showText();
-                    StartCoroutine(delayInputCO());
-                }
-                else
-                {
-                    hideDialogBox();
-                }
-            }
+            //Blättere weiter                                       
+            showText();
+        }
+        else
+        {
+            hideDialogBox();
         }
     }
 
@@ -68,7 +58,7 @@ public class DialogBox : MonoBehaviour
     #region Funktionen (Show, Hide, Text)
 
     public void showDialogBox(string text)
-    {        
+    {
         //Zeige die DialogBox (Signal)
         this.showIt = true;
         this.texts.Clear();
@@ -99,7 +89,7 @@ public class DialogBox : MonoBehaviour
     }
 
     private IEnumerator delayInputPlayerCO()
-    {        
+    {
         //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
         yield return new WaitForSeconds(this.delay);
 
@@ -112,7 +102,7 @@ public class DialogBox : MonoBehaviour
     private List<string> formatText(string text)
     {
         List<string> result = new List<string>();
-        
+
         string[] temp = text.Replace("\n", "\n ").Split(' ');
         string line = "";
         int i = 0;
@@ -122,7 +112,7 @@ public class DialogBox : MonoBehaviour
             string word = temp[i];
 
             if ((line + word).Length > this.maxLength
-                || i == temp.Length-1
+                || i == temp.Length - 1
                 || word.Contains("\n"))
             {
                 word = word.Replace("\n", "");
@@ -130,7 +120,7 @@ public class DialogBox : MonoBehaviour
                 result.Add(line);
                 line = "";
             }
-            else if((line + word).Length <= this.maxLength)
+            else if ((line + word).Length <= this.maxLength)
             {
                 line += word + " ";
             }
