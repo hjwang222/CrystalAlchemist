@@ -126,11 +126,13 @@ public class Buttons : MonoBehaviour
         if(skill == null)
         {
             skillUI.gameObject.SetActive(false);
+            buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
         }
         else
         {
             skillUI.gameObject.SetActive(true);
             skillUI.sprite = skill.icon;
+            buttonUI.color = new Color(1f, 1f, 1f, 1f);
         }
     }
 
