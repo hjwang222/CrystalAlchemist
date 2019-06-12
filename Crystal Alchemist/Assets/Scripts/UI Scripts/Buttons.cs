@@ -133,6 +133,7 @@ public class Buttons : MonoBehaviour
             skillUI.gameObject.SetActive(true);
             skillUI.sprite = skill.icon;
             buttonUI.color = new Color(1f, 1f, 1f, 1f);
+            buttonUI.fillAmount = 1;
         }
     }
 

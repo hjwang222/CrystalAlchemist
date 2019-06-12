@@ -10,7 +10,10 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     [SerializeField]
     private GameObject cursor;
+    [SerializeField]
+    private Canvas canvas;
     private GameObject lastselect;
+    private float scaleFactor = 1f;
 
 
     [SerializeField]
@@ -20,6 +23,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     {
         RectTransform rt = (RectTransform)this.transform;
         this.size = new Vector2(rt.rect.width, rt.rect.height);
+        if(this.canvas != null) this.scaleFactor = this.canvas.scaleFactor;
     }
 
     private void OnEnable()
@@ -32,10 +36,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         }
     }
 
-    private void OnDisable()
-    {
-        setCursor(false);
-    }
+    
 
     private void Update()
     {
@@ -67,7 +68,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
             if(!showCursor) this.cursor.SetActive(false);
 
             this.cursor.transform.position
-            = new Vector2(this.transform.position.x - (this.size.x / 2), this.transform.position.y + (this.size.y / 2)); 
+            = new Vector2(this.transform.position.x - ((this.size.x / 2)*this.scaleFactor), this.transform.position.y + ((this.size.y / 2) * this.scaleFactor)); 
 
         }
     }

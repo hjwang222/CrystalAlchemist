@@ -414,7 +414,16 @@ public class Utilities : MonoBehaviour
     }
 
     #endregion
-    
 
 
+    public static IEnumerator delayInputPlayerCO(float delay, Player player)
+    {
+        //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
+        yield return new WaitForSeconds(delay);
+
+        if (player != null)
+        {
+            player.currentState = CharacterState.idle;
+        }
+    }
 }

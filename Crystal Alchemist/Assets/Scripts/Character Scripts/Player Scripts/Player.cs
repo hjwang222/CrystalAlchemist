@@ -168,6 +168,12 @@ public class Player : Character
     }
 
 
+    public void delay(float delay)
+    {
+        StartCoroutine(Utilities.delayInputPlayerCO(delay, this));
+    }
+
+
     public void showDialogBox(string text)
     {
         if (this.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);

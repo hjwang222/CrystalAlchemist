@@ -16,6 +16,8 @@ public class SkillMenu : MonoBehaviour
     [Required]
     [SerializeField]
     private GameObject dummySlot;
+    [SerializeField]
+    private GameObject cursor;
 
     [BoxGroup("Tabs")]
     [SerializeField]
@@ -56,6 +58,8 @@ public class SkillMenu : MonoBehaviour
     [SerializeField]
     private GameObject slotRB;
 
+    private float delay = 0.3f;
+
     public StandardSkill selectedSkill;
     //TODO:
     //2. Change Title Screen (use other Scripts)
@@ -80,12 +84,13 @@ public class SkillMenu : MonoBehaviour
 
     private void OnEnable()
     {
+        this.cursor.SetActive(true);
         this.player.currentState = CharacterState.inDialog;        
     }
 
     private void OnDisable()
     {
-        this.player.currentState = CharacterState.idle;
+        this.cursor.SetActive(false);
     }
 
     #endregion
@@ -132,8 +137,11 @@ public class SkillMenu : MonoBehaviour
 
     public void exitMenu()
     {
+        this.player.delay(this.delay);
         this.transform.parent.gameObject.SetActive(false);
     }
+
+
 
     #endregion
 

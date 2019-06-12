@@ -13,6 +13,8 @@ public class DialogBox : MonoBehaviour
     public TextMeshProUGUI textMesh;
     [Tooltip("Sound der Dialogbox")]
     public AudioClip dialogSoundEffect;
+    [SerializeField]
+    private GameObject cursor;
 
     private bool showIt = false;
     private bool inputPossible = true;
@@ -32,6 +34,16 @@ public class DialogBox : MonoBehaviour
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
+    }
+
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        this.cursor.SetActive(false);
     }
 
 
@@ -60,6 +72,7 @@ public class DialogBox : MonoBehaviour
     public void showDialogBox(string text)
     {
         //Zeige die DialogBox (Signal)
+        this.cursor.SetActive(true);
         this.showIt = true;
         this.texts.Clear();
         this.texts = formatText(text);
@@ -67,36 +80,16 @@ public class DialogBox : MonoBehaviour
         if (this.player != null) this.player.currentState = CharacterState.inDialog;
         this.dialogBox.SetActive(true);
         showText();
-
-        StartCoroutine(delayInputCO());
     }
 
     private void hideDialogBox()
     {
         //Blende DialogBox aus
+        this.player.delay(this.delay);
+        this.cursor.SetActive(false);
         this.showIt = false;
         this.index = 0;
-        this.dialogBox.SetActive(false);
-
-        StartCoroutine(delayInputPlayerCO());
-    }
-
-    private IEnumerator delayInputCO()
-    {
-        this.inputPossible = false;
-        yield return new WaitForSeconds(this.delay);
-        this.inputPossible = true;
-    }
-
-    private IEnumerator delayInputPlayerCO()
-    {
-        //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
-        yield return new WaitForSeconds(this.delay);
-
-        if (this.player != null)
-        {
-            this.player.currentState = CharacterState.interact;
-        }
+        this.dialogBox.SetActive(false);        
     }
 
     private List<string> formatText(string text)

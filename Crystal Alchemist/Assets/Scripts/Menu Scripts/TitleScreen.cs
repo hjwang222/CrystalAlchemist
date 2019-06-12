@@ -17,6 +17,10 @@ public class TitleScreen : MonoBehaviour
     private GameObject optionMenu;
     [SerializeField]
     private AudioClip music;
+    [SerializeField]
+    private TextMeshProUGUI musicUGUI;
+    [SerializeField]
+    private TextMeshProUGUI effectUGUI;
 
     [Required]
     [SerializeField]
@@ -30,6 +34,9 @@ public class TitleScreen : MonoBehaviour
     {
         showMenu(this.mainMenu);
         SaveSystem.loadOptions();
+
+        setVolumeText(this.musicUGUI, GlobalValues.backgroundMusicVolume);
+        setVolumeText(this.effectUGUI, GlobalValues.soundEffectVolume);
 
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
@@ -90,17 +97,17 @@ public class TitleScreen : MonoBehaviour
          if (ugui.gameObject.transform.parent.GetComponent<TextMeshProUGUI>().text.Contains("Musik"))
         {
             GlobalValues.backgroundMusicVolume = addVolume(GlobalValues.backgroundMusicVolume, value);
-            showVolume(ugui, GlobalValues.backgroundMusicVolume);
+            setVolumeText(ugui, GlobalValues.backgroundMusicVolume);
             this.musicSource.volume = GlobalValues.backgroundMusicVolume;
         }
         else           
         {
             GlobalValues.soundEffectVolume = addVolume(GlobalValues.soundEffectVolume, value);
-            showVolume(ugui, GlobalValues.soundEffectVolume);
+            setVolumeText(ugui, GlobalValues.soundEffectVolume);
         }        
     }
     
-    private void showVolume(TextMeshProUGUI ugui, float volume)
+    private void setVolumeText(TextMeshProUGUI ugui, float volume)
     {
         ugui.text = Mathf.RoundToInt(volume * 100) + "%";
     }
