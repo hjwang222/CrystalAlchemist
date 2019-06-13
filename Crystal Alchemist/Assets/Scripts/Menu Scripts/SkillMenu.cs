@@ -12,12 +12,16 @@ public class SkillMenu : MonoBehaviour
     #region Attributes
     private Player player;
 
-    [BoxGroup("Dummy")]
+    [BoxGroup("Mandatory")]
     [Required]
     [SerializeField]
     private GameObject dummySlot;
+    [BoxGroup("Mandatory")]
     [SerializeField]
     private GameObject cursor;
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    private TextMeshProUGUI categoryText;
 
     [BoxGroup("Tabs")]
     [SerializeField]
@@ -60,10 +64,8 @@ public class SkillMenu : MonoBehaviour
 
     private float delay = 0.3f;
 
+    [HideInInspector]
     public StandardSkill selectedSkill;
-    //TODO:
-    //2. Change Title Screen (use other Scripts)
-    //3. Change Button Inputs (skills and interactions)
 
     #endregion
 
@@ -99,21 +101,25 @@ public class SkillMenu : MonoBehaviour
     #region OnClickTrigger
     public void showSkillDetails(SkillSlot slot)
     {        
-            this.skillDetailsName.text = slot.skill.skillName;
+            this.skillDetailsName.text = "Name: " + slot.skill.skillName;
             this.skillDetailsStrength.text = "Stärke: " + Mathf.Abs(slot.skill.addLifeTarget) + "";
             this.skillDetailsCost.text = "Kosten: " + Mathf.Abs(slot.skill.addResourceSender) + "";
 
-            if (slot.skill.statusEffects.Count > 0) this.StatusEffects.sprite = slot.skill.statusEffects[0].iconSprite;
-            else this.StatusEffects.sprite = null;        
+        if (slot.skill.statusEffects.Count > 0)
+        {
+            this.StatusEffects.enabled = true;
+            this.StatusEffects.sprite = slot.skill.statusEffects[0].iconSprite;
+        }
+        else this.StatusEffects.enabled = false;
     }
 
     public void hideSkillDetails()
     {
-        this.skillDetailsName.text = "-";
+        this.skillDetailsName.text = "Name: ";
         this.skillDetailsStrength.text = "Stärke: ";
         this.skillDetailsCost.text = "Kosten: ";
 
-        this.StatusEffects.sprite = null;
+        this.StatusEffects.enabled = false;
     }
 
     public void showCategory(int category)
@@ -124,9 +130,9 @@ public class SkillMenu : MonoBehaviour
         
         switch (category)
         {
-            case 1: this.physicalSkills.SetActive(true); break;
-            case 2: this.magicalSkills.SetActive(true); break;
-            default: this.itemSkills.SetActive(true); break;
+            case 1: this.physicalSkills.SetActive(true); this.categoryText.text = "Waffen"; break;
+            case 2: this.magicalSkills.SetActive(true); this.categoryText.text = "Zauber"; break;
+            default: this.itemSkills.SetActive(true); this.categoryText.text = "Items"; break;
         }
     }
 
