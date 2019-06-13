@@ -13,10 +13,6 @@ public class SkillMenu : MonoBehaviour
     private Player player;
 
     [BoxGroup("Mandatory")]
-    [Required]
-    [SerializeField]
-    private GameObject dummySlot;
-    [BoxGroup("Mandatory")]
     [SerializeField]
     private GameObject cursor;
     [BoxGroup("Mandatory")]
@@ -75,7 +71,13 @@ public class SkillMenu : MonoBehaviour
     private void Awake()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        setSlots();
+    }
+
+    private void Start()
+    {
+        setSkillsToSlots(SkillType.physical);
+        setSkillsToSlots(SkillType.magical);
+        setSkillsToSlots(SkillType.item);
         showCategory(1);
     }
 
@@ -100,17 +102,24 @@ public class SkillMenu : MonoBehaviour
 
     #region OnClickTrigger
     public void showSkillDetails(SkillSlot slot)
-    {        
+    {
+        if (slot.skill != null)
+        {
             this.skillDetailsName.text = "Name: " + slot.skill.skillName;
             this.skillDetailsStrength.text = "Stärke: " + Mathf.Abs(slot.skill.addLifeTarget) + "";
             this.skillDetailsCost.text = "Kosten: " + Mathf.Abs(slot.skill.addResourceSender) + "";
 
-        if (slot.skill.statusEffects.Count > 0)
-        {
-            this.StatusEffects.enabled = true;
-            this.StatusEffects.sprite = slot.skill.statusEffects[0].iconSprite;
+            if (slot.skill.statusEffects.Count > 0)
+            {
+                this.StatusEffects.enabled = true;
+                this.StatusEffects.sprite = slot.skill.statusEffects[0].iconSprite;
+            }
+            else this.StatusEffects.enabled = false;
         }
-        else this.StatusEffects.enabled = false;
+        else
+        {
+            hideSkillDetails();
+        }
     }
 
     public void hideSkillDetails()
@@ -147,11 +156,34 @@ public class SkillMenu : MonoBehaviour
         this.transform.parent.gameObject.SetActive(false);
     }
 
-
-
     #endregion
 
 
+    private void setSkillsToSlots(SkillType category)
+    {
+        GameObject categoryGameobject = this.itemSkills;
+        if (category == SkillType.physical) categoryGameobject = this.physicalSkills;
+        else if (category == SkillType.magical) categoryGameobject = this.magicalSkills;
+
+        for(int i = 0; i < categoryGameobject.transform.childCount; i++)
+        {
+            GameObject page = categoryGameobject.transform.GetChild(i).gameObject;
+
+            if (page.activeInHierarchy)
+            {
+                for (int ID = 0; ID < page.transform.childCount; ID++)
+                {
+                    GameObject slot = page.transform.GetChild(ID).gameObject;
+                    StandardSkill skill = Utilities.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
+                    slot.GetComponent<SkillSlot>().setSkill(skill);
+                }
+
+                if (!page.name.Contains("1")) page.SetActive(false);
+            }
+        }
+    }
+
+    /*
     private void setSlots()
     {
         this.dummySlot.SetActive(true);
@@ -173,5 +205,5 @@ public class SkillMenu : MonoBehaviour
         }
 
         this.dummySlot.SetActive(false);
-    }
+    }*/
 }

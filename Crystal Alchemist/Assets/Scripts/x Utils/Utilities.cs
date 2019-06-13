@@ -416,6 +416,17 @@ public class Utilities : MonoBehaviour
     #endregion
 
 
+    public static StandardSkill getSkillByID(List<StandardSkill> skillset, int ID, SkillType category)
+    {
+        foreach(StandardSkill skill in skillset)
+        {
+            if (category == skill.category && ID == skill.orderIndex) return skill;
+        }
+
+        return null;
+    }
+
+
     public static IEnumerator delayInputPlayerCO(float delay, Player player)
     {
         //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
