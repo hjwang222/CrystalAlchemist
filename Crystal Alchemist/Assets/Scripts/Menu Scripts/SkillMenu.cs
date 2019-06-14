@@ -58,6 +58,16 @@ public class SkillMenu : MonoBehaviour
     [SerializeField]
     private GameObject slotRB;
 
+    [BoxGroup("Buttons")]
+    [SerializeField]
+    private GameObject previousPage;
+    [BoxGroup("Buttons")]
+    [SerializeField]
+    private TextMeshProUGUI pageText;
+    [BoxGroup("Buttons")]
+    [SerializeField]
+    private GameObject nextPage;
+
     private float delay = 0.3f;
 
     [HideInInspector]
@@ -101,6 +111,7 @@ public class SkillMenu : MonoBehaviour
 
 
     #region OnClickTrigger
+
     public void showSkillDetails(SkillSlot slot)
     {
         if (slot.skill != null)
@@ -143,6 +154,8 @@ public class SkillMenu : MonoBehaviour
             case 2: this.magicalSkills.SetActive(true); this.categoryText.text = "Zauber"; break;
             default: this.itemSkills.SetActive(true); this.categoryText.text = "Items"; break;
         }
+
+        setPage(0);
     }
 
     public void selectSkillFromSkillSet(SkillSlot skillSlot)
@@ -154,6 +167,47 @@ public class SkillMenu : MonoBehaviour
     {
         this.player.delay(this.delay);
         this.transform.parent.gameObject.SetActive(false);
+    }
+
+    public void setPage(int value)
+    {
+        GameObject activeCategory = null;
+
+        if (this.physicalSkills.activeInHierarchy) activeCategory = this.physicalSkills;
+        else if (this.magicalSkills.activeInHierarchy) activeCategory = this.magicalSkills;
+        else if (this.itemSkills.activeInHierarchy) activeCategory = this.itemSkills;
+
+        if (activeCategory != null)
+        {
+            int activeIndex = 0;
+            int pagesCount = activeCategory.transform.childCount-1;
+
+            for (int i = 0; i <= pagesCount; i++)
+            {
+                GameObject page = activeCategory.transform.GetChild(i).gameObject;
+                if (page.activeInHierarchy) activeIndex = page.transform.GetSiblingIndex();
+            }
+
+            if (activeIndex + value < activeCategory.transform.childCount && activeIndex + value >= 0)
+            {
+                activeIndex += value;
+            
+                for (int i = 0; i < activeCategory.transform.childCount; i++)
+                {
+                    GameObject page = activeCategory.transform.GetChild(i).gameObject;
+                    page.SetActive(false);
+                    if (activeIndex == page.transform.GetSiblingIndex()) page.SetActive(true);
+                }
+
+                this.nextPage.SetActive(true);
+                this.previousPage.SetActive(true);
+
+                if (activeIndex == 0) this.previousPage.SetActive(false);
+                if (activeIndex == pagesCount) this.nextPage.SetActive(false);
+
+                this.pageText.text = (activeIndex + 1) + "/" + (pagesCount + 1);
+            } 
+        }
     }
 
     #endregion
@@ -178,7 +232,7 @@ public class SkillMenu : MonoBehaviour
                     slot.GetComponent<SkillSlot>().setSkill(skill);
                 }
 
-                if (!page.name.Contains("1")) page.SetActive(false);
+                if (page.transform.GetSiblingIndex() > 0) page.SetActive(false);
             }
         }
     }

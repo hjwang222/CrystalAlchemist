@@ -13,7 +13,8 @@ public class SkillSlot : MonoBehaviour
 
     private void Awake()
     {
-        this.ID = ((int.Parse(this.gameObject.transform.parent.name.Replace("Page ",""))-1)*10)+ int.Parse(this.gameObject.transform.name);
+        // this.ID = ((int.Parse(this.gameObject.transform.parent.name.Replace("Page ",""))-1)*10)+ int.Parse(this.gameObject.transform.name);
+        this.ID = (this.gameObject.transform.parent.transform.GetSiblingIndex() * 10) + (this.gameObject.transform.GetSiblingIndex() + 1);
     }
 
     public void setSkill(StandardSkill skill)

@@ -24,6 +24,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         RectTransform rt = (RectTransform)this.transform;
         this.size = new Vector2(rt.rect.width, rt.rect.height);
         if(this.canvas != null) this.scaleFactor = this.canvas.scaleFactor;
+        //this.scaleFactor = rt.localScale.x;
     }
 
     private void OnEnable()
