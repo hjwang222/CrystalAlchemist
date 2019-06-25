@@ -27,7 +27,7 @@ public enum ResourceType
     none,
     life,
     mana,
-    item, 
+    item,
     skill
 }
 
@@ -227,8 +227,8 @@ public class Utilities : MonoBehaviour
     {
         bool result = false;
 
-        if (currency == ResourceType.none) result = true;        
-        else if(currency != ResourceType.skill)
+        if (currency == ResourceType.none) result = true;
+        else if (currency != ResourceType.skill)
         {
             if (player.getResource(currency, item) + price >= 0)
             {
@@ -244,16 +244,16 @@ public class Utilities : MonoBehaviour
         return result;
     }
 
-    public static int getAmountFromInventory(ItemGroup itemgroup, List<Item> inventory, bool maxAmount)
-    {        
-            foreach (Item elem in inventory)
+    public static int getAmountFromInventory(string itemgroup, List<Item> inventory, bool maxAmount)
+    {
+        foreach (Item elem in inventory)
+        {
+            if (itemgroup.ToUpper() == elem.itemGroup.ToUpper())
             {
-                if (itemgroup == elem.itemGroup)
-                {
-                    if (!maxAmount) return elem.amount;
-                    else return elem.maxAmount;
-                }
-            }        
+                if (!maxAmount) return elem.amount;
+                else return elem.maxAmount;
+            }
+        }
 
         return 0;
     }
@@ -266,7 +266,7 @@ public class Utilities : MonoBehaviour
 
             foreach (Item elem in character.inventory)
             {
-                if (item.itemGroup == elem.itemGroup)
+                if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper())
                 {
                     found = elem;
                 }
@@ -285,7 +285,6 @@ public class Utilities : MonoBehaviour
             }
         }
     }
-
 
     public static void updateSkillset(StandardSkill skill, Character character)
     {
@@ -306,12 +305,12 @@ public class Utilities : MonoBehaviour
 
 
     public static float getInputMenu(string axis)
-    {        
-            float changeAnalogStick = Mathf.RoundToInt(Input.GetAxisRaw(axis));
-            float changeDPad = Input.GetAxisRaw("Cursor " + axis);
-            if (changeAnalogStick != 0) return changeAnalogStick;
-            else if (changeDPad != 0) return changeDPad;
-            return 0;        
+    {
+        float changeAnalogStick = Mathf.RoundToInt(Input.GetAxisRaw(axis));
+        float changeDPad = Input.GetAxisRaw("Cursor " + axis);
+        if (changeAnalogStick != 0) return changeAnalogStick;
+        else if (changeDPad != 0) return changeDPad;
+        return 0;
     }
 
 
@@ -335,11 +334,11 @@ public class Utilities : MonoBehaviour
     {
         if (tmp != null)
         {
-            if(text != null) tmp.text = text + "";
-            if(bold) tmp.fontStyle = FontStyles.Bold;
-            if(outlineColor != null) tmp.outlineColor = outlineColor;
-            if(fontColor != null) tmp.color = fontColor;
-            if(outlineWidth > 0) tmp.outlineWidth = outlineWidth;
+            if (text != null) tmp.text = text + "";
+            if (bold) tmp.fontStyle = FontStyles.Bold;
+            if (outlineColor != null) tmp.outlineColor = outlineColor;
+            if (fontColor != null) tmp.color = fontColor;
+            if (outlineWidth > 0) tmp.outlineWidth = outlineWidth;
         }
     }
 
@@ -418,7 +417,7 @@ public class Utilities : MonoBehaviour
 
     public static StandardSkill getSkillByID(List<StandardSkill> skillset, int ID, SkillType category)
     {
-        foreach(StandardSkill skill in skillset)
+        foreach (StandardSkill skill in skillset)
         {
             if (category == skill.category && ID == skill.orderIndex) return skill;
         }

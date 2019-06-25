@@ -182,7 +182,7 @@ public class Character : MonoBehaviour
 
     [FoldoutGroup("Loot", expanded: false)]
     [HideIf("canCollectAll")]
-    public List<ItemGroup> canCollect = new List<ItemGroup>();
+    public List<string> canCollect = new List<string>();
 
 
     ////////////////////////////////////////////////////////////////
@@ -667,8 +667,9 @@ public class Character : MonoBehaviour
                     }
                 }
 
-                //TODO ADDTARGET ITEM
+                //TODO RESOURCE LIST
                 updateResource(ResourceType.life, null, skill.addLifeTarget);
+                updateResource(ResourceType.mana, null, skill.addManaTarget);
                 
                 if(this.life > 0)
                 {

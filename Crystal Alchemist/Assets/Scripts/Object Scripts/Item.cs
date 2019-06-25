@@ -6,16 +6,6 @@ using Sirenix.OdinInspector;
 
 #region Enums
 
-public enum ItemGroup
-{
-    wood,
-    stone,
-    metal,
-    key,
-    coin,
-    crystal
-}
-
 //Resource = Mana oder Life
 //Rest = Items
 
@@ -30,7 +20,7 @@ public class Item : MonoBehaviour
     public string itemName;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
-    public int amount;
+    public int amount = 1;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     public int maxAmount;
@@ -41,8 +31,7 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.item)]
-    [EnumToggleButtons]
-    public ItemGroup itemGroup;
+    public string itemGroup;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.skill)]
