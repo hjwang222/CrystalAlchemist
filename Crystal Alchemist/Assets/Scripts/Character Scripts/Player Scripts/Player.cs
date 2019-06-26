@@ -58,6 +58,10 @@ public class Player : Character
     [FoldoutGroup("Player Signals", expanded: false)]
     public SimpleSignal openInventorySignal;
 
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal openPauseSignal;
+
 
     public StandardSkill AButton;    
     public StandardSkill BButton;   
@@ -151,14 +155,14 @@ public class Player : Character
             useSkill("Y-Button");
         }
 
-        if (Input.GetButtonDown("Quit"))
-        {
-            //SceneManager.LoadScene(0);
-        }
-
         if (Input.GetButtonDown("Inventory"))
         {
             this.openInventorySignal.Raise();
+        }
+
+        if (Input.GetButtonDown("Pause"))
+        {
+            this.openPauseSignal.Raise();
         }
 
         if (currentState == CharacterState.walk || this.currentState == CharacterState.idle || this.currentState == CharacterState.interact)

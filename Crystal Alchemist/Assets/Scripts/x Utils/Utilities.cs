@@ -159,6 +159,18 @@ public class Utilities : MonoBehaviour
         return Mathf.RoundToInt(value).ToString("0");
     }
 
+    public static string formatString(float value, float maxValue)
+    {
+        string formatString = "";
+
+        for(int i = 0; i < maxValue.ToString().Length; i++)
+        {
+            formatString += "0";
+        }
+
+        return value.ToString(formatString);
+    }
+
     #endregion
 
 
