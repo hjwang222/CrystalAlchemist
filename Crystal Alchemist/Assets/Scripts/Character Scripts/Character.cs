@@ -224,12 +224,7 @@ public class Character : MonoBehaviour
     private float speedMultiply = 5;
     private SimpleSignal healthSignal;
     private SimpleSignal manaSignal;
-    private SimpleSignal keySignal;
-    private SimpleSignal coinSignal;
-    private SimpleSignal crystalSignal;
-    private SimpleSignal woodSignal;
-    private SimpleSignal stoneSignal;
-    private SimpleSignal metalSignal;
+    private SimpleSignal currencies;
     private Vector3 spawnPosition;
 
     [HideInInspector]
@@ -351,17 +346,11 @@ public class Character : MonoBehaviour
     }
 
     public void setResourceSignal(SimpleSignal health, SimpleSignal mana,
-                                  SimpleSignal key, SimpleSignal coin, SimpleSignal crystal,
-                                  SimpleSignal wood, SimpleSignal stone, SimpleSignal metal)
+                                  SimpleSignal currencies)
     {
         this.healthSignal = health;
         this.manaSignal = mana;
-        this.keySignal = key;
-        this.coinSignal = coin;
-        this.crystalSignal = crystal;
-        this.woodSignal = wood;
-        this.stoneSignal = stone;
-        this.metalSignal = metal;
+        this.currencies = currencies;
     }
 
     public void regeneration()
@@ -542,7 +531,7 @@ public class Character : MonoBehaviour
                     if (item != null)
                     {
                         Utilities.updateInventory(item, this, Mathf.RoundToInt(addResource));
-                        callSignal(this.woodSignal, addResource);  //TODO Single Signal?
+                        callSignal(this.currencies, addResource);  //TODO Single Signal?
                     }
                     break;
                 }

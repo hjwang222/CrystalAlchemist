@@ -48,9 +48,6 @@ public class Interactable : MonoBehaviour
     [Tooltip("Standard-Soundeffekt")]
     public AudioClip soundEffect;
 
-
-
-
     [HideInInspector]
     public bool isPlayerInRange;
     [HideInInspector]

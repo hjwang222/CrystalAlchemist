@@ -41,9 +41,6 @@ public class Item : MonoBehaviour
     [FoldoutGroup("Sound", expanded: false)]
     public AudioClip collectSoundEffect;
 
-    [FoldoutGroup("Sound", expanded: false)]
-    public AudioClip raiseSoundEffect;
-
     private AudioSource audioSource;
     private Animator anim;
 
@@ -78,8 +75,7 @@ public class Item : MonoBehaviour
 
     public void playSounds()
     {
-        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect);
-        Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect);
+        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect);        
     }
 
 

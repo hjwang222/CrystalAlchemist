@@ -32,27 +32,7 @@ public class Player : Character
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal keySignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal crystalSignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal coinSignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal woodSignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal stoneSignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal metalSignalUI;
+    public SimpleSignal currencySignalUI;
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
@@ -83,7 +63,7 @@ public class Player : Character
     {
         this.init();
         loadSkillsFromSkillSet("Boomerang", Button.AButton);
-        this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.keySignalUI, this.coinSignalUI, this.crystalSignalUI, this.woodSignalUI, this.stoneSignalUI, this.metalSignalUI);
+        this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.currencySignalUI);
         PlayerData data = SaveSystem.loadPlayer();
 
         if (data != null)

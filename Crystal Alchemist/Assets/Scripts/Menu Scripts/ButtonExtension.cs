@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
+using UnityEngine.UI;
 
 public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 {   
     [SerializeField]
     private GameObject cursor;
     private float offset = 16;
-    [SerializeField]
-    private Canvas canvas;
-    private GameObject lastselect;
-    private float scaleFactor = 1f;
+    //[SerializeField]
+    //private Canvas canvas;
+    //private GameObject lastselect;
+    //private float scaleFactor = 1f;
 
     private Vector2 scale;
     private Vector2 size;
@@ -33,7 +34,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         this.cursorSize = new Vector2(rt.rect.width, rt.rect.height);
         this.cursorScale = rt.lossyScale;
 
-        if (this.canvas != null) this.scaleFactor = this.canvas.scaleFactor;
+        //if (this.canvas != null) this.scaleFactor = this.canvas.scaleFactor;
         //this.scaleFactor = rt.localScale.x;
     }
 
@@ -43,12 +44,14 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         {
             EventSystem.current.firstSelectedGameObject = this.gameObject;
             EventSystem.current.SetSelectedGameObject(this.gameObject);
-            setCursor(true);
+            setCursor(true, false);
         }
-    }    
+    }
 
+    /*
     private void Update()
     {
+                 
         if (EventSystem.current.currentSelectedGameObject == null)
         {
             EventSystem.current.SetSelectedGameObject(lastselect);
@@ -57,7 +60,20 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         {
             lastselect = EventSystem.current.currentSelectedGameObject;
         }
-    }
+
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(lastselect);
+        }
+        else if (EventSystem.current.currentSelectedGameObject != null
+                && lastselect != EventSystem.current.currentSelectedGameObject)
+        {
+            if (!EventSystem.current.currentSelectedGameObject.activeInHierarchy)
+                EventSystem.current.SetSelectedGameObject(lastselect);
+            else
+                lastselect = EventSystem.current.currentSelectedGameObject;
+        }
+}*/
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -69,7 +85,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         setCursor(true);
     }
 
-    public void setCursor(bool showCursor)
+    private void setCursor(bool showCursor, bool playEffect)
     {
         if (this.cursor != null)
         {
@@ -80,8 +96,14 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
             float y_new = (((this.size.y * this.scale.y) + (this.cursorSize.y * this.cursorScale.y)) / 2) - this.offset;
 
             this.cursor.transform.position = new Vector2(this.transform.position.x - (x_new), 
-                                                         this.transform.position.y + (y_new)); 
+                                                         this.transform.position.y + (y_new));
 
+            if (playEffect) this.cursor.GetComponent<Cursor>().playSoundEffect();
         }
+    }
+
+    private void setCursor(bool showCursor)
+    {
+        setCursor(showCursor, true);       
     }
 }
