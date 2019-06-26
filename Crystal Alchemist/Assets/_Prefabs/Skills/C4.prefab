@@ -61,12 +61,14 @@ MonoBehaviour:
   cooldown: 0.5
   cooldownAfterCombo: 0
   durationCombo: 0
-  addLifeTarget: -2
-  addManaTarget: 0
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -4
   statusEffects: []
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: 0
+  resourceType: 3
+  item: {fileID: 7267644143456828498, guid: eff514630d133a14fa019ee8341f1420, type: 3}
+  addResourceSender: -2
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0
@@ -94,7 +96,7 @@ MonoBehaviour:
   ignoreInvincibility: 0
   thrust: 4
   knockbackTime: 0.2
-  maxAmounts: 4
+  maxAmounts: 1
   comboAmount: 99
   summon: {fileID: 0}
   icon: {fileID: 21300018, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
@@ -104,7 +106,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: -0.013568943
+  cooldownTimeLeft: -0.0034246743
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 0}

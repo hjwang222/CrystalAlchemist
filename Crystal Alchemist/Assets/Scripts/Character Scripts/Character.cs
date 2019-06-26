@@ -14,7 +14,7 @@ public enum CharacterState
     idle,
     frozen, //kann sich nicht bewegen und angreifen
     silent, //kann nicht angreifen
-    dead, 
+    dead,
     respawning
 }
 
@@ -88,7 +88,7 @@ public class Character : MonoBehaviour
     [TabGroup("Max-Values")]
     [Tooltip("Maximales Mana")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
-    public float maxMana = Utilities.minFloat;    
+    public float maxMana = Utilities.minFloat;
 
 
 
@@ -117,7 +117,7 @@ public class Character : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////
 
-        
+
     [FoldoutGroup("Skills", expanded: false)]
     [Tooltip("Skills, welcher der Character verwenden kann")]
     public List<StandardSkill> skillSet = new List<StandardSkill>();
@@ -186,7 +186,7 @@ public class Character : MonoBehaviour
 
 
     ////////////////////////////////////////////////////////////////
-    
+
 
     [FoldoutGroup("Sound", expanded: false)]
     [Tooltip("Soundeffekt, wenn Gegner getroffen wurde")]
@@ -294,10 +294,10 @@ public class Character : MonoBehaviour
         this.spawnPosition = this.transform.position;
         this.direction = new Vector2(0, -1);
         //getItems();    
-        
+
         setComponents();
         spawn();
-        
+
         if (this.initializeSkill != null) useSkillInstantly(this.initializeSkill);
         //this.gameObject.layer = LayerMask.NameToLayer(this.gameObject.tag);
     }
@@ -316,8 +316,8 @@ public class Character : MonoBehaviour
 
 
     public void spawn()
-    {        
-        if(this.currentState == CharacterState.respawning) Utilities.SetParameter(this.animator, "isRespawn", true);
+    {
+        if (this.currentState == CharacterState.respawning) Utilities.SetParameter(this.animator, "isRespawn", true);
 
         this.life = this.startLife;
         this.mana = this.startMana;
@@ -332,7 +332,7 @@ public class Character : MonoBehaviour
 
         this.buffs.Clear();
         this.debuffs.Clear();
-        
+
         this.currentState = CharacterState.idle;
         this.animator.enabled = true;
         this.spriteRenderer.enabled = true;
@@ -347,11 +347,11 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        regeneration();        
+        regeneration();
     }
 
-    public void setResourceSignal(SimpleSignal health, SimpleSignal mana, 
-                                  SimpleSignal key, SimpleSignal coin, SimpleSignal crystal, 
+    public void setResourceSignal(SimpleSignal health, SimpleSignal mana,
+                                  SimpleSignal key, SimpleSignal coin, SimpleSignal crystal,
                                   SimpleSignal wood, SimpleSignal stone, SimpleSignal metal)
     {
         this.healthSignal = health;
@@ -392,11 +392,11 @@ public class Character : MonoBehaviour
                     this.manaTime += (Time.deltaTime * this.timeDistortion);
                 }
             }
-       }
+        }
     }
 
     private void useSkillInstantly(StandardSkill skill)
-    {        
+    {
         if (this.activeCastbar != null && skill.holdTimer == 0) this.activeCastbar.destroyIt();
 
         if (skill.cooldownTimeLeft > 0)
@@ -410,24 +410,24 @@ public class Character : MonoBehaviour
             if (currentAmountOfSameSkills < skill.maxAmounts
                 && this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0)
             {
-                    if (!skill.isRapidFire && !skill.keepHoldTimer) skill.holdTimer = 0;
-                    
-                    skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
+                if (!skill.isRapidFire && !skill.keepHoldTimer) skill.holdTimer = 0;
 
-                    if (skill.isStationary)
-                    {
+                skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
+
+                if (skill.isStationary)
+                {
                     //Place it in World 
-                        GameObject activeSkill = Instantiate(skill.gameObject, this.transform.position, Quaternion.identity);
-                        activeSkill.GetComponent<StandardSkill>().sender = this;
-                        this.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
-                    }
-                    else
-                    {
+                    GameObject activeSkill = Instantiate(skill.gameObject, this.transform.position, Quaternion.identity);
+                    activeSkill.GetComponent<StandardSkill>().sender = this;
+                    this.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
+                }
+                else
+                {
                     //Place it as Child
-                        GameObject activeSkill = Instantiate(skill.gameObject, this.transform.position, Quaternion.identity, this.transform);
-                        activeSkill.GetComponent<StandardSkill>().sender = this;
-                        this.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
-                    }                
+                    GameObject activeSkill = Instantiate(skill.gameObject, this.transform.position, Quaternion.identity, this.transform);
+                    activeSkill.GetComponent<StandardSkill>().sender = this;
+                    this.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
+                }
             }
         }
     }
@@ -504,7 +504,7 @@ public class Character : MonoBehaviour
         this.currentState = CharacterState.dead;
 
         if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
-        this.GetComponent<BoxCollider2D>().enabled = false;        
+        this.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     public void PlayDeathSoundEffect()
@@ -525,8 +525,8 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life:
                 {
-                    this.life = Utilities.setResource(this.life, this.maxLife, addResource);  
-                    if(this.life > 0 && this.currentState != CharacterState.dead) showDamageNumber(addResource);
+                    this.life = Utilities.setResource(this.life, this.maxLife, addResource);
+                    if (this.life > 0 && this.currentState != CharacterState.dead) showDamageNumber(addResource);
                     if (this.life <= 0) killIt();
                     callSignal(this.healthSignal, addResource);
                     break;
@@ -555,13 +555,13 @@ public class Character : MonoBehaviour
                     }
                     break;
                 }
-            /*case ResourceType.crystal:
-                {
-                    this.crystals = Mathf.RoundToInt(Utilities.setResource(this.crystals, this.maxCrystals, addResource));
-                    callSignal(this.crystalSignal, addResource);
-                    break;
-                }*/
-        }        
+                /*case ResourceType.crystal:
+                    {
+                        this.crystals = Mathf.RoundToInt(Utilities.setResource(this.crystals, this.maxCrystals, addResource));
+                        callSignal(this.crystalSignal, addResource);
+                        break;
+                    }*/
+        }
     }
 
     private void callSignal(SimpleSignal signal, float addResource)
@@ -575,7 +575,7 @@ public class Character : MonoBehaviour
 
         switch (type)
         {
-            case ResourceType.life: return this.life;                
+            case ResourceType.life: return this.life;
             case ResourceType.mana: return this.mana;
             case ResourceType.item: return Utilities.getAmountFromInventory(item.itemGroup, this.inventory, false);
         }
@@ -604,17 +604,17 @@ public class Character : MonoBehaviour
 
     public void updateSpellSpeed(float addSpellSpeed)
     {
-        this.spellspeed = ((this.startSpellSpeed/100) + (addSpellSpeed/100)) * this.timeDistortion;
+        this.spellspeed = ((this.startSpellSpeed / 100) + (addSpellSpeed / 100)) * this.timeDistortion;
     }
 
     public void updateTimeDistortion(float distortion)
     {
-        this.timeDistortion = 1 + (distortion/100);
+        this.timeDistortion = 1 + (distortion / 100);
 
-       /* if (this.CompareTag("Player"))
-        {
-            this.GetComponent<Player>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
-        }*/
+        /* if (this.CompareTag("Player"))
+         {
+             this.GetComponent<Player>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
+         }*/
 
         if (this.animator != null) this.animator.speed = this.timeDistortion;
         if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
@@ -641,8 +641,8 @@ public class Character : MonoBehaviour
         {
             item.playSounds();
 
-            this.updateResource(item.resourceType, item, item.amount);         
-            
+            this.updateResource(item.resourceType, item, item.amount);
+
             if (destroyIt) item.DestroyIt();
         }
     }
@@ -667,19 +667,20 @@ public class Character : MonoBehaviour
                     }
                 }
 
-                //TODO RESOURCE LIST
-                updateResource(ResourceType.life, null, skill.addLifeTarget);
-                updateResource(ResourceType.mana, null, skill.addManaTarget);
-                
-                if(this.life > 0)
+                foreach (affectedResource elem in skill.affectedResources)
                 {
-                    if (skill.addLifeTarget < 0)
+                    updateResource(elem.resourceType, null, elem.amount);
+
+                    if (this.life > 0 && elem.resourceType == ResourceType.life && elem.amount < 0)
                     {
                         //Charakter-Treffer (Schaden) animieren
                         Utilities.playSoundEffect(this.audioSource, this.hitSoundEffect);
                         StartCoroutine(hitCo());
                     }
+                }
 
+                if (this.life > 0)
+                {
                     //Rückstoß ermitteln
                     float knockbackTrust = skill.thrust - antiKnockback;
                     knockBack(skill.knockbackTime, knockbackTrust, skill.transform);
@@ -697,9 +698,9 @@ public class Character : MonoBehaviour
         else if (statusEffect.statusEffectType == StatusEffectType.buff) statusEffects = this.buffs;
 
         //Store in temp List to avoid Enumeration Exception
-        foreach(StatusEffect effect in statusEffects)
+        foreach (StatusEffect effect in statusEffects)
         {
-            if(effect.statusEffectName == statusEffect.statusEffectName)
+            if (effect.statusEffectName == statusEffect.statusEffectName)
             {
                 dispellStatusEffects.Add(effect);
                 if (!allTheSame) break;
@@ -720,10 +721,10 @@ public class Character : MonoBehaviour
         {
             bool isImmune = false;
 
-            for(int i = 0; i< this.immunityToStatusEffects.Count; i++)
+            for (int i = 0; i < this.immunityToStatusEffects.Count; i++)
             {
                 StatusEffect immunityEffect = this.immunityToStatusEffects[i];
-                if(statusEffect.statusEffectName == immunityEffect.statusEffectName)
+                if (statusEffect.statusEffectName == immunityEffect.statusEffectName)
                 {
                     isImmune = true;
                     break;
@@ -770,7 +771,7 @@ public class Character : MonoBehaviour
                         toDestroy.DestroyIt();
                     }
                 }
-            }       
+            }
         }
     }
 
@@ -805,19 +806,19 @@ public class Character : MonoBehaviour
     public IEnumerator hitCo()
     {
         this.isInvincible = true;
-        if(this.showHitcolor) this.spriteRenderer.color = this.hitColor;
+        if (this.showHitcolor) this.spriteRenderer.color = this.hitColor;
 
         yield return new WaitForSeconds(this.cannotBeHitTime);
 
         this.isInvincible = false;
         this.spriteRenderer.color = GlobalValues.color;
     }
-    
+
 
     public IEnumerator knockCo(float knockTime)
-    {        
+    {
         if (this.myRigidbody != null)
-        {            
+        {
             this.currentState = CharacterState.knockedback;
 
             yield return new WaitForSeconds(knockTime);

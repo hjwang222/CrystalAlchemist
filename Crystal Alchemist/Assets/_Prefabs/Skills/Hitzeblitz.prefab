@@ -60,8 +60,10 @@ MonoBehaviour:
   cooldown: 1
   cooldownAfterCombo: 0
   durationCombo: 0
-  addLifeTarget: -1
-  addManaTarget: 0
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -2
   statusEffects: []
   resourceType: 2
   item: {fileID: 0}
@@ -103,7 +105,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: -0.005372472
+  cooldownTimeLeft: -0.0016758908
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 0}

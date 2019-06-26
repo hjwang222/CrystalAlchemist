@@ -117,7 +117,11 @@ public class SkillMenu : MonoBehaviour
         if (slot.skill != null)
         {
             this.skillDetailsName.text = "Name: " + slot.skill.skillName;
-            this.skillDetailsStrength.text = "Stärke: " + Mathf.Abs(slot.skill.addLifeTarget) + "";
+
+            float strength = 0;
+            if (slot.skill.affectedResources.Count > 0) strength = Mathf.Abs(slot.skill.affectedResources[0].amount);
+            this.skillDetailsStrength.text = "Stärke: " + strength + "";
+
             this.skillDetailsCost.text = "Kosten: " + Mathf.Abs(slot.skill.addResourceSender) + "";
 
             if (slot.skill.statusEffects.Count > 0)

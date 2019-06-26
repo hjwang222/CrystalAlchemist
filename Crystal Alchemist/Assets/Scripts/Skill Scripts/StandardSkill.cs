@@ -79,14 +79,8 @@ public class StandardSkill : MonoBehaviour
     ////////////////////////////////////////////////////////////////
 
     [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Ziels)", expanded: false)]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    [Tooltip("Lebensveränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
-    public float addLifeTarget = -1;
-
-    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Ziels)", expanded: false)]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    [Tooltip("Manaveränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
-    public float addManaTarget = 0;
+    [Tooltip("Veränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
+    public List<affectedResource> affectedResources;
 
     [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Ziels)", expanded: false)]
     [Tooltip("Statuseffekte")]

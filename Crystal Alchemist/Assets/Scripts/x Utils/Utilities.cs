@@ -22,6 +22,13 @@ public struct LootTable
     public int amount;
 }
 
+[System.Serializable]
+public struct AffectedResource
+{
+    public ResourceType resourceType;
+    public float amount;
+}
+
 public enum ResourceType
 {
     none,
@@ -76,8 +83,18 @@ public class Utilities : MonoBehaviour
 
         if (target != null) activeSkill.GetComponent<StandardSkill>().target = target;
         activeSkill.GetComponent<StandardSkill>().sender = sender;
-        activeSkill.GetComponent<StandardSkill>().addLifeTarget /= reduce;
-        activeSkill.GetComponent<StandardSkill>().addManaTarget /= reduce;
+
+        List<affectedResource> temp = new List<affectedResource>();
+
+        for(int i = 0; i < activeSkill.GetComponent<StandardSkill>().affectedResources.Count; i++)
+        {
+            affectedResource elem = activeSkill.GetComponent<StandardSkill>().affectedResources[i];
+            elem.amount /= reduce;
+            temp.Add(elem);
+        }
+
+        activeSkill.GetComponent<StandardSkill>().affectedResources = temp;
+
         activeSkill.GetComponent<StandardSkill>().addResourceSender /= reduce;
         sender.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
 

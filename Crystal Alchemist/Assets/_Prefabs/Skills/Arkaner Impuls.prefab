@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e333cb7d9eccdf149a75af3b5ca70b72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Arkaner Impuls
+  skillName: Impuls
   category: 1
   orderIndex: 21
   skillDescription: 
@@ -60,8 +60,10 @@ MonoBehaviour:
   cooldown: 0.05
   cooldownAfterCombo: 0
   durationCombo: 0
-  addLifeTarget: -0.1
-  addManaTarget: 0
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -0.5
   statusEffects: []
   resourceType: 2
   item: {fileID: 0}
@@ -103,7 +105,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: 0
+  cooldownTimeLeft: -0.0010062475
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 0}

@@ -152,8 +152,10 @@ MonoBehaviour:
   cooldown: 3
   cooldownAfterCombo: 0
   durationCombo: 0
-  addLifeTarget: 0
-  addManaTarget: 2
+  affectedResources:
+  - resourceType: 2
+    item: {fileID: 0}
+    amount: 1
   statusEffects: []
   resourceType: 3
   item: {fileID: 4837573728731285450, guid: 00971db8ee1ee5f41a174485c94f3d32, type: 3}
