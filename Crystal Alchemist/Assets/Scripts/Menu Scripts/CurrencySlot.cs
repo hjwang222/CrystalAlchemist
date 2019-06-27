@@ -10,18 +10,47 @@ public class CurrencySlot : MonoBehaviour
     [SerializeField]
     private int maxValue;
     [SerializeField]
+    private float counterDelay = 0.05f;
+    [SerializeField]
     private TextMeshProUGUI textField;
+    [SerializeField]
+    private AudioClip raiseSoundEffect;
     private Player player;
 
+    private AudioSource audioSource;
+    private int currentValue;
 
-    void Awake()
+    private void Awake()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
+        this.audioSource.loop = false;
+        this.audioSource.playOnAwake = false;
     }
 
-    private void Update()
+    public void updateCurrency()
     {
-        float value = Utilities.getAmountFromInventory(this.itemGroup, this.player.inventory, false);
-        this.textField.text = Utilities.formatString(value, this.maxValue);
+        int newValue = Utilities.getAmountFromInventory(this.itemGroup, this.player.inventory, false);
+        if(this.currentValue != newValue) Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect);
+        StartCoroutine(Countdown(newValue));
     }
+
+    private IEnumerator Countdown(int newValue)
+    {
+        while (this.currentValue != newValue)
+        {
+            int rate = -1;
+            if (newValue - this.currentValue > 0) rate = 1;
+
+            this.currentValue += rate;
+            if ((rate > 0 && this.currentValue >= newValue)
+                || (rate < 0 && this.currentValue <= 0)) this.currentValue = newValue;
+
+            this.textField.text = Utilities.formatString(this.currentValue, this.maxValue);
+            
+            yield return new WaitForSeconds(this.counterDelay);
+        }
+    }
+
+
 }

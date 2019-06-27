@@ -206,8 +206,21 @@ public class SkillMenu : MonoBehaviour
                 this.nextPage.SetActive(true);
                 this.previousPage.SetActive(true);
 
-                if (activeIndex == 0) this.previousPage.SetActive(false);
-                if (activeIndex == pagesCount) this.nextPage.SetActive(false);
+                if (activeIndex == 0)
+                {
+                    this.previousPage.SetActive(false);
+                    EventSystem.current.SetSelectedGameObject(this.nextPage);
+                }
+                if (activeIndex == pagesCount)
+                {
+                    this.nextPage.SetActive(false);
+                    EventSystem.current.SetSelectedGameObject(this.previousPage);
+                }
+
+                if(!this.nextPage.activeInHierarchy && !this.previousPage.activeInHierarchy)
+                {
+                    EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);                    
+                }
 
                 this.pageText.text = (activeIndex + 1) + "/" + (pagesCount + 1);
             } 
