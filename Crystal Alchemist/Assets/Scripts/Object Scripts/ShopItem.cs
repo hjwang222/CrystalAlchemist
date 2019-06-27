@@ -35,7 +35,7 @@ public class ShopItem : Interactable
     {
         if (this.isPlayerInRange && Input.GetButtonDown("Submit"))
         {
-            if (Utilities.canOpen(this.currencyNeeded, this.item, this.player, this.price))
+            if (Utilities.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
             {
                 this.player.showDialogBox("Du hast 1 " + this.items[this.index].itemName + " für " + this.price + " gekauft!");
                 this.player.collect(items[this.index], false);

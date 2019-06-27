@@ -252,7 +252,7 @@ public class Utilities : MonoBehaviour
         return false;
     }
 
-    private static bool hasEnoughCurrency(ResourceType currency, Player player, Item item, int price)
+    private static bool hasEnoughCurrencyAndUpdateResource(ResourceType currency, Player player, Item item, int price)
     {
         bool result = false;
 
@@ -344,11 +344,11 @@ public class Utilities : MonoBehaviour
 
 
 
-    public static bool canOpen(ResourceType currency, Item item, Player player, int price)
+    public static bool canOpenAndUpdateResource(ResourceType currency, Item item, Player player, int price)
     {
         if (player != null && player.currentState != CharacterState.inDialog)
         {
-            if (hasEnoughCurrency(currency, player, item, -price)) return true;
+            if (hasEnoughCurrencyAndUpdateResource(currency, player, item, -price)) return true;
             else
             {
                 player.showDialogBox(GlobalValues.noMoneyText);

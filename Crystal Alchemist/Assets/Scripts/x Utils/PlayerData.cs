@@ -2,19 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [System.Serializable]
 public class PlayerData
 {
     public float health;
     public float mana;
-
-    public int coins;
-    public int keys;
-    public int crystals;
-
-    public int wood;
-    public int stone;
-    public int metal;
+    public List<string[]> inventory = new List<string[]>();
+    public List<GameObject> temp = new List<GameObject>();
 
     public float[] position;
     public string scene;
@@ -24,20 +19,22 @@ public class PlayerData
         this.health = player.life;
         this.mana = player.mana;
 
-        /*
-        this.coins = player.coins;
-        this.keys = player.keys;
-        this.crystals = player.crystals;
-
-        this.wood = player.wood;
-        this.stone = player.stone;
-        this.metal = player.metal;*/
-
         this.position = new float[3];
 
         this.position[0] = player.transform.position.x;
         this.position[1] = player.transform.position.y;
         this.position[2] = player.transform.position.z;
+
+        this.inventory.Clear();
+
+        foreach(Item item in player.inventory)
+        {
+            string[] temp = new string[2];
+            temp[0] = item.gameObject.name.Split('(')[0];
+            temp[1] = item.amount + "";
+            this.temp.Add(item.gameObject);
+            this.inventory.Add(temp);
+        }
 
         this.scene = player.getScene();
     }
@@ -53,5 +50,17 @@ public class GameOptions
     {
         this.musicVolume = GlobalValues.backgroundMusicVolume;
         this.soundVolume = GlobalValues.soundEffectVolume;
+    }
+}
+
+
+[System.Serializable]
+public class InventoryData
+{
+    public List<Item> items;
+
+    public InventoryData(List<Item> items)
+    {
+        this.items = items;
     }
 }

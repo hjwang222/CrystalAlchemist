@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
-
+using UnityEditor;
 
 public enum Button
 {
@@ -71,15 +71,26 @@ public class Player : Character
             this.life = data.health;
             this.mana = data.mana;
 
-            /*this.coins = data.coins;
-            this.crystals = data.crystals;
-            this.keys = data.keys;
-
-            this.wood = data.wood;
-            this.stone = data.stone;
-            this.metal = data.metal;*/
-
             this.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+
+            if (data.inventory.Count > 0)
+            {     
+                /*
+                foreach (string[] elem in data.inventory)
+                {
+                    GameObject prefab = AssetDatabase.LoadAssetAtPath("Assets/_Prefabs/Items/" + elem[0] + ".prefab", typeof(GameObject)) as GameObject;                    
+                    Item item = prefab.GetComponent<Item>();
+                    item.amount = Convert.ToInt32(elem[1]);
+                    this.collect(item, false);
+                }*/
+
+                foreach(GameObject item in data.temp)
+                {
+                    this.collect(item.GetComponent<Item>(), false);
+                }
+
+                this.currencySignalUI.Raise();
+            }
         }
 
         this.currentState = CharacterState.walk;

@@ -54,7 +54,6 @@ public static class SaveSystem
         }
     }
 
-
     public static void loadOptions()
     {
         string path = Application.persistentDataPath + "/options.fun";

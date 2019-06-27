@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
+using UnityEditor;
 
 #region Enums
 
@@ -10,6 +11,7 @@ using Sirenix.OdinInspector;
 //Rest = Items
 
 #endregion
+
 
 public class Item : MonoBehaviour
 {
@@ -51,7 +53,6 @@ public class Item : MonoBehaviour
 
     private void Awake()
     {
-
         //TODO: set Sprite if Skill != null
         init();
     }
@@ -62,6 +63,9 @@ public class Item : MonoBehaviour
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
         this.anim = this.GetComponent<Animator>();
+
+    
+        
         //this.soundEffects = this.GetComponents<AudioSource>();
     }
 

@@ -135,7 +135,7 @@ public class Treasure : Interactable
 
     private void canOpenChest()
     {
-        if (Utilities.canOpen(this.currencyNeeded, this.item, this.player, this.price)) OpenChest();
+        if (Utilities.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price)) OpenChest();
     }
 
     public void showTreasureItem()
