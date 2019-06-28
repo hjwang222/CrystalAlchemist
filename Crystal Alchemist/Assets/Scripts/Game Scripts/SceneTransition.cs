@@ -47,6 +47,8 @@ public class SceneTransition : MonoBehaviour
         {
             if (asyncOperation.progress >= 0.9f)
             {
+                yield return new WaitForSeconds(0.3f);
+
                 asyncOperation.allowSceneActivation = true;
                 player.currentState = CharacterState.idle;
                 player.transform.position = playerPositionInNewScene;
