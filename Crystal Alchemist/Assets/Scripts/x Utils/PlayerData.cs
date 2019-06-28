@@ -9,7 +9,7 @@ public class PlayerData
     public float health;
     public float mana;
     public List<string[]> inventory = new List<string[]>();
-    public List<GameObject> temp = new List<GameObject>();
+    public List<string[]> skills = new List<string[]>();
 
     public float[] position;
     public string scene;
@@ -25,18 +25,33 @@ public class PlayerData
         this.position[1] = player.transform.position.y;
         this.position[2] = player.transform.position.z;
 
-        this.inventory.Clear();
-
-        foreach(Item item in player.inventory)
-        {
-            string[] temp = new string[2];
-            temp[0] = item.gameObject.name.Split('(')[0];
-            temp[1] = item.amount + "";
-            this.temp.Add(item.gameObject);
-            this.inventory.Add(temp);
-        }
+        setInventory(player);
+        setSkills(player);
 
         this.scene = player.getScene();
+    }
+
+    private void setInventory(Player player)
+    {
+        this.inventory.Clear();
+
+        foreach (Item item in player.inventory)
+        {
+            string[] temp = new string[2];
+            temp[0] = item.gameObject.name.Replace(" (", "(").Split('(')[0];
+            temp[1] = item.amount + "";
+            this.inventory.Add(temp);
+        }
+    }
+
+    private void setSkills(Player player)
+    {
+        this.skills.Clear();
+
+        if (player.AButton != null) this.skills.Add(new string[] { "A", player.AButton.skillName });
+        if (player.BButton != null) this.skills.Add(new string[] { "B", player.BButton.skillName });
+        if (player.XButton != null) this.skills.Add(new string[] { "X", player.XButton.skillName });
+        if (player.YButton != null) this.skills.Add(new string[] { "Y", player.YButton.skillName });
     }
 }
 

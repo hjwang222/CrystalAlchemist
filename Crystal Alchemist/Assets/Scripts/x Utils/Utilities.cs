@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
 
+
 #region Objects
 [System.Serializable]
 public struct LootTable
@@ -304,6 +305,7 @@ public class Utilities : MonoBehaviour
             if (found == null)
             {
                 GameObject temp = Instantiate(item.gameObject, character.transform);
+                temp.name = item.name;
                 temp.SetActive(false);
                 temp.hideFlags = HideFlags.HideInHierarchy;
                 character.inventory.Add(temp.GetComponent<Item>());
@@ -454,6 +456,16 @@ public class Utilities : MonoBehaviour
         return null;
     }
 
+    public static StandardSkill getSkillByName(List<StandardSkill> skillset, string name)
+    {
+        foreach (StandardSkill skill in skillset)
+        {
+            if (name == skill.skillName) return skill;
+        }
+
+        return null;
+    }
+
 
     public static IEnumerator delayInputPlayerCO(float delay, Player player)
     {
@@ -465,4 +477,8 @@ public class Utilities : MonoBehaviour
             player.currentState = CharacterState.idle;
         }
     }
+
+
+
+    
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public static class SaveSystem
+
+public class SaveSystem
 {
     public static void Save(Player player)
     {
@@ -70,6 +71,8 @@ public static class SaveSystem
 
             GlobalValues.backgroundMusicVolume = data.musicVolume;
             GlobalValues.soundEffectVolume = data.soundVolume;
-        }        
+        }
     }
 }
+
+

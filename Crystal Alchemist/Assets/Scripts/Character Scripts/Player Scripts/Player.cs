@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
-using UnityEditor;
 
 public enum Button
 {
@@ -49,14 +48,8 @@ public class Player : Character
     public StandardSkill YButton;    
     public StandardSkill RBButton;
 
-
     private Vector3 change;
-    private string lastButtonPressed = "";
-
-
-
-
-    //public GameObject music;    
+    private string lastButtonPressed = "";   
 
     // Start is called before the first frame update
     private void Start()
@@ -64,34 +57,8 @@ public class Player : Character
         this.init();
         loadSkillsFromSkillSet("Boomerang", Button.AButton);
         this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.currencySignalUI);
-        PlayerData data = SaveSystem.loadPlayer();
 
-        if (data != null)
-        {
-            this.life = data.health;
-            this.mana = data.mana;
-
-            this.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-
-            if (data.inventory.Count > 0)
-            {     
-                /*
-                foreach (string[] elem in data.inventory)
-                {
-                    GameObject prefab = AssetDatabase.LoadAssetAtPath("Assets/_Prefabs/Items/" + elem[0] + ".prefab", typeof(GameObject)) as GameObject;                    
-                    Item item = prefab.GetComponent<Item>();
-                    item.amount = Convert.ToInt32(elem[1]);
-                    this.collect(item, false);
-                }*/
-
-                foreach(GameObject item in data.temp)
-                {
-                    this.collect(item.GetComponent<Item>(), false);
-                }
-
-                this.currencySignalUI.Raise();
-            }
-        }
+        LoadSystem.loadPlayerData(this);
 
         this.currentState = CharacterState.walk;
 
