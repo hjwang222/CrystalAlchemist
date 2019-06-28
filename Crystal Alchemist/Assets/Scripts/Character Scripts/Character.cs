@@ -493,7 +493,7 @@ public class Character : MonoBehaviour
         if (this.isPlayer)
         {
             //TODO: Wenn Spieler tot ist
-            SceneManager.LoadScene(0);
+            SceneManager.LoadSceneAsync(0);
         }
         else
         {

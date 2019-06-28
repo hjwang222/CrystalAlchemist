@@ -20,7 +20,7 @@ public class ChasingEnemy : Enemy
         //resetVelocity();
         
         regeneration();
-        setTarget();
+        
         moveCharacter();
 
     }

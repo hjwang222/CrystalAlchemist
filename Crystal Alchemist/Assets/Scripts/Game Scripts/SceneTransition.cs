@@ -15,7 +15,7 @@ public class SceneTransition : MonoBehaviour
     [Header("Fading")]
     public GameObject fadeInPanel;
     public GameObject fadeOutPanel;
-    public float fadeWait;    
+    public float fadeWait;
 
     public void Awake()
     {
@@ -30,17 +30,32 @@ public class SceneTransition : MonoBehaviour
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            load(other.GetComponent<Player>());      
+            StartCoroutine(LoadScene(other.GetComponent<Player>())); 
         }
     }
 
-    private void load(Player player)
+  
+    IEnumerator LoadScene(Player player)
     {
-        SceneManager.LoadScene(this.targetScene);
-       
-        player.currentState = CharacterState.idle;
-        player.transform.position = playerPositionInNewScene;
+        yield return null;
+
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.targetScene);
+        asyncOperation.allowSceneActivation = false;
+        player.gameObject.SetActive(false);
+
+        while (!asyncOperation.isDone)
+        {
+            if (asyncOperation.progress >= 0.9f)
+            {
+                asyncOperation.allowSceneActivation = true;
+                player.currentState = CharacterState.idle;
+                player.transform.position = playerPositionInNewScene;
+                player.gameObject.SetActive(true);
+            }
+            yield return null;            
+        }
     }
+
 
     /*
     public IEnumerator FadeCo(Player player)
