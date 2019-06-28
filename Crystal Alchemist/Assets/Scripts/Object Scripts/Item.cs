@@ -64,8 +64,6 @@ public class Item : MonoBehaviour
         this.audioSource.playOnAwake = false;
         this.anim = this.GetComponent<Animator>();
 
-    
-        
         //this.soundEffects = this.GetComponents<AudioSource>();
     }
 

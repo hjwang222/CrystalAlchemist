@@ -60,7 +60,7 @@ public class TitleScreen : MonoBehaviour
 
         if (data != null && data.scene != null && data.scene != "") scene = data.scene;
 
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadSceneAsync(scene);
     }
 
     public void exitGame()

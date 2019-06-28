@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
 
     public void exitGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadSceneAsync(0);
     }
 
     public void exitMenu()

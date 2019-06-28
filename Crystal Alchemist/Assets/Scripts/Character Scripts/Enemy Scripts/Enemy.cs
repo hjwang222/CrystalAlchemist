@@ -13,6 +13,7 @@ public class Enemy : Character
     void Start()
     {
         init();
+        setTarget();
         //this.target = GameObject.FindWithTag("Player").transform;   //Position und Size
         Utilities.SetParameter(this.animator, "isWakeUp", true);
     }
@@ -29,6 +30,7 @@ public class Enemy : Character
         //TODO: Wechsel erst nach x Sekunden oder wenn außer Reichweite
 
         Character temp = GameObject.FindWithTag("Player").GetComponent<Character>();
+
         if(temp.currentState != CharacterState.inDialog)
         {
             this.target = temp;

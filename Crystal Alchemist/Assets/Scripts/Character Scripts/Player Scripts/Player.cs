@@ -54,6 +54,7 @@ public class Player : Character
     // Start is called before the first frame update
     private void Start()
     {
+        this.isPlayer = true;
         this.init();
         loadSkillsFromSkillSet("Boomerang", Button.AButton);
         this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.currencySignalUI);
