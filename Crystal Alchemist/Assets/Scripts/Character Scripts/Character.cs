@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 #region Enums
 public enum CharacterState
@@ -269,7 +270,8 @@ public class Character : MonoBehaviour
     public float timeDistortion = 1;
     [HideInInspector]
     public GameObject activeLockOnTarget = null;
-
+    [HideInInspector]
+    public bool isPlayer = false;
 
     [HideInInspector]
     public List<Item> inventory = new List<Item>();
@@ -488,12 +490,20 @@ public class Character : MonoBehaviour
 
     private void killIt()
     {
-        Utilities.SetParameter(this.animator, "isDead", true);
+        if (this.isPlayer)
+        {
+            //TODO: Wenn Spieler tot ist
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            Utilities.SetParameter(this.animator, "isDead", true);
 
-        this.currentState = CharacterState.dead;
+            this.currentState = CharacterState.dead;
 
-        if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
-        this.GetComponent<BoxCollider2D>().enabled = false;
+            if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
+            this.GetComponent<BoxCollider2D>().enabled = false;
+        }
     }
 
     public void PlayDeathSoundEffect()
