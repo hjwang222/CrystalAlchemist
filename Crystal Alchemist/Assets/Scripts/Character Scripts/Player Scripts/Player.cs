@@ -41,6 +41,9 @@ public class Player : Character
     [FoldoutGroup("Player Signals", expanded: false)]
     public SimpleSignal openPauseSignal;
 
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public BoolSignal cameraSignal;
+
 
     public StandardSkill AButton;    
     public StandardSkill BButton;   
@@ -147,6 +150,33 @@ public class Player : Character
         Scene scene = SceneManager.GetActiveScene();
         return scene.name;
     }
+
+
+    public void setNewPosition(Vector2 playerPositionInNewScene)
+    {
+        StartCoroutine(positionCo(playerPositionInNewScene));
+    }
+
+    private IEnumerator positionCo(Vector2 playerPositionInNewScene)
+    {
+        this.currentState = CharacterState.inDialog;
+        this.spriteRenderer.enabled = false;
+        //this.cameraSignal.Raise(false);
+        yield return null;
+
+        this.transform.position = playerPositionInNewScene;
+        this.spriteRenderer.enabled = true;
+        //this.cameraSignal.Raise(true);
+        setPlayerPlayable();
+    }
+
+    public void setPlayerPlayable()
+    {
+        this.currentState = CharacterState.idle;
+    }
+
+
+
 
     #region Using Skill
 

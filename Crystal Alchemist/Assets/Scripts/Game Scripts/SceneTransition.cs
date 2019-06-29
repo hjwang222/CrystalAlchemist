@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using Sirenix.OdinInspector;
 
 public class SceneTransition : MonoBehaviour
 {
+
     [Header("New Scene Variables")]
     [Tooltip("Name der nächsten Map")]
+    [Required]
     public string targetScene;
+
+    [Required]
     [Tooltip("Spawnpunkt des Spielers")]
     public Vector2 playerPositionInNewScene;
+
+    [Required]
+    public SimpleSignal vcamSignal;
 
     [Header("Fading")]
     public GameObject fadeInPanel;
@@ -30,46 +38,39 @@ public class SceneTransition : MonoBehaviour
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            StartCoroutine(LoadScene(other.GetComponent<Player>())); 
+            StartCoroutine(LoadScene(other.GetComponent<Player>()));
+            Debug.Log("End");
         }
     }
 
   
-    IEnumerator LoadScene(Player player)
+    private IEnumerator LoadScene(Player player)
     {
         yield return null;
-
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.targetScene);
         asyncOperation.allowSceneActivation = false;
-        player.gameObject.SetActive(false);
+        this.vcamSignal.Raise();
 
         while (!asyncOperation.isDone)
         {
             if (asyncOperation.progress >= 0.9f)
             {
-                yield return new WaitForSeconds(0.3f);
-
                 asyncOperation.allowSceneActivation = true;
-                player.currentState = CharacterState.idle;
-                player.transform.position = playerPositionInNewScene;
-                player.gameObject.SetActive(true);
+                player.setNewPosition(this.playerPositionInNewScene);
             }
-            yield return null;            
-        }
+            yield return null;
+        }      
     }
 
 
     /*
     public IEnumerator FadeCo(Player player)
-    {
+    {   
         if (fadeOutPanel != null)
         {
             Instantiate(this.fadeOutPanel, Vector3.zero, Quaternion.identity);
         }
-        yield return new WaitForSeconds(this.fadeWait);
-
-        //if(player != null) player.SavePlayer();
-        
+        yield return new WaitForSeconds(this.fadeWait);      
 
         while (!asyncOperation.isDone)
         {

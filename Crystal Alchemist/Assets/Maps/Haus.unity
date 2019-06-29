@@ -7603,6 +7603,7 @@ GameObject:
   - component: {fileID: 7281069460179008108}
   - component: {fileID: 7281069460179008109}
   - component: {fileID: 7281069460179008110}
+  - component: {fileID: 7281069460179008084}
   m_Layer: 0
   m_Name: Area Bounds
   m_TagString: Room
@@ -7610,6 +7611,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7281069460179008084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7281069460179008083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: a33ae82561921e840bfadec36a9feb04, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7281069460179008110}
+        m_MethodName: setFollowAtNull
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!4 &7281069460179008108
 Transform:
   m_ObjectHideFlags: 0
@@ -7766,10 +7796,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetScene: Dorf
   playerPositionInNewScene: {x: 3, y: 2}
+  vcamSignal: {fileID: 11400000, guid: a33ae82561921e840bfadec36a9feb04, type: 2}
   fadeInPanel: {fileID: 0}
   fadeOutPanel: {fileID: 0}
   fadeWait: 0
-  virtualCamera: {fileID: 7281069459718837297}
 --- !u!1 &9170353455517045928
 GameObject:
   m_ObjectHideFlags: 0

@@ -8141,6 +8141,7 @@ GameObject:
   - component: {fileID: 299324000}
   - component: {fileID: 299324001}
   - component: {fileID: 299324002}
+  - component: {fileID: 299324003}
   m_Layer: 0
   m_Name: Dorf Box
   m_TagString: Room
@@ -8205,6 +8206,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1010957373}
+--- !u!114 &299324003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299323999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: a33ae82561921e840bfadec36a9feb04, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 299324002}
+        m_MethodName: setFollowAtNull
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1001 &322521110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15254,6 +15284,7 @@ GameObject:
   - component: {fileID: 1440446682}
   - component: {fileID: 1440446683}
   - component: {fileID: 1440446684}
+  - component: {fileID: 1440446685}
   m_Layer: 0
   m_Name: Teich Box
   m_TagString: Room
@@ -15318,6 +15349,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 142476648}
+--- !u!114 &1440446685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440446681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: a33ae82561921e840bfadec36a9feb04, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1440446684}
+        m_MethodName: setFollowAtNull
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!4 &1478306027 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1301488769302884364, guid: fc23bdea94e836e448a33ca313d7172e,
@@ -19772,6 +19832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetScene: Haus
   playerPositionInNewScene: {x: 0, y: -4}
+  vcamSignal: {fileID: 11400000, guid: a33ae82561921e840bfadec36a9feb04, type: 2}
   fadeInPanel: {fileID: 0}
   fadeOutPanel: {fileID: 0}
   fadeWait: 0
