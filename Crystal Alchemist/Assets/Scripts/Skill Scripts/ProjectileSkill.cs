@@ -20,7 +20,7 @@ public class ProjectileSkill : StandardSkill
             }
 
             if (!this.rotateEndSprite) this.transform.rotation = Quaternion.Euler(0,0,0);
-            Utilities.SetParameter(this.animator, "Hit", true);
+            Utilities.SetAnimatorParameter(this.animator, "Hit", true);
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
             this.isActive = false;
         }

@@ -127,7 +127,7 @@ public class StatusEffect : MonoBehaviour
     {
         if (this.endType == StatusEffectEndType.time) this.statusEffectTimeLeft = this.statusEffectDuration;
         if (this.endType == StatusEffectEndType.mana) this.statusEffectTimeLeft = Mathf.Infinity;
-        if (this.target != null && this.target.spriteRenderer.color == GlobalValues.color) this.target.spriteRenderer.color = this.statusEffectColor;
+        if (this.target != null && this.target.spriteRenderer.color == Color.white) this.target.spriteRenderer.color = this.statusEffectColor;
 
         if (this.statusEffectInterval == 0)
         {
@@ -205,7 +205,7 @@ public class StatusEffect : MonoBehaviour
         if (this.target != null)
         {
             //Charakter-Farbe zurücksetzen
-            this.target.spriteRenderer.color = GlobalValues.color;
+            this.target.spriteRenderer.color = Color.white;
 
             //Statuseffekt von der Liste entfernen
             if (this.statusEffectType == StatusEffectType.debuff)

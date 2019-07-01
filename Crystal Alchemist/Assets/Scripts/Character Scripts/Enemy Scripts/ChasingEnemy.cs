@@ -20,7 +20,7 @@ public class ChasingEnemy : Enemy
         //resetVelocity();
         
         regeneration();
-        
+        setTarget(); //TODO
         moveCharacter();
 
     }
@@ -50,12 +50,12 @@ public class ChasingEnemy : Enemy
 
                     changeState(CharacterState.walk); //Gegner bewegt sich gerade
 
-                    Utilities.SetParameter(this.animator, "isWakeUp", true);
+                    Utilities.SetAnimatorParameter(this.animator, "isWakeUp", true);
                 }
             }
             else if (Vector3.Distance(this.target.transform.position, transform.position) > this.chaseRadius)
             {
-                Utilities.SetParameter(this.animator, "isWakeUp", false);
+                Utilities.SetAnimatorParameter(this.animator, "isWakeUp", false);
             }
         }
     }

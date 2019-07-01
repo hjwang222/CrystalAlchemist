@@ -79,7 +79,7 @@ public class Treasure : Interactable
 
             if (this.treasureType == TreasureType.lootbox)
             {
-                Utilities.SetParameter(this.anim, "isOpened", false);
+                Utilities.SetAnimatorParameter(this.anim, "isOpened", false);
                 this.currentState = objectState.normal;
                 Utilities.setItem(this.lootTable, this.multiLoot, this.items);
             }
@@ -101,7 +101,7 @@ public class Treasure : Interactable
 
     private void OpenChest()
     {        
-        Utilities.SetParameter(this.anim, "isOpened", true);
+        Utilities.SetAnimatorParameter(this.anim, "isOpened", true);
         this.currentState = objectState.opened;
 
         string text = this.text;

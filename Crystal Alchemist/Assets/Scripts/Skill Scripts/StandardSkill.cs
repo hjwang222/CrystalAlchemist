@@ -24,6 +24,9 @@ public class StandardSkill : MonoBehaviour
     public SkillType category = SkillType.magical;
 
     [BoxGroup("Pflichtfelder")]
+    public string animationTriggerName = "";
+
+    [BoxGroup("Pflichtfelder")]
     [Tooltip("Sortierung")]
     public int orderIndex = 10;
 
@@ -119,6 +122,9 @@ public class StandardSkill : MonoBehaviour
     public float speedDuringDuration = 0;
 
     [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    public bool affectAnimation = true;
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
     [Tooltip("Soll der Charakter während des Schießens weiterhin in die gleiche Richtung schauen?")]
     public bool lockMovementonDuration = false;
 
@@ -141,6 +147,11 @@ public class StandardSkill : MonoBehaviour
     [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
     public bool rotateIt = false;
+
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
+    [HideIf("rotateIt")]
+    public bool blendTree = false;
 
     [ShowIf("rotateIt")]
     [FoldoutGroup("Projektil Attribute", expanded: false)]
@@ -346,8 +357,6 @@ public class StandardSkill : MonoBehaviour
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
-        this.spriteRenderer = GetComponent<SpriteRenderer>();
-        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
         this.animator = GetComponent<Animator>();
 
         this.delayTimeLeft = this.delay;
@@ -356,8 +365,13 @@ public class StandardSkill : MonoBehaviour
         this.elapsed = this.intervallSender;
 
         if (this.startSoundEffect != null) Utilities.playSoundEffect(this.audioSource, this.startSoundEffect);
-        
-        if (this.sender == null) this.sender = this.transform.parent.GetComponent<Character>(); //SET SENDER IF NULL (IMPORTANT!)
+
+        if (this.sender == null)
+        {
+            this.sender = this.transform.parent.GetComponent<Character>(); //SET SENDER IF NULL (IMPORTANT!)            
+        }
+
+        this.sender.startAttackAnimation(this.animationTriggerName);
     }
 
     private void updateResourceSender()
@@ -375,8 +389,8 @@ public class StandardSkill : MonoBehaviour
 
         if (this.animator != null)
         {
-            Utilities.SetParameter(this.animator, "moveX", this.sender.direction.x);
-            Utilities.SetParameter(this.animator, "moveY", this.sender.direction.y);
+            Utilities.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
+            Utilities.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
         }
 
         float angle;
@@ -398,6 +412,11 @@ public class StandardSkill : MonoBehaviour
         }
 
         if(this.rotateIt) transform.rotation = Quaternion.Euler(rotation);
+        if (this.blendTree)
+        {
+            Utilities.SetAnimatorParameter(this.animator, "moveX", this.direction.x);
+            Utilities.SetAnimatorParameter(this.animator, "moveY", this.direction.y);
+        }
     }
 
     #endregion
@@ -430,19 +449,19 @@ public class StandardSkill : MonoBehaviour
                 }
             }
 
-            if (this.speedDuringDuration != 0) this.sender.updateSpeed(this.speedDuringDuration);
+            if (this.speedDuringDuration != 0) this.sender.updateSpeed(this.speedDuringDuration, this.affectAnimation);
 
             if (this.animator != null && this.sender != null && !this.lockMovementonDuration)
             {
-                Utilities.SetParameter(this.animator, "moveX", this.sender.direction.x);
-                Utilities.SetParameter(this.animator, "moveY", this.sender.direction.y);
+                Utilities.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
+                Utilities.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
             }
 
             if (this.delayTimeLeft > 0)
             {
                 this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
                 
-                Utilities.SetParameter(this.animator, "Time", this.delayTimeLeft);
+                Utilities.SetAnimatorParameter(this.animator, "Time", this.delayTimeLeft);
                 //do something here
             }
             else
@@ -456,7 +475,7 @@ public class StandardSkill : MonoBehaviour
                     }
                     else
                     {
-                        Utilities.SetParameter(this.animator, "Explode", true);
+                        Utilities.SetAnimatorParameter(this.animator, "Explode", true);
 
                         if (this.animator == null || !Utilities.HasParameter(this.animator, "Explode")) DestroyIt();
                     }

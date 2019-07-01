@@ -122,45 +122,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Krug
-  characterSpecies: "Gef\xE4\xDF"
-  characterGender: 2
-  characterType: 3
-  element: 8
   startLife: 3
-  startMana: 0
+  startMana: 0.1
   startSpeed: 0
   startSpellSpeed: 100
-  immunityToStatusEffects: []
   respawnTime: 9999
-  skills: []
-  initializeSkill: {fileID: 0}
-  deathSkill: {fileID: 0}
+  immunityToStatusEffects: []
+  maxLife: 0.1
+  maxMana: 0.1
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
   manaRegeneration: 0
   manaRegenerationInterval: 0
-  attributeMaxLife: 3
-  attributeMaxMana: 0
+  skillSet: []
+  initializeSkill: {fileID: 0}
+  deathSkill: {fileID: 0}
+  damageNumber: {fileID: 0}
   antiKnockback: 0
   cannotBeHitTime: 0.3
   isTouchable: 1
-  coins: 0
-  crystals: 0
-  keys: 0
+  showHitcolor: 1
+  hitColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
   lootTable:
   - item: {fileID: 8069356869073092967, guid: 6b191b04f9a7dbc49920d197f5070449, type: 3}
     dropRate: 10
     amount: 0
   multiLoot: 0
-  showHitcolor: 1
-  hitColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
-  dialog: []
-  contextClueChild: {fileID: 0}
-  damageNumber: {fileID: 0}
+  canCollectAll: 0
+  canCollect: []
   hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
   killSoundEffect: {fileID: 8300000, guid: c1c64c941c14979489abf63f84a92cae, type: 3}
-  healthSignal: {fileID: 0}
-  manaSignal: {fileID: 0}
+  characterSpecies: "Gef\xE4\xDF"
+  characterGender: 2
+  characterType: 3
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
@@ -182,6 +176,8 @@ MonoBehaviour:
   lockAnimation: 0
   timeDistortion: 1
   activeLockOnTarget: {fileID: 0}
+  isPlayer: 0
+  inventory: []
 --- !u!95 &4378207659174940501
 Animator:
   serializedVersion: 3

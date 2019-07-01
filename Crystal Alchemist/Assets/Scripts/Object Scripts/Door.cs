@@ -26,7 +26,7 @@ public class Door : Interactable
         init();
         this.boxCollider = GetComponent<BoxCollider2D>();
 
-        if (this.isOpen) Utilities.SetParameter(this.animator, "isOpened", true);
+        if (this.isOpen) Utilities.SetAnimatorParameter(this.animator, "isOpened", true);
     }
 
     private void Update()
@@ -72,7 +72,7 @@ public class Door : Interactable
     private void OpenCloseDoor(bool isOpen, GameObject contextClueChild)
     {
         this.isOpen = isOpen;
-        Utilities.SetParameter(this.animator, "isOpened", this.isOpen);
+        Utilities.SetAnimatorParameter(this.animator, "isOpened", this.isOpen);
         this.boxCollider.enabled = !this.isOpen;
 
         if (contextClueChild != null)

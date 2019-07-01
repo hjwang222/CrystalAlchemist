@@ -66,8 +66,8 @@ public class Player : Character
 
         this.currentState = CharacterState.walk;
 
-        Utilities.SetParameter(this.animator, "moveX", 0);
-        Utilities.SetParameter(this.animator, "moveY", -1);
+        Utilities.SetAnimatorParameter(this.animator, "moveX", 0);
+        Utilities.SetAnimatorParameter(this.animator, "moveY", -1);
 
         this.direction = new Vector2(0, -1);
     }
@@ -100,7 +100,7 @@ public class Player : Character
 
         if (currentState == CharacterState.inDialog)
         {
-            Utilities.SetParameter(this.animator, "isWalking", false);
+            Utilities.SetAnimatorParameter(this.animator, "isWalking", false);
             return;
         }
 
@@ -475,14 +475,14 @@ public class Player : Character
             {
                 this.direction = change;
 
-                Utilities.SetParameter(this.animator, "moveX", change.x);
-                Utilities.SetParameter(this.animator, "moveY", change.y);
+                Utilities.SetAnimatorParameter(this.animator, "moveX", change.x);
+                Utilities.SetAnimatorParameter(this.animator, "moveY", change.y);
             }
 
 
-            Utilities.SetParameter(this.animator, "isWalking", true);
+            Utilities.SetAnimatorParameter(this.animator, "isWalking", true);
         }
-        else Utilities.SetParameter(this.animator, "isWalking", false);
+        else Utilities.SetAnimatorParameter(this.animator, "isWalking", false);
     }
 
     private void MoveCharacter()

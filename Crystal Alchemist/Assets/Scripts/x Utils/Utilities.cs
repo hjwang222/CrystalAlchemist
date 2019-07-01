@@ -218,7 +218,10 @@ public class Utilities : MonoBehaviour
         return result;
     }
 
-    public static void SetParameter(Animator animator, string parameter, bool value)
+    /// <summary>
+    /// set bool value for Animator
+    /// </summary>
+    public static void SetAnimatorParameter(Animator animator, string parameter, bool value)
     {
         if (animator != null)
         {
@@ -229,7 +232,25 @@ public class Utilities : MonoBehaviour
         }
     }
 
-    public static void SetParameter(Animator animator, string parameter, float value)
+
+    /// <summary>
+    /// set Trigger for Animator
+    /// </summary>
+    public static void SetAnimatorParameter(Animator animator, string parameter)
+    {
+        if (animator != null)
+        {
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.name == parameter) animator.SetTrigger(parameter);
+            }
+        }
+    }
+
+    /// <summary>
+    /// set float value for Animator
+    /// </summary>
+    public static void SetAnimatorParameter(Animator animator, string parameter, float value)
     {
         if (animator != null)
         {

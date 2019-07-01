@@ -306,7 +306,6 @@ public class Character : MonoBehaviour
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
         this.spriteRenderer = GetComponent<SpriteRenderer>();
-        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
         this.animator = GetComponent<Animator>();
         this.transform.gameObject.tag = this.characterType.ToString();
     }
@@ -314,7 +313,7 @@ public class Character : MonoBehaviour
 
     public void spawn()
     {
-        if (this.currentState == CharacterState.respawning) Utilities.SetParameter(this.animator, "isRespawn", true);
+        if (this.currentState == CharacterState.respawning) Utilities.SetAnimatorParameter(this.animator, "isRespawn", true);
 
         this.life = this.startLife;
         this.mana = this.startMana;
@@ -428,11 +427,6 @@ public class Character : MonoBehaviour
 
     #region Day/Night Circle  
 
-    public void updateColor()
-    {
-        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
-    }
-
     #endregion
 
 
@@ -497,7 +491,7 @@ public class Character : MonoBehaviour
         }
         else
         {
-            Utilities.SetParameter(this.animator, "isDead", true);
+            Utilities.SetAnimatorParameter(this.animator, "isDead", true);
 
             this.currentState = CharacterState.dead;
 
@@ -597,8 +591,13 @@ public class Character : MonoBehaviour
 
     public void updateSpeed(float addSpeed)
     {
+        updateSpeed(addSpeed, true);
+    }
+
+    public void updateSpeed(float addSpeed, bool affectAnimation)
+    {
         this.speed = ((this.startSpeed / 100) + (addSpeed / 100)) * this.timeDistortion * this.speedMultiply;
-        this.animator.speed = this.speed / (this.startSpeed * this.speedMultiply / 100);
+        if(affectAnimation) this.animator.speed = this.speed / (this.startSpeed * this.speedMultiply / 100);
     }
 
     public void updateSpellSpeed(float addSpellSpeed)
@@ -630,6 +629,14 @@ public class Character : MonoBehaviour
     }
 
     #endregion
+
+
+    public void startAttackAnimation(string parameter)
+    {
+        Utilities.SetAnimatorParameter(this.animator, parameter);
+    }
+
+
 
 
     #region Item Collect
@@ -801,8 +808,10 @@ public class Character : MonoBehaviour
 
 
     #region Coroutines (Hit, Kill, Respawn, Knockback)
+      
 
-    public IEnumerator hitCo()
+
+    private IEnumerator hitCo()
     {
         this.isInvincible = true;
         if (this.showHitcolor) this.spriteRenderer.color = this.hitColor;
@@ -810,11 +819,11 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(this.cannotBeHitTime);
 
         this.isInvincible = false;
-        this.spriteRenderer.color = GlobalValues.color;
+        this.spriteRenderer.color = Color.white;
     }
 
 
-    public IEnumerator knockCo(float knockTime)
+    private IEnumerator knockCo(float knockTime)
     {
         if (this.myRigidbody != null)
         {

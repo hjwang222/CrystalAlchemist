@@ -77,9 +77,6 @@ public class Interactable : MonoBehaviour
 
     public void init()
     {
-        this.spriteRenderer = GetComponent<SpriteRenderer>();
-        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
-
             this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
             this.audioSource.loop = false;
             this.audioSource.playOnAwake = false;
@@ -97,13 +94,6 @@ public class Interactable : MonoBehaviour
     }
 
     #endregion
-
-
-    public void updateColor()
-    {
-        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
-    }
-
 
     #region Context Clue Funktionen
 
