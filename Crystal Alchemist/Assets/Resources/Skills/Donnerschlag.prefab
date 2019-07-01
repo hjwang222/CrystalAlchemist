@@ -272,7 +272,7 @@ Transform:
   - {fileID: 6625934165072255100}
   - {fileID: 1065962740209003586}
   - {fileID: 6625934164191362223}
-  - {fileID: 4711548902206973503}
+  - {fileID: 5335493528809119116}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -490,6 +490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Donnerschlag
   category: 1
+  animationTriggerName: 
   orderIndex: 17
   skillDescription: 
   cast: 0
@@ -511,11 +512,13 @@ MonoBehaviour:
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0
+  affectAnimation: 1
   lockMovementonDuration: 0
   isRapidFire: 0
   isStationary: 1
   speed: 0
   rotateIt: 0
+  blendTree: 0
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
@@ -677,7 +680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7125f1409d0689b4d80b6ab7179979c8, type: 3}
---- !u!224 &4711548902206973503 stripped
+--- !u!224 &5335493528809119116 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 822386160285104020, guid: 7125f1409d0689b4d80b6ab7179979c8,
     type: 3}

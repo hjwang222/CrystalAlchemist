@@ -50,13 +50,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Schild
   category: 0
+  animationTriggerName: 
   orderIndex: 4
   skillDescription: 
   cast: 0
   keepHoldTimer: 0
   delay: 0
   duration: 9999
-  deactivateByButtonUp: 0
+  deactivateByButtonUp: 1
   cooldown: 0
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -68,11 +69,13 @@ MonoBehaviour:
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: -50
+  affectAnimation: 1
   lockMovementonDuration: 1
   isRapidFire: 1
   isStationary: 0
   speed: 0
   rotateIt: 0
+  blendTree: 0
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 90
@@ -102,7 +105,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: -0.013568943
+  cooldownTimeLeft: 0
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 0}

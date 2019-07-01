@@ -20,6 +20,8 @@ public class SceneTransition : MonoBehaviour
     [Required]
     public SimpleSignal vcamSignal;
 
+
+
     [Header("Fading")]
     public GameObject fadeInPanel;
     public GameObject fadeOutPanel;
@@ -54,7 +56,7 @@ public class SceneTransition : MonoBehaviour
         while (!asyncOperation.isDone)
         {
             if (asyncOperation.progress >= 0.9f)
-            {
+            {                
                 asyncOperation.allowSceneActivation = true;
                 player.setNewPosition(this.playerPositionInNewScene);
             }

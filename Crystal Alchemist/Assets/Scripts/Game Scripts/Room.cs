@@ -9,6 +9,11 @@ public class Room : MonoBehaviour
     [Required]
     public GameObject virtualCamera;
 
+    public string mapName;
+
+    [SerializeField]
+    private StringSignal locationSignal;
+
     private void Awake()
     {
         this.virtualCamera.SetActive(false);
@@ -20,7 +25,7 @@ public class Room : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             this.virtualCamera.SetActive(true);
-
+            this.locationSignal.Raise(this.mapName);
             CinemachineVirtualCamera vcam = this.virtualCamera.GetComponent<CinemachineVirtualCamera>();
             if(vcam.Follow == null) vcam.Follow = other.transform;
         }

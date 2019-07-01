@@ -335,6 +335,8 @@ public class Character : MonoBehaviour
         this.GetComponent<BoxCollider2D>().enabled = true;
         this.transform.position = this.spawnPosition;
 
+        this.setSkills(true);
+
         Utilities.setItem(this.lootTable, this.multiLoot, this.items);
     }
     #endregion
@@ -425,10 +427,6 @@ public class Character : MonoBehaviour
 
 
 
-    #region Day/Night Circle  
-
-    #endregion
-
 
     #region SkillUsage
 
@@ -482,6 +480,14 @@ public class Character : MonoBehaviour
         }
     }
 
+    private void setSkills(bool active)
+    {
+        foreach(StandardSkill skill in this.activeSkills)
+        {
+            skill.gameObject.SetActive(active);
+        }
+    }
+
     private void killIt()
     {
         if (this.isPlayer)
@@ -491,7 +497,11 @@ public class Character : MonoBehaviour
         }
         else
         {
+            //TODO: Kill sofort (Skill noch aktiv)
+
             Utilities.SetAnimatorParameter(this.animator, "isDead", true);
+
+            setSkills(false);
 
             this.currentState = CharacterState.dead;
 

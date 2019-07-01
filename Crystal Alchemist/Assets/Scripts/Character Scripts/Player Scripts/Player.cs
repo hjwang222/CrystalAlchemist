@@ -44,7 +44,6 @@ public class Player : Character
     [FoldoutGroup("Player Signals", expanded: false)]
     public BoolSignal cameraSignal;
 
-
     public StandardSkill AButton;    
     public StandardSkill BButton;   
     public StandardSkill XButton;    
