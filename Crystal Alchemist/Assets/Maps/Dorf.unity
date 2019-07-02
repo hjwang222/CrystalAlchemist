@@ -19845,9 +19845,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetScene: Haus
-  playerPositionInNewScene: {x: 0, y: -4}
+  playerPositionInNewScene: {x: 0, y: -5.5}
   vcamSignal: {fileID: 11400000, guid: a33ae82561921e840bfadec36a9feb04, type: 2}
   fadeSignal: {fileID: 11400000, guid: 7d067face1c3f4149b245c6294d12635, type: 2}
+  transitionDuration: {fileID: 11400000, guid: a2cc0078d349f9245bd74b3f5813a450, type: 2}
 --- !u!1001 &1301488769257352880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20611,6 +20612,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1555326793583579607, guid: 857105bf9e86080429fabf97d54c34d6,
         type: 3}
+      propertyPath: lootTable.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1555326793583579607, guid: 857105bf9e86080429fabf97d54c34d6,
+        type: 3}
       propertyPath: currencyNeeded
       value: 3
       objectReference: {fileID: 0}
@@ -20624,6 +20630,17 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 800778675}
+    - target: {fileID: 1555326793583579607, guid: 857105bf9e86080429fabf97d54c34d6,
+        type: 3}
+      propertyPath: lootTable.Array.data[0].amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1555326793583579607, guid: 857105bf9e86080429fabf97d54c34d6,
+        type: 3}
+      propertyPath: lootTable.Array.data[0].item
+      value: 
+      objectReference: {fileID: 6577156445127767014, guid: 9eed5a7d4c3ca4f49b552c626d2d4ee7,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 1555326793583579605, guid: 857105bf9e86080429fabf97d54c34d6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 857105bf9e86080429fabf97d54c34d6, type: 3}

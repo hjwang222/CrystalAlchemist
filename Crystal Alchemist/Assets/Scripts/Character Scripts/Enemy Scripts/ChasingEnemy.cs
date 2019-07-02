@@ -15,12 +15,8 @@ public class ChasingEnemy : Enemy
 
     #region Update und Movement Funktionen
     void Update()
-    {
-        //Ziel auswählen und verfolgen
-        //resetVelocity();
-        
+    {        
         regeneration();
-        setTarget(); //TODO
         moveCharacter();
 
     }

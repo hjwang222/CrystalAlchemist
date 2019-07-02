@@ -9,18 +9,12 @@ public class Fading : MonoBehaviour
     private Image image;
 
     [SerializeField]
-    private float duration = 2f;
-
-
-
-
-
-
+    private FloatValue transitionDuration;
 
     public void fade(bool fadeIn)
     {
-        if (fadeIn) image.CrossFadeAlpha(0, duration, true);
-        else image.CrossFadeAlpha(1, duration, true);
+        if (fadeIn) image.CrossFadeAlpha(0, this.transitionDuration.getValue(), true);
+        else image.CrossFadeAlpha(1, this.transitionDuration.getValue(), true);
     }
 
 }

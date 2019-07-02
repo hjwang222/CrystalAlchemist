@@ -13,40 +13,41 @@ public class Enemy : Character
     private void Start()
     {
         init();
-        setTarget();
-        //this.target = GameObject.FindWithTag("Player").transform;   //Position und Size
         Utilities.SetAnimatorParameter(this.animator, "isWakeUp", true);
     }
 
     #endregion
 
 
-    private void Update()
+
+
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        setTarget(); //TODO Aggro System
+        if(collision.CompareTag("Player") && !collision.isTrigger)
+        {
+            setTarget(collision.GetComponent<Character>());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !collision.isTrigger)
+        {
+            setTarget(null);
+        }
     }
 
 
 
     #region KI (Aggro, Animation, StateMachine)
 
-    public void setTarget()
+    public void setTarget(Character target)
     {
-        //Aggro-Verhalten
-        //TODO: Finde den nähsten Spieler
-        //TODO: Wechsel erst nach x Sekunden oder wenn außer Reichweite
-        if (this.target == null)
-        {
-            Character temp = GameObject.FindWithTag("Player").GetComponent<Character>();
-
-            if (temp.currentState != CharacterState.inDialog)
-            {
-                this.target = temp;
-            }
-            else
-            {
-                this.target = null;
-            }
+        if (this.target != target)
+        {            
+            this.target = target;
         }
     }
 

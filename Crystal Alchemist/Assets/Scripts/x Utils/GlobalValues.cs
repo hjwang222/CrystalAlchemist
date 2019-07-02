@@ -9,5 +9,6 @@ public class GlobalValues : MonoBehaviour
     public static float backgroundMusicVolume = 0.3f;
 
     public static string version = "2.0 Alpha";
-    public static string noMoneyText = "Du hast nicht genügend Geld.\nGeh arbeiten!";
+
+    public static float transitionDuration = 1f;
 }

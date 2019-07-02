@@ -26,6 +26,10 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     private BoolSignal fadeSignal;
 
+    [Required]
+    [SerializeField]
+    private FloatValue transitionDuration;
+
 
     public void Awake()
     {
@@ -39,43 +43,27 @@ public class SceneTransition : MonoBehaviour
             StartCoroutine(LoadScene(other.GetComponent<Player>()));
         }
     }
-
   
     private IEnumerator LoadScene(Player player)
     {
         this.fadeSignal.Raise(false);
-        yield return new WaitForSeconds(2f);
+        player.currentState = CharacterState.inDialog;
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.targetScene);
         asyncOperation.allowSceneActivation = false;
         this.vcamSignal.Raise();
 
-
         while (!asyncOperation.isDone)
         {
             if (asyncOperation.progress >= 0.9f)
-            {                
+            {
+                yield return new WaitForSeconds(this.transitionDuration.getValue());
+
                 asyncOperation.allowSceneActivation = true;
                 player.setNewPosition(this.playerPositionInNewScene);
             }
             yield return null;
         }      
     }
-
-
-    /*
-    public IEnumerator FadeCo(Player player)
-    {   
-        if (fadeOutPanel != null)
-        {
-            Instantiate(this.fadeOutPanel, Vector3.zero, Quaternion.identity);
-        }
-        yield return new WaitForSeconds(this.fadeWait);      
-
-        while (!asyncOperation.isDone)
-        {
-            yield return null;
-        }
-    }*/
 }
 

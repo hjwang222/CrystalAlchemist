@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2246077131478480994}
   - component: {fileID: 2246077131478480995}
   - component: {fileID: 2246077131478481017}
+  - component: {fileID: 8351946423556740917}
   m_Layer: 0
   m_Name: Blob
   m_TagString: Untagged
@@ -113,7 +114,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2246077131478480992}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: becbfa83e7612c948a966b7d5b5649fd, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -170,15 +171,11 @@ MonoBehaviour:
   immunityToStatusEffects: []
   maxLife: 3
   maxMana: 1
-  maxCrystals: 9999
-  maxCoins: 99
-  maxKeys: 99
-  maxAmmo: 99
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
   manaRegeneration: 0
   manaRegenerationInterval: 0
-  skills: []
+  skillSet: []
   initializeSkill: {fileID: 2574719380784309251, guid: 65b268bfda2fa0e4bb41978a974d71d5,
     type: 3}
   deathSkill: {fileID: 0}
@@ -201,7 +198,7 @@ MonoBehaviour:
     amount: 1
   multiLoot: 0
   canCollectAll: 0
-  canCollect: 
+  canCollect: []
   hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
   killSoundEffect: {fileID: 8300000, guid: a14b852168cb1df49873e07864a34b8f, type: 3}
   characterSpecies: Gel
@@ -213,12 +210,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   castbar: {fileID: 0}
   activeCastbar: {fileID: 0}
-  coins: 0
-  crystals: 0
-  keys: 0
-  wood: 0
-  stone: 0
-  metal: 0
   currentState: 0
   life: 0
   spellspeed: 0
@@ -234,6 +225,24 @@ MonoBehaviour:
   lockAnimation: 0
   timeDistortion: 1
   activeLockOnTarget: {fileID: 0}
+  isPlayer: 0
+  inventory: []
   target: {fileID: 0}
   chaseRadius: 4
   attackRadius: 0
+--- !u!58 &8351946423556740917
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2246077131478480992}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3.25
