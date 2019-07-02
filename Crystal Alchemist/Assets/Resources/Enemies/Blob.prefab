@@ -101,8 +101,8 @@ Rigidbody2D:
   m_AngularDrag: 0.5
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 2
-  m_SleepingMode: 1
+  m_Interpolate: 0
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &2246077131478480994
@@ -204,6 +204,7 @@ MonoBehaviour:
   characterSpecies: Gel
   characterGender: 2
   characterType: 1
+  spawnPosition: {x: 0, y: 0, z: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
@@ -237,6 +238,7 @@ MonoBehaviour:
     type: 3}
   activeClueDuration: 2
   attackRadius: 0
+  backToStart: 1
 --- !u!58 &8351946423556740917
 CircleCollider2D:
   m_ObjectHideFlags: 0

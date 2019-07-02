@@ -10,12 +10,12 @@ public class Enemy : Character
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
-    [Range(0,1)]
+    [Range(0,10)]
     private float aggroIncreaseFactor = 0.25f;
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
-    [Range(0, 1)]
+    [Range(0, 10)]
     private float aggroDecreaseFactor = 0.25f;
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
@@ -49,7 +49,8 @@ public class Enemy : Character
        
 
     public void Update()
-    {        
+    {
+        //this.myRigidbody.velocity = Vector2.zero;
         generateAggro();
     }
 
@@ -63,6 +64,8 @@ public class Enemy : Character
         foreach(Character character in this.aggroList.Keys)
         {
             this.aggroList[character][0] += this.aggroList[character][1] * (Time.deltaTime * this.timeDistortion);
+
+            if (this.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.aggroList[character][0] + " Aggro auf" + character.characterName);
 
             if(this.aggroList[character][0] >= 1)
             {

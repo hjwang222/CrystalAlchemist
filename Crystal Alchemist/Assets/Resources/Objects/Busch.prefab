@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1301488769302884364}
   - component: {fileID: 1301488769302884363}
+  - component: {fileID: 7794983885249979872}
   - component: {fileID: 1301488769302884365}
   - component: {fileID: 1301488769302884366}
   - component: {fileID: 1301488769302884367}
-  - component: {fileID: 7794983885249979872}
   m_Layer: 0
   m_Name: Busch
   m_TagString: Untagged
@@ -83,6 +83,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &7794983885249979872
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301488769302884362}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!61 &1301488769302884365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -122,45 +143,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Busch
-  characterSpecies: Vegetation
-  characterGender: 2
-  characterType: 3
-  element: 8
-  startLife: 0
-  startMana: 0
+  startLife: 0.1
+  startMana: 0.1
   startSpeed: 0
   startSpellSpeed: 100
-  immunityToStatusEffects: []
   respawnTime: 25
-  skills: []
-  initializeSkill: {fileID: 0}
-  deathSkill: {fileID: 0}
+  immunityToStatusEffects: []
+  maxLife: 0.1
+  maxMana: 0.1
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
   manaRegeneration: 0
   manaRegenerationInterval: 0
-  attributeMaxLife: 0
-  attributeMaxMana: 0
+  skillSet: []
+  initializeSkill: {fileID: 0}
+  deathSkill: {fileID: 0}
+  damageNumber: {fileID: 0}
   antiKnockback: 0
   cannotBeHitTime: 0.3
   isTouchable: 1
-  coins: 0
-  crystals: 0
-  keys: 0
+  showHitcolor: 1
+  hitColor: {r: 1, g: 1, b: 1, a: 1}
   lootTable:
   - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
     dropRate: 25
     amount: 0
   multiLoot: 0
-  showHitcolor: 1
-  hitColor: {r: 1, g: 1, b: 1, a: 1}
-  dialog: []
-  contextClueChild: {fileID: 0}
-  damageNumber: {fileID: 0}
+  canCollectAll: 0
+  canCollect: []
   hitSoundEffect: {fileID: 0}
   killSoundEffect: {fileID: 8300000, guid: f3e28be844c0e4d4797d1de8e8394680, type: 3}
-  healthSignal: {fileID: 0}
-  manaSignal: {fileID: 0}
+  characterSpecies: Vegetation
+  characterGender: 2
+  characterType: 3
+  spawnPosition: {x: 0, y: 0, z: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
@@ -182,6 +198,8 @@ MonoBehaviour:
   lockAnimation: 0
   timeDistortion: 1
   activeLockOnTarget: {fileID: 0}
+  isPlayer: 0
+  inventory: []
 --- !u!95 &1301488769302884367
 Animator:
   serializedVersion: 3
@@ -201,24 +219,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!50 &7794983885249979872
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301488769302884362}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 0
-  m_CollisionDetection: 1
-  m_Constraints: 4

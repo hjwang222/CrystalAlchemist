@@ -205,7 +205,7 @@ public class StatusEffect : MonoBehaviour
         if (this.target != null)
         {
             //Charakter-Farbe zurücksetzen
-            this.target.spriteRenderer.color = Color.white;
+            this.target.resetColor();
 
             //Statuseffekt von der Liste entfernen
             if (this.statusEffectType == StatusEffectType.debuff)

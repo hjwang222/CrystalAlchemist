@@ -226,6 +226,7 @@ public class Character : MonoBehaviour
     private SimpleSignal healthSignal;
     private SimpleSignal manaSignal;
     private SimpleSignal currencies;
+    private Color mainColor;
 
     [HideInInspector]
     public Vector3 spawnPosition;
@@ -291,6 +292,7 @@ public class Character : MonoBehaviour
     {
         this.spawnPosition = this.transform.position;
         this.direction = new Vector2(0, -1);
+
         //getItems();    
 
         setComponents();
@@ -307,6 +309,7 @@ public class Character : MonoBehaviour
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
         this.spriteRenderer = GetComponent<SpriteRenderer>();
+        this.mainColor = this.spriteRenderer.color;
         this.animator = GetComponent<Animator>();
         this.transform.gameObject.tag = this.characterType.ToString();
     }
@@ -333,6 +336,7 @@ public class Character : MonoBehaviour
         this.currentState = CharacterState.idle;
         this.animator.enabled = true;
         this.spriteRenderer.enabled = true;
+        this.spriteRenderer.color = this.mainColor;
         this.GetComponent<BoxCollider2D>().enabled = true;
         this.transform.position = this.spawnPosition;
 
@@ -501,7 +505,7 @@ public class Character : MonoBehaviour
             //TODO: Kill sofort (Skill noch aktiv)
 
             Utilities.SetAnimatorParameter(this.animator, "isDead", true);
-
+            this.spriteRenderer.color = Color.white;
             setSkills(false);
 
             this.currentState = CharacterState.dead;
@@ -567,6 +571,13 @@ public class Character : MonoBehaviour
                     }*/
         }
     }
+
+
+    public void resetColor()
+    {
+        this.spriteRenderer.color = this.mainColor;
+    }
+
 
     private void callSignal(SimpleSignal signal, float addResource)
     {
@@ -819,8 +830,6 @@ public class Character : MonoBehaviour
 
 
     #region Coroutines (Hit, Kill, Respawn, Knockback)
-      
-
 
     private IEnumerator hitCo()
     {
@@ -828,11 +837,9 @@ public class Character : MonoBehaviour
         if (this.showHitcolor) this.spriteRenderer.color = this.hitColor;
 
         yield return new WaitForSeconds(this.cannotBeHitTime);
-
-        this.isInvincible = false;
-        this.spriteRenderer.color = Color.white;
-    }
-
+        this.resetColor();
+        this.isInvincible = false;        
+    }    
 
     private IEnumerator knockCo(float knockTime)
     {
