@@ -226,8 +226,9 @@ public class Character : MonoBehaviour
     private SimpleSignal healthSignal;
     private SimpleSignal manaSignal;
     private SimpleSignal currencies;
-    private Vector3 spawnPosition;
 
+    [HideInInspector]
+    public Vector3 spawnPosition;
     [HideInInspector]
     public Rigidbody2D myRigidbody;
     [HideInInspector]
