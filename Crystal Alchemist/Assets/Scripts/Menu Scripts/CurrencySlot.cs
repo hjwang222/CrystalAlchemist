@@ -18,6 +18,7 @@ public class CurrencySlot : MonoBehaviour
     private Player player;
 
     private AudioSource audioSource;
+    private bool playOnce = false;
     private int currentValue;
 
     private void Awake()
@@ -31,7 +32,12 @@ public class CurrencySlot : MonoBehaviour
     public void updateCurrency()
     {
         int newValue = Utilities.getAmountFromInventory(this.itemGroup, this.player.inventory, false);
-        if(this.currentValue != newValue) Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect);
+
+        if (this.currentValue != newValue && this.playOnce)
+        {            
+            Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect);
+        }
+
         StartCoroutine(Countdown(newValue));
     }
 
@@ -50,6 +56,8 @@ public class CurrencySlot : MonoBehaviour
             
             yield return new WaitForSeconds(this.counterDelay);
         }
+
+        this.playOnce = true;
     }
 
 
