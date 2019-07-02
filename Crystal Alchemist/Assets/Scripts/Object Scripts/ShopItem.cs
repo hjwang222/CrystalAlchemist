@@ -17,7 +17,6 @@ public class ShopItem : Interactable
     public Animator anim;
 
     private int index = 0;
-    //private int amount = 1;
     
     private void Start()
     {
@@ -37,8 +36,13 @@ public class ShopItem : Interactable
         {
             if (Utilities.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
             {
-                this.player.showDialogBox("Du hast 1 " + this.items[this.index].itemName + " für " + this.price + " gekauft!");
-                this.player.collect(items[this.index], false);
+                Item loot = items[this.index];
+
+                string itemObtained = Utilities.getDialogBoxText("Du hast", loot.amount, loot, "für");
+                string itemNedded = Utilities.getDialogBoxText("", this.price, this.item, "gekauft!");
+
+                this.player.showDialogBox(itemObtained+"\n"+itemNedded);
+                this.player.collect(loot, false);
             }
         }
     }

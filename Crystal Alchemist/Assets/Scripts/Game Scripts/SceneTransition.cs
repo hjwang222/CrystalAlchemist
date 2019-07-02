@@ -11,29 +11,25 @@ public class SceneTransition : MonoBehaviour
     [Header("New Scene Variables")]
     [Tooltip("Name der nächsten Map")]
     [Required]
-    public string targetScene;
+    [SerializeField]
+    private string targetScene;
 
-    [Required]
     [Tooltip("Spawnpunkt des Spielers")]
-    public Vector2 playerPositionInNewScene;
+    [SerializeField]
+    private Vector2 playerPositionInNewScene;
 
     [Required]
-    public SimpleSignal vcamSignal;
+    [SerializeField]
+    private SimpleSignal vcamSignal;
 
+    [Required]
+    [SerializeField]
+    private BoolSignal fadeSignal;
 
-
-    [Header("Fading")]
-    public GameObject fadeInPanel;
-    public GameObject fadeOutPanel;
-    public float fadeWait;
 
     public void Awake()
     {
-        if (fadeInPanel != null)
-        {
-            GameObject panel = Instantiate(this.fadeInPanel, Vector3.zero, Quaternion.identity) as GameObject;
-            Destroy(panel, 1);
-        }
+        this.fadeSignal.Raise(true);
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -41,17 +37,19 @@ public class SceneTransition : MonoBehaviour
         if (other.CompareTag("Player") && !other.isTrigger)
         {
             StartCoroutine(LoadScene(other.GetComponent<Player>()));
-            Debug.Log("End");
         }
     }
 
   
     private IEnumerator LoadScene(Player player)
     {
-        yield return null;
+        this.fadeSignal.Raise(false);
+        yield return new WaitForSeconds(2f);
+
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.targetScene);
         asyncOperation.allowSceneActivation = false;
         this.vcamSignal.Raise();
+
 
         while (!asyncOperation.isDone)
         {

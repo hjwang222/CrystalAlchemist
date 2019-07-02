@@ -22,6 +22,8 @@ public class Interactable : MonoBehaviour
     [TextAreaAttribute]
     public string text;
 
+
+
     [FoldoutGroup("Loot", expanded:false)]
     [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
     public LootTable[] lootTable;

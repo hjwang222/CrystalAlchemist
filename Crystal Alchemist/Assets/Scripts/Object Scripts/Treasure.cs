@@ -120,7 +120,7 @@ public class Treasure : Interactable
             foreach (Item item in this.items)
             {
                 this.player.collect(item, false);
-                text = text.Replace("%XY%", item.itemName);
+                text = Utilities.getDialogBoxText("Du hast", item.amount, item, "erhalten!");
             }
         }
         else

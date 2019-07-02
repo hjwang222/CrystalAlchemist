@@ -7,7 +7,8 @@ using Sirenix.OdinInspector;
 public class Room : MonoBehaviour
 {
     [Required]
-    public GameObject virtualCamera;
+    [SerializeField]
+    private GameObject virtualCamera;
 
     public string mapName;
 

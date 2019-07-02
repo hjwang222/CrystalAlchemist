@@ -374,12 +374,32 @@ public class Utilities : MonoBehaviour
             if (hasEnoughCurrencyAndUpdateResource(currency, player, item, -price)) return true;
             else
             {
-                player.showDialogBox(GlobalValues.noMoneyText);
+                player.showDialogBox(getDialogBoxText("Du benötigst", price, item, "..."));
                 return false;
             }
         }
 
         return false;
+    }
+
+
+    public static string getDialogBoxText(string part1, int price, Item item, string part2)
+    {
+        string result = part1+" " + price + " ";
+        
+        switch (item.resourceType)
+        {
+            case ResourceType.item:
+                {
+                    string typ = item.itemGroup;
+                    if (price == 1 && typ != "Schlüssel") typ = typ.Substring(0, typ.Length - 1);
+                    result += typ;
+                };  break;
+            case ResourceType.life: result += "Leben"; break;
+            case ResourceType.mana: result += "Mana"; break;
+        }
+
+        return result + " "+part2;
     }
 
     public static void set3DText(TextMeshPro tmp, string text, bool bold, Color fontColor, Color outlineColor, float outlineWidth)
