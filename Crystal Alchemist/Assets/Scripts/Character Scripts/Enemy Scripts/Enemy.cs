@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
 public class Enemy : Character
 {
@@ -48,10 +49,17 @@ public class Enemy : Character
     #endregion
 
 
-    public void Update()
+    public new void Update()
     {
-        //this.myRigidbody.velocity = Vector2.zero;
+        base.Update();
         generateAggro();
+        
+        //TODO Scale
+        for(int i = 0; i < this.transform.childCount; i++)
+        {
+            GameObject child = this.transform.GetChild(i).gameObject;
+            child.transform.localScale = new Vector3(1/this.transform.localScale.x, 1 / this.transform.localScale.y);
+        }
     }
 
 
@@ -135,7 +143,7 @@ public class Enemy : Character
 
     private void setParameterOfAggrolist(Character character, float amount)
     {
-        this.aggroList[character][1] = amount; //set factor of increase/decreasing aggro
+        if (this.aggroList.ContainsKey(character)) this.aggroList[character][1] = amount; //set factor of increase/decreasing aggro
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -171,8 +179,6 @@ public class Enemy : Character
 
 
     #region Animation, StateMachine
-
-
 
 
     private void setAnimFloat(Vector2 setVector)

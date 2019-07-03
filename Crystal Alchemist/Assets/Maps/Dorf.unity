@@ -217,6 +217,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blob (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478480992, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -955,7 +960,6 @@ GameObject:
   - component: {fileID: 296795419}
   - component: {fileID: 296795421}
   - component: {fileID: 296795420}
-  - component: {fileID: 296795422}
   m_Layer: 9
   m_Name: Boden
   m_TagString: Untagged
@@ -8149,18 +8153,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &296795422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 296795418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba22a5aded6e3148bf0a7ee6ec61193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &299323999
 GameObject:
   m_ObjectHideFlags: 0
@@ -8626,7 +8618,6 @@ GameObject:
   - component: {fileID: 561791733}
   - component: {fileID: 561791735}
   - component: {fileID: 561791734}
-  - component: {fileID: 561791739}
   - component: {fileID: 561791738}
   - component: {fileID: 561791737}
   - component: {fileID: 561791736}
@@ -11496,18 +11487,6 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
---- !u!114 &561791739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561791732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba22a5aded6e3148bf0a7ee6ec61193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &573835275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11887,7 +11866,6 @@ GameObject:
   - component: {fileID: 923102968}
   - component: {fileID: 923102970}
   - component: {fileID: 923102969}
-  - component: {fileID: 923102971}
   m_Layer: 0
   m_Name: "D\xE4cher"
   m_TagString: Untagged
@@ -14646,18 +14624,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &923102971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 923102967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba22a5aded6e3148bf0a7ee6ec61193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &957187714 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5795621731665983165, guid: d22ffa2b5ca097c488ba101f32c79e65,
@@ -14675,6 +14641,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Blob Guardian
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478480992, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -15087,6 +15058,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blob (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478480992, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15189,7 +15165,7 @@ PrefabInstance:
     - target: {fileID: 2246077131478480992, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_Name
-      value: Blob (2)
+      value: Patrol
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -15291,6 +15267,16 @@ PrefabInstance:
       propertyPath: path.Array.data[3]
       value: 
       objectReference: {fileID: 48388267}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: followPathPrecision
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: followPathInCircle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480996, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_Interpolate
@@ -15975,6 +15961,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blob (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478480992, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16339,7 +16330,6 @@ GameObject:
   - component: {fileID: 1938352045}
   - component: {fileID: 1938352047}
   - component: {fileID: 1938352046}
-  - component: {fileID: 1938352051}
   - component: {fileID: 1938352050}
   - component: {fileID: 1938352049}
   - component: {fileID: 1938352048}
@@ -16654,18 +16644,6 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
---- !u!114 &1938352051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938352044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba22a5aded6e3148bf0a7ee6ec61193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1943111351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16774,7 +16752,6 @@ GameObject:
   - component: {fileID: 2016141797}
   - component: {fileID: 2016141799}
   - component: {fileID: 2016141798}
-  - component: {fileID: 2016141800}
   m_Layer: 9
   m_Name: Dekoration
   m_TagString: Untagged
@@ -19642,18 +19619,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &2016141800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2016141796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ba22a5aded6e3148bf0a7ee6ec61193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2027145274
 GameObject:
   m_ObjectHideFlags: 0
@@ -20504,6 +20469,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blob
       objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478480992, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20611,7 +20581,7 @@ PrefabInstance:
     - target: {fileID: 6937466115396253474, guid: 3d0b15c6e29c52f4ead96db224a29a7a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6937466115396253474, guid: 3d0b15c6e29c52f4ead96db224a29a7a,
         type: 3}
@@ -20773,7 +20743,7 @@ PrefabInstance:
     - target: {fileID: 780883929058337939, guid: d22ffa2b5ca097c488ba101f32c79e65,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.9804688
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 780883929058337939, guid: d22ffa2b5ca097c488ba101f32c79e65,
         type: 3}

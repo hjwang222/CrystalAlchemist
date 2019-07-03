@@ -7,16 +7,32 @@ public class ChasingEnemy : Enemy
 {
     #region Parameter fürs Verfolgen
 
-    [FoldoutGroup("Enemy Attributes", expanded: false)]
+    [FoldoutGroup("Movement Attributes", expanded: false)]
     public float attackRadius = 0;
 
-    [FoldoutGroup("Enemy Attributes", expanded: false)]
+    [FoldoutGroup("Movement Attributes", expanded: false)]
     [SerializeField]
     private bool backToStart = true;
 
-    [FoldoutGroup("Patrol Attributes", expanded: false)]
+    [FoldoutGroup("Movement Attributes", expanded: false)]
     [SerializeField]
     private List<Transform> path;
+
+    [FoldoutGroup("Movement Attributes", expanded: false)]
+    [SerializeField]
+    private float followPathPause = 0;
+
+    [FoldoutGroup("Movement Attributes", expanded: false)]
+    [SerializeField]
+    private float followPathPrecision = 0.01f;
+
+    [FoldoutGroup("Movement Attributes", expanded: false)]
+    [SerializeField]
+    private bool followPathInCircle = true;
+
+
+
+    private int factor = 1;
     private int currentPoint = 0;
     private Transform currentGoal;
 
@@ -32,13 +48,7 @@ public class ChasingEnemy : Enemy
     }
 
     private void moveCharacter()
-    {
-        if (currentState == CharacterState.dead)
-        {
-            //STOP ANIMATION
-            return;
-        }
-
+    {     
         if (this.target != null)
         {
             //Wenn der Spieler innerhalb vom Chase-Radius ist und auch nur solange bis der Gegner den Spieler nicht berührt!
@@ -51,19 +61,25 @@ public class ChasingEnemy : Enemy
         {
             if(this.path.Count > 0)
             {
-                if (Vector3.Distance(transform.position, path[currentPoint].position) > float.Epsilon)
+                if (Vector3.Distance(transform.position, path[currentPoint].position) > followPathPrecision)
                 {
                     moveTorwardsTarget(path[currentPoint].position);
                 }
                 else
                 {
-                    ChangeGoal();
+                    StartCoroutine(delayMovementCo());
                 }
             }
             else if(this.backToStart) moveTorwardsTarget(spawnPosition);
 
             //Utilities.SetAnimatorParameter(this.animator, "isWakeUp", false);
         }
+    }
+
+    private IEnumerator delayMovementCo()
+    {
+        yield return new WaitForSeconds(this.followPathPause);
+        ChangeGoal();
     }
 
     private void moveTorwardsTarget(Vector3 position)
@@ -86,16 +102,32 @@ public class ChasingEnemy : Enemy
 
     private void ChangeGoal()
     {
-        if (currentPoint == path.Count - 1)
+        if (currentPoint == path.Count - 1) //letzter Knoten
+        {          
+            if (this.followPathInCircle)
+            {
+                this.currentPoint = 0;
+            }
+            else
+            {
+                this.factor = -1; //rückwärts laufen
+                currentPoint += this.factor;
+            }
+        }
+        else if (currentPoint == 0)//erster Knoten 
         {
-            currentPoint = 0;
-            currentGoal = path[0];
+            if (!this.followPathInCircle)
+            {
+                this.factor = 1; //reset to normal
+            }
+            currentPoint += this.factor;
         }
         else
         {
-            currentPoint++;
-            currentGoal = path[currentPoint];
-        }
+            currentPoint += this.factor;
+        } 
+        
+        currentGoal = path[currentPoint];
     }
 
     #endregion

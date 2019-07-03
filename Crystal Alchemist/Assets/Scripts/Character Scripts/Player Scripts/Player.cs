@@ -93,10 +93,14 @@ public class Player : Character
 
 
     // Update is called once per frame
-    private void Update()
+    private new void Update()
     {
-        regeneration();
+        base.Update();
+        playerInputs();        
+    }
 
+    private void playerInputs()
+    {
         if (currentState == CharacterState.inDialog)
         {
             Utilities.SetAnimatorParameter(this.animator, "isWalking", false);
