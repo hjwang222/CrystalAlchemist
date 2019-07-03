@@ -8,12 +8,17 @@ public class ChasingEnemy : Enemy
     #region Parameter fürs Verfolgen
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
-    [SerializeField]
-    private float attackRadius = 0;
+    public float attackRadius = 0;
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
     private bool backToStart = true;
+
+    [FoldoutGroup("Patrol Attributes", expanded: false)]
+    [SerializeField]
+    private List<Transform> path;
+    private int currentPoint = 0;
+    private Transform currentGoal;
 
     #endregion
 
@@ -26,7 +31,7 @@ public class ChasingEnemy : Enemy
         moveCharacter();
     }
 
-    public void moveCharacter()
+    private void moveCharacter()
     {
         if (currentState == CharacterState.dead)
         {
@@ -44,7 +49,18 @@ public class ChasingEnemy : Enemy
         }
         else
         {
-            if(this.backToStart) moveTorwardsTarget(spawnPosition);
+            if(this.path.Count > 0)
+            {
+                if (Vector3.Distance(transform.position, path[currentPoint].position) > float.Epsilon)
+                {
+                    moveTorwardsTarget(path[currentPoint].position);
+                }
+                else
+                {
+                    ChangeGoal();
+                }
+            }
+            else if(this.backToStart) moveTorwardsTarget(spawnPosition);
 
             //Utilities.SetAnimatorParameter(this.animator, "isWakeUp", false);
         }
@@ -64,6 +80,21 @@ public class ChasingEnemy : Enemy
             changeState(CharacterState.walk); //Gegner bewegt sich gerade
 
             Utilities.SetAnimatorParameter(this.animator, "isWakeUp", true);
+        }
+    }
+
+
+    private void ChangeGoal()
+    {
+        if (currentPoint == path.Count - 1)
+        {
+            currentPoint = 0;
+            currentGoal = path[0];
+        }
+        else
+        {
+            currentPoint++;
+            currentGoal = path[currentPoint];
         }
     }
 

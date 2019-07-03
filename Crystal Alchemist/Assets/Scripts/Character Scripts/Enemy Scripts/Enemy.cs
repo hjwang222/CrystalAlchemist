@@ -10,7 +10,7 @@ public class Enemy : Character
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
-    [Range(0,10)]
+    [Range(0, 10)]
     private float aggroIncreaseFactor = 0.25f;
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
@@ -46,7 +46,7 @@ public class Enemy : Character
     }
 
     #endregion
-       
+
 
     public void Update()
     {
@@ -61,13 +61,13 @@ public class Enemy : Character
     {
         List<Character> charactersToRemove = new List<Character>();
 
-        foreach(Character character in this.aggroList.Keys)
+        foreach (Character character in this.aggroList.Keys)
         {
             this.aggroList[character][0] += this.aggroList[character][1] * (Time.deltaTime * this.timeDistortion);
 
-            if (this.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.aggroList[character][0] + " Aggro auf" + character.characterName);
+            //if (this.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.aggroList[character][0] + " Aggro auf" + character.characterName);
 
-            if(this.aggroList[character][0] >= 1)
+            if (this.aggroList[character][0] >= 1)
             {
                 this.aggroList[character][0] = 1; //aggro
                 this.aggroList[character][1] = 0; //factor
@@ -91,7 +91,7 @@ public class Enemy : Character
             }
         }
 
-        foreach(Character character in charactersToRemove)
+        foreach (Character character in charactersToRemove)
         {
             this.removeFromAggroList(character);
         }
@@ -102,14 +102,14 @@ public class Enemy : Character
         hideClue();
         showClue(clue);
         yield return new WaitForSeconds(duration);
-        if(duration > 0) hideClue();
+        if (duration > 0) hideClue();
     }
 
     private void showClue(GameObject clue)
     {
         if (clue != null && this.activeClue == null)
         {
-            Vector3 position = new Vector3(this.transform.position.x-0.5f, this.transform.position.y+0.5f);
+            Vector3 position = new Vector3(this.transform.position.x - 0.5f, this.transform.position.y + 0.5f);
             this.activeClue = Instantiate(clue, position, Quaternion.identity, this.transform);
         }
     }
@@ -140,19 +140,30 @@ public class Enemy : Character
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") && !collision.isTrigger)
-        {
-            addToAggroList(collision.GetComponent<Character>());
-            setParameterOfAggrolist(collision.GetComponent<Character>(), 1*this.aggroIncreaseFactor);
-            if(this.target == null) StartCoroutine(showClueCo(this.targetFoundClue, this.foundClueDuration));
-        }
+        increaseAggro(collision);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        decreaseAggro(collision);
+    }
+
+    public void increaseAggro(Collider2D collision)
+    {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
-            setParameterOfAggrolist(collision.GetComponent<Character>(), -1*this.aggroDecreaseFactor);
+
+            addToAggroList(collision.GetComponent<Character>());
+            setParameterOfAggrolist(collision.GetComponent<Character>(), 1 * this.aggroIncreaseFactor);
+            if (this.target == null) StartCoroutine(showClueCo(this.targetFoundClue, this.foundClueDuration));
+        }
+    }
+
+    public void decreaseAggro(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !collision.isTrigger)
+        {
+            setParameterOfAggrolist(collision.GetComponent<Character>(), -1 * this.aggroDecreaseFactor);
         }
     }
 
@@ -173,7 +184,7 @@ public class Enemy : Character
     }
 
     public void changeAnim(Vector2 direction)
-    {        
+    {
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
             if (direction.x > 0) setAnimFloat(Vector2.right);
