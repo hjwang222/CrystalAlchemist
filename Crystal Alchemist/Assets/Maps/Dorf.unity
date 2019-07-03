@@ -14705,12 +14705,12 @@ PrefabInstance:
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -14730,7 +14730,7 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: startSpeed
-      value: 60
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -15277,6 +15277,11 @@ PrefabInstance:
       propertyPath: followPathInCircle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: startSpeed
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480996, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_Interpolate
@@ -15447,18 +15452,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc23bdea94e836e448a33ca313d7172e, type: 3}
---- !u!114 &1380689327 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
-    type: 3}
-  m_PrefabInstance: {fileID: 986865105}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac635517652981a448863c38811bc524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1406142080 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1301488769302884364, guid: fc23bdea94e836e448a33ca313d7172e,
@@ -20632,7 +20625,7 @@ PrefabInstance:
         type: 3}
       propertyPath: protectingNPCs.Array.data[0]
       value: 
-      objectReference: {fileID: 1380689327}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d0b15c6e29c52f4ead96db224a29a7a, type: 3}
 --- !u!1001 &3742429445787802539
