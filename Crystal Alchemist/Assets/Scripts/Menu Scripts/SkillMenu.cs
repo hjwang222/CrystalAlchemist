@@ -14,7 +14,7 @@ public class SkillMenu : MonoBehaviour
 
     [BoxGroup("Mandatory")]
     [SerializeField]
-    private GameObject cursor;
+    private Cursor cursor;
     [BoxGroup("Mandatory")]
     [SerializeField]
     private TextMeshProUGUI categoryText;
@@ -93,18 +93,26 @@ public class SkillMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Inventory")) exitMenu();
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (this.selectedSkill != null) selectSkillFromSkillSet(null);
+            else exitMenu();
+        }
+        else if (Input.GetButtonDown("Inventory")) exitMenu();
     }
 
     private void OnEnable()
     {
-        this.cursor.SetActive(true);
+        selectSkillFromSkillSet(null);
+        this.cursor.gameObject.SetActive(true);
         this.player.currentState = CharacterState.inDialog;        
     }
 
     private void OnDisable()
     {
-        this.cursor.SetActive(false);
+        selectSkillFromSkillSet(null);
+        this.cursor.gameObject.SetActive(false);
     }
 
     #endregion
@@ -164,7 +172,16 @@ public class SkillMenu : MonoBehaviour
 
     public void selectSkillFromSkillSet(SkillSlot skillSlot)
     {
-        this.selectedSkill = skillSlot.skill;
+        if (skillSlot != null && skillSlot.skill != null)
+        {
+            this.selectedSkill = skillSlot.skill;
+            this.cursor.setSelectedGameObject(skillSlot.image);
+        }
+        else
+        {
+            this.selectedSkill = null;
+            this.cursor.setSelectedGameObject(null);
+        }
     }
 
     public void exitMenu()
@@ -175,6 +192,7 @@ public class SkillMenu : MonoBehaviour
 
     public void setPage(int value)
     {
+        selectSkillFromSkillSet(null);
         GameObject activeCategory = null;
 
         if (this.physicalSkills.activeInHierarchy) activeCategory = this.physicalSkills;
@@ -222,7 +240,8 @@ public class SkillMenu : MonoBehaviour
                     EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);                    
                 }
 
-                this.pageText.text = (activeIndex + 1) + "/" + (pagesCount + 1);
+                if (pagesCount > 0) this.pageText.text = (activeIndex + 1) + "/" + (pagesCount + 1);
+                else this.pageText.text = "";
             } 
         }
     }
@@ -242,9 +261,11 @@ public class SkillMenu : MonoBehaviour
 
             if (page.activeInHierarchy)
             {
-                for (int ID = 0; ID < page.transform.childCount; ID++)
+                GameObject skills = page.transform.GetChild(page.transform.childCount-1).gameObject;
+
+                for (int ID = 0; ID < skills.transform.childCount; ID++)
                 {
-                    GameObject slot = page.transform.GetChild(ID).gameObject;
+                    GameObject slot = skills.transform.GetChild(ID).gameObject;
                     StandardSkill skill = Utilities.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
                     slot.GetComponent<SkillSlot>().setSkill(skill);
                 }
@@ -252,29 +273,5 @@ public class SkillMenu : MonoBehaviour
                 if (page.transform.GetSiblingIndex() > 0) page.SetActive(false);
             }
         }
-    }
-
-    /*
-    private void setSlots()
-    {
-        this.dummySlot.SetActive(true);
-
-        List<StandardSkill> sortedByIndex 
-            = this.player.skillSet.ToArray().OrderBy(o => (((int)(o.category)*1000)+o.orderIndex)).ToList<StandardSkill>();
-
-        for (int i = 0; i < sortedByIndex.Count; i++)
-        {
-            StandardSkill skill = sortedByIndex[i];
-            GameObject categoryGameobject = this.itemSkills;
-
-            if (skill.category == SkillType.physical) categoryGameobject = this.physicalSkills;
-            else if (skill.category == SkillType.magical) categoryGameobject = this.magicalSkills;
-
-            GameObject temp = Instantiate(this.dummySlot, categoryGameobject.transform);
-            temp.GetComponent<SkillSlot>().setSkill(skill);
-            temp.name = skill.skillName + "-Slot";
-        }
-
-        this.dummySlot.SetActive(false);
-    }*/
+    }        
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
-public enum Button
+public enum enumButton
 {
    AButton,
    BButton,
@@ -58,7 +58,7 @@ public class Player : Character
     {
         this.isPlayer = true;
         this.init();
-        loadSkillsFromSkillSet("Boomerang", Button.AButton);
+        loadSkillsFromSkillSet("Boomerang", enumButton.AButton);
         this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.currencySignalUI);
 
         LoadSystem.loadPlayerData(this);
@@ -71,7 +71,7 @@ public class Player : Character
         this.direction = new Vector2(0, -1);
     }
 
-    public void loadSkillsFromSkillSet(string name, Button button)
+    public void loadSkillsFromSkillSet(string name, enumButton button)
     {
         foreach(StandardSkill skill in this.skillSet)
         {
@@ -79,11 +79,11 @@ public class Player : Character
             {
                 switch (button)
                 {
-                    case Button.AButton: this.AButton = skill; break;
-                    case Button.BButton: this.BButton = skill; break;
-                    case Button.XButton: this.XButton = skill; break;
-                    case Button.YButton: this.YButton = skill; break;
-                    case Button.RBButton: this.RBButton = skill; break;
+                    case enumButton.AButton: this.AButton = skill; break;
+                    case enumButton.BButton: this.BButton = skill; break;
+                    case enumButton.XButton: this.XButton = skill; break;
+                    case enumButton.YButton: this.YButton = skill; break;
+                    case enumButton.RBButton: this.RBButton = skill; break;
                 }
 
                 break;

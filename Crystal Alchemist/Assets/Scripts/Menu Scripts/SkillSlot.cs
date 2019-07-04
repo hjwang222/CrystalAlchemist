@@ -5,16 +5,15 @@ using UnityEngine.UI;
 
 
 public class SkillSlot : MonoBehaviour
-{
-    [SerializeField]
-    private Image image;
+{    
+    public Image image;
     public StandardSkill skill;
     public int ID;
 
     private void Awake()
     {
         // this.ID = ((int.Parse(this.gameObject.transform.parent.name.Replace("Page ",""))-1)*10)+ int.Parse(this.gameObject.transform.name);
-        this.ID = (this.gameObject.transform.parent.transform.GetSiblingIndex() * 10) + (this.gameObject.transform.GetSiblingIndex() + 1);
+        this.ID = (this.gameObject.transform.parent.transform.parent.transform.GetSiblingIndex() * 10) + (this.gameObject.transform.GetSiblingIndex() + 1);
     }
 
     public void setSkill(StandardSkill skill)

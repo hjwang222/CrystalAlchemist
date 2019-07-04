@@ -11,18 +11,18 @@ public class Enemy : Character
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
-    [Range(0, 1)]
-    private float aggroIncreaseFactor = 0.25f;
+    [Range(0, 120)]
+    private float aggroIncreaseFactor = 25;
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
-    [Range(0, 1)]
-    private float aggroOnHitIncreaseFactor = 0.25f;
+    [Range(0, 120)]
+    private float aggroOnHitIncreaseFactor = 25;
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
-    [Range(-1, 0)]
-    private float aggroDecreaseFactor = -0.25f;
+    [Range(-120, 0)]
+    private float aggroDecreaseFactor = -25;
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
@@ -65,7 +65,7 @@ public class Enemy : Character
 
     public void addAggro(Character newTarget, float aggro)
     {
-        if(newTarget != null && this.aggroList.ContainsKey(newTarget)) this.aggroList[newTarget][0] += aggro;
+        if(newTarget != null && this.aggroList.ContainsKey(newTarget)) this.aggroList[newTarget][0] += (float)(aggro/100);
     }
 
     public void clearAggro()

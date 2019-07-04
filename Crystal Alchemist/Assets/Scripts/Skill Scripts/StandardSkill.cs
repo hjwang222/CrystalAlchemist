@@ -265,10 +265,6 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Maximale Anzahl aktiver gleicher Angriffe in einer Combo")]
     public int comboAmount = Utilities.maxIntSmall;
 
-    [FoldoutGroup("Special Behaviors", expanded: false)]
-    [Tooltip("Beschwörungen")]
-    public GameObject summon;
-
     //private bool showIndicator = false;
     //private bool showCastBar = false;
 
@@ -577,7 +573,6 @@ public class StandardSkill : MonoBehaviour
         this.sender.activeSkills.Remove(this);        
         //this.isActive = false;
         Destroy(this.gameObject);
-
     }
 
     #endregion

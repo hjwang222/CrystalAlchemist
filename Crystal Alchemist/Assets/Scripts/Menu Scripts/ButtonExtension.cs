@@ -10,10 +10,6 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     [SerializeField]
     private GameObject cursor;
     private float offset = 16;
-    //[SerializeField]
-    //private Canvas canvas;
-    //private GameObject lastselect;
-    //private float scaleFactor = 1f;
 
     private Vector2 scale;
     private Vector2 size;
@@ -23,6 +19,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     [SerializeField]
     private bool setFirstSelected = false;
+    private Button button;
 
     private void Awake()
     {
@@ -34,8 +31,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         this.cursorSize = new Vector2(rt.rect.width, rt.rect.height);
         this.cursorScale = rt.lossyScale;
 
-        //if (this.canvas != null) this.scaleFactor = this.canvas.scaleFactor;
-        //this.scaleFactor = rt.localScale.x;
+        this.button = this.gameObject.GetComponent<Button>();
     }
 
     private void OnEnable()
@@ -47,33 +43,6 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
             setCursor(true, false);
         }
     }
-
-    /*
-    private void Update()
-    {
-                 
-        if (EventSystem.current.currentSelectedGameObject == null)
-        {
-            EventSystem.current.SetSelectedGameObject(lastselect);
-        }
-        else
-        {
-            lastselect = EventSystem.current.currentSelectedGameObject;
-        }
-
-        if (EventSystem.current.currentSelectedGameObject == null)
-        {
-            EventSystem.current.SetSelectedGameObject(lastselect);
-        }
-        else if (EventSystem.current.currentSelectedGameObject != null
-                && lastselect != EventSystem.current.currentSelectedGameObject)
-        {
-            if (!EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-                EventSystem.current.SetSelectedGameObject(lastselect);
-            else
-                lastselect = EventSystem.current.currentSelectedGameObject;
-        }
-}*/
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -87,6 +56,11 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     private void setCursor(bool showCursor, bool playEffect)
     {
+        if (this.button != null)
+        {
+            this.button.Select();
+        }
+
         if (this.cursor != null)
         {
             if (!this.cursor.activeInHierarchy && showCursor) this.cursor.SetActive(true);            

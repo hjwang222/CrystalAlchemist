@@ -260,7 +260,7 @@ PrefabInstance:
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -295,7 +295,17 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroDecreaseFactor
-      value: -0.5
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: aggroIncreaseFactor
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: aggroOnHitIncreaseFactor
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480996, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -656,10 +666,10 @@ Transform:
   m_Children:
   - {fileID: 558845583}
   - {fileID: 867685052}
-  - {fileID: 553528489}
-  - {fileID: 1569397901}
   - {fileID: 814304182}
   - {fileID: 1060683241}
+  - {fileID: 553528489}
+  - {fileID: 1569397901}
   - {fileID: 130801340}
   - {fileID: 1874277001}
   - {fileID: 2053001221}
@@ -14600,7 +14610,7 @@ PrefabInstance:
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -14630,7 +14640,7 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroIncreaseFactor
-      value: 1
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -14665,7 +14675,7 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroOnHitIncreaseFactor
-      value: 1
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480996, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -15084,12 +15094,17 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroDecreaseFactor
-      value: -0.5
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroOnHitIncreaseFactor
-      value: 1
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: aggroIncreaseFactor
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d6332d8d9d7c9c438540f3999e42183, type: 3}
@@ -15143,7 +15158,7 @@ PrefabInstance:
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -15173,12 +15188,12 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroIncreaseFactor
-      value: 1
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroDecreaseFactor
-      value: -1
+      value: -120
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -15228,7 +15243,7 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroOnHitIncreaseFactor
-      value: 1
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480996, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -15964,7 +15979,7 @@ PrefabInstance:
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -15989,7 +16004,17 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroDecreaseFactor
-      value: -0.5
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: aggroIncreaseFactor
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: aggroOnHitIncreaseFactor
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480996, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -20471,12 +20496,17 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroDecreaseFactor
-      value: -0.5
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroOnHitIncreaseFactor
-      value: 1
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: aggroIncreaseFactor
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d6332d8d9d7c9c438540f3999e42183, type: 3}
@@ -20560,7 +20590,7 @@ PrefabInstance:
     - target: {fileID: 219291890440112683, guid: 3d0b15c6e29c52f4ead96db224a29a7a,
         type: 3}
       propertyPath: aggroIncreaseFactor
-      value: 1
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 219291890440112683, guid: 3d0b15c6e29c52f4ead96db224a29a7a,
         type: 3}

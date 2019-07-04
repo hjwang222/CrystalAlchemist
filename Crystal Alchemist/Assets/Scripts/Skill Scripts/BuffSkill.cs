@@ -1,9 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class BuffSkill : StandardSkill
 {
+    [FoldoutGroup("Heal and Dispell", expanded: false)]
+    [SerializeField]
+    private bool dispell = false;
+
+    [FoldoutGroup("Heal and Dispell", expanded: false)]
+    [SerializeField]
+    private Color targetColor;
+    private Color tempColor;
+
     #region Overrides
     public override void init()
     {
@@ -17,7 +27,23 @@ public class BuffSkill : StandardSkill
     public void UseSkillOnSelf()
     {
         //Spieler selbst (Heals, Buffs)
-        this.sender.gotHit(this);
+        this.sender.gotHit(this);        
+
+        if (dispell)
+        {
+            if (this.sender.debuffs.Count > 0) this.sender.RemoveStatusEffect(this.sender.debuffs[0], false);
+        }
+
+        if (this.targetColor != null)
+        {
+            this.sender.spriteRenderer.color = this.targetColor;
+        }
+    }
+
+    public override void DestroyIt()
+    {
+        this.sender.resetColor();
+        base.DestroyIt();
     }
     #endregion
 }

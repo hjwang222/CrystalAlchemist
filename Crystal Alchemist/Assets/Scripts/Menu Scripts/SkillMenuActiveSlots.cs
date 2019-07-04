@@ -10,12 +10,12 @@ public class SkillMenuActiveSlots : MonoBehaviour
     [SerializeField]
     private Image skillImage;
     [SerializeField]
-    private Button button;
+    private enumButton button;
     [SerializeField]
     private SimpleSignal newAssignedSkillSignal;
 
     void Start()
-    {        
+    {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         setImage();
     }
@@ -24,7 +24,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
     {
         StandardSkill skill = getSkill();
 
-        if(skill != null)
+        if (skill != null)
         {
             this.skillImage.gameObject.SetActive(true);
             this.skillImage.sprite = skill.icon;
@@ -36,21 +36,21 @@ public class SkillMenuActiveSlots : MonoBehaviour
     }
 
     public void assignSkillToButton(SkillMenu skillMenu)
-    {        
-            setSkill(skillMenu.selectedSkill);
-            skillMenu.selectedSkill = null;
-            setImage();
-            this.newAssignedSkillSignal.Raise();        
+    {
+        setSkill(skillMenu.selectedSkill);
+        skillMenu.selectSkillFromSkillSet(null);
+        setImage();
+        this.newAssignedSkillSignal.Raise();
     }
 
     private StandardSkill getSkill()
     {
         switch (this.button)
         {
-            case Button.AButton: return this.player.AButton;
-            case Button.BButton: return this.player.BButton;
-            case Button.XButton: return this.player.XButton;
-            case Button.YButton: return this.player.YButton;
+            case enumButton.AButton: return this.player.AButton;
+            case enumButton.BButton: return this.player.BButton;
+            case enumButton.XButton: return this.player.XButton;
+            case enumButton.YButton: return this.player.YButton;
             default: return this.player.RBButton;
         }
     }
@@ -59,10 +59,10 @@ public class SkillMenuActiveSlots : MonoBehaviour
     {
         switch (this.button)
         {
-            case Button.AButton: this.player.AButton = skill; break;
-            case Button.BButton: this.player.BButton = skill; break;
-            case Button.XButton: this.player.XButton = skill; break;
-            case Button.YButton: this.player.YButton = skill; break;
+            case enumButton.AButton: this.player.AButton = skill; break;
+            case enumButton.BButton: this.player.BButton = skill; break;
+            case enumButton.XButton: this.player.XButton = skill; break;
+            case enumButton.YButton: this.player.YButton = skill; break;
             default: this.player.RBButton = skill; break;
         }
     }
