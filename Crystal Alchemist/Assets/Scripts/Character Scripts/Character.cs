@@ -46,6 +46,27 @@ public class Character : MonoBehaviour
     [Tooltip("Name")]
     public string characterName;
 
+    [Required("Name muss gesetzt sein!")]
+    [BoxGroup("Pflichtfelder")]
+    public Rigidbody2D myRigidbody;
+
+    [Required("Name muss gesetzt sein!")]
+    [BoxGroup("Pflichtfelder")]
+    public Animator animator;
+
+    [Required("Name muss gesetzt sein!")]
+    [BoxGroup("Pflichtfelder")]
+    public SpriteRenderer spriteRenderer;
+
+    [Required("Name muss gesetzt sein!")]
+    [BoxGroup("Pflichtfelder")]
+    public BoxCollider2D boxCollider;
+
+    [BoxGroup("Pflichtfelder")]
+    [Tooltip("Beschreibung des Skills")]
+    public GameObject activeSkillParent;
+
+
     ////////////////////////////////////////////////////////////////
 
     [TabGroup("Start-Values")]
@@ -230,14 +251,10 @@ public class Character : MonoBehaviour
 
     [HideInInspector]
     public Vector3 spawnPosition;
-    [HideInInspector]
-    public Rigidbody2D myRigidbody;
-    [HideInInspector]
-    public Animator animator;
+
     [HideInInspector]
     public AudioSource audioSource;
-    [HideInInspector]
-    public SpriteRenderer spriteRenderer;
+
     [HideInInspector]
     public CastBar castbar;
     [HideInInspector]
@@ -304,13 +321,15 @@ public class Character : MonoBehaviour
 
     private void setComponents()
     {
-        this.myRigidbody = GetComponent<Rigidbody2D>();
+        if (this.myRigidbody == null) this.myRigidbody = this.GetComponent<Rigidbody2D>();
+        if (this.spriteRenderer == null) this.spriteRenderer = this.GetComponent<SpriteRenderer>();
+        if (this.animator == null) this.animator = this.GetComponent<Animator>();
+        if (this.boxCollider == null) this.boxCollider = GetComponent<BoxCollider2D>();
+
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
-        this.spriteRenderer = GetComponent<SpriteRenderer>();
-        this.mainColor = this.spriteRenderer.color;
-        this.animator = GetComponent<Animator>();
+        this.mainColor = this.spriteRenderer.color;        
         this.transform.gameObject.tag = this.characterType.ToString();
     }
 
@@ -337,7 +356,7 @@ public class Character : MonoBehaviour
         this.animator.enabled = true;
         this.spriteRenderer.enabled = true;
         this.spriteRenderer.color = this.mainColor;
-        this.GetComponent<BoxCollider2D>().enabled = true;
+        this.boxCollider.enabled = true;
         this.transform.position = this.spawnPosition;
 
         this.setSkills(true);
@@ -414,6 +433,8 @@ public class Character : MonoBehaviour
 
                 skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
 
+                StandardSkill temp = Utilities.instantiateSkill(skill, this, null, 1);
+                /*
                 if (skill.isStationary)
                 {
                     //Place it in World 
@@ -427,7 +448,7 @@ public class Character : MonoBehaviour
                     GameObject activeSkill = Instantiate(skill.gameObject, this.transform.position, Quaternion.identity, this.transform);
                     activeSkill.GetComponent<StandardSkill>().sender = this;
                     this.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
-                }
+                }*/
             }
         }
     }
@@ -514,7 +535,7 @@ public class Character : MonoBehaviour
             this.currentState = CharacterState.dead;
 
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
-            this.GetComponent<BoxCollider2D>().enabled = false;
+            this.boxCollider.enabled = false;
         }
     }
 

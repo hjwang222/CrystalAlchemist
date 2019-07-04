@@ -67,7 +67,8 @@ public class ChasingEnemy : Enemy
                 }
                 else
                 {
-                    StartCoroutine(delayMovementCo());
+                    ChangeGoal();
+                    //StartCoroutine(delayMovementCo());
                 }
             }
             else if(this.backToStart) moveTorwardsTarget(spawnPosition);

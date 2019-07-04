@@ -80,7 +80,7 @@ public class Utilities : MonoBehaviour
     {
         GameObject activeSkill = Instantiate(skill.gameObject, sender.transform.position, Quaternion.identity);
 
-        if (!skill.isStationary) activeSkill.transform.parent = sender.transform;
+        if (!skill.isStationary) activeSkill.transform.parent = sender.activeSkillParent.transform;
 
         if (target != null) activeSkill.GetComponent<StandardSkill>().target = target;
         activeSkill.GetComponent<StandardSkill>().sender = sender;

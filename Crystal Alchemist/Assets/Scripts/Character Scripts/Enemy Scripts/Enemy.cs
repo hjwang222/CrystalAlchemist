@@ -52,14 +52,7 @@ public class Enemy : Character
     public new void Update()
     {
         base.Update();
-        generateAggro();
-        
-        //TODO Scale
-        for(int i = 0; i < this.transform.childCount; i++)
-        {
-            GameObject child = this.transform.GetChild(i).gameObject;
-            child.transform.localScale = new Vector3(1/this.transform.localScale.x, 1 / this.transform.localScale.y);
-        }
+        generateAggro();  
     }
 
 
