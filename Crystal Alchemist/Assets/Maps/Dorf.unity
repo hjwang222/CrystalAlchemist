@@ -14630,7 +14630,7 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroIncreaseFactor
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -14661,6 +14661,11 @@ PrefabInstance:
         type: 3}
       propertyPath: respawnTime
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: aggroOnHitIncreaseFactor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480996, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -15081,6 +15086,11 @@ PrefabInstance:
       propertyPath: aggroDecreaseFactor
       value: -0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: aggroOnHitIncreaseFactor
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d6332d8d9d7c9c438540f3999e42183, type: 3}
 --- !u!1001 &1243374015
@@ -15163,12 +15173,12 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroIncreaseFactor
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: aggroDecreaseFactor
-      value: -10
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -15214,6 +15224,11 @@ PrefabInstance:
         type: 3}
       propertyPath: followPathPause
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: aggroOnHitIncreaseFactor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480996, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
@@ -20458,6 +20473,11 @@ PrefabInstance:
       propertyPath: aggroDecreaseFactor
       value: -0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: aggroOnHitIncreaseFactor
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d6332d8d9d7c9c438540f3999e42183, type: 3}
 --- !u!1001 &3700712065284788623
@@ -20540,12 +20560,12 @@ PrefabInstance:
     - target: {fileID: 219291890440112683, guid: 3d0b15c6e29c52f4ead96db224a29a7a,
         type: 3}
       propertyPath: aggroIncreaseFactor
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 219291890440112683, guid: 3d0b15c6e29c52f4ead96db224a29a7a,
         type: 3}
       propertyPath: aggroDecreaseFactor
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d0b15c6e29c52f4ead96db224a29a7a, type: 3}

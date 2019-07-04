@@ -8,11 +8,11 @@ public class ProtectedArea : MonoBehaviour
     private List<Enemy> protectingNPCs = new List<Enemy>();
 
     [SerializeField]
-    [Range(0, 10)]
+    [Range(0, 1)]
     private float aggroIncreaseFactor = 0.25f;
 
     [SerializeField]
-    [Range(-10, 0)]
+    [Range(-1, 0)]
     private float aggroDecreaseFactor = -0.25f;
 
     private void OnTriggerEnter2D(Collider2D collision)

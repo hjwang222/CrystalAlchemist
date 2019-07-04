@@ -11,17 +11,17 @@ public class Enemy : Character
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
-    [Range(0, 10)]
+    [Range(0, 1)]
     private float aggroIncreaseFactor = 0.25f;
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
-    [Range(0, 10)]
+    [Range(0, 1)]
     private float aggroOnHitIncreaseFactor = 0.25f;
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
-    [Range(-10, 0)]
+    [Range(-1, 0)]
     private float aggroDecreaseFactor = -0.25f;
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
