@@ -18,6 +18,11 @@ public class Item : MonoBehaviour
 
     #region Attribute
 
+    [Required]
+    [SerializeField]
+    [BoxGroup("Pflichtfeld")]
+    private SpriteRenderer shadowRenderer;
+
     [FoldoutGroup("Item Attributes", expanded: false)]
     public string itemName;
 
@@ -90,7 +95,8 @@ public class Item : MonoBehaviour
         SortingGroup group = this.GetComponent<SortingGroup>();
         if (group != null) group.sortingOrder = 1;
         this.GetComponent<BoxCollider2D>().enabled = false;   
-        this.anim.enabled = true;  
+        this.anim.enabled = true;
+        if(this.shadowRenderer != null) this.shadowRenderer.enabled = false;
     }
 
     #endregion

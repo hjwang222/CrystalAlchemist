@@ -31,7 +31,7 @@ public class ChasingEnemy : Enemy
     private bool followPathInCircle = true;
 
 
-
+    private bool standStill = false;
     private int factor = 1;
     private int currentPoint = 0;
     private Transform currentGoal;
@@ -59,28 +59,31 @@ public class ChasingEnemy : Enemy
         }
         else
         {
-            if(this.path.Count > 0)
+            if (!this.standStill)
             {
-                if (Vector3.Distance(transform.position, path[currentPoint].position) > followPathPrecision)
+                if (this.path.Count > 0)
                 {
-                    moveTorwardsTarget(path[currentPoint].position);
+                    if (Vector3.Distance(transform.position, path[currentPoint].position) > followPathPrecision)
+                    {
+                        moveTorwardsTarget(path[currentPoint].position);
+                    }
+                    else
+                    {
+                        ChangeGoal();
+                        StartCoroutine(delayMovementCo());
+                    }
                 }
-                else
-                {
-                    ChangeGoal();
-                    //StartCoroutine(delayMovementCo());
-                }
+                else if (this.backToStart) moveTorwardsTarget(spawnPosition);
             }
-            else if(this.backToStart) moveTorwardsTarget(spawnPosition);
-
             //Utilities.SetAnimatorParameter(this.animator, "isWakeUp", false);
         }
     }
 
     private IEnumerator delayMovementCo()
     {
+        this.standStill = true;
         yield return new WaitForSeconds(this.followPathPause);
-        ChangeGoal();
+        this.standStill = false;
     }
 
     private void moveTorwardsTarget(Vector3 position)

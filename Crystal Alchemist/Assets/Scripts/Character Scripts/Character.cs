@@ -64,6 +64,10 @@ public class Character : MonoBehaviour
 
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
+    public SpriteRenderer shadowRenderer;
+
+    [BoxGroup("Pflichtfelder")]
+    [Tooltip("Beschreibung des Skills")]
     public GameObject activeSkillParent;
 
 
@@ -357,6 +361,7 @@ public class Character : MonoBehaviour
         this.spriteRenderer.enabled = true;
         this.spriteRenderer.color = this.mainColor;
         this.boxCollider.enabled = true;
+        this.shadowRenderer.enabled = true;
         this.transform.position = this.spawnPosition;
 
         this.setSkills(true);
@@ -536,6 +541,7 @@ public class Character : MonoBehaviour
 
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
             this.boxCollider.enabled = false;
+            this.shadowRenderer.enabled = false;
         }
     }
 
