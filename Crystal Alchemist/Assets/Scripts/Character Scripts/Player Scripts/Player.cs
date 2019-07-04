@@ -408,7 +408,7 @@ public class Player : Character
                     if (activeSkill.delay > 0) activeSkill.delayTimeLeft = 0; //C4
                     else activeSkill.durationTimeLeft = 0; //Schild
                 }
-            }
+            }            
         }
     }
 
@@ -481,7 +481,6 @@ public class Player : Character
                 Utilities.SetAnimatorParameter(this.animator, "moveX", change.x);
                 Utilities.SetAnimatorParameter(this.animator, "moveY", change.y);
             }
-
 
             Utilities.SetAnimatorParameter(this.animator, "isWalking", true);
         }
