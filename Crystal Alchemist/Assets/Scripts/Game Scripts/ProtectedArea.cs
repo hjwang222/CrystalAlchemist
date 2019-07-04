@@ -7,11 +7,19 @@ public class ProtectedArea : MonoBehaviour
     [SerializeField]
     private List<Enemy> protectingNPCs = new List<Enemy>();
 
+    [SerializeField]
+    [Range(0, 10)]
+    private float aggroIncreaseFactor = 0.25f;
+
+    [SerializeField]
+    [Range(0, 10)]
+    private float aggroDecreaseFactor = 0.25f;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         foreach (Enemy enemy in this.protectingNPCs)
         {
-            enemy.increaseAggro(collision);
+            enemy.increaseAggro(collision.GetComponent<Character>(), this.aggroIncreaseFactor);
         }        
     }
 
@@ -19,7 +27,7 @@ public class ProtectedArea : MonoBehaviour
     {
         foreach (Enemy enemy in this.protectingNPCs)
         {
-            enemy.decreaseAggro(collision);
+            enemy.decreaseAggro(collision.GetComponent<Character>(), this.aggroIncreaseFactor);
         }
     }
 }

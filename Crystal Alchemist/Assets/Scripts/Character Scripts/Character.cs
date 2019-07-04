@@ -731,6 +731,8 @@ public class Character : MonoBehaviour
 
                     if (this.life > 0 && elem.resourceType == ResourceType.life && elem.amount < 0)
                     {
+                        Enemy enemy = this.GetComponent<Enemy>();
+                        if (enemy != null) enemy.increaseAggroOnHit(skill.sender);
                         //Charakter-Treffer (Schaden) animieren
                         Utilities.playSoundEffect(this.audioSource, this.hitSoundEffect);
                         StartCoroutine(hitCo());
