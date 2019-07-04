@@ -21,8 +21,8 @@ public class Enemy : Character
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
-    [Range(0, 10)]
-    private float aggroDecreaseFactor = 0.25f;
+    [Range(-10, 0)]
+    private float aggroDecreaseFactor = -0.25f;
 
     [FoldoutGroup("Enemy Attributes", expanded: false)]
     [SerializeField]
@@ -63,20 +63,30 @@ public class Enemy : Character
 
     #region Aggro-System
 
+    public void addAggro(Character newTarget, float aggro)
+    {
+        if(newTarget != null && this.aggroList.ContainsKey(newTarget)) this.aggroList[newTarget][0] += aggro;
+    }
+
+    public void clearAggro()
+    {
+        this.aggroList.Clear();
+    }
+
     public void generateAggro()
     {
         List<Character> charactersToRemove = new List<Character>();
 
         foreach (Character character in this.aggroList.Keys)
         {
-            this.aggroList[character][0] += this.aggroList[character][1] * (Time.deltaTime * this.timeDistortion);
+            //                       amount                         factor
+            addAggro(character, this.aggroList[character][1] * (Time.deltaTime * this.timeDistortion));
 
-            //if (this.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.aggroList[character][0] + " Aggro auf" + character.characterName);
+            if (this.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.aggroList[character][0] + " Aggro auf" + character.characterName);
 
-            if (this.aggroList[character][0] >= 1)
+            if (this.aggroList[character][0] >= 1f)
             {
-                this.aggroList[character][0] = 1; //aggro
-                this.aggroList[character][1] = 0; //factor
+                this.aggroList[character][0] = 1f; //aggro                             
 
                 //Aggro max, Target!
                 if (this.target == null)
@@ -87,8 +97,7 @@ public class Enemy : Character
             }
             else if (this.aggroList[character][0] <= 0)
             {
-                this.aggroList[character][0] = 0; //aggro
-                this.aggroList[character][1] = 0; //factor
+                this.aggroList[character][0] = 0; //aggro   
 
                 //Aggro lost, Target lost
                 if (this.target == character) this.target = null;
@@ -131,6 +140,7 @@ public class Enemy : Character
 
     private void addToAggroList(Character character)
     {
+        //Aggro, Increase, Factor
         if (!this.aggroList.ContainsKey(character)) this.aggroList.Add(character, new float[] { 0, 0 });
     }
 
@@ -141,7 +151,10 @@ public class Enemy : Character
 
     private void setParameterOfAggrolist(Character character, float amount)
     {
-        if (this.aggroList.ContainsKey(character)) this.aggroList[character][1] = amount; //set factor of increase/decreasing aggro
+        if (this.aggroList.ContainsKey(character))
+        {
+            this.aggroList[character][1] = amount; //set factor of increase/decreasing aggro            
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -160,22 +173,31 @@ public class Enemy : Character
         }
     }
 
-    public void increaseAggroOnHit(Character target)
+    public void increaseAggroOnHit(Character newTarget)
     {
-        increaseAggro(target, this.aggroOnHitIncreaseFactor);
+        if (newTarget != null)
+        {
+            addToAggroList(newTarget);            
+            addAggro(newTarget, this.aggroOnHitIncreaseFactor);
+            if(this.aggroList[newTarget][1] == 0) setParameterOfAggrolist(newTarget, this.aggroDecreaseFactor);
+            if (this.target == null) StartCoroutine(showClueCo(this.targetFoundClue, this.foundClueDuration));
+        }
     }
 
 
-    public void increaseAggro(Character target, float aggroIncrease)
+    public void increaseAggro(Character newTarget, float aggroIncrease)
     {
-        addToAggroList(target);
-        setParameterOfAggrolist(target, 1 * aggroIncrease);
-        if (this.target == null) StartCoroutine(showClueCo(this.targetFoundClue, this.foundClueDuration));
+        if (newTarget != null)
+        {
+            addToAggroList(newTarget);
+            setParameterOfAggrolist(newTarget, aggroIncrease);
+            if (this.target == null) StartCoroutine(showClueCo(this.targetFoundClue, this.foundClueDuration));
+        }
     }
 
-    public void decreaseAggro(Character target, float aggroDecrease)
+    public void decreaseAggro(Character newTarget, float aggroDecrease)
     {
-        setParameterOfAggrolist(target, -1 * aggroDecrease);
+        if (newTarget != null) setParameterOfAggrolist(newTarget, aggroDecrease);
     }
 
     #endregion

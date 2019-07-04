@@ -12,8 +12,8 @@ public class ProtectedArea : MonoBehaviour
     private float aggroIncreaseFactor = 0.25f;
 
     [SerializeField]
-    [Range(0, 10)]
-    private float aggroDecreaseFactor = 0.25f;
+    [Range(-10, 0)]
+    private float aggroDecreaseFactor = -0.25f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

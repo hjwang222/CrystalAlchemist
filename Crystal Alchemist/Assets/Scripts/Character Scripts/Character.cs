@@ -537,6 +537,9 @@ public class Character : MonoBehaviour
             this.spriteRenderer.color = Color.white;
             setSkills(false);
 
+            Enemy enemy = this.GetComponent<Enemy>();
+            if (enemy != null) enemy.clearAggro();
+
             this.currentState = CharacterState.dead;
 
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
