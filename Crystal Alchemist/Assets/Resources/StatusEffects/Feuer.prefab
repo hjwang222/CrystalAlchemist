@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7363475295885747727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7363475295885747724}
+  - component: {fileID: 7363475295885747722}
+  - component: {fileID: 5307428103921262142}
+  m_Layer: 0
+  m_Name: Feuer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7363475295885747724
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363475295885747727}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.14899082}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 97, y: 480.00003}
+  m_SizeDelta: {x: 48, y: 48}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7363475295885747722
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363475295885747727}
+  m_CullTransparentMesh: 0
+--- !u!114 &5307428103921262142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363475295885747727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a738f2d23433b442af0c9cd354f9dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffectName: Feuer
+  statusEffectDescription: 
+  maxStacks: 3
+  canBeDispelled: 1
+  statusEffectType: 1
+  endType: 0
+  statusEffectDuration: 12
+  statusEffectInterval: 3
+  canOverride: 0
+  statusEffectManaDrain: 0
+  statusEffectManaDrainInterval: 1
+  canDeactivateIt: 0
+  statusEffectColor: {r: 1, g: 0.24985157, b: 0, a: 1}
+  iconSprite: {fileID: 21300004, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
+  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
+  target: {fileID: 0}
+  statusEffectTimeLeft: 0
+  timeDistortion: 1
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -0.25
+  addSkillToTarget: {fileID: 6468805673426445367, guid: 12525a727c1ac6d4dbfb845d2913c034,
+    type: 3}

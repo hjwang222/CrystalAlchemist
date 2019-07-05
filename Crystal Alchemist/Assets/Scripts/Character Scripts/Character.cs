@@ -375,7 +375,7 @@ public class Character : MonoBehaviour
     public void Update()
     {
         if(this.currentState != CharacterState.knockedback) this.myRigidbody.velocity = Vector2.zero;
-        else if (currentState == CharacterState.dead) return;
+        else if (this.currentState == CharacterState.dead || this.currentState == CharacterState.frozen) return;
 
         regeneration();
     }

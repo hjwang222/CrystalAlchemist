@@ -317,7 +317,7 @@ public class Player : Character
             skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
             if (!skill.isRapidFire) skill.holdTimer = 0;
 
-            Utilities.fireSkill(skill, this);
+            Utilities.instantiateSkill(skill, this);
         }
         else if (skill.lockOn != null && this.activeLockOnTarget == null)
         {

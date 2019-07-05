@@ -71,9 +71,9 @@ public class Utilities : MonoBehaviour
         return resource;
     }
 
-    public static void fireSkill(StandardSkill skill, Character sender)
+    public static StandardSkill instantiateSkill(StandardSkill skill, Character sender)
     {
-        instantiateSkill(skill, sender, null, 1);
+        return instantiateSkill(skill, sender, null, 1);
     }
 
     public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target, float reduce)

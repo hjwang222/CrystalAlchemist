@@ -19,7 +19,9 @@ public struct affectedResource
 public class affectResource : StatusEffect
 {
     #region Attributes
-    public List<affectedResource> affectedResources;
+    [FoldoutGroup("affect Resource", expanded: false)]
+    [SerializeField]
+    private List<affectedResource> affectedResources;
     #endregion
 
 
