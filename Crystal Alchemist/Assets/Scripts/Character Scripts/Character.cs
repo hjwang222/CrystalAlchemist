@@ -41,34 +41,37 @@ public enum Gender
 public class Character : MonoBehaviour
 {
     #region Basic Attributes
-    [Required("Name muss gesetzt sein!")]
+    [Required]
     [BoxGroup("Pflichtfelder")]
-    [Tooltip("Name")]
     public string characterName;
 
-    [Required("Name muss gesetzt sein!")]
+    [Required]
     [BoxGroup("Pflichtfelder")]
     public Rigidbody2D myRigidbody;
 
-    [Required("Name muss gesetzt sein!")]
+    [Required]
     [BoxGroup("Pflichtfelder")]
     public Animator animator;
 
-    [Required("Name muss gesetzt sein!")]
+    [Required]
     [BoxGroup("Pflichtfelder")]
     public SpriteRenderer spriteRenderer;
 
-    [Required("Name muss gesetzt sein!")]
+    [Required]
     [BoxGroup("Pflichtfelder")]
     public BoxCollider2D boxCollider;
 
     [BoxGroup("Pflichtfelder")]
-    [Tooltip("Beschreibung des Skills")]
+    [Required]
     public SpriteRenderer shadowRenderer;
 
     [BoxGroup("Pflichtfelder")]
-    [Tooltip("Beschreibung des Skills")]
+    [Required]
     public GameObject activeSkillParent;
+
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public GameObject activeStatusEffectParent;
 
 
     ////////////////////////////////////////////////////////////////
@@ -374,10 +377,15 @@ public class Character : MonoBehaviour
 
     public void Update()
     {
-        if(this.currentState != CharacterState.knockedback) this.myRigidbody.velocity = Vector2.zero;
-        else if (this.currentState == CharacterState.dead || this.currentState == CharacterState.frozen) return;
-
         regeneration();
+
+        if (this.currentState != CharacterState.knockedback)
+        {
+            this.myRigidbody.velocity = Vector2.zero;
+        }
+
+        if (this.currentState == CharacterState.dead || this.currentState == CharacterState.frozen)
+            return;        
     }
 
     public void setResourceSignal(SimpleSignal health, SimpleSignal mana,
@@ -388,7 +396,7 @@ public class Character : MonoBehaviour
         this.currencies = currencies;
     }
 
-    public void regeneration()
+    private void regeneration()
     {
         if (this.currentState != CharacterState.dead && this.currentState != CharacterState.respawning)
         {
@@ -746,7 +754,7 @@ public class Character : MonoBehaviour
                 {
                     //Rückstoß ermitteln
                     float knockbackTrust = skill.thrust - antiKnockback;
-                    knockBack(skill.knockbackTime, knockbackTrust, skill.transform);
+                    knockBack(skill.knockbackTime, knockbackTrust, skill);
                 }
             }
         }
@@ -841,6 +849,7 @@ public class Character : MonoBehaviour
     private void instantiateStatusEffect(StatusEffect statusEffect, List<StatusEffect> statusEffects)
     {
         GameObject statusEffectClone = Instantiate(statusEffect.gameObject, this.transform.position, Quaternion.identity, this.transform);
+        statusEffectClone.transform.parent = this.activeStatusEffectParent.transform;
         DontDestroyOnLoad(statusEffectClone);
         StatusEffect statusEffectScript = statusEffectClone.GetComponent<StatusEffect>();
         statusEffectScript.target = this;
@@ -850,14 +859,22 @@ public class Character : MonoBehaviour
         statusEffects.Add(statusEffectClone.GetComponent<StatusEffect>());
     }
 
-    private void knockBack(float knockTime, float thrust, Transform attack)
+    public void knockBack(float knockTime, float thrust, Vector2 direction)
+    {
+        this.myRigidbody.velocity = Vector2.zero;
+
+        Vector2 diffference = direction.normalized * thrust;
+        this.myRigidbody.AddForce(diffference, ForceMode2D.Impulse);
+
+        StartCoroutine(knockCo(knockTime));        
+    }
+
+    public void knockBack(float knockTime, float thrust, StandardSkill attack)
     {
         if (this.myRigidbody != null)
         {
-            Vector2 diffference = this.myRigidbody.transform.position - attack.position;
-            diffference = diffference.normalized * thrust;
-            this.myRigidbody.AddForce(diffference, ForceMode2D.Impulse);
-            StartCoroutine(knockCo(knockTime));
+            Vector2 diffference = this.myRigidbody.transform.position - attack.transform.position;
+            knockBack(knockTime, thrust, diffference);
         }
     }
 

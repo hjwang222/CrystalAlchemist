@@ -96,7 +96,7 @@ public class Player : Character
     private new void Update()
     {
         base.Update();
-        playerInputs();        
+        playerInputs();
     }
 
     private void playerInputs()
@@ -490,8 +490,13 @@ public class Player : Character
     private void MoveCharacter()
     {
         change.Normalize(); //Diagonal-Laufen fixen
-        this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
-        this.myRigidbody.velocity = Vector2.zero;
+        //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
+
+        Vector3 movement = new Vector3(change.x, change.y, 0.0f);
+        this.myRigidbody.velocity = (movement * speed * this.timeDistortion);
+
+        //Debug.Log("Reset in Player Movement: " + this.myRigidbody.velocity);
+        //this.myRigidbody.velocity = Vector2.zero;
 
         //Slide
         //Vector3 movement = new Vector3(change.x, change.y, 0.0f);

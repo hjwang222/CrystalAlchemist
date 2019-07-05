@@ -12,6 +12,7 @@ public class addSkill : affectResource
     public override void init()
     {
         base.init();
-        Utilities.instantiateSkill(this.addSkillToTarget, this.target);
+        StandardSkill skill = Utilities.instantiateSkill(this.addSkillToTarget, this.target);
+        skill.duration = this.statusEffectDuration;
     }
 }

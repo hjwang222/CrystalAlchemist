@@ -42,8 +42,7 @@ public class ChasingEnemy : Enemy
     #region Update und Movement Funktionen
     private new void Update()
     {
-        base.Update();
-        regeneration();
+        base.Update();        
         moveCharacter();
     }
 
@@ -94,6 +93,7 @@ public class ChasingEnemy : Enemy
             Vector3 temp = Vector3.MoveTowards(transform.position, position, this.speed * (Time.deltaTime * this.timeDistortion));
 
             changeAnim(temp - transform.position);
+
             this.myRigidbody.MovePosition(temp);
             this.myRigidbody.velocity = Vector2.zero;
 

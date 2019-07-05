@@ -59,17 +59,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusEffectName: Feuer
   statusEffectDescription: 
-  maxStacks: 3
+  maxStacks: 1
   canBeDispelled: 1
   statusEffectType: 1
   endType: 0
-  statusEffectDuration: 12
-  statusEffectInterval: 3
+  statusEffectDuration: 9
+  statusEffectInterval: 0.5
   canOverride: 0
   statusEffectManaDrain: 0
   statusEffectManaDrainInterval: 1
   canDeactivateIt: 0
-  statusEffectColor: {r: 1, g: 0.24985157, b: 0, a: 1}
+  statusEffectColor: {r: 1, g: 0.52093834, b: 0, a: 1}
   iconSprite: {fileID: 21300004, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
   updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
   target: {fileID: 0}
@@ -78,6 +78,6 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
-    amount: -0.25
+    amount: -0.025
   addSkillToTarget: {fileID: 6468805673426445367, guid: 12525a727c1ac6d4dbfb845d2913c034,
     type: 3}

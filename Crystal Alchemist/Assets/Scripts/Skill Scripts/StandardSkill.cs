@@ -124,6 +124,7 @@ public class StandardSkill : MonoBehaviour
     public float speedDuringDuration = 0;
 
     [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [Tooltip("Soll die Geschwindigkeit auch die Animation beeinflussen?")]
     public bool affectAnimation = true;
 
     [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
@@ -151,7 +152,7 @@ public class StandardSkill : MonoBehaviour
     public bool rotateIt = false;
 
     [FoldoutGroup("Projektil Attribute", expanded: false)]
-    [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
+    [Tooltip("Wird ein Blend-Tree verwendet (Animation)?")]
     [HideIf("rotateIt")]
     public bool blendTree = false;
 

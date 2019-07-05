@@ -82,7 +82,7 @@ public class Enemy : Character
             //                       amount                         factor
             addAggro(character, this.aggroList[character][1] * (Time.deltaTime * this.timeDistortion));
 
-            if (this.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.aggroList[character][0] + " Aggro auf" + character.characterName);
+            //if (this.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.aggroList[character][0] + " Aggro auf" + character.characterName);
 
             if (this.aggroList[character][0] >= 1f)
             {

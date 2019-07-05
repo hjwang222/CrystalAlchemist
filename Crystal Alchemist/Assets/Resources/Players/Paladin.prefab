@@ -32,8 +32,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4531212770177679800}
-  - {fileID: 8162491572302619957}
   - {fileID: 1490945895739742448}
+  - {fileID: 5664017428727299626}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -56,6 +56,7 @@ MonoBehaviour:
   boxCollider: {fileID: 4005903117030388743}
   shadowRenderer: {fileID: 7098998326650301281}
   activeSkillParent: {fileID: 8638893490402070047}
+  activeStatusEffectParent: {fileID: 1487360461578692118}
   startLife: 3
   startMana: 2
   startSpeed: 100
@@ -66,8 +67,8 @@ MonoBehaviour:
   maxMana: 3
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
-  manaRegeneration: 0
-  manaRegenerationInterval: 0
+  manaRegeneration: 0.25
+  manaRegenerationInterval: 3
   skillSet:
   - {fileID: 103987821612614508, guid: 2f0554ae42ef20e4e976d37f34aad3e3, type: 3}
   - {fileID: 2502710003444371835, guid: 05bc84479b081af4ca7844c3cd88c425, type: 3}
@@ -77,6 +78,7 @@ MonoBehaviour:
   - {fileID: 680506914304237524, guid: 8d38c6d44fc7878428ee4d926eeff611, type: 3}
   - {fileID: 6096689982342564308, guid: bddbde069b87bf945a2ba62d587c3c99, type: 3}
   - {fileID: 8157143814619834876, guid: f0b2ecb21609c6c48badb5e37582d142, type: 3}
+  - {fileID: 6162400572210519683, guid: 689f7820c63a03148aa81b962ee64ad6, type: 3}
   - {fileID: 975855144787553018, guid: 42f53cb1b0e3a1e4c98ecc587d8dd07e, type: 3}
   - {fileID: 6388236434287011116, guid: 478564dcd28512a4a88aeeac6dcd1b25, type: 3}
   - {fileID: 4500866824247064267, guid: 8a7f78e4a6588ab4289c20b832353307, type: 3}
@@ -201,6 +203,36 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!1 &1487360461578692118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5664017428727299626}
+  m_Layer: 10
+  m_Name: activeStatusEffects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5664017428727299626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487360461578692118}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 759644400424337062}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5158803107809188404
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +263,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8162491572302619957}
   m_Father: {fileID: 759644400424337062}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -369,7 +402,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 759644400424337062}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8669538159987880188
 GameObject:
@@ -399,8 +432,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 759644400424337062}
-  m_RootOrder: 1
+  m_Father: {fileID: 4531212770177679800}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7098998326650301281
 SpriteRenderer:
