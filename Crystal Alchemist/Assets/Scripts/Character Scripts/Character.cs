@@ -526,7 +526,7 @@ public class Character : MonoBehaviour
         else
         {
             //TODO: Kill sofort (Skill noch aktiv)
-
+            
             Utilities.SetAnimatorParameter(this.animator, "isDead", true);
             this.spriteRenderer.color = Color.white;
             setSkills(false);
@@ -645,10 +645,11 @@ public class Character : MonoBehaviour
 
     public void updateSpeed(float addSpeed, bool affectAnimation)
     {
-        float newSpeed = addSpeed;
-        if (((this.startSpeed / 100) + (newSpeed / 100)) < 0) newSpeed = this.startSpeed*(-1f);
+        float startSpeedInPercent = this.startSpeed / 100;
+        float addNewSpeed = startSpeedInPercent * (addSpeed / 100);
+        float changeSpeed = startSpeedInPercent + addNewSpeed;
 
-        this.speed = ((this.startSpeed / 100) + (newSpeed / 100)) * this.timeDistortion * this.speedMultiply;
+        this.speed = changeSpeed * this.timeDistortion * this.speedMultiply;
         if(affectAnimation) this.animator.speed = this.speed / (this.startSpeed * this.speedMultiply / 100);
     }
 
@@ -779,7 +780,7 @@ public class Character : MonoBehaviour
         }
 
         dispellStatusEffects.Clear();
-    }
+    }   
 
     public void AddStatusEffect(StatusEffect statusEffect)
     {
