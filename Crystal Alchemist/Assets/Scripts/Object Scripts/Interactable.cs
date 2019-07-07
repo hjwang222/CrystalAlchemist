@@ -104,9 +104,14 @@ public class Interactable : MonoBehaviour
         //Context Clue einblenden und Charakter nicht mehr angreifen lassen!
 
         if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
-        {            
-            this.player = characterCollisionBox.gameObject.GetComponent<Player>();
-            if(this.player != null) this.player.currentState = CharacterState.interact;
+        {
+            Player player = characterCollisionBox.GetComponent<Player>();
+
+            if (player != null)
+            {
+                player.currentState = CharacterState.interact;
+                this.player = player;
+            }
             this.isPlayerInRange = true;
             this.context.SetActive(true);
         }
@@ -118,8 +123,18 @@ public class Interactable : MonoBehaviour
 
         if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
         {
-            if (this.player != null) this.player.currentState = CharacterState.idle;
-            this.player = null;            
+            Player player = characterCollisionBox.GetComponent<Player>();
+
+            if (player != null)
+            {
+                player.currentState = CharacterState.idle;
+            }
+
+            if(this.player == player)
+            {
+                this.player = null;
+            }
+
             this.isPlayerInRange = false;
             this.context.SetActive(false);
         }

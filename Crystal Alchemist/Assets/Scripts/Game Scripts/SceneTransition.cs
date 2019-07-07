@@ -40,7 +40,8 @@ public class SceneTransition : MonoBehaviour
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            StartCoroutine(LoadScene(other.GetComponent<Player>()));
+            Player player = other.GetComponent<Player>();
+            if(player != null) StartCoroutine(LoadScene(player));
         }
     }
   

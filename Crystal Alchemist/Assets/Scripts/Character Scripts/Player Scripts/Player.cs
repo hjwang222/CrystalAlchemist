@@ -44,6 +44,11 @@ public class Player : Character
     [FoldoutGroup("Player Signals", expanded: false)]
     public BoolSignal cameraSignal;
 
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    [SerializeField]
+    private GameObject targetHelpObject;
+
     public StandardSkill AButton;    
     public StandardSkill BButton;   
     public StandardSkill XButton;    
@@ -57,11 +62,15 @@ public class Player : Character
     private void Start()
     {
         this.isPlayer = true;
+
         this.init();
-        loadSkillsFromSkillSet("Boomerang", enumButton.AButton);
+        
         this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.currencySignalUI);
 
         LoadSystem.loadPlayerData(this);
+
+        if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);
+        Utilities.checkIfHelperDeactivate(this);
 
         this.currentState = CharacterState.walk;
 
@@ -162,13 +171,13 @@ public class Player : Character
 
     private IEnumerator positionCo(Vector2 playerPositionInNewScene)
     {
-        this.currentState = CharacterState.inDialog;
-        this.spriteRenderer.enabled = false;
+        this.currentState = CharacterState.inDialog;       
+        this.enableSpriteRenderer(false);
         //this.cameraSignal.Raise(false);
         yield return null;
 
         this.transform.position = playerPositionInNewScene;
-        this.spriteRenderer.enabled = true;
+        this.enableSpriteRenderer(true);
         //this.cameraSignal.Raise(true);
         setPlayerPlayable();
     }

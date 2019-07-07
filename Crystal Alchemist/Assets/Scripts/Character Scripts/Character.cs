@@ -55,7 +55,8 @@ public class Character : MonoBehaviour
 
     [Required]
     [BoxGroup("Pflichtfelder")]
-    public SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
 
     [Required]
     [BoxGroup("Pflichtfelder")]
@@ -254,7 +255,9 @@ public class Character : MonoBehaviour
     private SimpleSignal healthSignal;
     private SimpleSignal manaSignal;
     private SimpleSignal currencies;
-    private Color mainColor;
+    private List<Color> colors = new List<Color>();
+    private bool showTargetHelp = false;
+    private GameObject targetHelpObjectPlayer;
 
     [HideInInspector]
     public Vector3 spawnPosition;
@@ -316,12 +319,12 @@ public class Character : MonoBehaviour
     {
         this.spawnPosition = this.transform.position;
         this.direction = new Vector2(0, -1);
-
+        
         //getItems();    
 
         setComponents();
         spawn();
-
+        this.currentState = CharacterState.idle;
         if (this.initializeSkill != null) useSkillInstantly(this.initializeSkill);
         //this.gameObject.layer = LayerMask.NameToLayer(this.gameObject.tag);
     }
@@ -330,16 +333,34 @@ public class Character : MonoBehaviour
     {
         if (this.myRigidbody == null) this.myRigidbody = this.GetComponent<Rigidbody2D>();
         if (this.spriteRenderer == null) this.spriteRenderer = this.GetComponent<SpriteRenderer>();
+
         if (this.animator == null) this.animator = this.GetComponent<Animator>();
         if (this.boxCollider == null) this.boxCollider = GetComponent<BoxCollider2D>();
 
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
-        this.mainColor = this.spriteRenderer.color;        
+        this.colors.Add(this.spriteRenderer.color);
+
         this.transform.gameObject.tag = this.characterType.ToString();
+
+        if (this.spriteRenderer != null)
+        {
+            this.spriteRenderer.gameObject.tag = this.transform.gameObject.tag;
+        }
+        if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
     }
 
+    public void setTargetHelper(GameObject targetHelper)
+    {
+        this.targetHelpObjectPlayer = targetHelper;
+        this.targetHelpObjectPlayer.SetActive(false);
+    }
+
+    public void setTargetHelperActive(bool value)
+    {
+        if (this.targetHelpObjectPlayer != null) this.targetHelpObjectPlayer.gameObject.SetActive(value);
+    }
 
     public void spawn()
     {
@@ -362,7 +383,9 @@ public class Character : MonoBehaviour
         this.currentState = CharacterState.idle;
         this.animator.enabled = true;
         this.spriteRenderer.enabled = true;
-        this.spriteRenderer.color = this.mainColor;
+
+        resetColor();
+
         this.boxCollider.enabled = true;
         this.shadowRenderer.enabled = true;
         this.transform.position = this.spawnPosition;
@@ -385,7 +408,7 @@ public class Character : MonoBehaviour
         }
 
         if (this.currentState == CharacterState.dead)
-            return;                
+            return;
     }
 
     public void setResourceSignal(SimpleSignal health, SimpleSignal mana,
@@ -447,7 +470,7 @@ public class Character : MonoBehaviour
                 skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
 
                 StandardSkill temp = Utilities.instantiateSkill(skill, this, null, 1);
-                
+
             }
         }
     }
@@ -510,7 +533,7 @@ public class Character : MonoBehaviour
 
     private void setSkills(bool active)
     {
-        foreach(StandardSkill skill in this.activeSkills)
+        foreach (StandardSkill skill in this.activeSkills)
         {
             skill.gameObject.SetActive(active);
         }
@@ -526,7 +549,7 @@ public class Character : MonoBehaviour
         else
         {
             //TODO: Kill sofort (Skill noch aktiv)
-            
+
             Utilities.SetAnimatorParameter(this.animator, "isDead", true);
             this.spriteRenderer.color = Color.white;
             setSkills(false);
@@ -600,12 +623,6 @@ public class Character : MonoBehaviour
     }
 
 
-    public void resetColor()
-    {
-        this.spriteRenderer.color = this.mainColor;
-    }
-
-
     private void callSignal(SimpleSignal signal, float addResource)
     {
         if (signal != null && addResource != 0) signal.Raise();
@@ -650,7 +667,7 @@ public class Character : MonoBehaviour
         float changeSpeed = startSpeedInPercent + addNewSpeed;
 
         this.speed = changeSpeed * this.timeDistortion * this.speedMultiply;
-        if(affectAnimation) this.animator.speed = this.speed / (this.startSpeed * this.speedMultiply / 100);
+        if (affectAnimation) this.animator.speed = this.speed / (this.startSpeed * this.speedMultiply / 100);
     }
 
     public void updateSpellSpeed(float addSpellSpeed)
@@ -668,7 +685,7 @@ public class Character : MonoBehaviour
          }*/
 
         updateAnimatorSpeed(this.timeDistortion);
-        
+
         if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
 
         foreach (StatusEffect effect in this.buffs)
@@ -696,6 +713,48 @@ public class Character : MonoBehaviour
     }
 
 
+
+
+    #region Color Changes
+
+    public void resetColor()
+    {
+        if (this.spriteRenderer != null)
+        {
+            if(this.colors.Count > 0) this.spriteRenderer.color = this.colors[0];
+            this.colors.Clear();
+            this.addColor(this.spriteRenderer.color);
+        }
+    }
+
+    public void resetColor(Color color)
+    {
+        if (this.spriteRenderer != null)
+        {
+            this.colors.Remove(color);
+            this.spriteRenderer.color = this.colors[this.colors.Count - 1];
+        }
+    }
+
+    public void enableSpriteRenderer(bool value)
+    {
+        this.spriteRenderer.enabled = value;
+    }
+
+    public void addColor(Color color)
+    {
+        if (this.colors.Contains(color))
+        {
+            this.spriteRenderer.color = this.colors[this.colors.IndexOf(color)];
+        }
+        else
+        {
+            this.colors.Add(color);
+            this.spriteRenderer.color = this.colors[this.colors.Count - 1];
+        }
+    }
+
+    #endregion
 
 
     #region Item Collect
@@ -780,7 +839,7 @@ public class Character : MonoBehaviour
         }
 
         dispellStatusEffects.Clear();
-    }   
+    }
 
     public void AddStatusEffect(StatusEffect statusEffect)
     {
@@ -862,7 +921,7 @@ public class Character : MonoBehaviour
         Vector2 diffference = direction.normalized * thrust;
         this.myRigidbody.AddForce(diffference, ForceMode2D.Impulse);
 
-        StartCoroutine(knockCo(knockTime));        
+        StartCoroutine(knockCo(knockTime));
     }
 
     public void knockBack(float knockTime, float thrust, StandardSkill attack)
@@ -882,12 +941,12 @@ public class Character : MonoBehaviour
     private IEnumerator hitCo()
     {
         this.isInvincible = true;
-        if (this.showHitcolor) this.spriteRenderer.color = this.hitColor;
+        if (this.showHitcolor) this.addColor(this.hitColor);
 
         yield return new WaitForSeconds(this.cannotBeHitTime);
-        this.resetColor();
-        this.isInvincible = false;        
-    }    
+        this.resetColor(this.hitColor);
+        this.isInvincible = false;
+    }
 
     private IEnumerator knockCo(float knockTime)
     {

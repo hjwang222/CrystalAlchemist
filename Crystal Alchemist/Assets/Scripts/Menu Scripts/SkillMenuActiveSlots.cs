@@ -39,6 +39,8 @@ public class SkillMenuActiveSlots : MonoBehaviour
     {
         setSkill(skillMenu.selectedSkill);
         skillMenu.selectSkillFromSkillSet(null);
+        Utilities.checkIfHelperDeactivate(this.player);
+
         setImage();
         this.newAssignedSkillSignal.Raise();
     }
@@ -56,7 +58,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
     }
 
     private void setSkill(StandardSkill skill)
-    {
+    {           
         switch (this.button)
         {
             case enumButton.AButton: this.player.AButton = skill; break;

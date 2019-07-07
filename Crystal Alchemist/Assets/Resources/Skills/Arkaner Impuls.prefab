@@ -51,13 +51,13 @@ MonoBehaviour:
   skillName: Impuls
   category: 1
   animationTriggerName: 
-  orderIndex: 21
+  orderIndex: 22
   skillDescription: 
   cast: 0
   keepHoldTimer: 0
   delay: 0
   duration: 2
-  deactivateByButtonUp: 0
+  deactivateByButtonUp: 1
   cooldown: 0.05
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -66,14 +66,19 @@ MonoBehaviour:
     item: {fileID: 0}
     amount: -0.5
   statusEffects: []
+  thrust: 0
+  knockbackTime: 0
   resourceType: 2
   item: {fileID: 0}
-  addResourceSender: 0
+  addResourceSender: -0.04
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0
   affectAnimation: 1
-  lockMovementonDuration: 0
+  lockMovementonDuration: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
   isRapidFire: 1
   isStationary: 0
   speed: 40
@@ -84,6 +89,7 @@ MonoBehaviour:
   snapRotationInDegrees: 0
   positionOffset: 0.75
   positionHeight: 0
+  activeTargetHelper: 1
   lockOn: {fileID: 0}
   targetingMode: 0
   maxAmountOfTargets: 0
@@ -96,11 +102,8 @@ MonoBehaviour:
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
-  thrust: 0
-  knockbackTime: 0
   maxAmounts: 9999
   comboAmount: 99
-  summon: {fileID: 0}
   icon: {fileID: 21300014, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 8300000, guid: a7d626076c682c34fa5b8ee7c4cb4631, type: 3}
   endSoundEffect: {fileID: 8300000, guid: d16c88f8218bdea468612a11d5720ce5, type: 3}
@@ -108,7 +111,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: -0.0010062475
+  cooldownTimeLeft: -0.0030966718
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 0}
@@ -121,6 +124,7 @@ MonoBehaviour:
   holdTimer: 0
   triggerIsActive: 1
   setPositionAtStart: 1
+  skillOnImpact: {fileID: 0}
 --- !u!61 &6888541797719318242
 BoxCollider2D:
   m_ObjectHideFlags: 0

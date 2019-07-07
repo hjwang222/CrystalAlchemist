@@ -36,13 +36,13 @@ public class BuffSkill : StandardSkill
 
         if (this.targetColor != null)
         {
-            this.sender.spriteRenderer.color = this.targetColor;
+            this.sender.addColor(this.targetColor);
         }
     }
 
     public override void DestroyIt()
     {
-        this.sender.resetColor();
+        this.sender.resetColor(this.targetColor);
         base.DestroyIt();
     }
     #endregion

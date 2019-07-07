@@ -21,6 +21,11 @@ public class TitleScreen : MonoBehaviour
     private TextMeshProUGUI musicUGUI;
     [SerializeField]
     private TextMeshProUGUI effectUGUI;
+    [SerializeField]
+    private TextMeshProUGUI continueUGUI;
+    [SerializeField]
+    private Color color;
+
 
     [Required]
     [SerializeField]
@@ -28,7 +33,7 @@ public class TitleScreen : MonoBehaviour
 
     private AudioSource audioSource;
     private AudioSource musicSource;
-
+    private string lastSavepoint = null;
 
     void Start()
     {
@@ -51,16 +56,24 @@ public class TitleScreen : MonoBehaviour
             this.musicSource.Play();
         }
 
+        PlayerData data = SaveSystem.loadPlayer();
+        if (data != null && data.scene != null && data.scene != "") this.lastSavepoint = data.scene;
+
+        if (this.lastSavepoint == null) this.continueUGUI.color = Color.gray;
+        else this.continueUGUI.color = this.color;
+
         destroySignal.Raise();
     }
 
     public void startGame(string scene)
     {
-        PlayerData data = SaveSystem.loadPlayer();
-
-        if (data != null && data.scene != null && data.scene != "") scene = data.scene;
-
+        SaveSystem.DeleteSave();
         SceneManager.LoadSceneAsync(scene);
+    }
+
+    public void continueGame()
+    {
+        if(this.lastSavepoint != null) SceneManager.LoadSceneAsync(this.lastSavepoint);
     }
 
     public void exitGame()

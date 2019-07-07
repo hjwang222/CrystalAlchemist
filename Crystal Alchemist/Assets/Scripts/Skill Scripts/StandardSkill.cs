@@ -224,6 +224,10 @@ public class StandardSkill : MonoBehaviour
     ////////////////////////////////////////////////////////////////
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
+    [Tooltip("Ob die Zielhilfe aktiviert werden soll")]
+    public bool activeTargetHelper = false;
+
+    [FoldoutGroup("Zielerfassung", expanded: false)]
     [Tooltip("Ob das Ziel erfasst werden soll. Wenn NULL, dann nicht.")]
     public GameObject lockOn;
 

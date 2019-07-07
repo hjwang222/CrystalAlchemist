@@ -520,6 +520,19 @@ public class Utilities : MonoBehaviour
     }
 
 
+    public static void checkIfHelperDeactivate(Player player)
+    {
+        if (!checkIfHelperActivated(player.AButton)
+            && !checkIfHelperActivated(player.BButton)
+            && !checkIfHelperActivated(player.XButton)
+            && !checkIfHelperActivated(player.YButton)) player.setTargetHelperActive(false);
+        else player.setTargetHelperActive(true);
+    }
 
-    
+    private static bool checkIfHelperActivated(StandardSkill skill)
+    {
+        if (skill != null && skill.activeTargetHelper) return true;
+        else return false;
+    }
+
 }

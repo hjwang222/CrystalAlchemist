@@ -142,7 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Analysis
   category: 1
-  orderIndex: 22
+  animationTriggerName: 
+  orderIndex: 21
   skillDescription: 
   cast: 3
   keepHoldTimer: 0
@@ -152,21 +153,27 @@ MonoBehaviour:
   cooldown: 3
   cooldownAfterCombo: 0
   durationCombo: 0
-  addLifeTarget: 0
-  addManaTarget: 0
+  affectedResources: []
   statusEffects:
   - {fileID: 4742325497012214215, guid: c133ea91399c3144ab317096acc94303, type: 3}
+  thrust: 0
+  knockbackTime: 0
   resourceType: 2
   item: {fileID: 0}
   addResourceSender: 0
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0
+  affectAnimation: 1
   lockMovementonDuration: 0
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
   isRapidFire: 0
   isStationary: 0
   speed: 0
   rotateIt: 0
+  blendTree: 0
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
@@ -184,11 +191,8 @@ MonoBehaviour:
   affectObjects: 0
   affectSkills: 0
   ignoreInvincibility: 1
-  thrust: 0
-  knockbackTime: 0
   maxAmounts: 1
   comboAmount: 99
-  summon: {fileID: 0}
   icon: {fileID: 21300006, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 0}
   endSoundEffect: {fileID: 0}
@@ -209,3 +213,5 @@ MonoBehaviour:
   holdTimer: 0
   triggerIsActive: 1
   setPositionAtStart: 1
+  dispell: 0
+  targetColor: {r: 0, g: 0, b: 0, a: 0}

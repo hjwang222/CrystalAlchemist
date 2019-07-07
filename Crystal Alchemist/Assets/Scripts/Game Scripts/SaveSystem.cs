@@ -20,6 +20,12 @@ public class SaveSystem
         stream.Dispose();
     }
 
+    public static void DeleteSave()
+    {
+        string path = Application.persistentDataPath + "/player.fun";
+        File.Delete(path);
+    }
+
     public static void SaveOptions()
     {
         BinaryFormatter formatter = new BinaryFormatter();

@@ -67,6 +67,8 @@ MonoBehaviour:
     amount: -1
   statusEffects:
   - {fileID: -4460325451948071493, guid: 12a1cb7dbe7ad25478c6b067a17a4884, type: 3}
+  thrust: 4
+  knockbackTime: 0.2
   resourceType: 3
   item: {fileID: 4136168518151711949, guid: 0c21e8ac001e9c842ad6c6af30b3581d, type: 3}
   addResourceSender: -1
@@ -75,9 +77,12 @@ MonoBehaviour:
   speedDuringDuration: 0
   affectAnimation: 1
   lockMovementonDuration: 0
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
   isRapidFire: 1
   isStationary: 0
-  speed: 30
+  speed: 20
   rotateIt: 1
   blendTree: 0
   rotationModifier: 0
@@ -97,8 +102,6 @@ MonoBehaviour:
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
-  thrust: 4
-  knockbackTime: 0.2
   maxAmounts: 99
   comboAmount: 99
   icon: {fileID: 21300004, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
