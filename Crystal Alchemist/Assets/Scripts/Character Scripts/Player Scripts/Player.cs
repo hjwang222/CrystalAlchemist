@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
-
-public enum Button
+public enum enumButton
 {
    AButton,
    BButton,
@@ -32,32 +31,23 @@ public class Player : Character
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal keySignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal crystalSignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal coinSignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal woodSignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal stoneSignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal metalSignalUI;
+    public SimpleSignal currencySignalUI;
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
     public SimpleSignal openInventorySignal;
 
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal openPauseSignal;
+
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public BoolSignal cameraSignal;
+
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    [SerializeField]
+    private GameObject targetHelpObject;
 
     public StandardSkill AButton;    
     public StandardSkill BButton;   
@@ -65,48 +55,32 @@ public class Player : Character
     public StandardSkill YButton;    
     public StandardSkill RBButton;
 
-
     private Vector3 change;
-    private string lastButtonPressed = "";
-
-
-
-
-    //public GameObject music;    
+    private string lastButtonPressed = "";   
 
     // Start is called before the first frame update
     private void Start()
     {
+        this.isPlayer = true;
+
         this.init();
-        loadSkillsFromSkillSet("Boomerang", Button.AButton);
-        this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.keySignalUI, this.coinSignalUI, this.crystalSignalUI, this.woodSignalUI, this.stoneSignalUI, this.metalSignalUI);
-        PlayerData data = SaveSystem.loadPlayer();
+        
+        this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.currencySignalUI);
 
-        if (data != null)
-        {
-            this.life = data.health;
-            this.mana = data.mana;
+        LoadSystem.loadPlayerData(this);
 
-            /*this.coins = data.coins;
-            this.crystals = data.crystals;
-            this.keys = data.keys;
-
-            this.wood = data.wood;
-            this.stone = data.stone;
-            this.metal = data.metal;*/
-
-            this.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-        }
+        if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);
+        Utilities.checkIfHelperDeactivate(this);
 
         this.currentState = CharacterState.walk;
 
-        Utilities.SetParameter(this.animator, "moveX", 0);
-        Utilities.SetParameter(this.animator, "moveY", -1);
+        Utilities.SetAnimatorParameter(this.animator, "moveX", 0);
+        Utilities.SetAnimatorParameter(this.animator, "moveY", -1);
 
         this.direction = new Vector2(0, -1);
     }
 
-    public void loadSkillsFromSkillSet(string name, Button button)
+    public void loadSkillsFromSkillSet(string name, enumButton button)
     {
         foreach(StandardSkill skill in this.skillSet)
         {
@@ -114,11 +88,11 @@ public class Player : Character
             {
                 switch (button)
                 {
-                    case Button.AButton: this.AButton = skill; break;
-                    case Button.BButton: this.BButton = skill; break;
-                    case Button.XButton: this.XButton = skill; break;
-                    case Button.YButton: this.YButton = skill; break;
-                    case Button.RBButton: this.RBButton = skill; break;
+                    case enumButton.AButton: this.AButton = skill; break;
+                    case enumButton.BButton: this.BButton = skill; break;
+                    case enumButton.XButton: this.XButton = skill; break;
+                    case enumButton.YButton: this.YButton = skill; break;
+                    case enumButton.RBButton: this.RBButton = skill; break;
                 }
 
                 break;
@@ -128,13 +102,17 @@ public class Player : Character
 
 
     // Update is called once per frame
-    private void Update()
+    private new void Update()
     {
-        regeneration();
+        base.Update();
+        playerInputs();        
+    }
 
+    private void playerInputs()
+    {
         if (currentState == CharacterState.inDialog)
         {
-            Utilities.SetParameter(this.animator, "isWalking", false);
+            Utilities.SetAnimatorParameter(this.animator, "isWalking", false);
             return;
         }
 
@@ -151,20 +129,26 @@ public class Player : Character
             useSkill("Y-Button");
         }
 
-        if (Input.GetButtonDown("Quit"))
-        {
-            //SceneManager.LoadScene(0);
-        }
-
         if (Input.GetButtonDown("Inventory"))
         {
             this.openInventorySignal.Raise();
+        }
+
+        if (Input.GetButtonDown("Pause"))
+        {
+            this.openPauseSignal.Raise();
         }
 
         if (currentState == CharacterState.walk || this.currentState == CharacterState.idle || this.currentState == CharacterState.interact)
         {
             UpdateAnimationAndMove();
         }
+    }
+
+
+    public void delay(float delay)
+    {
+        StartCoroutine(Utilities.delayInputPlayerCO(delay, this));
     }
 
 
@@ -178,6 +162,33 @@ public class Player : Character
         Scene scene = SceneManager.GetActiveScene();
         return scene.name;
     }
+
+
+    public void setNewPosition(Vector2 playerPositionInNewScene)
+    {
+        StartCoroutine(positionCo(playerPositionInNewScene));
+    }
+
+    private IEnumerator positionCo(Vector2 playerPositionInNewScene)
+    {
+        this.currentState = CharacterState.inDialog;       
+        this.enableSpriteRenderer(false);
+        //this.cameraSignal.Raise(false);
+        yield return null;
+
+        this.transform.position = playerPositionInNewScene;
+        this.enableSpriteRenderer(true);
+        //this.cameraSignal.Raise(true);
+        setPlayerPlayable();
+    }
+
+    public void setPlayerPlayable()
+    {
+        this.currentState = CharacterState.idle;
+    }
+
+
+
 
     #region Using Skill
 
@@ -212,7 +223,8 @@ public class Player : Character
                     int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
 
                     if (currentAmountOfSameSkills < skill.maxAmounts
-                        && (this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0 || skill.addResourceSender == -Utilities.maxFloatInfinite))
+                        && (this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0 
+                        || skill.addResourceSender == -Utilities.maxFloatInfinite))
                     {
                         if (isSkillReadyToUse(button, skill)) activateSkill(button, skill);
                         activateSkillFromTargetingSystem(skill);
@@ -314,7 +326,7 @@ public class Player : Character
             skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
             if (!skill.isRapidFire) skill.holdTimer = 0;
 
-            Utilities.fireSkill(skill, this);
+            Utilities.instantiateSkill(skill, this);
         }
         else if (skill.lockOn != null && this.activeLockOnTarget == null)
         {
@@ -405,7 +417,7 @@ public class Player : Character
                     if (activeSkill.delay > 0) activeSkill.delayTimeLeft = 0; //C4
                     else activeSkill.durationTimeLeft = 0; //Schild
                 }
-            }
+            }            
         }
     }
 
@@ -475,21 +487,25 @@ public class Player : Character
             {
                 this.direction = change;
 
-                Utilities.SetParameter(this.animator, "moveX", change.x);
-                Utilities.SetParameter(this.animator, "moveY", change.y);
+                Utilities.SetAnimatorParameter(this.animator, "moveX", change.x);
+                Utilities.SetAnimatorParameter(this.animator, "moveY", change.y);
             }
 
-
-            Utilities.SetParameter(this.animator, "isWalking", true);
+            Utilities.SetAnimatorParameter(this.animator, "isWalking", true);
         }
-        else Utilities.SetParameter(this.animator, "isWalking", false);
+        else Utilities.SetAnimatorParameter(this.animator, "isWalking", false);
     }
 
     private void MoveCharacter()
     {
         change.Normalize(); //Diagonal-Laufen fixen
-        this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
-        this.myRigidbody.velocity = Vector2.zero;
+        //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
+
+        Vector3 movement = new Vector3(change.x, change.y, 0.0f);
+        this.myRigidbody.velocity = (movement * speed * this.timeDistortion);
+
+        //Debug.Log("Reset in Player Movement: " + this.myRigidbody.velocity);
+        //this.myRigidbody.velocity = Vector2.zero;
 
         //Slide
         //Vector3 movement = new Vector3(change.x, change.y, 0.0f);

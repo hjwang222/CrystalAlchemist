@@ -3,34 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
+using UnityEditor;
 
 #region Enums
-
-public enum ItemGroup
-{
-    wood,
-    stone,
-    metal,
-    key,
-    coin,
-    crystal
-}
 
 //Resource = Mana oder Life
 //Rest = Items
 
 #endregion
 
+
 public class Item : MonoBehaviour
 {
 
     #region Attribute
 
+    [Required]
+    [SerializeField]
+    [BoxGroup("Pflichtfeld")]
+    private SpriteRenderer shadowRenderer;
+
     [FoldoutGroup("Item Attributes", expanded: false)]
     public string itemName;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
-    public int amount;
+    public int amount = 1;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     public int maxAmount;
@@ -41,8 +38,7 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.item)]
-    [EnumToggleButtons]
-    public ItemGroup itemGroup;
+    public string itemGroup;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.skill)]
@@ -51,9 +47,6 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Sound", expanded: false)]
     public AudioClip collectSoundEffect;
-
-    [FoldoutGroup("Sound", expanded: false)]
-    public AudioClip raiseSoundEffect;
 
     private AudioSource audioSource;
     private Animator anim;
@@ -65,7 +58,6 @@ public class Item : MonoBehaviour
 
     private void Awake()
     {
-
         //TODO: set Sprite if Skill != null
         init();
     }
@@ -76,6 +68,7 @@ public class Item : MonoBehaviour
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
         this.anim = this.GetComponent<Animator>();
+
         //this.soundEffects = this.GetComponents<AudioSource>();
     }
 
@@ -89,8 +82,7 @@ public class Item : MonoBehaviour
 
     public void playSounds()
     {
-        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect);
-        Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect);
+        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect);        
     }
 
 
@@ -103,7 +95,8 @@ public class Item : MonoBehaviour
         SortingGroup group = this.GetComponent<SortingGroup>();
         if (group != null) group.sortingOrder = 1;
         this.GetComponent<BoxCollider2D>().enabled = false;   
-        this.anim.enabled = true;  
+        this.anim.enabled = true;
+        if(this.shadowRenderer != null) this.shadowRenderer.enabled = false;
     }
 
     #endregion

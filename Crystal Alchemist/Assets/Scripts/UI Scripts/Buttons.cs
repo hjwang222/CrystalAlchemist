@@ -3,30 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public class Buttons : MonoBehaviour
 {
     private Player player;
 
-    [Header("A Button UI")]
-    public Image iconAButton;
-    public Image skillIconAButton;
-    public TextMeshProUGUI cooldownA;
+    [FoldoutGroup("A Button UI", expanded: false)]
+    [SerializeField]
+    private Image iconAButton;
+    [FoldoutGroup("A Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconAButton;
+    [FoldoutGroup("A Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI cooldownA;
+    [FoldoutGroup("A Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI ammoA;
 
-    [Header("B Button UI")]
-    public Image iconBButton;
-    public Image skillIconBButton;
-    public TextMeshProUGUI cooldownB;
+    [FoldoutGroup("B Button UI", expanded: false)]
+    [SerializeField]
+    private Image iconBButton;
+    [FoldoutGroup("B Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconBButton;
+    [FoldoutGroup("B Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI cooldownB;
+    [FoldoutGroup("B Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI ammoB;
 
-    [Header("X Button UI")]
-    public Image iconXButton;
-    public Image skillIconXButton;
-    public TextMeshProUGUI cooldownX;
+    [FoldoutGroup("X Button UI", expanded: false)]
+    [SerializeField]
+    private Image iconXButton;
+    [FoldoutGroup("X Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconXButton;
+    [FoldoutGroup("X Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI cooldownX;
+    [FoldoutGroup("X Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI ammoX;
 
-    [Header("Y Button UI")]
-    public Image iconYButton;
-    public Image skillIconYButton;
-    public TextMeshProUGUI cooldownY;
+    [FoldoutGroup("Y Button UI", expanded: false)]
+    [SerializeField]
+    private Image iconYButton;
+    [FoldoutGroup("Y Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconYButton;
+    [FoldoutGroup("Y Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI cooldownY;
+    [FoldoutGroup("Y Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI ammoY;
 
     // Start is called before the first frame update
 
@@ -50,87 +83,92 @@ public class Buttons : MonoBehaviour
 
     private void Update()
     {
-        try
-        {
-            updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton);
-            updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton);
-            updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton);
-            updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton);
-        }
-        catch { }
+        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton, this.ammoA);
+        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB);
+        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX);
+        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY);
     }
 
-    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI text, StandardSkill skill)
+    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, StandardSkill skill, TextMeshProUGUI ammo)
     {
-        float cooldownLeft = skill.cooldownTimeLeft / (player.timeDistortion * player.spellspeed);
-        float cooldown = skill.cooldown / (player.timeDistortion * player.spellspeed);
-
-        if ((player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite) 
-            || player.getAmountOfSameSkills(skill) >= skill.maxAmounts
-            || cooldownLeft == Utilities.maxFloatInfinite)
+        if (skill != null)
         {
-            //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
-            string cooldownText = "X";
+            float cooldownLeft = skill.cooldownTimeLeft / (player.timeDistortion * player.spellspeed);
+            float cooldownValue = skill.cooldown / (player.timeDistortion * player.spellspeed);
 
-            text.text = cooldownText;
-            text.fontSize = 74;
-            text.color = new Color(0.8f, 0, 0);
-            text.outlineColor = new Color32(75, 0, 0, 255);
-            text.outlineWidth = 0.25f;
-            skillUI.color = new Color(1f, 1f, 1f, 0.2f);
-            buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
-        }
-        else if (player.activeLockOnTarget != null
-          && player.activeLockOnTarget.GetComponent<TargetingSystem>().skill == skill)
-        {
-            //ist Skill in Zielerfassung
-            string cooldownText = "[+]";
+            if (skill.item != null) ammo.text = (int)player.getResource(skill.resourceType, skill.item)+"";
+            else ammo.text = "";            
 
-            text.fontSize = 50;
-            text.color = new Color(0.8f, 0.75f, 0);
-            text.outlineColor = new Color32(75, 65, 0, 255);
-            text.outlineWidth = 0.25f;
-            text.text = cooldownText;
-            skillUI.color = new Color(1f, 1f, 1f, 0.2f);
-            buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
-        }
-        else if(cooldownLeft > 0 && cooldown > 0.5f)
-        {
-            //Ist Skill in der Abklingzeit
-            string cooldownText = Utilities.setDurationToString(cooldownLeft) + "s";
+            if ((player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite)
+                || player.getAmountOfSameSkills(skill) >= skill.maxAmounts
+                || cooldownLeft == Utilities.maxFloatInfinite)
+            {
+                //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
+                string cooldownText = "X";
 
-            buttonUI.fillAmount = 1-(cooldownLeft / cooldown);
+                cooldown.text = cooldownText;
+                cooldown.fontSize = 74;
+                cooldown.color = new Color(0.8f, 0, 0);
+                cooldown.outlineColor = new Color32(75, 0, 0, 255);
+                cooldown.outlineWidth = 0.25f;
+                skillUI.color = new Color(1f, 1f, 1f, 0.2f);
+                buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
+            }
+            else if (player.activeLockOnTarget != null
+              && player.activeLockOnTarget.GetComponent<TargetingSystem>().skill == skill)
+            {
+                //ist Skill in Zielerfassung
+                string cooldownText = "[+]";
 
-            text.fontSize = 50;
-            text.color = new Color(1f,1f,1f,1f);
-            text.outlineColor = new Color32(75, 75, 75, 255);
-            text.outlineWidth = 0.25f;
-            text.text = cooldownText;
-            skillUI.color = new Color(1f, 1f, 1f, 0.2f);
-            buttonUI.color = new Color(1f, 1f, 1f, 1f);
-        }        
-        else
-        {
-            //Skill ist einsatzbereit
-            text.text = "";
-            text.fontSize = 50;
-            text.outlineColor = new Color32(75, 75, 75, 255);
-            skillUI.color = new Color(1f, 1f, 1f, 1f);
-            buttonUI.color = new Color(1f, 1f, 1f, 1f);
-            buttonUI.fillAmount = 1;
+                cooldown.fontSize = 50;
+                cooldown.color = new Color(0.8f, 0.75f, 0);
+                cooldown.outlineColor = new Color32(75, 65, 0, 255);
+                cooldown.outlineWidth = 0.25f;
+                cooldown.text = cooldownText;
+                skillUI.color = new Color(1f, 1f, 1f, 0.2f);
+                buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
+            }
+            else if (cooldownLeft > 0 && cooldownValue > 0.5f)
+            {
+                //Ist Skill in der Abklingzeit
+                string cooldownText = Utilities.setDurationToString(cooldownLeft) + "s";
+
+                buttonUI.fillAmount = 1 - (cooldownLeft / cooldownValue);
+
+                cooldown.fontSize = 50;
+                cooldown.color = new Color(1f, 1f, 1f, 1f);
+                cooldown.outlineColor = new Color32(75, 75, 75, 255);
+                cooldown.outlineWidth = 0.25f;
+                cooldown.text = cooldownText;
+                skillUI.color = new Color(1f, 1f, 1f, 0.2f);
+                buttonUI.color = new Color(1f, 1f, 1f, 1f);
+            }
+            else
+            {
+                //Skill ist einsatzbereit
+                cooldown.text = "";
+                cooldown.fontSize = 50;
+                cooldown.outlineColor = new Color32(75, 75, 75, 255);
+                skillUI.color = new Color(1f, 1f, 1f, 1f);
+                buttonUI.color = new Color(1f, 1f, 1f, 1f);
+                buttonUI.fillAmount = 1;                
+            }
         }
     }
 
     private void setButton(StandardSkill skill, Image skillUI, Image buttonUI)
     {
-        if(skill == null)
+        if (skill == null)
         {
             skillUI.gameObject.SetActive(false);
+            buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
         }
         else
         {
             skillUI.gameObject.SetActive(true);
             skillUI.sprite = skill.icon;
+            buttonUI.color = new Color(1f, 1f, 1f, 1f);
+            buttonUI.fillAmount = 1;
         }
     }
 

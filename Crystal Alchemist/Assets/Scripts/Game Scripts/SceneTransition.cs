@@ -3,61 +3,68 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using Sirenix.OdinInspector;
 
 public class SceneTransition : MonoBehaviour
 {
+
     [Header("New Scene Variables")]
     [Tooltip("Name der nächsten Map")]
-    public string targetScene;
-    [Tooltip("Spawnpunkt des Spielers")]
-    public Vector2 playerPositionInNewScene;
+    [Required]
+    [SerializeField]
+    private string targetScene;
 
-    [Header("Fading")]
-    public GameObject fadeInPanel;
-    public GameObject fadeOutPanel;
-    public float fadeWait;    
+    [Tooltip("Spawnpunkt des Spielers")]
+    [SerializeField]
+    private Vector2 playerPositionInNewScene;
+
+    [Required]
+    [SerializeField]
+    private SimpleSignal vcamSignal;
+
+    [Required]
+    [SerializeField]
+    private BoolSignal fadeSignal;
+
+    [Required]
+    [SerializeField]
+    private FloatValue transitionDuration;
+
 
     public void Awake()
     {
-        if (fadeInPanel != null)
-        {
-            GameObject panel = Instantiate(this.fadeInPanel, Vector3.zero, Quaternion.identity) as GameObject;
-            Destroy(panel, 1);
-        }
+        this.fadeSignal.Raise(true);
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            load(other.GetComponent<Player>());      
+            Player player = other.GetComponent<Player>();
+            if(player != null) StartCoroutine(LoadScene(player));
         }
     }
-
-    private void load(Player player)
+  
+    private IEnumerator LoadScene(Player player)
     {
-        SceneManager.LoadScene(this.targetScene);
-       
-        player.currentState = CharacterState.idle;
-        player.transform.position = playerPositionInNewScene;
-    }
+        this.fadeSignal.Raise(false);
+        player.currentState = CharacterState.inDialog;
 
-    /*
-    public IEnumerator FadeCo(Player player)
-    {
-        if (fadeOutPanel != null)
-        {
-            Instantiate(this.fadeOutPanel, Vector3.zero, Quaternion.identity);
-        }
-        yield return new WaitForSeconds(this.fadeWait);
-
-        //if(player != null) player.SavePlayer();
-        
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.targetScene);
+        asyncOperation.allowSceneActivation = false;
+        this.vcamSignal.Raise();
 
         while (!asyncOperation.isDone)
         {
+            if (asyncOperation.progress >= 0.9f)
+            {
+                yield return new WaitForSeconds(this.transitionDuration.getValue());
+
+                asyncOperation.allowSceneActivation = true;
+                player.setNewPosition(this.playerPositionInNewScene);
+            }
             yield return null;
-        }
-    }*/
+        }      
+    }
 }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
 
+
 #region Objects
 [System.Serializable]
 public struct LootTable
@@ -22,12 +23,19 @@ public struct LootTable
     public int amount;
 }
 
+[System.Serializable]
+public struct AffectedResource
+{
+    public ResourceType resourceType;
+    public float amount;
+}
+
 public enum ResourceType
 {
     none,
     life,
     mana,
-    item, 
+    item,
     skill
 }
 
@@ -63,21 +71,31 @@ public class Utilities : MonoBehaviour
         return resource;
     }
 
-    public static void fireSkill(StandardSkill skill, Character sender)
+    public static StandardSkill instantiateSkill(StandardSkill skill, Character sender)
     {
-        instantiateSkill(skill, sender, null, 1);
+        return instantiateSkill(skill, sender, null, 1);
     }
 
     public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target, float reduce)
     {
         GameObject activeSkill = Instantiate(skill.gameObject, sender.transform.position, Quaternion.identity);
 
-        if (!skill.isStationary) activeSkill.transform.parent = sender.transform;
+        if (!skill.isStationary) activeSkill.transform.parent = sender.activeSkillParent.transform;
 
         if (target != null) activeSkill.GetComponent<StandardSkill>().target = target;
         activeSkill.GetComponent<StandardSkill>().sender = sender;
-        activeSkill.GetComponent<StandardSkill>().addLifeTarget /= reduce;
-        activeSkill.GetComponent<StandardSkill>().addManaTarget /= reduce;
+
+        List<affectedResource> temp = new List<affectedResource>();
+
+        for(int i = 0; i < activeSkill.GetComponent<StandardSkill>().affectedResources.Count; i++)
+        {
+            affectedResource elem = activeSkill.GetComponent<StandardSkill>().affectedResources[i];
+            elem.amount /= reduce;
+            temp.Add(elem);
+        }
+
+        activeSkill.GetComponent<StandardSkill>().affectedResources = temp;
+
         activeSkill.GetComponent<StandardSkill>().addResourceSender /= reduce;
         sender.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
 
@@ -142,6 +160,18 @@ public class Utilities : MonoBehaviour
         return Mathf.RoundToInt(value).ToString("0");
     }
 
+    public static string formatString(float value, float maxValue)
+    {
+        string formatString = "";
+
+        for(int i = 0; i < maxValue.ToString().Length; i++)
+        {
+            formatString += "0";
+        }
+
+        return value.ToString(formatString);
+    }
+
     #endregion
 
 
@@ -188,7 +218,10 @@ public class Utilities : MonoBehaviour
         return result;
     }
 
-    public static void SetParameter(Animator animator, string parameter, bool value)
+    /// <summary>
+    /// set bool value for Animator
+    /// </summary>
+    public static void SetAnimatorParameter(Animator animator, string parameter, bool value)
     {
         if (animator != null)
         {
@@ -199,7 +232,25 @@ public class Utilities : MonoBehaviour
         }
     }
 
-    public static void SetParameter(Animator animator, string parameter, float value)
+
+    /// <summary>
+    /// set Trigger for Animator
+    /// </summary>
+    public static void SetAnimatorParameter(Animator animator, string parameter)
+    {
+        if (animator != null)
+        {
+            foreach (AnimatorControllerParameter param in animator.parameters)
+            {
+                if (param.name == parameter) animator.SetTrigger(parameter);
+            }
+        }
+    }
+
+    /// <summary>
+    /// set float value for Animator
+    /// </summary>
+    public static void SetAnimatorParameter(Animator animator, string parameter, float value)
     {
         if (animator != null)
         {
@@ -223,12 +274,12 @@ public class Utilities : MonoBehaviour
         return false;
     }
 
-    private static bool hasEnoughCurrency(ResourceType currency, Player player, Item item, int price)
+    private static bool hasEnoughCurrencyAndUpdateResource(ResourceType currency, Player player, Item item, int price)
     {
         bool result = false;
 
-        if (currency == ResourceType.none) result = true;        
-        else if(currency != ResourceType.skill)
+        if (currency == ResourceType.none) result = true;
+        else if (currency != ResourceType.skill)
         {
             if (player.getResource(currency, item) + price >= 0)
             {
@@ -244,16 +295,16 @@ public class Utilities : MonoBehaviour
         return result;
     }
 
-    public static int getAmountFromInventory(ItemGroup itemgroup, List<Item> inventory, bool maxAmount)
-    {        
-            foreach (Item elem in inventory)
+    public static int getAmountFromInventory(string itemgroup, List<Item> inventory, bool maxAmount)
+    {
+        foreach (Item elem in inventory)
+        {
+            if (itemgroup.ToUpper() == elem.itemGroup.ToUpper())
             {
-                if (itemgroup == elem.itemGroup)
-                {
-                    if (!maxAmount) return elem.amount;
-                    else return elem.maxAmount;
-                }
-            }        
+                if (!maxAmount) return elem.amount;
+                else return elem.maxAmount;
+            }
+        }
 
         return 0;
     }
@@ -266,7 +317,7 @@ public class Utilities : MonoBehaviour
 
             foreach (Item elem in character.inventory)
             {
-                if (item.itemGroup == elem.itemGroup)
+                if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper())
                 {
                     found = elem;
                 }
@@ -275,6 +326,7 @@ public class Utilities : MonoBehaviour
             if (found == null)
             {
                 GameObject temp = Instantiate(item.gameObject, character.transform);
+                temp.name = item.name;
                 temp.SetActive(false);
                 temp.hideFlags = HideFlags.HideInHierarchy;
                 character.inventory.Add(temp.GetComponent<Item>());
@@ -285,7 +337,6 @@ public class Utilities : MonoBehaviour
             }
         }
     }
-
 
     public static void updateSkillset(StandardSkill skill, Character character)
     {
@@ -306,24 +357,24 @@ public class Utilities : MonoBehaviour
 
 
     public static float getInputMenu(string axis)
-    {        
-            float changeAnalogStick = Mathf.RoundToInt(Input.GetAxisRaw(axis));
-            float changeDPad = Input.GetAxisRaw("Cursor " + axis);
-            if (changeAnalogStick != 0) return changeAnalogStick;
-            else if (changeDPad != 0) return changeDPad;
-            return 0;        
+    {
+        float changeAnalogStick = Mathf.RoundToInt(Input.GetAxisRaw(axis));
+        float changeDPad = Input.GetAxisRaw("Cursor " + axis);
+        if (changeAnalogStick != 0) return changeAnalogStick;
+        else if (changeDPad != 0) return changeDPad;
+        return 0;
     }
 
 
 
-    public static bool canOpen(ResourceType currency, Item item, Player player, int price)
+    public static bool canOpenAndUpdateResource(ResourceType currency, Item item, Player player, int price)
     {
         if (player != null && player.currentState != CharacterState.inDialog)
         {
-            if (hasEnoughCurrency(currency, player, item, -price)) return true;
+            if (hasEnoughCurrencyAndUpdateResource(currency, player, item, -price)) return true;
             else
             {
-                player.showDialogBox(GlobalValues.noMoneyText);
+                player.showDialogBox(getDialogBoxText("Du benötigst", price, item, "..."));
                 return false;
             }
         }
@@ -331,15 +382,35 @@ public class Utilities : MonoBehaviour
         return false;
     }
 
+
+    public static string getDialogBoxText(string part1, int price, Item item, string part2)
+    {
+        string result = part1+" " + price + " ";
+        
+        switch (item.resourceType)
+        {
+            case ResourceType.item:
+                {
+                    string typ = item.itemGroup;
+                    if (price == 1 && typ != "Schlüssel") typ = typ.Substring(0, typ.Length - 1);
+                    result += typ;
+                };  break;
+            case ResourceType.life: result += "Leben"; break;
+            case ResourceType.mana: result += "Mana"; break;
+        }
+
+        return result + " "+part2;
+    }
+
     public static void set3DText(TextMeshPro tmp, string text, bool bold, Color fontColor, Color outlineColor, float outlineWidth)
     {
         if (tmp != null)
         {
-            if(text != null) tmp.text = text + "";
-            if(bold) tmp.fontStyle = FontStyles.Bold;
-            if(outlineColor != null) tmp.outlineColor = outlineColor;
-            if(fontColor != null) tmp.color = fontColor;
-            if(outlineWidth > 0) tmp.outlineWidth = outlineWidth;
+            if (text != null) tmp.text = text + "";
+            if (bold) tmp.fontStyle = FontStyles.Bold;
+            if (outlineColor != null) tmp.outlineColor = outlineColor;
+            if (fontColor != null) tmp.color = fontColor;
+            if (outlineWidth > 0) tmp.outlineWidth = outlineWidth;
         }
     }
 
@@ -414,7 +485,54 @@ public class Utilities : MonoBehaviour
     }
 
     #endregion
-    
 
+
+    public static StandardSkill getSkillByID(List<StandardSkill> skillset, int ID, SkillType category)
+    {
+        foreach (StandardSkill skill in skillset)
+        {
+            if (category == skill.category && ID == skill.orderIndex) return skill;
+        }
+
+        return null;
+    }
+
+    public static StandardSkill getSkillByName(List<StandardSkill> skillset, string name)
+    {
+        foreach (StandardSkill skill in skillset)
+        {
+            if (name == skill.skillName) return skill;
+        }
+
+        return null;
+    }
+
+
+    public static IEnumerator delayInputPlayerCO(float delay, Player player)
+    {
+        //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
+        yield return new WaitForSeconds(delay);
+
+        if (player != null)
+        {
+            player.currentState = CharacterState.idle;
+        }
+    }
+
+
+    public static void checkIfHelperDeactivate(Player player)
+    {
+        if (!checkIfHelperActivated(player.AButton)
+            && !checkIfHelperActivated(player.BButton)
+            && !checkIfHelperActivated(player.XButton)
+            && !checkIfHelperActivated(player.YButton)) player.setTargetHelperActive(false);
+        else player.setTargetHelperActive(true);
+    }
+
+    private static bool checkIfHelperActivated(StandardSkill skill)
+    {
+        if (skill != null && skill.activeTargetHelper) return true;
+        else return false;
+    }
 
 }

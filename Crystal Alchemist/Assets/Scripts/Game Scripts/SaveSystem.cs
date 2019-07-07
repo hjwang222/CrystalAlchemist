@@ -4,7 +4,8 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public static class SaveSystem
+
+public class SaveSystem
 {
     public static void Save(Player player)
     {
@@ -17,6 +18,12 @@ public static class SaveSystem
         formatter.Serialize(stream, data);
         stream.Close();
         stream.Dispose();
+    }
+
+    public static void DeleteSave()
+    {
+        string path = Application.persistentDataPath + "/player.fun";
+        File.Delete(path);
     }
 
     public static void SaveOptions()
@@ -54,7 +61,6 @@ public static class SaveSystem
         }
     }
 
-
     public static void loadOptions()
     {
         string path = Application.persistentDataPath + "/options.fun";
@@ -71,6 +77,8 @@ public static class SaveSystem
 
             GlobalValues.backgroundMusicVolume = data.musicVolume;
             GlobalValues.soundEffectVolume = data.soundVolume;
-        }        
+        }
     }
 }
+
+

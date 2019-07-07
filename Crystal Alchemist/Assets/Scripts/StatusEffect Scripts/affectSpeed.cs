@@ -5,8 +5,12 @@ using UnityEngine;
 public class affectSpeed : StatusEffect
 {
     #region Attributes
+    [SerializeField]
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    public float speed;
+    private float speed;
+
+    [SerializeField]
+    private Animator anim;
     #endregion
 
 
@@ -14,7 +18,15 @@ public class affectSpeed : StatusEffect
     public override void doEffect()
     {
         base.doEffect();
-        this.target.updateSpeed(this.speed); 
+        this.target.updateSpeed(this.speed);
+        if(this.anim != null) this.anim.speed = 1;        
+    }
+
+    public override void DestroyIt()
+    {
+        //Zeit wieder normalisieren
+        this.target.updateSpeed(0);
+        base.DestroyIt();
     }
     #endregion
 }
