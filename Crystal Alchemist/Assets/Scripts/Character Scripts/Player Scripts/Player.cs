@@ -96,7 +96,7 @@ public class Player : Character
     private new void Update()
     {
         base.Update();
-        playerInputs();
+        playerInputs();        
     }
 
     private void playerInputs()

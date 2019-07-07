@@ -230,7 +230,7 @@ public class Enemy : Character
 
     public void changeState(CharacterState newState)
     {
-        if (this.currentState != newState) this.currentState = newState;
+        if (this.currentState != newState) this.currentState = newState;        
     }
 
     #endregion

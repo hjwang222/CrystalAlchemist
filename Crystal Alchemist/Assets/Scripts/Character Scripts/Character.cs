@@ -384,8 +384,8 @@ public class Character : MonoBehaviour
             this.myRigidbody.velocity = Vector2.zero;
         }
 
-        if (this.currentState == CharacterState.dead || this.currentState == CharacterState.frozen)
-            return;        
+        if (this.currentState == CharacterState.dead)
+            return;                
     }
 
     public void setResourceSignal(SimpleSignal health, SimpleSignal mana,
@@ -447,21 +447,7 @@ public class Character : MonoBehaviour
                 skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
 
                 StandardSkill temp = Utilities.instantiateSkill(skill, this, null, 1);
-                /*
-                if (skill.isStationary)
-                {
-                    //Place it in World 
-                    GameObject activeSkill = Instantiate(skill.gameObject, this.transform.position, Quaternion.identity);
-                    activeSkill.GetComponent<StandardSkill>().sender = this;
-                    this.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
-                }
-                else
-                {
-                    //Place it as Child
-                    GameObject activeSkill = Instantiate(skill.gameObject, this.transform.position, Quaternion.identity, this.transform);
-                    activeSkill.GetComponent<StandardSkill>().sender = this;
-                    this.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
-                }*/
+                
             }
         }
     }
@@ -659,7 +645,10 @@ public class Character : MonoBehaviour
 
     public void updateSpeed(float addSpeed, bool affectAnimation)
     {
-        this.speed = ((this.startSpeed / 100) + (addSpeed / 100)) * this.timeDistortion * this.speedMultiply;
+        float newSpeed = addSpeed;
+        if (((this.startSpeed / 100) + (newSpeed / 100)) < 0) newSpeed = this.startSpeed*(-1f);
+
+        this.speed = ((this.startSpeed / 100) + (newSpeed / 100)) * this.timeDistortion * this.speedMultiply;
         if(affectAnimation) this.animator.speed = this.speed / (this.startSpeed * this.speedMultiply / 100);
     }
 
@@ -677,7 +666,8 @@ public class Character : MonoBehaviour
              this.GetComponent<Player>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
          }*/
 
-        if (this.animator != null) this.animator.speed = this.timeDistortion;
+        updateAnimatorSpeed(this.timeDistortion);
+        
         if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
 
         foreach (StatusEffect effect in this.buffs)
@@ -689,6 +679,11 @@ public class Character : MonoBehaviour
         {
             effect.updateTimeDistortion(distortion);
         }
+    }
+
+    public void updateAnimatorSpeed(float value)
+    {
+        if (this.animator != null) this.animator.speed = value;
     }
 
     #endregion

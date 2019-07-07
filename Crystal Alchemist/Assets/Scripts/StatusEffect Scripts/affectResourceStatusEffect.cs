@@ -16,7 +16,7 @@ public struct affectedResource
     public float amount;
 }
 
-public class affectResource : StatusEffect
+public class affectResourceStatusEffect : StatusEffect
 {
     #region Attributes
     [FoldoutGroup("affect Resource", expanded: false)]

@@ -72,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Gift Haut
   category: 0
+  animationTriggerName: 
   orderIndex: 10
   skillDescription: 
   cast: 0
@@ -88,17 +89,24 @@ MonoBehaviour:
     amount: -0.5
   statusEffects:
   - {fileID: -4460325451948071493, guid: 12a1cb7dbe7ad25478c6b067a17a4884, type: 3}
+  thrust: 6
+  knockbackTime: 0.4
   resourceType: 2
   item: {fileID: 0}
   addResourceSender: 0
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0
+  affectAnimation: 1
   lockMovementonDuration: 0
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
   isRapidFire: 0
   isStationary: 0
   speed: 0
   rotateIt: 0
+  blendTree: 0
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
@@ -116,11 +124,8 @@ MonoBehaviour:
   affectObjects: 0
   affectSkills: 0
   ignoreInvincibility: 0
-  thrust: 6
-  knockbackTime: 0.4
   maxAmounts: 9999
   comboAmount: 99
-  summon: {fileID: 0}
   icon: {fileID: 0}
   startSoundEffect: {fileID: 0}
   endSoundEffect: {fileID: 0}

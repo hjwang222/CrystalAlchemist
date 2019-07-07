@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class addSkill : affectResource
+public class addSkill : affectResourceStatusEffect
 {
     [FoldoutGroup("Add Skill", expanded: false)]
     [SerializeField]

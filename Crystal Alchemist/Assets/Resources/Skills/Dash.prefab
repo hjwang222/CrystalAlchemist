@@ -63,32 +63,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 661548303189921719}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e5e1cd928e7dc4d9b98d84407f268b, type: 3}
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Dash
   category: 1
   animationTriggerName: 
-  orderIndex: 11
+  orderIndex: 12
   skillDescription: 
   cast: 0
   keepHoldTimer: 0
   delay: 0
-  duration: 0.2
+  duration: 0
   deactivateByButtonUp: 0
   cooldown: 0.1
   cooldownAfterCombo: 0
   durationCombo: 0
   affectedResources: []
   statusEffects: []
+  thrust: 0
+  knockbackTime: 0.2
   resourceType: 2
   item: {fileID: 0}
-  addResourceSender: -0.25
+  addResourceSender: 0
   intervallSender: 0
   speedDuringCasting: 0
-  speedDuringDuration: -99
-  affectAnimation: 0
+  speedDuringDuration: 0
+  affectAnimation: 1
   lockMovementonDuration: 0
+  forward: 1
+  selfThrust: 20
+  selfThrustTime: 0.2
   isRapidFire: 0
   isStationary: 0
   speed: 0
@@ -97,7 +102,7 @@ MonoBehaviour:
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
-  positionOffset: 1
+  positionOffset: 0
   positionHeight: 0
   lockOn: {fileID: 0}
   targetingMode: 2
@@ -106,14 +111,12 @@ MonoBehaviour:
   multiHitDelay: 0
   showRange: 0
   affectSelf: 0
-  affectPlayers: 1
-  affectEnemies: 1
-  affectObjects: 1
+  affectPlayers: 0
+  affectEnemies: 0
+  affectObjects: 0
   affectSkills: 0
   ignoreInvincibility: 0
-  thrust: 0
-  knockbackTime: 0.2
-  maxAmounts: 9999
+  maxAmounts: 1
   comboAmount: 99
   icon: {fileID: 6355109479269064622, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 0}
@@ -122,7 +125,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: -0.00065096654
+  cooldownTimeLeft: -0.0010389145
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 0}
@@ -135,9 +138,6 @@ MonoBehaviour:
   holdTimer: 0
   triggerIsActive: 1
   setPositionAtStart: 1
-  forward: 1
-  selfThrust: 16
-  selfThrustTime: 0.2
 --- !u!1 &1288681395139722514
 GameObject:
   m_ObjectHideFlags: 0

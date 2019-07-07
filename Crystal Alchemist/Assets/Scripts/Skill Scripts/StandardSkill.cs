@@ -79,57 +79,95 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Zeit für eine Kombo")]
     [Range(0, Utilities.maxFloatSmall)]
     public float durationCombo = 0;
-       
+
 
     ////////////////////////////////////////////////////////////////
 
-    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Ziels)", expanded: false)]
+    [TabGroup("Ziel Attribute")]
     [Tooltip("Veränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
     public List<affectedResource> affectedResources;
 
-    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Ziels)", expanded: false)]
+    [TabGroup("Ziel Attribute")]
     [Tooltip("Statuseffekte")]
     public List<StatusEffect> statusEffects;
 
     ////////////////////////////////////////////////////////////////
 
-    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [Space(10)]
+    [TabGroup("Ziel Attribute")]
+    [Range(0, Utilities.maxFloatSmall)]
+    [Tooltip("Stärke des Knockbacks")]
+    public float thrust = 4;
+
+    [TabGroup("Ziel Attribute")]
+    [Range(0, Utilities.maxFloatSmall)]
+    [Tooltip("Dauer des Knockbacks")]
+    [HideIf("thrust", 0f)]
+    public float knockbackTime = 0.2f;
+
+    ////////////////////////////////////////////////////////////////
+
+    [TabGroup("Sender Attribute")]
     [EnumToggleButtons]
     [Tooltip("Art der Resource")]
     public ResourceType resourceType = ResourceType.mana;
 
-    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [TabGroup("Sender Attribute")]
     [ShowIf("resourceType", ResourceType.item)]
     [Tooltip("Benötigtes Item")]
     public Item item;
 
-    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [TabGroup("Sender Attribute")]
+    [HideIf("resourceType", ResourceType.none)]
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     [Tooltip("Höhe der Resource des Senders. Negativ = Schaden, Positiv = Heilung")]
     public float addResourceSender = 0;
 
-    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [TabGroup("Sender Attribute")]
+    [HideIf("resourceType", ResourceType.none)]
     [Range(0, Utilities.maxFloatInfinite)]
     [Tooltip("Intervall während der Dauer des Skills Leben oder Mana verändert werden.")]
     public float intervallSender = 0;
 
-    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [TabGroup("Sender Attribute")]
     [Tooltip("Bewegungsgeschwindigkeit während eines Casts")]
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     public float speedDuringCasting = 0;
 
-    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [TabGroup("Sender Attribute")]
     [Tooltip("Bewegungsgeschwindigkeit während des Angriffs")]
     [Range(-Utilities.maxFloatSmall, Utilities.maxFloatSmall)]
     public float speedDuringDuration = 0;
 
-    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [TabGroup("Sender Attribute")]
     [Tooltip("Soll die Geschwindigkeit auch die Animation beeinflussen?")]
     public bool affectAnimation = true;
 
-    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [TabGroup("Sender Attribute")]
     [Tooltip("Soll der Charakter während des Schießens weiterhin in die gleiche Richtung schauen?")]
     public bool lockMovementonDuration = false;
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    [Space(10)]
+    [TabGroup("Sender Attribute")]
+    [Tooltip("True = nach vorne, False = Knockback")]
+    [SerializeField]
+    private bool forward = false;
+
+    [TabGroup("Sender Attribute")]
+    [Range(0, Utilities.maxFloatSmall)]
+    [Tooltip("Stärke des Knockbacks")]
+    [SerializeField]
+    private float selfThrust = 0;
+
+    [TabGroup("Sender Attribute")]
+    [Range(0, Utilities.maxFloatSmall)]
+    [Tooltip("Dauer des Knockbacks")]
+    [HideIf("selfThrust", 0f)]
+    [SerializeField]
+    private float selfThrustTime = 0;
+
 
     ////////////////////////////////////////////////////////////////
 
@@ -242,18 +280,7 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Unverwundbarkeit ignorieren (z.B. für Heals)?")]
     public bool ignoreInvincibility = false;
 
-    ////////////////////////////////////////////////////////////////
 
-    [FoldoutGroup("Knockback", expanded: false)]
-    [Range(0, Utilities.maxFloatSmall)]
-    [Tooltip("Stärke des Knockbacks")]
-    public float thrust = 4;
-
-    [FoldoutGroup("Knockback", expanded: false)]
-    [Range(0, Utilities.maxFloatSmall)]
-    [Tooltip("Dauer des Knockbacks")]
-    [HideIf("thrust", 0f)]
-    public float knockbackTime = 0.2f;
 
     ////////////////////////////////////////////////////////////////
 
@@ -329,23 +356,36 @@ public class StandardSkill : MonoBehaviour
     #region Start Funktionen (Init, set Basics, Update Sender, set Position
 
     public void Start()
-    {        
-        init();        
+    {
+        init();
     }
 
     public virtual void init()
     {
         this.cooldownTimeLeft = 0;
         setBasicAttributes();
-        updateResourceSender();        
-        
-        if(this.sender == null)
+        updateResourceSender();
+        setSelfTrust();        
+
+        if (this.sender == null)
         {
             throw new System.Exception("No SENDER found! Must be player!");
         }
 
         //this.gameObject.layer = LayerMask.NameToLayer(this.sender.gameObject.tag + " Skill");        
-    }   
+    }
+
+    private void setSelfTrust()
+    {
+        if (this.selfThrust > 0)
+        {
+            this.duration = this.selfThrustTime;
+            int trustdirection = -1; //knockback
+            if (forward) trustdirection = 1; //dash
+
+            this.sender.knockBack(selfThrustTime, selfThrust, (this.sender.direction*trustdirection));
+        }
+    }
 
     private void setBasicAttributes()
     {
@@ -411,8 +451,9 @@ public class StandardSkill : MonoBehaviour
         }
 
         if(this.rotateIt) transform.rotation = Quaternion.Euler(rotation);
+
         if (this.blendTree)
-        {
+        {            
             Utilities.SetAnimatorParameter(this.animator, "moveX", this.direction.x);
             Utilities.SetAnimatorParameter(this.animator, "moveY", this.direction.y);
         }
