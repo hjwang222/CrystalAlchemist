@@ -22,6 +22,7 @@ public class affectResourceStatusEffect : StatusEffect
     [FoldoutGroup("affect Resource", expanded: false)]
     [SerializeField]
     private List<affectedResource> affectedResources;
+
     #endregion
 
 

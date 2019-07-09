@@ -498,13 +498,12 @@ public class Player : Character
     {
         change.Normalize(); //Diagonal-Laufen fixen
 
+
         //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
         //this.myRigidbody.velocity = Vector2.zero;
-
            
-            Vector3 movement = new Vector3(change.x, change.y, 0.0f);
-            this.myRigidbody.velocity = (movement * speed * this.timeDistortion);
-        
+        Vector3 movement = new Vector3(change.x, change.y, 0.0f);
+        this.myRigidbody.velocity = (movement * speed * this.timeDistortion);        
 
         //Debug.Log("Reset in Player Movement: " + this.myRigidbody.velocity);
         //this.myRigidbody.velocity = Vector2.zero;

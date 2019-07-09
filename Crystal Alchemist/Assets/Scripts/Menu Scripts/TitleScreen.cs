@@ -8,9 +8,7 @@ using UnityEngine.EventSystems;
 
 public class TitleScreen : MonoBehaviour
 {
-    [Required]
-    [SerializeField]
-    private Canvas canvas;
+
     [SerializeField]
     private GameObject mainMenu;
     [SerializeField]

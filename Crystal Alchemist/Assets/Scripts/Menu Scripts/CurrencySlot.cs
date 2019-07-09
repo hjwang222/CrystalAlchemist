@@ -20,6 +20,9 @@ public class CurrencySlot : MonoBehaviour
     private AudioSource audioSource;
     private bool playOnce = false;
     private int currentValue;
+    private bool isRunning = false;
+
+    private int newValue;
 
     private void Awake()
     {
@@ -30,35 +33,41 @@ public class CurrencySlot : MonoBehaviour
     }
 
     public void updateCurrency()
-    {
-        int newValue = Utilities.getAmountFromInventory(this.itemGroup, this.player.inventory, false);
+    {        
+        this.newValue = Utilities.getAmountFromInventory(this.itemGroup, this.player.inventory, false);
 
-        if (this.currentValue != newValue && this.playOnce)
-        {            
+        if (!this.playOnce)
+        {
+            this.playOnce = true;
             Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect);
         }
 
-        StartCoroutine(Countdown(newValue));
+        if(!this.isRunning) StartCoroutine(Countdown());
     }
 
-    private IEnumerator Countdown(int newValue)
-    {
-        while (this.currentValue != newValue)
+    private IEnumerator Countdown()
+    {        
+        while (this.currentValue != this.newValue)
         {
             int rate = -1;
-            if (newValue - this.currentValue > 0) rate = 1;
+            if (this.newValue - this.currentValue > 0) rate = 1;
 
             this.currentValue += rate;
-            if ((rate > 0 && this.currentValue >= newValue)
-                || (rate < 0 && this.currentValue <= 0)) this.currentValue = newValue;
+            if (((rate > 0 && this.currentValue >= this.newValue)
+                || (rate < 0 && this.currentValue <= 0)))
+            {
+                this.currentValue = this.newValue;
+                this.isRunning = false;
+                this.playOnce = false;
+                this.textField.text = Utilities.formatString(this.currentValue, this.maxValue);
+                break;
+            }   
 
             this.textField.text = Utilities.formatString(this.currentValue, this.maxValue);
             
             yield return new WaitForSeconds(this.counterDelay);
         }
 
-        this.playOnce = true;
+        this.isRunning = false;
     }
-
-
 }
