@@ -43,7 +43,7 @@ public class ChasingEnemy : Enemy
     private new void Update()
     {
         base.Update();        
-        if(this.currentState != CharacterState.dead && this.currentState != CharacterState.frozen) moveCharacter();
+        if(this.currentState != CharacterState.dead) moveCharacter();
     }
 
     private void moveCharacter()
@@ -87,7 +87,7 @@ public class ChasingEnemy : Enemy
 
     private void moveTorwardsTarget(Vector3 position)
     {
-        if (this.currentState == CharacterState.idle || this.currentState == CharacterState.walk && this.currentState != CharacterState.knockedback  && this.currentState != CharacterState.frozen)
+        if (this.currentState == CharacterState.idle || this.currentState == CharacterState.walk && this.currentState != CharacterState.knockedback)
         {
             //Bewegt den Gegner zum Spieler
             Vector3 temp = Vector3.MoveTowards(transform.position, position, this.speed * (Time.deltaTime * this.timeDistortion));

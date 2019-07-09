@@ -15,7 +15,7 @@ public class StandardSkill : MonoBehaviour
 
     [Required("Name muss gesetzt sein!")]
     [BoxGroup("Pflichtfelder")]
-    [Tooltip("Name des Angriffs")]    
+    [Tooltip("Name des Angriffs")]
     public string skillName;
 
     [BoxGroup("Pflichtfelder")]
@@ -369,7 +369,7 @@ public class StandardSkill : MonoBehaviour
         this.cooldownTimeLeft = 0;
         setBasicAttributes();
         updateResourceSender();
-        setSelfTrust();        
+        setSelfTrust();
 
         if (this.sender == null)
         {
@@ -387,7 +387,7 @@ public class StandardSkill : MonoBehaviour
             int trustdirection = -1; //knockback
             if (forward) trustdirection = 1; //dash
 
-            this.sender.knockBack(selfThrustTime, selfThrust, (this.sender.direction*trustdirection));
+            this.sender.knockBack(selfThrustTime, selfThrust, (this.sender.direction * trustdirection));
         }
     }
 
@@ -424,7 +424,7 @@ public class StandardSkill : MonoBehaviour
             this.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
             setPostionAndDirection();
         }
-    }    
+    }
 
     private void setPostionAndDirection()
     {
@@ -440,26 +440,28 @@ public class StandardSkill : MonoBehaviour
         Vector2 start;
         Vector3 rotation;
 
-        Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
+        if (!this.blendTree)
+        {
+            Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
                                           this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
                                           out angle, out start, out this.direction, out rotation);
 
-        //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;
+            //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;
 
-        if (setPositionAtStart) this.transform.position = start;
+            if (setPositionAtStart) this.transform.position = start;
 
-        if (this.myRigidbody != null)
-        {
-            this.myRigidbody.velocity = this.direction.normalized * this.speed;
-            this.tempVelocity = this.myRigidbody.velocity;            
+            if (this.myRigidbody != null)
+            {
+                this.myRigidbody.velocity = this.direction.normalized * this.speed;
+                this.tempVelocity = this.myRigidbody.velocity;
+            }
+
+            if (this.rotateIt) transform.rotation = Quaternion.Euler(rotation);
         }
-
-        if(this.rotateIt) transform.rotation = Quaternion.Euler(rotation);
-
-        if (this.blendTree)
-        {            
-            Utilities.SetAnimatorParameter(this.animator, "moveX", this.direction.x);
-            Utilities.SetAnimatorParameter(this.animator, "moveY", this.direction.y);
+        else
+        {
+            Utilities.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
+            Utilities.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
         }
     }
 
@@ -474,60 +476,60 @@ public class StandardSkill : MonoBehaviour
     }
 
     public virtual void doOnUpdate()
-    {        
-            if (this.intervallSender > 0)
-            {
-                if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.timeDistortion);
-                else
-                {
-                    if (this.sender != null)
-                    {
-                        if (this.sender.getResource(this.resourceType, this.item) + this.addResourceSender < 0)
-                            this.durationTimeLeft = 0;
-                        else
-                        {
-                            this.elapsed = this.intervallSender;
-                            this.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
-                        }
-                    }
-                }
-            }
-
-            if (this.speedDuringDuration != 0) this.sender.updateSpeed(this.speedDuringDuration, this.affectAnimation);
-
-            if (this.animator != null && this.sender != null && !this.lockMovementonDuration)
-            {
-                Utilities.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
-                Utilities.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
-            }
-
-            if (this.delayTimeLeft > 0)
-            {
-                this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
-                
-                Utilities.SetAnimatorParameter(this.animator, "Time", this.delayTimeLeft);
-                //do something here
-            }
+    {
+        if (this.intervallSender > 0)
+        {
+            if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.timeDistortion);
             else
             {
-                //Prüfe ob der Skill eine Maximale Dauer hat
-                if (this.durationTimeLeft < Utilities.maxFloatInfinite)
+                if (this.sender != null)
                 {
-                    if (this.durationTimeLeft > 0)
-                    {
-                        this.durationTimeLeft -= (Time.deltaTime * this.timeDistortion);
-                    }
+                    if (this.sender.getResource(this.resourceType, this.item) + this.addResourceSender < 0)
+                        this.durationTimeLeft = 0;
                     else
                     {
-                        Utilities.SetAnimatorParameter(this.animator, "Explode", true);
-
-                        if (this.animator == null || !Utilities.HasParameter(this.animator, "Explode")) DestroyIt();
+                        this.elapsed = this.intervallSender;
+                        this.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
                     }
                 }
             }
+        }
+
+        if (this.speedDuringDuration != 0) this.sender.updateSpeed(this.speedDuringDuration, this.affectAnimation);
+
+        if (this.animator != null && this.sender != null && !this.lockMovementonDuration)
+        {
+            Utilities.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
+            Utilities.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
+        }
+
+        if (this.delayTimeLeft > 0)
+        {
+            this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
+
+            Utilities.SetAnimatorParameter(this.animator, "Time", this.delayTimeLeft);
+            //do something here
+        }
+        else
+        {
+            //Prüfe ob der Skill eine Maximale Dauer hat
+            if (this.durationTimeLeft < Utilities.maxFloatInfinite)
+            {
+                if (this.durationTimeLeft > 0)
+                {
+                    this.durationTimeLeft -= (Time.deltaTime * this.timeDistortion);
+                }
+                else
+                {
+                    Utilities.SetAnimatorParameter(this.animator, "Explode", true);
+
+                    if (this.animator == null || !Utilities.HasParameter(this.animator, "Explode")) DestroyIt();
+                }
+            }
+        }
 
         if (this.target != null && !this.target.gameObject.activeInHierarchy) this.durationTimeLeft = 0;
-              
+
     }
 
     public void landAttack(Character hittedObject)
@@ -560,12 +562,12 @@ public class StandardSkill : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
-        if (Utilities.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);           
+        if (Utilities.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);
     }
 
     public virtual void OnTriggerExit2D(Collider2D hittedCharacter)
     {
-        
+
     }
 
     #endregion
@@ -603,20 +605,20 @@ public class StandardSkill : MonoBehaviour
 
     public void ActivateIt()
     {
-        this.delayTimeLeft = 0;        
+        this.delayTimeLeft = 0;
     }
 
     public void SetTriggerActive(int value)
     {
-        if(value == 0) this.triggerIsActive = false;
+        if (value == 0) this.triggerIsActive = false;
         else this.triggerIsActive = true;
     }
 
     public virtual void DestroyIt()
-    {        
+    {
         if (this.speedDuringDuration != 0) this.sender.updateSpeed(0);
-        
-        this.sender.activeSkills.Remove(this);        
+
+        this.sender.activeSkills.Remove(this);
         //this.isActive = false;
         Destroy(this.gameObject);
     }
@@ -628,11 +630,11 @@ public class StandardSkill : MonoBehaviour
 
     public void updateTimeDistortion(float distortion) //Signal?
     {
-        this.timeDistortion = 1 + (distortion/100);
+        this.timeDistortion = 1 + (distortion / 100);
 
         if (this.animator != null) this.animator.speed = this.timeDistortion;
         if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
-        if (this.myRigidbody != null && this.isActive) this.myRigidbody.velocity = this.direction.normalized * this.speed * this.timeDistortion;    
+        if (this.myRigidbody != null && this.isActive) this.myRigidbody.velocity = this.direction.normalized * this.speed * this.timeDistortion;
     }
 
     #endregion

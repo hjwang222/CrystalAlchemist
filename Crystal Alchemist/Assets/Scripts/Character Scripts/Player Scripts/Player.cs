@@ -72,8 +72,6 @@ public class Player : Character
         if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);
         Utilities.checkIfHelperDeactivate(this);
 
-        this.currentState = CharacterState.walk;
-
         Utilities.SetAnimatorParameter(this.animator, "moveX", 0);
         Utilities.SetAnimatorParameter(this.animator, "moveY", -1);
 
@@ -499,10 +497,14 @@ public class Player : Character
     private void MoveCharacter()
     {
         change.Normalize(); //Diagonal-Laufen fixen
-        //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
 
-        Vector3 movement = new Vector3(change.x, change.y, 0.0f);
-        this.myRigidbody.velocity = (movement * speed * this.timeDistortion);
+        //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
+        //this.myRigidbody.velocity = Vector2.zero;
+
+           
+            Vector3 movement = new Vector3(change.x, change.y, 0.0f);
+            this.myRigidbody.velocity = (movement * speed * this.timeDistortion);
+        
 
         //Debug.Log("Reset in Player Movement: " + this.myRigidbody.velocity);
         //this.myRigidbody.velocity = Vector2.zero;

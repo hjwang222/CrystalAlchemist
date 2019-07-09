@@ -76,8 +76,8 @@ MonoBehaviour:
   affectAnimation: 0
   lockMovementonDuration: 1
   forward: 1
-  selfThrust: 10
-  selfThrustTime: 0.2
+  selfThrust: 6
+  selfThrustTime: 0.4
   isRapidFire: 0
   isStationary: 0
   speed: 0
@@ -88,6 +88,7 @@ MonoBehaviour:
   snapRotationInDegrees: 90
   positionOffset: 0
   positionHeight: 0
+  activeTargetHelper: 0
   lockOn: {fileID: 0}
   targetingMode: 0
   maxAmountOfTargets: 0
@@ -109,7 +110,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: -0.008889871
+  cooldownTimeLeft: -0.0026922654
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 0}
@@ -167,7 +168,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2211265516280113145

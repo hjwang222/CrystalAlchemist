@@ -13,9 +13,9 @@ public enum CharacterState
     inDialog, //Dialog-Box ist offen
     knockedback, //im Knockback
     idle,
-    frozen, //kann sich nicht bewegen und angreifen
     silent, //kann nicht angreifen
     dead,
+    dash,
     respawning
 }
 
@@ -782,8 +782,7 @@ public class Character : MonoBehaviour
 
     public void gotHit(StandardSkill skill)
     {
-        if (this.currentState != CharacterState.inDialog)
-        {
+        
             if (!this.isInvincible || skill.ignoreInvincibility)
             {
                 //Status Effekt hinzufügen
@@ -816,7 +815,7 @@ public class Character : MonoBehaviour
                     knockBack(skill.knockbackTime, knockbackTrust, skill);
                 }
             }
-        }
+        
     }
 
     public void RemoveAllStatusEffects(List<StatusEffect> statusEffects)
@@ -939,10 +938,9 @@ public class Character : MonoBehaviour
     public void knockBack(float knockTime, float thrust, Vector2 direction)
     {
         this.myRigidbody.velocity = Vector2.zero;
-
         Vector2 diffference = direction.normalized * thrust;
-        this.myRigidbody.AddForce(diffference, ForceMode2D.Impulse);
 
+        this.myRigidbody.AddForce(diffference, ForceMode2D.Impulse);
         StartCoroutine(knockCo(knockTime));
     }
 
