@@ -19,7 +19,7 @@ public class Cursor : MonoBehaviour
     [SerializeField]
     private GameObject cursorSelected;
 
-    private void Awake()
+    private void Start()
     {
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
@@ -28,6 +28,16 @@ public class Cursor : MonoBehaviour
         this.image.sprite = null;
         this.cursorSelected.SetActive(false);
         this.cursor.SetActive(true);
+    }
+
+    private void OnEnable()
+    {
+        this.isPlaying = false;
+    }
+
+    private void OnDisable()
+    {
+        this.isPlaying = false;
     }
 
     public void setSelectedGameObject(Image image)
@@ -48,18 +58,21 @@ public class Cursor : MonoBehaviour
 
     public void playSoundEffect()
     {
+        Debug.Log(isPlaying);
+
         if (!this.isPlaying)
         {
+            this.isPlaying = true;
             StartCoroutine(playAudioEffect());          
         }
     }
 
     private IEnumerator playAudioEffect()
     {
-        this.isPlaying = true;
         Utilities.playSoundEffect(this.audioSource, this.soundEffect);
         float length = this.soundEffect.length;
         yield return new WaitForSeconds(length);
         this.isPlaying = false;
+        Debug.Log(isPlaying+" "+length);
     }
 }

@@ -72,6 +72,8 @@ public class Enemy : Character
 
     public void clearAggro()
     {
+        this.target = null;
+        this.hideClue();
         this.aggroList.Clear();
     }
 

@@ -192,7 +192,14 @@ public class StandardSkill : MonoBehaviour
     [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Tooltip("Wird ein Blend-Tree verwendet (Animation)?")]
     [HideIf("rotateIt")]
-    public bool blendTree = false;
+    [SerializeField]
+    private bool blendTree = false;
+
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Wird ein Blend-Tree verwendet (Animation)?")]
+    [HideIf("rotateIt")]
+    [SerializeField]
+    private bool useOffSetToBlendTree = false;
 
     [ShowIf("rotateIt")]
     [FoldoutGroup("Projektil Attribute", expanded: false)]
@@ -460,6 +467,9 @@ public class StandardSkill : MonoBehaviour
         }
         else
         {
+            if(this.useOffSetToBlendTree) this.transform.position = new Vector2(this.sender.transform.position.x + (this.sender.direction.x * positionOffset),
+                                                                                this.sender.transform.position.y + (this.sender.direction.y * positionOffset) + positionHeight);
+
             Utilities.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
             Utilities.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
         }

@@ -23,6 +23,11 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     private void Awake()
     {
+        this.cursor.SetActive(false);
+    }
+
+    private void Start()
+    {
         RectTransform rt = (RectTransform)this.transform;
         this.size = new Vector2(rt.rect.width, rt.rect.height);
         this.scale = rt.lossyScale;
@@ -32,12 +37,28 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         this.cursorScale = rt.lossyScale;
 
         this.button = this.gameObject.GetComponent<Button>();
+
+        /*Debug.Log(this.name + " - "
+                    + this.transform.localScale + " - "
+                    + this.transform.parent.localScale + " - "
+                    + this.transform.parent.parent.localScale + " - "
+                    + this.transform.parent.parent.parent.localScale + " - "
+                    + WordToScenePoint(this.transform.localPosition));*/
+
+        setFirst();
     }
 
     private void OnEnable()
     {
+        setFirst();
+    }
+
+    private void setFirst()
+    {
         if (this.setFirstSelected)
         {
+            this.cursor.SetActive(true);
+
             EventSystem.current.firstSelectedGameObject = this.gameObject;
             EventSystem.current.SetSelectedGameObject(this.gameObject);
             setCursor(true, false);

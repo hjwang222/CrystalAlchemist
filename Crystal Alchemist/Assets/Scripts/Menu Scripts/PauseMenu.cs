@@ -7,10 +7,18 @@ public class PauseMenu : MonoBehaviour
 {
     private float delay = 0.3f;
     private Player player;
+
     [SerializeField]
     private GameObject cursor;
+
     [SerializeField]
     private GameObject blackScreen;
+
+    [SerializeField]
+    private GameObject parentMenue;
+
+    [SerializeField]
+    private GameObject childMenue;
 
     private void Awake()
     {
@@ -25,6 +33,10 @@ public class PauseMenu : MonoBehaviour
     private void OnEnable()
     {
         this.cursor.SetActive(true);
+
+        this.parentMenue.SetActive(true);
+        this.childMenue.SetActive(false);
+
         this.player.currentState = CharacterState.inDialog;
     }
 
@@ -43,5 +55,11 @@ public class PauseMenu : MonoBehaviour
         this.player.delay(this.delay);
         this.transform.parent.gameObject.SetActive(false);
         this.blackScreen.SetActive(false);
+    }
+
+    public void showControls()
+    {
+        this.parentMenue.SetActive(false);
+        this.childMenue.SetActive(true);
     }
 }
