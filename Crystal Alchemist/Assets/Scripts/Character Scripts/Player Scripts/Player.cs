@@ -49,6 +49,11 @@ public class Player : Character
     [SerializeField]
     private GameObject targetHelpObject;
 
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    [SerializeField]
+    private BoolValue loadGame;
+
     public StandardSkill AButton;    
     public StandardSkill BButton;   
     public StandardSkill XButton;    
@@ -62,12 +67,10 @@ public class Player : Character
     private void Start()
     {
         this.isPlayer = true;
-
-        this.init();
-        
+        this.init();        
         this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.currencySignalUI);
 
-        LoadSystem.loadPlayerData(this);
+        if (this.loadGame.getValue()) LoadSystem.loadPlayerData(this);
 
         if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);
         Utilities.checkIfHelperDeactivate(this);

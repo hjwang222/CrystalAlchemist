@@ -160,6 +160,8 @@ MonoBehaviour:
     item: {fileID: 0}
     amount: 1
   statusEffects: []
+  thrust: 0
+  knockbackTime: 0
   resourceType: 3
   item: {fileID: 4837573728731285450, guid: 00971db8ee1ee5f41a174485c94f3d32, type: 3}
   addResourceSender: -1
@@ -168,16 +170,21 @@ MonoBehaviour:
   speedDuringDuration: 0
   affectAnimation: 1
   lockMovementonDuration: 0
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
   isRapidFire: 0
   isStationary: 0
   speed: 0
   rotateIt: 0
   blendTree: 0
+  useOffSetToBlendTree: 0
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
   positionOffset: 0
   positionHeight: 0
+  activeTargetHelper: 0
   lockOn: {fileID: 0}
   targetingMode: 2
   maxAmountOfTargets: 1
@@ -190,8 +197,6 @@ MonoBehaviour:
   affectObjects: 0
   affectSkills: 0
   ignoreInvincibility: 1
-  thrust: 0
-  knockbackTime: 0
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: 7825757526154977504, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
@@ -201,7 +206,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: -0.0019325297
+  cooldownTimeLeft: 0.28848833
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 0}
@@ -215,7 +220,7 @@ MonoBehaviour:
   triggerIsActive: 1
   setPositionAtStart: 1
   dispell: 0
-  targetColor: {r: 0, g: 0.34659192, b: 0.7176471, a: 1}
+  targetColor: {r: 0.0047169924, g: 0.48332277, b: 1, a: 1}
 --- !u!95 &8167815907136014450
 Animator:
   serializedVersion: 3
@@ -273,7 +278,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0, g: 0.74037004, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.8698499, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

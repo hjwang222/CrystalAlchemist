@@ -104,10 +104,13 @@ public class Utilities : MonoBehaviour
 
     public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect)
     {
-        float volume = 1f;
+        playSoundEffect(audioSource, soundeffect, GlobalValues.soundEffectVolume);
+    }
+
+    public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect, float volume)
+    {        
         if (soundeffect != null && audioSource != null)
         {
-            volume = GlobalValues.soundEffectVolume;
             audioSource.pitch = GlobalValues.soundEffectPitch;
 
             audioSource.PlayOneShot(soundeffect, volume);

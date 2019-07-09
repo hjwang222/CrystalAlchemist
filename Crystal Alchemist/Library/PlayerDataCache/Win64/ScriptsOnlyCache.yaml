@@ -16,6 +16,7 @@ ScriptsOnlyBuild:
     - BlindUIManager
     - BoolSignal
     - BoolSignalListener
+    - BoolValue
     - BoomerangSkill
     - Breakable
     - BuffSkill
@@ -81,6 +82,7 @@ ScriptsOnlyBuild:
     - Sirenix.OdinInspector.Editor.GeneralDrawerConfig
     - Sirenix.OdinInspector.Editor.ImportSettingsConfig
     - Sirenix.OdinInspector.Editor.InspectorConfig
+    - Sirenix.OdinInspector.Editor.OdinEditor
     - Sirenix.Serialization.AOTGenerationConfig
     Sirenix.Serialization.Config.dll:
     - Sirenix.Serialization.GlobalSerializationConfig
@@ -299,6 +301,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12054}
     - Class: 114
       Script: {instanceID: 483626}
+    - Class: 114
+      Script: {instanceID: 658846}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -512,6 +516,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12054}
     - Class: 114
       Script: {instanceID: 483626}
+    - Class: 114
+      Script: {instanceID: 658846}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -755,6 +761,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 42648}
     - Class: 114
       Script: {instanceID: 483626}
+    - Class: 114
+      Script: {instanceID: 658846}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -2534,7 +2542,7 @@ ScriptsOnlyBuild:
     className: TintTextureGenerator
   - hash:
       serializedVersion: 2
-      Hash: 71620f139b735f9322f62b67dbcb9ae9
+      Hash: 51d54ba37b12be1e4e79d8a683034069
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TitleScreen
@@ -2588,7 +2596,7 @@ ScriptsOnlyBuild:
     className: ResponsiveButtonGroupExample
   - hash:
       serializedVersion: 2
-      Hash: 1755920d04baa302ef4de661870a93e0
+      Hash: bfafce78135cc723641a3784b329185c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DamageNumbers
@@ -2774,7 +2782,7 @@ ScriptsOnlyBuild:
     className: affectState
   - hash:
       serializedVersion: 2
-      Hash: dd6af323b3ae9e22c322bce68227d3b7
+      Hash: 91d2269a2c89c92f72a298ea3709d3a3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Player
@@ -2844,6 +2852,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ShowControlMenu
+  - hash:
+      serializedVersion: 2
+      Hash: 687552b2a57127d6e76ef882be8ca8c2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BoolValue
   platform: 19
   scenePathNames:
   - Assets/Maps/Title.unity

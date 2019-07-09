@@ -24,7 +24,7 @@ public class SecretArea : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
-            Utilities.playSoundEffect(this.audioSource, this.secretSoundEffect);
+            Utilities.playSoundEffect(this.audioSource, this.secretSoundEffect, GlobalValues.backgroundMusicVolume);
             StartCoroutine(FadeOut());
         }
     }

@@ -440,7 +440,7 @@ public class Character : MonoBehaviour
                 if (this.manaTime >= this.manaRegenerationInterval)
                 {
                     this.manaTime = 0;
-                    updateResource(ResourceType.mana, null, this.manaRegeneration);
+                    updateResource(ResourceType.mana, null, this.manaRegeneration, false);
                 }
                 else
                 {
@@ -521,12 +521,13 @@ public class Character : MonoBehaviour
 
     //Signal?
 
-    private void showDamageNumber(float addLife)
+    private void showDamageNumber(float value, Color[] color)
     {
         if (this.damageNumber != null)
         {
             GameObject damageNumberClone = Instantiate(this.damageNumber, this.transform.position, Quaternion.identity, this.transform);
-            damageNumberClone.GetComponent<DamageNumbers>().number = addLife;
+            damageNumberClone.GetComponent<DamageNumbers>().number = value;
+            damageNumberClone.GetComponent<DamageNumbers>().setcolor(color);
             damageNumberClone.hideFlags = HideFlags.HideInHierarchy;
         }
     }
@@ -583,28 +584,38 @@ public class Character : MonoBehaviour
 
     public void updateResource(ResourceType type, Item item, float addResource)
     {
+        updateResource(type, item, addResource, true);
+    }
+
+    public void updateResource(ResourceType type, Item item, float value, bool showingDamageNumber)
+    {
         switch (type)
         {
             case ResourceType.life:
                 {
-                    this.life = Utilities.setResource(this.life, this.maxLife, addResource);
-                    if (this.life > 0 && this.currentState != CharacterState.dead) showDamageNumber(addResource);
+                    this.life = Utilities.setResource(this.life, this.maxLife, value);
+
+                    Color[] colorArray = GlobalValues.red;
+                    if (value > 0) colorArray = GlobalValues.green;
+
+                    if (this.life > 0 && this.currentState != CharacterState.dead && showingDamageNumber) showDamageNumber(value, colorArray);
                     if (this.life <= 0) killIt();
-                    callSignal(this.healthSignal, addResource);
+                    callSignal(this.healthSignal, value);
                     break;
                 }
             case ResourceType.mana:
-                {
-                    this.mana = Utilities.setResource(this.mana, this.maxMana, addResource);
-                    callSignal(this.manaSignal, addResource);
+                {                    
+                    this.mana = Utilities.setResource(this.mana, this.maxMana, value);
+                    if(showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
+                    callSignal(this.manaSignal, value);
                     break;
                 }
             case ResourceType.item:
                 {
                     if (item != null)
                     {
-                        Utilities.updateInventory(item, this, Mathf.RoundToInt(addResource));
-                        callSignal(this.currencies, addResource);  //TODO Single Signal?
+                        Utilities.updateInventory(item, this, Mathf.RoundToInt(value));
+                        callSignal(this.currencies, value);  //TODO Single Signal?
                     }
                     break;
                 }
@@ -769,7 +780,7 @@ public class Character : MonoBehaviour
         {
             item.playSounds();
 
-            this.updateResource(item.resourceType, item, item.amount);
+            this.updateResource(item.resourceType, item, item.amount);            
 
             if (destroyIt) item.DestroyIt();
         }
@@ -781,8 +792,7 @@ public class Character : MonoBehaviour
     #region Damage Functions (hit, statuseffect, knockback)
 
     public void gotHit(StandardSkill skill)
-    {
-        
+    {        
             if (!this.isInvincible || skill.ignoreInvincibility)
             {
                 //Status Effekt hinzufügen

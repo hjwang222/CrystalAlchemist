@@ -12,7 +12,6 @@ public class BuffSkill : StandardSkill
     [FoldoutGroup("Heal and Dispell", expanded: false)]
     [SerializeField]
     private Color targetColor;
-    private Color tempColor;
 
     #region Overrides
     public override void init()

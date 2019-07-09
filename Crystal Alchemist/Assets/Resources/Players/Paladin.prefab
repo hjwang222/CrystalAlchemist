@@ -145,6 +145,7 @@ MonoBehaviour:
   openPauseSignal: {fileID: 11400000, guid: fe8d16e1c87adbc46bf6d8de8ceae041, type: 2}
   cameraSignal: {fileID: 11400000, guid: 4a599050ff805e94fa907cfa2b0ff326, type: 2}
   targetHelpObject: {fileID: 8153952292305783526}
+  loadGame: {fileID: 11400000, guid: 6235bec172bdebb4b9dfed7e628eb8cc, type: 2}
   AButton: {fileID: 0}
   BButton: {fileID: 0}
   XButton: {fileID: 0}
@@ -496,6 +497,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 759644400424337062}
     m_Modifications:
+    - target: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
+        type: 3}
+      propertyPath: m_Name
+      value: Direction Ring
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -549,16 +560,6 @@ PrefabInstance:
     - target: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
-        type: 3}
-      propertyPath: m_Name
-      value: Direction Ring
-      objectReference: {fileID: 0}
-    - target: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5349438606657991408, guid: 1c27a61d4b7f3984eb11097accadce1d,

@@ -23,7 +23,8 @@ public class TitleScreen : MonoBehaviour
     private TextMeshProUGUI continueUGUI;
     [SerializeField]
     private Color color;
-
+    [SerializeField]
+    private BoolValue loadGame;
 
     [Required]
     [SerializeField]
@@ -60,12 +61,20 @@ public class TitleScreen : MonoBehaviour
 
     public void startGame(string scene)
     {
-        SaveSystem.DeleteSave();
+        this.loadGame.setValue(false);
         SceneManager.LoadSceneAsync(scene);
+    }
+
+    public void deleteSaveGame()
+    {
+        SaveSystem.DeleteSave();
+        this.lastSavepoint = null;
+        this.continueUGUI.color = Color.gray;
     }
 
     public void continueGame()
     {
+        this.loadGame.setValue(true);
         if(this.lastSavepoint != null) SceneManager.LoadSceneAsync(this.lastSavepoint);
     }
 
