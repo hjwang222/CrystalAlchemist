@@ -31,7 +31,6 @@ public class TitleScreen : MonoBehaviour
     [SerializeField]
     private SimpleSignal destroySignal;
 
-    private AudioSource audioSource;
     private AudioSource musicSource;
     private string lastSavepoint = null;
 
@@ -42,10 +41,6 @@ public class TitleScreen : MonoBehaviour
 
         setVolumeText(this.musicUGUI, GlobalValues.backgroundMusicVolume);
         setVolumeText(this.effectUGUI, GlobalValues.soundEffectVolume);
-
-        this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
-        this.audioSource.loop = false;
-        this.audioSource.playOnAwake = false;
 
         if (this.music != null)
         {

@@ -48,6 +48,8 @@ public class Enemy : Character
     private void Start()
     {
         init();
+        this.aggroList.Clear();
+        this.target = null;
         Utilities.SetAnimatorParameter(this.animator, "isWakeUp", true);
     }
 

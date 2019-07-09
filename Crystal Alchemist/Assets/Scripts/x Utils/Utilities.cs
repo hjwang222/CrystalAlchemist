@@ -334,7 +334,12 @@ public class Utilities : MonoBehaviour
             else
             {
                 found.amount += amount;
-            }
+
+                if (found.amount <= 0)
+                {
+                    character.inventory.Remove(found);
+                }
+            }            
         }
     }
 

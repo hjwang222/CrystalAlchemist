@@ -551,6 +551,10 @@ public class Character : MonoBehaviour
             //TODO: Kill sofort (Skill noch aktiv)
 
             Utilities.SetAnimatorParameter(this.animator, "isDead", true);
+
+            RemoveAllStatusEffects(this.debuffs);
+            RemoveAllStatusEffects(this.buffs);
+
             this.spriteRenderer.color = Color.white;
             setSkills(false);
 
@@ -813,6 +817,24 @@ public class Character : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void RemoveAllStatusEffects(List<StatusEffect> statusEffects)
+    {
+        List<StatusEffect> dispellStatusEffects = new List<StatusEffect>();
+
+        //Store in temp List to avoid Enumeration Exception
+        foreach (StatusEffect effect in statusEffects)
+        {
+            dispellStatusEffects.Add(effect);            
+        }
+
+        foreach (StatusEffect effect in dispellStatusEffects)
+        {
+            effect.DestroyIt();
+        }
+
+        dispellStatusEffects.Clear();
     }
 
     public void RemoveStatusEffect(StatusEffect statusEffect, bool allTheSame)

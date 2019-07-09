@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
     private Player player;
     [SerializeField]
     private GameObject cursor;
+    [SerializeField]
+    private GameObject blackScreen;
 
     private void Awake()
     {
@@ -40,5 +42,6 @@ public class PauseMenu : MonoBehaviour
     {
         this.player.delay(this.delay);
         this.transform.parent.gameObject.SetActive(false);
+        this.blackScreen.SetActive(false);
     }
 }

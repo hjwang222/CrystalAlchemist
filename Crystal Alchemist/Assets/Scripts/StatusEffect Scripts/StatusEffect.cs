@@ -87,7 +87,24 @@ public class StatusEffect : MonoBehaviour
 
     [FoldoutGroup("Visuals", expanded: false)]
     [Tooltip("Farbe während der Dauer des Statuseffekts")]
-    public Color statusEffectColor;
+    [SerializeField]
+    private float destroyDelay = 0.2f;
+
+    [FoldoutGroup("Visuals", expanded: false)]
+    [Tooltip("Farbe während der Dauer des Statuseffekts")]
+    [SerializeField]
+    private Animator ownAnimator;
+
+    [FoldoutGroup("Visuals", expanded: false)]
+    [Tooltip("Farbe während der Dauer des Statuseffekts")]
+    [SerializeField]
+    private bool changeColor = true;
+
+    [FoldoutGroup("Visuals", expanded: false)]
+    [Tooltip("Farbe während der Dauer des Statuseffekts")]
+    [SerializeField]
+    [ShowIf("changeColor")]
+    private Color statusEffectColor;
 
     [FoldoutGroup("Visuals", expanded: false)]
     [Tooltip("Icon des Statuseffekts für das UI")]
@@ -95,7 +112,8 @@ public class StatusEffect : MonoBehaviour
 
     [FoldoutGroup("Visuals", expanded: false)]
     [Tooltip("Signal zum Update der UI")]
-    public SimpleSignal updateUI;
+    [SerializeField]
+    private SimpleSignal updateUI;
 
 
     private float elapsed;
@@ -125,9 +143,11 @@ public class StatusEffect : MonoBehaviour
 
     public virtual void init()
     {
+        if (this.ownAnimator == null) this.ownAnimator = this.GetComponent<Animator>();
+
         if (this.endType == StatusEffectEndType.time) this.statusEffectTimeLeft = this.statusEffectDuration;
         if (this.endType == StatusEffectEndType.mana) this.statusEffectTimeLeft = Mathf.Infinity;
-        if (this.target != null) this.target.addColor(this.statusEffectColor);
+        if (this.target != null && this.changeColor) this.target.addColor(this.statusEffectColor);
 
         if (this.statusEffectInterval == 0)
         {
@@ -202,10 +222,12 @@ public class StatusEffect : MonoBehaviour
 
     public virtual void DestroyIt()
     {
+        Utilities.SetAnimatorParameter(this.ownAnimator, "End");
+
         if (this.target != null)
         {
             //Charakter-Farbe zurücksetzen
-            this.target.resetColor(this.statusEffectColor);
+            if(this.changeColor) this.target.resetColor(this.statusEffectColor);
 
             //Statuseffekt von der Liste entfernen
             if (this.statusEffectType == StatusEffectType.debuff)
@@ -220,13 +242,13 @@ public class StatusEffect : MonoBehaviour
 
         //GUI updaten und Objekt kurz danach zerstören
         this.updateUI.Raise();
-        Destroy(this.gameObject, 0.2f);
+        Destroy(this.gameObject, this.destroyDelay);
     }
 
     public virtual void doEffect()
     {
         //Wirkung abhängig vom Script!
-        if (this.target != null)
+        if (this.target != null && this.changeColor)
         {
             this.target.addColor(this.statusEffectColor);
         }

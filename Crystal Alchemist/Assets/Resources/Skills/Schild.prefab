@@ -63,6 +63,8 @@ MonoBehaviour:
   durationCombo: 0
   affectedResources: []
   statusEffects: []
+  thrust: 0
+  knockbackTime: 0
   resourceType: 2
   item: {fileID: 0}
   addResourceSender: 0
@@ -71,6 +73,9 @@ MonoBehaviour:
   speedDuringDuration: -50
   affectAnimation: 1
   lockMovementonDuration: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
   isRapidFire: 1
   isStationary: 0
   speed: 0
@@ -81,6 +86,7 @@ MonoBehaviour:
   snapRotationInDegrees: 90
   positionOffset: 0.125
   positionHeight: 0
+  activeTargetHelper: 0
   lockOn: {fileID: 0}
   targetingMode: 2
   maxAmountOfTargets: 1
@@ -93,11 +99,8 @@ MonoBehaviour:
   affectObjects: 1
   affectSkills: 1
   ignoreInvincibility: 0
-  thrust: 0
-  knockbackTime: 0
   maxAmounts: 1
   comboAmount: 99
-  summon: {fileID: 0}
   icon: {fileID: 21300002, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 0}
   endSoundEffect: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5646575447307628004}
   - component: {fileID: 1485117890447238215}
   m_Layer: 0
-  m_Name: Feuer
+  m_Name: Laserflamme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +128,8 @@ MonoBehaviour:
   durationCombo: 0
   affectedResources: []
   statusEffects: []
+  thrust: 4
+  knockbackTime: 0.2
   resourceType: 2
   item: {fileID: 0}
   addResourceSender: 0
@@ -136,6 +138,9 @@ MonoBehaviour:
   speedDuringDuration: 0
   affectAnimation: 1
   lockMovementonDuration: 0
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
   isRapidFire: 0
   isStationary: 0
   speed: 0
@@ -146,6 +151,7 @@ MonoBehaviour:
   snapRotationInDegrees: 0
   positionOffset: 0
   positionHeight: 0
+  activeTargetHelper: 0
   lockOn: {fileID: 0}
   targetingMode: 0
   maxAmountOfTargets: 0
@@ -158,11 +164,8 @@ MonoBehaviour:
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
-  thrust: 4
-  knockbackTime: 0.2
   maxAmounts: 9999
   comboAmount: 99
-  summon: {fileID: 0}
   icon: {fileID: 0}
   startSoundEffect: {fileID: 0}
   endSoundEffect: {fileID: 0}

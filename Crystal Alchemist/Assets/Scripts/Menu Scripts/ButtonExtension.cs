@@ -72,6 +72,9 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
             this.cursor.transform.position = new Vector2(this.transform.position.x - (x_new), 
                                                          this.transform.position.y + (y_new));
 
+            //Debug.Log("Button: "+this.size + " - " + this.scale);
+            //Debug.Log("Cursor: "+this.cursorSize + " - " + this.cursorScale);
+
             if (playEffect) this.cursor.GetComponent<Cursor>().playSoundEffect();
         }
     }

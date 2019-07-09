@@ -14,10 +14,16 @@ public class SkillMenu : MonoBehaviour
 
     [BoxGroup("Mandatory")]
     [SerializeField]
+    [Required]
     private Cursor cursor;
     [BoxGroup("Mandatory")]
     [SerializeField]
+    [Required]
     private TextMeshProUGUI categoryText;
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    [Required]
+    private GameObject blackScreen;
 
     [BoxGroup("Tabs")]
     [SerializeField]
@@ -188,6 +194,7 @@ public class SkillMenu : MonoBehaviour
     {
         this.player.delay(this.delay);
         this.transform.parent.gameObject.SetActive(false);
+        this.blackScreen.SetActive(false);
     }
 
     public void setPage(int value)

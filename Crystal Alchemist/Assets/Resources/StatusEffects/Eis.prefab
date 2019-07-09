@@ -67,10 +67,13 @@ MonoBehaviour:
   endType: 0
   statusEffectDuration: 8
   statusEffectInterval: 0
-  canOverride: 1
+  canOverride: 0
   statusEffectManaDrain: 0
   statusEffectManaDrainInterval: 1
   canDeactivateIt: 0
+  destroyDelay: 1
+  ownAnimator: {fileID: 5231157900605460847}
+  changeColor: 1
   statusEffectColor: {r: 0, g: 0.9450981, b: 1, a: 1}
   iconSprite: {fileID: 21300002, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
   updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
@@ -78,7 +81,6 @@ MonoBehaviour:
   statusEffectTimeLeft: 0
   timeDistortion: 1
   speed: -100
-  anim: {fileID: 0}
 --- !u!212 &5171202800015985860
 SpriteRenderer:
   m_ObjectHideFlags: 0

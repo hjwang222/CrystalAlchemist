@@ -272,7 +272,7 @@ Transform:
   - {fileID: 6625934165072255100}
   - {fileID: 1065962740209003586}
   - {fileID: 6625934164191362223}
-  - {fileID: 5335493528809119116}
+  - {fileID: 5335493528809119723}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -506,6 +506,8 @@ MonoBehaviour:
     item: {fileID: 0}
     amount: -3
   statusEffects: []
+  thrust: 4
+  knockbackTime: 0.2
   resourceType: 2
   item: {fileID: 0}
   addResourceSender: -1
@@ -514,6 +516,9 @@ MonoBehaviour:
   speedDuringDuration: 0
   affectAnimation: 1
   lockMovementonDuration: 0
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
   isRapidFire: 0
   isStationary: 1
   speed: 0
@@ -524,6 +529,7 @@ MonoBehaviour:
   snapRotationInDegrees: 0
   positionOffset: 0
   positionHeight: 0
+  activeTargetHelper: 0
   lockOn: {fileID: 6540191019208669748, guid: 5b2939f613b001c4a9eb3296ae0d2093, type: 3}
   targetingMode: 1
   maxAmountOfTargets: 3
@@ -536,11 +542,8 @@ MonoBehaviour:
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
-  thrust: 4
-  knockbackTime: 0.2
   maxAmounts: 3
   comboAmount: 99
-  summon: {fileID: 0}
   icon: {fileID: 21300022, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
   startSoundEffect: {fileID: 8300000, guid: a9880e2410cffa044936162b476e2b5b, type: 3}
   endSoundEffect: {fileID: 0}
@@ -680,7 +683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7125f1409d0689b4d80b6ab7179979c8, type: 3}
---- !u!224 &5335493528809119116 stripped
+--- !u!224 &5335493528809119723 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 822386160285104020, guid: 7125f1409d0689b4d80b6ab7179979c8,
     type: 3}
