@@ -248,10 +248,11 @@ public class StatusEffect : MonoBehaviour
     public virtual void doEffect()
     {
         //Wirkung abhängig vom Script!
+        /*
         if (this.target != null && this.changeColor)
         {
             this.target.addColor(this.statusEffectColor);
-        }
+        }*/
     }
 
 

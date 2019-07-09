@@ -126,7 +126,10 @@ MonoBehaviour:
   cooldown: 0
   cooldownAfterCombo: 0
   durationCombo: 0
-  affectedResources: []
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -0.5
   statusEffects: []
   thrust: 4
   knockbackTime: 0.2
@@ -146,6 +149,7 @@ MonoBehaviour:
   speed: 0
   rotateIt: 0
   blendTree: 0
+  useOffSetToBlendTree: 0
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
