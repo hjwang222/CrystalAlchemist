@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour
     private GameObject childMenue;
 
     private CharacterState lastState;
+    private bool overrideState = true;
 
     private void Awake()
     {
@@ -39,7 +40,11 @@ public class PauseMenu : MonoBehaviour
         this.parentMenue.SetActive(true);
         this.childMenue.SetActive(false);
 
-        this.lastState = this.player.currentState;
+        if (this.overrideState)
+        {
+            this.lastState = this.player.currentState;
+            this.overrideState = false;
+        }
         this.player.currentState = CharacterState.inMenu;
     }
 
@@ -55,6 +60,7 @@ public class PauseMenu : MonoBehaviour
 
     public void exitMenu()
     {
+        this.overrideState = true;
         this.player.delay(this.lastState);
         this.transform.parent.gameObject.SetActive(false);
         this.blackScreen.SetActive(false);
