@@ -61,6 +61,7 @@ MonoBehaviour:
   keepHoldTimer: 0
   delay: 0
   duration: 9999
+  lockMovementonDuration: 9999
   deactivateByButtonUp: 1
   cooldown: 0
   cooldownAfterCombo: 0
@@ -76,7 +77,6 @@ MonoBehaviour:
   speedDuringCasting: 0
   speedDuringDuration: -50
   affectAnimation: 1
-  lockMovementonDuration: 1
   forward: 0
   selfThrust: 0
   selfThrustTime: 0
@@ -88,7 +88,6 @@ MonoBehaviour:
   blendTree: 1
   useOffSetToBlendTree: 0
   rotationModifier: 0
-  rotateEndSprite: 0
   snapRotationInDegrees: 90
   positionOffset: 0.125
   positionHeight: 0
@@ -116,6 +115,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0

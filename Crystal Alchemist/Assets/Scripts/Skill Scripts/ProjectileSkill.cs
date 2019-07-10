@@ -25,11 +25,11 @@ public class ProjectileSkill : StandardSkill
                 this.playEndEffectAlready = true;
             }
 
-            if (!this.rotateEndSprite) this.transform.rotation = Quaternion.Euler(0,0,0);
+            
             Utilities.SetAnimatorParameter(this.animator, "Hit");
             // if (this.shadow != null) this.shadow.gameObject.SetActive(false);
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
-
+            
             placeFire(hittedCharacter);
 
             this.isActive = false;

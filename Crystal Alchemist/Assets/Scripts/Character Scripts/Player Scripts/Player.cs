@@ -485,7 +485,7 @@ public class Player : Character
 
             foreach (StandardSkill skill in this.activeSkills)
             {
-                if (skill.lockMovementonDuration)
+                if (skill.movementLocked)
                 {
                     lockAnimation = true;
                     break;
