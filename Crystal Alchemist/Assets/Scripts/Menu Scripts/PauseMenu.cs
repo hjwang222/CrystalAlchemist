@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    private float delay = 0.3f;
+    
     private Player player;
 
     [SerializeField]
@@ -19,6 +19,8 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField]
     private GameObject childMenue;
+
+    private CharacterState lastState;
 
     private void Awake()
     {
@@ -37,7 +39,8 @@ public class PauseMenu : MonoBehaviour
         this.parentMenue.SetActive(true);
         this.childMenue.SetActive(false);
 
-        this.player.currentState = CharacterState.inDialog;
+        this.lastState = this.player.currentState;
+        this.player.currentState = CharacterState.inMenu;
     }
 
     private void OnDisable()
@@ -52,7 +55,7 @@ public class PauseMenu : MonoBehaviour
 
     public void exitMenu()
     {
-        this.player.delay(this.delay);
+        this.player.delay(this.lastState);
         this.transform.parent.gameObject.SetActive(false);
         this.blackScreen.SetActive(false);
     }

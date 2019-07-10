@@ -12,6 +12,8 @@ public class GlobalValues : MonoBehaviour
     public static Color[] blue = new Color[] { new Color32(0, 125, 255, 255), new Color32(0, 25, 125, 255) };
     public static Color[] green = new Color[] { new Color32(0, 255, 0, 255), new Color32(0, 125, 0, 255) };
 
+    public static float playerDelay = 0.1f;
+
     public static string version = "2.0 Alpha";
 
     public static float transitionDuration = 1f;

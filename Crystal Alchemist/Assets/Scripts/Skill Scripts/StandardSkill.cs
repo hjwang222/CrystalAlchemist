@@ -49,11 +49,6 @@ public class StandardSkill : MonoBehaviour
     [Required]
     public Animator animator;
 
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    [SerializeField]
-    private List<Collider2D> myColliders;
-
     [Space(10)]
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Schatten")]
@@ -489,14 +484,6 @@ public class StandardSkill : MonoBehaviour
 
             //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;                       
 
-            if (this.colliderHeightOffset != 0)
-            {
-                foreach (Collider2D collider in this.myColliders)
-                {
-                    this.setColliderOffset(collider);
-                }
-            }
-
             if (setPositionAtStart) this.transform.position = start;
 
             if (this.myRigidbody != null)
@@ -527,21 +514,6 @@ public class StandardSkill : MonoBehaviour
 
     #endregion
 
-
-
-
-    private Vector2 setColliderOffset(Vector2 direction)
-    {
-        return new Vector2(direction.y * (this.colliderHeightOffset / this.transform.localScale.y),
-                           direction.x * (this.colliderHeightOffset / this.transform.localScale.x));        
-    }
-
-    private void setColliderOffset(Collider2D collider)
-    {
-        if (collider != null) collider.offset = setColliderOffset(this.direction);
-    }
-
-
     #region Update Funktionen   
 
     public void Update()
@@ -551,7 +523,11 @@ public class StandardSkill : MonoBehaviour
 
     public virtual void doOnUpdate()
     {
-        if (this.spriteRenderer != null && this.shadow != null) this.shadow.sprite = this.spriteRenderer.sprite;
+        if (this.spriteRenderer != null && this.shadow != null)
+        {
+            this.shadow.sprite = this.spriteRenderer.sprite;
+            this.shadow.transform.rotation = this.spriteRenderer.transform.rotation;
+        }
 
         if (this.intervallSender > 0)
         {

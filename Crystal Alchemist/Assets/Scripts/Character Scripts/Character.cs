@@ -11,6 +11,7 @@ public enum CharacterState
     attack,
     interact, //in Reichweite eines interagierbaren Objektes
     inDialog, //Dialog-Box ist offen
+    inMenu, //Pause oder Inventar ist offen
     knockedback, //im Knockback
     idle,
     silent, //kann nicht angreifen

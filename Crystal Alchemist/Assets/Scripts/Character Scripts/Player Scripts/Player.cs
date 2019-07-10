@@ -111,7 +111,7 @@ public class Player : Character
 
     private void playerInputs()
     {
-        if (currentState == CharacterState.inDialog)
+        if (this.currentState == CharacterState.inDialog || this.currentState == CharacterState.inMenu)
         {
             Utilities.SetAnimatorParameter(this.animator, "isWalking", false);
             return;
@@ -139,16 +139,18 @@ public class Player : Character
             this.openPauseSignal.Raise();
         }
 
-        if (currentState == CharacterState.walk || this.currentState == CharacterState.idle || this.currentState == CharacterState.interact)
+        if (currentState != CharacterState.dead 
+            && this.currentState != CharacterState.inDialog 
+            && this.currentState != CharacterState.inMenu)
         {
             UpdateAnimationAndMove();
         }
     }
 
 
-    public void delay(float delay)
+    public void delay(CharacterState newState)
     {
-        StartCoroutine(Utilities.delayInputPlayerCO(delay, this));
+        StartCoroutine(Utilities.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
     }
 
 
@@ -208,8 +210,6 @@ public class Player : Character
 
     private void useSkill(string button)
     {
-        if (this.currentState != CharacterState.interact && this.currentState != CharacterState.inDialog)
-        {            
             StandardSkill skill = this.getSkillFromButton(button);
 
             if (skill != null)
@@ -218,7 +218,9 @@ public class Player : Character
                 {
                     skill.cooldownTimeLeft -= (Time.deltaTime * this.timeDistortion * this.spellspeed);
                 }
-                else
+                else if(this.currentState != CharacterState.interact 
+                     && this.currentState != CharacterState.inDialog
+                     && this.currentState != CharacterState.inMenu)
                 {
                     int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
 
@@ -237,7 +239,7 @@ public class Player : Character
                 }
             }
         }
-    }
+    
 
     private bool isSkillReadyToUse(string button, StandardSkill skill)
     {

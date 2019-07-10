@@ -21,6 +21,15 @@ public class Buttons : MonoBehaviour
     [FoldoutGroup("A Button UI", expanded: false)]
     [SerializeField]
     private TextMeshProUGUI ammoA;
+    [FoldoutGroup("A Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconAButtonTrans;
+    [FoldoutGroup("A Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI action;
+    [FoldoutGroup("A Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI confirm;
 
     [FoldoutGroup("B Button UI", expanded: false)]
     [SerializeField]
@@ -34,6 +43,12 @@ public class Buttons : MonoBehaviour
     [FoldoutGroup("B Button UI", expanded: false)]
     [SerializeField]
     private TextMeshProUGUI ammoB;
+    [FoldoutGroup("B Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconBButtonTrans;
+    [FoldoutGroup("B Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI cancel;
 
     [FoldoutGroup("X Button UI", expanded: false)]
     [SerializeField]
@@ -47,6 +62,9 @@ public class Buttons : MonoBehaviour
     [FoldoutGroup("X Button UI", expanded: false)]
     [SerializeField]
     private TextMeshProUGUI ammoX;
+    [FoldoutGroup("X Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconXButtonTrans;
 
     [FoldoutGroup("Y Button UI", expanded: false)]
     [SerializeField]
@@ -60,6 +78,9 @@ public class Buttons : MonoBehaviour
     [FoldoutGroup("Y Button UI", expanded: false)]
     [SerializeField]
     private TextMeshProUGUI ammoY;
+    [FoldoutGroup("Y Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconYButtonTrans;
 
     // Start is called before the first frame update
 
@@ -83,23 +104,64 @@ public class Buttons : MonoBehaviour
 
     private void Update()
     {
-        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton, this.ammoA);
-        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB);
-        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX);
-        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY);
+        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton, this.ammoA, this.action, this.skillIconAButtonTrans, this.confirm);
+        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB, null, this.skillIconBButtonTrans, this.cancel);
+        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX, null, this.skillIconXButtonTrans, null);
+        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY, null, this.skillIconYButtonTrans, null);
     }
 
-    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, StandardSkill skill, TextMeshProUGUI ammo)
+    private void enableUI(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, TextMeshProUGUI ammo, Image buttonUITrans, bool value)
     {
-        if (skill != null)
+        buttonUITrans.enabled = value;
+        cooldown.enabled = value;
+        skillUI.enabled = value;
+        buttonUI.enabled = value;
+        ammo.enabled = value;
+    }
+
+    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, StandardSkill skill, TextMeshProUGUI ammo, TextMeshProUGUI action, Image buttonUITrans, TextMeshProUGUI menuAction)
+    {
+        if (action != null) action.enabled = false;
+        if (menuAction != null) menuAction.enabled = false;
+
+        enableUI(skillUI, buttonUI, cooldown, ammo, buttonUITrans, false);
+
+        if (this.player.currentState == CharacterState.inMenu)
         {
+            if (menuAction != null)
+            {
+                menuAction.enabled = true;
+                buttonUI.enabled = true;
+                buttonUI.color = new Color(1f, 1f, 1f, 1f);
+                buttonUI.fillAmount = 1;
+            }            
+        }
+        else if (this.player.currentState == CharacterState.inDialog)
+        {
+            
+        }
+        else if (this.player.currentState == CharacterState.interact)
+        {
+            if (action != null)
+            {
+                action.enabled = true;
+                buttonUI.enabled = true;
+                buttonUI.color = new Color(1f, 1f, 1f, 1f);
+                buttonUI.fillAmount = 1;
+            }                      
+        }         
+        else if (skill != null)
+        {
+            enableUI(skillUI, buttonUI, cooldown, ammo, buttonUITrans, true);
+
             float cooldownLeft = skill.cooldownTimeLeft / (player.timeDistortion * player.spellspeed);
             float cooldownValue = skill.cooldown / (player.timeDistortion * player.spellspeed);
 
             if (skill.item != null) ammo.text = (int)player.getResource(skill.resourceType, skill.item)+"";
             else ammo.text = "";            
 
-            if (this.player.currentState == CharacterState.attack ||
+            if (this.player.currentState == CharacterState.attack ||                
+                this.player.currentState == CharacterState.inDialog ||
                 (player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite)
                 || player.getAmountOfSameSkills(skill) >= skill.maxAmounts
                 || cooldownLeft == Utilities.maxFloatInfinite)
@@ -154,6 +216,10 @@ public class Buttons : MonoBehaviour
                 buttonUI.color = new Color(1f, 1f, 1f, 1f);
                 buttonUI.fillAmount = 1;                
             }
+        }
+        else
+        {
+            buttonUITrans.enabled = true;
         }
     }
 
