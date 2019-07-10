@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 680506914304237524}
   - component: {fileID: 4229681705441237260}
   - component: {fileID: 4229681705441237250}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Stromschlag
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -52,6 +52,11 @@ MonoBehaviour:
   animationTriggerName: 
   orderIndex: 18
   skillDescription: 
+  spriteRenderer: {fileID: 6508292816955024436}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  myColliders: []
+  shadow: {fileID: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -80,9 +85,11 @@ MonoBehaviour:
   selfThrustTime: 0
   isRapidFire: 1
   isStationary: 0
+  colliderHeightOffset: 0
   speed: 0
   rotateIt: 1
   blendTree: 0
+  useOffSetToBlendTree: 0
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
@@ -111,12 +118,9 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
   target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
-  spriteRenderer: {fileID: 6508292816955024436}
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
@@ -204,7 +208,7 @@ GameObject:
   - component: {fileID: 6508292816955024443}
   - component: {fileID: 6508292816955024436}
   - component: {fileID: 6508292816955024440}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: New Sprite
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -302,7 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7606972994670469863}
   - component: {fileID: 7606972994670469864}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7078582995585776847}
   - component: {fileID: 8591703498699444151}
   - component: {fileID: 6096689982342564308}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Analysis Zauber
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -145,6 +145,11 @@ MonoBehaviour:
   animationTriggerName: 
   orderIndex: 21
   skillDescription: 
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  myColliders: []
+  shadow: {fileID: 0}
   cast: 2
   keepHoldTimer: 0
   delay: 0
@@ -171,6 +176,7 @@ MonoBehaviour:
   selfThrustTime: 0
   isRapidFire: 0
   isStationary: 0
+  colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
   blendTree: 0
@@ -203,12 +209,9 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
   target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1

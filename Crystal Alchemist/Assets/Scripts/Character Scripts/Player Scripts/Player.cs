@@ -121,8 +121,7 @@ public class Player : Character
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
 
-        if (this.currentState != CharacterState.attack
-            && this.currentState != CharacterState.knockedback)
+        if (this.currentState != CharacterState.knockedback)
         {
             useSkill("A-Button");
             useSkill("B-Button");

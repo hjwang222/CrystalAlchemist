@@ -35,6 +35,7 @@ public class TitleScreen : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = true;
         showMenu(this.mainMenu);
         SaveSystem.loadOptions();
 
@@ -59,10 +60,16 @@ public class TitleScreen : MonoBehaviour
         destroySignal.Raise();
     }
 
+    private void LateUpdate()
+    {
+        if (!Cursor.visible) Cursor.visible = true;
+    }
+
     public void startGame(string scene)
     {
         this.loadGame.setValue(false);
         SceneManager.LoadSceneAsync(scene);
+        Cursor.visible = false;
     }
 
     public void deleteSaveGame()
@@ -76,6 +83,7 @@ public class TitleScreen : MonoBehaviour
     {
         this.loadGame.setValue(true);
         if(this.lastSavepoint != null) SceneManager.LoadSceneAsync(this.lastSavepoint);
+        Cursor.visible = false;
     }
 
     public void exitGame()

@@ -46,6 +46,8 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                     + WordToScenePoint(this.transform.localPosition));*/
 
         setFirst();
+
+        //Cursor.visible = false;
     }
 
     private void OnEnable()
@@ -96,7 +98,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
             //Debug.Log("Button: "+this.size + " - " + this.scale);
             //Debug.Log("Cursor: "+this.cursorSize + " - " + this.cursorScale);
 
-            if (playEffect) this.cursor.GetComponent<Cursor>().playSoundEffect();
+            if (playEffect) this.cursor.GetComponent<myCursor>().playSoundEffect();
         }
     }
 

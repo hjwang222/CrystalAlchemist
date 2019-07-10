@@ -57,14 +57,7 @@ public class StandardSkill : MonoBehaviour
     [Space(10)]
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Schatten")]
-    [SerializeField]
-    private SpriteRenderer shadow;
-
-    [BoxGroup("Pflichtfelder")]
-    [Tooltip("Schattenfarbe")]
-    [ShowIf("shadow")]
-    [SerializeField]
-    private Color shadowColor = new Color(0,0,0,40);
+    public SpriteRenderer shadow;
 
     ////////////////////////////////////////////////////////////////
 
@@ -324,7 +317,9 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Unverwundbarkeit ignorieren (z.B. für Heals)?")]
     public bool ignoreInvincibility = false;
 
-
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("Soll der Spieler nur diesen Skill benutzen dürfen?")]
+    public bool useAttackState = false;
 
     ////////////////////////////////////////////////////////////////
 
@@ -446,7 +441,6 @@ public class StandardSkill : MonoBehaviour
         if (this.shadow != null && this.spriteRenderer != null)
         {
             this.shadow.sprite = this.spriteRenderer.sprite;
-            this.shadow.color = this.shadowColor;
         }
 
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
@@ -466,6 +460,8 @@ public class StandardSkill : MonoBehaviour
         }
 
         this.sender.startAttackAnimation(this.animationTriggerName);
+
+        if (this.useAttackState) this.sender.currentState = CharacterState.attack;
     }
 
     private void updateResourceSender()
@@ -555,6 +551,8 @@ public class StandardSkill : MonoBehaviour
 
     public virtual void doOnUpdate()
     {
+        if (this.spriteRenderer != null && this.shadow != null) this.shadow.sprite = this.spriteRenderer.sprite;
+
         if (this.intervallSender > 0)
         {
             if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.timeDistortion);
@@ -697,7 +695,8 @@ public class StandardSkill : MonoBehaviour
         if (this.speedDuringDuration != 0) this.sender.updateSpeed(0);
 
         this.sender.activeSkills.Remove(this);
-        //this.isActive = false;
+        if (this.useAttackState) this.sender.currentState = CharacterState.idle;
+            //this.isActive = false;
         Destroy(this.gameObject);
     }
 

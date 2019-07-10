@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Cursor : MonoBehaviour
+public class myCursor : MonoBehaviour
 {
     [SerializeField]
     private AudioClip soundEffect;

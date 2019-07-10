@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3497126498219702588}
   - component: {fileID: 3342286359297243341}
   - component: {fileID: 925074013887456555}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Boomerang
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -54,6 +54,11 @@ MonoBehaviour:
   animationTriggerName: 
   orderIndex: 3
   skillDescription: 
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  myColliders: []
+  shadow: {fileID: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -82,9 +87,11 @@ MonoBehaviour:
   selfThrustTime: 0
   isRapidFire: 0
   isStationary: 0
+  colliderHeightOffset: 0
   speed: 15
   rotateIt: 1
   blendTree: 0
+  useOffSetToBlendTree: 0
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 90
@@ -113,12 +120,9 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: -0.004169181
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
   target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1

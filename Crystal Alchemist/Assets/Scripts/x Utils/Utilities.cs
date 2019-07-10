@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
+using System;
 
 
 #region Objects
@@ -78,28 +79,33 @@ public class Utilities : MonoBehaviour
 
     public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target, float reduce)
     {
-        GameObject activeSkill = Instantiate(skill.gameObject, sender.transform.position, Quaternion.identity);
-
-        if (!skill.isStationary) activeSkill.transform.parent = sender.activeSkillParent.transform;
-
-        if (target != null) activeSkill.GetComponent<StandardSkill>().target = target;
-        activeSkill.GetComponent<StandardSkill>().sender = sender;
-
-        List<affectedResource> temp = new List<affectedResource>();
-
-        for(int i = 0; i < activeSkill.GetComponent<StandardSkill>().affectedResources.Count; i++)
+        if (sender.currentState != CharacterState.attack)
         {
-            affectedResource elem = activeSkill.GetComponent<StandardSkill>().affectedResources[i];
-            elem.amount /= reduce;
-            temp.Add(elem);
+            GameObject activeSkill = Instantiate(skill.gameObject, sender.transform.position, Quaternion.identity);
+
+            if (!skill.isStationary) activeSkill.transform.parent = sender.activeSkillParent.transform;
+
+            if (target != null) activeSkill.GetComponent<StandardSkill>().target = target;
+            activeSkill.GetComponent<StandardSkill>().sender = sender;
+
+            List<affectedResource> temp = new List<affectedResource>();
+
+            for (int i = 0; i < activeSkill.GetComponent<StandardSkill>().affectedResources.Count; i++)
+            {
+                affectedResource elem = activeSkill.GetComponent<StandardSkill>().affectedResources[i];
+                elem.amount /= reduce;
+                temp.Add(elem);
+            }
+
+            activeSkill.GetComponent<StandardSkill>().affectedResources = temp;
+
+            activeSkill.GetComponent<StandardSkill>().addResourceSender /= reduce;
+            sender.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
+
+            return activeSkill.GetComponent<StandardSkill>();
         }
 
-        activeSkill.GetComponent<StandardSkill>().affectedResources = temp;
-
-        activeSkill.GetComponent<StandardSkill>().addResourceSender /= reduce;
-        sender.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
-
-        return activeSkill.GetComponent<StandardSkill>();
+        return null;
     }
 
     public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect)
@@ -119,7 +125,7 @@ public class Utilities : MonoBehaviour
 
     public static void setItem(LootTable[] lootTable, bool multiLoot, List<Item> items)
     {
-        int rng = Random.Range(1, Utilities.maxIntSmall);
+        int rng = UnityEngine.Random.Range(1, Utilities.maxIntSmall);
         int lowestDropRate = 101;
 
         foreach (LootTable loot in lootTable)
@@ -184,25 +190,35 @@ public class Utilities : MonoBehaviour
     #region Check Utils
 
     public static bool checkCollision(Collider2D hittedCharacter, StandardSkill skill)
-    {        
-        if (skill != null && skill.triggerIsActive)
+    {
+        try
         {
-            if (skill.affectSkills
-                && hittedCharacter.CompareTag("Skill")
-                && hittedCharacter.GetComponent<StandardSkill>().skillName != skill.skillName)
+            if (skill != null && skill.triggerIsActive)
             {
-                return true;
-            }
-            else if (!hittedCharacter.isTrigger)
-            {
-                if ((skill.affectPlayers && hittedCharacter.CompareTag("Player"))
-                    || skill.affectEnemies && hittedCharacter.CompareTag("Enemy")
-                    || skill.affectObjects && hittedCharacter.CompareTag("Object")
-                    )
+                if (skill.affectSkills
+                    && hittedCharacter.CompareTag("Skill")
+                    && hittedCharacter.GetComponent<StandardSkill>().skillName != skill.skillName)
                 {
                     return true;
                 }
+                else if (!hittedCharacter.isTrigger)
+                {
+                    if ((skill.affectPlayers && hittedCharacter.CompareTag("Player"))
+                        || skill.affectEnemies && hittedCharacter.CompareTag("Enemy")
+                        || skill.affectObjects && hittedCharacter.CompareTag("Object")
+                        )
+                    {
+                        return true;
+                    }
+                }
             }
+
+            return false;
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(hittedCharacter.tag+" : "+hittedCharacter.gameObject.name);
+           // Debug.Log(hittedCharacter.GetComponent<Character>().name + " : " + skill.name);
         }
 
         return false;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5387825760302318934}
   - component: {fileID: 6939719257136123582}
   - component: {fileID: 2211265516280113145}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Schwert
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -52,6 +52,12 @@ MonoBehaviour:
   animationTriggerName: sword
   orderIndex: 1
   skillDescription: 
+  spriteRenderer: {fileID: 5387825760302318934}
+  myRigidbody: {fileID: 2211265516280113145}
+  animator: {fileID: 6939719257136123582}
+  myColliders:
+  - {fileID: 8355835792145004362}
+  shadow: {fileID: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -80,14 +86,17 @@ MonoBehaviour:
   selfThrustTime: 0
   isRapidFire: 0
   isStationary: 0
+  colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
   blendTree: 1
+  useOffSetToBlendTree: 0
   rotationModifier: 90
   rotateEndSprite: 0
   snapRotationInDegrees: 90
   positionOffset: 0
   positionHeight: 0
+  activeTargetHelper: 0
   lockOn: {fileID: 0}
   targetingMode: 0
   maxAmountOfTargets: 0
@@ -98,8 +107,9 @@ MonoBehaviour:
   affectPlayers: 0
   affectEnemies: 1
   affectObjects: 1
-  affectSkills: 1
+  affectSkills: 0
   ignoreInvincibility: 0
+  useAttackState: 1
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: 21300000, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
@@ -109,13 +119,10 @@ MonoBehaviour:
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: -0.0045557227
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
+  cooldownTimeLeft: -0.0019431207
   target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
@@ -167,7 +174,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &6939719257136123582
@@ -220,7 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5590416017817286310}
   - component: {fileID: 8355835792145004362}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: collider
   m_TagString: Attack
   m_Icon: {fileID: 0}

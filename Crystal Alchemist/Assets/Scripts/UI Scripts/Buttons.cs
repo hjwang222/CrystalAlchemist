@@ -99,7 +99,8 @@ public class Buttons : MonoBehaviour
             if (skill.item != null) ammo.text = (int)player.getResource(skill.resourceType, skill.item)+"";
             else ammo.text = "";            
 
-            if ((player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite)
+            if (this.player.currentState == CharacterState.attack ||
+                (player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite)
                 || player.getAmountOfSameSkills(skill) >= skill.maxAmounts
                 || cooldownLeft == Utilities.maxFloatInfinite)
             {

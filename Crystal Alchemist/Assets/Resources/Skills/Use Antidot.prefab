@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7736697032808662322}
   - component: {fileID: 8956259282679186702}
   - component: {fileID: -2803908752990074219}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Use Antidot
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -147,6 +147,11 @@ MonoBehaviour:
   animationTriggerName: 
   orderIndex: 3
   skillDescription: 
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  myColliders: []
+  shadow: {fileID: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -157,6 +162,8 @@ MonoBehaviour:
   durationCombo: 0
   affectedResources: []
   statusEffects: []
+  thrust: 0
+  knockbackTime: 0
   resourceType: 3
   item: {fileID: 5093969795789574484, guid: 7068d4f0f4dace14b99ad94094add34c, type: 3}
   addResourceSender: -1
@@ -165,16 +172,22 @@ MonoBehaviour:
   speedDuringDuration: 0
   affectAnimation: 1
   lockMovementonDuration: 0
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
   isRapidFire: 0
   isStationary: 0
+  colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
   blendTree: 0
+  useOffSetToBlendTree: 0
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
   positionOffset: 0
   positionHeight: 0
+  activeTargetHelper: 0
   lockOn: {fileID: 0}
   targetingMode: 2
   maxAmountOfTargets: 1
@@ -187,8 +200,6 @@ MonoBehaviour:
   affectObjects: 0
   affectSkills: 0
   ignoreInvincibility: 1
-  thrust: 0
-  knockbackTime: 0
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: 5217516531157938199, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
@@ -199,12 +210,9 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: -0.0061827544
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
   target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1

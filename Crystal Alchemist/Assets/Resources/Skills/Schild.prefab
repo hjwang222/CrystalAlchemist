@@ -53,6 +53,12 @@ MonoBehaviour:
   animationTriggerName: 
   orderIndex: 4
   skillDescription: 
+  spriteRenderer: {fileID: 564329192152756961}
+  myRigidbody: {fileID: 8557586700020975895}
+  animator: {fileID: 6086066880683234547}
+  myColliders:
+  - {fileID: 6821413945222853649}
+  shadow: {fileID: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -78,9 +84,11 @@ MonoBehaviour:
   selfThrustTime: 0
   isRapidFire: 1
   isStationary: 0
+  colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
   blendTree: 1
+  useOffSetToBlendTree: 0
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 90
@@ -99,6 +107,7 @@ MonoBehaviour:
   affectObjects: 1
   affectSkills: 1
   ignoreInvincibility: 0
+  useAttackState: 1
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: 21300002, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
@@ -109,12 +118,9 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
   target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1

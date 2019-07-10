@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1969711209088018435}
   - component: {fileID: 1969711209088018432}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: Phaser
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -49,6 +49,11 @@ MonoBehaviour:
   animationTriggerName: 
   orderIndex: 23
   skillDescription: 
+  spriteRenderer: {fileID: 3924551678506968721}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  myColliders: []
+  shadow: {fileID: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -77,9 +82,11 @@ MonoBehaviour:
   selfThrustTime: 0
   isRapidFire: 0
   isStationary: 0
+  colliderHeightOffset: 0
   speed: 0
   rotateIt: 1
   blendTree: 0
+  useOffSetToBlendTree: 0
   rotationModifier: 0
   rotateEndSprite: 0
   snapRotationInDegrees: 0
@@ -108,12 +115,9 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
   target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
-  spriteRenderer: {fileID: 3924551678506968721}
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
@@ -135,7 +139,7 @@ GameObject:
   - component: {fileID: 3924551678506968722}
   - component: {fileID: 3924551678506968721}
   - component: {fileID: 3924551678506968720}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

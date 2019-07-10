@@ -15,7 +15,7 @@ public class SkillMenu : MonoBehaviour
     [BoxGroup("Mandatory")]
     [SerializeField]
     [Required]
-    private Cursor cursor;
+    private myCursor cursor;
     [BoxGroup("Mandatory")]
     [SerializeField]
     [Required]
