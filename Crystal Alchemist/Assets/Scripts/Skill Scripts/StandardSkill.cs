@@ -9,6 +9,13 @@ public enum SkillType
     item
 }
 
+public enum StateType
+{
+    none,
+    attack,
+    defend
+}
+
 public class StandardSkill : MonoBehaviour
 {
     #region Attribute
@@ -314,7 +321,8 @@ public class StandardSkill : MonoBehaviour
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("Soll der Spieler nur diesen Skill benutzen dürfen?")]
-    public bool useAttackState = false;
+    [EnumToggleButtons]
+    public StateType stateType = StateType.none;
 
     ////////////////////////////////////////////////////////////////
 
@@ -456,7 +464,8 @@ public class StandardSkill : MonoBehaviour
 
         this.sender.startAttackAnimation(this.animationTriggerName);
 
-        if (this.useAttackState) this.sender.currentState = CharacterState.attack;
+        if (this.stateType == StateType.attack) this.sender.currentState = CharacterState.attack;
+        else if (this.stateType == StateType.defend) this.sender.currentState = CharacterState.defend;
     }
 
     private void updateResourceSender()
@@ -671,7 +680,7 @@ public class StandardSkill : MonoBehaviour
         if (this.speedDuringDuration != 0) this.sender.updateSpeed(0);
 
         this.sender.activeSkills.Remove(this);
-        if (this.useAttackState) this.sender.currentState = CharacterState.idle;
+        if (this.stateType != StateType.none) this.sender.currentState = CharacterState.idle;
             //this.isActive = false;
         Destroy(this.gameObject);
     }

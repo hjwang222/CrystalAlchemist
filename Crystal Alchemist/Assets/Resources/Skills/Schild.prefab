@@ -56,8 +56,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 564329192152756961}
   myRigidbody: {fileID: 8557586700020975895}
   animator: {fileID: 6086066880683234547}
-  myColliders:
-  - {fileID: 6821413945222853649}
   shadow: {fileID: 0}
   cast: 0
   keepHoldTimer: 0
@@ -71,7 +69,7 @@ MonoBehaviour:
   statusEffects: []
   thrust: 0
   knockbackTime: 0
-  resourceType: 2
+  resourceType: 0
   item: {fileID: 0}
   addResourceSender: 0
   intervallSender: 0
@@ -107,7 +105,7 @@ MonoBehaviour:
   affectObjects: 1
   affectSkills: 1
   ignoreInvincibility: 0
-  useAttackState: 1
+  stateType: 2
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: 21300002, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
