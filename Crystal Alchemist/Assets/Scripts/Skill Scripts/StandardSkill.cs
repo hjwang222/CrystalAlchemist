@@ -35,8 +35,36 @@ public class StandardSkill : MonoBehaviour
     [TextArea]
     public string skillDescription;
 
+    [Space(10)]
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
 
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public Rigidbody2D myRigidbody;
 
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public Animator animator;
+
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    [SerializeField]
+    private List<Collider2D> myColliders;
+
+    [Space(10)]
+    [BoxGroup("Pflichtfelder")]
+    [Tooltip("Schatten")]
+    [SerializeField]
+    private SpriteRenderer shadow;
+
+    [BoxGroup("Pflichtfelder")]
+    [Tooltip("Schattenfarbe")]
+    [ShowIf("shadow")]
+    [SerializeField]
+    private Color shadowColor = new Color(0,0,0,40);
 
     ////////////////////////////////////////////////////////////////
 
@@ -178,6 +206,11 @@ public class StandardSkill : MonoBehaviour
     [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Tooltip("Ist das Projektil stationär. True = liegt einfach herum (z.B. Bombe)")]
     public bool isStationary = false;
+
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Schattencollider")]
+    [Range(-1, 0)]
+    public float colliderHeightOffset = 0;
 
     [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Tooltip("Geschwindigkeit des Projektils")]
@@ -327,6 +360,7 @@ public class StandardSkill : MonoBehaviour
     private bool playStartEffectAlready = false;
     private Vector2 tempVelocity;
     private float elapsed;
+    
 
     [HideInInspector]
     public Character sender;
@@ -336,18 +370,17 @@ public class StandardSkill : MonoBehaviour
     public float durationTimeLeft;
     [HideInInspector]
     public float cooldownTimeLeft;
-    [HideInInspector]
-    public Rigidbody2D myRigidbody;
-    [HideInInspector]
-    public Animator animator;
+
+
+
     [HideInInspector]
     public Character target;
     [HideInInspector]
     public AudioSource audioSource;
     [HideInInspector]
     public bool playEndEffectAlready = false;
-    [HideInInspector]
-    public SpriteRenderer spriteRenderer;
+
+
     [HideInInspector]
     public float timeDistortion = 1;
     [HideInInspector]
@@ -383,6 +416,8 @@ public class StandardSkill : MonoBehaviour
             throw new System.Exception("No SENDER found! Must be player!");
         }
 
+        
+
         //this.gameObject.layer = LayerMask.NameToLayer(this.sender.gameObject.tag + " Skill");        
     }
 
@@ -403,11 +438,20 @@ public class StandardSkill : MonoBehaviour
         //Setze Basis-Attribute, damit auch alles funktioniert
 
         this.name = this.skillName + Time.deltaTime;
-        this.myRigidbody = GetComponent<Rigidbody2D>();
+
+        if (this.myRigidbody == null) this.myRigidbody = GetComponent<Rigidbody2D>();
+        if(this.spriteRenderer == null) this.spriteRenderer = GetComponent<SpriteRenderer>();
+        if (this.animator == null) this.animator = GetComponent<Animator>();
+
+        if (this.shadow != null && this.spriteRenderer != null)
+        {
+            this.shadow.sprite = this.spriteRenderer.sprite;
+            this.shadow.color = this.shadowColor;
+        }
+
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
-        this.audioSource.playOnAwake = false;
-        this.animator = GetComponent<Animator>();
+        this.audioSource.playOnAwake = false;        
 
         this.delayTimeLeft = this.delay;
         this.durationTimeLeft = this.duration;
@@ -437,12 +481,6 @@ public class StandardSkill : MonoBehaviour
     {
         //Bestimme Winkel und Position
 
-        if (this.animator != null)
-        {
-            Utilities.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
-            Utilities.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
-        }
-
         float angle;
         Vector2 start;
         Vector3 rotation;
@@ -453,7 +491,15 @@ public class StandardSkill : MonoBehaviour
                                           this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
                                           out angle, out start, out this.direction, out rotation);
 
-            //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;
+            //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;                       
+
+            if (this.colliderHeightOffset != 0)
+            {
+                foreach (Collider2D collider in this.myColliders)
+                {
+                    this.setColliderOffset(collider);
+                }
+            }
 
             if (setPositionAtStart) this.transform.position = start;
 
@@ -468,14 +514,40 @@ public class StandardSkill : MonoBehaviour
         else
         {
             if(this.useOffSetToBlendTree) this.transform.position = new Vector2(this.sender.transform.position.x + (this.sender.direction.x * positionOffset),
-                                                                                this.sender.transform.position.y + (this.sender.direction.y * positionOffset) + positionHeight);
+                                                                                this.sender.transform.position.y + (this.sender.direction.y * positionOffset) + positionHeight);            
+        }
 
+        if (this.animator != null)
+        {
             Utilities.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
             Utilities.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
+        }
+
+        if (this.shadow != null)
+        {
+            this.shadow.transform.position = (Vector2)this.transform.position - (setColliderOffset());
         }
     }
 
     #endregion
+
+    private Vector2 setColliderOffset()
+    {
+        return new Vector2(-Mathf.Abs(this.direction.y) * (this.colliderHeightOffset / this.transform.localScale.y),
+                           -Mathf.Abs(this.direction.x) * (this.colliderHeightOffset / this.transform.localScale.x));
+    }
+
+
+    private Vector2 setColliderOffset(Vector2 direction)
+    {
+        return new Vector2(direction.y * (this.colliderHeightOffset / this.transform.localScale.y),
+                           direction.x * (this.colliderHeightOffset / this.transform.localScale.x));        
+    }
+
+    private void setColliderOffset(Collider2D collider)
+    {
+        if (collider != null) collider.offset = setColliderOffset(this.direction);
+    }
 
 
     #region Update Funktionen   
@@ -483,6 +555,7 @@ public class StandardSkill : MonoBehaviour
     public void Update()
     {
         doOnUpdate();
+        //Debug.Log(this.transform.position +": "+this.shadow.transform.position);
     }
 
     public virtual void doOnUpdate()

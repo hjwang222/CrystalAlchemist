@@ -82,9 +82,11 @@ MonoBehaviour:
   selfThrustTime: 0
   isRapidFire: 1
   isStationary: 0
+  colliderHeightOffset: -0.5
   speed: 20
   rotateIt: 1
   blendTree: 0
+  useOffSetToBlendTree: 0
   rotationModifier: 0
   rotateEndSprite: 1
   snapRotationInDegrees: 45
@@ -112,7 +114,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: 0.11661192
+  cooldownTimeLeft: -0.019506054
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   target: {fileID: 0}
@@ -150,7 +152,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.80761695, y: 0.1823734}
+  m_Size: {x: 0.80761695, y: 0.30791843}
   m_EdgeRadius: 0
 --- !u!212 &7773802961073927067
 SpriteRenderer:

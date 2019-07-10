@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class ProjectileEffect : MonoBehaviour
 {
     [SerializeField]
+    [Required]
     private GameObject ghost;
 
     [SerializeField]
+    [Required]
     private StandardSkill skill;
 
     [SerializeField]
@@ -21,25 +24,33 @@ public class ProjectileEffect : MonoBehaviour
     [SerializeField]
     private bool useCharacterSprite;
 
+    private void Start()
+    {
+        if(this.skill == null) this.skill = this.GetComponent<StandardSkill>();
+    }
+
     private void Update()
     {
-        if (ghostDelay > 0)
+        if (this.skill != null)
         {
-            this.ghostDelay -= (Time.deltaTime * this.skill.timeDistortion);
-        }
-        else
-        {
-            GameObject currentGhost = Instantiate(this.ghost, skill.transform.position, skill.transform.rotation);
-
-            if (this.useCharacterSprite)
+            if (ghostDelay > 0)
             {
-                Sprite currentSprite = this.skill.sender.GetComponent<SpriteRenderer>().sprite;
-                //currentGhost.transform.localScale = this.transform.localScale;
-                currentGhost.GetComponent<SpriteRenderer>().sprite = currentSprite;
+                this.ghostDelay -= (Time.deltaTime * this.skill.timeDistortion);
             }
-            this.ghostDelay = this.delay;
+            else
+            {
+                GameObject currentGhost = Instantiate(this.ghost, skill.transform.position, skill.transform.rotation);
 
-            Destroy(currentGhost, this.destroyAfter);
+                if (this.useCharacterSprite)
+                {
+                    Sprite currentSprite = this.skill.sender.GetComponent<SpriteRenderer>().sprite;
+                    //currentGhost.transform.localScale = this.transform.localScale;
+                    currentGhost.GetComponent<SpriteRenderer>().sprite = currentSprite;
+                }
+                this.ghostDelay = this.delay;
+
+                Destroy(currentGhost, this.destroyAfter);
+            }
         }
     }
 }

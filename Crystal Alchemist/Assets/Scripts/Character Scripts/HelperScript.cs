@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class HelperScript : MonoBehaviour
 {
-    public Character character;
+    [SerializeField]
+    private Character character;
 
     public void DestroyIt()
     {
