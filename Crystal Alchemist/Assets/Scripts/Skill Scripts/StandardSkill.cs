@@ -525,17 +525,13 @@ public class StandardSkill : MonoBehaviour
 
         if (this.shadow != null)
         {
-            this.shadow.transform.position = (Vector2)this.transform.position - (setColliderOffset());
+            this.shadow.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + this.colliderHeightOffset);
         }
     }
 
     #endregion
 
-    private Vector2 setColliderOffset()
-    {
-        return new Vector2(-Mathf.Abs(this.direction.y) * (this.colliderHeightOffset / this.transform.localScale.y),
-                           -Mathf.Abs(this.direction.x) * (this.colliderHeightOffset / this.transform.localScale.x));
-    }
+
 
 
     private Vector2 setColliderOffset(Vector2 direction)
@@ -555,7 +551,6 @@ public class StandardSkill : MonoBehaviour
     public void Update()
     {
         doOnUpdate();
-        //Debug.Log(this.transform.position +": "+this.shadow.transform.position);
     }
 
     public virtual void doOnUpdate()
