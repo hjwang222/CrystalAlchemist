@@ -11,7 +11,7 @@ public class DamageNumbers : MonoBehaviour
     private Color[] color;
 
     [SerializeField]
-    private float factor = 10;
+    private float factor = 1;
 
     public void setcolor(Color[] color)
     {

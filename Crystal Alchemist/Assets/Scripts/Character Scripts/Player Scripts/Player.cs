@@ -394,6 +394,15 @@ public class Player : Character
         }
     }
 
+    public void deactivateAllSkills()
+    {
+        for (int i = 0; i < this.activeSkills.Count; i++)
+        {
+            StandardSkill activeSkill = this.activeSkills[i];
+            activeSkill.durationTimeLeft = 0; 
+        }
+    }
+
     private void deactivateSkill(string button, StandardSkill skill)
     {
         //Skill deaktivieren

@@ -49,6 +49,7 @@ public class SceneTransition : MonoBehaviour
     {
         this.fadeSignal.Raise(false);
         player.currentState = CharacterState.inDialog;
+        player.deactivateAllSkills();
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.targetScene);
         asyncOperation.allowSceneActivation = false;

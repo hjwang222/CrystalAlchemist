@@ -153,9 +153,12 @@ public class Utilities : MonoBehaviour
 
     public static string setDamageNumber(float value, float schwelle)
     {
-        if (Mathf.Abs(value) < schwelle) return value.ToString("0.0");
-        if (Mathf.Abs(value) >= 10) return value.ToString("#");
-        else return value.ToString("#.0");
+        //if (Mathf.Abs(value) < schwelle)
+        //    return value.ToString("0.0");
+        //if (Mathf.Abs(value) >= 10)
+        //    return value.ToString("#");
+        //else return value.ToString("#.0");
+        return value + "";
     }
 
     public static string setDurationToString(float value)
@@ -181,7 +184,7 @@ public class Utilities : MonoBehaviour
     #region Check Utils
 
     public static bool checkCollision(Collider2D hittedCharacter, StandardSkill skill)
-    {
+    {        
         if (skill != null && skill.triggerIsActive)
         {
             if (skill.affectSkills

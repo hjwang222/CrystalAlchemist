@@ -58,7 +58,7 @@ public class Cursor : MonoBehaviour
 
     public void playSoundEffect()
     {
-        Debug.Log(isPlaying);
+        //Debug.Log(isPlaying);
 
         if (!this.isPlaying)
         {
@@ -73,6 +73,6 @@ public class Cursor : MonoBehaviour
         float length = this.soundEffect.length;
         yield return new WaitForSeconds(length);
         this.isPlaying = false;
-        Debug.Log(isPlaying+" "+length);
+        //Debug.Log(isPlaying+" "+length);
     }
 }
