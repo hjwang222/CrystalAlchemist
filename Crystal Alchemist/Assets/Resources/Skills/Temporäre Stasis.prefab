@@ -34,11 +34,11 @@ RectTransform:
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 5183345667786185736}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.84520024, y: 1.6800001}
+  m_AnchoredPosition: {x: 1.0785339, y: 1.6800001}
   m_SizeDelta: {x: 4.4144, y: 0.9846}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &9014079209903171959
@@ -269,12 +269,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4199971107470901726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.25, y: -1.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
+  - {fileID: 5075986525323100903}
   - {fileID: 2563732198302763149}
   - {fileID: 3078339166480335347}
-  - {fileID: 5075986525323100903}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -298,12 +298,12 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
-  myColliders: []
   shadow: {fileID: 0}
   cast: 2
   keepHoldTimer: 0
   delay: 0
   duration: 30
+  lockMovementonDuration: 0
   deactivateByButtonUp: 0
   cooldown: 2
   cooldownAfterCombo: 0
@@ -319,7 +319,6 @@ MonoBehaviour:
   speedDuringCasting: -25
   speedDuringDuration: 0
   affectAnimation: 1
-  lockMovementonDuration: 0
   forward: 0
   selfThrust: 0
   selfThrustTime: 0
@@ -331,7 +330,6 @@ MonoBehaviour:
   blendTree: 0
   useOffSetToBlendTree: 0
   rotationModifier: 0
-  rotateEndSprite: 0
   snapRotationInDegrees: 0
   positionOffset: 0
   positionHeight: 0
@@ -348,7 +346,7 @@ MonoBehaviour:
   affectObjects: 0
   affectSkills: 1
   ignoreInvincibility: 0
-  useAttackState: 0
+  stateType: 0
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: -126482093299932471, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
@@ -359,6 +357,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: -0.0062103495
+  movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
@@ -618,7 +617,7 @@ GameObject:
   - component: {fileID: 5075986525323100903}
   - component: {fileID: 5075986525323100904}
   m_Layer: 14
-  m_Name: New Sprite
+  m_Name: BodenSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -636,7 +635,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5183345667786185736}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5075986525323100904
 SpriteRenderer:
@@ -697,7 +696,7 @@ GameObject:
   - component: {fileID: 2563732198302763149}
   - component: {fileID: 4628686981486418788}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Sanduhr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -715,11 +714,11 @@ RectTransform:
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 5183345667786185736}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.9000003, y: 1.6800001}
+  m_AnchoredPosition: {x: -0.6666667, y: 1.6800001}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &4628686981486418788

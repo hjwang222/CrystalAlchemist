@@ -544,7 +544,8 @@ public class Utilities : MonoBehaviour
         if (!checkIfHelperActivated(player.AButton)
             && !checkIfHelperActivated(player.BButton)
             && !checkIfHelperActivated(player.XButton)
-            && !checkIfHelperActivated(player.YButton)) player.setTargetHelperActive(false);
+            && !checkIfHelperActivated(player.YButton)
+            && !checkIfHelperActivated(player.RBButton)) player.setTargetHelperActive(false);
         else player.setTargetHelperActive(true);
     }
 

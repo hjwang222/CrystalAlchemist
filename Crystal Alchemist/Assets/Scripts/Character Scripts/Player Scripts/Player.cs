@@ -127,6 +127,7 @@ public class Player : Character
             useSkill("B-Button");
             useSkill("X-Button");
             useSkill("Y-Button");
+            useSkill("RB-Button");
         }
 
         if (Input.GetButtonDown("Inventory"))
@@ -204,6 +205,7 @@ public class Player : Character
             case "B-Button": return this.BButton;
             case "X-Button": return this.XButton;
             case "Y-Button": return this.YButton;
+            case "RB-Button": return this.RBButton;
             default: return null;
         }
     }

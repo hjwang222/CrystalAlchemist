@@ -52,6 +52,7 @@ public class PlayerData
         if (player.BButton != null) this.skills.Add(new string[] { "B", player.BButton.skillName });
         if (player.XButton != null) this.skills.Add(new string[] { "X", player.XButton.skillName });
         if (player.YButton != null) this.skills.Add(new string[] { "Y", player.YButton.skillName });
+        if (player.RBButton != null) this.skills.Add(new string[] { "RB", player.RBButton.skillName });
     }
 }
 

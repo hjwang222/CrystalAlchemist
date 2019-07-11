@@ -9,6 +9,10 @@ public class BoomerangSkill : StandardSkill
     [Range(0, Utilities.maxFloatSmall)]
     public float timeToMoveBack = 0;
     private float durationThenBackToSender = 0;
+
+    [SerializeField]
+    private float minDistance = 0.1f;
+    private Item moveItem;
     #endregion
 
 
@@ -57,10 +61,14 @@ public class BoomerangSkill : StandardSkill
             this.durationThenBackToSender = 0;
         }
 
-        if (hittedCharacter.CompareTag("Item"))
+        if (this.sender != null
+            && hittedCharacter.tag != this.sender.tag
+            && hittedCharacter.CompareTag("Item"))
         {
             this.durationThenBackToSender = 0;
-            hittedCharacter.transform.position = this.transform.position;
+
+            Item hittedItem = hittedCharacter.GetComponent<Item>();
+            if (hittedItem != null && this.moveItem == null) this.moveItem = hittedItem;        
         }
     }
     #endregion
@@ -74,12 +82,17 @@ public class BoomerangSkill : StandardSkill
             //Bewege den Skill zurück zum Sender
 
             this.myRigidbody.velocity = Vector2.zero;
-            if (Vector3.Distance(this.sender.transform.position, this.transform.position) > 0.25f)
+            if (Vector3.Distance(this.sender.transform.position, this.transform.position) > this.minDistance)
             {
-                Vector3 temp = Vector3.MoveTowards(this.transform.position, this.sender.transform.position, this.speed * (Time.deltaTime * this.timeDistortion));
+                Vector3 newPosition = Vector3.MoveTowards(this.transform.position, this.sender.transform.position, this.speed * (Time.deltaTime * this.timeDistortion));
 
-                this.myRigidbody.MovePosition(temp);
+                this.myRigidbody.MovePosition(newPosition);
                 this.myRigidbody.velocity = Vector2.zero;
+
+                if(this.moveItem != null && this.moveItem.GetComponent<Rigidbody2D>() != null)
+                {
+                    this.moveItem.GetComponent<Rigidbody2D>().MovePosition(newPosition);
+                }
             }
             else
             {

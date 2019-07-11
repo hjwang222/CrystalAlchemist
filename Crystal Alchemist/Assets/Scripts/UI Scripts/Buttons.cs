@@ -82,6 +82,23 @@ public class Buttons : MonoBehaviour
     [SerializeField]
     private Image skillIconYButtonTrans;
 
+
+    [FoldoutGroup("RB Button UI", expanded: false)]
+    [SerializeField]
+    private Image iconRBButton;
+    [FoldoutGroup("RB Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconRBButton;
+    [FoldoutGroup("RB Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI cooldownRB;
+    [FoldoutGroup("RB Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI ammoRB;
+    [FoldoutGroup("RB Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconRBButtonTrans;
+
     // Start is called before the first frame update
 
     private void Awake()
@@ -100,6 +117,7 @@ public class Buttons : MonoBehaviour
         setButton(this.player.BButton, this.skillIconBButton, this.iconBButton);
         setButton(this.player.XButton, this.skillIconXButton, this.iconXButton);
         setButton(this.player.YButton, this.skillIconYButton, this.iconYButton);
+        setButton(this.player.RBButton, this.skillIconRBButton, this.iconRBButton);
     }
 
     private void FixedUpdate()
@@ -108,6 +126,7 @@ public class Buttons : MonoBehaviour
         updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB, null, this.skillIconBButtonTrans, this.cancel);
         updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX, null, this.skillIconXButtonTrans, null);
         updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY, null, this.skillIconYButtonTrans, null);
+        updateButton(this.skillIconRBButton, this.iconRBButton, this.cooldownRB, this.player.RBButton, this.ammoRB, null, this.skillIconRBButtonTrans, null);
     }
 
     private void enableUI(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, TextMeshProUGUI ammo, Image buttonUITrans, bool value)

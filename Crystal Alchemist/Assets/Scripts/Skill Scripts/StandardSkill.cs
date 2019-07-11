@@ -534,6 +534,11 @@ public class StandardSkill : MonoBehaviour
         doOnUpdate();
     }
 
+    public float getDurationLeft()
+    {
+        return this.durationTimeLeft;
+    }
+
     public virtual void doOnUpdate()
     {
         if (this.LockElapsed > 0)
@@ -550,14 +555,6 @@ public class StandardSkill : MonoBehaviour
             this.shadow.sprite = this.spriteRenderer.sprite;
             this.shadow.transform.rotation = this.spriteRenderer.transform.rotation;
         }
-    public float getDurationLeft()
-    {
-        return this.durationTimeLeft;
-    }
-
-    public virtual void doOnUpdate()
-    {
-        if (this.spriteRenderer != null && this.shadow != null) this.shadow.sprite = this.spriteRenderer.sprite;
 
         if (this.intervallSender > 0)
         {

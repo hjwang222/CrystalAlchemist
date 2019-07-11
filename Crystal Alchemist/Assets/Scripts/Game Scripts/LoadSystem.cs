@@ -55,6 +55,7 @@ public class LoadSystem : MonoBehaviour
                 case "B": player.BButton = skill; break;
                 case "X": player.XButton = skill; break;
                 case "Y": player.YButton = skill; break;
+                case "RB": player.RBButton = skill; break;
             }
         }
     }
