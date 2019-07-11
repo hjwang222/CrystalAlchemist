@@ -111,7 +111,7 @@ public class Player : Character
 
     private void playerInputs()
     {
-        if (currentState == CharacterState.inDialog)
+        if (this.currentState == CharacterState.inDialog || this.currentState == CharacterState.inMenu)
         {
             Utilities.SetAnimatorParameter(this.animator, "isWalking", false);
             return;
@@ -139,16 +139,18 @@ public class Player : Character
             this.openPauseSignal.Raise();
         }
 
-        if (currentState == CharacterState.walk || this.currentState == CharacterState.idle || this.currentState == CharacterState.interact)
+        if (currentState != CharacterState.dead 
+            && this.currentState != CharacterState.inDialog 
+            && this.currentState != CharacterState.inMenu)
         {
             UpdateAnimationAndMove();
         }
     }
 
 
-    public void delay(float delay)
+    public void delay(CharacterState newState)
     {
-        StartCoroutine(Utilities.delayInputPlayerCO(delay, this));
+        StartCoroutine(Utilities.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
     }
 
 
@@ -208,8 +210,6 @@ public class Player : Character
 
     private void useSkill(string button)
     {
-        if (this.currentState != CharacterState.interact && this.currentState != CharacterState.inDialog)
-        {            
             StandardSkill skill = this.getSkillFromButton(button);
 
             if (skill != null)
@@ -218,7 +218,9 @@ public class Player : Character
                 {
                     skill.cooldownTimeLeft -= (Time.deltaTime * this.timeDistortion * this.spellspeed);
                 }
-                else
+                else if(this.currentState != CharacterState.interact 
+                     && this.currentState != CharacterState.inDialog
+                     && this.currentState != CharacterState.inMenu)
                 {
                     int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
 
@@ -237,7 +239,7 @@ public class Player : Character
                 }
             }
         }
-    }
+    
 
     private bool isSkillReadyToUse(string button, StandardSkill skill)
     {
@@ -471,8 +473,6 @@ public class Player : Character
 
     #endregion
 
-
-
     #region Movement
 
     private void UpdateAnimationAndMove()
@@ -485,7 +485,7 @@ public class Player : Character
 
             foreach (StandardSkill skill in this.activeSkills)
             {
-                if (skill.lockMovementonDuration)
+                if (skill.movementLocked)
                 {
                     lockAnimation = true;
                     break;
@@ -507,14 +507,17 @@ public class Player : Character
 
     private void MoveCharacter()
     {
-        change.Normalize(); //Diagonal-Laufen fixen
+        if (this.currentState != CharacterState.knockedback 
+            && this.currentState != CharacterState.attack)
+        {
+            change.Normalize(); //Diagonal-Laufen fixen
 
+            //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
+            //this.myRigidbody.velocity = Vector2.zero;
 
-        //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
-        //this.myRigidbody.velocity = Vector2.zero;
-           
-        Vector3 movement = new Vector3(change.x, change.y, 0.0f);
-        this.myRigidbody.velocity = (movement * speed * this.timeDistortion);        
+            Vector3 movement = new Vector3(change.x, change.y, 0.0f);
+            this.myRigidbody.velocity = (movement * speed * this.timeDistortion);
+        }
 
         //Debug.Log("Reset in Player Movement: " + this.myRigidbody.velocity);
         //this.myRigidbody.velocity = Vector2.zero;

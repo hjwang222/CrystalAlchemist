@@ -79,7 +79,7 @@ public class Utilities : MonoBehaviour
 
     public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target, float reduce)
     {
-        if (sender.currentState != CharacterState.attack)
+        if (sender.currentState != CharacterState.attack && sender.currentState != CharacterState.defend)
         {
             GameObject activeSkill = Instantiate(skill.gameObject, sender.transform.position, Quaternion.identity);
 
@@ -114,7 +114,7 @@ public class Utilities : MonoBehaviour
     }
 
     public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect, float volume)
-    {        
+    {
         if (soundeffect != null && audioSource != null)
         {
             audioSource.pitch = GlobalValues.soundEffectPitch;
@@ -176,7 +176,7 @@ public class Utilities : MonoBehaviour
     {
         string formatString = "";
 
-        for(int i = 0; i < maxValue.ToString().Length; i++)
+        for (int i = 0; i < maxValue.ToString().Length; i++)
         {
             formatString += "0";
         }
@@ -191,34 +191,24 @@ public class Utilities : MonoBehaviour
 
     public static bool checkCollision(Collider2D hittedCharacter, StandardSkill skill)
     {
-        try
+        if (skill != null && skill.triggerIsActive)
         {
-            if (skill != null && skill.triggerIsActive)
+            if (skill.affectSkills
+                && hittedCharacter.CompareTag("Skill")
+                && hittedCharacter.GetComponent<StandardSkill>().skillName != skill.skillName)
             {
-                if (skill.affectSkills
-                    && hittedCharacter.CompareTag("Skill")
-                    && hittedCharacter.GetComponent<StandardSkill>().skillName != skill.skillName)
+                return true;
+            }
+            else if (!hittedCharacter.isTrigger)
+            {
+                if ((skill.affectPlayers && hittedCharacter.CompareTag("Player"))
+                    || skill.affectEnemies && hittedCharacter.CompareTag("Enemy")
+                    || skill.affectObjects && hittedCharacter.CompareTag("Object")
+                    )
                 {
                     return true;
                 }
-                else if (!hittedCharacter.isTrigger)
-                {
-                    if ((skill.affectPlayers && hittedCharacter.CompareTag("Player"))
-                        || skill.affectEnemies && hittedCharacter.CompareTag("Enemy")
-                        || skill.affectObjects && hittedCharacter.CompareTag("Object")
-                        )
-                    {
-                        return true;
-                    }
-                }
             }
-
-            return false;
-        }
-        catch (Exception ex)
-        {
-            Debug.Log(hittedCharacter.tag+" : "+hittedCharacter.gameObject.name);
-           // Debug.Log(hittedCharacter.GetComponent<Character>().name + " : " + skill.name);
         }
 
         return false;
@@ -361,7 +351,7 @@ public class Utilities : MonoBehaviour
                 {
                     character.inventory.Remove(found);
                 }
-            }            
+            }
         }
     }
 
@@ -396,7 +386,9 @@ public class Utilities : MonoBehaviour
 
     public static bool canOpenAndUpdateResource(ResourceType currency, Item item, Player player, int price)
     {
-        if (player != null && player.currentState != CharacterState.inDialog)
+        if (player != null 
+            && player.currentState != CharacterState.inDialog
+            && player.currentState != CharacterState.inMenu)
         {
             if (hasEnoughCurrencyAndUpdateResource(currency, player, item, -price)) return true;
             else
@@ -412,8 +404,8 @@ public class Utilities : MonoBehaviour
 
     public static string getDialogBoxText(string part1, int price, Item item, string part2)
     {
-        string result = part1+" " + price + " ";
-        
+        string result = part1 + " " + price + " ";
+
         switch (item.resourceType)
         {
             case ResourceType.item:
@@ -421,12 +413,12 @@ public class Utilities : MonoBehaviour
                     string typ = item.itemGroup;
                     if (price == 1 && typ != "Schlüssel") typ = typ.Substring(0, typ.Length - 1);
                     result += typ;
-                };  break;
+                }; break;
             case ResourceType.life: result += "Leben"; break;
             case ResourceType.mana: result += "Mana"; break;
         }
 
-        return result + " "+part2;
+        return result + " " + part2;
     }
 
     public static void set3DText(TextMeshPro tmp, string text, bool bold, Color fontColor, Color outlineColor, float outlineWidth)
@@ -535,14 +527,14 @@ public class Utilities : MonoBehaviour
     }
 
 
-    public static IEnumerator delayInputPlayerCO(float delay, Player player)
+    public static IEnumerator delayInputPlayerCO(float delay, Player player, CharacterState newState)
     {
         //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
         yield return new WaitForSeconds(delay);
 
         if (player != null)
         {
-            player.currentState = CharacterState.idle;
+            player.currentState = newState;
         }
     }
 

@@ -17,10 +17,10 @@ public class ShopItem : Interactable
     public Animator anim;
 
     private int index = 0;
-    
+
     private void Start()
     {
-        init();
+        base.Start();
 
         Utilities.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
@@ -30,20 +30,17 @@ public class ShopItem : Interactable
         this.childSprite.sprite = this.items[this.index].getSprite();
     }
 
-    private void Update()
+    public override void doSomething()
     {
-        if (this.isPlayerInRange && Input.GetButtonDown("Submit"))
+        if (Utilities.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
         {
-            if (Utilities.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
-            {
-                Item loot = items[this.index];
+            Item loot = items[this.index];
 
-                string itemObtained = Utilities.getDialogBoxText("Du hast", loot.amount, loot, "für");
-                string itemNedded = Utilities.getDialogBoxText("", this.price, this.item, "gekauft!");
+            string itemObtained = Utilities.getDialogBoxText("Du hast", loot.amount, loot, "für");
+            string itemNedded = Utilities.getDialogBoxText("", this.price, this.item, "gekauft!");
 
-                this.player.showDialogBox(itemObtained+"\n"+itemNedded);
-                this.player.collect(loot, false);
-            }
+            this.player.showDialogBox(itemObtained + "\n" + itemNedded);
+            this.player.collect(loot, false);
         }
     }
 }

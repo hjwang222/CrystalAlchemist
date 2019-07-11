@@ -32,8 +32,13 @@ public class HelperScriptSkills : MonoBehaviour
         this.skill.SetTriggerActive(value);
     }
 
-    public virtual void DestroyIt()
+    public void DestroyIt()
     {
         this.skill.DestroyIt();
+    }
+
+    public void ResetRotation()
+    {
+        this.skill.resetRotation();
     }
 }

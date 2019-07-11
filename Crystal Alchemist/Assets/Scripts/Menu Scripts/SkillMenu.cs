@@ -74,10 +74,10 @@ public class SkillMenu : MonoBehaviour
     [SerializeField]
     private GameObject nextPage;
 
-    private float delay = 0.3f;
-
     [HideInInspector]
     public StandardSkill selectedSkill;
+
+    private CharacterState lastState;
 
     #endregion
 
@@ -99,7 +99,6 @@ public class SkillMenu : MonoBehaviour
 
     private void Update()
     {
-
         if (Input.GetButtonDown("Cancel"))
         {
             if (this.selectedSkill != null) selectSkillFromSkillSet(null);
@@ -110,9 +109,10 @@ public class SkillMenu : MonoBehaviour
 
     private void OnEnable()
     {
+        this.lastState = this.player.currentState;
         selectSkillFromSkillSet(null);
         this.cursor.gameObject.SetActive(true);
-        this.player.currentState = CharacterState.inDialog;        
+        this.player.currentState = CharacterState.inMenu;        
     }
 
     private void OnDisable()
@@ -192,7 +192,7 @@ public class SkillMenu : MonoBehaviour
 
     public void exitMenu()
     {
-        this.player.delay(this.delay);
+        this.player.delay(this.lastState);
         this.transform.parent.gameObject.SetActive(false);
         this.blackScreen.SetActive(false);
     }

@@ -23,17 +23,26 @@ public class Door : Interactable
 
     private void Start()
     {
-        init();
+        base.Start();
         this.boxCollider = GetComponent<BoxCollider2D>();
 
         if (this.isOpen) Utilities.SetAnimatorParameter(this.animator, "isOpened", true);
     }
 
-    private void Update()
+    public override void doOnUpdate()
+    {
+        if (!this.isPlayerInRange && this.isOpen && this.doorType == DoorType.normal)
+        {
+            //Normale Tür fällt von alleine wieder zu
+            OpenCloseDoor(false, this.context);
+        }
+    }
+
+    public override void doSomething()
     {
         if (this.doorType != DoorType.enemy && this.doorType != DoorType.button)
         {
-            if (this.isPlayerInRange && !this.isOpen && Input.GetButtonDown("Submit"))
+            if (!this.isOpen)           
             {
                  if (this.doorType == DoorType.normal)
                 {
@@ -47,12 +56,7 @@ public class Door : Interactable
                 {
                     if (this.player != null) this.player.showDialogBox(this.text);
                 }
-            }
-            else if (!this.isPlayerInRange && this.isOpen && this.doorType == DoorType.normal)
-            {
-                //Normale Tür fällt von alleine wieder zu
-                OpenCloseDoor(false, this.context);
-            }            
+            }                       
         }
         else if (this.doorType == DoorType.enemy)
         {
@@ -61,7 +65,7 @@ public class Door : Interactable
         else if (this.doorType == DoorType.button)
         {
             //Wenn Knopf gedrückt wurde, OpenDoor()
-        }
+        }        
     }
 
     private void OpenCloseDoor(bool isOpen)

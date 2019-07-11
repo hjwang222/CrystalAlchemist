@@ -45,7 +45,7 @@ public class Treasure : Interactable
 
     private void Start()
     {
-        init();
+        base.Start();
 
         Utilities.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
     }
@@ -55,9 +55,20 @@ public class Treasure : Interactable
 
     #region Update Funktion
 
-    private void Update()
+    public override void doOnUpdate()
     {
-        if (this.isPlayerInRange && this.currentState != objectState.opened && Input.GetButtonDown("Submit"))
+        if (this.context != null)
+        {
+            //Wenn Spieler in Reichweite ist und Truhe zu ist -> Context Clue anzeigen! Ansonsten nicht.
+            if (this.currentState == objectState.opened) this.context.SetActive(false);
+            else if (this.currentState != objectState.opened && this.isPlayerInRange) this.context.SetActive(true);
+            else this.context.SetActive(false);
+        }
+    }
+
+    public override void doSomething()
+    {        
+        if (this.currentState != objectState.opened)
         {
             if (this.treasureType == TreasureType.normal)
             {
@@ -68,7 +79,7 @@ public class Treasure : Interactable
                 canOpenChest();
             }
         }
-        else if (this.isPlayerInRange && this.currentState == objectState.opened && Input.GetButtonDown("Submit"))
+        else
         {   
             //Entferne Item aus der Welt und leere die Liste
             foreach (Item item in this.items)
@@ -83,15 +94,7 @@ public class Treasure : Interactable
                 this.currentState = objectState.normal;
                 Utilities.setItem(this.lootTable, this.multiLoot, this.items);
             }
-        }   
-
-        if (this.context != null)
-        {
-            //Wenn Spieler in Reichweite ist und Truhe zu ist -> Context Clue anzeigen! Ansonsten nicht.
-            if (this.currentState == objectState.opened) this.context.SetActive(false);
-            else if (this.currentState != objectState.opened && this.isPlayerInRange) this.context.SetActive(true);
-            else this.context.SetActive(false);
-        }
+        }           
     }
 
     #endregion

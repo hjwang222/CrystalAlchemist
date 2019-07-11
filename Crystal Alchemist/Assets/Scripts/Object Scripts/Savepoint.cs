@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class Savepoint : Interactable
 {
-    private void Update()
+    public override void doSomething()
     {
-        if (this.isPlayerInRange && Input.GetButtonDown("Submit"))
-        {            
-            if (this.player != null)
-            {
-                SaveSystem.Save(this.player);
-                this.player.showDialogBox(this.text);
-            }
-        }
+        SaveSystem.Save(this.player);
+        this.player.showDialogBox(this.text);
     }
 }

@@ -72,12 +72,35 @@ public class Interactable : MonoBehaviour
 
     #region Start Funktionen (init, ContextClue, Item set bzw. Lootregeln)
 
-    private void Start()
+    public void Start()
     {
         init();
     }
 
-    public void init()
+    private void Update()
+    {
+        if (this.isPlayerInRange
+           && Input.GetButtonDown("Submit")
+           && this.player != null
+           && this.player.currentState != CharacterState.inMenu)
+        {
+            doSomething();
+        }
+
+        doOnUpdate();
+    }
+
+    public virtual void doOnUpdate()
+    {
+
+    }
+
+    public virtual void doSomething()
+    {
+
+    }
+
+    private void init()
     {
             this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
             this.audioSource.loop = false;

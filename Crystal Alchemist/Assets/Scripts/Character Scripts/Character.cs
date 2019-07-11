@@ -9,8 +9,10 @@ public enum CharacterState
 {
     walk,
     attack,
+    defend,
     interact, //in Reichweite eines interagierbaren Objektes
     inDialog, //Dialog-Box ist offen
+    inMenu, //Pause oder Inventar ist offen
     knockedback, //im Knockback
     idle,
     silent, //kann nicht angreifen
@@ -949,8 +951,8 @@ public class Character : MonoBehaviour
     {
         this.myRigidbody.velocity = Vector2.zero;
         Vector2 diffference = direction.normalized * thrust;
-
         this.myRigidbody.AddForce(diffference, ForceMode2D.Impulse);
+
         StartCoroutine(knockCo(knockTime));
     }
 

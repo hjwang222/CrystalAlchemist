@@ -33,10 +33,22 @@ public class BoomerangSkill : StandardSkill
         }        
     }
 
+    public override void OnTriggerEnter2D(Collider2D hittedCharacter)
+    {
+        base.OnTriggerEnter2D(hittedCharacter);
+
+        moveThings(hittedCharacter);
+    }
+
     public override void OnTriggerStay2D (Collider2D hittedCharacter)
     {
         base.OnTriggerStay2D(hittedCharacter);
         //got Hit -> Back to Target
+        moveThings(hittedCharacter);
+    }
+
+    private void moveThings(Collider2D hittedCharacter)
+    {
         if (this.sender != null
             && hittedCharacter.tag != this.sender.tag
             && !hittedCharacter.isTrigger

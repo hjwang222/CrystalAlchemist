@@ -21,6 +21,11 @@ public class ShowControlMenu : MonoBehaviour
         showControlType("");
     }
 
+    private void Update()
+    {
+        if (Input.GetButtonDown("Cancel")) close();
+    }
+
     public void showControlType(string type)
     {
         if(type == "keyboard")

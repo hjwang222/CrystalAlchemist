@@ -5,11 +5,8 @@ using TMPro;
 
 public class Sign : Interactable
 {
-    private void Update()
+    public override void doSomething()
     {
-        if (this.isPlayerInRange && Input.GetButtonDown("Submit"))
-        {
-            if (this.player != null) this.player.showDialogBox(this.text);
-        }
+        this.player.showDialogBox(this.text);        
     }
 }

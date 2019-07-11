@@ -9,6 +9,13 @@ public enum SkillType
     item
 }
 
+public enum StateType
+{
+    none,
+    attack,
+    defend
+}
+
 public class StandardSkill : MonoBehaviour
 {
     #region Attribute
@@ -49,11 +56,6 @@ public class StandardSkill : MonoBehaviour
     [Required]
     public Animator animator;
 
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    [SerializeField]
-    private List<Collider2D> myColliders;
-
     [Space(10)]
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Schatten")]
@@ -81,6 +83,12 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Dauer des Angriffs. 0 = Animation, max bis Trigger")]
     [Range(0, Utilities.maxFloatInfinite)]
     public float duration = 1;
+
+    [FoldoutGroup("Zeit-Attribute", expanded: false)]
+    [Tooltip("Soll der Charakter während des Schießens weiterhin in die gleiche Richtung schauen?")]
+    [SerializeField]
+    [Range(0, Utilities.maxFloatInfinite)]
+    private float lockMovementonDuration = 0;
 
     [FoldoutGroup("Zeit-Attribute", expanded: false)]
     public bool deactivateByButtonUp = false;
@@ -164,10 +172,6 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Soll die Geschwindigkeit auch die Animation beeinflussen?")]
     public bool affectAnimation = true;
 
-    [TabGroup("Sender Attribute")]
-    [Tooltip("Soll der Charakter während des Schießens weiterhin in die gleiche Richtung schauen?")]
-    public bool lockMovementonDuration = false;
-
     //////////////////////////////////////////////////////////////////////////////
 
     [Space(10)]
@@ -231,11 +235,6 @@ public class StandardSkill : MonoBehaviour
     [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Range(-360, 360)]
     public float rotationModifier = 0;
-
-    [ShowIf("rotateIt")]
-    [FoldoutGroup("Projektil Attribute", expanded: false)]
-    [Tooltip("Soll der Hit-Sprite passend zur Flugbahn rotieren?")]
-    public bool rotateEndSprite = false;
 
     [ShowIf("rotateIt")]
     [FoldoutGroup("Projektil Attribute", expanded: false)]
@@ -319,7 +318,8 @@ public class StandardSkill : MonoBehaviour
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("Soll der Spieler nur diesen Skill benutzen dürfen?")]
-    public bool useAttackState = false;
+    [EnumToggleButtons]
+    public StateType stateType = StateType.none;
 
     ////////////////////////////////////////////////////////////////
 
@@ -354,8 +354,9 @@ public class StandardSkill : MonoBehaviour
 
     private bool playStartEffectAlready = false;
     private Vector2 tempVelocity;
-    private float elapsed = 0;
-    
+    private float elapsed;
+
+    private float LockElapsed;
 
     [HideInInspector]
     public Character sender;
@@ -366,7 +367,8 @@ public class StandardSkill : MonoBehaviour
     [HideInInspector]
     public float cooldownTimeLeft;
 
-
+    [HideInInspector]
+    public bool movementLocked;
 
     [HideInInspector]
     public Character target;
@@ -450,6 +452,9 @@ public class StandardSkill : MonoBehaviour
         this.delayTimeLeft = this.delay;
         this.durationTimeLeft = this.duration;
 
+        this.LockElapsed = this.lockMovementonDuration;
+        if (this.LockElapsed > 0) this.movementLocked = true;
+
         this.elapsed = this.intervallSender;
 
         if (this.startSoundEffect != null) Utilities.playSoundEffect(this.audioSource, this.startSoundEffect);
@@ -461,7 +466,8 @@ public class StandardSkill : MonoBehaviour
 
         this.sender.startAttackAnimation(this.animationTriggerName);
 
-        if (this.useAttackState) this.sender.currentState = CharacterState.attack;
+        if (this.stateType == StateType.attack) this.sender.currentState = CharacterState.attack;
+        else if (this.stateType == StateType.defend) this.sender.currentState = CharacterState.defend;
     }
 
     private void updateResourceSender()
@@ -489,14 +495,6 @@ public class StandardSkill : MonoBehaviour
 
             //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;                       
 
-            if (this.colliderHeightOffset != 0)
-            {
-                foreach (Collider2D collider in this.myColliders)
-                {
-                    this.setColliderOffset(collider);
-                }
-            }
-
             if (setPositionAtStart) this.transform.position = start;
 
             if (this.myRigidbody != null)
@@ -521,26 +519,13 @@ public class StandardSkill : MonoBehaviour
 
         if (this.shadow != null)
         {
-            this.shadow.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + this.colliderHeightOffset);
+            float changeX = 0;
+            if (this.direction.y < 0) changeX = this.direction.y;
+            this.shadow.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + this.colliderHeightOffset + (this.colliderHeightOffset * changeX));
         }
     }
 
     #endregion
-
-
-
-
-    private Vector2 setColliderOffset(Vector2 direction)
-    {
-        return new Vector2(direction.y * (this.colliderHeightOffset / this.transform.localScale.y),
-                           direction.x * (this.colliderHeightOffset / this.transform.localScale.x));        
-    }
-
-    private void setColliderOffset(Collider2D collider)
-    {
-        if (collider != null) collider.offset = setColliderOffset(this.direction);
-    }
-
 
     #region Update Funktionen   
 
@@ -549,6 +534,22 @@ public class StandardSkill : MonoBehaviour
         doOnUpdate();
     }
 
+    public virtual void doOnUpdate()
+    {
+        if (this.LockElapsed > 0)
+        {
+            this.LockElapsed -= Time.deltaTime;
+        }
+        else
+        {
+            this.movementLocked = false;
+        }
+
+        if (this.spriteRenderer != null && this.shadow != null)
+        {
+            this.shadow.sprite = this.spriteRenderer.sprite;
+            this.shadow.transform.rotation = this.spriteRenderer.transform.rotation;
+        }
     public float getDurationLeft()
     {
         return this.durationTimeLeft;
@@ -578,7 +579,7 @@ public class StandardSkill : MonoBehaviour
 
         if (this.speedDuringDuration != 0) this.sender.updateSpeed(this.speedDuringDuration, this.affectAnimation);
 
-        if (this.animator != null && this.sender != null && !this.lockMovementonDuration)
+        if (this.animator != null && this.sender != null && !this.movementLocked)
         {
             Utilities.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
             Utilities.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
@@ -695,12 +696,17 @@ public class StandardSkill : MonoBehaviour
         else this.triggerIsActive = true;
     }
 
+    public void resetRotation()
+    {
+        this.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
     public virtual void DestroyIt()
     {
         if (this.speedDuringDuration != 0) this.sender.updateSpeed(0);
 
         this.sender.activeSkills.Remove(this);
-        if (this.useAttackState) this.sender.currentState = CharacterState.idle;
+        if (this.stateType != StateType.none) this.sender.currentState = CharacterState.idle;
             //this.isActive = false;
         Destroy(this.gameObject);
     }

@@ -22,7 +22,6 @@ public class DialogBox : MonoBehaviour
     private AudioSource audioSource;
     private Player player;
     private int index = 0;
-    private float delay = 0.3f;
     private int maxLength = 28;
     #endregion
 
@@ -85,7 +84,7 @@ public class DialogBox : MonoBehaviour
     private void hideDialogBox()
     {
         //Blende DialogBox aus
-        this.player.delay(this.delay);
+        this.player.delay(CharacterState.interact);
         this.cursor.SetActive(false);
         this.showIt = false;
         this.index = 0;
