@@ -354,7 +354,7 @@ public class StandardSkill : MonoBehaviour
 
     private bool playStartEffectAlready = false;
     private Vector2 tempVelocity;
-    private float elapsed;
+    private float elapsed = 0;
     
 
     [HideInInspector]
@@ -547,6 +547,11 @@ public class StandardSkill : MonoBehaviour
     public void Update()
     {
         doOnUpdate();
+    }
+
+    public float getDurationLeft()
+    {
+        return this.durationTimeLeft;
     }
 
     public virtual void doOnUpdate()

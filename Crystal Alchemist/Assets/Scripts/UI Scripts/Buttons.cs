@@ -81,7 +81,7 @@ public class Buttons : MonoBehaviour
         setButton(this.player.YButton, this.skillIconYButton, this.iconYButton);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton, this.ammoA);
         updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB);
