@@ -56,12 +56,12 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
-  myColliders: []
   shadow: {fileID: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
   duration: 10
+  lockMovementonDuration: 0
   deactivateByButtonUp: 0
   cooldown: 1
   cooldownAfterCombo: 0
@@ -80,7 +80,6 @@ MonoBehaviour:
   speedDuringCasting: 0
   speedDuringDuration: 0
   affectAnimation: 1
-  lockMovementonDuration: 0
   forward: 0
   selfThrust: 0
   selfThrustTime: 0
@@ -92,7 +91,6 @@ MonoBehaviour:
   blendTree: 0
   useOffSetToBlendTree: 0
   rotationModifier: 0
-  rotateEndSprite: 0
   snapRotationInDegrees: 0
   positionOffset: 0.75
   positionHeight: 0
@@ -109,6 +107,7 @@ MonoBehaviour:
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
+  stateType: 0
   maxAmounts: 99
   comboAmount: 99
   icon: {fileID: 21300026, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
@@ -119,6 +118,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: -0.0016758908
+  movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
   playEndEffectAlready: 0
