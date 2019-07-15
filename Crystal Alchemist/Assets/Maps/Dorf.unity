@@ -33890,6 +33890,11 @@ PrefabInstance:
       propertyPath: text
       value: Schwimmen verboten!
       objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631784, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: dialogBoxText
+      value: Schwimmen verboten!
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3927818717087631785, guid: b38228c375f915f44932624529e24a1f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b38228c375f915f44932624529e24a1f, type: 3}
@@ -45714,6 +45719,11 @@ PrefabInstance:
       propertyPath: text
       value: "Das ist meine Kiste!\nMEINE Kiste!\n\ngez. K\xF6nig Glibber"
       objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631784, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: dialogBoxText
+      value: "Das ist meine Kiste.\nMEINE KISTE!\n\ngez. K\xF6nig Glibber"
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3927818717087631785, guid: b38228c375f915f44932624529e24a1f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b38228c375f915f44932624529e24a1f, type: 3}
@@ -47602,6 +47612,16 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631784, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: defaultText
+      value: Nicht aus dem Brunnen trinken!
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631784, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: dialogBoxText
+      value: Nicht aus dem Brunnen trinken!
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3927818717087631785, guid: b38228c375f915f44932624529e24a1f, type: 3}
@@ -54234,7 +54254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
-  text: 
+  dialogBoxText: 
   lootTable: []
   multiLoot: 0
   currencyNeeded: 0
@@ -55204,6 +55224,13 @@ PrefabInstance:
       propertyPath: text
       value: 'Hier geht es zum Wald. Vorsicht: Monster!'
       objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631784, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: dialogBoxText
+      value: 'Hier gehts zum Wald der Blobs.
+
+        Betreten auf eigene Gefahr.'
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3927818717087631785, guid: b38228c375f915f44932624529e24a1f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b38228c375f915f44932624529e24a1f, type: 3}
@@ -55320,6 +55347,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3692160304636444062, guid: 2b9adabf4a983c94080dff32924a285a,
         type: 3}
+    - target: {fileID: 2186908886390952264, guid: 12a4fc3ce47a23948a398b288322d9ae,
+        type: 3}
+      propertyPath: defaultText
+      value: "Diese T\xFCr ist verschlossen. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 2186908886390952264, guid: 12a4fc3ce47a23948a398b288322d9ae,
+        type: 3}
+      propertyPath: dialogBoxText
+      value: "Diese T\xFCr ist verschlossen.\nM\xF6glicherweise k\xF6nnte ein besonderer
+        Schl\xFCssel sie \xF6ffnen... ."
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3536326584310434845, guid: 12a4fc3ce47a23948a398b288322d9ae, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 12a4fc3ce47a23948a398b288322d9ae, type: 3}

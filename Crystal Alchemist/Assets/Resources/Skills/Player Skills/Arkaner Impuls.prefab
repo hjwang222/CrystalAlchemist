@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 1062884032966687811}
   - component: {fileID: 7120161598169946747}
   - component: {fileID: 8945697548278569866}
+  - component: {fileID: 6526762562809975763}
   m_Layer: 0
   m_Name: Arkaner Impuls
   m_TagString: Untagged
@@ -330,9 +331,6 @@ MonoBehaviour:
   maxAmounts: 9999
   comboAmount: 99
   icon: {fileID: 21300014, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  startSoundEffect: {fileID: 8300000, guid: a7d626076c682c34fa5b8ee7c4cb4631, type: 3}
-  endSoundEffect: {fileID: 8300000, guid: d16c88f8218bdea468612a11d5720ce5, type: 3}
-  animSoundeffect: {fileID: 0}
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
@@ -340,7 +338,7 @@ MonoBehaviour:
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
-  playEndEffectAlready: 0
+  dontPlayAudio: 0
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
@@ -476,3 +474,22 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!95 &6526762562809975763
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cd4771f91cf9afb45bb4b55530dcbc97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

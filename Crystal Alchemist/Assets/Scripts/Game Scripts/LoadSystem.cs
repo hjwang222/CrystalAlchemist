@@ -38,7 +38,7 @@ public class LoadSystem : MonoBehaviour
             instance.name = prefab.name;
             Item item = instance.GetComponent<Item>();
             item.amount = Convert.ToInt32(elem[1]);
-            player.collect(item, true);
+            player.collect(item, true, false);
         }
     }
 

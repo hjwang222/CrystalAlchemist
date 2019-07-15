@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,19 +8,14 @@ public class HelperScriptSkills : MonoBehaviour
     [SerializeField]
     private StandardSkill skill;
 
-    public void PlayStartSoundEffect()
+    public void PlaySoundEffect(AudioClip clip)
     {
-        this.skill.PlayStartSoundEffect();
+        this.skill.PlaySoundEffect(clip);
     }
 
-    public void PlayAnimatorSoundEffect()
+    public void PlaySoundEffectOnce(AudioClip clip)
     {
-        this.skill.PlayAnimatorSoundEffect();
-    }
-
-    public void PlayEndSoundEffect()
-    {
-        this.skill.PlayEndSoundEffect();
+        this.skill.PlaySoundEffectOnce(clip);
     }
 
     public void ActivateIt()

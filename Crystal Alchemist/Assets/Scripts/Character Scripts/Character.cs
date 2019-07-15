@@ -774,10 +774,14 @@ public class Character : MonoBehaviour
 
     public void collect(Item item, bool destroyIt)
     {
+        collect(item, destroyIt, true);
+    }
+
+    public void collect(Item item, bool destroyIt, bool playSound)
+    {
         if (this.canCollectAll || this.canCollect.Contains(item.itemGroup))
         {
-            item.playSounds();
-
+            if(playSound) item.playSounds();
             this.updateResource(item.resourceType, item, item.amount);            
 
             if (destroyIt) item.DestroyIt();

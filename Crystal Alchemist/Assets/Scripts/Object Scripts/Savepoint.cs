@@ -7,6 +7,6 @@ public class Savepoint : Interactable
     public override void doSomething()
     {
         SaveSystem.Save(this.player);
-        this.player.showDialogBox(this.text);
+        this.player.showDialogBox(this.dialogBoxText);
     }
 }

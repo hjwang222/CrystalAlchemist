@@ -7,6 +7,6 @@ public class Sign : Interactable
 {
     public override void doSomething()
     {
-        this.player.showDialogBox(this.text);        
+        this.player.showDialogBox(this.dialogBoxText);        
     }
 }

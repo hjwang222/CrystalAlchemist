@@ -18,14 +18,7 @@ public class ProjectileSkill : StandardSkill
             && hittedCharacter.tag != this.sender.tag 
             && !hittedCharacter.isTrigger
             && !hittedCharacter.CompareTag("Room"))
-        {       
-            if (!this.playEndEffectAlready && this.endSoundEffect != null)
-            {
-                Utilities.Audio.playSoundEffect(this.audioSource, this.endSoundEffect);
-                this.playEndEffectAlready = true;
-            }
-
-            
+        {                               
             Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Hit");
             // if (this.shadow != null) this.shadow.gameObject.SetActive(false);
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;

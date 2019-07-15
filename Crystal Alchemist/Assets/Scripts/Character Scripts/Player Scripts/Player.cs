@@ -110,6 +110,7 @@ public class Player : Character
         }
     }
 
+    ///////////////////////////////////////////////////////////////
 
     // Update is called once per frame
     private new void Update()
@@ -117,7 +118,6 @@ public class Player : Character
         base.Update();
         playerInputs();          
     }
-
     
     private void playerInputs()
     {
@@ -158,12 +158,10 @@ public class Player : Character
         }
     }
 
-
     public void delay(CharacterState newState)
     {
         StartCoroutine(Utilities.Skill.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
     }
-
 
     public void showDialogBox(string text)
     {
@@ -176,6 +174,7 @@ public class Player : Character
         return scene.name;
     }
 
+    ///////////////////////////////////////////////////////////////
 
     public void setNewPosition(Vector2 playerPositionInNewScene)
     {
@@ -200,7 +199,7 @@ public class Player : Character
         this.currentState = CharacterState.idle;
     }
 
-
+    ///////////////////////////////////////////////////////////////
 
 
     #region Using Skill
@@ -250,8 +249,7 @@ public class Player : Character
                     }
                 }
             }
-        }
-    
+        }    
 
     private bool isSkillReadyToUse(string button, StandardSkill skill)
     {
@@ -471,7 +469,7 @@ public class Player : Character
     {
         StandardSkill temp = Utilities.Skill.instantiateSkill(skill, this, target, damageReduce);
         //Vermeidung, dass Audio zu stark abgespielt wird
-        if (!playSoundeffect) temp.startSoundEffect = null;
+        if (!playSoundeffect) temp.dontPlayAudio = true;
     }
 
     private void setLastButtonPressed(string button, StandardSkill skill)
@@ -484,6 +482,8 @@ public class Player : Character
     }
 
     #endregion
+
+    ///////////////////////////////////////////////////////////////
 
     #region Movement
 

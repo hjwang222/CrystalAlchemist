@@ -107,9 +107,6 @@ MonoBehaviour:
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: 21300020, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  startSoundEffect: {fileID: 8300000, guid: f326318a806fd6642b491ebc8fe68e7a, type: 3}
-  endSoundEffect: {fileID: 0}
-  animSoundeffect: {fileID: 0}
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
@@ -117,7 +114,7 @@ MonoBehaviour:
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
-  playEndEffectAlready: 0
+  dontPlayAudio: 0
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
@@ -139,6 +136,7 @@ GameObject:
   - component: {fileID: 3924551678506968722}
   - component: {fileID: 3924551678506968721}
   - component: {fileID: 3924551678506968720}
+  - component: {fileID: 4156987265135631255}
   m_Layer: 14
   m_Name: New Sprite
   m_TagString: Untagged
@@ -227,3 +225,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4156987265135631255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3924551678506968723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 1969711209088018432}

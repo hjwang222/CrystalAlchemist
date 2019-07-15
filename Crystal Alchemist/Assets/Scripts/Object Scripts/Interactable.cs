@@ -20,7 +20,7 @@ public class Interactable : MonoBehaviour
     [FoldoutGroup("Dialog", expanded: false)]
     [Tooltip("Anzeige-Text für die Dialog-Box")]
     [TextAreaAttribute]
-    public string text;
+    public string dialogBoxText;
 
 
 

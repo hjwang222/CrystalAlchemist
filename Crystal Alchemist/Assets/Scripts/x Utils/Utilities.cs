@@ -336,8 +336,10 @@ public class Utilities : MonoBehaviour
             }
         }
 
-        public static bool canOpenAndUpdateResource(ResourceType currency, Item item, Player player, int price)
+        public static bool canOpenAndUpdateResource(ResourceType currency, Item item, Player player, int price, string defaultText)
         {
+            string text = defaultText;            
+
             if (player != null
                 && player.currentState != CharacterState.inDialog
                 && player.currentState != CharacterState.inMenu)
@@ -345,13 +347,14 @@ public class Utilities : MonoBehaviour
                 if (hasEnoughCurrencyAndUpdateResource(currency, player, item, -price)) return true;
                 else
                 {
-                    player.showDialogBox(Format.getDialogBoxText("Du benötigst", price, item, "..."));
+                    if (text.Replace(" ", "").Length <= 0) text = Format.getDialogBoxText("Du benötigst", price, item, "...");
+                    player.showDialogBox(text);
                     return false;
                 }
             }
 
             return false;
-        }
+        }        
     }
 
     ///////////////////////////////////////////////////////////////

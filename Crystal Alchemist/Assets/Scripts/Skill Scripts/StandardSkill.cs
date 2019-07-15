@@ -341,15 +341,6 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Icon für den Spieler")]
     public Sprite icon;
 
-    [FoldoutGroup("Sound und Icons", expanded: false)]
-    public AudioClip startSoundEffect;
-
-    [FoldoutGroup("Sound und Icons", expanded: false)]
-    public AudioClip endSoundEffect;
-
-    [FoldoutGroup("Sound und Icons", expanded: false)]
-    public AudioClip animSoundeffect;
-
     ////////////////////////////////////////////////////////////////
 
     private bool playStartEffectAlready = false;
@@ -375,7 +366,7 @@ public class StandardSkill : MonoBehaviour
     [HideInInspector]
     public AudioSource audioSource;
     [HideInInspector]
-    public bool playEndEffectAlready = false;
+    public bool dontPlayAudio = false;
 
 
     [HideInInspector]
@@ -456,8 +447,6 @@ public class StandardSkill : MonoBehaviour
         if (this.LockElapsed > 0) this.movementLocked = true;
 
         this.elapsed = this.intervallSender;
-
-        if (this.startSoundEffect != null) Utilities.Audio.playSoundEffect(this.audioSource, this.startSoundEffect);
 
         if (this.sender == null)
         {
@@ -654,32 +643,15 @@ public class StandardSkill : MonoBehaviour
 
     #region AnimatorEvents
 
-    public void PlayStartSoundEffect()
+    public void PlaySoundEffect(AudioClip audioClip)
     {
-        if (!this.playStartEffectAlready)
-        {
-            playSoundEffect(this.startSoundEffect);
-            this.playStartEffectAlready = true;
-        }
+        Utilities.Audio.playSoundEffect(this.audioSource, audioClip);
     }
 
-    public void PlayAnimatorSoundEffect()
+    public void PlaySoundEffectOnce(AudioClip audioClip)
     {
-        playSoundEffect(this.animSoundeffect);
-    }
-
-    public void PlayEndSoundEffect()
-    {
-        if (!this.playEndEffectAlready)
-        {
-            playSoundEffect(this.endSoundEffect);
-            this.playEndEffectAlready = true;
-        }
-    }
-
-    private void playSoundEffect(AudioClip clip)
-    {
-        if (clip != null) Utilities.Audio.playSoundEffect(this.audioSource, clip);
+        if (!this.dontPlayAudio) Utilities.Audio.playSoundEffect(this.audioSource, audioClip);
+        this.dontPlayAudio = true;
     }
 
     public void ActivateIt()
