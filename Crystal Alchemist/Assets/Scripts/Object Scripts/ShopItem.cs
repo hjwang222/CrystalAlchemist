@@ -22,7 +22,7 @@ public class ShopItem : Interactable
     {
         base.Start();
 
-        Utilities.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        Utilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
         this.items.Add(this.lootTable[this.index].item);
 
@@ -32,12 +32,12 @@ public class ShopItem : Interactable
 
     public override void doSomething()
     {
-        if (Utilities.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
+        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
         {
             Item loot = items[this.index];
 
-            string itemObtained = Utilities.getDialogBoxText("Du hast", loot.amount, loot, "für");
-            string itemNedded = Utilities.getDialogBoxText("", this.price, this.item, "gekauft!");
+            string itemObtained = Utilities.Format.getDialogBoxText("Du hast", loot.amount, loot, "für");
+            string itemNedded = Utilities.Format.getDialogBoxText("", this.price, this.item, "gekauft!");
 
             this.player.showDialogBox(itemObtained + "\n" + itemNedded);
             this.player.collect(loot, false);

@@ -124,7 +124,7 @@ public class DialogBox : MonoBehaviour
 
     private void showText()
     {
-        Utilities.playSoundEffect(this.audioSource, this.dialogSoundEffect);
+        Utilities.Audio.playSoundEffect(this.audioSource, this.dialogSoundEffect);
 
         if (this.index + 1 < this.texts.Count) this.textMesh.text = this.texts[this.index] + "\n" + this.texts[this.index + 1];
         else this.textMesh.text = this.texts[this.index];

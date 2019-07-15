@@ -50,7 +50,7 @@ public class LaserSkill : StandardSkill
         Vector2 startpoint;
         Vector3 rotation;
 
-        Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
+        Utilities.Rotation.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
                                           this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
                                           out angle, out startpoint, out this.direction, out rotation);
 
@@ -58,7 +58,7 @@ public class LaserSkill : StandardSkill
         {
             this.direction = (Vector2)this.target.transform.position - startpoint;
             float temp_angle = Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg;
-            this.direction = Utilities.DegreeToVector2(temp_angle);
+            this.direction = Utilities.Rotation.DegreeToVector2(temp_angle);
         }
 
         renderLine(startpoint, rotation);
@@ -85,7 +85,7 @@ public class LaserSkill : StandardSkill
                 hitpoint = target.transform.position;
             }
 
-            if (Utilities.checkCollision(hitted, this))
+            if (Utilities.Collisions.checkCollision(hitted, this))
             {
                 Character hittedCharacter = hitted.transform.GetComponent<Character>();
                 if (hittedCharacter != null) hittedCharacter.gotHit(this);

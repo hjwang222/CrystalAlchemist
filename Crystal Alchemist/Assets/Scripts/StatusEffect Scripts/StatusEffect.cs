@@ -222,7 +222,7 @@ public class StatusEffect : MonoBehaviour
 
     public virtual void DestroyIt()
     {
-        Utilities.SetAnimatorParameter(this.ownAnimator, "End");
+        Utilities.UnityUtils.SetAnimatorParameter(this.ownAnimator, "End");
 
         if (this.target != null)
         {

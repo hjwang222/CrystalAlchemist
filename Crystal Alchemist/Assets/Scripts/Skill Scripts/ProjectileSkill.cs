@@ -21,12 +21,12 @@ public class ProjectileSkill : StandardSkill
         {       
             if (!this.playEndEffectAlready && this.endSoundEffect != null)
             {
-                Utilities.playSoundEffect(this.audioSource, this.endSoundEffect);
+                Utilities.Audio.playSoundEffect(this.audioSource, this.endSoundEffect);
                 this.playEndEffectAlready = true;
             }
 
             
-            Utilities.SetAnimatorParameter(this.animator, "Hit");
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Hit");
             // if (this.shadow != null) this.shadow.gameObject.SetActive(false);
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
             
@@ -42,7 +42,7 @@ public class ProjectileSkill : StandardSkill
         {
             Vector2 hitpoint = hittedCharacter.transform.position;
 
-            if (!Utilities.checkCollision(hittedCharacter, this)) hitpoint = this.transform.position;
+            if (!Utilities.Collisions.checkCollision(hittedCharacter, this)) hitpoint = this.transform.position;
 
             GameObject fire = Instantiate(this.skillOnImpact.gameObject, hitpoint, Quaternion.identity);
             //fire.transform.position = hittedCharacter.transform.position;

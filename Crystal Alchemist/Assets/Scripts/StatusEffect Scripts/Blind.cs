@@ -11,7 +11,7 @@ public class Blind : StatusEffect
     public override void DestroyIt()
     {
         Animator animator = this.panel.transform.GetChild(0).GetComponent<Animator>();
-        Utilities.SetAnimatorParameter(animator, "Explode", true);
+        Utilities.UnityUtils.SetAnimatorParameter(animator, "Explode", true);
         Destroy(this.panel, 2f);
         base.DestroyIt();
     }

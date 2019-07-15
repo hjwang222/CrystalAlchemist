@@ -38,6 +38,10 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.item)]
+    public bool isKeyItem = false;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("resourceType", ResourceType.item)]
     public string itemGroup;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
@@ -82,7 +86,7 @@ public class Item : MonoBehaviour
 
     public void playSounds()
     {
-        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect);        
+        Utilities.Audio.playSoundEffect(this.audioSource, this.collectSoundEffect);        
     }
 
 

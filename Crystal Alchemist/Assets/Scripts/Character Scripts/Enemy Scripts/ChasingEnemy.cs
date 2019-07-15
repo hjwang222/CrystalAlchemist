@@ -99,7 +99,7 @@ public class ChasingEnemy : Enemy
 
             //changeState(CharacterState.walk); //Gegner bewegt sich gerade
 
-            Utilities.SetAnimatorParameter(this.animator, "isWakeUp", true);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWakeUp", true);
         }
     }
 

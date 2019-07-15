@@ -6,7 +6,7 @@ using TMPro;
 public class CurrencySlot : MonoBehaviour
 {
     [SerializeField]
-    private string itemGroup;
+    private Item item;
     [SerializeField]
     private int maxValue;
     [SerializeField]
@@ -34,12 +34,12 @@ public class CurrencySlot : MonoBehaviour
 
     public void updateCurrency()
     {        
-        this.newValue = Utilities.getAmountFromInventory(this.itemGroup, this.player.inventory, false);
+        this.newValue = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);
 
         if (!this.playOnce)
         {
             this.playOnce = true;
-            Utilities.playSoundEffect(this.audioSource, this.raiseSoundEffect);
+            Utilities.Audio.playSoundEffect(this.audioSource, this.raiseSoundEffect);
         }
 
         if(!this.isRunning) StartCoroutine(Countdown());
@@ -59,11 +59,11 @@ public class CurrencySlot : MonoBehaviour
                 this.currentValue = this.newValue;
                 this.isRunning = false;
                 this.playOnce = false;
-                this.textField.text = Utilities.formatString(this.currentValue, this.maxValue);
+                this.textField.text = Utilities.Format.formatString(this.currentValue, this.maxValue);
                 break;
             }   
 
-            this.textField.text = Utilities.formatString(this.currentValue, this.maxValue);
+            this.textField.text = Utilities.Format.formatString(this.currentValue, this.maxValue);
             
             yield return new WaitForSeconds(this.counterDelay);
         }

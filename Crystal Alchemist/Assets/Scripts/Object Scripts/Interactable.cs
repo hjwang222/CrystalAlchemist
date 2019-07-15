@@ -24,7 +24,7 @@ public class Interactable : MonoBehaviour
 
 
 
-    [FoldoutGroup("Loot", expanded:false)]
+    [FoldoutGroup("Loot", expanded: false)]
     [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
     public LootTable[] lootTable;
 
@@ -43,7 +43,7 @@ public class Interactable : MonoBehaviour
     public Item item;
 
     [FoldoutGroup("Activation Requirements", expanded: false)]
-    [Range(0,Utilities.maxIntInfinite)]
+    [Range(0, Utilities.maxIntInfinite)]
     public int price = 0;
 
     [FoldoutGroup("Sound", expanded: false)]
@@ -51,7 +51,10 @@ public class Interactable : MonoBehaviour
     public AudioClip soundEffect;
 
     [HideInInspector]
-    public bool isPlayerInRange;
+    public bool isPlayerInRange = false;
+    [HideInInspector]
+    public bool isPlayerLookingAtIt = false;
+
     [HideInInspector]
     public Player player;
     [HideInInspector]
@@ -62,7 +65,7 @@ public class Interactable : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     [HideInInspector]
     public GameObject context;
-    [HideInInspector]    
+    [HideInInspector]
     public List<Item> items = new List<Item>();
     [HideInInspector]
     public objectState currentState = objectState.normal;
@@ -79,16 +82,20 @@ public class Interactable : MonoBehaviour
 
     private void Update()
     {
-        if (this.isPlayerInRange
-           && Input.GetButtonDown("Submit")
-           && this.player != null
-           && this.player.currentState != CharacterState.inMenu)
+        if (this.player != null
+            && this.isPlayerInRange
+            && this.isPlayerLookingAtIt
+            && this.player.currentState == CharacterState.interact)
         {
-            doSomething();
+            if (Input.GetButtonDown("Submit"))
+            {
+                doSomething();
+            }
         }
 
         doOnUpdate();
     }
+
 
     public virtual void doOnUpdate()
     {
@@ -102,19 +109,19 @@ public class Interactable : MonoBehaviour
 
     private void init()
     {
-            this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
-            this.audioSource.loop = false;
-            this.audioSource.playOnAwake = false;
-            this.animator = GetComponent<Animator>();            
-            setContext();
-            Utilities.setItem(this.lootTable, this.multiLoot, this.items);        
-    }    
+        this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
+        this.audioSource.loop = false;
+        this.audioSource.playOnAwake = false;
+        this.animator = GetComponent<Animator>();
+        setContext();
+        Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
+    }
 
     public void setContext()
     {
-        if(this.contextClueChild != null)
+        if (this.contextClueChild != null)
         {
-            this.context = Instantiate(this.contextClueChild, this.transform.position, Quaternion.identity, this.transform);            
+            this.context = Instantiate(this.contextClueChild, this.transform.position, Quaternion.identity, this.transform);
         }
     }
 
@@ -122,43 +129,71 @@ public class Interactable : MonoBehaviour
 
     #region Context Clue Funktionen
 
-    private void OnTriggerEnter2D(Collider2D characterCollisionBox)
-    {
-        //Context Clue einblenden und Charakter nicht mehr angreifen lassen!
 
+
+
+    private void interact(Collider2D characterCollisionBox)
+    {
         if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
         {
             Player player = characterCollisionBox.GetComponent<Player>();
 
             if (player != null)
             {
-                player.currentState = CharacterState.interact;
-                this.player = player;
+                if(this.player != player) this.player = player;
+                this.isPlayerInRange = true;
+
+                checkifLooking(this.player);
             }
-            this.isPlayerInRange = true;
-            this.context.SetActive(true);
         }
+    }
+
+    private void checkifLooking(Character character)
+    {
+        if (character != null
+            && (character.currentState == CharacterState.interact 
+             || character.currentState == CharacterState.idle))
+        {
+            if (this.isPlayerInRange
+                && Utilities.Collisions.checkIfGameObjectIsViewed(character, this.gameObject))
+            {
+                player.currentState = CharacterState.interact;
+                this.context.SetActive(true);
+                this.isPlayerLookingAtIt = true;
+            }
+            else
+            {
+                player.currentState = CharacterState.idle;
+                this.context.SetActive(false);
+                this.isPlayerLookingAtIt = false;
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D characterCollisionBox)
+    {
+        interact(characterCollisionBox);
+    }
+
+    private void OnTriggerEnter2D(Collider2D characterCollisionBox)
+    {
+        interact(characterCollisionBox);
     }
 
     private void OnTriggerExit2D(Collider2D characterCollisionBox)
     {
-        //Context Clue ausblenden und Charakter wieder normal agieren lassen 
-
         if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
         {
             Player player = characterCollisionBox.GetComponent<Player>();
 
-            if (player != null)
+            if (player != null && player.currentState == CharacterState.interact)
             {
                 player.currentState = CharacterState.idle;
-            }
-
-            if(this.player == player)
-            {
-                this.player = null;
+                if (this.player == player) this.player = null;
             }
 
             this.isPlayerInRange = false;
+            this.isPlayerLookingAtIt = false;
             this.context.SetActive(false);
         }
     }

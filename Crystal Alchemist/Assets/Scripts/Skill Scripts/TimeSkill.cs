@@ -56,7 +56,7 @@ public class TimeSkill : StandardSkill
     {
         base.OnTriggerExit2D(hittedCharacter);
         //Normalisiere Zeit beim Austritt aus dem Feld
-        if (Utilities.checkCollision(hittedCharacter, this))
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this))
             removeTimeDistorion(hittedCharacter.gameObject);
     }
 
@@ -64,7 +64,7 @@ public class TimeSkill : StandardSkill
     {
         base.OnTriggerEnter2D(hittedCharacter);
         //Setze Zeit beim Eintritt in das Feld
-        if (Utilities.checkCollision(hittedCharacter, this) && !isDestroyed)
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this) && !isDestroyed)
             setTimeDistorion(hittedCharacter.gameObject, this.TimeDistortion);
     }
 

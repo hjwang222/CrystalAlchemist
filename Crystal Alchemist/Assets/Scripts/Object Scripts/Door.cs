@@ -16,7 +16,8 @@ public class Door : Interactable
 
     [FoldoutGroup("Tür-Attribute", expanded: false)]
     [EnumToggleButtons]
-    public DoorType doorType = DoorType.closed;
+    [SerializeField]
+    private DoorType doorType = DoorType.closed;
 
     private bool isOpen;
     private BoxCollider2D boxCollider;
@@ -26,7 +27,7 @@ public class Door : Interactable
         base.Start();
         this.boxCollider = GetComponent<BoxCollider2D>();
 
-        if (this.isOpen) Utilities.SetAnimatorParameter(this.animator, "isOpened", true);
+        if (this.isOpen) Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", true);
     }
 
     public override void doOnUpdate()
@@ -47,7 +48,7 @@ public class Door : Interactable
                  if (this.doorType == DoorType.normal)
                 {
                     //Normale Tür, einfach aufmachen
-                    if (Utilities.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
+                    if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
                     {
                         OpenCloseDoor(true, this.context);
                     }
@@ -76,7 +77,7 @@ public class Door : Interactable
     private void OpenCloseDoor(bool isOpen, GameObject contextClueChild)
     {
         this.isOpen = isOpen;
-        Utilities.SetAnimatorParameter(this.animator, "isOpened", this.isOpen);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", this.isOpen);
         this.boxCollider.enabled = !this.isOpen;
 
         if (contextClueChild != null)
@@ -87,7 +88,6 @@ public class Door : Interactable
             else contextClueChild.SetActive(false);
         }
 
-        Utilities.playSoundEffect(this.audioSource, this.soundEffect);
-
+        Utilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
     }
 }

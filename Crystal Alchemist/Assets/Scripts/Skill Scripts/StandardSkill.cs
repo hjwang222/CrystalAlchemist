@@ -457,7 +457,7 @@ public class StandardSkill : MonoBehaviour
 
         this.elapsed = this.intervallSender;
 
-        if (this.startSoundEffect != null) Utilities.playSoundEffect(this.audioSource, this.startSoundEffect);
+        if (this.startSoundEffect != null) Utilities.Audio.playSoundEffect(this.audioSource, this.startSoundEffect);
 
         if (this.sender == null)
         {
@@ -489,7 +489,7 @@ public class StandardSkill : MonoBehaviour
 
         if (!this.blendTree)
         {
-            Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
+            Utilities.Rotation.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
                                           this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
                                           out angle, out start, out this.direction, out rotation);
 
@@ -513,8 +513,8 @@ public class StandardSkill : MonoBehaviour
 
         if (this.animator != null)
         {
-            Utilities.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
-            Utilities.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
         }
 
         if (this.shadow != null)
@@ -578,15 +578,15 @@ public class StandardSkill : MonoBehaviour
 
         if (this.animator != null && this.sender != null && !this.movementLocked)
         {
-            Utilities.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
-            Utilities.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
         }
 
         if (this.delayTimeLeft > 0)
         {
             this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
 
-            Utilities.SetAnimatorParameter(this.animator, "Time", this.delayTimeLeft);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Time", this.delayTimeLeft);
             //do something here
         }
         else
@@ -600,9 +600,9 @@ public class StandardSkill : MonoBehaviour
                 }
                 else
                 {
-                    Utilities.SetAnimatorParameter(this.animator, "Explode", true);
+                    Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Explode", true);
 
-                    if (this.animator == null || !Utilities.HasParameter(this.animator, "Explode")) DestroyIt();
+                    if (this.animator == null || !Utilities.UnityUtils.HasParameter(this.animator, "Explode")) DestroyIt();
                 }
             }
         }
@@ -636,12 +636,12 @@ public class StandardSkill : MonoBehaviour
 
     public virtual void OnTriggerStay2D(Collider2D hittedCharacter)
     {
-        if (Utilities.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);
     }
 
     public virtual void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
-        if (Utilities.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);
     }
 
     public virtual void OnTriggerExit2D(Collider2D hittedCharacter)
@@ -679,7 +679,7 @@ public class StandardSkill : MonoBehaviour
 
     private void playSoundEffect(AudioClip clip)
     {
-        if (clip != null) Utilities.playSoundEffect(this.audioSource, clip);
+        if (clip != null) Utilities.Audio.playSoundEffect(this.audioSource, clip);
     }
 
     public void ActivateIt()

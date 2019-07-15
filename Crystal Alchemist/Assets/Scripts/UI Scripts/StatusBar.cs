@@ -83,7 +83,7 @@ public class StatusBar : MonoBehaviour
             if (elapsed <= 0)
             {
                 elapsed = audioInterval;
-                Utilities.playSoundEffect(this.audioSource, this.lowSoundEffect);
+                Utilities.Audio.playSoundEffect(this.audioSource, this.lowSoundEffect);
             }
             else
             {
@@ -143,7 +143,7 @@ public class StatusBar : MonoBehaviour
             StatusEffect statusEffectFromList = effectList[i];
             statusEffectGUI.GetComponent<Image>().sprite = statusEffectFromList.iconSprite;
 
-            string seconds = Utilities.setDurationToString(statusEffectFromList.statusEffectTimeLeft)+"s";
+            string seconds = Utilities.Format.setDurationToString(statusEffectFromList.statusEffectTimeLeft)+"s";
             if (statusEffectFromList.endType == StatusEffectEndType.mana) seconds = "";
 
             statusEffectGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = seconds;

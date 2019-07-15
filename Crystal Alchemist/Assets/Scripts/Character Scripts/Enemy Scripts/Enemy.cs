@@ -50,7 +50,7 @@ public class Enemy : Character
         init();
         this.aggroList.Clear();
         this.target = null;
-        Utilities.SetAnimatorParameter(this.animator, "isWakeUp", true);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWakeUp", true);
     }
 
     #endregion
@@ -68,6 +68,23 @@ public class Enemy : Character
     public void addAggro(Character newTarget, float aggro)
     {
         if(newTarget != null && this.aggroList.ContainsKey(newTarget)) this.aggroList[newTarget][0] += (float)(aggro/100);
+    }
+
+    public void getHighestAggro(out float aggro, out string target)
+    {
+        aggro = 0;
+        target = "";
+
+        foreach (Character character in this.aggroList.Keys)
+        {
+            float currentAggro = this.aggroList[character][0];
+
+            if (currentAggro > aggro)
+            {
+                aggro = currentAggro;
+                target = character.characterName;
+            }
+        }
     }
 
     public void clearAggro()
@@ -214,8 +231,8 @@ public class Enemy : Character
     {
         this.direction = setVector;
 
-        Utilities.SetAnimatorParameter(this.animator, "moveX", setVector.x);
-        Utilities.SetAnimatorParameter(this.animator, "moveY", setVector.y);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", setVector.x);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", setVector.y);
     }
 
     public void changeAnim(Vector2 direction)

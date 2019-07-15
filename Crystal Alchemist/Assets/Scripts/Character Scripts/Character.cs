@@ -76,7 +76,6 @@ public class Character : MonoBehaviour
     [Required]
     public GameObject activeStatusEffectParent;
 
-
     ////////////////////////////////////////////////////////////////
 
     [TabGroup("Start-Values")]
@@ -267,8 +266,7 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public AudioSource audioSource;
 
-    [HideInInspector]
-    public CastBar castbar;
+
     [HideInInspector]
     public CastBar activeCastbar;
     [HideInInspector]
@@ -306,8 +304,6 @@ public class Character : MonoBehaviour
 
     [HideInInspector]
     public List<Item> inventory = new List<Item>();
-
-
     #endregion
 
 
@@ -366,7 +362,7 @@ public class Character : MonoBehaviour
 
     public void spawn()
     {
-        if (this.currentState == CharacterState.respawning) Utilities.SetAnimatorParameter(this.animator, "isRespawn", true);
+        if (this.currentState == CharacterState.respawning) Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isRespawn", true);
 
         this.life = this.startLife;
         this.mana = this.startMana;
@@ -394,7 +390,7 @@ public class Character : MonoBehaviour
 
         this.setSkills(true);
 
-        Utilities.setItem(this.lootTable, this.multiLoot, this.items);
+        Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
     }
     #endregion
 
@@ -471,7 +467,7 @@ public class Character : MonoBehaviour
 
                 skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
 
-                StandardSkill temp = Utilities.instantiateSkill(skill, this, null, 1);
+                StandardSkill temp = Utilities.Skill.instantiateSkill(skill, this, null, 1);
 
             }
         }
@@ -553,7 +549,7 @@ public class Character : MonoBehaviour
         {
             //TODO: Kill sofort (Skill noch aktiv)
 
-            Utilities.SetAnimatorParameter(this.animator, "isDead", true);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isDead", true);
 
             RemoveAllStatusEffects(this.debuffs);
             RemoveAllStatusEffects(this.buffs);
@@ -574,7 +570,7 @@ public class Character : MonoBehaviour
 
     public void PlayDeathSoundEffect()
     {
-        Utilities.playSoundEffect(this.audioSource, this.killSoundEffect);
+        Utilities.Audio.playSoundEffect(this.audioSource, this.killSoundEffect);
     }
 
     public void DestroyIt()
@@ -595,7 +591,7 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life:
                 {
-                    this.life = Utilities.setResource(this.life, this.maxLife, value);
+                    this.life = Utilities.Resources.setResource(this.life, this.maxLife, value);
 
                     Color[] colorArray = GlobalValues.red;
                     if (value > 0) colorArray = GlobalValues.green;
@@ -607,7 +603,7 @@ public class Character : MonoBehaviour
                 }
             case ResourceType.mana:
                 {                    
-                    this.mana = Utilities.setResource(this.mana, this.maxMana, value);
+                    this.mana = Utilities.Resources.setResource(this.mana, this.maxMana, value);
                     if(showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
                     callSignal(this.manaSignal, value);
                     break;
@@ -616,7 +612,7 @@ public class Character : MonoBehaviour
                 {
                     if (item != null)
                     {
-                        Utilities.updateInventory(item, this, Mathf.RoundToInt(value));
+                        Utilities.Items.updateInventory(item, this, Mathf.RoundToInt(value));
                         callSignal(this.currencies, value);  //TODO Single Signal?
                     }
                     break;
@@ -625,7 +621,7 @@ public class Character : MonoBehaviour
                 {
                     if (item != null && item.skill != null)
                     {
-                        Utilities.updateSkillset(item.skill, this);
+                        Utilities.Skill.updateSkillset(item.skill, this);
                         //callSignal(this.woodSignal, addResource);  //TODO Single Signal?
                     }
                     break;
@@ -653,7 +649,7 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life: return this.life;
             case ResourceType.mana: return this.mana;
-            case ResourceType.item: return Utilities.getAmountFromInventory(item.itemGroup, this.inventory, false);
+            case ResourceType.item: return Utilities.Items.getAmountFromInventory(item, this.inventory, false);
         }
 
         return 0;
@@ -665,7 +661,7 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life: return this.maxLife;
             case ResourceType.mana: return this.maxMana;
-            case ResourceType.item: return Utilities.getAmountFromInventory(item.itemGroup, this.inventory, true);
+            case ResourceType.item: return Utilities.Items.getAmountFromInventory(item, this.inventory, true);
         }
 
         return 0;
@@ -726,7 +722,7 @@ public class Character : MonoBehaviour
 
     public void startAttackAnimation(string parameter)
     {
-        Utilities.SetAnimatorParameter(this.animator, parameter);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, parameter);
     }
 
 
@@ -815,7 +811,7 @@ public class Character : MonoBehaviour
                         Enemy enemy = this.GetComponent<Enemy>();
                         if (enemy != null) enemy.increaseAggroOnHit(skill.sender);
                         //Charakter-Treffer (Schaden) animieren
-                        Utilities.playSoundEffect(this.audioSource, this.hitSoundEffect);
+                        Utilities.Audio.playSoundEffect(this.audioSource, this.hitSoundEffect);
                         StartCoroutine(hitCo());
                     }
                 }

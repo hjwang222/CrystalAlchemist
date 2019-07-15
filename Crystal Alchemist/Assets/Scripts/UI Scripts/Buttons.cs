@@ -215,7 +215,7 @@ public class Buttons : MonoBehaviour
             else if (cooldownLeft > 0 && cooldownValue > 0.5f)
             {
                 //Ist Skill in der Abklingzeit
-                string cooldownText = Utilities.setDurationToString(cooldownLeft) + "s";
+                string cooldownText = Utilities.Format.setDurationToString(cooldownLeft) + "s";
 
                 buttonUI.fillAmount = 1 - (cooldownLeft / cooldownValue);
 

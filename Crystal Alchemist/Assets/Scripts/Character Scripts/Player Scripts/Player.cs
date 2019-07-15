@@ -17,6 +17,10 @@ public enum enumButton
 
 public class Player : Character
 {
+    [BoxGroup("Pflichtfelder")]
+    [SerializeField]
+    private CastBar castbar;
+
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
     public StringSignal dialogBoxSignal;
@@ -54,10 +58,15 @@ public class Player : Character
     [SerializeField]
     private BoolValue loadGame;
 
-    public StandardSkill AButton;    
-    public StandardSkill BButton;   
-    public StandardSkill XButton;    
-    public StandardSkill YButton;    
+    [HideInInspector]
+    public StandardSkill AButton;
+    [HideInInspector]
+    public StandardSkill BButton;
+    [HideInInspector]
+    public StandardSkill XButton;
+    [HideInInspector]
+    public StandardSkill YButton;
+    [HideInInspector]
     public StandardSkill RBButton;
 
     private Vector3 change;
@@ -73,10 +82,10 @@ public class Player : Character
         if (this.loadGame.getValue()) LoadSystem.loadPlayerData(this);
 
         if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);
-        Utilities.checkIfHelperDeactivate(this);
+        Utilities.Helper.checkIfHelperDeactivate(this);
 
-        Utilities.SetAnimatorParameter(this.animator, "moveX", 0);
-        Utilities.SetAnimatorParameter(this.animator, "moveY", -1);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
 
         this.direction = new Vector2(0, -1);
     }
@@ -106,14 +115,15 @@ public class Player : Character
     private new void Update()
     {
         base.Update();
-        playerInputs();        
+        playerInputs();          
     }
 
+    
     private void playerInputs()
     {
         if (this.currentState == CharacterState.inDialog || this.currentState == CharacterState.inMenu)
         {
-            Utilities.SetAnimatorParameter(this.animator, "isWalking", false);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", false);
             return;
         }
 
@@ -151,7 +161,7 @@ public class Player : Character
 
     public void delay(CharacterState newState)
     {
-        StartCoroutine(Utilities.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
+        StartCoroutine(Utilities.Skill.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
     }
 
 
@@ -330,7 +340,7 @@ public class Player : Character
             skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
             if (!skill.isRapidFire) skill.holdTimer = 0;
 
-            Utilities.instantiateSkill(skill, this);
+            Utilities.Skill.instantiateSkill(skill, this);
         }
         else if (skill.lockOn != null && this.activeLockOnTarget == null)
         {
@@ -459,7 +469,7 @@ public class Player : Character
 
     private void fireSkillToSingleTarget(Character target, float damageReduce, bool playSoundeffect, StandardSkill skill)
     {
-        StandardSkill temp = Utilities.instantiateSkill(skill, this, target, damageReduce);
+        StandardSkill temp = Utilities.Skill.instantiateSkill(skill, this, target, damageReduce);
         //Vermeidung, dass Audio zu stark abgespielt wird
         if (!playSoundeffect) temp.startSoundEffect = null;
     }
@@ -498,13 +508,13 @@ public class Player : Character
             {
                 this.direction = change;
 
-                Utilities.SetAnimatorParameter(this.animator, "moveX", change.x);
-                Utilities.SetAnimatorParameter(this.animator, "moveY", change.y);
+                Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", change.x);
+                Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", change.y);
             }
 
-            Utilities.SetAnimatorParameter(this.animator, "isWalking", true);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", true);
         }
-        else Utilities.SetAnimatorParameter(this.animator, "isWalking", false);
+        else Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", false);
     }
 
     private void MoveCharacter()

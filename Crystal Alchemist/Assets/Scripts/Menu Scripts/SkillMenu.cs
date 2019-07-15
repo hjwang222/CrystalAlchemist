@@ -273,7 +273,7 @@ public class SkillMenu : MonoBehaviour
                 for (int ID = 0; ID < skills.transform.childCount; ID++)
                 {
                     GameObject slot = skills.transform.GetChild(ID).gameObject;
-                    StandardSkill skill = Utilities.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
+                    StandardSkill skill = Utilities.Skill.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
                     slot.GetComponent<SkillSlot>().setSkill(skill);
                 }
 

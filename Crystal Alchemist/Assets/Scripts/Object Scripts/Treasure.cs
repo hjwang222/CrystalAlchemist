@@ -47,7 +47,7 @@ public class Treasure : Interactable
     {
         base.Start();
 
-        Utilities.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        Utilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
     }
 
     #endregion
@@ -90,9 +90,9 @@ public class Treasure : Interactable
 
             if (this.treasureType == TreasureType.lootbox)
             {
-                Utilities.SetAnimatorParameter(this.anim, "isOpened", false);
+                Utilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", false);
                 this.currentState = objectState.normal;
-                Utilities.setItem(this.lootTable, this.multiLoot, this.items);
+                Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
             }
         }           
     }
@@ -104,7 +104,7 @@ public class Treasure : Interactable
 
     private void OpenChest()
     {        
-        Utilities.SetAnimatorParameter(this.anim, "isOpened", true);
+        Utilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", true);
         this.currentState = objectState.opened;
 
         string text = this.text;
@@ -112,8 +112,8 @@ public class Treasure : Interactable
         if (this.soundEffect != null && this.items.Count > 0)
         {
             //Spiele Soundeffekte ab
-            Utilities.playSoundEffect(this.audioSource, this.soundEffect);
-            Utilities.playSoundEffect(this.audioSource, this.soundEffectTreasure);
+            Utilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
+            Utilities.Audio.playSoundEffect(this.audioSource, this.soundEffectTreasure);
 
             //Zeige Item
             this.showTreasureItem();
@@ -123,7 +123,7 @@ public class Treasure : Interactable
             foreach (Item item in this.items)
             {
                 this.player.collect(item, false);
-                text = Utilities.getDialogBoxText("Du hast", item.amount, item, "erhalten!");
+                text = Utilities.Format.getDialogBoxText("Du hast", item.amount, item, "erhalten!");
             }
         }
         else
@@ -138,7 +138,7 @@ public class Treasure : Interactable
 
     private void canOpenChest()
     {
-        if (Utilities.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price)) OpenChest();
+        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price)) OpenChest();
     }
 
     public void showTreasureItem()
