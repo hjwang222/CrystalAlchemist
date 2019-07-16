@@ -75,6 +75,8 @@ public class Player : Character
     // Start is called before the first frame update
     private void Start()
     {
+        SaveSystem.loadOptions();
+
         this.isPlayer = true;
         this.init();        
         this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.currencySignalUI);

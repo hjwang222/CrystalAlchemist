@@ -77,6 +77,9 @@ public class SaveSystem
 
             GlobalValues.backgroundMusicVolume = data.musicVolume;
             GlobalValues.soundEffectVolume = data.soundVolume;
+
+            if (data.layout == "keyboard") GlobalValues.layoutType = LayoutType.keyboard;
+            else GlobalValues.layoutType = LayoutType.gamepad;
         }
     }
 }

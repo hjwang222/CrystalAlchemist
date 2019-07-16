@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
 using System;
+using UnityEngine.UI;
 
 
 #region Objects
@@ -361,6 +362,13 @@ public class Utilities : MonoBehaviour
 
     public static class Format
     {
+        public static void SetButtonColor(Button button, Color newColor)
+        {
+            ColorBlock cb = button.colors;
+            cb.normalColor = newColor;
+            button.colors = cb;
+        }
+
         public static string getDialogBoxText(string part1, int price, Item item, string part2)
         {
             string result = part1 + " " + price + " ";

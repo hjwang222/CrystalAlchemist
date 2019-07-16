@@ -61,11 +61,13 @@ public class GameOptions
 {
     public float musicVolume;
     public float soundVolume;
+    public string layout;
 
     public GameOptions()
     {
         this.musicVolume = GlobalValues.backgroundMusicVolume;
         this.soundVolume = GlobalValues.soundEffectVolume;
+        this.layout = GlobalValues.layoutType.ToString().ToLower();
     }
 }
 

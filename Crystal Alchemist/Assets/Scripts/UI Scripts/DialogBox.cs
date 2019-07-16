@@ -8,13 +8,18 @@ public class DialogBox : MonoBehaviour
     #region Attribute
     [Header("Dialog-Attribute")]
     [Tooltip("DialogBox Child-Objekt")]
-    public GameObject dialogBox;
+    [SerializeField]
+    private GameObject dialogBox;
     [Tooltip("DialogBox Text-Objekt")]
-    public TextMeshProUGUI textMesh;
+    [SerializeField]
+    private TextMeshProUGUI textMesh;
     [Tooltip("Sound der Dialogbox")]
-    public AudioClip dialogSoundEffect;
+    [SerializeField]
+    private AudioClip dialogSoundEffect;
     [SerializeField]
     private GameObject cursor;
+    [SerializeField]
+    private GameObject controls;
 
     private bool showIt = false;
     private bool inputPossible = true;
@@ -77,6 +82,7 @@ public class DialogBox : MonoBehaviour
         this.texts = formatText(text);
 
         if (this.player != null) this.player.currentState = CharacterState.inDialog;
+        this.controls.SetActive(false);
         this.dialogBox.SetActive(true);
         showText();
     }
@@ -85,6 +91,7 @@ public class DialogBox : MonoBehaviour
     {
         //Blende DialogBox aus
         this.player.delay(CharacterState.interact);
+        this.controls.SetActive(true);
         this.cursor.SetActive(false);
         this.showIt = false;
         this.index = 0;

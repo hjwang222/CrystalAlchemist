@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum LayoutType
+{
+    gamepad,
+    keyboard
+}
+
 public class GlobalValues : MonoBehaviour
 {
     public static float soundEffectVolume = 1f;
     public static float soundEffectPitch = 1f;
     public static float backgroundMusicVolume = 0.3f;
+
+    public static LayoutType layoutType = LayoutType.gamepad;
 
     public static Color[] red = new Color[] { new Color32(255, 0, 0, 255) , new Color32(125, 0, 0, 255) };
     public static Color[] blue = new Color[] { new Color32(0, 125, 255, 255), new Color32(0, 25, 125, 255) };
