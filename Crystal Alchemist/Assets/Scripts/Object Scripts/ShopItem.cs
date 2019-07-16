@@ -32,7 +32,7 @@ public class ShopItem : Interactable
 
     public override void doSomething()
     {
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
+        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, this.dialogBoxText))
         {
             Item loot = items[this.index];
 

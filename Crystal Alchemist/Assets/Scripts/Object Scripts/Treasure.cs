@@ -107,7 +107,7 @@ public class Treasure : Interactable
         Utilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", true);
         this.currentState = objectState.opened;
 
-        string text = this.text;
+        string text = this.dialogBoxText;
 
         if (this.soundEffect != null && this.items.Count > 0)
         {
@@ -138,7 +138,7 @@ public class Treasure : Interactable
 
     private void canOpenChest()
     {
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price)) OpenChest();
+        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, this.dialogBoxText)) OpenChest();
     }
 
     public void showTreasureItem()

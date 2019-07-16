@@ -115,7 +115,7 @@ public class StatusEffect : MonoBehaviour
     [SerializeField]
     private SimpleSignal updateUI;
 
-
+    private AudioSource audioSource;
     private float elapsed;
     private float elapsedMana;
 
@@ -160,7 +160,11 @@ public class StatusEffect : MonoBehaviour
             //erste Wirkung
             this.elapsed = this.statusEffectInterval;
             this.elapsedMana = this.statusEffectManaDrainInterval;
-        }         
+        }
+
+        this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
+        this.audioSource.loop = false;
+        this.audioSource.playOnAwake = false;
     }
 
     #endregion
@@ -253,6 +257,11 @@ public class StatusEffect : MonoBehaviour
         {
             this.target.addColor(this.statusEffectColor);
         }*/
+    }
+
+    public void PlaySoundEffect(AudioClip audioClip)
+    {
+        Utilities.Audio.playSoundEffect(this.audioSource, audioClip);
     }
 
 

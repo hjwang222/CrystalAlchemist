@@ -48,14 +48,14 @@ public class Door : Interactable
                  if (this.doorType == DoorType.normal)
                 {
                     //Normale Tür, einfach aufmachen
-                    if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
+                    if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, this.dialogBoxText))
                     {
                         OpenCloseDoor(true, this.context);
                     }
                 }
                 else
                 {
-                    if (this.player != null) this.player.showDialogBox(this.text);
+                    if (this.player != null) this.player.showDialogBox(this.dialogBoxText);
                 }
             }                       
         }
