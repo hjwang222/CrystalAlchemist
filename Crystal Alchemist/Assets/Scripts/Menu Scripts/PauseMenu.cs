@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     private void OnEnable()
-    {
+    {        
         this.cursor.SetActive(true);
 
         this.parentMenue.SetActive(true);
@@ -71,4 +72,6 @@ public class PauseMenu : MonoBehaviour
         this.parentMenue.SetActive(false);
         this.childMenue.SetActive(true);
     }
+
+   
 }

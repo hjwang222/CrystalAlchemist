@@ -1123,12 +1123,12 @@ PrefabInstance:
     - target: {fileID: 3428822943495909471, guid: 171cc3d031cc8ce40900a0d6cdaf234d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.756
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 3428822943495909471, guid: 171cc3d031cc8ce40900a0d6cdaf234d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.532791
+      value: -2.4
       objectReference: {fileID: 0}
     - target: {fileID: 3428822943495909471, guid: 171cc3d031cc8ce40900a0d6cdaf234d,
         type: 3}
@@ -1174,6 +1174,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428822943495909467, guid: 171cc3d031cc8ce40900a0d6cdaf234d,
+        type: 3}
+      propertyPath: dialogBoxText
+      value: Spielstand wurde gespeichert.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428822943495909467, guid: 171cc3d031cc8ce40900a0d6cdaf234d,
+        type: 3}
+      propertyPath: dialogBoxTextEnglish
+      value: Game saved.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428822943495909469, guid: 171cc3d031cc8ce40900a0d6cdaf234d,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.068243325
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428822943495909469, guid: 171cc3d031cc8ce40900a0d6cdaf234d,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.8505088
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428822943495909469, guid: 171cc3d031cc8ce40900a0d6cdaf234d,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.3757913
+      objectReference: {fileID: 0}
+    - target: {fileID: 3428822943495909469, guid: 171cc3d031cc8ce40900a0d6cdaf234d,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.9064145
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 171cc3d031cc8ce40900a0d6cdaf234d, type: 3}
@@ -1394,15 +1424,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5093969795789574484, guid: 7068d4f0f4dace14b99ad94094add34c,
         type: 3}
-    - target: {fileID: 784103811228868707, guid: 558d0c161ff317645a4b0813c61f494a,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 784103811228868705, guid: 558d0c161ff317645a4b0813c61f494a,
         type: 3}
       propertyPath: m_margin.z
       value: -0.3749528
+      objectReference: {fileID: 0}
+    - target: {fileID: 784103811228868707, guid: 558d0c161ff317645a4b0813c61f494a,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 558d0c161ff317645a4b0813c61f494a, type: 3}
@@ -1920,11 +1950,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1198615760890807356, guid: a8a5e5c5b245d40438d961dd94e598fe,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1198615762132691352, guid: a8a5e5c5b245d40438d961dd94e598fe,
         type: 3}
       propertyPath: currencyNeeded
@@ -1935,6 +1960,11 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 1198615760911594903}
+    - target: {fileID: 1198615760890807356, guid: a8a5e5c5b245d40438d961dd94e598fe,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8a5e5c5b245d40438d961dd94e598fe, type: 3}
 --- !u!95 &1198615760911594903 stripped
@@ -11104,6 +11134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 7281069459718837297}
   mapName: Shop und Co
+  mapNameEnglish: Shop and more
   locationSignal: {fileID: 11400000, guid: 607a9253355ca954388700e0704f8968, type: 2}
 --- !u!1 &7281069460228075793
 GameObject:

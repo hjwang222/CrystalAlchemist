@@ -5,10 +5,18 @@ using UnityEngine;
 public class LayoutChange : MonoBehaviour
 {
     [SerializeField]
-    private GameObject gamepadUI;
+    private List<GameObject> gamepadUI;
 
     [SerializeField]
-    private GameObject keyboardUI;
+    private List<GameObject> keyboardUI;
+
+    private void setActive(bool value, List<GameObject> gameObjects)
+    {
+        foreach (GameObject obje in gameObjects)
+        {
+            obje.SetActive(value);
+        }
+    }
 
     private void Start()
     {
@@ -24,13 +32,13 @@ public class LayoutChange : MonoBehaviour
     {
         if(GlobalValues.layoutType == LayoutType.keyboard)
         {
-            this.gamepadUI.SetActive(false);
-            this.keyboardUI.SetActive(true);            
+            setActive(false, this.gamepadUI);
+            setActive(true, this.keyboardUI);
         }
         else
         {
-            this.gamepadUI.SetActive(true);
-            this.keyboardUI.SetActive(false);            
+            setActive(true, this.gamepadUI);
+            setActive(false, this.keyboardUI);
         }
     }
 }

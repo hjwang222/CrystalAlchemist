@@ -14,20 +14,27 @@ public class SkillMenuActiveSlots : MonoBehaviour
     [SerializeField]
     private SimpleSignal newAssignedSkillSignal;
 
+    public StandardSkill skill;
+
     void Start()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         setImage();
     }
 
+    private void OnEnable()
+    {
+        setImage();
+    }
+
     private void setImage()
     {
-        StandardSkill skill = getSkill();
-
-        if (skill != null)
+        this.skill = getSkill();
+        
+        if (this.skill != null)
         {
             this.skillImage.gameObject.SetActive(true);
-            this.skillImage.sprite = skill.icon;
+            this.skillImage.sprite = this.skill.icon;
         }
         else
         {
@@ -47,15 +54,19 @@ public class SkillMenuActiveSlots : MonoBehaviour
 
     private StandardSkill getSkill()
     {
-        switch (this.button)
+        if (this.player != null)
         {
-            case enumButton.AButton: return this.player.AButton;
-            case enumButton.BButton: return this.player.BButton;
-            case enumButton.XButton: return this.player.XButton;
-            case enumButton.YButton: return this.player.YButton;
-            case enumButton.RBButton: return this.player.RBButton;
-            default: return this.player.RBButton;
+            switch (this.button)
+            {
+                case enumButton.AButton: return this.player.AButton;
+                case enumButton.BButton: return this.player.BButton;
+                case enumButton.XButton: return this.player.XButton;
+                case enumButton.YButton: return this.player.YButton;
+                case enumButton.RBButton: return this.player.RBButton;
+                default: return null;
+            }
         }
+        return null;
     }
 
     private void setSkill(StandardSkill skill)

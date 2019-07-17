@@ -69,5 +69,6 @@ public class CurrencySlot : MonoBehaviour
         }
 
         this.isRunning = false;
+        this.playOnce = false;
     }
 }

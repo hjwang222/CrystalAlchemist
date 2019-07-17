@@ -23,8 +23,23 @@ public class Item : MonoBehaviour
     [BoxGroup("Pflichtfeld")]
     private SpriteRenderer shadowRenderer;
 
-    [FoldoutGroup("Item Attributes", expanded: false)]
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [SerializeField]
     public string itemName;
+
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [ShowIf("resourceType", ResourceType.item)]
+    [SerializeField]
+    public string itemGroup;
+
+    [Space(10)]
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [SerializeField]
+    public string itemNameEnglish;
+
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [SerializeField]
+    public string itemGroupEnglish;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     public int amount = 1;
@@ -39,10 +54,6 @@ public class Item : MonoBehaviour
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.item)]
     public bool isKeyItem = false;
-
-    [FoldoutGroup("Item Attributes", expanded: false)]
-    [ShowIf("resourceType", ResourceType.item)]
-    public string itemGroup;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.skill)]

@@ -26,6 +26,10 @@ public class StandardSkill : MonoBehaviour
     public string skillName;
 
     [BoxGroup("Pflichtfelder")]
+    [Tooltip("Name des Angriffs")]
+    public string skillNameEnglish;
+
+    [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
     [EnumToggleButtons]
     public SkillType category = SkillType.magical;

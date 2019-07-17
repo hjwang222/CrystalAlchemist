@@ -22,6 +22,11 @@ public class Interactable : MonoBehaviour
     [TextAreaAttribute]
     public string dialogBoxText;
 
+    [FoldoutGroup("Dialog", expanded: false)]
+    [Tooltip("Englischer Anzeige-Text für die Dialog-Box")]
+    [TextAreaAttribute]
+    public string dialogBoxTextEnglish;
+
 
 
     [FoldoutGroup("Loot", expanded: false)]
@@ -89,20 +94,19 @@ public class Interactable : MonoBehaviour
         {
             if (Input.GetButtonDown("Submit"))
             {
-                doSomething();
+                doSomethingOnSubmit();
             }
         }
 
         doOnUpdate();
     }
 
-
     public virtual void doOnUpdate()
     {
 
     }
 
-    public virtual void doSomething()
+    public virtual void doSomethingOnSubmit()
     {
 
     }

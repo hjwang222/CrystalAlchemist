@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Schwert
+  skillNameEnglish: Sword
   category: 0
   animationTriggerName: sword
   orderIndex: 1
@@ -60,6 +61,7 @@ MonoBehaviour:
   keepHoldTimer: 0
   delay: 0
   duration: 9999
+  lockMovementonDuration: 1
   deactivateByButtonUp: 0
   cooldown: 0.3
   cooldownAfterCombo: 0
@@ -78,7 +80,6 @@ MonoBehaviour:
   speedDuringCasting: 0
   speedDuringDuration: -99
   affectAnimation: 0
-  lockMovementonDuration: 1
   forward: 0
   selfThrust: 0
   selfThrustTime: 0
@@ -90,7 +91,6 @@ MonoBehaviour:
   blendTree: 1
   useOffSetToBlendTree: 0
   rotationModifier: 90
-  rotateEndSprite: 0
   snapRotationInDegrees: 90
   positionOffset: 0
   positionHeight: 0
@@ -111,16 +111,14 @@ MonoBehaviour:
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: 21300000, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  startSoundEffect: {fileID: 8300000, guid: 5524b6e8c3f491c42a39af04a2460765, type: 3}
-  endSoundEffect: {fileID: 0}
-  animSoundeffect: {fileID: 0}
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: -0.004384335
+  cooldownTimeLeft: -0.0028667413
+  movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
-  playEndEffectAlready: 0
+  dontPlayAudio: 0
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1

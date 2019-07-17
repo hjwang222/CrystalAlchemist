@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Manatrank
+  skillNameEnglish: Mana Potion
   category: 2
   animationTriggerName: 
   orderIndex: 2
@@ -150,12 +151,12 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
-  myColliders: []
   shadow: {fileID: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
   duration: 60
+  lockMovementonDuration: 0
   deactivateByButtonUp: 0
   cooldown: 3
   cooldownAfterCombo: 0
@@ -174,7 +175,6 @@ MonoBehaviour:
   speedDuringCasting: 0
   speedDuringDuration: 0
   affectAnimation: 1
-  lockMovementonDuration: 0
   forward: 0
   selfThrust: 0
   selfThrustTime: 0
@@ -186,7 +186,6 @@ MonoBehaviour:
   blendTree: 0
   useOffSetToBlendTree: 0
   rotationModifier: 0
-  rotateEndSprite: 0
   snapRotationInDegrees: 0
   positionOffset: 0
   positionHeight: 0
@@ -203,19 +202,18 @@ MonoBehaviour:
   affectObjects: 0
   affectSkills: 0
   ignoreInvincibility: 1
+  stateType: 0
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: 7825757526154977504, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  startSoundEffect: {fileID: 8300000, guid: 7adbf2f631e07b8419a465f3760d6496, type: 3}
-  endSoundEffect: {fileID: 0}
-  animSoundeffect: {fileID: 0}
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0.28848833
+  movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
-  playEndEffectAlready: 0
+  dontPlayAudio: 0
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1

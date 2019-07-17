@@ -57,30 +57,9 @@ public class Treasure : Interactable
 
     public override void doOnUpdate()
     {
-        if (this.context != null)
-        {
-            //Wenn Spieler in Reichweite ist und Truhe zu ist -> Context Clue anzeigen! Ansonsten nicht.
-            if (this.currentState == objectState.opened) this.context.SetActive(false);
-            else if (this.currentState != objectState.opened && this.isPlayerInRange) this.context.SetActive(true);
-            else this.context.SetActive(false);
-        }
-    }
-
-    public override void doSomething()
-    {        
-        if (this.currentState != objectState.opened)
-        {
-            if (this.treasureType == TreasureType.normal)
-            {
-                canOpenChest();
-            }
-            else if (this.treasureType == TreasureType.lootbox)
-            {
-                canOpenChest();
-            }
-        }
-        else
-        {   
+        //Close when opened
+        if (this.currentState == objectState.opened && this.player != null && this.player.currentState == CharacterState.interact)
+        {           
             //Entferne Item aus der Welt und leere die Liste
             foreach (Item item in this.items)
             {
@@ -94,7 +73,30 @@ public class Treasure : Interactable
                 this.currentState = objectState.normal;
                 Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
             }
-        }           
+        }
+        /*
+        if (this.context != null)
+        {
+            //Wenn Spieler in Reichweite ist und Truhe zu ist -> Context Clue anzeigen! Ansonsten nicht.
+            if (this.currentState == objectState.opened) this.context.SetActive(false);
+            else if (this.currentState != objectState.opened && this.isPlayerInRange) this.context.SetActive(true);
+            else this.context.SetActive(false);
+        }*/
+    }
+
+    public override void doSomethingOnSubmit()
+    {        
+        if (this.currentState != objectState.opened)
+        {
+            if (this.treasureType == TreasureType.normal)
+            {
+                canOpenChest();
+            }
+            else if (this.treasureType == TreasureType.lootbox)
+            {
+                canOpenChest();
+            }
+        }              
     }
 
     #endregion
@@ -107,7 +109,7 @@ public class Treasure : Interactable
         Utilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", true);
         this.currentState = objectState.opened;
 
-        string text = this.dialogBoxText;
+        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
 
         if (this.soundEffect != null && this.items.Count > 0)
         {
@@ -124,12 +126,15 @@ public class Treasure : Interactable
             {
                 this.player.collect(item, false);
                 text = Utilities.Format.getDialogBoxText("Du hast", item.amount, item, "erhalten!");
-            }
+
+                if (GlobalValues.useAlternativeLanguage) text = Utilities.Format.getDialogBoxText("You obtained", item.amount, item, "!");
+            }                
         }
         else
         {
             //Kein Item drin
             text = "Die Kiste ist leer... .";
+            if (GlobalValues.useAlternativeLanguage) text = "This chest is empty... .";
         }
 
         if (this.player != null) this.player.showDialogBox(text);
@@ -138,7 +143,8 @@ public class Treasure : Interactable
 
     private void canOpenChest()
     {
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, this.dialogBoxText)) OpenChest();
+        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
+        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text)) OpenChest();
     }
 
     public void showTreasureItem()

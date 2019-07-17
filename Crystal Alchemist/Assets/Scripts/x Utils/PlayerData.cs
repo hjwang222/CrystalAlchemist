@@ -62,12 +62,14 @@ public class GameOptions
     public float musicVolume;
     public float soundVolume;
     public string layout;
+    public bool useAlternativeLanguage;
 
     public GameOptions()
     {
         this.musicVolume = GlobalValues.backgroundMusicVolume;
         this.soundVolume = GlobalValues.soundEffectVolume;
         this.layout = GlobalValues.layoutType.ToString().ToLower();
+        this.useAlternativeLanguage = GlobalValues.useAlternativeLanguage;
     }
 }
 

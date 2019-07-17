@@ -47,6 +47,9 @@ public class Character : MonoBehaviour
     [BoxGroup("Pflichtfelder")]
     public string characterName;
 
+    [BoxGroup("Pflichtfelder")]
+    public string englischCharacterName;
+
     [Required]
     [BoxGroup("Pflichtfelder")]
     public Rigidbody2D myRigidbody;
@@ -582,10 +585,20 @@ public class Character : MonoBehaviour
 
     public void updateResource(ResourceType type, Item item, float addResource)
     {
-        updateResource(type, item, addResource, true);
+        updateResource(false, type, item, addResource, true);
     }
 
-    public void updateResource(ResourceType type, Item item, float value, bool showingDamageNumber)
+    public void updateResource(ResourceType type, Item item, float addResource, bool showingDamageNumber)
+    {
+        updateResource(false, type, item, addResource, showingDamageNumber);
+    }
+
+    public void updateResource(bool raiseResourceSignal, ResourceType type, Item item, float addResource)
+    {
+        updateResource(raiseResourceSignal, type, item, addResource, true);
+    }
+
+    public void updateResource(bool raiseResourceSignal, ResourceType type, Item item, float value, bool showingDamageNumber)
     {
         switch (type)
         {
@@ -613,7 +626,7 @@ public class Character : MonoBehaviour
                     if (item != null)
                     {
                         Utilities.Items.updateInventory(item, this, Mathf.RoundToInt(value));
-                        callSignal(this.currencies, value);  //TODO Single Signal?
+                        if(raiseResourceSignal) callSignal(this.currencies, value);  //TODO Single Signal?
                     }
                     break;
                 }
@@ -782,7 +795,7 @@ public class Character : MonoBehaviour
         if (this.canCollectAll || this.canCollect.Contains(item.itemGroup))
         {
             if(playSound) item.playSounds();
-            this.updateResource(item.resourceType, item, item.amount);            
+            this.updateResource(true, item.resourceType, item, item.amount);            
 
             if (destroyIt) item.DestroyIt();
         }

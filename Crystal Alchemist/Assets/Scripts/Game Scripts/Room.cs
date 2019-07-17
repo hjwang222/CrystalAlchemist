@@ -10,7 +10,11 @@ public class Room : MonoBehaviour
     [SerializeField]
     private GameObject virtualCamera;
 
-    public string mapName;
+    [SerializeField]
+    private string mapName;
+
+    [SerializeField]
+    private string mapNameEnglish;
 
     [SerializeField]
     private StringSignal locationSignal;
@@ -25,8 +29,10 @@ public class Room : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            string text = Utilities.Format.getLanguageDialogText(this.mapName, this.mapNameEnglish);
+
             this.virtualCamera.SetActive(true);
-            this.locationSignal.Raise(this.mapName);
+            this.locationSignal.Raise(text);
             CinemachineVirtualCamera vcam = this.virtualCamera.GetComponent<CinemachineVirtualCamera>();
             if(vcam.Follow == null) vcam.Follow = other.transform;
         }
