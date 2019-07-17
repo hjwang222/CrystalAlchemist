@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Gift Haut
+  skillNameEnglish: 
   category: 0
   animationTriggerName: 
   orderIndex: 10
@@ -78,12 +79,12 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
-  myColliders: []
   shadow: {fileID: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
-  duration: 99
+  duration: 9999
+  lockMovementonDuration: 0
   deactivateByButtonUp: 0
   cooldown: 0
   cooldownAfterCombo: 0
@@ -103,7 +104,6 @@ MonoBehaviour:
   speedDuringCasting: 0
   speedDuringDuration: 0
   affectAnimation: 1
-  lockMovementonDuration: 0
   forward: 0
   selfThrust: 0
   selfThrustTime: 0
@@ -115,7 +115,6 @@ MonoBehaviour:
   blendTree: 0
   useOffSetToBlendTree: 0
   rotationModifier: 0
-  rotateEndSprite: 0
   snapRotationInDegrees: 0
   positionOffset: 0
   positionHeight: 0
@@ -132,19 +131,18 @@ MonoBehaviour:
   affectObjects: 0
   affectSkills: 0
   ignoreInvincibility: 0
+  stateType: 0
   maxAmounts: 9999
   comboAmount: 99
   icon: {fileID: 0}
-  startSoundEffect: {fileID: 0}
-  endSoundEffect: {fileID: 0}
-  animSoundeffect: {fileID: 0}
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
-  playEndEffectAlready: 0
+  dontPlayAudio: 0
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1

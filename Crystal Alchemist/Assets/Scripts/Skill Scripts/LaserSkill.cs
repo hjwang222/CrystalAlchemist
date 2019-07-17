@@ -70,7 +70,10 @@ public class LaserSkill : StandardSkill
         int layerMask = 1 << this.sender.gameObject.layer;
         layerMask = ~layerMask;
 
-        RaycastHit2D hitInfo = Physics2D.CircleCast(startpoint, this.laserSprite.size.y / 5, direction, distance, layerMask);
+        float offset = 1f;
+        Vector2 newPosition = new Vector2(startpoint.x - (this.direction.x * offset), startpoint.y - (this.direction.y * offset));
+
+        RaycastHit2D hitInfo = Physics2D.CircleCast(newPosition, this.laserSprite.size.y / 5, this.direction, distance, layerMask);
 
         if ((this.lockOn != null && target != null) || (this.lockOn == null && hitInfo && !hitInfo.collider.isTrigger))
         {
