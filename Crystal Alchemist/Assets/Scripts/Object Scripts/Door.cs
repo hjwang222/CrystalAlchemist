@@ -39,7 +39,7 @@ public class Door : Interactable
         }
     }
 
-    public override void doSomething()
+    public override void doSomethingOnSubmit()
     {
         if (this.doorType != DoorType.enemy && this.doorType != DoorType.button)
         {
@@ -48,14 +48,17 @@ public class Door : Interactable
                  if (this.doorType == DoorType.normal)
                 {
                     //Normale Tür, einfach aufmachen
-                    if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, this.dialogBoxText))
+
+                    string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
+                    if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text))
                     {
                         OpenCloseDoor(true, this.context);
                     }
                 }
                 else
                 {
-                    if (this.player != null) this.player.showDialogBox(this.dialogBoxText);
+                    string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
+                    if (this.player != null) this.player.showDialogBox(text);
                 }
             }                       
         }

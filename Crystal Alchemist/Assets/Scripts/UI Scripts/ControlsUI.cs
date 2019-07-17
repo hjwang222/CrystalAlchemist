@@ -39,7 +39,9 @@ public class ControlsUI : MonoBehaviour
         else if (this.player != null 
             && this.player.currentState == CharacterState.inDialog)
         {
-
+            this.combat.SetActive(false);
+            this.interaction.SetActive(false);
+            this.menu.SetActive(false);
         }
         else if (this.player != null 
             && this.player.currentState == CharacterState.interact)

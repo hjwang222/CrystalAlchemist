@@ -18,8 +18,7 @@ public class LoadSystem : MonoBehaviour
 
             if (data.inventory.Count > 0)
             {
-                loadInventory(data, player);
-                player.currencySignalUI.Raise();
+                loadInventory(data, player);                
             }
 
             if (data.skills.Count > 0)

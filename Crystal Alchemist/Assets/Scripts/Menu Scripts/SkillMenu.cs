@@ -16,10 +16,22 @@ public class SkillMenu : MonoBehaviour
     [SerializeField]
     [Required]
     private myCursor cursor;
+
     [BoxGroup("Mandatory")]
     [SerializeField]
     [Required]
-    private TextMeshProUGUI categoryText;
+    private TextMeshProUGUI categoryWeapons;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    [Required]
+    private TextMeshProUGUI categoryMagic;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    [Required]
+    private TextMeshProUGUI categoryItems;
+
     [BoxGroup("Mandatory")]
     [SerializeField]
     [Required]
@@ -46,23 +58,7 @@ public class SkillMenu : MonoBehaviour
     private TextMeshProUGUI skillDetailsCost;
     [BoxGroup("Detail-Ansicht")]
     [SerializeField]
-    private Image StatusEffects;
-
-    [BoxGroup("Skill Slots")]
-    [SerializeField]
-    private GameObject slotA;
-    [BoxGroup("Skill Slots")]
-    [SerializeField]
-    private GameObject slotB;
-    [BoxGroup("Skill Slots")]
-    [SerializeField]
-    private GameObject slotX;
-    [BoxGroup("Skill Slots")]
-    [SerializeField]
-    private GameObject slotY;
-    [BoxGroup("Skill Slots")]
-    [SerializeField]
-    private GameObject slotRB;
+    private Image StatusEffects;       
 
     [BoxGroup("Buttons")]
     [SerializeField]
@@ -128,20 +124,30 @@ public class SkillMenu : MonoBehaviour
 
     public void showSkillDetails(SkillSlot slot)
     {
-        if (slot.skill != null)
+        showSkillDetails(slot.skill);
+    }
+
+    public void showSkillDetails(SkillMenuActiveSlots slot)
+    {
+        showSkillDetails(slot.skill);
+    }
+
+    public void showSkillDetails(StandardSkill skill)
+    {
+        if (skill != null)
         {
-            this.skillDetailsName.text = "Name: " + slot.skill.skillName;
+            this.skillDetailsName.text = Utilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
 
             float strength = 0;
-            if (slot.skill.affectedResources.Count > 0) strength = Mathf.Abs(slot.skill.affectedResources[0].amount);
-            this.skillDetailsStrength.text = "Stärke: " + strength + "";
+            if (skill.affectedResources.Count > 0) strength = Mathf.Abs(skill.affectedResources[0].amount)*4;
+            this.skillDetailsStrength.text = strength + "";
 
-            this.skillDetailsCost.text = "Kosten: " + Mathf.Abs(slot.skill.addResourceSender) + "";
+            this.skillDetailsCost.text = Mathf.Abs(skill.addResourceSender)*4 + "";
 
-            if (slot.skill.statusEffects.Count > 0)
+            if (skill.statusEffects.Count > 0)
             {
                 this.StatusEffects.enabled = true;
-                this.StatusEffects.sprite = slot.skill.statusEffects[0].iconSprite;
+                this.StatusEffects.sprite = skill.statusEffects[0].iconSprite;
             }
             else this.StatusEffects.enabled = false;
         }
@@ -153,9 +159,9 @@ public class SkillMenu : MonoBehaviour
 
     public void hideSkillDetails()
     {
-        this.skillDetailsName.text = "Name: ";
-        this.skillDetailsStrength.text = "Stärke: ";
-        this.skillDetailsCost.text = "Kosten: ";
+        this.skillDetailsName.text = "";
+        this.skillDetailsStrength.text = "";
+        this.skillDetailsCost.text = "";
 
         this.StatusEffects.enabled = false;
     }
@@ -163,14 +169,17 @@ public class SkillMenu : MonoBehaviour
     public void showCategory(int category)
     {        
         this.physicalSkills.SetActive(false);
+        this.categoryWeapons.gameObject.SetActive(false);
         this.magicalSkills.SetActive(false);
+        this.categoryMagic.gameObject.SetActive(false);
         this.itemSkills.SetActive(false);
-        
+        this.categoryItems.gameObject.SetActive(false);
+
         switch (category)
         {
-            case 1: this.physicalSkills.SetActive(true); this.categoryText.text = "Waffen"; break;
-            case 2: this.magicalSkills.SetActive(true); this.categoryText.text = "Zauber"; break;
-            default: this.itemSkills.SetActive(true); this.categoryText.text = "Items"; break;
+            case 1: this.physicalSkills.SetActive(true); this.categoryWeapons.gameObject.SetActive(true); break;
+            case 2: this.magicalSkills.SetActive(true); this.categoryMagic.gameObject.SetActive(true); break;
+            default: this.itemSkills.SetActive(true); this.categoryItems.gameObject.SetActive(true); break;
         }
 
         setPage(0);

@@ -131,23 +131,23 @@ public class Utilities : MonoBehaviour
                 return false;
             }
 
-            int layerMask = 1 << character.gameObject.layer;
-            layerMask = ~layerMask;
-            float distance = 1f;
+            int layerMask = 9; //Map
+            float distance = 0.5f;
+            float width = 0.2f;
+            float offset = 0.1f;
 
-            RaycastHit2D hit = Physics2D.Raycast(character.shadowRenderer.transform.position, character.direction, distance, layerMask);
+            Vector2 position = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset), character.shadowRenderer.transform.position.y - (character.direction.y * offset));
 
-            if (hit.collider != null && hit.collider.gameObject == gameObject)
-            {
-                return true;
-            }
+            RaycastHit2D hit = Physics2D.CircleCast(position, width, character.direction, distance, layerMask);
 
+            if (hit != false && !hit.collider.isTrigger && hit.collider.gameObject == gameObject) return true;
+            
             return false;
         }
     }
 
     ///////////////////////////////////////////////////////////////
-    
+
     public static class UnityUtils
     {
         public static GameObject hasChildWithTag(Character character, string searchTag)
@@ -339,7 +339,7 @@ public class Utilities : MonoBehaviour
 
         public static bool canOpenAndUpdateResource(ResourceType currency, Item item, Player player, int price, string defaultText)
         {
-            string text = defaultText;            
+            string text = defaultText;
 
             if (player != null
                 && player.currentState != CharacterState.inDialog
@@ -348,14 +348,18 @@ public class Utilities : MonoBehaviour
                 if (hasEnoughCurrencyAndUpdateResource(currency, player, item, -price)) return true;
                 else
                 {
-                    if (text.Replace(" ", "").Length <= 0) text = Format.getDialogBoxText("Du benötigst", price, item, "...");
+                    if (text.Replace(" ", "").Length <= 0)
+                    {
+                        text = Format.getDialogBoxText("Du benötigst", price, item, "...");
+                        if (GlobalValues.useAlternativeLanguage) text = Format.getDialogBoxText("You need", price, item, "...");
+                    }
                     player.showDialogBox(text);
                     return false;
                 }
             }
 
             return false;
-        }        
+        }
     }
 
     ///////////////////////////////////////////////////////////////
@@ -379,13 +383,15 @@ public class Utilities : MonoBehaviour
                     {
                         if (item.isKeyItem)
                         {
-                            result = part1 + " " + item.itemName;
+                            result = part1 + " " + getLanguageDialogText(item.itemName, item.itemNameEnglish);
                         }
                         else
                         {
-                            string typ = item.itemGroup;
+                            string typ = getLanguageDialogText(item.itemGroup, item.itemGroupEnglish);
 
-                            if (price == 1 && typ != "Schlüssel") typ = typ.Substring(0, typ.Length - 1);
+
+                            if (price == 1 && (typ != "Schlüssel" || GlobalValues.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
+
                             result += typ;
                         }
                     }; break;
@@ -394,6 +400,12 @@ public class Utilities : MonoBehaviour
             }
 
             return result + " " + part2;
+        }
+
+        public static string getLanguageDialogText(string originalText, string alternativeText)
+        {
+            if (GlobalValues.useAlternativeLanguage && alternativeText.Replace(" ", "").Length > 1) return alternativeText;
+            else return originalText;
         }
 
         public static string setDamageNumber(float value, float schwelle)

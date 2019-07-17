@@ -82,7 +82,7 @@ public class Enemy : Character
             if (currentAggro > aggro)
             {
                 aggro = currentAggro;
-                target = character.characterName;
+                target = Utilities.Format.getLanguageDialogText(character.characterName, character.englischCharacterName);
             }
         }
     }

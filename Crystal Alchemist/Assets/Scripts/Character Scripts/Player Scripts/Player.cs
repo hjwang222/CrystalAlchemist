@@ -77,6 +77,8 @@ public class Player : Character
     {
         SaveSystem.loadOptions();
 
+
+
         this.isPlayer = true;
         this.init();        
         this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.currencySignalUI);
@@ -90,6 +92,8 @@ public class Player : Character
         Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
 
         this.direction = new Vector2(0, -1);
+
+        this.currencySignalUI.Raise();
     }
 
     public void loadSkillsFromSkillSet(string name, enumButton button)
@@ -118,7 +122,7 @@ public class Player : Character
     private new void Update()
     {
         base.Update();
-        playerInputs();          
+        playerInputs();
     }
     
     private void playerInputs()

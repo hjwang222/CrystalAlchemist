@@ -50,10 +50,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowRenderer: {fileID: 3576198895323998835}
   itemName: Blauer Kristall
+  itemGroup: Kristalle
+  itemNameEnglish: Blue Crystal
+  itemGroupEnglish: crystals
   amount: 5
   maxAmount: 9999
   resourceType: 3
-  itemGroup: Kristalle
+  isKeyItem: 0
   skill: {fileID: 0}
   collectSoundEffect: {fileID: 8300000, guid: ec4c06267ecfbc94ca8f84ce329e2910, type: 3}
 --- !u!61 &8069356869073092964
@@ -162,7 +165,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7435804413859673067}
+  - {fileID: 7435804413859672952}
   - {fileID: 9017888502905957137}
   m_Father: {fileID: 8069356869073092965}
   m_RootOrder: 0
@@ -383,7 +386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f11b09210e7962848bddb256727f4657, type: 3}
---- !u!4 &7435804413859673067 stripped
+--- !u!4 &7435804413859672952 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 634257569416937405, guid: f11b09210e7962848bddb256727f4657,
     type: 3}

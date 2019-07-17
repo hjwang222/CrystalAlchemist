@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Feuerball
+  skillNameEnglish: Fireball
   category: 1
   animationTriggerName: 
   orderIndex: 1
@@ -217,9 +218,6 @@ MonoBehaviour:
   maxAmounts: 99
   comboAmount: 99
   icon: {fileID: 2415121650574243764, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  startSoundEffect: {fileID: 8300000, guid: adc16cf237d5fe844aa1a59578d837ac, type: 3}
-  endSoundEffect: {fileID: 0}
-  animSoundeffect: {fileID: 0}
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
@@ -227,7 +225,7 @@ MonoBehaviour:
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
-  playEndEffectAlready: 0
+  dontPlayAudio: 0
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1

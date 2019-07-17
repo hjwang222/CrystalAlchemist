@@ -30,14 +30,22 @@ public class ShopItem : Interactable
         this.childSprite.sprite = this.items[this.index].getSprite();
     }
 
-    public override void doSomething()
+    public override void doSomethingOnSubmit()
     {
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, this.dialogBoxText))
+        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
+
+        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text))
         {
             Item loot = items[this.index];
 
             string itemObtained = Utilities.Format.getDialogBoxText("Du hast", loot.amount, loot, "für");
             string itemNedded = Utilities.Format.getDialogBoxText("", this.price, this.item, "gekauft!");
+
+            if (GlobalValues.useAlternativeLanguage)
+            {
+                itemObtained = Utilities.Format.getDialogBoxText("You bought", loot.amount, loot, "for");
+                itemNedded = Utilities.Format.getDialogBoxText("", this.price, this.item, "!");
+            }
 
             this.player.showDialogBox(itemObtained + "\n" + itemNedded);
             this.player.collect(loot, false);

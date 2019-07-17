@@ -24,7 +24,6 @@ public class CombatButtons : MonoBehaviour
     [FoldoutGroup("A Button UI", expanded: false)]
     [SerializeField]
     private Image skillIconAButtonTrans;
-    [FoldoutGroup("A Button UI", expanded: false)]
 
     [FoldoutGroup("B Button UI", expanded: false)]
     [SerializeField]
@@ -107,6 +106,7 @@ public class CombatButtons : MonoBehaviour
 
     public void setButtonSkillImages()
     {
+
         setButton(this.player.AButton, this.skillIconAButton, this.iconAButton);
         setButton(this.player.BButton, this.skillIconBButton, this.iconBButton);
         setButton(this.player.XButton, this.skillIconXButton, this.iconXButton);

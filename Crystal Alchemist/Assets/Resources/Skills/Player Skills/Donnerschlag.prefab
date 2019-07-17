@@ -272,7 +272,7 @@ Transform:
   - {fileID: 6625934165072255100}
   - {fileID: 1065962740209003586}
   - {fileID: 6625934164191362223}
-  - {fileID: 5335493528809119585}
+  - {fileID: 5335493528809119355}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -489,6 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Donnerschlag
+  skillNameEnglish: Thunderstrike
   category: 1
   animationTriggerName: 
   orderIndex: 17
@@ -551,9 +552,6 @@ MonoBehaviour:
   maxAmounts: 3
   comboAmount: 99
   icon: {fileID: 21300022, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  startSoundEffect: {fileID: 8300000, guid: a9880e2410cffa044936162b476e2b5b, type: 3}
-  endSoundEffect: {fileID: 0}
-  animSoundeffect: {fileID: 0}
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
@@ -561,7 +559,7 @@ MonoBehaviour:
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
-  playEndEffectAlready: 0
+  dontPlayAudio: 0
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
@@ -697,7 +695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7125f1409d0689b4d80b6ab7179979c8, type: 3}
---- !u!224 &5335493528809119585 stripped
+--- !u!224 &5335493528809119355 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 822386160285104020, guid: 7125f1409d0689b4d80b6ab7179979c8,
     type: 3}
