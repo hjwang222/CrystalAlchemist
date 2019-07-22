@@ -102,20 +102,28 @@ public class Utilities : MonoBehaviour
         {
             if (skill != null && skill.triggerIsActive)
             {
-                if (skill.affectSkills
-                    && hittedCharacter.CompareTag("Skill")
-                    && hittedCharacter.GetComponent<StandardSkill>().skillName != skill.skillName)
+                if (hittedCharacter.gameObject == skill.sender.gameObject)
                 {
-                    return true;
+                    if (!skill.affectSelf) return false;
+                    else return true;
                 }
-                else if (!hittedCharacter.isTrigger)
+                else
                 {
-                    if ((skill.affectPlayers && hittedCharacter.CompareTag("Player"))
-                        || skill.affectEnemies && hittedCharacter.CompareTag("Enemy")
-                        || skill.affectObjects && hittedCharacter.CompareTag("Object")
-                        )
+                    if (skill.affectSkills
+                        && hittedCharacter.CompareTag("Skill")
+                        && hittedCharacter.GetComponent<StandardSkill>().skillName != skill.skillName)
                     {
                         return true;
+                    }
+                    else if (!hittedCharacter.isTrigger)
+                    {
+                        if ((skill.affectPlayers && hittedCharacter.CompareTag("Player"))
+                            || skill.affectEnemies && hittedCharacter.CompareTag("Enemy")
+                            || skill.affectObjects && hittedCharacter.CompareTag("Object")
+                            )
+                        {
+                            return true;
+                        }
                     }
                 }
             }
@@ -459,6 +467,8 @@ public class Utilities : MonoBehaviour
             }
         }
     }
+
+    
 
     ///////////////////////////////////////////////////////////////
 

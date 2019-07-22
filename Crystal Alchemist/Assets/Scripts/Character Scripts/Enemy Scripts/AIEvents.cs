@@ -25,29 +25,35 @@ public enum AIEventType
 }
 
 [System.Serializable]
-public struct AIRotation
+public class AIPhase
 {
-    public int phase;
-
     public List<AIAction> actions;
 }
 
 [System.Serializable]
-public struct AIEvent
+public class AIEvent
 {
+    [BoxGroup("Trigger")]
     public List<AITrigger> trigger;
 
+    [BoxGroup("Trigger")]
+    public bool repeatEvent = false;
+
+    [BoxGroup("Trigger")]
+    public bool requireAll = false;
+
+    [BoxGroup("Actions")]
     public List<AIAction> actions;
 
-    public bool notActive;
+    [HideInInspector]
+    public float startTime = 0;
 
-    public bool reset;
-
-    public bool requireAll;
+    [HideInInspector]
+    public bool isActive = true;
 }
 
 [System.Serializable]
-public struct AIAction
+public class AIAction
 {
     public AIActionType type;
 
@@ -74,7 +80,7 @@ public struct AIAction
 }
 
 [System.Serializable]
-public struct AITrigger
+public class AITrigger
 {
     [SerializeField]
     public AIEventType type;
@@ -100,22 +106,24 @@ public class AIEvents : MonoBehaviour
     private Enemy enemy;
 
     [SerializeField]
-    private List<AIRotation> phases = new List<AIRotation>();
+    private List<AIPhase> phases = new List<AIPhase>();
 
     [SerializeField]
-    private List<AIEvent> events;
+    private List<AIEvent> events = new List<AIEvent>();
+
 
     private List<AIAction> activeRotation = new List<AIAction>();
     private List<AIAction> eventRotation = new List<AIAction>();
 
     private float timeElapsed;
-    private bool canUseAction = true;
-    private bool startEvents = false;
+
+    private bool startAI = false;
     private int actionsIndex;
     private int eventIndex;
+
     private float globalCoolDown = 0;
 
-    //private bool startAI = false;
+
 
     private void Start()
     {
@@ -149,14 +157,16 @@ public class AIEvents : MonoBehaviour
         }
     }
 
+
+
     private void Update()
     {
         if (enemy.target != null)
         {
-            this.startEvents = true;
+            this.startAI = true;
         }
 
-        if (this.startEvents)
+        if (this.startAI)
         {
             this.timeElapsed += (Time.deltaTime * this.enemy.timeDistortion);
 
@@ -182,19 +192,29 @@ public class AIEvents : MonoBehaviour
     }
 
 
+
+
     #region Events
 
     private void checkEvents()
     {
         for(int i = 0; i < this.events.Count; i++) 
         {
-            AIEvent elem = this.events[i];
+            AIEvent temp = this.events[i];
 
-            if (isTriggered(elem))
+            if (isTriggered(this.events[i]))
             {
-                this.eventRotation.AddRange(elem.actions);
+                this.eventRotation.AddRange(this.events[i].actions);
                 this.globalCoolDown = 0;
-                if(!elem.reset) elem.notActive = true;                
+
+                if (!temp.repeatEvent)
+                {
+                    temp.isActive = false;
+                }
+                else
+                {
+                    temp.startTime = this.timeElapsed;
+                }
             }
         }
     }
@@ -203,16 +223,16 @@ public class AIEvents : MonoBehaviour
     {
         int success = 0;
 
-        if (!elem.notActive)
+        if (elem.isActive)
         {
             foreach (AITrigger triggerElem in elem.trigger)
             {
-                if (triggerElem.type == AIEventType.time && this.timeElapsed >= triggerElem.time)
+                if (triggerElem.type == AIEventType.time && this.timeElapsed >= (triggerElem.time + elem.startTime))
                 {
                     if (!elem.requireAll) return true;
                     else success++;
                 }
-                else if (triggerElem.type == AIEventType.life && this.enemy.life <= (this.enemy.life * triggerElem.life / 100))
+                else if (triggerElem.type == AIEventType.life && this.enemy.life <= (this.enemy.maxLife * triggerElem.life / 100))
                 {
                     if (!elem.requireAll) return true;
                     else success++;
@@ -230,27 +250,48 @@ public class AIEvents : MonoBehaviour
         return false;
     }
 
+    public void resetAllEvents()
+    {
+        this.activeRotation = this.phases[0].actions;
+        this.startAI = false;
+
+        for (int i = 0; i < this.events.Count; i++)
+        {
+            AIEvent elem = this.events[i];
+            if (!elem.isActive)
+            {
+                elem.isActive = true;
+                elem.startTime = 0;
+            }
+        }
+    }
+
     #endregion
 
 
 
 
-    private int doRotation(List<AIAction> actionList, int index, bool clear)
+    private int doRotation(List<AIAction> actionList, int index, bool clearList)
     {
         AIAction action = actionList[index];
 
         useAction(action);
 
-        if (index < actionList.Count - 1) return index++; //next Action
+        if (index < actionList.Count - 1)
+        {
+            return index += 1; //next Action
+        }
         else
         {
-            if (clear) actionList.Clear();
+            if (clearList)
+            {
+                actionList.Clear(); //All Events done, clear list
+            }
+
             return 0; //repeat
         }                  
     }
-
-
-
+       
     private bool skillCanBeUsed(StandardSkill skill)
     {
         if (skill != null)
@@ -282,7 +323,6 @@ public class AIEvents : MonoBehaviour
         {
             //useskill
             StandardSkill usedSkill = Utilities.Skill.instantiateSkill(action.skill, this.enemy, this.enemy.target);
-
         }
         else if (action.type == AIActionType.move)
         {

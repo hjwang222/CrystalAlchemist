@@ -17,6 +17,11 @@ public class Fading : MonoBehaviour
     [SerializeField]
     private Color colorFadeOut = Color.white;
 
+    private void Start()
+    {
+        fade(true);
+    }
+
     public void fade(bool fadeIn)
     {
         if (fadeIn)

@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc1b5e2950c0504aae886f416523f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 2246077131478481017}
+  character: {fileID: 4482648712296496520}
 --- !u!1 &1158493752
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +234,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2246077131478480998}
   - component: {fileID: 2246077131478480996}
+  - component: {fileID: 4482648712296496520}
   - component: {fileID: 2246077131478481017}
+  - component: {fileID: 4482648712296496523}
+  - component: {fileID: 4482648712296496522}
   - component: {fileID: 8351946423556740917}
   - component: {fileID: 1028641328}
   - component: {fileID: 7129135206912136028}
@@ -252,8 +255,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2246077131478480992}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.763466, y: -1.22807, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 30, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 929082026}
@@ -283,7 +286,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2246077131478481017
+--- !u!114 &4482648712296496520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,7 +295,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2246077131478480992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac635517652981a448863c38811bc524, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Blob
@@ -308,7 +311,7 @@ MonoBehaviour:
   startMana: 1
   startSpeed: 25
   startSpellSpeed: 100
-  respawnTime: 25
+  respawnTime: 30
   immunityToStatusEffects: []
   maxLife: 3
   maxMana: 1
@@ -316,33 +319,26 @@ MonoBehaviour:
   lifeRegenerationInterval: 0
   manaRegeneration: 0
   manaRegenerationInterval: 0
-  skillSet: []
   initializeSkill: {fileID: 2574719380784309251, guid: 65b268bfda2fa0e4bb41978a974d71d5,
     type: 3}
   deathSkill: {fileID: 0}
   damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
     type: 3}
   antiKnockback: 0
-  cannotBeHitTime: 0.5
+  cannotBeHitTime: 0.3
   isTouchable: 1
   showHitcolor: 1
-  hitColor: {r: 0.6320754, g: 0, b: 0, a: 1}
+  hitColor: {r: 0.6313726, g: 0, b: 0, a: 1}
   lootTable:
-  - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
-    dropRate: 20
-    amount: 1
   - item: {fileID: 8069356869073092967, guid: 6b191b04f9a7dbc49920d197f5070449, type: 3}
-    dropRate: 10
-    amount: 1
-  - item: {fileID: 8525589707579411224, guid: 4f1623ac219c06a40aa2cbe59058c6b2, type: 3}
-    dropRate: 30
+    dropRate: 0
     amount: 1
   multiLoot: 0
   canCollectAll: 0
   canCollect: []
   hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
   killSoundEffect: {fileID: 8300000, guid: a14b852168cb1df49873e07864a34b8f, type: 3}
-  characterSpecies: Gel
+  characterSpecies: 
   characterGender: 2
   characterType: 1
   spawnPosition: {x: 0, y: 0, z: 0}
@@ -366,21 +362,111 @@ MonoBehaviour:
   isPlayer: 0
   inventory: []
   target: {fileID: 0}
-  aggroIncreaseFactor: 0.6
-  aggroOnHitIncreaseFactor: 10
-  aggroDecreaseFactor: 0
+--- !u!114 &2246077131478481017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2246077131478480992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac635517652981a448863c38811bc524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 4482648712296496520}
+  attackRadius: 0
+  backToStart: 1
+  path: []
+  followPathPause: 0
+  followPathPrecision: 0.01
+  followPathInCircle: 0
+--- !u!114 &4482648712296496523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2246077131478480992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f80b21aee0d2f47a0e58afdc49b328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 4482648712296496520}
+  aggroIncreaseFactor: 60
+  aggroOnHitIncreaseFactor: 120
+  aggroDecreaseFactor: -50
   targetFoundClue: {fileID: 2272594966625261294, guid: 4fd74db682f4f7c4080f1aa35f365e1e,
     type: 3}
   foundClueDuration: 0
   targetActiveClue: {fileID: 7047217433774240400, guid: d0cd9d0d605bdfd44b021afb2046b0b9,
     type: 3}
   activeClueDuration: 2
-  attackRadius: 0
-  backToStart: 0
-  path: []
-  followPathPause: 0
-  followPathPrecision: 0.01
-  followPathInCircle: 1
+--- !u!114 &4482648712296496522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2246077131478480992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 4482648712296496520}
+  phases:
+  - actions:
+    - type: 1
+      position: {x: 0, y: 0}
+      dialogText: Hallo
+      delay: 0
+      phase: 0
+      skill: {fileID: 0}
+      sequence: {fileID: 0}
+      globalCooldown: 5
+    - type: 1
+      position: {x: 0, y: 0}
+      dialogText: Welt
+      delay: 0
+      phase: 0
+      skill: {fileID: 0}
+      sequence: {fileID: 0}
+      globalCooldown: 10
+  events:
+  - trigger:
+    - type: 1
+      time: 0
+      life: 60
+      collider: []
+    actions:
+    - type: 1
+      position: {x: 0, y: 0}
+      dialogText: Autsch!
+      delay: 0
+      phase: 0
+      skill: {fileID: 0}
+      sequence: {fileID: 0}
+      globalCooldown: 5
+    notActive: 0
+    requireAll: 0
+  - trigger:
+    - type: 0
+      time: 20
+      life: 0
+      collider: []
+    actions:
+    - type: 1
+      position: {x: 0, y: 0}
+      dialogText: Mir ist langweilig
+      delay: 0
+      phase: 0
+      skill: {fileID: 0}
+      sequence: {fileID: 0}
+      globalCooldown: 5
+    notActive: 0
+    requireAll: 0
 --- !u!58 &8351946423556740917
 CircleCollider2D:
   m_ObjectHideFlags: 0

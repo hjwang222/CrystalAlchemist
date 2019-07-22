@@ -398,6 +398,9 @@ public class Character : MonoBehaviour
         this.setSkills(true);
 
         Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
+
+        AIEvents eventAI = this.GetComponent<AIEvents>();
+        if (eventAI != null) eventAI.resetAllEvents();
     }
     #endregion
 
