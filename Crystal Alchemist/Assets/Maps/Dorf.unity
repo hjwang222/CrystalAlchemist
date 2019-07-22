@@ -56556,12 +56556,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 2246077132325060722}
-  rotation: []
+  phases: []
   events:
-  - type: 1
-    time: 0
-    life: 50
-    collider: []
+  - trigger: []
     actions:
     - type: 3
       position: {x: 0, y: 0}
@@ -56573,6 +56570,7 @@ MonoBehaviour:
       sequence: {fileID: 0}
       globalCooldown: 0
     isActive: 1
+    requireAll: 0
 --- !u!114 &2246077132325060721
 MonoBehaviour:
   m_ObjectHideFlags: 0

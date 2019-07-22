@@ -33,6 +33,20 @@ public struct AIRotation
 }
 
 [System.Serializable]
+public struct AIEvent
+{
+    public List<AITrigger> trigger;
+
+    public List<AIAction> actions;
+
+    public bool notActive;
+
+    public bool reset;
+
+    public bool requireAll;
+}
+
+[System.Serializable]
 public struct AIAction
 {
     public AIActionType type;
@@ -73,10 +87,6 @@ public struct AITrigger
 
     [ShowIf("type", AIEventType.range)]
     public List<Collider2D> collider;
-
-    public List<AIAction> actions;
-
-    public bool isActive;
 }
 
 #endregion
@@ -90,25 +100,28 @@ public class AIEvents : MonoBehaviour
     private Enemy enemy;
 
     [SerializeField]
-    private List<AIRotation> rotation = new List<AIRotation>();
+    private List<AIRotation> phases = new List<AIRotation>();
 
     [SerializeField]
-    private List<AITrigger> events;
+    private List<AIEvent> events;
 
     private List<AIAction> activeRotation = new List<AIAction>();
-    private List<AIAction> additionalActions = new List<AIAction>();
+    private List<AIAction> eventRotation = new List<AIAction>();
 
     private float timeElapsed;
     private bool canUseAction = true;
-
+    private bool startEvents = false;
     private int actionsIndex;
+    private int eventIndex;
+    private float globalCoolDown = 0;
+
     //private bool startAI = false;
 
     private void Start()
     {
         if (this.enemy.initializeSkill != null) useSkillInstantly(this.enemy.initializeSkill);
 
-        if (rotation.Count > 0) this.activeRotation = this.rotation[0].actions;
+        if (phases.Count > 0) this.activeRotation = this.phases[0].actions;
     }
 
     private void useSkillInstantly(StandardSkill skill)
@@ -140,71 +153,103 @@ public class AIEvents : MonoBehaviour
     {
         if (enemy.target != null)
         {
+            this.startEvents = true;
+        }
+
+        if (this.startEvents)
+        {
             this.timeElapsed += (Time.deltaTime * this.enemy.timeDistortion);
-            //Ziel erfasst -> Angriff!
 
             //Event
-            //checkEvents();
+            checkEvents();
 
-            //Event-Actions
-            //useEventActions();
-
-            //Rotation
-            //useActions(this.activeRotation);
+            if(this.globalCoolDown <= 0)
+            {
+                if(this.eventRotation.Count > 0)
+                {
+                    this.eventIndex = doRotation(this.eventRotation, this.eventIndex, true);  
+                }
+                else if (this.activeRotation.Count > 0)
+                {
+                    this.actionsIndex = doRotation(this.activeRotation, this.actionsIndex, false);
+                }
+            }
+            else
+            {
+                this.globalCoolDown -= (Time.deltaTime * this.enemy.timeDistortion);
+            }
         }
     }
 
 
-    /*
-     * Trigger:
-     * Werden ausgelöst wenn bestimme Voraussetzungen erfüllt sind
-     *  
-     * 
-     * Events:
-     * Zusätzliche Aktionen, die durch Trigger ausgelöst werden
-     * 
-     * 
-     * Rotation:
-     * Festgelegte Reihenfolge an Sequenzen oder Skills, die ständig wiederholten werden
-     * /
+    #region Events
 
-
-
-    /*
     private void checkEvents()
     {
-        foreach (AITrigger elem in this.events)
+        for(int i = 0; i < this.events.Count; i++) 
         {
-            if (isTriggered(elem)) addAdditionalActions(elem.actions);
+            AIEvent elem = this.events[i];
+
+            if (isTriggered(elem))
+            {
+                this.eventRotation.AddRange(elem.actions);
+                this.globalCoolDown = 0;
+                if(!elem.reset) elem.notActive = true;                
+            }
         }
     }
 
-    private void useEventActions()
+    private bool isTriggered(AIEvent elem)
     {
-        foreach (AIAction action in this.additionalActions)
+        int success = 0;
+
+        if (!elem.notActive)
         {
-            useAction(action);
+            foreach (AITrigger triggerElem in elem.trigger)
+            {
+                if (triggerElem.type == AIEventType.time && this.timeElapsed >= triggerElem.time)
+                {
+                    if (!elem.requireAll) return true;
+                    else success++;
+                }
+                else if (triggerElem.type == AIEventType.life && this.enemy.life <= (this.enemy.life * triggerElem.life / 100))
+                {
+                    if (!elem.requireAll) return true;
+                    else success++;
+                }
+                else if (triggerElem.type == AIEventType.range)
+                {
+                    if (!elem.requireAll) return true;
+                    else success++;
+                }
+            }
+
+            if (elem.requireAll && success == elem.trigger.Count) return true;
         }
 
-        this.additionalActions.Clear();
+        return false;
     }
 
-    private void addAdditionalActions(List<AIAction> actions)
-    {
-        //check cooldown and maxAmounts
-        this.additionalActions.AddRange(actions);
-    }
+    #endregion
 
-    private void useActions(List<AIAction> actions)
+
+
+
+    private int doRotation(List<AIAction> actionList, int index, bool clear)
     {
-        if (this.canUseAction && actions.Count > 0)
+        AIAction action = actionList[index];
+
+        useAction(action);
+
+        if (index < actionList.Count - 1) return index++; //next Action
+        else
         {
-            AIAction action = actions[this.actionsIndex];
-            useAction(action);
-            StartCoroutine(waitCo(action.globalCooldown));
-            this.actionsIndex++;
-        }
+            if (clear) actionList.Clear();
+            return 0; //repeat
+        }                  
     }
+
+
 
     private bool skillCanBeUsed(StandardSkill skill)
     {
@@ -218,7 +263,7 @@ public class AIEvents : MonoBehaviour
                   && this.enemy.currentState != CharacterState.inDialog
                   && this.enemy.currentState != CharacterState.inMenu)
             {
-                int currentAmountOfSameSkills = this.enemy.getAmountOfSameSkills(skill);
+                int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.enemy.activeSkills);
 
                 if (currentAmountOfSameSkills < skill.maxAmounts)
                 {
@@ -232,55 +277,42 @@ public class AIEvents : MonoBehaviour
 
     private void useAction(AIAction action)
     {
-        if (action.type == AIActionType.skill 
+        if (action.type == AIActionType.skill
             && skillCanBeUsed(action.skill))
         {
             //useskill
-            StandardSkill usedSkill = Utilities.Skill.instantiateSkill(action.skill, this.enemy);               
+            StandardSkill usedSkill = Utilities.Skill.instantiateSkill(action.skill, this.enemy, this.enemy.target);
+
+        }
+        else if (action.type == AIActionType.move)
+        {
+            //move enemy to position            
+        }
+        else if (action.type == AIActionType.dialog)
+        {
+            //show text bubble
+            Debug.Log(action.dialogText);           
+        }
+        else if (action.type == AIActionType.sequence)
+        {
+            Instantiate(action.sequence);            
+        }
+        else if (action.type == AIActionType.transition)
+        {
+            //switch phase
+            this.actionsIndex = 0;
+            this.activeRotation = this.phases[action.phase].actions;
         }
         else if (action.type == AIActionType.wait)
         {
-            //wait
-            StartCoroutine(waitCo(action.delay));
+            //wait            
         }
 
-        //moveEnemy
-        //showDialog
-
+        this.globalCoolDown = action.globalCooldown;
     }
+    
 
-    private void switchPhase()
-    {
-        //this.rotation = new phase
-        //index = 0;
-    }
 
-    private IEnumerator waitCo(float delay)
-    {
-        this.canUseAction = false;
-        yield return new WaitForSeconds(delay);
-        this.canUseAction = true;
-    }
 
-    private bool isTriggered(AITrigger elem)
-    {
-        if (elem.isActive)
-        {
-            if (elem.type == AIEventType.time && this.timeElapsed >= elem.time)
-            {
-                return true;
-            }
-            else if (elem.type == AIEventType.life && this.enemy.life <= (this.enemy.life * elem.life/100))
-            {
-                return true;
-            }
-            else if (elem.type == AIEventType.range)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }*/
 }
 
