@@ -506,9 +506,27 @@ public class Utilities : MonoBehaviour
 
     public static class Skill
     {
+        public static int getAmountOfSameSkills(StandardSkill skill, List<StandardSkill> activeSkills)
+        {
+            int result = 0;
+
+            for (int i = 0; i < activeSkills.Count; i++)
+            {
+                StandardSkill activeSkill = activeSkills[i];
+                if (activeSkill.skillName == skill.skillName) result++;
+            }
+
+            return result;
+        }
+
         public static StandardSkill instantiateSkill(StandardSkill skill, Character sender)
         {
             return instantiateSkill(skill, sender, null, 1);
+        }
+
+        public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target)
+        {
+            return instantiateSkill(skill, sender, target, 1);
         }
 
         public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target, float reduce)
@@ -532,9 +550,14 @@ public class Utilities : MonoBehaviour
                 }
 
                 activeSkill.GetComponent<StandardSkill>().affectedResources = temp;
-
                 activeSkill.GetComponent<StandardSkill>().addResourceSender /= reduce;
                 sender.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
+
+                /*
+                if (skill.comboAmount > 0 
+                    && skill.cooldownAfterCombo > skill.cooldown
+                    && getAmountOfSameSkills(skill, sender.activeSkills) >= skill.comboAmount)
+                    skill.cooldownTimeLeft = skill.cooldownAfterCombo;*/
 
                 return activeSkill.GetComponent<StandardSkill>();
             }
@@ -562,18 +585,18 @@ public class Utilities : MonoBehaviour
             return null;
         }
 
-        public static void updateSkillset(StandardSkill skill, Character character)
+        public static void updateSkillset(StandardSkill skill, Player player)
         {
             if (skill != null)
             {
                 bool found = false;
 
-                foreach (StandardSkill elem in character.skillSet)
+                foreach (StandardSkill elem in player.skillSet)
                 {
                     if (elem.skillName == skill.skillName) { found = true; break; }
                 }
 
-                if (!found) character.skillSet.Add(skill);
+                if (!found) player.skillSet.Add(skill);
             }
         }
 
