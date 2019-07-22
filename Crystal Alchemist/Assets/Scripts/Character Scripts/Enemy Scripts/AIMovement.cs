@@ -10,6 +10,7 @@ public class AIMovement : MonoBehaviour
     [BoxGroup("Required")]
     private Enemy enemy;
 
+
     #region Parameter fürs Verfolgen
 
     [FoldoutGroup("Movement Attributes", expanded: false)]
