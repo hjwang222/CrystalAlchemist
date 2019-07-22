@@ -19,7 +19,8 @@ public class ProtectedArea : MonoBehaviour
     {
         foreach (Enemy enemy in this.protectingNPCs)
         {
-            if(enemy.gameObject.activeInHierarchy) enemy.increaseAggro(collision.GetComponent<Character>(), this.aggroIncreaseFactor);
+            if(enemy.gameObject.activeInHierarchy && enemy.GetComponent<AIAggroSystem>() != null)
+                enemy.GetComponent<AIAggroSystem>().increaseAggro(collision.GetComponent<Character>(), this.aggroIncreaseFactor);
         }        
     }
 
@@ -27,7 +28,8 @@ public class ProtectedArea : MonoBehaviour
     {
         foreach (Enemy enemy in this.protectingNPCs)
         {
-            if (enemy.gameObject.activeInHierarchy) enemy.decreaseAggro(collision.GetComponent<Character>(), this.aggroIncreaseFactor);
+            if (enemy.gameObject.activeInHierarchy && enemy.GetComponent<AIAggroSystem>() != null)
+                enemy.GetComponent<AIAggroSystem>().decreaseAggro(collision.GetComponent<Character>(), this.aggroIncreaseFactor);
         }
     }
 }

@@ -12,7 +12,8 @@ public class RespawnSystem : MonoBehaviour
         {
             Character character = this.transform.GetChild(i).gameObject.GetComponent<Character>();
 
-            if (!character.gameObject.activeInHierarchy 
+            if (character != null
+                && !character.gameObject.activeInHierarchy 
                 && character.currentState == CharacterState.dead
                 && !this.respawnObjects.Contains(character))
             {                

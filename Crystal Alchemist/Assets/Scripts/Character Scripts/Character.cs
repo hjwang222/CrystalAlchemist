@@ -152,10 +152,6 @@ public class Character : MonoBehaviour
     ////////////////////////////////////////////////////////////////
 
 
-    [FoldoutGroup("Skills", expanded: false)]
-    [Tooltip("Skills, welcher der Character verwenden kann")]
-    public List<StandardSkill> skillSet = new List<StandardSkill>();
-
     [Space(10)]
     [FoldoutGroup("Skills", expanded: false)]
     [Tooltip("Skill, welcher der Character sofort verwendet")]
@@ -320,13 +316,13 @@ public class Character : MonoBehaviour
     {
         this.spawnPosition = this.transform.position;
         this.direction = new Vector2(0, -1);
-        
+
         //getItems();    
 
         setComponents();
         spawn();
         this.currentState = CharacterState.idle;
-        if (this.initializeSkill != null) useSkillInstantly(this.initializeSkill);
+
         //this.gameObject.layer = LayerMask.NameToLayer(this.gameObject.tag);
     }
 
@@ -350,6 +346,14 @@ public class Character : MonoBehaviour
             this.spriteRenderer.gameObject.tag = this.transform.gameObject.tag;
         }
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
+    }
+
+    public void setResourceSignal(SimpleSignal health, SimpleSignal mana,
+                              SimpleSignal currencies)
+    {
+        this.healthSignal = health;
+        this.manaSignal = mana;
+        this.currencies = currencies;
     }
 
     public void setTargetHelper(GameObject targetHelper)
@@ -398,6 +402,7 @@ public class Character : MonoBehaviour
     #endregion
 
 
+    #region Updates
 
     public void Update()
     {
@@ -410,14 +415,6 @@ public class Character : MonoBehaviour
 
         if (this.currentState == CharacterState.dead)
             return;
-    }
-
-    public void setResourceSignal(SimpleSignal health, SimpleSignal mana,
-                                  SimpleSignal currencies)
-    {
-        this.healthSignal = health;
-        this.manaSignal = mana;
-        this.currencies = currencies;
     }
 
     private void regeneration()
@@ -451,58 +448,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void useSkillInstantly(StandardSkill skill)
-    {
-        if (this.activeCastbar != null && skill.holdTimer == 0) this.activeCastbar.destroyIt();
-
-        if (skill.cooldownTimeLeft > 0)
-        {
-            skill.cooldownTimeLeft -= (Time.deltaTime * this.timeDistortion);
-        }
-        else
-        {
-            int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
-
-            if (currentAmountOfSameSkills < skill.maxAmounts
-                && this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0)
-            {
-                if (!skill.isRapidFire && !skill.keepHoldTimer) skill.holdTimer = 0;
-
-                skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
-
-                StandardSkill temp = Utilities.Skill.instantiateSkill(skill, this, null, 1);
-
-            }
-        }
-    }
-
-
-
-
-
-    #region SkillUsage
-
-
-    #region Utils
-
-    public int getAmountOfSameSkills(StandardSkill skill)
-    {
-        int result = 0;
-
-        for (int i = 0; i < this.activeSkills.Count; i++)
-        {
-            StandardSkill activeSkill = this.activeSkills[i];
-            if (activeSkill.skillName == skill.skillName) result++;
-        }
-
-        return result;
-    }
     #endregion
-
-
-
-    #endregion
-
 
 
     #region Item Functions (drop Item, Lootregeln)
@@ -519,8 +465,6 @@ public class Character : MonoBehaviour
 
 
     #region Update Functions (Signals?)  
-
-    //Signal?
 
     private void showDamageNumber(float value, Color[] color)
     {
@@ -560,8 +504,8 @@ public class Character : MonoBehaviour
             this.spriteRenderer.color = Color.white;
             setSkills(false);
 
-            Enemy enemy = this.GetComponent<Enemy>();
-            if (enemy != null) enemy.clearAggro();
+            AIAggroSystem aggro = this.GetComponent<AIAggroSystem>();
+            if (aggro != null) aggro.clearAggro();
 
             this.currentState = CharacterState.dead;
 
@@ -615,9 +559,9 @@ public class Character : MonoBehaviour
                     break;
                 }
             case ResourceType.mana:
-                {                    
+                {
                     this.mana = Utilities.Resources.setResource(this.mana, this.maxMana, value);
-                    if(showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
+                    if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
                     callSignal(this.manaSignal, value);
                     break;
                 }
@@ -626,25 +570,18 @@ public class Character : MonoBehaviour
                     if (item != null)
                     {
                         Utilities.Items.updateInventory(item, this, Mathf.RoundToInt(value));
-                        if(raiseResourceSignal) callSignal(this.currencies, value);  //TODO Single Signal?
+                        if (raiseResourceSignal) callSignal(this.currencies, value); 
                     }
                     break;
                 }
             case ResourceType.skill:
                 {
-                    if (item != null && item.skill != null)
+                    if (item != null && item.skill != null && this.GetComponent<Player>() != null)
                     {
-                        Utilities.Skill.updateSkillset(item.skill, this);
-                        //callSignal(this.woodSignal, addResource);  //TODO Single Signal?
+                        Utilities.Skill.updateSkillset(item.skill, this.GetComponent<Player>());
                     }
                     break;
                 }
-                /*case ResourceType.crystal:
-                    {
-                        this.crystals = Mathf.RoundToInt(Utilities.setResource(this.crystals, this.maxCrystals, addResource));
-                        callSignal(this.crystalSignal, addResource);
-                        break;
-                    }*/
         }
     }
 
@@ -679,7 +616,6 @@ public class Character : MonoBehaviour
 
         return 0;
     }
-
 
     public void updateSpeed(float addSpeed)
     {
@@ -747,7 +683,7 @@ public class Character : MonoBehaviour
     {
         if (this.spriteRenderer != null)
         {
-            if(this.colors.Count > 0) this.spriteRenderer.color = this.colors[0];
+            if (this.colors.Count > 0) this.spriteRenderer.color = this.colors[0];
             this.colors.Clear();
             this.addColor(this.spriteRenderer.color);
         }
@@ -794,8 +730,8 @@ public class Character : MonoBehaviour
     {
         if (this.canCollectAll || this.canCollect.Contains(item.itemGroup))
         {
-            if(playSound) item.playSounds();
-            this.updateResource(true, item.resourceType, item, item.amount);            
+            if (playSound) item.playSounds();
+            this.updateResource(true, item.resourceType, item, item.amount);
 
             if (destroyIt) item.DestroyIt();
         }
@@ -807,40 +743,41 @@ public class Character : MonoBehaviour
     #region Damage Functions (hit, statuseffect, knockback)
 
     public void gotHit(StandardSkill skill)
-    {        
-            if (!this.isInvincible || skill.ignoreInvincibility)
+    {
+        if (!this.isInvincible || skill.ignoreInvincibility)
+        {
+            //Status Effekt hinzufügen
+            if (skill.statusEffects != null)
             {
-                //Status Effekt hinzufügen
-                if (skill.statusEffects != null)
+                foreach (StatusEffect effect in skill.statusEffects)
                 {
-                    foreach (StatusEffect effect in skill.statusEffects)
-                    {
-                        this.AddStatusEffect(effect);
-                    }
-                }
-
-                foreach (affectedResource elem in skill.affectedResources)
-                {
-                    updateResource(elem.resourceType, null, elem.amount);
-
-                    if (this.life > 0 && elem.resourceType == ResourceType.life && elem.amount < 0)
-                    {
-                        Enemy enemy = this.GetComponent<Enemy>();
-                        if (enemy != null) enemy.increaseAggroOnHit(skill.sender);
-                        //Charakter-Treffer (Schaden) animieren
-                        Utilities.Audio.playSoundEffect(this.audioSource, this.hitSoundEffect);
-                        StartCoroutine(hitCo());
-                    }
-                }
-
-                if (this.life > 0)
-                {
-                    //Rückstoß ermitteln
-                    float knockbackTrust = skill.thrust - antiKnockback;
-                    knockBack(skill.knockbackTime, knockbackTrust, skill);
+                    this.AddStatusEffect(effect);
                 }
             }
-        
+
+            foreach (affectedResource elem in skill.affectedResources)
+            {
+                updateResource(elem.resourceType, null, elem.amount);
+
+                if (this.life > 0 && elem.resourceType == ResourceType.life && elem.amount < 0)
+                {
+                    AIAggroSystem aggro = this.GetComponent<AIAggroSystem>();
+                    if (aggro != null) aggro.increaseAggroOnHit(skill.sender);
+
+                    //Charakter-Treffer (Schaden) animieren
+                    Utilities.Audio.playSoundEffect(this.audioSource, this.hitSoundEffect);
+                    StartCoroutine(hitCo());
+                }
+            }
+
+            if (this.life > 0)
+            {
+                //Rückstoß ermitteln
+                float knockbackTrust = skill.thrust - antiKnockback;
+                knockBack(skill.knockbackTime, knockbackTrust, skill);
+            }
+        }
+
     }
 
     public void RemoveAllStatusEffects(List<StatusEffect> statusEffects)
@@ -850,7 +787,7 @@ public class Character : MonoBehaviour
         //Store in temp List to avoid Enumeration Exception
         foreach (StatusEffect effect in statusEffects)
         {
-            dispellStatusEffects.Add(effect);            
+            dispellStatusEffects.Add(effect);
         }
 
         foreach (StatusEffect effect in dispellStatusEffects)

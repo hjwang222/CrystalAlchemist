@@ -398,7 +398,7 @@ public class StandardSkill : MonoBehaviour
 
     public virtual void init()
     {
-        this.cooldownTimeLeft = 0;
+        //this.cooldownTimeLeft = 0;
         setBasicAttributes();
         updateResourceSender();
         setSelfTrust();

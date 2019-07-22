@@ -7,11 +7,11 @@ using Sirenix.OdinInspector;
 
 public enum enumButton
 {
-   AButton,
-   BButton,
-   XButton,
-   YButton,
-   RBButton
+    AButton,
+    BButton,
+    XButton,
+    YButton,
+    RBButton
 }
 
 
@@ -20,6 +20,10 @@ public class Player : Character
     [BoxGroup("Pflichtfelder")]
     [SerializeField]
     private CastBar castbar;
+
+    [FoldoutGroup("Skills", expanded: false)]
+    [Tooltip("Skills, welcher der Character verwenden kann")]
+    public List<StandardSkill> skillSet = new List<StandardSkill>();
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
@@ -70,7 +74,7 @@ public class Player : Character
     public StandardSkill RBButton;
 
     private Vector3 change;
-    private string lastButtonPressed = "";   
+    private string lastButtonPressed = "";
 
     // Start is called before the first frame update
     private void Start()
@@ -80,7 +84,7 @@ public class Player : Character
 
 
         this.isPlayer = true;
-        this.init();        
+        this.init();
         this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.currencySignalUI);
 
         if (this.loadGame.getValue()) LoadSystem.loadPlayerData(this);
@@ -98,9 +102,9 @@ public class Player : Character
 
     public void loadSkillsFromSkillSet(string name, enumButton button)
     {
-        foreach(StandardSkill skill in this.skillSet)
+        foreach (StandardSkill skill in this.skillSet)
         {
-            if(skill.skillName == name)
+            if (skill.skillName == name)
             {
                 switch (button)
                 {
@@ -124,7 +128,7 @@ public class Player : Character
         base.Update();
         playerInputs();
     }
-    
+
     private void playerInputs()
     {
         if (this.currentState == CharacterState.inDialog || this.currentState == CharacterState.inMenu)
@@ -156,8 +160,8 @@ public class Player : Character
             this.openPauseSignal.Raise();
         }
 
-        if (currentState != CharacterState.dead 
-            && this.currentState != CharacterState.inDialog 
+        if (currentState != CharacterState.dead
+            && this.currentState != CharacterState.inDialog
             && this.currentState != CharacterState.inMenu)
         {
             UpdateAnimationAndMove();
@@ -189,7 +193,7 @@ public class Player : Character
 
     private IEnumerator positionCo(Vector2 playerPositionInNewScene)
     {
-        this.currentState = CharacterState.inDialog;       
+        this.currentState = CharacterState.inDialog;
         this.enableSpriteRenderer(false);
         //this.cameraSignal.Raise(false);
         yield return null;
@@ -227,35 +231,35 @@ public class Player : Character
 
     private void useSkill(string button)
     {
-            StandardSkill skill = this.getSkillFromButton(button);
+        StandardSkill skill = this.getSkillFromButton(button);
 
-            if (skill != null)
+        if (skill != null)
+        {
+            if (skill.cooldownTimeLeft > 0)
             {
-                if (skill.cooldownTimeLeft > 0)
-                {
-                    skill.cooldownTimeLeft -= (Time.deltaTime * this.timeDistortion * this.spellspeed);
-                }
-                else if(this.currentState != CharacterState.interact 
-                     && this.currentState != CharacterState.inDialog
-                     && this.currentState != CharacterState.inMenu)
-                {
-                    int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
+                skill.cooldownTimeLeft -= (Time.deltaTime * this.timeDistortion * this.spellspeed);
+            }
+            else if (this.currentState != CharacterState.interact
+                 && this.currentState != CharacterState.inDialog
+                 && this.currentState != CharacterState.inMenu)
+            {
+                int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.activeSkills);
 
-                    if (currentAmountOfSameSkills < skill.maxAmounts
-                        && (this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0 
+                if (currentAmountOfSameSkills < skill.maxAmounts
+                        && (this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0
                         || skill.addResourceSender == -Utilities.maxFloatInfinite))
-                    {
-                        if (isSkillReadyToUse(button, skill)) activateSkill(button, skill);
-                        activateSkillFromTargetingSystem(skill);
-                    }
-                    else if (currentAmountOfSameSkills >= skill.maxAmounts
-                         && (skill.deactivateByButtonUp || skill.delay == Utilities.maxFloatInfinite))
-                    {
-                        deactivateSkill(button, skill);
-                    }
+                {
+                    if (isSkillReadyToUse(button, skill)) activateSkill(button, skill);
+                    activateSkillFromTargetingSystem(skill);
+                }
+                else if (currentAmountOfSameSkills >= skill.maxAmounts
+                     && (skill.deactivateByButtonUp || skill.delay == Utilities.maxFloatInfinite))
+                {
+                    deactivateSkill(button, skill);
                 }
             }
-        }    
+        }
+    }
 
     private bool isSkillReadyToUse(string button, StandardSkill skill)
     {
@@ -416,7 +420,7 @@ public class Player : Character
         for (int i = 0; i < this.activeSkills.Count; i++)
         {
             StandardSkill activeSkill = this.activeSkills[i];
-            activeSkill.durationTimeLeft = 0; 
+            activeSkill.durationTimeLeft = 0;
         }
     }
 
@@ -444,7 +448,7 @@ public class Player : Character
                     if (activeSkill.delay > 0) activeSkill.delayTimeLeft = 0; //C4
                     else activeSkill.durationTimeLeft = 0; //Schild
                 }
-            }            
+            }
         }
     }
 
@@ -525,7 +529,7 @@ public class Player : Character
 
     private void MoveCharacter()
     {
-        if (this.currentState != CharacterState.knockedback 
+        if (this.currentState != CharacterState.knockedback
             && this.currentState != CharacterState.attack)
         {
             change.Normalize(); //Diagonal-Laufen fixen
