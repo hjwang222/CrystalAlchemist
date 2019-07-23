@@ -17,7 +17,7 @@ public enum CharacterState
     idle,
     silent, //kann nicht angreifen
     dead,
-    dash,
+    manually,
     respawning
 }
 

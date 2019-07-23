@@ -541,7 +541,9 @@ public class Utilities : MonoBehaviour
 
         public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target, float reduce)
         {
-            if (sender.currentState != CharacterState.attack && sender.currentState != CharacterState.defend)
+            if (skill != null
+                && sender.currentState != CharacterState.attack 
+                && sender.currentState != CharacterState.defend)
             {
                 GameObject activeSkill = Instantiate(skill.gameObject, sender.transform.position, Quaternion.identity);
 
