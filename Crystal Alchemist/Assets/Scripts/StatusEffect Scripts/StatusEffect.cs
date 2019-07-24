@@ -42,6 +42,10 @@ public class StatusEffect : MonoBehaviour
     public bool canBeDispelled = true;
 
     [FoldoutGroup("Basis Attribute")]
+    [Tooltip("Ist der Charakter betäubt?")]
+    public bool stunTarget = false;
+
+    [FoldoutGroup("Basis Attribute")]
     [EnumToggleButtons]
     [Tooltip("Handelt es sich um einen positiven oder negativen Effekt?")]
     public StatusEffectType statusEffectType = StatusEffectType.debuff;    

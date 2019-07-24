@@ -372,6 +372,138 @@ public class Utilities : MonoBehaviour
 
     ///////////////////////////////////////////////////////////////
 
+    public static class StatusEffectUtil
+    {
+        public static bool isCharacterStunned(Character character)
+        {
+            foreach(StatusEffect debuff in character.debuffs)
+            {
+                if (debuff.stunTarget) return true;
+            }
+
+            return false;
+        }
+
+        public static void RemoveAllStatusEffects(List<StatusEffect> statusEffects)
+        {
+            List<StatusEffect> dispellStatusEffects = new List<StatusEffect>();
+
+            //Store in temp List to avoid Enumeration Exception
+            foreach (StatusEffect effect in statusEffects)
+            {
+                dispellStatusEffects.Add(effect);
+            }
+
+            foreach (StatusEffect effect in dispellStatusEffects)
+            {
+                effect.DestroyIt();
+            }
+
+            dispellStatusEffects.Clear();
+        }
+
+        public static void RemoveStatusEffect(StatusEffect statusEffect, bool allTheSame, Character character)
+        {
+            List<StatusEffect> statusEffects = null;
+            List<StatusEffect> dispellStatusEffects = new List<StatusEffect>();
+
+            if (statusEffect.statusEffectType == StatusEffectType.debuff) statusEffects = character.debuffs;
+            else if (statusEffect.statusEffectType == StatusEffectType.buff) statusEffects = character.buffs;
+
+            //Store in temp List to avoid Enumeration Exception
+            foreach (StatusEffect effect in statusEffects)
+            {
+                if (effect.statusEffectName == statusEffect.statusEffectName)
+                {
+                    dispellStatusEffects.Add(effect);
+                    if (!allTheSame) break;
+                }
+            }
+
+            foreach (StatusEffect effect in dispellStatusEffects)
+            {
+                effect.DestroyIt();
+            }
+
+            dispellStatusEffects.Clear();
+        }
+
+        public static void AddStatusEffect(StatusEffect statusEffect, Character character)
+        {
+            if (statusEffect != null && character.characterType != CharacterType.Object)
+            {
+                bool isImmune = false;
+
+                for (int i = 0; i < character.immunityToStatusEffects.Count; i++)
+                {
+                    StatusEffect immunityEffect = character.immunityToStatusEffects[i];
+                    if (statusEffect.statusEffectName == immunityEffect.statusEffectName)
+                    {
+                        isImmune = true;
+                        break;
+                    }
+                }
+
+                if (!isImmune)
+                {
+                    List<StatusEffect> statusEffects = null;
+                    List<StatusEffect> result = new List<StatusEffect>();
+
+                    //add to list for better reference
+                    if (statusEffect.statusEffectType == StatusEffectType.debuff) statusEffects = character.debuffs;
+                    else if (statusEffect.statusEffectType == StatusEffectType.buff) statusEffects = character.buffs;
+
+                    for (int i = 0; i < statusEffects.Count; i++)
+                    {
+                        if (statusEffects[i].statusEffectName == statusEffect.statusEffectName)
+                        {
+                            //Hole alle gleichnamigen Effekte aus der Liste
+                            result.Add(statusEffects[i]);
+                        }
+                    }
+
+                    //TODO, das geht noch besser
+                    if (result.Count < statusEffect.maxStacks)
+                    {
+                        //Wenn der Effekte die maximale Anzahl Stacks nicht überschritten hat -> Hinzufügen
+                        instantiateStatusEffect(statusEffect, statusEffects, character);
+                    }
+                    else
+                    {
+                        if (statusEffect.canOverride && statusEffect.endType == StatusEffectEndType.time)
+                        {
+                            //Wenn der Effekt überschreiben kann, soll der Effekt mit der kürzesten Dauer entfernt werden
+                            StatusEffect toDestroy = result[0];
+                            toDestroy.DestroyIt();
+
+                            instantiateStatusEffect(statusEffect, statusEffects, character);
+                        }
+                        else if (statusEffect.canDeactivateIt && statusEffect.endType == StatusEffectEndType.mana)
+                        {
+                            StatusEffect toDestroy = result[0];
+                            toDestroy.DestroyIt();
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void instantiateStatusEffect(StatusEffect statusEffect, List<StatusEffect> statusEffects, Character character)
+        {
+            GameObject statusEffectClone = Instantiate(statusEffect.gameObject, character.transform.position, Quaternion.identity, character.transform);
+            statusEffectClone.transform.parent = character.activeStatusEffectParent.transform;
+            DontDestroyOnLoad(statusEffectClone);
+            StatusEffect statusEffectScript = statusEffectClone.GetComponent<StatusEffect>();
+            statusEffectScript.target = character;
+            //statusEffectClone.hideFlags = HideFlags.HideInHierarchy;
+
+            //add to list for better reference
+            statusEffects.Add(statusEffectClone.GetComponent<StatusEffect>());
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////
+
     public static class Format
     {
         public static void SetButtonColor(Button button, Color newColor)
@@ -484,21 +616,21 @@ public class Utilities : MonoBehaviour
             return RadianToVector2(degree * Mathf.Deg2Rad);
         }
 
-        public static void setDirectionAndRotation(Vector2 senderPosition, Vector2 senderDirection, Character target,
+        public static void setDirectionAndRotation(Character sender, Character target,
                                                     float positionOffset, float positionHeight, float snapRotationInDegrees, float rotationModifier,
                                                    out float angle, out Vector2 start, out Vector2 direction, out Vector3 rotation)
         {
-            direction = senderDirection;
+            direction = sender.direction.normalized;
 
-            start = new Vector2(senderPosition.x + (direction.x * positionOffset),
-                                senderPosition.y + (direction.y * positionOffset) + positionHeight);
+            start = new Vector2(sender.transform.position.x + (direction.x * positionOffset),
+                                sender.transform.position.y + (direction.y * positionOffset) + positionHeight);
 
-            if (target != null)
-            {
-                direction = (Vector2)target.transform.position - start;
-                float temp_angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                direction = Utilities.Rotation.DegreeToVector2(temp_angle);
-            }
+            //if sender is not frozen
+
+            if (target != null) direction = (Vector2)target.transform.position - start;    
+
+            float temp_angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            direction = Utilities.Rotation.DegreeToVector2(temp_angle);
 
             angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) + rotationModifier;
 
@@ -532,6 +664,7 @@ public class Utilities : MonoBehaviour
         public static StandardSkill setSkill(Character character, StandardSkill prefab)
         {
             StandardSkill skillInstance = MonoBehaviour.Instantiate(prefab, character.skillSetParent.transform) as StandardSkill;
+            skillInstance.sender = character;
             skillInstance.gameObject.SetActive(false);            
 
             return skillInstance;

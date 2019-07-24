@@ -29,7 +29,7 @@ public class TimeSkill : StandardSkill
 
         foreach(Character character in this.affectedCharacters)
         {
-            character.RemoveStatusEffect(this.timeEffect, true);
+            Utilities.StatusEffectUtil.RemoveStatusEffect(this.timeEffect, true, character);
         }
 
         //Skills wieder normalisieren
@@ -86,7 +86,7 @@ public class TimeSkill : StandardSkill
 
         if (character != null)
         {
-            character.RemoveStatusEffect(this.timeEffect, true);
+            Utilities.StatusEffectUtil.RemoveStatusEffect(this.timeEffect, true, character);
             this.affectedCharacters.Remove(character);
         }
     }
@@ -98,7 +98,7 @@ public class TimeSkill : StandardSkill
 
         if (character != null)
         {
-            character.AddStatusEffect(this.timeEffect);
+            Utilities.StatusEffectUtil.AddStatusEffect(this.timeEffect, character);
             this.affectedCharacters.Add(character);
         }
 

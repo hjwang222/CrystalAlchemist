@@ -22,7 +22,7 @@ public class ContagiousStatusEffect : affectResourceStatusEffect
         if (!collision.isTrigger)
         {
             Character character = collision.GetComponent<Character>();
-            if (character != null) character.AddStatusEffect(this);
+            if (character != null) Utilities.StatusEffectUtil.AddStatusEffect(this, character);
         }
     }
 
@@ -31,7 +31,7 @@ public class ContagiousStatusEffect : affectResourceStatusEffect
         if (!collision.isTrigger)
         {
             Character character = collision.GetComponent<Character>();
-            if (character != null) character.AddStatusEffect(this);
+            if (character != null) Utilities.StatusEffectUtil.AddStatusEffect(this, character);
         }
     }
 }

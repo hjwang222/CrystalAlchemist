@@ -67,6 +67,21 @@ public class StandardSkill : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////
 
+    [FoldoutGroup("Indikatoren", expanded: false)]
+    [Tooltip("AOE")]
+    [SerializeField]
+    private GameObject indicator;
+
+    [FoldoutGroup("Indikatoren", expanded: false)]
+    [Tooltip("Indikator anzeigen")]
+    public bool showingIndicator = true;
+
+    [FoldoutGroup("Indikatoren", expanded: false)]
+    [Tooltip("Cast anzeigen")]
+    public bool showCastBarForEnemies = true;
+
+    ////////////////////////////////////////////////////////////////
+
 
     [FoldoutGroup("Zeit-Attribute", expanded: false)]
     [Tooltip("Castzeit bis zur Instanziierung (für Außen)")]
@@ -350,8 +365,9 @@ public class StandardSkill : MonoBehaviour
     private bool playStartEffectAlready = false;
     private Vector2 tempVelocity;
     private float elapsed;
-
     private float LockElapsed;
+    private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
+    private GameObject activeIndicator;
 
     [HideInInspector]
     public Character sender;
@@ -391,6 +407,7 @@ public class StandardSkill : MonoBehaviour
 
     #region Start Funktionen (Init, set Basics, Update Sender, set Position
 
+
     public void Start()
     {
         init();
@@ -406,10 +423,7 @@ public class StandardSkill : MonoBehaviour
         if (this.sender == null)
         {
             throw new System.Exception("No SENDER found! Must be player!");
-        }
-
-        
-
+        }        
         //this.gameObject.layer = LayerMask.NameToLayer(this.sender.gameObject.tag + " Skill");        
     }
 
@@ -482,7 +496,7 @@ public class StandardSkill : MonoBehaviour
 
         if (!this.blendTree)
         {
-            Utilities.Rotation.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
+            Utilities.Rotation.setDirectionAndRotation(this.sender, this.target,
                                           this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
                                           out angle, out start, out this.direction, out rotation);
 
@@ -496,7 +510,7 @@ public class StandardSkill : MonoBehaviour
                 this.tempVelocity = this.myRigidbody.velocity;
             }
 
-            if (this.rotateIt) transform.rotation = Quaternion.Euler(rotation);
+            if (this.rotateIt) transform.rotation = Quaternion.Euler(rotation);            
         }
         else
         {
@@ -525,6 +539,11 @@ public class StandardSkill : MonoBehaviour
     public void Update()
     {
         doOnUpdate();
+    }
+
+    public void LateUpdate()
+    {
+        if (!this.rotateIt) this.transform.rotation = this.fixedRotation;
     }
 
     public float getDurationLeft()
@@ -682,6 +701,22 @@ public class StandardSkill : MonoBehaviour
         if (this.stateType != StateType.none) this.sender.currentState = CharacterState.idle;
             //this.isActive = false;
         Destroy(this.gameObject);
+    }
+
+    public void showIndicator()
+    {
+        if (this.indicator != null 
+            && this.activeIndicator == null 
+            && this.showingIndicator)
+        {
+            this.activeIndicator = Instantiate(this.indicator);
+            if (this.activeIndicator.GetComponent<LineIndicator>() != null) this.activeIndicator.GetComponent<LineIndicator>().skill = this;
+        }
+    }
+
+    public void hideIndicator()
+    {
+        if (this.activeIndicator != null) Destroy(this.activeIndicator);
     }
 
     #endregion

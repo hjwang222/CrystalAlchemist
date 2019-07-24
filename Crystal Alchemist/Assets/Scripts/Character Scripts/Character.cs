@@ -304,7 +304,6 @@ public class Character : MonoBehaviour
     public GameObject activeLockOnTarget = null;
     [HideInInspector]
     public bool isPlayer = false;
-
     [HideInInspector]
     public List<Item> inventory = new List<Item>();
     #endregion
@@ -505,8 +504,8 @@ public class Character : MonoBehaviour
 
             Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isDead", true);
 
-            RemoveAllStatusEffects(this.debuffs);
-            RemoveAllStatusEffects(this.buffs);
+            Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
+            Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
 
             this.spriteRenderer.color = Color.white;
             setSkills(false);
@@ -681,7 +680,24 @@ public class Character : MonoBehaviour
         Utilities.UnityUtils.SetAnimatorParameter(this.animator, parameter);
     }
 
+    public void resetCast(StandardSkill skill)
+    {
+        if (skill != null)
+        {
+            if (!skill.keepHoldTimer) skill.holdTimer = 0;
+            hideCastBarAndIndicator(skill);
+        }
+    }
 
+    public void hideCastBarAndIndicator(StandardSkill skill)
+    {
+        if (this.activeCastbar != null)
+        {
+            this.activeCastbar.destroyIt();
+        }
+
+        skill.hideIndicator();
+    }
 
 
     #region Color Changes
@@ -758,7 +774,7 @@ public class Character : MonoBehaviour
             {
                 foreach (StatusEffect effect in skill.statusEffects)
                 {
-                    this.AddStatusEffect(effect);
+                    Utilities.StatusEffectUtil.AddStatusEffect(effect,this);
                 }
             }
 
@@ -787,122 +803,8 @@ public class Character : MonoBehaviour
 
     }
 
-    public void RemoveAllStatusEffects(List<StatusEffect> statusEffects)
-    {
-        List<StatusEffect> dispellStatusEffects = new List<StatusEffect>();
 
-        //Store in temp List to avoid Enumeration Exception
-        foreach (StatusEffect effect in statusEffects)
-        {
-            dispellStatusEffects.Add(effect);
-        }
 
-        foreach (StatusEffect effect in dispellStatusEffects)
-        {
-            effect.DestroyIt();
-        }
-
-        dispellStatusEffects.Clear();
-    }
-
-    public void RemoveStatusEffect(StatusEffect statusEffect, bool allTheSame)
-    {
-        List<StatusEffect> statusEffects = null;
-        List<StatusEffect> dispellStatusEffects = new List<StatusEffect>();
-
-        if (statusEffect.statusEffectType == StatusEffectType.debuff) statusEffects = this.debuffs;
-        else if (statusEffect.statusEffectType == StatusEffectType.buff) statusEffects = this.buffs;
-
-        //Store in temp List to avoid Enumeration Exception
-        foreach (StatusEffect effect in statusEffects)
-        {
-            if (effect.statusEffectName == statusEffect.statusEffectName)
-            {
-                dispellStatusEffects.Add(effect);
-                if (!allTheSame) break;
-            }
-        }
-
-        foreach (StatusEffect effect in dispellStatusEffects)
-        {
-            effect.DestroyIt();
-        }
-
-        dispellStatusEffects.Clear();
-    }
-
-    public void AddStatusEffect(StatusEffect statusEffect)
-    {
-        if (statusEffect != null && this.characterType != CharacterType.Object)
-        {
-            bool isImmune = false;
-
-            for (int i = 0; i < this.immunityToStatusEffects.Count; i++)
-            {
-                StatusEffect immunityEffect = this.immunityToStatusEffects[i];
-                if (statusEffect.statusEffectName == immunityEffect.statusEffectName)
-                {
-                    isImmune = true;
-                    break;
-                }
-            }
-
-            if (!isImmune)
-            {
-                List<StatusEffect> statusEffects = null;
-                List<StatusEffect> result = new List<StatusEffect>();
-
-                //add to list for better reference
-                if (statusEffect.statusEffectType == StatusEffectType.debuff) statusEffects = this.debuffs;
-                else if (statusEffect.statusEffectType == StatusEffectType.buff) statusEffects = this.buffs;
-
-                for (int i = 0; i < statusEffects.Count; i++)
-                {
-                    if (statusEffects[i].statusEffectName == statusEffect.statusEffectName)
-                    {
-                        //Hole alle gleichnamigen Effekte aus der Liste
-                        result.Add(statusEffects[i]);
-                    }
-                }
-
-                //TODO, das geht noch besser
-                if (result.Count < statusEffect.maxStacks)
-                {
-                    //Wenn der Effekte die maximale Anzahl Stacks nicht überschritten hat -> Hinzufügen
-                    instantiateStatusEffect(statusEffect, statusEffects);
-                }
-                else
-                {
-                    if (statusEffect.canOverride && statusEffect.endType == StatusEffectEndType.time)
-                    {
-                        //Wenn der Effekt überschreiben kann, soll der Effekt mit der kürzesten Dauer entfernt werden
-                        StatusEffect toDestroy = result[0];
-                        toDestroy.DestroyIt();
-
-                        instantiateStatusEffect(statusEffect, statusEffects);
-                    }
-                    else if (statusEffect.canDeactivateIt && statusEffect.endType == StatusEffectEndType.mana)
-                    {
-                        StatusEffect toDestroy = result[0];
-                        toDestroy.DestroyIt();
-                    }
-                }
-            }
-        }
-    }
-
-    private void instantiateStatusEffect(StatusEffect statusEffect, List<StatusEffect> statusEffects)
-    {
-        GameObject statusEffectClone = Instantiate(statusEffect.gameObject, this.transform.position, Quaternion.identity, this.transform);
-        statusEffectClone.transform.parent = this.activeStatusEffectParent.transform;
-        DontDestroyOnLoad(statusEffectClone);
-        StatusEffect statusEffectScript = statusEffectClone.GetComponent<StatusEffect>();
-        statusEffectScript.target = this;
-        //statusEffectClone.hideFlags = HideFlags.HideInHierarchy;
-
-        //add to list for better reference
-        statusEffects.Add(statusEffectClone.GetComponent<StatusEffect>());
-    }
 
     public void knockBack(float knockTime, float thrust, Vector2 direction)
     {

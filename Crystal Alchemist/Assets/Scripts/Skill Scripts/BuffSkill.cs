@@ -30,7 +30,7 @@ public class BuffSkill : StandardSkill
 
         if (dispell)
         {
-            if (this.sender.debuffs.Count > 0) this.sender.RemoveStatusEffect(this.sender.debuffs[0], false);
+            if (this.sender.debuffs.Count > 0) Utilities.StatusEffectUtil.RemoveStatusEffect(this.sender.debuffs[0], false, this.sender);
         }
 
         if (this.targetColor != null)

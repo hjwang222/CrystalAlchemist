@@ -97,7 +97,8 @@ public class AIMovement : MonoBehaviour
             //Bewegt den Gegner zum Spieler
             Vector3 temp = Vector3.MoveTowards(transform.position, position, this.enemy.speed * (Time.deltaTime * this.enemy.timeDistortion));
 
-            this.enemy.changeAnim(temp - transform.position);
+            Vector2 direction = position - this.transform.position;
+            if (!Utilities.StatusEffectUtil.isCharacterStunned(this.enemy)) this.enemy.changeAnim(direction.normalized);
 
             this.enemy.myRigidbody.MovePosition(temp);
             this.enemy.myRigidbody.velocity = Vector2.zero;

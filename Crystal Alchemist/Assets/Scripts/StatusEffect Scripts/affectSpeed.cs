@@ -16,7 +16,7 @@ public class affectSpeed : StatusEffect
     public override void doEffect()
     {
         base.doEffect();
-        this.target.updateSpeed(this.speed);     
+        this.target.updateSpeed(this.speed);
     }
 
     public override void DestroyIt()

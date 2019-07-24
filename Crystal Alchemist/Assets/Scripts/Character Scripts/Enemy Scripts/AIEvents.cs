@@ -133,14 +133,12 @@ public class AIAction
     [ShowIf("type", AIActionType.sequence)]
     [VerticalGroup("Type")]
     [HideLabel]
-    public GameObject sequence;
+    public SkillSequence sequence;
 
     [TableColumnWidth(15)]
     [VerticalGroup("GCD")]
     [HideLabel]
     public float gcd = 2.5f;
-
-    
 
     public StandardSkill skillinstance;
 }
@@ -220,7 +218,6 @@ public class AIEvents : MonoBehaviour
     private bool nextDialog = true;
     private bool AIstopped = false;
 
-    private CastBar activeCastBar;
     private MiniDialogBox activeDialog;
     private int counter;
 
@@ -289,24 +286,31 @@ public class AIEvents : MonoBehaviour
 
     private void doEvents()
     {
-        this.timeElapsed += (Time.deltaTime * this.enemy.timeDistortion);
-
-        //Event
-        checkEvents();
-
-        if (this.activeAction != null)
+        if (!Utilities.StatusEffectUtil.isCharacterStunned(this.enemy))
         {
-            if (this.activeAction.skillinstance != null)
-            {
-                if (this.activeAction.cast >= 0) this.activeAction.skillinstance.cast = this.activeAction.cast;
-                if (this.activeAction.cD >= 0) this.activeAction.skillinstance.cooldown = this.activeAction.cD;
-            }
+            this.timeElapsed += (Time.deltaTime * this.enemy.timeDistortion);
 
-            casting();
+            //Event
+            checkEvents();
+
+            if (this.activeAction != null)
+            {
+                if (this.activeAction.skillinstance != null)
+                {
+                    if (this.activeAction.cast >= 0) this.activeAction.skillinstance.cast = this.activeAction.cast;
+                    if (this.activeAction.cD >= 0) this.activeAction.skillinstance.cooldown = this.activeAction.cD;
+                }
+
+                casting();
+            }
+            else
+            {
+                setNextAction();
+            }
         }
         else
         {
-            setNextAction();
+            if(this.activeAction != null) this.enemy.resetCast(this.activeAction.skillinstance);
         }
     }
 
@@ -324,23 +328,28 @@ public class AIEvents : MonoBehaviour
             if (this.activeAction.skillinstance.holdTimer < this.activeAction.skillinstance.cast)
             {
                 this.activeAction.skillinstance.holdTimer += (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
+                
+                this.activeAction.skillinstance.showIndicator(); //Zeige Indikator beim Casten
 
-                if (this.activeCastBar == null)
+                if (this.activeAction.skillinstance.showCastBarForEnemies)
                 {
-                    GameObject temp = Instantiate(this.castbar.gameObject, this.transform.position, Quaternion.identity, this.transform);
-                    //temp.hideFlags = HideFlags.HideInHierarchy;
-                    this.activeCastBar = temp.GetComponent<CastBar>();
-                    this.activeCastBar.target = this.enemy;
-                    this.activeCastBar.skill = this.activeAction.skillinstance;
-                }
-                else
-                {
-                    this.activeCastBar.showCastBar();
+                    if (this.enemy.activeCastbar == null)
+                    {
+                        GameObject temp = Instantiate(this.castbar.gameObject, this.transform.position, Quaternion.identity, this.transform);
+                        //temp.hideFlags = HideFlags.HideInHierarchy;
+                        this.enemy.activeCastbar = temp.GetComponent<CastBar>();
+                        this.enemy.activeCastbar.target = this.enemy;
+                        this.enemy.activeCastbar.skill = this.activeAction.skillinstance;
+                    }
+                    else
+                    {
+                        this.enemy.activeCastbar.showCastBar();
+                    }
                 }
             }
             else
             {
-                //cast done, use action
+                //cast done, use action                
                 useAction(this.activeAction);
             }
         }
@@ -497,9 +506,13 @@ public class AIEvents : MonoBehaviour
         if (action.type != AIActionType.dialog)
         {
             if (action.skillinstance == null && action.skill != null)
+            {
                 action.skillinstance = Utilities.Skill.setSkill(this.enemy, action.skill);
+                action.skillinstance.showingIndicator = true;
+            }
 
             this.activeAction = action;
+
             this.counter = action.amount;            
         }
         else
@@ -548,8 +561,7 @@ public class AIEvents : MonoBehaviour
 
     private void clearAction()
     {
-        if (this.activeCastBar != null) this.activeCastBar.destroyIt();
-        if (this.activeAction != null && this.activeAction.skillinstance != null) this.activeAction.skillinstance.holdTimer = 0;
+        if (this.activeAction != null) this.enemy.resetCast(this.activeAction.skillinstance);
         this.activeAction = null;
         this.actionsIndex = 0;
         this.counter = 0;
@@ -575,7 +587,10 @@ public class AIEvents : MonoBehaviour
         }
         else if (action.type == AIActionType.sequence)
         {
-            Instantiate(action.sequence);
+            //TODO: Utilities
+            SkillSequence sequence = Instantiate(action.sequence);
+            sequence.setSender(this.enemy);
+
             actionUsed = true;
         }
         else if (action.type == AIActionType.transition)
@@ -602,9 +617,8 @@ public class AIEvents : MonoBehaviour
 
         if ((this.activeAction != null && !this.activeAction.castGroup) || this.counter <= 0)
         {
-            if (this.activeAction != null && this.activeAction.skillinstance != null) this.activeAction.skillinstance.holdTimer = 0;
-            this.counter = 0;
-            if (this.activeCastBar != null) this.activeCastBar.destroyIt();
+            if (this.activeAction != null) this.enemy.resetCast(this.activeAction.skillinstance);
+            this.counter = 0;            
 
             Debug.Log("Set GCD: " + action.gcd);
             this.globalCoolDown = action.gcd;

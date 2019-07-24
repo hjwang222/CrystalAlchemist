@@ -50,7 +50,7 @@ public class LaserSkill : StandardSkill
         Vector2 startpoint;
         Vector3 rotation;
 
-        Utilities.Rotation.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
+        Utilities.Rotation.setDirectionAndRotation(this.sender, this.target,
                                           this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
                                           out angle, out startpoint, out this.direction, out rotation);
 

@@ -83,7 +83,7 @@ public class Player : Character
 
         List<StandardSkill> tempSkillSet = new List<StandardSkill>();
 
-        foreach(StandardSkill skill in this.skillSet)
+        foreach (StandardSkill skill in this.skillSet)
         {
             tempSkillSet.Add(Utilities.Skill.setSkill(this, skill));
         }
@@ -144,19 +144,6 @@ public class Player : Character
             return;
         }
 
-        change = Vector3.zero;
-        change.x = Input.GetAxisRaw("Horizontal");
-        change.y = Input.GetAxisRaw("Vertical");
-
-        if (this.currentState != CharacterState.knockedback)
-        {
-            useSkill("A-Button");
-            useSkill("B-Button");
-            useSkill("X-Button");
-            useSkill("Y-Button");
-            useSkill("RB-Button");
-        }
-
         if (Input.GetButtonDown("Inventory"))
         {
             this.openInventorySignal.Raise();
@@ -167,11 +154,27 @@ public class Player : Character
             this.openPauseSignal.Raise();
         }
 
-        if (currentState != CharacterState.dead
-            && this.currentState != CharacterState.inDialog
-            && this.currentState != CharacterState.inMenu)
+        if (!Utilities.StatusEffectUtil.isCharacterStunned(this))
         {
-            UpdateAnimationAndMove();
+            change = Vector3.zero;
+            change.x = Input.GetAxisRaw("Horizontal");
+            change.y = Input.GetAxisRaw("Vertical");
+
+            if (currentState != CharacterState.dead
+                && this.currentState != CharacterState.inDialog
+                && this.currentState != CharacterState.inMenu)
+            {
+                UpdateAnimationAndMove();
+            }           
+        }
+
+        if (this.currentState != CharacterState.knockedback)
+        {
+            useSkill("A-Button");
+            useSkill("B-Button");
+            useSkill("X-Button");
+            useSkill("Y-Button");
+            useSkill("RB-Button");
         }
     }
 
@@ -248,7 +251,8 @@ public class Player : Character
             }
             else if (this.currentState != CharacterState.interact
                  && this.currentState != CharacterState.inDialog
-                 && this.currentState != CharacterState.inMenu)
+                 && this.currentState != CharacterState.inMenu
+                 && !Utilities.StatusEffectUtil.isCharacterStunned(this))
             {
                 int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.activeSkills);
 
@@ -265,6 +269,11 @@ public class Player : Character
                     deactivateSkill(button, skill);
                 }
             }
+
+            if (Utilities.StatusEffectUtil.isCharacterStunned(this))
+            {
+                if(!skill.keepHoldTimer) skill.holdTimer = 0;
+            }
         }
     }
 
@@ -276,11 +285,7 @@ public class Player : Character
 
             if (skill.isRapidFire)
             {
-                if (!skill.keepHoldTimer) skill.holdTimer = 0;
-                if (this.activeCastbar != null)
-                {
-                    this.activeCastbar.destroyIt();
-                }
+                resetCast(skill);
             }
 
             //Instants only (kein Cast und kein Rapidfire)
@@ -295,6 +300,7 @@ public class Player : Character
             if (skill.holdTimer < skill.cast)
             {
                 skill.holdTimer += (Time.deltaTime * this.timeDistortion * this.spellspeed);
+                skill.showIndicator(); //Zeige Indikator beim Casten
             }
 
             if (skill.holdTimer >= skill.cast && skill.isRapidFire)
@@ -321,7 +327,7 @@ public class Player : Character
                 && this.activeCastbar != null
                 && skill.isRapidFire)
             {
-                this.activeCastbar.destroyIt();
+                hideCastBarAndIndicator(skill);
             }
             else if (skill.cast > 0 && this.activeCastbar != null && skill.holdTimer > 0)
             {
@@ -338,16 +344,17 @@ public class Player : Character
                 return true;
             }
             if (skill.speedDuringCasting != 0) this.updateSpeed(0);
-            if (!skill.keepHoldTimer) skill.holdTimer = 0;
-            if (this.activeCastbar != null) this.activeCastbar.destroyIt();
+            resetCast(skill);
         }
 
         return false;
     }
 
+
+
     private void activateSkill(string button, StandardSkill skill)
     {
-        if (this.activeCastbar != null) this.activeCastbar.destroyIt();
+        hideCastBarAndIndicator(skill);
 
         if (skill.lockOn == null)
         {
