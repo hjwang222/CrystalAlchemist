@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &242878290860008501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5007069744063628954}
+  m_Layer: 0
+  m_Name: skillset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5007069744063628954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242878290860008501}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.025000095, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 759644400424337062}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &759644400424337056
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,7 +64,8 @@ Transform:
   - {fileID: 4531212770177679800}
   - {fileID: 1490945895739742448}
   - {fileID: 5664017428727299626}
-  - {fileID: 4859328780346412590}
+  - {fileID: 5007069744063628954}
+  - {fileID: 1359776168893412036}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -59,6 +90,7 @@ MonoBehaviour:
   shadowRenderer: {fileID: 7098998326650301281}
   activeSkillParent: {fileID: 8638893490402070047}
   activeStatusEffectParent: {fileID: 1487360461578692118}
+  skillSetParent: {fileID: 242878290860008501}
   startLife: 3
   startMana: 2
   startSpeed: 100
@@ -71,27 +103,6 @@ MonoBehaviour:
   lifeRegenerationInterval: 0
   manaRegeneration: 0.25
   manaRegenerationInterval: 3
-  skillSet:
-  - {fileID: 103987821612614508, guid: 2f0554ae42ef20e4e976d37f34aad3e3, type: 3}
-  - {fileID: 2502710003444371835, guid: 05bc84479b081af4ca7844c3cd88c425, type: 3}
-  - {fileID: 4238057447665557524, guid: d9d5c19e4e61ad142865732f1f61048b, type: 3}
-  - {fileID: 1969711209088018432, guid: d6d1154f9bb87ae4fa94b5c2fe7a7c09, type: 3}
-  - {fileID: 8883430349395961274, guid: 79742653ec493d246bcdef0cbf88e31b, type: 3}
-  - {fileID: 680506914304237524, guid: 8d38c6d44fc7878428ee4d926eeff611, type: 3}
-  - {fileID: 6096689982342564308, guid: bddbde069b87bf945a2ba62d587c3c99, type: 3}
-  - {fileID: 8157143814619834876, guid: f0b2ecb21609c6c48badb5e37582d142, type: 3}
-  - {fileID: 6162400572210519683, guid: 689f7820c63a03148aa81b962ee64ad6, type: 3}
-  - {fileID: 975855144787553018, guid: 42f53cb1b0e3a1e4c98ecc587d8dd07e, type: 3}
-  - {fileID: 6388236434287011116, guid: 478564dcd28512a4a88aeeac6dcd1b25, type: 3}
-  - {fileID: 4500866824247064267, guid: 8a7f78e4a6588ab4289c20b832353307, type: 3}
-  - {fileID: 4199971107470901696, guid: 3d7ade5656d74284380cd8f7d60fd1f0, type: 3}
-  - {fileID: 2626038527925349230, guid: 08ac142b84c3a2547ab5aed3862039d9, type: 3}
-  - {fileID: 6096689982342564308, guid: 7693768a878661948aefd9181f7a2d01, type: 3}
-  - {fileID: 6096689982342564308, guid: f00196e007dd1804990d23436f5ab617, type: 3}
-  - {fileID: 6388236434287011116, guid: 6383752caca7be74ea6d1e0d459f14df, type: 3}
-  - {fileID: 7736697032808662322, guid: 56f5ab55d0651f847a53e3a0d8305f08, type: 3}
-  - {fileID: 8104124904149976495, guid: 1069657a2cf5c7248891f906a405a860, type: 3}
-  - {fileID: 2626038527925349230, guid: 8191971a062876046ab19f93a98c3268, type: 3}
   initializeSkill: {fileID: 0}
   deathSkill: {fileID: 0}
   damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
@@ -137,6 +148,27 @@ MonoBehaviour:
   isPlayer: 0
   inventory: []
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
+  skillSet:
+  - {fileID: 103987821612614508, guid: 2f0554ae42ef20e4e976d37f34aad3e3, type: 3}
+  - {fileID: 2502710003444371835, guid: 05bc84479b081af4ca7844c3cd88c425, type: 3}
+  - {fileID: 4238057447665557524, guid: d9d5c19e4e61ad142865732f1f61048b, type: 3}
+  - {fileID: 1969711209088018432, guid: d6d1154f9bb87ae4fa94b5c2fe7a7c09, type: 3}
+  - {fileID: 8883430349395961274, guid: 79742653ec493d246bcdef0cbf88e31b, type: 3}
+  - {fileID: 680506914304237524, guid: 8d38c6d44fc7878428ee4d926eeff611, type: 3}
+  - {fileID: 6096689982342564308, guid: bddbde069b87bf945a2ba62d587c3c99, type: 3}
+  - {fileID: 8157143814619834876, guid: f0b2ecb21609c6c48badb5e37582d142, type: 3}
+  - {fileID: 6162400572210519683, guid: 689f7820c63a03148aa81b962ee64ad6, type: 3}
+  - {fileID: 975855144787553018, guid: 42f53cb1b0e3a1e4c98ecc587d8dd07e, type: 3}
+  - {fileID: 6388236434287011116, guid: 478564dcd28512a4a88aeeac6dcd1b25, type: 3}
+  - {fileID: 4500866824247064267, guid: 8a7f78e4a6588ab4289c20b832353307, type: 3}
+  - {fileID: 4199971107470901696, guid: 3d7ade5656d74284380cd8f7d60fd1f0, type: 3}
+  - {fileID: 2626038527925349230, guid: 08ac142b84c3a2547ab5aed3862039d9, type: 3}
+  - {fileID: 6096689982342564308, guid: 7693768a878661948aefd9181f7a2d01, type: 3}
+  - {fileID: 6096689982342564308, guid: f00196e007dd1804990d23436f5ab617, type: 3}
+  - {fileID: 6388236434287011116, guid: 6383752caca7be74ea6d1e0d459f14df, type: 3}
+  - {fileID: 7736697032808662322, guid: 56f5ab55d0651f847a53e3a0d8305f08, type: 3}
+  - {fileID: 8104124904149976495, guid: 1069657a2cf5c7248891f906a405a860, type: 3}
+  - {fileID: 2626038527925349230, guid: 8191971a062876046ab19f93a98c3268, type: 3}
   dialogBoxSignal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
   healthSignalUI: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
   manaSignalUI: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}
@@ -145,7 +177,7 @@ MonoBehaviour:
     type: 2}
   openPauseSignal: {fileID: 11400000, guid: fe8d16e1c87adbc46bf6d8de8ceae041, type: 2}
   cameraSignal: {fileID: 11400000, guid: 4a599050ff805e94fa907cfa2b0ff326, type: 2}
-  targetHelpObject: {fileID: 4859328780346411098}
+  targetHelpObject: {fileID: 8153952292305783526}
   loadGame: {fileID: 11400000, guid: 6235bec172bdebb4b9dfed7e628eb8cc, type: 2}
   AButton: {fileID: 0}
   BButton: {fileID: 0}
@@ -546,7 +578,7 @@ PrefabInstance:
     - target: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}
@@ -570,13 +602,13 @@ PrefabInstance:
       objectReference: {fileID: 5074818981556205378}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c27a61d4b7f3984eb11097accadce1d, type: 3}
---- !u!1 &4859328780346411098 stripped
+--- !u!1 &8153952292305783526 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
     type: 3}
   m_PrefabInstance: {fileID: 4859328780346409498}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4859328780346412590 stripped
+--- !u!4 &1359776168893412036 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
     type: 3}

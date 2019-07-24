@@ -79,6 +79,10 @@ public class Character : MonoBehaviour
     [Required]
     public GameObject activeStatusEffectParent;
 
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public GameObject skillSetParent;
+
     ////////////////////////////////////////////////////////////////
 
     [TabGroup("Start-Values")]

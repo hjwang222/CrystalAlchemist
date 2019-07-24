@@ -23,14 +23,15 @@ public class Enemy : Character
 
     private void setAnimFloat(Vector2 setVector)
     {
-        this.direction = setVector;
-
         Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", setVector.x);
         Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", setVector.y);
     }
 
     public void changeAnim(Vector2 direction)
     {
+        //TODO: To be tested
+        this.direction = direction;
+
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
             if (direction.x > 0) setAnimFloat(Vector2.right);

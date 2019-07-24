@@ -62,6 +62,10 @@ public class AIEvent
 
     [FoldoutGroup("$eventName", Expanded = false)]
     [HorizontalGroup("$eventName/Tab0", 0.5f, LabelWidth = 100)]
+    public List<string> affectedPhases = new List<string>();
+
+    [FoldoutGroup("$eventName", Expanded = false)]
+    [HorizontalGroup("$eventName/Tab0", 0.5f, LabelWidth = 100)]
     public bool repeatEvent = false;
 
     [FoldoutGroup("$eventName", Expanded = false)]
@@ -95,10 +99,10 @@ public class AIAction
     [HideLabel]
     public string dialogText;
 
-    [ShowIf("type", AIActionType.wait)]
-    [VerticalGroup("Properties")]
+    [ShowIf("type", AIActionType.dialog)]
+    [VerticalGroup("Type")]
     [LabelWidth(75)]
-    public float delay;
+    public float duration = 4f;
 
     [ShowIf("type", AIActionType.transition)]
     [VerticalGroup("Properties")]
@@ -136,7 +140,9 @@ public class AIAction
     [HideLabel]
     public float gcd = 2.5f;
 
+    
 
+    public StandardSkill skillinstance;
 }
 
 [System.Serializable]
@@ -195,17 +201,25 @@ public class AIEvents : MonoBehaviour
     [SerializeField]
     private List<AIEvent> events = new List<AIEvent>();
 
-    private List<AIAction> activeRotation = new List<AIAction>();
-    private List<AIAction> eventRotation = new List<AIAction>();
+    private AIAction activeAction;
+    private AIPhase activePhase;
+
+    private List<AIAction> activeEvens = new List<AIAction>();
+
+    private AIAction activeDialogAction;
+    private List<AIAction> activeDialogs = new List<AIAction>();
 
     private float timeElapsed;
 
     private bool startAI = false;
-    private int actionsIndex;
-    private int eventIndex;
+    private int actionsIndex = 0;
+    private int eventIndex = 0;
+    private int dialogIndex = 0;
 
     private float globalCoolDown = 0;
-    private AIAction activeAction;
+    private bool nextDialog = true;
+    private bool AIstopped = false;
+
     private CastBar activeCastBar;
     private MiniDialogBox activeDialog;
     private int counter;
@@ -221,7 +235,10 @@ public class AIEvents : MonoBehaviour
 
         Utilities.Skill.instantiateSkill(this.enemy.initializeSkill, this.enemy);
 
-        if (phases.Count > 0) this.activeRotation = this.phases[0].actions;
+        if (phases.Count > 0)
+        {
+            this.activePhase = this.phases[0];
+        }
     }
 
     private void Update()
@@ -233,36 +250,80 @@ public class AIEvents : MonoBehaviour
 
         if (this.startAI)
         {
-            this.timeElapsed += (Time.deltaTime * this.enemy.timeDistortion);
+            handleDialogs();
 
-            //Event
-            checkEvents();
+            if (!this.AIstopped) doEvents();            
+        }
+    }
 
-            if (this.activeAction != null)
+    private IEnumerator stopCo(float duration)
+    {
+        this.AIstopped = true;
+        yield return new WaitForSeconds(duration);
+        this.AIstopped = false;
+    }
+
+    private IEnumerator waitDialogCo(float duration)
+    {
+        this.nextDialog = false;
+        yield return new WaitForSeconds(duration);
+        this.nextDialog = true;
+    }
+
+    private void handleDialogs()
+    {
+        if (this.nextDialog)
+        {
+            if (this.activeDialogAction != null
+            && this.activeDialog == null)
             {
-                if (this.activeAction.skill != null)
-                {
-                    if (this.activeAction.cast >= 0) this.activeAction.skill.cast = this.activeAction.cast;
-                    if (this.activeAction.cD >= 0) this.activeAction.skill.cooldown = this.activeAction.cD;
-                }
-
-                casting();
+                showDialog(this.activeDialogAction);
             }
-            else
+            else if (this.activeDialog == null
+                && this.activeDialogAction == null)
             {
-                setNextAction();
+                setNextDialog();
             }
         }
+    }
+
+    private void doEvents()
+    {
+        this.timeElapsed += (Time.deltaTime * this.enemy.timeDistortion);
+
+        //Event
+        checkEvents();
+
+        if (this.activeAction != null)
+        {
+            if (this.activeAction.skillinstance != null)
+            {
+                if (this.activeAction.cast >= 0) this.activeAction.skillinstance.cast = this.activeAction.cast;
+                if (this.activeAction.cD >= 0) this.activeAction.skillinstance.cooldown = this.activeAction.cD;
+            }
+
+            casting();
+        }
+        else
+        {
+            setNextAction();
+        }
+    }
+
+    private void setNextDialog()
+    {
+        if (this.activeDialogAction == null && this.activeDialogs.Count > 0)
+            this.dialogIndex = setNextActionToDo(this.activeDialogs, this.dialogIndex, true);
     }
 
     private void casting()
     {
         if (this.activeAction.type == AIActionType.skill
-                    && this.activeAction.skill != null)
+                    && this.activeAction.skillinstance != null)
         {
-            if (this.activeAction.skill.holdTimer < this.activeAction.skill.cast)
+            if (this.activeAction.skillinstance.holdTimer < this.activeAction.skillinstance.cast)
             {
-                this.activeAction.skill.holdTimer += (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
+                this.activeAction.skillinstance.holdTimer += (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
 
                 if (this.activeCastBar == null)
                 {
@@ -270,7 +331,7 @@ public class AIEvents : MonoBehaviour
                     //temp.hideFlags = HideFlags.HideInHierarchy;
                     this.activeCastBar = temp.GetComponent<CastBar>();
                     this.activeCastBar.target = this.enemy;
-                    this.activeCastBar.skill = this.activeAction.skill;
+                    this.activeCastBar.skill = this.activeAction.skillinstance;
                 }
                 else
                 {
@@ -296,15 +357,15 @@ public class AIEvents : MonoBehaviour
         {
             this.globalCoolDown = 0;
 
-            if (this.eventRotation.Count > 0)
+            if (this.activeEvens.Count > 0)
             {
                 //Do events
-                this.eventIndex = doRotation(this.eventRotation, this.eventIndex, true);
+                this.eventIndex = setNextActionToDo(this.activeEvens, this.eventIndex, true);
             }
-            else if (this.activeRotation.Count > 0)
+            else if (this.activePhase.actions.Count > 0)
             {
                 //Do current rotation
-                this.actionsIndex = doRotation(this.activeRotation, this.actionsIndex, false);
+                this.actionsIndex = setNextActionToDo(this.activePhase.actions, this.actionsIndex, false);
             }
         }
         else
@@ -318,6 +379,28 @@ public class AIEvents : MonoBehaviour
 
     #region Events
 
+    private void addRange(List<AIAction> actions)
+    {
+        foreach (AIAction action in actions)
+        {
+            if (action.type == AIActionType.dialog) this.activeDialogs.Add(action);
+            else this.activeEvens.Add(action);
+        }
+    }
+
+    private void showDialog(AIAction action)
+    {
+        float wait = action.gcd + action.duration;
+        Debug.Log("Talk: " + action.dialogText+" (wait "+ wait +"s)");
+        GameObject dialog = Instantiate(this.box.gameObject, this.enemy.transform);
+        MiniDialogBox temp = dialog.GetComponent<MiniDialogBox>();
+        temp.setText(action.dialogText);
+        temp.setDuration(action.duration);
+        this.activeDialog = temp;
+        this.activeDialogAction = null;
+        StartCoroutine(waitDialogCo(wait));
+    }
+
     private void checkEvents()
     {
         for (int i = 0; i < this.events.Count; i++)
@@ -326,21 +409,25 @@ public class AIEvents : MonoBehaviour
 
             if (isTriggered(this.events[i]))
             {
-                this.eventRotation.AddRange(this.events[i].actions);
+                Debug.Log("TRIGGERED!");
 
-                this.globalCoolDown = 0;
-                this.counter = 0;
-                this.activeAction = null;
+                clearAction();
                 if (this.actionsIndex > 0) this.actionsIndex -= 1;
 
-                if (!temp.repeatEvent)
-                {
-                    temp.isActive = false;
-                }
-                else
-                {
-                    temp.startTime = this.timeElapsed;
-                }
+                addRange(this.events[i].actions);                                
+                temp.isActive = false;                
+            }
+        }
+    }
+
+    private void resetEventFromPhase(AIPhase phase)
+    {
+        foreach(AIEvent elem in this.events)
+        {
+            if (elem.affectedPhases.Contains(phase.phaseName) && elem.repeatEvent)
+            {
+                elem.isActive = true;
+                elem.startTime = this.timeElapsed;
             }
         }
     }
@@ -349,7 +436,9 @@ public class AIEvents : MonoBehaviour
     {
         int success = 0;
 
-        if (elem.isActive)
+        if (elem.isActive 
+            && (elem.affectedPhases.Contains(this.activePhase.phaseName)
+                || elem.affectedPhases.Count == 0))
         {
             foreach (AITrigger triggerElem in elem.trigger)
             {
@@ -378,7 +467,7 @@ public class AIEvents : MonoBehaviour
 
     public void resetAllEvents()
     {
-        this.activeRotation = this.phases[0].actions;
+        this.activePhase = this.phases[0];
         this.startAI = false;
 
         clearAction();
@@ -401,12 +490,22 @@ public class AIEvents : MonoBehaviour
 
     #region use Action
 
-    private int doRotation(List<AIAction> actionList, int index, bool clearList)
+    private int setNextActionToDo(List<AIAction> actionList, int index, bool clearList)
     {
         AIAction action = actionList[index];
 
-        this.activeAction = action;
-        this.counter = action.amount;
+        if (action.type != AIActionType.dialog)
+        {
+            if (action.skillinstance == null && action.skill != null)
+                action.skillinstance = Utilities.Skill.setSkill(this.enemy, action.skill);
+
+            this.activeAction = action;
+            this.counter = action.amount;            
+        }
+        else
+        {
+            this.activeDialogAction = action;
+        }
 
         if (index < actionList.Count - 1)
         {
@@ -450,7 +549,7 @@ public class AIEvents : MonoBehaviour
     private void clearAction()
     {
         if (this.activeCastBar != null) this.activeCastBar.destroyIt();
-        if (this.activeAction != null && this.activeAction.skill != null) this.activeAction.skill.holdTimer = 0;
+        if (this.activeAction != null && this.activeAction.skillinstance != null) this.activeAction.skillinstance.holdTimer = 0;
         this.activeAction = null;
         this.actionsIndex = 0;
         this.counter = 0;
@@ -461,26 +560,18 @@ public class AIEvents : MonoBehaviour
     {
         bool actionUsed = false;
 
-        if (action.type == AIActionType.skill && skillCanBeUsed(action.skill))
+        if (action.type == AIActionType.skill && skillCanBeUsed(action.skillinstance))
         {
             //useskill
-            StandardSkill usedSkill = Utilities.Skill.instantiateSkill(action.skill, this.enemy, this.enemy.target);
-            action.skill.cooldownTimeLeft = action.skill.cooldown;
+            StandardSkill usedSkill = Utilities.Skill.instantiateSkill(action.skillinstance, this.enemy, this.enemy.target);
+            action.skillinstance.cooldownTimeLeft = action.skillinstance.cooldown;
             actionUsed = true;
+            Debug.Log("Using action: " + usedSkill.skillName);
         }
         else if (action.type == AIActionType.move)
         {
             //move enemy to position    
-            actionUsed = true;
-        }
-        else if (action.type == AIActionType.dialog && this.activeDialog == null)
-        {
-            //TODO: Besser set Active
-            GameObject dialog = Instantiate(this.box.gameObject, this.enemy.transform.position, Quaternion.identity, this.enemy.transform);
-            dialog.GetComponent<MiniDialogBox>().setText(action.dialogText);
-            this.activeDialog = dialog.GetComponent<MiniDialogBox>();
-
-            actionUsed = true;
+            //actionUsed = true;
         }
         else if (action.type == AIActionType.sequence)
         {
@@ -492,13 +583,16 @@ public class AIEvents : MonoBehaviour
             //switch phase
 
             clearAction();
-            this.activeRotation = getPhaseByName(action.nextPhase);
-            actionUsed = true;
+            this.activePhase = getPhaseByName(action.nextPhase);
+            resetEventFromPhase(this.activePhase);
+            Debug.Log("Phase changed to: " + action.nextPhase);
+            //actionUsed = true;
         }
         else if (action.type == AIActionType.wait)
         {
             //wait
-            actionUsed = true;
+            Debug.Log("Wait "+action.gcd+" seconds");
+            StartCoroutine(stopCo(action.gcd));
         }
 
         if (actionUsed)
@@ -508,20 +602,24 @@ public class AIEvents : MonoBehaviour
 
         if ((this.activeAction != null && !this.activeAction.castGroup) || this.counter <= 0)
         {
-            if (this.activeAction != null && this.activeAction.skill != null) this.activeAction.skill.holdTimer = 0;
+            if (this.activeAction != null && this.activeAction.skillinstance != null) this.activeAction.skillinstance.holdTimer = 0;
             this.counter = 0;
             if (this.activeCastBar != null) this.activeCastBar.destroyIt();
 
+            Debug.Log("Set GCD: " + action.gcd);
             this.globalCoolDown = action.gcd;
             this.activeAction = null;
         }
     }
 
-    private List<AIAction> getPhaseByName(string value)
+    private AIPhase getPhaseByName(string value)
     {
         foreach (AIPhase phase in this.phases)
         {
-            if (phase.phaseName.ToUpper() == value.ToUpper()) return phase.actions;
+            if (phase.phaseName.ToUpper() == value.ToUpper())
+            {
+                return phase;
+            }
         }
 
         return null;

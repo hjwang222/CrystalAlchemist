@@ -81,7 +81,14 @@ public class Player : Character
     {
         SaveSystem.loadOptions();
 
+        List<StandardSkill> tempSkillSet = new List<StandardSkill>();
 
+        foreach(StandardSkill skill in this.skillSet)
+        {
+            tempSkillSet.Add(Utilities.Skill.setSkill(this, skill));
+        }
+
+        this.skillSet = tempSkillSet;
 
         this.isPlayer = true;
         this.init();

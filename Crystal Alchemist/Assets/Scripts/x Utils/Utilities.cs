@@ -529,6 +529,14 @@ public class Utilities : MonoBehaviour
             return result;
         }
 
+        public static StandardSkill setSkill(Character character, StandardSkill prefab)
+        {
+            StandardSkill skillInstance = MonoBehaviour.Instantiate(prefab, character.skillSetParent.transform) as StandardSkill;
+            skillInstance.gameObject.SetActive(false);            
+
+            return skillInstance;
+        }
+
         public static StandardSkill instantiateSkill(StandardSkill skill, Character sender)
         {
             return instantiateSkill(skill, sender, null, 1);
@@ -546,6 +554,7 @@ public class Utilities : MonoBehaviour
                 && sender.currentState != CharacterState.defend)
             {
                 GameObject activeSkill = Instantiate(skill.gameObject, sender.transform.position, Quaternion.identity);
+                activeSkill.SetActive(true);
 
                 if (!skill.isStationary) activeSkill.transform.parent = sender.activeSkillParent.transform;
 
