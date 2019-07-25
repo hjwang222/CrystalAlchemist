@@ -596,6 +596,8 @@ public class StandardSkill : MonoBehaviour
 
         if (this.delayTimeLeft > 0)
         {
+            showIndicator();
+
             this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
 
             Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Time", this.delayTimeLeft);
@@ -603,6 +605,8 @@ public class StandardSkill : MonoBehaviour
         }
         else
         {
+            hideIndicator();
+
             //Prüfe ob der Skill eine Maximale Dauer hat
             if (this.durationTimeLeft < Utilities.maxFloatInfinite)
             {

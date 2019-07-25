@@ -98,6 +98,44 @@ public class Utilities : MonoBehaviour
 
     public static class Collisions
     {
+        public static bool checkDistance(Character character, GameObject gameObject, float min, float max)
+        {
+            float distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
+
+            if (distance >= min && distance <= max) return true;
+            else return false;
+        }
+
+        public static float checkDistanceReduce(Character character, GameObject gameObject, float min, float max)
+        {
+            float distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
+            float percentage = 100 - (100 / (max - min) * (distance - min));
+
+            if (distance <= min) return 100;
+            else if (distance >= max) return 0;
+            else return percentage;
+        }
+
+        public static bool checkBehindObstacle(Character character, GameObject gameObject)
+        {
+            int layerMask = 9; //Map
+            //float width = 0.2f;
+            float offset = 0.1f;
+
+            Vector2 position = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset), 
+                                           character.shadowRenderer.transform.position.y - (character.direction.y * offset));
+
+            Vector2 direction = position - (Vector2)gameObject.transform.position;            
+
+            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, direction.normalized, 100, layerMask);
+
+            Debug.DrawRay(gameObject.transform.position, direction, Color.red);
+
+            if (hit != false && !hit.collider.isTrigger && hit.collider.gameObject == character.gameObject) return false;
+
+            return true;
+        }
+
         public static bool checkCollision(Collider2D hittedCharacter, StandardSkill skill)
         {
             if (skill != null && skill.triggerIsActive)
@@ -133,6 +171,11 @@ public class Utilities : MonoBehaviour
 
         public static bool checkIfGameObjectIsViewed(Character character, GameObject gameObject)
         {
+            return checkIfGameObjectIsViewed(character, gameObject, 0.5f);
+        }
+
+        public static bool checkIfGameObjectIsViewed(Character character, GameObject gameObject, float distance)
+        {
             if (character != null && character.shadowRenderer == null)
             {
                 Debug.Log("Schatten-Objekt ist leer!");
@@ -140,11 +183,11 @@ public class Utilities : MonoBehaviour
             }
 
             int layerMask = 9; //Map
-            float distance = 0.5f;
             float width = 0.2f;
             float offset = 0.1f;
 
-            Vector2 position = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset), character.shadowRenderer.transform.position.y - (character.direction.y * offset));
+            Vector2 position = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset), 
+                                           character.shadowRenderer.transform.position.y - (character.direction.y * offset));
 
             RaycastHit2D hit = Physics2D.CircleCast(position, width, character.direction, distance, layerMask);
 

@@ -30,8 +30,7 @@ public class LineIndicator : MonoBehaviour
 
         float angle;
         Vector2 startpoint;
-        Vector3 rotation;
-        
+        Vector3 rotation;        
 
         Utilities.Rotation.setDirectionAndRotation(this.skill.sender, this.skill.target,
                                           0, 0, this.skill.snapRotationInDegrees, this.skill.rotationModifier,
