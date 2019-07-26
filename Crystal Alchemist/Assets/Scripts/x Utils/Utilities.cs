@@ -129,15 +129,12 @@ public class Utilities : MonoBehaviour
         public static float checkDistanceReduce(Character character, GameObject gameObject, float deadDistance, float saveDistance)
         {
             float distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
-            Debug.Log("100 - (100 / ("+saveDistance+" - "+deadDistance+") * ("+distance+" - "+deadDistance+")");
             float percentage = 100 - (100 / (saveDistance - deadDistance) * (distance - deadDistance));
 
             percentage = Mathf.Round(percentage / 25) *25;
 
             if (percentage > 100) percentage = 100;
             else if (percentage < 0) percentage = 0;
-
-            Debug.Log(percentage);
 
             return percentage;            
         }
