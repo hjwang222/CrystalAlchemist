@@ -69,7 +69,7 @@ public class StandardSkill : MonoBehaviour
 
     [FoldoutGroup("Indikatoren", expanded: false)]
     [Tooltip("AOE")]
-    public Indicator indicator;
+    public List<Indicator> indicators = new List<Indicator>();
 
     [FoldoutGroup("Indikatoren", expanded: false)]
     [Tooltip("Indikator anzeigen")]
@@ -352,6 +352,9 @@ public class StandardSkill : MonoBehaviour
     ////////////////////////////////////////////////////////////////
 
     [FoldoutGroup("Special Behaviors", expanded: false)]
+    public bool doCastDuringDelay = false;
+
+    [FoldoutGroup("Special Behaviors", expanded: false)]
     [Range(1, Utilities.maxIntInfinite)]
     [Tooltip("Maximale Anzahl aktiver gleicher Angriffe")]
     public int maxAmounts = Utilities.maxIntInfinite;
@@ -375,7 +378,7 @@ public class StandardSkill : MonoBehaviour
     private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
 
     [HideInInspector]
-    public Indicator activeIndicator;
+    public List<Indicator> activeIndicator = new List<Indicator>();
 
     [HideInInspector]
     public Character sender;
@@ -615,7 +618,8 @@ public class StandardSkill : MonoBehaviour
             this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
 
             Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Time", this.delayTimeLeft);
-            //do something here
+
+            if (this.doCastDuringDelay) doOnCast();
         }
         else
         {
@@ -727,23 +731,30 @@ public class StandardSkill : MonoBehaviour
 
     public void showIndicator()
     {
-        if (this.indicator != null 
-            && this.activeIndicator == null 
+        if (this.indicators.Count > 0 
+            && this.activeIndicator.Count == 0
             && this.showingIndicator)
         {
-            this.activeIndicator = Instantiate(this.indicator);
-            initializeIndicator();
+            foreach (Indicator indicator in this.indicators)
+            { 
+                Indicator temp = Instantiate(indicator);
+                initializeIndicator(temp);
+                this.activeIndicator.Add(temp);
+            }
         }
     }
 
-    public virtual void initializeIndicator()
+    public virtual void initializeIndicator(Indicator indicator)
     {
-        if (this.activeIndicator != null) this.activeIndicator.setSkill(this);
+        indicator.setSkill(this);
     }
 
     public void hideIndicator()
     {
-        if (this.activeIndicator != null) Destroy(this.activeIndicator.gameObject);
+        foreach (Indicator indicator in this.activeIndicator)
+        {
+            indicator.DestroyIt();
+        }
     }
 
     #endregion

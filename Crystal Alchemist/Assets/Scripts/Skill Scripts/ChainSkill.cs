@@ -47,17 +47,17 @@ public class ChainSkill : StandardSkill
     private float startDistance = 0;
 
 
-    public override void initializeIndicator()
+    public override void initializeIndicator(Indicator indicator)
     {
-        base.initializeIndicator();
+        base.initializeIndicator(indicator);
 
         if (this.chainSpriteRenderer != null && this.activeIndicator != null)
         {
-            this.activeIndicator.indicatorRenderer.sprite = this.chainSpriteRenderer.sprite;
-            this.activeIndicator.indicatorRenderer.color = this.chainSpriteRenderer.color;
-            this.activeIndicator.indicatorRenderer.size = new Vector2(this.activeIndicator.indicatorRenderer.size.x, this.chainSpriteRenderer.size.y);
+            indicator.indicatorRenderer.sprite = this.chainSpriteRenderer.sprite;
+            indicator.indicatorRenderer.color = this.chainSpriteRenderer.color;
+            indicator.indicatorRenderer.size = new Vector2(indicator.indicatorRenderer.size.x, this.chainSpriteRenderer.size.y);
 
-            this.activeIndicator.animator.enabled = false;
+            indicator.animator.enabled = false;
         }
     }
 
@@ -65,7 +65,13 @@ public class ChainSkill : StandardSkill
     {
         if (this.hasRightDistance())
         {
-            if (this.changeColor) this.activeIndicator.indicatorRenderer.color = this.rightColor;
+            if (this.changeColor)
+            {
+                foreach (Indicator indicator in this.indicators)
+                {
+                    indicator.indicatorRenderer.color = this.rightColor;
+                }
+            }
 
             if (this.canBreak && !this.useRange)
             {
@@ -75,7 +81,10 @@ public class ChainSkill : StandardSkill
         }
         else
         {
-            if (this.changeColor) this.activeIndicator.indicatorRenderer.color = this.wrongColor;
+            if (this.changeColor) foreach (Indicator indicator in this.indicators)
+                {
+                    indicator.indicatorRenderer.color = this.wrongColor;
+                }
         }
 
     }

@@ -24,4 +24,9 @@ public class Indicator : MonoBehaviour
         this.skill = skill;
         if (skill != null && skill.useCustomColor) this.indicatorRenderer.color = skill.indicatorColor;
     }
+
+    public void DestroyIt()
+    {
+        Destroy(this.gameObject);
+    }
 }

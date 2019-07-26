@@ -56,20 +56,20 @@ public class ImpactSkill : StandardSkill
             if (this.type == aoeType.hide)
             {
                 //hide AOE
-                bool isHiding = Utilities.Collisions.checkBehindObstacle(hittedCharacter.GetComponent<Character>(), this.sender.gameObject);
+                bool isHiding = Utilities.Collisions.checkBehindObstacle(hittedCharacter.GetComponent<Character>(), this.gameObject);
                 if(!isHiding) this.landAttack(hittedCharacter);
             }
             else if (this.type == aoeType.range)
             {
                 //range AOE
                 float percentage = Utilities.Collisions.checkDistanceReduce(hittedCharacter.GetComponent<Character>(),
-                                                                            this.sender.gameObject, rangePercentage.x, rangePercentage.y);
+                                                                            this.gameObject, rangePercentage.x, rangePercentage.y);
                 this.landAttack(hittedCharacter, percentage);
             }
             else if(this.type == aoeType.look)
             {
                 //normal AOE
-                bool isLookingAt = Utilities.Collisions.checkIfGameObjectIsViewed(hittedCharacter.GetComponent<Character>(), this.sender.gameObject, this.viewRange);
+                bool isLookingAt = Utilities.Collisions.checkIfGameObjectIsViewed(hittedCharacter.GetComponent<Character>(), this.gameObject, this.viewRange);
                 if((this.mustLookAway && isLookingAt) || (!this.mustLookAway && !isLookingAt)) this.landAttack(hittedCharacter);
             }
             else
