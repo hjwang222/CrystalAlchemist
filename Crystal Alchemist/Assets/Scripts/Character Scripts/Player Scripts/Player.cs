@@ -77,7 +77,7 @@ public class Player : Character
     private string lastButtonPressed = "";
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         SaveSystem.loadOptions();
 
@@ -300,7 +300,8 @@ public class Player : Character
             if (skill.holdTimer < skill.cast)
             {
                 skill.holdTimer += (Time.deltaTime * this.timeDistortion * this.spellspeed);
-                skill.showIndicator(); //Zeige Indikator beim Casten
+                skill.showIndicator(); //Zeige Indikator beim Casten+
+                skill.doOnCast();
             }
 
             if (skill.holdTimer >= skill.cast && skill.isRapidFire)

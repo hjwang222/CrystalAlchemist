@@ -140,6 +140,7 @@ public class AIAction
     [HideLabel]
     public float gcd = 2.5f;
 
+    [HideInInspector]
     public StandardSkill skillinstance;
 }
 
@@ -249,6 +250,11 @@ public class AIEvents : MonoBehaviour
         {
             handleDialogs();
 
+            if (this.activeAction != null 
+                && this.activeAction.skillinstance == null 
+                && this.enemy != null
+                && this.enemy.activeCastbar != null) this.enemy.activeCastbar.destroyIt();
+
             if (!this.AIstopped) doEvents();            
         }
     }
@@ -299,6 +305,7 @@ public class AIEvents : MonoBehaviour
                 {
                     if (this.activeAction.cast >= 0) this.activeAction.skillinstance.cast = this.activeAction.cast;
                     if (this.activeAction.cD >= 0) this.activeAction.skillinstance.cooldown = this.activeAction.cD;
+                    if (this.activeAction.skillinstance.setTargetAutomatically) this.activeAction.skillinstance.target = this.enemy.target;
                 }
 
                 casting();
@@ -330,6 +337,7 @@ public class AIEvents : MonoBehaviour
                 this.activeAction.skillinstance.holdTimer += (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
                 
                 this.activeAction.skillinstance.showIndicator(); //Zeige Indikator beim Casten
+                this.activeAction.skillinstance.doOnCast();
 
                 if (this.activeAction.skillinstance.showCastBarForEnemies)
                 {

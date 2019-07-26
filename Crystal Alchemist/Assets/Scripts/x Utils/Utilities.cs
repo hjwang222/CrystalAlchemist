@@ -26,9 +26,15 @@ public struct LootTable
 }
 
 [System.Serializable]
-public struct AffectedResource
+public class affectedResource
 {
     public ResourceType resourceType;
+
+    [ShowIf("resourceType", ResourceType.item)]
+    [Tooltip("Benötigtes Item")]
+    public Item item;
+
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     public float amount;
 }
 
@@ -98,40 +104,76 @@ public class Utilities : MonoBehaviour
 
     public static class Collisions
     {
-        public static bool checkDistance(Character character, GameObject gameObject, float min, float max)
+        public static bool checkDistance(Character character, GameObject gameObject, float min, float max, float startDistance, float distanceNeeded, bool useStartDistance, bool useRange)
         {
             float distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
 
-            if (distance >= min && distance <= max) return true;
-            else return false;
+            //Debug.Log(startDistance + " : " + distanceNeeded + " : "+distance);
+
+            if (useStartDistance && distanceNeeded > 0)
+            {
+                if (distance > (startDistance + distanceNeeded)) return true;
+            }
+            else if (!useStartDistance && distanceNeeded > 0)
+            {
+                if (distance > distanceNeeded) return true;
+            }
+            else if (useRange)
+            {
+                if (distance >= min && distance <= max) return true;
+            }
+
+            return false;
         }
 
-        public static float checkDistanceReduce(Character character, GameObject gameObject, float min, float max)
+        public static float checkDistanceReduce(Character character, GameObject gameObject, float deadDistance, float saveDistance)
         {
             float distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
-            float percentage = 100 - (100 / (max - min) * (distance - min));
+            Debug.Log("100 - (100 / ("+saveDistance+" - "+deadDistance+") * ("+distance+" - "+deadDistance+")");
+            float percentage = 100 - (100 / (saveDistance - deadDistance) * (distance - deadDistance));
 
-            if (distance <= min) return 100;
-            else if (distance >= max) return 0;
-            else return percentage;
+            percentage = Mathf.Round(percentage / 25) *25;
+
+            if (percentage > 100) percentage = 100;
+            else if (percentage < 0) percentage = 0;
+
+            Debug.Log(percentage);
+
+            return percentage;            
         }
 
         public static bool checkBehindObstacle(Character character, GameObject gameObject)
         {
-            int layerMask = 9; //Map
-            //float width = 0.2f;
             float offset = 0.1f;
+            Vector2 targetPosition = new Vector2(character.transform.position.x - (character.direction.x * offset),
+                                                     character.transform.position.y - (character.direction.y * offset));
 
-            Vector2 position = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset), 
-                                           character.shadowRenderer.transform.position.y - (character.direction.y * offset));
+            
+            if (character.shadowRenderer != null)
+            {
+                targetPosition = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset),
+                                             character.shadowRenderer.transform.position.y - (character.direction.y * offset));
+            }
+            
+            Vector2 start = gameObject.transform.position;
+            Vector2 direction = (targetPosition - start).normalized;
 
-            Vector2 direction = position - (Vector2)gameObject.transform.position;            
+            RaycastHit2D hit = Physics2D.Raycast(start, direction, 100f);            
 
-            RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, direction.normalized, 100, layerMask);
+            if (hit && !hit.collider.isTrigger)
+            {
+                if (hit.collider.gameObject != character.gameObject)
+                {
+                    //Debug.DrawLine(start, hit.transform.position, Color.green);
+                    return true;
+                }
+                else
+                {
+                    //Debug.DrawLine(start, hit.transform.position, Color.red);
+                    return false;
+                }
+            }
 
-            Debug.DrawRay(gameObject.transform.position, direction, Color.red);
-
-            if (hit != false && !hit.collider.isTrigger && hit.collider.gameObject == character.gameObject) return false;
 
             return true;
         }
@@ -186,13 +228,13 @@ public class Utilities : MonoBehaviour
             float width = 0.2f;
             float offset = 0.1f;
 
-            Vector2 position = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset), 
+            Vector2 position = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset),
                                            character.shadowRenderer.transform.position.y - (character.direction.y * offset));
 
             RaycastHit2D hit = Physics2D.CircleCast(position, width, character.direction, distance, layerMask);
 
             if (hit != false && !hit.collider.isTrigger && hit.collider.gameObject == gameObject) return true;
-            
+
             return false;
         }
     }
@@ -419,7 +461,7 @@ public class Utilities : MonoBehaviour
     {
         public static bool isCharacterStunned(Character character)
         {
-            foreach(StatusEffect debuff in character.debuffs)
+            foreach (StatusEffect debuff in character.debuffs)
             {
                 if (debuff.stunTarget) return true;
             }
@@ -643,7 +685,7 @@ public class Utilities : MonoBehaviour
         }
     }
 
-    
+
 
     ///////////////////////////////////////////////////////////////
 
@@ -670,7 +712,7 @@ public class Utilities : MonoBehaviour
 
             //if sender is not frozen
 
-            if (target != null) direction = (Vector2)target.transform.position - start;    
+            if (target != null) direction = (Vector2)target.transform.position - start;
 
             float temp_angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             direction = Utilities.Rotation.DegreeToVector2(temp_angle);
@@ -708,7 +750,7 @@ public class Utilities : MonoBehaviour
         {
             StandardSkill skillInstance = MonoBehaviour.Instantiate(prefab, character.skillSetParent.transform) as StandardSkill;
             skillInstance.sender = character;
-            skillInstance.gameObject.SetActive(false);            
+            skillInstance.gameObject.SetActive(false);
 
             return skillInstance;
         }
@@ -726,7 +768,7 @@ public class Utilities : MonoBehaviour
         public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target, float reduce)
         {
             if (skill != null
-                && sender.currentState != CharacterState.attack 
+                && sender.currentState != CharacterState.attack
                 && sender.currentState != CharacterState.defend)
             {
                 GameObject activeSkill = Instantiate(skill.gameObject, sender.transform.position, Quaternion.identity);

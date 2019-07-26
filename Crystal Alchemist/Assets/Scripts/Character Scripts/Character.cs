@@ -343,11 +343,11 @@ public class Character : MonoBehaviour
         this.colors.Add(this.spriteRenderer.color);
 
         this.transform.gameObject.tag = this.characterType.ToString();
-
+        /*
         if (this.spriteRenderer != null)
         {
             this.spriteRenderer.gameObject.tag = this.transform.gameObject.tag;
-        }
+        }*/
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
     }
 
@@ -516,10 +516,11 @@ public class Character : MonoBehaviour
             this.currentState = CharacterState.dead;
 
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
-            this.boxCollider.enabled = false;
+            StartCoroutine(colliderDisable());
             this.shadowRenderer.enabled = false;
         }
     }
+
 
     public void PlayDeathSoundEffect()
     {
@@ -765,7 +766,7 @@ public class Character : MonoBehaviour
 
     #region Damage Functions (hit, statuseffect, knockback)
 
-    public void gotHit(StandardSkill skill)
+    public void gotHit(StandardSkill skill, float percentage)
     {
         if (!this.isInvincible || skill.ignoreInvincibility)
         {
@@ -774,15 +775,17 @@ public class Character : MonoBehaviour
             {
                 foreach (StatusEffect effect in skill.statusEffects)
                 {
-                    Utilities.StatusEffectUtil.AddStatusEffect(effect,this);
+                    Utilities.StatusEffectUtil.AddStatusEffect(effect, this);
                 }
             }
 
             foreach (affectedResource elem in skill.affectedResources)
             {
-                updateResource(elem.resourceType, null, elem.amount);
+                float amount = elem.amount * percentage / 100;
 
-                if (this.life > 0 && elem.resourceType == ResourceType.life && elem.amount < 0)
+                updateResource(elem.resourceType, null, amount);
+
+                if (this.life > 0 && elem.resourceType == ResourceType.life && amount < 0)
                 {
                     AIAggroSystem aggro = this.GetComponent<AIAggroSystem>();
                     if (aggro != null) aggro.increaseAggroOnHit(skill.sender);
@@ -800,7 +803,11 @@ public class Character : MonoBehaviour
                 knockBack(skill.knockbackTime, knockbackTrust, skill);
             }
         }
+    }
 
+    public void gotHit(StandardSkill skill)
+    {
+        gotHit(skill, 100);
     }
 
 
@@ -828,6 +835,13 @@ public class Character : MonoBehaviour
 
 
     #region Coroutines (Hit, Kill, Respawn, Knockback)
+
+
+    private IEnumerator colliderDisable()
+    {
+        yield return null;
+        this.boxCollider.enabled = false;
+    }
 
     private IEnumerator hitCo()
     {

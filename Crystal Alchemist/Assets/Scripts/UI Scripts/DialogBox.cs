@@ -32,7 +32,7 @@ public class DialogBox : MonoBehaviour
 
 
     #region Unity Funktionen (Start, Update)
-    private void Start()
+    private void Awake()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();

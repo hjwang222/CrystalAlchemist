@@ -87,6 +87,7 @@ public class SkillMenu : MonoBehaviour
 
     private void Start()
     {
+        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         setSkillsToSlots(SkillType.physical);
         setSkillsToSlots(SkillType.magical);
         setSkillsToSlots(SkillType.item);

@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
-public class LineIndicator : MonoBehaviour
+public class LineIndicator : Indicator
 {
-    public StandardSkill skill;
-    public float distance = 10;
-    public SpriteRenderer laserSprite;
+    [SerializeField]
+    private float distance = 10;
 
     private Vector2 direction;
+    private ChainSkill chain;
+    
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         drawLine(true);
     }
 
@@ -21,8 +24,6 @@ public class LineIndicator : MonoBehaviour
     {
         drawLine(this.skill.rotateIt);
     }
-
-
 
     private void drawLine(bool updateRotation)
     {
@@ -55,7 +56,7 @@ public class LineIndicator : MonoBehaviour
         float offset = 1f;
         Vector2 newPosition = new Vector2(startpoint.x - (this.direction.x * offset), startpoint.y - (this.direction.y * offset));
 
-        RaycastHit2D hitInfo = Physics2D.CircleCast(newPosition, this.laserSprite.size.y, this.direction, distance, layerMask);
+        RaycastHit2D hitInfo = Physics2D.CircleCast(newPosition, this.indicatorRenderer.size.y+0.5f, this.direction, distance, layerMask);
 
         if (hitInfo && !hitInfo.collider.isTrigger)
         {
@@ -72,21 +73,18 @@ public class LineIndicator : MonoBehaviour
 
             Vector2 temp = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y - startpoint.y) / 2) + startpoint;
 
-            this.laserSprite.transform.position = temp;
-            this.laserSprite.size = new Vector2(Vector3.Distance(hitpoint, startpoint), this.laserSprite.size.y);
-            this.laserSprite.transform.rotation = Quaternion.Euler(rotation);            
+            this.indicatorRenderer.transform.position = temp;
+            this.indicatorRenderer.size = new Vector2(Vector3.Distance(hitpoint, startpoint), this.indicatorRenderer.size.y);
+            this.indicatorRenderer.transform.rotation = Quaternion.Euler(rotation);            
         }
         else
         {
-            
                 //Kein Ziel getroffen, zeichne Linie mit max Länge            
                 Vector2 temp = new Vector2(this.direction.x * (this.distance / 2), this.direction.y * (this.distance / 2)) + startpoint;
 
-                this.laserSprite.transform.position = temp;
-                this.laserSprite.size = new Vector2(this.distance, this.laserSprite.size.y);
-                this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
-            
-            
+                this.indicatorRenderer.transform.position = temp;
+                this.indicatorRenderer.size = new Vector2(this.distance, this.indicatorRenderer.size.y);
+                this.indicatorRenderer.transform.rotation = Quaternion.Euler(rotation);      
         }
     }
 

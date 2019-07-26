@@ -69,8 +69,7 @@ public class StandardSkill : MonoBehaviour
 
     [FoldoutGroup("Indikatoren", expanded: false)]
     [Tooltip("AOE")]
-    [SerializeField]
-    private GameObject indicator;
+    public Indicator indicator;
 
     [FoldoutGroup("Indikatoren", expanded: false)]
     [Tooltip("Indikator anzeigen")]
@@ -79,6 +78,13 @@ public class StandardSkill : MonoBehaviour
     [FoldoutGroup("Indikatoren", expanded: false)]
     [Tooltip("Cast anzeigen")]
     public bool showCastBarForEnemies = true;
+
+    [FoldoutGroup("Indikatoren", expanded: false)]
+    public bool useCustomColor;
+
+    [FoldoutGroup("Indikatoren", expanded: false)]
+    [ShowIf("useCustomColor", true)]
+    public Color indicatorColor;
 
     ////////////////////////////////////////////////////////////////
 
@@ -279,6 +285,9 @@ public class StandardSkill : MonoBehaviour
     public bool activeTargetHelper = false;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
+    public bool setTargetAutomatically = false;
+
+    [FoldoutGroup("Zielerfassung", expanded: false)]
     [Tooltip("Ob das Ziel erfasst werden soll. Wenn NULL, dann nicht.")]
     public GameObject lockOn;
 
@@ -351,9 +360,6 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Maximale Anzahl aktiver gleicher Angriffe in einer Combo")]
     public int comboAmount = Utilities.maxIntSmall;
 
-    //private bool showIndicator = false;
-    //private bool showCastBar = false;
-
     ////////////////////////////////////////////////////////////////
 
     [FoldoutGroup("Sound und Icons", expanded: false)]
@@ -367,7 +373,9 @@ public class StandardSkill : MonoBehaviour
     private float elapsed;
     private float LockElapsed;
     private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
-    private GameObject activeIndicator;
+
+    [HideInInspector]
+    public Indicator activeIndicator;
 
     [HideInInspector]
     public Character sender;
@@ -534,6 +542,7 @@ public class StandardSkill : MonoBehaviour
 
     #endregion
 
+
     #region Update Funktionen   
 
     public void Update()
@@ -549,6 +558,11 @@ public class StandardSkill : MonoBehaviour
     public float getDurationLeft()
     {
         return this.durationTimeLeft;
+    }
+
+    public virtual void doOnCast()
+    {
+
     }
 
     public virtual void doOnUpdate()
@@ -618,7 +632,11 @@ public class StandardSkill : MonoBehaviour
                 {
                     Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Explode", true);
 
-                    if (this.animator == null || !Utilities.UnityUtils.HasParameter(this.animator, "Explode")) DestroyIt();
+                    if (this.animator == null || !Utilities.UnityUtils.HasParameter(this.animator, "Explode"))
+                    {
+                        SetTriggerActive(1);
+                        DestroyIt();
+                    }
                 }
             }
         }
@@ -627,21 +645,21 @@ public class StandardSkill : MonoBehaviour
 
     }
 
-    public void landAttack(Character hittedObject)
-    {
-        if (hittedObject != null)
-        {
-            //Gegner zurückstoßen + Hit
-            hittedObject.gotHit(this);
-        }
-    }
-
     public void landAttack(Collider2D hittedObject)
     {
         if (hittedObject.GetComponent<Character>() != null)
         {
             //Gegner zurückstoßen + Hit
-            landAttack(hittedObject.GetComponent<Character>());
+            hittedObject.GetComponent<Character>().gotHit(this);
+        }
+    }
+
+    public void landAttack(Collider2D hittedObject, float percentage)
+    {
+        if (hittedObject.GetComponent<Character>() != null)
+        {
+            //Gegner zurückstoßen + Hit
+            hittedObject.GetComponent<Character>().gotHit(this, percentage);
         }
     }
 
@@ -714,13 +732,18 @@ public class StandardSkill : MonoBehaviour
             && this.showingIndicator)
         {
             this.activeIndicator = Instantiate(this.indicator);
-            if (this.activeIndicator.GetComponent<LineIndicator>() != null) this.activeIndicator.GetComponent<LineIndicator>().skill = this;
+            initializeIndicator();
         }
+    }
+
+    public virtual void initializeIndicator()
+    {
+        if (this.activeIndicator != null) this.activeIndicator.setSkill(this);
     }
 
     public void hideIndicator()
     {
-        if (this.activeIndicator != null) Destroy(this.activeIndicator);
+        if (this.activeIndicator != null) Destroy(this.activeIndicator.gameObject);
     }
 
     #endregion
