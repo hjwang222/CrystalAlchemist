@@ -379,7 +379,9 @@ public class AIEvents : MonoBehaviour
                 //Do events
                 this.eventIndex = setNextActionToDo(this.activeEvens, this.eventIndex, true);
             }
-            else if (this.activePhase.actions.Count > 0)
+            else if (this.activePhase != null
+                && this.activePhase.actions != null
+                && this.activePhase.actions.Count > 0)
             {
                 //Do current rotation
                 this.actionsIndex = setNextActionToDo(this.activePhase.actions, this.actionsIndex, false);
@@ -484,7 +486,7 @@ public class AIEvents : MonoBehaviour
 
     public void resetAllEvents()
     {
-        this.activePhase = this.phases[0];
+        if(this.phases.Count > 0) this.activePhase = this.phases[0];
         this.startAI = false;
 
         clearAction();
@@ -586,7 +588,7 @@ public class AIEvents : MonoBehaviour
             StandardSkill usedSkill = Utilities.Skill.instantiateSkill(action.skillinstance, this.enemy, this.enemy.target);
             action.skillinstance.cooldownTimeLeft = action.skillinstance.cooldown;
             actionUsed = true;
-            Debug.Log("Using action: " + usedSkill.skillName);
+            //Debug.Log("Using action: " + usedSkill.skillName);
         }
         else if (action.type == AIActionType.move)
         {
@@ -608,13 +610,13 @@ public class AIEvents : MonoBehaviour
             clearAction();
             this.activePhase = getPhaseByName(action.nextPhase);
             resetEventFromPhase(this.activePhase);
-            Debug.Log("Phase changed to: " + action.nextPhase);
+            //Debug.Log("Phase changed to: " + action.nextPhase);
             //actionUsed = true;
         }
         else if (action.type == AIActionType.wait)
         {
             //wait
-            Debug.Log("Wait "+action.gcd+" seconds");
+            //Debug.Log("Wait "+action.gcd+" seconds");
             StartCoroutine(stopCo(action.gcd));
         }
 
@@ -628,7 +630,7 @@ public class AIEvents : MonoBehaviour
             if (this.activeAction != null) this.enemy.resetCast(this.activeAction.skillinstance);
             this.counter = 0;            
 
-            Debug.Log("Set GCD: " + action.gcd);
+            //Debug.Log("Set GCD: " + action.gcd);
             this.globalCoolDown = action.gcd;
             this.activeAction = null;
         }
