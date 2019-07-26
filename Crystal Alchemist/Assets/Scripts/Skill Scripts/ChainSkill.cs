@@ -51,7 +51,7 @@ public class ChainSkill : StandardSkill
     {
         base.initializeIndicator(indicator);
 
-        if (this.chainSpriteRenderer != null && this.activeIndicator != null)
+        if (this.chainSpriteRenderer != null && this.activeIndicators != null)
         {
             indicator.indicatorRenderer.sprite = this.chainSpriteRenderer.sprite;
             indicator.indicatorRenderer.color = this.chainSpriteRenderer.color;

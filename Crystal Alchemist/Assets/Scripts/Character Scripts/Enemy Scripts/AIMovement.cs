@@ -46,7 +46,7 @@ public class AIMovement : MonoBehaviour
 
     #region Update und Movement Funktionen
     private void Update()
-    {     
+    {    
         if(this.enemy.currentState != CharacterState.dead
         && this.enemy.currentState != CharacterState.manually) moveCharacter();
     }

@@ -378,7 +378,7 @@ public class StandardSkill : MonoBehaviour
     private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
 
     [HideInInspector]
-    public List<Indicator> activeIndicator = new List<Indicator>();
+    public List<Indicator> activeIndicators = new List<Indicator>();
 
     [HideInInspector]
     public Character sender;
@@ -732,14 +732,14 @@ public class StandardSkill : MonoBehaviour
     public void showIndicator()
     {
         if (this.indicators.Count > 0 
-            && this.activeIndicator.Count == 0
+            && this.activeIndicators.Count == 0
             && this.showingIndicator)
         {
             foreach (Indicator indicator in this.indicators)
             { 
                 Indicator temp = Instantiate(indicator);
                 initializeIndicator(temp);
-                this.activeIndicator.Add(temp);
+                this.activeIndicators.Add(temp);
             }
         }
     }
@@ -751,7 +751,7 @@ public class StandardSkill : MonoBehaviour
 
     public void hideIndicator()
     {
-        foreach (Indicator indicator in this.activeIndicator)
+        foreach (Indicator indicator in this.activeIndicators)
         {
             indicator.DestroyIt();
         }
