@@ -12,9 +12,6 @@ public enum markTargetType
 public class MarkIndicator : Indicator
 {
     [SerializeField]
-    private Sprite markIcon;
-
-    [SerializeField]
     private markTargetType markTarget;
 
     public override void Start()

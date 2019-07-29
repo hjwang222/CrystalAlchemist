@@ -208,6 +208,25 @@ public class Utilities : MonoBehaviour
             return false;
         }
 
+        public static bool checkIfGameObjectIsViewed(Character character, GameObject target, int range)
+        {
+            Vector2 direction = character.direction;
+            Vector2 temp = (character.transform.position - target.transform.position).normalized;
+
+            float direction_angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+            float temp_angle = Mathf.Atan2(temp.x, temp.y) * Mathf.Rad2Deg;
+
+            float angle = Mathf.Abs(direction_angle - temp_angle);
+
+            float min = 180 - range;
+            float max = 180 + range;
+
+            //Debug.Log(angle + ">>" + min + ":" + max);
+
+            if (angle >= min && angle <= max) return true;
+            return false;
+        }
+
         public static bool checkIfGameObjectIsViewed(Character character, GameObject gameObject)
         {
             return checkIfGameObjectIsViewed(character, gameObject, 0.5f);

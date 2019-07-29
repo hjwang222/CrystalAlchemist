@@ -26,8 +26,7 @@ public class ImpactSkill : StandardSkill
     [FoldoutGroup("Special Behaviors", expanded: false)]
     [ShowIf("type", aoeType.look)]
     [SerializeField]
-    [Range(1,Utilities.maxFloatSmall)]
-    private float viewRange = 50f;
+    int viewRange = 45;
 
     [FoldoutGroup("Special Behaviors", expanded: false)]
     [ShowIf("type", aoeType.range)]
