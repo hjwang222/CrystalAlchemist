@@ -166,7 +166,7 @@ MonoBehaviour:
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
   cast: 0
   keepHoldTimer: 0
-  delay: 5
+  delay: 3
   duration: 0
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
@@ -477,7 +477,7 @@ MonoBehaviour:
   modifcations:
   - gameObject: {fileID: 77989889262590430}
     position: 4
-    spawnDelay: 0.5
+    spawnDelay: 0
     min: {fileID: 0}
     max: {fileID: 0}
     spawnPoints:
@@ -488,7 +488,7 @@ MonoBehaviour:
     randomRotations: 0
   - gameObject: {fileID: 8549775454235651228}
     position: 4
-    spawnDelay: 3
+    spawnDelay: 1.5
     min: {fileID: 0}
     max: {fileID: 0}
     spawnPoints:
@@ -812,6 +812,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3549508462353426965, guid: f06af58a2b363ec43858d6b931476a48,
+        type: 3}
+      propertyPath: delay
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f06af58a2b363ec43858d6b931476a48, type: 3}

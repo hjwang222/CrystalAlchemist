@@ -11,6 +11,10 @@ public enum aoeShareType
     more
 }
 
+//TODO: Show Timer
+
+//TODO: Override Cast
+
 public class AoESkill : StandardSkill
 {
     [FoldoutGroup("Special Behaviors", expanded: false)]
@@ -163,7 +167,7 @@ public class AoESkill : StandardSkill
 
     public override void OnTriggerExit2D(Collider2D hittedCharacter)
     {
-        if (Utilities.Collisions.checkCollision(hittedCharacter, this))
+        if (!this.hurtCharacter && Utilities.Collisions.checkCollision(hittedCharacter, this))
         {
             Character character = hittedCharacter.GetComponent<Character>();
             if (character != null && this.listOfCharacters.Contains(character)) this.listOfCharacters.Remove(character);
