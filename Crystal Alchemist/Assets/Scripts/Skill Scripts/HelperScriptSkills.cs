@@ -33,6 +33,11 @@ public class HelperScriptSkills : MonoBehaviour
         this.skill.DestroyIt();
     }
 
+    public void DestroyDelay(float delay)
+    {
+        this.skill.DestroyIt(delay);
+    }
+
     public void showIndicator()
     {
         this.skill.showIndicator();

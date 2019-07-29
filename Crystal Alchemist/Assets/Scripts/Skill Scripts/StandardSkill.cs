@@ -730,6 +730,16 @@ public class StandardSkill : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public virtual void DestroyIt(float delay)
+    {
+        if (this.speedDuringDuration != 0) this.sender.updateSpeed(0);
+
+        this.sender.activeSkills.Remove(this);
+        if (this.stateType != StateType.none) this.sender.currentState = CharacterState.idle;
+        //this.isActive = false;
+        Destroy(this.gameObject, delay);
+    }
+
     public void showIndicator()
     {
         if (this.indicators.Count > 0 
