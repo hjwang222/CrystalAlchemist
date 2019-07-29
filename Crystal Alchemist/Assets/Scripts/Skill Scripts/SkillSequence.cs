@@ -20,7 +20,7 @@ public class customSequence
     public GameObject gameObject;
 
     public modificationType position = modificationType.none;
-
+    public bool initActive = false;
     public float spawnDelay = 0f;
 
     [ShowIf("position", modificationType.randomArea)]
@@ -89,7 +89,29 @@ public class SkillSequence : MonoBehaviour
         {
             if (mod.gameObject != null && this.timeElapsed >= mod.spawnDelay)
             {
-                mod.gameObject.SetActive(true);
+                if (!mod.gameObject.activeInHierarchy)
+                {
+                    StandardSkill skill = mod.gameObject.GetComponent<StandardSkill>();
+
+                    if (skill != null)
+                    {
+                        skill.showIndicator();
+
+                        if (skill.holdTimer < skill.cast)
+                        {
+                            skill.holdTimer += (Time.deltaTime * this.sender.timeDistortion * this.sender.spellspeed);
+                        }
+                        else
+                        {
+                            skill.hideIndicator();
+                            mod.gameObject.SetActive(true);
+                        }
+                    }
+                    else
+                    {
+                        mod.gameObject.SetActive(true);
+                    }
+                }
             }
         }
     }
@@ -102,6 +124,7 @@ public class SkillSequence : MonoBehaviour
     {
         foreach (customSequence modification in this.modifcations)
         {
+            if(!modification.initActive) modification.gameObject.SetActive(false);
             setPosition(modification);
             setRotation(modification);
         }

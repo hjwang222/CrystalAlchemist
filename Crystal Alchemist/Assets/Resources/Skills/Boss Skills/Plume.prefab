@@ -67,7 +67,7 @@ MonoBehaviour:
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
   cast: 0
   keepHoldTimer: 0
-  delay: 1
+  delay: 1.5
   duration: 0
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
+  keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
   rotationModifier: 0
@@ -451,6 +452,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8171713707304626961}
     m_Modifications:
+    - target: {fileID: 5734340486931179260, guid: 351aab7a805452c4aafd15bd06c04cea,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734340486931179260, guid: 351aab7a805452c4aafd15bd06c04cea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5792540112292189006, guid: 351aab7a805452c4aafd15bd06c04cea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -515,16 +526,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5734340486931179260, guid: 351aab7a805452c4aafd15bd06c04cea,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion
-      objectReference: {fileID: 0}
-    - target: {fileID: 5734340486931179260, guid: 351aab7a805452c4aafd15bd06c04cea,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 526825844287091840, guid: 351aab7a805452c4aafd15bd06c04cea,
         type: 3}

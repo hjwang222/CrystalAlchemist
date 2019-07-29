@@ -245,6 +245,11 @@ public class StandardSkill : MonoBehaviour
     public bool rotateIt = false;
 
     [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
+    [HideIf("rotateIt")]
+    public bool keepOriginalRotation = false;
+
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Tooltip("Wird ein Blend-Tree verwendet (Animation)?")]
     [HideIf("rotateIt")]
     [SerializeField]
@@ -414,6 +419,11 @@ public class StandardSkill : MonoBehaviour
     [HideInInspector]
     public bool setPositionAtStart = true;
 
+    [HideInInspector]
+    public bool setActive = true;
+
+    private bool speedup = true;
+
     #endregion
 
 
@@ -502,27 +512,29 @@ public class StandardSkill : MonoBehaviour
     {
         //Bestimme Winkel und Position
 
-        float angle;
-        Vector2 start;
-        Vector3 rotation;
+        float angle = 0;
+        Vector2 start = this.transform.position;
+        Vector3 rotation = this.transform.rotation.eulerAngles;
 
         if (!this.blendTree)
         {
-            Utilities.Rotation.setDirectionAndRotation(this.sender, this.target,
-                                          this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
-                                          out angle, out start, out this.direction, out rotation);
+            if (!this.keepOriginalRotation)
+            {
+                Utilities.Rotation.setDirectionAndRotation(this.sender, this.target,
+             this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
+             out angle, out start, out this.direction, out rotation);
+            }
 
             //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;                       
 
             if (setPositionAtStart) this.transform.position = start;
+                        
+                if (this.keepOriginalRotation)
+                {
+                    this.direction = Utilities.Rotation.DegreeToVector2(this.transform.rotation.eulerAngles.z);
+                }
 
-            if (this.myRigidbody != null)
-            {
-                this.myRigidbody.velocity = this.direction.normalized * this.speed;
-                this.tempVelocity = this.myRigidbody.velocity;
-            }
-
-            if (this.rotateIt) transform.rotation = Quaternion.Euler(rotation);            
+            if (this.rotateIt && !this.keepOriginalRotation) transform.rotation = Quaternion.Euler(rotation);            
         }
         else
         {
@@ -556,7 +568,7 @@ public class StandardSkill : MonoBehaviour
 
     public void LateUpdate()
     {
-        if (!this.rotateIt) this.transform.rotation = this.fixedRotation;
+        if (!this.rotateIt && !this.keepOriginalRotation) this.transform.rotation = this.fixedRotation;
     }
 
     public float getDurationLeft()
@@ -583,7 +595,7 @@ public class StandardSkill : MonoBehaviour
         if (this.spriteRenderer != null && this.shadow != null)
         {
             this.shadow.sprite = this.spriteRenderer.sprite;
-            this.shadow.transform.rotation = this.spriteRenderer.transform.rotation;
+            if(!this.keepOriginalRotation) this.shadow.transform.rotation = this.spriteRenderer.transform.rotation;
         }
 
         if (this.intervallSender > 0)
@@ -624,6 +636,8 @@ public class StandardSkill : MonoBehaviour
         }
         else
         {
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Active", true);
+            velocity();
             hideIndicator();
 
             //Prüfe ob der Skill eine Maximale Dauer hat
@@ -648,6 +662,16 @@ public class StandardSkill : MonoBehaviour
 
         if (this.target != null && !this.target.gameObject.activeInHierarchy) this.durationTimeLeft = 0;
 
+    }
+
+    private void velocity()
+    {
+        if (this.myRigidbody != null && this.speedup)
+        {
+            this.myRigidbody.velocity = this.direction.normalized * this.speed;
+            this.tempVelocity = this.myRigidbody.velocity;
+            this.speedup = false;
+        }
     }
 
     public void landAttack(Collider2D hittedObject)

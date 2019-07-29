@@ -278,17 +278,18 @@ MonoBehaviour:
   myRigidbody: {fileID: 8945697548278569866}
   animator: {fileID: 1969718782558145669}
   shadow: {fileID: 8613971535191392423}
-  indicator: {fileID: 6412671664492908832, guid: 9b22dad969f7a26408b54899975d64f5,
-    type: 3}
+  indicators: []
   showingIndicator: 1
   showCastBarForEnemies: 1
-  cast: 1
+  useCustomColor: 0
+  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  cast: 0
   keepHoldTimer: 0
   delay: 0
   duration: 2
   lockMovementonDuration: 0.1
   deactivateByButtonUp: 1
-  cooldown: 0.1
+  cooldown: 0.075
   cooldownAfterCombo: 0
   durationCombo: 0
   affectedResources:
@@ -313,6 +314,7 @@ MonoBehaviour:
   colliderHeightOffset: -0.5
   speed: 40
   rotateIt: 1
+  keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
   rotationModifier: 0
@@ -320,6 +322,7 @@ MonoBehaviour:
   positionOffset: 0.75
   positionHeight: 0
   activeTargetHelper: 1
+  setTargetAutomatically: 0
   lockOn: {fileID: 0}
   targetingMode: 0
   maxAmountOfTargets: 0
@@ -333,9 +336,11 @@ MonoBehaviour:
   affectSkills: 0
   ignoreInvincibility: 0
   stateType: 0
+  doCastDuringDelay: 0
   maxAmounts: 9999
   comboAmount: 99
   icon: {fileID: 21300014, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  activeIndicators: []
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0

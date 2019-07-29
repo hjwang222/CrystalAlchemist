@@ -31,7 +31,7 @@ public class ProjectileEffect : MonoBehaviour
 
     private void Update()
     {
-        if (this.skill != null)
+        if (this.skill != null && this.skill.delayTimeLeft <= 0)
         {
             if (ghostDelay > 0)
             {
@@ -39,7 +39,7 @@ public class ProjectileEffect : MonoBehaviour
             }
             else
             {
-                GameObject currentGhost = Instantiate(this.ghost, skill.transform.position, skill.transform.rotation);
+                GameObject currentGhost = Instantiate(this.ghost, this.skill.transform.position, skill.transform.rotation);
 
                 if (this.useCharacterSprite)
                 {

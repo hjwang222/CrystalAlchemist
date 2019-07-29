@@ -19,12 +19,20 @@ public class Indicator : MonoBehaviour
 
     }
 
+    /*
+    private void Update()
+    {
+        if(this.skill != null) this.transform.position = this.skill.transform.position;
+    }
+    */
+
     public void setSkill(StandardSkill skill)
     {
         this.skill = skill;
         if (skill != null)
         {
             if (skill.useCustomColor) this.indicatorRenderer.color = skill.indicatorColor;
+            this.transform.position = this.skill.transform.position;
         }
     }
 
