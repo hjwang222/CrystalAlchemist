@@ -352,6 +352,7 @@ public class StandardSkill : MonoBehaviour
     ////////////////////////////////////////////////////////////////
 
     [FoldoutGroup("Special Behaviors", expanded: false)]
+    [Tooltip("Soll etwas während des Delays getan werden (DoCast Methode)")]
     public bool doCastDuringDelay = false;
 
     [FoldoutGroup("Special Behaviors", expanded: false)]
@@ -753,8 +754,10 @@ public class StandardSkill : MonoBehaviour
     {
         foreach (Indicator indicator in this.activeIndicators)
         {
-            indicator.DestroyIt();
+            if(indicator != null) indicator.DestroyIt();
         }
+
+        this.activeIndicators.Clear();
     }
 
     #endregion

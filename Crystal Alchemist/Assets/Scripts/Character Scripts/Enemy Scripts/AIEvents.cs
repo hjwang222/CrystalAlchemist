@@ -598,9 +598,9 @@ public class AIEvents : MonoBehaviour
         else if (action.type == AIActionType.sequence)
         {
             //TODO: Utilities
-            SkillSequence sequence = Instantiate(action.sequence);
+            SkillSequence sequence = Instantiate(action.sequence, this.enemy.transform.position, Quaternion.identity);
             sequence.setSender(this.enemy);
-
+            sequence.setTarget(this.enemy.target);
             actionUsed = true;
         }
         else if (action.type == AIActionType.transition)

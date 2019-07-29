@@ -16,13 +16,16 @@ public class Indicator : MonoBehaviour
 
     public virtual void Start()
     {
-        
+
     }
 
     public void setSkill(StandardSkill skill)
     {
         this.skill = skill;
-        if (skill != null && skill.useCustomColor) this.indicatorRenderer.color = skill.indicatorColor;
+        if (skill != null)
+        {
+            if (skill.useCustomColor) this.indicatorRenderer.color = skill.indicatorColor;
+        }
     }
 
     public void DestroyIt()

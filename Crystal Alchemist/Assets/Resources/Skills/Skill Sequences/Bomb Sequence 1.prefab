@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5403799806944912059
 Transform:
   m_ObjectHideFlags: 0
@@ -77,9 +77,10 @@ MonoBehaviour:
   modifcations:
   - gameObject: {fileID: 5403799806944912054}
     position: 0
-    max: {x: 0, y: 0}
-    min: {x: 0, y: 0}
-    rotation: 2
+    max: {fileID: 0}
+    min: {fileID: 0}
+    randomSpawnPositions: []
+    rotation: 4
     randomRotations: 6
 --- !u!1001 &5403799806134089336
 PrefabInstance:

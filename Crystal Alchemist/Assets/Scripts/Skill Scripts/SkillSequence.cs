@@ -8,7 +8,7 @@ using Sirenix.OdinInspector;
 public enum modificationType
 {
     none,
-    target, 
+    target,
     sender,
     randomArea,
     random
@@ -20,12 +20,16 @@ public class customSequence
     public GameObject gameObject;
 
     public modificationType position = modificationType.none;
-    [ShowIf("position", modificationType.randomArea)]
-    public GameObject max;
+
+    public float spawnDelay = 0f;
+
     [ShowIf("position", modificationType.randomArea)]
     public GameObject min;
+    [ShowIf("position", modificationType.randomArea)]
+    public GameObject max;
+
     [ShowIf("position", modificationType.random)]
-    public List<GameObject> randomSpawnPositions = new List<GameObject>();
+    public List<GameObject> spawnPoints = new List<GameObject>();
 
     public modificationType rotation = modificationType.none;
     [ShowIf("rotation", modificationType.random)]
@@ -47,10 +51,47 @@ public class SkillSequence : MonoBehaviour
     private List<customSequence> modifcations = new List<customSequence>();
 
 
+    private bool useDurationTime = false;
+    private float duration = 0;
+    private float timeElapsed = 0;
+
     private void Start()
     {
         setChildObjects();
         initModification();
+    }
+
+    private void Update()
+    {
+        this.timeElapsed += Time.deltaTime;
+
+        if ((this.useDurationTime && this.timeElapsed >= this.duration) || this.noActiveGameObjects())
+        {
+            this.DestroyIt();
+        }
+
+        activateGameObject();
+    }
+
+    private bool noActiveGameObjects()
+    {
+        foreach(customSequence custom in this.modifcations)
+        {
+            if (custom.gameObject != null) return false;
+        }
+
+        return true;
+    }
+
+    private void activateGameObject()
+    {
+        foreach(customSequence mod in this.modifcations)
+        {
+            if (mod.gameObject != null && this.timeElapsed >= mod.spawnDelay)
+            {
+                mod.gameObject.SetActive(true);
+            }
+        }
     }
 
     /////////////////////////////////////////
@@ -76,12 +117,13 @@ public class SkillSequence : MonoBehaviour
         else if (modification.position == modificationType.random)
         {
             //set Position of a set of Spawn-Points
-            modification.gameObject.transform.position = getRandomPosition(modification.randomSpawnPositions);
+            modification.gameObject.transform.position = getRandomPosition(modification.spawnPoints);
         }
         else if (modification.position == modificationType.target)
         {
             //set Position on Target
             modification.gameObject.transform.position = this.target.transform.position;
+            if (this.target.shadowRenderer != null) modification.gameObject.transform.position = this.target.shadowRenderer.transform.position;
         }
         else if (modification.position == modificationType.sender)
         {
@@ -115,6 +157,7 @@ public class SkillSequence : MonoBehaviour
                 if (childSkill != null)
                 {
                     childSkill.sender = this.sender;
+                    childSkill.target = this.target;
                     childSkill.setPositionAtStart = false;
                 }
             }

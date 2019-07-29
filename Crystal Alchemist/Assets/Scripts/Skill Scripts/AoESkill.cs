@@ -82,6 +82,8 @@ public class AoESkill : StandardSkill
 
     public override void doOnUpdate()
     {
+        base.doOnUpdate();
+
         if (this.followTarget)
         {
             if (this.timeLeft > 0)
