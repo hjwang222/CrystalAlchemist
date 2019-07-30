@@ -278,11 +278,12 @@ MonoBehaviour:
   myRigidbody: {fileID: 8945697548278569866}
   animator: {fileID: 1969718782558145669}
   shadow: {fileID: 8613971535191392423}
-  indicators: []
+  indicators:
+  - {fileID: 5604874298435353384, guid: 4c2b4b217381faf4485e28928382b866, type: 3}
   showingIndicator: 1
   showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  useCustomColor: 1
+  indicatorColor: {r: 1, g: 0, b: 0, a: 1}
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -355,6 +356,7 @@ MonoBehaviour:
   holdTimer: 0
   triggerIsActive: 1
   setPositionAtStart: 1
+  setActive: 1
   skillOnImpact: {fileID: 0}
 --- !u!210 &1062884032966687811
 SortingGroup:
