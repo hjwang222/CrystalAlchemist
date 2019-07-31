@@ -71,6 +71,7 @@ MonoBehaviour:
   shadowRenderer: {fileID: 3139136754922538361}
   activeSkillParent: {fileID: 1720950400238353364}
   activeStatusEffectParent: {fileID: 7916120204381260195}
+  skillSetParent: {fileID: 0}
   startLife: 0.1
   startMana: 0.1
   startSpeed: 0
@@ -83,7 +84,6 @@ MonoBehaviour:
   lifeRegenerationInterval: 0
   manaRegeneration: 0
   manaRegenerationInterval: 0
-  skillSet: []
   initializeSkill: {fileID: 0}
   deathSkill: {fileID: 0}
   damageNumber: {fileID: 0}
@@ -307,6 +307,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -390,6 +391,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

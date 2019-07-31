@@ -58,8 +58,7 @@ MonoBehaviour:
   myRigidbody: {fileID: 1305676713030356591}
   animator: {fileID: 6564946875506407106}
   shadow: {fileID: 0}
-  indicator: {fileID: 5604874298435353384, guid: 4c2b4b217381faf4485e28928382b866,
-    type: 3}
+  indicators: []
   showingIndicator: 1
   showCastBarForEnemies: 1
   useCustomColor: 0
@@ -95,6 +94,7 @@ MonoBehaviour:
   colliderHeightOffset: 0
   speed: 0
   rotateIt: 1
+  keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
   rotationModifier: 0
@@ -116,9 +116,11 @@ MonoBehaviour:
   affectSkills: 0
   ignoreInvincibility: 0
   stateType: 0
+  doCastDuringDelay: 0
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: 0}
+  activeIndicators: []
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
@@ -133,6 +135,7 @@ MonoBehaviour:
   holdTimer: 0
   triggerIsActive: 1
   setPositionAtStart: 1
+  setActive: 1
   useRange: 1
   rangeNeeded: {x: 4, y: 5}
   distanceNeeded: 0
@@ -183,6 +186,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

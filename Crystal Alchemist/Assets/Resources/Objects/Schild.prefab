@@ -49,7 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
-  text: Nicht aus dem Brunnen trinken!
+  dialogBoxText: 
+  dialogBoxTextEnglish: 
   lootTable: []
   multiLoot: 0
   currencyNeeded: 0
@@ -57,6 +58,7 @@ MonoBehaviour:
   price: 0
   soundEffect: {fileID: 0}
   isPlayerInRange: 0
+  isPlayerLookingAtIt: 0
   player: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
@@ -175,7 +177,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -183,6 +185,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

@@ -76,7 +76,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
-  text: Du hast %XY% erhalten!
+  dialogBoxText: 
+  dialogBoxTextEnglish: 
   lootTable:
   - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
     dropRate: 100
@@ -87,6 +88,7 @@ MonoBehaviour:
   price: 1
   soundEffect: {fileID: 8300000, guid: 4f7be5fca72aed945b5adc95e382a719, type: 3}
   isPlayerInRange: 0
+  isPlayerLookingAtIt: 0
   player: {fileID: 0}
   animator: {fileID: 0}
   audioSource: {fileID: 0}
@@ -195,6 +197,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -244,11 +247,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1555326793583579602}
     m_Modifications:
-    - target: {fileID: 1324514916148282493, guid: c2fcea4a156b7e04197a6fecb1d6366b,
-        type: 3}
-      propertyPath: m_Name
-      value: Shadow
-      objectReference: {fileID: 0}
     - target: {fileID: 2236758614029836603, guid: c2fcea4a156b7e04197a6fecb1d6366b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -308,6 +306,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 0.87987334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1324514916148282493, guid: c2fcea4a156b7e04197a6fecb1d6366b,
+        type: 3}
+      propertyPath: m_Name
+      value: Shadow
       objectReference: {fileID: 0}
     - target: {fileID: 6020851155677782105, guid: c2fcea4a156b7e04197a6fecb1d6366b,
         type: 3}

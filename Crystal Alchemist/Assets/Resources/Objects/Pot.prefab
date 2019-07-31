@@ -48,7 +48,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -56,6 +56,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -131,7 +132,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -139,6 +140,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -270,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Krug
+  englischCharacterName: 
   myRigidbody: {fileID: 546327852}
   animator: {fileID: 2094131440841753910}
   spriteRenderer: {fileID: 3542870481894826020}
@@ -277,6 +280,7 @@ MonoBehaviour:
   shadowRenderer: {fileID: 1580008844188032001}
   activeSkillParent: {fileID: 9010662488490252655}
   activeStatusEffectParent: {fileID: 6899571501455701071}
+  skillSetParent: {fileID: 0}
   startLife: 3
   startMana: 0.1
   startSpeed: 0
@@ -289,7 +293,6 @@ MonoBehaviour:
   lifeRegenerationInterval: 0
   manaRegeneration: 0
   manaRegenerationInterval: 0
-  skillSet: []
   initializeSkill: {fileID: 0}
   deathSkill: {fileID: 0}
   damageNumber: {fileID: 0}
@@ -312,7 +315,6 @@ MonoBehaviour:
   characterType: 3
   spawnPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
-  castbar: {fileID: 0}
   activeCastbar: {fileID: 0}
   currentState: 0
   life: 0

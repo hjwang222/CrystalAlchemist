@@ -137,6 +137,7 @@ MonoBehaviour:
   holdTimer: 0
   triggerIsActive: 1
   setPositionAtStart: 1
+  setActive: 1
   joinCollider: {fileID: 5456579120775784224}
   hurtCollider: {fileID: 5456579120775784224}
   amountNeeded: 0
@@ -186,6 +187,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -402,6 +404,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -452,16 +455,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8171713707304626961}
     m_Modifications:
-    - target: {fileID: 5734340486931179260, guid: 351aab7a805452c4aafd15bd06c04cea,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion
-      objectReference: {fileID: 0}
-    - target: {fileID: 5734340486931179260, guid: 351aab7a805452c4aafd15bd06c04cea,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5792540112292189006, guid: 351aab7a805452c4aafd15bd06c04cea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -526,6 +519,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734340486931179260, guid: 351aab7a805452c4aafd15bd06c04cea,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734340486931179260, guid: 351aab7a805452c4aafd15bd06c04cea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 526825844287091840, guid: 351aab7a805452c4aafd15bd06c04cea,
         type: 3}

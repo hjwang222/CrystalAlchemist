@@ -51,33 +51,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Zeitfeld
+  skillNameEnglish: 
+  category: 1
+  animationTriggerName: 
+  orderIndex: 10
   skillDescription: 
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  shadow: {fileID: 0}
+  indicators: []
+  showingIndicator: 1
+  showCastBarForEnemies: 1
+  useCustomColor: 0
+  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
   cast: 3
   keepHoldTimer: 0
   delay: 0
   duration: 10
+  lockMovementonDuration: 0
   deactivateByButtonUp: 0
   cooldown: 2
   cooldownAfterCombo: 0
   durationCombo: 0
-  addLifeTarget: 0
-  addManaTarget: 0
+  affectedResources: []
   statusEffects: []
-  addLifeSender: 0
-  addManaSender: -1
+  thrust: 0
+  knockbackTime: 0
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: 0
   intervallSender: 0
   speedDuringCasting: -2
   speedDuringDuration: 0
-  lockMovementonDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
   isRapidFire: 0
   isStationary: 1
+  colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
+  keepOriginalRotation: 0
+  blendTree: 0
+  useOffSetToBlendTree: 0
   rotationModifier: 0
-  rotateEndSprite: 0
   snapRotationInDegrees: 0
   positionOffset: 0
   positionHeight: 0
+  activeTargetHelper: 0
+  setTargetAutomatically: 0
   lockOn: {fileID: 0}
   targetingMode: 1
   maxAmountOfTargets: 21
@@ -90,31 +114,27 @@ MonoBehaviour:
   affectObjects: 0
   affectSkills: 1
   ignoreInvincibility: 0
-  thrust: 0
-  knockbackTime: 0
+  stateType: 0
+  doCastDuringDelay: 0
   maxAmounts: 1
   comboAmount: 99
-  summon: {fileID: 0}
   icon: {fileID: 21300016, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  startSoundEffect: {fileID: 8300000, guid: ede0da1dfd787c14c9ed656c8920460c, type: 3}
-  endSoundEffect: {fileID: 0}
-  animSoundeffect: {fileID: 0}
+  activeIndicators: []
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: -0.0044638608
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
+  movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
-  playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
+  dontPlayAudio: 0
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
   setPositionAtStart: 1
+  setActive: 1
 --- !u!114 &2736543033070227866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,33 +148,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: 
+  skillNameEnglish: 
+  category: 1
+  animationTriggerName: 
+  orderIndex: 10
   skillDescription: 
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  shadow: {fileID: 0}
+  indicators: []
+  showingIndicator: 1
+  showCastBarForEnemies: 1
+  useCustomColor: 0
+  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
   duration: 1
+  lockMovementonDuration: 0
   deactivateByButtonUp: 0
   cooldown: 1
   cooldownAfterCombo: 0
   durationCombo: 0
-  addLifeTarget: -1
-  addManaTarget: 0
+  affectedResources: []
   statusEffects: []
-  addLifeSender: 0
-  addManaSender: 0
+  thrust: 4
+  knockbackTime: 0.2
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: 0
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0
-  lockMovementonDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
   isRapidFire: 0
   isStationary: 0
+  colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
+  keepOriginalRotation: 0
+  blendTree: 0
+  useOffSetToBlendTree: 0
   rotationModifier: 0
-  rotateEndSprite: 0
   snapRotationInDegrees: 0
   positionOffset: 1
   positionHeight: 0
+  activeTargetHelper: 0
+  setTargetAutomatically: 0
   lockOn: {fileID: 0}
   targetingMode: 2
   maxAmountOfTargets: 1
@@ -167,31 +211,27 @@ MonoBehaviour:
   affectObjects: 0
   affectSkills: 0
   ignoreInvincibility: 0
-  thrust: 4
-  knockbackTime: 0.2
+  stateType: 0
+  doCastDuringDelay: 0
   maxAmounts: 9999
   comboAmount: 99
-  summon: {fileID: 0}
   icon: {fileID: 0}
-  startSoundEffect: {fileID: 0}
-  endSoundEffect: {fileID: 0}
-  animSoundeffect: {fileID: 0}
+  activeIndicators: []
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
+  movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
-  playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
+  dontPlayAudio: 0
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
   setPositionAtStart: 1
+  setActive: 1
   TimeDistortion: 0.5
   timeEffect: {fileID: 0}
   invertColor: 0
@@ -212,7 +252,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -220,6 +260,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -478,7 +519,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -486,6 +527,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

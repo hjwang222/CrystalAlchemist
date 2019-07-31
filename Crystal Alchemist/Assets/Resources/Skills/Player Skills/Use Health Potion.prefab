@@ -152,6 +152,11 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
+  indicators: []
+  showingIndicator: 1
+  showCastBarForEnemies: 1
+  useCustomColor: 0
+  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -183,6 +188,7 @@ MonoBehaviour:
   colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
+  keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
   rotationModifier: 0
@@ -190,6 +196,7 @@ MonoBehaviour:
   positionOffset: 0
   positionHeight: 0
   activeTargetHelper: 0
+  setTargetAutomatically: 0
   lockOn: {fileID: 0}
   targetingMode: 2
   maxAmountOfTargets: 1
@@ -203,9 +210,11 @@ MonoBehaviour:
   affectSkills: 0
   ignoreInvincibility: 1
   stateType: 0
+  doCastDuringDelay: 0
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: -8825673795923600958, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  activeIndicators: []
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
@@ -220,6 +229,7 @@ MonoBehaviour:
   holdTimer: 0
   triggerIsActive: 1
   setPositionAtStart: 1
+  setActive: 1
   dispell: 0
   targetColor: {r: 0, g: 0.7264151, b: 0.051900968, a: 1}
 --- !u!95 &3512976782353714778
@@ -258,7 +268,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -266,6 +276,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

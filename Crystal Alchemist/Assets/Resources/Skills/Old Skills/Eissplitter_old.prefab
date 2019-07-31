@@ -48,7 +48,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -56,6 +56,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -97,7 +98,7 @@ GameObject:
   - component: {fileID: 6547021016636600889}
   - component: {fileID: 584844941762424878}
   m_Layer: 0
-  m_Name: Eissplitter
+  m_Name: Eissplitter_old
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,16 +132,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Eissplitter
+  skillNameEnglish: 
   category: 1
   animationTriggerName: 
   orderIndex: 4
   skillDescription: 
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
   shadow: {fileID: 7027740632504434826}
-  shadowColor: {r: 0, g: 0.13462897, b: 0.24528301, a: 0.5019608}
+  indicators: []
+  showingIndicator: 1
+  showCastBarForEnemies: 1
+  useCustomColor: 0
+  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
   cast: 0
   keepHoldTimer: 0
   delay: 0
   duration: 20
+  lockMovementonDuration: 0
   deactivateByButtonUp: 0
   cooldown: 1
   cooldownAfterCombo: 0
@@ -160,7 +170,6 @@ MonoBehaviour:
   speedDuringCasting: 0
   speedDuringDuration: 0
   affectAnimation: 1
-  lockMovementonDuration: 0
   forward: 0
   selfThrust: 0
   selfThrustTime: 0
@@ -169,14 +178,15 @@ MonoBehaviour:
   colliderHeightOffset: -0.5
   speed: 10
   rotateIt: 1
+  keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
   rotationModifier: 0
-  rotateEndSprite: 1
   snapRotationInDegrees: 45
   positionOffset: 0.75
   positionHeight: 0
   activeTargetHelper: 0
+  setTargetAutomatically: 0
   lockOn: {fileID: 0}
   targetingMode: 2
   maxAmountOfTargets: 1
@@ -189,28 +199,27 @@ MonoBehaviour:
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
+  stateType: 0
+  doCastDuringDelay: 0
   maxAmounts: 99
   comboAmount: 99
   icon: {fileID: -2174905366303013736, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  startSoundEffect: {fileID: 8300000, guid: 6660e0aefe588864b8d061d04d3080ac, type: 3}
-  endSoundEffect: {fileID: 8300000, guid: 8dcab4a7b864971469fd4fd030dc9d39, type: 3}
-  animSoundeffect: {fileID: 0}
+  activeIndicators: []
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0.78304654
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
+  movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
-  playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
+  dontPlayAudio: 0
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
   setPositionAtStart: 1
+  setActive: 1
   skillOnImpact: {fileID: 0}
 --- !u!114 &726161678418189669
 MonoBehaviour:
@@ -246,7 +255,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -254,6 +263,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

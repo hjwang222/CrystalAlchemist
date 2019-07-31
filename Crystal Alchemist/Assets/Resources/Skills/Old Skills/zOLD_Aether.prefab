@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 174652828677801054}
   - component: {fileID: 2366878569866779062}
   m_Layer: 0
-  m_Name: Aether
+  m_Name: zOLD_Aether
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,65 +50,90 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: "\xC4therfeuer"
-  global: {fileID: 11400000, guid: 986022dcee4ee954eaa9f9d283c038e9, type: 2}
-  soundEffectVolume: {fileID: 11400000, guid: 394e01d43aceea343afccda1fb64a108, type: 2}
+  skillNameEnglish: 
+  category: 1
+  animationTriggerName: 
+  orderIndex: 10
+  skillDescription: 
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  shadow: {fileID: 0}
+  indicators: []
+  showingIndicator: 1
+  showCastBarForEnemies: 1
+  useCustomColor: 0
+  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
   cast: 0.5
   keepHoldTimer: 0
   delay: 0
-  scriptActivation: 0
   duration: 0.3
+  lockMovementonDuration: 1
+  deactivateByButtonUp: 0
   cooldown: 0.05
-  lockOnTarget: 0
-  addLifeTarget: -0.1
-  addManaTarget: 0
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  affectedResources: []
   statusEffects: []
-  target: {fileID: 0}
+  thrust: 0
+  knockbackTime: 0
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: 0
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  isRapidFire: 1
+  isStationary: 0
+  colliderHeightOffset: 0
   speed: 40
   rotateIt: 1
-  rotateEndSprite: 0
+  keepOriginalRotation: 0
+  blendTree: 0
+  useOffSetToBlendTree: 0
+  rotationModifier: 0
   snapRotationInDegrees: 90
-  isRapidFire: 1
   positionOffset: 0.75
-  isStationary: 0
+  positionHeight: 0
+  activeTargetHelper: 0
+  setTargetAutomatically: 0
+  lockOn: {fileID: 0}
+  targetingMode: 2
+  maxAmountOfTargets: 1
+  targetingDuration: 6
+  multiHitDelay: 0
+  showRange: 0
   affectSelf: 0
   affectPlayers: 0
   affectEnemies: 1
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
-  addLifeSender: 0
-  addManaSender: -0.01
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  lockMovementonDuration: 1
-  thrust: 0
-  knockbackTime: 0
+  stateType: 0
+  doCastDuringDelay: 0
   maxAmounts: 9999
-  summon: {fileID: 0}
-  script: {fileID: 0}
-  element: 8
-  skillDescription: 
-  sender: {fileID: 0}
+  comboAmount: 99
   icon: {fileID: 21300014, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  startSoundEffect: {fileID: 8300000, guid: a7d626076c682c34fa5b8ee7c4cb4631, type: 3}
-  endSoundEffect: {fileID: 8300000, guid: d16c88f8218bdea468612a11d5720ce5, type: 3}
-  animSoundeffect: {fileID: 0}
-  showIndicator: 0
-  showCastBar: 0
+  activeIndicators: []
+  sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  scriptActivationTimeLeft: 0
   cooldownTimeLeft: -0.0169922
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
+  movementLocked: 0
+  target: {fileID: 0}
   audioSource: {fileID: 0}
-  playEndEffectAlready: 0
-  spriteRenderer: {fileID: 0}
+  dontPlayAudio: 0
   timeDistortion: 1
   direction: {x: 0, y: 0}
-  isNotActive: 0
+  isActive: 1
   holdTimer: 0
+  triggerIsActive: 1
+  setPositionAtStart: 1
+  setActive: 1
 --- !u!114 &4629621059597347103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,10 +146,92 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e333cb7d9eccdf149a75af3b5ca70b72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillName: 
+  skillNameEnglish: 
+  category: 1
+  animationTriggerName: 
+  orderIndex: 10
+  skillDescription: 
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  shadow: {fileID: 0}
+  indicators: []
+  showingIndicator: 1
+  showCastBarForEnemies: 1
+  useCustomColor: 0
+  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  cast: 0
+  keepHoldTimer: 0
+  delay: 0
+  duration: 1
+  lockMovementonDuration: 0
+  deactivateByButtonUp: 0
+  cooldown: 1
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  affectedResources: []
+  statusEffects: []
+  thrust: 4
+  knockbackTime: 0.2
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: 0
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  isRapidFire: 0
+  isStationary: 0
+  colliderHeightOffset: 0
+  speed: 0
+  rotateIt: 0
+  keepOriginalRotation: 0
+  blendTree: 0
+  useOffSetToBlendTree: 0
+  rotationModifier: 0
+  snapRotationInDegrees: 0
+  positionOffset: 1
+  positionHeight: 0
+  activeTargetHelper: 0
+  setTargetAutomatically: 0
+  lockOn: {fileID: 0}
+  targetingMode: 2
+  maxAmountOfTargets: 1
+  targetingDuration: 6
+  multiHitDelay: 0
+  showRange: 0
+  affectSelf: 0
+  affectPlayers: 0
+  affectEnemies: 0
+  affectObjects: 0
+  affectSkills: 0
+  ignoreInvincibility: 0
+  stateType: 0
+  doCastDuringDelay: 0
+  maxAmounts: 9999
+  comboAmount: 99
+  icon: {fileID: 0}
+  activeIndicators: []
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  movementLocked: 0
   target: {fileID: 0}
-  skill: {fileID: 0}
-  value: 0
-  instantiatNewGameObject: {fileID: 0}
+  audioSource: {fileID: 0}
+  dontPlayAudio: 0
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setPositionAtStart: 1
+  setActive: 1
+  skillOnImpact: {fileID: 0}
 --- !u!61 &2436721245591175478
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -168,7 +275,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -176,6 +283,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
