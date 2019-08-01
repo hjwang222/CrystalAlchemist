@@ -101,9 +101,13 @@ public class AIAction
 
     [ShowIf("type", AIActionType.dialog)]
     [VerticalGroup("Properties")]
-    [TextArea]
-    [HideLabel]
-    public string dialogText;
+    [LabelWidth(25)]
+    public string de;
+
+    [ShowIf("type", AIActionType.dialog)]
+    [VerticalGroup("Properties")]
+    [LabelWidth(25)]
+    public string en;
 
     [ShowIf("type", AIActionType.dialog)]
     [VerticalGroup("Type")]
@@ -441,7 +445,7 @@ public class AIEvents : MonoBehaviour
         GameObject dialog = Instantiate(this.box.gameObject, this.enemy.dialogPosition.transform);
 
         MiniDialogBox temp = dialog.GetComponent<MiniDialogBox>();
-        temp.setText(action.dialogText);
+        temp.setText(Utilities.Format.getLanguageDialogText(action.de, action.en));
         temp.setDuration(action.duration);
         this.activeDialog = temp;
         this.activeDialogAction = null;

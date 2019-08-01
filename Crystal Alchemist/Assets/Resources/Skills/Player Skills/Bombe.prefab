@@ -34,7 +34,7 @@ Transform:
   m_LocalPosition: {x: -4.16, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1376023711239439177}
+  - {fileID: 869773473104932804}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -71,6 +71,7 @@ MonoBehaviour:
   duration: 0.75
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
   cooldown: 0.5
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -96,6 +97,7 @@ MonoBehaviour:
   colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
+  rotateOnUpdate: 0
   keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
@@ -114,6 +116,7 @@ MonoBehaviour:
   affectSelf: 0
   affectPlayers: 1
   affectEnemies: 1
+  affectNPCs: 0
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
@@ -439,7 +442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2fcea4a156b7e04197a6fecb1d6366b, type: 3}
---- !u!4 &1376023711239439177 stripped
+--- !u!4 &869773473104932804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2236758614029836603, guid: c2fcea4a156b7e04197a6fecb1d6366b,
     type: 3}

@@ -16,7 +16,7 @@ public class MiniDialogBox : MonoBehaviour
     }
 
     public void setText(string text)
-    {
+    {        
         this.textfield.text = text;
     }
 

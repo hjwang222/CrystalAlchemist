@@ -565,7 +565,8 @@ MonoBehaviour:
   - type: 1
     killItCompletely: 0
     position: {x: 0, y: 0}
-    dialogText: '[Zielerfassung...]'
+    de: '[Initialisiere...]'
+    en: '[Initializing...]'
     duration: 4
     nextPhase: 
     skill: {fileID: 0}
@@ -583,7 +584,8 @@ MonoBehaviour:
     - type: 3
       killItCompletely: 0
       position: {x: 0, y: 0}
-      dialogText: 
+      de: 
+      en: 
       duration: 4
       nextPhase: 
       skill: {fileID: 4500866824247064267, guid: 8a7f78e4a6588ab4289c20b832353307,
@@ -607,7 +609,8 @@ MonoBehaviour:
     - type: 6
       killItCompletely: 1
       position: {x: 0, y: 0}
-      dialogText: 
+      de: 
+      en: 
       duration: 4
       nextPhase: 
       skill: {fileID: 0}
@@ -618,8 +621,7 @@ MonoBehaviour:
       sequence: {fileID: 0}
       gcd: 0
       skillinstance: {fileID: 0}
-    affectedPhases:
-    - Hauptphase
+    affectedPhases: []
     repeatEvent: 0
     requireAll: 0
     startTime: 0
@@ -659,6 +661,7 @@ MonoBehaviour:
   activeClueDuration: 1
   aggroPlayer: 0
   aggroNPC: 0
+  aggroObject: 0
   aggroEnemy: 1
 --- !u!1 &8609950149900843970
 GameObject:
