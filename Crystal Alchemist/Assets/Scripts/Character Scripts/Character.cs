@@ -150,20 +150,6 @@ public class Character : MonoBehaviour
     [Range(0, Utilities.maxFloatSmall)]
     public float manaRegenerationInterval = 0;
 
-
-
-    ////////////////////////////////////////////////////////////////
-
-
-    [Space(10)]
-    [FoldoutGroup("Skills", expanded: false)]
-    [Tooltip("Skill, welcher der Character sofort verwendet")]
-    public StandardSkill initializeSkill;
-
-    [FoldoutGroup("Skills", expanded: false)]
-    [Tooltip("Skill, welcher der Character bei seinem Tod verwendet")]
-    public StandardSkill deathSkill;
-
     ////////////////////////////////////////////////////////////////
 
     [FoldoutGroup("Schaden", expanded: false)]

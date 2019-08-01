@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -505,11 +505,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: "M\xFCnze"
       objectReference: {fileID: 0}
-    - target: {fileID: 3729390435161036568, guid: 98cff32a40d85d94cb5938ce950a2659,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 330836146565999749, guid: 98cff32a40d85d94cb5938ce950a2659,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -566,6 +561,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 330836144660511514, guid: 98cff32a40d85d94cb5938ce950a2659,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 3729390435161036568, guid: 98cff32a40d85d94cb5938ce950a2659,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -4216,7 +4216,7 @@ PrefabInstance:
     - target: {fileID: 3422741139635827465, guid: 50af93dea71b4b643b9da12e495da573,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3422741139635827470, guid: 50af93dea71b4b643b9da12e495da573,
         type: 3}

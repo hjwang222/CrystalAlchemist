@@ -353,9 +353,6 @@ MonoBehaviour:
   lifeRegenerationInterval: 0
   manaRegeneration: 0
   manaRegenerationInterval: 0
-  initializeSkill: {fileID: 2574719380784309251, guid: 65b268bfda2fa0e4bb41978a974d71d5,
-    type: 3}
-  deathSkill: {fileID: 0}
   damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
     type: 3}
   antiKnockback: 0
@@ -412,6 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 4482648712296496520}
   movementRadius: 0.1
+  movementRadiusPartner: 0.1
   movementDelay: 0
   backToStart: 1
   path: []
@@ -439,6 +437,9 @@ MonoBehaviour:
   targetActiveClue: {fileID: 7047217433774240400, guid: d0cd9d0d605bdfd44b021afb2046b0b9,
     type: 3}
   activeClueDuration: 2
+  aggroPlayer: 1
+  aggroNPC: 0
+  aggroEnemy: 0
 --- !u!114 &4482648712296496522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,11 +455,27 @@ MonoBehaviour:
   enemy: {fileID: 4482648712296496520}
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   box: {fileID: 5104834203016797782, guid: 4828c807745ed894ea715e12180742d8, type: 3}
+  initialActions:
+  - type: 3
+    killItCompletely: 0
+    position: {x: 0, y: 0}
+    dialogText: 
+    duration: 4
+    nextPhase: 
+    skill: {fileID: 2574719380784309251, guid: 65b268bfda2fa0e4bb41978a974d71d5, type: 3}
+    cast: -1
+    cD: -1
+    amount: 0
+    castGroup: 0
+    sequence: {fileID: 0}
+    gcd: 2.5
+    skillinstance: {fileID: 0}
   phases:
   - phaseName: Phase 1
     phaseDescription: Startphase
     actions:
     - type: 3
+      killItCompletely: 0
       position: {x: 0, y: 0}
       dialogText: 
       duration: 4
@@ -473,6 +490,7 @@ MonoBehaviour:
       gcd: 2.5
       skillinstance: {fileID: 0}
     - type: 3
+      killItCompletely: 0
       position: {x: 0, y: 0}
       dialogText: 
       duration: 4
@@ -490,6 +508,7 @@ MonoBehaviour:
     phaseDescription: 
     actions:
     - type: 3
+      killItCompletely: 0
       position: {x: 0, y: 0}
       dialogText: 
       duration: 4
@@ -504,6 +523,7 @@ MonoBehaviour:
       gcd: 3
       skillinstance: {fileID: 0}
     - type: 5
+      killItCompletely: 0
       position: {x: 0, y: 0}
       dialogText: 
       duration: 4
@@ -530,6 +550,7 @@ MonoBehaviour:
       collider: []
     actions:
     - type: 1
+      killItCompletely: 0
       position: {x: 0, y: 0}
       dialogText: Take THIS!
       duration: 2
@@ -543,6 +564,7 @@ MonoBehaviour:
       gcd: 2
       skillinstance: {fileID: 0}
     - type: 2
+      killItCompletely: 0
       position: {x: 0, y: 0}
       dialogText: 
       duration: 4
@@ -556,6 +578,7 @@ MonoBehaviour:
       gcd: 3
       skillinstance: {fileID: 0}
     - type: 5
+      killItCompletely: 0
       position: {x: 0, y: 0}
       dialogText: 
       duration: 4
@@ -583,6 +606,7 @@ MonoBehaviour:
       collider: []
     actions:
     - type: 1
+      killItCompletely: 0
       position: {x: 0, y: 0}
       dialogText: Hallo!
       duration: 2

@@ -293,6 +293,7 @@ MonoBehaviour:
   duration: 2
   lockMovementonDuration: 0.1
   deactivateByButtonUp: 1
+  deactivateByButtonDown: 0
   cooldown: 0.075
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -318,6 +319,7 @@ MonoBehaviour:
   colliderHeightOffset: -0.5
   speed: 40
   rotateIt: 1
+  rotateOnUpdate: 0
   keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
@@ -336,6 +338,7 @@ MonoBehaviour:
   affectSelf: 0
   affectPlayers: 1
   affectEnemies: 1
+  affectNPCs: 0
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
@@ -515,6 +518,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2537374611990174651}
     m_Modifications:
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -570,25 +578,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
-      objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_FalloffIntensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
@@ -598,12 +591,12 @@ PrefabInstance:
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_Intensity
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LightVolumeOpacity
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

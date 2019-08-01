@@ -427,6 +427,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7715491483693814756}
     m_Modifications:
+    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
+        type: 3}
+      propertyPath: m_Name
+      value: Item Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2956711678939615906, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -482,16 +487,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
-        type: 3}
-      propertyPath: m_Name
-      value: Item Light
-      objectReference: {fileID: 0}
-    - target: {fileID: 7454736788490218463, guid: 9545455d17740e94f8071d7b4854ef7a,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7454736788490218463, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}
       propertyPath: m_Color.g
@@ -501,6 +496,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0.25943398
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454736788490218463, guid: 9545455d17740e94f8071d7b4854ef7a,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454736788490218463, guid: 9545455d17740e94f8071d7b4854ef7a,
+        type: 3}
+      propertyPath: m_LightVolumeOpacity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7454736788490218463, guid: 9545455d17740e94f8071d7b4854ef7a,
+        type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9545455d17740e94f8071d7b4854ef7a, type: 3}

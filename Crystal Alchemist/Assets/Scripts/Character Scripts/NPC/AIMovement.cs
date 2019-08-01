@@ -16,6 +16,9 @@ public class AIMovement : MonoBehaviour
     public float movementRadius = 0.1f;
 
     [FoldoutGroup("Movement Attributes", expanded: false)]
+    public float movementRadiusPartner = 0.1f;
+
+    [FoldoutGroup("Movement Attributes", expanded: false)]
     [SerializeField]
     private float movementDelay = 0;
 
@@ -71,7 +74,7 @@ public class AIMovement : MonoBehaviour
         else if (this.npc.partner != null)
         {
             //Wenn der Partner innerhalb vom Chase-Radius ist und auch nur solange bis der Gegner den Spieler nicht berührt!
-            if (Vector3.Distance(this.npc.partner.transform.position, this.transform.position) > this.movementRadius)
+            if (Vector3.Distance(this.npc.partner.transform.position, this.transform.position) > this.movementRadiusPartner)
             {
                 if (this.startCoroutine)
                     StartCoroutine(delayMovementCo());

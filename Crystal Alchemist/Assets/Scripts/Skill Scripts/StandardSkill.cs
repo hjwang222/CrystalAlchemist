@@ -345,6 +345,10 @@ public class StandardSkill : MonoBehaviour
     public bool affectEnemies = false;
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("wirkt auf alle Gegner")]
+    public bool affectNPCs = false;
+
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("wirkt auf alle Objekte")]
     public bool affectObjects = false;
 

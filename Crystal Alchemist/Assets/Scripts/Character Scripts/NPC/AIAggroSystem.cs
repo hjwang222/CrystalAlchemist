@@ -44,6 +44,22 @@ public class AIAggroSystem : MonoBehaviour
     [SerializeField]
     private float activeClueDuration = 1;
 
+    [FoldoutGroup("Aggro Attributes", expanded: false)]
+    [SerializeField]
+    private bool aggroPlayer = false;
+
+    [FoldoutGroup("Aggro Attributes", expanded: false)]
+    [SerializeField]
+    private bool aggroNPC = false;
+
+    [FoldoutGroup("Aggro Attributes", expanded: false)]
+    [SerializeField]
+    private bool aggroObject = false;
+
+    [FoldoutGroup("Aggro Attributes", expanded: false)]
+    [SerializeField]
+    private bool aggroEnemy = false;
+
     private GameObject activeClue;
     private Dictionary<Character, float[]> aggroList = new Dictionary<Character, float[]>();
 
@@ -99,6 +115,14 @@ public class AIAggroSystem : MonoBehaviour
     public void generateAggro()
     {
         List<Character> charactersToRemove = new List<Character>();
+
+        if(this.enemy.target != null 
+            && (!this.enemy.target.gameObject.activeInHierarchy 
+            || this.enemy.target.currentState == CharacterState.dead))
+        {
+            this.aggroList.Remove(this.enemy.target);
+            this.enemy.target = null;
+        }
 
         foreach (Character character in this.aggroList.Keys)
         {
@@ -182,7 +206,7 @@ public class AIAggroSystem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !collision.isTrigger)
+        if (Utilities.Collisions.checkAffections(this.aggroPlayer, this.aggroEnemy, this.aggroObject, this.aggroNPC, collision))
         {
             increaseAggro(collision.GetComponent<Character>(), this.aggroIncreaseFactor);
         }
@@ -190,7 +214,7 @@ public class AIAggroSystem : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !collision.isTrigger)
+        if (Utilities.Collisions.checkAffections(this.aggroPlayer, this.aggroEnemy, this.aggroObject, this.aggroNPC, collision))
         {
             decreaseAggro(collision.GetComponent<Character>(), this.aggroDecreaseFactor);
         }

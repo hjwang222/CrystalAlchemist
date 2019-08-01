@@ -201,6 +201,9 @@ public class AIEvents : MonoBehaviour
     private MiniDialogBox box;
 
     [SerializeField]
+    private List<AIAction> initialActions = new List<AIAction>();
+
+    [SerializeField]
     private List<AIPhase> phases = new List<AIPhase>();
 
     [SerializeField]
@@ -216,7 +219,7 @@ public class AIEvents : MonoBehaviour
 
     private float timeElapsed;
 
-    private bool startAI = false;
+    private bool startAIAttacking = false;
     private int actionsIndex = 0;
     private int eventIndex = 0;
     private int dialogIndex = 0;
@@ -237,7 +240,11 @@ public class AIEvents : MonoBehaviour
     {
         resetAllEvents();
 
-        Utilities.Skill.instantiateSkill(this.enemy.initializeSkill, this.enemy);
+        foreach(AIAction action in this.initialActions)
+        {
+            if (action.type != AIActionType.dialog) useAction(action);
+            else showDialog(action);
+        }
 
         if (phases.Count > 0)
         {
@@ -247,25 +254,29 @@ public class AIEvents : MonoBehaviour
 
     private void Update()
     {
-        if(this.enemy.partner != null) Debug.Log(this.enemy.partner.name);
+        checkStart();
 
-        if (!this.startAI &&
-           ((enemy.target != null ||
-            (enemy.target == null && enemy.partner != null))))
+        if((this.enemy.characterType == CharacterType.Enemy && this.startAIAttacking)
+            || this.enemy.characterType == CharacterType.NPC) handleDialogs();
+
+        if (this.startAIAttacking)
         {
-            this.startAI = true;
-        }
-
-        if (this.startAI)
-        {
-            handleDialogs();
-
             if (this.activeAction != null 
                 && this.activeAction.skillinstance == null 
                 && this.enemy != null
                 && this.enemy.activeCastbar != null) this.enemy.activeCastbar.destroyIt();
 
             if (!this.AIstopped) doEvents();            
+        }
+    }
+
+    private void checkStart()
+    {
+        if (enemy.target != null) this.startAIAttacking = true;
+        else
+        { 
+            this.startAIAttacking = false;
+            resetAllEvents();
         }
     }
 
@@ -340,36 +351,41 @@ public class AIEvents : MonoBehaviour
     private void casting()
     {
         if (this.activeAction.type == AIActionType.skill
-                    && this.activeAction.skillinstance != null)
+         && this.activeAction.skillinstance != null)
         {
-            if (this.activeAction.skillinstance.holdTimer < this.activeAction.skillinstance.cast)
+            if (this.enemy.target != null)
             {
-                this.activeAction.skillinstance.holdTimer += (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
-                
-                this.activeAction.skillinstance.showIndicator(); //Zeige Indikator beim Casten
-                this.activeAction.skillinstance.doOnCast();
+                if (this.activeAction.skillinstance.target == null) this.activeAction.skillinstance.target = this.enemy.target;
 
-                if (this.activeAction.skillinstance.showCastBarForEnemies)
+                if (this.activeAction.skillinstance.holdTimer < this.activeAction.skillinstance.cast)
                 {
-                    if (this.enemy.activeCastbar == null)
+                    this.activeAction.skillinstance.holdTimer += (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
+
+                    this.activeAction.skillinstance.showIndicator(); //Zeige Indikator beim Casten
+                    this.activeAction.skillinstance.doOnCast();
+
+                    if (this.activeAction.skillinstance.showCastBarForEnemies)
                     {
-                        GameObject temp = Instantiate(this.castbar.gameObject, this.transform.position, Quaternion.identity, this.transform);
-                        //temp.hideFlags = HideFlags.HideInHierarchy;
-                        this.enemy.activeCastbar = temp.GetComponent<CastBar>();
-                        this.enemy.activeCastbar.target = this.enemy;
-                        this.enemy.activeCastbar.skill = this.activeAction.skillinstance;
-                    }
-                    else
-                    {
-                        this.enemy.activeCastbar.showCastBar();
+                        if (this.enemy.activeCastbar == null)
+                        {
+                            GameObject temp = Instantiate(this.castbar.gameObject, this.transform.position, Quaternion.identity, this.transform);
+                            //temp.hideFlags = HideFlags.HideInHierarchy;
+                            this.enemy.activeCastbar = temp.GetComponent<CastBar>();
+                            this.enemy.activeCastbar.target = this.enemy;
+                            this.enemy.activeCastbar.skill = this.activeAction.skillinstance;
+                        }
+                        else
+                        {
+                            this.enemy.activeCastbar.showCastBar();
+                        }
                     }
                 }
-            }
-            else
-            {
-                //cast done, use action                
-                useAction(this.activeAction);
-            }
+                else
+                {
+                    //cast done, use action                
+                    useAction(this.activeAction);
+                }
+            }            
         }
         else
         {
@@ -420,7 +436,7 @@ public class AIEvents : MonoBehaviour
     private void showDialog(AIAction action)
     {
         float wait = action.gcd + action.duration;
-        Debug.Log("Talk: " + action.dialogText+" (wait "+ wait +"s)");
+        //Debug.Log("Talk: " + action.dialogText+" (wait "+ wait +"s)");
 
         GameObject dialog = Instantiate(this.box.gameObject, this.enemy.dialogPosition.transform);
 
@@ -499,7 +515,7 @@ public class AIEvents : MonoBehaviour
     public void resetAllEvents()
     {
         if(this.phases.Count > 0) this.activePhase = this.phases[0];
-        this.startAI = false;
+        this.startAIAttacking = false;
 
         clearAction();
 
@@ -596,6 +612,7 @@ public class AIEvents : MonoBehaviour
         {
             //useskill
             StandardSkill usedSkill = Utilities.Skill.instantiateSkill(action.skillinstance, this.enemy, this.enemy.target);
+            action.skillinstance.target = null;
             action.skillinstance.cooldownTimeLeft = action.skillinstance.cooldown;
             actionUsed = true;
             //Debug.Log("Using action: " + usedSkill.skillName);

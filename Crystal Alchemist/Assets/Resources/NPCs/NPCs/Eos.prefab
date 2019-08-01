@@ -47,8 +47,8 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 0.96222955, b: 0.6650944, a: 1}
-  m_Intensity: 0.5
-  m_LightVolumeOpacity: 0.5
+  m_Intensity: 1
+  m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 000000007f83324619b8859a9b211b543d8d9983
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
@@ -56,8 +56,8 @@ MonoBehaviour:
   m_AlphaBlendOnOverlap: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0.5
-  m_PointLightOuterRadius: 4
+  m_PointLightInnerRadius: 2
+  m_PointLightOuterRadius: 6
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -411,7 +411,7 @@ MonoBehaviour:
   skillSetParent: {fileID: 3722434751308757473}
   startLife: 3
   startMana: 1
-  startSpeed: 75
+  startSpeed: 120
   startSpellSpeed: 100
   respawnTime: 0
   immunityToStatusEffects: []
@@ -421,8 +421,6 @@ MonoBehaviour:
   lifeRegenerationInterval: 0
   manaRegeneration: 0
   manaRegenerationInterval: 0
-  initializeSkill: {fileID: 0}
-  deathSkill: {fileID: 0}
   damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
     type: 3}
   antiKnockback: 0
@@ -476,6 +474,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: 1938021464261085658}
   movementRadius: 0.5
+  movementRadiusPartner: 0.5
   movementDelay: 0.3
   backToStart: 0
   path: []
@@ -496,14 +495,29 @@ MonoBehaviour:
   enemy: {fileID: 1938021464261085658}
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   box: {fileID: 5104834203016797782, guid: 4828c807745ed894ea715e12180742d8, type: 3}
+  initialActions:
+  - type: 1
+    killItCompletely: 0
+    position: {x: 0, y: 0}
+    dialogText: Mein Licht erhellt die Dunkelheit!
+    duration: 4
+    nextPhase: 
+    skill: {fileID: 0}
+    cast: -1
+    cD: -1
+    amount: 0
+    castGroup: 0
+    sequence: {fileID: 0}
+    gcd: 2.5
+    skillinstance: {fileID: 0}
   phases:
   - phaseName: Feen Lebenszyklus
     phaseDescription: Eintagsfliege
     actions:
-    - type: 1
+    - type: 2
       killItCompletely: 0
       position: {x: 0, y: 0}
-      dialogText: Hallo Welt
+      dialogText: 
       duration: 4
       nextPhase: 
       skill: {fileID: 0}
@@ -512,7 +526,7 @@ MonoBehaviour:
       amount: 0
       castGroup: 0
       sequence: {fileID: 0}
-      gcd: 30
+      gcd: 60
       skillinstance: {fileID: 0}
     - type: 1
       killItCompletely: 0
@@ -527,20 +541,6 @@ MonoBehaviour:
       castGroup: 0
       sequence: {fileID: 0}
       gcd: 2.5
-      skillinstance: {fileID: 0}
-    - type: 2
-      killItCompletely: 0
-      position: {x: 0, y: 0}
-      dialogText: 
-      duration: 4
-      nextPhase: 
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 30
       skillinstance: {fileID: 0}
     - type: 6
       killItCompletely: 1

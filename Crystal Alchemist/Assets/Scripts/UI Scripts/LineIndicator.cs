@@ -9,8 +9,7 @@ public class LineIndicator : Indicator
     private float distance = 10;
 
     private Vector2 direction;
-    private ChainSkill chain;
-    
+    private ChainSkill chain;    
 
     // Start is called before the first frame update
     public override void Start()
@@ -31,11 +30,13 @@ public class LineIndicator : Indicator
 
         float angle;
         Vector2 startpoint;
-        Vector3 rotation;        
+        Vector3 rotation;
 
         Utilities.Rotation.setDirectionAndRotation(this.skill.sender, this.skill.target,
                                           0, 0, this.skill.snapRotationInDegrees, this.skill.rotationModifier,
                                           out angle, out startpoint, out this.direction, out rotation);
+
+        startpoint = this.skill.sender.spriteRenderer.transform.position;
 
         if (this.skill.target != null && updateRotation)
         {
@@ -44,7 +45,7 @@ public class LineIndicator : Indicator
             this.direction = Utilities.Rotation.DegreeToVector2(temp_angle);
         }
 
-        renderLine(startpoint, rotation);
+            renderLine(startpoint, rotation);
     }
 
     private void renderLine(Vector2 startpoint, Vector3 rotation)
@@ -53,8 +54,10 @@ public class LineIndicator : Indicator
         int layerMask = 1 << this.skill.sender.gameObject.layer;
         layerMask = ~layerMask;
 
-        float offset = 1f;
-        Vector2 newPosition = new Vector2(startpoint.x - (this.direction.x * offset), startpoint.y - (this.direction.y * offset));
+        //float offset = 0f;
+        Vector2 newPosition = startpoint;
+        //newPosition = new Vector2(startpoint.x - (this.direction.x * offset), startpoint.y - (this.direction.y * offset));
+        
 
         RaycastHit2D hitInfo = Physics2D.CircleCast(newPosition, this.indicatorRenderer.size.y+0.5f, this.direction, distance, layerMask);
 

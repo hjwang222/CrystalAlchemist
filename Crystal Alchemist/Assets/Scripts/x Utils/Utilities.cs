@@ -175,6 +175,17 @@ public class Utilities : MonoBehaviour
             return true;
         }
 
+        public static bool checkAffections(bool affectPlayers, bool affectEnemies, bool affectObjects, bool affectNPCs, Collider2D hittedCharacter)
+        {
+            if(!hittedCharacter.isTrigger 
+           && (affectPlayers && hittedCharacter.CompareTag("Player")
+            || affectEnemies && hittedCharacter.CompareTag("Enemy")
+            || affectNPCs && hittedCharacter.CompareTag("NPC")
+            || affectObjects && (hittedCharacter.CompareTag("Object")))) return true;
+
+            return false;
+        }
+
         public static bool checkCollision(Collider2D hittedCharacter, StandardSkill skill)
         {
             if (skill != null && skill.triggerIsActive)
@@ -194,10 +205,7 @@ public class Utilities : MonoBehaviour
                     }
                     else if (!hittedCharacter.isTrigger)
                     {
-                        if ((skill.affectPlayers && hittedCharacter.CompareTag("Player"))
-                            || skill.affectEnemies && hittedCharacter.CompareTag("Enemy")
-                            || skill.affectObjects && hittedCharacter.CompareTag("Object")
-                            )
+                        if (checkAffections(skill.affectPlayers, skill.affectEnemies, skill.affectObjects, skill.affectNPCs, hittedCharacter))
                         {
                             return true;
                         }
@@ -742,8 +750,8 @@ public class Utilities : MonoBehaviour
         {
             direction = sender.direction.normalized;
 
-            start = new Vector2(sender.transform.position.x + (direction.x * positionOffset),
-                                sender.transform.position.y + (direction.y * positionOffset) + positionHeight);
+            start = new Vector2(sender.spriteRenderer.transform.position.x + (direction.x * positionOffset),
+                                sender.spriteRenderer.transform.position.y + (direction.y * positionOffset) + positionHeight);
 
             //if sender is not frozen
 

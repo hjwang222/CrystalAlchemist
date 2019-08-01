@@ -515,6 +515,7 @@ MonoBehaviour:
   duration: 9999
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
   cooldown: 3
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -540,6 +541,7 @@ MonoBehaviour:
   colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
+  rotateOnUpdate: 0
   keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
@@ -558,6 +560,7 @@ MonoBehaviour:
   affectSelf: 0
   affectPlayers: 0
   affectEnemies: 1
+  affectNPCs: 0
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
@@ -589,6 +592,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6625934164191362223}
     m_Modifications:
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -644,11 +652,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
-      objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.size
@@ -656,43 +659,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[4]
-      value: 595341281
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[0]
-      value: 595341281
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[1]
-      value: 595341281
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[2]
-      value: 595341281
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[3]
-      value: 1177715583
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
       propertyPath: m_FalloffIntensity
-      value: 0.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
@@ -701,13 +669,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
-      propertyPath: m_Color.g
+      propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
-      propertyPath: m_Color.b
-      value: 1
+      propertyPath: m_ApplyToSortingLayers.Array.data[0]
+      value: 595341281
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a4137c3904df94aa0b798edf1c5d6b, type: 3}
@@ -724,6 +697,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1065962740209003586}
     m_Modifications:
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -779,25 +757,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_Color.r
       value: 0.28773582
-      objectReference: {fileID: 0}
-    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
@@ -806,13 +769,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
-      propertyPath: m_LightVolumeOpacity
-      value: 0.5
+      propertyPath: m_Intensity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
-      propertyPath: m_Intensity
-      value: 0.5
+      propertyPath: m_LightVolumeOpacity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a4137c3904df94aa0b798edf1c5d6b, type: 3}
@@ -838,6 +806,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 822386160285104016, guid: 7125f1409d0689b4d80b6ab7179979c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 822386160285104020, guid: 7125f1409d0689b4d80b6ab7179979c8,
         type: 3}
@@ -948,11 +921,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 822386160285104019, guid: 7125f1409d0689b4d80b6ab7179979c8,
-        type: 3}
-      propertyPath: m_BlockingMask.m_Bits
-      value: 32567
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7125f1409d0689b4d80b6ab7179979c8, type: 3}

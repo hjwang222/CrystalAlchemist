@@ -70,6 +70,7 @@ MonoBehaviour:
   duration: 10
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
   cooldown: 1
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -96,6 +97,7 @@ MonoBehaviour:
   colliderHeightOffset: -0.5
   speed: 10
   rotateIt: 1
+  rotateOnUpdate: 0
   keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
@@ -114,6 +116,7 @@ MonoBehaviour:
   affectSelf: 0
   affectPlayers: 0
   affectEnemies: 1
+  affectNPCs: 0
   affectObjects: 1
   affectSkills: 0
   ignoreInvincibility: 0
@@ -536,6 +539,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7710717558811602010}
     m_Modifications:
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -591,10 +599,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
-      propertyPath: m_Name
-      value: Point Light
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_LightVolumeOpacity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a4137c3904df94aa0b798edf1c5d6b, type: 3}
