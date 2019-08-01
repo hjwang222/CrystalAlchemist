@@ -118,6 +118,9 @@ public class StandardSkill : MonoBehaviour
     [FoldoutGroup("Zeit-Attribute", expanded: false)]
     public bool deactivateByButtonUp = false;
 
+    [FoldoutGroup("Zeit-Attribute", expanded: false)]
+    public bool deactivateByButtonDown = false;
+
     [Space(10)]
     [FoldoutGroup("Zeit-Attribute", expanded: false)]
     [Tooltip("Abklingzeit nach Aktivierung (für Außen)")]
@@ -243,6 +246,10 @@ public class StandardSkill : MonoBehaviour
     [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
     public bool rotateIt = false;
+
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
+    public bool rotateOnUpdate = false;
 
     [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
@@ -583,6 +590,8 @@ public class StandardSkill : MonoBehaviour
 
     public virtual void doOnUpdate()
     {
+        if (this.rotateOnUpdate) setPostionAndDirection();
+
         if (this.LockElapsed > 0)
         {
             this.LockElapsed -= Time.deltaTime;

@@ -6,33 +6,29 @@ using UnityEngine.Experimental.Rendering.LWRP;
 public class DayNightCircle : MonoBehaviour
 {
     [SerializeField]
-    private Color day;
-
-    [SerializeField]
-    private Color night;
-
-    [SerializeField]
     private Light2D light;
 
-    public bool changeColor = false;
+    [SerializeField]
+    private TimeValue timeValue;
 
-    private Color currentColor;
+    private bool isRunning = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        this.light.color = this.timeValue.GetColor();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void changeColor()
     {
-        if(changeColor) StartCoroutine(lerpColor(light, day, night, 10f));
+        Color newColor = this.timeValue.GetColor();
+        float duration = this.timeValue.factor * (this.timeValue.update-1);
+        if(newColor != light.color && !this.isRunning) StartCoroutine(lerpColor(light, light.color, newColor, duration));
+        if (newColor != light.color && this.isRunning) Debug.Log("Is Running");
     }
 
     IEnumerator lerpColor(Light2D light, Color fromColor, Color toColor, float duration)
     {
-        this.changeColor = false;
+        this.isRunning = true;
         float counter = 0;
 
         while (counter < duration)
@@ -46,5 +42,7 @@ public class DayNightCircle : MonoBehaviour
             //Wait for a frame
             yield return null;
         }
+
+        this.isRunning = false;
     }
 }

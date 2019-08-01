@@ -21,6 +21,10 @@ public class Player : Character
     [SerializeField]
     private CastBar castbar;
 
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public TimeValue timeValue;
+
     [FoldoutGroup("Skills", expanded: false)]
     [Tooltip("Skills, welcher der Character verwenden kann")]
     public List<StandardSkill> skillSet = new List<StandardSkill>();
@@ -264,7 +268,7 @@ public class Player : Character
                     activateSkillFromTargetingSystem(skill);
                 }
                 else if (currentAmountOfSameSkills >= skill.maxAmounts
-                     && (skill.deactivateByButtonUp || skill.delay == Utilities.maxFloatInfinite))
+                     && ((skill.deactivateByButtonUp || skill.deactivateByButtonDown) || skill.delay == Utilities.maxFloatInfinite))
                 {
                     deactivateSkill(button, skill);
                 }
@@ -444,11 +448,11 @@ public class Player : Character
         //Skill deaktivieren
         bool destroyit = false;
 
-        if (Input.GetButtonUp(button))
+        if (Input.GetButtonUp(button) && skill.deactivateByButtonUp)
         {
             destroyit = true;
         }
-        else if (Input.GetButtonDown(button))
+        else if (Input.GetButtonDown(button) && skill.deactivateByButtonDown)
         {
             destroyit = true;
         }

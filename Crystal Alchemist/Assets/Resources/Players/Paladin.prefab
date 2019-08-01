@@ -148,6 +148,7 @@ MonoBehaviour:
   isPlayer: 0
   inventory: []
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
+  timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
   skillSet:
   - {fileID: 103987821612614508, guid: 2f0554ae42ef20e4e976d37f34aad3e3, type: 3}
   - {fileID: 2502710003444371835, guid: 05bc84479b081af4ca7844c3cd88c425, type: 3}
@@ -169,6 +170,7 @@ MonoBehaviour:
   - {fileID: 7736697032808662322, guid: 56f5ab55d0651f847a53e3a0d8305f08, type: 3}
   - {fileID: 8104124904149976495, guid: 1069657a2cf5c7248891f906a405a860, type: 3}
   - {fileID: 2626038527925349230, guid: 8191971a062876046ab19f93a98c3268, type: 3}
+  - {fileID: 8133084885112653638, guid: 379b457af4311284f9a75f39f2f23861, type: 3}
   dialogBoxSignal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
   healthSignalUI: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
   manaSignalUI: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}
@@ -505,6 +507,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 759644400424337062}
     m_Modifications:
+    - target: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
+        type: 3}
+      propertyPath: m_Name
+      value: Direction Ring
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -560,21 +572,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
-        type: 3}
-      propertyPath: m_Name
-      value: Direction Ring
-      objectReference: {fileID: 0}
-    - target: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5349438606657991408, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}
       propertyPath: character
       value: 
       objectReference: {fileID: 5074818981556205378}
+    - target: {fileID: 6331683523956655689, guid: 1c27a61d4b7f3984eb11097accadce1d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c27a61d4b7f3984eb11097accadce1d, type: 3}
 --- !u!1 &8153952292305783526 stripped
