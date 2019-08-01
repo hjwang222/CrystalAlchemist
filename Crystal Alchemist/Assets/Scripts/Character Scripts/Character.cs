@@ -60,8 +60,7 @@ public class Character : MonoBehaviour
 
     [Required]
     [BoxGroup("Pflichtfelder")]
-    [SerializeField]
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     [Required]
     [BoxGroup("Pflichtfelder")]
@@ -394,7 +393,7 @@ public class Character : MonoBehaviour
 
         resetColor();
 
-        this.boxCollider.enabled = true;
+        if(this.boxCollider != null) this.boxCollider.enabled = true;
         this.shadowRenderer.enabled = true;
         this.transform.position = this.spawnPosition;
 
@@ -491,7 +490,12 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void killIt()
+    public void KillItCompletely()
+    {
+        Destroy(this.gameObject);
+    }
+
+    public void KillIt()
     {
         if (this.isPlayer)
         {
@@ -561,7 +565,7 @@ public class Character : MonoBehaviour
                     if (value > 0) colorArray = GlobalValues.green;
 
                     if (this.life > 0 && this.currentState != CharacterState.dead && showingDamageNumber) showDamageNumber(value, colorArray);
-                    if (this.life <= 0) killIt();
+                    if (this.life <= 0) KillIt();
                     callSignal(this.healthSignal, value);
                     break;
                 }
@@ -840,7 +844,7 @@ public class Character : MonoBehaviour
     private IEnumerator colliderDisable()
     {
         yield return null;
-        this.boxCollider.enabled = false;
+        if (this.boxCollider != null) this.boxCollider.enabled = false;
     }
 
     private IEnumerator hitCo()

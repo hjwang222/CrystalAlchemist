@@ -6,7 +6,7 @@ using TMPro;
 
 public class AggroBar : MonoBehaviour
 {
-    private Enemy enemy;
+    private AI enemy;
 
     [SerializeField]
     private Image charging;
@@ -15,7 +15,7 @@ public class AggroBar : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI zielName;
 
-    public void setEnemy(Enemy enemy)
+    public void setEnemy(AI enemy)
     {
         this.enemy = enemy;
     }

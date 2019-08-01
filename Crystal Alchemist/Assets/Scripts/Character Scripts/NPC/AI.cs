@@ -4,10 +4,17 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
 
-public class Enemy : Character
+public class AI : Character
 {
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    public GameObject dialogPosition;
+
     [HideInInspector]
     public Character target;
+
+    [HideInInspector]
+    public Character partner;
 
     private void Start()
     {

@@ -9,7 +9,29 @@ public class ProjectileSkill : StandardSkill
     [SerializeField]
     private StandardSkill skillOnImpact;
 
+    private bool speedup = true;
+    private Vector2 tempVelocity;
+
     #region Overrides
+
+
+    public override void doOnUpdate()
+    {
+        base.doOnUpdate();
+
+        if(this.delayTimeLeft <= 0) setVelocity();
+    }
+
+    private void setVelocity()
+    {
+        if (this.myRigidbody != null && this.speedup)
+        {
+            this.myRigidbody.velocity = this.direction.normalized * this.speed;
+            this.tempVelocity = this.myRigidbody.velocity;
+            this.speedup = false;
+        }
+    }
+
     public override void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
         base.OnTriggerEnter2D(hittedCharacter);

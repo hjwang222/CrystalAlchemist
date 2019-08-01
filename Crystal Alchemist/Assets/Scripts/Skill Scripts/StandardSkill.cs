@@ -385,7 +385,7 @@ public class StandardSkill : MonoBehaviour
     ////////////////////////////////////////////////////////////////
 
     private bool playStartEffectAlready = false;
-    private Vector2 tempVelocity;
+
     private float elapsed;
     private float LockElapsed;
     private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
@@ -429,7 +429,7 @@ public class StandardSkill : MonoBehaviour
     [HideInInspector]
     public bool setActive = true;
 
-    private bool speedup = true;
+
 
     #endregion
 
@@ -645,8 +645,7 @@ public class StandardSkill : MonoBehaviour
         }
         else
         {
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Active", true);
-            velocity();
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Active", true);            
             hideIndicator();
 
             //Prüfe ob der Skill eine Maximale Dauer hat
@@ -673,15 +672,7 @@ public class StandardSkill : MonoBehaviour
 
     }
 
-    private void velocity()
-    {
-        if (this.myRigidbody != null && this.speedup)
-        {
-            this.myRigidbody.velocity = this.direction.normalized * this.speed;
-            this.tempVelocity = this.myRigidbody.velocity;
-            this.speedup = false;
-        }
-    }
+
 
     public void landAttack(Collider2D hittedObject)
     {

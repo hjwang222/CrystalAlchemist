@@ -8,13 +8,16 @@ public class AIMovement : MonoBehaviour
     [SerializeField]
     [Required]
     [BoxGroup("Required")]
-    private Enemy enemy;
-
+    private AI npc;
 
     #region Parameter fürs Verfolgen
 
     [FoldoutGroup("Movement Attributes", expanded: false)]
-    public float attackRadius = 0;
+    public float movementRadius = 0.1f;
+
+    [FoldoutGroup("Movement Attributes", expanded: false)]
+    [SerializeField]
+    private float movementDelay = 0;
 
     [FoldoutGroup("Movement Attributes", expanded: false)]
     [SerializeField]
@@ -25,13 +28,11 @@ public class AIMovement : MonoBehaviour
     private List<Transform> path;
 
     [FoldoutGroup("Movement Attributes", expanded: false)]
-    [SerializeField]
-    private float followPathPause = 0;
-
-    [FoldoutGroup("Movement Attributes", expanded: false)]
+    [ShowIf("path")]
     [SerializeField]
     private float followPathPrecision = 0.01f;
 
+    [ShowIf("path")]
     [FoldoutGroup("Movement Attributes", expanded: false)]
     [SerializeField]
     private bool followPathInCircle = true;
@@ -40,25 +41,46 @@ public class AIMovement : MonoBehaviour
     private int factor = 1;
     private int currentPoint = 0;
     private Transform currentGoal;
+    private bool startCoroutine = true;
 
     #endregion
 
 
     #region Update und Movement Funktionen
     private void Update()
-    {            
-        if(this.enemy.currentState != CharacterState.dead
-        && this.enemy.currentState != CharacterState.manually) moveCharacter();
+    {
+        if(this.npc.currentState != CharacterState.dead
+        && this.npc.currentState != CharacterState.manually) moveCharacter();
     }
 
     private void moveCharacter()
     {     
-        if (this.enemy.target != null)
+        if (this.npc.target != null)
         {
             //Wenn der Spieler innerhalb vom Chase-Radius ist und auch nur solange bis der Gegner den Spieler nicht berührt!
-            if (Vector3.Distance(this.enemy.target.transform.position, this.transform.position) > this.attackRadius)
+            if (Vector3.Distance(this.npc.target.transform.position, this.transform.position) > this.movementRadius)
             {
-                moveTorwardsTarget(this.enemy.target.transform.position);
+                if (this.startCoroutine) StartCoroutine(delayMovementCo());
+                if (!this.standStill) moveTorwardsTarget(this.npc.target.transform.position);
+            }
+            else
+            {
+                this.startCoroutine = true;
+            }
+        }
+        else if (this.npc.partner != null)
+        {
+            //Wenn der Partner innerhalb vom Chase-Radius ist und auch nur solange bis der Gegner den Spieler nicht berührt!
+            if (Vector3.Distance(this.npc.partner.transform.position, this.transform.position) > this.movementRadius)
+            {
+                if (this.startCoroutine)
+                    StartCoroutine(delayMovementCo());
+                if (!this.standStill)
+                    moveTorwardsTarget(this.npc.partner.transform.position);
+            }
+            else
+            {
+                this.startCoroutine = true;
             }
         }
         else
@@ -73,11 +95,12 @@ public class AIMovement : MonoBehaviour
                     }
                     else
                     {
+                        this.startCoroutine = true;
                         ChangeGoal();
                         StartCoroutine(delayMovementCo());
                     }
                 }
-                else if (this.backToStart) moveTorwardsTarget(this.enemy.spawnPosition);
+                else if (this.backToStart) moveTorwardsTarget(this.npc.spawnPosition);
             }
             //Utilities.SetAnimatorParameter(this.animator, "isWakeUp", false);
         }
@@ -85,27 +108,31 @@ public class AIMovement : MonoBehaviour
 
     private IEnumerator delayMovementCo()
     {
+        this.startCoroutine = false;
         this.standStill = true;
-        yield return new WaitForSeconds(this.followPathPause);
+        yield return new WaitForSeconds(this.movementDelay);
         this.standStill = false;
     }
 
     private void moveTorwardsTarget(Vector3 position)
     {
-        if (this.enemy.currentState == CharacterState.idle || this.enemy.currentState == CharacterState.walk && this.enemy.currentState != CharacterState.knockedback)
+        if (this.npc.currentState == CharacterState.idle || this.npc.currentState == CharacterState.walk && this.npc.currentState != CharacterState.knockedback)
         {
             //Bewegt den Gegner zum Spieler
-            Vector3 temp = Vector3.MoveTowards(transform.position, position, this.enemy.speed * (Time.deltaTime * this.enemy.timeDistortion));
+            Vector3 temp = Vector3.MoveTowards(transform.position, position, this.npc.speed * (Time.deltaTime * this.npc.timeDistortion));
 
             Vector2 direction = position - this.transform.position;
-            if (!Utilities.StatusEffectUtil.isCharacterStunned(this.enemy)) this.enemy.changeAnim(direction.normalized);
+            if (!Utilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
 
-            this.enemy.myRigidbody.MovePosition(temp);
-            this.enemy.myRigidbody.velocity = Vector2.zero;
+            if (this.npc.direction.x < 0) this.npc.spriteRenderer.flipX = true;
+            else this.npc.spriteRenderer.flipX = false;
+
+            this.npc.myRigidbody.MovePosition(temp);
+            this.npc.myRigidbody.velocity = Vector2.zero;
 
             //changeState(CharacterState.walk); //Gegner bewegt sich gerade
 
-            Utilities.UnityUtils.SetAnimatorParameter(this.enemy.animator, "isWakeUp", true);
+            Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWakeUp", true);
         }
     }
 

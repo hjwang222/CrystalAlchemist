@@ -27,8 +27,6 @@ public class Interactable : MonoBehaviour
     [TextAreaAttribute]
     public string dialogBoxTextEnglish;
 
-
-
     [FoldoutGroup("Loot", expanded: false)]
     [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
     public LootTable[] lootTable;
@@ -55,6 +53,9 @@ public class Interactable : MonoBehaviour
     [Tooltip("Standard-Soundeffekt")]
     public AudioClip soundEffect;
 
+    [Required]
+    public Animator animator;
+
     [HideInInspector]
     public bool isPlayerInRange = false;
     [HideInInspector]
@@ -62,8 +63,9 @@ public class Interactable : MonoBehaviour
 
     [HideInInspector]
     public Player player;
-    [HideInInspector]
-    public Animator animator;
+    
+
+
     [HideInInspector]
     public AudioSource audioSource;
     [HideInInspector]
@@ -116,7 +118,7 @@ public class Interactable : MonoBehaviour
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
-        this.animator = GetComponent<Animator>();
+        if(this.animator == null && GetComponent<Animator>() != null) this.animator = GetComponent<Animator>();
         setContext();
         Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
     }

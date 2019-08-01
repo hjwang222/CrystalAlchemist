@@ -14,9 +14,6 @@ public class PlayerData
     public float[] position;
     public string scene;
 
-    public int minute;
-    public int hour;
-
     public PlayerData(Player player)
     {
         this.health = player.life;
@@ -32,9 +29,6 @@ public class PlayerData
         setSkills(player);
 
         this.scene = player.getScene();
-
-        this.minute = player.timeValue.getMinute();
-        this.hour = player.timeValue.getHour();
     }
 
     private void setInventory(Player player)

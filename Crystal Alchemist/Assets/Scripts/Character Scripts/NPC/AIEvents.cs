@@ -14,7 +14,8 @@ public enum AIActionType
     wait,
     skill,
     sequence,
-    transition
+    transition, 
+    kill
 }
 
 public enum AIEventType
@@ -86,6 +87,11 @@ public class AIAction
     [VerticalGroup("Type")]
     [HideLabel]
     public AIActionType type;
+
+    [ShowIf("type", AIActionType.kill)]
+    [VerticalGroup("Properties")]
+    [LabelWidth(120)]
+    public bool killItCompletely;
 
     [ShowIf("type", AIActionType.move)]
     [TableColumnWidth(150)]
@@ -182,7 +188,7 @@ public class AIEvents : MonoBehaviour
     [SerializeField]
     [Required]
     [BoxGroup("Required")]
-    private Enemy enemy;
+    private AI enemy;
 
     [SerializeField]
     [Required]
@@ -241,7 +247,11 @@ public class AIEvents : MonoBehaviour
 
     private void Update()
     {
-        if (enemy.target != null)
+        if(this.enemy.partner != null) Debug.Log(this.enemy.partner.name);
+
+        if (!this.startAI &&
+           ((enemy.target != null ||
+            (enemy.target == null && enemy.partner != null))))
         {
             this.startAI = true;
         }
@@ -411,7 +421,9 @@ public class AIEvents : MonoBehaviour
     {
         float wait = action.gcd + action.duration;
         Debug.Log("Talk: " + action.dialogText+" (wait "+ wait +"s)");
-        GameObject dialog = Instantiate(this.box.gameObject, this.enemy.transform);
+
+        GameObject dialog = Instantiate(this.box.gameObject, this.enemy.dialogPosition.transform);
+
         MiniDialogBox temp = dialog.GetComponent<MiniDialogBox>();
         temp.setText(action.dialogText);
         temp.setDuration(action.duration);
@@ -553,9 +565,7 @@ public class AIEvents : MonoBehaviour
             {
                 skill.cooldownTimeLeft -= (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
             }
-            else if (this.enemy.currentState != CharacterState.interact
-                  && this.enemy.currentState != CharacterState.inDialog
-                  && this.enemy.currentState != CharacterState.inMenu)
+            else 
             {
                 int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.enemy.activeSkills);
 
@@ -618,6 +628,12 @@ public class AIEvents : MonoBehaviour
             //wait
             //Debug.Log("Wait "+action.gcd+" seconds");
             StartCoroutine(stopCo(action.gcd));
+        }
+        else if (action.type == AIActionType.kill)
+        {
+            //suicide
+            if(action.killItCompletely) this.enemy.KillItCompletely();
+            else this.enemy.KillIt();
         }
 
         if (actionUsed)

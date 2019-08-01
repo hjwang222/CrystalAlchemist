@@ -6,20 +6,14 @@ public class TimeHandler : MonoBehaviour
 {
     [SerializeField]
     private TimeValue timeValue;
-    
+
     private void Start()
     {
-        PlayerData data = SaveSystem.loadPlayer();
-        if (data != null)
-        {
-            this.timeValue.setTime(data.minute, data.hour);
-        }
-        else
-        {
-            this.timeValue.setTime(System.DateTime.Now.Minute, System.DateTime.Now.Hour);
-        }
+        int minute = 0;
+        int hour = 0;
 
-        this.timeValue.init();
+        Utilities.Format.getStartTime(this.timeValue.factor, out hour, out minute);
+        this.timeValue.setTime(minute, hour);
     }
 
     // Update is called once per frame

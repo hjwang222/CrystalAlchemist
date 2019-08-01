@@ -11,7 +11,7 @@ public class AIAggroSystem : MonoBehaviour
     [SerializeField]
     [Required]
     [BoxGroup("Required")]
-    private Enemy enemy;
+    private AI enemy;
 
     [FoldoutGroup("Aggro Attributes", expanded: false)]
     [SerializeField]

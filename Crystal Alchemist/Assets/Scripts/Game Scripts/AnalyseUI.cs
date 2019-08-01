@@ -62,7 +62,7 @@ public class AnalyseUI : MonoBehaviour
             }
             else this.objectInfo.SetActive(true);
 
-            Enemy enemy = this.character.GetComponent<Enemy>();
+            AI enemy = this.character.GetComponent<AI>();
             if (enemy != null)
             {
                 this.aggrobar.gameObject.SetActive(true);

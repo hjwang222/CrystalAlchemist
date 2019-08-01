@@ -705,6 +705,19 @@ public class Utilities : MonoBehaviour
                 if (outlineWidth > 0) tmp.outlineWidth = outlineWidth;
             }
         }
+        
+        public static void getStartTime(float factor, out int hour, out int minute)
+        {
+            DateTime origin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0);
+            TimeSpan diff = DateTime.Now - origin;
+            double difference = Math.Floor(diff.TotalSeconds);
+            float minutes = (float)(difference * (double)factor); //elapsed ingame minutes
+            float fhour = ((minutes / 60f) % 24f);
+            float fminute = (minutes % 60f);
+
+            hour = Mathf.RoundToInt(fhour);
+            minute = Mathf.RoundToInt(fminute);
+        }
     }
 
 

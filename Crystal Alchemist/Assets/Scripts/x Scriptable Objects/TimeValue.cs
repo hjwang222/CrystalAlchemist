@@ -49,15 +49,12 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
         this.hour = hour;
     }
 
-    public void init()
-    {
-        if (hour < 18 && hour > 6) this.night = false;
-        else this.night = true;
-    }
-
     public void setTime(float seconds)
     {
         this.seconds += seconds;
+
+        if (hour < 18 && hour > 6) this.night = false;
+        else this.night = true;
 
         if (this.seconds >= this.factor)
         {
@@ -71,9 +68,6 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
 
             if (this.minute >= 60)
             {
-                if (hour < 18 && hour > 6) this.night = false;
-                else this.night = true;
-
                 this.minute = 0;
                 this.hour+=1;
 
