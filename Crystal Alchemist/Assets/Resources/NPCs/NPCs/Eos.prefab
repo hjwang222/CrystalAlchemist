@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9189589815307079105}
   - component: {fileID: 2915822676959184400}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2652810396556960423}
   - component: {fileID: 2652810396556960420}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 2652810396879462138}
   - component: {fileID: 2652810396879462137}
   - component: {fileID: 2652810396879462142}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2652810397108339307}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: activeSkills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3276615408397806758}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: skillset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,8 @@ GameObject:
   - component: {fileID: 4322055140194454571}
   - component: {fileID: 1938021464261085656}
   - component: {fileID: 4298136363205430322}
-  m_Layer: 0
+  - component: {fileID: 7016091898417923367}
+  m_Layer: 11
   m_Name: Eos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,14 +410,18 @@ MonoBehaviour:
   activeSkillParent: {fileID: 2652810397108339306}
   activeStatusEffectParent: {fileID: 8669415238972280400}
   skillSetParent: {fileID: 3722434751308757473}
+  startSpriteForRespawn: {fileID: 0}
+  startSpriteForRespawnWhite: {fileID: 0}
   startLife: 3
   startMana: 1
   startSpeed: 120
   startSpellSpeed: 100
-  respawnTime: 0
   immunityToStatusEffects: []
   maxLife: 3
   maxMana: 1
+  respawnTime: 0
+  respawnAnimation: {fileID: 0}
+  deathAnimation: {fileID: 0}
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
   manaRegeneration: 0
@@ -446,6 +451,7 @@ MonoBehaviour:
   mana: 0
   speed: 0
   isInvincible: 0
+  isImmortal: 0
   isHit: 0
   items: []
   buffs: []
@@ -498,6 +504,7 @@ MonoBehaviour:
   initialActions:
   - type: 1
     killItCompletely: 0
+    isImmortal: 0
     position: {x: 0, y: 0}
     de: "F\xFCrchte nicht die Dunkelheit."
     en: Dont fear the darkness.
@@ -511,42 +518,19 @@ MonoBehaviour:
     sequence: {fileID: 0}
     gcd: 2.5
     skillinstance: {fileID: 0}
-  phases:
-  - phaseName: Feen Lebenszyklus
-    phaseDescription: Eintagsfliege
+  phases: []
+  events:
+  - eventName: Death
+    eventDescription: 
+    trigger:
+    - type: 0
+      time: 30
+      life: 0
+      collider: []
     actions:
-    - type: 2
-      killItCompletely: 0
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      nextPhase: 
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 60
-      skillinstance: {fileID: 0}
-    - type: 1
-      killItCompletely: 0
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      nextPhase: 
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 2.5
-      skillinstance: {fileID: 0}
-    - type: 6
+    - type: 7
       killItCompletely: 1
+      isImmortal: 0
       position: {x: 0, y: 0}
       de: 
       en: 
@@ -558,9 +542,13 @@ MonoBehaviour:
       amount: 0
       castGroup: 0
       sequence: {fileID: 0}
-      gcd: 2.5
+      gcd: 0
       skillinstance: {fileID: 0}
-  events: []
+    affectedPhases: []
+    repeatEvent: 0
+    requireAll: 0
+    startTime: 0
+    isActive: 1
 --- !u!210 &4298136363205430322
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -572,6 +560,23 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &7016091898417923367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4322055140194454578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a37b145246250f4b98d09b1b3d7d2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghost: {fileID: 634257569416937404, guid: f11b09210e7962848bddb256727f4657, type: 3}
+  mainObject: {fileID: 2652810396879462133}
+  delay: 0.25
+  destroyAfter: 0.5
+  useCharacterSprite: 0
 --- !u!1 &4624666807855673779
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4283048916830764583}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5243410974534406608}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: activeStatusEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}

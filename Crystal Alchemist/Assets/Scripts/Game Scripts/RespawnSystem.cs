@@ -6,20 +6,33 @@ public class RespawnSystem : MonoBehaviour
 {
     private List<Character> respawnObjects = new List<Character>();
 
-    void Update()
-    {        
-        for(int i = 0; i < this.transform.childCount; i++)
-        {
-            Character character = this.transform.GetChild(i).gameObject.GetComponent<Character>();
+    void FixedUpdate()
+    {
+        setRespawnObjects(this.transform.gameObject);
+    }
 
-            if (character != null
-                && !character.gameObject.activeInHierarchy 
-                && character.currentState == CharacterState.dead
-                && !this.respawnObjects.Contains(character))
-            {                
-                setRespawn(character);
-            }            
-        }       
+    private void setRespawnObjects(GameObject parent)
+    {
+        for (int i = 0; i < parent.transform.childCount; i++)
+        {
+            GameObject child = parent.transform.GetChild(i).gameObject;
+
+            Character character = child.gameObject.GetComponent<Character>();
+
+            if (character != null)
+            {
+                if (!character.gameObject.activeInHierarchy
+                 && character.currentState == CharacterState.dead
+                 && !this.respawnObjects.Contains(character))
+                {
+                    setRespawn(character);
+                }
+            }
+            else
+            {
+                setRespawnObjects(child);
+            }
+        }
     }
 
     private void setRespawn(Character character)
@@ -39,9 +52,22 @@ public class RespawnSystem : MonoBehaviour
 
     private void respawnCharacter(Character character)
     {
-        character.gameObject.SetActive(true);
-        character.spawn();
+        if (character.respawnAnimation != null)
+        {
+            //spawn character after animation
+
+            RespawnAnimation respawnObject = Instantiate(character.respawnAnimation, character.spawnPosition, Quaternion.identity);
+            respawnObject.setCharacter(character);
+        }
+        else
+        {
+            //spawn character immediately
+            character.gameObject.SetActive(true);
+            character.initSpawn();
+            Utilities.UnityUtils.SetAnimatorParameter(character.animator, "Respawn");
+        }
     }
+
 
 }
 

@@ -68,6 +68,7 @@ MonoBehaviour:
   duration: 5
   lockMovementonDuration: 1
   deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
   cooldown: 1
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -93,6 +94,7 @@ MonoBehaviour:
   colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
+  rotateOnUpdate: 0
   keepOriginalRotation: 0
   blendTree: 1
   useOffSetToBlendTree: 0
@@ -109,10 +111,9 @@ MonoBehaviour:
   multiHitDelay: 0
   showRange: 0
   affectSelf: 0
-  affectPlayers: 0
-  affectEnemies: 1
-  affectObjects: 1
-  affectSkills: 0
+  affectOther: 1
+  affectSame: 0
+  affectNeutral: 1
   ignoreInvincibility: 0
   stateType: 1
   doCastDuringDelay: 0

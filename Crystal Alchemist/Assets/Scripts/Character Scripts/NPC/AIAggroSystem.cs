@@ -44,21 +44,21 @@ public class AIAggroSystem : MonoBehaviour
     [SerializeField]
     private float activeClueDuration = 1;
 
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
-    [SerializeField]
-    private bool aggroPlayer = false;
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("wirkt nur auf sich selbst")]
+    public bool affectSelf = false;
 
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
-    [SerializeField]
-    private bool aggroNPC = false;
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("wirkt auf alle Spieler")]
+    public bool affectOther = false;
 
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
-    [SerializeField]
-    private bool aggroObject = false;
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("wirkt auf alle Gegner")]
+    public bool affectSame = false;
 
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
-    [SerializeField]
-    private bool aggroEnemy = false;
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("wirkt auf alle Gegner")]
+    public bool affectNeutral = false;
 
     private GameObject activeClue;
     private Dictionary<Character, float[]> aggroList = new Dictionary<Character, float[]>();
@@ -206,7 +206,7 @@ public class AIAggroSystem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Utilities.Collisions.checkAffections(this.aggroPlayer, this.aggroEnemy, this.aggroObject, this.aggroNPC, collision))
+        if (Utilities.Collisions.checkAffections(this.enemy, this.affectOther, this.affectSame, this.affectNeutral, collision))
         {
             increaseAggro(collision.GetComponent<Character>(), this.aggroIncreaseFactor);
         }
@@ -214,7 +214,7 @@ public class AIAggroSystem : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (Utilities.Collisions.checkAffections(this.aggroPlayer, this.aggroEnemy, this.aggroObject, this.aggroNPC, collision))
+        if (Utilities.Collisions.checkAffections(this.enemy, this.affectOther, this.affectSame, this.affectNeutral, collision))
         {
             decreaseAggro(collision.GetComponent<Character>(), this.aggroDecreaseFactor);
         }

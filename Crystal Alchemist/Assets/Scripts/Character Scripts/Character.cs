@@ -82,6 +82,14 @@ public class Character : MonoBehaviour
     [Required]
     public GameObject skillSetParent;
 
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public Sprite startSpriteForRespawn;
+
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public Sprite startSpriteForRespawnWhite;
+
     ////////////////////////////////////////////////////////////////
 
     [TabGroup("Start-Values")]
@@ -106,27 +114,34 @@ public class Character : MonoBehaviour
 
     [Space(10)]
     [TabGroup("Start-Values")]
-    [Tooltip("Respawn-Zeit")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float respawnTime = 30;
-
-    [Space(10)]
-    [TabGroup("Start-Values")]
     [Tooltip("Immunität von Statuseffekten")]
     public List<StatusEffect> immunityToStatusEffects = new List<StatusEffect>();
 
 
 
-    [TabGroup("Max-Values")]
+    [TabGroup("Spawn Values")]
     [Tooltip("Maximales Life")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
     public float maxLife = Utilities.minFloat;
 
-    [TabGroup("Max-Values")]
+    [TabGroup("Spawn Values")]
     [Tooltip("Maximales Mana")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
     public float maxMana = Utilities.minFloat;
 
+    [Space(10)]
+    [TabGroup("Spawn Values")]
+    [Tooltip("Respawn-Zeit")]
+    [Range(0, Utilities.maxFloatInfinite)]
+    public float respawnTime = 30;
+
+    [TabGroup("Spawn Values")]
+    [Tooltip("Respawn-Animation")]
+    public RespawnAnimation respawnAnimation;
+
+    [TabGroup("Spawn Values")]
+    [Tooltip("Respawn-Animation")]
+    public DeathAnimation deathAnimation;
 
 
     [TabGroup("Regeneration")]
@@ -247,6 +262,7 @@ public class Character : MonoBehaviour
     private List<Color> colors = new List<Color>();
     private bool showTargetHelp = false;
     private GameObject targetHelpObjectPlayer;
+    private DeathAnimation activeDeathAnimation;
 
     [HideInInspector]
     public Vector3 spawnPosition;
@@ -269,6 +285,8 @@ public class Character : MonoBehaviour
     public float speed;
     [HideInInspector]
     public bool isInvincible;
+    [HideInInspector]
+    public bool isImmortal = false;
     [HideInInspector]
     public bool isHit;
     [HideInInspector]
@@ -308,8 +326,7 @@ public class Character : MonoBehaviour
         //getItems();    
 
         setComponents();
-        spawn();
-        this.currentState = CharacterState.idle;
+        initSpawn();
 
         //this.gameObject.layer = LayerMask.NameToLayer(this.gameObject.tag);
     }
@@ -355,10 +372,14 @@ public class Character : MonoBehaviour
         if (this.targetHelpObjectPlayer != null) this.targetHelpObjectPlayer.gameObject.SetActive(value);
     }
 
-    public void spawn()
+    public void initSpawn()
     {
-        if (this.currentState == CharacterState.respawning) Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isRespawn", true);
+        setBasicAttributesToNormal();
+        ActivateCharacter();
+    }
 
+    private void setBasicAttributesToNormal()
+    {
         this.life = this.startLife;
         this.mana = this.startMana;
 
@@ -377,14 +398,18 @@ public class Character : MonoBehaviour
         this.animator.enabled = true;
         this.spriteRenderer.enabled = true;
 
-        resetColor();
-
-        if(this.boxCollider != null) this.boxCollider.enabled = true;
         this.shadowRenderer.enabled = true;
         this.transform.position = this.spawnPosition;
 
-        this.setSkills(true);
+        this.activeDeathAnimation = null;
 
+        resetColor();
+    }
+
+    public void ActivateCharacter()
+    {
+        if (this.boxCollider != null) this.boxCollider.enabled = true;
+        this.setSkills(true);
         Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
 
         AIEvents eventAI = this.GetComponent<AIEvents>();
@@ -476,9 +501,15 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void KillItCompletely()
+    private void destroySkills()
     {
-        Destroy(this.gameObject);
+        //TODO: Exception
+       /* foreach (StandardSkill skill in this.activeSkills)
+        {
+            skill.DestroyIt(1f);
+        }*/
+
+        this.activeSkills.Clear();
     }
 
     public void KillIt()
@@ -491,12 +522,9 @@ public class Character : MonoBehaviour
         else
         {
             //TODO: Kill sofort (Skill noch aktiv)
-
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isDead", true);
-
             Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
             Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
-
+                       
             this.spriteRenderer.color = Color.white;
             setSkills(false);
 
@@ -508,6 +536,15 @@ public class Character : MonoBehaviour
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
             StartCoroutine(colliderDisable());
             this.shadowRenderer.enabled = false;
+
+            destroySkills();
+
+            //Play Death Effect
+            if (this.deathAnimation != null)
+            {
+                PlayDeathAnimation();
+            }
+            else Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead");
         }
     }
 
@@ -522,6 +559,21 @@ public class Character : MonoBehaviour
         dropItem();
         //Destroy(this.gameObject);
         this.gameObject.SetActive(false);
+    }
+
+    public void DestroyItCompletely()
+    {
+        Destroy(this.gameObject);
+    }
+
+    public void PlayDeathAnimation()
+    {
+        if (this.activeDeathAnimation == null)
+        {
+            DeathAnimation deathObject = Instantiate(this.deathAnimation, this.transform.position, Quaternion.identity);
+            deathObject.setCharacter(this);
+            this.activeDeathAnimation = deathObject;
+        }
     }
 
     public void updateResource(ResourceType type, Item item, float addResource)
@@ -567,7 +619,7 @@ public class Character : MonoBehaviour
                     if (item != null)
                     {
                         Utilities.Items.updateInventory(item, this, Mathf.RoundToInt(value));
-                        if (raiseResourceSignal) callSignal(this.currencies, value); 
+                        if (raiseResourceSignal) callSignal(this.currencies, value);
                     }
                     break;
                 }
@@ -758,7 +810,7 @@ public class Character : MonoBehaviour
 
     public void gotHit(StandardSkill skill, float percentage)
     {
-        if (!this.isInvincible || skill.ignoreInvincibility)
+        if ((!this.isInvincible && !this.isImmortal) || skill.ignoreInvincibility)
         {
             //Status Effekt hinzufügen
             if (skill.statusEffects != null)
@@ -800,7 +852,10 @@ public class Character : MonoBehaviour
         gotHit(skill, 100);
     }
 
-
+    public void setImmortal(float duration)
+    {
+        StartCoroutine(immortalCo(duration));
+    }
 
 
     public void knockBack(float knockTime, float thrust, Vector2 direction)
@@ -841,6 +896,13 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(this.cannotBeHitTime);
         this.resetColor(this.hitColor);
         this.isInvincible = false;
+    }
+
+    private IEnumerator immortalCo(float duration)
+    {
+        this.isImmortal = true;
+        yield return new WaitForSeconds(this.cannotBeHitTime);
+        this.isImmortal = false;
     }
 
     private IEnumerator knockCo(float knockTime)

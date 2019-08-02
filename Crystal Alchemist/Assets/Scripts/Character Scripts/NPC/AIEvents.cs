@@ -15,6 +15,7 @@ public enum AIActionType
     skill,
     sequence,
     transition, 
+    immortal,
     kill
 }
 
@@ -88,10 +89,10 @@ public class AIAction
     [HideLabel]
     public AIActionType type;
 
-    [ShowIf("type", AIActionType.kill)]
+    [ShowIf("type", AIActionType.immortal)]
     [VerticalGroup("Properties")]
-    [LabelWidth(120)]
-    public bool killItCompletely;
+    [LabelWidth(100)]
+    public bool isImmortal;
 
     [ShowIf("type", AIActionType.move)]
     [TableColumnWidth(150)]
@@ -110,6 +111,7 @@ public class AIAction
     public string en;
 
     [ShowIf("type", AIActionType.dialog)]
+    [ShowIf("type", AIActionType.immortal)]
     [VerticalGroup("Type")]
     [LabelWidth(75)]
     public float duration = 4f;
@@ -205,6 +207,10 @@ public class AIEvents : MonoBehaviour
     private MiniDialogBox box;
 
     [SerializeField]
+    [BoxGroup("Required")]
+    private bool startImmediately = false;
+
+    [SerializeField]
     private List<AIAction> initialActions = new List<AIAction>();
 
     [SerializeField]
@@ -246,7 +252,15 @@ public class AIEvents : MonoBehaviour
 
         foreach(AIAction action in this.initialActions)
         {
-            if (action.type != AIActionType.dialog) useAction(action);
+            if (action.type != AIActionType.dialog)
+            {
+                if (action.skillinstance == null && action.skill != null)
+                {
+                    action.skillinstance = Utilities.Skill.setSkill(this.enemy, action.skill);
+                    action.skillinstance.showingIndicator = true;
+                    useAction(action);
+                }                
+            }
             else showDialog(action);
         }
 
@@ -282,6 +296,8 @@ public class AIEvents : MonoBehaviour
             this.startAIAttacking = false;
             resetAllEvents();
         }
+
+        if (this.startImmediately) this.startAIAttacking = true;
     }
 
     private IEnumerator stopCo(float duration)
@@ -460,7 +476,7 @@ public class AIEvents : MonoBehaviour
 
             if (isTriggered(this.events[i]))
             {
-                Debug.Log("TRIGGERED!");
+                //Debug.Log("TRIGGERED!");
 
                 clearAction();
                 if (this.actionsIndex > 0) this.actionsIndex -= 1;
@@ -488,7 +504,7 @@ public class AIEvents : MonoBehaviour
         int success = 0;
 
         if (elem.isActive 
-            && (elem.affectedPhases.Contains(this.activePhase.phaseName)
+            && ((this.activePhase != null && elem.affectedPhases.Contains(this.activePhase.phaseName))
                 || elem.affectedPhases.Count == 0))
         {
             foreach (AITrigger triggerElem in elem.trigger)
@@ -653,8 +669,12 @@ public class AIEvents : MonoBehaviour
         else if (action.type == AIActionType.kill)
         {
             //suicide
-            if(action.killItCompletely) this.enemy.KillItCompletely();
-            else this.enemy.KillIt();
+            this.enemy.KillIt();
+        }
+        else if (action.type == AIActionType.immortal)
+        {
+            //suicide
+            this.enemy.setImmortal(action.duration);
         }
 
         if (actionUsed)

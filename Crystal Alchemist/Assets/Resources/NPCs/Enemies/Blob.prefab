@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 439064309}
   - component: {fileID: 439064310}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 929082024}
   - component: {fileID: 929082027}
   - component: {fileID: 929082028}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1158493753}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: activeSkills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 695891193754114292}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: skillset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 8351946423556740917}
   - component: {fileID: 1028641328}
   - component: {fileID: 7129135206912136028}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,14 +341,20 @@ MonoBehaviour:
   activeSkillParent: {fileID: 1158493752}
   activeStatusEffectParent: {fileID: 6674156776865872386}
   skillSetParent: {fileID: 1691123302925716915}
+  startSpriteForRespawn: {fileID: 21300000, guid: bba5f92a22649c6499e4206f67431dc5,
+    type: 3}
+  startSpriteForRespawnWhite: {fileID: -876002081585225699, guid: bba5f92a22649c6499e4206f67431dc5,
+    type: 3}
   startLife: 3
   startMana: 1
   startSpeed: 25
   startSpellSpeed: 100
-  respawnTime: 10
   immunityToStatusEffects: []
   maxLife: 3
   maxMana: 1
+  respawnTime: 10
+  respawnAnimation: {fileID: 1140035694535706356, guid: 815950c2030167244ab889505e154cc8,
+    type: 3}
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
   manaRegeneration: 0
@@ -381,6 +387,7 @@ MonoBehaviour:
   mana: 0
   speed: 0
   isInvincible: 0
+  isImmortal: 0
   isHit: 0
   items: []
   buffs: []
@@ -437,10 +444,10 @@ MonoBehaviour:
   targetActiveClue: {fileID: 7047217433774240400, guid: d0cd9d0d605bdfd44b021afb2046b0b9,
     type: 3}
   activeClueDuration: 2
-  aggroPlayer: 1
-  aggroNPC: 0
-  aggroObject: 0
-  aggroEnemy: 0
+  affectSelf: 0
+  affectOther: 1
+  affectSame: 0
+  affectNeutral: 0
 --- !u!114 &4482648712296496522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,6 +466,7 @@ MonoBehaviour:
   initialActions:
   - type: 3
     killItCompletely: 0
+    isImmortal: 0
     position: {x: 0, y: 0}
     de: 
     en: 
@@ -472,140 +480,8 @@ MonoBehaviour:
     sequence: {fileID: 0}
     gcd: 2.5
     skillinstance: {fileID: 0}
-  phases:
-  - phaseName: Phase 1
-    phaseDescription: Startphase
-    actions:
-    - type: 3
-      killItCompletely: 0
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      nextPhase: 
-      skill: {fileID: 6388236434287011116, guid: 478564dcd28512a4a88aeeac6dcd1b25,
-        type: 3}
-      cast: 2
-      cD: -1
-      amount: 2
-      castGroup: 1
-      sequence: {fileID: 0}
-      gcd: 2.5
-      skillinstance: {fileID: 0}
-    - type: 3
-      killItCompletely: 0
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      nextPhase: 
-      skill: {fileID: 8883430349395961274, guid: 79742653ec493d246bcdef0cbf88e31b,
-        type: 3}
-      cast: 0
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 5
-      skillinstance: {fileID: 0}
-  - phaseName: Enrage
-    phaseDescription: 
-    actions:
-    - type: 3
-      killItCompletely: 0
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      nextPhase: 
-      skill: {fileID: 4500866824247064267, guid: 8a7f78e4a6588ab4289c20b832353307,
-        type: 3}
-      cast: 5
-      cD: -1
-      amount: 10
-      castGroup: 1
-      sequence: {fileID: 0}
-      gcd: 3
-      skillinstance: {fileID: 0}
-    - type: 5
-      killItCompletely: 0
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      nextPhase: Phase 1
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 2.5
-      skillinstance: {fileID: 0}
+  phases: []
   events:
-  - eventName: Enrage-Timer
-    eventDescription: Blob goes enrage
-    trigger:
-    - type: 0
-      time: 12
-      life: 75
-      collider: []
-    - type: 1
-      time: 0
-      life: 25
-      collider: []
-    actions:
-    - type: 1
-      killItCompletely: 0
-      position: {x: 0, y: 0}
-      de: "Friss meine geschmolzene Schei\xDFe!"
-      en: TAKE THIS!
-      duration: 2
-      nextPhase: 
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 2
-      skillinstance: {fileID: 0}
-    - type: 2
-      killItCompletely: 0
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      nextPhase: 
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 3
-      skillinstance: {fileID: 0}
-    - type: 5
-      killItCompletely: 0
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      nextPhase: Enrage
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 2.5
-      skillinstance: {fileID: 0}
-    affectedPhases:
-    - Phase 1
-    repeatEvent: 1
-    requireAll: 0
-    startTime: 0
-    isActive: 1
   - eventName: Startup
     eventDescription: 
     trigger:
@@ -616,6 +492,7 @@ MonoBehaviour:
     actions:
     - type: 1
       killItCompletely: 0
+      isImmortal: 0
       position: {x: 0, y: 0}
       de: Hmmm... lecker!
       en: Yummy!
@@ -696,7 +573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7788126183368172930}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: activeStatusEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}

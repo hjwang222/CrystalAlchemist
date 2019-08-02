@@ -338,23 +338,15 @@ public class StandardSkill : MonoBehaviour
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("wirkt auf alle Spieler")]
-    public bool affectPlayers = false;
+    public bool affectOther = false;
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("wirkt auf alle Gegner")]
-    public bool affectEnemies = false;
+    public bool affectSame = false;
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("wirkt auf alle Gegner")]
-    public bool affectNPCs = false;
-
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
-    [Tooltip("wirkt auf alle Objekte")]
-    public bool affectObjects = false;
-
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
-    [Tooltip("wirkt auf alle Skills")]
-    public bool affectSkills = false;
+    public bool affectNeutral = false;
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("Unverwundbarkeit ignorieren (z.B. für Heals)?")]

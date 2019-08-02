@@ -12,6 +12,11 @@ public class HelperScript : MonoBehaviour
         character.DestroyIt();
     }
 
+    public void DestroyItCompletely()
+    {
+        character.DestroyItCompletely();
+    }
+
     public void PlayDeathSoundEffect()
     {
         character.PlayDeathSoundEffect();

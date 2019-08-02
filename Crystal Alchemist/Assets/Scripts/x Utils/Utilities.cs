@@ -175,13 +175,16 @@ public class Utilities : MonoBehaviour
             return true;
         }
 
-        public static bool checkAffections(bool affectPlayers, bool affectEnemies, bool affectObjects, bool affectNPCs, Collider2D hittedCharacter)
+        public static bool checkAffections(Character character, bool affectOther, bool affectSame, bool affectNeutral, Collider2D hittedCharacter)
         {
             if(!hittedCharacter.isTrigger 
-           && (affectPlayers && hittedCharacter.CompareTag("Player")
-            || affectEnemies && hittedCharacter.CompareTag("Enemy")
-            || affectNPCs && hittedCharacter.CompareTag("NPC")
-            || affectObjects && (hittedCharacter.CompareTag("Object")))) return true;
+           && (
+               (affectOther && (character.CompareTag("Player") || character.CompareTag("NPC")) && hittedCharacter.CompareTag("Enemy"))
+            || (affectOther && (character.CompareTag("Enemy") && (hittedCharacter.CompareTag("Player") || hittedCharacter.CompareTag("NPC"))))
+            || (affectSame && (character.CompareTag("Player") == hittedCharacter.CompareTag("Player") || character.CompareTag("Player") == hittedCharacter.CompareTag("NPC")))
+            || (affectSame && (character.CompareTag("NPC") == hittedCharacter.CompareTag("NPC") || character.CompareTag("NPC") == hittedCharacter.CompareTag("Player")))
+            || (affectSame && (character.CompareTag("Enemy") == hittedCharacter.CompareTag("Enemy")))
+            || (affectNeutral && hittedCharacter.CompareTag("Object")))) return true;
 
             return false;
         }
@@ -197,15 +200,16 @@ public class Utilities : MonoBehaviour
                 }
                 else
                 {
-                    if (skill.affectSkills
+                    /*if (skill.affectSkills
                         && hittedCharacter.CompareTag("Skill")
                         && hittedCharacter.GetComponent<StandardSkill>().skillName != skill.skillName)
                     {
                         return true;
                     }
-                    else if (!hittedCharacter.isTrigger)
+                    else*/ 
+                    if (!hittedCharacter.isTrigger)
                     {
-                        if (checkAffections(skill.affectPlayers, skill.affectEnemies, skill.affectObjects, skill.affectNPCs, hittedCharacter))
+                        if (checkAffections(skill.sender, skill.affectOther, skill.affectSame, skill.affectNeutral, hittedCharacter))
                         {
                             return true;
                         }

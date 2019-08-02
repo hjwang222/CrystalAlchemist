@@ -113,11 +113,9 @@ MonoBehaviour:
   multiHitDelay: 0
   showRange: 0
   affectSelf: 0
-  affectPlayers: 0
-  affectEnemies: 1
-  affectNPCs: 0
-  affectObjects: 1
-  affectSkills: 0
+  affectOther: 1
+  affectSame: 0
+  affectNeutral: 1
   ignoreInvincibility: 0
   stateType: 0
   doCastDuringDelay: 0
@@ -154,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghost: {fileID: 634257569416937404, guid: f11b09210e7962848bddb256727f4657, type: 3}
-  skill: {fileID: 8104124904149976495}
+  mainObject: {fileID: 4607741441608745160}
   delay: 0.1
   destroyAfter: 0.6
   useCharacterSprite: 0
