@@ -60,10 +60,10 @@ MonoBehaviour:
   item: {fileID: 0}
   price: 0
   soundEffect: {fileID: 0}
+  animator: {fileID: 0}
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
-  animator: {fileID: 0}
   audioSource: {fileID: 0}
   spriteRenderer: {fileID: 0}
   context: {fileID: 0}
@@ -322,13 +322,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5438960208231086915, guid: 0053029995641684484b1154763deb53,
         type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 4
+      propertyPath: m_Color.g
+      value: 0.2020163
       objectReference: {fileID: 0}
     - target: {fileID: 5438960208231086915, guid: 0053029995641684484b1154763deb53,
         type: 3}
-      propertyPath: m_Color.g
-      value: 0.2020163
+      propertyPath: m_Color.b
+      value: 0.15566039
+      objectReference: {fileID: 0}
+    - target: {fileID: 5438960208231086915, guid: 0053029995641684484b1154763deb53,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5438960208231086915, guid: 0053029995641684484b1154763deb53,
+        type: 3}
+      propertyPath: m_LightVolumeOpacity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5438960208231086915, guid: 0053029995641684484b1154763deb53,
         type: 3}
@@ -347,13 +357,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5438960208231086915, guid: 0053029995641684484b1154763deb53,
         type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5438960208231086915, guid: 0053029995641684484b1154763deb53,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.15566039
+      propertyPath: m_PointLightInnerRadius
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0053029995641684484b1154763deb53, type: 3}

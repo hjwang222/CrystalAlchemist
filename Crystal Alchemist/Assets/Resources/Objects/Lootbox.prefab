@@ -473,10 +473,10 @@ MonoBehaviour:
   item: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659, type: 3}
   price: 1
   soundEffect: {fileID: 8300000, guid: 4f7be5fca72aed945b5adc95e382a719, type: 3}
+  animator: {fileID: 4617041708320505071}
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
-  animator: {fileID: 4617041708320505071}
   audioSource: {fileID: 0}
   spriteRenderer: {fileID: 0}
   context: {fileID: 0}
@@ -728,13 +728,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 2
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
-      propertyPath: m_Color.r
-      value: 1
+      propertyPath: m_Color.g
+      value: 0.96657705
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
@@ -743,8 +743,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
-      propertyPath: m_Color.g
-      value: 0.96657705
+      propertyPath: m_Intensity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_LightVolumeOpacity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a4137c3904df94aa0b798edf1c5d6b, type: 3}

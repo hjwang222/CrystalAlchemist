@@ -19,7 +19,6 @@ public class AI : Character
     private void Start()
     {
         init();
-
         this.target = null;
         Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWakeUp", true);
     }
