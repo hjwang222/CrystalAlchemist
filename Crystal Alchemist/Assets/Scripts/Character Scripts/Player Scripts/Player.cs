@@ -258,7 +258,7 @@ public class Player : Character
                  && this.currentState != CharacterState.inMenu
                  && !Utilities.StatusEffectUtil.isCharacterStunned(this))
             {
-                int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.activeSkills);
+                int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.activeSkills, this.activePets);
 
                 if (currentAmountOfSameSkills < skill.maxAmounts
                         && (this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0

@@ -14,6 +14,7 @@ public class TimeHandler : MonoBehaviour
 
         Utilities.Format.getStartTime(this.timeValue.factor, out hour, out minute);
         this.timeValue.setTime(minute, hour);
+        this.timeValue.factor = this.timeValue.normalFactor;
     }
 
     // Update is called once per frame

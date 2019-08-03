@@ -139,7 +139,7 @@ public class CombatButtons : MonoBehaviour
                 this.player.currentState == CharacterState.knockedback ||
                 this.player.currentState == CharacterState.inDialog ||
                 (player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite)
-                || Utilities.Skill.getAmountOfSameSkills(skill, player.activeSkills) >= skill.maxAmounts
+                || Utilities.Skill.getAmountOfSameSkills(skill, player.activeSkills, player.activePets) >= skill.maxAmounts
                 || cooldownLeft == Utilities.maxFloatInfinite)
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)

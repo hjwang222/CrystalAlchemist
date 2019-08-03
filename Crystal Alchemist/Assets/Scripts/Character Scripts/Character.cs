@@ -72,23 +72,25 @@ public class Character : MonoBehaviour
 
     [BoxGroup("Pflichtfelder")]
     [Required]
-    public GameObject activeSkillParent;
-
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    public GameObject activeStatusEffectParent;
-
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    public GameObject skillSetParent;
-
-    [BoxGroup("Pflichtfelder")]
-    [Required]
     public Sprite startSpriteForRespawn;
 
     [BoxGroup("Pflichtfelder")]
     [Required]
     public Sprite startSpriteForRespawnWhite;
+
+    [BoxGroup("Easy Access")]
+    [Required]
+    public GameObject activeSkillParent;
+
+    [BoxGroup("Easy Access")]
+    [Required]
+    public GameObject activeStatusEffectParent;
+
+    [BoxGroup("Easy Access")]
+    [Required]
+    public GameObject skillSetParent;
+
+
 
     ////////////////////////////////////////////////////////////////
 
@@ -309,6 +311,8 @@ public class Character : MonoBehaviour
     public bool isPlayer = false;
     [HideInInspector]
     public List<Item> inventory = new List<Item>();
+    [HideInInspector]
+    public List<Character> activePets = new List<Character>();
     #endregion
 
 
@@ -409,11 +413,10 @@ public class Character : MonoBehaviour
     public void ActivateCharacter()
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
-        this.setSkills(true);
         Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
 
         AIEvents eventAI = this.GetComponent<AIEvents>();
-        if (eventAI != null) eventAI.resetAllEvents();
+        if (eventAI != null) eventAI.init();
     }
     #endregion
 
@@ -493,21 +496,13 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void setSkills(bool active)
-    {
-        foreach (StandardSkill skill in this.activeSkills)
-        {
-            skill.gameObject.SetActive(active);
-        }
-    }
-
     private void destroySkills()
     {
         //TODO: Exception
-       /* foreach (StandardSkill skill in this.activeSkills)
+        foreach (StandardSkill skill in this.activeSkills)
         {
-            skill.DestroyIt(1f);
-        }*/
+            skill.durationTimeLeft = 0;
+        }
 
         this.activeSkills.Clear();
     }
@@ -526,7 +521,6 @@ public class Character : MonoBehaviour
             Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
                        
             this.spriteRenderer.color = Color.white;
-            setSkills(false);
 
             AIAggroSystem aggro = this.GetComponent<AIAggroSystem>();
             if (aggro != null) aggro.clearAggro();

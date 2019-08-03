@@ -501,14 +501,15 @@ MonoBehaviour:
   enemy: {fileID: 1938021464261085658}
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   box: {fileID: 5104834203016797782, guid: 4828c807745ed894ea715e12180742d8, type: 3}
+  startImmediately: 1
   initialActions:
   - type: 1
-    killItCompletely: 0
     isImmortal: 0
     position: {x: 0, y: 0}
     de: "F\xFCrchte nicht die Dunkelheit."
     en: Dont fear the darkness.
     duration: 4
+    dauer: 4
     nextPhase: 
     skill: {fileID: 0}
     cast: -1
@@ -524,17 +525,33 @@ MonoBehaviour:
     eventDescription: 
     trigger:
     - type: 0
-      time: 30
+      time: 60
       life: 0
       collider: []
     actions:
+    - type: 1
+      isImmortal: 0
+      position: {x: 0, y: 0}
+      de: Machs gut!
+      en: Bye bye!
+      duration: 4
+      dauer: 4
+      nextPhase: 
+      skill: {fileID: 0}
+      cast: -1
+      cD: -1
+      amount: 0
+      castGroup: 0
+      sequence: {fileID: 0}
+      gcd: 0
+      skillinstance: {fileID: 0}
     - type: 7
-      killItCompletely: 1
       isImmortal: 0
       position: {x: 0, y: 0}
       de: 
       en: 
       duration: 4
+      dauer: 4
       nextPhase: 
       skill: {fileID: 0}
       cast: -1
@@ -574,8 +591,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghost: {fileID: 634257569416937404, guid: f11b09210e7962848bddb256727f4657, type: 3}
   mainObject: {fileID: 2652810396879462133}
-  delay: 0.25
-  destroyAfter: 0.5
+  delay: 0.3
+  destroyAfter: 0.6
   useCharacterSprite: 0
 --- !u!1 &4624666807855673779
 GameObject:

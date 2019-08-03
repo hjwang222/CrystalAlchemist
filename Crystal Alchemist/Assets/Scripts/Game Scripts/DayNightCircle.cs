@@ -15,15 +15,14 @@ public class DayNightCircle : MonoBehaviour
 
     private void Start()
     {
-        this.light.color = this.timeValue.GetColor();
+        this.light.color = this.timeValue.GetColor();        
     }
 
     public void changeColor()
     {
         Color newColor = this.timeValue.GetColor();
         float duration = this.timeValue.factor * (this.timeValue.update-1);
-        if(newColor != light.color && !this.isRunning) StartCoroutine(lerpColor(light, light.color, newColor, duration));
-        if (newColor != light.color && this.isRunning) Debug.Log("Is Running");
+        if (newColor != light.color && !this.isRunning) StartCoroutine(lerpColor(light, light.color, newColor, duration));
     }
 
     IEnumerator lerpColor(Light2D light, Color fromColor, Color toColor, float duration)

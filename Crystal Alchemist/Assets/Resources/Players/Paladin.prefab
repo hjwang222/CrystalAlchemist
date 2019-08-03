@@ -88,6 +88,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 2974922927713060803}
   boxCollider: {fileID: 5650224180514046960}
   shadowRenderer: {fileID: 7098998326650301281}
+  startSpriteForRespawn: {fileID: 0}
+  startSpriteForRespawnWhite: {fileID: 0}
   activeSkillParent: {fileID: 8638893490402070047}
   activeStatusEffectParent: {fileID: 1487360461578692118}
   skillSetParent: {fileID: 242878290860008501}
@@ -95,10 +97,12 @@ MonoBehaviour:
   startMana: 4
   startSpeed: 100
   startSpellSpeed: 100
-  respawnTime: 30
   immunityToStatusEffects: []
   maxLife: 5
   maxMana: 4
+  respawnTime: 30
+  respawnAnimation: {fileID: 0}
+  deathAnimation: {fileID: 0}
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
   manaRegeneration: 0.25
@@ -134,6 +138,7 @@ MonoBehaviour:
   mana: 0
   speed: 0
   isInvincible: 0
+  isImmortal: 0
   isHit: 0
   items: []
   buffs: []
@@ -145,6 +150,7 @@ MonoBehaviour:
   activeLockOnTarget: {fileID: 0}
   isPlayer: 0
   inventory: []
+  activePets: []
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
   skillSet:
@@ -170,6 +176,7 @@ MonoBehaviour:
   - {fileID: 2626038527925349230, guid: 8191971a062876046ab19f93a98c3268, type: 3}
   - {fileID: 2598273184590481572, guid: 062ebf34934818544859af78b674eb19, type: 3}
   - {fileID: 6121382049002356524, guid: af79dc6e8669ea341b020d34b9391b34, type: 3}
+  - {fileID: 6097060202432798594, guid: 829f95c3bd5d9984793723ed6e29d15d, type: 3}
   dialogBoxSignal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
   healthSignalUI: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
   manaSignalUI: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}

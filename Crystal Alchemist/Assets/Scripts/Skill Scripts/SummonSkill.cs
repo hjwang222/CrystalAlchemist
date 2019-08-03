@@ -31,9 +31,15 @@ public class SummonSkill : StandardSkill
         }
     }
 
+    public string getPetName()
+    {
+        return this.summon.characterName;
+    }
+
     private void summoning()
     {
         AI pet = Instantiate(this.summon, this.transform.position, Quaternion.Euler(0, 0, 0));
         pet.partner = this.sender;
+        this.sender.activePets.Add(pet);
     }
 }

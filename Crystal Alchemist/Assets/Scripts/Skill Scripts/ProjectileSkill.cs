@@ -54,12 +54,10 @@ public class ProjectileSkill : StandardSkill
     private void placeFire(Collider2D hittedCharacter)
     {
         if (this.skillOnImpact != null)
-        {
-            Vector2 hitpoint = hittedCharacter.transform.position;
+        {           
+            //if (!Utilities.Collisions.checkCollision(hittedCharacter, this)) hitpoint = this.transform.position;
 
-            if (!Utilities.Collisions.checkCollision(hittedCharacter, this)) hitpoint = this.transform.position;
-
-            GameObject fire = Instantiate(this.skillOnImpact.gameObject, hitpoint, Quaternion.identity);
+            GameObject fire = Instantiate(this.skillOnImpact.gameObject, this.transform.position, Quaternion.identity);
             //fire.transform.position = hittedCharacter.transform.position;
             StandardSkill fireSkill = fire.GetComponent<StandardSkill>();
 

@@ -131,12 +131,12 @@ public class Utilities : MonoBehaviour
             float distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
             float percentage = 100 - (100 / (saveDistance - deadDistance) * (distance - deadDistance));
 
-            percentage = Mathf.Round(percentage / 25) *25;
+            percentage = Mathf.Round(percentage / 25) * 25;
 
             if (percentage > 100) percentage = 100;
             else if (percentage < 0) percentage = 0;
 
-            return percentage;            
+            return percentage;
         }
 
         public static bool checkBehindObstacle(Character character, GameObject gameObject)
@@ -145,17 +145,17 @@ public class Utilities : MonoBehaviour
             Vector2 targetPosition = new Vector2(character.transform.position.x - (character.direction.x * offset),
                                                      character.transform.position.y - (character.direction.y * offset));
 
-            
+
             if (character.shadowRenderer != null)
             {
                 targetPosition = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset),
                                              character.shadowRenderer.transform.position.y - (character.direction.y * offset));
             }
-            
+
             Vector2 start = gameObject.transform.position;
             Vector2 direction = (targetPosition - start).normalized;
 
-            RaycastHit2D hit = Physics2D.Raycast(start, direction, 100f);            
+            RaycastHit2D hit = Physics2D.Raycast(start, direction, 100f);
 
             if (hit && !hit.collider.isTrigger)
             {
@@ -177,7 +177,7 @@ public class Utilities : MonoBehaviour
 
         public static bool checkAffections(Character character, bool affectOther, bool affectSame, bool affectNeutral, Collider2D hittedCharacter)
         {
-            if(!hittedCharacter.isTrigger 
+            if (!hittedCharacter.isTrigger
            && (
                (affectOther && (character.CompareTag("Player") || character.CompareTag("NPC")) && hittedCharacter.CompareTag("Enemy"))
             || (affectOther && (character.CompareTag("Enemy") && (hittedCharacter.CompareTag("Player") || hittedCharacter.CompareTag("NPC"))))
@@ -206,7 +206,7 @@ public class Utilities : MonoBehaviour
                     {
                         return true;
                     }
-                    else*/ 
+                    else*/
                     if (!hittedCharacter.isTrigger)
                     {
                         if (checkAffections(skill.sender, skill.affectOther, skill.affectSame, skill.affectNeutral, hittedCharacter))
@@ -241,7 +241,7 @@ public class Utilities : MonoBehaviour
 
         public static bool checkIfGameObjectIsViewed(Character character, GameObject gameObject)
         {
-            return checkIfGameObjectIsViewed(character, gameObject, 0.5f);
+            return checkIfGameObjectIsViewed(character, gameObject, 1f);
         }
 
         public static bool checkIfGameObjectIsViewed(Character character, GameObject gameObject, float distance)
@@ -252,26 +252,25 @@ public class Utilities : MonoBehaviour
                 return false;
             }
 
-            int layerMask = 9; //Map
             float width = 0.2f;
             float offset = 0.1f;
 
             Vector2 position = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset),
                                            character.shadowRenderer.transform.position.y - (character.direction.y * offset));
 
-            RaycastHit2D hit = Physics2D.CircleCast(position, width, character.direction, distance, layerMask);
+            RaycastHit2D hit = Physics2D.CircleCast(position, width, character.direction, distance);
 
             if (hit != false && !hit.collider.isTrigger && hit.collider.gameObject == gameObject) return true;
 
             return false;
         }
 
-        
-     }
- 
-     
- 
-    
+
+    }
+
+
+
+
 
     ///////////////////////////////////////////////////////////////
 
@@ -717,13 +716,13 @@ public class Utilities : MonoBehaviour
                 if (outlineWidth > 0) tmp.outlineWidth = outlineWidth;
             }
         }
-        
+
         public static void getStartTime(float factor, out int hour, out int minute)
         {
             DateTime origin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0);
             TimeSpan diff = DateTime.Now - origin;
             double difference = Math.Floor(diff.TotalSeconds);
-            float minutes = (float)(difference * (double)factor); //elapsed ingame minutes
+            float minutes = (float)(difference / (double)factor); //elapsed ingame minutes
             float fhour = ((minutes / 60f) % 24f);
             float fminute = (minutes % 60f);
 
@@ -780,14 +779,30 @@ public class Utilities : MonoBehaviour
 
     public static class Skill
     {
-        public static int getAmountOfSameSkills(StandardSkill skill, List<StandardSkill> activeSkills)
+        public static int getAmountOfSameSkills(StandardSkill skill, List<StandardSkill> activeSkills, List<Character> activePets)
         {
             int result = 0;
 
-            for (int i = 0; i < activeSkills.Count; i++)
+            SummonSkill summonSkill = skill.GetComponent<SummonSkill>();
+
+            if (summonSkill == null)
             {
-                StandardSkill activeSkill = activeSkills[i];
-                if (activeSkill.skillName == skill.skillName) result++;
+                for (int i = 0; i < activeSkills.Count; i++)
+                {
+                    StandardSkill activeSkill = activeSkills[i];
+                    if (activeSkill.skillName == skill.skillName) result++;
+                }
+            }
+            else
+            {
+
+                for (int i = 0; i < activePets.Count; i++)
+                {
+                    if (activePets[i] != null && activePets[i].characterName == summonSkill.getPetName())
+                    {
+                        result++;
+                    }
+                }
             }
 
             return result;

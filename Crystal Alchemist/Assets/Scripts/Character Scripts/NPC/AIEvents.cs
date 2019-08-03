@@ -111,10 +111,14 @@ public class AIAction
     public string en;
 
     [ShowIf("type", AIActionType.dialog)]
-    [ShowIf("type", AIActionType.immortal)]
     [VerticalGroup("Type")]
     [LabelWidth(75)]
     public float duration = 4f;
+
+    [ShowIf("type", AIActionType.immortal)]
+    [VerticalGroup("Type")]
+    [LabelWidth(75)]
+    public float dauer = 4f;
 
     [ShowIf("type", AIActionType.transition)]
     [VerticalGroup("Properties")]
@@ -222,14 +226,14 @@ public class AIEvents : MonoBehaviour
     private AIAction activeAction;
     private AIPhase activePhase;
 
-    private List<AIAction> activeEvens = new List<AIAction>();
+    private List<AIAction> activeEvents = new List<AIAction>();
 
     private AIAction activeDialogAction;
     private List<AIAction> activeDialogs = new List<AIAction>();
 
     private float timeElapsed;
 
-    private bool startAIAttacking = false;
+    private bool AIstarted = false;
     private int actionsIndex = 0;
     private int eventIndex = 0;
     private int dialogIndex = 0;
@@ -248,18 +252,24 @@ public class AIEvents : MonoBehaviour
 
     private void Start()
     {
+        init();
+    }
+
+    public void init()
+    {
         resetAllEvents();
 
-        foreach(AIAction action in this.initialActions)
+        foreach (AIAction action in this.initialActions)
         {
             if (action.type != AIActionType.dialog)
-            {
+            {                
                 if (action.skillinstance == null && action.skill != null)
                 {
                     action.skillinstance = Utilities.Skill.setSkill(this.enemy, action.skill);
-                    action.skillinstance.showingIndicator = true;
-                    useAction(action);
-                }                
+                    action.skillinstance.showingIndicator = true;                    
+                }
+
+                useAction(action);
             }
             else showDialog(action);
         }
@@ -274,10 +284,10 @@ public class AIEvents : MonoBehaviour
     {
         checkStart();
 
-        if((this.enemy.characterType == CharacterType.Enemy && this.startAIAttacking)
+        if((this.enemy.characterType == CharacterType.Enemy && this.AIstarted)
             || this.enemy.characterType == CharacterType.NPC) handleDialogs();
 
-        if (this.startAIAttacking)
+        if (this.AIstarted || this.startImmediately)
         {
             if (this.activeAction != null 
                 && this.activeAction.skillinstance == null 
@@ -290,14 +300,12 @@ public class AIEvents : MonoBehaviour
 
     private void checkStart()
     {
-        if (enemy.target != null) this.startAIAttacking = true;
-        else
+        if (this.enemy.target != null) this.AIstarted = true;
+        else if (this.AIstarted && this.enemy.target == null)
         { 
-            this.startAIAttacking = false;
+            this.AIstarted = false;
             resetAllEvents();
         }
-
-        if (this.startImmediately) this.startAIAttacking = true;
     }
 
     private IEnumerator stopCo(float duration)
@@ -420,10 +428,10 @@ public class AIEvents : MonoBehaviour
         {
             this.globalCoolDown = 0;
 
-            if (this.activeEvens.Count > 0)
+            if (this.activeEvents.Count > 0)
             {
                 //Do events
-                this.eventIndex = setNextActionToDo(this.activeEvens, this.eventIndex, true);
+                this.eventIndex = setNextActionToDo(this.activeEvents, this.eventIndex, true);
             }
             else if (this.activePhase != null
                 && this.activePhase.actions != null
@@ -449,7 +457,7 @@ public class AIEvents : MonoBehaviour
         foreach (AIAction action in actions)
         {
             if (action.type == AIActionType.dialog) this.activeDialogs.Add(action);
-            else this.activeEvens.Add(action);
+            else this.activeEvents.Add(action);
         }
     }
 
@@ -535,7 +543,7 @@ public class AIEvents : MonoBehaviour
     public void resetAllEvents()
     {
         if(this.phases.Count > 0) this.activePhase = this.phases[0];
-        this.startAIAttacking = false;
+        this.AIstarted = false;
 
         clearAction();
 
@@ -603,7 +611,7 @@ public class AIEvents : MonoBehaviour
             }
             else 
             {
-                int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.enemy.activeSkills);
+                int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.enemy.activeSkills, this.enemy.activePets);
 
                 if (currentAmountOfSameSkills < skill.maxAmounts)
                 {
@@ -674,7 +682,7 @@ public class AIEvents : MonoBehaviour
         else if (action.type == AIActionType.immortal)
         {
             //suicide
-            this.enemy.setImmortal(action.duration);
+            this.enemy.setImmortal(action.dauer);
         }
 
         if (actionUsed)

@@ -122,11 +122,11 @@ MonoBehaviour:
   cooldownAfterCombo: 0
   durationCombo: 0
   affectedResources:
-  - resourceType: 0
+  - resourceType: 1
     item: {fileID: 0}
-    amount: 0
+    amount: -1
   statusEffects: []
-  thrust: 0
+  thrust: 4
   knockbackTime: 0.2
   resourceType: 2
   item: {fileID: 0}
@@ -159,12 +159,10 @@ MonoBehaviour:
   targetingDuration: 0
   multiHitDelay: 0
   showRange: 0
-  affectSelf: 0
-  affectPlayers: 1
-  affectEnemies: 1
-  affectNPCs: 0
-  affectObjects: 1
-  affectSkills: 0
+  affectSelf: 1
+  affectOther: 1
+  affectSame: 1
+  affectNeutral: 1
   ignoreInvincibility: 0
   stateType: 0
   doCastDuringDelay: 0
