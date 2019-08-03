@@ -13,6 +13,8 @@ public class BoomerangSkill : StandardSkill
     [SerializeField]
     private float minDistance = 0.1f;
     private Item moveItem;
+    private bool speedup = true;
+    private Vector2 tempVelocity;
     #endregion
 
 
@@ -26,6 +28,7 @@ public class BoomerangSkill : StandardSkill
     public override void doOnUpdate()
     {
         base.doOnUpdate();
+        if (this.delayTimeLeft <= 0) setVelocity();
 
         if (this.durationThenBackToSender > 0)
         {
@@ -35,6 +38,16 @@ public class BoomerangSkill : StandardSkill
         {
             moveBackToSender();
         }        
+    }
+
+    private void setVelocity()
+    {
+        if (this.myRigidbody != null && this.speedup)
+        {
+            this.myRigidbody.velocity = this.direction.normalized * this.speed;
+            this.tempVelocity = this.myRigidbody.velocity;
+            this.speedup = false;
+        }
     }
 
     public override void OnTriggerEnter2D(Collider2D hittedCharacter)

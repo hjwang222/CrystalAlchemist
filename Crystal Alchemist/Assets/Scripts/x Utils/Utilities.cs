@@ -200,14 +200,13 @@ public class Utilities : MonoBehaviour
                 }
                 else
                 {
-                    /*if (skill.affectSkills
+                    if (skill.affectSkills
                         && hittedCharacter.CompareTag("Skill")
                         && hittedCharacter.GetComponent<StandardSkill>().skillName != skill.skillName)
                     {
                         return true;
                     }
-                    else*/
-                    if (!hittedCharacter.isTrigger)
+                    else if (!hittedCharacter.isTrigger)
                     {
                         if (checkAffections(skill.sender, skill.affectOther, skill.affectSame, skill.affectNeutral, hittedCharacter))
                         {

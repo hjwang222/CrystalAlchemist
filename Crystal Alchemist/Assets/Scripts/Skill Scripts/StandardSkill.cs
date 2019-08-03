@@ -349,6 +349,10 @@ public class StandardSkill : MonoBehaviour
     public bool affectNeutral = false;
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [Tooltip("wirkt auf alle Skills")]
+    public bool affectSkills = false;
+
+    [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("Unverwundbarkeit ignorieren (z.B. für Heals)?")]
     public bool ignoreInvincibility = false;
 
@@ -496,10 +500,23 @@ public class StandardSkill : MonoBehaviour
             this.sender = this.transform.parent.GetComponent<Character>(); //SET SENDER IF NULL (IMPORTANT!)            
         }
 
+        //setTag(this.gameObject, this.sender.tag);
+
         this.sender.startAttackAnimation(this.animationTriggerName);
 
         if (this.stateType == StateType.attack) this.sender.currentState = CharacterState.attack;
         else if (this.stateType == StateType.defend) this.sender.currentState = CharacterState.defend;
+    }
+
+    private void setTag(GameObject gameobject, string tag)
+    {
+        int childcount = gameobject.transform.childCount;
+        gameobject.tag = tag;
+
+        for(int i = 0; i < childcount; i++)
+        {
+            setTag(gameobject.transform.GetChild(i).gameObject, tag);
+        }
     }
 
     private void updateResourceSender()

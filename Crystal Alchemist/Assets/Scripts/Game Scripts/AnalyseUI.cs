@@ -137,7 +137,7 @@ public class AnalyseUI : MonoBehaviour
         if (this.character.items.Count > 0 && this.character.currentState != CharacterState.dead)
         {
             this.ImageitemPreview.gameObject.SetActive(true);
-            this.ImageitemPreview.sprite = this.character.items[0].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+            this.ImageitemPreview.sprite = this.character.items[0].itemSprite;
         }
     }
 
@@ -151,7 +151,7 @@ public class AnalyseUI : MonoBehaviour
             if (interactable.items.Count > 0 && this.interactable.currentState != objectState.opened)
             {
                 this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = interactable.items[0].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+                this.ImageObjectitemPreview.sprite = interactable.items[0].itemSprite;
             }            
         }
         else if (this.character != null)
@@ -160,7 +160,7 @@ public class AnalyseUI : MonoBehaviour
             if (this.character.items.Count > 0 && this.character.currentState != CharacterState.dead)
             {
                 this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = this.character.items[0].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+                this.ImageObjectitemPreview.sprite = this.character.items[0].itemSprite;
             }            
         }
     }

@@ -23,6 +23,10 @@ public class Item : MonoBehaviour
     [BoxGroup("Pflichtfeld")]
     private SpriteRenderer shadowRenderer;
 
+    [Required]
+    [BoxGroup("Pflichtfeld")]
+    public Sprite itemSprite;
+
     [FoldoutGroup("Item Texts", expanded: false)]
     [SerializeField]
     public string itemName;
