@@ -84,7 +84,11 @@ public class LaserSkill : StandardSkill
             if (this.target != null)
             {
                 //Übernehme Position, wenn ein Ziel vorhanden ist
-                hitted = target.GetComponent<Collider2D>();
+                foreach(Collider2D collider in target.GetComponentsInChildren<Collider2D>(false))
+                {
+                    if (!collider.isTrigger) hitted = collider;
+                }
+
                 hitpoint = target.transform.position;
             }
 

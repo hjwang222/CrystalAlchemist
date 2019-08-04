@@ -737,6 +737,7 @@ public class StandardSkill : MonoBehaviour
 
     public void PlaySoundEffectOnce(AudioClip audioClip)
     {
+        if (this.audioSource == null) this.audioSource = this.gameObject.AddComponent<AudioSource>();
         if (!this.dontPlayAudio) Utilities.Audio.playSoundEffect(this.audioSource, audioClip);
         this.dontPlayAudio = true;
     }

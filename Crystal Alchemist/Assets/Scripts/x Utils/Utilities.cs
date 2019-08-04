@@ -189,6 +189,22 @@ public class Utilities : MonoBehaviour
             return false;
         }
 
+        private static bool skillAffected(Collider2D hittedCharacter, StandardSkill skill)
+        {
+            StandardSkill tempSkill = Skill.getSkillByCollision(hittedCharacter.gameObject);
+
+            if (tempSkill != null)
+            {
+                if (skill.affectSkills
+                && tempSkill.CompareTag("Skill")
+                && tempSkill.skillName != skill.skillName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public static bool checkCollision(Collider2D hittedCharacter, StandardSkill skill)
         {
             if (skill != null && skill.triggerIsActive)
@@ -200,9 +216,7 @@ public class Utilities : MonoBehaviour
                 }
                 else
                 {
-                    if (skill.affectSkills
-                        && hittedCharacter.CompareTag("Skill")
-                        && hittedCharacter.GetComponent<StandardSkill>().skillName != skill.skillName)
+                    if (skillAffected(hittedCharacter, skill))
                     {
                         return true;
                     }
@@ -883,6 +897,11 @@ public class Utilities : MonoBehaviour
             }
 
             return null;
+        }
+
+        public static StandardSkill getSkillByCollision(GameObject collision)
+        {
+            return collision.GetComponentInParent<StandardSkill>();
         }
 
         public static void updateSkillset(StandardSkill skill, Player player)

@@ -13,6 +13,7 @@ public class GlobalValues : MonoBehaviour
     public static float soundEffectVolume = 1f;
     public static float soundEffectPitch = 1f;
     public static float backgroundMusicVolume = 0.3f;
+    public static float backgroundMusicPitch = 1f;
 
     public static LayoutType layoutType = LayoutType.gamepad;
     public static bool useAlternativeLanguage = false;

@@ -3722,6 +3722,7 @@ GameObject:
   - component: {fileID: 7441004188390991391}
   - component: {fileID: 3097423082287932411}
   - component: {fileID: 7176443204082346253}
+  - component: {fileID: 8683884234883870453}
   m_Layer: 5
   m_Name: Coin Slot
   m_TagString: Untagged
@@ -3797,7 +3798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: b6a3b64d4c9fbc94e89adfd0ed648204, type: 2}
+  signal: {fileID: 11400000, guid: 78e6c135226315747a40750b0044ccd8, type: 2}
   signalEvent:
     m_PersistentCalls:
       m_Calls:
@@ -3814,6 +3815,34 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &8683884234883870453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750171112737849210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51f101f038526c4a99f5ca5f31c9ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 7d300550d3b6045409213221ce4fb6d3, type: 2}
+  signalEventBool:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3097423082287932411}
+        m_MethodName: updateSound
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Single2, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &755390245504271317
 GameObject:
   m_ObjectHideFlags: 0
@@ -17329,6 +17358,7 @@ GameObject:
   - component: {fileID: 7874774623755355470}
   - component: {fileID: 8593034663922176930}
   - component: {fileID: 1611852612655107161}
+  - component: {fileID: 1572614247210461212}
   m_Layer: 5
   m_Name: Key Slot
   m_TagString: Untagged
@@ -17404,7 +17434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: b6a3b64d4c9fbc94e89adfd0ed648204, type: 2}
+  signal: {fileID: 11400000, guid: 78e6c135226315747a40750b0044ccd8, type: 2}
   signalEvent:
     m_PersistentCalls:
       m_Calls:
@@ -17421,6 +17451,34 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1572614247210461212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3974312489190644066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51f101f038526c4a99f5ca5f31c9ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 7d300550d3b6045409213221ce4fb6d3, type: 2}
+  signalEventBool:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8593034663922176930}
+        m_MethodName: updateSound
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Single2, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &4011664259335117255
 GameObject:
   m_ObjectHideFlags: 0
@@ -29346,6 +29404,7 @@ GameObject:
   - component: {fileID: 6134547959126909359}
   - component: {fileID: 8310762505222753225}
   - component: {fileID: 7220228895034193707}
+  - component: {fileID: 1486240225020294980}
   m_Layer: 5
   m_Name: Key Slot
   m_TagString: Untagged
@@ -29421,7 +29480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: b6a3b64d4c9fbc94e89adfd0ed648204, type: 2}
+  signal: {fileID: 11400000, guid: 78e6c135226315747a40750b0044ccd8, type: 2}
   signalEvent:
     m_PersistentCalls:
       m_Calls:
@@ -29438,6 +29497,34 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1486240225020294980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5995305968342258834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51f101f038526c4a99f5ca5f31c9ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 7d300550d3b6045409213221ce4fb6d3, type: 2}
+  signalEventBool:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8310762505222753225}
+        m_MethodName: updateSound
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Single2, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &6012986463741863690
 GameObject:
   m_ObjectHideFlags: 0
@@ -35252,6 +35339,7 @@ GameObject:
   - component: {fileID: 3587206604678865464}
   - component: {fileID: 1141964972359757376}
   - component: {fileID: 2732323389205146972}
+  - component: {fileID: 5122607069433211212}
   m_Layer: 5
   m_Name: Crystal Slot
   m_TagString: Untagged
@@ -35327,7 +35415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: b6a3b64d4c9fbc94e89adfd0ed648204, type: 2}
+  signal: {fileID: 11400000, guid: 78e6c135226315747a40750b0044ccd8, type: 2}
   signalEvent:
     m_PersistentCalls:
       m_Calls:
@@ -35344,6 +35432,34 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &5122607069433211212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7565006139543293070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51f101f038526c4a99f5ca5f31c9ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 7d300550d3b6045409213221ce4fb6d3, type: 2}
+  signalEventBool:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1141964972359757376}
+        m_MethodName: updateSound
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Single2, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &7590813392979359299
 GameObject:
   m_ObjectHideFlags: 0
@@ -36893,6 +37009,7 @@ GameObject:
   - component: {fileID: 5781476252147249387}
   - component: {fileID: 2071941771004649316}
   - component: {fileID: 2864878319363668764}
+  - component: {fileID: 5770233226355367130}
   m_Layer: 5
   m_Name: Crystal Slot
   m_TagString: Untagged
@@ -36968,7 +37085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: b6a3b64d4c9fbc94e89adfd0ed648204, type: 2}
+  signal: {fileID: 11400000, guid: 78e6c135226315747a40750b0044ccd8, type: 2}
   signalEvent:
     m_PersistentCalls:
       m_Calls:
@@ -36985,6 +37102,34 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &5770233226355367130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7807648017292631567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51f101f038526c4a99f5ca5f31c9ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 7d300550d3b6045409213221ce4fb6d3, type: 2}
+  signalEventBool:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2071941771004649316}
+        m_MethodName: updateSound
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Single2, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &7808347040006175632
 GameObject:
   m_ObjectHideFlags: 0
@@ -38220,6 +38365,7 @@ GameObject:
   - component: {fileID: 4771863221867271979}
   - component: {fileID: 8429335685020541203}
   - component: {fileID: 1485415054681625512}
+  - component: {fileID: 3931715825709339374}
   m_Layer: 5
   m_Name: Coin Slot
   m_TagString: Untagged
@@ -38295,7 +38441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: b6a3b64d4c9fbc94e89adfd0ed648204, type: 2}
+  signal: {fileID: 11400000, guid: 78e6c135226315747a40750b0044ccd8, type: 2}
   signalEvent:
     m_PersistentCalls:
       m_Calls:
@@ -38312,6 +38458,34 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &3931715825709339374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147314594028395231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51f101f038526c4a99f5ca5f31c9ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 7d300550d3b6045409213221ce4fb6d3, type: 2}
+  signalEventBool:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8429335685020541203}
+        m_MethodName: updateSound
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Single2, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &8163155742716571781
 GameObject:
   m_ObjectHideFlags: 0

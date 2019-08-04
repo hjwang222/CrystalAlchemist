@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1866628593189516363}
   - component: {fileID: 8613971535191392423}
   - component: {fileID: 6011491638290907752}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,9 +236,9 @@ GameObject:
   - component: {fileID: 7120161598169946747}
   - component: {fileID: 8945697548278569866}
   - component: {fileID: 6526762562809975763}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Arkaner Impuls
-  m_TagString: Untagged
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -339,6 +339,7 @@ MonoBehaviour:
   affectOther: 1
   affectSame: 0
   affectNeutral: 1
+  affectSkills: 0
   ignoreInvincibility: 0
   stateType: 0
   doCastDuringDelay: 0
@@ -516,6 +517,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2537374611990174651}
     m_Modifications:
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -570,11 +581,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

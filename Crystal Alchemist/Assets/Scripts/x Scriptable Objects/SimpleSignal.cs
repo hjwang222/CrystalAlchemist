@@ -9,9 +9,14 @@ public class SimpleSignal : ScriptableObject
 
     public void Raise()
     {
-        for(int i = listeners.Count-1; i >= 0; i--)
+        List<SignalListener> activelisteners = new List<SignalListener>();
+
+        for (int i = listeners.Count-1; i >= 0; i--)
         {
-            this.listeners[i].OnSignalRaised();
+            if (this.listeners[i] != null)
+            {
+                this.listeners[i].OnSignalRaised();
+            }
         }
     }
 

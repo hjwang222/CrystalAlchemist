@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9065695916760293169}
   - component: {fileID: 507477887828383353}
   - component: {fileID: 4629674684146547449}
-  m_Layer: 10
+  m_Layer: 21
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 2108399200509422104}
   - component: {fileID: 263720471577684969}
   - component: {fileID: 6097060202432798594}
-  m_Layer: 10
+  m_Layer: 21
   m_Name: Zeitsprung
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -328,6 +328,7 @@ MonoBehaviour:
   affectOther: 0
   affectSame: 0
   affectNeutral: 0
+  affectSkills: 0
   ignoreInvincibility: 0
   stateType: 0
   doCastDuringDelay: 0
@@ -351,5 +352,7 @@ MonoBehaviour:
   setPositionAtStart: 1
   setActive: 1
   timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
-  newValue: 0.01
+  newValue: 0.001
   targetColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+  musicPitchSignal: {fileID: 11400000, guid: b59098637cd968a4bb789b38655e3526, type: 2}
+  musicPitch: 0.25

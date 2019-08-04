@@ -358,7 +358,7 @@ public class Character : MonoBehaviour
     }
 
     public void setResourceSignal(SimpleSignal health, SimpleSignal mana,
-                              SimpleSignal currencies)
+                                  SimpleSignal currencies)
     {
         this.healthSignal = health;
         this.manaSignal = mana;
@@ -528,7 +528,8 @@ public class Character : MonoBehaviour
             this.currentState = CharacterState.dead;
 
             if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
-            StartCoroutine(colliderDisable());
+            //StartCoroutine(colliderDisable());
+            if (this.boxCollider != null) this.boxCollider.enabled = false;
             this.shadowRenderer.enabled = false;
 
             destroySkills();
@@ -791,7 +792,11 @@ public class Character : MonoBehaviour
         if (this.canCollectAll || this.canCollect.Contains(item.itemGroup))
         {
             if (playSound) item.playSounds();
-            this.updateResource(true, item.resourceType, item, item.amount);
+
+            bool playRaiseSound = false;
+            if (item.itemGroup == "Kristalle") playRaiseSound = true;
+
+            this.updateResource(playRaiseSound, item.resourceType, item, item.amount);
 
             if (destroyIt) item.DestroyIt();
         }

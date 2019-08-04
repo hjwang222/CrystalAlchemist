@@ -18,10 +18,10 @@ public class CurrencySlot : MonoBehaviour
     private Player player;
 
     private AudioSource audioSource;
-    private bool playOnce = false;
+    //private bool playOnce = false;
     private int currentValue;
     private bool isRunning = false;
-
+    private bool playSound = false;
     private int newValue;
 
     private void Awake()
@@ -32,13 +32,18 @@ public class CurrencySlot : MonoBehaviour
         this.audioSource.playOnAwake = false;
     }
 
+    public void updateSound(bool value)
+    {
+        this.playSound = value;
+    }
+
     public void updateCurrency()
     {        
         this.newValue = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);
 
-        if (!this.playOnce)
+        if (this.playSound)
         {
-            this.playOnce = true;
+            //this.playOnce = true;
             Utilities.Audio.playSoundEffect(this.audioSource, this.raiseSoundEffect);
         }
 
@@ -58,7 +63,7 @@ public class CurrencySlot : MonoBehaviour
             {
                 this.currentValue = this.newValue;
                 this.isRunning = false;
-                this.playOnce = false;
+                //this.playOnce = false;
                 this.textField.text = Utilities.Format.formatString(this.currentValue, this.maxValue);
                 break;
             }   
@@ -69,6 +74,6 @@ public class CurrencySlot : MonoBehaviour
         }
 
         this.isRunning = false;
-        this.playOnce = false;
+        //this.playOnce = false;
     }
 }

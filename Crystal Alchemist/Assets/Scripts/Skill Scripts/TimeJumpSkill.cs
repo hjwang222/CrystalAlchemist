@@ -17,10 +17,25 @@ public class TimeJumpSkill : StandardSkill
     [SerializeField]
     private Color targetColor;
 
+    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [SerializeField]
+    private SimpleSignal musicPitchSignal;
+
+    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [SerializeField]
+    private float musicPitch;
+
+    public override void init()
+    {
+        base.init();
+        GlobalValues.backgroundMusicPitch = this.musicPitch;
+        this.musicPitchSignal.Raise();
+    }
+
     public override void doOnUpdate()
     {
         base.doOnUpdate();
-        this.timeValue.factor = this.newValue;
+        this.timeValue.factor = this.newValue;        
 
         if (this.targetColor != null)
         {
@@ -31,7 +46,8 @@ public class TimeJumpSkill : StandardSkill
     private void OnDestroy()
     {
         this.timeValue.factor = this.timeValue.normalFactor;
-
+        GlobalValues.backgroundMusicPitch = 1f;
+        this.musicPitchSignal.Raise();
         this.sender.resetColor(this.targetColor);
     }
 

@@ -26,6 +26,11 @@ public class BackgroundMusic : MonoBehaviour
         }
     }
 
+    public void changePitch()
+    {
+        this.audioSource.pitch = GlobalValues.backgroundMusicPitch;
+    }
+
     private IEnumerator playLoopMusic()
     {
         yield return new WaitForSecondsRealtime(this.startMusic.length);

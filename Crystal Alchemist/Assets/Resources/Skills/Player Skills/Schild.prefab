@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7505462611311167718}
   - component: {fileID: 8557586700020975895}
   - component: {fileID: 6086066880683234547}
-  m_Layer: 10
+  m_Layer: 21
   m_Name: Schild
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -109,10 +109,9 @@ MonoBehaviour:
   multiHitDelay: 0
   showRange: 0
   affectSelf: 0
-  affectPlayers: 0
-  affectEnemies: 1
-  affectNPCs: 0
-  affectObjects: 1
+  affectOther: 0
+  affectSame: 0
+  affectNeutral: 0
   affectSkills: 1
   ignoreInvincibility: 0
   stateType: 2
@@ -331,7 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5246980305061559774}
   - component: {fileID: 6821413945222853649}
-  m_Layer: 10
+  m_Layer: 21
   m_Name: collision
   m_TagString: Skill
   m_Icon: {fileID: 0}

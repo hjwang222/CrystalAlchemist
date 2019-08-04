@@ -70,7 +70,10 @@ public class LineIndicator : Indicator
             if (this.skill.target != null)
             {
                 //Übernehme Position, wenn ein Ziel vorhanden ist
-                hitted = this.skill.target.GetComponent<Collider2D>();
+                foreach (Collider2D collider in this.skill.target.GetComponentsInChildren<Collider2D>(false))
+                {
+                    if (!collider.isTrigger) hitted = collider;
+                }
                 hitpoint = this.skill.target.transform.position;
             }
 
