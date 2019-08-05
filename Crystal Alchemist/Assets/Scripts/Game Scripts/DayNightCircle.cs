@@ -15,7 +15,13 @@ public class DayNightCircle : MonoBehaviour
 
     private void Start()
     {
-        this.light.color = this.timeValue.GetColor();        
+        StartCoroutine(startCo());  
+    }
+
+    IEnumerator startCo()
+    {
+        yield return new WaitForSeconds(0.1f);
+        this.light.color = this.timeValue.GetColor();
     }
 
     public void changeColor()

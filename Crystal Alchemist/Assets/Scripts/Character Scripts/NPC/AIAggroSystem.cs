@@ -55,7 +55,7 @@ public class AIAggroSystem : MonoBehaviour
     [SerializeField]
     private GameObject targetActiveClue;
 
-    [FoldoutGroup("Aggro Object Object Attributes", expanded: false)]
+    [FoldoutGroup("Aggro Object Attributes", expanded: false)]
     [SerializeField]
     private float activeClueDuration = 1;
 

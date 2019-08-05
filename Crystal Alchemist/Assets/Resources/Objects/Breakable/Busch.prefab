@@ -67,11 +67,11 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7100320595481495857}
   boxCollider: {fileID: 5863874315535871781}
   shadowRenderer: {fileID: 3139136754922538361}
+  startSpriteForRespawn: {fileID: 0}
+  startSpriteForRespawnWhite: {fileID: 0}
   activeSkillParent: {fileID: 1720950400238353364}
   activeStatusEffectParent: {fileID: 7916120204381260195}
   skillSetParent: {fileID: 0}
-  startSpriteForRespawn: {fileID: 0}
-  startSpriteForRespawnWhite: {fileID: 0}
   startLife: 0.1
   startMana: 0.1
   startSpeed: 0
@@ -79,8 +79,9 @@ MonoBehaviour:
   immunityToStatusEffects: []
   maxLife: 0.1
   maxMana: 0.1
-  respawnTime: 10
+  respawnTime: 60
   respawnAnimation: {fileID: 0}
+  deathAnimation: {fileID: 0}
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
   manaRegeneration: 0
@@ -124,6 +125,7 @@ MonoBehaviour:
   activeLockOnTarget: {fileID: 0}
   isPlayer: 0
   inventory: []
+  activePets: []
 --- !u!50 &7794983885249979872
 Rigidbody2D:
   serializedVersion: 4
