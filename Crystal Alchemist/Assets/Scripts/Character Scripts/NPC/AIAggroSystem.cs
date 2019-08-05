@@ -13,6 +13,12 @@ public class AIAggroSystem : MonoBehaviour
     [BoxGroup("Required")]
     private AI enemy;
 
+
+    [FoldoutGroup("Aggro Attributes", expanded: false)]
+    [SerializeField]
+    private bool firstHitMaxAggro = true;
+
+
     [FoldoutGroup("Aggro Attributes", expanded: false)]
     [SerializeField]
     [Range(0, 120)]
@@ -30,19 +36,29 @@ public class AIAggroSystem : MonoBehaviour
 
     [FoldoutGroup("Aggro Attributes", expanded: false)]
     [SerializeField]
-    private GameObject targetFoundClue;
+    private float aggroNeededToTarget = 100;
 
     [FoldoutGroup("Aggro Attributes", expanded: false)]
+    [SerializeField]
+    private float targetChangeDelay = 0f;
+
+
+    [FoldoutGroup("Aggro Object Attributes", expanded: false)]
+    [SerializeField]
+    private GameObject targetFoundClue;
+
+    [FoldoutGroup("Aggro Object Attributes", expanded: false)]
     [SerializeField]
     private float foundClueDuration = 1;
 
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
+    [FoldoutGroup("Aggro Object Attributes", expanded: false)]
     [SerializeField]
     private GameObject targetActiveClue;
 
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
+    [FoldoutGroup("Aggro Object Object Attributes", expanded: false)]
     [SerializeField]
     private float activeClueDuration = 1;
+
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("wirkt nur auf sich selbst")]
@@ -131,15 +147,21 @@ public class AIAggroSystem : MonoBehaviour
 
             //if (this.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.aggroList[character][0] + " Aggro auf" + character.characterName);
 
-            if (this.aggroList[character][0] >= 1f)
+            if (this.aggroList[character][0] >= (this.aggroNeededToTarget/100))
             {
-                this.aggroList[character][0] = 1f; //aggro                             
+                //this.aggroList[character][0] = 1f; //aggro                             
 
                 //Aggro max, Target!
                 if (this.enemy.target == null)
                 {
-                    this.enemy.target = character;
-                    StartCoroutine(showClueCo(this.targetActiveClue, this.activeClueDuration));
+                    StartCoroutine(switchTargetCo(0, character));
+                }
+                else
+                {
+                    if(this.aggroList[this.enemy.target][1] < this.aggroList[character][1])
+                    {
+                        StartCoroutine(switchTargetCo(this.targetChangeDelay, character));
+                    }
                 }
             }
             else if (this.aggroList[character][0] <= 0)
@@ -158,6 +180,15 @@ public class AIAggroSystem : MonoBehaviour
             this.removeFromAggroList(character);
         }
     }
+
+
+    private IEnumerator switchTargetCo(float delay, Character character)
+    {
+        yield return new WaitForSeconds(delay);
+        this.enemy.target = character;
+        StartCoroutine(showClueCo(this.targetActiveClue, this.activeClueDuration));
+    }
+
 
     private IEnumerator showClueCo(GameObject clue, float duration)
     {
@@ -187,8 +218,13 @@ public class AIAggroSystem : MonoBehaviour
 
     private void addToAggroList(Character character)
     {
-        //Aggro, Increase, Factor
-        if (!this.aggroList.ContainsKey(character)) this.aggroList.Add(character, new float[] { 0, 0 });
+        float aggroAmount = 0f;
+        float factor = 0f;
+
+        if (!this.aggroList.ContainsKey(character))
+        {   
+            this.aggroList.Add(character, new float[] { aggroAmount, factor });            
+        }
     }
 
     private void removeFromAggroList(Character character)
@@ -220,12 +256,15 @@ public class AIAggroSystem : MonoBehaviour
         }
     }
 
-    public void increaseAggroOnHit(Character newTarget)
+    public void increaseAggroOnHit(Character newTarget, float damage)
     {
         if (newTarget != null)
         {
             addToAggroList(newTarget);
-            addAggro(newTarget, this.aggroOnHitIncreaseFactor);
+
+            addAggro(newTarget, (this.aggroOnHitIncreaseFactor*damage));
+            if (this.aggroList.Count == 1 && this.firstHitMaxAggro) addAggro(newTarget, this.aggroNeededToTarget);
+
             if (this.aggroList[newTarget][1] == 0) setParameterOfAggrolist(newTarget, this.aggroDecreaseFactor);
             if (this.enemy.target == null) StartCoroutine(showClueCo(this.targetFoundClue, this.foundClueDuration));
         }

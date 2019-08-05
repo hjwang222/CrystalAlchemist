@@ -11,6 +11,9 @@ public class Room : MonoBehaviour
     private GameObject virtualCamera;
 
     [SerializeField]
+    private GameObject objectsInArea;
+
+    [SerializeField]
     private string mapName;
 
     [SerializeField]
@@ -21,7 +24,13 @@ public class Room : MonoBehaviour
 
     private void Awake()
     {
+        setObjects(false);
         this.virtualCamera.SetActive(false);
+    }
+
+    private void setObjects(bool value)
+    {
+        if (this.objectsInArea != null) this.objectsInArea.SetActive(value);
     }
 
     // OnTriggerEnter2D is a built in Unity function
@@ -31,7 +40,9 @@ public class Room : MonoBehaviour
         {
             string text = Utilities.Format.getLanguageDialogText(this.mapName, this.mapNameEnglish);
 
+            setObjects(true);
             this.virtualCamera.SetActive(true);
+
             this.locationSignal.Raise(text);
             CinemachineVirtualCamera vcam = this.virtualCamera.GetComponent<CinemachineVirtualCamera>();
             if(vcam.Follow == null) vcam.Follow = other.transform;
@@ -42,6 +53,7 @@ public class Room : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            setObjects(false);
             this.virtualCamera.SetActive(false);
         }
     }

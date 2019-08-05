@@ -829,7 +829,7 @@ public class Character : MonoBehaviour
                 if (this.life > 0 && elem.resourceType == ResourceType.life && amount < 0)
                 {
                     AIAggroSystem aggro = this.GetComponent<AIAggroSystem>();
-                    if (aggro != null) aggro.increaseAggroOnHit(skill.sender);
+                    if (aggro != null) aggro.increaseAggroOnHit(skill.sender, elem.amount);
 
                     //Charakter-Treffer (Schaden) animieren
                     Utilities.Audio.playSoundEffect(this.audioSource, this.hitSoundEffect);

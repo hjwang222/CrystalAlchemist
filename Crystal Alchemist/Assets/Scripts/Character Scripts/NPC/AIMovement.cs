@@ -13,6 +13,9 @@ public class AIMovement : MonoBehaviour
     #region Parameter fürs Verfolgen
 
     [FoldoutGroup("Movement Attributes", expanded: false)]
+    public bool prioritizePartner = false;
+
+    [FoldoutGroup("Movement Attributes", expanded: false)]
     public float movementRadius = 0.1f;
 
     [FoldoutGroup("Movement Attributes", expanded: false)]
@@ -56,37 +59,47 @@ public class AIMovement : MonoBehaviour
         && this.npc.currentState != CharacterState.manually) moveCharacter();
     }
 
-    private void moveCharacter()
-    {     
-        if (this.npc.target != null)
+    private bool movementPriority(bool priotizePartner)
+    {
+        if (priotizePartner)
         {
-            //Wenn der Spieler innerhalb vom Chase-Radius ist und auch nur solange bis der Gegner den Spieler nicht berührt!
-            if (Vector3.Distance(this.npc.target.transform.position, this.transform.position) > this.movementRadius)
-            {
-                if (this.startCoroutine) StartCoroutine(delayMovementCo());
-                if (!this.standStill) moveTorwardsTarget(this.npc.target.transform.position);
-            }
-            else
-            {
-                this.startCoroutine = true;
-            }
-        }
-        else if (this.npc.partner != null)
-        {
-            //Wenn der Partner innerhalb vom Chase-Radius ist und auch nur solange bis der Gegner den Spieler nicht berührt!
-            if (Vector3.Distance(this.npc.partner.transform.position, this.transform.position) > this.movementRadiusPartner)
-            {
-                if (this.startCoroutine)
-                    StartCoroutine(delayMovementCo());
-                if (!this.standStill)
-                    moveTorwardsTarget(this.npc.partner.transform.position);
-            }
-            else
-            {
-                this.startCoroutine = true;
-            }
+            //Partner > Target (loyal)
+            if (this.npc.partner != null) moveToCharacter(this.npc.partner, this.movementRadiusPartner);
+            else if (this.npc.target != null) moveToCharacter(this.npc.target, this.movementRadius);
+            else return false;
         }
         else
+        {
+            //Target > Partner (aggressive)
+            if (this.npc.target != null) moveToCharacter(this.npc.target, this.movementRadius);
+            else if (this.npc.partner != null) moveToCharacter(this.npc.partner, this.movementRadiusPartner);
+            else return false;
+        }
+
+        return true;
+    }
+
+    private void moveToCharacter(Character target, float radius)
+    {
+        if (target != null)
+        {
+            //Wenn der Spieler innerhalb vom Chase-Radius ist und auch nur solange bis der Gegner den Spieler nicht berührt!
+            if (Vector3.Distance(target.transform.position, this.transform.position) > radius)
+            {
+                if (this.startCoroutine) StartCoroutine(delayMovementCo());
+                if (!this.standStill) moveTorwardsTarget(target.transform.position);
+            }
+            else
+            {
+                this.startCoroutine = true;
+            }
+        }
+    }
+
+    private void moveCharacter()
+    {     
+        //no target, no partner -> Patrol
+        if (!movementPriority(this.prioritizePartner))
         {
             if (!this.standStill)
             {
