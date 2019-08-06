@@ -24,6 +24,11 @@ public class Item : MonoBehaviour
     private SpriteRenderer shadowRenderer;
 
     [Required]
+    [SerializeField]
+    [BoxGroup("Pflichtfeld")]
+    private SpriteRenderer spriteRenderer;
+
+    [Required]
     [BoxGroup("Pflichtfeld")]
     public Sprite itemSprite;
 
@@ -100,8 +105,9 @@ public class Item : MonoBehaviour
 
     public Sprite getSprite()
     {
-        return this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+        return this.spriteRenderer.sprite;
     }
+
 
     public void playSounds()
     {

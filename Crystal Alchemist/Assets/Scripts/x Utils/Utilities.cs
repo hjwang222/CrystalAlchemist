@@ -499,6 +499,16 @@ public class Utilities : MonoBehaviour
 
             return false;
         }
+
+        public static Item getItemByID(List<Item> inventory, int ID, bool isKeyItem)
+        {
+            foreach (Item item in inventory)
+            {
+                if (item.isKeyItem == isKeyItem && item.itemSlot == ID) return item;
+            }
+
+            return null;
+        }
     }
 
     ///////////////////////////////////////////////////////////////
