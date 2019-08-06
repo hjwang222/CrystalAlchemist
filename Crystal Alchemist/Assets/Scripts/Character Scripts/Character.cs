@@ -257,7 +257,7 @@ public class Character : MonoBehaviour
 
     private float lifeTime;
     private float manaTime;
-    private float speedMultiply = 5;
+    public float speedMultiply = 5;
     private SimpleSignal healthSignal;
     private SimpleSignal manaSignal;
     private SimpleSignal currencies;
@@ -313,6 +313,11 @@ public class Character : MonoBehaviour
     public List<Item> inventory = new List<Item>();
     [HideInInspector]
     public List<Character> activePets = new List<Character>();
+    [HideInInspector]
+    public float steps = 0;
+    [HideInInspector]
+    public bool isOnIce = false;
+
     #endregion
 
 
@@ -427,7 +432,7 @@ public class Character : MonoBehaviour
     {
         regeneration();
 
-        if (this.currentState != CharacterState.knockedback)
+        if (this.currentState != CharacterState.knockedback && !this.isOnIce)
         {
             this.myRigidbody.velocity = Vector2.zero;
         }

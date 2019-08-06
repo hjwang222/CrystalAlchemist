@@ -553,7 +553,11 @@ public class Player : Character
 
             Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", true);
         }
-        else Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", false);
+        else
+        {
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", false);
+            this.currentState = CharacterState.idle;
+        }
     }
 
     private void MoveCharacter()
@@ -561,13 +565,14 @@ public class Player : Character
         if (this.currentState != CharacterState.knockedback
             && this.currentState != CharacterState.attack)
         {
+            this.currentState = CharacterState.walk;
             change.Normalize(); //Diagonal-Laufen fixen
 
             //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
             //this.myRigidbody.velocity = Vector2.zero;
 
-            Vector3 movement = new Vector3(change.x, change.y, 0.0f);
-            this.myRigidbody.velocity = (movement * speed * this.timeDistortion);
+            Vector3 movement = new Vector3(change.x, change.y + (this.steps*this.change.x), 0.0f);
+            if(!this.isOnIce) this.myRigidbody.velocity = (movement * speed * this.timeDistortion);            
         }
 
         //Debug.Log("Reset in Player Movement: " + this.myRigidbody.velocity);

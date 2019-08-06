@@ -120,6 +120,8 @@ public class AIMovement : MonoBehaviour
             }
             //Utilities.SetAnimatorParameter(this.animator, "isWakeUp", false);
         }
+
+        this.npc.currentState = CharacterState.idle;
     }
 
     private IEnumerator delayMovementCo()
@@ -146,7 +148,7 @@ public class AIMovement : MonoBehaviour
             this.npc.myRigidbody.MovePosition(temp);
             this.npc.myRigidbody.velocity = Vector2.zero;
 
-            //changeState(CharacterState.walk); //Gegner bewegt sich gerade
+            this.npc.currentState = CharacterState.walk;
 
             Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWakeUp", true);
         }

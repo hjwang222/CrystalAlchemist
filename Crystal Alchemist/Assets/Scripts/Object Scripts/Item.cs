@@ -36,6 +36,10 @@ public class Item : MonoBehaviour
     [SerializeField]
     public string itemGroup;
 
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [SerializeField]
+    public int itemSlot;
+
     [Space(10)]
     [FoldoutGroup("Item Texts", expanded: false)]
     [SerializeField]
