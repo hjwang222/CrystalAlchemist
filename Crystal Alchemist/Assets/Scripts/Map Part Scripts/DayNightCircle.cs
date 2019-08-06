@@ -20,7 +20,7 @@ public class DayNightCircle : MonoBehaviour
 
     IEnumerator startCo()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return null;
         this.light.color = this.timeValue.GetColor();
     }
 
