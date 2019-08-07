@@ -41,17 +41,27 @@ public class InventorySlot : MonoBehaviour
         return this.item;
     }
 
+    public void openSkillMenu(InventoryMenu menu)
+    {
+        if(this.item != null) menu.openSkillMenu();
+    }
+
+    public void openMap(InventoryMenu menu)
+    {
+        if (this.item != null) menu.openMap();
+    }
+
     public void setItemToSlot(Item item)
     {
         if (item == null)
         {
             this.image.gameObject.SetActive(false);
-            this.GetComponent<Button>().interactable = false;
+            //this.GetComponent<Button>().interactable = false;
         }
         else
         {
             this.image.gameObject.SetActive(true);
-            this.GetComponent<Button>().interactable = true;
+            //this.GetComponent<Button>().interactable = true;
             this.item = item;
 
             if(!item.isKeyItem && item.amount > 0) this.amount.text = "x" + item.amount;
