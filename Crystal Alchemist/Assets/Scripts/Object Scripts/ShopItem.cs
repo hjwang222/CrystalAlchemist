@@ -27,7 +27,7 @@ public class ShopItem : Interactable
         this.items.Add(this.lootTable[this.index].item);
 
         //this.amountText.text = this.amount + "";
-        this.childSprite.sprite = this.items[this.index].getSprite();
+        this.childSprite.sprite = this.items[this.index].itemSprite;
     }
 
     public override void doSomethingOnSubmit()

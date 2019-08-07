@@ -15,6 +15,8 @@ public class GlobalValues : MonoBehaviour
     public static float backgroundMusicVolume = 0.3f;
     public static float backgroundMusicPitch = 1f;
 
+    public static float backgroundMusicVolumeMenu = 0.5f;
+
     public static LayoutType layoutType = LayoutType.gamepad;
     public static bool useAlternativeLanguage = false;
 
@@ -25,4 +27,10 @@ public class GlobalValues : MonoBehaviour
     public static float playerDelay = 0.1f;
 
     public static float transitionDuration = 1f;
+
+
+    public static float getMusicInMenu()
+    {
+        return backgroundMusicVolume * backgroundMusicVolumeMenu;
+    }
 }

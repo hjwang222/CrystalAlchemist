@@ -27,9 +27,19 @@ public class InventoryMenu : MonoBehaviour
     private GameObject blackScreen;
 
 
+    [BoxGroup("Signals")]
+    [SerializeField]
+    private SimpleSignal skillMenuSignal;
+
+    [BoxGroup("Signals")]
+    [SerializeField]
+    private FloatSignal musicVolumeSignal;
+
+
     [BoxGroup("Tabs")]
     [SerializeField]
     private GameObject regularItems;
+
     [BoxGroup("Tabs")]
     [SerializeField]
     private GameObject keyItems;
@@ -39,14 +49,13 @@ public class InventoryMenu : MonoBehaviour
     private void Awake()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+
+        showCategory(0);
     }
 
     private void Start()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        setSkillsToSlots(false);
-        setSkillsToSlots(true);
-        showCategory(1);
+        if(this.player == null) this.player = GameObject.FindWithTag("Player").GetComponent<Player>();        
     }
 
     private void Update()
@@ -60,14 +69,30 @@ public class InventoryMenu : MonoBehaviour
 
     private void OnEnable()
     {
+        setSkillsToSlots(false);
+        setSkillsToSlots(true);
+
         this.lastState = this.player.currentState;
         this.cursor.gameObject.SetActive(true);
         this.player.currentState = CharacterState.inMenu;
+
+        this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
     }
 
     private void OnDisable()
     {
         this.cursor.gameObject.SetActive(false);
+
+        this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+    }
+
+
+    public void openSkillMenu()
+    {
+        this.transform.parent.gameObject.SetActive(false);
+        this.blackScreen.SetActive(false);
+        this.player.currentState = this.lastState;
+        this.skillMenuSignal.Raise();
     }
 
 
@@ -78,10 +103,16 @@ public class InventoryMenu : MonoBehaviour
         this.blackScreen.SetActive(false);
     }
 
+    public void switchCategory()
+    {
+        if (this.regularItems.activeInHierarchy) showCategory(1);
+        else showCategory(0);
+    }
+
     public void showCategory(int category)
     {
         this.regularItems.SetActive(false);
-        this.keyItemsLabel.gameObject.SetActive(false);
+        this.regularItemsLabel.gameObject.SetActive(false);
         this.keyItems.SetActive(false);
         this.keyItemsLabel.gameObject.SetActive(false);
 
@@ -101,7 +132,7 @@ public class InventoryMenu : MonoBehaviour
         for (int i = 0; i < categoryGameobject.transform.childCount; i++)
         {
             GameObject slot = categoryGameobject.transform.GetChild(i).gameObject;
-            Item item = Utilities.Items.getItemByID(this.player.inventory, slot.GetComponent<InventorySlot>().ID, showKeyItems);
+            Item item = Utilities.Items.getItemByID(this.player.inventory, slot.GetComponent<InventorySlot>().getID(), showKeyItems);
             slot.GetComponent<InventorySlot>().setItemToSlot(item);
         }
     }

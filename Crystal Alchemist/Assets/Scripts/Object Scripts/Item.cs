@@ -24,13 +24,12 @@ public class Item : MonoBehaviour
     private SpriteRenderer shadowRenderer;
 
     [Required]
-    [SerializeField]
     [BoxGroup("Pflichtfeld")]
-    private SpriteRenderer spriteRenderer;
+    public Sprite itemSprite;
 
     [Required]
     [BoxGroup("Pflichtfeld")]
-    public Sprite itemSprite;
+    public Sprite itemSpriteInventory;
 
     [FoldoutGroup("Item Texts", expanded: false)]
     [SerializeField]
@@ -101,12 +100,6 @@ public class Item : MonoBehaviour
     }
 
     #endregion
-
-
-    public Sprite getSprite()
-    {
-        return this.spriteRenderer.sprite;
-    }
 
 
     public void playSounds()

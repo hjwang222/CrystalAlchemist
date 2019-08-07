@@ -556,7 +556,7 @@ public class Player : Character
         else
         {
             Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", false);
-            this.currentState = CharacterState.idle;
+            if (this.currentState == CharacterState.walk) this.currentState = CharacterState.idle;
         }
     }
 
@@ -565,7 +565,7 @@ public class Player : Character
         if (this.currentState != CharacterState.knockedback
             && this.currentState != CharacterState.attack)
         {
-            this.currentState = CharacterState.walk;
+            if(this.currentState != CharacterState.interact) this.currentState = CharacterState.walk;
             change.Normalize(); //Diagonal-Laufen fixen
 
             //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));

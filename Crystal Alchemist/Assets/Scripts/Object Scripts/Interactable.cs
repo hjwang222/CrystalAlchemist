@@ -158,7 +158,8 @@ public class Interactable : MonoBehaviour
     {
         if (character != null
             && (character.currentState == CharacterState.interact 
-             || character.currentState == CharacterState.idle))
+             || character.currentState == CharacterState.idle
+             || character.currentState == CharacterState.walk))
         {
             if (this.isPlayerInRange
                 && Utilities.Collisions.checkIfGameObjectIsViewed(character, this.gameObject))

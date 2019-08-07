@@ -21,6 +21,9 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private GameObject childMenue;
 
+    [SerializeField]
+    private FloatSignal musicVolumeSignal;
+
     private CharacterState lastState;
     private bool overrideState = true;
 
@@ -47,11 +50,15 @@ public class PauseMenu : MonoBehaviour
             this.overrideState = false;
         }
         this.player.currentState = CharacterState.inMenu;
+
+        this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
     }
 
     private void OnDisable()
     {
         this.cursor.SetActive(false);
+
+        this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
     }
 
     public void exitGame()

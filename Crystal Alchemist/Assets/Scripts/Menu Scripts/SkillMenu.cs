@@ -70,6 +70,10 @@ public class SkillMenu : MonoBehaviour
     [SerializeField]
     private GameObject nextPage;
 
+    [BoxGroup("Signals")]
+    [SerializeField]
+    private FloatSignal musicVolumeSignal;
+
     [HideInInspector]
     public StandardSkill selectedSkill;
 
@@ -109,13 +113,17 @@ public class SkillMenu : MonoBehaviour
         this.lastState = this.player.currentState;
         selectSkillFromSkillSet(null);
         this.cursor.gameObject.SetActive(true);
-        this.player.currentState = CharacterState.inMenu;        
+        this.player.currentState = CharacterState.inMenu;
+
+        this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
     }
 
     private void OnDisable()
     {
         selectSkillFromSkillSet(null);
         this.cursor.gameObject.SetActive(false);
+
+        this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
     }
 
     #endregion
