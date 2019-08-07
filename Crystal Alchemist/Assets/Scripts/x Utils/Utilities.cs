@@ -509,6 +509,17 @@ public class Utilities : MonoBehaviour
 
             return null;
         }
+
+        /*
+        public static Item getItemByFeature(List<Item> inventory, ItemFeature feature)
+        {
+            foreach (Item item in inventory)
+            {
+                if (item.itemFeature == feature) return item;
+            }
+
+            return null;
+        }*/
     }
 
     ///////////////////////////////////////////////////////////////

@@ -50,20 +50,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffectName: Temporale Stase
-  iconSprite: {fileID: 21300036, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
-  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
+  statusEffectNameEnglish: Temporal Stasis
+  statusEffectDescription: Ziel wird stark verlangsamt
+  statusEffectDescriptionEnglish: Target will heavy slowed down
+  maxStacks: 1
+  canBeDispelled: 0
+  stunTarget: 0
+  statusEffectType: 1
   endType: 0
-  statusEffectDescription: ist in der Zeit eingefroren
   statusEffectDuration: 99
   statusEffectInterval: 99
+  canOverride: 1
   statusEffectManaDrain: 0
   statusEffectManaDrainInterval: 0
-  maxStacks: 1
-  canOverride: 1
   canDeactivateIt: 0
-  canBeDispelled: 0
-  statusEffectType: 1
+  destroyDelay: 0.2
+  ownAnimator: {fileID: 0}
+  changeColor: 1
   statusEffectColor: {r: 0.18461668, g: 0.05268779, b: 0.3018868, a: 1}
+  iconSprite: {fileID: 21300036, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
+  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
   target: {fileID: 0}
   statusEffectTimeLeft: 0
   timeDistortion: 1

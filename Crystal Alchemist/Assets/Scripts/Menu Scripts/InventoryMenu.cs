@@ -44,6 +44,10 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField]
     private GameObject keyItems;
 
+    [BoxGroup("Tabs")]
+    [SerializeField]
+    private GameObject quickmenu;
+
     private CharacterState lastState;
 
     private void Awake()
@@ -62,15 +66,17 @@ public class InventoryMenu : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            exitMenu();
+            if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
+            else exitMenu();
         }
         else if (Input.GetButtonDown("Inventory")) exitMenu();
     }
 
     private void OnEnable()
     {
-        setSkillsToSlots(false);
-        setSkillsToSlots(true);
+        setSkillsToSlots(this.regularItems, false);
+        setSkillsToSlots(this.keyItems, true);
+        setSkillsToSlots(this.quickmenu, true);
 
         this.lastState = this.player.currentState;
         this.cursor.gameObject.SetActive(true);
@@ -86,7 +92,6 @@ public class InventoryMenu : MonoBehaviour
         this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
     }
 
-
     public void openSkillMenu()
     {
         this.transform.parent.gameObject.SetActive(false);
@@ -95,9 +100,17 @@ public class InventoryMenu : MonoBehaviour
         this.skillMenuSignal.Raise();
     }
 
+    public void openMap()
+    {
+        this.transform.parent.gameObject.SetActive(false);
+        this.blackScreen.SetActive(false);
+        this.player.currentState = this.lastState;
+        //raise Map Signal
+    }
 
     public void exitMenu()
     {
+        this.cursor.infoBox.Hide();
         this.player.delay(this.lastState);
         this.transform.parent.gameObject.SetActive(false);
         this.blackScreen.SetActive(false);
@@ -121,18 +134,20 @@ public class InventoryMenu : MonoBehaviour
             case 1: this.keyItems.SetActive(true); this.keyItemsLabel.gameObject.SetActive(true); break;
             default: this.regularItems.SetActive(true); this.regularItemsLabel.gameObject.SetActive(true); break;
         }
-
     }
 
-    private void setSkillsToSlots(bool showKeyItems)
+    private void setSkillsToSlots(GameObject categoryGameobject, bool showKeyItems)
     {
-        GameObject categoryGameobject = this.regularItems;
-        if (showKeyItems) categoryGameobject = this.keyItems;
-
         for (int i = 0; i < categoryGameobject.transform.childCount; i++)
         {
             GameObject slot = categoryGameobject.transform.GetChild(i).gameObject;
-            Item item = Utilities.Items.getItemByID(this.player.inventory, slot.GetComponent<InventorySlot>().getID(), showKeyItems);
+            InventorySlot iSlot = slot.GetComponent<InventorySlot>();
+            Item item = null;  
+
+            //if (iSlot.getFeature() != ItemFeature.none) item = Utilities.Items.getItemByFeature(this.player.inventory, iSlot.getFeature());
+            //else 
+            item = Utilities.Items.getItemByID(this.player.inventory, iSlot.getID(), showKeyItems);
+
             slot.GetComponent<InventorySlot>().setItemToSlot(item);
         }
     }

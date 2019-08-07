@@ -27,10 +27,20 @@ public class StatusEffect : MonoBehaviour
     [Tooltip("Name des Statuseffekts")]
     public string statusEffectName;
 
+    [BoxGroup("Statuseffekt Pflichtfelder")]
+    [Required]
+    [Tooltip("Name des Statuseffekts")]
+    public string statusEffectNameEnglish;
+
     [FoldoutGroup("RPG Elemente")]
     [TextArea]
     [Tooltip("Beschreibung des Statuseffekts")]
     public string statusEffectDescription;
+
+    [FoldoutGroup("RPG Elemente")]
+    [TextArea]
+    [Tooltip("Beschreibung des Statuseffekts")]
+    public string statusEffectDescriptionEnglish;
 
     [FoldoutGroup("Basis Attribute")]
     [Tooltip("Anzahl der maximalen gleichen Effekte (Stacks)")]

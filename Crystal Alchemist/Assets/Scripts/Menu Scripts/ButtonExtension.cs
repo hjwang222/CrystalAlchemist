@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 {   
     [SerializeField]
-    private GameObject cursor;
+    private myCursor cursor;
     private float offset = 16;
 
     private Vector2 scale;
@@ -23,7 +23,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     private void Awake()
     {
-        this.cursor.SetActive(false);
+        this.cursor.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -59,7 +59,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     {
         if (this.setFirstSelected)
         {
-            this.cursor.SetActive(true);
+            this.cursor.gameObject.SetActive(true);
 
             EventSystem.current.firstSelectedGameObject = this.gameObject;
             EventSystem.current.SetSelectedGameObject(this.gameObject);
@@ -82,12 +82,55 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         if (this.button != null)
         {
             this.button.Select();
+
+            if (this.cursor.infoBox != null)
+            {
+                if (this.cursor.transform.localPosition.x < 0)
+                {
+                    //right
+                    RectTransform panelRectTransform = (RectTransform)this.cursor.infoBox.transform;
+                    panelRectTransform.anchorMin = new Vector2(1, 0.5f);
+                    panelRectTransform.anchorMax = new Vector2(1, 0.5f);
+                    panelRectTransform.pivot = new Vector2(0.5f, 0.5f);
+                    panelRectTransform.position = new Vector3(Screen.width-175, (Screen.height / 2)+40, 0);
+                }
+                else
+                {
+                    //left
+                    RectTransform panelRectTransform = (RectTransform)this.cursor.infoBox.transform;
+                    panelRectTransform.anchorMin = new Vector2(0, 0.5f);
+                    panelRectTransform.anchorMax = new Vector2(0, 0.5f);
+                    panelRectTransform.pivot = new Vector2(0.5f, 0.5f);
+                    panelRectTransform.position = new Vector3(175, (Screen.height / 2)+40, 0);
+                }
+
+                InventorySlot inventoryslot = this.button.gameObject.GetComponent<InventorySlot>();
+                SkillSlot skillSlot = this.button.gameObject.GetComponent<SkillSlot>();
+                SkillMenuActiveSlots activeSlot = this.button.gameObject.GetComponent<SkillMenuActiveSlots>();
+
+                if (inventoryslot != null && inventoryslot.getItem() != null)
+                {
+                    this.cursor.infoBox.Show(inventoryslot.getItem());
+                }
+                else if(skillSlot != null && skillSlot.skill != null)
+                {
+                    this.cursor.infoBox.Show(skillSlot.skill);
+                }
+                else if (activeSlot != null && activeSlot.skill != null)
+                {
+                    this.cursor.infoBox.Show(activeSlot.skill);
+                }
+                else
+                {
+                    this.cursor.infoBox.Hide();
+                }
+            }
         }
 
         if (this.cursor != null)
         {
-            if (!this.cursor.activeInHierarchy && showCursor) this.cursor.SetActive(true);            
-            if(!showCursor) this.cursor.SetActive(false);
+            if (!this.cursor.gameObject.activeInHierarchy && showCursor) this.cursor.gameObject.SetActive(true);            
+            if(!showCursor) this.cursor.gameObject.SetActive(false);
 
             float x_new = (((this.size.x * this.scale.x) + (this.cursorSize.x * this.cursorScale.x)) / 2) - this.offset;
             float y_new = (((this.size.y * this.scale.y) + (this.cursorSize.y * this.cursorScale.y)) / 2) - this.offset;

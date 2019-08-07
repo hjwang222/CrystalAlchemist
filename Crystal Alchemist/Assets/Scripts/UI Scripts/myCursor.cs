@@ -10,6 +10,8 @@ public class myCursor : MonoBehaviour
     private AudioSource audioSource;
     private bool isPlaying = false;
 
+    public InfoBox infoBox;
+
     [SerializeField]
     private Image image;
 

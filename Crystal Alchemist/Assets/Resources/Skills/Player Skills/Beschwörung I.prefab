@@ -142,10 +142,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Eos
   skillNameEnglish: Eos
+  skillDescription: "Beschw\xF6rt die Fee \"Eos\" herbei"
+  skillDescriptionEnglish: Summons the fairy "Eos"
   category: 1
   animationTriggerName: 
   orderIndex: 27
-  skillDescription: 
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -201,10 +202,9 @@ MonoBehaviour:
   multiHitDelay: 0
   showRange: 0
   affectSelf: 0
-  affectPlayers: 0
-  affectEnemies: 0
-  affectNPCs: 0
-  affectObjects: 0
+  affectOther: 0
+  affectSame: 0
+  affectNeutral: 0
   affectSkills: 0
   ignoreInvincibility: 0
   stateType: 0

@@ -103,6 +103,7 @@ public class SkillMenu : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
             if (this.selectedSkill != null) selectSkillFromSkillSet(null);
+            else if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
             else exitMenu();
         }
         else if (Input.GetButtonDown("Inventory")) exitMenu();
@@ -141,7 +142,7 @@ public class SkillMenu : MonoBehaviour
         showSkillDetails(slot.skill);
     }
 
-    public void showSkillDetails(StandardSkill skill)
+    private void showSkillDetails(StandardSkill skill)
     {
         if (skill != null)
         {
@@ -167,7 +168,7 @@ public class SkillMenu : MonoBehaviour
     }
 
     public void hideSkillDetails()
-    {
+    {        
         this.skillDetailsName.text = "";
         this.skillDetailsStrength.text = "";
         this.skillDetailsCost.text = "";
@@ -210,6 +211,7 @@ public class SkillMenu : MonoBehaviour
 
     public void exitMenu()
     {
+        this.cursor.infoBox.Hide();
         this.player.delay(this.lastState);
         this.transform.parent.gameObject.SetActive(false);
         this.blackScreen.SetActive(false);

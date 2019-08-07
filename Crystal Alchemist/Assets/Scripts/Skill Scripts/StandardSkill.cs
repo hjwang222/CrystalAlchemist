@@ -31,6 +31,16 @@ public class StandardSkill : MonoBehaviour
 
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
+    [TextArea]
+    public string skillDescription;
+
+    [BoxGroup("Pflichtfelder")]
+    [Tooltip("Beschreibung des Skills")]
+    [TextArea]
+    public string skillDescriptionEnglish;
+
+    [BoxGroup("Pflichtfelder")]
+    [Tooltip("Beschreibung des Skills")]
     [EnumToggleButtons]
     public SkillType category = SkillType.magical;
 
@@ -41,10 +51,7 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Sortierung")]
     public int orderIndex = 10;
 
-    [BoxGroup("Pflichtfelder")]
-    [Tooltip("Beschreibung des Skills")]
-    [TextArea]
-    public string skillDescription;
+
 
     [Space(10)]
     [BoxGroup("Pflichtfelder")]

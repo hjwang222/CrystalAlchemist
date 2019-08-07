@@ -142,23 +142,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Analysis
   skillNameEnglish: Analyse
+  skillDescription: Scannt Gegner und Objekte
+  skillDescriptionEnglish: Scanning enemies and objects
   category: 1
   animationTriggerName: 
   orderIndex: 21
-  skillDescription: 
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  indicator: {fileID: 0}
+  indicators: []
   showingIndicator: 1
   showCastBarForEnemies: 1
+  useCustomColor: 0
+  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
   cast: 2
   keepHoldTimer: 0
   delay: 0
   duration: 0
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
   cooldown: 3
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -182,6 +186,8 @@ MonoBehaviour:
   colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
+  rotateOnUpdate: 0
+  keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
   rotationModifier: 0
@@ -189,6 +195,7 @@ MonoBehaviour:
   positionOffset: 0
   positionHeight: 0
   activeTargetHelper: 0
+  setTargetAutomatically: 0
   lockOn: {fileID: 0}
   targetingMode: 2
   maxAmountOfTargets: 1
@@ -196,15 +203,17 @@ MonoBehaviour:
   multiHitDelay: 0
   showRange: 0
   affectSelf: 1
-  affectPlayers: 0
-  affectEnemies: 0
-  affectObjects: 0
+  affectOther: 0
+  affectSame: 0
+  affectNeutral: 0
   affectSkills: 0
   ignoreInvincibility: 1
   stateType: 0
+  doCastDuringDelay: 0
   maxAmounts: 1
   comboAmount: 99
   icon: {fileID: 21300006, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  activeIndicators: []
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
@@ -219,5 +228,6 @@ MonoBehaviour:
   holdTimer: 0
   triggerIsActive: 1
   setPositionAtStart: 1
+  setActive: 1
   dispell: 0
   targetColor: {r: 0, g: 0, b: 0, a: 0}

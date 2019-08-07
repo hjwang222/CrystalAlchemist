@@ -7,8 +7,13 @@ using UnityEditor;
 
 #region Enums
 
-//Resource = Mana oder Life
-//Rest = Items
+public enum ItemFeature
+{
+    none,
+    skills,
+    map,
+    hud
+}
 
 #endregion
 
@@ -36,9 +41,20 @@ public class Item : MonoBehaviour
     public string itemName;
 
     [FoldoutGroup("Item Texts", expanded: false)]
+    [Tooltip("Beschreibung des Skills")]
+    [TextArea]
+    public string itemDescription;
+
+    [FoldoutGroup("Item Texts", expanded: false)]
     [ShowIf("resourceType", ResourceType.item)]
     [SerializeField]
     public string itemGroup;
+
+    /*
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [ShowIf("resourceType", ResourceType.item)]
+    [SerializeField]
+    public ItemFeature itemFeature = ItemFeature.none;*/
 
     [FoldoutGroup("Item Texts", expanded: false)]
     [SerializeField]
@@ -48,6 +64,11 @@ public class Item : MonoBehaviour
     [FoldoutGroup("Item Texts", expanded: false)]
     [SerializeField]
     public string itemNameEnglish;
+
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [Tooltip("Beschreibung des Skills")]
+    [TextArea]
+    public string itemDescriptionEnglish;
 
     [FoldoutGroup("Item Texts", expanded: false)]
     [SerializeField]
@@ -95,8 +116,19 @@ public class Item : MonoBehaviour
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
         this.anim = this.GetComponent<Animator>();
-
+        if (this.itemSpriteInventory == null) this.itemSpriteInventory = this.itemSprite;
         //this.soundEffects = this.GetComponents<AudioSource>();
+    }
+
+    private void Start()
+    {
+        //Check if keyItem already in Inventory
+
+        if (this.isKeyItem)
+        {
+            Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+            if (player != null && Utilities.Items.getAmountFromInventory(this,player.inventory,false) > 0) Destroy(this.gameObject);
+        }
     }
 
     #endregion
