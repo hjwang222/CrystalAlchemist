@@ -56,9 +56,10 @@ public class Item : MonoBehaviour
     [SerializeField]
     public ItemFeature itemFeature = ItemFeature.none;*/
 
+    [Tooltip("Slot-Nummer im Inventar. Wenn -1 dann kein Platz im Inventar")]
     [FoldoutGroup("Item Texts", expanded: false)]
     [SerializeField]
-    public int itemSlot;
+    public int itemSlot = -1;
 
     [Space(10)]
     [FoldoutGroup("Item Texts", expanded: false)]

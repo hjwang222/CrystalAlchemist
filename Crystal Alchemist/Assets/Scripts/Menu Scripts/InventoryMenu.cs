@@ -53,13 +53,13 @@ public class InventoryMenu : MonoBehaviour
     private void Awake()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
-
-        showCategory(0);
     }
 
     private void Start()
     {
-        if(this.player == null) this.player = GameObject.FindWithTag("Player").GetComponent<Player>();        
+        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        loadInventory();
+        showCategory(0);
     }
 
     private void Update()
@@ -74,9 +74,7 @@ public class InventoryMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        setSkillsToSlots(this.regularItems, false);
-        setSkillsToSlots(this.keyItems, true);
-        setSkillsToSlots(this.quickmenu, true);
+        loadInventory();
 
         this.lastState = this.player.currentState;
         this.cursor.gameObject.SetActive(true);
@@ -90,6 +88,13 @@ public class InventoryMenu : MonoBehaviour
         this.cursor.gameObject.SetActive(false);
 
         this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+    }
+
+    private void loadInventory()
+    {      
+        setItemsToSlots(this.regularItems, false);
+        setItemsToSlots(this.keyItems, true);
+        setItemsToSlots(this.quickmenu, true);
     }
 
     public void openSkillMenu()
@@ -136,19 +141,24 @@ public class InventoryMenu : MonoBehaviour
         }
     }
 
-    private void setSkillsToSlots(GameObject categoryGameobject, bool showKeyItems)
+    private void setItemsToSlots(GameObject categoryGameobject, bool showKeyItems)
     {
-        for (int i = 0; i < categoryGameobject.transform.childCount; i++)
+        if (this.player != null)
         {
-            GameObject slot = categoryGameobject.transform.GetChild(i).gameObject;
-            InventorySlot iSlot = slot.GetComponent<InventorySlot>();
-            Item item = null;  
+            for (int i = 0; i < categoryGameobject.transform.childCount; i++)
+            {
+                GameObject slot = categoryGameobject.transform.GetChild(i).gameObject;
+                InventorySlot iSlot = slot.GetComponent<InventorySlot>();
+                Item item = null;
 
-            //if (iSlot.getFeature() != ItemFeature.none) item = Utilities.Items.getItemByFeature(this.player.inventory, iSlot.getFeature());
-            //else 
-            item = Utilities.Items.getItemByID(this.player.inventory, iSlot.getID(), showKeyItems);
+                //if (iSlot.getFeature() != ItemFeature.none) item = Utilities.Items.getItemByFeature(this.player.inventory, iSlot.getFeature());
+                //else 
 
-            slot.GetComponent<InventorySlot>().setItemToSlot(item);
+                int ID = iSlot.getID();
+                item = Utilities.Items.getItemByID(this.player.inventory, ID, showKeyItems);
+
+                slot.GetComponent<InventorySlot>().setItemToSlot(item);
+            }
         }
     }
 }

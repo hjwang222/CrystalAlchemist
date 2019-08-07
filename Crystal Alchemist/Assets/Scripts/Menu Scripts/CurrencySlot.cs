@@ -10,8 +10,6 @@ public class CurrencySlot : MonoBehaviour
     [SerializeField]
     private int maxValue;
     [SerializeField]
-    private float counterDelay = 0.05f;
-    [SerializeField]
     private TextMeshProUGUI textField;
     [SerializeField]
     private AudioClip raiseSoundEffect;
@@ -24,12 +22,16 @@ public class CurrencySlot : MonoBehaviour
     private bool playSound = false;
     private int newValue;
 
-    private void Awake()
+    private void Start()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
+
+        updateCurrency();
+
+        playSound = true;
     }
 
     public void updateSound(bool value)
@@ -51,7 +53,11 @@ public class CurrencySlot : MonoBehaviour
     }
 
     private IEnumerator Countdown()
-    {        
+    {
+        int change = Mathf.Abs(this.currentValue - this.newValue);
+        float counterDelay = 1;
+        if (change != 0) counterDelay = 0.01f / (float)change;
+
         while (this.currentValue != this.newValue)
         {
             int rate = -1;
@@ -70,7 +76,7 @@ public class CurrencySlot : MonoBehaviour
 
             this.textField.text = Utilities.Format.formatString(this.currentValue, this.maxValue);
             
-            yield return new WaitForSeconds(this.counterDelay);
+            yield return new WaitForSeconds(counterDelay);
         }
 
         this.isRunning = false;

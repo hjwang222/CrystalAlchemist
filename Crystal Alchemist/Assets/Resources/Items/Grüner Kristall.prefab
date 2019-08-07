@@ -50,13 +50,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadowRenderer: {fileID: 8426257186259745798}
-  spriteRenderer: {fileID: 6543087421468060301}
-  spriteAnimator: {fileID: 6543087421468060302}
-  itemSprite: {fileID: 21300392, guid: b0b8d75b616ba6e42aa4ea4103267705, type: 3}
+  itemSprite: {fileID: -28472239257485128, guid: da2b8cd3ab5195945ab9099a1134a852,
+    type: 3}
+  itemSpriteInventory: {fileID: 8368822998687311816, guid: da2b8cd3ab5195945ab9099a1134a852,
+    type: 3}
   itemName: "Gr\xFCner Kristall"
+  itemDescription: 
   itemGroup: Kristalle
-  itemSlot: 0
+  itemSlot: 1
   itemNameEnglish: Green Crystal
+  itemDescriptionEnglish: 
   itemGroupEnglish: crystals
   amount: 1
   maxAmount: 9999
@@ -213,7 +216,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300392, guid: b0b8d75b616ba6e42aa4ea4103267705, type: 3}
+  m_Sprite: {fileID: -28472239257485128, guid: da2b8cd3ab5195945ab9099a1134a852, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -431,6 +434,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6543087420962035895}
     m_Modifications:
+    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
+        type: 3}
+      propertyPath: m_Name
+      value: Item Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2956711678939615906, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -485,11 +493,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
-        type: 3}
-      propertyPath: m_Name
-      value: Item Light
       objectReference: {fileID: 0}
     - target: {fileID: 7454736788490218463, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}

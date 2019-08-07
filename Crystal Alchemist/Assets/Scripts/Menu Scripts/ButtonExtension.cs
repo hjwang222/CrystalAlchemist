@@ -21,11 +21,14 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     private bool setFirstSelected = false;
     private Button button;
 
+    private int distance = 400;
+
+    /*
     private void Awake()
     {
-        this.cursor.gameObject.SetActive(false);
+        //this.cursor.gameObject.SetActive(false);
     }
-
+    */
     private void Start()
     {
         RectTransform rt = (RectTransform)this.transform;
@@ -78,6 +81,28 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     }
 
     private void setCursor(bool showCursor, bool playEffect)
+    {       
+        if (this.cursor != null)
+        {
+            if (!this.cursor.gameObject.activeInHierarchy && showCursor) this.cursor.gameObject.SetActive(true);            
+            if(!showCursor) this.cursor.gameObject.SetActive(false);
+
+            float x_new = (((this.size.x * this.scale.x) + (this.cursorSize.x * this.cursorScale.x)) / 2) - this.offset;
+            float y_new = (((this.size.y * this.scale.y) + (this.cursorSize.y * this.cursorScale.y)) / 2) - this.offset;
+
+            this.cursor.transform.position = new Vector2(this.transform.position.x - (x_new), 
+                                                         this.transform.position.y + (y_new));
+
+            setInfoBox();
+
+            //Debug.Log("Button: "+this.size + " - " + this.scale);
+            //Debug.Log("Cursor: "+this.cursorSize + " - " + this.cursorScale);
+
+            if (playEffect) this.cursor.GetComponent<myCursor>().playSoundEffect();
+        }
+    }
+
+    private void setInfoBox()
     {
         if (this.button != null)
         {
@@ -92,7 +117,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                     panelRectTransform.anchorMin = new Vector2(1, 0.5f);
                     panelRectTransform.anchorMax = new Vector2(1, 0.5f);
                     panelRectTransform.pivot = new Vector2(0.5f, 0.5f);
-                    panelRectTransform.position = new Vector3(Screen.width-175, (Screen.height / 2)+40, 0);
+                    panelRectTransform.position = new Vector3(Screen.width - (this.cursorScale.x * distance), (Screen.height / 2) + 40, 0);
                 }
                 else
                 {
@@ -101,7 +126,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                     panelRectTransform.anchorMin = new Vector2(0, 0.5f);
                     panelRectTransform.anchorMax = new Vector2(0, 0.5f);
                     panelRectTransform.pivot = new Vector2(0.5f, 0.5f);
-                    panelRectTransform.position = new Vector3(175, (Screen.height / 2)+40, 0);
+                    panelRectTransform.position = new Vector3((this.cursorScale.x * distance), (Screen.height / 2) + 40, 0);
                 }
 
                 InventorySlot inventoryslot = this.button.gameObject.GetComponent<InventorySlot>();
@@ -112,7 +137,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                 {
                     this.cursor.infoBox.Show(inventoryslot.getItem());
                 }
-                else if(skillSlot != null && skillSlot.skill != null)
+                else if (skillSlot != null && skillSlot.skill != null)
                 {
                     this.cursor.infoBox.Show(skillSlot.skill);
                 }
@@ -125,23 +150,6 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                     this.cursor.infoBox.Hide();
                 }
             }
-        }
-
-        if (this.cursor != null)
-        {
-            if (!this.cursor.gameObject.activeInHierarchy && showCursor) this.cursor.gameObject.SetActive(true);            
-            if(!showCursor) this.cursor.gameObject.SetActive(false);
-
-            float x_new = (((this.size.x * this.scale.x) + (this.cursorSize.x * this.cursorScale.x)) / 2) - this.offset;
-            float y_new = (((this.size.y * this.scale.y) + (this.cursorSize.y * this.cursorScale.y)) / 2) - this.offset;
-
-            this.cursor.transform.position = new Vector2(this.transform.position.x - (x_new), 
-                                                         this.transform.position.y + (y_new));
-
-            //Debug.Log("Button: "+this.size + " - " + this.scale);
-            //Debug.Log("Cursor: "+this.cursorSize + " - " + this.cursorScale);
-
-            if (playEffect) this.cursor.GetComponent<myCursor>().playSoundEffect();
         }
     }
 

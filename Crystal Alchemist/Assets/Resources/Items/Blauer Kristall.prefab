@@ -50,13 +50,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadowRenderer: {fileID: 3576198895323998835}
-  spriteRenderer: {fileID: 8069356869642040159}
-  spriteAnimator: {fileID: 7453362626710449600}
-  itemSprite: {fileID: 21300422, guid: b0b8d75b616ba6e42aa4ea4103267705, type: 3}
+  itemSprite: {fileID: 4406425217221059118, guid: da2b8cd3ab5195945ab9099a1134a852,
+    type: 3}
+  itemSpriteInventory: {fileID: 8368822998687311816, guid: da2b8cd3ab5195945ab9099a1134a852,
+    type: 3}
   itemName: Blauer Kristall
+  itemDescription: 
   itemGroup: Kristalle
-  itemSlot: 0
+  itemSlot: 1
   itemNameEnglish: Blue Crystal
+  itemDescriptionEnglish: 
   itemGroupEnglish: crystals
   amount: 5
   maxAmount: 9999
@@ -170,7 +173,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8069356869867652894}
+  - {fileID: 7435804413859673443}
   - {fileID: 9017888502905957137}
   m_Father: {fileID: 8069356869073092965}
   m_RootOrder: 1
@@ -213,7 +216,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300422, guid: b0b8d75b616ba6e42aa4ea4103267705, type: 3}
+  m_Sprite: {fileID: 4406425217221059118, guid: da2b8cd3ab5195945ab9099a1134a852,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -331,6 +335,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8069356869073092965}
     m_Modifications:
+    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
+        type: 3}
+      propertyPath: m_Name
+      value: Item Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2956711678939615906, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -385,11 +394,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
-        type: 3}
-      propertyPath: m_Name
-      value: Item Light
       objectReference: {fileID: 0}
     - target: {fileID: 7454736788490218463, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}
@@ -503,7 +507,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f11b09210e7962848bddb256727f4657, type: 3}
---- !u!4 &8069356869867652894 stripped
+--- !u!4 &7435804413859673443 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 634257569416937405, guid: f11b09210e7962848bddb256727f4657,
     type: 3}

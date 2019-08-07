@@ -117,10 +117,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Feuer
   skillNameEnglish: 
+  skillDescription: 
+  skillDescriptionEnglish: 
   category: 1
   animationTriggerName: 
   orderIndex: 1
-  skillDescription: 
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -228,6 +229,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6819255767860027242}
     m_Modifications:
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -282,11 +288,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

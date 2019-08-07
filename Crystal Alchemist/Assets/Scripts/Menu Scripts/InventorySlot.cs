@@ -18,7 +18,7 @@ public class InventorySlot : MonoBehaviour
     //[SerializeField]
     //private ItemFeature feature;
 
-    private Item item;
+    public Item item;
 
     private void Awake()
     {
@@ -53,7 +53,9 @@ public class InventorySlot : MonoBehaviour
 
     public void setItemToSlot(Item item)
     {
-        if (item == null)
+        this.item = item;
+
+        if (this.item == null)
         {
             this.image.gameObject.SetActive(false);
             //this.GetComponent<Button>().interactable = false;
@@ -61,13 +63,10 @@ public class InventorySlot : MonoBehaviour
         else
         {
             this.image.gameObject.SetActive(true);
-            //this.GetComponent<Button>().interactable = true;
-            this.item = item;
+            //this.GetComponent<Button>().interactable = true;            
 
             if(!item.isKeyItem && item.amount > 0) this.amount.text = "x" + item.amount;
-
             this.image.sprite = this.item.itemSpriteInventory;
-
             this.image.color = new Color(1f, 1f, 1f, 1f);
         }
     }

@@ -404,7 +404,7 @@ public class Utilities : MonoBehaviour
             {
                 if (player.getResource(currency, item) + price >= 0)
                 {
-                    if (!item.isKeyItem) player.updateResource(currency, item, price);
+                    if (!item.isKeyItem) player.updateResource(true, currency, item, price);
                     result = true;
                 }
                 else
@@ -760,6 +760,9 @@ public class Utilities : MonoBehaviour
             float minutes = (float)(difference / (double)factor); //elapsed ingame minutes
             float fhour = ((minutes / 60f) % 24f);
             float fminute = (minutes % 60f);
+
+            if (fhour >= 24) fhour = 0;
+            if (fminute >= 60) fminute = 0;
 
             hour = Mathf.RoundToInt(fhour);
             minute = Mathf.RoundToInt(fminute);
