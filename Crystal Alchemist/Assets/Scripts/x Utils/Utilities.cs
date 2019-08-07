@@ -271,14 +271,15 @@ public class Utilities : MonoBehaviour
             Vector2 position = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset),
                                            character.shadowRenderer.transform.position.y - (character.direction.y * offset));
 
-            RaycastHit2D hit = Physics2D.CircleCast(position, width, character.direction, distance);
+            RaycastHit2D[] hit = Physics2D.CircleCastAll(position, width, character.direction, distance);
 
-            if (hit != false && !hit.collider.isTrigger && hit.collider.gameObject == gameObject) return true;
+            foreach (RaycastHit2D hitted in hit)
+            {
+                if (hitted != false && !hitted.collider.isTrigger && hitted.collider.gameObject == gameObject) return true;
+            }
 
             return false;
         }
-
-
     }
 
 
