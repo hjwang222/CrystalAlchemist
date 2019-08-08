@@ -260,7 +260,7 @@ public class Character : MonoBehaviour
     public float speedMultiply = 5;
     private SimpleSignal healthSignal;
     private SimpleSignal manaSignal;
-    private SimpleSignal currencies;
+
     private List<Color> colors = new List<Color>();
     private bool showTargetHelp = false;
     private GameObject targetHelpObjectPlayer;
@@ -362,12 +362,10 @@ public class Character : MonoBehaviour
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
     }
 
-    public void setResourceSignal(SimpleSignal health, SimpleSignal mana,
-                                  SimpleSignal currencies)
+    public void setResourceSignal(SimpleSignal health, SimpleSignal mana)
     {
         this.healthSignal = health;
         this.manaSignal = mana;
-        this.currencies = currencies;
     }
 
     public void setTargetHelper(GameObject targetHelper)
@@ -514,8 +512,9 @@ public class Character : MonoBehaviour
 
     public void KillIt()
     {
-        if (this.isPlayer)
+        if (this.isPlayer && this.currentState != CharacterState.dead)
         {
+            this.currentState = CharacterState.dead;
             //TODO: Wenn Spieler tot ist
             SceneManager.LoadSceneAsync(0);
         }
@@ -578,20 +577,10 @@ public class Character : MonoBehaviour
 
     public void updateResource(ResourceType type, Item item, float addResource)
     {
-        updateResource(false, type, item, addResource, true);
+        updateResource(type, item, addResource, true);
     }
 
-    public void updateResource(ResourceType type, Item item, float addResource, bool showingDamageNumber)
-    {
-        updateResource(false, type, item, addResource, showingDamageNumber);
-    }
-
-    public void updateResource(bool raiseResourceSignal, ResourceType type, Item item, float addResource)
-    {
-        updateResource(raiseResourceSignal, type, item, addResource, true);
-    }
-
-    public void updateResource(bool raiseResourceSignal, ResourceType type, Item item, float value, bool showingDamageNumber)
+    public void updateResource(ResourceType type, Item item, float value, bool showingDamageNumber)
     {
         switch (type)
         {
@@ -619,7 +608,7 @@ public class Character : MonoBehaviour
                     if (item != null)
                     {
                         Utilities.Items.updateInventory(item, this, Mathf.RoundToInt(value));
-                        if (raiseResourceSignal) callSignal(this.currencies, value);
+                        callSignal(item.signal, value);
                     }
                     break;
                 }
@@ -798,10 +787,7 @@ public class Character : MonoBehaviour
         {
             if (playSound) item.playSounds();
 
-            bool playRaiseSound = false;
-            if (item.itemGroup == "Kristalle") playRaiseSound = true;
-
-            this.updateResource(playRaiseSound, item.resourceType, item, item.amount);
+            this.updateResource(item.resourceType, item, item.amount);
 
             if (destroyIt) item.DestroyIt();
         }
@@ -860,7 +846,6 @@ public class Character : MonoBehaviour
     {
         StartCoroutine(immortalCo(duration));
     }
-
 
     public void knockBack(float knockTime, float thrust, Vector2 direction)
     {

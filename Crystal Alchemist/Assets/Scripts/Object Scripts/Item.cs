@@ -97,6 +97,9 @@ public class Item : MonoBehaviour
     [FoldoutGroup("Sound", expanded: false)]
     public AudioClip collectSoundEffect;
 
+    [FoldoutGroup("Signals", expanded: false)]
+    public SimpleSignal signal;
+
     private AudioSource audioSource;
     private Animator anim;
 

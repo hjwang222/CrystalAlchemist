@@ -16,15 +16,31 @@ public class AI : Character
     [HideInInspector]
     public Character partner;
 
+    private bool isSleeping = true;
+
     private void Start()
     {
         init();
         this.target = null;
-        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWakeUp", true);
     }
-
-
     #region Animation, StateMachine
+
+
+    private new void Update()
+    {
+        base.Update();
+
+        if(this.target != null && this.isSleeping)
+        {
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "WakeUp");
+            this.isSleeping = false;
+        }
+        else if(this.target == null && !this.isSleeping)
+        {
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Sleep");
+            this.isSleeping = true;
+        }
+    }
 
 
     private void setAnimFloat(Vector2 setVector)

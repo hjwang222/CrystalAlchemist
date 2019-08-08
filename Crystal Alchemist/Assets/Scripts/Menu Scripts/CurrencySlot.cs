@@ -34,11 +34,6 @@ public class CurrencySlot : MonoBehaviour
         playSound = true;
     }
 
-    public void updateSound(bool value)
-    {
-        this.playSound = value;
-    }
-
     public void updateCurrency()
     {        
         this.newValue = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);

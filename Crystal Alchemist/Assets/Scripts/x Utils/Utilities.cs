@@ -404,7 +404,7 @@ public class Utilities : MonoBehaviour
             {
                 if (player.getResource(currency, item) + price >= 0)
                 {
-                    if (!item.isKeyItem) player.updateResource(true, currency, item, price);
+                    if (!item.isKeyItem) player.updateResource(currency, item, price);
                     result = true;
                 }
                 else

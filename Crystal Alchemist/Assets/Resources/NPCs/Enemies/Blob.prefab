@@ -331,8 +331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Blob
-  englischCharacterName: Blob
+  characterName: Gift Blob
+  englischCharacterName: Poison Blob
   myRigidbody: {fileID: 2246077131478480996}
   animator: {fileID: 929082027}
   spriteRenderer: {fileID: 929082024}
@@ -347,7 +347,7 @@ MonoBehaviour:
   skillSetParent: {fileID: 1691123302925716915}
   startLife: 3
   startMana: 1
-  startSpeed: 25
+  startSpeed: 40
   startSpellSpeed: 100
   immunityToStatusEffects: []
   maxLife: 3
@@ -386,6 +386,7 @@ MonoBehaviour:
   characterSpecies: 
   characterGender: 2
   characterType: 1
+  speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
   activeCastbar: {fileID: 0}
@@ -408,6 +409,8 @@ MonoBehaviour:
   isPlayer: 0
   inventory: []
   activePets: []
+  steps: 0
+  isOnIce: 0
   dialogPosition: {fileID: 929082023}
   target: {fileID: 0}
   partner: {fileID: 0}

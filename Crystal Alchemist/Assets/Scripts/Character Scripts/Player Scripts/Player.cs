@@ -43,10 +43,6 @@ public class Player : Character
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal currencySignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
     public SimpleSignal openInventorySignal;
 
     [Required]
@@ -55,9 +51,6 @@ public class Player : Character
 
     [FoldoutGroup("Player Signals", expanded: false)]
     public BoolSignal cameraSignal;
-
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public BoolSignal currencySignalUISound;
 
     [Required]
     [BoxGroup("Pflichtfelder")]
@@ -91,7 +84,6 @@ public class Player : Character
 
     private void initPlayer()
     {
-        this.currencySignalUISound.Raise(false);
         SaveSystem.loadOptions();
 
         List<StandardSkill> tempSkillSet = new List<StandardSkill>();
@@ -105,7 +97,7 @@ public class Player : Character
 
         this.isPlayer = true;
         this.init();
-        this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.currencySignalUI);
+        this.setResourceSignal(this.healthSignalUI, this.manaSignalUI);
 
         if (this.loadGame.getValue()) LoadSystem.loadPlayerData(this);
 
@@ -116,7 +108,6 @@ public class Player : Character
         Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
 
         this.direction = new Vector2(0, -1);
-        this.currencySignalUISound.Raise(true);
         //this.currencySignalUI.Raise();
     }
 
