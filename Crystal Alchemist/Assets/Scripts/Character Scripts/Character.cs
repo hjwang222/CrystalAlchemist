@@ -257,6 +257,7 @@ public class Character : MonoBehaviour
 
     private float lifeTime;
     private float manaTime;
+    [HideInInspector]
     public float speedMultiply = 5;
     private SimpleSignal healthSignal;
     private SimpleSignal manaSignal;

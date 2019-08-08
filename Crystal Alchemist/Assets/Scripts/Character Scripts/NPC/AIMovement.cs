@@ -153,8 +153,11 @@ public class AIMovement : MonoBehaviour
             Vector2 direction = position - this.transform.position;
             if (!Utilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
 
-            if (this.npc.direction.x < 0) this.npc.spriteRenderer.flipX = true;
-            else this.npc.spriteRenderer.flipX = false;
+            if (this.npc.flip)
+            {
+                if (this.npc.direction.x < 0) this.npc.spriteRenderer.flipX = true;
+                else this.npc.spriteRenderer.flipX = false;
+            }
 
             this.npc.myRigidbody.MovePosition(temp);
             this.npc.myRigidbody.velocity = Vector2.zero;

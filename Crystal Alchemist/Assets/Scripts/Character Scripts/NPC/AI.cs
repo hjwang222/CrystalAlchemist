@@ -10,6 +10,9 @@ public class AI : Character
     [BoxGroup("Pflichtfelder")]
     public GameObject dialogPosition;
 
+    [BoxGroup("AI")]
+    public bool flip = true;
+
     [HideInInspector]
     public Character target;
 
