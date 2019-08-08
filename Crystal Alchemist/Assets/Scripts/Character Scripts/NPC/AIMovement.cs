@@ -51,6 +51,10 @@ public class AIMovement : MonoBehaviour
 
     #endregion
 
+    private void Start()
+    {
+        Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+    }
 
     #region Update und Movement Funktionen
     private void Update()
@@ -87,7 +91,9 @@ public class AIMovement : MonoBehaviour
             if (Vector3.Distance(target.transform.position, this.transform.position) > radius)
             {
                 if (this.startCoroutine) StartCoroutine(delayMovementCo());
+
                 if (!this.standStill) moveTorwardsTarget(target.transform.position);
+                else Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
             }
             else
             {
@@ -116,11 +122,16 @@ public class AIMovement : MonoBehaviour
                         StartCoroutine(delayMovementCo());
                     }
                 }
-                else if (this.backToStart) moveTorwardsTarget(this.npc.spawnPosition);
+                else if (this.backToStart && this.npc.transform.position != this.npc.spawnPosition) moveTorwardsTarget(this.npc.spawnPosition);
+                else Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+            }
+            else
+            {
+                Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
             }
             //Utilities.SetAnimatorParameter(this.animator, "isWakeUp", false);
         }
-
+        
         this.npc.currentState = CharacterState.idle;
     }
 
@@ -134,7 +145,7 @@ public class AIMovement : MonoBehaviour
 
     private void moveTorwardsTarget(Vector3 position)
     {
-        if (this.npc.currentState == CharacterState.idle || this.npc.currentState == CharacterState.walk && this.npc.currentState != CharacterState.knockedback)
+        if ((this.npc.currentState == CharacterState.idle || this.npc.currentState == CharacterState.walk) && this.npc.currentState != CharacterState.knockedback)
         {
             //Bewegt den Gegner zum Spieler
             Vector3 temp = Vector3.MoveTowards(transform.position, position, this.npc.speed * (Time.deltaTime * this.npc.timeDistortion));
@@ -149,8 +160,8 @@ public class AIMovement : MonoBehaviour
             this.npc.myRigidbody.velocity = Vector2.zero;
 
             this.npc.currentState = CharacterState.walk;
-
-            Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWakeUp", true);
+            
+            Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", true);
         }
     }
 
