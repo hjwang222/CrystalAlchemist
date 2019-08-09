@@ -4,44 +4,68 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Sirenix.OdinInspector;
 
 public class DeathScreen : MonoBehaviour
 {
     [SerializeField]
+    [BoxGroup("Mandatory")]
     private SimpleSignal stopMusic;
 
+    [BoxGroup("Mandatory")]
     [SerializeField]
     private BoolValue loadGame;
 
+    [BoxGroup("Mandatory")]
     [SerializeField]
     private AudioSource audiosource;
 
+    [BoxGroup("Mandatory")]
     [SerializeField]
     private AudioClip deathMusic;
 
+    [BoxGroup("Mandatory")]
     [SerializeField]
-    private PostProcessVolume colorGrading;
+    private PostProcessVolume postProcessVolume;
 
+    [BoxGroup("Mandatory")]
     [SerializeField]
     private TextMeshProUGUI textField;
 
+    [BoxGroup("Mandatory")]
     [SerializeField]
     private TextMeshProUGUI countDown;
 
+    [BoxGroup("Mandatory")]
     [SerializeField]
     private GameObject returnTitleScreen;
 
+    [BoxGroup("Mandatory")]
     [SerializeField]
     private GameObject returnSavePoint;
 
+    [BoxGroup("Time")]
     [SerializeField]
     private int timer = 30;
+
+    [BoxGroup("Time")]
+    [SerializeField]
+    private float fadingDelay = 0.025f;
+
+    [BoxGroup("Time")]
+    [SerializeField]
+    private float textDelay = 0.1f;
+
+    [BoxGroup("Time")]
+    [SerializeField]
+    private float buttonDelay = 2f;
 
     private string currentText;
     private string fullText;
     private string lastSavepoint;
+    private ColorGrading colorGrading;
 
-    private void Start()
+    private void Awake()
     {
         this.returnSavePoint.SetActive(false);
         this.returnTitleScreen.SetActive(false);
@@ -55,18 +79,14 @@ public class DeathScreen : MonoBehaviour
         PlayerData data = SaveSystem.loadPlayer();
         if (data != null && data.scene != null && data.scene != "") this.lastSavepoint = data.scene;
         this.stopMusic.Raise();
-
-        //this.colorGrading.GetComponent<ColorGrading>().active = true;
-        showText();
-
-        //if(this.colorGrading.GetComponent<ColorGrading>() != null) StartCoroutine(FadeOut(0.1f));
+        if (this.postProcessVolume.profile.TryGetSettings(out this.colorGrading)) StartCoroutine(FadeOut(this.fadingDelay));
     }
 
     private void showText()
     {
         playMusic(this.deathMusic);
         this.textField.gameObject.SetActive(true);
-        ShowText(0.1f);
+        ShowText(this.textDelay);
     }
 
     public void playMusic(AudioClip clip)
@@ -83,7 +103,7 @@ public class DeathScreen : MonoBehaviour
     public void showButtons()
     {
         this.returnTitleScreen.SetActive(true);
-        if (this.lastSavepoint != null) this.returnSavePoint.SetActive(true);
+        //if (this.lastSavepoint != null) this.returnSavePoint.SetActive(true);
 
         this.countDown.gameObject.SetActive(true);
         StartCoroutine(this.countDownCo());
@@ -96,25 +116,30 @@ public class DeathScreen : MonoBehaviour
 
     public void returnSaveGame()
     {
-        this.loadGame.setValue(true);
         if (this.lastSavepoint != null) SceneManager.LoadSceneAsync(this.lastSavepoint);
     }
 
     private IEnumerator ShowTextCo(float delay)
     {
-        for(int i = 0; i < this.fullText.Length; i++)
+        for(int i = 0; i <= this.fullText.Length; i++)
         {
-            if(i >= this.fullText.Length)
+            currentText = this.fullText.Substring(0, i);
+            this.textField.text = this.currentText;
+
+            if (i >= this.fullText.Length)
             {
-                showButtons();
+                StartCoroutine(showButtonCo(this.buttonDelay));
                 break;
             }
 
-            currentText = this.fullText.Substring(0, i);
-            this.textField.text = this.currentText;
-            Debug.Log(this.currentText);
             yield return new WaitForSeconds(delay);
         }
+    }
+
+    private IEnumerator showButtonCo(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        showButtons();
     }
 
     private IEnumerator countDownCo()
@@ -124,24 +149,24 @@ public class DeathScreen : MonoBehaviour
             if (i >= this.timer)
             {
                 returnToTitleScreen();
-                break;
             }
-            this.countDown.text = "" + i + "s";
+            this.countDown.text = "" + (this.timer-i) + "s";
             yield return new WaitForSeconds(1);
         }
     }
 
     private IEnumerator FadeOut(float delay)
     {
-        while (this.colorGrading.GetComponent<ColorGrading>().saturation.value > -100)
+        while (this.colorGrading.saturation.value > -100)
         {
-            if (this.colorGrading.GetComponent<ColorGrading>().saturation.value <= -100)
+            this.colorGrading.saturation.value -= 1f;
+
+            if (this.colorGrading.saturation.value <= -100)
             {
                 showText();
                 break;
             }
-
-            this.colorGrading.GetComponent<ColorGrading>().saturation.value -= 1f;
+            
             yield return new WaitForSeconds(delay);
         }
     }

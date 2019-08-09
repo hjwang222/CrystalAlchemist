@@ -3865,10 +3865,10 @@ RectTransform:
   m_Father: {fileID: 982956890083992349}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -67.863945, y: -0.859169}
-  m_SizeDelta: {x: 600, y: 180}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.12780762, y: -0.002105713}
+  m_SizeDelta: {x: 160.96, y: 71.693}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6357200779665973848
 MonoBehaviour:
@@ -3886,7 +3886,7 @@ MonoBehaviour:
   loadGame: {fileID: 11400000, guid: 6235bec172bdebb4b9dfed7e628eb8cc, type: 2}
   audiosource: {fileID: 3975563060501849351}
   deathMusic: {fileID: 0}
-  colorGrading: {fileID: 0}
+  postProcessVolume: {fileID: 5514980624623143217}
   textField: {fileID: 124264620137512529}
   countDown: {fileID: 2410168094194877347}
   returnTitleScreen: {fileID: 8426288853237118033}
@@ -34438,6 +34438,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 1557770953073583826}
   setFirstSelected: 1
+--- !u!1 &5514980624623143216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5514980624623143214}
+  - component: {fileID: 5514980624623143217}
+  m_Layer: 8
+  m_Name: PostProcessing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5514980624623143214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5514980624623143216}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.0287466, y: 0.6721561, z: -16.201418}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2129297611303384488}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5514980624623143217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5514980624623143216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 3a70278658fda67439669e98f01337b1, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &5523684909797830857
 GameObject:
   m_ObjectHideFlags: 0
@@ -45607,6 +45655,7 @@ Transform:
   - {fileID: 3456071192229148758}
   - {fileID: 3861080509922436828}
   - {fileID: 982956890083992349}
+  - {fileID: 5514980624623143214}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -56078,7 +56127,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Leider hat es ... nicht geschafft wieder nach Hause zu kommen... .
+  m_text: "Leider hast du es nicht geschafft wieder zur\xFCck nach Hause zu kommen...
+    ."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3f1660bebbaef6b4987ec9111be1f411, type: 2}
   m_sharedMaterial: {fileID: 21836469378663696, guid: 3f1660bebbaef6b4987ec9111be1f411,
@@ -56201,7 +56251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Game Over
+  alternativeText: 'Sadly, you never found the way back home... . '
   textMeshField: {fileID: 124264620137512529}
 --- !u!114 &1355102452971477777
 MonoBehaviour:
