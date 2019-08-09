@@ -14,7 +14,7 @@ public class PlayerData
     public float[] position;
     public string scene;
 
-    public PlayerData(Player player)
+    public PlayerData(Player player, string scene)
     {
         this.health = player.life;
         this.mana = player.mana;
@@ -28,7 +28,7 @@ public class PlayerData
         setInventory(player);
         setSkills(player);
 
-        this.scene = player.getScene();
+        this.scene = scene;
     }
 
     private void setInventory(Player player)

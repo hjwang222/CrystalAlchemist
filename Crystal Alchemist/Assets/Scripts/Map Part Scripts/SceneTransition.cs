@@ -41,7 +41,12 @@ public class SceneTransition : MonoBehaviour
         if (other.CompareTag("Player") && !other.isTrigger)
         {
             Player player = other.GetComponent<Player>();
-            if(player != null) StartCoroutine(LoadScene(player));
+            if (player != null)
+            {
+                this.vcamSignal.Raise();
+                player.teleportPlayer(this.targetScene, this.playerPositionInNewScene, this.transitionDuration.getValue());
+               // StartCoroutine(LoadScene(player));
+            }
         }
     }
   

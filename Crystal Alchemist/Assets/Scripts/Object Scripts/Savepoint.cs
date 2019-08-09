@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Savepoint : Interactable
 {
     public override void doSomethingOnSubmit()
     {
-        SaveSystem.Save(this.player);
+        Scene scene = SceneManager.GetActiveScene();
+
+        SaveSystem.Save(this.player, scene.name);
+
+        this.player.setLastTeleport(scene.name);
+
         string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
         this.player.showDialogBox(text);
     }

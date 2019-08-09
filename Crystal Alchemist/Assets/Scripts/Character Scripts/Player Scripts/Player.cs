@@ -53,8 +53,13 @@ public class Player : Character
     [FoldoutGroup("Player Signals", expanded: false)]
     public SimpleSignal openPauseSignal;
 
+    [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
     public BoolSignal cameraSignal;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public BoolSignal fadeSignal;
 
     [Required]
     [BoxGroup("Pflichtfelder")]
@@ -65,6 +70,11 @@ public class Player : Character
     [BoxGroup("Pflichtfelder")]
     [SerializeField]
     private BoolValue loadGame;
+
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    [SerializeField]
+    private FloatValue fadingDuration;
 
     [HideInInspector]
     public StandardSkill AButton;
@@ -77,6 +87,10 @@ public class Player : Character
     [HideInInspector]
     public StandardSkill RBButton;
 
+
+    private Vector2 lastSaveGamePosition;
+    private string lastSaveGameScene;
+
     private Vector3 change;
     private string lastButtonPressed = "";
 
@@ -86,7 +100,7 @@ public class Player : Character
        initPlayer();
     }
 
-    private void initPlayer()
+    public void initPlayer()
     {
         SaveSystem.loadOptions();
 
@@ -113,6 +127,61 @@ public class Player : Character
         this.direction = new Vector2(0, -1);
         //this.currencySignalUI.Raise();
     }
+
+
+    public void setLastTeleport(string targetScene)
+    {
+        this.lastSaveGamePosition = this.transform.position;
+        this.lastSaveGameScene = targetScene;
+    }
+
+    public bool getLastTeleport(out string scene, out Vector2 position)
+    {
+        scene = this.lastSaveGameScene;
+        position = this.lastSaveGamePosition;
+
+        if (scene != null && position != null) return true;
+        else return false;
+    }
+
+    public void teleportPlayer()
+    {
+        teleportPlayer(this.lastSaveGameScene, this.lastSaveGamePosition, this.fadingDuration.getValue());
+    }
+
+    public void teleportPlayer(string targetScene, Vector2 position)
+    {
+        teleportPlayer(targetScene, position, this.fadingDuration.getValue());
+    }
+
+    public void teleportPlayer(string targetScene, Vector2 position, float duration)
+    {
+        StartCoroutine(LoadScene(targetScene, position, duration));
+    }
+
+    private IEnumerator LoadScene(string targetScene, Vector2 position, float duration)
+    {
+        this.fadeSignal.Raise(false);
+        this.currentState = CharacterState.inDialog;
+        this.deactivateAllSkills();
+
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(targetScene);
+        asyncOperation.allowSceneActivation = false;
+
+        while (!asyncOperation.isDone)
+        {
+            if (asyncOperation.progress >= 0.9f)
+            {
+                yield return new WaitForSeconds(duration);
+
+                asyncOperation.allowSceneActivation = true;
+                this.setNewPosition(position);
+            }
+            yield return null;
+        }
+    }
+
+
 
     public override void KillIt()
     {
@@ -219,12 +288,6 @@ public class Player : Character
     public void showDialogBox(string text)
     {
         if (this.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
-    }
-
-    public string getScene()
-    {
-        Scene scene = SceneManager.GetActiveScene();
-        return scene.name;
     }
 
     ///////////////////////////////////////////////////////////////

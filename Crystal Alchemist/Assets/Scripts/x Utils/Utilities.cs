@@ -644,7 +644,7 @@ public class Utilities : MonoBehaviour
         private static void instantiateStatusEffect(StatusEffect statusEffect, List<StatusEffect> statusEffects, Character character)
         {
             GameObject statusEffectClone = Instantiate(statusEffect.gameObject, character.transform.position, Quaternion.identity, character.transform);
-            statusEffectClone.transform.parent = character.activeStatusEffectParent.transform;
+            statusEffectClone.transform.SetParent(character.activeStatusEffectParent.transform, false);
             DontDestroyOnLoad(statusEffectClone);
             StatusEffect statusEffectScript = statusEffectClone.GetComponent<StatusEffect>();
             statusEffectScript.target = character;

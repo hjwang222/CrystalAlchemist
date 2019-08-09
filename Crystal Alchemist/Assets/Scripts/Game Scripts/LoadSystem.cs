@@ -14,6 +14,9 @@ public class LoadSystem : MonoBehaviour
             player.life = data.health;
             player.mana = data.mana;
 
+            player.healthSignalUI.Raise();
+            player.manaSignalUI.Raise();
+
             player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
 
             if (data.inventory.Count > 0)
@@ -30,6 +33,8 @@ public class LoadSystem : MonoBehaviour
 
     private static void loadInventory(PlayerData data, Player player)
     {
+        player.inventory.Clear();
+
         foreach (string[] elem in data.inventory)
         {
             GameObject prefab = Resources.Load("Items/" + elem[0], typeof(GameObject)) as GameObject;

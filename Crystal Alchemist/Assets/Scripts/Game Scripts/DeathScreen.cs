@@ -30,11 +30,19 @@ public class DeathScreen : MonoBehaviour
 
     [BoxGroup("Mandatory")]
     [SerializeField]
+    private myCursor cursor;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
     private TextMeshProUGUI textField;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
     private TextMeshProUGUI countDown;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    private GameObject UI;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
@@ -64,13 +72,16 @@ public class DeathScreen : MonoBehaviour
     private string fullText;
     private string lastSavepoint;
     private ColorGrading colorGrading;
+    private Player player;
 
     private void Awake()
     {
+        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         this.returnSavePoint.SetActive(false);
         this.returnTitleScreen.SetActive(false);
         this.countDown.gameObject.SetActive(false);
         this.textField.gameObject.SetActive(false);
+        this.UI.SetActive(false);
     }
 
 
@@ -102,8 +113,9 @@ public class DeathScreen : MonoBehaviour
 
     public void showButtons()
     {
+        this.cursor.gameObject.SetActive(true);
         this.returnTitleScreen.SetActive(true);
-        //if (this.lastSavepoint != null) this.returnSavePoint.SetActive(true);
+        if (this.lastSavepoint != null) this.returnSavePoint.SetActive(true);
 
         this.countDown.gameObject.SetActive(true);
         StartCoroutine(this.countDownCo());
@@ -116,7 +128,14 @@ public class DeathScreen : MonoBehaviour
 
     public void returnSaveGame()
     {
-        if (this.lastSavepoint != null) SceneManager.LoadSceneAsync(this.lastSavepoint);
+        if (this.lastSavepoint != null)
+        {
+            this.colorGrading.saturation.value = 0;
+            this.gameObject.SetActive(false);
+            this.UI.SetActive(true);
+            SceneManager.LoadSceneAsync(this.lastSavepoint);
+            this.player.initPlayer();
+        }
     }
 
     private IEnumerator ShowTextCo(float delay)
