@@ -785,6 +785,13 @@ public class Utilities : MonoBehaviour
             return RadianToVector2(degree * Mathf.Deg2Rad);
         }
 
+        public static void rotateCollider(Character character, GameObject gameObject)
+        {
+            float angle = (Mathf.Atan2(character.direction.y, character.direction.x) * Mathf.Rad2Deg) + 90;
+
+            gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
+
         public static void setDirectionAndRotation(Character sender, Character target,
                                                     float positionOffset, float positionHeight, float snapRotationInDegrees, float rotationModifier,
                                                    out float angle, out Vector2 start, out Vector2 direction, out Vector3 rotation)

@@ -17,6 +17,8 @@ public class Interactable : MonoBehaviour
     [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]
     public GameObject contextClueChild;
 
+
+
     [FoldoutGroup("Dialog", expanded: false)]
     [Tooltip("Anzeige-Text für die Dialog-Box")]
     [TextAreaAttribute]
@@ -165,13 +167,13 @@ public class Interactable : MonoBehaviour
                 && Utilities.Collisions.checkIfGameObjectIsViewed(character, this.gameObject))
             {
                 player.currentState = CharacterState.interact;
-                this.context.SetActive(true);
+                this.context.SetActive(true);                
                 this.isPlayerLookingAtIt = true;
             }
             else
             {
                 player.currentState = CharacterState.idle;
-                this.context.SetActive(false);
+                this.context.SetActive(false);                
                 this.isPlayerLookingAtIt = false;
             }
         }

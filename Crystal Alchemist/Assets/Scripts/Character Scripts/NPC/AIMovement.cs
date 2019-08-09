@@ -60,6 +60,7 @@ public class AIMovement : MonoBehaviour
     private void Update()
     {
         if(this.npc.currentState != CharacterState.dead
+        && this.npc.currentState != CharacterState.knockedback
         && this.npc.currentState != CharacterState.manually) moveCharacter();
     }
 
@@ -122,7 +123,7 @@ public class AIMovement : MonoBehaviour
                         StartCoroutine(delayMovementCo());
                     }
                 }
-                else if (this.backToStart && this.npc.transform.position != this.npc.spawnPosition) moveTorwardsTarget(this.npc.spawnPosition);
+                else if (this.backToStart && Vector2.Distance(this.npc.transform.position, this.npc.spawnPosition) > 0.1f) moveTorwardsTarget(this.npc.spawnPosition);
                 else Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
             }
             else
@@ -145,12 +146,14 @@ public class AIMovement : MonoBehaviour
 
     private void moveTorwardsTarget(Vector3 position)
     {
-        if ((this.npc.currentState == CharacterState.idle || this.npc.currentState == CharacterState.walk) && this.npc.currentState != CharacterState.knockedback)
+        if (this.npc.currentState != CharacterState.knockedback
+            && this.npc.currentState != CharacterState.attack
+            && this.npc.currentState != CharacterState.dead)
         {
             //Bewegt den Gegner zum Spieler
-            Vector3 temp = Vector3.MoveTowards(transform.position, position, this.npc.speed * (Time.deltaTime * this.npc.timeDistortion));
+            // Vector3 temp = Vector3.MoveTowards(transform.position, position, this.npc.speed * (Time.deltaTime * this.npc.timeDistortion));
 
-            Vector2 direction = position - this.transform.position;
+            Vector2 direction = (position - this.transform.position).normalized;
             if (!Utilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
 
             if (this.npc.flip)
@@ -159,8 +162,12 @@ public class AIMovement : MonoBehaviour
                 else this.npc.spriteRenderer.flipX = false;
             }
 
-            this.npc.myRigidbody.MovePosition(temp);
-            this.npc.myRigidbody.velocity = Vector2.zero;
+            //this.npc.myRigidbody.MovePosition(temp);
+            //this.npc.myRigidbody.velocity = Vector2.zero;
+
+            Vector3 movement = new Vector3(this.npc.direction.x, this.npc.direction.y + (this.npc.steps * this.npc.direction.x), 0.0f);
+            if (!this.npc.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.speed * this.npc.timeDistortion);
+
 
             this.npc.currentState = CharacterState.walk;
             

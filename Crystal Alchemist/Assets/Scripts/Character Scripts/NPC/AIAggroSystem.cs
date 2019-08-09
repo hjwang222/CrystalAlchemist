@@ -61,10 +61,6 @@ public class AIAggroSystem : MonoBehaviour
 
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
-    [Tooltip("wirkt nur auf sich selbst")]
-    public bool affectSelf = false;
-
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("wirkt auf alle Spieler")]
     public bool affectOther = false;
 
@@ -90,7 +86,8 @@ public class AIAggroSystem : MonoBehaviour
     }
 
     private void Update()
-    {
+    {        
+        Utilities.Rotation.rotateCollider(this.enemy, this.gameObject);
         generateAggro();
     }
 
@@ -202,8 +199,8 @@ public class AIAggroSystem : MonoBehaviour
     {
         if (clue != null && this.activeClue == null)
         {
-            Vector3 position = new Vector3(this.transform.position.x - 0.5f, this.transform.position.y + 0.5f);
-            this.activeClue = Instantiate(clue, position, Quaternion.identity, this.transform);
+            Vector3 position = new Vector3(this.enemy.transform.position.x - 0.5f, this.enemy.transform.position.y + 0.5f);
+            this.activeClue = Instantiate(clue, position, Quaternion.identity, this.enemy.transform);
         }
     }
 

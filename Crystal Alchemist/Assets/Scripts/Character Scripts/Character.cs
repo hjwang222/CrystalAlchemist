@@ -228,10 +228,6 @@ public class Character : MonoBehaviour
     [Tooltip("Soundeffekt, wenn Gegner getroffen wurde")]
     public AudioClip hitSoundEffect;
 
-    [FoldoutGroup("Sound", expanded: false)]
-    [Tooltip("Soundeffekt, wenn Gegner getötet wurde")]
-    public AudioClip killSoundEffect;
-
 
     ////////////////////////////////////////////////////////////////
 
@@ -249,6 +245,11 @@ public class Character : MonoBehaviour
     [Tooltip("Um welchen Typ handelt es sich?")]
     [EnumToggleButtons]
     public CharacterType characterType = CharacterType.Object;
+
+    [BoxGroup("AI")]
+    [SerializeField]
+    [Required]
+    private AIAggroSystem aggro;
 
     #endregion
 
@@ -331,7 +332,6 @@ public class Character : MonoBehaviour
     public void init()
     {
         this.spawnPosition = this.transform.position;
-        this.direction = new Vector2(0, -1);
 
         //getItems();    
 
@@ -382,14 +382,17 @@ public class Character : MonoBehaviour
 
     public void initSpawn()
     {
+        destroySkills();
         setBasicAttributesToNormal();
         ActivateCharacter();
     }
 
     private void setBasicAttributesToNormal()
     {
+        this.direction = new Vector2(0, -1);
+
         this.life = this.startLife;
-        this.mana = this.startMana;
+        this.mana = this.startMana;        
 
         //TODO
         this.speed = (this.startSpeed / 100) * this.speedMultiply;
@@ -521,14 +524,18 @@ public class Character : MonoBehaviour
         }
         else
         {
+            foreach (StandardSkill skill in this.activeSkills)
+            {
+                if(!skill.isStationary) skill.durationTimeLeft = 0;
+            }
+
             //TODO: Kill sofort (Skill noch aktiv)
             Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
             Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
                        
             this.spriteRenderer.color = Color.white;
 
-            AIAggroSystem aggro = this.GetComponent<AIAggroSystem>();
-            if (aggro != null) aggro.clearAggro();
+            if (this.aggro != null) aggro.clearAggro();
 
             this.currentState = CharacterState.dead;
 
@@ -536,8 +543,6 @@ public class Character : MonoBehaviour
             //StartCoroutine(colliderDisable());
             if (this.boxCollider != null) this.boxCollider.enabled = false;
             this.shadowRenderer.enabled = false;
-
-            destroySkills();
 
             //Play Death Effect
             if (this.deathAnimation != null)
@@ -549,9 +554,9 @@ public class Character : MonoBehaviour
     }
 
 
-    public void PlayDeathSoundEffect()
+    public void PlaySoundEffect(AudioClip clip)
     {
-        Utilities.Audio.playSoundEffect(this.audioSource, this.killSoundEffect);
+        Utilities.Audio.playSoundEffect(this.audioSource, clip);
     }
 
     public void DestroyIt()
@@ -819,8 +824,7 @@ public class Character : MonoBehaviour
                 updateResource(elem.resourceType, null, amount);
 
                 if (this.life > 0 && elem.resourceType == ResourceType.life && amount < 0)
-                {
-                    AIAggroSystem aggro = this.GetComponent<AIAggroSystem>();
+                {                    
                     if (aggro != null) aggro.increaseAggroOnHit(skill.sender, elem.amount);
 
                     //Charakter-Treffer (Schaden) animieren

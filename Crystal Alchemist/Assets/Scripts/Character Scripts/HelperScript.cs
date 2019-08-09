@@ -17,8 +17,13 @@ public class HelperScript : MonoBehaviour
         character.DestroyItCompletely();
     }
 
-    public void PlayDeathSoundEffect()
+    public void PlaySoundEffect(AudioClip clip)
     {
-        character.PlayDeathSoundEffect();
+        character.PlaySoundEffect(clip);
+    }
+
+    public void updateSpeed(float addSpeed)
+    {
+        character.updateSpeed(addSpeed,false);
     }
 }

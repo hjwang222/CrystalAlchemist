@@ -13,6 +13,12 @@ public class CurrencySlot : MonoBehaviour
     private TextMeshProUGUI textField;
     [SerializeField]
     private AudioClip raiseSoundEffect;
+    [SerializeField]
+    private FloatSignal hideSignal;
+    [SerializeField]
+    private float hideDelay = 3f;
+
+
     private Player player;
 
     private AudioSource audioSource;
@@ -34,8 +40,14 @@ public class CurrencySlot : MonoBehaviour
         playSound = true;
     }
 
+    public bool isItRunning()
+    {
+        return this.isRunning;
+    }
+
     public void updateCurrency()
-    {        
+    {
+
         this.newValue = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);
 
         if (this.playSound)
@@ -52,6 +64,7 @@ public class CurrencySlot : MonoBehaviour
         int change = Mathf.Abs(this.currentValue - this.newValue);
         float counterDelay = 1;
         if (change != 0) counterDelay = 0.01f / (float)change;
+        this.isRunning = true;
 
         while (this.currentValue != this.newValue)
         {
@@ -64,6 +77,7 @@ public class CurrencySlot : MonoBehaviour
             {
                 this.currentValue = this.newValue;
                 this.isRunning = false;
+                this.hideSignal.Raise(this.hideDelay);
                 //this.playOnce = false;
                 this.textField.text = Utilities.Format.formatString(this.currentValue, this.maxValue);
                 break;
@@ -75,6 +89,7 @@ public class CurrencySlot : MonoBehaviour
         }
 
         this.isRunning = false;
+        
         //this.playOnce = false;
     }
 }

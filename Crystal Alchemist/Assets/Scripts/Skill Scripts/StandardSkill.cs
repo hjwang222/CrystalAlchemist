@@ -681,6 +681,7 @@ public class StandardSkill : MonoBehaviour
 
                     if (this.animator == null || !Utilities.UnityUtils.HasParameter(this.animator, "Explode"))
                     {
+                        Debug.Log(this.skillName + " hat kein Animator oder Explode-Parameter");
                         SetTriggerActive(1);
                         DestroyIt();
                     }

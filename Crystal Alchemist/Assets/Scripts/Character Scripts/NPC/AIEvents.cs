@@ -9,14 +9,15 @@ using Sirenix.OdinInspector;
 
 public enum AIActionType
 {
-    move,
+    movement,
     dialog,
     wait,
     skill,
     sequence,
     transition, 
     immortal,
-    kill
+    kill,
+    animation
 }
 
 public enum AIEventType
@@ -94,7 +95,7 @@ public class AIAction
     [LabelWidth(100)]
     public bool isImmortal;
 
-    [ShowIf("type", AIActionType.move)]
+    [ShowIf("type", AIActionType.movement)]
     [TableColumnWidth(150)]
     [VerticalGroup("Properties")]
     [LabelWidth(75)]
@@ -124,6 +125,11 @@ public class AIAction
     [VerticalGroup("Properties")]
     [LabelWidth(85)]
     public string nextPhase;
+
+    [ShowIf("type", AIActionType.animation)]
+    [VerticalGroup("Properties")]
+    [LabelWidth(85)]
+    public string animation;
 
     [ShowIf("type", AIActionType.skill)]
     [VerticalGroup("Type")]
@@ -185,7 +191,7 @@ public class AITrigger
     [VerticalGroup("Value")]
     [HideLabel]
     [SerializeField]
-    public List<Collider2D> collider;
+    public List<RangeTriggered> rangeTrigger;
 }
 
 #endregion
@@ -529,8 +535,14 @@ public class AIEvents : MonoBehaviour
                 }
                 else if (triggerElem.type == AIEventType.range)
                 {
-                    if (!elem.requireAll) return true;
-                    else success++;
+                    foreach(RangeTriggered range in triggerElem.rangeTrigger)
+                    {
+                        if(range.isTriggered)
+                        {
+                            if (!elem.requireAll) return true;
+                            else success++;
+                        }
+                    }                   
                 }
             }
 
@@ -645,7 +657,7 @@ public class AIEvents : MonoBehaviour
             actionUsed = true;
             //Debug.Log("Using action: " + usedSkill.skillName);
         }
-        else if (action.type == AIActionType.move)
+        else if (action.type == AIActionType.movement)
         {
             //move enemy to position    
             //actionUsed = true;
@@ -678,6 +690,10 @@ public class AIEvents : MonoBehaviour
         {
             //suicide
             this.enemy.KillIt();
+        }
+        else if (action.type == AIActionType.animation)
+        {
+            Utilities.UnityUtils.SetAnimatorParameter(this.enemy.animator, action.animation);
         }
         else if (action.type == AIActionType.immortal)
         {
@@ -713,6 +729,7 @@ public class AIEvents : MonoBehaviour
 
         return null;
     }
+
 
     #endregion
 

@@ -554,7 +554,8 @@ public class Player : Character
     private void MoveCharacter()
     {
         if (this.currentState != CharacterState.knockedback
-            && this.currentState != CharacterState.attack)
+            && this.currentState != CharacterState.attack
+            && this.currentState != CharacterState.dead)
         {
             if(this.currentState != CharacterState.interact) this.currentState = CharacterState.walk;
             change.Normalize(); //Diagonal-Laufen fixen
@@ -565,13 +566,6 @@ public class Player : Character
             Vector3 movement = new Vector3(change.x, change.y + (this.steps*this.change.x), 0.0f);
             if(!this.isOnIce) this.myRigidbody.velocity = (movement * speed * this.timeDistortion);            
         }
-
-        //Debug.Log("Reset in Player Movement: " + this.myRigidbody.velocity);
-        //this.myRigidbody.velocity = Vector2.zero;
-
-        //Slide
-        //Vector3 movement = new Vector3(change.x, change.y, 0.0f);
-        //this.myRigidbody.AddForce(movement * speed);
     }
 
     #endregion

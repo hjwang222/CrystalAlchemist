@@ -113,7 +113,7 @@ Transform:
   m_Children:
   - {fileID: 439064309}
   m_Father: {fileID: 2246077131478480998}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &929082024
 SpriteRenderer:
@@ -224,8 +224,84 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2246077131478480998}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &460673902827425336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1797094622092973467}
+  - component: {fileID: 2285685941926595743}
+  - component: {fileID: 699278166353142346}
+  m_Layer: 11
+  m_Name: Aggro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1797094622092973467
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460673902827425336}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.185, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2246077131478480998}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2285685941926595743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460673902827425336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f80b21aee0d2f47a0e58afdc49b328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 4482648712296496520}
+  firstHitMaxAggro: 1
+  aggroIncreaseFactor: 60
+  aggroOnHitIncreaseFactor: 50
+  aggroDecreaseFactor: -40
+  aggroNeededToTarget: 100
+  targetChangeDelay: 0
+  targetFoundClue: {fileID: 2272594966625261294, guid: 4fd74db682f4f7c4080f1aa35f365e1e,
+    type: 3}
+  foundClueDuration: 0
+  targetActiveClue: {fileID: 7047217433774240400, guid: d0cd9d0d605bdfd44b021afb2046b0b9,
+    type: 3}
+  activeClueDuration: 2
+  affectOther: 1
+  affectSame: 0
+  affectNeutral: 0
+--- !u!58 &699278166353142346
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460673902827425336}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3.25
 --- !u!1 &1691123302925716915
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +330,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2246077131478480998}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2246077131478480992
 GameObject:
@@ -268,9 +344,7 @@ GameObject:
   - component: {fileID: 2246077131478480996}
   - component: {fileID: 4482648712296496520}
   - component: {fileID: 2246077131478481017}
-  - component: {fileID: 4482648712296496523}
   - component: {fileID: 4482648712296496522}
-  - component: {fileID: 8351946423556740917}
   - component: {fileID: 1028641328}
   - component: {fileID: 7129135206912136028}
   m_Layer: 11
@@ -291,6 +365,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1797094622092973467}
   - {fileID: 929082026}
   - {fileID: 1158493753}
   - {fileID: 7788126183368172930}
@@ -386,6 +461,7 @@ MonoBehaviour:
   characterSpecies: 
   characterGender: 2
   characterType: 1
+  aggro: {fileID: 2285685941926595743}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
@@ -412,6 +488,7 @@ MonoBehaviour:
   steps: 0
   isOnIce: 0
   dialogPosition: {fileID: 929082023}
+  flip: 1
   target: {fileID: 0}
   partner: {fileID: 0}
 --- !u!114 &2246077131478481017
@@ -435,35 +512,6 @@ MonoBehaviour:
   path: []
   followPathPrecision: 0.01
   followPathInCircle: 0
---- !u!114 &4482648712296496523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2246077131478480992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9f80b21aee0d2f47a0e58afdc49b328, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 4482648712296496520}
-  firstHitMaxAggro: 1
-  aggroIncreaseFactor: 60
-  aggroOnHitIncreaseFactor: 50
-  aggroDecreaseFactor: -40
-  aggroNeededToTarget: 100
-  targetChangeDelay: 0
-  targetFoundClue: {fileID: 2272594966625261294, guid: 4fd74db682f4f7c4080f1aa35f365e1e,
-    type: 3}
-  foundClueDuration: 0
-  targetActiveClue: {fileID: 7047217433774240400, guid: d0cd9d0d605bdfd44b021afb2046b0b9,
-    type: 3}
-  activeClueDuration: 2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 0
 --- !u!114 &4482648712296496522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,7 +553,7 @@ MonoBehaviour:
     - type: 0
       time: 0
       life: 0
-      collider: []
+      rangeTrigger: []
     actions:
     - type: 1
       isImmortal: 0
@@ -528,22 +576,6 @@ MonoBehaviour:
     requireAll: 0
     startTime: 0
     isActive: 1
---- !u!58 &8351946423556740917
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2246077131478480992}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 3.25
 --- !u!61 &1028641328
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -609,5 +641,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2246077131478480998}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
