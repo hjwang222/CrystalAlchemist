@@ -152,15 +152,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  indicators: []
+  indicators:
+  - {fileID: 4803367683635004671, guid: 4bea464adb12fb4419adec9db5f4305b, type: 3}
   showingIndicator: 1
   showCastBarForEnemies: 1
   useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  indicatorColor: {r: 1, g: 1, b: 1, a: 1}
   cast: 4
   keepHoldTimer: 0
   delay: 0
-  duration: 0
+  duration: 0.3
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
   deactivateByButtonDown: 0
@@ -187,7 +188,7 @@ MonoBehaviour:
   speed: 0
   rotateIt: 0
   rotateOnUpdate: 0
-  keepOriginalRotation: 0
+  keepOriginalRotation: 1
   blendTree: 0
   useOffSetToBlendTree: 0
   rotationModifier: 0
@@ -230,7 +231,7 @@ MonoBehaviour:
   setPositionAtStart: 1
   setActive: 1
   supportType: 3
-  useCollider: 1
+  useCollider: 0
   targetColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!58 &3229661110501609832
 CircleCollider2D:

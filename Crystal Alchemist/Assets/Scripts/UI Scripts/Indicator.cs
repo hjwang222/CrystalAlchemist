@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Experimental.Rendering.LWRP;
 
 public class Indicator : MonoBehaviour
 {
@@ -14,9 +15,11 @@ public class Indicator : MonoBehaviour
     [Required]
     public Animator animator;
 
+    public Light2D light;
+
     public virtual void Start()
     {
-
+        
     }
 
     /*
@@ -31,7 +34,11 @@ public class Indicator : MonoBehaviour
         this.skill = skill;
         if (skill != null)
         {
-            if (skill.useCustomColor) this.indicatorRenderer.color = skill.indicatorColor;
+            if (skill.useCustomColor)
+            {
+                this.indicatorRenderer.color = skill.indicatorColor;
+                if(this.light != null) this.light.color = skill.indicatorColor;
+            }
             this.transform.position = this.skill.transform.position;
         }
     }

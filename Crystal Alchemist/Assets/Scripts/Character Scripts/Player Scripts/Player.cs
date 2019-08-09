@@ -129,9 +129,9 @@ public class Player : Character
     }
 
 
-    public void setLastTeleport(string targetScene)
+    public void setLastTeleport(string targetScene, Vector2 position)
     {
-        this.lastSaveGamePosition = this.transform.position;
+        this.lastSaveGamePosition = position;
         this.lastSaveGameScene = targetScene;
     }
 
@@ -187,6 +187,14 @@ public class Player : Character
     {
         if(this.currentState != CharacterState.dead)
         {
+            this.change = Vector2.zero;
+            this.direction = new Vector2(0, -1);
+
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
+
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead");
+
             this.currentState = CharacterState.dead;
             this.deathSignal.Raise();
         }        
@@ -240,43 +248,46 @@ public class Player : Character
 
     private void playerInputs()
     {
-        if (this.currentState == CharacterState.inDialog || this.currentState == CharacterState.inMenu)
+        if (this.currentState != CharacterState.dead)
         {
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", false);
-            return;
-        }
-
-        if (Input.GetButtonDown("Inventory"))
-        {
-            this.openInventorySignal.Raise();
-        }
-
-        if (Input.GetButtonDown("Pause"))
-        {
-            this.openPauseSignal.Raise();
-        }
-
-        if (!Utilities.StatusEffectUtil.isCharacterStunned(this))
-        {
-            change = Vector3.zero;
-            change.x = Input.GetAxisRaw("Horizontal");
-            change.y = Input.GetAxisRaw("Vertical");
-
-            if (currentState != CharacterState.dead
-                && this.currentState != CharacterState.inDialog
-                && this.currentState != CharacterState.inMenu)
+            if (this.currentState == CharacterState.inDialog || this.currentState == CharacterState.inMenu)
             {
-                UpdateAnimationAndMove();
-            }           
-        }
+                Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", false);
+                return;
+            }
 
-        if (this.currentState != CharacterState.knockedback)
-        {
-            useSkill("A-Button");
-            useSkill("B-Button");
-            useSkill("X-Button");
-            useSkill("Y-Button");
-            useSkill("RB-Button");
+            if (Input.GetButtonDown("Inventory"))
+            {
+                this.openInventorySignal.Raise();
+            }
+
+            if (Input.GetButtonDown("Pause"))
+            {
+                this.openPauseSignal.Raise();
+            }
+
+            if (!Utilities.StatusEffectUtil.isCharacterStunned(this))
+            {
+                change = Vector3.zero;
+                change.x = Input.GetAxisRaw("Horizontal");
+                change.y = Input.GetAxisRaw("Vertical");
+
+                if (currentState != CharacterState.dead
+                    && this.currentState != CharacterState.inDialog
+                    && this.currentState != CharacterState.inMenu)
+                {
+                    UpdateAnimationAndMove();
+                }
+            }
+
+            if (this.currentState != CharacterState.knockedback)
+            {
+                useSkill("A-Button");
+                useSkill("B-Button");
+                useSkill("X-Button");
+                useSkill("Y-Button");
+                useSkill("RB-Button");
+            }
         }
     }
 
@@ -429,6 +440,7 @@ public class Player : Character
             else if (skill.cast > 0 && this.activeCastbar != null && skill.holdTimer > 0)
             {
                 this.activeCastbar.showCastBar();
+                skill.showIndicator();
             }
         }
         else if (Input.GetButtonUp(button))

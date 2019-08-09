@@ -8,8 +8,17 @@ public class CircleIndicator : Indicator
     public override void Start()
     {
         base.Start();
-        this.transform.parent = this.skill.transform;
-        this.transform.position = this.skill.transform.position;
+
+        if (this.skill.gameObject.activeInHierarchy)
+        {
+            this.transform.parent = this.skill.transform;
+            this.transform.position = this.skill.transform.position;
+        }
+        else
+        {
+            //this.transform.parent = this.skill.sender.transform;
+            this.transform.position = this.skill.sender.shadowRenderer.transform.position;
+        }
     }    
     
 }
