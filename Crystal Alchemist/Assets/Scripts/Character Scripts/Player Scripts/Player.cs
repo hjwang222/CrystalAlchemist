@@ -35,6 +35,10 @@ public class Player : Character
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal deathSignal;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
     public SimpleSignal healthSignalUI;
 
     [Required]
@@ -97,7 +101,6 @@ public class Player : Character
 
         this.isPlayer = true;
         this.init();
-        this.setResourceSignal(this.healthSignalUI, this.manaSignalUI);
 
         if (this.loadGame.getValue()) LoadSystem.loadPlayerData(this);
 
@@ -109,6 +112,32 @@ public class Player : Character
 
         this.direction = new Vector2(0, -1);
         //this.currencySignalUI.Raise();
+    }
+
+    public override void KillIt()
+    {
+        if(this.currentState != CharacterState.dead)
+        {
+            this.currentState = CharacterState.dead;
+            this.deathSignal.Raise();
+        }        
+    }
+
+    public override void updateResource(ResourceType type, Item item, float value, bool showingDamageNumber)
+    {
+        base.updateResource(type, item, value, showingDamageNumber);
+
+        switch (type)
+        {
+            case ResourceType.life:
+                {
+                    callSignal(this.healthSignalUI, value); break;
+                }
+            case ResourceType.mana:
+                {
+                    callSignal(this.manaSignalUI, value); break;
+                }
+        }
     }
 
     public void loadSkillsFromSkillSet(string name, enumButton button)

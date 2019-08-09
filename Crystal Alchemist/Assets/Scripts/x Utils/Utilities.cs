@@ -418,7 +418,7 @@ public class Utilities : MonoBehaviour
 
         public static int getAmountFromInventory(Item item, List<Item> inventory, bool maxAmount)
         {
-            Item itemFound = getItem(item, inventory);
+            Item itemFound = getItemFromInventory(item, inventory);
 
             if (itemFound != null)
             {
@@ -429,7 +429,7 @@ public class Utilities : MonoBehaviour
             return 0;
         }
 
-        private static Item getItem(Item item, List<Item> inventory)
+        public static Item getItemFromInventory(Item item, List<Item> inventory)
         {
             foreach (Item elem in inventory)
             {
@@ -452,7 +452,7 @@ public class Utilities : MonoBehaviour
         {
             if (item != null)
             {
-                Item found = getItem(item, character.inventory);
+                Item found = getItemFromInventory(item, character.inventory);
 
                 if (found == null)
                 {

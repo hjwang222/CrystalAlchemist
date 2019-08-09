@@ -258,10 +258,9 @@ public class Character : MonoBehaviour
 
     private float lifeTime;
     private float manaTime;
+
     [HideInInspector]
     public float speedMultiply = 5;
-    private SimpleSignal healthSignal;
-    private SimpleSignal manaSignal;
 
     private List<Color> colors = new List<Color>();
     private bool showTargetHelp = false;
@@ -363,12 +362,6 @@ public class Character : MonoBehaviour
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
     }
 
-    public void setResourceSignal(SimpleSignal health, SimpleSignal mana)
-    {
-        this.healthSignal = health;
-        this.manaSignal = mana;
-    }
-
     public void setTargetHelper(GameObject targetHelper)
     {
         this.targetHelpObjectPlayer = targetHelper;
@@ -392,7 +385,7 @@ public class Character : MonoBehaviour
         this.direction = new Vector2(0, -1);
 
         this.life = this.startLife;
-        this.mana = this.startMana;        
+        this.mana = this.startMana;
 
         //TODO
         this.speed = (this.startSpeed / 100) * this.speedMultiply;
@@ -514,25 +507,19 @@ public class Character : MonoBehaviour
         this.activeSkills.Clear();
     }
 
-    public void KillIt()
+    public virtual void KillIt()
     {
-        if (this.isPlayer && this.currentState != CharacterState.dead)
-        {
-            this.currentState = CharacterState.dead;
-            //TODO: Wenn Spieler tot ist
-            SceneManager.LoadSceneAsync(0);
-        }
-        else
+        if (!this.isPlayer)
         {
             foreach (StandardSkill skill in this.activeSkills)
             {
-                if(!skill.isStationary) skill.durationTimeLeft = 0;
+                if (!skill.isStationary) skill.durationTimeLeft = 0;
             }
 
             //TODO: Kill sofort (Skill noch aktiv)
             Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
             Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
-                       
+
             this.spriteRenderer.color = Color.white;
 
             if (this.aggro != null) aggro.clearAggro();
@@ -586,7 +573,7 @@ public class Character : MonoBehaviour
         updateResource(type, item, addResource, true);
     }
 
-    public void updateResource(ResourceType type, Item item, float value, bool showingDamageNumber)
+    public virtual void updateResource(ResourceType type, Item item, float value, bool showingDamageNumber)
     {
         switch (type)
         {
@@ -599,14 +586,12 @@ public class Character : MonoBehaviour
 
                     if (this.life > 0 && this.currentState != CharacterState.dead && showingDamageNumber) showDamageNumber(value, colorArray);
                     if (this.life <= 0) KillIt();
-                    callSignal(this.healthSignal, value);
                     break;
                 }
             case ResourceType.mana:
                 {
                     this.mana = Utilities.Resources.setResource(this.mana, this.maxMana, value);
                     if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
-                    callSignal(this.manaSignal, value);
                     break;
                 }
             case ResourceType.item:
@@ -630,7 +615,7 @@ public class Character : MonoBehaviour
     }
 
 
-    private void callSignal(SimpleSignal signal, float addResource)
+    public void callSignal(SimpleSignal signal, float addResource)
     {
         if (signal != null && addResource != 0) signal.Raise();
     }
@@ -824,7 +809,7 @@ public class Character : MonoBehaviour
                 updateResource(elem.resourceType, null, amount);
 
                 if (this.life > 0 && elem.resourceType == ResourceType.life && amount < 0)
-                {                    
+                {
                     if (aggro != null) aggro.increaseAggroOnHit(skill.sender, elem.amount);
 
                     //Charakter-Treffer (Schaden) animieren

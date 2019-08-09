@@ -40,6 +40,11 @@ public class BackgroundMusic : MonoBehaviour
         this.volume = volume;
     }
 
+    public void stopMusic()
+    {
+        this.audioSource.Stop();
+    }
+
     private IEnumerator playLoopMusic()
     {
         yield return new WaitForSecondsRealtime(this.startMusic.length);
