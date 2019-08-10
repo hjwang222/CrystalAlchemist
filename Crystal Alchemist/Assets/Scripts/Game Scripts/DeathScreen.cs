@@ -131,6 +131,8 @@ public class DeathScreen : MonoBehaviour
         if (this.lastSavepoint != null)
         {
             this.colorGrading.saturation.value = 0;
+            this.colorGrading.colorFilter.value = Color.white;
+
             this.gameObject.SetActive(false);
             this.UI.SetActive(true);
             SceneManager.LoadSceneAsync(this.lastSavepoint);
@@ -179,6 +181,10 @@ public class DeathScreen : MonoBehaviour
         while (this.colorGrading.saturation.value > -100)
         {
             this.colorGrading.saturation.value -= 1f;
+
+           /* this.colorGrading.colorFilter.value.g -= 2.4f;
+            this.colorGrading.colorFilter.value.b -= 2.4f;
+            this.colorGrading.colorFilter.value.r -= 2.4f;*/
 
             if (this.colorGrading.saturation.value <= -100)
             {

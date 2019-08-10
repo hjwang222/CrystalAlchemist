@@ -78,7 +78,7 @@ public class StatusBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (playLow)
+        if (this.playLow && this.player.currentState != CharacterState.dead)
         {
             if (elapsed <= 0)
             {
@@ -194,7 +194,7 @@ public class StatusBar : MonoBehaviour
             
         }
 
-        if (this.current <= 0.5f)
+        if (this.current <= 0.5f && this.player.currentState != CharacterState.dead)
         {
             this.playLow = true;
             if (this.warning != null) this.warning.SetActive(true);
