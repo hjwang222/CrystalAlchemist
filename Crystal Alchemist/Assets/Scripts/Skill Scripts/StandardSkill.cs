@@ -51,8 +51,6 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Sortierung")]
     public int orderIndex = 10;
 
-
-
     [Space(10)]
     [BoxGroup("Pflichtfelder")]
     [Required]
@@ -92,6 +90,14 @@ public class StandardSkill : MonoBehaviour
     [FoldoutGroup("Indikatoren", expanded: false)]
     [ShowIf("useCustomColor", true)]
     public Color indicatorColor;
+
+    [Space(10)]
+    [FoldoutGroup("Indikatoren", expanded: false)]
+    public CastingAnimation castingAnimation;
+
+    [ShowIf("castingAnimation", null)]
+    [FoldoutGroup("Indikatoren", expanded: false)]
+    public string castingAnimationCharacterKey;
 
     ////////////////////////////////////////////////////////////////
 
@@ -392,7 +398,7 @@ public class StandardSkill : MonoBehaviour
     ////////////////////////////////////////////////////////////////
 
     private bool playStartEffectAlready = false;
-
+    private CastingAnimation activeCastingAnimation;
     private float elapsed;
     private float LockElapsed;
     private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
@@ -605,7 +611,7 @@ public class StandardSkill : MonoBehaviour
 
     public virtual void doOnCast()
     {
-
+        
     }
 
     public virtual void doOnUpdate()
@@ -667,6 +673,7 @@ public class StandardSkill : MonoBehaviour
         {
             Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Active", true);            
             hideIndicator();
+            hideCastingAnimation();
 
             //Prüfe ob der Skill eine Maximale Dauer hat
             if (this.durationTimeLeft < Utilities.maxFloatInfinite)
@@ -814,6 +821,29 @@ public class StandardSkill : MonoBehaviour
         }
 
         this.activeIndicators.Clear();
+    }
+
+
+    public void showCastingAnimation()
+    {
+        if(this.castingAnimation != null
+        && this.activeCastingAnimation == null
+        && this.sender != null)
+        {
+            this.activeCastingAnimation = Instantiate(this.castingAnimation, this.sender.transform);
+            this.activeCastingAnimation.setCastingAnimation(this, this.sender);
+            Utilities.UnityUtils.SetAnimatorParameter(this.sender.animator, this.castingAnimationCharacterKey, true);
+        }
+    }
+
+    public void hideCastingAnimation()
+    {
+        if(this.activeCastingAnimation != null)
+        {
+            Destroy(this.activeCastingAnimation.gameObject);
+            this.activeCastingAnimation = null;
+            Utilities.UnityUtils.SetAnimatorParameter(this.sender.animator, this.castingAnimationCharacterKey, false);
+        }
     }
 
     #endregion

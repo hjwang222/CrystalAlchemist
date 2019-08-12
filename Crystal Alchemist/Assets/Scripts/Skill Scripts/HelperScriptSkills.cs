@@ -48,6 +48,16 @@ public class HelperScriptSkills : MonoBehaviour
         this.skill.hideIndicator();
     }
 
+    public void showCastingAnimation()
+    {
+        this.skill.showCastingAnimation();
+    }
+
+    public void hideCastingAnimation()
+    {
+        this.skill.hideCastingAnimation();
+    }
+
     public void ResetRotation()
     {
         this.skill.resetRotation();

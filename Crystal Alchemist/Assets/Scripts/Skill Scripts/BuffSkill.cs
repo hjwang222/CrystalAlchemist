@@ -25,6 +25,11 @@ public class BuffSkill : StandardSkill
     [SerializeField]
     private Color targetColor;
 
+    [FoldoutGroup("Heal and Dispell", expanded: false)]
+    [SerializeField]
+    [ShowIf("supportType", SupportType.teleport)]
+    private bool showAnimation = false;
+
     #region Overrides
     public override void init()
     {
@@ -69,6 +74,7 @@ public class BuffSkill : StandardSkill
 
     public override void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
+        //With delay
         if (Utilities.Collisions.checkCollision(hittedCharacter, this)) useSkill(hittedCharacter.GetComponent<Character>());
     }
 
@@ -90,11 +96,12 @@ public class BuffSkill : StandardSkill
         string scene;
         Vector2 position;
 
-        if (character.isPlayer
+        if (character != null
+            && character.isPlayer
             && player != null 
             && player.getLastTeleport(out scene, out position))
         {
-            character.GetComponent<Player>().teleportPlayer(scene, position);            
+            character.GetComponent<Player>().teleportPlayer(scene, position, this.showAnimation);            
         }
     }
 }

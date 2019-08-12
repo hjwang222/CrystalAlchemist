@@ -96,6 +96,7 @@ public class SkillSequence : MonoBehaviour
                     if (skill != null)
                     {
                         skill.showIndicator();
+                        skill.showCastingAnimation();
 
                         if (skill.holdTimer < skill.cast)
                         {
@@ -104,6 +105,7 @@ public class SkillSequence : MonoBehaviour
                         else
                         {
                             skill.hideIndicator();
+                            skill.hideCastingAnimation();
                             mod.gameObject.SetActive(true);
                         }
                     }

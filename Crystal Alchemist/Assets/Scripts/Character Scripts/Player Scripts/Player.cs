@@ -121,6 +121,7 @@ public class Player : Character
         if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);
         Utilities.Helper.checkIfHelperDeactivate(this);
 
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", false);
         Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
         Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
 
@@ -144,26 +145,36 @@ public class Player : Character
         else return false;
     }
 
-    public void teleportPlayer()
+    public void teleportPlayer(string targetScene, Vector2 position, bool showAnimation)
     {
-        teleportPlayer(this.lastSaveGameScene, this.lastSaveGamePosition, this.fadingDuration.getValue());
+        StartCoroutine(LoadScene(targetScene, position, this.fadingDuration.getValue(), showAnimation));
     }
 
-    public void teleportPlayer(string targetScene, Vector2 position)
+    public void useDoorPlayer(string targetScene, Vector2 position, float duration, bool showAnimation)
     {
-        teleportPlayer(targetScene, position, this.fadingDuration.getValue());
+        StartCoroutine(LoadScene(targetScene, position, duration, showAnimation));
     }
 
-    public void teleportPlayer(string targetScene, Vector2 position, float duration)
-    {
-        StartCoroutine(LoadScene(targetScene, position, duration));
-    }
-
-    private IEnumerator LoadScene(string targetScene, Vector2 position, float duration)
-    {
-        this.fadeSignal.Raise(false);
+    private IEnumerator LoadScene(string targetScene, Vector2 position, float duration, bool showAnimation)
+    {        
         this.currentState = CharacterState.inDialog;
         this.deactivateAllSkills();
+
+        if (showAnimation && this.respawnAnimation != null)
+        {
+            RespawnAnimation respawnObject = Instantiate(this.respawnAnimation, this.transform.position, Quaternion.identity);
+            respawnObject.setCharacter(this, true);
+            yield return new WaitForSeconds(respawnObject.getAnimationLength());
+            this.enableSpriteRenderer(false);
+            //yield return new WaitForSeconds(2f);
+        }
+        else
+        {
+            this.enableSpriteRenderer(false);
+        }
+
+        this.fadeSignal.Raise(false);
+        //this.cameraSignal.Raise(false);
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(targetScene);
         asyncOperation.allowSceneActivation = false;
@@ -175,7 +186,7 @@ public class Player : Character
                 yield return new WaitForSeconds(duration);
 
                 asyncOperation.allowSceneActivation = true;
-                this.setNewPosition(position);
+                StartCoroutine(positionCo(position, this.respawnAnimation));
             }
             yield return null;
         }
@@ -192,8 +203,7 @@ public class Player : Character
 
             Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
             Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
-
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead");
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", true);
 
             this.currentState = CharacterState.dead;
             this.deathSignal.Raise();
@@ -248,6 +258,8 @@ public class Player : Character
 
     private void playerInputs()
     {
+        Debug.Log(this.currentState);
+
         if (this.currentState != CharacterState.dead)
         {
             if (this.currentState == CharacterState.inDialog || this.currentState == CharacterState.inMenu)
@@ -273,6 +285,7 @@ public class Player : Character
                 change.y = Input.GetAxisRaw("Vertical");
 
                 if (currentState != CharacterState.dead
+                    && this.currentState != CharacterState.respawning
                     && this.currentState != CharacterState.inDialog
                     && this.currentState != CharacterState.inMenu)
                 {
@@ -303,26 +316,23 @@ public class Player : Character
 
     ///////////////////////////////////////////////////////////////
 
-    public void setNewPosition(Vector2 playerPositionInNewScene)
-    {
-        StartCoroutine(positionCo(playerPositionInNewScene));
-    }
 
-    private IEnumerator positionCo(Vector2 playerPositionInNewScene)
+    private IEnumerator positionCo(Vector2 playerPositionInNewScene, bool showAnimation)
     {
-        this.currentState = CharacterState.inDialog;
-        this.enableSpriteRenderer(false);
-        //this.cameraSignal.Raise(false);
+        yield return new WaitForSeconds(2f);
+
+        if (showAnimation && this.respawnAnimation != null)
+        {
+            RespawnAnimation respawnObject = Instantiate(this.respawnAnimation, playerPositionInNewScene, Quaternion.identity);
+            respawnObject.setCharacter(this);
+            yield return new WaitForSeconds(respawnObject.getAnimationLength());
+        }
+        
         yield return null;
 
         this.transform.position = playerPositionInNewScene;
         this.enableSpriteRenderer(true);
         //this.cameraSignal.Raise(true);
-        setPlayerPlayable();
-    }
-
-    public void setPlayerPlayable()
-    {
         this.currentState = CharacterState.idle;
     }
 
@@ -408,6 +418,7 @@ public class Player : Character
             {
                 skill.holdTimer += (Time.deltaTime * this.timeDistortion * this.spellspeed);
                 skill.showIndicator(); //Zeige Indikator beim Casten+
+                skill.showCastingAnimation();
                 skill.doOnCast();
             }
 
@@ -441,6 +452,7 @@ public class Player : Character
             {
                 this.activeCastbar.showCastBar();
                 skill.showIndicator();
+                skill.showCastingAnimation();
             }
         }
         else if (Input.GetButtonUp(button))
@@ -583,7 +595,8 @@ public class Player : Character
 
         foreach (Character target in targetingSystem.sortedTargets)
         {
-            if (target.currentState != CharacterState.dead && target.currentState != CharacterState.respawning)
+            if (target.currentState != CharacterState.dead 
+                && target.currentState != CharacterState.respawning)
             {
                 bool playSoundEffect = false;
                 if (i == 0 || skill.multiHitDelay > 0.3f) playSoundEffect = true;

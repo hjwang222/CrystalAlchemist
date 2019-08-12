@@ -720,6 +720,7 @@ public class Character : MonoBehaviour
         }
 
         skill.hideIndicator();
+        skill.hideCastingAnimation();
     }
 
 
@@ -747,6 +748,7 @@ public class Character : MonoBehaviour
     public void enableSpriteRenderer(bool value)
     {
         this.spriteRenderer.enabled = value;
+        if(this.shadowRenderer != null) this.shadowRenderer.enabled = value;
     }
 
     public void addColor(Color color)

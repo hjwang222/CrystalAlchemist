@@ -396,6 +396,7 @@ public class AIEvents : MonoBehaviour
                     this.activeAction.skillinstance.holdTimer += (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
 
                     this.activeAction.skillinstance.showIndicator(); //Zeige Indikator beim Casten
+                    this.activeAction.skillinstance.showCastingAnimation();
                     this.activeAction.skillinstance.doOnCast();
 
                     if (this.activeAction.skillinstance.showCastBarForEnemies)

@@ -11,30 +11,52 @@ public class RespawnAnimation : MonoBehaviour
     private SpriteRenderer characterSpriteBright;
 
     [SerializeField]
+    private List<Animator> animators;
+
+    [SerializeField]
     private AudioSource audioSource;
 
     private Character character;
+    private bool reverse;
 
     public void setCharacter(Character character)
     {
+        this.setCharacter(character, false);
+    }
+
+    public void setCharacter(Character character, bool reverse)
+    {
+        this.reverse = reverse;
+
+        if (this.reverse)
+        {
+            foreach(Animator animator in this.animators)
+            {
+                Utilities.UnityUtils.SetAnimatorParameter(animator, "Reverse");
+            }
+        }
         this.character = character;
         this.characterSprite.sprite = character.startSpriteForRespawn;
         this.characterSpriteBright.sprite = character.startSpriteForRespawnWhite;
     }
 
+    public float getAnimationLength()
+    {
+        AnimationClip[] clips = this.animators[0].runtimeAnimatorController.animationClips;
+        return clips[0].length;
+    }
+
     public void DestroyIt()
     {
-        this.characterSprite.enabled = false;
-        this.characterSpriteBright.enabled = false;
+        if (!this.reverse)
+        {
+            this.characterSprite.enabled = false;
+            this.characterSpriteBright.enabled = false;
+        
+            character.gameObject.SetActive(true);
+            character.initSpawn();
+        }
 
-        character.gameObject.SetActive(true);
-        character.initSpawn();
         Destroy(this.gameObject, 0.1f);
     }
-
-    public void PlayDeathSoundEffect(AudioClip soundEffect)
-    {
-        Utilities.Audio.playSoundEffect(this.audioSource, soundEffect);
-    }
-
 }

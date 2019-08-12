@@ -30,6 +30,9 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     private FloatValue transitionDuration;
 
+    [SerializeField]
+    private bool showAnimation = false;
+
 
     public void Awake()
     {
@@ -44,12 +47,13 @@ public class SceneTransition : MonoBehaviour
             if (player != null)
             {
                 this.vcamSignal.Raise();
-                player.teleportPlayer(this.targetScene, this.playerPositionInNewScene, this.transitionDuration.getValue());
+                player.useDoorPlayer(this.targetScene, this.playerPositionInNewScene, this.transitionDuration.getValue(), this.showAnimation);
                // StartCoroutine(LoadScene(player));
             }
         }
     }
   
+    /*
     private IEnumerator LoadScene(Player player)
     {
         this.fadeSignal.Raise(false);
@@ -71,6 +75,6 @@ public class SceneTransition : MonoBehaviour
             }
             yield return null;
         }      
-    }
+    }*/
 }
 

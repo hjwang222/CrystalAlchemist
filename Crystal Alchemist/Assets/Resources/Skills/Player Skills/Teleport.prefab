@@ -152,12 +152,14 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  indicators:
-  - {fileID: 4803367683635004671, guid: 4bea464adb12fb4419adec9db5f4305b, type: 3}
-  showingIndicator: 1
-  showCastBarForEnemies: 1
+  indicators: []
+  showingIndicator: 0
+  showCastBarForEnemies: 0
   useCustomColor: 0
   indicatorColor: {r: 1, g: 1, b: 1, a: 1}
+  castingAnimation: {fileID: 2159891387579794337, guid: 4bea464adb12fb4419adec9db5f4305b,
+    type: 3}
+  castingAnimationCharacterKey: 
   cast: 4
   keepHoldTimer: 0
   delay: 0
@@ -209,7 +211,7 @@ MonoBehaviour:
   affectNeutral: 0
   affectSkills: 0
   ignoreInvincibility: 1
-  stateType: 2
+  stateType: 0
   doCastDuringDelay: 0
   maxAmounts: 1
   comboAmount: 99
@@ -233,6 +235,7 @@ MonoBehaviour:
   supportType: 3
   useCollider: 0
   targetColor: {r: 0, g: 0, b: 0, a: 0}
+  showAnimation: 1
 --- !u!58 &3229661110501609832
 CircleCollider2D:
   m_ObjectHideFlags: 0
