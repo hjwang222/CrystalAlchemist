@@ -70,7 +70,6 @@ public class DeathScreen : MonoBehaviour
 
     private string currentText;
     private string fullText;
-    private string lastSavepoint;
     private ColorGrading colorGrading;
     private Player player;
 
@@ -87,8 +86,6 @@ public class DeathScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerData data = SaveSystem.loadPlayer();
-        if (data != null && data.scene != null && data.scene != "") this.lastSavepoint = data.scene;
         this.stopMusic.Raise();
         if (this.postProcessVolume.profile.TryGetSettings(out this.colorGrading)) StartCoroutine(FadeOut(this.fadingDelay));
     }
@@ -115,7 +112,7 @@ public class DeathScreen : MonoBehaviour
     {
         this.cursor.gameObject.SetActive(true);
         this.returnTitleScreen.SetActive(true);
-        if (this.lastSavepoint != null) this.returnSavePoint.SetActive(true);
+        if (this.player.getLastTeleport()) this.returnSavePoint.SetActive(true);
 
         this.countDown.gameObject.SetActive(true);
         StartCoroutine(this.countDownCo());
@@ -128,15 +125,19 @@ public class DeathScreen : MonoBehaviour
 
     public void returnSaveGame()
     {
-        if (this.lastSavepoint != null)
+        string scene;
+        Vector2 position;
+
+        if (this.player.getLastTeleport(out scene, out position))
         {
             this.colorGrading.saturation.value = 0;
             this.colorGrading.colorFilter.value = Color.white;
 
             this.gameObject.SetActive(false);
             this.UI.SetActive(true);
-            SceneManager.LoadSceneAsync(this.lastSavepoint);
+            //SceneManager.LoadSceneAsync(this.lastSavepoint);
             this.player.initPlayer();
+            this.player.teleportPlayer(scene, position, true);
         }
     }
 

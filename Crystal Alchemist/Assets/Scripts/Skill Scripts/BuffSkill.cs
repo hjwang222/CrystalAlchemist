@@ -65,7 +65,7 @@ public class BuffSkill : StandardSkill
             Teleport(character);
         }
 
-        if (this.targetColor != null)
+        if (this.targetColor != null && character != null)
         {
             character.addColor(this.targetColor);
         }

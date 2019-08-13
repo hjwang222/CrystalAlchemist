@@ -178,6 +178,8 @@ public class Utilities : MonoBehaviour
         public static bool checkAffections(Character character, bool affectOther, bool affectSame, bool affectNeutral, Collider2D hittedCharacter)
         {
             if (!hittedCharacter.isTrigger
+                && character.currentState != CharacterState.dead
+                && character.currentState != CharacterState.respawning
            && (
                (affectOther && (character.CompareTag("Player") || character.CompareTag("NPC")) && hittedCharacter.CompareTag("Enemy"))
             || (affectOther && (character.CompareTag("Enemy") && (hittedCharacter.CompareTag("Player") || hittedCharacter.CompareTag("NPC"))))
@@ -483,6 +485,7 @@ public class Utilities : MonoBehaviour
 
             if (player != null
                 && player.currentState != CharacterState.inDialog
+                && player.currentState != CharacterState.respawning
                 && player.currentState != CharacterState.inMenu)
             {
                 if (hasEnoughCurrencyAndUpdateResource(currency, player, item, -price)) return true;

@@ -131,7 +131,8 @@ public class AIAggroSystem : MonoBehaviour
 
         if(this.enemy.target != null 
             && (!this.enemy.target.gameObject.activeInHierarchy 
-            || this.enemy.target.currentState == CharacterState.dead))
+            || this.enemy.target.currentState == CharacterState.dead
+            || this.enemy.target.currentState == CharacterState.respawning))
         {
             this.aggroList.Remove(this.enemy.target);
             this.enemy.target = null;

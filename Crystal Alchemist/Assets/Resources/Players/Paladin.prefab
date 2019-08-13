@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 5074818981556205378}
   - component: {fileID: 759644400424337060}
   - component: {fileID: 5650224180514046960}
-  - component: {fileID: 4633911114313944782}
   m_Layer: 10
   m_Name: Paladin
   m_TagString: Player
@@ -248,17 +247,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.614625, y: 0.36394513}
   m_EdgeRadius: 0
---- !u!210 &4633911114313944782
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759644400424337056}
-  m_Enabled: 1
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
-  m_SortingOrder: 0
 --- !u!1 &1487360461578692118
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,6 +289,7 @@ GameObject:
   - component: {fileID: 2974922927713060803}
   - component: {fileID: 4187403449301391866}
   - component: {fileID: 4596317871093219076}
+  - component: {fileID: 6682989032966240731}
   m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
@@ -404,6 +393,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 5074818981556205378}
+--- !u!210 &6682989032966240731
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5158803107809188404}
+  m_Enabled: 1
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0
 --- !u!1 &8638893490402070047
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,11 +527,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Direction Ring
       objectReference: {fileID: 0}
-    - target: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -592,11 +587,6 @@ PrefabInstance:
       propertyPath: character
       value: 
       objectReference: {fileID: 5074818981556205378}
-    - target: {fileID: 6331683523956655689, guid: 1c27a61d4b7f3984eb11097accadce1d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c27a61d4b7f3984eb11097accadce1d, type: 3}
 --- !u!1 &8153952292305783526 stripped

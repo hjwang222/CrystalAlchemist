@@ -58,8 +58,16 @@ public class Room : MonoBehaviour
         }
     }
 
-    public void setFollowAtNull()
+    /*public void setFollowAtNull()
     {
         this.virtualCamera.GetComponent<CinemachineVirtualCamera>().Follow = null;
-    }    
+    }    */
+
+    public void setCameraPosition(bool setNull)
+    {
+        if (setNull)
+        {
+            this.virtualCamera.GetComponent<CinemachineVirtualCamera>().Follow = null;
+        }
+    }
 }

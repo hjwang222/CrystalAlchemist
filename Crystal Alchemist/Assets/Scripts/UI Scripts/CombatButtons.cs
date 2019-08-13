@@ -116,15 +116,22 @@ public class CombatButtons : MonoBehaviour
 
     private void FixedUpdate()
     {
-        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton, this.ammoA, this.skillIconAButtonTrans);
-        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB, this.skillIconBButtonTrans);
-        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX, this.skillIconXButtonTrans);
-        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY, this.skillIconYButtonTrans);
-        updateButton(this.skillIconRBButton, this.iconRBButton, this.cooldownRB, this.player.RBButton, this.ammoRB, this.skillIconRBButtonTrans);
+        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton, this.ammoA, this.skillIconAButtonTrans, this.player.isButtonUsable("A-Button"));
+        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB, this.skillIconBButtonTrans, this.player.isButtonUsable("B-Button"));
+        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX, this.skillIconXButtonTrans, this.player.isButtonUsable("X-Button"));
+        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY, this.skillIconYButtonTrans, this.player.isButtonUsable("Y-Button"));
+        updateButton(this.skillIconRBButton, this.iconRBButton, this.cooldownRB, this.player.RBButton, this.ammoRB, this.skillIconRBButtonTrans, this.player.isButtonUsable("RB-Button"));
+    }
+
+    private void setFontSize(TextMeshProUGUI textfield)
+    {
+        if (textfield.text == "X") textfield.fontSize = 75;
+        else if (textfield.text == "[+]") textfield.fontSize = 50;
+        else textfield.fontSize = 48;
     }
 
 
-    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, StandardSkill skill, TextMeshProUGUI ammo, Image buttonUITrans)
+    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, StandardSkill skill, TextMeshProUGUI ammo, Image buttonUITrans, bool isUsable)
     {
         if (skill != null)
         {       
@@ -134,19 +141,21 @@ public class CombatButtons : MonoBehaviour
             if (skill.item != null) ammo.text = (int)player.getResource(skill.resourceType, skill.item)+"";
             else ammo.text = "";            
 
-            if (this.player.currentState == CharacterState.attack ||
+            if (!isUsable ||
+                this.player.currentState == CharacterState.attack ||
                 this.player.currentState == CharacterState.defend ||
                 this.player.currentState == CharacterState.knockedback ||
                 this.player.currentState == CharacterState.inDialog ||
+                this.player.currentState == CharacterState.respawning ||
                 (player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite)
                 || Utilities.Skill.getAmountOfSameSkills(skill, player.activeSkills, player.activePets) >= skill.maxAmounts
                 || cooldownLeft == Utilities.maxFloatInfinite)
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
                 string cooldownText = "X";
-
                 cooldown.text = cooldownText;
-                cooldown.fontSize = 74;
+                setFontSize(cooldown);
+
                 cooldown.color = new Color(0.8f, 0, 0);
                 cooldown.outlineColor = new Color32(75, 0, 0, 255);
                 cooldown.outlineWidth = 0.25f;
@@ -158,12 +167,12 @@ public class CombatButtons : MonoBehaviour
             {
                 //ist Skill in Zielerfassung
                 string cooldownText = "[+]";
+                cooldown.text = cooldownText;
+                setFontSize(cooldown);
 
-                cooldown.fontSize = 50;
                 cooldown.color = new Color(0.8f, 0.75f, 0);
                 cooldown.outlineColor = new Color32(75, 65, 0, 255);
                 cooldown.outlineWidth = 0.25f;
-                cooldown.text = cooldownText;
                 skillUI.color = new Color(1f, 1f, 1f, 0.2f);
                 buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
             }
@@ -171,14 +180,13 @@ public class CombatButtons : MonoBehaviour
             {
                 //Ist Skill in der Abklingzeit
                 string cooldownText = Utilities.Format.setDurationToString(cooldownLeft) + "s";
+                cooldown.text = cooldownText;
+                setFontSize(cooldown);
 
                 buttonUI.fillAmount = 1 - (cooldownLeft / cooldownValue);
-
-                cooldown.fontSize = 50;
                 cooldown.color = new Color(1f, 1f, 1f, 1f);
                 cooldown.outlineColor = new Color32(75, 75, 75, 255);
                 cooldown.outlineWidth = 0.25f;
-                cooldown.text = cooldownText;
                 skillUI.color = new Color(1f, 1f, 1f, 0.2f);
                 buttonUI.color = new Color(1f, 1f, 1f, 1f);
             }
@@ -186,7 +194,8 @@ public class CombatButtons : MonoBehaviour
             {
                 //Skill ist einsatzbereit
                 cooldown.text = "";
-                cooldown.fontSize = 50;
+                setFontSize(cooldown);
+
                 cooldown.outlineColor = new Color32(75, 75, 75, 255);
                 skillUI.color = new Color(1f, 1f, 1f, 1f);
                 buttonUI.color = new Color(1f, 1f, 1f, 1f);

@@ -793,38 +793,42 @@ public class Character : MonoBehaviour
 
     public void gotHit(StandardSkill skill, float percentage)
     {
-        if ((!this.isInvincible && !this.isImmortal) || skill.ignoreInvincibility)
+        if (this.currentState != CharacterState.respawning
+         && this.currentState != CharacterState.dead)
         {
-            //Status Effekt hinzufügen
-            if (skill.statusEffects != null)
+            if ((!this.isInvincible && !this.isImmortal) || skill.ignoreInvincibility)
             {
-                foreach (StatusEffect effect in skill.statusEffects)
+                //Status Effekt hinzufügen
+                if (skill.statusEffects != null)
                 {
-                    Utilities.StatusEffectUtil.AddStatusEffect(effect, this);
+                    foreach (StatusEffect effect in skill.statusEffects)
+                    {
+                        Utilities.StatusEffectUtil.AddStatusEffect(effect, this);
+                    }
                 }
-            }
 
-            foreach (affectedResource elem in skill.affectedResources)
-            {
-                float amount = elem.amount * percentage / 100;
-
-                updateResource(elem.resourceType, null, amount);
-
-                if (this.life > 0 && elem.resourceType == ResourceType.life && amount < 0)
+                foreach (affectedResource elem in skill.affectedResources)
                 {
-                    if (aggro != null) aggro.increaseAggroOnHit(skill.sender, elem.amount);
+                    float amount = elem.amount * percentage / 100;
 
-                    //Charakter-Treffer (Schaden) animieren
-                    Utilities.Audio.playSoundEffect(this.audioSource, this.hitSoundEffect);
-                    StartCoroutine(hitCo());
+                    updateResource(elem.resourceType, null, amount);
+
+                    if (this.life > 0 && elem.resourceType == ResourceType.life && amount < 0)
+                    {
+                        if (aggro != null) aggro.increaseAggroOnHit(skill.sender, elem.amount);
+
+                        //Charakter-Treffer (Schaden) animieren
+                        Utilities.Audio.playSoundEffect(this.audioSource, this.hitSoundEffect);
+                        StartCoroutine(hitCo());
+                    }
                 }
-            }
 
-            if (this.life > 0)
-            {
-                //Rückstoß ermitteln
-                float knockbackTrust = skill.thrust - antiKnockback;
-                knockBack(skill.knockbackTime, knockbackTrust, skill);
+                if (this.life > 0)
+                {
+                    //Rückstoß ermitteln
+                    float knockbackTrust = skill.thrust - antiKnockback;
+                    knockBack(skill.knockbackTime, knockbackTrust, skill);
+                }
             }
         }
     }
