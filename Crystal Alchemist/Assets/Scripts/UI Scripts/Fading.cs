@@ -11,10 +11,27 @@ public class Fading : MonoBehaviour
     [SerializeField]
     private FloatValue transitionDuration;
 
+    [SerializeField]
+    private Color colorFadeIn = Color.black;
+
+    [SerializeField]
+    private Color colorFadeOut = Color.white;
+
+    private void Start()
+    {
+        fade(true);
+    }
+
     public void fade(bool fadeIn)
     {
-        if (fadeIn) image.CrossFadeAlpha(0, this.transitionDuration.getValue(), true);
-        else image.CrossFadeAlpha(1, this.transitionDuration.getValue(), true);
+        if (fadeIn)
+        {            
+            this.image.CrossFadeAlpha(0, this.transitionDuration.getValue(), true);
+        }
+        else
+        {            
+            this.image.CrossFadeAlpha(1, this.transitionDuration.getValue(), true);
+        }        
     }
 
 }

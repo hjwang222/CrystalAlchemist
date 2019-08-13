@@ -3,25 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[System.Serializable]
-public struct affectedResource
-{
-    public ResourceType resourceType;
-
-    [ShowIf("resourceType", ResourceType.item)]
-    [Tooltip("Benötigtes Item")]
-    public Item item;
-
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    public float amount;
-}
-
 public class affectResourceStatusEffect : StatusEffect
 {
     #region Attributes
     [FoldoutGroup("affect Resource", expanded: false)]
     [SerializeField]
     private List<affectedResource> affectedResources;
+
     #endregion
 
 

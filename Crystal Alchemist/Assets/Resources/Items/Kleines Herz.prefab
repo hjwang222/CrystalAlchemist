@@ -48,7 +48,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -56,6 +56,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -93,7 +94,7 @@ GameObject:
   - component: {fileID: 8525589707579411225}
   - component: {fileID: 8525589707579411222}
   - component: {fileID: 3928213745636417567}
-  - component: {fileID: 2145905171}
+  - component: {fileID: 3281040534560913379}
   m_Layer: 0
   m_Name: Kleines Herz
   m_TagString: Item
@@ -129,11 +130,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadowRenderer: {fileID: 6104539230901435834}
+  itemSprite: {fileID: -5115724647623679475, guid: da2b8cd3ab5195945ab9099a1134a852,
+    type: 3}
+  itemSpriteInventory: {fileID: 0}
   itemName: Kleines Herz
+  itemDescription: 
+  itemGroup: 0
+  itemSlot: -1
+  itemNameEnglish: 
+  itemDescriptionEnglish: 
+  itemGroupEnglish: 
   amount: 1
   maxAmount: 0
   resourceType: 1
-  itemGroup: 0
+  isKeyItem: 0
   skill: {fileID: 0}
   collectSoundEffect: {fileID: 8300000, guid: 36888cf2843c6ae49962b01f67e19050, type: 3}
 --- !u!61 &8525589707579411225
@@ -192,7 +202,7 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
---- !u!50 &2145905171
+--- !u!50 &3281040534560913379
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -200,7 +210,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8525589707579411223}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -264,7 +274,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -272,6 +282,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -284,7 +295,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300146, guid: b0b8d75b616ba6e42aa4ea4103267705, type: 3}
+  m_Sprite: {fileID: -5115724647623679475, guid: da2b8cd3ab5195945ab9099a1134a852,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -363,7 +375,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -371,6 +383,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

@@ -14,7 +14,7 @@ public class PlayerData
     public float[] position;
     public string scene;
 
-    public PlayerData(Player player)
+    public PlayerData(Player player, string scene)
     {
         this.health = player.life;
         this.mana = player.mana;
@@ -28,7 +28,7 @@ public class PlayerData
         setInventory(player);
         setSkills(player);
 
-        this.scene = player.getScene();
+        this.scene = scene;
     }
 
     private void setInventory(Player player)
@@ -52,6 +52,7 @@ public class PlayerData
         if (player.BButton != null) this.skills.Add(new string[] { "B", player.BButton.skillName });
         if (player.XButton != null) this.skills.Add(new string[] { "X", player.XButton.skillName });
         if (player.YButton != null) this.skills.Add(new string[] { "Y", player.YButton.skillName });
+        if (player.RBButton != null) this.skills.Add(new string[] { "RB", player.RBButton.skillName });
     }
 }
 
@@ -60,11 +61,15 @@ public class GameOptions
 {
     public float musicVolume;
     public float soundVolume;
+    public string layout;
+    public bool useAlternativeLanguage;
 
     public GameOptions()
     {
         this.musicVolume = GlobalValues.backgroundMusicVolume;
         this.soundVolume = GlobalValues.soundEffectVolume;
+        this.layout = GlobalValues.layoutType.ToString().ToLower();
+        this.useAlternativeLanguage = GlobalValues.useAlternativeLanguage;
     }
 }
 

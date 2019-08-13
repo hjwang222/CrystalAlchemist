@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class HelperScript : MonoBehaviour
 {
-    public Character character;
+    [SerializeField]
+    private Character character;
 
     public void DestroyIt()
     {
         character.DestroyIt();
     }
 
-    public void PlayDeathSoundEffect()
+    public void DestroyItCompletely()
     {
-        character.PlayDeathSoundEffect();
+        character.DestroyItCompletely();
+    }
+
+    public void PlaySoundEffect(AudioClip clip)
+    {
+        character.PlaySoundEffect(clip);
+    }
+
+    public void updateSpeed(float addSpeed)
+    {
+        character.updateSpeed(addSpeed,false);
     }
 }

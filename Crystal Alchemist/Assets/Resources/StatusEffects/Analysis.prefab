@@ -50,17 +50,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffectName: Analysis
-  statusEffectDescription: 
+  statusEffectNameEnglish: Analyse
+  statusEffectDescription: "Zeigt Infos \xFCber Gegner und Objekte"
+  statusEffectDescriptionEnglish: Showing informations about enemies and objects
   maxStacks: 1
   canBeDispelled: 1
+  stunTarget: 0
   statusEffectType: 0
   endType: 1
   statusEffectDuration: 1
   statusEffectInterval: 0
   canOverride: 0
   statusEffectManaDrain: 0.25
-  statusEffectManaDrainInterval: 1
+  statusEffectManaDrainInterval: 3
   canDeactivateIt: 1
+  destroyDelay: 0.2
+  ownAnimator: {fileID: 0}
+  changeColor: 0
   statusEffectColor: {r: 1, g: 1, b: 1, a: 1}
   iconSprite: {fileID: 21300034, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
   updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}

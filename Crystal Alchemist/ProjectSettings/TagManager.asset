@@ -13,6 +13,7 @@ TagManager:
   - Skill
   - LockOn
   - DontDestroyHandler
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -22,20 +23,20 @@ TagManager:
   - UI
   - 
   - 
-  - Lighting
-  - Map
+  - PostProcessing
+  - MapCollision
   - Player
-  - Enemies
+  - NPCs
   - Objects
   - Area Bounds
+  - Skill
+  - Interactables
+  - MapSkills
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy Skill
+  - Player Skill
   - 
   - 
   - 
@@ -47,11 +48,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Boden
+    uniqueID: 1177715583
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Boden
-    uniqueID: 1177715583
+  - name: Collision
+    uniqueID: 931760429
     locked: 0
   - name: Objekte
     uniqueID: 2592454681

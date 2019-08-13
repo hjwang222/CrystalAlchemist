@@ -5,29 +5,35 @@ using TMPro;
 
 public class DamageNumbers : MonoBehaviour
 {
+    [HideInInspector]
     public float number;
+
+    private Color[] color;
+
+    [SerializeField]
+    private float factor = 1;
+
+    public void setcolor(Color[] color)
+    {
+        this.color = color;
+    }
 
     public void Start()
     {
         string text = "";
         TextMeshProUGUI textmeshPro = GetComponent<TextMeshProUGUI>();
 
+        number *= factor;
 
+        if (number != 0)
+        {
+            if(number > 0) text = "+" + Utilities.Format.setDamageNumber(number, 1f);
+            else text = Utilities.Format.setDamageNumber(number, 1f);
 
-        if (number > 0)
-        {
-            text = "+" + Utilities.setDamageNumber(number * 4,1f);
-            textmeshPro.color = new Color32(0, 255, 0, 255);
-            textmeshPro.outlineColor = new Color32(0, 128, 0, 255);
+            textmeshPro.color = this.color[0];
+            textmeshPro.outlineColor = this.color[1];
             textmeshPro.outlineWidth = 0.25f;
-        }
-        else if(number < 0)
-        {
-            text = Utilities.setDamageNumber(number * 4, 1f);
-            textmeshPro.color = new Color32(255, 0, 0, 255);
-            textmeshPro.outlineColor = new Color32(125, 0, 0, 255);
-            textmeshPro.outlineWidth = 0.25f;
-        }
+        }        
         else
         {
             text = "";

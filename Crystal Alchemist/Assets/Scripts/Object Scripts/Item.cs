@@ -7,8 +7,13 @@ using UnityEditor;
 
 #region Enums
 
-//Resource = Mana oder Life
-//Rest = Items
+public enum ItemFeature
+{
+    none,
+    skills,
+    map,
+    hud
+}
 
 #endregion
 
@@ -23,8 +28,52 @@ public class Item : MonoBehaviour
     [BoxGroup("Pflichtfeld")]
     private SpriteRenderer shadowRenderer;
 
-    [FoldoutGroup("Item Attributes", expanded: false)]
+    [Required]
+    [BoxGroup("Pflichtfeld")]
+    public Sprite itemSprite;
+
+    [Required]
+    [BoxGroup("Pflichtfeld")]
+    public Sprite itemSpriteInventory;
+
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [SerializeField]
     public string itemName;
+
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [Tooltip("Beschreibung des Skills")]
+    [TextArea]
+    public string itemDescription;
+
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [ShowIf("resourceType", ResourceType.item)]
+    [SerializeField]
+    public string itemGroup;
+
+    /*
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [ShowIf("resourceType", ResourceType.item)]
+    [SerializeField]
+    public ItemFeature itemFeature = ItemFeature.none;*/
+
+    [Tooltip("Slot-Nummer im Inventar. Wenn -1 dann kein Platz im Inventar")]
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [SerializeField]
+    public int itemSlot = -1;
+
+    [Space(10)]
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [SerializeField]
+    public string itemNameEnglish;
+
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [Tooltip("Beschreibung des Skills")]
+    [TextArea]
+    public string itemDescriptionEnglish;
+
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [SerializeField]
+    public string itemGroupEnglish;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     public int amount = 1;
@@ -38,7 +87,7 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.item)]
-    public string itemGroup;
+    public bool isKeyItem = false;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.skill)]
@@ -47,6 +96,9 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Sound", expanded: false)]
     public AudioClip collectSoundEffect;
+
+    [FoldoutGroup("Signals", expanded: false)]
+    public SimpleSignal signal;
 
     private AudioSource audioSource;
     private Animator anim;
@@ -68,21 +120,27 @@ public class Item : MonoBehaviour
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
         this.anim = this.GetComponent<Animator>();
-
+        if (this.itemSpriteInventory == null) this.itemSpriteInventory = this.itemSprite;
         //this.soundEffects = this.GetComponents<AudioSource>();
+    }
+
+    private void Start()
+    {
+        //Check if keyItem already in Inventory
+
+        if (this.isKeyItem)
+        {
+            Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+            if (player != null && Utilities.Items.getAmountFromInventory(this,player.inventory,false) > 0) Destroy(this.gameObject);
+        }
     }
 
     #endregion
 
 
-    public Sprite getSprite()
-    {
-        return this.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
-    }
-
     public void playSounds()
     {
-        Utilities.playSoundEffect(this.audioSource, this.collectSoundEffect);        
+        Utilities.Audio.playSoundEffect(this.audioSource, this.collectSoundEffect);        
     }
 
 

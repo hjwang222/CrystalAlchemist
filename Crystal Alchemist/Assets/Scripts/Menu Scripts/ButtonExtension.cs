@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 {   
     [SerializeField]
-    private GameObject cursor;
+    private myCursor cursor;
     private float offset = 16;
 
     private Vector2 scale;
@@ -21,7 +21,15 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     private bool setFirstSelected = false;
     private Button button;
 
+    private int distance = 400;
+
+    /*
     private void Awake()
+    {
+        //this.cursor.gameObject.SetActive(false);
+    }
+    */
+    private void Start()
     {
         RectTransform rt = (RectTransform)this.transform;
         this.size = new Vector2(rt.rect.width, rt.rect.height);
@@ -32,12 +40,30 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         this.cursorScale = rt.lossyScale;
 
         this.button = this.gameObject.GetComponent<Button>();
+
+        /*Debug.Log(this.name + " - "
+                    + this.transform.localScale + " - "
+                    + this.transform.parent.localScale + " - "
+                    + this.transform.parent.parent.localScale + " - "
+                    + this.transform.parent.parent.parent.localScale + " - "
+                    + WordToScenePoint(this.transform.localPosition));*/
+
+        setFirst();
+
+        //Cursor.visible = false;
     }
 
     private void OnEnable()
     {
+        setFirst();
+    }
+
+    private void setFirst()
+    {
         if (this.setFirstSelected)
         {
+            this.cursor.gameObject.SetActive(true);
+
             EventSystem.current.firstSelectedGameObject = this.gameObject;
             EventSystem.current.SetSelectedGameObject(this.gameObject);
             setCursor(true, false);
@@ -55,16 +81,11 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     }
 
     private void setCursor(bool showCursor, bool playEffect)
-    {
-        if (this.button != null)
-        {
-            this.button.Select();
-        }
-
+    {       
         if (this.cursor != null)
         {
-            if (!this.cursor.activeInHierarchy && showCursor) this.cursor.SetActive(true);            
-            if(!showCursor) this.cursor.SetActive(false);
+            if (!this.cursor.gameObject.activeInHierarchy && showCursor) this.cursor.gameObject.SetActive(true);            
+            if(!showCursor) this.cursor.gameObject.SetActive(false);
 
             float x_new = (((this.size.x * this.scale.x) + (this.cursorSize.x * this.cursorScale.x)) / 2) - this.offset;
             float y_new = (((this.size.y * this.scale.y) + (this.cursorSize.y * this.cursorScale.y)) / 2) - this.offset;
@@ -72,7 +93,63 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
             this.cursor.transform.position = new Vector2(this.transform.position.x - (x_new), 
                                                          this.transform.position.y + (y_new));
 
-            if (playEffect) this.cursor.GetComponent<Cursor>().playSoundEffect();
+            setInfoBox();
+
+            //Debug.Log("Button: "+this.size + " - " + this.scale);
+            //Debug.Log("Cursor: "+this.cursorSize + " - " + this.cursorScale);
+
+            if (playEffect) this.cursor.GetComponent<myCursor>().playSoundEffect();
+        }
+    }
+
+    private void setInfoBox()
+    {
+        if (this.button != null)
+        {
+            this.button.Select();
+
+            if (this.cursor.infoBox != null)
+            {
+                if (this.cursor.transform.localPosition.x < 0)
+                {
+                    //right
+                    RectTransform panelRectTransform = (RectTransform)this.cursor.infoBox.transform;
+                    panelRectTransform.anchorMin = new Vector2(1, 0.5f);
+                    panelRectTransform.anchorMax = new Vector2(1, 0.5f);
+                    panelRectTransform.pivot = new Vector2(0.5f, 0.5f);
+                    panelRectTransform.position = new Vector3(Screen.width - (this.cursorScale.x * distance), (Screen.height / 2) + 40, 0);
+                }
+                else
+                {
+                    //left
+                    RectTransform panelRectTransform = (RectTransform)this.cursor.infoBox.transform;
+                    panelRectTransform.anchorMin = new Vector2(0, 0.5f);
+                    panelRectTransform.anchorMax = new Vector2(0, 0.5f);
+                    panelRectTransform.pivot = new Vector2(0.5f, 0.5f);
+                    panelRectTransform.position = new Vector3((this.cursorScale.x * distance), (Screen.height / 2) + 40, 0);
+                }
+
+                InventorySlot inventoryslot = this.button.gameObject.GetComponent<InventorySlot>();
+                SkillSlot skillSlot = this.button.gameObject.GetComponent<SkillSlot>();
+                SkillMenuActiveSlots activeSlot = this.button.gameObject.GetComponent<SkillMenuActiveSlots>();
+
+                if (inventoryslot != null && inventoryslot.getItem() != null)
+                {
+                    this.cursor.infoBox.Show(inventoryslot.getItem());
+                }
+                else if (skillSlot != null && skillSlot.skill != null)
+                {
+                    this.cursor.infoBox.Show(skillSlot.skill);
+                }
+                else if (activeSlot != null && activeSlot.skill != null)
+                {
+                    this.cursor.infoBox.Show(activeSlot.skill);
+                }
+                else
+                {
+                    this.cursor.infoBox.Hide();
+                }
+            }
         }
     }
 

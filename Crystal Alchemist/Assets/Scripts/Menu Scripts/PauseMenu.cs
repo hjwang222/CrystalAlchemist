@@ -2,13 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    private float delay = 0.3f;
+    
     private Player player;
+
     [SerializeField]
     private GameObject cursor;
+
+    [SerializeField]
+    private GameObject blackScreen;
+
+    [SerializeField]
+    private GameObject parentMenue;
+
+    [SerializeField]
+    private GameObject childMenue;
+
+    [SerializeField]
+    private FloatSignal musicVolumeSignal;
+
+    private CharacterState lastState;
+    private bool overrideState = true;
 
     private void Awake()
     {
@@ -21,14 +38,27 @@ public class PauseMenu : MonoBehaviour
     }
 
     private void OnEnable()
-    {
+    {        
         this.cursor.SetActive(true);
-        this.player.currentState = CharacterState.inDialog;
+
+        this.parentMenue.SetActive(true);
+        this.childMenue.SetActive(false);
+
+        if (this.overrideState)
+        {
+            this.lastState = this.player.currentState;
+            this.overrideState = false;
+        }
+        this.player.currentState = CharacterState.inMenu;
+
+        this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
     }
 
     private void OnDisable()
     {
         this.cursor.SetActive(false);
+
+        this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
     }
 
     public void exitGame()
@@ -38,7 +68,17 @@ public class PauseMenu : MonoBehaviour
 
     public void exitMenu()
     {
-        this.player.delay(this.delay);
+        this.overrideState = true;
+        this.player.delay(this.lastState);
         this.transform.parent.gameObject.SetActive(false);
+        this.blackScreen.SetActive(false);
     }
+
+    public void showControls()
+    {
+        this.parentMenue.SetActive(false);
+        this.childMenue.SetActive(true);
+    }
+
+   
 }

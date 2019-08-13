@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 9.331924, y: 1.9714661}
+  m_AnchoredPosition: {x: 9.331909, y: 1.9714661}
   m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7792743474313937383
@@ -58,9 +58,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffectName: Regena
-  statusEffectDescription: 
+  statusEffectNameEnglish: Regen
+  statusEffectDescription: "Heilung \xFCber Zeit"
+  statusEffectDescriptionEnglish: Healing over tiime
   maxStacks: 1
   canBeDispelled: 0
+  stunTarget: 0
   statusEffectType: 0
   endType: 0
   statusEffectDuration: 1
@@ -69,6 +72,9 @@ MonoBehaviour:
   statusEffectManaDrain: 0
   statusEffectManaDrainInterval: 1
   canDeactivateIt: 0
+  destroyDelay: 0.2
+  ownAnimator: {fileID: 0}
+  changeColor: 1
   statusEffectColor: {r: 0, g: 0.7830189, b: 0.13526034, a: 1}
   iconSprite: {fileID: 21300020, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
   updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}

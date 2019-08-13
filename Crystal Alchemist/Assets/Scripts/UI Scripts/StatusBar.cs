@@ -78,12 +78,12 @@ public class StatusBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (playLow)
+        if (this.playLow && this.player.currentState != CharacterState.dead)
         {
             if (elapsed <= 0)
             {
                 elapsed = audioInterval;
-                Utilities.playSoundEffect(this.audioSource, this.lowSoundEffect);
+                Utilities.Audio.playSoundEffect(this.audioSource, this.lowSoundEffect);
             }
             else
             {
@@ -143,7 +143,7 @@ public class StatusBar : MonoBehaviour
             StatusEffect statusEffectFromList = effectList[i];
             statusEffectGUI.GetComponent<Image>().sprite = statusEffectFromList.iconSprite;
 
-            string seconds = Utilities.setDurationToString(statusEffectFromList.statusEffectTimeLeft)+"s";
+            string seconds = Utilities.Format.setDurationToString(statusEffectFromList.statusEffectTimeLeft)+"s";
             if (statusEffectFromList.endType == StatusEffectEndType.mana) seconds = "";
 
             statusEffectGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = seconds;
@@ -194,7 +194,7 @@ public class StatusBar : MonoBehaviour
             
         }
 
-        if (this.current <= 0.5f)
+        if (this.current <= 0.5f && this.player.currentState != CharacterState.dead)
         {
             this.playLow = true;
             if (this.warning != null) this.warning.SetActive(true);

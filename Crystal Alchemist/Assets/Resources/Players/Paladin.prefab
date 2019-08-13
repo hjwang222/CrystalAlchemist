@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &242878290860008501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5007069744063628954}
+  m_Layer: 0
+  m_Name: skillset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5007069744063628954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242878290860008501}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 759644400424337062}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &759644400424337056
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +42,6 @@ GameObject:
   - component: {fileID: 5074818981556205378}
   - component: {fileID: 759644400424337060}
   - component: {fileID: 5650224180514046960}
-  - component: {fileID: 4633911114313944782}
   m_Layer: 10
   m_Name: Paladin
   m_TagString: Player
@@ -34,6 +63,7 @@ Transform:
   - {fileID: 4531212770177679800}
   - {fileID: 1490945895739742448}
   - {fileID: 5664017428727299626}
+  - {fileID: 5007069744063628954}
   - {fileID: 1359776168893412036}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -50,49 +80,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 946fe45f31af8544caf372295024317d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Mhem
+  characterName: Paladin
+  englischCharacterName: Paladin
   myRigidbody: {fileID: 759644400424337060}
   animator: {fileID: 4187403449301391866}
   spriteRenderer: {fileID: 2974922927713060803}
-  boxCollider: {fileID: 4005903117030388743}
+  boxCollider: {fileID: 5650224180514046960}
   shadowRenderer: {fileID: 7098998326650301281}
+  startSpriteForRespawn: {fileID: 21300000, guid: 2f9e7113a05024a409cdca59c5d40bb8,
+    type: 3}
+  startSpriteForRespawnWhite: {fileID: 21300160, guid: 2f9e7113a05024a409cdca59c5d40bb8,
+    type: 3}
   activeSkillParent: {fileID: 8638893490402070047}
   activeStatusEffectParent: {fileID: 1487360461578692118}
-  startLife: 3
-  startMana: 2
+  skillSetParent: {fileID: 242878290860008501}
+  startLife: 5
+  startMana: 4
   startSpeed: 100
   startSpellSpeed: 100
-  respawnTime: 30
   immunityToStatusEffects: []
-  maxLife: 4
-  maxMana: 3
+  maxLife: 5
+  maxMana: 4
+  respawnTime: 30
+  respawnAnimation: {fileID: 1140035694535706356, guid: 815950c2030167244ab889505e154cc8,
+    type: 3}
+  deathAnimation: {fileID: 0}
   lifeRegeneration: 0
   lifeRegenerationInterval: 0
   manaRegeneration: 0.25
   manaRegenerationInterval: 3
-  skillSet:
-  - {fileID: 103987821612614508, guid: 2f0554ae42ef20e4e976d37f34aad3e3, type: 3}
-  - {fileID: 2502710003444371835, guid: 05bc84479b081af4ca7844c3cd88c425, type: 3}
-  - {fileID: 4238057447665557524, guid: d9d5c19e4e61ad142865732f1f61048b, type: 3}
-  - {fileID: 1969711209088018432, guid: d6d1154f9bb87ae4fa94b5c2fe7a7c09, type: 3}
-  - {fileID: 8883430349395961274, guid: 79742653ec493d246bcdef0cbf88e31b, type: 3}
-  - {fileID: 680506914304237524, guid: 8d38c6d44fc7878428ee4d926eeff611, type: 3}
-  - {fileID: 6096689982342564308, guid: bddbde069b87bf945a2ba62d587c3c99, type: 3}
-  - {fileID: 8157143814619834876, guid: f0b2ecb21609c6c48badb5e37582d142, type: 3}
-  - {fileID: 6162400572210519683, guid: 689f7820c63a03148aa81b962ee64ad6, type: 3}
-  - {fileID: 975855144787553018, guid: 42f53cb1b0e3a1e4c98ecc587d8dd07e, type: 3}
-  - {fileID: 6388236434287011116, guid: 478564dcd28512a4a88aeeac6dcd1b25, type: 3}
-  - {fileID: 4500866824247064267, guid: 8a7f78e4a6588ab4289c20b832353307, type: 3}
-  - {fileID: 4199971107470901696, guid: 3d7ade5656d74284380cd8f7d60fd1f0, type: 3}
-  - {fileID: 2626038527925349230, guid: 08ac142b84c3a2547ab5aed3862039d9, type: 3}
-  - {fileID: 6096689982342564308, guid: 7693768a878661948aefd9181f7a2d01, type: 3}
-  - {fileID: 6096689982342564308, guid: f00196e007dd1804990d23436f5ab617, type: 3}
-  - {fileID: 6388236434287011116, guid: 6383752caca7be74ea6d1e0d459f14df, type: 3}
-  - {fileID: 6388236434287011116, guid: d1feaca1af387874fba1ef7b91755b3e, type: 3}
-  - {fileID: 7736697032808662322, guid: 56f5ab55d0651f847a53e3a0d8305f08, type: 3}
-  - {fileID: 2626038527925349230, guid: 8191971a062876046ab19f93a98c3268, type: 3}
-  initializeSkill: {fileID: 0}
-  deathSkill: {fileID: 0}
   damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
     type: 3}
   antiKnockback: 0
@@ -111,13 +127,13 @@ MonoBehaviour:
   - 
   - 
   hitSoundEffect: {fileID: 8300000, guid: 27ac131e0a552ec4e80c1947b53d31a9, type: 3}
-  killSoundEffect: {fileID: 0}
   characterSpecies: Human
   characterGender: 0
   characterType: 0
+  aggro: {fileID: 0}
+  speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
-  castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   activeCastbar: {fileID: 0}
   currentState: 0
   life: 0
@@ -125,6 +141,7 @@ MonoBehaviour:
   mana: 0
   speed: 0
   isInvincible: 0
+  isImmortal: 0
   isHit: 0
   items: []
   buffs: []
@@ -136,15 +153,48 @@ MonoBehaviour:
   activeLockOnTarget: {fileID: 0}
   isPlayer: 0
   inventory: []
+  activePets: []
+  steps: 0
+  isOnIce: 0
+  castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
+  timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
+  skillSet:
+  - {fileID: 103987821612614508, guid: 2f0554ae42ef20e4e976d37f34aad3e3, type: 3}
+  - {fileID: 2502710003444371835, guid: 05bc84479b081af4ca7844c3cd88c425, type: 3}
+  - {fileID: 4238057447665557524, guid: d9d5c19e4e61ad142865732f1f61048b, type: 3}
+  - {fileID: 1969711209088018432, guid: d6d1154f9bb87ae4fa94b5c2fe7a7c09, type: 3}
+  - {fileID: 8883430349395961274, guid: 79742653ec493d246bcdef0cbf88e31b, type: 3}
+  - {fileID: 680506914304237524, guid: 8d38c6d44fc7878428ee4d926eeff611, type: 3}
+  - {fileID: 6096689982342564308, guid: bddbde069b87bf945a2ba62d587c3c99, type: 3}
+  - {fileID: 8157143814619834876, guid: f0b2ecb21609c6c48badb5e37582d142, type: 3}
+  - {fileID: 6162400572210519683, guid: 689f7820c63a03148aa81b962ee64ad6, type: 3}
+  - {fileID: 975855144787553018, guid: 42f53cb1b0e3a1e4c98ecc587d8dd07e, type: 3}
+  - {fileID: 6388236434287011116, guid: 478564dcd28512a4a88aeeac6dcd1b25, type: 3}
+  - {fileID: 4500866824247064267, guid: 8a7f78e4a6588ab4289c20b832353307, type: 3}
+  - {fileID: 4199971107470901696, guid: 3d7ade5656d74284380cd8f7d60fd1f0, type: 3}
+  - {fileID: 2626038527925349230, guid: 08ac142b84c3a2547ab5aed3862039d9, type: 3}
+  - {fileID: 6096689982342564308, guid: 7693768a878661948aefd9181f7a2d01, type: 3}
+  - {fileID: 6096689982342564308, guid: f00196e007dd1804990d23436f5ab617, type: 3}
+  - {fileID: 6388236434287011116, guid: 6383752caca7be74ea6d1e0d459f14df, type: 3}
+  - {fileID: 7736697032808662322, guid: 56f5ab55d0651f847a53e3a0d8305f08, type: 3}
+  - {fileID: 8104124904149976495, guid: 1069657a2cf5c7248891f906a405a860, type: 3}
+  - {fileID: 2626038527925349230, guid: 8191971a062876046ab19f93a98c3268, type: 3}
+  - {fileID: 2598273184590481572, guid: 062ebf34934818544859af78b674eb19, type: 3}
+  - {fileID: 6121382049002356524, guid: af79dc6e8669ea341b020d34b9391b34, type: 3}
+  - {fileID: 6097060202432798594, guid: 829f95c3bd5d9984793723ed6e29d15d, type: 3}
+  - {fileID: 1929037885388743043, guid: 28d171700ce5ac84fb3390e7c6068744, type: 3}
   dialogBoxSignal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
+  deathSignal: {fileID: 11400000, guid: dda75ee433c9b274f8925d7dc56f9851, type: 2}
   healthSignalUI: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
   manaSignalUI: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}
-  currencySignalUI: {fileID: 11400000, guid: b6a3b64d4c9fbc94e89adfd0ed648204, type: 2}
   openInventorySignal: {fileID: 11400000, guid: 2d989f4dd631a3d4f9286a7be6c33d95,
     type: 2}
   openPauseSignal: {fileID: 11400000, guid: fe8d16e1c87adbc46bf6d8de8ceae041, type: 2}
   cameraSignal: {fileID: 11400000, guid: 4a599050ff805e94fa907cfa2b0ff326, type: 2}
+  fadeSignal: {fileID: 11400000, guid: 7d067face1c3f4149b245c6294d12635, type: 2}
   targetHelpObject: {fileID: 8153952292305783526}
+  loadGame: {fileID: 11400000, guid: 6235bec172bdebb4b9dfed7e628eb8cc, type: 2}
+  fadingDuration: {fileID: 11400000, guid: a2cc0078d349f9245bd74b3f5813a450, type: 2}
   AButton: {fileID: 0}
   BButton: {fileID: 0}
   XButton: {fileID: 0}
@@ -167,7 +217,7 @@ Rigidbody2D:
   m_AngularDrag: 0.5
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -180,7 +230,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 759644400424337056}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b2c33c8d64f27eb44a2dc62e558a4e36, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -197,17 +247,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.614625, y: 0.36394513}
   m_EdgeRadius: 0
---- !u!210 &4633911114313944782
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759644400424337056}
-  m_Enabled: 1
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
-  m_SortingOrder: 0
 --- !u!1 &1487360461578692118
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,8 +288,8 @@ GameObject:
   - component: {fileID: 4531212770177679800}
   - component: {fileID: 2974922927713060803}
   - component: {fileID: 4187403449301391866}
-  - component: {fileID: 4005903117030388743}
   - component: {fileID: 4596317871093219076}
+  - component: {fileID: 6682989032966240731}
   m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
@@ -290,7 +329,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -298,6 +337,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -340,32 +380,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &4005903117030388743
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5158803107809188404}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0053334236, y: -0.49868935}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.5}
-    newSize: {x: 1.5, y: 1.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.614625, y: 0.36394513}
-  m_EdgeRadius: 0
 --- !u!114 &4596317871093219076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,6 +393,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 5074818981556205378}
+--- !u!210 &6682989032966240731
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5158803107809188404}
+  m_Enabled: 1
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0
 --- !u!1 &8638893490402070047
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,7 +459,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8669538159987880188}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5529, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4531212770177679800}
@@ -457,7 +482,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -465,6 +490,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -482,8 +508,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 2
+  m_Size: {x: 1, y: 0.49405822}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -500,11 +526,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Direction Ring
-      objectReference: {fileID: 0}
-    - target: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}
@@ -544,7 +565,7 @@ PrefabInstance:
     - target: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}

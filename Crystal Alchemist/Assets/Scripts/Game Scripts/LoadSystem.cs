@@ -14,12 +14,16 @@ public class LoadSystem : MonoBehaviour
             player.life = data.health;
             player.mana = data.mana;
 
+            player.healthSignalUI.Raise();
+            player.manaSignalUI.Raise();
+
             player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+
+            player.setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]));
 
             if (data.inventory.Count > 0)
             {
-                loadInventory(data, player);
-                player.currencySignalUI.Raise();
+                loadInventory(data, player);                
             }
 
             if (data.skills.Count > 0)
@@ -31,6 +35,8 @@ public class LoadSystem : MonoBehaviour
 
     private static void loadInventory(PlayerData data, Player player)
     {
+        player.inventory.Clear();
+
         foreach (string[] elem in data.inventory)
         {
             GameObject prefab = Resources.Load("Items/" + elem[0], typeof(GameObject)) as GameObject;
@@ -38,7 +44,7 @@ public class LoadSystem : MonoBehaviour
             instance.name = prefab.name;
             Item item = instance.GetComponent<Item>();
             item.amount = Convert.ToInt32(elem[1]);
-            player.collect(item, true);
+            player.collect(item, true, false);
         }
     }
 
@@ -46,7 +52,7 @@ public class LoadSystem : MonoBehaviour
     {
         foreach (string[] elem in data.skills)
         {
-            StandardSkill skill = Utilities.getSkillByName(player.skillSet, elem[1]);
+            StandardSkill skill = Utilities.Skill.getSkillByName(player.skillSet, elem[1]);
             string button = elem[0];
 
             switch (button)
@@ -55,6 +61,7 @@ public class LoadSystem : MonoBehaviour
                 case "B": player.BButton = skill; break;
                 case "X": player.XButton = skill; break;
                 case "Y": player.YButton = skill; break;
+                case "RB": player.RBButton = skill; break;
             }
         }
     }

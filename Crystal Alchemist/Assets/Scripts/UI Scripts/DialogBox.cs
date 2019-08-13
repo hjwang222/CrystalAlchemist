@@ -8,13 +8,18 @@ public class DialogBox : MonoBehaviour
     #region Attribute
     [Header("Dialog-Attribute")]
     [Tooltip("DialogBox Child-Objekt")]
-    public GameObject dialogBox;
+    [SerializeField]
+    private GameObject dialogBox;
     [Tooltip("DialogBox Text-Objekt")]
-    public TextMeshProUGUI textMesh;
+    [SerializeField]
+    private TextMeshProUGUI textMesh;
     [Tooltip("Sound der Dialogbox")]
-    public AudioClip dialogSoundEffect;
+    [SerializeField]
+    private AudioClip dialogSoundEffect;
     [SerializeField]
     private GameObject cursor;
+    [SerializeField]
+    private GameObject controls;
 
     private bool showIt = false;
     private bool inputPossible = true;
@@ -22,13 +27,12 @@ public class DialogBox : MonoBehaviour
     private AudioSource audioSource;
     private Player player;
     private int index = 0;
-    private float delay = 0.3f;
     private int maxLength = 28;
     #endregion
 
 
     #region Unity Funktionen (Start, Update)
-    private void Start()
+    private void Awake()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
@@ -78,6 +82,7 @@ public class DialogBox : MonoBehaviour
         this.texts = formatText(text);
 
         if (this.player != null) this.player.currentState = CharacterState.inDialog;
+        this.controls.SetActive(false);
         this.dialogBox.SetActive(true);
         showText();
     }
@@ -85,7 +90,8 @@ public class DialogBox : MonoBehaviour
     private void hideDialogBox()
     {
         //Blende DialogBox aus
-        this.player.delay(this.delay);
+        this.player.delay(CharacterState.interact);
+        this.controls.SetActive(true);
         this.cursor.SetActive(false);
         this.showIt = false;
         this.index = 0;
@@ -125,7 +131,7 @@ public class DialogBox : MonoBehaviour
 
     private void showText()
     {
-        Utilities.playSoundEffect(this.audioSource, this.dialogSoundEffect);
+        Utilities.Audio.playSoundEffect(this.audioSource, this.dialogSoundEffect);
 
         if (this.index + 1 < this.texts.Count) this.textMesh.text = this.texts[this.index] + "\n" + this.texts[this.index + 1];
         else this.textMesh.text = this.texts[this.index];

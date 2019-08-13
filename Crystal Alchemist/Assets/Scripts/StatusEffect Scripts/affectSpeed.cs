@@ -9,8 +9,6 @@ public class affectSpeed : StatusEffect
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     private float speed;
 
-    [SerializeField]
-    private Animator anim;
     #endregion
 
 
@@ -19,7 +17,6 @@ public class affectSpeed : StatusEffect
     {
         base.doEffect();
         this.target.updateSpeed(this.speed);
-        if(this.anim != null) this.anim.speed = 1;        
     }
 
     public override void DestroyIt()
