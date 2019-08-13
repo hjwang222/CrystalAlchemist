@@ -50,7 +50,7 @@ public class LaserSkill : StandardSkill
         Vector2 startpoint;
         Vector3 rotation;
 
-        Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
+        Utilities.Rotation.setDirectionAndRotation(this.sender, this.target,
                                           this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
                                           out angle, out startpoint, out this.direction, out rotation);
 
@@ -58,7 +58,7 @@ public class LaserSkill : StandardSkill
         {
             this.direction = (Vector2)this.target.transform.position - startpoint;
             float temp_angle = Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg;
-            this.direction = Utilities.DegreeToVector2(temp_angle);
+            this.direction = Utilities.Rotation.DegreeToVector2(temp_angle);
         }
 
         renderLine(startpoint, rotation);
@@ -70,7 +70,10 @@ public class LaserSkill : StandardSkill
         int layerMask = 1 << this.sender.gameObject.layer;
         layerMask = ~layerMask;
 
-        RaycastHit2D hitInfo = Physics2D.CircleCast(startpoint, this.laserSprite.size.y / 5, direction, distance, layerMask);
+        float offset = 1f;
+        Vector2 newPosition = new Vector2(startpoint.x - (this.direction.x * offset), startpoint.y - (this.direction.y * offset));
+
+        RaycastHit2D hitInfo = Physics2D.CircleCast(newPosition, this.laserSprite.size.y / 5, this.direction, distance, layerMask);
 
         if ((this.lockOn != null && target != null) || (this.lockOn == null && hitInfo && !hitInfo.collider.isTrigger))
         {
@@ -81,11 +84,15 @@ public class LaserSkill : StandardSkill
             if (this.target != null)
             {
                 //Übernehme Position, wenn ein Ziel vorhanden ist
-                hitted = target.GetComponent<Collider2D>();
+                foreach(Collider2D collider in target.GetComponentsInChildren<Collider2D>(false))
+                {
+                    if (!collider.isTrigger) hitted = collider;
+                }
+
                 hitpoint = target.transform.position;
             }
 
-            if (Utilities.checkCollision(hitted, this))
+            if (Utilities.Collisions.checkCollision(hitted, this))
             {
                 Character hittedCharacter = hitted.transform.GetComponent<Character>();
                 if (hittedCharacter != null) hittedCharacter.gotHit(this);

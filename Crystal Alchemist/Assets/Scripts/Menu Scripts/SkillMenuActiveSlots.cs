@@ -6,45 +6,79 @@ using UnityEngine.UI;
 public class SkillMenuActiveSlots : MonoBehaviour
 {
     private Player player;
-    [SerializeField]
-    private Image AButtonSkill;
-    [SerializeField]
-    private Image BButtonSkill;
-    [SerializeField]
-    private Image XButtonSkill;
-    [SerializeField]
-    private Image YButtonSkill;
-    [SerializeField]
-    private Image RBButtonSkill;
 
-    // Start is called before the first frame update
+    [SerializeField]
+    private Image skillImage;
+    [SerializeField]
+    private enumButton button;
+    [SerializeField]
+    private SimpleSignal newAssignedSkillSignal;
+
+    public StandardSkill skill;
+
     void Start()
     {
-        
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
-
-        updateSkillImage();
+        setImage();
     }
 
-    public void updateSkillImage()
+    private void OnEnable()
     {
-        setImage(AButtonSkill, this.player.AButton);
-        setImage(BButtonSkill, this.player.BButton);
-        setImage(XButtonSkill, this.player.XButton);
-        setImage(YButtonSkill, this.player.YButton);
-        setImage(RBButtonSkill, this.player.RBButton);
+        setImage();
     }
 
-    private void setImage(Image image, StandardSkill skill)
+    private void setImage()
     {
-        if(skill != null)
+        this.skill = getSkill();
+        
+        if (this.skill != null)
         {
-            image.gameObject.SetActive(true);
-            image.sprite = skill.icon;
+            this.skillImage.gameObject.SetActive(true);
+            this.skillImage.sprite = this.skill.icon;
         }
         else
         {
-            image.gameObject.SetActive(false);
+            this.skillImage.gameObject.SetActive(false);
+        }
+    }
+
+    public void assignSkillToButton(SkillMenu skillMenu)
+    {
+        setSkill(skillMenu.selectedSkill);
+        skillMenu.selectSkillFromSkillSet(null);
+        Utilities.Helper.checkIfHelperDeactivate(this.player);
+
+        setImage();
+        this.newAssignedSkillSignal.Raise();
+    }
+
+    private StandardSkill getSkill()
+    {
+        if (this.player != null)
+        {
+            switch (this.button)
+            {
+                case enumButton.AButton: return this.player.AButton;
+                case enumButton.BButton: return this.player.BButton;
+                case enumButton.XButton: return this.player.XButton;
+                case enumButton.YButton: return this.player.YButton;
+                case enumButton.RBButton: return this.player.RBButton;
+                default: return null;
+            }
+        }
+        return null;
+    }
+
+    private void setSkill(StandardSkill skill)
+    {           
+        switch (this.button)
+        {
+            case enumButton.AButton: this.player.AButton = skill; break;
+            case enumButton.BButton: this.player.BButton = skill; break;
+            case enumButton.XButton: this.player.XButton = skill; break;
+            case enumButton.YButton: this.player.YButton = skill; break;
+            case enumButton.RBButton: this.player.RBButton = skill; break;
+            default: this.player.RBButton = skill; break;
         }
     }
 }

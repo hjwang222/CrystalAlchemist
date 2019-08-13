@@ -5,11 +5,10 @@ using TMPro;
 
 public class Sign : Interactable
 {
-    private void Update()
+    public override void doSomethingOnSubmit()
     {
-        if (this.isPlayerInRange && Input.GetButtonDown("Submit"))
-        {
-            if (this.player != null) this.player.showDialogBox(this.text);
-        }
+        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
+
+        this.player.showDialogBox(text);        
     }
 }

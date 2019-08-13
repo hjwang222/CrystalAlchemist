@@ -29,7 +29,7 @@ public class TimeSkill : StandardSkill
 
         foreach(Character character in this.affectedCharacters)
         {
-            character.RemoveStatusEffect(this.timeEffect, true);
+            Utilities.StatusEffectUtil.RemoveStatusEffect(this.timeEffect, true, character);
         }
 
         //Skills wieder normalisieren
@@ -54,17 +54,22 @@ public class TimeSkill : StandardSkill
 
     public override void OnTriggerExit2D(Collider2D hittedCharacter)
     {
-        base.OnTriggerExit2D(hittedCharacter);
         //Normalisiere Zeit beim Austritt aus dem Feld
-        if (Utilities.checkCollision(hittedCharacter, this))
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this))
             removeTimeDistorion(hittedCharacter.gameObject);
     }
 
     public override void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
-        base.OnTriggerEnter2D(hittedCharacter);
         //Setze Zeit beim Eintritt in das Feld
-        if (Utilities.checkCollision(hittedCharacter, this) && !isDestroyed)
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this))
+            setTimeDistorion(hittedCharacter.gameObject, this.TimeDistortion);
+    }
+
+    public override void OnTriggerStay2D(Collider2D hittedCharacter)
+    {
+        //Setze Zeit beim Eintritt in das Feld
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this))
             setTimeDistorion(hittedCharacter.gameObject, this.TimeDistortion);
     }
 
@@ -74,7 +79,7 @@ public class TimeSkill : StandardSkill
     #region Functions (private)
     private void removeTimeDistorion(GameObject hittedCharacter)
     {
-        StandardSkill skill = hittedCharacter.GetComponent<StandardSkill>();
+        StandardSkill skill = Utilities.Skill.getSkillByCollision(hittedCharacter);
 
         if (skill != null)
         {
@@ -86,7 +91,7 @@ public class TimeSkill : StandardSkill
 
         if (character != null)
         {
-            character.RemoveStatusEffect(this.timeEffect, true);
+            Utilities.StatusEffectUtil.RemoveStatusEffect(this.timeEffect, true, character);
             this.affectedCharacters.Remove(character);
         }
     }
@@ -94,18 +99,18 @@ public class TimeSkill : StandardSkill
     private void setTimeDistorion(GameObject hittedCharacter, float destortion)
     {
         Character character = hittedCharacter.GetComponent<Character>();
-        StandardSkill skill = hittedCharacter.GetComponent<StandardSkill>();
+        StandardSkill skill = Utilities.Skill.getSkillByCollision(hittedCharacter);
 
         if (character != null)
         {
-            character.AddStatusEffect(this.timeEffect);
-            this.affectedCharacters.Add(character);
+            Utilities.StatusEffectUtil.AddStatusEffect(this.timeEffect, character);
+            if (!this.affectedCharacters.Contains(character)) this.affectedCharacters.Add(character);
         }
 
         if (skill != null)
         {
             skill.updateTimeDistortion(destortion);
-            this.affectedSkills.Add(skill);
+            if(!this.affectedSkills.Contains(skill)) this.affectedSkills.Add(skill);
         }
     }
     #endregion

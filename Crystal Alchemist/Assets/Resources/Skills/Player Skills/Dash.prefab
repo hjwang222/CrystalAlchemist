@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &661548303189921719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6024384182685389377}
+  - component: {fileID: 6162400572210519683}
+  m_Layer: 14
+  m_Name: Dash
+  m_TagString: Skill
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6024384182685389377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5590416017817286310}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6162400572210519683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Dash
+  skillNameEnglish: Dash
+  skillDescription: Schnelle Ausweich-Bewegung
+  skillDescriptionEnglish: Fast dodge movement
+  category: 1
+  animationTriggerName: 
+  orderIndex: 12
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  shadow: {fileID: 0}
+  indicators: []
+  showingIndicator: 1
+  showCastBarForEnemies: 1
+  useCustomColor: 0
+  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  cast: 0
+  keepHoldTimer: 0
+  delay: 0
+  duration: 0.2
+  lockMovementonDuration: 0
+  deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
+  cooldown: 0.1
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  affectedResources: []
+  statusEffects: []
+  thrust: 0
+  knockbackTime: 0.2
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: -0.5
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 1
+  selfThrust: 20
+  selfThrustTime: 0.2
+  isRapidFire: 0
+  isStationary: 0
+  colliderHeightOffset: 0
+  speed: 0
+  rotateIt: 0
+  rotateOnUpdate: 0
+  keepOriginalRotation: 0
+  blendTree: 0
+  useOffSetToBlendTree: 0
+  rotationModifier: 0
+  snapRotationInDegrees: 0
+  positionOffset: 0
+  positionHeight: 0
+  activeTargetHelper: 0
+  setTargetAutomatically: 0
+  lockOn: {fileID: 0}
+  targetingMode: 2
+  maxAmountOfTargets: 1
+  targetingDuration: 6
+  multiHitDelay: 0
+  showRange: 0
+  affectSelf: 0
+  affectOther: 0
+  affectSame: 0
+  affectNeutral: 0
+  affectSkills: 0
+  ignoreInvincibility: 0
+  stateType: 1
+  doCastDuringDelay: 0
+  maxAmounts: 1
+  comboAmount: 99
+  icon: {fileID: 6355109479269064622, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  activeIndicators: []
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: -0.00039163604
+  movementLocked: 0
+  target: {fileID: 0}
+  audioSource: {fileID: 0}
+  dontPlayAudio: 0
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setPositionAtStart: 1
+  setActive: 1
+--- !u!1 &1288681395139722514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5590416017817286310}
+  m_Layer: 14
+  m_Name: collider
+  m_TagString: Attack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5590416017817286310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288681395139722514}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6024384182685389377}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

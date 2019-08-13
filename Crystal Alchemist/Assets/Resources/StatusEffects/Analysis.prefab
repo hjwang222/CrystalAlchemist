@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2634165681308481017
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2634165681308481018}
+  - component: {fileID: 4742325497012214215}
+  - component: {fileID: 2634165681308481020}
+  m_Layer: 0
+  m_Name: Analysis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2634165681308481018
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634165681308481017}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 48, y: 48}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4742325497012214215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634165681308481017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81633f67dcc3b42449b6bce525b87bae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffectName: Analysis
+  statusEffectNameEnglish: Analyse
+  statusEffectDescription: "Zeigt Infos \xFCber Gegner und Objekte"
+  statusEffectDescriptionEnglish: Showing informations about enemies and objects
+  maxStacks: 1
+  canBeDispelled: 1
+  stunTarget: 0
+  statusEffectType: 0
+  endType: 1
+  statusEffectDuration: 1
+  statusEffectInterval: 0
+  canOverride: 0
+  statusEffectManaDrain: 0.25
+  statusEffectManaDrainInterval: 3
+  canDeactivateIt: 1
+  destroyDelay: 0.2
+  ownAnimator: {fileID: 0}
+  changeColor: 0
+  statusEffectColor: {r: 1, g: 1, b: 1, a: 1}
+  iconSprite: {fileID: 21300034, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
+  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
+  target: {fileID: 0}
+  statusEffectTimeLeft: 0
+  timeDistortion: 1
+  specialGameObject: {fileID: 2140673505560165479, guid: f26a64cb4b5c5c549b6018becf166d02,
+    type: 3}
+--- !u!222 &2634165681308481020
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634165681308481017}
+  m_CullTransparentMesh: 0

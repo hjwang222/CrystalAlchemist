@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 #region Enums
 public enum CharacterState
 {
     walk,
     attack,
+    defend,
     interact, //in Reichweite eines interagierbaren Objektes
     inDialog, //Dialog-Box ist offen
+    inMenu, //Pause oder Inventar ist offen
     knockedback, //im Knockback
     idle,
-    frozen, //kann sich nicht bewegen und angreifen
     silent, //kann nicht angreifen
-    dead, 
+    dead,
+    manually,
     respawning
 }
 
@@ -40,10 +43,54 @@ public enum Gender
 public class Character : MonoBehaviour
 {
     #region Basic Attributes
-    [Required("Name muss gesetzt sein!")]
+    [Required]
     [BoxGroup("Pflichtfelder")]
-    [Tooltip("Name")]
     public string characterName;
+
+    [BoxGroup("Pflichtfelder")]
+    public string englischCharacterName;
+
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    public Rigidbody2D myRigidbody;
+
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    public Animator animator;
+
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    public SpriteRenderer spriteRenderer;
+
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    public BoxCollider2D boxCollider;
+
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public SpriteRenderer shadowRenderer;
+
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public Sprite startSpriteForRespawn;
+
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public Sprite startSpriteForRespawnWhite;
+
+    [BoxGroup("Easy Access")]
+    [Required]
+    public GameObject activeSkillParent;
+
+    [BoxGroup("Easy Access")]
+    [Required]
+    public GameObject activeStatusEffectParent;
+
+    [BoxGroup("Easy Access")]
+    [Required]
+    public GameObject skillSetParent;
+
+
 
     ////////////////////////////////////////////////////////////////
 
@@ -69,27 +116,34 @@ public class Character : MonoBehaviour
 
     [Space(10)]
     [TabGroup("Start-Values")]
-    [Tooltip("Respawn-Zeit")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float respawnTime = 30;
-
-    [Space(10)]
-    [TabGroup("Start-Values")]
     [Tooltip("Immunität von Statuseffekten")]
     public List<StatusEffect> immunityToStatusEffects = new List<StatusEffect>();
 
 
 
-    [TabGroup("Max-Values")]
+    [TabGroup("Spawn Values")]
     [Tooltip("Maximales Life")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
     public float maxLife = Utilities.minFloat;
 
-    [TabGroup("Max-Values")]
+    [TabGroup("Spawn Values")]
     [Tooltip("Maximales Mana")]
     [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
-    public float maxMana = Utilities.minFloat;    
+    public float maxMana = Utilities.minFloat;
 
+    [Space(10)]
+    [TabGroup("Spawn Values")]
+    [Tooltip("Respawn-Zeit")]
+    [Range(0, Utilities.maxFloatInfinite)]
+    public float respawnTime = 30;
+
+    [TabGroup("Spawn Values")]
+    [Tooltip("Respawn-Animation")]
+    public RespawnAnimation respawnAnimation;
+
+    [TabGroup("Spawn Values")]
+    [Tooltip("Respawn-Animation")]
+    public DeathAnimation deathAnimation;
 
 
     [TabGroup("Regeneration")]
@@ -112,24 +166,6 @@ public class Character : MonoBehaviour
     [Tooltip("Intervall der Manaregeneration")]
     [Range(0, Utilities.maxFloatSmall)]
     public float manaRegenerationInterval = 0;
-
-
-
-    ////////////////////////////////////////////////////////////////
-
-        
-    [FoldoutGroup("Skills", expanded: false)]
-    [Tooltip("Skills, welcher der Character verwenden kann")]
-    public List<StandardSkill> skillSet = new List<StandardSkill>();
-
-    [Space(10)]
-    [FoldoutGroup("Skills", expanded: false)]
-    [Tooltip("Skill, welcher der Character sofort verwendet")]
-    public StandardSkill initializeSkill;
-
-    [FoldoutGroup("Skills", expanded: false)]
-    [Tooltip("Skill, welcher der Character bei seinem Tod verwendet")]
-    public StandardSkill deathSkill;
 
     ////////////////////////////////////////////////////////////////
 
@@ -182,19 +218,15 @@ public class Character : MonoBehaviour
 
     [FoldoutGroup("Loot", expanded: false)]
     [HideIf("canCollectAll")]
-    public List<ItemGroup> canCollect = new List<ItemGroup>();
+    public List<string> canCollect = new List<string>();
 
 
     ////////////////////////////////////////////////////////////////
-    
+
 
     [FoldoutGroup("Sound", expanded: false)]
     [Tooltip("Soundeffekt, wenn Gegner getroffen wurde")]
     public AudioClip hitSoundEffect;
-
-    [FoldoutGroup("Sound", expanded: false)]
-    [Tooltip("Soundeffekt, wenn Gegner getötet wurde")]
-    public AudioClip killSoundEffect;
 
 
     ////////////////////////////////////////////////////////////////
@@ -214,6 +246,11 @@ public class Character : MonoBehaviour
     [EnumToggleButtons]
     public CharacterType characterType = CharacterType.Object;
 
+    [BoxGroup("AI")]
+    [SerializeField]
+    [Required]
+    private AIAggroSystem aggro;
+
     #endregion
 
 
@@ -221,27 +258,22 @@ public class Character : MonoBehaviour
 
     private float lifeTime;
     private float manaTime;
-    private float speedMultiply = 5;
-    private SimpleSignal healthSignal;
-    private SimpleSignal manaSignal;
-    private SimpleSignal keySignal;
-    private SimpleSignal coinSignal;
-    private SimpleSignal crystalSignal;
-    private SimpleSignal woodSignal;
-    private SimpleSignal stoneSignal;
-    private SimpleSignal metalSignal;
-    private Vector3 spawnPosition;
 
     [HideInInspector]
-    public Rigidbody2D myRigidbody;
+    public float speedMultiply = 5;
+
+    private List<Color> colors = new List<Color>();
+    private bool showTargetHelp = false;
+    private GameObject targetHelpObjectPlayer;
+    private DeathAnimation activeDeathAnimation;
+
     [HideInInspector]
-    public Animator animator;
+    public Vector3 spawnPosition;
+
     [HideInInspector]
     public AudioSource audioSource;
-    [HideInInspector]
-    public SpriteRenderer spriteRenderer;
-    [HideInInspector]
-    public CastBar castbar;
+
+
     [HideInInspector]
     public CastBar activeCastbar;
     [HideInInspector]
@@ -256,6 +288,8 @@ public class Character : MonoBehaviour
     public float speed;
     [HideInInspector]
     public bool isInvincible;
+    [HideInInspector]
+    public bool isImmortal = false;
     [HideInInspector]
     public bool isHit;
     [HideInInspector]
@@ -274,11 +308,16 @@ public class Character : MonoBehaviour
     public float timeDistortion = 1;
     [HideInInspector]
     public GameObject activeLockOnTarget = null;
-
-
+    [HideInInspector]
+    public bool isPlayer = false;
     [HideInInspector]
     public List<Item> inventory = new List<Item>();
-
+    [HideInInspector]
+    public List<Character> activePets = new List<Character>();
+    [HideInInspector]
+    public float steps = 0;
+    [HideInInspector]
+    public bool isOnIce = false;
 
     #endregion
 
@@ -292,32 +331,58 @@ public class Character : MonoBehaviour
     public void init()
     {
         this.spawnPosition = this.transform.position;
-        this.direction = new Vector2(0, -1);
+
         //getItems();    
-        
+
         setComponents();
-        spawn();
-        
-        if (this.initializeSkill != null) useSkillInstantly(this.initializeSkill);
+        initSpawn();
+
         //this.gameObject.layer = LayerMask.NameToLayer(this.gameObject.tag);
     }
 
     private void setComponents()
     {
-        this.myRigidbody = GetComponent<Rigidbody2D>();
+        if (this.myRigidbody == null) this.myRigidbody = this.GetComponent<Rigidbody2D>();
+        if (this.spriteRenderer == null) this.spriteRenderer = this.GetComponent<SpriteRenderer>();
+
+        if (this.animator == null) this.animator = this.GetComponent<Animator>();
+        if (this.boxCollider == null) this.boxCollider = GetComponent<BoxCollider2D>();
+
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
-        this.spriteRenderer = GetComponent<SpriteRenderer>();
-        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
-        this.animator = GetComponent<Animator>();
+        this.colors.Add(this.spriteRenderer.color);
+
         this.transform.gameObject.tag = this.characterType.ToString();
+        /*
+        if (this.spriteRenderer != null)
+        {
+            this.spriteRenderer.gameObject.tag = this.transform.gameObject.tag;
+        }*/
+        if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
     }
 
+    public void setTargetHelper(GameObject targetHelper)
+    {
+        this.targetHelpObjectPlayer = targetHelper;
+        this.targetHelpObjectPlayer.SetActive(false);
+    }
 
-    public void spawn()
-    {        
-        if(this.currentState == CharacterState.respawning) Utilities.SetParameter(this.animator, "isRespawn", true);
+    public void setTargetHelperActive(bool value)
+    {
+        if (this.targetHelpObjectPlayer != null) this.targetHelpObjectPlayer.gameObject.SetActive(value);
+    }
+
+    public void initSpawn()
+    {
+        destroySkills();
+        setBasicAttributesToNormal();
+        ActivateCharacter();
+    }
+
+    private void setBasicAttributesToNormal()
+    {
+        this.direction = new Vector2(0, -1);
 
         this.life = this.startLife;
         this.mana = this.startMana;
@@ -332,39 +397,46 @@ public class Character : MonoBehaviour
 
         this.buffs.Clear();
         this.debuffs.Clear();
-        
+
         this.currentState = CharacterState.idle;
         this.animator.enabled = true;
         this.spriteRenderer.enabled = true;
-        this.GetComponent<BoxCollider2D>().enabled = true;
+
+        this.shadowRenderer.enabled = true;
         this.transform.position = this.spawnPosition;
 
-        Utilities.setItem(this.lootTable, this.multiLoot, this.items);
+        this.activeDeathAnimation = null;
+
+        resetColor();
+    }
+
+    public void ActivateCharacter()
+    {
+        if (this.boxCollider != null) this.boxCollider.enabled = true;
+        Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
+
+        AIEvents eventAI = this.GetComponent<AIEvents>();
+        if (eventAI != null) eventAI.init();
     }
     #endregion
 
 
+    #region Updates
 
-    private void Update()
+    public void Update()
     {
-        regeneration();        
+        regeneration();
+
+        if (this.currentState != CharacterState.knockedback && !this.isOnIce)
+        {
+            this.myRigidbody.velocity = Vector2.zero;
+        }
+
+        if (this.currentState == CharacterState.dead)
+            return;
     }
 
-    public void setResourceSignal(SimpleSignal health, SimpleSignal mana, 
-                                  SimpleSignal key, SimpleSignal coin, SimpleSignal crystal, 
-                                  SimpleSignal wood, SimpleSignal stone, SimpleSignal metal)
-    {
-        this.healthSignal = health;
-        this.manaSignal = mana;
-        this.keySignal = key;
-        this.coinSignal = coin;
-        this.crystalSignal = crystal;
-        this.woodSignal = wood;
-        this.stoneSignal = stone;
-        this.metalSignal = metal;
-    }
-
-    public void regeneration()
+    private void regeneration()
     {
         if (this.currentState != CharacterState.dead && this.currentState != CharacterState.respawning)
         {
@@ -385,89 +457,17 @@ public class Character : MonoBehaviour
                 if (this.manaTime >= this.manaRegenerationInterval)
                 {
                     this.manaTime = 0;
-                    updateResource(ResourceType.mana, null, this.manaRegeneration);
+                    updateResource(ResourceType.mana, null, this.manaRegeneration, false);
                 }
                 else
                 {
                     this.manaTime += (Time.deltaTime * this.timeDistortion);
                 }
             }
-       }
-    }
-
-    private void useSkillInstantly(StandardSkill skill)
-    {        
-        if (this.activeCastbar != null && skill.holdTimer == 0) this.activeCastbar.destroyIt();
-
-        if (skill.cooldownTimeLeft > 0)
-        {
-            skill.cooldownTimeLeft -= (Time.deltaTime * this.timeDistortion);
-        }
-        else
-        {
-            int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
-
-            if (currentAmountOfSameSkills < skill.maxAmounts
-                && this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0)
-            {
-                    if (!skill.isRapidFire && !skill.keepHoldTimer) skill.holdTimer = 0;
-                    
-                    skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
-
-                    if (skill.isStationary)
-                    {
-                    //Place it in World 
-                        GameObject activeSkill = Instantiate(skill.gameObject, this.transform.position, Quaternion.identity);
-                        activeSkill.GetComponent<StandardSkill>().sender = this;
-                        this.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
-                    }
-                    else
-                    {
-                    //Place it as Child
-                        GameObject activeSkill = Instantiate(skill.gameObject, this.transform.position, Quaternion.identity, this.transform);
-                        activeSkill.GetComponent<StandardSkill>().sender = this;
-                        this.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
-                    }                
-            }
         }
     }
 
-
-
-
-    #region Day/Night Circle  
-
-    public void updateColor()
-    {
-        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
-    }
-
     #endregion
-
-
-    #region SkillUsage
-
-
-    #region Utils
-
-    public int getAmountOfSameSkills(StandardSkill skill)
-    {
-        int result = 0;
-
-        for (int i = 0; i < this.activeSkills.Count; i++)
-        {
-            StandardSkill activeSkill = this.activeSkills[i];
-            if (activeSkill.skillName == skill.skillName) result++;
-        }
-
-        return result;
-    }
-    #endregion
-
-
-
-    #endregion
-
 
 
     #region Item Functions (drop Item, Lootregeln)
@@ -485,31 +485,65 @@ public class Character : MonoBehaviour
 
     #region Update Functions (Signals?)  
 
-    //Signal?
-
-    private void showDamageNumber(float addLife)
+    private void showDamageNumber(float value, Color[] color)
     {
         if (this.damageNumber != null)
         {
             GameObject damageNumberClone = Instantiate(this.damageNumber, this.transform.position, Quaternion.identity, this.transform);
-            damageNumberClone.GetComponent<DamageNumbers>().number = addLife;
+            damageNumberClone.GetComponent<DamageNumbers>().number = value;
+            damageNumberClone.GetComponent<DamageNumbers>().setcolor(color);
             damageNumberClone.hideFlags = HideFlags.HideInHierarchy;
         }
     }
 
-    private void killIt()
+    private void destroySkills()
     {
-        Utilities.SetParameter(this.animator, "isDead", true);
+        //TODO: Exception
+        foreach (StandardSkill skill in this.activeSkills)
+        {
+            skill.durationTimeLeft = 0;
+        }
 
-        this.currentState = CharacterState.dead;
-
-        if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
-        this.GetComponent<BoxCollider2D>().enabled = false;        
+        this.activeSkills.Clear();
     }
 
-    public void PlayDeathSoundEffect()
+    public virtual void KillIt()
     {
-        Utilities.playSoundEffect(this.audioSource, this.killSoundEffect);
+        if (!this.isPlayer)
+        {
+            foreach (StandardSkill skill in this.activeSkills)
+            {
+                if (!skill.isStationary) skill.durationTimeLeft = 0;
+            }
+
+            //TODO: Kill sofort (Skill noch aktiv)
+            Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
+            Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
+
+            this.spriteRenderer.color = Color.white;
+
+            if (this.aggro != null) aggro.clearAggro();
+
+            this.currentState = CharacterState.dead;
+
+            if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
+            //StartCoroutine(colliderDisable());
+            if (this.boxCollider != null) this.boxCollider.enabled = false;
+            this.shadowRenderer.enabled = false;
+
+            //Play Death Effect
+            if (this.deathAnimation != null)
+            {
+                PlayDeathAnimation();
+            }
+            else Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead");
+        }
+    }
+
+
+    public void PlaySoundEffect(AudioClip clip)
+    {
+        Utilities.Audio.playSoundEffect(this.audioSource, clip);
     }
 
     public void DestroyIt()
@@ -519,52 +553,69 @@ public class Character : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
+    public void DestroyItCompletely()
+    {
+        Destroy(this.gameObject);
+    }
+
+    public void PlayDeathAnimation()
+    {
+        if (this.activeDeathAnimation == null)
+        {
+            DeathAnimation deathObject = Instantiate(this.deathAnimation, this.transform.position, Quaternion.identity);
+            deathObject.setCharacter(this);
+            this.activeDeathAnimation = deathObject;
+        }
+    }
+
     public void updateResource(ResourceType type, Item item, float addResource)
+    {
+        updateResource(type, item, addResource, true);
+    }
+
+    public virtual void updateResource(ResourceType type, Item item, float value, bool showingDamageNumber)
     {
         switch (type)
         {
             case ResourceType.life:
                 {
-                    this.life = Utilities.setResource(this.life, this.maxLife, addResource);  
-                    if(this.life > 0 && this.currentState != CharacterState.dead) showDamageNumber(addResource);
-                    if (this.life <= 0) killIt();
-                    callSignal(this.healthSignal, addResource);
+                    this.life = Utilities.Resources.setResource(this.life, this.maxLife, value);
+
+                    Color[] colorArray = GlobalValues.red;
+                    if (value > 0) colorArray = GlobalValues.green;
+
+                    if (this.life > 0 && this.currentState != CharacterState.dead && showingDamageNumber) showDamageNumber(value, colorArray);
+                    if (this.life <= 0) KillIt();
                     break;
                 }
             case ResourceType.mana:
                 {
-                    this.mana = Utilities.setResource(this.mana, this.maxMana, addResource);
-                    callSignal(this.manaSignal, addResource);
+                    this.mana = Utilities.Resources.setResource(this.mana, this.maxMana, value);
+                    if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
                     break;
                 }
             case ResourceType.item:
                 {
                     if (item != null)
                     {
-                        Utilities.updateInventory(item, this, Mathf.RoundToInt(addResource));
-                        callSignal(this.woodSignal, addResource);  //TODO Single Signal?
+                        Utilities.Items.updateInventory(item, this, Mathf.RoundToInt(value));
+                        callSignal(item.signal, value);
                     }
                     break;
                 }
             case ResourceType.skill:
                 {
-                    if (item != null && item.skill != null)
+                    if (item != null && item.skill != null && this.GetComponent<Player>() != null)
                     {
-                        Utilities.updateSkillset(item.skill, this);
-                        //callSignal(this.woodSignal, addResource);  //TODO Single Signal?
+                        Utilities.Skill.updateSkillset(item.skill, this.GetComponent<Player>());
                     }
                     break;
                 }
-            /*case ResourceType.crystal:
-                {
-                    this.crystals = Mathf.RoundToInt(Utilities.setResource(this.crystals, this.maxCrystals, addResource));
-                    callSignal(this.crystalSignal, addResource);
-                    break;
-                }*/
-        }        
+        }
     }
 
-    private void callSignal(SimpleSignal signal, float addResource)
+
+    public void callSignal(SimpleSignal signal, float addResource)
     {
         if (signal != null && addResource != 0) signal.Raise();
     }
@@ -575,9 +626,9 @@ public class Character : MonoBehaviour
 
         switch (type)
         {
-            case ResourceType.life: return this.life;                
+            case ResourceType.life: return this.life;
             case ResourceType.mana: return this.mana;
-            case ResourceType.item: return Utilities.getAmountFromInventory(item.itemGroup, this.inventory, false);
+            case ResourceType.item: return Utilities.Items.getAmountFromInventory(item, this.inventory, false);
         }
 
         return 0;
@@ -589,34 +640,43 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life: return this.maxLife;
             case ResourceType.mana: return this.maxMana;
-            case ResourceType.item: return Utilities.getAmountFromInventory(item.itemGroup, this.inventory, true);
+            case ResourceType.item: return Utilities.Items.getAmountFromInventory(item, this.inventory, true);
         }
 
         return 0;
     }
 
-
     public void updateSpeed(float addSpeed)
     {
-        this.speed = ((this.startSpeed / 100) + (addSpeed / 100)) * this.timeDistortion * this.speedMultiply;
-        this.animator.speed = this.speed / (this.startSpeed * this.speedMultiply / 100);
+        updateSpeed(addSpeed, true);
+    }
+
+    public void updateSpeed(float addSpeed, bool affectAnimation)
+    {
+        float startSpeedInPercent = this.startSpeed / 100;
+        float addNewSpeed = startSpeedInPercent * (addSpeed / 100);
+        float changeSpeed = startSpeedInPercent + addNewSpeed;
+
+        this.speed = changeSpeed * this.timeDistortion * this.speedMultiply;
+        if (affectAnimation) this.animator.speed = this.speed / (this.startSpeed * this.speedMultiply / 100);
     }
 
     public void updateSpellSpeed(float addSpellSpeed)
     {
-        this.spellspeed = ((this.startSpellSpeed/100) + (addSpellSpeed/100)) * this.timeDistortion;
+        this.spellspeed = ((this.startSpellSpeed / 100) + (addSpellSpeed / 100)) * this.timeDistortion;
     }
 
     public void updateTimeDistortion(float distortion)
     {
-        this.timeDistortion = 1 + (distortion/100);
+        this.timeDistortion = 1 + (distortion / 100);
 
-       /* if (this.CompareTag("Player"))
-        {
-            this.GetComponent<Player>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
-        }*/
+        /* if (this.CompareTag("Player"))
+         {
+             this.GetComponent<Player>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
+         }*/
 
-        if (this.animator != null) this.animator.speed = this.timeDistortion;
+        updateAnimatorSpeed(this.timeDistortion);
+
         if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
 
         foreach (StatusEffect effect in this.buffs)
@@ -630,6 +690,80 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void updateAnimatorSpeed(float value)
+    {
+        if (this.animator != null) this.animator.speed = value;
+    }
+
+    #endregion
+
+
+    public void startAttackAnimation(string parameter)
+    {
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, parameter);
+    }
+
+    public void resetCast(StandardSkill skill)
+    {
+        if (skill != null)
+        {
+            if (!skill.keepHoldTimer) skill.holdTimer = 0;
+            hideCastBarAndIndicator(skill);
+        }
+    }
+
+    public void hideCastBarAndIndicator(StandardSkill skill)
+    {
+        if (this.activeCastbar != null)
+        {
+            this.activeCastbar.destroyIt();
+        }
+
+        skill.hideIndicator();
+        skill.hideCastingAnimation();
+    }
+
+
+    #region Color Changes
+
+    public void resetColor()
+    {
+        if (this.spriteRenderer != null)
+        {
+            if (this.colors.Count > 0) this.spriteRenderer.color = this.colors[0];
+            this.colors.Clear();
+            this.addColor(this.spriteRenderer.color);
+        }
+    }
+
+    public void resetColor(Color color)
+    {
+        if (this.spriteRenderer != null)
+        {
+            this.colors.Remove(color);
+            this.spriteRenderer.color = this.colors[this.colors.Count - 1];
+        }
+    }
+
+    public void enableSpriteRenderer(bool value)
+    {
+        this.spriteRenderer.enabled = value;
+        if(this.shadowRenderer != null) this.shadowRenderer.enabled = value;
+    }
+
+    public void addColor(Color color)
+    {
+        if (this.colors.Contains(color))
+        {
+            this.spriteRenderer.color = this.colors[this.colors.IndexOf(color)];
+        }
+        else
+        {
+            this.colors.Add(color);
+            this.spriteRenderer.color = this.colors[this.colors.Count - 1];
+        }
+    }
+
     #endregion
 
 
@@ -637,12 +771,17 @@ public class Character : MonoBehaviour
 
     public void collect(Item item, bool destroyIt)
     {
+        collect(item, destroyIt, true);
+    }
+
+    public void collect(Item item, bool destroyIt, bool playSound)
+    {
         if (this.canCollectAll || this.canCollect.Contains(item.itemGroup))
         {
-            item.playSounds();
+            if (playSound) item.playSounds();
 
-            this.updateResource(item.resourceType, item, item.amount);         
-            
+            this.updateResource(item.resourceType, item, item.amount);
+
             if (destroyIt) item.DestroyIt();
         }
     }
@@ -652,147 +791,73 @@ public class Character : MonoBehaviour
 
     #region Damage Functions (hit, statuseffect, knockback)
 
-    public void gotHit(StandardSkill skill)
+    public void gotHit(StandardSkill skill, float percentage)
     {
-        if (this.currentState != CharacterState.inDialog)
+        if (this.currentState != CharacterState.respawning
+         && this.currentState != CharacterState.dead)
         {
-            if (!this.isInvincible || skill.ignoreInvincibility)
+            if ((!this.isInvincible && !this.isImmortal) || skill.ignoreInvincibility)
             {
                 //Status Effekt hinzufügen
                 if (skill.statusEffects != null)
                 {
                     foreach (StatusEffect effect in skill.statusEffects)
                     {
-                        this.AddStatusEffect(effect);
+                        Utilities.StatusEffectUtil.AddStatusEffect(effect, this);
                     }
                 }
 
-                //TODO ADDTARGET ITEM
-                updateResource(ResourceType.life, null, skill.addLifeTarget);
-                
-                if(this.life > 0)
+                foreach (affectedResource elem in skill.affectedResources)
                 {
-                    if (skill.addLifeTarget < 0)
+                    float amount = elem.amount * percentage / 100;
+
+                    updateResource(elem.resourceType, null, amount);
+
+                    if (this.life > 0 && elem.resourceType == ResourceType.life && amount < 0)
                     {
+                        if (aggro != null) aggro.increaseAggroOnHit(skill.sender, elem.amount);
+
                         //Charakter-Treffer (Schaden) animieren
-                        Utilities.playSoundEffect(this.audioSource, this.hitSoundEffect);
+                        Utilities.Audio.playSoundEffect(this.audioSource, this.hitSoundEffect);
                         StartCoroutine(hitCo());
                     }
+                }
 
+                if (this.life > 0)
+                {
                     //Rückstoß ermitteln
                     float knockbackTrust = skill.thrust - antiKnockback;
-                    knockBack(skill.knockbackTime, knockbackTrust, skill.transform);
+                    knockBack(skill.knockbackTime, knockbackTrust, skill);
                 }
             }
         }
     }
 
-    public void RemoveStatusEffect(StatusEffect statusEffect, bool allTheSame)
+    public void gotHit(StandardSkill skill)
     {
-        List<StatusEffect> statusEffects = null;
-        List<StatusEffect> dispellStatusEffects = new List<StatusEffect>();
-
-        if (statusEffect.statusEffectType == StatusEffectType.debuff) statusEffects = this.debuffs;
-        else if (statusEffect.statusEffectType == StatusEffectType.buff) statusEffects = this.buffs;
-
-        //Store in temp List to avoid Enumeration Exception
-        foreach(StatusEffect effect in statusEffects)
-        {
-            if(effect.statusEffectName == statusEffect.statusEffectName)
-            {
-                dispellStatusEffects.Add(effect);
-                if (!allTheSame) break;
-            }
-        }
-
-        foreach (StatusEffect effect in dispellStatusEffects)
-        {
-            effect.DestroyIt();
-        }
-
-        dispellStatusEffects.Clear();
+        gotHit(skill, 100);
     }
 
-    public void AddStatusEffect(StatusEffect statusEffect)
+    public void setImmortal(float duration)
     {
-        if (statusEffect != null && this.characterType != CharacterType.Object)
-        {
-            bool isImmune = false;
-
-            for(int i = 0; i< this.immunityToStatusEffects.Count; i++)
-            {
-                StatusEffect immunityEffect = this.immunityToStatusEffects[i];
-                if(statusEffect.statusEffectName == immunityEffect.statusEffectName)
-                {
-                    isImmune = true;
-                    break;
-                }
-            }
-
-            if (!isImmune)
-            {
-                List<StatusEffect> statusEffects = null;
-                List<StatusEffect> result = new List<StatusEffect>();
-
-                //add to list for better reference
-                if (statusEffect.statusEffectType == StatusEffectType.debuff) statusEffects = this.debuffs;
-                else if (statusEffect.statusEffectType == StatusEffectType.buff) statusEffects = this.buffs;
-
-                for (int i = 0; i < statusEffects.Count; i++)
-                {
-                    if (statusEffects[i].statusEffectName == statusEffect.statusEffectName)
-                    {
-                        //Hole alle gleichnamigen Effekte aus der Liste
-                        result.Add(statusEffects[i]);
-                    }
-                }
-
-                //TODO, das geht noch besser
-                if (result.Count < statusEffect.maxStacks)
-                {
-                    //Wenn der Effekte die maximale Anzahl Stacks nicht überschritten hat -> Hinzufügen
-                    instantiateStatusEffect(statusEffect, statusEffects);
-                }
-                else
-                {
-                    if (statusEffect.canOverride && statusEffect.endType == StatusEffectEndType.time)
-                    {
-                        //Wenn der Effekt überschreiben kann, soll der Effekt mit der kürzesten Dauer entfernt werden
-                        StatusEffect toDestroy = result[0];
-                        toDestroy.DestroyIt();
-
-                        instantiateStatusEffect(statusEffect, statusEffects);
-                    }
-                    else if (statusEffect.canDeactivateIt && statusEffect.endType == StatusEffectEndType.mana)
-                    {
-                        StatusEffect toDestroy = result[0];
-                        toDestroy.DestroyIt();
-                    }
-                }
-            }       
-        }
+        StartCoroutine(immortalCo(duration));
     }
 
-    private void instantiateStatusEffect(StatusEffect statusEffect, List<StatusEffect> statusEffects)
+    public void knockBack(float knockTime, float thrust, Vector2 direction)
     {
-        GameObject statusEffectClone = Instantiate(statusEffect.gameObject, this.transform.position, Quaternion.identity, this.transform);
-        DontDestroyOnLoad(statusEffectClone);
-        StatusEffect statusEffectScript = statusEffectClone.GetComponent<StatusEffect>();
-        statusEffectScript.target = this;
-        //statusEffectClone.hideFlags = HideFlags.HideInHierarchy;
+        this.myRigidbody.velocity = Vector2.zero;
+        Vector2 diffference = direction.normalized * thrust;
+        this.myRigidbody.AddForce(diffference, ForceMode2D.Impulse);
 
-        //add to list for better reference
-        statusEffects.Add(statusEffectClone.GetComponent<StatusEffect>());
+        StartCoroutine(knockCo(knockTime));
     }
 
-    private void knockBack(float knockTime, float thrust, Transform attack)
+    public void knockBack(float knockTime, float thrust, StandardSkill attack)
     {
         if (this.myRigidbody != null)
         {
-            Vector2 diffference = this.myRigidbody.transform.position - attack.position;
-            diffference = diffference.normalized * thrust;
-            this.myRigidbody.AddForce(diffference, ForceMode2D.Impulse);
-            StartCoroutine(knockCo(knockTime));
+            Vector2 diffference = this.myRigidbody.transform.position - attack.transform.position;
+            knockBack(knockTime, thrust, diffference);
         }
     }
 
@@ -801,22 +866,34 @@ public class Character : MonoBehaviour
 
     #region Coroutines (Hit, Kill, Respawn, Knockback)
 
-    public IEnumerator hitCo()
+
+    private IEnumerator colliderDisable()
+    {
+        yield return null;
+        if (this.boxCollider != null) this.boxCollider.enabled = false;
+    }
+
+    private IEnumerator hitCo()
     {
         this.isInvincible = true;
-        if(this.showHitcolor) this.spriteRenderer.color = this.hitColor;
+        if (this.showHitcolor) this.addColor(this.hitColor);
 
         yield return new WaitForSeconds(this.cannotBeHitTime);
-
+        this.resetColor(this.hitColor);
         this.isInvincible = false;
-        this.spriteRenderer.color = GlobalValues.color;
     }
-    
 
-    public IEnumerator knockCo(float knockTime)
-    {        
+    private IEnumerator immortalCo(float duration)
+    {
+        this.isImmortal = true;
+        yield return new WaitForSeconds(this.cannotBeHitTime);
+        this.isImmortal = false;
+    }
+
+    private IEnumerator knockCo(float knockTime)
+    {
         if (this.myRigidbody != null)
-        {            
+        {
             this.currentState = CharacterState.knockedback;
 
             yield return new WaitForSeconds(knockTime);
