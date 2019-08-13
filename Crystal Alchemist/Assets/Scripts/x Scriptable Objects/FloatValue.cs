@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class FloatValue : ScriptableObject, ISerializationCallbackReceiver
+public class FloatValue : ScriptableObject//, ISerializationCallbackReceiver
 {
-    
+    /*
     [SerializeField]
-    private float value;
+    private float startValue;
 
-    public float getValue()
+    [SerializeField]
+    private float pitch = 1f;
+
+    [HideInInspector]
+    public float value;
+    [HideInInspector]
+    public float pitchValue;
+
+    public void OnAfterDeserialize()
     {
-        return this.value;
+        this.value = this.startValue;
+        this.pitchValue = this.pitch;
     }
 
-    public void OnAfterDeserialize() { }    
-
-    public void OnBeforeSerialize() { }
+    public void OnBeforeSerialize() { }*/
 
 }

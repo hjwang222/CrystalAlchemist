@@ -4,26 +4,19 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-
-public class SaveSystem
+public static class SaveSystem
 {
-    public static void Save(Player player, string scene)
+    public static void Save(Player player)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/player.fun";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(player, scene);
+        PlayerData data = new PlayerData(player);
 
         formatter.Serialize(stream, data);
         stream.Close();
         stream.Dispose();
-    }
-
-    public static void DeleteSave()
-    {
-        string path = Application.persistentDataPath + "/player.fun";
-        File.Delete(path);
     }
 
     public static void SaveOptions()
@@ -48,8 +41,6 @@ public class SaveSystem
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            if (stream.Length <= 0) return null;
-
             PlayerData data = formatter.Deserialize(stream) as PlayerData;
 
             stream.Close();
@@ -62,6 +53,7 @@ public class SaveSystem
             return null;
         }
     }
+
 
     public static void loadOptions()
     {
@@ -79,12 +71,6 @@ public class SaveSystem
 
             GlobalValues.backgroundMusicVolume = data.musicVolume;
             GlobalValues.soundEffectVolume = data.soundVolume;
-            GlobalValues.useAlternativeLanguage = data.useAlternativeLanguage;
-
-            if (data.layout == "keyboard") GlobalValues.layoutType = LayoutType.keyboard;
-            else GlobalValues.layoutType = LayoutType.gamepad;
-        }
+        }        
     }
 }
-
-

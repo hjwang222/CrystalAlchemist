@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4381141778963013575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4381141778963013572}
+  - component: {fileID: 4381141778963013570}
+  - component: {fileID: 6981784530255214311}
+  m_Layer: 0
+  m_Name: Blind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4381141778963013572
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4381141778963013575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.14899082}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 97, y: 480.00003}
+  m_SizeDelta: {x: 48, y: 48}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4381141778963013570
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4381141778963013575}
+  m_CullTransparentMesh: 0
+--- !u!114 &6981784530255214311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4381141778963013575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d781262add0ec548af8fd007a17677a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffectName: Blind
+  iconSprite: {fileID: 21300012, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
+  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
+  endType: 0
+  statusEffectDescription: ist erblindet
+  statusEffectDuration: 10
+  statusEffectInterval: 0
+  statusEffectManaDrain: 0
+  statusEffectManaDrainInterval: 0
+  maxStacks: 1
+  canOverride: 1
+  canDeactivateIt: 0
+  canBeDispelled: 1
+  statusEffectType: 1
+  statusEffectColor: {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}
+  target: {fileID: 0}
+  statusEffectTimeLeft: 0
+  timeDistortion: 1
+  instantiatNewGameObject: {fileID: 3875153507443885169, guid: c07991eef82d315498cda38ca7ec8df0,
+    type: 3}

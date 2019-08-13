@@ -9,12 +9,6 @@ public class BoomerangSkill : StandardSkill
     [Range(0, Utilities.maxFloatSmall)]
     public float timeToMoveBack = 0;
     private float durationThenBackToSender = 0;
-
-    [SerializeField]
-    private float minDistance = 0.1f;
-    private Item moveItem;
-    private bool speedup = true;
-    private Vector2 tempVelocity;
     #endregion
 
 
@@ -28,7 +22,6 @@ public class BoomerangSkill : StandardSkill
     public override void doOnUpdate()
     {
         base.doOnUpdate();
-        if (this.delayTimeLeft <= 0) setVelocity();
 
         if (this.durationThenBackToSender > 0)
         {
@@ -40,32 +33,10 @@ public class BoomerangSkill : StandardSkill
         }        
     }
 
-    private void setVelocity()
-    {
-        if (this.myRigidbody != null && this.speedup)
-        {
-            this.myRigidbody.velocity = this.direction.normalized * this.speed;
-            this.tempVelocity = this.myRigidbody.velocity;
-            this.speedup = false;
-        }
-    }
-
-    public override void OnTriggerEnter2D(Collider2D hittedCharacter)
-    {
-        base.OnTriggerEnter2D(hittedCharacter);
-
-        moveThings(hittedCharacter);
-    }
-
     public override void OnTriggerStay2D (Collider2D hittedCharacter)
     {
         base.OnTriggerStay2D(hittedCharacter);
         //got Hit -> Back to Target
-        moveThings(hittedCharacter);
-    }
-
-    private void moveThings(Collider2D hittedCharacter)
-    {
         if (this.sender != null
             && hittedCharacter.tag != this.sender.tag
             && !hittedCharacter.isTrigger
@@ -74,14 +45,10 @@ public class BoomerangSkill : StandardSkill
             this.durationThenBackToSender = 0;
         }
 
-        if (this.sender != null
-            && hittedCharacter.tag != this.sender.tag
-            && hittedCharacter.CompareTag("Item"))
+        if (hittedCharacter.CompareTag("Item"))
         {
             this.durationThenBackToSender = 0;
-
-            Item hittedItem = hittedCharacter.GetComponent<Item>();
-            if (hittedItem != null && this.moveItem == null) this.moveItem = hittedItem;        
+            hittedCharacter.transform.position = this.transform.position;
         }
     }
     #endregion
@@ -95,17 +62,12 @@ public class BoomerangSkill : StandardSkill
             //Bewege den Skill zurück zum Sender
 
             this.myRigidbody.velocity = Vector2.zero;
-            if (Vector3.Distance(this.sender.transform.position, this.transform.position) > this.minDistance)
+            if (Vector3.Distance(this.sender.transform.position, this.transform.position) > 0.25f)
             {
-                Vector3 newPosition = Vector3.MoveTowards(this.transform.position, this.sender.transform.position, this.speed * (Time.deltaTime * this.timeDistortion));
+                Vector3 temp = Vector3.MoveTowards(this.transform.position, this.sender.transform.position, this.speed * (Time.deltaTime * this.timeDistortion));
 
-                this.myRigidbody.MovePosition(newPosition);
+                this.myRigidbody.MovePosition(temp);
                 this.myRigidbody.velocity = Vector2.zero;
-
-                if(this.moveItem != null && this.moveItem.GetComponent<Rigidbody2D>() != null)
-                {
-                    this.moveItem.GetComponent<Rigidbody2D>().MovePosition(newPosition);
-                }
             }
             else
             {

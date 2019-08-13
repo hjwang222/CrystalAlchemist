@@ -5,37 +5,22 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
-public enum enumButton
+
+public enum Button
 {
-    AButton,
-    BButton,
-    XButton,
-    YButton,
-    RBButton
+   AButton,
+   BButton,
+   XButton,
+   YButton,
+   RBButton
 }
 
 
 public class Player : Character
 {
-    [BoxGroup("Pflichtfelder")]
-    [SerializeField]
-    private CastBar castbar;
-
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    public TimeValue timeValue;
-
-    [FoldoutGroup("Skills", expanded: false)]
-    [Tooltip("Skills, welcher der Character verwenden kann")]
-    public List<StandardSkill> skillSet = new List<StandardSkill>();
-
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
     public StringSignal dialogBoxSignal;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal deathSignal;
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
@@ -47,276 +32,152 @@ public class Player : Character
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal keySignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal crystalSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal coinSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal woodSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal stoneSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal metalSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
     public SimpleSignal openInventorySignal;
 
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal openPauseSignal;
 
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public BoolSignal fadeSignal;
-
-    [Required]
-    [BoxGroup("Pflichtfelder")]
-    [SerializeField]
-    private GameObject targetHelpObject;
-
-    [Required]
-    [BoxGroup("Pflichtfelder")]
-    [SerializeField]
-    private BoolValue loadGame;
-
-    [Required]
-    [BoxGroup("Pflichtfelder")]
-    [SerializeField]
-    private FloatValue fadingDuration;
-
-    [HideInInspector]
-    public StandardSkill AButton;
-    [HideInInspector]
-    public StandardSkill BButton;
-    [HideInInspector]
-    public StandardSkill XButton;
-    [HideInInspector]
-    public StandardSkill YButton;
-    [HideInInspector]
+    public StandardSkill AButton;    
+    public StandardSkill BButton;   
+    public StandardSkill XButton;    
+    public StandardSkill YButton;    
     public StandardSkill RBButton;
-    private string currentButtonPressed = "";
 
-    private Vector2 lastSaveGamePosition;
-    private string lastSaveGameScene;
 
     private Vector3 change;
+    private string lastButtonPressed = "";
 
-    ///////////////////////////////////////////////////////////////
 
-    private void Awake()
+
+
+    //public GameObject music;    
+
+    // Start is called before the first frame update
+    private void Start()
     {
-       initPlayer();
-    }
+        this.init();
+        loadSkillsFromSkillSet("Boomerang", Button.AButton);
+        this.setResourceSignal(this.healthSignalUI, this.manaSignalUI, this.keySignalUI, this.coinSignalUI, this.crystalSignalUI, this.woodSignalUI, this.stoneSignalUI, this.metalSignalUI);
+        PlayerData data = SaveSystem.loadPlayer();
 
-    public void initPlayer()
-    {
-        SaveSystem.loadOptions();
-
-        List<StandardSkill> tempSkillSet = new List<StandardSkill>();
-
-        foreach (StandardSkill skill in this.skillSet)
+        if (data != null)
         {
-            tempSkillSet.Add(Utilities.Skill.setSkill(this, skill));
+            this.life = data.health;
+            this.mana = data.mana;
+
+            /*this.coins = data.coins;
+            this.crystals = data.crystals;
+            this.keys = data.keys;
+
+            this.wood = data.wood;
+            this.stone = data.stone;
+            this.metal = data.metal;*/
+
+            this.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
         }
 
-        
+        this.currentState = CharacterState.walk;
 
-        this.skillSet = tempSkillSet;
-
-        this.isPlayer = true;
-        this.init();
-
-        if (this.loadGame.getValue()) LoadSystem.loadPlayerData(this);
-
-        if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);
-        Utilities.Helper.checkIfHelperDeactivate(this);
-
-        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", false);
-        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
-        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
+        Utilities.SetParameter(this.animator, "moveX", 0);
+        Utilities.SetParameter(this.animator, "moveY", -1);
 
         this.direction = new Vector2(0, -1);
-        //this.currencySignalUI.Raise();
     }
 
-
-    private new void Update()
+    public void loadSkillsFromSkillSet(string name, Button button)
     {
-        base.Update();
-        playerInputs();
-    }
-
-    private void playerInputs()
-    {
-        if (this.currentState != CharacterState.dead)
+        foreach(StandardSkill skill in this.skillSet)
         {
-            if (this.currentState == CharacterState.inDialog || this.currentState == CharacterState.inMenu || this.currentState == CharacterState.respawning)
+            if(skill.skillName == name)
             {
-                Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", false);
-                return;
-            }
-
-            if (Input.GetButtonDown("Inventory"))
-            {
-                this.openInventorySignal.Raise();
-            }
-
-            if (Input.GetButtonDown("Pause"))
-            {
-                this.openPauseSignal.Raise();
-            }
-
-            if (!Utilities.StatusEffectUtil.isCharacterStunned(this))
-            {
-                change = Vector3.zero;
-                change.x = Input.GetAxisRaw("Horizontal");
-                change.y = Input.GetAxisRaw("Vertical");
-
-                if (currentState != CharacterState.dead
-                    && this.currentState != CharacterState.inDialog
-                    && this.currentState != CharacterState.inMenu
-                    && this.currentState != CharacterState.respawning)
+                switch (button)
                 {
-                    UpdateAnimationAndMove();
+                    case Button.AButton: this.AButton = skill; break;
+                    case Button.BButton: this.BButton = skill; break;
+                    case Button.XButton: this.XButton = skill; break;
+                    case Button.YButton: this.YButton = skill; break;
+                    case Button.RBButton: this.RBButton = skill; break;
                 }
-            }
 
-            if (this.currentState != CharacterState.knockedback)
-            {
-                if (!isButtonPressed("A-Button")
-                && !isButtonPressed("B-Button")
-                && !isButtonPressed("X-Button")
-                && !isButtonPressed("Y-Button")
-                && !isButtonPressed("RB-Button")) this.currentButtonPressed = "";
-
-                updateSkillButtons("A-Button");
-                updateSkillButtons("B-Button");
-                updateSkillButtons("X-Button");
-                updateSkillButtons("Y-Button");
-                updateSkillButtons("RB-Button");
+                break;
             }
         }
     }
 
-    private bool isButtonPressed(string button)
+
+    // Update is called once per frame
+    private void Update()
     {
-        if (Input.GetButton(button)
-            || Input.GetButtonUp(button)
-            || Input.GetButtonDown(button)) return true;
-        else return false;
+        regeneration();
+
+        if (currentState == CharacterState.inDialog)
+        {
+            Utilities.SetParameter(this.animator, "isWalking", false);
+            return;
+        }
+
+        change = Vector3.zero;
+        change.x = Input.GetAxisRaw("Horizontal");
+        change.y = Input.GetAxisRaw("Vertical");
+
+        if (this.currentState != CharacterState.attack
+            && this.currentState != CharacterState.knockedback)
+        {
+            useSkill("A-Button");
+            useSkill("B-Button");
+            useSkill("X-Button");
+            useSkill("Y-Button");
+        }
+
+        if (Input.GetButtonDown("Quit"))
+        {
+            //SceneManager.LoadScene(0);
+        }
+
+        if (Input.GetButtonDown("Inventory"))
+        {
+            this.openInventorySignal.Raise();
+        }
+
+        if (currentState == CharacterState.walk || this.currentState == CharacterState.idle || this.currentState == CharacterState.interact)
+        {
+            UpdateAnimationAndMove();
+        }
     }
 
-    public void delay(CharacterState newState)
-    {
-        StartCoroutine(Utilities.Skill.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
-    }
 
     public void showDialogBox(string text)
     {
         if (this.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
     }
 
-    public override void KillIt()
+    public string getScene()
     {
-        if (this.currentState != CharacterState.dead)
-        {
-            this.change = Vector2.zero;
-            this.direction = new Vector2(0, -1);
-
-            //TODO: Kill sofort (Skill noch aktiv)
-            Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
-            Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
-
-            this.spriteRenderer.color = Color.white;
-
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", true);
-
-            this.currentState = CharacterState.dead;
-            this.deathSignal.Raise();
-        }
+        Scene scene = SceneManager.GetActiveScene();
+        return scene.name;
     }
-
-    ///////////////////////////////////////////////////////////////
-
-
-    public void setLastTeleport(string targetScene, Vector2 position)
-    {
-        this.lastSaveGamePosition = position;
-        this.lastSaveGameScene = targetScene;
-    }
-
-    public bool getLastTeleport()
-    {
-        return getLastTeleport(out string scene, out Vector2 position);
-    }
-
-    public bool getLastTeleport(out string scene, out Vector2 position)
-    {
-        scene = this.lastSaveGameScene;
-        position = this.lastSaveGamePosition;
-
-        if (scene != null && position != null) return true;
-        else return false;
-    }
-
-    public void teleportPlayer(string targetScene, Vector2 position, bool showAnimation)
-    {
-        StartCoroutine(LoadScene(targetScene, position, this.fadingDuration.getValue(), showAnimation));
-    }
-
-    public void teleportPlayer(string targetScene, Vector2 position, float duration, bool showAnimation)
-    {
-        StartCoroutine(LoadScene(targetScene, position, duration, showAnimation));
-    }
-
-    private IEnumerator LoadScene(string targetScene, Vector2 position, float duration, bool showAnimation)
-    {
-        this.currentState = CharacterState.respawning;
-        this.deactivateAllSkills();
-
-        if (showAnimation && this.respawnAnimation != null)
-        {
-            RespawnAnimation respawnObject = Instantiate(this.respawnAnimation, this.transform.position, Quaternion.identity);
-            respawnObject.setCharacter(this, true);
-            yield return new WaitForSeconds(respawnObject.getAnimationLength());
-            this.enableSpriteRenderer(false);
-            //yield return new WaitForSeconds(2f);
-        }
-        else
-        {
-            this.enableSpriteRenderer(false);
-        }
-
-        this.fadeSignal.Raise(false);
-
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(targetScene);
-        asyncOperation.allowSceneActivation = false;
-
-        while (!asyncOperation.isDone)
-        {
-            if (asyncOperation.progress >= 0.9f)
-            {
-                yield return new WaitForSeconds(duration);
-
-                asyncOperation.allowSceneActivation = true;
-                StartCoroutine(positionCo(position, showAnimation));
-            }
-            yield return null;
-        }
-    }
-
-    private IEnumerator positionCo(Vector2 playerPositionInNewScene, bool showAnimation)
-    {
-        this.transform.position = playerPositionInNewScene;        
-
-        if (showAnimation && this.respawnAnimation != null)
-        {
-            yield return new WaitForSeconds(2f);
-
-            RespawnAnimation respawnObject = Instantiate(this.respawnAnimation, playerPositionInNewScene, Quaternion.identity);
-            respawnObject.setCharacter(this);
-            yield return new WaitForSeconds(respawnObject.getAnimationLength());
-        }
-
-        yield return null;
-
-        this.transform.position = playerPositionInNewScene;
-        this.enableSpriteRenderer(true);
-        this.currentState = CharacterState.idle;
-    }
-
-    ///////////////////////////////////////////////////////////////
-
 
     #region Using Skill
 
@@ -330,130 +191,114 @@ public class Player : Character
             case "B-Button": return this.BButton;
             case "X-Button": return this.XButton;
             case "Y-Button": return this.YButton;
-            case "RB-Button": return this.RBButton;
             default: return null;
         }
     }
 
-    private void updateSkillButtons(string button)
+    private void useSkill(string button)
     {
-        StandardSkill skill = this.getSkillFromButton(button);
+        if (this.currentState != CharacterState.interact && this.currentState != CharacterState.inDialog)
+        {            
+            StandardSkill skill = this.getSkillFromButton(button);
 
-        if (skill != null)
-        {
-            if (skill.cooldownTimeLeft > 0)
+            if (skill != null)
             {
-                skill.cooldownTimeLeft -= (Time.deltaTime * this.timeDistortion * this.spellspeed);
-            }
-            else if (this.currentState != CharacterState.interact
-                 && this.currentState != CharacterState.inDialog
-                 && this.currentState != CharacterState.respawning
-                 && this.currentState != CharacterState.inMenu
-                 && !Utilities.StatusEffectUtil.isCharacterStunned(this))
-            {
-                int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.activeSkills, this.activePets);
-
-                if (currentAmountOfSameSkills < skill.maxAmounts
-                        && (this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0
-                        || skill.addResourceSender == -Utilities.maxFloatInfinite))
+                if (skill.cooldownTimeLeft > 0)
                 {
-                    if (isSkillReadyToUse(button, skill))
+                    skill.cooldownTimeLeft -= (Time.deltaTime * this.timeDistortion * this.spellspeed);
+                }
+                else
+                {
+                    int currentAmountOfSameSkills = getAmountOfSameSkills(skill);
+
+                    if (currentAmountOfSameSkills < skill.maxAmounts
+                        && (this.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0 || skill.addResourceSender == -Utilities.maxFloatInfinite))
                     {
-                        activateSkill(button, skill); //activate Skill or Target System
+                        if (isSkillReadyToUse(button, skill)) activateSkill(button, skill);
+                        activateSkillFromTargetingSystem(skill);
                     }
-
-                    activateSkillFromTargetingSystem(skill); //if Target System is ready
+                    else if (currentAmountOfSameSkills >= skill.maxAmounts
+                         && (skill.deactivateByButtonUp || skill.delay == Utilities.maxFloatInfinite))
+                    {
+                        deactivateSkill(button, skill);
+                    }
                 }
-                else if (currentAmountOfSameSkills >= skill.maxAmounts
-                     && ((skill.deactivateByButtonUp || skill.deactivateByButtonDown) || skill.delay == Utilities.maxFloatInfinite))
-                {
-                    deactivateSkill(button, skill);
-                }
-            }
-
-            if (Utilities.StatusEffectUtil.isCharacterStunned(this))
-            {
-                if(!skill.keepHoldTimer) skill.holdTimer = 0;
             }
         }
     }
 
     private bool isSkillReadyToUse(string button, StandardSkill skill)
     {
-        if (isButtonUsable(button))
+        if (Input.GetButtonDown(button) && (skill.isRapidFire || skill.cast == 0))
         {
-            if (Input.GetButtonDown(button) && (skill.isRapidFire || skill.cast == 0))
+            setLastButtonPressed(button, skill);
+
+            if (skill.isRapidFire)
             {
-                setLastButtonPressed(button);
-
-                if (skill.isRapidFire)
+                if (!skill.keepHoldTimer) skill.holdTimer = 0;
+                if (this.activeCastbar != null)
                 {
-                    resetCast(skill);
-                }
-
-                //Instants only (kein Cast und kein Rapidfire)
-                if (skill.cast == 0) return true;
-            }
-            else if (Input.GetButton(button))
-            {
-                setLastButtonPressed(button);
-
-                if (skill.speedDuringCasting != 0) updateSpeed(skill.speedDuringCasting);
-
-                if (skill.holdTimer < skill.cast)
-                {
-                    skill.holdTimer += (Time.deltaTime * this.timeDistortion * this.spellspeed);
-                    skill.showIndicator(); //Zeige Indikator beim Casten+
-                    skill.showCastingAnimation();
-                    skill.doOnCast();
-                }
-
-                if (skill.holdTimer >= skill.cast && skill.isRapidFire)
-                {
-                    //Rapidfire oder Cast Rapidfire                        
-                    return true;
-                }
-
-                if (skill.cast > 0
-                    && skill.holdTimer > 0
-                    && skill.holdTimer < skill.cast
-                    && this.activeCastbar == null
-                    && this.castbar != null
-                    && this.activeLockOnTarget == null)
-                {
-                    GameObject temp = Instantiate(this.castbar.gameObject, this.transform.position, Quaternion.identity, this.transform);
-                    //temp.hideFlags = HideFlags.HideInHierarchy;
-                    this.activeCastbar = temp.GetComponent<CastBar>();
-                    this.activeCastbar.target = this;
-                    this.activeCastbar.skill = skill;
-                }
-                else if (skill.cast > 0
-                    && skill.holdTimer >= skill.cast
-                    && this.activeCastbar != null
-                    && skill.isRapidFire)
-                {
-                    hideCastBarAndIndicator(skill);
-                }
-                else if (skill.cast > 0 && this.activeCastbar != null && skill.holdTimer > 0)
-                {
-                    this.activeCastbar.showCastBar();
-                    skill.showIndicator();
-                    skill.showCastingAnimation();
+                    this.activeCastbar.destroyIt();
                 }
             }
-            else if (Input.GetButtonUp(button))
+
+            //Instants only (kein Cast und kein Rapidfire)
+            if (skill.cast == 0) return true;
+        }
+        else if (Input.GetButton(button))
+        {
+            setLastButtonPressed(button, skill);
+
+            if (skill.speedDuringCasting != 0) updateSpeed(skill.speedDuringCasting);
+
+            if (skill.holdTimer < skill.cast)
             {
-                setLastButtonPressed(button);
-                if (skill.speedDuringCasting != 0) this.updateSpeed(0);
-
-                //Cast only
-                if (skill.holdTimer >= skill.cast && skill.cast > 0)
-                {
-                    return true;
-                }
-
-                resetCast(skill);
+                skill.holdTimer += (Time.deltaTime * this.timeDistortion * this.spellspeed);
             }
+
+            if (skill.holdTimer >= skill.cast && skill.isRapidFire)
+            {
+                //Rapidfire oder Cast Rapidfire                        
+                return true;
+            }
+
+            if (skill.cast > 0
+                && skill.holdTimer > 0
+                && skill.holdTimer < skill.cast
+                && this.activeCastbar == null
+                && this.castbar != null
+                && this.activeLockOnTarget == null)
+            {
+                GameObject temp = Instantiate(this.castbar.gameObject, this.transform.position, Quaternion.identity, this.transform);
+                //temp.hideFlags = HideFlags.HideInHierarchy;
+                this.activeCastbar = temp.GetComponent<CastBar>();
+                this.activeCastbar.target = this;
+                this.activeCastbar.skill = skill;
+            }
+            else if (skill.cast > 0
+                && skill.holdTimer >= skill.cast
+                && this.activeCastbar != null
+                && skill.isRapidFire)
+            {
+                this.activeCastbar.destroyIt();
+            }
+            else if (skill.cast > 0 && this.activeCastbar != null && skill.holdTimer > 0)
+            {
+                this.activeCastbar.showCastBar();
+            }
+        }
+        else if (Input.GetButtonUp(button))
+        {
+            setLastButtonPressed(button, skill);
+
+            //Cast only
+            if (skill.holdTimer >= skill.cast && skill.cast > 0)
+            {
+                return true;
+            }
+            if (skill.speedDuringCasting != 0) this.updateSpeed(0);
+            if (!skill.keepHoldTimer) skill.holdTimer = 0;
+            if (this.activeCastbar != null) this.activeCastbar.destroyIt();
         }
 
         return false;
@@ -461,7 +306,7 @@ public class Player : Character
 
     private void activateSkill(string button, StandardSkill skill)
     {
-        hideCastBarAndIndicator(skill);
+        if (this.activeCastbar != null) this.activeCastbar.destroyIt();
 
         if (skill.lockOn == null)
         {
@@ -469,7 +314,7 @@ public class Player : Character
             skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
             if (!skill.isRapidFire) skill.holdTimer = 0;
 
-            Utilities.Skill.instantiateSkill(skill, this);            
+            Utilities.fireSkill(skill, this);
         }
         else if (skill.lockOn != null && this.activeLockOnTarget == null)
         {
@@ -536,25 +381,16 @@ public class Player : Character
         }
     }
 
-    public void deactivateAllSkills()
-    {
-        for (int i = 0; i < this.activeSkills.Count; i++)
-        {
-            StandardSkill activeSkill = this.activeSkills[i];
-            activeSkill.durationTimeLeft = 0;
-        }
-    }
-
     private void deactivateSkill(string button, StandardSkill skill)
     {
         //Skill deaktivieren
         bool destroyit = false;
 
-        if (Input.GetButtonUp(button) && skill.deactivateByButtonUp)
+        if (Input.GetButtonUp(button))
         {
             destroyit = true;
         }
-        else if (Input.GetButtonDown(button) && skill.deactivateByButtonDown)
+        else if (Input.GetButtonDown(button))
         {
             destroyit = true;
         }
@@ -580,8 +416,7 @@ public class Player : Character
 
         foreach (Character target in targetingSystem.sortedTargets)
         {
-            if (target.currentState != CharacterState.dead 
-                && target.currentState != CharacterState.respawning)
+            if (target.currentState != CharacterState.dead && target.currentState != CharacterState.respawning)
             {
                 bool playSoundEffect = false;
                 if (i == 0 || skill.multiHitDelay > 0.3f) playSoundEffect = true;
@@ -599,70 +434,23 @@ public class Player : Character
 
     private void fireSkillToSingleTarget(Character target, float damageReduce, bool playSoundeffect, StandardSkill skill)
     {
-        StandardSkill temp = Utilities.Skill.instantiateSkill(skill, this, target, damageReduce);
+        StandardSkill temp = Utilities.instantiateSkill(skill, this, target, damageReduce);
         //Vermeidung, dass Audio zu stark abgespielt wird
-        if (!playSoundeffect) temp.dontPlayAudio = true;
+        if (!playSoundeffect) temp.startSoundEffect = null;
     }
 
-    public bool isButtonUsable(string button)
+    private void setLastButtonPressed(string button, StandardSkill skill)
     {
-        if (button == this.currentButtonPressed 
-            || this.currentButtonPressed == null 
-            || this.currentButtonPressed == "") return true;
-        else return false;
-    }
-
-    private void setLastButtonPressed(string button)
-    {
-        if(this.currentButtonPressed == "") this.currentButtonPressed = button;
-        /*
         if (this.lastButtonPressed != button)
         {
-            //if (!skill.keepHoldTimer) skill.holdTimer = 0;
+            if (!skill.keepHoldTimer) skill.holdTimer = 0;
             this.lastButtonPressed = button;
-        }*/
-    }
-
-    public override void updateResource(ResourceType type, Item item, float value, bool showingDamageNumber)
-    {
-        base.updateResource(type, item, value, showingDamageNumber);
-
-        switch (type)
-        {
-            case ResourceType.life:
-                {
-                    callSignal(this.healthSignalUI, value); break;
-                }
-            case ResourceType.mana:
-                {
-                    callSignal(this.manaSignalUI, value); break;
-                }
-        }
-    }
-
-    public void loadSkillsFromSkillSet(string name, enumButton button)
-    {
-        foreach (StandardSkill skill in this.skillSet)
-        {
-            if (skill.skillName == name)
-            {
-                switch (button)
-                {
-                    case enumButton.AButton: this.AButton = skill; break;
-                    case enumButton.BButton: this.BButton = skill; break;
-                    case enumButton.XButton: this.XButton = skill; break;
-                    case enumButton.YButton: this.YButton = skill; break;
-                    case enumButton.RBButton: this.RBButton = skill; break;
-                }
-
-                break;
-            }
         }
     }
 
     #endregion
 
-    ///////////////////////////////////////////////////////////////
+
 
     #region Movement
 
@@ -676,7 +464,7 @@ public class Player : Character
 
             foreach (StandardSkill skill in this.activeSkills)
             {
-                if (skill.movementLocked)
+                if (skill.lockMovementonDuration)
                 {
                     lockAnimation = true;
                     break;
@@ -687,34 +475,25 @@ public class Player : Character
             {
                 this.direction = change;
 
-                Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", change.x);
-                Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", change.y);
+                Utilities.SetParameter(this.animator, "moveX", change.x);
+                Utilities.SetParameter(this.animator, "moveY", change.y);
             }
 
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", true);
+
+            Utilities.SetParameter(this.animator, "isWalking", true);
         }
-        else
-        {
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isWalking", false);
-            if (this.currentState == CharacterState.walk) this.currentState = CharacterState.idle;
-        }
+        else Utilities.SetParameter(this.animator, "isWalking", false);
     }
 
     private void MoveCharacter()
     {
-        if (this.currentState != CharacterState.knockedback
-            && this.currentState != CharacterState.attack
-            && this.currentState != CharacterState.dead)
-        {
-            if(this.currentState != CharacterState.interact) this.currentState = CharacterState.walk;
-            change.Normalize(); //Diagonal-Laufen fixen
+        change.Normalize(); //Diagonal-Laufen fixen
+        this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
+        this.myRigidbody.velocity = Vector2.zero;
 
-            //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
-            //this.myRigidbody.velocity = Vector2.zero;
-
-            Vector3 movement = new Vector3(change.x, change.y + (this.steps*this.change.x), 0.0f);
-            if(!this.isOnIce) this.myRigidbody.velocity = (movement * speed * this.timeDistortion);            
-        }
+        //Slide
+        //Vector3 movement = new Vector3(change.x, change.y, 0.0f);
+        //this.myRigidbody.AddForce(movement * speed);
     }
 
     #endregion

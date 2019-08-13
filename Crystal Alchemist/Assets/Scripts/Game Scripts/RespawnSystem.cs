@@ -4,70 +4,67 @@ using UnityEngine;
 
 public class RespawnSystem : MonoBehaviour
 {
-    private List<Character> respawnObjects = new List<Character>();
+    private List<RespawnObject> respawnObjects = new List<RespawnObject>();
 
-    void FixedUpdate()
-    {
-        setRespawnObjects(this.transform.gameObject);
-    }
-
-    private void setRespawnObjects(GameObject parent)
-    {
-        for (int i = 0; i < parent.transform.childCount; i++)
+    void Update()
+    {        
+        for(int i = 0; i < this.transform.childCount; i++)
         {
-            GameObject child = parent.transform.GetChild(i).gameObject;
+            Character character = this.transform.GetChild(i).gameObject.GetComponent<Character>();
 
-            Character character = child.gameObject.GetComponent<Character>();
-
-            if (character != null)
+            if (!character.gameObject.activeInHierarchy && character.currentState == CharacterState.dead)
             {
-                if (!character.gameObject.activeInHierarchy
-                 && character.currentState == CharacterState.dead
-                 && !this.respawnObjects.Contains(character))
-                {
-                    setRespawn(character);
-                }
+                this.respawnObjects.Add(new RespawnObject(character));
+            }            
+        }
+
+        List<RespawnObject> temp = new List<RespawnObject>();
+
+        foreach(RespawnObject respawnObject in this.respawnObjects)
+        {
+            if (respawnObject.spawnNow)
+            {
+                respawnObject.respawnCharacter();
             }
             else
             {
-                setRespawnObjects(child);
+                respawnObject.countdown();
+                temp.Add(respawnObject);
             }
         }
+
+        this.respawnObjects = temp;
+    }
+}
+
+public class RespawnObject
+{
+    private float respawnTimeLeft;
+    private Character character;
+    public bool spawnNow = false;
+    
+    public RespawnObject(Character character)
+    {
+        this.character = character;
+        if(character.respawnTime < Utilities.maxFloatInfinite) this.respawnTimeLeft = character.respawnTime;
+        this.character.currentState = CharacterState.respawning;
     }
 
-    private void setRespawn(Character character)
+    public void countdown()
     {
-        if (character.respawnTime < Utilities.maxFloatInfinite)
+        if(this.respawnTimeLeft > 0)
         {
-            StartCoroutine(respawnCo(character));
-            character.currentState = CharacterState.respawning;
-        }
-    }
-
-    private IEnumerator respawnCo(Character character)
-    {
-        yield return new WaitForSeconds(character.respawnTime);
-        respawnCharacter(character);
-    }
-
-    private void respawnCharacter(Character character)
-    {
-        if (character.respawnAnimation != null)
-        {
-            //spawn character after animation
-
-            RespawnAnimation respawnObject = Instantiate(character.respawnAnimation, character.spawnPosition, Quaternion.identity);
-            respawnObject.setCharacter(character);
+            this.respawnTimeLeft -= Time.deltaTime;
         }
         else
         {
-            //spawn character immediately
-            character.gameObject.SetActive(true);
-            character.initSpawn();
-            Utilities.UnityUtils.SetAnimatorParameter(character.animator, "Respawn");
+            this.spawnNow = true;
         }
     }
 
-
+    public void respawnCharacter()
+    {
+        this.character.gameObject.SetActive(true);
+        this.character.spawn();
+    }
 }
-

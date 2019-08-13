@@ -17,38 +17,29 @@ public class ShopItem : Interactable
     public Animator anim;
 
     private int index = 0;
-
+    //private int amount = 1;
+    
     private void Start()
     {
-        base.Start();
+        init();
 
-        Utilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        Utilities.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
         this.items.Add(this.lootTable[this.index].item);
 
         //this.amountText.text = this.amount + "";
-        this.childSprite.sprite = this.items[this.index].itemSprite;
+        this.childSprite.sprite = this.items[this.index].getSprite();
     }
 
-    public override void doSomethingOnSubmit()
+    private void Update()
     {
-        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text))
+        if (this.isPlayerInRange && Input.GetButtonDown("Submit"))
         {
-            Item loot = items[this.index];
-
-            string itemObtained = Utilities.Format.getDialogBoxText("Du hast", loot.amount, loot, "für");
-            string itemNedded = Utilities.Format.getDialogBoxText("", this.price, this.item, "gekauft!");
-
-            if (GlobalValues.useAlternativeLanguage)
+            if (Utilities.canOpen(this.currencyNeeded, this.item, this.player, this.price))
             {
-                itemObtained = Utilities.Format.getDialogBoxText("You bought", loot.amount, loot, "for");
-                itemNedded = Utilities.Format.getDialogBoxText("", this.price, this.item, "!");
+                this.player.showDialogBox("Du hast 1 " + this.items[this.index].itemName + " für " + this.price + " gekauft!");
+                this.player.collect(items[this.index], false);
             }
-
-            this.player.showDialogBox(itemObtained + "\n" + itemNedded);
-            this.player.collect(loot, false);
         }
     }
 }

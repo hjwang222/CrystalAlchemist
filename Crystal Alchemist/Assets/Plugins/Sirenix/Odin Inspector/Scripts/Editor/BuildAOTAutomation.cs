@@ -1,10 +1,11 @@
+﻿#if UNITY_EDITOR
+#if UNITY_5_6_OR_NEWER
+
 //-----------------------------------------------------------------------
 // <copyright file="BuildAOTAutomation.cs" company="Sirenix IVS">
 // Copyright (c) Sirenix IVS. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-
-#if UNITY_EDITOR && UNITY_5_6_OR_NEWER
 
 namespace Sirenix.Serialization.Internal
 {
@@ -76,4 +77,5 @@ namespace Sirenix.Serialization.Internal
     }
 }
 
-#endif // UNITY_EDITOR && UNITY_5_6_OR_NEWER
+#endif
+#endif

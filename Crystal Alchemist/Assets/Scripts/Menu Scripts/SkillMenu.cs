@@ -5,37 +5,15 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
-using System.Linq;
 
 public class SkillMenu : MonoBehaviour
 {
-    #region Attributes
     private Player player;
 
-    [BoxGroup("Mandatory")]
-    [SerializeField]
+    [BoxGroup("Dummy")]
     [Required]
-    private myCursor cursor;
-
-    [BoxGroup("Mandatory")]
     [SerializeField]
-    [Required]
-    private TextMeshProUGUI categoryWeapons;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private TextMeshProUGUI categoryMagic;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private TextMeshProUGUI categoryItems;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private GameObject blackScreen;
+    private GameObject dummySlot;
 
     [BoxGroup("Tabs")]
     [SerializeField]
@@ -58,247 +36,113 @@ public class SkillMenu : MonoBehaviour
     private TextMeshProUGUI skillDetailsCost;
     [BoxGroup("Detail-Ansicht")]
     [SerializeField]
-    private Image StatusEffects;       
+    private Image StatusEffects;
 
-    [BoxGroup("Buttons")]
+    [BoxGroup("UI Signal")]
     [SerializeField]
-    private GameObject previousPage;
-    [BoxGroup("Buttons")]
+    private SimpleSignal signal;
+
+    [BoxGroup("Skill Slots")]
     [SerializeField]
-    private TextMeshProUGUI pageText;
-    [BoxGroup("Buttons")]
+    private GameObject slotA;
+    [BoxGroup("Skill Slots")]
     [SerializeField]
-    private GameObject nextPage;
-
-    [BoxGroup("Signals")]
+    private GameObject slotB;
+    [BoxGroup("Skill Slots")]
     [SerializeField]
-    private FloatSignal musicVolumeSignal;
+    private GameObject slotX;
+    [BoxGroup("Skill Slots")]
+    [SerializeField]
+    private GameObject slotY;
+    [BoxGroup("Skill Slots")]
+    [SerializeField]
+    private GameObject slotRB;    
 
-    [HideInInspector]
-    public StandardSkill selectedSkill;
 
-    private CharacterState lastState;
+    //TODO:
+    //1. Set Skills and Save them
+    //2. Change Title Screen (use other Scripts)
+    //3. Change Button Inputs (skills and interactions)
 
-    #endregion
-
-
-    #region Unity Functions
 
     private void Awake()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
-    }
-
-    private void Start()
-    {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        setSkillsToSlots(SkillType.physical);
-        setSkillsToSlots(SkillType.magical);
-        setSkillsToSlots(SkillType.item);
+        setSlots();
         showCategory(1);
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
-        {
-            if (this.selectedSkill != null) selectSkillFromSkillSet(null);
-            else if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
-            else exitMenu();
-        }
-        else if (Input.GetButtonDown("Inventory")) exitMenu();
+        if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("Inventory")) exitMenu();
+    }
+
+    public void exitMenu()
+    {
+        this.transform.parent.gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
-        this.lastState = this.player.currentState;
-        selectSkillFromSkillSet(null);
-        this.cursor.gameObject.SetActive(true);
-        this.player.currentState = CharacterState.inMenu;
-
-        this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+        this.player.currentState = CharacterState.inDialog;        
     }
 
     private void OnDisable()
     {
-        selectSkillFromSkillSet(null);
-        this.cursor.gameObject.SetActive(false);
-
-        this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+        this.player.currentState = CharacterState.idle;
     }
 
-    #endregion
-
-
-    #region OnClickTrigger
 
     public void showSkillDetails(SkillSlot slot)
-    {
-        showSkillDetails(slot.skill);
-    }
+    {        
+            this.skillDetailsName.text = slot.skill.skillName;
+            this.skillDetailsStrength.text = "Stärke: " + Mathf.Abs(slot.skill.addLifeTarget) + "";
+            this.skillDetailsCost.text = "Kosten: " + Mathf.Abs(slot.skill.addResourceSender) + "";
 
-    public void showSkillDetails(SkillMenuActiveSlots slot)
-    {
-        showSkillDetails(slot.skill);
-    }
-
-    private void showSkillDetails(StandardSkill skill)
-    {
-        if (skill != null)
-        {
-            this.skillDetailsName.text = Utilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
-
-            float strength = 0;
-            if (skill.affectedResources.Count > 0) strength = Mathf.Abs(skill.affectedResources[0].amount)*4;
-            this.skillDetailsStrength.text = strength + "";
-
-            this.skillDetailsCost.text = Mathf.Abs(skill.addResourceSender)*4 + "";
-
-            if (skill.statusEffects.Count > 0)
-            {
-                this.StatusEffects.enabled = true;
-                this.StatusEffects.sprite = skill.statusEffects[0].iconSprite;
-            }
-            else this.StatusEffects.enabled = false;
-        }
-        else
-        {
-            hideSkillDetails();
-        }
+            if (slot.skill.statusEffects.Count > 0) this.StatusEffects.sprite = slot.skill.statusEffects[0].iconSprite;
+            else this.StatusEffects.sprite = null;        
     }
 
     public void hideSkillDetails()
-    {        
-        this.skillDetailsName.text = "";
-        this.skillDetailsStrength.text = "";
-        this.skillDetailsCost.text = "";
+    {
+        this.skillDetailsName.text = "-";
+        this.skillDetailsStrength.text = "Stärke: ";
+        this.skillDetailsCost.text = "Kosten: ";
 
-        this.StatusEffects.enabled = false;
+        this.StatusEffects.sprite = null;
     }
 
     public void showCategory(int category)
     {        
         this.physicalSkills.SetActive(false);
-        this.categoryWeapons.gameObject.SetActive(false);
         this.magicalSkills.SetActive(false);
-        this.categoryMagic.gameObject.SetActive(false);
         this.itemSkills.SetActive(false);
-        this.categoryItems.gameObject.SetActive(false);
-
+        
         switch (category)
         {
-            case 1: this.physicalSkills.SetActive(true); this.categoryWeapons.gameObject.SetActive(true); break;
-            case 2: this.magicalSkills.SetActive(true); this.categoryMagic.gameObject.SetActive(true); break;
-            default: this.itemSkills.SetActive(true); this.categoryItems.gameObject.SetActive(true); break;
-        }
-
-        setPage(0);
-    }
-
-    public void selectSkillFromSkillSet(SkillSlot skillSlot)
-    {
-        if (skillSlot != null && skillSlot.skill != null)
-        {
-            this.selectedSkill = skillSlot.skill;
-            this.cursor.setSelectedGameObject(skillSlot.image);
-        }
-        else
-        {
-            this.selectedSkill = null;
-            this.cursor.setSelectedGameObject(null);
+            case 1: this.physicalSkills.SetActive(true); break;
+            case 2: this.magicalSkills.SetActive(true); break;
+            default: this.itemSkills.SetActive(true); break;
         }
     }
 
-    public void exitMenu()
+    private void setSlots()
     {
-        this.cursor.infoBox.Hide();
-        this.player.delay(this.lastState);
-        this.transform.parent.gameObject.SetActive(false);
-        this.blackScreen.SetActive(false);
-    }
+        this.dummySlot.SetActive(true);
 
-    public void setPage(int value)
-    {
-        selectSkillFromSkillSet(null);
-        GameObject activeCategory = null;
-
-        if (this.physicalSkills.activeInHierarchy) activeCategory = this.physicalSkills;
-        else if (this.magicalSkills.activeInHierarchy) activeCategory = this.magicalSkills;
-        else if (this.itemSkills.activeInHierarchy) activeCategory = this.itemSkills;
-
-        if (activeCategory != null)
+        for(int i = 0; i < this.player.skillSet.Count; i++)
         {
-            int activeIndex = 0;
-            int pagesCount = activeCategory.transform.childCount-1;
+            StandardSkill skill = this.player.skillSet[i];
+            GameObject categoryGameobject = this.itemSkills;
 
-            for (int i = 0; i <= pagesCount; i++)
-            {
-                GameObject page = activeCategory.transform.GetChild(i).gameObject;
-                if (page.activeInHierarchy) activeIndex = page.transform.GetSiblingIndex();
-            }
+            if (skill.category == SkillType.physical) categoryGameobject = this.physicalSkills;
+            else if (skill.category == SkillType.magical) categoryGameobject = this.magicalSkills;
 
-            if (activeIndex + value < activeCategory.transform.childCount && activeIndex + value >= 0)
-            {
-                activeIndex += value;
-            
-                for (int i = 0; i < activeCategory.transform.childCount; i++)
-                {
-                    GameObject page = activeCategory.transform.GetChild(i).gameObject;
-                    page.SetActive(false);
-                    if (activeIndex == page.transform.GetSiblingIndex()) page.SetActive(true);
-                }
-
-                this.nextPage.SetActive(true);
-                this.previousPage.SetActive(true);
-
-                if (activeIndex == 0)
-                {
-                    this.previousPage.SetActive(false);
-                    EventSystem.current.SetSelectedGameObject(this.nextPage);
-                }
-                if (activeIndex == pagesCount)
-                {
-                    this.nextPage.SetActive(false);
-                    EventSystem.current.SetSelectedGameObject(this.previousPage);
-                }
-
-                if(!this.nextPage.activeInHierarchy && !this.previousPage.activeInHierarchy)
-                {
-                    EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);                    
-                }
-
-                if (pagesCount > 0) this.pageText.text = (activeIndex + 1) + "/" + (pagesCount + 1);
-                else this.pageText.text = "";
-            } 
+            GameObject temp = Instantiate(this.dummySlot, categoryGameobject.transform);
+            temp.GetComponent<SkillSlot>().setSkill(skill);
+            temp.name = skill.skillName + "-Slot";
         }
+
+        this.dummySlot.SetActive(false);
     }
-
-    #endregion
-
-
-    private void setSkillsToSlots(SkillType category)
-    {
-        GameObject categoryGameobject = this.itemSkills;
-        if (category == SkillType.physical) categoryGameobject = this.physicalSkills;
-        else if (category == SkillType.magical) categoryGameobject = this.magicalSkills;
-
-        for(int i = 0; i < categoryGameobject.transform.childCount; i++)
-        {
-            GameObject page = categoryGameobject.transform.GetChild(i).gameObject;
-
-            if (page.activeInHierarchy)
-            {
-                GameObject skills = page.transform.GetChild(page.transform.childCount-1).gameObject;
-
-                for (int ID = 0; ID < skills.transform.childCount; ID++)
-                {
-                    GameObject slot = skills.transform.GetChild(ID).gameObject;
-                    StandardSkill skill = Utilities.Skill.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
-                    slot.GetComponent<SkillSlot>().setSkill(skill);
-                }
-
-                if (page.transform.GetSiblingIndex() > 0) page.SetActive(false);
-            }
-        }
-    }        
 }

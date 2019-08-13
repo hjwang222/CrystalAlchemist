@@ -15,14 +15,7 @@ public class SignalListener : MonoBehaviour
 
     private void OnEnable()
     {
-        try
-        {
-            signal.RegisterListener(this);
-        }
-        catch 
-        {
-            string elem = this.ToString();
-        }
+        signal.RegisterListener(this);
     }
 
     private void OnDisable()

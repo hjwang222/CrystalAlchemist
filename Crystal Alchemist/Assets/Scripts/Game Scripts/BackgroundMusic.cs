@@ -8,18 +8,15 @@ public class BackgroundMusic : MonoBehaviour
     public AudioClip startMusic;
     public AudioClip loopMusic;
 
-    private float volume;
-
     // Start is called before the first frame update
     void Start()
     {
-        this.volume = GlobalValues.backgroundMusicVolume;
         this.audioSource = this.GetComponent<AudioSource>();
 
         if (this.startMusic != null)
         {
             this.audioSource.loop = false;
-            this.audioSource.PlayOneShot(this.startMusic, this.volume);
+            this.audioSource.PlayOneShot(this.startMusic, GlobalValues.backgroundMusicVolume);
 
             StartCoroutine(playLoopMusic());
         }
@@ -27,22 +24,6 @@ public class BackgroundMusic : MonoBehaviour
         {
             playLoop();
         }
-    }
-
-    public void changePitch()
-    {
-        this.audioSource.pitch = GlobalValues.backgroundMusicPitch;        
-    }
-
-    public void changeVolume(float volume)
-    {
-        this.audioSource.volume = volume;
-        this.volume = volume;
-    }
-
-    public void stopMusic()
-    {
-        this.audioSource.Stop();
     }
 
     private IEnumerator playLoopMusic()
@@ -55,8 +36,8 @@ public class BackgroundMusic : MonoBehaviour
     {
         if (this.loopMusic != null)
         {
-            this.audioSource.volume = this.volume;
             this.audioSource.clip = this.loopMusic;
+            this.audioSource.volume = GlobalValues.backgroundMusicVolume;
             this.audioSource.loop = true;
             this.audioSource.Play();
         }

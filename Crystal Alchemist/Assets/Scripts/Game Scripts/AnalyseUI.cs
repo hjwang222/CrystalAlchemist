@@ -18,14 +18,6 @@ public class AnalyseUI : MonoBehaviour
     public Image ImageObjectitemPreview;
     public GameObject statusEffectHolder;
 
-    [Header("Gruppen")]
-    [SerializeField]
-    private GameObject enemyInfo;
-    [SerializeField]
-    private GameObject objectInfo;
-    [SerializeField]
-    private AggroBar aggrobar;
-
     private Character character;
     private Interactable interactable;
 
@@ -37,9 +29,10 @@ public class AnalyseUI : MonoBehaviour
 
     private void init()
     {
-        this.enemyInfo.SetActive(false);
-        this.objectInfo.SetActive(false);
-        this.aggrobar.gameObject.SetActive(false);
+        if (this.target == null)
+        {
+            this.target = this.transform.parent.gameObject;
+        }
 
         //set type of Analyse
         this.transform.position = new Vector2(this.target.transform.position.x + 1.5f, this.target.transform.position.y + 1.5f);
@@ -48,7 +41,6 @@ public class AnalyseUI : MonoBehaviour
         {
             //set UI to Treasure/Object Info
             this.interactable = this.target.GetComponent<Interactable>();
-            this.objectInfo.SetActive(true);
         }
         else if (this.target.GetComponent<Character>() != null)
         {
@@ -58,15 +50,9 @@ public class AnalyseUI : MonoBehaviour
             if (this.character.characterType != CharacterType.Object)
             {
                 //show Basic Information for Enemies
-                this.enemyInfo.SetActive(true);
-            }
-            else this.objectInfo.SetActive(true);
-
-            AI enemy = this.character.GetComponent<AI>();
-            if (enemy != null)
-            {
-                this.aggrobar.gameObject.SetActive(true);
-                this.aggrobar.setEnemy(enemy);
+                this.TMPcharacterName.enabled = true;
+                this.TMPlifeAmount.enabled = true;
+                this.heartImage.enabled = true;
             }
         }
     }
@@ -76,21 +62,21 @@ public class AnalyseUI : MonoBehaviour
         updateInfos();
     }
 
+
+
     private void updateInfos()
     {
         if (this.character != null)
         {
-            if (this.character.characterType != CharacterType.Object)
-            {
-                showEnemyInfo();
-                updateStatusEffects();
-            }
-            else showItemInfo();
+            if (this.character.characterType != CharacterType.Object) showEnemyInfo();
+            else showItem();
         }
         else if (this.interactable != null)
         {
-            showItemInfo();
+            showItem();
         }
+
+        updateStatusEffects();
     }
 
     private void updateStatusEffects()
@@ -129,39 +115,50 @@ public class AnalyseUI : MonoBehaviour
 
     private void showEnemyInfo()
     {
-        this.ImageitemPreview.gameObject.SetActive(false);
-
-        this.TMPcharacterName.text = Utilities.Format.getLanguageDialogText(this.character.characterName, this.character.englischCharacterName);
+        this.TMPcharacterName.text = this.character.characterName;
         this.TMPlifeAmount.text = "x" + (this.character.life * 4);
 
         if (this.character.items.Count > 0 && this.character.currentState != CharacterState.dead)
         {
-            this.ImageitemPreview.gameObject.SetActive(true);
-            this.ImageitemPreview.sprite = this.character.items[0].itemSprite;
+            this.ImageitemPreview.enabled = true;
+            this.ImageitemPreview.sprite = this.character.items[0].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
         }
+        else this.ImageitemPreview.enabled = false;
+
+        //STatusEffect
     }
 
-    private void showItemInfo()
+    private void showItem()
     {
-        this.ImageObjectitemIndicator.gameObject.SetActive(false);
-
         if (this.interactable != null)
         {
             //Show Object Information
             if (interactable.items.Count > 0 && this.interactable.currentState != objectState.opened)
             {
-                this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = interactable.items[0].itemSprite;
-            }            
+                this.ImageObjectitemIndicator.enabled = true;
+                this.ImageObjectitemPreview.enabled = true;
+                this.ImageObjectitemPreview.sprite = interactable.items[0].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+            }
+            else
+            {
+                this.ImageObjectitemPreview.enabled = false;
+                this.ImageObjectitemIndicator.enabled = false;
+            }
         }
         else if (this.character != null)
         {
             //Show Object Information
             if (this.character.items.Count > 0 && this.character.currentState != CharacterState.dead)
             {
-                this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = this.character.items[0].itemSprite;
-            }            
+                this.ImageObjectitemIndicator.enabled = true;
+                this.ImageObjectitemPreview.enabled = true;
+                this.ImageObjectitemPreview.sprite = this.character.items[0].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+            }
+            else
+            {
+                this.ImageObjectitemPreview.enabled = false;
+                this.ImageObjectitemIndicator.enabled = false;
+            }
         }
     }
 

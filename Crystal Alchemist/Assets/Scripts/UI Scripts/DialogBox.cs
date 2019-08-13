@@ -8,18 +8,11 @@ public class DialogBox : MonoBehaviour
     #region Attribute
     [Header("Dialog-Attribute")]
     [Tooltip("DialogBox Child-Objekt")]
-    [SerializeField]
-    private GameObject dialogBox;
+    public GameObject dialogBox;
     [Tooltip("DialogBox Text-Objekt")]
-    [SerializeField]
-    private TextMeshProUGUI textMesh;
+    public TextMeshProUGUI textMesh;
     [Tooltip("Sound der Dialogbox")]
-    [SerializeField]
-    private AudioClip dialogSoundEffect;
-    [SerializeField]
-    private GameObject cursor;
-    [SerializeField]
-    private GameObject controls;
+    public AudioClip dialogSoundEffect;
 
     private bool showIt = false;
     private bool inputPossible = true;
@@ -27,12 +20,13 @@ public class DialogBox : MonoBehaviour
     private AudioSource audioSource;
     private Player player;
     private int index = 0;
+    private float delay = 0.3f;
     private int maxLength = 28;
     #endregion
 
 
     #region Unity Funktionen (Start, Update)
-    private void Awake()
+    private void Start()
     {
         this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
@@ -40,31 +34,31 @@ public class DialogBox : MonoBehaviour
         this.audioSource.playOnAwake = false;
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        
-    }
-
-    private void OnDisable()
-    {
-        this.cursor.SetActive(false);
-    }
-
-
-    public void next(int index)
-    {
-        this.index += index;
-
-        if (this.index < 0) this.index = 0;
-
-        if (this.index < this.texts.Count)
+        if (this.showIt)
         {
-            //Blättere weiter                                       
-            showText();
-        }
-        else
-        {
-            hideDialogBox();
+            //Wenn DialogBox aktiv ist
+            //TODO: B-Button einfügen
+
+            if (this.inputPossible && (Input.GetButtonDown("Submit") || Input.GetButtonDown("Cancel")))
+            {
+                if (Input.GetButtonDown("Submit")) this.index += 2;
+                else if (Input.GetButtonDown("Cancel")) this.index -= 2;
+
+                if (this.index < 0) this.index = 0;
+
+                if (this.index < this.texts.Count)
+                {
+                    //Blättere weiter                                       
+                    showText();
+                    StartCoroutine(delayInputCO());
+                }
+                else
+                {
+                    hideDialogBox();
+                }
+            }
         }
     }
 
@@ -74,34 +68,51 @@ public class DialogBox : MonoBehaviour
     #region Funktionen (Show, Hide, Text)
 
     public void showDialogBox(string text)
-    {
+    {        
         //Zeige die DialogBox (Signal)
-        this.cursor.SetActive(true);
         this.showIt = true;
         this.texts.Clear();
         this.texts = formatText(text);
 
         if (this.player != null) this.player.currentState = CharacterState.inDialog;
-        this.controls.SetActive(false);
         this.dialogBox.SetActive(true);
         showText();
+
+        StartCoroutine(delayInputCO());
     }
 
     private void hideDialogBox()
     {
         //Blende DialogBox aus
-        this.player.delay(CharacterState.interact);
-        this.controls.SetActive(true);
-        this.cursor.SetActive(false);
         this.showIt = false;
         this.index = 0;
-        this.dialogBox.SetActive(false);        
+        this.dialogBox.SetActive(false);
+
+        StartCoroutine(delayInputPlayerCO());
+    }
+
+    private IEnumerator delayInputCO()
+    {
+        this.inputPossible = false;
+        yield return new WaitForSeconds(this.delay);
+        this.inputPossible = true;
+    }
+
+    private IEnumerator delayInputPlayerCO()
+    {        
+        //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
+        yield return new WaitForSeconds(this.delay);
+
+        if (this.player != null)
+        {
+            this.player.currentState = CharacterState.interact;
+        }
     }
 
     private List<string> formatText(string text)
     {
         List<string> result = new List<string>();
-
+        
         string[] temp = text.Replace("\n", "\n ").Split(' ');
         string line = "";
         int i = 0;
@@ -111,7 +122,7 @@ public class DialogBox : MonoBehaviour
             string word = temp[i];
 
             if ((line + word).Length > this.maxLength
-                || i == temp.Length - 1
+                || i == temp.Length-1
                 || word.Contains("\n"))
             {
                 word = word.Replace("\n", "");
@@ -119,7 +130,7 @@ public class DialogBox : MonoBehaviour
                 result.Add(line);
                 line = "";
             }
-            else if ((line + word).Length <= this.maxLength)
+            else if((line + word).Length <= this.maxLength)
             {
                 line += word + " ";
             }
@@ -131,7 +142,7 @@ public class DialogBox : MonoBehaviour
 
     private void showText()
     {
-        Utilities.Audio.playSoundEffect(this.audioSource, this.dialogSoundEffect);
+        Utilities.playSoundEffect(this.audioSource, this.dialogSoundEffect);
 
         if (this.index + 1 < this.texts.Count) this.textMesh.text = this.texts[this.index] + "\n" + this.texts[this.index + 1];
         else this.textMesh.text = this.texts[this.index];

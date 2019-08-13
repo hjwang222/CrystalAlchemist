@@ -1,10 +1,9 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="Vector2IntMinMaxAttributeDrawer.cs" company="Sirenix IVS">
+﻿#if UNITY_2017_2_OR_NEWER
+//-----------------------------------------------------------------------
+// <copyright file="VectorIntDrawer.cs" company="Sirenix IVS">
 // Copyright (c) Sirenix IVS. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-
-#if UNITY_EDITOR && UNITY_2017_2_OR_NEWER
 
 namespace Sirenix.OdinInspector.Editor.Drawers
 {
@@ -144,4 +143,4 @@ namespace Sirenix.OdinInspector.Editor.Drawers
         }
     }
 }
-#endif // UNITY_EDITOR && UNITY_2017_2_OR_NEWER
+#endif

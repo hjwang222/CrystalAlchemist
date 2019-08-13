@@ -5,28 +5,15 @@ using UnityEngine.UI;
 
 
 public class SkillSlot : MonoBehaviour
-{    
-    public Image image;
-    public StandardSkill skill;
-    public int ID;
+{
+    [SerializeField]
+    private Image image;
 
-    private void Awake()
-    {
-        // this.ID = ((int.Parse(this.gameObject.transform.parent.name.Replace("Page ",""))-1)*10)+ int.Parse(this.gameObject.transform.name);
-        this.ID = (this.gameObject.transform.parent.transform.parent.transform.GetSiblingIndex() * 10) + (this.gameObject.transform.GetSiblingIndex() + 1);
-    }
+    public StandardSkill skill;
 
     public void setSkill(StandardSkill skill)
     {
-        if (skill == null)
-            //this.image.color = new Color(1f, 1f, 1f, 0.2f);
-            this.image.enabled = false;
-        else
-        {
-            this.skill = skill;
-            this.image.enabled = true;
-            this.image.sprite = this.skill.icon;
-            this.image.color = new Color(1f, 1f, 1f, 1f);
-        }
-    }    
+        this.skill = skill;
+        this.image.sprite = this.skill.icon;
+    }   
 }

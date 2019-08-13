@@ -9,35 +9,14 @@ public enum SkillType
     item
 }
 
-public enum StateType
-{
-    none,
-    attack,
-    defend
-}
-
 public class StandardSkill : MonoBehaviour
 {
     #region Attribute
 
     [Required("Name muss gesetzt sein!")]
     [BoxGroup("Pflichtfelder")]
-    [Tooltip("Name des Angriffs")]
+    [Tooltip("Name des Angriffs")]    
     public string skillName;
-
-    [BoxGroup("Pflichtfelder")]
-    [Tooltip("Name des Angriffs")]
-    public string skillNameEnglish;
-
-    [BoxGroup("Pflichtfelder")]
-    [Tooltip("Beschreibung des Skills")]
-    [TextArea]
-    public string skillDescription;
-
-    [BoxGroup("Pflichtfelder")]
-    [Tooltip("Beschreibung des Skills")]
-    [TextArea]
-    public string skillDescriptionEnglish;
 
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
@@ -45,59 +24,10 @@ public class StandardSkill : MonoBehaviour
     public SkillType category = SkillType.magical;
 
     [BoxGroup("Pflichtfelder")]
-    public string animationTriggerName = "";
+    [Tooltip("Beschreibung des Skills")]
+    [TextArea]
+    public string skillDescription;
 
-    [BoxGroup("Pflichtfelder")]
-    [Tooltip("Sortierung")]
-    public int orderIndex = 10;
-
-    [Space(10)]
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    [SerializeField]
-    private SpriteRenderer spriteRenderer;
-
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    public Rigidbody2D myRigidbody;
-
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    public Animator animator;
-
-    [Space(10)]
-    [BoxGroup("Pflichtfelder")]
-    [Tooltip("Schatten")]
-    public SpriteRenderer shadow;
-
-    ////////////////////////////////////////////////////////////////
-
-    [FoldoutGroup("Indikatoren", expanded: false)]
-    [Tooltip("AOE")]
-    public List<Indicator> indicators = new List<Indicator>();
-
-    [FoldoutGroup("Indikatoren", expanded: false)]
-    [Tooltip("Indikator anzeigen")]
-    public bool showingIndicator = true;
-
-    [FoldoutGroup("Indikatoren", expanded: false)]
-    [Tooltip("Cast anzeigen")]
-    public bool showCastBarForEnemies = true;
-
-    [FoldoutGroup("Indikatoren", expanded: false)]
-    public bool useCustomColor;
-
-    [FoldoutGroup("Indikatoren", expanded: false)]
-    [ShowIf("useCustomColor", true)]
-    public Color indicatorColor;
-
-    [Space(10)]
-    [FoldoutGroup("Indikatoren", expanded: false)]
-    public CastingAnimation castingAnimation;
-
-    [ShowIf("castingAnimation", null)]
-    [FoldoutGroup("Indikatoren", expanded: false)]
-    public string castingAnimationCharacterKey;
 
     ////////////////////////////////////////////////////////////////
 
@@ -123,16 +53,7 @@ public class StandardSkill : MonoBehaviour
     public float duration = 1;
 
     [FoldoutGroup("Zeit-Attribute", expanded: false)]
-    [Tooltip("Soll der Charakter während des Schießens weiterhin in die gleiche Richtung schauen?")]
-    [SerializeField]
-    [Range(0, Utilities.maxFloatInfinite)]
-    private float lockMovementonDuration = 0;
-
-    [FoldoutGroup("Zeit-Attribute", expanded: false)]
     public bool deactivateByButtonUp = false;
-
-    [FoldoutGroup("Zeit-Attribute", expanded: false)]
-    public bool deactivateByButtonDown = false;
 
     [Space(10)]
     [FoldoutGroup("Zeit-Attribute", expanded: false)]
@@ -149,91 +70,59 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Zeit für eine Kombo")]
     [Range(0, Utilities.maxFloatSmall)]
     public float durationCombo = 0;
-
+       
 
     ////////////////////////////////////////////////////////////////
 
-    [TabGroup("Ziel Attribute")]
-    [Tooltip("Veränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
-    public List<affectedResource> affectedResources;
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Ziels)", expanded: false)]
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    [Tooltip("Lebensveränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
+    public float addLifeTarget = -1;
 
-    [TabGroup("Ziel Attribute")]
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Ziels)", expanded: false)]
+    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    [Tooltip("Manaveränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
+    public float addManaTarget = 0;
+
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Ziels)", expanded: false)]
     [Tooltip("Statuseffekte")]
     public List<StatusEffect> statusEffects;
 
     ////////////////////////////////////////////////////////////////
 
-    [Space(10)]
-    [TabGroup("Ziel Attribute")]
-    [Range(0, Utilities.maxFloatSmall)]
-    [Tooltip("Stärke des Knockbacks")]
-    public float thrust = 4;
-
-    [TabGroup("Ziel Attribute")]
-    [Range(0, Utilities.maxFloatSmall)]
-    [Tooltip("Dauer des Knockbacks")]
-    [HideIf("thrust", 0f)]
-    public float knockbackTime = 0.2f;
-
-    ////////////////////////////////////////////////////////////////
-
-    [TabGroup("Sender Attribute")]
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
     [EnumToggleButtons]
     [Tooltip("Art der Resource")]
     public ResourceType resourceType = ResourceType.mana;
 
-    [TabGroup("Sender Attribute")]
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
     [ShowIf("resourceType", ResourceType.item)]
     [Tooltip("Benötigtes Item")]
     public Item item;
 
-    [TabGroup("Sender Attribute")]
-    [HideIf("resourceType", ResourceType.none)]
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     [Tooltip("Höhe der Resource des Senders. Negativ = Schaden, Positiv = Heilung")]
     public float addResourceSender = 0;
 
-    [TabGroup("Sender Attribute")]
-    [HideIf("resourceType", ResourceType.none)]
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
     [Range(0, Utilities.maxFloatInfinite)]
     [Tooltip("Intervall während der Dauer des Skills Leben oder Mana verändert werden.")]
     public float intervallSender = 0;
 
-    [TabGroup("Sender Attribute")]
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
     [Tooltip("Bewegungsgeschwindigkeit während eines Casts")]
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     public float speedDuringCasting = 0;
 
-    [TabGroup("Sender Attribute")]
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
     [Tooltip("Bewegungsgeschwindigkeit während des Angriffs")]
     [Range(-Utilities.maxFloatSmall, Utilities.maxFloatSmall)]
     public float speedDuringDuration = 0;
 
-    [TabGroup("Sender Attribute")]
-    [Tooltip("Soll die Geschwindigkeit auch die Animation beeinflussen?")]
-    public bool affectAnimation = true;
-
-    //////////////////////////////////////////////////////////////////////////////
-
-    [Space(10)]
-    [TabGroup("Sender Attribute")]
-    [Tooltip("True = nach vorne, False = Knockback")]
-    [SerializeField]
-    private bool forward = false;
-
-    [TabGroup("Sender Attribute")]
-    [Range(0, Utilities.maxFloatSmall)]
-    [Tooltip("Stärke des Knockbacks")]
-    [SerializeField]
-    private float selfThrust = 0;
-
-    [TabGroup("Sender Attribute")]
-    [Range(0, Utilities.maxFloatSmall)]
-    [Tooltip("Dauer des Knockbacks")]
-    [HideIf("selfThrust", 0f)]
-    [SerializeField]
-    private float selfThrustTime = 0;
-
+    [FoldoutGroup("Basis Attribute (bezogen auf Effekte des Senders)", expanded: false)]
+    [Tooltip("Soll der Charakter während des Schießens weiterhin in die gleiche Richtung schauen?")]
+    public bool lockMovementonDuration = false;
 
     ////////////////////////////////////////////////////////////////
 
@@ -246,11 +135,6 @@ public class StandardSkill : MonoBehaviour
     public bool isStationary = false;
 
     [FoldoutGroup("Projektil Attribute", expanded: false)]
-    [Tooltip("Schattencollider")]
-    [Range(-1, 0)]
-    public float colliderHeightOffset = 0;
-
-    [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Tooltip("Geschwindigkeit des Projektils")]
     [Range(0, Utilities.maxFloatSmall)]
     public float speed = 0;
@@ -260,31 +144,15 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
     public bool rotateIt = false;
 
-    [FoldoutGroup("Projektil Attribute", expanded: false)]
-    [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
-    public bool rotateOnUpdate = false;
-
-    [FoldoutGroup("Projektil Attribute", expanded: false)]
-    [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
-    [HideIf("rotateIt")]
-    public bool keepOriginalRotation = false;
-
-    [FoldoutGroup("Projektil Attribute", expanded: false)]
-    [Tooltip("Wird ein Blend-Tree verwendet (Animation)?")]
-    [HideIf("rotateIt")]
-    [SerializeField]
-    private bool blendTree = false;
-
-    [FoldoutGroup("Projektil Attribute", expanded: false)]
-    [Tooltip("Wird ein Blend-Tree verwendet (Animation)?")]
-    [HideIf("rotateIt")]
-    [SerializeField]
-    private bool useOffSetToBlendTree = false;
-
     [ShowIf("rotateIt")]
     [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Range(-360, 360)]
     public float rotationModifier = 0;
+
+    [ShowIf("rotateIt")]
+    [FoldoutGroup("Projektil Attribute", expanded: false)]
+    [Tooltip("Soll der Hit-Sprite passend zur Flugbahn rotieren?")]
+    public bool rotateEndSprite = false;
 
     [ShowIf("rotateIt")]
     [FoldoutGroup("Projektil Attribute", expanded: false)]
@@ -304,13 +172,6 @@ public class StandardSkill : MonoBehaviour
     public float positionHeight = 0f;
 
     ////////////////////////////////////////////////////////////////
-
-    [FoldoutGroup("Zielerfassung", expanded: false)]
-    [Tooltip("Ob die Zielhilfe aktiviert werden soll")]
-    public bool activeTargetHelper = false;
-
-    [FoldoutGroup("Zielerfassung", expanded: false)]
-    public bool setTargetAutomatically = false;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
     [Tooltip("Ob das Ziel erfasst werden soll. Wenn NULL, dann nicht.")]
@@ -351,15 +212,15 @@ public class StandardSkill : MonoBehaviour
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("wirkt auf alle Spieler")]
-    public bool affectOther = false;
+    public bool affectPlayers = false;
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("wirkt auf alle Gegner")]
-    public bool affectSame = false;
+    public bool affectEnemies = false;
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
-    [Tooltip("wirkt auf alle Gegner")]
-    public bool affectNeutral = false;
+    [Tooltip("wirkt auf alle Objekte")]
+    public bool affectObjects = false;
 
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("wirkt auf alle Skills")]
@@ -369,16 +230,20 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Unverwundbarkeit ignorieren (z.B. für Heals)?")]
     public bool ignoreInvincibility = false;
 
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
-    [Tooltip("Soll der Spieler nur diesen Skill benutzen dürfen?")]
-    [EnumToggleButtons]
-    public StateType stateType = StateType.none;
-
     ////////////////////////////////////////////////////////////////
 
-    [FoldoutGroup("Special Behaviors", expanded: false)]
-    [Tooltip("Soll etwas während des Delays getan werden (DoCast Methode)")]
-    public bool doCastDuringDelay = false;
+    [FoldoutGroup("Knockback", expanded: false)]
+    [Range(0, Utilities.maxFloatSmall)]
+    [Tooltip("Stärke des Knockbacks")]
+    public float thrust = 4;
+
+    [FoldoutGroup("Knockback", expanded: false)]
+    [Range(0, Utilities.maxFloatSmall)]
+    [Tooltip("Dauer des Knockbacks")]
+    [HideIf("thrust", 0f)]
+    public float knockbackTime = 0.2f;
+
+    ////////////////////////////////////////////////////////////////
 
     [FoldoutGroup("Special Behaviors", expanded: false)]
     [Range(1, Utilities.maxIntInfinite)]
@@ -389,22 +254,33 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Maximale Anzahl aktiver gleicher Angriffe in einer Combo")]
     public int comboAmount = Utilities.maxIntSmall;
 
+    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [Tooltip("Beschwörungen")]
+    public GameObject summon;
+
+    //private bool showIndicator = false;
+    //private bool showCastBar = false;
+
     ////////////////////////////////////////////////////////////////
 
     [FoldoutGroup("Sound und Icons", expanded: false)]
     [Tooltip("Icon für den Spieler")]
     public Sprite icon;
 
+    [FoldoutGroup("Sound und Icons", expanded: false)]
+    public AudioClip startSoundEffect;
+
+    [FoldoutGroup("Sound und Icons", expanded: false)]
+    public AudioClip endSoundEffect;
+
+    [FoldoutGroup("Sound und Icons", expanded: false)]
+    public AudioClip animSoundeffect;
+
     ////////////////////////////////////////////////////////////////
 
     private bool playStartEffectAlready = false;
-    private CastingAnimation activeCastingAnimation;
+    private Vector2 tempVelocity;
     private float elapsed;
-    private float LockElapsed;
-    private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
-
-    [HideInInspector]
-    public List<Indicator> activeIndicators = new List<Indicator>();
 
     [HideInInspector]
     public Character sender;
@@ -414,18 +290,18 @@ public class StandardSkill : MonoBehaviour
     public float durationTimeLeft;
     [HideInInspector]
     public float cooldownTimeLeft;
-
     [HideInInspector]
-    public bool movementLocked;
-
+    public Rigidbody2D myRigidbody;
+    [HideInInspector]
+    public Animator animator;
     [HideInInspector]
     public Character target;
     [HideInInspector]
     public AudioSource audioSource;
     [HideInInspector]
-    public bool dontPlayAudio = false;
-
-
+    public bool playEndEffectAlready = false;
+    [HideInInspector]
+    public SpriteRenderer spriteRenderer;
     [HideInInspector]
     public float timeDistortion = 1;
     [HideInInspector]
@@ -439,97 +315,51 @@ public class StandardSkill : MonoBehaviour
     [HideInInspector]
     public bool setPositionAtStart = true;
 
-    [HideInInspector]
-    public bool setActive = true;
-
-
-
     #endregion
 
 
     #region Start Funktionen (Init, set Basics, Update Sender, set Position
 
-
     public void Start()
-    {
-        init();
+    {        
+        init();        
     }
 
     public virtual void init()
     {
-        //this.cooldownTimeLeft = 0;
+        this.cooldownTimeLeft = 0;
         setBasicAttributes();
-        updateResourceSender();
-        setSelfTrust();
-
-        if (this.sender == null)
+        updateResourceSender();        
+        
+        if(this.sender == null)
         {
             throw new System.Exception("No SENDER found! Must be player!");
-        }        
-        //this.gameObject.layer = LayerMask.NameToLayer(this.sender.gameObject.tag + " Skill");        
-    }
-
-    private void setSelfTrust()
-    {
-        if (this.selfThrust > 0)
-        {
-            this.duration = this.selfThrustTime;
-            int trustdirection = -1; //knockback
-            if (forward) trustdirection = 1; //dash
-
-            this.sender.knockBack(selfThrustTime, selfThrust, (this.sender.direction * trustdirection));
         }
-    }
+
+        //this.gameObject.layer = LayerMask.NameToLayer(this.sender.gameObject.tag + " Skill");        
+    }   
 
     private void setBasicAttributes()
     {
         //Setze Basis-Attribute, damit auch alles funktioniert
 
         this.name = this.skillName + Time.deltaTime;
-
-        if (this.myRigidbody == null) this.myRigidbody = GetComponent<Rigidbody2D>();
-        if(this.spriteRenderer == null) this.spriteRenderer = GetComponent<SpriteRenderer>();
-        if (this.animator == null) this.animator = GetComponent<Animator>();
-
-        if (this.shadow != null && this.spriteRenderer != null)
-        {
-            this.shadow.sprite = this.spriteRenderer.sprite;
-        }
-
+        this.myRigidbody = GetComponent<Rigidbody2D>();
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
-        this.audioSource.playOnAwake = false;        
+        this.audioSource.playOnAwake = false;
+        this.spriteRenderer = GetComponent<SpriteRenderer>();
+        if (this.spriteRenderer != null) this.spriteRenderer.color = GlobalValues.color;
+        this.animator = GetComponent<Animator>();
 
         this.delayTimeLeft = this.delay;
         this.durationTimeLeft = this.duration;
 
-        this.LockElapsed = this.lockMovementonDuration;
-        if (this.LockElapsed > 0) this.movementLocked = true;
-
         this.elapsed = this.intervallSender;
 
-        if (this.sender == null)
-        {
-            this.sender = this.transform.parent.GetComponent<Character>(); //SET SENDER IF NULL (IMPORTANT!)            
-        }
-
-        //setTag(this.gameObject, this.sender.tag);
-
-        this.sender.startAttackAnimation(this.animationTriggerName);
-
-        if (this.stateType == StateType.attack) this.sender.currentState = CharacterState.attack;
-        else if (this.stateType == StateType.defend) this.sender.currentState = CharacterState.defend;
-    }
-
-    private void setTag(GameObject gameobject, string tag)
-    {
-        int childcount = gameobject.transform.childCount;
-        gameobject.tag = tag;
-
-        for(int i = 0; i < childcount; i++)
-        {
-            setTag(gameobject.transform.GetChild(i).gameObject, tag);
-        }
+        if (this.startSoundEffect != null) Utilities.playSoundEffect(this.audioSource, this.startSoundEffect);
+        
+        if (this.sender == null) this.sender = this.transform.parent.GetComponent<Character>(); //SET SENDER IF NULL (IMPORTANT!)
     }
 
     private void updateResourceSender()
@@ -539,54 +369,37 @@ public class StandardSkill : MonoBehaviour
             this.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
             setPostionAndDirection();
         }
-    }
+    }    
 
     private void setPostionAndDirection()
     {
         //Bestimme Winkel und Position
 
-        float angle = 0;
-        Vector2 start = this.transform.position;
-        Vector3 rotation = this.transform.rotation.eulerAngles;
-
-        if (!this.blendTree)
-        {
-            if (!this.keepOriginalRotation)
-            {
-                Utilities.Rotation.setDirectionAndRotation(this.sender, this.target,
-             this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
-             out angle, out start, out this.direction, out rotation);
-            }
-
-            //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;                       
-
-            if (setPositionAtStart) this.transform.position = start;
-                        
-                if (this.keepOriginalRotation)
-                {
-                    this.direction = Utilities.Rotation.DegreeToVector2(this.transform.rotation.eulerAngles.z);
-                }
-
-            if (this.rotateIt && !this.keepOriginalRotation) transform.rotation = Quaternion.Euler(rotation);            
-        }
-        else
-        {
-            if(this.useOffSetToBlendTree) this.transform.position = new Vector2(this.sender.transform.position.x + (this.sender.direction.x * positionOffset),
-                                                                                this.sender.transform.position.y + (this.sender.direction.y * positionOffset) + positionHeight);            
-        }
-
         if (this.animator != null)
         {
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
+            Utilities.SetParameter(this.animator, "moveX", this.sender.direction.x);
+            Utilities.SetParameter(this.animator, "moveY", this.sender.direction.y);
         }
 
-        if (this.shadow != null)
+        float angle;
+        Vector2 start;
+        Vector3 rotation;
+
+        Utilities.setDirectionAndRotation(this.sender.transform.position, this.sender.direction, this.target,
+                                          this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
+                                          out angle, out start, out this.direction, out rotation);
+
+        //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;
+
+        if (setPositionAtStart) this.transform.position = start;
+
+        if (this.myRigidbody != null)
         {
-            float changeX = 0;
-            if (this.direction.y < 0) changeX = this.direction.y;
-            this.shadow.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + this.colliderHeightOffset + (this.colliderHeightOffset * changeX));
+            this.myRigidbody.velocity = this.direction.normalized * this.speed;
+            this.tempVelocity = this.myRigidbody.velocity;            
         }
+
+        if(this.rotateIt) transform.rotation = Quaternion.Euler(rotation);
     }
 
     #endregion
@@ -599,124 +412,78 @@ public class StandardSkill : MonoBehaviour
         doOnUpdate();
     }
 
-    public void LateUpdate()
-    {
-        if (!this.rotateIt && !this.keepOriginalRotation) this.transform.rotation = this.fixedRotation;
-    }
-
-    public float getDurationLeft()
-    {
-        return this.durationTimeLeft;
-    }
-
-    public virtual void doOnCast()
-    {
-        
-    }
-
     public virtual void doOnUpdate()
-    {
-        if (this.rotateOnUpdate) setPostionAndDirection();
-
-        if (this.LockElapsed > 0)
-        {
-            this.LockElapsed -= Time.deltaTime;
-        }
-        else
-        {
-            this.movementLocked = false;
-        }
-
-        if (this.spriteRenderer != null && this.shadow != null)
-        {
-            this.shadow.sprite = this.spriteRenderer.sprite;
-            if(!this.keepOriginalRotation) this.shadow.transform.rotation = this.spriteRenderer.transform.rotation;
-        }
-
-        if (this.intervallSender > 0)
-        {
-            if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.timeDistortion);
-            else
+    {        
+            if (this.intervallSender > 0)
             {
-                if (this.sender != null)
-                {
-                    if (this.sender.getResource(this.resourceType, this.item) + this.addResourceSender < 0)
-                        this.durationTimeLeft = 0;
-                    else
-                    {
-                        this.elapsed = this.intervallSender;
-                        this.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
-                    }
-                }
-            }
-        }
-
-        if (this.speedDuringDuration != 0) this.sender.updateSpeed(this.speedDuringDuration, this.affectAnimation);
-
-        if (this.animator != null && this.sender != null && !this.movementLocked)
-        {
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
-        }
-
-        if (this.delayTimeLeft > 0)
-        {
-            showIndicator();
-
-            this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
-
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Time", this.delayTimeLeft);
-
-            if (this.doCastDuringDelay) doOnCast();
-        }
-        else
-        {
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Active", true);            
-            hideIndicator();
-            hideCastingAnimation();
-
-            //Prüfe ob der Skill eine Maximale Dauer hat
-            if (this.durationTimeLeft < Utilities.maxFloatInfinite)
-            {
-                if (this.durationTimeLeft > 0)
-                {
-                    this.durationTimeLeft -= (Time.deltaTime * this.timeDistortion);
-                }
+                if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.timeDistortion);
                 else
                 {
-                    Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Explode", true);
-
-                    if (this.animator == null || !Utilities.UnityUtils.HasParameter(this.animator, "Explode"))
+                    if (this.sender != null)
                     {
-                        Debug.Log(this.skillName + " hat kein Animator oder Explode-Parameter");
-                        SetTriggerActive(1);
-                        DestroyIt();
+                        if (this.sender.getResource(this.resourceType, this.item) + this.addResourceSender < 0)
+                            this.durationTimeLeft = 0;
+                        else
+                        {
+                            this.elapsed = this.intervallSender;
+                            this.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
+                        }
                     }
                 }
             }
-        }
+
+            if (this.speedDuringDuration != 0) this.sender.updateSpeed(this.speedDuringDuration);
+
+            if (this.animator != null && this.sender != null && !this.lockMovementonDuration)
+            {
+                Utilities.SetParameter(this.animator, "moveX", this.sender.direction.x);
+                Utilities.SetParameter(this.animator, "moveY", this.sender.direction.y);
+            }
+
+            if (this.delayTimeLeft > 0)
+            {
+                this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
+                
+                Utilities.SetParameter(this.animator, "Time", this.delayTimeLeft);
+                //do something here
+            }
+            else
+            {
+                //Prüfe ob der Skill eine Maximale Dauer hat
+                if (this.durationTimeLeft < Utilities.maxFloatInfinite)
+                {
+                    if (this.durationTimeLeft > 0)
+                    {
+                        this.durationTimeLeft -= (Time.deltaTime * this.timeDistortion);
+                    }
+                    else
+                    {
+                        Utilities.SetParameter(this.animator, "Explode", true);
+
+                        if (this.animator == null || !Utilities.HasParameter(this.animator, "Explode")) DestroyIt();
+                    }
+                }
+            }
 
         if (this.target != null && !this.target.gameObject.activeInHierarchy) this.durationTimeLeft = 0;
-
+              
     }
 
-
+    public void landAttack(Character hittedObject)
+    {
+        if (hittedObject != null)
+        {
+            //Gegner zurückstoßen + Hit
+            hittedObject.gotHit(this);
+        }
+    }
 
     public void landAttack(Collider2D hittedObject)
     {
         if (hittedObject.GetComponent<Character>() != null)
         {
             //Gegner zurückstoßen + Hit
-            hittedObject.GetComponent<Character>().gotHit(this);
-        }
-    }
-
-    public void landAttack(Collider2D hittedObject, float percentage)
-    {
-        if (hittedObject.GetComponent<Character>() != null)
-        {
-            //Gegner zurückstoßen + Hit
-            hittedObject.GetComponent<Character>().gotHit(this, percentage);
+            landAttack(hittedObject.GetComponent<Character>());
         }
     }
 
@@ -727,17 +494,17 @@ public class StandardSkill : MonoBehaviour
 
     public virtual void OnTriggerStay2D(Collider2D hittedCharacter)
     {
-        if (Utilities.Collisions.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);
+        if (Utilities.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);
     }
 
     public virtual void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
-        if (Utilities.Collisions.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);
+        if (Utilities.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);           
     }
 
     public virtual void OnTriggerExit2D(Collider2D hittedCharacter)
     {
-
+        
     }
 
     #endregion
@@ -745,105 +512,53 @@ public class StandardSkill : MonoBehaviour
 
     #region AnimatorEvents
 
-    public void PlaySoundEffect(AudioClip audioClip)
+    public void PlayStartSoundEffect()
     {
-        Utilities.Audio.playSoundEffect(this.audioSource, audioClip);
+        if (!this.playStartEffectAlready)
+        {
+            playSoundEffect(this.startSoundEffect);
+            this.playStartEffectAlready = true;
+        }
     }
 
-    public void PlaySoundEffectOnce(AudioClip audioClip)
+    public void PlayAnimatorSoundEffect()
     {
-        if (this.audioSource == null) this.audioSource = this.gameObject.AddComponent<AudioSource>();
-        if (!this.dontPlayAudio) Utilities.Audio.playSoundEffect(this.audioSource, audioClip);
-        this.dontPlayAudio = true;
+        playSoundEffect(this.animSoundeffect);
+    }
+
+    public void PlayEndSoundEffect()
+    {
+        if (!this.playEndEffectAlready)
+        {
+            playSoundEffect(this.endSoundEffect);
+            this.playEndEffectAlready = true;
+        }
+    }
+
+    private void playSoundEffect(AudioClip clip)
+    {
+        if (clip != null) Utilities.playSoundEffect(this.audioSource, clip);
     }
 
     public void ActivateIt()
     {
-        this.delayTimeLeft = 0;
+        this.delayTimeLeft = 0;        
     }
 
     public void SetTriggerActive(int value)
     {
-        if (value == 0) this.triggerIsActive = false;
+        if(value == 0) this.triggerIsActive = false;
         else this.triggerIsActive = true;
     }
 
-    public void resetRotation()
-    {
-        this.transform.rotation = Quaternion.Euler(0, 0, 0);
-    }
-
     public virtual void DestroyIt()
-    {
+    {        
         if (this.speedDuringDuration != 0) this.sender.updateSpeed(0);
-
-        this.sender.activeSkills.Remove(this);
-        if (this.stateType != StateType.none) this.sender.currentState = CharacterState.idle;
-            //this.isActive = false;
-        Destroy(this.gameObject);
-    }
-
-    public virtual void DestroyIt(float delay)
-    {
-        if (this.speedDuringDuration != 0) this.sender.updateSpeed(0);
-
-        this.sender.activeSkills.Remove(this);
-        if (this.stateType != StateType.none) this.sender.currentState = CharacterState.idle;
+        
+        this.sender.activeSkills.Remove(this);        
         //this.isActive = false;
-        Destroy(this.gameObject, delay);
-    }
+        Destroy(this.gameObject);
 
-    public void showIndicator()
-    {
-        if (this.indicators.Count > 0 
-            && this.activeIndicators.Count == 0
-            && this.showingIndicator)
-        {
-            foreach (Indicator indicator in this.indicators)
-            { 
-                Indicator temp = Instantiate(indicator);
-                initializeIndicator(temp);
-                this.activeIndicators.Add(temp);
-            }
-        }
-    }
-
-    public virtual void initializeIndicator(Indicator indicator)
-    {
-        indicator.setSkill(this);
-    }
-
-    public void hideIndicator()
-    {
-        foreach (Indicator indicator in this.activeIndicators)
-        {
-            if(indicator != null) indicator.DestroyIt();
-        }
-
-        this.activeIndicators.Clear();
-    }
-
-
-    public void showCastingAnimation()
-    {
-        if(this.castingAnimation != null
-        && this.activeCastingAnimation == null
-        && this.sender != null)
-        {
-            this.activeCastingAnimation = Instantiate(this.castingAnimation, this.sender.transform);
-            this.activeCastingAnimation.setCastingAnimation(this, this.sender);
-            Utilities.UnityUtils.SetAnimatorParameter(this.sender.animator, this.castingAnimationCharacterKey, true);
-        }
-    }
-
-    public void hideCastingAnimation()
-    {
-        if(this.activeCastingAnimation != null)
-        {
-            Destroy(this.activeCastingAnimation.gameObject);
-            this.activeCastingAnimation = null;
-            Utilities.UnityUtils.SetAnimatorParameter(this.sender.animator, this.castingAnimationCharacterKey, false);
-        }
     }
 
     #endregion
@@ -853,11 +568,11 @@ public class StandardSkill : MonoBehaviour
 
     public void updateTimeDistortion(float distortion) //Signal?
     {
-        this.timeDistortion = 1 + (distortion / 100);
+        this.timeDistortion = 1 + (distortion/100);
 
         if (this.animator != null) this.animator.speed = this.timeDistortion;
         if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
-        if (this.myRigidbody != null && this.isActive) this.myRigidbody.velocity = this.direction.normalized * this.speed * this.timeDistortion;
+        if (this.myRigidbody != null && this.isActive) this.myRigidbody.velocity = this.direction.normalized * this.speed * this.timeDistortion;    
     }
 
     #endregion

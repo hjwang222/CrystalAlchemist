@@ -16,51 +16,43 @@ public class Door : Interactable
 
     [FoldoutGroup("Tür-Attribute", expanded: false)]
     [EnumToggleButtons]
-    [SerializeField]
-    private DoorType doorType = DoorType.closed;
+    public DoorType doorType = DoorType.closed;
 
     private bool isOpen;
     private BoxCollider2D boxCollider;
 
     private void Start()
     {
-        base.Start();
+        init();
         this.boxCollider = GetComponent<BoxCollider2D>();
 
-        if (this.isOpen) Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", true);
+        if (this.isOpen) Utilities.SetParameter(this.animator, "isOpened", true);
     }
 
-    public override void doOnUpdate()
-    {
-        if (!this.isPlayerInRange && this.isOpen && this.doorType == DoorType.normal)
-        {
-            //Normale Tür fällt von alleine wieder zu
-            OpenCloseDoor(false, this.context);
-        }
-    }
-
-    public override void doSomethingOnSubmit()
+    private void Update()
     {
         if (this.doorType != DoorType.enemy && this.doorType != DoorType.button)
         {
-            if (!this.isOpen)           
+            if (this.isPlayerInRange && !this.isOpen && Input.GetButtonDown("Submit"))
             {
                  if (this.doorType == DoorType.normal)
                 {
                     //Normale Tür, einfach aufmachen
-
-                    string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-                    if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text))
+                    if (Utilities.canOpen(this.currencyNeeded, this.item, this.player, this.price))
                     {
                         OpenCloseDoor(true, this.context);
                     }
                 }
                 else
                 {
-                    string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-                    if (this.player != null) this.player.showDialogBox(text);
+                    if (this.player != null) this.player.showDialogBox(this.text);
                 }
-            }                       
+            }
+            else if (!this.isPlayerInRange && this.isOpen && this.doorType == DoorType.normal)
+            {
+                //Normale Tür fällt von alleine wieder zu
+                OpenCloseDoor(false, this.context);
+            }            
         }
         else if (this.doorType == DoorType.enemy)
         {
@@ -69,7 +61,7 @@ public class Door : Interactable
         else if (this.doorType == DoorType.button)
         {
             //Wenn Knopf gedrückt wurde, OpenDoor()
-        }        
+        }
     }
 
     private void OpenCloseDoor(bool isOpen)
@@ -80,7 +72,7 @@ public class Door : Interactable
     private void OpenCloseDoor(bool isOpen, GameObject contextClueChild)
     {
         this.isOpen = isOpen;
-        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", this.isOpen);
+        Utilities.SetParameter(this.animator, "isOpened", this.isOpen);
         this.boxCollider.enabled = !this.isOpen;
 
         if (contextClueChild != null)
@@ -91,6 +83,7 @@ public class Door : Interactable
             else contextClueChild.SetActive(false);
         }
 
-        Utilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
+        Utilities.playSoundEffect(this.audioSource, this.soundEffect);
+
     }
 }

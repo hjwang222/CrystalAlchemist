@@ -1,10 +1,11 @@
+﻿#if UNITY_EDITOR
+#if UNITY_5_6_OR_NEWER
+
 //-----------------------------------------------------------------------
 // <copyright file="AssemblyImportSettingsAutomation.cs" company="Sirenix IVS">
 // Copyright (c) Sirenix IVS. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-
-#if UNITY_EDITOR && UNITY_5_6_OR_NEWER
 
 namespace Sirenix.OdinInspector.Editor
 {
@@ -109,4 +110,5 @@ namespace Sirenix.OdinInspector.Editor
     }
 }
 
-#endif // UNITY_EDITOR && UNITY_5_6_OR_NEWER
+#endif // UNITY_5_6_OR_NEWER
+#endif

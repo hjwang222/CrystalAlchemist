@@ -75,7 +75,7 @@ public class TargetingSystem : MonoBehaviour
         {
             if (this.durationTime < Utilities.maxFloatInfinite)
             {
-                this.text.text = "LOCK ON\n" + Utilities.Format.setDurationToString(this.elapsed);
+                this.text.text = "LOCK ON\n" + Utilities.setDurationToString(this.elapsed);
             }
 
             if (elapsed <= 0)
@@ -179,7 +179,7 @@ public class TargetingSystem : MonoBehaviour
         {
             foreach (Character character in this.sortedTargets)
             {
-                if (Utilities.UnityUtils.hasChildWithTag(character, "LockOn") == null && this.showTargetIndicator)
+                if (Utilities.hasChildWithTag(character, "LockOn") == null && this.showTargetIndicator)
                 {
                     GameObject multipleLockOns = Instantiate(this.lockon, character.transform.position, Quaternion.identity, character.transform);
                     multipleLockOns.hideFlags = HideFlags.HideInHierarchy;
@@ -262,7 +262,7 @@ public class TargetingSystem : MonoBehaviour
         {
             if (this.currentTarget != null)
             {
-                if (Utilities.UnityUtils.hasChildWithTag(this.currentTarget, "LockOn") == null && this.showTargetIndicator)
+                if (Utilities.hasChildWithTag(this.currentTarget, "LockOn") == null && this.showTargetIndicator)
                 {
                     this.singleTargetWithMark = Instantiate(this.lockon, currentTarget.transform.position, Quaternion.identity, currentTarget.transform);
                     this.singleTargetWithMark.name = this.singleTargetWithMark.name + currentTarget.characterName + Time.deltaTime;
@@ -297,15 +297,15 @@ public class TargetingSystem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Utilities.Collisions.checkCollision(collision, this.skill) && collision.GetComponent<Character>() != null)
+        if (Utilities.checkCollision(collision, this.skill) && collision.GetComponent<Character>() != null)
             this.targetsInRange.Add(collision.GetComponent<Character>());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (Utilities.Collisions.checkCollision(collision, this.skill) && collision.GetComponent<Character>() != null)
+        if (Utilities.checkCollision(collision, this.skill) && collision.GetComponent<Character>() != null)
         {
-            GameObject lockOn = Utilities.UnityUtils.hasChildWithTag(collision.GetComponent<Character>(), "LockOn");
+            GameObject lockOn = Utilities.hasChildWithTag(collision.GetComponent<Character>(), "LockOn");
             if (this.singleTargetWithMark == lockOn) this.singleTargetWithMark = null;
             this.listOfTargetsWithMark.Remove(lockon);
             Destroy(lockOn);
