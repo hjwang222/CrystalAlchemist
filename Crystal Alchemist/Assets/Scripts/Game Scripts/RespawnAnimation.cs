@@ -11,13 +11,14 @@ public class RespawnAnimation : MonoBehaviour
     private SpriteRenderer characterSpriteBright;
 
     [SerializeField]
-    private List<Animator> animators;
+    private List<Animator> animators;    
 
     [SerializeField]
     private AudioSource audioSource;
 
     private Character character;
     private bool reverse;
+
 
     public void setCharacter(Character character)
     {
