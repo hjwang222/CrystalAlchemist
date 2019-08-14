@@ -330,8 +330,7 @@ public class Character : MonoBehaviour
 
     public void init()
     {
-        this.spawnPosition = this.transform.position;
-
+        if(!this.isPlayer) this.spawnPosition = this.transform.position;
         //getItems();    
 
         setComponents();
@@ -403,7 +402,7 @@ public class Character : MonoBehaviour
         this.spriteRenderer.enabled = true;
 
         this.shadowRenderer.enabled = true;
-        this.transform.position = this.spawnPosition;
+        if(!this.isPlayer) this.transform.position = this.spawnPosition;
 
         this.activeDeathAnimation = null;
 

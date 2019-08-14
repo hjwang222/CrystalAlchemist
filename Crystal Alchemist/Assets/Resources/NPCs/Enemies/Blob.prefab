@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 1797094622092973467}
   - component: {fileID: 2285685941926595743}
   - component: {fileID: 699278166353142346}
-  m_Layer: 11
+  m_Layer: 17
   m_Name: Aggro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,6 @@ MonoBehaviour:
   canCollectAll: 0
   canCollect: []
   hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
-  killSoundEffect: {fileID: 8300000, guid: a14b852168cb1df49873e07864a34b8f, type: 3}
   characterSpecies: 
   characterGender: 2
   characterType: 1
@@ -537,6 +536,7 @@ MonoBehaviour:
     duration: 4
     dauer: 4
     nextPhase: 
+    animation: 
     skill: {fileID: 2574719380784309251, guid: 65b268bfda2fa0e4bb41978a974d71d5, type: 3}
     cast: -1
     cD: -1
@@ -563,6 +563,7 @@ MonoBehaviour:
       duration: 2
       dauer: 4
       nextPhase: 
+      animation: 
       skill: {fileID: 0}
       cast: -1
       cD: -1

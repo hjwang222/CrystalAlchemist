@@ -107,8 +107,6 @@ public class Player : Character
             tempSkillSet.Add(Utilities.Skill.setSkill(this, skill));
         }
 
-        
-
         this.skillSet = tempSkillSet;
 
         this.isPlayer = true;
@@ -306,11 +304,11 @@ public class Player : Character
             RespawnAnimation respawnObject = Instantiate(this.respawnAnimation, playerPositionInNewScene, Quaternion.identity);
             respawnObject.setCharacter(this);
             yield return new WaitForSeconds(respawnObject.getAnimationLength());
+
+            yield return new WaitForSeconds(1f);
         }
 
-        yield return null;
-
-        this.transform.position = playerPositionInNewScene;
+        //this.transform.position = playerPositionInNewScene;
         this.enableSpriteRenderer(true);
         this.currentState = CharacterState.idle;
     }

@@ -55,7 +55,6 @@ public class RespawnSystem : MonoBehaviour
         if (character.respawnAnimation != null)
         {
             //spawn character after animation
-
             RespawnAnimation respawnObject = Instantiate(character.respawnAnimation, character.spawnPosition, Quaternion.identity);
             respawnObject.setCharacter(character);
         }

@@ -121,7 +121,6 @@ MonoBehaviour:
   canCollectAll: 0
   canCollect: []
   hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
-  killSoundEffect: {fileID: 8300000, guid: a14b852168cb1df49873e07864a34b8f, type: 3}
   characterSpecies: 
   characterGender: 2
   characterType: 1
@@ -184,6 +183,7 @@ MonoBehaviour:
       duration: 4
       dauer: 4
       nextPhase: 
+      animation: 
       skill: {fileID: 8367300629129016423, guid: ebbcacfde9010dc489df5125a980db67,
         type: 3}
       cast: 1
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 6405626492518989134}
   - component: {fileID: 6272208109676738659}
   - component: {fileID: 3866322097961817499}
-  m_Layer: 11
+  m_Layer: 17
   m_Name: Aggro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
