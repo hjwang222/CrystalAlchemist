@@ -177,16 +177,19 @@ public class Utilities : MonoBehaviour
 
         public static bool checkAffections(Character character, bool affectOther, bool affectSame, bool affectNeutral, Collider2D hittedCharacter)
         {
+            Character target = hittedCharacter.GetComponent<Character>();
+
             if (!hittedCharacter.isTrigger
-                && character.currentState != CharacterState.dead
-                && character.currentState != CharacterState.respawning
+                && target != null
+                && target.currentState != CharacterState.dead
+                && target.currentState != CharacterState.respawning
            && (
-               (affectOther && (character.CompareTag("Player") || character.CompareTag("NPC")) && hittedCharacter.CompareTag("Enemy"))
-            || (affectOther && (character.CompareTag("Enemy") && (hittedCharacter.CompareTag("Player") || hittedCharacter.CompareTag("NPC"))))
-            || (affectSame && (character.CompareTag("Player") == hittedCharacter.CompareTag("Player") || character.CompareTag("Player") == hittedCharacter.CompareTag("NPC")))
-            || (affectSame && (character.CompareTag("NPC") == hittedCharacter.CompareTag("NPC") || character.CompareTag("NPC") == hittedCharacter.CompareTag("Player")))
-            || (affectSame && (character.CompareTag("Enemy") == hittedCharacter.CompareTag("Enemy")))
-            || (affectNeutral && hittedCharacter.CompareTag("Object")))) return true;
+               (affectOther && (character.CompareTag("Player") || character.CompareTag("NPC")) && target.CompareTag("Enemy"))
+            || (affectOther && (character.CompareTag("Enemy") && (target.CompareTag("Player") || target.CompareTag("NPC"))))
+            || (affectSame && (character.CompareTag("Player") == target.CompareTag("Player") || character.CompareTag("Player") == target.CompareTag("NPC")))
+            || (affectSame && (character.CompareTag("NPC") == target.CompareTag("NPC") || character.CompareTag("NPC") == target.CompareTag("Player")))
+            || (affectSame && (character.CompareTag("Enemy") == target.CompareTag("Enemy")))
+            || (affectNeutral && target.CompareTag("Object")))) return true;
 
             return false;
         }
