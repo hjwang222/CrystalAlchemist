@@ -104,7 +104,7 @@ Transform:
   m_LocalPosition: {x: -4.16, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 869773473104931892}
+  - {fileID: 869773473104933842}
   - {fileID: 4301822135087756943}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -137,6 +137,8 @@ MonoBehaviour:
   showCastBarForEnemies: 1
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
   cast: 0
   keepHoldTimer: 0
   delay: 5
@@ -446,11 +448,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6850837334322202214}
     m_Modifications:
-    - target: {fileID: 1324514916148282493, guid: c2fcea4a156b7e04197a6fecb1d6366b,
-        type: 3}
-      propertyPath: m_Name
-      value: Shadow
-      objectReference: {fileID: 0}
     - target: {fileID: 2236758614029836603, guid: c2fcea4a156b7e04197a6fecb1d6366b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -511,9 +508,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 1324514916148282493, guid: c2fcea4a156b7e04197a6fecb1d6366b,
+        type: 3}
+      propertyPath: m_Name
+      value: Shadow
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2fcea4a156b7e04197a6fecb1d6366b, type: 3}
---- !u!4 &869773473104931892 stripped
+--- !u!4 &869773473104933842 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2236758614029836603, guid: c2fcea4a156b7e04197a6fecb1d6366b,
     type: 3}

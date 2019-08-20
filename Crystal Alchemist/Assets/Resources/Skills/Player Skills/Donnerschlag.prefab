@@ -277,7 +277,7 @@ Transform:
   - {fileID: 6625934165072255100}
   - {fileID: 1065962740209003586}
   - {fileID: 6625934164191362223}
-  - {fileID: 5335493528809112756}
+  - {fileID: 5335493528809114252}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -413,7 +413,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1177715583
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300006, guid: 1c1e5cee8cbc4b54eb913dfa5f9d9ee3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.6}
@@ -510,6 +510,8 @@ MonoBehaviour:
   showCastBarForEnemies: 1
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
   cast: 0
   keepHoldTimer: 0
   delay: 9999
@@ -797,21 +799,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 619960818180383821}
     m_Modifications:
-    - target: {fileID: 822386160285104016, guid: 7125f1409d0689b4d80b6ab7179979c8,
-        type: 3}
-      propertyPath: m_Name
-      value: Flash
-      objectReference: {fileID: 0}
-    - target: {fileID: 822386160285104016, guid: 7125f1409d0689b4d80b6ab7179979c8,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 822386160285104016, guid: 7125f1409d0689b4d80b6ab7179979c8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 822386160285104020, guid: 7125f1409d0689b4d80b6ab7179979c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -917,6 +904,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 822386160285104016, guid: 7125f1409d0689b4d80b6ab7179979c8,
+        type: 3}
+      propertyPath: m_Name
+      value: Flash
+      objectReference: {fileID: 0}
+    - target: {fileID: 822386160285104016, guid: 7125f1409d0689b4d80b6ab7179979c8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 822386160285104016, guid: 7125f1409d0689b4d80b6ab7179979c8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8032729451236678571, guid: 7125f1409d0689b4d80b6ab7179979c8,
         type: 3}
       propertyPath: m_Layer
@@ -924,7 +926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7125f1409d0689b4d80b6ab7179979c8, type: 3}
---- !u!224 &5335493528809112756 stripped
+--- !u!224 &5335493528809114252 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 822386160285104020, guid: 7125f1409d0689b4d80b6ab7179979c8,
     type: 3}
