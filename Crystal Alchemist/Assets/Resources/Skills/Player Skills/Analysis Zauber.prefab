@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7078582995585776847}
   - component: {fileID: 8591703498699444151}
   - component: {fileID: 6096689982342564308}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Analysis Zauber
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -156,6 +156,8 @@ MonoBehaviour:
   showCastBarForEnemies: 1
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
   cast: 2
   keepHoldTimer: 0
   delay: 0
@@ -232,3 +234,4 @@ MonoBehaviour:
   supportType: 1
   useCollider: 0
   targetColor: {r: 0, g: 0, b: 0, a: 0}
+  showAnimation: 0

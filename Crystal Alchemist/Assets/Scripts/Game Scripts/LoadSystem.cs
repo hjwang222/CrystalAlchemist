@@ -19,7 +19,7 @@ public class LoadSystem : MonoBehaviour
 
             player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
 
-            player.setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]));
+            player.GetComponent<PlayerTeleport>().setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]));
 
             if (data.inventory.Count > 0)
             {

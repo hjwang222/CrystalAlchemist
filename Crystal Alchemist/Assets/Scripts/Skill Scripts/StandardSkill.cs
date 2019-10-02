@@ -424,8 +424,8 @@ public class StandardSkill : MonoBehaviour
     public AudioSource audioSource;
     [HideInInspector]
     public bool dontPlayAudio = false;
-
-
+    [HideInInspector]
+    public bool basicRequirementsExists = true;
     [HideInInspector]
     public float timeDistortion = 1;
     [HideInInspector]

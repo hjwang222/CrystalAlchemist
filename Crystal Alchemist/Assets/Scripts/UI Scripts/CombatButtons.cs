@@ -116,11 +116,11 @@ public class CombatButtons : MonoBehaviour
 
     private void FixedUpdate()
     {
-        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton, this.ammoA, this.skillIconAButtonTrans, this.player.isButtonUsable("A-Button"));
-        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB, this.skillIconBButtonTrans, this.player.isButtonUsable("B-Button"));
-        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX, this.skillIconXButtonTrans, this.player.isButtonUsable("X-Button"));
-        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY, this.skillIconYButtonTrans, this.player.isButtonUsable("Y-Button"));
-        updateButton(this.skillIconRBButton, this.iconRBButton, this.cooldownRB, this.player.RBButton, this.ammoRB, this.skillIconRBButtonTrans, this.player.isButtonUsable("RB-Button"));
+        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton, this.ammoA, this.skillIconAButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("A-Button"));
+        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB, this.skillIconBButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("B-Button"));
+        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX, this.skillIconXButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("X-Button"));
+        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY, this.skillIconYButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("Y-Button"));
+        updateButton(this.skillIconRBButton, this.iconRBButton, this.cooldownRB, this.player.RBButton, this.ammoRB, this.skillIconRBButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("RB-Button"));
     }
 
     private void setFontSize(TextMeshProUGUI textfield)
@@ -149,7 +149,8 @@ public class CombatButtons : MonoBehaviour
                 this.player.currentState == CharacterState.respawning ||
                 (player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite)
                 || Utilities.Skill.getAmountOfSameSkills(skill, player.activeSkills, player.activePets) >= skill.maxAmounts
-                || cooldownLeft == Utilities.maxFloatInfinite)
+                || cooldownLeft == Utilities.maxFloatInfinite
+                || !skill.basicRequirementsExists)
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
                 string cooldownText = "X";

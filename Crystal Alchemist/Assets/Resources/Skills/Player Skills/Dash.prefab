@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6024384182685389377}
   - component: {fileID: 6162400572210519683}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Dash
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -60,6 +60,8 @@ MonoBehaviour:
   showCastBarForEnemies: 1
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -141,7 +143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5590416017817286310}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: collider
   m_TagString: Attack
   m_Icon: {fileID: 0}

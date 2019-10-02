@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7736697032808662322}
   - component: {fileID: 8956259282679186702}
   - component: {fileID: -2803908752990074219}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Use Antidot
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -159,6 +159,8 @@ MonoBehaviour:
   showCastBarForEnemies: 1
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -234,6 +236,7 @@ MonoBehaviour:
   supportType: 2
   useCollider: 0
   targetColor: {r: 0.8442608, g: 1, b: 0, a: 1}
+  showAnimation: 0
 --- !u!95 &8956259282679186702
 Animator:
   serializedVersion: 3
@@ -309,6 +312,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6771622126804119593}
     m_Modifications:
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -363,11 +376,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

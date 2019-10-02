@@ -11073,7 +11073,7 @@ GameObject:
   - component: {fileID: 269025761}
   - component: {fileID: 269025760}
   - component: {fileID: 269025759}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Cliff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11223,7 +11223,7 @@ GameObject:
   - component: {fileID: 548178330}
   - component: {fileID: 548178329}
   - component: {fileID: 548178328}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Stairs (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11496,7 +11496,7 @@ GameObject:
   - component: {fileID: 1030661961}
   - component: {fileID: 1030661959}
   - component: {fileID: 1030661960}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11727,11 +11727,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blob
       objectReference: {fileID: 0}
-    - target: {fileID: 4482648712296496520, guid: 1d6332d8d9d7c9c438540f3999e42183,
-        type: 3}
-      propertyPath: startSpeed
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480998, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11787,6 +11782,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4482648712296496520, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: startSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_Enabled
@@ -11795,26 +11795,6 @@ PrefabInstance:
     - target: {fileID: 2246077131478481017, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: attackRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4482648712296496523, guid: 1d6332d8d9d7c9c438540f3999e42183,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7788126183368172930, guid: 1d6332d8d9d7c9c438540f3999e42183,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 695891193754114292, guid: 1d6332d8d9d7c9c438540f3999e42183,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 695891193754114292, guid: 1d6332d8d9d7c9c438540f3999e42183,
-        type: 3}
-      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4482648712296496522, guid: 1d6332d8d9d7c9c438540f3999e42183,
@@ -12158,6 +12138,26 @@ PrefabInstance:
       propertyPath: phases.Array.data[0].actions.Array.data[1].castGroup
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7788126183368172930, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 695891193754114292, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 695891193754114292, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482648712296496523, guid: 1d6332d8d9d7c9c438540f3999e42183,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d6332d8d9d7c9c438540f3999e42183, type: 3}
 --- !u!1001 &1894830954
@@ -12240,7 +12240,7 @@ GameObject:
   - component: {fileID: 1901792593}
   - component: {fileID: 1901792594}
   - component: {fileID: 1901792592}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Stairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}

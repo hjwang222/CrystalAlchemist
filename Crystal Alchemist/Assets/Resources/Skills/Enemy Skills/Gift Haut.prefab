@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 224756837918827972}
   - component: {fileID: 224756837918827970}
   - component: {fileID: 2574719380784309251}
-  m_Layer: 20
+  m_Layer: 12
   m_Name: Gift Haut
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -72,10 +72,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Gift Haut
   skillNameEnglish: 
+  skillDescription: 
+  skillDescriptionEnglish: 
   category: 0
   animationTriggerName: 
   orderIndex: 10
-  skillDescription: 
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -85,6 +86,8 @@ MonoBehaviour:
   showCastBarForEnemies: 1
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
   cast: 0
   keepHoldTimer: 0
   delay: 0

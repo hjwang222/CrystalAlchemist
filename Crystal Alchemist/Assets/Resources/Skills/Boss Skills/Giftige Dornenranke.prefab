@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3332871584301595858}
   - component: {fileID: 8768238948503651726}
   - component: {fileID: 7441476451166585983}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Giftige Dornenranke
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -50,10 +50,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Giftige Dornenranke
   skillNameEnglish: Poison Thornes
+  skillDescription: 
+  skillDescriptionEnglish: 
   category: 1
   animationTriggerName: 
   orderIndex: 0
-  skillDescription: 
   spriteRenderer: {fileID: 1608680952786485129}
   myRigidbody: {fileID: 7441476451166585983}
   animator: {fileID: 3332871584301595858}
@@ -63,12 +64,15 @@ MonoBehaviour:
   showCastBarForEnemies: 1
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
   cast: 0
   keepHoldTimer: 0
   delay: 0
   duration: 1
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
   cooldown: 1
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -92,6 +96,7 @@ MonoBehaviour:
   colliderHeightOffset: 0
   speed: 0
   rotateIt: 1
+  rotateOnUpdate: 0
   keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
@@ -108,9 +113,9 @@ MonoBehaviour:
   multiHitDelay: 0
   showRange: 0
   affectSelf: 0
-  affectPlayers: 1
-  affectEnemies: 0
-  affectObjects: 0
+  affectOther: 0
+  affectSame: 0
+  affectNeutral: 0
   affectSkills: 0
   ignoreInvincibility: 0
   stateType: 0

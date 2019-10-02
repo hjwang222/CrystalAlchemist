@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4301822135087756943}
   - component: {fileID: 5259047670313868482}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 5261843100729261818}
   - component: {fileID: 2227704814518306726}
   - component: {fileID: 515671639}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Bombe
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ Transform:
   m_LocalPosition: {x: -4.16, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 869773473104933842}
+  - {fileID: 1376023711239439177}
   - {fileID: 4301822135087756943}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -448,6 +448,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6850837334322202214}
     m_Modifications:
+    - target: {fileID: 1324514916148282493, guid: c2fcea4a156b7e04197a6fecb1d6366b,
+        type: 3}
+      propertyPath: m_Name
+      value: Shadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1324514916148282493, guid: c2fcea4a156b7e04197a6fecb1d6366b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2236758614029836603, guid: c2fcea4a156b7e04197a6fecb1d6366b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -508,14 +518,9 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 1324514916148282493, guid: c2fcea4a156b7e04197a6fecb1d6366b,
-        type: 3}
-      propertyPath: m_Name
-      value: Shadow
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2fcea4a156b7e04197a6fecb1d6366b, type: 3}
---- !u!4 &869773473104933842 stripped
+--- !u!4 &1376023711239439177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2236758614029836603, guid: c2fcea4a156b7e04197a6fecb1d6366b,
     type: 3}

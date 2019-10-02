@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1301488769302884366}
   - component: {fileID: 7794983885249979872}
   - component: {fileID: 5863874315535871781}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Busch
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -100,10 +100,11 @@ MonoBehaviour:
   canCollectAll: 0
   canCollect: []
   hitSoundEffect: {fileID: 0}
-  killSoundEffect: {fileID: 8300000, guid: f3e28be844c0e4d4797d1de8e8394680, type: 3}
   characterSpecies: Vegetation
   characterGender: 2
   characterType: 3
+  aggro: {fileID: 0}
+  speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
   activeCastbar: {fileID: 0}
@@ -126,6 +127,8 @@ MonoBehaviour:
   isPlayer: 0
   inventory: []
   activePets: []
+  steps: 0
+  isOnIce: 0
 --- !u!50 &7794983885249979872
 Rigidbody2D:
   serializedVersion: 4

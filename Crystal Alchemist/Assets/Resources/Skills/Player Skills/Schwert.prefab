@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5387825760302318934}
   - component: {fileID: 6939719257136123582}
   - component: {fileID: 2211265516280113145}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Schwert
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -63,6 +63,8 @@ MonoBehaviour:
   showCastBarForEnemies: 1
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
   cast: 0
   keepHoldTimer: 0
   delay: 0
@@ -237,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5590416017817286310}
   - component: {fileID: 8355835792145004362}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: collider
   m_TagString: Attack
   m_Icon: {fileID: 0}

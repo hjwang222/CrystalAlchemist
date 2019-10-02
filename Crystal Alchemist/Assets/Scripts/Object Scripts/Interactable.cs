@@ -17,8 +17,6 @@ public class Interactable : MonoBehaviour
     [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]
     public GameObject contextClueChild;
 
-
-
     [FoldoutGroup("Dialog", expanded: false)]
     [Tooltip("Anzeige-Text für die Dialog-Box")]
     [TextAreaAttribute]

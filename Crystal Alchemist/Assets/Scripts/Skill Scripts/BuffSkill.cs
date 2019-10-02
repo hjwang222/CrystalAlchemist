@@ -14,8 +14,7 @@ public enum SupportType
 public class BuffSkill : StandardSkill
 {
     [FoldoutGroup("Heal and Dispell", expanded: false)]
-    [SerializeField]
-    private SupportType supportType = SupportType.none;
+    public SupportType supportType = SupportType.none;
 
     [FoldoutGroup("Heal and Dispell", expanded: false)]
     [SerializeField]
@@ -33,6 +32,9 @@ public class BuffSkill : StandardSkill
     #region Overrides
     public override void init()
     {
+        Player player = this.sender.GetComponent<Player>();
+        if (this.supportType == SupportType.teleport && player != null && !player.GetComponent<PlayerTeleport>().getLastTeleport()) this.basicRequirementsExists = false;
+
         base.init();
         if (!this.useCollider && this.affectSelf) useSkill(this.sender); 
     }
@@ -99,9 +101,9 @@ public class BuffSkill : StandardSkill
         if (character != null
             && character.isPlayer
             && player != null 
-            && player.getLastTeleport(out scene, out position))
+            && player.GetComponent<PlayerTeleport>().getLastTeleport(out scene, out position))
         {
-            character.GetComponent<Player>().teleportPlayer(scene, position, this.showAnimation);            
+            character.GetComponent<Player>().GetComponent<PlayerTeleport>().teleportPlayer(scene, position, this.showAnimation);            
         }
     }
 }

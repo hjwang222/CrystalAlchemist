@@ -47,7 +47,7 @@ public class SceneTransition : MonoBehaviour
             if (player != null)
             {
                 this.vcamSignal.Raise();
-                player.teleportPlayer(this.targetScene, this.playerPositionInNewScene, this.transitionDuration.getValue(), this.showAnimation);
+                player.GetComponent<PlayerTeleport>().teleportPlayer(this.targetScene, this.playerPositionInNewScene, this.transitionDuration.getValue(), this.showAnimation);
                // StartCoroutine(LoadScene(player));
             }
         }
