@@ -18,7 +18,7 @@ public class ShopItem : Interactable
 
     private int index = 0;
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
 

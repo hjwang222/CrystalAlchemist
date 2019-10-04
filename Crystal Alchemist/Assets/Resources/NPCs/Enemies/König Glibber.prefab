@@ -301,8 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: "K\xF6nig Glibber"
-  englischCharacterName: King Goo
+  stats: {fileID: 11400000, guid: 071c75d9e981e5748aaddf91a57b8143, type: 2}
   myRigidbody: {fileID: 3945848509854940437}
   animator: {fileID: 3020177092142690266}
   spriteRenderer: {fileID: 3020177092142690265}
@@ -315,40 +314,6 @@ MonoBehaviour:
   activeSkillParent: {fileID: 3020177091833525065}
   activeStatusEffectParent: {fileID: 8464107762506563443}
   skillSetParent: {fileID: 4508596630270412994}
-  startLife: 25
-  startMana: 1
-  startSpeed: 30
-  startSpellSpeed: 100
-  immunityToStatusEffects: []
-  maxLife: 25
-  maxMana: 1
-  respawnTime: 60
-  respawnAnimation: {fileID: 1140035694535706356, guid: 815950c2030167244ab889505e154cc8,
-    type: 3}
-  deathAnimation: {fileID: 8912312725720200054, guid: 97eb044421b412d479b7008552d1ea56,
-    type: 3}
-  lifeRegeneration: 0
-  lifeRegenerationInterval: 0
-  manaRegeneration: 0
-  manaRegenerationInterval: 0
-  damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
-    type: 3}
-  antiKnockback: 0
-  cannotBeHitTime: 0.3
-  isTouchable: 1
-  showHitcolor: 1
-  hitColor: {r: 0.6313726, g: 0, b: 0, a: 1}
-  lootTable:
-  - item: {fileID: 3692160304636444062, guid: 0aea2ca1a4e017d4d9f7b1ccd427e54a, type: 3}
-    dropRate: 100
-    amount: 1
-  multiLoot: 0
-  canCollectAll: 0
-  canCollect: []
-  hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
-  characterSpecies: 
-  characterGender: 2
-  characterType: 1
   aggro: {fileID: 6778252411727736238}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}

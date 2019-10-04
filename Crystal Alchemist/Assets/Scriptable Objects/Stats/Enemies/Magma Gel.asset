@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed50160a1f51fb4b89bf02e00ece70d, type: 3}
+  m_Name: Magma Gel
+  m_EditorClassIdentifier: 
+  characterName: Magma Gel
+  englischCharacterName: Magma Gel
+  startLife: 3
+  startMana: 1
+  startSpeed: 60
+  startSpellSpeed: 100
+  immunityToStatusEffects:
+  - {fileID: -2323953556458181828, guid: e420e9509f9819f4188748abbdda79ee, type: 3}
+  maxLife: 3
+  maxMana: 1
+  respawnTime: 30
+  respawnAnimation: {fileID: 1140035694535706356, guid: 815950c2030167244ab889505e154cc8,
+    type: 3}
+  deathAnimation: {fileID: 8912312725720200054, guid: 97eb044421b412d479b7008552d1ea56,
+    type: 3}
+  lifeRegeneration: 0
+  lifeRegenerationInterval: 0
+  manaRegeneration: 0
+  manaRegenerationInterval: 0
+  damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
+    type: 3}
+  antiKnockback: 0
+  cannotBeHitTime: 0.3
+  showHitcolor: 1
+  hitColor: {r: 0.6313726, g: 0, b: 0, a: 1}
+  lootTable:
+  - item: {fileID: 8069356869073092967, guid: 6b191b04f9a7dbc49920d197f5070449, type: 3}
+    dropRate: 20
+    amount: 1
+  - item: {fileID: 7715491483693814758, guid: ff61f4065ad8e734d83ed008fddeb967, type: 3}
+    dropRate: 10
+    amount: 1
+  - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
+    dropRate: 40
+    amount: 1
+  multiLoot: 0
+  canCollectAll: 0
+  canCollect: []
+  hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
+  characterSpecies: Gel
+  characterGender: 2
+  characterType: 1

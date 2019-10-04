@@ -406,8 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Gift Blob
-  englischCharacterName: Poison Blob
+  stats: {fileID: 11400000, guid: 4296eda28d32ab54491ee3379dc99977, type: 2}
   myRigidbody: {fileID: 2246077131478480996}
   animator: {fileID: 929082027}
   spriteRenderer: {fileID: 929082024}
@@ -420,46 +419,6 @@ MonoBehaviour:
   activeSkillParent: {fileID: 1158493752}
   activeStatusEffectParent: {fileID: 6674156776865872386}
   skillSetParent: {fileID: 1691123302925716915}
-  startLife: 3
-  startMana: 1
-  startSpeed: 40
-  startSpellSpeed: 100
-  immunityToStatusEffects: []
-  maxLife: 3
-  maxMana: 1
-  respawnTime: 10
-  respawnAnimation: {fileID: 1140035694535706356, guid: 815950c2030167244ab889505e154cc8,
-    type: 3}
-  deathAnimation: {fileID: 8912312725720200054, guid: 97eb044421b412d479b7008552d1ea56,
-    type: 3}
-  lifeRegeneration: 0
-  lifeRegenerationInterval: 0
-  manaRegeneration: 0
-  manaRegenerationInterval: 0
-  damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
-    type: 3}
-  antiKnockback: 0
-  cannotBeHitTime: 0.3
-  isTouchable: 1
-  showHitcolor: 1
-  hitColor: {r: 0.6313726, g: 0, b: 0, a: 1}
-  lootTable:
-  - item: {fileID: 8069356869073092967, guid: 6b191b04f9a7dbc49920d197f5070449, type: 3}
-    dropRate: 20
-    amount: 1
-  - item: {fileID: 7715491483693814758, guid: ff61f4065ad8e734d83ed008fddeb967, type: 3}
-    dropRate: 10
-    amount: 1
-  - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
-    dropRate: 40
-    amount: 1
-  multiLoot: 0
-  canCollectAll: 0
-  canCollect: []
-  hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
-  characterSpecies: 
-  characterGender: 2
-  characterType: 1
   aggro: {fileID: 2285685941926595743}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}

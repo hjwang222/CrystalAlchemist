@@ -113,7 +113,7 @@ public class AIAggroSystem : MonoBehaviour
             if (currentAggro > aggro)
             {
                 aggro = currentAggro;
-                target = Utilities.Format.getLanguageDialogText(character.characterName, character.englischCharacterName);
+                target = Utilities.Format.getLanguageDialogText(character.stats.characterName, character.stats.englischCharacterName);
             }
         }
     }

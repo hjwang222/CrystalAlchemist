@@ -20,12 +20,14 @@ public class Door : Interactable
     private DoorType doorType = DoorType.closed;
 
     private bool isOpen;
+
+    [FoldoutGroup("Tür-Attribute", expanded: false)]
+    [SerializeField]
     private BoxCollider2D boxCollider;
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
-        this.boxCollider = GetComponent<BoxCollider2D>();
 
         if (this.isOpen) Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", true);
     }

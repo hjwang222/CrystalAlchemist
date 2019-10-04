@@ -55,7 +55,7 @@ public class AnalyseUI : MonoBehaviour
             //set UI to Character Info
             this.character = this.target.GetComponent<Character>();
 
-            if (this.character.characterType != CharacterType.Object)
+            if (this.character.stats.characterType != CharacterType.Object)
             {
                 //show Basic Information for Enemies
                 this.enemyInfo.SetActive(true);
@@ -80,7 +80,7 @@ public class AnalyseUI : MonoBehaviour
     {
         if (this.character != null)
         {
-            if (this.character.characterType != CharacterType.Object)
+            if (this.character.stats.characterType != CharacterType.Object)
             {
                 showEnemyInfo();
                 updateStatusEffects();
@@ -131,7 +131,7 @@ public class AnalyseUI : MonoBehaviour
     {
         this.ImageitemPreview.gameObject.SetActive(false);
 
-        this.TMPcharacterName.text = Utilities.Format.getLanguageDialogText(this.character.characterName, this.character.englischCharacterName);
+        this.TMPcharacterName.text = Utilities.Format.getLanguageDialogText(this.character.stats.characterName, this.character.stats.englischCharacterName);
         this.TMPlifeAmount.text = "x" + (this.character.life * 4);
 
         if (this.character.items.Count > 0 && this.character.currentState != CharacterState.dead)

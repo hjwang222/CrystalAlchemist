@@ -164,7 +164,7 @@ public class TargetingSystem : MonoBehaviour
         {
             this.singleTargetWithMark.transform.SetParent(this.currentTarget.transform);
             this.singleTargetWithMark.transform.position = this.currentTarget.transform.position;
-            this.singleTargetWithMark.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = this.currentTarget.characterName;
+            this.singleTargetWithMark.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = this.currentTarget.stats.characterName;
         }
     }
 
@@ -183,8 +183,8 @@ public class TargetingSystem : MonoBehaviour
                 {
                     GameObject multipleLockOns = Instantiate(this.lockon, character.transform.position, Quaternion.identity, character.transform);
                     multipleLockOns.hideFlags = HideFlags.HideInHierarchy;
-                    multipleLockOns.name = multipleLockOns.name + character.characterName + Time.deltaTime;
-                    multipleLockOns.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = character.characterName;
+                    multipleLockOns.name = multipleLockOns.name + character.stats.characterName + Time.deltaTime;
+                    multipleLockOns.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = character.stats.characterName;
                     this.listOfTargetsWithMark.Add(multipleLockOns);
                 }
             }
@@ -265,7 +265,7 @@ public class TargetingSystem : MonoBehaviour
                 if (Utilities.UnityUtils.hasChildWithTag(this.currentTarget, "LockOn") == null && this.showTargetIndicator)
                 {
                     this.singleTargetWithMark = Instantiate(this.lockon, currentTarget.transform.position, Quaternion.identity, currentTarget.transform);
-                    this.singleTargetWithMark.name = this.singleTargetWithMark.name + currentTarget.characterName + Time.deltaTime;
+                    this.singleTargetWithMark.name = this.singleTargetWithMark.name + currentTarget.stats.characterName + Time.deltaTime;
                     this.singleTargetWithMark.hideFlags = HideFlags.HideInHierarchy;
                 }
             }

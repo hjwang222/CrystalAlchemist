@@ -7,7 +7,7 @@ using System;
 public class AI : Character
 {
     [Required]
-    [BoxGroup("Pflichtfelder")]
+    [BoxGroup("Easy Access")]
     public GameObject dialogPosition;
 
     [BoxGroup("AI")]

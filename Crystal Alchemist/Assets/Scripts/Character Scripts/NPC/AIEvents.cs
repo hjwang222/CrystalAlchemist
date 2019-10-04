@@ -290,8 +290,8 @@ public class AIEvents : MonoBehaviour
     {
         checkStart();
 
-        if((this.enemy.characterType == CharacterType.Enemy && this.AIstarted)
-            || this.enemy.characterType == CharacterType.NPC) handleDialogs();
+        if((this.enemy.stats.characterType == CharacterType.Enemy && this.AIstarted)
+            || this.enemy.stats.characterType == CharacterType.NPC) handleDialogs();
 
         if (this.AIstarted || this.startImmediately)
         {
@@ -529,7 +529,7 @@ public class AIEvents : MonoBehaviour
                     if (!elem.requireAll) return true;
                     else success++;
                 }
-                else if (triggerElem.type == AIEventType.life && this.enemy.life <= (this.enemy.maxLife * triggerElem.life / 100))
+                else if (triggerElem.type == AIEventType.life && this.enemy.life <= (this.enemy.stats.maxLife * triggerElem.life / 100))
                 {
                     if (!elem.requireAll) return true;
                     else success++;

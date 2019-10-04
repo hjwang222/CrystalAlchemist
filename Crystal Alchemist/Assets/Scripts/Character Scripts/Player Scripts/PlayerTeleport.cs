@@ -46,9 +46,9 @@ public class PlayerTeleport : MonoBehaviour
         this.player.currentState = CharacterState.respawning;
         this.gameObject.GetComponent<PlayerAttacks>().deactivateAllSkills();
 
-        if (showAnimation && this.player.respawnAnimation != null)
+        if (showAnimation && this.player.stats.respawnAnimation != null)
         {
-            RespawnAnimation respawnObject = Instantiate(this.player.respawnAnimation, this.transform.position, Quaternion.identity);
+            RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, this.transform.position, Quaternion.identity);
             respawnObject.setCharacter(this.player, true);
             yield return new WaitForSeconds(respawnObject.getAnimationLength());
             this.player.enableSpriteRenderer(false);
@@ -81,11 +81,11 @@ public class PlayerTeleport : MonoBehaviour
     {
         this.transform.position = playerPositionInNewScene;
 
-        if (showAnimation && this.player.respawnAnimation != null)
+        if (showAnimation && this.player.stats.respawnAnimation != null)
         {
             yield return new WaitForSeconds(2f);
 
-            RespawnAnimation respawnObject = Instantiate(this.player.respawnAnimation, playerPositionInNewScene, Quaternion.identity);
+            RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, playerPositionInNewScene, Quaternion.identity);
             respawnObject.setCharacter(this.player);
             yield return new WaitForSeconds(respawnObject.getAnimationLength());
 

@@ -465,8 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Blob
-  englischCharacterName: Blob
+  stats: {fileID: 11400000, guid: 044d5a2f62542b141ab2f44c3e80795b, type: 2}
   myRigidbody: {fileID: 7518508113067193758}
   animator: {fileID: 3591206468238266611}
   spriteRenderer: {fileID: 8609950150137522002}
@@ -477,37 +476,6 @@ MonoBehaviour:
   activeSkillParent: {fileID: 8609950149900843970}
   activeStatusEffectParent: {fileID: 3162633258840045560}
   skillSetParent: {fileID: 6918834853960073289}
-  startLife: 3
-  startMana: 1
-  startSpeed: 100
-  startSpellSpeed: 100
-  immunityToStatusEffects:
-  - {fileID: -4460325451948071493, guid: 12a1cb7dbe7ad25478c6b067a17a4884, type: 3}
-  - {fileID: -2323953556458181828, guid: e420e9509f9819f4188748abbdda79ee, type: 3}
-  maxLife: 3
-  maxMana: 1
-  respawnTime: 0
-  respawnAnimation: {fileID: 0}
-  deathAnimation: {fileID: 0}
-  lifeRegeneration: 0
-  lifeRegenerationInterval: 0
-  manaRegeneration: 0
-  manaRegenerationInterval: 0
-  damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
-    type: 3}
-  antiKnockback: 0
-  cannotBeHitTime: 0.3
-  isTouchable: 1
-  showHitcolor: 1
-  hitColor: {r: 0, g: 1, b: 0.89335155, a: 1}
-  lootTable: []
-  multiLoot: 0
-  canCollectAll: 0
-  canCollect: []
-  hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
-  characterSpecies: 
-  characterGender: 1
-  characterType: 2
   aggro: {fileID: 4937573517194286390}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}

@@ -73,8 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Titanias Turm
-  englischCharacterName: Titanias Tower
+  stats: {fileID: 11400000, guid: 2ecf4e93db9bd0a43a3dda9972716fe8, type: 2}
   myRigidbody: {fileID: 2438936824352443031}
   animator: {fileID: 4536096100035205208}
   spriteRenderer: {fileID: 4536096100035205211}
@@ -87,43 +86,6 @@ MonoBehaviour:
   activeSkillParent: {fileID: 4536096100877042891}
   activeStatusEffectParent: {fileID: 7092093423516748017}
   skillSetParent: {fileID: 2993592967878901568}
-  startLife: 20
-  startMana: 1
-  startSpeed: 0
-  startSpellSpeed: 100
-  immunityToStatusEffects:
-  - {fileID: 2841143901546363653, guid: 49f1ebd00c6ca964c8e6d197f4187346, type: 3}
-  - {fileID: -2323953556458181828, guid: e420e9509f9819f4188748abbdda79ee, type: 3}
-  - {fileID: -4460325451948071493, guid: 12a1cb7dbe7ad25478c6b067a17a4884, type: 3}
-  maxLife: 20
-  maxMana: 1
-  respawnTime: 60
-  respawnAnimation: {fileID: 1140035694535706356, guid: 815950c2030167244ab889505e154cc8,
-    type: 3}
-  deathAnimation: {fileID: 8912312725720200054, guid: 97eb044421b412d479b7008552d1ea56,
-    type: 3}
-  lifeRegeneration: 0
-  lifeRegenerationInterval: 0
-  manaRegeneration: 0
-  manaRegenerationInterval: 0
-  damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
-    type: 3}
-  antiKnockback: -99
-  cannotBeHitTime: 0.3
-  isTouchable: 1
-  showHitcolor: 1
-  hitColor: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}
-  lootTable:
-  - item: {fileID: 7715491483693814758, guid: ff61f4065ad8e734d83ed008fddeb967, type: 3}
-    dropRate: 100
-    amount: 1
-  multiLoot: 0
-  canCollectAll: 0
-  canCollect: []
-  hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
-  characterSpecies: 
-  characterGender: 2
-  characterType: 1
   aggro: {fileID: 6272208109676738659}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}

@@ -33,7 +33,7 @@ public class SummonSkill : StandardSkill
 
     public string getPetName()
     {
-        return this.summon.characterName;
+        return this.summon.stats.characterName;
     }
 
     private void summoning()

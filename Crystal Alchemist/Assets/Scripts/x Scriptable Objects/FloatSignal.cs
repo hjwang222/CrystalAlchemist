@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Signals/FloatSignal")]
 public class FloatSignal : ScriptableObject
 {
     public List<FloatSignalListener> listeners = new List<FloatSignalListener>();

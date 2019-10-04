@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50edb187effa6214081b297a24971a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: b0a76af33d38bc4429c115714bd4c66b, type: 2}
   characterName: Busch
   englischCharacterName: 
   myRigidbody: {fileID: 7794983885249979872}
@@ -89,13 +90,12 @@ MonoBehaviour:
   damageNumber: {fileID: 0}
   antiKnockback: 0
   cannotBeHitTime: 0.3
-  isTouchable: 1
   showHitcolor: 1
   hitColor: {r: 1, g: 1, b: 1, a: 1}
   lootTable:
   - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
     dropRate: 25
-    amount: 0
+    amount: 1
   multiLoot: 0
   canCollectAll: 0
   canCollect: []

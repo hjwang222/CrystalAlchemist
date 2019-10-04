@@ -37,7 +37,7 @@ public class RespawnSystem : MonoBehaviour
 
     private void setRespawn(Character character)
     {
-        if (character.respawnTime < Utilities.maxFloatInfinite)
+        if (character.stats.respawnTime < Utilities.maxFloatInfinite)
         {
             StartCoroutine(respawnCo(character));
             character.currentState = CharacterState.respawning;
@@ -46,16 +46,16 @@ public class RespawnSystem : MonoBehaviour
 
     private IEnumerator respawnCo(Character character)
     {
-        yield return new WaitForSeconds(character.respawnTime);
+        yield return new WaitForSeconds(character.stats.respawnTime);
         respawnCharacter(character);
     }
 
     private void respawnCharacter(Character character)
     {
-        if (character.respawnAnimation != null)
+        if (character.stats.respawnAnimation != null)
         {
             //spawn character after animation
-            RespawnAnimation respawnObject = Instantiate(character.respawnAnimation, character.spawnPosition, Quaternion.identity);
+            RespawnAnimation respawnObject = Instantiate(character.stats.respawnAnimation, character.spawnPosition, Quaternion.identity);
             respawnObject.setCharacter(character);
         }
         else

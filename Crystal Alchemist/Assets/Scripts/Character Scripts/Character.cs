@@ -2,79 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEngine.SceneManagement;
-
-#region Enums
-public enum CharacterState
-{
-    walk,
-    attack,
-    defend,
-    interact, //in Reichweite eines interagierbaren Objektes
-    inDialog, //Dialog-Box ist offen
-    inMenu, //Pause oder Inventar ist offen
-    knockedback, //im Knockback
-    idle,
-    silent, //kann nicht angreifen
-    dead,
-    manually,
-    respawning
-}
-
-public enum CharacterType
-{
-    Player,
-    Enemy,
-    NPC,
-    Object
-}
-
-public enum Gender
-{
-    male,
-    female,
-    none
-}
-
-#endregion
-
-
 
 public class Character : MonoBehaviour
 {
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    public CharacterStats stats;
+
     #region Basic Attributes
-    [Required]
-    [BoxGroup("Pflichtfelder")]
-    public string characterName;
-
-    [BoxGroup("Pflichtfelder")]
-    public string englischCharacterName;
 
     [Required]
-    [BoxGroup("Pflichtfelder")]
+    [BoxGroup("Easy Access")]
     public Rigidbody2D myRigidbody;
 
     [Required]
-    [BoxGroup("Pflichtfelder")]
+    [BoxGroup("Easy Access")]
     public Animator animator;
 
     [Required]
-    [BoxGroup("Pflichtfelder")]
+    [BoxGroup("Easy Access")]
     public SpriteRenderer spriteRenderer;
 
     [Required]
-    [BoxGroup("Pflichtfelder")]
+    [BoxGroup("Easy Access")]
     public BoxCollider2D boxCollider;
 
-    [BoxGroup("Pflichtfelder")]
+    [BoxGroup("Easy Access")]
     [Required]
     public SpriteRenderer shadowRenderer;
 
-    [BoxGroup("Pflichtfelder")]
+    [BoxGroup("Easy Access")]
     [Required]
     public Sprite startSpriteForRespawn;
 
-    [BoxGroup("Pflichtfelder")]
+    [BoxGroup("Easy Access")]
     [Required]
     public Sprite startSpriteForRespawnWhite;
 
@@ -90,167 +51,6 @@ public class Character : MonoBehaviour
     [Required]
     public GameObject skillSetParent;
 
-
-
-    ////////////////////////////////////////////////////////////////
-
-    [TabGroup("Start-Values")]
-    [Tooltip("Leben, mit dem der Spieler startet")]
-    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
-    public float startLife = Utilities.minFloat;
-
-    [TabGroup("Start-Values")]
-    [Tooltip("Mana, mit dem der Spieler startet")]
-    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
-    public float startMana = Utilities.minFloat;
-
-    [TabGroup("Start-Values")]
-    [Tooltip("Movement-Speed in %, mit dem der Spieler startet")]
-    [Range(Utilities.minFloatPercent, Utilities.maxFloatPercent)]
-    public float startSpeed = 100;
-
-    [TabGroup("Start-Values")]
-    [Tooltip("Geschwindigkeitsmodifier in % von Cooldown und Castzeit")]
-    [Range(Utilities.minFloatPercent, Utilities.maxFloatPercent)]
-    public float startSpellSpeed = 100;
-
-    [Space(10)]
-    [TabGroup("Start-Values")]
-    [Tooltip("Immunität von Statuseffekten")]
-    public List<StatusEffect> immunityToStatusEffects = new List<StatusEffect>();
-
-
-
-    [TabGroup("Spawn Values")]
-    [Tooltip("Maximales Life")]
-    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
-    public float maxLife = Utilities.minFloat;
-
-    [TabGroup("Spawn Values")]
-    [Tooltip("Maximales Mana")]
-    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
-    public float maxMana = Utilities.minFloat;
-
-    [Space(10)]
-    [TabGroup("Spawn Values")]
-    [Tooltip("Respawn-Zeit")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float respawnTime = 30;
-
-    [TabGroup("Spawn Values")]
-    [Tooltip("Respawn-Animation")]
-    public RespawnAnimation respawnAnimation;
-
-    [TabGroup("Spawn Values")]
-    [Tooltip("Respawn-Animation")]
-    public DeathAnimation deathAnimation;
-
-
-    [TabGroup("Regeneration")]
-    [Tooltip("Höhe der Lebensregeneration")]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    public float lifeRegeneration = 0;
-
-    [TabGroup("Regeneration")]
-    [Tooltip("Intervall der Lebensregeneration")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float lifeRegenerationInterval = 0;
-
-    [Space(10)]
-    [TabGroup("Regeneration")]
-    [Tooltip("Höhe der Manaregeneration")]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
-    public float manaRegeneration = 0;
-
-    [TabGroup("Regeneration")]
-    [Tooltip("Intervall der Manaregeneration")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float manaRegenerationInterval = 0;
-
-    ////////////////////////////////////////////////////////////////
-
-    [FoldoutGroup("Schaden", expanded: false)]
-    [Required]
-    [Tooltip("DamageNumber-Objekt hier rein (nur für zerstörbare Objekte)")]
-    public GameObject damageNumber;
-
-    [Space(10)]
-    [FoldoutGroup("Schaden", expanded: false)]
-    [Tooltip("Wie stark (-) oder schwach (+) kann das Objekt zurück gestoßen werden?")]
-    [Range(-Utilities.maxFloatSmall, Utilities.maxFloatSmall)]
-    public float antiKnockback = 0;
-
-    [FoldoutGroup("Schaden", expanded: false)]
-    [Tooltip("Unverwundbarkeitszeit")]
-    [Range(0, 10)]
-    public float cannotBeHitTime = 0.3f;
-
-    [FoldoutGroup("Schaden", expanded: false)]
-    [Tooltip("Kann das Objekt berührt werden?")]
-    public bool isTouchable = true;
-
-    [Space(10)]
-    [FoldoutGroup("Schaden", expanded: false)]
-    [Tooltip("Farbe, wenn Gegner getroffen wurde")]
-    public bool showHitcolor = true;
-
-    [FoldoutGroup("Schaden", expanded: false)]
-    [ShowIf("showHitcolor")]
-    public Color hitColor = Color.white;
-
-
-    ////////////////////////////////////////////////////////////////
-
-
-    [FoldoutGroup("Loot", expanded: false)]
-    [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
-    public LootTable[] lootTable;
-
-    [Space(10)]
-    [FoldoutGroup("Loot", expanded: false)]
-    [Tooltip("Multiloot = alle Items. Ansonsten nur das seltenste Item")]
-    public bool multiLoot = false;
-
-    [Space(10)]
-    [FoldoutGroup("Loot", expanded: false)]
-    [Tooltip("Was darf der Charakter einsammeln. All = alles, ansonsten nur anhand der Liste")]
-    public bool canCollectAll = false;
-
-    [FoldoutGroup("Loot", expanded: false)]
-    [HideIf("canCollectAll")]
-    public List<string> canCollect = new List<string>();
-
-
-    ////////////////////////////////////////////////////////////////
-
-
-    [FoldoutGroup("Sound", expanded: false)]
-    [Tooltip("Soundeffekt, wenn Gegner getroffen wurde")]
-    public AudioClip hitSoundEffect;
-
-
-    ////////////////////////////////////////////////////////////////
-
-
-    [FoldoutGroup("RPG Elements", expanded: false)]
-    [Tooltip("Rasse")]
-    public string characterSpecies;
-
-    [FoldoutGroup("RPG Elements", expanded: false)]
-    [Tooltip("Geschlecht")]
-    [EnumToggleButtons]
-    public Gender characterGender = Gender.none;
-
-    [FoldoutGroup("RPG Elements", expanded: false)]
-    [Tooltip("Um welchen Typ handelt es sich?")]
-    [EnumToggleButtons]
-    public CharacterType characterType = CharacterType.Object;
-
-    [BoxGroup("AI")]
-    [SerializeField]
-    [Required]
-    private AIAggroSystem aggro;
-
     #endregion
 
 
@@ -258,22 +58,17 @@ public class Character : MonoBehaviour
 
     private float lifeTime;
     private float manaTime;
-
-    [HideInInspector]
-    public float speedMultiply = 5;
-
     private List<Color> colors = new List<Color>();
     private bool showTargetHelp = false;
     private GameObject targetHelpObjectPlayer;
     private DeathAnimation activeDeathAnimation;
 
     [HideInInspector]
+    public float speedMultiply = 5;
+    [HideInInspector]
     public Vector3 spawnPosition;
-
     [HideInInspector]
     public AudioSource audioSource;
-
-
     [HideInInspector]
     public CastBar activeCastbar;
     [HideInInspector]
@@ -352,7 +147,7 @@ public class Character : MonoBehaviour
         this.audioSource.playOnAwake = false;
         this.colors.Add(this.spriteRenderer.color);
 
-        this.transform.gameObject.tag = this.characterType.ToString();
+        this.transform.gameObject.tag = this.stats.characterType.ToString();
         /*
         if (this.spriteRenderer != null)
         {
@@ -383,11 +178,11 @@ public class Character : MonoBehaviour
     {
         this.direction = new Vector2(0, -1);
 
-        this.life = this.startLife;
-        this.mana = this.startMana;
+        this.life = this.stats.startLife;
+        this.mana = this.stats.startMana;
 
         //TODO
-        this.speed = (this.startSpeed / 100) * this.speedMultiply;
+        this.speed = (this.stats.startSpeed / 100) * this.speedMultiply;
         this.animator.speed = 1;
 
         this.updateTimeDistortion(0);
@@ -412,7 +207,7 @@ public class Character : MonoBehaviour
     public void ActivateCharacter()
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
-        Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
+        Utilities.Items.setItem(this.stats.lootTable, this.stats.multiLoot, this.items);
 
         AIEvents eventAI = this.GetComponent<AIEvents>();
         if (eventAI != null) eventAI.init();
@@ -439,24 +234,24 @@ public class Character : MonoBehaviour
     {
         if (this.currentState != CharacterState.dead && this.currentState != CharacterState.respawning)
         {
-            if (this.lifeRegeneration != 0 && this.lifeRegenerationInterval != 0)
+            if (this.stats.lifeRegeneration != 0 && this.stats.lifeRegenerationInterval != 0)
             {
-                if (this.lifeTime >= this.lifeRegenerationInterval)
+                if (this.lifeTime >= this.stats.lifeRegenerationInterval)
                 {
                     this.lifeTime = 0;
-                    updateResource(ResourceType.life, null, this.lifeRegeneration);
+                    updateResource(ResourceType.life, null, this.stats.lifeRegeneration);
                 }
                 else
                 {
                     this.lifeTime += (Time.deltaTime * this.timeDistortion);
                 }
             }
-            if (this.manaRegeneration != 0 && this.manaRegenerationInterval != 0)
+            if (this.stats.manaRegeneration != 0 && this.stats.manaRegenerationInterval != 0)
             {
-                if (this.manaTime >= this.manaRegenerationInterval)
+                if (this.manaTime >= this.stats.manaRegenerationInterval)
                 {
                     this.manaTime = 0;
-                    updateResource(ResourceType.mana, null, this.manaRegeneration, false);
+                    updateResource(ResourceType.mana, null, this.stats.manaRegeneration, false);
                 }
                 else
                 {
@@ -486,9 +281,9 @@ public class Character : MonoBehaviour
 
     private void showDamageNumber(float value, Color[] color)
     {
-        if (this.damageNumber != null)
+        if (this.stats.damageNumber != null)
         {
-            GameObject damageNumberClone = Instantiate(this.damageNumber, this.transform.position, Quaternion.identity, this.transform);
+            GameObject damageNumberClone = Instantiate(this.stats.damageNumber, this.transform.position, Quaternion.identity, this.transform);
             damageNumberClone.GetComponent<DamageNumbers>().number = value;
             damageNumberClone.GetComponent<DamageNumbers>().setcolor(color);
             damageNumberClone.hideFlags = HideFlags.HideInHierarchy;
@@ -521,7 +316,7 @@ public class Character : MonoBehaviour
 
             this.spriteRenderer.color = Color.white;
 
-            if (this.aggro != null) aggro.clearAggro();
+            if (this.GetComponent<AIAggroSystem>() != null) this.GetComponent<AIAggroSystem>().clearAggro();
 
             this.currentState = CharacterState.dead;
 
@@ -531,7 +326,7 @@ public class Character : MonoBehaviour
             this.shadowRenderer.enabled = false;
 
             //Play Death Effect
-            if (this.deathAnimation != null)
+            if (this.stats.deathAnimation != null)
             {
                 PlayDeathAnimation();
             }
@@ -561,7 +356,7 @@ public class Character : MonoBehaviour
     {
         if (this.activeDeathAnimation == null)
         {
-            DeathAnimation deathObject = Instantiate(this.deathAnimation, this.transform.position, Quaternion.identity);
+            DeathAnimation deathObject = Instantiate(this.stats.deathAnimation, this.transform.position, Quaternion.identity);
             deathObject.setCharacter(this);
             this.activeDeathAnimation = deathObject;
         }
@@ -578,7 +373,7 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life:
                 {
-                    this.life = Utilities.Resources.setResource(this.life, this.maxLife, value);
+                    this.life = Utilities.Resources.setResource(this.life, this.stats.maxLife, value);
 
                     Color[] colorArray = GlobalValues.red;
                     if (value > 0) colorArray = GlobalValues.green;
@@ -589,7 +384,7 @@ public class Character : MonoBehaviour
                 }
             case ResourceType.mana:
                 {
-                    this.mana = Utilities.Resources.setResource(this.mana, this.maxMana, value);
+                    this.mana = Utilities.Resources.setResource(this.mana, this.stats.maxMana, value);
                     if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
                     break;
                 }
@@ -637,8 +432,8 @@ public class Character : MonoBehaviour
     {
         switch (type)
         {
-            case ResourceType.life: return this.maxLife;
-            case ResourceType.mana: return this.maxMana;
+            case ResourceType.life: return this.stats.maxLife;
+            case ResourceType.mana: return this.stats.maxMana;
             case ResourceType.item: return Utilities.Items.getAmountFromInventory(item, this.inventory, true);
         }
 
@@ -652,17 +447,17 @@ public class Character : MonoBehaviour
 
     public void updateSpeed(float addSpeed, bool affectAnimation)
     {
-        float startSpeedInPercent = this.startSpeed / 100;
+        float startSpeedInPercent = this.stats.startSpeed / 100;
         float addNewSpeed = startSpeedInPercent * (addSpeed / 100);
         float changeSpeed = startSpeedInPercent + addNewSpeed;
 
         this.speed = changeSpeed * this.timeDistortion * this.speedMultiply;
-        if (affectAnimation) this.animator.speed = this.speed / (this.startSpeed * this.speedMultiply / 100);
+        if (affectAnimation) this.animator.speed = this.speed / (this.stats.startSpeed * this.speedMultiply / 100);
     }
 
     public void updateSpellSpeed(float addSpellSpeed)
     {
-        this.spellspeed = ((this.startSpellSpeed / 100) + (addSpellSpeed / 100)) * this.timeDistortion;
+        this.spellspeed = ((this.stats.startSpellSpeed / 100) + (addSpellSpeed / 100)) * this.timeDistortion;
     }
 
     public void updateTimeDistortion(float distortion)
@@ -775,7 +570,7 @@ public class Character : MonoBehaviour
 
     public void collect(Item item, bool destroyIt, bool playSound)
     {
-        if (this.canCollectAll || this.canCollect.Contains(item.itemGroup))
+        if (this.stats.canCollectAll || this.stats.canCollect.Contains(item.itemGroup))
         {
             if (playSound) item.playSounds();
 
@@ -814,10 +609,11 @@ public class Character : MonoBehaviour
 
                     if (this.life > 0 && elem.resourceType == ResourceType.life && amount < 0)
                     {
-                        if (aggro != null) aggro.increaseAggroOnHit(skill.sender, elem.amount);
+                        if (this.GetComponent<AIAggroSystem>() != null)
+                            this.GetComponent<AIAggroSystem>().increaseAggroOnHit(skill.sender, elem.amount);
 
                         //Charakter-Treffer (Schaden) animieren
-                        Utilities.Audio.playSoundEffect(this.audioSource, this.hitSoundEffect);
+                        Utilities.Audio.playSoundEffect(this.audioSource, this.stats.hitSoundEffect);
                         StartCoroutine(hitCo());
                     }
                 }
@@ -825,7 +621,7 @@ public class Character : MonoBehaviour
                 if (this.life > 0)
                 {
                     //Rückstoß ermitteln
-                    float knockbackTrust = skill.thrust - antiKnockback;
+                    float knockbackTrust = skill.thrust - this.stats.antiKnockback;
                     knockBack(skill.knockbackTime, knockbackTrust, skill);
                 }
             }
@@ -875,17 +671,17 @@ public class Character : MonoBehaviour
     private IEnumerator hitCo()
     {
         this.isInvincible = true;
-        if (this.showHitcolor) this.addColor(this.hitColor);
+        if (this.stats.showHitcolor) this.addColor(this.stats.hitColor);
 
-        yield return new WaitForSeconds(this.cannotBeHitTime);
-        this.resetColor(this.hitColor);
+        yield return new WaitForSeconds(this.stats.cannotBeHitTime);
+        this.resetColor(this.stats.hitColor);
         this.isInvincible = false;
     }
 
     private IEnumerator immortalCo(float duration)
     {
         this.isImmortal = true;
-        yield return new WaitForSeconds(this.cannotBeHitTime);
+        yield return new WaitForSeconds(this.stats.cannotBeHitTime);
         this.isImmortal = false;
     }
 

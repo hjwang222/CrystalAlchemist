@@ -589,13 +589,13 @@ public class Utilities : MonoBehaviour
 
         public static void AddStatusEffect(StatusEffect statusEffect, Character character)
         {
-            if (statusEffect != null && character.characterType != CharacterType.Object)
+            if (statusEffect != null && character.stats.characterType != CharacterType.Object)
             {
                 bool isImmune = false;
 
-                for (int i = 0; i < character.immunityToStatusEffects.Count; i++)
+                for (int i = 0; i < character.stats.immunityToStatusEffects.Count; i++)
                 {
-                    StatusEffect immunityEffect = character.immunityToStatusEffects[i];
+                    StatusEffect immunityEffect = character.stats.immunityToStatusEffects[i];
                     if (statusEffect.statusEffectName == immunityEffect.statusEffectName)
                     {
                         isImmune = true;
@@ -849,7 +849,7 @@ public class Utilities : MonoBehaviour
 
                 for (int i = 0; i < activePets.Count; i++)
                 {
-                    if (activePets[i] != null && activePets[i].characterName == summonSkill.getPetName())
+                    if (activePets[i] != null && activePets[i].stats.characterName == summonSkill.getPetName())
                     {
                         result++;
                     }
