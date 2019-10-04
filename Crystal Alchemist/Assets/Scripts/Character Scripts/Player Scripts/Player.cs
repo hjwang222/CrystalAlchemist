@@ -77,7 +77,7 @@ public class Player : Character
 
     private void Awake()
     {
-       initPlayer();
+        initPlayer();
     }
 
     public void initPlayer()
@@ -151,11 +151,11 @@ public class Player : Character
         }
     }
 
-    
 
-  
 
-    
+
+
+
 
 
 }

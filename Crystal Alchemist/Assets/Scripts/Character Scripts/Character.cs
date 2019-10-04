@@ -52,8 +52,7 @@ public class Character : MonoBehaviour
     public GameObject skillSetParent;
 
     #endregion
-
-
+    
     #region Attributes
 
     private float lifeTime;
@@ -148,11 +147,13 @@ public class Character : MonoBehaviour
         this.colors.Add(this.spriteRenderer.color);
 
         this.transform.gameObject.tag = this.stats.characterType.ToString();
+
         /*
         if (this.spriteRenderer != null)
         {
             this.spriteRenderer.gameObject.tag = this.transform.gameObject.tag;
         }*/
+
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
     }
 
@@ -200,6 +201,8 @@ public class Character : MonoBehaviour
         if(!this.isPlayer) this.transform.position = this.spawnPosition;
 
         this.activeDeathAnimation = null;
+
+        if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Static;
 
         resetColor();
     }
@@ -416,8 +419,6 @@ public class Character : MonoBehaviour
 
     public float getResource(ResourceType type, Item item)
     {
-        //TODO ItemGroup?
-
         switch (type)
         {
             case ResourceType.life: return this.life;
@@ -464,7 +465,7 @@ public class Character : MonoBehaviour
     {
         this.timeDistortion = 1 + (distortion / 100);
 
-        /* if (this.CompareTag("Player"))
+         /*if (this.CompareTag("Player"))
          {
              this.GetComponent<Player>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
          }*/
@@ -621,7 +622,7 @@ public class Character : MonoBehaviour
                 if (this.life > 0)
                 {
                     //Rückstoß ermitteln
-                    float knockbackTrust = skill.thrust - this.stats.antiKnockback;
+                    float knockbackTrust = skill.thrust - (this.stats.antiKnockback/100*skill.thrust);
                     knockBack(skill.knockbackTime, knockbackTrust, skill);
                 }
             }

@@ -56,8 +56,8 @@ public class Utilities : MonoBehaviour
     public const int maxIntInfinite = 9999;
     public const float minFloat = 0.1f;
 
-    public const float maxFloatSmall = 99;
-    public const int maxIntSmall = 99;
+    public const float maxFloatSmall = 100;
+    public const int maxIntSmall = 100;
 
     public const float maxFloatPercent = 1000;
     public const float minFloatPercent = -100;

@@ -70,10 +70,16 @@ public class CharacterStats : ScriptableObject
     [Range(Utilities.minFloatPercent, Utilities.maxFloatPercent)]
     public float startSpellSpeed = 100;
 
+    [TabGroup("Start-Values")]
+    [Tooltip("Immunität von Statuseffekten")]
+    public bool isMassive = false;
+
     [Space(10)]
     [TabGroup("Start-Values")]
     [Tooltip("Immunität von Statuseffekten")]
     public List<StatusEffect> immunityToStatusEffects = new List<StatusEffect>();
+
+
 
 
 
