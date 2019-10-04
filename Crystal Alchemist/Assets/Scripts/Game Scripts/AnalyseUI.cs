@@ -134,10 +134,10 @@ public class AnalyseUI : MonoBehaviour
         this.TMPcharacterName.text = Utilities.Format.getLanguageDialogText(this.character.stats.characterName, this.character.stats.englischCharacterName);
         this.TMPlifeAmount.text = "x" + (this.character.life * 4);
 
-        if (this.character.items.Count > 0 && this.character.currentState != CharacterState.dead)
+        if (this.character.inventory.Count > 0 && this.character.currentState != CharacterState.dead)
         {
             this.ImageitemPreview.gameObject.SetActive(true);
-            this.ImageitemPreview.sprite = this.character.items[0].itemSprite;
+            this.ImageitemPreview.sprite = this.character.inventory[0].itemSprite;
         }
     }
 
@@ -148,19 +148,19 @@ public class AnalyseUI : MonoBehaviour
         if (this.interactable != null)
         {
             //Show Object Information
-            if (interactable.items.Count > 0 && this.interactable.currentState != objectState.opened)
+            if (interactable.inventory.Count > 0 && this.interactable.currentState != objectState.opened)
             {
                 this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = interactable.items[0].itemSprite;
+                this.ImageObjectitemPreview.sprite = interactable.inventory[0].itemSprite;
             }            
         }
         else if (this.character != null)
         {
             //Show Object Information
-            if (this.character.items.Count > 0 && this.character.currentState != CharacterState.dead)
+            if (this.character.inventory.Count > 0 && this.character.currentState != CharacterState.dead)
             {
                 this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = this.character.items[0].itemSprite;
+                this.ImageObjectitemPreview.sprite = this.character.inventory[0].itemSprite;
             }            
         }
     }

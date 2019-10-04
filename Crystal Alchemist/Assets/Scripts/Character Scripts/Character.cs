@@ -87,8 +87,6 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public bool isHit;
     [HideInInspector]
-    public List<Item> items = new List<Item>();
-    [HideInInspector]
     public List<StatusEffect> buffs = new List<StatusEffect>();
     [HideInInspector]
     public List<StatusEffect> debuffs = new List<StatusEffect>();
@@ -210,7 +208,7 @@ public class Character : MonoBehaviour
     public void ActivateCharacter()
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
-        Utilities.Items.setItem(this.stats.lootTable, this.stats.multiLoot, this.items);
+        Utilities.Items.setItem(this.stats.lootTable, this.stats.multiLoot, this.inventory);
 
         AIEvents eventAI = this.GetComponent<AIEvents>();
         if (eventAI != null) eventAI.init();
@@ -222,15 +220,31 @@ public class Character : MonoBehaviour
 
     public void Update()
     {
+        checkAutoItems();
+
         regeneration();
 
         if (this.currentState != CharacterState.knockedback && !this.isOnIce)
         {
             this.myRigidbody.velocity = Vector2.zero;
-        }
+        }        
+
+        if (this.life <= 0) KillIt();
 
         if (this.currentState == CharacterState.dead)
             return;
+    }
+
+    private void checkAutoItems()
+    {
+        foreach(Item item in this.inventory)
+        {
+            ItemTrigger trigger = item.GetComponent<ItemTrigger>();
+            if(trigger != null)
+            {
+                trigger.checkTriggered(this);
+            }
+        }
     }
 
     private void regeneration()
@@ -271,7 +285,7 @@ public class Character : MonoBehaviour
 
     public void dropItem()
     {
-        foreach (Item itemObject in this.items)
+        foreach (Item itemObject in this.inventory)
         {
             GameObject itemClone = Instantiate(itemObject.gameObject, this.transform.position, Quaternion.identity);
         }
@@ -382,7 +396,7 @@ public class Character : MonoBehaviour
                     if (value > 0) colorArray = GlobalValues.green;
 
                     if (this.life > 0 && this.currentState != CharacterState.dead && showingDamageNumber) showDamageNumber(value, colorArray);
-                    if (this.life <= 0) KillIt();
+                    
                     break;
                 }
             case ResourceType.mana:

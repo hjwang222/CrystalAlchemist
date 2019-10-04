@@ -62,9 +62,7 @@ public class Interactable : MonoBehaviour
     public bool isPlayerLookingAtIt = false;
 
     [HideInInspector]
-    public Player player;
-    
-
+    public Player player; 
 
     [HideInInspector]
     public AudioSource audioSource;
@@ -73,7 +71,7 @@ public class Interactable : MonoBehaviour
     [HideInInspector]
     public GameObject context;
     [HideInInspector]
-    public List<Item> items = new List<Item>();
+    public List<Item> inventory = new List<Item>();
     [HideInInspector]
     public objectState currentState = objectState.normal;
 
@@ -120,7 +118,7 @@ public class Interactable : MonoBehaviour
         this.audioSource.playOnAwake = false;
         if(this.animator == null && GetComponent<Animator>() != null) this.animator = GetComponent<Animator>();
         setContext();
-        Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
+        Utilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory);
     }
 
     public void setContext()

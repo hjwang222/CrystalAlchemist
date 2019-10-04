@@ -24,10 +24,10 @@ public class ShopItem : Interactable
 
         Utilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
-        this.items.Add(this.lootTable[this.index].item);
+        this.inventory.Add(this.lootTable[this.index].item);
 
         //this.amountText.text = this.amount + "";
-        this.childSprite.sprite = this.items[this.index].itemSprite;
+        this.childSprite.sprite = this.inventory[this.index].itemSprite;
     }
 
     public override void doSomethingOnSubmit()
@@ -36,7 +36,7 @@ public class ShopItem : Interactable
 
         if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text))
         {
-            Item loot = items[this.index];
+            Item loot = inventory[this.index];
 
             string itemObtained = Utilities.Format.getDialogBoxText("Du hast", loot.amount, loot, "für");
             string itemNedded = Utilities.Format.getDialogBoxText("", this.price, this.item, "gekauft!");

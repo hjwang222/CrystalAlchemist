@@ -61,17 +61,17 @@ public class Treasure : Interactable
         if (this.currentState == objectState.opened && this.player != null && this.player.currentState == CharacterState.interact)
         {           
             //Entferne Item aus der Welt und leere die Liste
-            foreach (Item item in this.items)
+            foreach (Item item in this.inventory)
             {
                 Destroy(item.gameObject);
             }
-            this.items.Clear();
+            this.inventory.Clear();
 
             if (this.treasureType == TreasureType.lootbox)
             {
                 Utilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", false);
                 this.currentState = objectState.normal;
-                Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
+                Utilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory);
             }
         }
         /*
@@ -111,7 +111,7 @@ public class Treasure : Interactable
 
         string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
 
-        if (this.soundEffect != null && this.items.Count > 0)
+        if (this.soundEffect != null && this.inventory.Count > 0)
         {
             //Spiele Soundeffekte ab
             Utilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
@@ -122,7 +122,7 @@ public class Treasure : Interactable
 
             //OLD, muss besser gehen!
             //Gebe Item dem Spieler
-            foreach (Item item in this.items)
+            foreach (Item item in this.inventory)
             {
                 this.player.collect(item, false);
                 text = Utilities.Format.getDialogBoxText("Du hast", item.amount, item, "erhalten!");
@@ -149,11 +149,11 @@ public class Treasure : Interactable
 
     public void showTreasureItem()
     {
-        for (int i = 0; i < this.items.Count; i++)
+        for (int i = 0; i < this.inventory.Count; i++)
         {
             //Item instanziieren und der Liste zurück geben und das Item anzeigen
-            this.items[i] = Instantiate(this.items[i], this.transform.position, Quaternion.identity, this.transform);
-            this.items[i].GetComponent<Item>().showFromTreasure();
+            this.inventory[i] = Instantiate(this.inventory[i], this.transform.position, Quaternion.identity, this.transform);
+            this.inventory[i].GetComponent<Item>().showFromTreasure();
         }
     }
 

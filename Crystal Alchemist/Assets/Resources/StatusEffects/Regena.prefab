@@ -66,8 +66,8 @@ MonoBehaviour:
   stunTarget: 0
   statusEffectType: 0
   endType: 0
-  statusEffectDuration: 1
-  statusEffectInterval: 10
+  statusEffectDuration: 10
+  statusEffectInterval: 1
   canOverride: 1
   statusEffectManaDrain: 0
   statusEffectManaDrainInterval: 1
@@ -81,4 +81,7 @@ MonoBehaviour:
   target: {fileID: 0}
   statusEffectTimeLeft: 0
   timeDistortion: 1
-  affectedResources: []
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: 0.5
