@@ -5,6 +5,10 @@ using TMPro;
 
 public class CurrencyInventoryUI : MonoBehaviour
 {
+
+    [SerializeField]
+    private PlayerStats playerStats;
+
     [SerializeField]
     private TextMeshProUGUI amountField;
 
@@ -13,7 +17,7 @@ public class CurrencyInventoryUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        Player player = this.playerStats.player;
 
         Item item = Utilities.Items.getItemFromInventory(this.item, player.inventory);
 

@@ -85,8 +85,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: f489034bab4a8c34eb316a47f0cf1f8a, type: 2}
-  characterName: Paladin
-  englischCharacterName: Paladin
   myRigidbody: {fileID: 759644400424337060}
   animator: {fileID: 4187403449301391866}
   spriteRenderer: {fileID: 2974922927713060803}
@@ -99,42 +97,6 @@ MonoBehaviour:
   activeSkillParent: {fileID: 8638893490402070047}
   activeStatusEffectParent: {fileID: 1487360461578692118}
   skillSetParent: {fileID: 242878290860008501}
-  startLife: 5
-  startMana: 4
-  startSpeed: 100
-  startSpellSpeed: 100
-  immunityToStatusEffects: []
-  maxLife: 5
-  maxMana: 4
-  respawnTime: 30
-  respawnAnimation: {fileID: 1140035694535706356, guid: 815950c2030167244ab889505e154cc8,
-    type: 3}
-  deathAnimation: {fileID: 0}
-  lifeRegeneration: 0
-  lifeRegenerationInterval: 0
-  manaRegeneration: 0.25
-  manaRegenerationInterval: 3
-  damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
-    type: 3}
-  antiKnockback: 0
-  cannotBeHitTime: 1
-  showHitcolor: 1
-  hitColor: {r: 1, g: 0, b: 0, a: 1}
-  lootTable: []
-  multiLoot: 0
-  canCollectAll: 1
-  canCollect:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  hitSoundEffect: {fileID: 8300000, guid: 27ac131e0a552ec4e80c1947b53d31a9, type: 3}
-  characterSpecies: Human
-  characterGender: 0
-  characterType: 0
-  aggro: {fileID: 0}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
@@ -147,7 +109,6 @@ MonoBehaviour:
   isInvincible: 0
   isImmortal: 0
   isHit: 0
-  items: []
   buffs: []
   debuffs: []
   activeSkills: []
@@ -186,6 +147,7 @@ MonoBehaviour:
   - {fileID: 6097060202432798594, guid: 829f95c3bd5d9984793723ed6e29d15d, type: 3}
   - {fileID: 1929037885388743043, guid: 28d171700ce5ac84fb3390e7c6068744, type: 3}
   timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
+  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
   dialogBoxSignal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
   deathSignal: {fileID: 11400000, guid: dda75ee433c9b274f8925d7dc56f9851, type: 2}
   healthSignalUI: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}

@@ -44,7 +44,8 @@ public enum ResourceType
     life,
     mana,
     item,
-    skill
+    skill,
+    statuseffect
 }
 
 #endregion
@@ -517,6 +518,16 @@ public class Utilities : MonoBehaviour
             return null;
         }
 
+        public static bool hasItemGroup(string itemGroup, List<Item> inventory)
+        {
+            foreach (Item elem in inventory)
+            {
+                if (itemGroup.ToUpper() == elem.itemGroup.ToUpper()) return true;                
+            }
+
+             return false;
+        }
+
         /*
         public static Item getItemByFeature(List<Item> inventory, ItemFeature feature)
         {
@@ -658,6 +669,31 @@ public class Utilities : MonoBehaviour
 
             //add to list for better reference
             statusEffects.Add(statusEffectClone.GetComponent<StatusEffect>());
+        }
+
+        public static List<StatusEffect> GetStatusEffect(StatusEffect statusEffect, Character character, bool getAll)
+        {
+            List<StatusEffect> result = new List<StatusEffect>();
+
+            foreach(StatusEffect effect in character.buffs)
+            {
+                if (effect.statusEffectName == statusEffect.statusEffectName)
+                {
+                    result.Add(effect);
+                    if (!getAll) break;
+                }
+            }
+
+            foreach (StatusEffect effect in character.debuffs)
+            {
+                if (effect.statusEffectName == statusEffect.statusEffectName)
+                {
+                    result.Add(effect);
+                    if (!getAll) break;
+                }
+            }
+
+            return result;
         }
     }
 

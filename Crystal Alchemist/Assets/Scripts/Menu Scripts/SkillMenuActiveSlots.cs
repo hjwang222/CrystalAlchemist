@@ -8,6 +8,8 @@ public class SkillMenuActiveSlots : MonoBehaviour
     private Player player;
 
     [SerializeField]
+    private PlayerStats playerStats;
+    [SerializeField]
     private Image skillImage;
     [SerializeField]
     private enumButton button;
@@ -18,7 +20,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
 
     void Start()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
         setImage();
     }
 

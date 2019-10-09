@@ -91,8 +91,11 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.skill)]
-    [EnumToggleButtons]    
     public StandardSkill skill;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("resourceType", ResourceType.statuseffect)]
+    public List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     [FoldoutGroup("Sound", expanded: false)]
     public AudioClip collectSoundEffect;
@@ -164,10 +167,10 @@ public class Item : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D character)
     {
-        if (character.CompareTag("Player") && !character.isTrigger)
+        if (!character.isTrigger)
         {
-            Player player = character.GetComponent<Player>();
-            if (player != null) player.collect(this, true);
+            Character chara = character.GetComponent<Character>();
+            if (chara != null) chara.collect(this, true);
         }
     }   
 

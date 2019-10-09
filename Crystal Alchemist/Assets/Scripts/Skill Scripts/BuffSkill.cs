@@ -7,7 +7,7 @@ public enum SupportType
 {
     none,
     heal,
-    dispell,
+    statuseffect,
     teleport
 }
 
@@ -15,6 +15,33 @@ public class BuffSkill : StandardSkill
 {
     [FoldoutGroup("Heal and Dispell", expanded: false)]
     public SupportType supportType = SupportType.none;
+
+    [FoldoutGroup("Heal and Dispell", expanded: false)]
+    [SerializeField]
+    [Range(0,10)]
+    [ShowIf("supportType", SupportType.statuseffect)]
+    private float immortalTimer = 0;
+
+    [FoldoutGroup("Heal and Dispell", expanded: false)]
+    [SerializeField]
+    [ShowIf("supportType", SupportType.statuseffect)]
+    private StatusEffectType affectAllOfKind;
+
+    [FoldoutGroup("Heal and Dispell", expanded: false)]
+    [SerializeField]
+    [ShowIf("supportType", SupportType.statuseffect)]
+    private bool dispellIt = false;
+
+    [FoldoutGroup("Heal and Dispell", expanded: false)]
+    [SerializeField]
+    [ShowIf("supportType", SupportType.statuseffect)]
+    private bool allTheSame = false;
+
+    [FoldoutGroup("Heal and Dispell", expanded: false)]
+    [SerializeField]
+    [Range(0, 100)]
+    [ShowIf("supportType", SupportType.statuseffect)]
+    private int extendTimePercentage = 0;
 
     [FoldoutGroup("Heal and Dispell", expanded: false)]
     [SerializeField]
@@ -54,13 +81,18 @@ public class BuffSkill : StandardSkill
 
     private void useSkill(Character character)
     {
+        //TODO: Module
+
+        if (this.immortalTimer > 0) character.setImmortal(this.immortalTimer);
+
         if (this.supportType == SupportType.heal)
         {
             character.gotHit(this);
         }
-        else if (this.supportType == SupportType.dispell)
+        else if (this.supportType == SupportType.statuseffect)
         {
-            if (character.debuffs.Count > 0) Utilities.StatusEffectUtil.RemoveStatusEffect(this.sender.debuffs[0], false, character);
+            changeStatusEffects(character);
+            character.gotHit(this);
         }
         else if (this.supportType == SupportType.teleport)
         {
@@ -88,6 +120,36 @@ public class BuffSkill : StandardSkill
     public override void OnTriggerExit2D(Collider2D hittedCharacter)
     {
 
+    }
+
+
+    private void changeStatusEffects(Character character)
+    {
+        List<StatusEffect> changeEffects = new List<StatusEffect>();
+        
+            //all effects of a kind
+            if (this.affectAllOfKind == StatusEffectType.buff)
+            {
+                changeEffects.AddRange(character.buffs);
+            }
+            else
+            {
+                changeEffects.AddRange(character.debuffs);
+            }
+
+        if (this.allTheSame)
+        {
+            foreach (StatusEffect effect in changeEffects)
+            {
+                if (this.dispellIt) Utilities.StatusEffectUtil.RemoveStatusEffect(effect, false, character);
+                if (this.extendTimePercentage > 0) effect.statusEffectTimeLeft += (effect.statusEffectTimeLeft * extendTimePercentage) / 100;
+            }
+        }
+        else
+        {
+            if (this.dispellIt) Utilities.StatusEffectUtil.RemoveStatusEffect(changeEffects[0], false, character);
+            if (this.extendTimePercentage > 0) changeEffects[0].statusEffectTimeLeft += (changeEffects[0].statusEffectTimeLeft * extendTimePercentage) / 100;
+        }        
     }
 
 

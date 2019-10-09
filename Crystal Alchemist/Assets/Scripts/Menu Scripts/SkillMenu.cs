@@ -10,6 +10,10 @@ using System.Linq;
 public class SkillMenu : MonoBehaviour
 {
     #region Attributes
+    [SerializeField]
+    [BoxGroup("Mandatory")]
+    private PlayerStats playerStats;
+
     private Player player;
 
     [BoxGroup("Mandatory")]
@@ -86,12 +90,12 @@ public class SkillMenu : MonoBehaviour
 
     private void Awake()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
     }
 
     private void Start()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
         setSkillsToSlots(SkillType.physical);
         setSkillsToSlots(SkillType.magical);
         setSkillsToSlots(SkillType.item);

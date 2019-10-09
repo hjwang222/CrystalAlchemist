@@ -10,6 +10,10 @@ public class DeathScreen : MonoBehaviour
 {
     [SerializeField]
     [BoxGroup("Mandatory")]
+    private PlayerStats playerStats;
+
+    [SerializeField]
+    [BoxGroup("Mandatory")]
     private SimpleSignal stopMusic;
 
     [BoxGroup("Mandatory")]
@@ -75,7 +79,7 @@ public class DeathScreen : MonoBehaviour
 
     private void Awake()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
         this.returnSavePoint.SetActive(false);
         this.returnTitleScreen.SetActive(false);
         this.countDown.gameObject.SetActive(false);

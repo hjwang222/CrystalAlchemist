@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class InventoryMenu : MonoBehaviour
 {
+    [SerializeField]
+    [BoxGroup("Mandatory")]
+    private PlayerStats playerStats;
+
     private Player player;
 
     [BoxGroup("Mandatory")]
@@ -52,12 +56,12 @@ public class InventoryMenu : MonoBehaviour
 
     private void Awake()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
     }
 
     private void Start()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
         loadInventory();
         showCategory(0);
     }

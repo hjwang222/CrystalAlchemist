@@ -9,6 +9,10 @@ public class CombatButtons : MonoBehaviour
 {
     private Player player;
 
+    [SerializeField]
+    [BoxGroup("Mandatory")]
+    private PlayerStats playerStats;
+
     [FoldoutGroup("A Button UI", expanded: false)]
     [SerializeField]
     private Image iconAButton;
@@ -91,7 +95,7 @@ public class CombatButtons : MonoBehaviour
 
     private void Awake()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
     }
 
     void Start()

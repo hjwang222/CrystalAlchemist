@@ -16,6 +16,10 @@ public class Player : Character
     [Required]
     public TimeValue timeValue;
 
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public PlayerStats playerStats;
+
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
     public StringSignal dialogBoxSignal;
@@ -82,6 +86,8 @@ public class Player : Character
 
     public void initPlayer()
     {
+        this.playerStats.player = this;
+
         SaveSystem.loadOptions();
 
         this.isPlayer = true;

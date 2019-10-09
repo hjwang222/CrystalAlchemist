@@ -85,6 +85,8 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public bool isImmortal = false;
     [HideInInspector]
+    public bool cannotDie = false;
+    [HideInInspector]
     public bool isHit;
     [HideInInspector]
     public List<StatusEffect> buffs = new List<StatusEffect>();
@@ -110,6 +112,7 @@ public class Character : MonoBehaviour
     public float steps = 0;
     [HideInInspector]
     public bool isOnIce = false;
+
 
     #endregion
 
@@ -220,31 +223,18 @@ public class Character : MonoBehaviour
 
     public void Update()
     {
-        checkAutoItems();
-
         regeneration();
 
         if (this.currentState != CharacterState.knockedback && !this.isOnIce)
         {
-            this.myRigidbody.velocity = Vector2.zero;
+            if(this.myRigidbody.bodyType != RigidbodyType2D.Static) this.myRigidbody.velocity = Vector2.zero;
         }        
 
-        if (this.life <= 0) KillIt();
+        if (this.life <= 0 && !this.cannotDie && !this.isImmortal && !this.isInvincible)
+            KillIt();
 
         if (this.currentState == CharacterState.dead)
             return;
-    }
-
-    private void checkAutoItems()
-    {
-        foreach(Item item in this.inventory)
-        {
-            ItemTrigger trigger = item.GetComponent<ItemTrigger>();
-            if(trigger != null)
-            {
-                trigger.checkTriggered(this);
-            }
-        }
     }
 
     private void regeneration()
@@ -419,6 +409,17 @@ public class Character : MonoBehaviour
                     if (item != null && item.skill != null && this.GetComponent<Player>() != null)
                     {
                         Utilities.Skill.updateSkillset(item.skill, this.GetComponent<Player>());
+                    }
+                    break;
+                }
+            case ResourceType.statuseffect:
+                {
+                    if (item != null && item.statusEffects.Count > 0)
+                    {
+                        foreach (StatusEffect effect in item.statusEffects)
+                        {
+                            Utilities.StatusEffectUtil.AddStatusEffect(effect, this);
+                        }
                     }
                     break;
                 }

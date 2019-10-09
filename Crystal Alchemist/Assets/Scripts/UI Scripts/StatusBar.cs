@@ -21,7 +21,9 @@ public enum UIType
 public class StatusBar : MonoBehaviour
 {
     #region Attribute
-
+    [SerializeField]
+    [BoxGroup("Mandatory")]
+    private PlayerStats playerStats;
 
     [BoxGroup("UI Typ")]
     public UIType UIType = UIType.resource;
@@ -68,7 +70,7 @@ public class StatusBar : MonoBehaviour
 
     private void init()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
         this.audioSource = GetComponent<AudioSource>();
         setValues();
         setStatusBar();
@@ -144,7 +146,7 @@ public class StatusBar : MonoBehaviour
             statusEffectGUI.GetComponent<Image>().sprite = statusEffectFromList.iconSprite;
 
             string seconds = Utilities.Format.setDurationToString(statusEffectFromList.statusEffectTimeLeft)+"s";
-            if (statusEffectFromList.endType == StatusEffectEndType.mana) seconds = "";
+            if (statusEffectFromList.endType != StatusEffectEndType.time) seconds = "";
 
             statusEffectGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = seconds;
 

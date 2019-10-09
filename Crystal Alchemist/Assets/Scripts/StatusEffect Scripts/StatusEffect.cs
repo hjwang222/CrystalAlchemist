@@ -12,11 +12,78 @@ public enum StatusEffectType
     debuff
 }
 
-public enum StatusEffectEndType
+public enum StatusEffectTriggerType
 {
+    init,
     time,
+    intervall,
+    hit,
+    life,
     mana
 }
+
+public enum StatusEffectActionType
+{
+    resource,
+    stacks,
+    skill,
+    destroy
+}
+
+
+
+[System.Serializable]
+public class StatusEffectTrigger
+{
+    public StatusEffectTriggerType triggerType;
+
+    [ShowIf("triggerType", StatusEffectTriggerType.time)]
+    public float duration;
+    [ShowIf("triggerType", StatusEffectTriggerType.time)]
+    [Tooltip("Darf der Statuseffekt einen gleichen Effekt überschreiben? (nur bei Typ Time)")]
+    public bool canOverride = false;
+
+    [ShowIf("triggerType", StatusEffectTriggerType.intervall)]
+    public float intervall;
+
+    [ShowIf("triggerType", StatusEffectTriggerType.life)]
+    public float life;
+
+    [ShowIf("triggerType", StatusEffectTriggerType.mana)]
+    public float mana;
+    [ShowIf("triggerType", StatusEffectTriggerType.mana)]
+    [Tooltip("Darf der Statuseffekt den gleichen Effekt deaktivieren? (nur bei Typ Mana)")]
+    public bool canDeactivateIt = false;
+
+    [ShowIf("triggerType", StatusEffectTriggerType.hit)]
+    public float hits;
+
+    public bool requireAll = false;
+}
+
+[System.Serializable]
+public class StatusEffectAction
+{
+    public StatusEffectActionType actionType;
+
+    [ShowIf("actionType", StatusEffectActionType.resource)]
+    [SerializeField]
+    public List<affectedResource> affectedResources;
+
+    [ShowIf("actionType", StatusEffectActionType.stacks)]
+    public int amount;
+
+    [ShowIf("actionType", StatusEffectActionType.skill)]
+    public List<StandardSkill> skills;
+}
+
+[System.Serializable]
+public class StatusEffectEvent
+{
+    public List<StatusEffectTrigger> triggers;
+    public List<StatusEffectAction> actions;
+}
+
 #endregion
 
 public class StatusEffect : MonoBehaviour
@@ -48,56 +115,16 @@ public class StatusEffect : MonoBehaviour
     public float maxStacks = 1;
 
     [FoldoutGroup("Basis Attribute")]
-    [Tooltip("Darf der Statuseffekt geheilt werden?")]
-    public bool canBeDispelled = true;
-
-    [FoldoutGroup("Basis Attribute")]
     [Tooltip("Ist der Charakter betäubt?")]
     public bool stunTarget = false;
 
     [FoldoutGroup("Basis Attribute")]
     [EnumToggleButtons]
     [Tooltip("Handelt es sich um einen positiven oder negativen Effekt?")]
-    public StatusEffectType statusEffectType = StatusEffectType.debuff;    
+    public StatusEffectType statusEffectType = StatusEffectType.debuff;
 
-    [BoxGroup("Statuseffekt Attribute")]
-    [Tooltip("Wann endet der Statuseffekt?")]
-    [EnumToggleButtons]
-    public StatusEffectEndType endType = StatusEffectEndType.time;
-
-    [BoxGroup("Statuseffekt Attribute")]
-    [ShowIf("endType", StatusEffectEndType.time)]
-    [Tooltip("Dauer des Statuseffekts (nur bei Typ Time)")]
-    [Range(1, Utilities.maxFloatSmall)]
-    public float statusEffectDuration = 1;
-
-    [BoxGroup("Statuseffekt Attribute")]
-    [ShowIf("endType", StatusEffectEndType.time)]
-    [Tooltip("Intervall, wann der Effekt eintrifft. 0 = 1x nur am Anfang")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float statusEffectInterval = 1;
-
-    [BoxGroup("Statuseffekt Attribute")]
-    [ShowIf("endType", StatusEffectEndType.time)]
-    [Tooltip("Darf der Statuseffekt einen gleichen Effekt überschreiben? (nur bei Typ Time)")]
-    public bool canOverride = false;
-
-    [BoxGroup("Statuseffekt Attribute")]
-    [ShowIf("endType",StatusEffectEndType.mana)]
-    [Tooltip("Mana-Kosten des Effekts (nur bei Typ Mana)")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float statusEffectManaDrain = 0;
-
-    [BoxGroup("Statuseffekt Attribute")]
-    [ShowIf("endType", StatusEffectEndType.mana)]
-    [Tooltip("Intervall des Mana-Entzugs (nur bei Typ Mana)")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float statusEffectManaDrainInterval = 1;
-
-    [BoxGroup("Statuseffekt Attribute")]
-    [ShowIf("endType", StatusEffectEndType.mana)]
-    [Tooltip("Darf der Statuseffekt den gleichen Effekt deaktivieren? (nur bei Typ Mana)")]
-    public bool canDeactivateIt = false;
+    [FoldoutGroup("Trigger and Actions", expanded: false)]
+    public List<StatusEffectEvent> statusEffectEvents = new List<StatusEffectEvent>();
 
     [FoldoutGroup("Visuals", expanded: false)]
     [Tooltip("Farbe während der Dauer des Statuseffekts")]
@@ -158,11 +185,11 @@ public class StatusEffect : MonoBehaviour
     public virtual void init()
     {
         if (this.ownAnimator == null) this.ownAnimator = this.GetComponent<Animator>();
-
-        if (this.endType == StatusEffectEndType.time) this.statusEffectTimeLeft = this.statusEffectDuration;
-        if (this.endType == StatusEffectEndType.mana) this.statusEffectTimeLeft = Mathf.Infinity;
         if (this.target != null && this.changeColor) this.target.addColor(this.statusEffectColor);
 
+        doActions();
+
+        /*
         if (this.statusEffectInterval == 0)
         {
             //Einmalig
@@ -174,7 +201,8 @@ public class StatusEffect : MonoBehaviour
             //erste Wirkung
             this.elapsed = this.statusEffectInterval;
             this.elapsedMana = this.statusEffectManaDrainInterval;
-        }
+           } */
+        
 
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
@@ -191,7 +219,76 @@ public class StatusEffect : MonoBehaviour
         doOnUpdate();
     }
 
+    private void doActions()
+    {
+        foreach (StatusEffectEvent buffEvent in this.statusEffectEvents)
+        {
+            if (isTriggered(buffEvent)) doEvent(buffEvent);
+        }
+    }
+
+    private bool isTriggered(StatusEffectEvent buffEvent)
+    {
+        bool isTriggered = false;
+
+        foreach (StatusEffectTrigger trigger in buffEvent.triggers)
+        {
+            switch (trigger.triggerType)
+            {
+                case StatusEffectTriggerType.time: if (this.statusEffectTimeLeft >= trigger.duration) isTriggered = true; break;
+                case StatusEffectTriggerType.intervall: if (this.elapsed >= trigger.intervall) isTriggered = true; this.elapsed = 0; break;
+                case StatusEffectTriggerType.init: isTriggered = true; break;
+                case StatusEffectTriggerType.life: if (this.target.life <= trigger.life) isTriggered = true; break;
+                case StatusEffectTriggerType.mana: if (this.target.mana <= trigger.mana) isTriggered = true; break;
+            }
+        }
+
+        return isTriggered;
+    }
+
+    private void doEvent(StatusEffectEvent buffEvent)
+    {
+        foreach (StatusEffectAction action in buffEvent.actions)
+        {
+            if (action.actionType == StatusEffectActionType.resource)
+            {
+                foreach (affectedResource resource in action.affectedResources)
+                {
+                    this.target.updateResource(resource.resourceType, resource.item, resource.amount);
+                }
+            }
+            else if (action.actionType == StatusEffectActionType.stacks)
+            {
+                Utilities.StatusEffectUtil.RemoveStatusEffect(this, false, this.target);
+            }
+            else if (action.actionType == StatusEffectActionType.skill)
+            {
+                foreach (StandardSkill skill in action.skills)
+                {
+                    Utilities.Skill.instantiateSkill(skill, this.target);
+                }
+            }
+            else if (action.actionType == StatusEffectActionType.destroy)
+            {
+                this.DestroyIt();
+            }
+        }
+    }
+
     public virtual void doOnUpdate()
+    {
+        this.updateUI.Raise();
+
+        this.statusEffectTimeLeft += (Time.deltaTime * this.timeDistortion);
+        this.elapsed += (Time.deltaTime * this.timeDistortion);
+
+        doEffect();
+        doActions();
+    }
+
+   
+    /*
+    public virtual void doOnUpdate2()
     {
         //TODO: Performance?
         this.updateUI.Raise();
@@ -236,7 +333,7 @@ public class StatusEffect : MonoBehaviour
             //Zerstöre Effekt, wenn die Zeit abgelaufen ist
             DestroyIt();
         }
-    }
+    }*/
 
     public virtual void DestroyIt()
     {
