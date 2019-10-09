@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5671926146174382799}
   - component: {fileID: 5671926146174382793}
-  - component: {fileID: 3634902042802677668}
+  - component: {fileID: 3621922215859874659}
   m_Layer: 0
   m_Name: Auferstehung
   m_TagString: Untagged
@@ -45,7 +45,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5671926146174382796}
   m_CullTransparentMesh: 0
---- !u!114 &3634902042802677668
+--- !u!114 &3621922215859874659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,24 +54,61 @@ MonoBehaviour:
   m_GameObject: {fileID: 5671926146174382796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc2e7563cbb0b74b95541bb954a6e72, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fe38f3cb00c4c84ea801bab87a6e5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffectName: Auferstehung
   statusEffectNameEnglish: Ressurection
   statusEffectDescription: 
   statusEffectDescriptionEnglish: 
+  maxDuration: 180
+  canOverride: 1
+  canDeactivateIt: 0
   maxStacks: 1
-  canBeDispelled: 0
   stunTarget: 0
   statusEffectType: 0
-  endType: 0
-  statusEffectDuration: 90
-  statusEffectInterval: 90
-  canOverride: 1
-  statusEffectManaDrain: 0
-  statusEffectManaDrainInterval: 1
-  canDeactivateIt: 0
+  statusEffectEvents:
+  - triggers:
+    - triggerType: 0
+      intervall: 0
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 8
+      affectedResources: []
+      amount: 0
+      speed: 0
+      time: 0
+      skills: []
+      instantiatNewGameObject: {fileID: 0}
+      analyseUI: {fileID: 0}
+  - triggers:
+    - triggerType: 3
+      intervall: 0
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 2
+      affectedResources: []
+      amount: 0
+      speed: 0
+      time: 0
+      skills:
+      - {fileID: 6096689982342564308, guid: 11202d6f47cfaec4380bf94430734912, type: 3}
+      instantiatNewGameObject: {fileID: 0}
+      analyseUI: {fileID: 0}
+    - actionType: 3
+      affectedResources: []
+      amount: 0
+      speed: 0
+      time: 0
+      skills: []
+      instantiatNewGameObject: {fileID: 0}
+      analyseUI: {fileID: 0}
   destroyDelay: 0.2
   ownAnimator: {fileID: 0}
   changeColor: 0
@@ -81,5 +118,3 @@ MonoBehaviour:
   target: {fileID: 0}
   statusEffectTimeLeft: 0
   timeDistortion: 1
-  actions:
-  - {fileID: 6096689982342564308, guid: 11202d6f47cfaec4380bf94430734912, type: 3}

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7363475295885747724}
   - component: {fileID: 7363475295885747722}
+  - component: {fileID: 71630591074221121}
   - component: {fileID: -2323953556458181828}
   - component: {fileID: 2365905393584449253}
   - component: {fileID: 6621120452757124598}
@@ -49,6 +50,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363475295885747727}
   m_CullTransparentMesh: 0
+--- !u!114 &71630591074221121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363475295885747727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe38f3cb00c4c84ea801bab87a6e5a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffectName: Feuer
+  statusEffectNameEnglish: Fire
+  statusEffectDescription: Brennt
+  statusEffectDescriptionEnglish: Burns
+  maxDuration: 5
+  canOverride: 1
+  canDeactivateIt: 0
+  maxStacks: 1
+  stunTarget: 0
+  statusEffectType: 1
+  statusEffectEvents:
+  - triggers:
+    - triggerType: 1
+      intervall: 1
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 0
+      affectedResources:
+      - resourceType: 1
+        item: {fileID: 0}
+        amount: -0.5
+      - resourceType: 2
+        item: {fileID: 0}
+        amount: -0.25
+      amount: 0
+      speed: 0
+      time: 0
+      skills: []
+      instantiatNewGameObject: {fileID: 0}
+      analyseUI: {fileID: 0}
+  destroyDelay: 0.2
+  ownAnimator: {fileID: 0}
+  changeColor: 1
+  statusEffectColor: {r: 0.8018868, g: 0.25095177, b: 0.02647741, a: 1}
+  iconSprite: {fileID: 21300004, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
+  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
+  target: {fileID: 0}
+  statusEffectTimeLeft: 0
+  timeDistortion: 1
 --- !u!114 &-2323953556458181828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,35 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83a91fbea3812fb40b627e5bf88a39dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statusEffectName: Feuer
-  statusEffectNameEnglish: Fire
-  statusEffectDescription: "Schaden \xFCber Zeit. Ver- breitung bei Ber\xFChrung."
-  statusEffectDescriptionEnglish: Damage over Time. Spread by contact.
-  maxStacks: 1
-  canBeDispelled: 1
-  stunTarget: 0
-  statusEffectType: 1
-  endType: 0
-  statusEffectDuration: 10
-  statusEffectInterval: 2
-  canOverride: 0
-  statusEffectManaDrain: 0
-  statusEffectManaDrainInterval: 1
-  canDeactivateIt: 0
-  destroyDelay: 0.2
-  ownAnimator: {fileID: 0}
-  changeColor: 1
-  statusEffectColor: {r: 1, g: 0.52156866, b: 0, a: 1}
-  iconSprite: {fileID: 21300004, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
-  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
-  target: {fileID: 0}
-  statusEffectTimeLeft: 0
-  timeDistortion: 1
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: -0.25
-  collider: {fileID: 2365905393584449253}
+  effectCollider: {fileID: 2365905393584449253}
+  statuseffect: {fileID: 71630591074221121}
 --- !u!61 &2365905393584449253
 BoxCollider2D:
   m_ObjectHideFlags: 0

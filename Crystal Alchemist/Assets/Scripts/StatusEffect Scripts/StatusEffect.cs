@@ -15,11 +15,11 @@ public enum StatusEffectType
 public enum StatusEffectTriggerType
 {
     init,
-    time,
     intervall,
     hit,
     life,
-    mana
+    mana,
+    destroyed
 }
 
 public enum StatusEffectActionType
@@ -27,21 +27,18 @@ public enum StatusEffectActionType
     resource,
     stacks,
     skill,
-    destroy
+    destroy,
+    speed,
+    time,
+    analyse,
+    blind,
+    immortal
 }
-
-
 
 [System.Serializable]
 public class StatusEffectTrigger
 {
     public StatusEffectTriggerType triggerType;
-
-    [ShowIf("triggerType", StatusEffectTriggerType.time)]
-    public float duration;
-    [ShowIf("triggerType", StatusEffectTriggerType.time)]
-    [Tooltip("Darf der Statuseffekt einen gleichen Effekt überschreiben? (nur bei Typ Time)")]
-    public bool canOverride = false;
 
     [ShowIf("triggerType", StatusEffectTriggerType.intervall)]
     public float intervall;
@@ -51,9 +48,6 @@ public class StatusEffectTrigger
 
     [ShowIf("triggerType", StatusEffectTriggerType.mana)]
     public float mana;
-    [ShowIf("triggerType", StatusEffectTriggerType.mana)]
-    [Tooltip("Darf der Statuseffekt den gleichen Effekt deaktivieren? (nur bei Typ Mana)")]
-    public bool canDeactivateIt = false;
 
     [ShowIf("triggerType", StatusEffectTriggerType.hit)]
     public float hits;
@@ -73,8 +67,22 @@ public class StatusEffectAction
     [ShowIf("actionType", StatusEffectActionType.stacks)]
     public int amount;
 
+    [ShowIf("actionType", StatusEffectActionType.speed)]
+    [Range(-100, 100)]
+    public float speed;
+
+    [ShowIf("actionType", StatusEffectActionType.time)]
+    [Range(-100, 100)]
+    public float time;
+
     [ShowIf("actionType", StatusEffectActionType.skill)]
     public List<StandardSkill> skills;
+
+    [ShowIf("actionType", StatusEffectActionType.blind)]
+    public GameObject instantiatNewGameObject;
+
+    [ShowIf("actionType", StatusEffectActionType.analyse)]
+    public GameObject analyseUI;
 }
 
 [System.Serializable]
@@ -109,6 +117,22 @@ public class StatusEffect : MonoBehaviour
     [Tooltip("Beschreibung des Statuseffekts")]
     public string statusEffectDescriptionEnglish;
 
+
+
+
+    [FoldoutGroup("Basis Attribute")]
+    [Range(0, Utilities.maxFloatInfinite)]
+    public float maxDuration = 0;
+
+    [FoldoutGroup("Basis Attribute")]
+    public bool canOverride = false;
+
+    [FoldoutGroup("Basis Attribute")]
+    public bool canDeactivateIt = false;
+
+    [FoldoutGroup("Basis Attribute")]
+    public bool canBeDispelled = true;
+
     [FoldoutGroup("Basis Attribute")]
     [Tooltip("Anzahl der maximalen gleichen Effekte (Stacks)")]
     [Range(1, Utilities.maxFloatSmall)]
@@ -123,8 +147,17 @@ public class StatusEffect : MonoBehaviour
     [Tooltip("Handelt es sich um einen positiven oder negativen Effekt?")]
     public StatusEffectType statusEffectType = StatusEffectType.debuff;
 
+
+
+
+
     [FoldoutGroup("Trigger and Actions", expanded: false)]
     public List<StatusEffectEvent> statusEffectEvents = new List<StatusEffectEvent>();
+
+
+
+
+
 
     [FoldoutGroup("Visuals", expanded: false)]
     [Tooltip("Farbe während der Dauer des Statuseffekts")]
@@ -158,7 +191,8 @@ public class StatusEffect : MonoBehaviour
 
     private AudioSource audioSource;
     private float elapsed;
-    private float elapsedMana;
+    private GameObject panel;
+    private List<GameObject> gameObjectApplied = new List<GameObject>();
 
     [HideInInspector]
     public Character target;
@@ -186,8 +220,9 @@ public class StatusEffect : MonoBehaviour
     {
         if (this.ownAnimator == null) this.ownAnimator = this.GetComponent<Animator>();
         if (this.target != null && this.changeColor) this.target.addColor(this.statusEffectColor);
+        this.statusEffectTimeLeft = this.maxDuration;
 
-        doActions();
+        doActions(true);
 
         /*
         if (this.statusEffectInterval == 0)
@@ -219,27 +254,27 @@ public class StatusEffect : MonoBehaviour
         doOnUpdate();
     }
 
-    private void doActions()
+    private void doActions(bool isInit)
     {
         foreach (StatusEffectEvent buffEvent in this.statusEffectEvents)
         {
-            if (isTriggered(buffEvent)) doEvent(buffEvent);
+            if (isTriggered(buffEvent, isInit)) doEvent(buffEvent);
         }
     }
 
-    private bool isTriggered(StatusEffectEvent buffEvent)
+    private bool isTriggered(StatusEffectEvent buffEvent, bool isInit)
     {
         bool isTriggered = false;
 
         foreach (StatusEffectTrigger trigger in buffEvent.triggers)
         {
             switch (trigger.triggerType)
-            {
-                case StatusEffectTriggerType.time: if (this.statusEffectTimeLeft >= trigger.duration) isTriggered = true; break;
-                case StatusEffectTriggerType.intervall: if (this.elapsed >= trigger.intervall) isTriggered = true; this.elapsed = 0; break;
-                case StatusEffectTriggerType.init: isTriggered = true; break;
-                case StatusEffectTriggerType.life: if (this.target.life <= trigger.life) isTriggered = true; break;
-                case StatusEffectTriggerType.mana: if (this.target.mana <= trigger.mana) isTriggered = true; break;
+            {                
+                case StatusEffectTriggerType.intervall: if (this.elapsed >= trigger.intervall) { isTriggered = true; this.elapsed = 0; } break;
+                case StatusEffectTriggerType.init: if (isInit) isTriggered = true; break;
+                case StatusEffectTriggerType.life: if (this.target != null && this.target.life <= trigger.life) isTriggered = true; break;
+                case StatusEffectTriggerType.mana: if (this.target != null && this.target.mana <= trigger.mana) isTriggered = true; break;
+                case StatusEffectTriggerType.destroyed: if (this.statusEffectTimeLeft <= 0) isTriggered = true; break;
             }
         }
 
@@ -250,12 +285,28 @@ public class StatusEffect : MonoBehaviour
     {
         foreach (StatusEffectAction action in buffEvent.actions)
         {
-            if (action.actionType == StatusEffectActionType.resource)
+            if (action.actionType == StatusEffectActionType.resource && this.target != null)
             {
                 foreach (affectedResource resource in action.affectedResources)
                 {
                     this.target.updateResource(resource.resourceType, resource.item, resource.amount);
                 }
+            }
+            else if (action.actionType == StatusEffectActionType.speed)
+            {
+                this.target.updateSpeed(action.speed);
+            }
+            else if (action.actionType == StatusEffectActionType.time)
+            {
+                target.updateTimeDistortion(action.time);
+            }
+            else if (action.actionType == StatusEffectActionType.blind)
+            {
+                this.panel = Instantiate(action.instantiatNewGameObject);
+            }
+            else if (action.actionType == StatusEffectActionType.analyse)
+            {
+                showAnalyse(action.analyseUI);
             }
             else if (action.actionType == StatusEffectActionType.stacks)
             {
@@ -268,9 +319,40 @@ public class StatusEffect : MonoBehaviour
                     Utilities.Skill.instantiateSkill(skill, this.target);
                 }
             }
+            else if (action.actionType == StatusEffectActionType.immortal)
+            {
+                if(this.target != null) this.target.cannotDie = true;
+            }
             else if (action.actionType == StatusEffectActionType.destroy)
             {
                 this.DestroyIt();
+            }
+        }
+    }
+
+    private void showAnalyse(GameObject analyseGameObject)
+    {
+        if (analyseGameObject != null)
+        {
+            //TODO: Bug, dass es doppelt hinzugefügt wird
+            GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            this.gameObjectApplied.Clear();
+
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                GameObject tmp = Instantiate(analyseGameObject, enemies[i].transform.position, Quaternion.identity, enemies[i].transform);
+                tmp.GetComponent<AnalyseUI>().target = enemies[i];
+                tmp.hideFlags = HideFlags.HideInHierarchy;
+                this.gameObjectApplied.Add(tmp);
+            }
+
+            for (int i = 0; i < objects.Length; i++)
+            {
+                GameObject tmp = Instantiate(analyseGameObject, objects[i].transform.position, Quaternion.identity, objects[i].transform);
+                tmp.GetComponent<AnalyseUI>().target = objects[i];
+                tmp.hideFlags = HideFlags.HideInHierarchy;
+                this.gameObjectApplied.Add(tmp);
             }
         }
     }
@@ -279,11 +361,17 @@ public class StatusEffect : MonoBehaviour
     {
         this.updateUI.Raise();
 
-        this.statusEffectTimeLeft += (Time.deltaTime * this.timeDistortion);
+        if (this.maxDuration < Utilities.maxFloatInfinite)
+        {
+            this.statusEffectTimeLeft -= (Time.deltaTime * this.timeDistortion);            
+        }
+
         this.elapsed += (Time.deltaTime * this.timeDistortion);
 
-        doEffect();
-        doActions();
+        //doEffect();
+        doActions(false);
+
+        if (this.statusEffectTimeLeft <= 0) DestroyIt();
     }
 
    
@@ -344,6 +432,8 @@ public class StatusEffect : MonoBehaviour
             //Charakter-Farbe zurücksetzen
             if(this.changeColor) this.target.resetColor(this.statusEffectColor);
 
+            this.resetValues();
+
             //Statuseffekt von der Liste entfernen
             if (this.statusEffectType == StatusEffectType.debuff)
             {
@@ -360,15 +450,53 @@ public class StatusEffect : MonoBehaviour
         Destroy(this.gameObject, this.destroyDelay);
     }
 
+    private void resetValues()
+    {
+        foreach (StatusEffectEvent buffEvent in this.statusEffectEvents)
+        {
+            foreach (StatusEffectAction action in buffEvent.actions)
+            {
+                if (action.actionType == StatusEffectActionType.speed)
+                {
+                    this.target.updateSpeed(0);
+                }
+                else if (action.actionType == StatusEffectActionType.time)
+                {
+                    target.updateTimeDistortion(0);
+                }
+                else if (action.actionType == StatusEffectActionType.blind)
+                {
+                    Animator animator = this.panel.transform.GetChild(0).GetComponent<Animator>();
+                    Utilities.UnityUtils.SetAnimatorParameter(animator, "Explode", true);
+                    Destroy(this.panel, 2f);
+                }     
+                else if (action.actionType == StatusEffectActionType.analyse)
+                {
+                    for (int i = 0; i < this.gameObjectApplied.Count; i++)
+                    {
+                        Destroy(this.gameObjectApplied[i]);
+                    }
+                    this.gameObjectApplied.Clear();
+                }
+                else if (action.actionType == StatusEffectActionType.immortal)
+                {
+                    if (this.target != null) this.target.cannotDie = false;
+                }                
+            }
+        }
+    }
+
+    /*
     public virtual void doEffect()
     {
         //Wirkung abhängig vom Script!
-        /*
+        
         if (this.target != null && this.changeColor)
         {
             this.target.addColor(this.statusEffectColor);
+        }
         }*/
-    }
+    
 
     public void PlaySoundEffect(AudioClip audioClip)
     {

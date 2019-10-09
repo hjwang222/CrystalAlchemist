@@ -117,7 +117,7 @@ public class AnalyseUI : MonoBehaviour
                 statusEffectGUI.GetComponent<Image>().sprite = statusEffectFromList.iconSprite;
 
                 string seconds = Mathf.RoundToInt(statusEffectFromList.statusEffectTimeLeft) + "s";
-                if (statusEffectFromList.endType == StatusEffectEndType.mana || statusEffectFromList.statusEffectDuration == Utilities.maxFloatInfinite) seconds = "";
+                if (statusEffectFromList.statusEffectTimeLeft <= 0 || statusEffectFromList.maxDuration == Utilities.maxFloatInfinite) seconds = "";
 
                 statusEffectGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = seconds;
 

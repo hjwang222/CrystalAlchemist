@@ -640,7 +640,7 @@ public class Utilities : MonoBehaviour
                     }
                     else
                     {
-                        if (statusEffect.canOverride && statusEffect.endType == StatusEffectEndType.time)
+                        if (statusEffect.canOverride)
                         {
                             //Wenn der Effekt überschreiben kann, soll der Effekt mit der kürzesten Dauer entfernt werden
                             StatusEffect toDestroy = result[0];
@@ -648,7 +648,7 @@ public class Utilities : MonoBehaviour
 
                             instantiateStatusEffect(statusEffect, statusEffects, character);
                         }
-                        else if (statusEffect.canDeactivateIt && statusEffect.endType == StatusEffectEndType.mana)
+                        else if (statusEffect.canDeactivateIt)
                         {
                             StatusEffect toDestroy = result[0];
                             toDestroy.DestroyIt();
@@ -755,7 +755,10 @@ public class Utilities : MonoBehaviour
 
         public static string setDurationToString(float value)
         {
-            return Mathf.RoundToInt(value).ToString("0");
+            int rounded = Mathf.RoundToInt(value);
+
+            if (rounded > 59) return (rounded/60).ToString("0")+"m";
+            else return rounded.ToString("0")+"s";
         }
 
         public static string formatString(float value, float maxValue)

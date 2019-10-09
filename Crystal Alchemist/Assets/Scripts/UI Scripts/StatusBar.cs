@@ -145,8 +145,8 @@ public class StatusBar : MonoBehaviour
             StatusEffect statusEffectFromList = effectList[i];
             statusEffectGUI.GetComponent<Image>().sprite = statusEffectFromList.iconSprite;
 
-            string seconds = Utilities.Format.setDurationToString(statusEffectFromList.statusEffectTimeLeft)+"s";
-            if (statusEffectFromList.endType != StatusEffectEndType.time) seconds = "";
+            string seconds = Utilities.Format.setDurationToString(statusEffectFromList.statusEffectTimeLeft);
+            if (statusEffectFromList.statusEffectTimeLeft <= 0 || statusEffectFromList.maxDuration == Utilities.maxFloatInfinite) seconds = "";
 
             statusEffectGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = seconds;
 

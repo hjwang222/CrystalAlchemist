@@ -43,15 +43,6 @@ public class TimeSkill : StandardSkill
         base.DestroyIt();
     }
 
-    public override void init()
-    {
-        base.init();
-        foreach (TimeDistortion effect in this.statusEffects)
-        {
-            effect.time = this.TimeDistortion;            
-        }
-    }
-
     public override void OnTriggerExit2D(Collider2D hittedCharacter)
     {
         //Normalisiere Zeit beim Austritt aus dem Feld

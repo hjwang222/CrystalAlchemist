@@ -184,7 +184,7 @@ public class CombatButtons : MonoBehaviour
             else if (cooldownLeft > 0 && cooldownValue > 0.5f)
             {
                 //Ist Skill in der Abklingzeit
-                string cooldownText = Utilities.Format.setDurationToString(cooldownLeft) + "s";
+                string cooldownText = Utilities.Format.setDurationToString(cooldownLeft);
                 cooldown.text = cooldownText;
                 setFontSize(cooldown);
 
