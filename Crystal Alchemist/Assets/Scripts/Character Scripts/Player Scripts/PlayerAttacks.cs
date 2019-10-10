@@ -90,7 +90,7 @@ public class PlayerAttacks : MonoBehaviour
                 int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.player.activeSkills, this.player.activePets);
 
                 if (currentAmountOfSameSkills < skill.maxAmounts
-                        && (this.player.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0
+                        && (this.player.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0 //new method: Check if enough resource on skill
                         || skill.addResourceSender == -Utilities.maxFloatInfinite)
                         && skill.basicRequirementsExists)
                 {
@@ -200,7 +200,9 @@ public class PlayerAttacks : MonoBehaviour
     {
         this.player.hideCastBarAndIndicator(skill);
 
-        if (skill.lockOn == null)
+        SkillTargetingSystemModule targetingSystemModule = skill.GetComponent<SkillTargetingSystemModule>();
+
+        if (targetingSystemModule == null)
         {
             //Benutze Skill (ohne Zielerfassung)            
             skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
@@ -208,10 +210,10 @@ public class PlayerAttacks : MonoBehaviour
 
             Utilities.Skill.instantiateSkill(skill, this.player);
         }
-        else if (skill.lockOn != null && this.player.activeLockOnTarget == null)
+        else if (targetingSystemModule != null && targetingSystemModule.lockOn != null && this.player.activeLockOnTarget == null)
         {
             //Aktiviere Zielerfassung
-            this.player.activeLockOnTarget = Instantiate(skill.lockOn, this.transform.position, Quaternion.identity, this.transform);
+            this.player.activeLockOnTarget = Instantiate(targetingSystemModule.lockOn, this.transform.position, Quaternion.identity, this.transform);
             TargetingSystem lockOnScript = this.player.activeLockOnTarget.GetComponent<TargetingSystem>();
             lockOnScript.button = button;
             lockOnScript.sender = this.player;
@@ -230,23 +232,24 @@ public class PlayerAttacks : MonoBehaviour
             if (!skill.isRapidFire) skill.holdTimer = 0;
 
             TargetingSystem targetingSystem = this.player.activeLockOnTarget.GetComponent<TargetingSystem>();
+            SkillTargetingSystemModule targetingSystemModule = skill.GetComponent<SkillTargetingSystemModule>();
 
             if (targetingSystem.currentTarget == null
                 && targetingSystem.sortedTargets.Count == 0
-                && skill.targetingMode != TargetingMode.autoMulti
-                && skill.targetingMode != TargetingMode.autoSingle)
+                && targetingSystemModule.targetingMode != TargetingMode.autoMulti
+                && targetingSystemModule.targetingMode != TargetingMode.autoSingle)
             {
                 Destroy(this.player.activeLockOnTarget);
                 this.player.activeLockOnTarget = null;
             }
             else if (targetingSystem.currentTarget != null
                 || targetingSystem.sortedTargets.Count > 0
-                || skill.targetingMode == TargetingMode.autoMulti
-                || skill.targetingMode == TargetingMode.autoSingle)
+                || targetingSystemModule.targetingMode == TargetingMode.autoMulti
+                || targetingSystemModule.targetingMode == TargetingMode.autoSingle)
             {
                 skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
 
-                if (targetingSystem.selectAll || skill.targetingMode == TargetingMode.autoMulti)
+                if (targetingSystem.selectAll || targetingSystemModule.targetingMode == TargetingMode.autoMulti)
                 {
                     for (int i = 0; i < targetingSystem.listOfTargetsWithMark.Count; i++)
                     {
@@ -257,10 +260,10 @@ public class PlayerAttacks : MonoBehaviour
                     StartCoroutine(fireSkillToMultipleTargets(targetingSystem, skill));
 
                     //Fire Skill one time when no target is there
-                    if (skill.targetingMode == TargetingMode.autoMulti && targetingSystem.sortedTargets.Count == 0)
+                    if (targetingSystemModule.targetingMode == TargetingMode.autoMulti && targetingSystem.sortedTargets.Count == 0)
                         fireSkillToSingleTarget(targetingSystem.currentTarget, 1, true, skill);
                 }
-                else if (!targetingSystem.selectAll || skill.targetingMode == TargetingMode.autoSingle)
+                else if (!targetingSystem.selectAll || targetingSystemModule.targetingMode == TargetingMode.autoSingle)
                 {
                     //SingleHit
                     Destroy(targetingSystem.singleTargetWithMark);

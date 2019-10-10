@@ -272,7 +272,9 @@ public class AIEvents : MonoBehaviour
                 if (action.skillinstance == null && action.skill != null)
                 {
                     action.skillinstance = Utilities.Skill.setSkill(this.enemy, action.skill);
-                    action.skillinstance.showingIndicator = true;                    
+
+                    SkillIndicatorModule indicatorModule = action.skillinstance.GetComponent<SkillIndicatorModule>();
+                    if(indicatorModule != null) indicatorModule.showingIndicator = true;                    
                 }
 
                 useAction(action);
@@ -360,7 +362,8 @@ public class AIEvents : MonoBehaviour
                 {
                     if (this.activeAction.cast >= 0) this.activeAction.skillinstance.cast = this.activeAction.cast;
                     if (this.activeAction.cD >= 0) this.activeAction.skillinstance.cooldown = this.activeAction.cD;
-                    if (this.activeAction.skillinstance.setTargetAutomatically)
+                    if (this.activeAction.skillinstance.GetComponent<SkillTargetingSystemModule>() != null
+                        && this.activeAction.skillinstance.GetComponent<SkillTargetingSystemModule>().setTargetAutomatically)
                         this.activeAction.skillinstance.target = this.enemy.target;
                 }
 
@@ -396,11 +399,15 @@ public class AIEvents : MonoBehaviour
                 {
                     this.activeAction.skillinstance.holdTimer += (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
 
-                    this.activeAction.skillinstance.showIndicator(); //Zeige Indikator beim Casten
-                    this.activeAction.skillinstance.showCastingAnimation();
+                    SkillIndicatorModule indicatorModule = this.activeAction.skillinstance.GetComponent<SkillIndicatorModule>();
+                    if (indicatorModule != null) indicatorModule.showIndicator(); //Zeige Indikator beim Casten
+
+                    SkillAnimationModule animationModule = this.activeAction.skillinstance.GetComponent<SkillAnimationModule>();
+                    if (indicatorModule != null) animationModule.showCastingAnimation();
+
                     this.activeAction.skillinstance.doOnCast();
 
-                    if (this.activeAction.skillinstance.showCastBarForEnemies)
+                    if (indicatorModule != null && indicatorModule.showCastBarForEnemies)
                     {
                         if (this.enemy.activeCastbar == null)
                         {
@@ -588,7 +595,10 @@ public class AIEvents : MonoBehaviour
             if (action.skillinstance == null && action.skill != null)
             {
                 action.skillinstance = Utilities.Skill.setSkill(this.enemy, action.skill);
-                action.skillinstance.showingIndicator = true;
+
+
+                SkillIndicatorModule indicatorModule = action.skillinstance.GetComponent<SkillIndicatorModule>();
+                if (indicatorModule != null) indicatorModule.showingIndicator = true;
             }
 
             this.activeAction = action;
