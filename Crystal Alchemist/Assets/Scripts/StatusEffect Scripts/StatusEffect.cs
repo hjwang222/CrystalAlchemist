@@ -209,8 +209,6 @@ public class StatusEffect : MonoBehaviour
         init();        
     }
 
-    //Signal?
-
     public void updateTimeDistortion(float distortion)
     {
         this.timeDistortion = 1 + (distortion/100);
@@ -223,21 +221,6 @@ public class StatusEffect : MonoBehaviour
         this.statusEffectTimeLeft = this.maxDuration;
 
         doActions(true);
-
-        /*
-        if (this.statusEffectInterval == 0)
-        {
-            //Einmalig
-            doEffect();
-            this.statusEffectInterval = Mathf.Infinity;
-        }
-        else
-        {
-            //erste Wirkung
-            this.elapsed = this.statusEffectInterval;
-            this.elapsedMana = this.statusEffectManaDrainInterval;
-           } */
-        
 
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
@@ -334,7 +317,6 @@ public class StatusEffect : MonoBehaviour
     {
         if (analyseGameObject != null)
         {
-            //TODO: Bug, dass es doppelt hinzugefügt wird
             GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             this.gameObjectApplied.Clear();
@@ -356,7 +338,6 @@ public class StatusEffect : MonoBehaviour
             }
         }
     }
-
     public virtual void doOnUpdate()
     {
         this.updateUI.Raise();
@@ -368,61 +349,11 @@ public class StatusEffect : MonoBehaviour
 
         this.elapsed += (Time.deltaTime * this.timeDistortion);
 
-        //doEffect();
         doActions(false);
 
         if (this.statusEffectTimeLeft <= 0) DestroyIt();
-    }
-
-   
-    /*
-    public virtual void doOnUpdate2()
-    {
-        //TODO: Performance?
-        this.updateUI.Raise();
-
-        if (this.endType == StatusEffectEndType.time) this.statusEffectTimeLeft -= (Time.deltaTime * this.timeDistortion);
-
-        this.elapsed += (Time.deltaTime * this.timeDistortion);
-        this.elapsedMana += (Time.deltaTime * this.timeDistortion);
-
-        if (this.endType == StatusEffectEndType.mana
-            && this.statusEffectManaDrainInterval > 0
-            && this.elapsedMana >= statusEffectManaDrainInterval
-            && this.target != null
-            && this.target.getResource(ResourceType.mana, null) - this.statusEffectManaDrain >= 0)
-        {
-            //Reduziere Mana solange der Effekt aktiv ist   
-            this.target.updateResource(ResourceType.mana, null, -this.statusEffectManaDrain);
-            this.elapsedMana = 0;
-        }
-
-        if ((this.endType == StatusEffectEndType.time
-            && this.statusEffectInterval > 0
-            && this.statusEffectTimeLeft > 0
-            && this.elapsed >= statusEffectInterval)
-            ||
-            (this.endType == StatusEffectEndType.mana
-            && this.statusEffectInterval > 0
-            && this.elapsed >= statusEffectInterval
-            && this.target != null
-            && this.target.getResource(ResourceType.mana, null) - this.statusEffectManaDrain >= 0))
-        {
-            //solange der Effekt aktiv ist und das Intervall erreicht ist, soll etwas passieren. Intervall zurück setzen
-            doEffect();
-            this.elapsed = 0;
-        }
-        else if ((this.endType == StatusEffectEndType.time
-                 && this.statusEffectTimeLeft <= 0)
-                 || (this.endType == StatusEffectEndType.mana
-            && this.target != null
-            && this.target.getResource(ResourceType.mana, null) - this.statusEffectManaDrain < 0))
-        {
-            //Zerstöre Effekt, wenn die Zeit abgelaufen ist
-            DestroyIt();
-        }
-    }*/
-
+    }   
+ 
     public virtual void DestroyIt()
     {
         Utilities.UnityUtils.SetAnimatorParameter(this.ownAnimator, "End");
@@ -486,18 +417,7 @@ public class StatusEffect : MonoBehaviour
         }
     }
 
-    /*
-    public virtual void doEffect()
-    {
-        //Wirkung abhängig vom Script!
-        
-        if (this.target != null && this.changeColor)
-        {
-            this.target.addColor(this.statusEffectColor);
-        }
-        }*/
     
-
     public void PlaySoundEffect(AudioClip audioClip)
     {
         Utilities.Audio.playSoundEffect(this.audioSource, audioClip);

@@ -77,6 +77,11 @@ public class CharacterStats : ScriptableObject
     [Space(10)]
     [TabGroup("Start-Values")]
     [Tooltip("Immunität von Statuseffekten")]
+    public bool isImmuneToAllDebuffs = false;
+    
+    [TabGroup("Start-Values")]
+    [HideIf("isImmuneToAllDebuffs")]
+    [Tooltip("Immunität von Statuseffekten")]
     public List<StatusEffect> immunityToStatusEffects = new List<StatusEffect>();
 
 

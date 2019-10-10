@@ -201,7 +201,8 @@ public class Utilities : MonoBehaviour
 
             if (tempSkill != null)
             {
-                if (skill.affectSkills
+                if (skill.GetComponent<SkillTargetModule>() != null
+                && skill.GetComponent<SkillTargetModule>().affectSkills
                 && tempSkill.CompareTag("Skill")
                 && tempSkill.skillName != skill.skillName)
                 {
@@ -217,8 +218,9 @@ public class Utilities : MonoBehaviour
             {
                 if (hittedCharacter.gameObject == skill.sender.gameObject)
                 {
-                    if (!skill.affectSelf) return false;
-                    else return true;
+                    if (skill.GetComponent<SkillTargetModule>() != null
+                        && skill.GetComponent<SkillTargetModule>().affectSelf) return true;
+                    else return false;
                 }
                 else
                 {
@@ -228,8 +230,10 @@ public class Utilities : MonoBehaviour
                     }
                     else if (!hittedCharacter.isTrigger)
                     {
-                        if (checkAffections(skill.sender, skill.affectOther, skill.affectSame, skill.affectNeutral, hittedCharacter))
-                        {
+                        SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
+                        if (targetModule != null
+                            && checkAffections(skill.sender, targetModule.affectOther, targetModule.affectSame, targetModule.affectNeutral, hittedCharacter))
+                        { 
                             return true;
                         }
                     }
@@ -604,13 +608,18 @@ public class Utilities : MonoBehaviour
             {
                 bool isImmune = false;
 
-                for (int i = 0; i < character.stats.immunityToStatusEffects.Count; i++)
+                if (character.stats.isImmuneToAllDebuffs 
+                    && statusEffect.statusEffectType == StatusEffectType.debuff) isImmune = true;
+                else
                 {
-                    StatusEffect immunityEffect = character.stats.immunityToStatusEffects[i];
-                    if (statusEffect.statusEffectName == immunityEffect.statusEffectName)
+                    for (int i = 0; i < character.stats.immunityToStatusEffects.Count; i++)
                     {
-                        isImmune = true;
-                        break;
+                        StatusEffect immunityEffect = character.stats.immunityToStatusEffects[i];
+                        if (statusEffect.statusEffectName == immunityEffect.statusEffectName)
+                        {
+                            isImmune = true;
+                            break;
+                        }
                     }
                 }
 
@@ -903,6 +912,7 @@ public class Utilities : MonoBehaviour
             StandardSkill skillInstance = MonoBehaviour.Instantiate(prefab, character.skillSetParent.transform) as StandardSkill;
             skillInstance.sender = character;
             skillInstance.gameObject.SetActive(false);
+            skillInstance.preLoad();
 
             return skillInstance;
         }
@@ -923,26 +933,33 @@ public class Utilities : MonoBehaviour
                 && sender.currentState != CharacterState.attack
                 && sender.currentState != CharacterState.defend)
             {
-                GameObject activeSkill = Instantiate(skill.gameObject, sender.transform.position, Quaternion.identity);
-                activeSkill.SetActive(true);
+                StandardSkill activeSkill = Instantiate(skill, sender.transform.position, Quaternion.identity);
+                activeSkill.gameObject.SetActive(true);
+                SkillTargetModule targetModule = activeSkill.GetComponent<SkillTargetModule>();
+                SkillSenderModule sendermodule = activeSkill.GetComponent<SkillSenderModule>();
 
                 if (!skill.isStationary) activeSkill.transform.parent = sender.activeSkillParent.transform;
 
-                if (target != null) activeSkill.GetComponent<StandardSkill>().target = target;
-                activeSkill.GetComponent<StandardSkill>().sender = sender;
+                if (target != null) activeSkill.target = target;
+                activeSkill.sender = sender;
 
                 List<affectedResource> temp = new List<affectedResource>();
 
-                for (int i = 0; i < activeSkill.GetComponent<StandardSkill>().affectedResources.Count; i++)
+                if (targetModule != null)
                 {
-                    affectedResource elem = activeSkill.GetComponent<StandardSkill>().affectedResources[i];
-                    elem.amount /= reduce;
-                    temp.Add(elem);
+
+                    for (int i = 0; i < targetModule.affectedResources.Count; i++)
+                    {
+                        affectedResource elem = targetModule.affectedResources[i];
+                        elem.amount /= reduce;
+                        temp.Add(elem);
+                    }
+
+                    targetModule.affectedResources = temp;
+                    if(sendermodule != null) sendermodule.addResourceSender /= reduce;
                 }
 
-                activeSkill.GetComponent<StandardSkill>().affectedResources = temp;
-                activeSkill.GetComponent<StandardSkill>().addResourceSender /= reduce;
-                sender.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
+                sender.activeSkills.Add(activeSkill);
 
                 /*
                 if (skill.comboAmount > 0 
@@ -960,7 +977,11 @@ public class Utilities : MonoBehaviour
         {
             foreach (StandardSkill skill in skillset)
             {
-                if (category == skill.category && ID == skill.orderIndex) return skill;
+                SkillBookModule skillBookModule = skill.GetComponent<SkillBookModule>();
+
+                if (skillBookModule != null 
+                    && category == skillBookModule.category
+                    && ID == skillBookModule.orderIndex) return skill;
             }
 
             return null;
@@ -1024,7 +1045,9 @@ public class Utilities : MonoBehaviour
 
         private static bool checkIfHelperActivated(StandardSkill skill)
         {
-            if (skill != null && skill.activeTargetHelper) return true;
+            if (skill != null 
+                && skill.GetComponent<SkillTargetingSystemModule>() != null
+                && skill.GetComponent<SkillTargetingSystemModule>().activeTargetHelper) return true;
             else return false;
         }
     }

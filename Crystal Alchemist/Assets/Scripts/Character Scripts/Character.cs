@@ -223,7 +223,12 @@ public class Character : MonoBehaviour
 
     public void Update()
     {
+        if (this.currentState == CharacterState.dead)
+            return;
+
         regeneration();
+
+        updateLifeAnimation();
 
         if (this.currentState != CharacterState.knockedback && !this.isOnIce)
         {
@@ -232,9 +237,12 @@ public class Character : MonoBehaviour
 
         if (this.life <= 0 && !this.cannotDie && !this.isImmortal && !this.isInvincible)
             KillIt();
+    }
 
-        if (this.currentState == CharacterState.dead)
-            return;
+    private void updateLifeAnimation()
+    {
+        float percentage = this.life * 100 / this.stats.maxLife;
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Life", percentage);
     }
 
     private void regeneration()
@@ -327,7 +335,7 @@ public class Character : MonoBehaviour
 
             this.currentState = CharacterState.dead;
 
-            if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
+            if (this.myRigidbody != null && this.myRigidbody.bodyType != RigidbodyType2D.Static) this.myRigidbody.velocity = Vector2.zero;
             //StartCoroutine(colliderDisable());
             if (this.boxCollider != null) this.boxCollider.enabled = false;
             this.shadowRenderer.enabled = false;

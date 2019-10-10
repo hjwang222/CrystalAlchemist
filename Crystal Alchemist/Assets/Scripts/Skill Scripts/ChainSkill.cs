@@ -45,13 +45,22 @@ public class ChainSkill : StandardSkill
     public Color wrongColor;
 
     private float startDistance = 0;
+    private SkillIndicatorModule indicatorModule;
 
-
-    public override void initializeIndicator(Indicator indicator)
+    private void Start()
     {
-        base.initializeIndicator(indicator);
+        this.indicatorModule = this.GetComponent<SkillIndicatorModule>();
+    }
 
-        if (this.chainSpriteRenderer != null && this.activeIndicators != null)
+    public void initializeIndicator(Indicator indicator)
+    {
+        //base.initializeIndicator(indicator);
+
+        
+
+        if (this.indicatorModule != null
+            && this.chainSpriteRenderer != null 
+            && this.indicatorModule.activeIndicators != null)
         {
             indicator.indicatorRenderer.sprite = this.chainSpriteRenderer.sprite;
             indicator.indicatorRenderer.color = this.chainSpriteRenderer.color;
@@ -67,7 +76,7 @@ public class ChainSkill : StandardSkill
         {
             if (this.changeColor)
             {
-                foreach (Indicator indicator in this.indicators)
+                foreach (Indicator indicator in this.indicatorModule.indicators)
                 {
                     indicator.indicatorRenderer.color = this.rightColor;
                 }
@@ -75,13 +84,13 @@ public class ChainSkill : StandardSkill
 
             if (this.canBreak && !this.useRange)
             {
-                hideIndicator();
+                this.indicatorModule.hideIndicator();
                 this.DestroyIt();
             }
         }
         else
         {
-            if (this.changeColor) foreach (Indicator indicator in this.indicators)
+            if (this.changeColor) foreach (Indicator indicator in this.indicatorModule.indicators)
                 {
                     indicator.indicatorRenderer.color = this.wrongColor;
                 }

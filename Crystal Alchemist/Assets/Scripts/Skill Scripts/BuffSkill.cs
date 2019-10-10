@@ -57,11 +57,9 @@ public class BuffSkill : StandardSkill
     private bool showAnimation = false;
 
     #region Overrides
+
     public override void init()
     {
-        Player player = this.sender.GetComponent<Player>();
-        if (this.supportType == SupportType.teleport && player != null && !player.GetComponent<PlayerTeleport>().getLastTeleport()) this.basicRequirementsExists = false;
-
         base.init();
         if (!this.useCollider && this.affectSelf) useSkill(this.sender); 
     }

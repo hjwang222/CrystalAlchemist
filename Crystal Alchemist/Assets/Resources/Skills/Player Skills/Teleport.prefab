@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3198320152754607256}
   - component: {fileID: 4135789139748317152}
   - component: {fileID: 1929037885388743043}
+  - component: {fileID: 783293887223134462}
   - component: {fileID: 3229661110501609832}
   m_Layer: 12
   m_Name: Teleport
@@ -147,7 +148,7 @@ MonoBehaviour:
   skillDescriptionEnglish: Returns you to the last save point
   category: 1
   animationTriggerName: 
-  orderIndex: 7
+  orderIndex: 11
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -170,6 +171,7 @@ MonoBehaviour:
   cooldown: 60
   cooldownAfterCombo: 0
   durationCombo: 0
+  canAffectedBytimeDistortion: 1
   affectedResources: []
   statusEffects: []
   thrust: 0
@@ -242,6 +244,19 @@ MonoBehaviour:
   useCollider: 0
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   showAnimation: 1
+--- !u!114 &783293887223134462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892130185635481934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a40c805296abb4c851b2ce64fd3152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 1929037885388743043}
 --- !u!58 &3229661110501609832
 CircleCollider2D:
   m_ObjectHideFlags: 0

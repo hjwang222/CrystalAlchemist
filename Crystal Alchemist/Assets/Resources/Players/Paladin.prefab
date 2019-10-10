@@ -108,6 +108,7 @@ MonoBehaviour:
   speed: 0
   isInvincible: 0
   isImmortal: 0
+  cannotDie: 0
   isHit: 0
   buffs: []
   debuffs: []
@@ -146,6 +147,7 @@ MonoBehaviour:
   - {fileID: 6121382049002356524, guid: af79dc6e8669ea341b020d34b9391b34, type: 3}
   - {fileID: 6097060202432798594, guid: 829f95c3bd5d9984793723ed6e29d15d, type: 3}
   - {fileID: 1929037885388743043, guid: 28d171700ce5ac84fb3390e7c6068744, type: 3}
+  - {fileID: 7292334694722244825, guid: 00d71e733b0c7114a806e954775ad101, type: 3}
   timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
   dialogBoxSignal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
@@ -221,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5074818981556205378}
+  teleportSignal: {fileID: 0}
 --- !u!50 &759644400424337060
 Rigidbody2D:
   serializedVersion: 4
