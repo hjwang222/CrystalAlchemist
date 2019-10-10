@@ -26,7 +26,7 @@ public class ProjectileSkill : StandardSkill
     {
         if (this.myRigidbody != null && this.speedup)
         {
-            this.myRigidbody.velocity = this.direction.normalized * this.speed;
+            this.myRigidbody.velocity = this.direction.normalized * this.getSpeed();
             this.tempVelocity = this.myRigidbody.velocity;
             this.speedup = false;
         }
@@ -64,7 +64,7 @@ public class ProjectileSkill : StandardSkill
             if (fireSkill != null)
             {
                 //Position nicht überschreiben
-                fireSkill.setPositionAtStart = false;
+                if(fireSkill.GetComponent<SkillTransformModule>() != null) fireSkill.GetComponent<SkillTransformModule>().setPositionAtStart = false;
                 fireSkill.sender = this.sender;
             }
         }

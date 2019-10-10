@@ -95,8 +95,8 @@ public class SkillSequence : MonoBehaviour
 
                     if (skill != null)
                     {
-                        skill.showIndicator();
-                        skill.showCastingAnimation();
+                        if (skill.GetComponent<SkillIndicatorModule>() != null) skill.GetComponent<SkillIndicatorModule>().showIndicator();
+                        if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().showCastingAnimation();
 
                         if (skill.holdTimer < skill.cast)
                         {
@@ -104,8 +104,8 @@ public class SkillSequence : MonoBehaviour
                         }
                         else
                         {
-                            skill.hideIndicator();
-                            skill.hideCastingAnimation();
+                            if (skill.GetComponent<SkillIndicatorModule>() != null) skill.GetComponent<SkillIndicatorModule>().hideIndicator();
+                            if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().hideCastingAnimation();
                             mod.gameObject.SetActive(true);
                         }
                     }
@@ -183,7 +183,8 @@ public class SkillSequence : MonoBehaviour
                 {
                     childSkill.sender = this.sender;
                     childSkill.target = this.target;
-                    childSkill.setPositionAtStart = false;
+
+                    if(childSkill.GetComponent<SkillTransformModule>() != null) childSkill.GetComponent<SkillTransformModule>().setPositionAtStart = false;
                 }
             }
         }

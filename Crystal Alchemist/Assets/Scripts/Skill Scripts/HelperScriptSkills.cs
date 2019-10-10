@@ -40,22 +40,22 @@ public class HelperScriptSkills : MonoBehaviour
 
     public void showIndicator()
     {
-        this.skill.showIndicator();
+        if(this.skill.GetComponent<SkillIndicatorModule>() != null) this.skill.GetComponent<SkillIndicatorModule>().showIndicator();
     }
 
     public void hideIndicator()
     {
-        this.skill.hideIndicator();
+        if (this.skill.GetComponent<SkillIndicatorModule>() != null) this.skill.GetComponent<SkillIndicatorModule>().hideIndicator();
     }
 
     public void showCastingAnimation()
     {
-        this.skill.showCastingAnimation();
+        if (this.skill.GetComponent<SkillAnimationModule>() != null) this.skill.GetComponent<SkillAnimationModule>().showCastingAnimation();
     }
 
     public void hideCastingAnimation()
     {
-        this.skill.hideCastingAnimation();
+        if (this.skill.GetComponent<SkillAnimationModule>() != null) this.skill.GetComponent<SkillAnimationModule>().hideCastingAnimation();
     }
 
     public void ResetRotation()

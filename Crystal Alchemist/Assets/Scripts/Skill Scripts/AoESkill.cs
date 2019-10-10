@@ -76,7 +76,7 @@ public class AoESkill : StandardSkill
     {
         if (this.myRigidbody != null)
         {
-            Vector3 temp = Vector3.MoveTowards(transform.position, position, this.speed * (Time.deltaTime));
+            Vector3 temp = Vector3.MoveTowards(transform.position, position, this.getSpeed() * (Time.deltaTime));
             Vector2 direction = position - this.transform.position;
 
             this.myRigidbody.MovePosition(temp);

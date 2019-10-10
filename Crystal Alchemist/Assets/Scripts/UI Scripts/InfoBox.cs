@@ -32,15 +32,19 @@ public class InfoBox : MonoBehaviour
     {
         this.additionalInfo.SetActive(false);
 
-        this.previewImage.sprite = skill.icon;
         this.nameField.text = Utilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
-        this.descriptionField.text = Utilities.Format.getLanguageDialogText(skill.skillDescription, skill.skillDescriptionEnglish);
 
-        if(skill.statusEffects.Count > 0)
+        if (skill.GetComponent<SkillBookModule>() != null)
+        {
+            this.previewImage.sprite = skill.GetComponent<SkillBookModule>().icon;
+            this.descriptionField.text = Utilities.Format.getLanguageDialogText(skill.GetComponent<SkillBookModule>().skillDescription, skill.GetComponent<SkillBookModule>().skillDescriptionEnglish);
+        }
+
+        if (skill.GetComponent<SkillTargetModule>() != null && skill.GetComponent<SkillTargetModule>().statusEffects.Count > 0)
         {
             this.additionalInfo.SetActive(true);
 
-            StatusEffect statusEffect = skill.statusEffects[0];
+            StatusEffect statusEffect = skill.GetComponent<SkillTargetModule>().statusEffects[0];
 
             this.statusEffectPreviewImage.sprite = statusEffect.iconSprite;
             this.statusEffectNameField.text = Utilities.Format.getLanguageDialogText(statusEffect.statusEffectName, statusEffect.statusEffectNameEnglish);

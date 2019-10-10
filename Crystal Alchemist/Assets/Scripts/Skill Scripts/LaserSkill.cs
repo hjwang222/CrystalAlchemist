@@ -28,7 +28,7 @@ public class LaserSkill : StandardSkill
     public override void doOnUpdate()
     {
         base.doOnUpdate();
-        drawLine(this.rotateIt);
+        drawLine(this.rotateIt());
     }
 
     public override void init()
@@ -50,9 +50,7 @@ public class LaserSkill : StandardSkill
         Vector2 startpoint;
         Vector3 rotation;
 
-        Utilities.Rotation.setDirectionAndRotation(this.sender, this.target,
-                                          this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
-                                          out angle, out startpoint, out this.direction, out rotation);
+        Utilities.Rotation.setDirectionAndRotation(this, out angle, out startpoint, out this.direction, out rotation);
 
         if (this.target != null && updateRotation)
         {
@@ -75,7 +73,10 @@ public class LaserSkill : StandardSkill
 
         RaycastHit2D hitInfo = Physics2D.CircleCast(newPosition, this.laserSprite.size.y / 5, this.direction, distance, layerMask);
 
-        if ((this.lockOn != null && target != null) || (this.lockOn == null && hitInfo && !hitInfo.collider.isTrigger))
+        SkillTargetingSystemModule targetingSystemModule = this.GetComponent<SkillTargetingSystemModule>();
+
+        if ((targetingSystemModule != null && targetingSystemModule.lockOn != null && target != null) 
+            || (targetingSystemModule != null && targetingSystemModule.lockOn == null && hitInfo && !hitInfo.collider.isTrigger))
         {
             //Ziel bzw. Collider wurde getroffen, zeichne Linie bis zum Ziel
             Collider2D hitted = hitInfo.collider;
@@ -117,7 +118,7 @@ public class LaserSkill : StandardSkill
                     if (fireSkill != null)
                     {
                         //Position nicht überschreiben
-                        fireSkill.setPositionAtStart = false;
+                        if (fireSkill.GetComponent<SkillTransformModule>() != null) fireSkill.GetComponent<SkillTransformModule>().setPositionAtStart = false;
                         fireSkill.sender = this.sender;
                     }
 
@@ -131,7 +132,7 @@ public class LaserSkill : StandardSkill
         }        
         else
         {
-            if (this.lockOn == null)
+            if (this.GetComponent<SkillTargetingSystemModule>() != null && this.GetComponent<SkillTargetingSystemModule>().lockOn == null)
             {
                 //Kein Ziel getroffen, zeichne Linie mit max Länge            
                 Vector2 temp = new Vector2(this.direction.x * (this.distance / 2), this.direction.y * (this.distance / 2)) + startpoint;

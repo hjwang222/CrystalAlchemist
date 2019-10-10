@@ -846,18 +846,30 @@ public class Utilities : MonoBehaviour
             gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
 
-        public static void setDirectionAndRotation(Character sender, Character target,
-                                                    float positionOffset, float positionHeight, float snapRotationInDegrees, float rotationModifier,
+        public static void setDirectionAndRotation(StandardSkill skill,
                                                    out float angle, out Vector2 start, out Vector2 direction, out Vector3 rotation)
         {
-            direction = sender.direction.normalized;
+            float snapRotationInDegrees = 0;
+            float rotationModifier = 0;
+            float positionOffset = 0;
+            float positionHeight = 0;
 
-            start = new Vector2(sender.spriteRenderer.transform.position.x + (direction.x * positionOffset),
-                                sender.spriteRenderer.transform.position.y + (direction.y * positionOffset) + positionHeight);
+            if (skill.GetComponent<SkillTransformModule>() != null)
+            {
+                snapRotationInDegrees = skill.GetComponent<SkillTransformModule>().snapRotationInDegrees;
+                rotationModifier = skill.GetComponent<SkillTransformModule>().rotationModifier;
+                positionOffset = skill.GetComponent<SkillTransformModule>().positionOffset;
+                positionHeight = skill.GetComponent<SkillTransformModule>().positionHeight;
+            }
+
+            direction = skill.sender.direction.normalized;
+
+            start = new Vector2(skill.sender.spriteRenderer.transform.position.x + (direction.x * positionOffset),
+                                skill.sender.spriteRenderer.transform.position.y + (direction.y * positionOffset) + positionHeight);
 
             //if sender is not frozen
 
-            if (target != null) direction = (Vector2)target.transform.position - start;
+            if (skill.target != null) direction = (Vector2)skill.target.transform.position - start;
 
             float temp_angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             direction = Utilities.Rotation.DegreeToVector2(temp_angle);

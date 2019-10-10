@@ -198,7 +198,7 @@ public class StandardSkill : MonoBehaviour
         if (this.sender == null)
         {
             throw new System.Exception("No SENDER found! Must be player!");
-        }        
+        }
         //this.gameObject.layer = LayerMask.NameToLayer(this.sender.gameObject.tag + " Skill");        
     }
 
@@ -211,7 +211,7 @@ public class StandardSkill : MonoBehaviour
         this.name = this.skillName + Time.deltaTime;
 
         if (this.myRigidbody == null) this.myRigidbody = GetComponent<Rigidbody2D>();
-        if(this.spriteRenderer == null) this.spriteRenderer = GetComponent<SpriteRenderer>();
+        if (this.spriteRenderer == null) this.spriteRenderer = GetComponent<SpriteRenderer>();
         if (this.animator == null) this.animator = GetComponent<Animator>();
 
         if (this.shadow != null && this.spriteRenderer != null)
@@ -221,7 +221,7 @@ public class StandardSkill : MonoBehaviour
 
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
-        this.audioSource.playOnAwake = false;        
+        this.audioSource.playOnAwake = false;
 
         this.delayTimeLeft = this.delay;
         this.durationTimeLeft = this.duration;
@@ -240,7 +240,7 @@ public class StandardSkill : MonoBehaviour
         int childcount = gameobject.transform.childCount;
         gameobject.tag = tag;
 
-        for(int i = 0; i < childcount; i++)
+        for (int i = 0; i < childcount; i++)
         {
             setTag(gameobject.transform.GetChild(i).gameObject, tag);
         }
@@ -248,7 +248,7 @@ public class StandardSkill : MonoBehaviour
 
 
 
-    
+
 
     #endregion
 
@@ -269,7 +269,7 @@ public class StandardSkill : MonoBehaviour
 
     public virtual void doOnCast()
     {
-        
+
     }
 
     public virtual void doOnUpdate()
@@ -290,7 +290,7 @@ public class StandardSkill : MonoBehaviour
             this.shadow.sprite = this.spriteRenderer.sprite;
         }
 
-        
+
 
 
 
@@ -303,7 +303,7 @@ public class StandardSkill : MonoBehaviour
         if (this.delayTimeLeft > 0)
         {
             SkillIndicatorModule indicatorModule = this.GetComponent<SkillIndicatorModule>();
-            if(indicatorModule != null) indicatorModule.showIndicator();
+            if (indicatorModule != null) indicatorModule.showIndicator();
 
             this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
 
@@ -366,6 +366,32 @@ public class StandardSkill : MonoBehaviour
     }
 
     #endregion
+
+
+    public bool isResourceEnough(Character character)
+    {
+        SkillSenderModule senderModule = this.GetComponent<SkillSenderModule>();
+
+        if (senderModule == null) return true;
+        else
+        {
+            if (character.getResource(senderModule.resourceType, senderModule.item) + senderModule.addResourceSender >= 0 //new method: Check if enough resource on skill
+                           || senderModule.addResourceSender == -Utilities.maxFloatInfinite) return true;
+            else return false;
+        }
+    }
+
+    public float getSpeed()
+    {
+        if (this.GetComponent<SkillProjectile>() != null) return this.GetComponent<SkillProjectile>().speed;
+        else return 0;
+    }
+
+    public bool rotateIt()
+    {
+        if (this.GetComponent<SkillTransformModule>() != null) return this.GetComponent<SkillTransformModule>().rotateIt;
+        else return false;
+    }
 
 
     #region Trigger

@@ -64,7 +64,7 @@ public class SkillTransformModule : MonoBehaviour
 
 
     private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
-    private bool setPositionAtStart = true;
+    public bool setPositionAtStart = true;
 
 
     private void Update()
@@ -94,9 +94,7 @@ public class SkillTransformModule : MonoBehaviour
         {
             if (!this.keepOriginalRotation)
             {
-                Utilities.Rotation.setDirectionAndRotation(this.skill.sender, this.skill.target,
-             this.positionOffset, this.positionHeight, this.snapRotationInDegrees, this.rotationModifier,
-             out angle, out start, out this.skill.direction, out rotation);
+                Utilities.Rotation.setDirectionAndRotation(this.skill, out angle, out start, out this.skill.direction, out rotation);
             }
 
             //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;                       

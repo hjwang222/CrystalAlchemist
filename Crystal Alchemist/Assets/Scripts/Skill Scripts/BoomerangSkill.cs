@@ -44,7 +44,7 @@ public class BoomerangSkill : StandardSkill
     {
         if (this.myRigidbody != null && this.speedup)
         {
-            this.myRigidbody.velocity = this.direction.normalized * this.speed;
+            this.myRigidbody.velocity = this.direction.normalized * this.getSpeed();
             this.tempVelocity = this.myRigidbody.velocity;
             this.speedup = false;
         }
@@ -97,7 +97,7 @@ public class BoomerangSkill : StandardSkill
             this.myRigidbody.velocity = Vector2.zero;
             if (Vector3.Distance(this.sender.transform.position, this.transform.position) > this.minDistance)
             {
-                Vector3 newPosition = Vector3.MoveTowards(this.transform.position, this.sender.transform.position, this.speed * (Time.deltaTime * this.timeDistortion));
+                Vector3 newPosition = Vector3.MoveTowards(this.transform.position, this.sender.transform.position, this.getSpeed() * (Time.deltaTime * this.timeDistortion));
 
                 this.myRigidbody.MovePosition(newPosition);
                 this.myRigidbody.velocity = Vector2.zero;

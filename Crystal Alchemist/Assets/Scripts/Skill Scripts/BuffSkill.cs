@@ -61,7 +61,9 @@ public class BuffSkill : StandardSkill
     public override void init()
     {
         base.init();
-        if (!this.useCollider && this.affectSelf) useSkill(this.sender); 
+        if (!this.useCollider 
+            && this.GetComponent<SkillTargetModule>() != null
+            && this.GetComponent<SkillTargetModule>().affectSelf) useSkill(this.sender); 
     }
     #endregion
 

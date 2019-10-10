@@ -54,7 +54,7 @@ public class HomingSkill : StandardSkill
                 }
 
                 //Bewege Skill zum Ziel
-                Vector3 temp = Vector3.MoveTowards(this.transform.position, targetPosition, this.speed * (Time.deltaTime * this.timeDistortion));
+                Vector3 temp = Vector3.MoveTowards(this.transform.position, targetPosition, this.getSpeed() * (Time.deltaTime * this.timeDistortion));
 
                 this.myRigidbody.MovePosition(temp);
                 this.myRigidbody.velocity = Vector2.zero;

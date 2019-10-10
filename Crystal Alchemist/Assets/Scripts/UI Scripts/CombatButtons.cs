@@ -142,7 +142,9 @@ public class CombatButtons : MonoBehaviour
             float cooldownLeft = skill.cooldownTimeLeft / (player.timeDistortion * player.spellspeed);
             float cooldownValue = skill.cooldown / (player.timeDistortion * player.spellspeed);
 
-            if (skill.item != null) ammo.text = (int)player.getResource(skill.resourceType, skill.item)+"";
+            SkillSenderModule senderModule = skill.GetComponent<SkillSenderModule>();
+
+            if (senderModule != null && senderModule.item != null) ammo.text = (int)player.getResource(senderModule.resourceType, senderModule.item)+"";
             else ammo.text = "";            
 
             if (!isUsable ||
@@ -151,7 +153,7 @@ public class CombatButtons : MonoBehaviour
                 this.player.currentState == CharacterState.knockedback ||
                 this.player.currentState == CharacterState.inDialog ||
                 this.player.currentState == CharacterState.respawning ||
-                (player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite)
+                (!skill.isResourceEnough(player))
                 || Utilities.Skill.getAmountOfSameSkills(skill, player.activeSkills, player.activePets) >= skill.maxAmounts
                 || cooldownLeft == Utilities.maxFloatInfinite
                 || !skill.basicRequirementsExists)
@@ -223,7 +225,7 @@ public class CombatButtons : MonoBehaviour
         else
         {
             skillUI.gameObject.SetActive(true);
-            skillUI.sprite = skill.icon;
+            if(skill.GetComponent<SkillBookModule>() != null) skillUI.sprite = skill.GetComponent<SkillBookModule>().icon;
             buttonUI.color = new Color(1f, 1f, 1f, 1f);
             buttonUI.fillAmount = 1;
         }

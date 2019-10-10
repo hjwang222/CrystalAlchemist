@@ -32,12 +32,12 @@ public class Indicator : MonoBehaviour
     public void setSkill(StandardSkill skill)
     {
         this.skill = skill;
-        if (skill != null)
+        if (skill != null && skill.GetComponent<SkillIndicatorModule>() != null)
         {
-            if (skill.useCustomColor)
+            if (skill.GetComponent<SkillIndicatorModule>().useCustomColor)
             {
-                this.indicatorRenderer.color = skill.indicatorColor;
-                if(this.light != null) this.light.color = skill.indicatorColor;
+                this.indicatorRenderer.color = skill.GetComponent<SkillIndicatorModule>().indicatorColor;
+                if(this.light != null) this.light.color = skill.GetComponent<SkillIndicatorModule>().indicatorColor;
             }
             this.transform.position = this.skill.transform.position;
         }

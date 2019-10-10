@@ -48,7 +48,7 @@ public class FollowSkill : StandardSkill
     private void moveTorwardsTarget(Vector3 position)
     {        
             //Bewegt den Gegner zum Spieler
-            Vector3 temp = Vector3.MoveTowards(transform.position, position, this.speed * (Time.deltaTime * this.timeDistortion));
+            Vector3 temp = Vector3.MoveTowards(transform.position, position, this.getSpeed() * (Time.deltaTime * this.timeDistortion));
             Vector2 direction = position - this.transform.position;
 
             this.myRigidbody.MovePosition(temp);

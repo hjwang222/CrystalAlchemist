@@ -90,8 +90,7 @@ public class PlayerAttacks : MonoBehaviour
                 int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.player.activeSkills, this.player.activePets);
 
                 if (currentAmountOfSameSkills < skill.maxAmounts
-                        && (this.player.getResource(skill.resourceType, skill.item) + skill.addResourceSender >= 0 //new method: Check if enough resource on skill
-                        || skill.addResourceSender == -Utilities.maxFloatInfinite)
+                        && skill.isResourceEnough(this.player)
                         && skill.basicRequirementsExists)
                 {
                     if (isSkillReadyToUse(button, skill))
@@ -135,13 +134,16 @@ public class PlayerAttacks : MonoBehaviour
             {
                 setLastButtonPressed(button);
 
-                if (skill.speedDuringCasting != 0) this.player.updateSpeed(skill.speedDuringCasting);
+                if (skill.GetComponent<SkillSenderModule>() != null && skill.GetComponent<SkillSenderModule>().speedDuringCasting != 0)
+                    this.player.updateSpeed(skill.GetComponent<SkillSenderModule>().speedDuringCasting);
 
                 if (skill.holdTimer < skill.cast)
                 {
                     skill.holdTimer += (Time.deltaTime * this.player.timeDistortion * this.player.spellspeed);
-                    skill.showIndicator(); //Zeige Indikator beim Casten+
-                    skill.showCastingAnimation();
+
+                    if (skill.GetComponent<SkillIndicatorModule>() != null) skill.GetComponent<SkillIndicatorModule>().showIndicator(); //Zeige Indikator beim Casten+
+                    if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().showCastingAnimation();
+
                     skill.doOnCast();
                 }
 
@@ -174,14 +176,14 @@ public class PlayerAttacks : MonoBehaviour
                 else if (skill.cast > 0 && this.player.activeCastbar != null && skill.holdTimer > 0)
                 {
                     this.player.activeCastbar.showCastBar();
-                    skill.showIndicator();
-                    skill.showCastingAnimation();
+                    if (skill.GetComponent<SkillIndicatorModule>() != null) skill.GetComponent<SkillIndicatorModule>().showIndicator();
+                    if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().showCastingAnimation();
                 }
             }
             else if (Input.GetButtonUp(button))
             {
                 setLastButtonPressed(button);
-                if (skill.speedDuringCasting != 0) this.player.updateSpeed(0);
+                if (skill.GetComponent<SkillSenderModule>() != null && skill.GetComponent<SkillSenderModule>().speedDuringCasting != 0) this.player.updateSpeed(0);
 
                 //Cast only
                 if (skill.holdTimer >= skill.cast && skill.cast > 0)
@@ -324,11 +326,11 @@ public class PlayerAttacks : MonoBehaviour
                 && target.currentState != CharacterState.respawning)
             {
                 bool playSoundEffect = false;
-                if (i == 0 || skill.multiHitDelay > 0.3f) playSoundEffect = true;
+                if (i == 0 || skill.GetComponent<SkillTargetingSystemModule>().multiHitDelay > 0.3f) playSoundEffect = true;
 
                 fireSkillToSingleTarget(target, damageReduce, playSoundEffect, skill);
 
-                yield return new WaitForSeconds(skill.multiHitDelay);
+                yield return new WaitForSeconds(skill.GetComponent<SkillTargetingSystemModule>().multiHitDelay);
             }
             i++;
         }

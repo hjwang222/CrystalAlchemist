@@ -21,20 +21,27 @@ public class LineIndicator : Indicator
     // Update is called once per frame
     void Update()
     {
-        drawLine(this.skill.rotateIt);
+        drawLine(this.skill.rotateIt());
     }
 
     private void drawLine(bool updateRotation)
     {
         //Bestimme Winkel und Position
 
+        float snapRotationInDegrees = 0;
+        float rotationModifier = 0;
+        if (this.skill.GetComponent<SkillTransformModule>() != null)
+        {
+            snapRotationInDegrees = this.skill.GetComponent<SkillTransformModule>().snapRotationInDegrees;
+            rotationModifier = this.skill.GetComponent<SkillTransformModule>().rotationModifier;
+        }
+
+
         float angle;
         Vector2 startpoint;
         Vector3 rotation;
 
-        Utilities.Rotation.setDirectionAndRotation(this.skill.sender, this.skill.target,
-                                          0, 0, this.skill.snapRotationInDegrees, this.skill.rotationModifier,
-                                          out angle, out startpoint, out this.direction, out rotation);
+        Utilities.Rotation.setDirectionAndRotation(this.skill, out angle, out startpoint, out this.direction, out rotation);
 
         startpoint = this.skill.sender.spriteRenderer.transform.position;
 

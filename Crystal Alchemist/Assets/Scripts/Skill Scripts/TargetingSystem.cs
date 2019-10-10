@@ -52,13 +52,13 @@ public class TargetingSystem : MonoBehaviour
     {
         if (this.sender == null || this.skill == null) throw new System.Exception("Sender oder Skill nicht übergeben.\nSender: " + this.sender + "\nSkill: " + this.skill);
 
-        this.durationTime = this.skill.targetingDuration;
-        this.maxAmountOfTargets = this.skill.maxAmountOfTargets;
-        this.targetMode = this.skill.targetingMode;
+        this.durationTime = this.skill.GetComponent<SkillTargetingSystemModule>().targetingDuration;
+        this.maxAmountOfTargets = this.skill.GetComponent<SkillTargetingSystemModule>().maxAmountOfTargets;
+        this.targetMode = this.skill.GetComponent<SkillTargetingSystemModule>().targetingMode;
 
         this.elapsed = this.durationTime;
 
-        if (!skill.showRange)
+        if (!skill.GetComponent<SkillTargetingSystemModule>().showRange)
         {
             foreach (GameObject obj in this.RangeIndicators)
             {

@@ -150,20 +150,29 @@ public class SkillMenu : MonoBehaviour
     {
         if (skill != null)
         {
+            SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
+            SkillSenderModule senderModule = skill.GetComponent<SkillSenderModule>();
+
             this.skillDetailsName.text = Utilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
-
             float strength = 0;
-            if (skill.affectedResources.Count > 0) strength = Mathf.Abs(skill.affectedResources[0].amount)*4;
-            this.skillDetailsStrength.text = strength + "";
 
-            this.skillDetailsCost.text = Mathf.Abs(skill.addResourceSender)*4 + "";
-
-            if (skill.statusEffects.Count > 0)
+            if(senderModule != null)
             {
-                this.StatusEffects.enabled = true;
-                this.StatusEffects.sprite = skill.statusEffects[0].iconSprite;
+                this.skillDetailsCost.text = Mathf.Abs(senderModule.addResourceSender) * 4 + "";
             }
-            else this.StatusEffects.enabled = false;
+
+            if (targetModule != null)
+            {
+                if (targetModule.affectedResources.Count > 0) strength = Mathf.Abs(targetModule.affectedResources[0].amount) * 4;
+                this.skillDetailsStrength.text = strength + "";
+
+                if (targetModule.statusEffects.Count > 0)
+                {
+                    this.StatusEffects.enabled = true;
+                    this.StatusEffects.sprite = targetModule.statusEffects[0].iconSprite;
+                }
+                else this.StatusEffects.enabled = false;
+            }
         }
         else
         {

@@ -537,8 +537,8 @@ public class Character : MonoBehaviour
             this.activeCastbar.destroyIt();
         }
 
-        skill.hideIndicator();
-        skill.hideCastingAnimation();
+        if (skill.GetComponent<SkillIndicatorModule>() != null) skill.GetComponent<SkillIndicatorModule>().hideIndicator();
+        if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().hideCastingAnimation();
     }
 
 
@@ -611,21 +611,24 @@ public class Character : MonoBehaviour
 
     public void gotHit(StandardSkill skill, float percentage)
     {
+        SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
+
         if (this.currentState != CharacterState.respawning
-         && this.currentState != CharacterState.dead)
+         && this.currentState != CharacterState.dead
+         && targetModule != null)
         {
-            if ((!this.isInvincible && !this.isImmortal) || skill.ignoreInvincibility)
+            if ((!this.isInvincible && !this.isImmortal) || targetModule.ignoreInvincibility)
             {
                 //Status Effekt hinzufügen
-                if (skill.statusEffects != null)
+                if (targetModule.statusEffects != null)
                 {
-                    foreach (StatusEffect effect in skill.statusEffects)
+                    foreach (StatusEffect effect in targetModule.statusEffects)
                     {
                         Utilities.StatusEffectUtil.AddStatusEffect(effect, this);
                     }
                 }
 
-                foreach (affectedResource elem in skill.affectedResources)
+                foreach (affectedResource elem in targetModule.affectedResources)
                 {
                     float amount = elem.amount * percentage / 100;
 
@@ -645,8 +648,8 @@ public class Character : MonoBehaviour
                 if (this.life > 0)
                 {
                     //Rückstoß ermitteln
-                    float knockbackTrust = skill.thrust - (this.stats.antiKnockback/100*skill.thrust);
-                    knockBack(skill.knockbackTime, knockbackTrust, skill);
+                    float knockbackTrust = targetModule.thrust - (this.stats.antiKnockback/100* targetModule.thrust);
+                    knockBack(targetModule.knockbackTime, knockbackTrust, skill);
                 }
             }
         }
