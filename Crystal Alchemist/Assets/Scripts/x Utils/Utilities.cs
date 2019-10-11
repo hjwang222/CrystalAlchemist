@@ -894,7 +894,7 @@ public class Utilities : MonoBehaviour
         {
             int result = 0;
 
-            SummonSkill summonSkill = skill.GetComponent<SummonSkill>();
+            SkillSummon summonSkill = skill.GetComponent<SkillSummon>();
 
             if (summonSkill == null)
             {
@@ -906,7 +906,6 @@ public class Utilities : MonoBehaviour
             }
             else
             {
-
                 for (int i = 0; i < activePets.Count; i++)
                 {
                     if (activePets[i] != null && activePets[i].stats.characterName == summonSkill.getPetName())

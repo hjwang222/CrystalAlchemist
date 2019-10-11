@@ -9,15 +9,26 @@ public class SkillProjectile : MonoBehaviour
     [Required]
     private StandardSkill skill;
 
-    [FoldoutGroup("Projektil Attribute", expanded: false)]
-    [Tooltip("Geschwindigkeit des Projektils")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float speed = 0;
+    private bool speedup = true;
+    private Vector2 tempVelocity;
+
+    private void Update()
+    {
+        if (this.skill.delayTimeLeft <= 0) setVelocity();
+    }    
+
+    private void setVelocity()
+    {
+        if (this.skill.myRigidbody != null && this.speedup)
+        {
+            this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
+            this.tempVelocity = this.skill.myRigidbody.velocity;
+            this.speedup = false;
+        }
+    }        
 
     public void updateTimeDistortion(float distortion)
     {
-        if (this.skill.myRigidbody != null && this.skill.isActive) this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.speed * this.skill.timeDistortion;
-    }
-
-   
+        if (this.skill.myRigidbody != null && this.skill.isActive) this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed * this.skill.timeDistortion;
+    }   
 }

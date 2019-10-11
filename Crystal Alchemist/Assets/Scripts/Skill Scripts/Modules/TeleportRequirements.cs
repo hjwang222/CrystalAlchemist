@@ -5,7 +5,7 @@ using UnityEngine;
 public class TeleportRequirements : PreLoadModule
 {
     [SerializeField]
-    private BuffSkill skill;
+    private StandardSkill skill;
 
     public override void checkRequirements()
     {
@@ -14,11 +14,10 @@ public class TeleportRequirements : PreLoadModule
         if (player != null)
         {
             bool teleportEnabled = player.GetComponent<PlayerTeleport>().getLastTeleport();
-            if (this.skill.supportType == SupportType.teleport)
-            {
-                if (!teleportEnabled) this.skill.basicRequirementsExists = false;
-                else this.skill.basicRequirementsExists = true;
-            }
+            
+            if (!teleportEnabled) this.skill.basicRequirementsExists = false;
+            else this.skill.basicRequirementsExists = true;
+            
         }
     }
 }

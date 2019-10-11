@@ -9,7 +9,7 @@ public class LineIndicator : Indicator
     private float distance = 10;
 
     private Vector2 direction;
-    private ChainSkill chain;    
+    private SkillChain chain;    
 
     // Start is called before the first frame update
     public override void Start()

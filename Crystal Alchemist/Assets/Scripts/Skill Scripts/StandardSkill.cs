@@ -124,6 +124,10 @@ public class StandardSkill : MonoBehaviour
     [Tooltip("Maximale Anzahl aktiver gleicher Angriffe in einer Combo")]
     public int comboAmount = Utilities.maxIntSmall;
 
+    [FoldoutGroup("Controls", expanded: false)]
+    [Tooltip("Geschwindigkeit des Projektils")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float speed = 0;
 
     ////////////////////////////////////////////////////////////////
 
@@ -267,15 +271,13 @@ public class StandardSkill : MonoBehaviour
         return this.durationTimeLeft;
     }
 
-    public virtual void doOnCast()
+    public void doOnCast()
     {
-
+        if (this.GetComponent<SkillChain>() != null) this.GetComponent<SkillChain>().doOnCast();
     }
 
-    public virtual void doOnUpdate()
+    public void doOnUpdate()
     {
-
-
         if (this.LockElapsed > 0)
         {
             this.LockElapsed -= Time.deltaTime;
@@ -289,10 +291,6 @@ public class StandardSkill : MonoBehaviour
         {
             this.shadow.sprite = this.spriteRenderer.sprite;
         }
-
-
-
-
 
         if (this.animator != null && this.sender != null && !this.movementLocked)
         {
@@ -347,7 +345,7 @@ public class StandardSkill : MonoBehaviour
 
 
 
-    public void landAttack(Collider2D hittedObject)
+    public void hitIt(Collider2D hittedObject)
     {
         if (hittedObject.GetComponent<Character>() != null)
         {
@@ -356,7 +354,7 @@ public class StandardSkill : MonoBehaviour
         }
     }
 
-    public void landAttack(Collider2D hittedObject, float percentage)
+    public void hitIt(Collider2D hittedObject, float percentage)
     {
         if (hittedObject.GetComponent<Character>() != null)
         {
@@ -381,37 +379,11 @@ public class StandardSkill : MonoBehaviour
         }
     }
 
-    public float getSpeed()
-    {
-        if (this.GetComponent<SkillProjectile>() != null) return this.GetComponent<SkillProjectile>().speed;
-        else return 0;
-    }
-
     public bool rotateIt()
     {
         if (this.GetComponent<SkillTransformModule>() != null) return this.GetComponent<SkillTransformModule>().rotateIt;
         else return false;
     }
-
-
-    #region Trigger
-
-    public virtual void OnTriggerStay2D(Collider2D hittedCharacter)
-    {
-        if (Utilities.Collisions.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);
-    }
-
-    public virtual void OnTriggerEnter2D(Collider2D hittedCharacter)
-    {
-        if (Utilities.Collisions.checkCollision(hittedCharacter, this)) landAttack(hittedCharacter);
-    }
-
-    public virtual void OnTriggerExit2D(Collider2D hittedCharacter)
-    {
-
-    }
-
-    #endregion
 
 
     #region AnimatorEvents
