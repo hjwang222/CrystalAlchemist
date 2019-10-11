@@ -5,8 +5,13 @@ using Sirenix.OdinInspector;
 
 public class SkillHitTrigger : MonoBehaviour
 {
-    [Required]
+    [HideInInspector]
     public Skill skill;
+
+    private void Awake()
+    {
+        this.skill = this.GetComponent<Skill>();
+    }
 
     //Interface
 }

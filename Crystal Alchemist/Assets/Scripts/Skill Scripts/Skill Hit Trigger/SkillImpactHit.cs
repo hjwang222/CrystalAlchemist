@@ -11,9 +11,7 @@ public enum aoeType
 }
 
 public class SkillImpactHit : SkillHitTrigger
-{ 
-
-
+{     
         [Space(10)]
         [EnumToggleButtons]
         [FoldoutGroup("Special Behaviors", expanded: false)]

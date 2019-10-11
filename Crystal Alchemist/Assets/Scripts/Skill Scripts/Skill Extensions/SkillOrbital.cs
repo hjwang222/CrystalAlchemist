@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 
 public class SkillOrbital : SkillExtension
 {
+
     private void Start()
     {
         if (this.skill.target != null) this.transform.position = this.skill.target.transform.position;

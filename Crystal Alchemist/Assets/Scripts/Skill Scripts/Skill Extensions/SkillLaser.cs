@@ -7,6 +7,7 @@ public class SkillLaser : SkillExtension
 {
     #region Attributes
 
+    [InfoBox("Kein Hit-Script notwendig, da kein Collider verwendet wird")]
     [SerializeField]
     private GameObject impactEffect;
 
@@ -114,7 +115,7 @@ public class SkillLaser : SkillExtension
                     if (fireSkill != null)
                     {
                         //Position nicht überschreiben
-                        if (fireSkill.GetComponent<SkillTransformModule>() != null) fireSkill.GetComponent<SkillTransformModule>().setPositionAtStart = false;
+                        if (fireSkill.GetComponent<SkillRotationModule>() != null) fireSkill.GetComponent<SkillRotationModule>().setPositionAtStart = false;
                         fireSkill.sender = this.skill.sender;
                     }
 

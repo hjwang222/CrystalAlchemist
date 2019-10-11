@@ -851,16 +851,23 @@ public class Utilities : MonoBehaviour
         {
             float snapRotationInDegrees = 0;
             float rotationModifier = 0;
-            float positionOffset = 0;
+            float positionOffset = skill.positionOffset;
             float positionHeight = 0;
 
-            if (skill.GetComponent<SkillTransformModule>() != null)
+            SkillRotationModule rotationModule = skill.GetComponent<SkillRotationModule>();
+            SkillPositionZModule positionModule = skill.GetComponent<SkillPositionZModule>();
+
+            if (rotationModule != null)
             {
-                snapRotationInDegrees = skill.GetComponent<SkillTransformModule>().snapRotationInDegrees;
-                rotationModifier = skill.GetComponent<SkillTransformModule>().rotationModifier;
-                positionOffset = skill.GetComponent<SkillTransformModule>().positionOffset;
-                positionHeight = skill.GetComponent<SkillTransformModule>().positionHeight;
+                snapRotationInDegrees = rotationModule.snapRotationInDegrees;
+                rotationModifier = rotationModule.rotationModifier;
             }
+
+            if (positionModule != null)
+            {
+                positionHeight = positionModule.positionHeight;
+            }
+
 
             direction = skill.sender.direction.normalized;
 
@@ -1057,8 +1064,7 @@ public class Utilities : MonoBehaviour
         private static bool checkIfHelperActivated(global::Skill skill)
         {
             if (skill != null 
-                && skill.GetComponent<SkillTargetingSystemModule>() != null
-                && skill.GetComponent<SkillTargetingSystemModule>().activeTargetHelper) return true;
+                && skill.GetComponent<SkillAimingModule>() != null) return true;
             else return false;
         }
     }

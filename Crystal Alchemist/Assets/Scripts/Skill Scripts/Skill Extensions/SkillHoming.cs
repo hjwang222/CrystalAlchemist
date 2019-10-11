@@ -5,10 +5,10 @@ using Sirenix.OdinInspector;
 
 public class SkillHoming : SkillExtension
 {
-    [FoldoutGroup("Homing-spezifische Attribute", expanded: false)]
+    [BoxGroup("Homing-spezifische Attribute")]
     public float offSetTime;
 
-    [FoldoutGroup("Homing-spezifische Attribute", expanded: false)]
+    [BoxGroup("Homing-spezifische Attribute")]
     public float offSetStrength;
 
     private void Update()

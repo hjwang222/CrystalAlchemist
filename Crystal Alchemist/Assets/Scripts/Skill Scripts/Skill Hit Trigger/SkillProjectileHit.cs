@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 public class SkillProjectileHit : SkillHitTrigger
 {
     [Space(10)]
-    [InfoBox("Projektile stoppen beim Aufprall und triggern die \"Hit\"-Animation", InfoMessageType.None)]    
+    [InfoBox("Projektile stoppen beim Aufprall und triggern die \"Hit\"-Animation. Kein Schaden!", InfoMessageType.None)]    
     [SerializeField]
     private Skill skillOnImpact;
 
@@ -41,7 +41,7 @@ public class SkillProjectileHit : SkillHitTrigger
             if (fireSkill != null)
             {
                 //Position nicht überschreiben
-                if (fireSkill.GetComponent<SkillTransformModule>() != null) fireSkill.GetComponent<SkillTransformModule>().setPositionAtStart = false;
+                if (fireSkill.GetComponent<SkillRotationModule>() != null) fireSkill.GetComponent<SkillRotationModule>().setPositionAtStart = false;
                 fireSkill.sender = this.skill.sender;
             }
         }

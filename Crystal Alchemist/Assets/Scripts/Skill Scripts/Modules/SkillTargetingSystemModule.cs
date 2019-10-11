@@ -6,10 +6,6 @@ using Sirenix.OdinInspector;
 public class SkillTargetingSystemModule : SkillModule
 {
     [FoldoutGroup("Zielerfassung", expanded: false)]
-    [Tooltip("Ob die Zielhilfe aktiviert werden soll")]
-    public bool activeTargetHelper = false;
-
-    [FoldoutGroup("Zielerfassung", expanded: false)]
     public bool setTargetAutomatically = false;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]

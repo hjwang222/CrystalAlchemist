@@ -184,7 +184,7 @@ public class SkillSequence : MonoBehaviour
                     childSkill.sender = this.sender;
                     childSkill.target = this.target;
 
-                    if(childSkill.GetComponent<SkillTransformModule>() != null) childSkill.GetComponent<SkillTransformModule>().setPositionAtStart = false;
+                    if(childSkill.GetComponent<SkillRotationModule>() != null) childSkill.GetComponent<SkillRotationModule>().setPositionAtStart = false;
                 }
             }
         }

@@ -13,6 +13,12 @@ GameObject:
   - component: {fileID: 5387825760302318934}
   - component: {fileID: 2211265516280113145}
   - component: {fileID: 936580078306894737}
+  - component: {fileID: 5052346188936570892}
+  - component: {fileID: 4925182744882300458}
+  - component: {fileID: 1457326785795499306}
+  - component: {fileID: 2676114091999809723}
+  - component: {fileID: 3313979781807750948}
+  - component: {fileID: 3479607655743142279}
   m_Layer: 12
   m_Name: Speer
   m_TagString: Skill
@@ -49,83 +55,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Speer
   skillNameEnglish: Spear
-  skillDescription: Der Speer eines Dragoons
-  skillDescriptionEnglish: The spear of a Dragoon
-  category: 0
-  animationTriggerName: spear
-  orderIndex: 2
   spriteRenderer: {fileID: 5387825760302318934}
   myRigidbody: {fileID: 2211265516280113145}
   animator: {fileID: 936580078306894737}
   shadow: {fileID: 5387825760302318934}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  castingAnimation: {fileID: 0}
-  castingAnimationCharacterKey: 
+  speed: 0
+  positionOffset: 0
+  maxAmounts: 1
+  isStationary: 0
+  doCastDuringDelay: 0
+  comboAmount: 99
   cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  duration: 5
   lockMovementonDuration: 1
   deactivateByButtonUp: 0
   deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 0
+  delay: 0
+  duration: 5
   cooldown: 1
   cooldownAfterCombo: 0
   durationCombo: 0
-  canAffectedBytimeDistortion: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: -1.5
-  statusEffects: []
-  thrust: 15
-  knockbackTime: 0.2
-  resourceType: 0
-  item: {fileID: 0}
-  addResourceSender: 0
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: -99
-  affectAnimation: 0
-  forward: 1
-  selfThrust: 10
-  selfThrustTime: 0.2
-  isRapidFire: 0
-  isStationary: 0
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 1
-  useOffSetToBlendTree: 0
-  rotationModifier: 90
-  snapRotationInDegrees: 90
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 0
-  maxAmountOfTargets: 0
-  targetingDuration: 0
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 1
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: -2313266835999037447, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
+  elapsed: 0
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
@@ -140,7 +92,6 @@ MonoBehaviour:
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
-  setPositionAtStart: 1
   setActive: 1
 --- !u!212 &5387825760302318934
 SpriteRenderer:
@@ -231,6 +182,119 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5052346188936570892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  skillDescription: Der Speer eines Dragoons
+  skillDescriptionEnglish: The spear of a Dragoon
+  category: 0
+  orderIndex: 2
+  icon: {fileID: -2313266835999037447, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &4925182744882300458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790e6050ddf4a164b8349c725a23765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+--- !u!114 &1457326785795499306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  resourceType: 0
+  item: {fileID: 0}
+  addResourceSender: 0
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  affectAnimation: 0
+  forward: 1
+  selfThrust: 10
+  selfThrustTime: 0.2
+  stateType: 1
+--- !u!114 &2676114091999809723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -1.5
+  statusEffects: []
+  thrust: 16
+  knockbackTime: 0.2
+  affectSelf: 0
+  affectOther: 1
+  affectSame: 0
+  affectNeutral: 1
+  affectSkills: 0
+  ignoreInvincibility: 0
+--- !u!114 &3313979781807750948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f850b25bbe1d943abae8f460828fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  useOffSetToBlendTree: 0
+--- !u!114 &3479607655743142279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e01b756280d164eb9e557d11c981f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  animationTriggerName: spear
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
+  targetColor: {r: 0, g: 0, b: 0, a: 0}
+  useColor: 0
 --- !u!1 &1288681395139722514
 GameObject:
   m_ObjectHideFlags: 0

@@ -243,8 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 946fe45f31af8544caf372295024317d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Paladin
-  englischCharacterName: Paladin
+  stats: {fileID: 0}
   myRigidbody: {fileID: 759644400424337060}
   animator: {fileID: 4187403449301391866}
   spriteRenderer: {fileID: 2974922927713060803}
@@ -257,43 +256,6 @@ MonoBehaviour:
   activeSkillParent: {fileID: 8638893490402070047}
   activeStatusEffectParent: {fileID: 1487360461578692118}
   skillSetParent: {fileID: 242878290860008501}
-  startLife: 5
-  startMana: 4
-  startSpeed: 100
-  startSpellSpeed: 100
-  immunityToStatusEffects: []
-  maxLife: 5
-  maxMana: 4
-  respawnTime: 30
-  respawnAnimation: {fileID: 1140035694535706356, guid: 815950c2030167244ab889505e154cc8,
-    type: 3}
-  deathAnimation: {fileID: 0}
-  lifeRegeneration: 0
-  lifeRegenerationInterval: 0
-  manaRegeneration: 0.25
-  manaRegenerationInterval: 3
-  damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
-    type: 3}
-  antiKnockback: 0
-  cannotBeHitTime: 1
-  isTouchable: 1
-  showHitcolor: 1
-  hitColor: {r: 1, g: 0, b: 0, a: 1}
-  lootTable: []
-  multiLoot: 0
-  canCollectAll: 1
-  canCollect:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  hitSoundEffect: {fileID: 8300000, guid: 27ac131e0a552ec4e80c1947b53d31a9, type: 3}
-  characterSpecies: Human
-  characterGender: 0
-  characterType: 0
-  aggro: {fileID: 0}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
@@ -305,8 +267,8 @@ MonoBehaviour:
   speed: 0
   isInvincible: 0
   isImmortal: 0
+  cannotDie: 0
   isHit: 0
-  items: []
   buffs: []
   debuffs: []
   activeSkills: []
@@ -319,15 +281,13 @@ MonoBehaviour:
   activePets: []
   steps: 0
   isOnIce: 0
-  castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
-  timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
   skillSet:
   - {fileID: 103987821612614508, guid: 2f0554ae42ef20e4e976d37f34aad3e3, type: 3}
   - {fileID: 2502710003444371835, guid: 05bc84479b081af4ca7844c3cd88c425, type: 3}
   - {fileID: 4238057447665557524, guid: d9d5c19e4e61ad142865732f1f61048b, type: 3}
-  - {fileID: 1969711209088018432, guid: d6d1154f9bb87ae4fa94b5c2fe7a7c09, type: 3}
+  - {fileID: 0}
   - {fileID: 8883430349395961274, guid: 79742653ec493d246bcdef0cbf88e31b, type: 3}
-  - {fileID: 680506914304237524, guid: 8d38c6d44fc7878428ee4d926eeff611, type: 3}
+  - {fileID: 0}
   - {fileID: 6096689982342564308, guid: bddbde069b87bf945a2ba62d587c3c99, type: 3}
   - {fileID: 8157143814619834876, guid: f0b2ecb21609c6c48badb5e37582d142, type: 3}
   - {fileID: 6162400572210519683, guid: 689f7820c63a03148aa81b962ee64ad6, type: 3}
@@ -346,6 +306,8 @@ MonoBehaviour:
   - {fileID: 6121382049002356524, guid: af79dc6e8669ea341b020d34b9391b34, type: 3}
   - {fileID: 6097060202432798594, guid: 829f95c3bd5d9984793723ed6e29d15d, type: 3}
   - {fileID: 1929037885388743043, guid: 28d171700ce5ac84fb3390e7c6068744, type: 3}
+  timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
+  playerStats: {fileID: 0}
   dialogBoxSignal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
   deathSignal: {fileID: 11400000, guid: dda75ee433c9b274f8925d7dc56f9851, type: 2}
   healthSignalUI: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
@@ -362,6 +324,7 @@ MonoBehaviour:
   XButton: {fileID: 0}
   YButton: {fileID: 0}
   RBButton: {fileID: 0}
+  change: {x: 0, y: 0, z: 0}
 --- !u!50 &759644400424337060
 Rigidbody2D:
   serializedVersion: 4

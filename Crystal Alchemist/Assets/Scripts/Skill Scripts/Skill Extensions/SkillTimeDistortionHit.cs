@@ -6,19 +6,20 @@ using Sirenix.OdinInspector;
 public class SkillTimeDistortionHit : SkillExtension
 {
     #region Attributes
+    
     private List<Character> affectedCharacters = new List<Character>();
     private List<Skill> affectedSkills = new List<Skill>();
 
     [Header("Zeitverzerrungs-Info")]
+    [InfoBox("Kein Hit Modul verwenden!")]
     [Tooltip("Wert, für Zeitkrümmung. 0 = Stop, 1 = Normal, 2 = Hast")]
-    [Range(Utilities.minFloatPercent, Utilities.maxFloatPercent)]
+    [Range(-100, 100)]
     public float TimeDistortion = 100;
     [Tooltip("StatusEffekt für Zeitverzerrung. Wichtig für Charactere")]
     public StatusEffect timeEffect;
 
     public float invertColor = 0f;    
     private bool isDestroyed = false;
-
     #endregion
 
 

@@ -10,7 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2470495877089466095}
   - component: {fileID: 7183666998251149103}
-  - component: {fileID: 7292334694722244825}
+  - component: {fileID: 8843811712285971331}
+  - component: {fileID: 7861167684578161149}
+  - component: {fileID: 4657507481048158680}
+  - component: {fileID: -7704521156288154744}
   m_Layer: 12
   m_Name: Steinwand
   m_TagString: Skill
@@ -128,7 +131,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7292334694722244825
+--- !u!114 &8843811712285971331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,88 +140,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 6912828604413741881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7f673929352bf14085cbd000b55674c, type: 3}
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Steinwand
   skillNameEnglish: Stonewall
-  skillDescription: Errichtet eine Wand aus Fels
-  skillDescriptionEnglish: Errichtet eine Wand aus Fels
-  category: 1
-  animationTriggerName: 
-  orderIndex: 7
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 0
-  showCastBarForEnemies: 0
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  castingAnimation: {fileID: 0}
-  castingAnimationCharacterKey: 
+  speed: 0
+  positionOffset: 2
+  maxAmounts: 2
+  isStationary: 1
+  doCastDuringDelay: 0
+  comboAmount: 100
   cast: 2
-  keepHoldTimer: 0
-  delay: 0
-  duration: 0
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
   deactivateByButtonDown: 0
-  cooldown: 1
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 0
+  delay: 0
+  duration: 1
+  cooldown: 0.3
   cooldownAfterCombo: 0
   durationCombo: 0
-  affectedResources: []
-  statusEffects: []
-  thrust: 0
-  knockbackTime: 0.2
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: -2
-  intervallSender: 1
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 0
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 2
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 0
-  affectOther: 0
-  affectSame: 0
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: -8271742512168903070, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
+  elapsed: 0
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
-  cooldownTimeLeft: -0.01215791
+  cooldownTimeLeft: 0
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
@@ -229,7 +182,61 @@ MonoBehaviour:
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
-  setPositionAtStart: 1
   setActive: 1
+--- !u!114 &7861167684578161149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6912828604413741881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: -1
+  intervallSender: 0
+  speedDuringCasting: -50
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0
+--- !u!114 &4657507481048158680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6912828604413741881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae77e52560de1c0439393b32f8444a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
   summon: {fileID: 1294441505385801003, guid: 6d802ff15d5a854459fa7bcb3f594f43, type: 3}
   summonInstantly: 1
+--- !u!114 &-7704521156288154744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6912828604413741881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  skillDescription: Erschafft eine Wand aus Fels
+  skillDescriptionEnglish: Creates a Wall of Stone
+  category: 1
+  orderIndex: 7
+  icon: {fileID: -8271742512168903070, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}

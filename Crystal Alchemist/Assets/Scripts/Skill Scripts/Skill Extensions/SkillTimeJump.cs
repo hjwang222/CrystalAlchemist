@@ -5,25 +5,21 @@ using Sirenix.OdinInspector;
 
 public class SkillTimeJump : SkillExtension
 {
-    [FoldoutGroup("Special Behaviors", expanded: false)]
     [SerializeField]
     private TimeValue timeValue;
-
-    [FoldoutGroup("Special Behaviors", expanded: false)]
+      
     [SerializeField]
     private float newValue = 0.05f;
 
-    [FoldoutGroup("Special Behaviors", expanded: false)]
     [SerializeField]
     private Color targetColor;
 
-    [FoldoutGroup("Special Behaviors", expanded: false)]
     [SerializeField]
     private SimpleSignal musicPitchSignal;
 
-    [FoldoutGroup("Special Behaviors", expanded: false)]
     [SerializeField]
     private float musicPitch;
+
 
     private void Start()
     {

@@ -80,6 +80,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6850837334322202214}
   - component: {fileID: 8883430349395961274}
+  - component: {fileID: 3988213254839590652}
+  - component: {fileID: 7459062905359120726}
+  - component: {fileID: 6534770195723807936}
+  - component: {fileID: 1321164909832867913}
   - component: {fileID: 7335655556955245143}
   - component: {fileID: 2575079058374853439}
   - component: {fileID: 8148772775939734945}
@@ -123,82 +127,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Bombe
   skillNameEnglish: Bomb
-  skillDescription: Ein zeitgesteuerter Sprengsatz
-  skillDescriptionEnglish: A timecontrolled explosive
-  category: 0
-  animationTriggerName: 
-  orderIndex: 8
   spriteRenderer: {fileID: 8148772775939734945}
   myRigidbody: {fileID: 515671639}
   animator: {fileID: 5261843100729261818}
   shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  castingAnimation: {fileID: 0}
-  castingAnimationCharacterKey: 
+  speed: 0
+  maxAmounts: 3
+  isStationary: 1
+  doCastDuringDelay: 0
+  comboAmount: 99
   cast: 0
-  keepHoldTimer: 0
-  delay: 5
-  duration: 0.75
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
   deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 1
+  delay: 5
+  duration: 0.75
   cooldown: 0.5
   cooldownAfterCombo: 0
   durationCombo: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: -3
-  statusEffects: []
-  thrust: 4
-  knockbackTime: 0.2
-  resourceType: 3
-  item: {fileID: 7267644143456828498, guid: eff514630d133a14fa019ee8341f1420, type: 3}
-  addResourceSender: -1
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 1
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 1
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 1
-  affectOther: 1
-  affectSame: 1
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 3
-  comboAmount: 99
-  icon: {fileID: 21300008, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
+  elapsed: 0
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
@@ -213,8 +163,88 @@ MonoBehaviour:
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
-  setPositionAtStart: 1
   setActive: 1
+--- !u!114 &3988213254839590652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2500810980607646640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 8883430349395961274}
+  skillDescription: Ein zeitgesteuerter Sprengsatz
+  skillDescriptionEnglish: A timecontrolled explosive
+  category: 0
+  orderIndex: 8
+  icon: {fileID: 21300008, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &7459062905359120726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2500810980607646640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 8883430349395961274}
+  resourceType: 3
+  item: {fileID: 7267644143456828498, guid: eff514630d133a14fa019ee8341f1420, type: 3}
+  addResourceSender: -1
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0
+--- !u!114 &6534770195723807936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2500810980607646640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 8883430349395961274}
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -3
+  statusEffects: []
+  thrust: 4
+  knockbackTime: 0.2
+  affectSelf: 1
+  affectOther: 1
+  affectSame: 1
+  affectNeutral: 1
+  affectSkills: 0
+  ignoreInvincibility: 0
+--- !u!114 &1321164909832867913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2500810980607646640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790e6050ddf4a164b8349c725a23765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 8883430349395961274}
 --- !u!58 &7335655556955245143
 CircleCollider2D:
   m_ObjectHideFlags: 0

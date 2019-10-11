@@ -5,9 +5,6 @@ using Sirenix.OdinInspector;
 
 public class SkillTeleport : SkillExtension
 {   
-    [SerializeField]
-    private bool showAnimation = false;
-
     private void Start()
     {
         Teleport(this.skill.sender);
@@ -25,7 +22,7 @@ public class SkillTeleport : SkillExtension
             && player != null
             && player.GetComponent<PlayerTeleport>().getLastTeleport(out scene, out position))
         {
-            character.GetComponent<Player>().GetComponent<PlayerTeleport>().teleportPlayer(scene, position, showAnimation);
+            character.GetComponent<Player>().GetComponent<PlayerTeleport>().teleportPlayer(scene, position, true);
         }
     }
 }

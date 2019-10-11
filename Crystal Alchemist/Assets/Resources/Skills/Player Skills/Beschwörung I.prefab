@@ -10,7 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7166791184677949074}
   - component: {fileID: 2489641117011251026}
-  - component: {fileID: 2598273184590481572}
+  - component: {fileID: 1079946639356011911}
+  - component: {fileID: 3168505014123356475}
+  - component: {fileID: 6220241518045123869}
+  - component: {fileID: 619979892021673929}
   m_Layer: 12
   m_Name: "Beschw\xF6rung I"
   m_TagString: Skill
@@ -128,7 +131,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2598273184590481572
+--- !u!114 &1079946639356011911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,84 +140,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 2220895325736981316}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7f673929352bf14085cbd000b55674c, type: 3}
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Eos
   skillNameEnglish: Eos
-  skillDescription: "Beschw\xF6rt die Fee \"Eos\" herbei"
-  skillDescriptionEnglish: Summons the fairy "Eos"
-  category: 1
-  animationTriggerName: 
-  orderIndex: 27
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 0
-  showCastBarForEnemies: 0
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  castingAnimation: {fileID: 0}
-  castingAnimationCharacterKey: 
+  speed: 0
+  positionOffset: 0
+  maxAmounts: 1
+  isStationary: 0
+  doCastDuringDelay: 0
+  comboAmount: 100
   cast: 1
-  keepHoldTimer: 0
-  delay: 0
-  duration: 0
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
   deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 0
+  delay: 0
+  duration: 0
   cooldown: 1
   cooldownAfterCombo: 0
   durationCombo: 0
-  affectedResources: []
-  statusEffects: []
-  thrust: 0
-  knockbackTime: 0.2
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: -1
-  intervallSender: 1
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 0
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 1
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 0
-  affectOther: 0
-  affectSame: 0
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: 4006610120250386862, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
+  elapsed: 0
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
@@ -229,7 +182,61 @@ MonoBehaviour:
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
-  setPositionAtStart: 1
   setActive: 1
+--- !u!114 &3168505014123356475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2220895325736981316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 1079946639356011911}
+  skillDescription: "Beschw\xF6rt die Fee \"Eos\" herbei"
+  skillDescriptionEnglish: Summons the fairy "Eos"
+  category: 1
+  orderIndex: 27
+  icon: {fileID: 4006610120250386862, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &6220241518045123869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2220895325736981316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae77e52560de1c0439393b32f8444a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 1079946639356011911}
   summon: {fileID: 1938021464261085658, guid: e8f5993f1f977624395b4526c4602aee, type: 3}
   summonInstantly: 1
+--- !u!114 &619979892021673929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2220895325736981316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 1079946639356011911}
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: -1
+  intervallSender: 1
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0

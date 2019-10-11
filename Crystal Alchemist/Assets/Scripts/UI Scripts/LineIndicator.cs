@@ -30,10 +30,10 @@ public class LineIndicator : Indicator
 
         float snapRotationInDegrees = 0;
         float rotationModifier = 0;
-        if (this.skill.GetComponent<SkillTransformModule>() != null)
+        if (this.skill.GetComponent<SkillRotationModule>() != null)
         {
-            snapRotationInDegrees = this.skill.GetComponent<SkillTransformModule>().snapRotationInDegrees;
-            rotationModifier = this.skill.GetComponent<SkillTransformModule>().rotationModifier;
+            snapRotationInDegrees = this.skill.GetComponent<SkillRotationModule>().snapRotationInDegrees;
+            rotationModifier = this.skill.GetComponent<SkillRotationModule>().rotationModifier;
         }
 
 

@@ -30,25 +30,49 @@ public class Skill : MonoBehaviour
     public string skillNameEnglish;
 
     [Space(10)]
-    [BoxGroup("Easy Access")]
-    [Required]
+    [FoldoutGroup("Easy Access", expanded: false)]
     public SpriteRenderer spriteRenderer;
 
-    [BoxGroup("Easy Access")]
-    [Required]
+    [FoldoutGroup("Easy Access", expanded: false)]
     public Rigidbody2D myRigidbody;
 
-    [BoxGroup("Easy Access")]
-    [Required]
+    [FoldoutGroup("Easy Access", expanded: false)]
     public Animator animator;
 
-    [Space(10)]
-    [BoxGroup("Easy Access")]
+    [FoldoutGroup("Easy Access", expanded: false)]
     [Tooltip("Schatten")]
     public SpriteRenderer shadow;
 
 
     ////////////////////////////////////////////////////////////////
+
+    [FoldoutGroup("Behavior", expanded: false)]
+    [Tooltip("Geschwindigkeit des Projektils")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float speed = 0;
+
+    [FoldoutGroup("Behavior", expanded: false)]
+    [Range(0, 2)]
+    [Tooltip("Positions-Offset, damit es nicht im Character anfängt")]
+    public float positionOffset = 1f;
+
+    [FoldoutGroup("Behavior", expanded: false)]
+    [Range(1, Utilities.maxIntInfinite)]
+    [Tooltip("Maximale Anzahl aktiver gleicher Angriffe")]
+    public int maxAmounts = Utilities.maxIntInfinite;
+
+    [Space(10)]
+    [FoldoutGroup("Behavior", expanded: false)]
+    [Tooltip("Ist das Projektil stationär. True = liegt einfach herum (z.B. Bombe)")]
+    public bool isStationary = false;
+
+    [FoldoutGroup("Behavior", expanded: false)]
+    [Tooltip("Soll etwas während des Delays getan werden (DoCast Methode)")]
+    public bool doCastDuringDelay = false;
+
+    [FoldoutGroup("Behavior", expanded: false)]
+    [Tooltip("Maximale Anzahl aktiver gleicher Angriffe in einer Combo")]
+    public int comboAmount = Utilities.maxIntSmall;
 
 
     [FoldoutGroup("Controls", expanded: false)]
@@ -57,77 +81,61 @@ public class Skill : MonoBehaviour
     public float cast = 0;
 
     [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Soll die Castzeit gespeichert bleiben. True = ja. Ansonsten reset bei Abbruch ")]
-    public bool keepHoldTimer = false;
-
-    [Space(10)]
-    [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Verzögerung bis Aktivierung")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float delay = 0;
-
-    [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Dauer des Angriffs. 0 = Animation, max bis Trigger")]
-    [Range(0, Utilities.maxFloatInfinite)]
-    public float duration = 1;
-
-    [FoldoutGroup("Controls", expanded: false)]
     [Tooltip("Soll der Charakter während des Schießens weiterhin in die gleiche Richtung schauen?")]
     [SerializeField]
     [Range(0, Utilities.maxFloatInfinite)]
     private float lockMovementonDuration = 0;
 
+    [Space(10)]
     [FoldoutGroup("Controls", expanded: false)]
     public bool deactivateByButtonUp = false;
 
     [FoldoutGroup("Controls", expanded: false)]
     public bool deactivateByButtonDown = false;
 
-    [Space(10)]
-    [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Abklingzeit nach Aktivierung (für Außen)")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float cooldown = 1;
-
-    [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Abklingzeit nach Kombo")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float cooldownAfterCombo = 0;
-
-    [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Zeit für eine Kombo")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float durationCombo = 0;
-
-    [FoldoutGroup("Controls", expanded: false)]
-    [SerializeField]
-    private bool canAffectedBytimeDistortion = true;
-
     [FoldoutGroup("Controls", expanded: false)]
     [Tooltip("Kann der Knopf gedrückt gehalten werden für weitere Schüsse?")]
     public bool isRapidFire = false;
 
     [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Ist das Projektil stationär. True = liegt einfach herum (z.B. Bombe)")]
-    public bool isStationary = false;
+    [Tooltip("Soll die Castzeit gespeichert bleiben. True = ja. Ansonsten reset bei Abbruch ")]
+    public bool keepHoldTimer = false;
 
     [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Soll etwas während des Delays getan werden (DoCast Methode)")]
-    public bool doCastDuringDelay = false;
+    [SerializeField]
+    private bool canAffectedBytimeDistortion = true;
 
-    [FoldoutGroup("Controls", expanded: false)]
-    [Range(1, Utilities.maxIntInfinite)]
-    [Tooltip("Maximale Anzahl aktiver gleicher Angriffe")]
-    public int maxAmounts = Utilities.maxIntInfinite;
+    
+    [FoldoutGroup("Time", expanded: false)]
+    [Tooltip("Verzögerung bis Aktivierung")]
+    [Range(0, Utilities.maxFloatInfinite)]
+    public float delay = 0;
 
-    [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Maximale Anzahl aktiver gleicher Angriffe in einer Combo")]
-    public int comboAmount = Utilities.maxIntSmall;
+    [FoldoutGroup("Time", expanded: false)]
+    [Tooltip("Dauer des Angriffs. 0 = Animation, max bis Trigger")]
+    [Range(0, Utilities.maxFloatInfinite)]
+    public float duration = 1;
 
-    [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Geschwindigkeit des Projektils")]
+    [FoldoutGroup("Time", expanded: false)]
+    [Tooltip("Abklingzeit nach Aktivierung (für Außen)")]
     [Range(0, Utilities.maxFloatSmall)]
-    public float speed = 0;
+    public float cooldown = 1;
+
+    [Space(10)]
+    [FoldoutGroup("Time", expanded: false)]
+    [Tooltip("Abklingzeit nach Kombo")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float cooldownAfterCombo = 0;
+
+    [FoldoutGroup("Time", expanded: false)]
+    [Tooltip("Zeit für eine Kombo")]
+    [Range(0, Utilities.maxFloatSmall)]
+    public float durationCombo = 0;
+
+
+
+
+
 
     ////////////////////////////////////////////////////////////////
 
@@ -353,23 +361,31 @@ public class Skill : MonoBehaviour
         bool setPositionAtStart = true;
         bool rotateIt = false;
 
-        float positionOffset = 0;
+        float positionOffset = this.positionOffset;
         float positionHeight = 0;
         float colliderHeightOffset = 0;
 
-        SkillTransformModule transformModule = this.GetComponent<SkillTransformModule>();
+        SkillRotationModule rotationModule = this.GetComponent<SkillRotationModule>();
+        SkillBlendTreeModule blendTreeModule = this.GetComponent<SkillBlendTreeModule>();
+        SkillPositionZModule positionModule = this.GetComponent<SkillPositionZModule>();
 
-        if(transformModule != null)
+        if (rotationModule != null)
         {
-            blendTree = transformModule.blendTree;
-            useOffSetToBlendTree = transformModule.useOffSetToBlendTree;
-            keepOriginalRotation = transformModule.keepOriginalRotation;
-            setPositionAtStart = transformModule.setPositionAtStart;
-            rotateIt = transformModule.rotateIt;
+            keepOriginalRotation = rotationModule.keepOriginalRotation;
+            setPositionAtStart = rotationModule.setPositionAtStart;
+            rotateIt = rotationModule.rotateIt;            
+        }
 
-            positionOffset = transformModule.positionOffset;
-            positionHeight = transformModule.positionHeight;
-            colliderHeightOffset = transformModule.colliderHeightOffset;
+        if(blendTreeModule != null)
+        {
+            blendTree = true;
+            useOffSetToBlendTree = blendTreeModule.useOffSetToBlendTree;
+        }
+
+        if(positionModule != null)
+        {
+            positionHeight = positionModule.positionHeight;
+            colliderHeightOffset = positionModule.colliderHeightOffset;
         }
 
         if (!blendTree)
@@ -425,7 +441,7 @@ public class Skill : MonoBehaviour
 
     public bool rotateIt()
     {
-        if (this.GetComponent<SkillTransformModule>() != null) return this.GetComponent<SkillTransformModule>().rotateIt;
+        if (this.GetComponent<SkillRotationModule>() != null) return this.GetComponent<SkillRotationModule>().rotateIt;
         else return false;
     }
 
@@ -471,12 +487,6 @@ public class Skill : MonoBehaviour
         //this.isActive = false;
         Destroy(this.gameObject, delay);
     }
-
-
-
-
-
-
 
 
     #endregion

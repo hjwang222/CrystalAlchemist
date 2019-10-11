@@ -13,11 +13,22 @@ public class SkillAnimationModule : SkillModule
     [ShowIf("castingAnimation", null)]
     public string castingAnimationCharacterKey;
 
+    [SerializeField]
+    private Color targetColor;
+    [SerializeField]
+    private bool useColor = false;
+
     private CastingAnimation activeCastingAnimation;
 
     private void Start()
     {
         this.skill.sender.startAttackAnimation(this.animationTriggerName);
+        if(this.useColor) this.skill.sender.addColor(this.targetColor);
+    }
+
+    private void OnDestroy()
+    {
+        if (this.useColor) this.skill.sender.resetColor(this.targetColor);
     }
 
     public void showCastingAnimation()

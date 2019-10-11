@@ -29,12 +29,12 @@ public class SkillSenderModule : SkillModule
 
     [TabGroup("Sender Attribute")]
     [Tooltip("Bewegungsgeschwindigkeit während eines Casts")]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    [Range(-100, 100)]
     public float speedDuringCasting = 0;
 
     [TabGroup("Sender Attribute")]
     [Tooltip("Bewegungsgeschwindigkeit während des Angriffs")]
-    [Range(-Utilities.maxFloatSmall, Utilities.maxFloatSmall)]
+    [Range(-100, 100)]
     public float speedDuringDuration = 0;
 
     [TabGroup("Sender Attribute")]

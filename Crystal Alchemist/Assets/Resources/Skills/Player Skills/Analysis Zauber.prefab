@@ -10,7 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7078582995585776847}
   - component: {fileID: 8591703498699444151}
-  - component: {fileID: 6096689982342564308}
+  - component: {fileID: 2329490064039763128}
+  - component: {fileID: 4150190368284044171}
+  - component: {fileID: 4057020238127454048}
+  - component: {fileID: 8871098035158512558}
   m_Layer: 12
   m_Name: Analysis Zauber
   m_TagString: Skill
@@ -128,7 +131,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6096689982342564308
+--- !u!114 &2329490064039763128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,85 +140,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 2277580816030834969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 830c76880be9a6747af1e5bc13fc9a1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Analysis
   skillNameEnglish: Analyse
-  skillDescription: Scannt Gegner und Objekte
-  skillDescriptionEnglish: Scanning enemies and objects
-  category: 1
-  animationTriggerName: 
-  orderIndex: 21
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  castingAnimation: {fileID: 0}
-  castingAnimationCharacterKey: 
+  speed: 0
+  positionOffset: 0
+  maxAmounts: 1
+  isStationary: 0
+  doCastDuringDelay: 0
+  comboAmount: 100
   cast: 2
-  keepHoldTimer: 0
-  delay: 0
-  duration: 0
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
   deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 0
+  delay: 0
+  duration: 0
   cooldown: 3
   cooldownAfterCombo: 0
   durationCombo: 0
-  affectedResources: []
-  statusEffects:
-  - {fileID: 7056982587471594013, guid: c133ea91399c3144ab317096acc94303, type: 3}
-  thrust: 0
-  knockbackTime: 0
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: 0
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 0
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 1
-  affectOther: 0
-  affectSame: 0
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 1
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: 21300006, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
+  elapsed: 0
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
@@ -230,14 +182,61 @@ MonoBehaviour:
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
-  setPositionAtStart: 1
   setActive: 1
-  supportType: 1
-  immortalTimer: 0
-  affectAllOfKind: 0
-  dispellIt: 0
-  allTheSame: 0
-  extendTimePercentage: 0
-  useCollider: 0
+--- !u!114 &4150190368284044171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 2329490064039763128}
+  skillDescription: Scannt Gegner und Objekte
+  skillDescriptionEnglish: Scanning enemies and objects
+  category: 1
+  orderIndex: 21
+  icon: {fileID: 21300006, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &4057020238127454048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 2329490064039763128}
+  affectedResources: []
+  statusEffects:
+  - {fileID: 7056982587471594013, guid: c133ea91399c3144ab317096acc94303, type: 3}
+  thrust: 0
+  knockbackTime: 0.2
+  affectSelf: 1
+  affectOther: 0
+  affectSame: 0
+  affectNeutral: 0
+  affectSkills: 0
+  ignoreInvincibility: 1
+--- !u!114 &8871098035158512558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65144b73769891f41a72088043398bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 2329490064039763128}
   targetColor: {r: 0, g: 0, b: 0, a: 0}
-  showAnimation: 0
+  immortalTimer: 0

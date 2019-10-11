@@ -5,8 +5,13 @@ using Sirenix.OdinInspector;
 
 public class PreLoadModule : MonoBehaviour
 {
-    [Required]
+    [HideInInspector]
     public Skill skill;
+
+    private void Awake()
+    {
+        this.skill = this.GetComponent<Skill>();
+    }
 
     public virtual void checkRequirements()
     {
