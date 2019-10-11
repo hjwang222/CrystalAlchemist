@@ -7,7 +7,7 @@ using UnityEngine.Experimental.Rendering.LWRP;
 public class Indicator : MonoBehaviour
 {
     [HideInInspector]
-    public StandardSkill skill;
+    public Skill skill;
 
     [Required]
     public SpriteRenderer indicatorRenderer;
@@ -29,7 +29,7 @@ public class Indicator : MonoBehaviour
     }
     */
 
-    public void setSkill(StandardSkill skill)
+    public void setSkill(Skill skill)
     {
         this.skill = skill;
         if (skill != null && skill.GetComponent<SkillIndicatorModule>() != null)

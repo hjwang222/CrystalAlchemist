@@ -93,7 +93,7 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public List<StatusEffect> debuffs = new List<StatusEffect>();
     [HideInInspector]
-    public List<StandardSkill> activeSkills = new List<StandardSkill>();
+    public List<Skill> activeSkills = new List<Skill>();
     [HideInInspector]
     public Vector2 direction;
     [HideInInspector]
@@ -308,7 +308,7 @@ public class Character : MonoBehaviour
     private void destroySkills()
     {
         //TODO: Exception
-        foreach (StandardSkill skill in this.activeSkills)
+        foreach (Skill skill in this.activeSkills)
         {
             skill.durationTimeLeft = 0;
         }
@@ -320,7 +320,7 @@ public class Character : MonoBehaviour
     {
         if (!this.isPlayer)
         {
-            foreach (StandardSkill skill in this.activeSkills)
+            foreach (Skill skill in this.activeSkills)
             {
                 if (!skill.isStationary) skill.durationTimeLeft = 0;
             }
@@ -416,7 +416,7 @@ public class Character : MonoBehaviour
                 {
                     if (item != null && item.skill != null && this.GetComponent<Player>() != null)
                     {
-                        Utilities.Skill.updateSkillset(item.skill, this.GetComponent<Player>());
+                        Utilities.Skills.updateSkillset(item.skill, this.GetComponent<Player>());
                     }
                     break;
                 }
@@ -521,7 +521,7 @@ public class Character : MonoBehaviour
         Utilities.UnityUtils.SetAnimatorParameter(this.animator, parameter);
     }
 
-    public void resetCast(StandardSkill skill)
+    public void resetCast(Skill skill)
     {
         if (skill != null)
         {
@@ -530,7 +530,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void hideCastBarAndIndicator(StandardSkill skill)
+    public void hideCastBarAndIndicator(Skill skill)
     {
         if (this.activeCastbar != null)
         {
@@ -609,7 +609,7 @@ public class Character : MonoBehaviour
 
     #region Damage Functions (hit, statuseffect, knockback)
 
-    public void gotHit(StandardSkill skill, float percentage)
+    public void gotHit(Skill skill, float percentage)
     {
         SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
 
@@ -655,7 +655,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void gotHit(StandardSkill skill)
+    public void gotHit(Skill skill)
     {
         gotHit(skill, 100);
     }
@@ -674,7 +674,7 @@ public class Character : MonoBehaviour
         StartCoroutine(knockCo(knockTime));
     }
 
-    public void knockBack(float knockTime, float thrust, StandardSkill attack)
+    public void knockBack(float knockTime, float thrust, Skill attack)
     {
         if (this.myRigidbody != null)
         {

@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillIndicatorModule : MonoBehaviour
+public class SkillIndicatorModule : SkillModule
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     [FoldoutGroup("Indikatoren", expanded: false)]
     [Tooltip("AOE")]
     public List<Indicator> indicators = new List<Indicator>();

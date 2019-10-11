@@ -2,11 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class HelperScriptSkills : MonoBehaviour
 {
     [SerializeField]
-    private StandardSkill skill;
+    [Required]
+    private Skill skill;
 
     public void PlaySoundEffect(AudioClip clip)
     {

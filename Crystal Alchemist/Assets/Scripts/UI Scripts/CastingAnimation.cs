@@ -11,11 +11,11 @@ public class CastingAnimation : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
-    private StandardSkill skill;
+    private Skill skill;
     private Character character;
     private float progress;
 
-    public void setCastingAnimation(StandardSkill skill, Character character)
+    public void setCastingAnimation(Skill skill, Character character)
     {
         this.skill = skill;
         this.character = character;

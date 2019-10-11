@@ -16,7 +16,7 @@ public class PlayerTeleport : MonoBehaviour
         this.lastSaveGamePosition = position;
         this.lastSaveGameScene = targetScene;
 
-        foreach(StandardSkill skill in player.skillSet)
+        foreach(Skill skill in player.skillSet)
         {
             skill.preLoad();
         }

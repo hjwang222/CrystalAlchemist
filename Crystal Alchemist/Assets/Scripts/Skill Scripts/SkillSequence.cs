@@ -91,7 +91,7 @@ public class SkillSequence : MonoBehaviour
             {
                 if (!mod.gameObject.activeInHierarchy)
                 {
-                    StandardSkill skill = mod.gameObject.GetComponent<StandardSkill>();
+                    Skill skill = mod.gameObject.GetComponent<Skill>();
 
                     if (skill != null)
                     {
@@ -178,7 +178,7 @@ public class SkillSequence : MonoBehaviour
         {
             for (int i = 0; i < this.transform.childCount; i++)
             {
-                StandardSkill childSkill = this.transform.GetChild(i).GetComponent<StandardSkill>();
+                Skill childSkill = this.transform.GetChild(i).GetComponent<Skill>();
                 if (childSkill != null)
                 {
                     childSkill.sender = this.sender;

@@ -5,13 +5,10 @@ using Sirenix.OdinInspector;
 
 public class SkillProjectileHit : SkillHitTrigger
 {
+    [Space(10)]
+    [InfoBox("Projektile stoppen beim Aufprall und triggern die \"Hit\"-Animation", InfoMessageType.None)]    
     [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
-    [FoldoutGroup("Projektil Attribute", expanded: false)]
-    [SerializeField]
-    private StandardSkill skillOnImpact;
+    private Skill skillOnImpact;
 
     private void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
@@ -39,7 +36,7 @@ public class SkillProjectileHit : SkillHitTrigger
 
             GameObject fire = Instantiate(this.skillOnImpact.gameObject, this.transform.position, Quaternion.identity);
             //fire.transform.position = hittedCharacter.transform.position;
-            StandardSkill fireSkill = fire.GetComponent<StandardSkill>();
+            Skill fireSkill = fire.GetComponent<Skill>();
 
             if (fireSkill != null)
             {

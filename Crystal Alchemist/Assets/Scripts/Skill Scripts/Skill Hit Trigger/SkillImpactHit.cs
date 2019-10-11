@@ -12,9 +12,7 @@ public enum aoeType
 
 public class SkillImpactHit : SkillHitTrigger
 { 
-        [SerializeField]
-        [Required]
-        private StandardSkill skill;
+
 
         [Space(10)]
         [EnumToggleButtons]

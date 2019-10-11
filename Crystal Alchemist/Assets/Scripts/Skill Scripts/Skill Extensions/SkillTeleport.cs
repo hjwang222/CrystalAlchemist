@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillTeleport : MonoBehaviour
-{
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
+public class SkillTeleport : SkillExtension
+{   
     [SerializeField]
     private bool showAnimation = false;
 

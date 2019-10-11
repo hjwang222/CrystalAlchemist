@@ -10,7 +10,7 @@ public class Player : Character
 {
     [FoldoutGroup("Skills", expanded: false)]
     [Tooltip("Skills, welcher der Character verwenden kann")]
-    public List<StandardSkill> skillSet = new List<StandardSkill>();
+    public List<Skill> skillSet = new List<Skill>();
 
     [BoxGroup("Pflichtfelder")]
     [Required]
@@ -63,15 +63,15 @@ public class Player : Character
     public FloatValue fadingDuration;
 
     [HideInInspector]
-    public StandardSkill AButton;
+    public Skill AButton;
     [HideInInspector]
-    public StandardSkill BButton;
+    public Skill BButton;
     [HideInInspector]
-    public StandardSkill XButton;
+    public Skill XButton;
     [HideInInspector]
-    public StandardSkill YButton;
+    public Skill YButton;
     [HideInInspector]
-    public StandardSkill RBButton;
+    public Skill RBButton;
 
     [HideInInspector]
     public Vector3 change;
@@ -108,7 +108,7 @@ public class Player : Character
 
     public void delay(CharacterState newState)
     {
-        StartCoroutine(Utilities.Skill.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
+        StartCoroutine(Utilities.Skills.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
     }
 
     public void showDialogBox(string text)

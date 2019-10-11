@@ -28,7 +28,7 @@ public class TargetingSystem : MonoBehaviour
     public GameObject lockon;
 
     public Character sender;
-    public StandardSkill skill;
+    public Skill skill;
     public string button;
 
     private int index = 0;

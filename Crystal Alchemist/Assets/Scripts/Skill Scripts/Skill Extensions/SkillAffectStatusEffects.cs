@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillAffectStatusEffects : MonoBehaviour
+public class SkillAffectStatusEffects : SkillExtension
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     [SerializeField]
     private StatusEffectType affectAllOfKind;
 

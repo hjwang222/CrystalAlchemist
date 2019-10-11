@@ -76,7 +76,7 @@ public class StatusEffectAction
     public float time;
 
     [ShowIf("actionType", StatusEffectActionType.skill)]
-    public List<StandardSkill> skills;
+    public List<Skill> skills;
 
     [ShowIf("actionType", StatusEffectActionType.blind)]
     public GameObject instantiatNewGameObject;
@@ -297,9 +297,9 @@ public class StatusEffect : MonoBehaviour
             }
             else if (action.actionType == StatusEffectActionType.skill)
             {
-                foreach (StandardSkill skill in action.skills)
+                foreach (Skill skill in action.skills)
                 {
-                    Utilities.Skill.instantiateSkill(skill, this.target);
+                    Utilities.Skills.instantiateSkill(skill, this.target);
                 }
             }
             else if (action.actionType == StatusEffectActionType.immortal)

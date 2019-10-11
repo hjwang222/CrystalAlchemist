@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillAnimationModule : MonoBehaviour
+public class SkillAnimationModule : SkillModule
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     public string animationTriggerName = "";
 
     [Space(10)]

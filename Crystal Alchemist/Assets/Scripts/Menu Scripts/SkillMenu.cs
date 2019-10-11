@@ -79,7 +79,7 @@ public class SkillMenu : MonoBehaviour
     private FloatSignal musicVolumeSignal;
 
     [HideInInspector]
-    public StandardSkill selectedSkill;
+    public Skill selectedSkill;
 
     private CharacterState lastState;
 
@@ -146,7 +146,7 @@ public class SkillMenu : MonoBehaviour
         showSkillDetails(slot.skill);
     }
 
-    private void showSkillDetails(StandardSkill skill)
+    private void showSkillDetails(Skill skill)
     {
         if (skill != null)
         {
@@ -306,7 +306,7 @@ public class SkillMenu : MonoBehaviour
                 for (int ID = 0; ID < skills.transform.childCount; ID++)
                 {
                     GameObject slot = skills.transform.GetChild(ID).gameObject;
-                    StandardSkill skill = Utilities.Skill.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
+                    Skill skill = Utilities.Skills.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
                     slot.GetComponent<SkillSlot>().setSkill(skill);
                 }
 

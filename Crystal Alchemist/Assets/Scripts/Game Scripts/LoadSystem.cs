@@ -52,7 +52,7 @@ public class LoadSystem : MonoBehaviour
     {
         foreach (string[] elem in data.skills)
         {
-            StandardSkill skill = Utilities.Skill.getSkillByName(player.skillSet, elem[1]);
+            Skill skill = Utilities.Skills.getSkillByName(player.skillSet, elem[1]);
             string button = elem[0];
 
             switch (button)

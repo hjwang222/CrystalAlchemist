@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillTargetingSystemModule : MonoBehaviour
+public class SkillTargetingSystemModule : SkillModule
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     [FoldoutGroup("Zielerfassung", expanded: false)]
     [Tooltip("Ob die Zielhilfe aktiviert werden soll")]
     public bool activeTargetHelper = false;

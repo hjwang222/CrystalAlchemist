@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillFollow : MonoBehaviour
+public class SkillFollow : SkillExtension
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     [FoldoutGroup("Special Behaviors", expanded: false)]
     [SerializeField]
     float movementDelay = 0;

@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillProjectile : MonoBehaviour
+public class SkillProjectile : SkillExtension
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     private bool speedup = true;
     private Vector2 tempVelocity;
 
@@ -26,9 +22,4 @@ public class SkillProjectile : MonoBehaviour
             this.speedup = false;
         }
     }        
-
-    public void updateTimeDistortion(float distortion)
-    {
-        if (this.skill.myRigidbody != null && this.skill.isActive) this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed * this.skill.timeDistortion;
-    }   
 }

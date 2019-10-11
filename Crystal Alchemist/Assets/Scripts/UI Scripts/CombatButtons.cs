@@ -135,7 +135,7 @@ public class CombatButtons : MonoBehaviour
     }
 
 
-    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, StandardSkill skill, TextMeshProUGUI ammo, Image buttonUITrans, bool isUsable)
+    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, Skill skill, TextMeshProUGUI ammo, Image buttonUITrans, bool isUsable)
     {
         if (skill != null)
         {       
@@ -154,7 +154,7 @@ public class CombatButtons : MonoBehaviour
                 this.player.currentState == CharacterState.inDialog ||
                 this.player.currentState == CharacterState.respawning ||
                 (!skill.isResourceEnough(player))
-                || Utilities.Skill.getAmountOfSameSkills(skill, player.activeSkills, player.activePets) >= skill.maxAmounts
+                || Utilities.Skills.getAmountOfSameSkills(skill, player.activeSkills, player.activePets) >= skill.maxAmounts
                 || cooldownLeft == Utilities.maxFloatInfinite
                 || !skill.basicRequirementsExists)
             {
@@ -215,7 +215,7 @@ public class CombatButtons : MonoBehaviour
         }
     }
 
-    private void setButton(StandardSkill skill, Image skillUI, Image buttonUI)
+    private void setButton(Skill skill, Image skillUI, Image buttonUI)
     {
         if (skill == null)
         {

@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillChain : MonoBehaviour
+public class SkillChain : SkillExtension
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
 
     [FoldoutGroup("Special Behaviors", expanded: false)]
     public bool useRange = false;

@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillTransformModule : MonoBehaviour
+public class SkillTransformModule : SkillModule
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     [Space(10)]
     [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
@@ -26,14 +22,12 @@ public class SkillTransformModule : MonoBehaviour
     [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Tooltip("Wird ein Blend-Tree verwendet (Animation)?")]
     [HideIf("rotateIt")]
-    [SerializeField]
-    private bool blendTree = false;
+    public bool blendTree = false;
 
     [FoldoutGroup("Projektil Attribute", expanded: false)]
     [Tooltip("Wird ein Blend-Tree verwendet (Animation)?")]
     [HideIf("rotateIt")]
-    [SerializeField]
-    private bool useOffSetToBlendTree = false;
+    public bool useOffSetToBlendTree = false;
 
     [ShowIf("rotateIt")]
     [FoldoutGroup("Projektil Attribute", expanded: false)]
@@ -58,18 +52,20 @@ public class SkillTransformModule : MonoBehaviour
     public float positionHeight = 0f;
 
     [FoldoutGroup("Projektil Attribute", expanded: false)]
-    [Tooltip("Schattencollider")]
+    [Tooltip("Schattencollider Höhe")]
     [Range(-1, 0)]
     public float colliderHeightOffset = 0;
-
-
+    
     private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
+
+    [HideInInspector]
     public bool setPositionAtStart = true;
+
 
 
     private void Update()
     {
-        if (this.rotateOnUpdate) setPostionAndDirection();
+        if (this.rotateOnUpdate) this.skill.setPostionAndDirection();
 
         if (this.skill.spriteRenderer != null && this.skill.shadow != null)
         {
@@ -82,49 +78,5 @@ public class SkillTransformModule : MonoBehaviour
         if (!this.rotateIt && !this.keepOriginalRotation) this.transform.rotation = this.fixedRotation;
     }
 
-    private void setPostionAndDirection()
-    {
-        //Bestimme Winkel und Position
-
-        float angle = 0;
-        Vector2 start = this.transform.position;
-        Vector3 rotation = this.transform.rotation.eulerAngles;
-
-        if (!this.blendTree)
-        {
-            if (!this.keepOriginalRotation)
-            {
-                Utilities.Rotation.setDirectionAndRotation(this.skill, out angle, out start, out this.skill.direction, out rotation);
-            }
-
-            //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;                       
-
-            if (setPositionAtStart) this.transform.position = start;
-
-            if (this.keepOriginalRotation)
-            {
-                this.skill.direction = Utilities.Rotation.DegreeToVector2(this.transform.rotation.eulerAngles.z);
-            }
-
-            if (this.rotateIt && !this.keepOriginalRotation) transform.rotation = Quaternion.Euler(rotation);
-        }
-        else
-        {
-            if (this.useOffSetToBlendTree) this.transform.position = new Vector2(this.skill.sender.transform.position.x + (this.skill.sender.direction.x * positionOffset),
-                                                                                 this.skill.sender.transform.position.y + (this.skill.sender.direction.y * positionOffset) + positionHeight);
-        }
-
-        if (this.skill.animator != null)
-        {
-            Utilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "moveX", this.skill.sender.direction.x);
-            Utilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "moveY", this.skill.sender.direction.y);
-        }
-
-        if (this.skill.shadow != null)
-        {
-            float changeX = 0;
-            if (this.skill.direction.y < 0) changeX = this.skill.direction.y;
-            this.skill.shadow.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + this.colliderHeightOffset + (this.colliderHeightOffset * changeX));
-        }
-    }
+    
 }

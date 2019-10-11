@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillSummon : MonoBehaviour
+public class SkillSummon : SkillExtension
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     [FoldoutGroup("Special Behaviors", expanded: false)]
     [SerializeField]
     private Character summon;

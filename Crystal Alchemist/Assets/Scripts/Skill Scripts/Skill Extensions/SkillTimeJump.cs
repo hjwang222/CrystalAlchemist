@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillTimeJump : MonoBehaviour
+public class SkillTimeJump : SkillExtension
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     [FoldoutGroup("Special Behaviors", expanded: false)]
     [SerializeField]
     private TimeValue timeValue;

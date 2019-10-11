@@ -28,7 +28,7 @@ public class InfoBox : MonoBehaviour
     private TextMeshProUGUI statusEffectDescriptionField;
 
 
-    private void setInfo(StandardSkill skill)
+    private void setInfo(Skill skill)
     {
         this.additionalInfo.SetActive(false);
 
@@ -67,7 +67,7 @@ public class InfoBox : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public void Show(StandardSkill skill)
+    public void Show(Skill skill)
     {
         this.gameObject.SetActive(true);
         setInfo(skill);

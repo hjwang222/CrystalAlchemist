@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillTargetModule : MonoBehaviour
-{
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
+public class SkillTargetModule : SkillModule
+{    
     [TabGroup("Ziel Attribute")]
     [Tooltip("Veränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
     public List<affectedResource> affectedResources;

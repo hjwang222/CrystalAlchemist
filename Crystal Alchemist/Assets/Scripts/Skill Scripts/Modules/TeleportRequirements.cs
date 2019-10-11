@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class TeleportRequirements : PreLoadModule
 {
-    [SerializeField]
-    private StandardSkill skill;
-
     public override void checkRequirements()
     {
         Player player = this.skill.sender.GetComponent<Player>();
@@ -16,8 +13,7 @@ public class TeleportRequirements : PreLoadModule
             bool teleportEnabled = player.GetComponent<PlayerTeleport>().getLastTeleport();
             
             if (!teleportEnabled) this.skill.basicRequirementsExists = false;
-            else this.skill.basicRequirementsExists = true;
-            
+            else this.skill.basicRequirementsExists = true;            
         }
     }
 }

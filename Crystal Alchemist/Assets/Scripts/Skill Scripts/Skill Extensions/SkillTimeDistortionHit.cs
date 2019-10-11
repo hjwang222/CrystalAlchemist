@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillTimeDistortionHit : MonoBehaviour
+public class SkillTimeDistortionHit : SkillExtension
 {
     #region Attributes
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     private List<Character> affectedCharacters = new List<Character>();
-    private List<StandardSkill> affectedSkills = new List<StandardSkill>();
+    private List<Skill> affectedSkills = new List<Skill>();
 
     [Header("Zeitverzerrungs-Info")]
     [Tooltip("Wert, für Zeitkrümmung. 0 = Stop, 1 = Normal, 2 = Hast")]
@@ -38,7 +34,7 @@ public class SkillTimeDistortionHit : MonoBehaviour
         }
 
         //Skills wieder normalisieren
-        foreach (StandardSkill skill in this.affectedSkills)
+        foreach (Skill skill in this.affectedSkills)
         {
             skill.updateTimeDistortion(0);
         }
@@ -74,7 +70,7 @@ public class SkillTimeDistortionHit : MonoBehaviour
     #region Functions (private)
     private void removeTimeDistorion(GameObject hittedCharacter)
     {
-        StandardSkill skill = Utilities.Skill.getSkillByCollision(hittedCharacter);
+        Skill skill = Utilities.Skills.getSkillByCollision(hittedCharacter);
 
         if (skill != null)
         {
@@ -94,7 +90,7 @@ public class SkillTimeDistortionHit : MonoBehaviour
     private void setTimeDistorion(GameObject hittedCharacter, float destortion)
     {
         Character character = hittedCharacter.GetComponent<Character>();
-        StandardSkill skill = Utilities.Skill.getSkillByCollision(hittedCharacter);
+        Skill skill = Utilities.Skills.getSkillByCollision(hittedCharacter);
 
         if (character != null)
         {

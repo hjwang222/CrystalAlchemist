@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillLaser : MonoBehaviour
+public class SkillLaser : SkillExtension
 {
     #region Attributes
-
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
 
     [SerializeField]
     private GameObject impactEffect;
@@ -113,7 +109,7 @@ public class SkillLaser : MonoBehaviour
                 {
                     this.fire = Instantiate(this.impactEffect, hitpoint, Quaternion.identity);
                     this.fire.transform.position = hitpoint;
-                    StandardSkill fireSkill = this.fire.GetComponent<StandardSkill>();
+                    Skill fireSkill = this.fire.GetComponent<Skill>();
 
                     if (fireSkill != null)
                     {

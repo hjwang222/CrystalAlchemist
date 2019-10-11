@@ -134,7 +134,7 @@ public class AIAction
     [ShowIf("type", AIActionType.skill)]
     [VerticalGroup("Type")]
     [HideLabel]
-    public StandardSkill skill;
+    public Skill skill;
 
     [ShowIf("type", AIActionType.skill)]
     [HorizontalGroup("Properties/Tab1", 0.5f, LabelWidth = 45)]
@@ -163,7 +163,7 @@ public class AIAction
     public float gcd = 2.5f;
 
     [HideInInspector]
-    public StandardSkill skillinstance;
+    public Skill skillinstance;
 }
 
 [System.Serializable]
@@ -271,7 +271,7 @@ public class AIEvents : MonoBehaviour
             {                
                 if (action.skillinstance == null && action.skill != null)
                 {
-                    action.skillinstance = Utilities.Skill.setSkill(this.enemy, action.skill);
+                    action.skillinstance = Utilities.Skills.setSkill(this.enemy, action.skill);
 
                     SkillIndicatorModule indicatorModule = action.skillinstance.GetComponent<SkillIndicatorModule>();
                     if(indicatorModule != null) indicatorModule.showingIndicator = true;                    
@@ -594,7 +594,7 @@ public class AIEvents : MonoBehaviour
         {
             if (action.skillinstance == null && action.skill != null)
             {
-                action.skillinstance = Utilities.Skill.setSkill(this.enemy, action.skill);
+                action.skillinstance = Utilities.Skills.setSkill(this.enemy, action.skill);
 
 
                 SkillIndicatorModule indicatorModule = action.skillinstance.GetComponent<SkillIndicatorModule>();
@@ -625,7 +625,7 @@ public class AIEvents : MonoBehaviour
         }
     }
 
-    private bool skillCanBeUsed(StandardSkill skill)
+    private bool skillCanBeUsed(Skill skill)
     {
         if (skill != null)
         {
@@ -635,7 +635,7 @@ public class AIEvents : MonoBehaviour
             }
             else 
             {
-                int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.enemy.activeSkills, this.enemy.activePets);
+                int currentAmountOfSameSkills = Utilities.Skills.getAmountOfSameSkills(skill, this.enemy.activeSkills, this.enemy.activePets);
 
                 if (currentAmountOfSameSkills < skill.maxAmounts)
                 {
@@ -663,7 +663,7 @@ public class AIEvents : MonoBehaviour
         if (action.type == AIActionType.skill && skillCanBeUsed(action.skillinstance))
         {
             //useskill
-            StandardSkill usedSkill = Utilities.Skill.instantiateSkill(action.skillinstance, this.enemy, this.enemy.target);
+            Skill usedSkill = Utilities.Skills.instantiateSkill(action.skillinstance, this.enemy, this.enemy.target);
             action.skillinstance.target = null;
             action.skillinstance.cooldownTimeLeft = action.skillinstance.cooldown;
             actionUsed = true;

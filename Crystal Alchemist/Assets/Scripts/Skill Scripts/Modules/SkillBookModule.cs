@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillBookModule : MonoBehaviour
-{
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
+public class SkillBookModule : SkillModule
+{ 
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
     [TextArea]

@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillSenderModule : MonoBehaviour
+public class SkillSenderModule : SkillModule
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     [TabGroup("Sender Attribute")]
     [EnumToggleButtons]
     [Tooltip("Art der Resource")]

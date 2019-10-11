@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillHeal : MonoBehaviour
+public class SkillHeal : SkillExtension
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     [FoldoutGroup("Heal and Dispell", expanded: false)]
     [SerializeField]
     private Color targetColor;

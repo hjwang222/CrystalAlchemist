@@ -26,11 +26,11 @@ public class PlayerAttacks : MonoBehaviour
 
     private void Awake()
     {
-        List<StandardSkill> tempSkillSet = new List<StandardSkill>();
+        List<Skill> tempSkillSet = new List<Skill>();
 
-        foreach (StandardSkill skill in this.player.skillSet)
+        foreach (Skill skill in this.player.skillSet)
         {
-            tempSkillSet.Add(Utilities.Skill.setSkill(this.player, skill));
+            tempSkillSet.Add(Utilities.Skills.setSkill(this.player, skill));
         }
 
         this.player.skillSet = tempSkillSet;
@@ -38,7 +38,7 @@ public class PlayerAttacks : MonoBehaviour
 
     public void loadSkillsFromSkillSet(string name, enumButton button)
     {
-        foreach (StandardSkill skill in this.player.skillSet)
+        foreach (Skill skill in this.player.skillSet)
         {
             if (skill.skillName == name)
             {
@@ -56,7 +56,7 @@ public class PlayerAttacks : MonoBehaviour
         }
     }
 
-    private StandardSkill getSkillFromButton(string button)
+    private Skill getSkillFromButton(string button)
     {
         //TODO: GEHT BESSER!
 
@@ -73,7 +73,7 @@ public class PlayerAttacks : MonoBehaviour
 
     public void updateSkillButtons(string button)
     {
-        StandardSkill skill = this.getSkillFromButton(button);
+        Skill skill = this.getSkillFromButton(button);
 
         if (skill != null)
         {
@@ -87,7 +87,7 @@ public class PlayerAttacks : MonoBehaviour
                  && this.player.currentState != CharacterState.inMenu
                  && !Utilities.StatusEffectUtil.isCharacterStunned(this.player))
             {
-                int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.player.activeSkills, this.player.activePets);
+                int currentAmountOfSameSkills = Utilities.Skills.getAmountOfSameSkills(skill, this.player.activeSkills, this.player.activePets);
 
                 if (currentAmountOfSameSkills < skill.maxAmounts
                         && skill.isResourceEnough(this.player)
@@ -114,7 +114,7 @@ public class PlayerAttacks : MonoBehaviour
         }
     }
 
-    private bool isSkillReadyToUse(string button, StandardSkill skill)
+    private bool isSkillReadyToUse(string button, Skill skill)
     {
         if (isButtonUsable(button))
         {
@@ -198,7 +198,7 @@ public class PlayerAttacks : MonoBehaviour
         return false;
     }
 
-    private void activateSkill(string button, StandardSkill skill)
+    private void activateSkill(string button, Skill skill)
     {
         this.player.hideCastBarAndIndicator(skill);
 
@@ -210,7 +210,7 @@ public class PlayerAttacks : MonoBehaviour
             skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
             if (!skill.isRapidFire) skill.holdTimer = 0;
 
-            Utilities.Skill.instantiateSkill(skill, this.player);
+            Utilities.Skills.instantiateSkill(skill, this.player);
         }
         else if (targetingSystemModule != null && targetingSystemModule.lockOn != null && this.player.activeLockOnTarget == null)
         {
@@ -224,7 +224,7 @@ public class PlayerAttacks : MonoBehaviour
         }
     }
 
-    private void activateSkillFromTargetingSystem(StandardSkill skill)
+    private void activateSkillFromTargetingSystem(Skill skill)
     {
         if (this.player.activeLockOnTarget != null
             && this.player.activeLockOnTarget.GetComponent<TargetingSystem>().skillReadyForActivation
@@ -282,12 +282,12 @@ public class PlayerAttacks : MonoBehaviour
     {
         for (int i = 0; i < this.player.activeSkills.Count; i++)
         {
-            StandardSkill activeSkill = this.player.activeSkills[i];
+            Skill activeSkill = this.player.activeSkills[i];
             activeSkill.durationTimeLeft = 0;
         }
     }
 
-    private void deactivateSkill(string button, StandardSkill skill)
+    private void deactivateSkill(string button, Skill skill)
     {
         //Skill deaktivieren
         bool destroyit = false;
@@ -305,7 +305,7 @@ public class PlayerAttacks : MonoBehaviour
         {
             for (int i = 0; i < this.player.activeSkills.Count; i++)
             {
-                StandardSkill activeSkill = this.player.activeSkills[i];
+                Skill activeSkill = this.player.activeSkills[i];
                 if (activeSkill.skillName == skill.skillName)
                 {
                     if (activeSkill.delay > 0) activeSkill.delayTimeLeft = 0; //C4
@@ -315,7 +315,7 @@ public class PlayerAttacks : MonoBehaviour
         }
     }
 
-    private IEnumerator fireSkillToMultipleTargets(TargetingSystem targetingSystem, StandardSkill skill)
+    private IEnumerator fireSkillToMultipleTargets(TargetingSystem targetingSystem, Skill skill)
     {
         float damageReduce = targetingSystem.sortedTargets.Count;
         int i = 0;
@@ -339,9 +339,9 @@ public class PlayerAttacks : MonoBehaviour
         this.player.activeLockOnTarget = null;
     }
 
-    private void fireSkillToSingleTarget(Character target, float damageReduce, bool playSoundeffect, StandardSkill skill)
+    private void fireSkillToSingleTarget(Character target, float damageReduce, bool playSoundeffect, Skill skill)
     {
-        StandardSkill temp = Utilities.Skill.instantiateSkill(skill, this.player, target, damageReduce);
+        Skill temp = Utilities.Skills.instantiateSkill(skill, this.player, target, damageReduce);
         //Vermeidung, dass Audio zu stark abgespielt wird
         if (!playSoundeffect) temp.dontPlayAudio = true;
     }

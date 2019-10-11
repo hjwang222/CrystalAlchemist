@@ -14,12 +14,8 @@ public enum aoeShareType
 //TODO: Show Timer
 //TODO: Override Cast
 
-public class SkillStack : MonoBehaviour
-{
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
+public class SkillStack : SkillExtension
+{   
     [FoldoutGroup("Special Behaviors", expanded: false)]
     [SerializeField]
     [Required]

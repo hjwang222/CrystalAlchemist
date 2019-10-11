@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
             bool lockAnimation = false;
 
-            foreach (StandardSkill skill in this.player.activeSkills)
+            foreach (Skill skill in this.player.activeSkills)
             {
                 if (skill.movementLocked)
                 {

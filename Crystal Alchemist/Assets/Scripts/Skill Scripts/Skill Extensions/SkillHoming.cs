@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillHoming : MonoBehaviour
+public class SkillHoming : SkillExtension
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     [FoldoutGroup("Homing-spezifische Attribute", expanded: false)]
     public float offSetTime;
 

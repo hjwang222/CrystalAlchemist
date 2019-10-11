@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillTouch : MonoBehaviour
+public class SkillTouch : SkillExtension
 {
-    [SerializeField]
-    [Required]
-    private StandardSkill skill;
-
     private void Start()
     {
         this.GetComponent<BoxCollider2D>().offset = this.skill.sender.boxCollider.offset;

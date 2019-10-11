@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SkillSlot : MonoBehaviour
 {    
     public Image image;
-    public StandardSkill skill;
+    public Skill skill;
     public int ID;
 
     private void Awake()
@@ -16,9 +16,9 @@ public class SkillSlot : MonoBehaviour
         this.ID = (this.gameObject.transform.parent.transform.parent.transform.GetSiblingIndex() * 10) + (this.gameObject.transform.GetSiblingIndex() + 1);
     }
 
-    public void setSkill(StandardSkill skill)
+    public void setSkill(Skill skill)
     {
-        if (skill == null && skill.GetComponent<SkillBookModule>() == null)
+        if (skill == null || skill.GetComponent<SkillBookModule>() == null)
             //this.image.color = new Color(1f, 1f, 1f, 0.2f);
             this.image.enabled = false;
         else

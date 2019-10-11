@@ -16,7 +16,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
     [SerializeField]
     private SimpleSignal newAssignedSkillSignal;
 
-    public StandardSkill skill;
+    public Skill skill;
 
     void Start()
     {
@@ -54,7 +54,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
         this.newAssignedSkillSignal.Raise();
     }
 
-    private StandardSkill getSkill()
+    private Skill getSkill()
     {
         if (this.player != null)
         {
@@ -71,7 +71,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
         return null;
     }
 
-    private void setSkill(StandardSkill skill)
+    private void setSkill(Skill skill)
     {           
         switch (this.button)
         {
