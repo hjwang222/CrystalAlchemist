@@ -64,6 +64,7 @@ MonoBehaviour:
   maxDuration: 9999
   canOverride: 0
   canDeactivateIt: 1
+  canBeDispelled: 1
   maxStacks: 1
   stunTarget: 0
   statusEffectType: 0
@@ -104,6 +105,15 @@ MonoBehaviour:
       skills: []
       instantiatNewGameObject: {fileID: 0}
       analyseUI: {fileID: 0}
+    - actionType: 6
+      affectedResources: []
+      amount: 0
+      speed: 0
+      time: 0
+      skills: []
+      instantiatNewGameObject: {fileID: 0}
+      analyseUI: {fileID: 2140673505560165479, guid: f26a64cb4b5c5c549b6018becf166d02,
+        type: 3}
   - triggers:
     - triggerType: 4
       intervall: 0

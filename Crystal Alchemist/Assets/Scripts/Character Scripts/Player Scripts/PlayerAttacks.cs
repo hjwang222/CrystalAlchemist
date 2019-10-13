@@ -77,33 +77,37 @@ public class PlayerAttacks : MonoBehaviour
 
         if (skill != null)
         {
-            if (skill.cooldownTimeLeft > 0)
+            int currentAmountOfSameSkills = Utilities.Skills.getAmountOfSameSkills(skill, this.player.activeSkills, this.player.activePets);
+
+            if (currentAmountOfSameSkills >= skill.maxAmounts
+                && ((skill.deactivateByButtonUp || skill.deactivateByButtonDown)
+                || skill.delay == Utilities.maxFloatInfinite))
             {
-                skill.cooldownTimeLeft -= (Time.deltaTime * this.player.timeDistortion * this.player.spellspeed);
+                deactivateSkill(button, skill);
             }
-            else if (this.player.currentState != CharacterState.interact
-                 && this.player.currentState != CharacterState.inDialog
-                 && this.player.currentState != CharacterState.respawning
-                 && this.player.currentState != CharacterState.inMenu
-                 && !Utilities.StatusEffectUtil.isCharacterStunned(this.player))
+            else
             {
-                int currentAmountOfSameSkills = Utilities.Skills.getAmountOfSameSkills(skill, this.player.activeSkills, this.player.activePets);
-
-                if (currentAmountOfSameSkills < skill.maxAmounts
-                        && skill.isResourceEnough(this.player)
-                        && skill.basicRequirementsExists)
+                if (skill.cooldownTimeLeft > 0)
                 {
-                    if (isSkillReadyToUse(button, skill))
-                    {
-                        activateSkill(button, skill); //activate Skill or Target System
-                    }
-
-                    activateSkillFromTargetingSystem(skill); //if Target System is ready
+                    skill.cooldownTimeLeft -= (Time.deltaTime * this.player.timeDistortion * this.player.spellspeed);
                 }
-                else if (currentAmountOfSameSkills >= skill.maxAmounts
-                     && ((skill.deactivateByButtonUp || skill.deactivateByButtonDown) || skill.delay == Utilities.maxFloatInfinite))
+                else if (this.player.currentState != CharacterState.interact
+                     && this.player.currentState != CharacterState.inDialog
+                     && this.player.currentState != CharacterState.respawning
+                     && this.player.currentState != CharacterState.inMenu
+                     && !Utilities.StatusEffectUtil.isCharacterStunned(this.player))
                 {
-                    deactivateSkill(button, skill);
+                    if (currentAmountOfSameSkills < skill.maxAmounts
+                            && skill.isResourceEnough(this.player)
+                            && skill.basicRequirementsExists)
+                    {
+                        if (isSkillReadyToUse(button, skill))
+                        {
+                            activateSkill(button, skill); //activate Skill or Target System
+                        }
+
+                        activateSkillFromTargetingSystem(skill); //if Target System is ready
+                    }
                 }
             }
 

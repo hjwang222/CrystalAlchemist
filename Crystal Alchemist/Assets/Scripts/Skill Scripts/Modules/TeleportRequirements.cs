@@ -6,7 +6,7 @@ public class TeleportRequirements : PreLoadModule
 {
     public override void checkRequirements()
     {
-        if (this.skill.sender != null)
+        if (this.skill != null && this.skill.sender != null)
         {
             Player player = this.skill.sender.GetComponent<Player>();
 

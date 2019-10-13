@@ -193,6 +193,7 @@ public class StatusEffect : MonoBehaviour
     private float elapsed;
     private GameObject panel;
     private List<GameObject> gameObjectApplied = new List<GameObject>();
+    private List<GameObject> analyseAdded = new List<GameObject>();
 
     [HideInInspector]
     public Character target;
@@ -319,22 +320,29 @@ public class StatusEffect : MonoBehaviour
         {
             GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            this.gameObjectApplied.Clear();
 
             for (int i = 0; i < enemies.Length; i++)
             {
-                GameObject tmp = Instantiate(analyseGameObject, enemies[i].transform.position, Quaternion.identity, enemies[i].transform);
-                tmp.GetComponent<AnalyseUI>().target = enemies[i];
-                tmp.hideFlags = HideFlags.HideInHierarchy;
-                this.gameObjectApplied.Add(tmp);
+                if (!this.analyseAdded.Contains(enemies[i])) //check if already added
+                {
+                    GameObject tmp = Instantiate(analyseGameObject, enemies[i].transform.position, Quaternion.identity, enemies[i].transform);
+                    tmp.GetComponent<AnalyseUI>().target = enemies[i];
+                    //tmp.hideFlags = HideFlags.HideInHierarchy;
+                    this.gameObjectApplied.Add(tmp);
+                    this.analyseAdded.Add(objects[i]);
+                }
             }
 
             for (int i = 0; i < objects.Length; i++)
             {
-                GameObject tmp = Instantiate(analyseGameObject, objects[i].transform.position, Quaternion.identity, objects[i].transform);
-                tmp.GetComponent<AnalyseUI>().target = objects[i];
-                tmp.hideFlags = HideFlags.HideInHierarchy;
-                this.gameObjectApplied.Add(tmp);
+                if (!this.analyseAdded.Contains(objects[i])) //check if already added
+                {
+                    GameObject tmp = Instantiate(analyseGameObject, objects[i].transform.position, Quaternion.identity, objects[i].transform);
+                    tmp.GetComponent<AnalyseUI>().target = objects[i];
+                    // tmp.hideFlags = HideFlags.HideInHierarchy;
+                    this.gameObjectApplied.Add(tmp);
+                    this.analyseAdded.Add(objects[i]);
+                }
             }
         }
     }
@@ -354,10 +362,10 @@ public class StatusEffect : MonoBehaviour
         if (this.statusEffectTimeLeft <= 0) DestroyIt();
     }   
  
-    public virtual void DestroyIt()
+    public void DestroyIt()
     {
         Utilities.UnityUtils.SetAnimatorParameter(this.ownAnimator, "End");
-
+               
         if (this.target != null)
         {
             //Charakter-Farbe zurücksetzen
@@ -375,6 +383,9 @@ public class StatusEffect : MonoBehaviour
                 this.target.GetComponent<Character>().buffs.Remove(this);
             }            
         }
+
+        this.gameObjectApplied.Clear();
+        this.analyseAdded.Clear();
 
         //GUI updaten und Objekt kurz danach zerstören
         this.updateUI.Raise();

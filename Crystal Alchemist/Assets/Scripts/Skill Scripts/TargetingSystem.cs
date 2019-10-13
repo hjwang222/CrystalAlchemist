@@ -97,7 +97,6 @@ public class TargetingSystem : MonoBehaviour
             }
 
             removeNullCharacters();
-
             sortNearestTargets();
             setLockOnNearestTarget();
 
@@ -248,6 +247,7 @@ public class TargetingSystem : MonoBehaviour
     private void sortNearestTargets()
     {
         this.sortedTargets.Clear();
+        
         List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
 
         for (int i = 0; i < this.maxAmountOfTargets && i < sorted.Count; i++)
