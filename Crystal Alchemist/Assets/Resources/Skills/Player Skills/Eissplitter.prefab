@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 2697588482501113128}
   - component: {fileID: 9119982907900064386}
   - component: {fileID: 5432061724297285009}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Eissplitter
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -213,6 +213,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
@@ -324,11 +325,8 @@ MonoBehaviour:
   rotateIt: 1
   rotateOnUpdate: 0
   keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
   rotationModifier: 0
   snapRotationInDegrees: 45
-  setPositionAtStart: 1
 --- !u!114 &2106465046035776382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,7 +396,7 @@ GameObject:
   - component: {fileID: 597466489169404831}
   - component: {fileID: 1781594353715446578}
   - component: {fileID: 1156435307969178262}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -515,7 +513,7 @@ GameObject:
   - component: {fileID: 157402643467407502}
   - component: {fileID: 152738269668406305}
   - component: {fileID: 4177264768934889194}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +645,7 @@ PrefabInstance:
     - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

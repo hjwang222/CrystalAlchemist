@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 2452030230981208128}
   - component: {fileID: 1293588450421558207}
   - component: {fileID: 6423164893705659178}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Schwert
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -82,6 +82,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: -0.0028667413
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
@@ -294,6 +295,7 @@ MonoBehaviour:
   castingAnimation: {fileID: 0}
   castingAnimationCharacterKey: 
   targetColor: {r: 0, g: 0, b: 0, a: 0}
+  useColor: 0
 --- !u!1 &1288681395139722514
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5590416017817286310}
   - component: {fileID: 8355835792145004362}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: collider
   m_TagString: Attack
   m_Icon: {fileID: 0}

@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 4863436425545495228}
   - component: {fileID: 1482197180039138272}
   - component: {fileID: 755399409455827473}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: C4
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -61,6 +61,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   shadow: {fileID: 0}
   speed: 0
+  positionOffset: 1
   maxAmounts: 1
   isStationary: 1
   doCastDuringDelay: 0
@@ -68,7 +69,7 @@ MonoBehaviour:
   cast: 0
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
+  deactivateByButtonDown: 1
   isRapidFire: 0
   keepHoldTimer: 0
   canAffectedBytimeDistortion: 1
@@ -82,6 +83,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: -0.0034246743
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
@@ -108,7 +110,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   resourceType: 3
   item: {fileID: 7267644143456828498, guid: eff514630d133a14fa019ee8341f1420, type: 3}
-  addResourceSender: -2
+  addResourceSender: -1
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0
@@ -411,7 +413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8803394200173126845}
   - component: {fileID: 1475723817302537295}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

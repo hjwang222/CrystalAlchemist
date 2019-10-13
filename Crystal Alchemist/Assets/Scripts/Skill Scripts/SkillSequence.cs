@@ -183,8 +183,7 @@ public class SkillSequence : MonoBehaviour
                 {
                     childSkill.sender = this.sender;
                     childSkill.target = this.target;
-
-                    if(childSkill.GetComponent<SkillRotationModule>() != null) childSkill.GetComponent<SkillRotationModule>().setPositionAtStart = false;
+                    childSkill.overridePosition = false;
                 }
             }
         }

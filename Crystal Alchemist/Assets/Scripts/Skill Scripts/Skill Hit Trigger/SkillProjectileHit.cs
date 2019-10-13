@@ -22,26 +22,26 @@ public class SkillProjectileHit : SkillHitTrigger
             // if (this.shadow != null) this.shadow.gameObject.SetActive(false);
             if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = Vector2.zero;
 
-            placeFire(hittedCharacter);
+            placeFire();
 
             this.skill.isActive = false;
         }
     }
 
-    private void placeFire(Collider2D hittedCharacter)
+    private void placeFire()
     {
         if (this.skillOnImpact != null)
         {
             //if (!Utilities.Collisions.checkCollision(hittedCharacter, this)) hitpoint = this.transform.position;
 
-            GameObject fire = Instantiate(this.skillOnImpact.gameObject, this.transform.position, Quaternion.identity);
+            GameObject fire = Instantiate(this.skillOnImpact.gameObject, this.skill.transform.position, Quaternion.identity);
             //fire.transform.position = hittedCharacter.transform.position;
             Skill fireSkill = fire.GetComponent<Skill>();
 
             if (fireSkill != null)
             {
                 //Position nicht überschreiben
-                if (fireSkill.GetComponent<SkillRotationModule>() != null) fireSkill.GetComponent<SkillRotationModule>().setPositionAtStart = false;
+                fireSkill.overridePosition = false;
                 fireSkill.sender = this.skill.sender;
             }
         }

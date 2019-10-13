@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8534472210655833774}
   - component: {fileID: 6063059781987790246}
   - component: {fileID: 4444995445623203262}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Stromschlag
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -168,6 +168,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
@@ -265,7 +266,6 @@ MonoBehaviour:
   keepOriginalRotation: 0
   rotationModifier: 0
   snapRotationInDegrees: 0
-  setPositionAtStart: 1
 --- !u!114 &6063059781987790246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 6508292816955024443}
   - component: {fileID: 6508292816955024436}
   - component: {fileID: 6508292816955024440}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: New Sprite
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7606972994670469863}
   - component: {fileID: 7606972994670469864}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ PrefabInstance:
     - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

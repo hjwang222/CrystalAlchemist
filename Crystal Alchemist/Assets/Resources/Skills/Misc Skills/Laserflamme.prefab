@@ -115,98 +115,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Feuer
-  skillNameEnglish: 
-  skillDescription: 
-  skillDescriptionEnglish: 
-  category: 1
-  animationTriggerName: 
-  orderIndex: 1
-  spriteRenderer: {fileID: 0}
+  skillName: Laserflamme
+  skillNameEnglish: Laserflame
+  spriteRenderer: {fileID: 5446557234535357358}
   myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 4321351672686956603}
   shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  castingAnimation: {fileID: 0}
-  castingAnimationCharacterKey: 
+  speed: 0
+  positionOffset: 0
+  maxAmounts: 9999
+  isStationary: 1
+  doCastDuringDelay: 0
+  comboAmount: 100
   cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  duration: 3
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
   deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 1
+  delay: 0
+  duration: 0
   cooldown: 0
   cooldownAfterCombo: 0
   durationCombo: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: -1
-  statusEffects: []
-  thrust: 0
-  knockbackTime: 0.2
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: 0
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 0
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 0
-  maxAmountOfTargets: 0
-  targetingDuration: 0
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 1
-  affectOther: 1
-  affectSame: 1
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 9999
-  comboAmount: 99
-  icon: {fileID: 0}
-  activeIndicators: []
+  elapsed: 0
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
   dontPlayAudio: 0
+  basicRequirementsExists: 1
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
-  setPositionAtStart: 1
   setActive: 1
 --- !u!58 &1485117890447238215
 CircleCollider2D:

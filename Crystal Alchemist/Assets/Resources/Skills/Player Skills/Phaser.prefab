@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 862621948294645814}
   - component: {fileID: 1969711209088018432}
   - component: {fileID: 965314693086916177}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Phaser
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -78,6 +78,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
@@ -190,11 +191,8 @@ MonoBehaviour:
   rotateIt: 1
   rotateOnUpdate: 0
   keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
   rotationModifier: 0
   snapRotationInDegrees: 0
-  setPositionAtStart: 1
 --- !u!1 &3924551678506968723
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +205,7 @@ GameObject:
   - component: {fileID: 3924551678506968721}
   - component: {fileID: 3924551678506968720}
   - component: {fileID: 4156987265135631255}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

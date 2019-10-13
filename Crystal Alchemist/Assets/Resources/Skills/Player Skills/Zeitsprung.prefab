@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9065695916760293169}
   - component: {fileID: 507477887828383353}
   - component: {fileID: 4629674684146547449}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 8395963437978072371}
   - component: {fileID: 4487708412532866469}
   - component: {fileID: 3403137778722635149}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Zeitsprung
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -259,14 +259,14 @@ MonoBehaviour:
   comboAmount: 100
   cast: 0
   lockMovementonDuration: 9999
-  deactivateByButtonUp: 0
+  deactivateByButtonUp: 1
   deactivateByButtonDown: 0
   isRapidFire: 1
   keepHoldTimer: 0
   canAffectedBytimeDistortion: 0
   delay: 0
   duration: 9999
-  cooldown: 1
+  cooldown: 0
   cooldownAfterCombo: 0
   durationCombo: 0
   elapsed: 0
@@ -274,6 +274,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: -0.011267286
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}

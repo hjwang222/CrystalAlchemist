@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 6029647470300104532}
   - component: {fileID: 8675766369740622298}
   - component: {fileID: 7817998858656526167}
-  m_Layer: 12
+  - component: {fileID: 5219678606332422380}
+  m_Layer: 13
   m_Name: Schild
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -80,6 +81,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
@@ -332,6 +334,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
   useOffSetToBlendTree: 0
+--- !u!114 &5219678606332422380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086066880683234544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd426c77cb496a439378f77fced912a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  ignoredCollider2D: {fileID: 6821413945222853649}
 --- !u!1 &8110846557276872138
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5246980305061559774}
   - component: {fileID: 6821413945222853649}
-  m_Layer: 21
+  m_Layer: 13
   m_Name: collision
   m_TagString: Skill
   m_Icon: {fileID: 0}

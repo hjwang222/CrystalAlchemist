@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7078203054151147465}
   - component: {fileID: 8528484996259057469}
   - component: {fileID: 4929557310536244856}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 5634262924188748619}
   - component: {fileID: 2130774073635876181}
   - component: {fileID: 3944331230545852029}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 7151566556649053221}
   - component: {fileID: 2117475987174398556}
   - component: {fileID: 5085618712826816977}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Giftpfeil
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -434,6 +434,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
@@ -547,7 +548,6 @@ MonoBehaviour:
   keepOriginalRotation: 0
   rotationModifier: 0
   snapRotationInDegrees: 45
-  setPositionAtStart: 1
 --- !u!114 &7151566556649053221
 MonoBehaviour:
   m_ObjectHideFlags: 0

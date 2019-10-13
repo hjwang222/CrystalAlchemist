@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4301822135087756943}
   - component: {fileID: 5259047670313868482}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 5261843100729261818}
   - component: {fileID: 2227704814518306726}
   - component: {fileID: 515671639}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Bombe
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -132,6 +132,7 @@ MonoBehaviour:
   animator: {fileID: 5261843100729261818}
   shadow: {fileID: 0}
   speed: 0
+  positionOffset: 1
   maxAmounts: 3
   isStationary: 1
   doCastDuringDelay: 0
@@ -153,6 +154,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: -0.0073119123
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
@@ -487,7 +489,7 @@ PrefabInstance:
     - target: {fileID: 1324514916148282493, guid: c2fcea4a156b7e04197a6fecb1d6366b,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2236758614029836603, guid: c2fcea4a156b7e04197a6fecb1d6366b,
         type: 3}

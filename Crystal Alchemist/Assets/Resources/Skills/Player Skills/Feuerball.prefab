@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1592722954610492268}
   - component: {fileID: 8280449274916686873}
   - component: {fileID: 8162130338726924441}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 2061831809823023025}
   - component: {fileID: 7116430054111049167}
   - component: {fileID: 1978907326292618844}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Feuerball
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -319,6 +319,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
@@ -432,7 +433,6 @@ MonoBehaviour:
   keepOriginalRotation: 0
   rotationModifier: 0
   snapRotationInDegrees: 45
-  setPositionAtStart: 1
 --- !u!114 &2061831809823023025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 712452891642831029}
   - component: {fileID: 1421051230670556681}
   - component: {fileID: 8103579987424890013}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -606,7 +606,7 @@ PrefabInstance:
     - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1866628593189516363}
   - component: {fileID: 8613971535191392423}
   - component: {fileID: 6011491638290907752}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 5257727404935883419}
   - component: {fileID: 1969718782558145669}
   - component: {fileID: 2642437566886130826}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 4588277751585783558}
   - component: {fileID: 6866986401814778853}
   - component: {fileID: 7657995963615701156}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Arkaner Impuls
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -457,6 +457,7 @@ MonoBehaviour:
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
@@ -529,11 +530,8 @@ MonoBehaviour:
   rotateIt: 1
   rotateOnUpdate: 0
   keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
   rotationModifier: 0
   snapRotationInDegrees: 0
-  setPositionAtStart: 1
 --- !u!114 &69357154066809696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,7 +658,7 @@ PrefabInstance:
     - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

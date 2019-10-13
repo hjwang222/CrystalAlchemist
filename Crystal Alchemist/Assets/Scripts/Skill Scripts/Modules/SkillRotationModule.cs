@@ -29,8 +29,7 @@ public class SkillRotationModule : SkillModule
     
     private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
 
-    [HideInInspector]
-    public bool setPositionAtStart = true;
+
 
 
 

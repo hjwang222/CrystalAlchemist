@@ -314,7 +314,6 @@ MonoBehaviour:
   activeSkillParent: {fileID: 3020177091833525065}
   activeStatusEffectParent: {fileID: 8464107762506563443}
   skillSetParent: {fileID: 4508596630270412994}
-  aggro: {fileID: 6778252411727736238}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
@@ -326,8 +325,8 @@ MonoBehaviour:
   speed: 0
   isInvincible: 0
   isImmortal: 0
+  cannotDie: 0
   isHit: 0
-  items: []
   buffs: []
   debuffs: []
   activeSkills: []
@@ -565,7 +564,7 @@ GameObject:
   - component: {fileID: 5555258133612552937}
   - component: {fileID: 6778252411727736238}
   - component: {fileID: 5650306304912438039}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: Aggro
   m_TagString: Untagged
   m_Icon: {fileID: 0}

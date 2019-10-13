@@ -153,7 +153,8 @@ public class Skill : MonoBehaviour
     public float durationTimeLeft;
     [HideInInspector]
     public float cooldownTimeLeft;
-
+    [HideInInspector]
+    public bool overridePosition = true;
     [HideInInspector]
     public bool movementLocked;
 
@@ -358,7 +359,6 @@ public class Skill : MonoBehaviour
         bool blendTree = false;
         bool useOffSetToBlendTree = false;
         bool keepOriginalRotation = false;
-        bool setPositionAtStart = true;
         bool rotateIt = false;
 
         float positionOffset = this.positionOffset;
@@ -371,8 +371,7 @@ public class Skill : MonoBehaviour
 
         if (rotationModule != null)
         {
-            keepOriginalRotation = rotationModule.keepOriginalRotation;
-            setPositionAtStart = rotationModule.setPositionAtStart;
+            keepOriginalRotation = rotationModule.keepOriginalRotation;            
             rotateIt = rotationModule.rotateIt;            
         }
 
@@ -397,7 +396,7 @@ public class Skill : MonoBehaviour
 
             //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;                       
 
-            if (setPositionAtStart) this.transform.position = start;
+            if (this.overridePosition) this.transform.position = start;
 
             if (keepOriginalRotation)
             {

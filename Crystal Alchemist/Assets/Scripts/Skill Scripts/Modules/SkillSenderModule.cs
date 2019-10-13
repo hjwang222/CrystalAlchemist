@@ -70,13 +70,13 @@ public class SkillSenderModule : SkillModule
 
     private void Start()
     {
+        if (this.stateType == StateType.attack) this.skill.sender.currentState = CharacterState.attack;
+        else if (this.stateType == StateType.defend) this.skill.sender.currentState = CharacterState.defend;
+
         updateResourceSender();
         setSelfTrust();
 
         this.skill.elapsed = this.intervallSender;
-
-        if (this.stateType == StateType.attack) this.skill.sender.currentState = CharacterState.attack;
-        else if (this.stateType == StateType.defend) this.skill.sender.currentState = CharacterState.defend;
     }
 
     private void Update()
@@ -108,10 +108,6 @@ public class SkillSenderModule : SkillModule
         if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(0);
     }
 
-
-
-
-
     private void updateResourceSender()
     {
         if (this.skill.sender != null)
@@ -120,12 +116,6 @@ public class SkillSenderModule : SkillModule
             //setPostionAndDirection();
         }
     }
-
-
-
-
-
-
 
     private void setSelfTrust()
     {
