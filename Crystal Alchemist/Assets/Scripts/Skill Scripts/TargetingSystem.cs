@@ -53,7 +53,10 @@ public class TargetingSystem : MonoBehaviour
     private void Update()
     {
         if (this.mode == TargetingMode.auto)
+        {
             selectAllNearestTargets();
+            this.readyToFire = true;
+        }            
         else
         {
             selectTargetManually();
@@ -167,6 +170,7 @@ public class TargetingSystem : MonoBehaviour
                 {
                     GameObject indicator = Instantiate(this.lockOnIndicator, target.transform.position, Quaternion.identity, target.transform);
                     this.appliedIndicators.Add(indicator);
+                    //TODO: Add Script
                 }
             }
 
