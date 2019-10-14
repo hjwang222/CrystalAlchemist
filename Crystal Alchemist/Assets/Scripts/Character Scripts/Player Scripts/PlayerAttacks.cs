@@ -247,6 +247,7 @@ public class PlayerAttacks : MonoBehaviour
                 || targetingSystemModule.targetingMode == TargetingMode.auto)
             {
                 skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
+
                 StartCoroutine(fireSkillToMultipleTargets(targetingSystem, skill));
                 /*
                 if (targetingSystem.selectAll || targetingSystemModule.targetingMode == TargetingMode.autoMulti)

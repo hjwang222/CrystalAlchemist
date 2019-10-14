@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using TMPro;
-
-
 
 public class TargetingSystem : MonoBehaviour
 {
+    [HideInInspector]
     public List<Character> targets = new List<Character>();
     private List<Character> targetsInRange = new List<Character>();
     private List<GameObject> appliedIndicators = new List<GameObject>();
@@ -52,36 +50,35 @@ public class TargetingSystem : MonoBehaviour
 
     private void Update()
     {
-        if (this.mode == TargetingMode.auto)
+        if (!this.readyToFire)
         {
-            selectAllNearestTargets();
-            this.readyToFire = true;
-        }            
-        else
-        {
-            selectTargetManually();
-        }
+            if (this.mode == TargetingMode.auto)
+            {
+                selectAllNearestTargets();
+                this.readyToFire = true;
+            }
+            else selectTargetManually();            
 
-        updateIndicator();
+            updateIndicator();
+        }              
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-
         if (Utilities.Collisions.checkCollision(collision, this.skill) && character != null)
         {
-            if (!this.targetsInRange.Contains(character)) this.targetsInRange.Add(collision.GetComponent<Character>());
+            if (!this.targetsInRange.Contains(character)) this.targetsInRange.Add(character);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-
         if (Utilities.Collisions.checkCollision(collision, this.skill) && character != null)
         {
-            if (this.targetsInRange.Contains(character)) this.targetsInRange.Remove(collision.GetComponent<Character>());
+            if (this.targetsInRange.Contains(character)) this.targetsInRange.Remove(character);
+            if (this.targets.Contains(character)) this.targets.Remove(character);
         }
     }
 
@@ -98,7 +95,8 @@ public class TargetingSystem : MonoBehaviour
 
     private void selectTargetManually()
     {
-        if (this.targets.Count == 0) selectNextTarget(0);
+        if (this.selectAll) selectAllNearestTargets();
+        else selectNextTarget(0);
 
         if (this.inputPossible)
         {
@@ -107,21 +105,17 @@ public class TargetingSystem : MonoBehaviour
                 float valueX = Input.GetAxisRaw("Cursor Horizontal");
                 float valueY = Input.GetAxisRaw("Cursor Vertical");
 
-                if (valueY != 0)
+                if (valueY != 0) //switch modes
                 {
                     StartCoroutine(delayCo());
 
                     if (this.selectAll) this.selectAll = false;
-                    else this.selectAll = true;
-
-                    if (this.selectAll) selectAllNearestTargets();
-                    else selectNextTarget((int)valueY);
+                    else this.selectAll = true;                   
                 }
 
-                if (valueX != 0)
+                if (valueX != 0) //switch targets
                 {
                     StartCoroutine(delayCo());
-                    //switch targets
                     selectNextTarget((int)valueX);
                 }
             }
@@ -136,12 +130,15 @@ public class TargetingSystem : MonoBehaviour
     {
         this.targets.Clear();
         List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.skill.sender.transform.position))).ToList<Character>();
-               
+
+        if (this.targetsInRange.Count > 0)
+        {
             this.index += value;
             if (this.index >= sorted.Count) this.index = 0;
             else if (index < 0) this.index = sorted.Count - 1;
 
-            addTarget(sorted[this.index]);        
+            addTarget(sorted[this.index]);
+        }
     }
 
     private void selectAllNearestTargets()
@@ -164,24 +161,37 @@ public class TargetingSystem : MonoBehaviour
     {
         if (this.showIndicator)
         {
-            foreach (Character target in this.targets)
-            {
-                if (Utilities.UnityUtils.hasChildWithTag(target, this.lockOnIndicator.tag) == null)
-                {
-                    GameObject indicator = Instantiate(this.lockOnIndicator, target.transform.position, Quaternion.identity, target.transform);
-                    this.appliedIndicators.Add(indicator);
-                    //TODO: Add Script
-                }
-            }
+            addIndicator();
+            removeIndicator();
+        }
+    }
 
-            foreach (GameObject applied in this.appliedIndicators)
+    private void addIndicator()
+    {
+        foreach (Character target in this.targets)
+        {
+            if (Utilities.UnityUtils.hasChildWithTag(target, this.lockOnIndicator.tag) == null)
             {
-                if (applied != null && !this.targets.Contains(applied.transform.parent.gameObject.GetComponent<Character>()))
-                {
-                    Destroy(applied);
-                }
+                GameObject indicator = Instantiate(this.lockOnIndicator, target.transform.position, Quaternion.identity, target.transform);
+                indicator.GetComponent<LockOnFrame>().setValues(Utilities.Format.getLanguageDialogText(target.stats.characterName, target.stats.englischCharacterName));
+                this.appliedIndicators.Add(indicator);                
             }
         }
+    }
+
+    private void removeIndicator()
+    {
+        List<GameObject> tempAppliedList = new List<GameObject>();
+
+        foreach (GameObject applied in this.appliedIndicators)
+        {
+            Character character = applied.transform.parent.gameObject.GetComponent<Character>();
+
+            if (applied != null && character != null && !this.targets.Contains(character)) Destroy(applied);            
+            else tempAppliedList.Add(applied);            
+        }
+
+        this.appliedIndicators = tempAppliedList;
     }
 
     private IEnumerator delayCo()
@@ -214,6 +224,20 @@ public class TargetingSystem : MonoBehaviour
         manual,
         autoSingle,
         autoMulti
+    }
+
+        private void removeTargetsOutOfRange()
+    {
+
+
+        List<Character> temp = new List<Character>();
+
+        foreach(Character target in this.targets)
+        {
+            if (this.targetsInRange.Contains(target)) temp.Add(target);
+        }
+
+        this.targets = temp;
     }
 
     public class TargetingSystem : MonoBehaviour
