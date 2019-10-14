@@ -296,11 +296,12 @@ MonoBehaviour:
   skill: {fileID: 0}
   setTargetAutomatically: 0
   lockOn: {fileID: 6540191019208669748, guid: 5b2939f613b001c4a9eb3296ae0d2093, type: 3}
-  targetingMode: 4
+  targetingMode: 1
   maxAmountOfTargets: 3
   targetingDuration: 6
   multiHitDelay: 0
   showRange: 0
+  showIndicator: 0
 --- !u!1 &6508292816955024442
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,16 +489,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 680506914304237523}
     m_Modifications:
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -552,6 +543,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

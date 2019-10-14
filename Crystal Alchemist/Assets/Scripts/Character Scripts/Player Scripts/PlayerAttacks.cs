@@ -221,9 +221,7 @@ public class PlayerAttacks : MonoBehaviour
             //Aktiviere Zielerfassung
             this.player.activeLockOnTarget = Instantiate(targetingSystemModule.lockOn, this.transform.position, Quaternion.identity, this.transform);
             TargetingSystem lockOnScript = this.player.activeLockOnTarget.GetComponent<TargetingSystem>();
-            lockOnScript.button = button;
-            lockOnScript.sender = this.player;
-            lockOnScript.skill = skill;
+            lockOnScript.setParameters(skill, button);
             //this.activeLockOnTarget.hideFlags = HideFlags.HideInHierarchy; //TODO: Debug Value as Scriptable Object
         }
     }
@@ -231,8 +229,7 @@ public class PlayerAttacks : MonoBehaviour
     private void activateSkillFromTargetingSystem(Skill skill)
     {
         if (this.player.activeLockOnTarget != null
-            && this.player.activeLockOnTarget.GetComponent<TargetingSystem>().skillReadyForActivation
-            && this.player.activeLockOnTarget.GetComponent<TargetingSystem>().skill == skill)
+            && this.player.activeLockOnTarget.GetComponent<TargetingSystem>().isReadyToFire(skill))
         {
             //Benutze Skill (mit Zielerfassung)   
             if (!skill.isRapidFire) skill.holdTimer = 0;
@@ -240,33 +237,31 @@ public class PlayerAttacks : MonoBehaviour
             TargetingSystem targetingSystem = this.player.activeLockOnTarget.GetComponent<TargetingSystem>();
             SkillTargetingSystemModule targetingSystemModule = skill.GetComponent<SkillTargetingSystemModule>();
 
-            if (targetingSystem.currentTarget == null
-                && targetingSystem.sortedTargets.Count == 0
-                && targetingSystemModule.targetingMode != TargetingMode.autoMulti
-                && targetingSystemModule.targetingMode != TargetingMode.autoSingle)
+            if (targetingSystem.targets.Count == 0
+                && targetingSystemModule.targetingMode != TargetingMode.auto)
             {
                 Destroy(this.player.activeLockOnTarget);
                 this.player.activeLockOnTarget = null;
             }
-            else if (targetingSystem.currentTarget != null
-                || targetingSystem.sortedTargets.Count > 0
-                || targetingSystemModule.targetingMode == TargetingMode.autoMulti
-                || targetingSystemModule.targetingMode == TargetingMode.autoSingle)
+            else if (targetingSystem.targets.Count > 0
+                || targetingSystemModule.targetingMode == TargetingMode.auto)
             {
                 skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
-
+                StartCoroutine(fireSkillToMultipleTargets(targetingSystem, skill));
+                /*
                 if (targetingSystem.selectAll || targetingSystemModule.targetingMode == TargetingMode.autoMulti)
                 {
+                    
                     for (int i = 0; i < targetingSystem.listOfTargetsWithMark.Count; i++)
                     {
                         Destroy(targetingSystem.listOfTargetsWithMark[i].gameObject);
-                    }
+                    }*/
 
                     //Multihit!
-                    StartCoroutine(fireSkillToMultipleTargets(targetingSystem, skill));
+                    
 
                     //Fire Skill one time when no target is there
-                    if (targetingSystemModule.targetingMode == TargetingMode.autoMulti && targetingSystem.sortedTargets.Count == 0)
+                    /*if (targetingSystemModule.targetingMode == TargetingMode.autoMulti && targetingSystem.sortedTargets.Count == 0)
                         fireSkillToSingleTarget(targetingSystem.currentTarget, 1, true, skill);
                 }
                 else if (!targetingSystem.selectAll || targetingSystemModule.targetingMode == TargetingMode.autoSingle)
@@ -278,6 +273,7 @@ public class PlayerAttacks : MonoBehaviour
                     Destroy(this.player.activeLockOnTarget);
                     this.player.activeLockOnTarget = null;
                 }
+                }*/
             }
         }
     }
@@ -321,10 +317,10 @@ public class PlayerAttacks : MonoBehaviour
 
     private IEnumerator fireSkillToMultipleTargets(TargetingSystem targetingSystem, Skill skill)
     {
-        float damageReduce = targetingSystem.sortedTargets.Count;
+        float damageReduce = targetingSystem.targets.Count;
         int i = 0;
 
-        foreach (Character target in targetingSystem.sortedTargets)
+        foreach (Character target in targetingSystem.targets)
         {
             if (target.currentState != CharacterState.dead
                 && target.currentState != CharacterState.respawning)

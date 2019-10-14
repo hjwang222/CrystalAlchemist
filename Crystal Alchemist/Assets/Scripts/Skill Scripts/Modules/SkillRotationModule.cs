@@ -28,10 +28,7 @@ public class SkillRotationModule : SkillModule
     public float snapRotationInDegrees = 0f;
     
     private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
-
-
-
-
+          
 
     private void Update()
     {

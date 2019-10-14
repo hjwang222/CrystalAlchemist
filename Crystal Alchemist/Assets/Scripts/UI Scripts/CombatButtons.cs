@@ -170,7 +170,7 @@ public class CombatButtons : MonoBehaviour
                 buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
             }
             else if (player.activeLockOnTarget != null
-              && player.activeLockOnTarget.GetComponent<TargetingSystem>().skill == skill)
+              && player.activeLockOnTarget.GetComponent<TargetingSystem>().getSkill() == skill)
             {
                 //ist Skill in Zielerfassung
                 string cooldownText = "[+]";

@@ -10,6 +10,7 @@ public class SkillSelfHit : SkillHitTrigger
     [Range(0, 10)]
     private float immortalTimer = 0;
 
+
     private void Start()
     {
         if (this.immortalTimer > 0) this.skill.sender.setImmortal(this.immortalTimer);

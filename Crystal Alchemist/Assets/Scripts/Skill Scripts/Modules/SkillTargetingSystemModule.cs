@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+public enum TargetingMode
+{
+    manual,
+    auto
+}
+
 public class SkillTargetingSystemModule : SkillModule
 {
     [FoldoutGroup("Zielerfassung", expanded: false)]
@@ -38,4 +44,9 @@ public class SkillTargetingSystemModule : SkillModule
     [ShowIf("lockOn")]
     [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
     public bool showRange = false;
+
+    [FoldoutGroup("Zielerfassung", expanded: false)]
+    [ShowIf("lockOn")]
+    [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
+    public bool showIndicator = false;
 }
