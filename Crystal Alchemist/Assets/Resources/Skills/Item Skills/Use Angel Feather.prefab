@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7078582995585776847}
   - component: {fileID: 8591703498699444151}
-  - component: {fileID: 6096689982342564308}
   - component: {fileID: 3512976782353714778}
   - component: {fileID: 4578934989978650050}
+  - component: {fileID: 3576738453253014613}
+  - component: {fileID: 3818622815184204766}
+  - component: {fileID: 502403076174282921}
   m_Layer: 12
   m_Name: Use Angel Feather
   m_TagString: Skill
@@ -131,123 +133,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6096689982342564308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2277580816030834969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 830c76880be9a6747af1e5bc13fc9a1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: Engelsfeder
-  skillNameEnglish: Angel Feather
-  skillDescription: Bewahrt dich vor dem Tod
-  skillDescriptionEnglish: Saves you from death
-  category: 1
-  animationTriggerName: 
-  orderIndex: 0
-  spriteRenderer: {fileID: 0}
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
-  shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  castingAnimation: {fileID: 0}
-  castingAnimationCharacterKey: 
-  cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  duration: 0
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  cooldown: 0
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: 1
-  statusEffects:
-  - {fileID: 2795883837435963087, guid: 20043cd3b9d47e94bbb787341459add6, type: 3}
-  - {fileID: 4110033603331299692, guid: 4dacc6d44333c2b4f9a48846d4edf7f6, type: 3}
-  thrust: 0
-  knockbackTime: 0
-  resourceType: 0
-  item: {fileID: 1005327347346205950, guid: 2b5759bd7bd0b574cadb08f28e359939, type: 3}
-  addResourceSender: -1
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 0
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 0
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 1
-  affectOther: 0
-  affectSame: 0
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 1
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: 0}
-  activeIndicators: []
-  sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: -0.0075883623
-  movementLocked: 0
-  target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
-  direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setPositionAtStart: 1
-  setActive: 1
-  supportType: 2
-  immortalTimer: 3
-  affectAllOfKind: 1
-  dispellIt: 1
-  allTheSame: 1
-  extendTimePercentage: 0
-  useCollider: 0
-  targetColor: {r: 1, g: 0.84081084, b: 0, a: 1}
-  showAnimation: 0
 --- !u!95 &3512976782353714778
 Animator:
   serializedVersion: 3
@@ -316,6 +201,98 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3576738453253014613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Echo des Engels
+  skillNameEnglish: Echo of Angel
+  spriteRenderer: {fileID: 4578934989978650050}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 3512976782353714778}
+  shadow: {fileID: 0}
+  speed: 0
+  positionOffset: 0
+  maxAmounts: 1
+  attachToSender: 1
+  doCastDuringDelay: 0
+  comboAmount: 100
+  cast: 0
+  lockMovementonDuration: 0
+  deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 0
+  delay: 0
+  duration: 1
+  cooldown: 1
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  elapsed: 0
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  overridePosition: 1
+  movementLocked: 0
+  target: {fileID: 0}
+  audioSource: {fileID: 0}
+  dontPlayAudio: 0
+  basicRequirementsExists: 1
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setActive: 1
+--- !u!114 &3818622815184204766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65144b73769891f41a72088043398bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  immortalTimer: 3
+--- !u!114 &502403076174282921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectedResources: []
+  statusEffects:
+  - {fileID: 2795883837435963087, guid: 20043cd3b9d47e94bbb787341459add6, type: 3}
+  - {fileID: 4110033603331299692, guid: 4dacc6d44333c2b4f9a48846d4edf7f6, type: 3}
+  thrust: 0
+  knockbackTime: 0.2
+  affectSelf: 1
+  affectOther: 0
+  affectSame: 0
+  affectNeutral: 0
+  affectSkills: 0
+  ignoreInvincibility: 1
 --- !u!1001 &7981406291649803579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323,16 +300,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7078582995585776847}
     m_Modifications:
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -387,6 +354,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

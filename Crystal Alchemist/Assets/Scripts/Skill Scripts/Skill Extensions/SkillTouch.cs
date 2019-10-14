@@ -5,9 +5,13 @@ using Sirenix.OdinInspector;
 
 public class SkillTouch : SkillExtension
 {
+    [SerializeField]
+    [Required]
+    private BoxCollider2D boxCollider;
+
     private void Start()
-    {
-        this.GetComponent<BoxCollider2D>().offset = this.skill.sender.boxCollider.offset;
-        this.GetComponent<BoxCollider2D>().size = this.skill.sender.boxCollider.size;
+    {    
+        this.boxCollider.offset = this.skill.sender.boxCollider.offset;
+        this.boxCollider.size = this.skill.sender.boxCollider.size;
     }
 }

@@ -63,8 +63,8 @@ public class Skill : MonoBehaviour
 
     [Space(10)]
     [FoldoutGroup("Behavior", expanded: false)]
-    [Tooltip("Ist das Projektil stationär. True = liegt einfach herum (z.B. Bombe)")]
-    public bool isStationary = false;
+    [Tooltip("Folgt der Skill dem Sender")]
+    public bool attachToSender = false;
 
     [FoldoutGroup("Behavior", expanded: false)]
     [Tooltip("Soll etwas während des Delays getan werden (DoCast Methode)")]
@@ -360,6 +360,7 @@ public class Skill : MonoBehaviour
         bool useOffSetToBlendTree = false;
         bool keepOriginalRotation = false;
         bool rotateIt = false;
+        bool useCustomPosition = false;
 
         float positionOffset = this.positionOffset;
         float positionHeight = 0;
@@ -383,7 +384,8 @@ public class Skill : MonoBehaviour
 
         if(positionModule != null)
         {
-            positionHeight = positionModule.positionHeight;
+            useCustomPosition = positionModule.useGameObjectHeight;
+            positionHeight = positionModule.positionHeight;            
             colliderHeightOffset = positionModule.colliderHeightOffset;
         }
 
@@ -407,8 +409,11 @@ public class Skill : MonoBehaviour
         }
         else
         {
-            if (useOffSetToBlendTree) this.transform.position = new Vector2(this.sender.transform.position.x + (this.sender.direction.x * positionOffset),
-                                                                                 this.sender.transform.position.y + (this.sender.direction.y * positionOffset) + positionHeight);
+            float positionX = this.sender.transform.position.x + (this.sender.direction.x * positionOffset);
+            float positionY = this.sender.transform.position.y + (this.sender.direction.y * positionOffset) + positionHeight;
+
+            if (useCustomPosition) positionY = this.sender.shootingPosition.transform.position.y + (this.sender.direction.y * positionOffset);
+            if (useOffSetToBlendTree) this.transform.position = new Vector2(positionX, positionY);
         }
 
         if (this.animator != null)

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &325864630953995024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7066615533062023259}
+  m_Layer: 11
+  m_Name: Shooting Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7066615533062023259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325864630953995024}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.325, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3945848509854940439}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3020177091833525065
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3945848509854940433}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23, y: 41.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5555258133612552937}
@@ -265,6 +295,7 @@ Transform:
   - {fileID: 3020177091833525064}
   - {fileID: 5043231758160191731}
   - {fileID: 2324312927500639621}
+  - {fileID: 7066615533062023259}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -314,6 +345,7 @@ MonoBehaviour:
   activeSkillParent: {fileID: 3020177091833525065}
   activeStatusEffectParent: {fileID: 8464107762506563443}
   skillSetParent: {fileID: 4508596630270412994}
+  shootingPosition: {fileID: 325864630953995024}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
@@ -380,24 +412,7 @@ MonoBehaviour:
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   box: {fileID: 5104834203016797782, guid: 4828c807745ed894ea715e12180742d8, type: 3}
   startImmediately: 0
-  initialActions:
-  - type: 3
-    isImmortal: 0
-    position: {x: 0, y: 0}
-    de: 
-    en: 
-    duration: 4
-    dauer: 4
-    nextPhase: 
-    animation: 
-    skill: {fileID: 2574719380784309251, guid: 65b268bfda2fa0e4bb41978a974d71d5, type: 3}
-    cast: -1
-    cD: -1
-    amount: 0
-    castGroup: 0
-    sequence: {fileID: 0}
-    gcd: 2.5
-    skillinstance: {fileID: 0}
+  initialActions: []
   phases:
   - phaseName: Startphase
     phaseDescription: 
@@ -411,7 +426,7 @@ MonoBehaviour:
       dauer: 4
       nextPhase: 
       animation: 
-      skill: {fileID: 6388236434287011116, guid: 478564dcd28512a4a88aeeac6dcd1b25,
+      skill: {fileID: 8182664675407730783, guid: 478564dcd28512a4a88aeeac6dcd1b25,
         type: 3}
       cast: 3
       cD: -1
@@ -446,7 +461,7 @@ MonoBehaviour:
       dauer: 4
       nextPhase: 
       animation: 
-      skill: {fileID: 4238057447665557524, guid: d9d5c19e4e61ad142865732f1f61048b,
+      skill: {fileID: 4276017439626974549, guid: d9d5c19e4e61ad142865732f1f61048b,
         type: 3}
       cast: 3
       cD: -1

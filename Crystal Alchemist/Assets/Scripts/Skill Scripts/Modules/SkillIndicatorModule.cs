@@ -28,11 +28,6 @@ public class SkillIndicatorModule : SkillModule
     [HideInInspector]
     public List<Indicator> activeIndicators = new List<Indicator>();
 
-    public virtual void initializeIndicator(Indicator indicator)
-    {
-        indicator.setSkill(this.skill);
-    }
-
     public void hideIndicator()
     {
         foreach (Indicator indicator in this.activeIndicators)
@@ -52,7 +47,7 @@ public class SkillIndicatorModule : SkillModule
             foreach (Indicator indicator in this.indicators)
             {
                 Indicator temp = Instantiate(indicator);
-                initializeIndicator(temp);
+                temp.setSkill(this.skill);
                 this.activeIndicators.Add(temp);
             }
         }

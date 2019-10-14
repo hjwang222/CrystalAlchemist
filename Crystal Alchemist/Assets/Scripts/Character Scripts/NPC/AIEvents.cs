@@ -403,7 +403,7 @@ public class AIEvents : MonoBehaviour
                     if (indicatorModule != null) indicatorModule.showIndicator(); //Zeige Indikator beim Casten
 
                     SkillAnimationModule animationModule = this.activeAction.skillinstance.GetComponent<SkillAnimationModule>();
-                    if (indicatorModule != null) animationModule.showCastingAnimation();
+                    if (animationModule != null) animationModule.showCastingAnimation();
 
                     this.activeAction.skillinstance.doOnCast();
 

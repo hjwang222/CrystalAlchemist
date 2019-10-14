@@ -29,6 +29,11 @@ public class PlayerControls : MonoBehaviour
 
     private void playerInputs()
     {
+        if (this.player.currentState != CharacterState.knockedback && !this.player.isOnIce)
+        {
+            if (this.player.myRigidbody.bodyType != RigidbodyType2D.Static) this.player.myRigidbody.velocity = Vector2.zero;
+        }
+
         if (this.player.currentState != CharacterState.dead)
         {
             if (this.player.currentState == CharacterState.inDialog || this.player.currentState == CharacterState.inMenu || this.player.currentState == CharacterState.respawning)
@@ -76,6 +81,8 @@ public class PlayerControls : MonoBehaviour
                 this.playerAttacks.updateSkillButtons("Y-Button");
                 this.playerAttacks.updateSkillButtons("RB-Button");
             }
+
+
         }
     }
 }

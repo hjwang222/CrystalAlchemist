@@ -51,8 +51,12 @@ public class Character : MonoBehaviour
     [Required]
     public GameObject skillSetParent;
 
+    [BoxGroup("Easy Access")]
+    [Required]
+    public GameObject shootingPosition;
+
     #endregion
-    
+
     #region Attributes
 
     private float lifeTime;
@@ -227,13 +231,7 @@ public class Character : MonoBehaviour
             return;
 
         regeneration();
-
         updateLifeAnimation();
-
-        if (this.currentState != CharacterState.knockedback && !this.isOnIce)
-        {
-            if(this.myRigidbody.bodyType != RigidbodyType2D.Static) this.myRigidbody.velocity = Vector2.zero;
-        }        
 
         if (this.life <= 0 && !this.cannotDie && !this.isImmortal && !this.isInvincible)
             KillIt();
@@ -322,7 +320,7 @@ public class Character : MonoBehaviour
         {
             foreach (Skill skill in this.activeSkills)
             {
-                if (!skill.isStationary) skill.durationTimeLeft = 0;
+                if (skill.attachToSender) skill.durationTimeLeft = 0;
             }
 
             //TODO: Kill sofort (Skill noch aktiv)
@@ -330,9 +328,6 @@ public class Character : MonoBehaviour
             Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
 
             this.spriteRenderer.color = Color.white;
-
-            if (this.GetComponent<AIAggroSystem>() != null) this.GetComponent<AIAggroSystem>().clearAggro();
-
             this.currentState = CharacterState.dead;
 
             if (this.myRigidbody != null && this.myRigidbody.bodyType != RigidbodyType2D.Static) this.myRigidbody.velocity = Vector2.zero;

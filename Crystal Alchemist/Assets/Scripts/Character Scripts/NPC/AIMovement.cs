@@ -59,7 +59,12 @@ public class AIMovement : MonoBehaviour
     #region Update und Movement Funktionen
     private void Update()
     {
-        if(this.npc.currentState != CharacterState.dead
+        if (this.npc.currentState != CharacterState.knockedback && !this.npc.isOnIce)
+        {
+            if (this.npc.myRigidbody.bodyType != RigidbodyType2D.Static) this.npc.myRigidbody.velocity = Vector2.zero;
+        }
+
+        if (this.npc.currentState != CharacterState.dead
         && this.npc.currentState != CharacterState.knockedback
         && this.npc.currentState != CharacterState.manually) moveCharacter();
     }
@@ -117,7 +122,7 @@ public class AIMovement : MonoBehaviour
                         moveTorwardsTarget(path[currentPoint].position);
                     }
                     else
-                    {
+                    {         
                         this.startCoroutine = true;
                         ChangeGoal();
                         StartCoroutine(delayMovementCo());
@@ -137,7 +142,7 @@ public class AIMovement : MonoBehaviour
     }
 
     private IEnumerator delayMovementCo()
-    {
+    {       
         this.startCoroutine = false;
         this.standStill = true;
         yield return new WaitForSeconds(this.movementDelay);
@@ -167,7 +172,6 @@ public class AIMovement : MonoBehaviour
 
             Vector3 movement = new Vector3(this.npc.direction.x, this.npc.direction.y + (this.npc.steps * this.npc.direction.x), 0.0f);
             if (!this.npc.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.speed * this.npc.timeDistortion);
-
 
             this.npc.currentState = CharacterState.walk;
             

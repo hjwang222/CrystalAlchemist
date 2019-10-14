@@ -299,7 +299,7 @@ MonoBehaviour:
   speed: 10
   positionOffset: 0.75
   maxAmounts: 99
-  isStationary: 1
+  attachToSender: 0
   doCastDuringDelay: 0
   comboAmount: 100
   cast: 0
@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  useGameObjectHeight: 0
   positionHeight: 0
   colliderHeightOffset: -0.5
 --- !u!114 &1040386303507051939
@@ -598,16 +599,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2875114918851550066}
     m_Modifications:
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -662,6 +653,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

@@ -853,6 +853,7 @@ public class Utilities : MonoBehaviour
             float rotationModifier = 0;
             float positionOffset = skill.positionOffset;
             float positionHeight = 0;
+            bool useCustomPosition = false;
 
             SkillRotationModule rotationModule = skill.GetComponent<SkillRotationModule>();
             SkillPositionZModule positionModule = skill.GetComponent<SkillPositionZModule>();
@@ -865,16 +866,18 @@ public class Utilities : MonoBehaviour
 
             if (positionModule != null)
             {
-                positionHeight = positionModule.positionHeight;
+                useCustomPosition = positionModule.useGameObjectHeight;
+                positionHeight = positionModule.positionHeight;                
             }
-
 
             direction = skill.sender.direction.normalized;
 
-            start = new Vector2(skill.sender.spriteRenderer.transform.position.x + (direction.x * positionOffset),
-                                skill.sender.spriteRenderer.transform.position.y + (direction.y * positionOffset) + positionHeight);
+            float positionX = skill.sender.spriteRenderer.transform.position.x + (direction.x * positionOffset);
+            float positionY = skill.sender.spriteRenderer.transform.position.y + (direction.y * positionOffset) + positionHeight;
 
-            //if sender is not frozen
+            if (useCustomPosition) positionY = skill.sender.shootingPosition.transform.position.y + (direction.y * positionOffset);
+
+            start = new Vector2(positionX, positionY);
 
             if (skill.target != null) direction = (Vector2)skill.target.transform.position - start;
 
@@ -956,7 +959,7 @@ public class Utilities : MonoBehaviour
                 SkillTargetModule targetModule = activeSkill.GetComponent<SkillTargetModule>();
                 SkillSenderModule sendermodule = activeSkill.GetComponent<SkillSenderModule>();
 
-                if (!skill.isStationary) activeSkill.transform.parent = sender.activeSkillParent.transform;
+                if (skill.attachToSender) activeSkill.transform.parent = sender.activeSkillParent.transform;
 
                 if (target != null) activeSkill.target = target;
                 activeSkill.sender = sender;

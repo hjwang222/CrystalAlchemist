@@ -118,7 +118,7 @@ public class AIAggroSystem : MonoBehaviour
         }
     }
 
-    public void clearAggro()
+    private void OnDisable()
     {
         this.enemy.target = null;
         this.hideClue();
