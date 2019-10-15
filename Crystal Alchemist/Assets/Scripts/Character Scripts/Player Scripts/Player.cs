@@ -55,22 +55,16 @@ public class Player : Character
 
     [Required]
     [BoxGroup("Pflichtfelder")]
-    [SerializeField]
-    private BoolValue loadGame;
+    public BoolValue loadGame;
 
     [Required]
     [BoxGroup("Pflichtfelder")]
     public FloatValue fadingDuration;
 
-    [HideInInspector]
     public Skill AButton;
-    [HideInInspector]
     public Skill BButton;
-    [HideInInspector]
     public Skill XButton;
-    [HideInInspector]
     public Skill YButton;
-    [HideInInspector]
     public Skill RBButton;
 
     [HideInInspector]

@@ -24,12 +24,17 @@ public class LoadSystem : MonoBehaviour
             if (data.inventory.Count > 0)
             {
                 loadInventory(data, player);                
-            }
+            }            
+        }
+    }
 
-            if (data.skills.Count > 0)
-            {
-                loadSkills(data, player);
-            }
+    public static void loadPlayerSkills(Player player)
+    {
+        PlayerData data = SaveSystem.loadPlayer();
+
+        if (data.skills.Count > 0)
+        {
+            loadSkills(data, player);
         }
     }
 
