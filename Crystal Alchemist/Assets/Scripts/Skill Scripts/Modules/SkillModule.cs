@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 public class SkillModule : MonoBehaviour
 {
-
+    [HideInInspector]
     public Skill skill;
 
     private void Awake()
