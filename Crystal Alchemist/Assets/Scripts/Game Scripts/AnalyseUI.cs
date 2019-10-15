@@ -9,13 +9,18 @@ public class AnalyseUI : MonoBehaviour
     private GameObject target;
 
     [Header("Easy Access Objects")]
-    public TextMeshProUGUI TMPcharacterName;
-    public TextMeshProUGUI TMPlifeAmount;
-    public Image heartImage;
-    public Image ImageitemPreview;
-    public Image ImageObjectitemIndicator;
-    public Image ImageObjectitemPreview;
-    public GameObject statusEffectHolder;
+    [SerializeField]
+    private TextMeshProUGUI TMPcharacterName;
+    [SerializeField]
+    private TextMeshProUGUI TMPlifeAmount;
+    [SerializeField]
+    private Image heartImage;
+    [SerializeField]
+    private Image ImageitemPreview;
+    [SerializeField]
+    private Image ImageObjectitemIndicator;
+    [SerializeField]
+    private Image ImageObjectitemPreview;
 
     [Header("Gruppen")]
     [SerializeField]
@@ -24,10 +29,13 @@ public class AnalyseUI : MonoBehaviour
     private GameObject objectInfo;
     [SerializeField]
     private AggroBar aggrobar;
+    [SerializeField]
+    private StatusEffectBar statusEffectBar;
 
     private Character character;
     private Interactable interactable;
-
+    private List<StatusEffectUI> activeStatusEffectUIs = new List<StatusEffectUI>();
+    private List<StatusEffect> activeStatusEffects = new List<StatusEffect>();
 
     private void Start()
     {
@@ -63,6 +71,7 @@ public class AnalyseUI : MonoBehaviour
             {
                 //show Basic Information for Enemies
                 this.enemyInfo.SetActive(true);
+                this.statusEffectBar.setCharacter(character);
             }
             else this.objectInfo.SetActive(true);
 
@@ -86,48 +95,13 @@ public class AnalyseUI : MonoBehaviour
         {
             if (this.character.stats.characterType != CharacterType.Object)
             {
-                showEnemyInfo();
-                updateStatusEffects();
+                showEnemyInfo();                
             }
             else showItemInfo();
         }
         else if (this.interactable != null)
         {
             showItemInfo();
-        }
-    }
-
-    private void updateStatusEffects()
-    {
-        if (this.character != null)
-        {
-            for (int i = 1; i < this.statusEffectHolder.transform.childCount; i++)
-            {
-                if (this.statusEffectHolder.transform.GetChild(i).gameObject.activeInHierarchy) Destroy(this.statusEffectHolder.transform.GetChild(i).gameObject);
-            }
-
-            //füge ggf. beide Listen hinzu oder selektiere nur eine
-            List<StatusEffect> effectList = new List<StatusEffect>();
-
-            effectList.AddRange(this.character.buffs);
-            effectList.AddRange(this.character.debuffs);
-
-            for (int i = 0; i < effectList.Count; i++)
-            {
-                //Make a copy
-                GameObject statusEffectGUI = Instantiate(this.statusEffectHolder.transform.GetChild(0), this.statusEffectHolder.transform).gameObject;
-
-                StatusEffect statusEffectFromList = effectList[i];
-                statusEffectGUI.GetComponent<Image>().sprite = statusEffectFromList.iconSprite;
-
-                string seconds = Mathf.RoundToInt(statusEffectFromList.statusEffectTimeLeft) + "s";
-                if (statusEffectFromList.statusEffectTimeLeft <= 0 || statusEffectFromList.maxDuration == Utilities.maxFloatInfinite) seconds = "";
-
-                statusEffectGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = seconds;
-
-                statusEffectGUI.SetActive(true);
-                statusEffectGUI.hideFlags = HideFlags.HideInHierarchy;
-            }
         }
     }
 

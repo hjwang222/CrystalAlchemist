@@ -17,7 +17,7 @@ public class InventorySlot : MonoBehaviour
 
     //[SerializeField]
     //private ItemFeature feature;
-
+    [HideInInspector]
     public Item item;
 
     private void Awake()
@@ -41,9 +41,9 @@ public class InventorySlot : MonoBehaviour
         return this.item;
     }
 
-    public void openSkillMenu(InventoryMenu menu)
+    public void openKeyItem(InventoryMenu menu)
     {
-        if(this.item != null) menu.openSkillMenu();
+        if(this.item != null) menu.openSkillMenu(this.item);
     }
 
     public void openMap(InventoryMenu menu)

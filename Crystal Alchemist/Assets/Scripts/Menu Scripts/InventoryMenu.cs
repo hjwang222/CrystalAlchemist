@@ -101,12 +101,12 @@ public class InventoryMenu : MonoBehaviour
         setItemsToSlots(this.quickmenu, true);
     }
 
-    public void openSkillMenu()
+    public void openSkillMenu(Item item)
     {
         this.transform.parent.gameObject.SetActive(false);
         this.blackScreen.SetActive(false);
         this.player.currentState = this.lastState;
-        this.skillMenuSignal.Raise();
+        item.keyItemSignal.Raise();
     }
 
     public void openMap()

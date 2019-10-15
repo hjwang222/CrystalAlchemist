@@ -195,7 +195,7 @@ public class StatusEffect : MonoBehaviour
         this.timeDistortion = 1 + (distortion/100);
     }
 
-    public virtual void init()
+    private void init()
     {
         if (this.ownAnimator == null) this.ownAnimator = this.GetComponent<Animator>();
         if (this.target != null && this.changeColor) this.target.addColor(this.statusEffectColor);
@@ -206,6 +206,8 @@ public class StatusEffect : MonoBehaviour
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
+
+        this.updateUI.Raise();
     }
 
     #endregion
@@ -291,7 +293,7 @@ public class StatusEffect : MonoBehaviour
     }
 
     
-    public virtual void doOnUpdate()
+    private void doOnUpdate()
     {
         this.updateUI.Raise();
 

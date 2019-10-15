@@ -90,6 +90,11 @@ public class Item : MonoBehaviour
     public bool isKeyItem = false;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("isKeyItem")]
+    public SimpleSignal keyItemSignal;
+
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.skill)]
     public Skill skill;
 

@@ -779,7 +779,8 @@ public class Utilities : MonoBehaviour
                 formatString += "0";
             }
 
-            return value.ToString(formatString);
+            if (value == 0) return formatString;
+            else return value.ToString(formatString);
         }
 
         public static void set3DText(TextMeshPro tmp, string text, bool bold, Color fontColor, Color outlineColor, float outlineWidth)

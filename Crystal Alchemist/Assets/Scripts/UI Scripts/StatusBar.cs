@@ -47,10 +47,16 @@ public class StatusBar : MonoBehaviour
     [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public GameObject warning;
 
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    private StatusEffectBar statusEffectBar;
+
     [FoldoutGroup("Sound", expanded: false)]
     public AudioClip lowSoundEffect;
     [FoldoutGroup("Sound", expanded: false)]
     public float audioInterval = 1.5f;
+
+
 
     private AudioSource audioSource;
     private float maximum;
@@ -114,47 +120,7 @@ public class StatusBar : MonoBehaviour
     #endregion
 
 
-    #region Update Signal Funktionen (Life, Mana, StatusEffects)
-    public void UpdateGUIStatusEffects()
-    {        
-        for (int i = 1; i < this.transform.childCount; i++)
-        {
-            if(this.transform.GetChild(i).gameObject.activeInHierarchy) Destroy(this.transform.GetChild(i).gameObject);
-        }
-
-        //füge ggf. beide Listen hinzu oder selektiere nur eine
-        List<StatusEffect> effectList = new List<StatusEffect>();
-        if (this.UIType == UIType.buffsOnly) effectList = this.player.buffs;
-        else if (this.UIType == UIType.debuffsOnly) effectList = this.player.debuffs;
-        else if (this.UIType == UIType.BuffsAndDebuffs)
-        {
-            effectList.AddRange(this.player.buffs);
-            effectList.AddRange(this.player.debuffs);
-        }
-        else if (this.UIType == UIType.DebuffsAndBuffs)
-        {
-            effectList.AddRange(this.player.debuffs);
-            effectList.AddRange(this.player.buffs);
-        }
-
-        for (int i = 0; i < effectList.Count; i++)
-        {
-            //Make a copy
-            GameObject statusEffectGUI = Instantiate(this.transform.GetChild(0), this.transform).gameObject;
-
-            StatusEffect statusEffectFromList = effectList[i];
-            statusEffectGUI.GetComponent<Image>().sprite = statusEffectFromList.iconSprite;
-
-            string seconds = Utilities.Format.setDurationToString(statusEffectFromList.statusEffectTimeLeft);
-            if (statusEffectFromList.statusEffectTimeLeft <= 0 || statusEffectFromList.maxDuration == Utilities.maxFloatInfinite) seconds = "";
-
-            statusEffectGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = seconds;
-
-            statusEffectGUI.SetActive(true);
-            statusEffectGUI.hideFlags = HideFlags.HideInHierarchy;
-        }
-    }
-    
+    #region Update Signal Funktionen (Life, Mana, StatusEffects)    
     public void UpdateGUIHealthMana()
     {
         setValues();
