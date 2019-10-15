@@ -24,7 +24,6 @@ public class SkillIndicatorModule : SkillModule
     [ShowIf("useCustomColor", true)]
     public Color indicatorColor;
 
-
     [HideInInspector]
     public List<Indicator> activeIndicators = new List<Indicator>();
 

@@ -123,7 +123,7 @@ public class Character : MonoBehaviour
 
 
     #region Start Functions (Spawn, Init)
-    void Start()
+    private void Start()
     {
         init();
     }
@@ -131,14 +131,10 @@ public class Character : MonoBehaviour
     public void init()
     {
         if (this.immortalAtStart > 0) this.setImmortal(this.immortalAtStart);
-
         if (!this.isPlayer) this.spawnPosition = this.transform.position;
-        //getItems();    
 
         setComponents();
         initSpawn();
-
-        //this.gameObject.layer = LayerMask.NameToLayer(this.gameObject.tag);
     }
 
     private void setComponents()
@@ -155,13 +151,6 @@ public class Character : MonoBehaviour
         this.colors.Add(this.spriteRenderer.color);
 
         this.transform.gameObject.tag = this.stats.characterType.ToString();
-
-        /*
-        if (this.spriteRenderer != null)
-        {
-            this.spriteRenderer.gameObject.tag = this.transform.gameObject.tag;
-        }*/
-
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
     }
 
@@ -323,7 +312,7 @@ public class Character : MonoBehaviour
         {
             foreach (Skill skill in this.activeSkills)
             {
-                if (skill.attachToSender) skill.durationTimeLeft = 0;
+                if (skill.attachToSender) skill.DestroyIt();
             }
 
             //TODO: Kill sofort (Skill noch aktiv)

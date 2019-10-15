@@ -35,6 +35,7 @@ public class SkillAnimationModule : SkillModule
     {
         if (this.castingAnimation != null
         && this.activeCastingAnimation == null
+        && this.skill != null
         && this.skill.sender != null)
         {
             this.activeCastingAnimation = Instantiate(this.castingAnimation, this.skill.sender.transform);

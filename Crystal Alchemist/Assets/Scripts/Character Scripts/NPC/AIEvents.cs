@@ -596,7 +596,6 @@ public class AIEvents : MonoBehaviour
             {
                 action.skillinstance = Utilities.Skills.setSkill(this.enemy, action.skill);
 
-
                 SkillIndicatorModule indicatorModule = action.skillinstance.GetComponent<SkillIndicatorModule>();
                 if (indicatorModule != null) indicatorModule.showingIndicator = true;
             }

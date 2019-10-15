@@ -195,9 +195,9 @@ public class Utilities : MonoBehaviour
             return false;
         }
 
-        private static bool skillAffected(Collider2D hittedCharacter, global::Skill skill)
+        private static bool skillAffected(Collider2D hittedCharacter, Skill skill)
         {
-            global::Skill tempSkill = Skills.getSkillByCollision(hittedCharacter.gameObject);
+            Skill tempSkill = Skills.getSkillByCollision(hittedCharacter.gameObject);
 
             if (tempSkill != null)
             {
@@ -212,7 +212,7 @@ public class Utilities : MonoBehaviour
             return false;
         }
 
-        public static bool checkCollision(Collider2D hittedCharacter, global::Skill skill)
+        public static bool checkCollision(Collider2D hittedCharacter, Skill skill)
         {
             if (skill != null && skill.triggerIsActive)
             {
@@ -847,7 +847,7 @@ public class Utilities : MonoBehaviour
             gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
 
-        public static void setDirectionAndRotation(global::Skill skill,
+        public static void setDirectionAndRotation(Skill skill,
                                                    out float angle, out Vector2 start, out Vector2 direction, out Vector3 rotation)
         {
             float snapRotationInDegrees = 0;
@@ -901,7 +901,7 @@ public class Utilities : MonoBehaviour
 
     public static class Skills
     {
-        public static int getAmountOfSameSkills(global::Skill skill, List<global::Skill> activeSkills, List<Character> activePets)
+        public static int getAmountOfSameSkills(Skill skill, List<Skill> activeSkills, List<Character> activePets)
         {
             int result = 0;
 
@@ -911,7 +911,7 @@ public class Utilities : MonoBehaviour
             {
                 for (int i = 0; i < activeSkills.Count; i++)
                 {
-                    global::Skill activeSkill = activeSkills[i];
+                    Skill activeSkill = activeSkills[i];
                     if (activeSkill.skillName == skill.skillName) result++;
                 }
             }
@@ -929,9 +929,9 @@ public class Utilities : MonoBehaviour
             return result;
         }
 
-        public static Skill setSkill(Character character, global::Skill prefab)
+        public static Skill setSkill(Character character, Skill prefab)
         {
-            global::Skill skillInstance = MonoBehaviour.Instantiate(prefab, character.skillSetParent.transform) as global::Skill;
+            Skill skillInstance = MonoBehaviour.Instantiate(prefab, character.skillSetParent.transform) as Skill;
             skillInstance.sender = character;
             skillInstance.gameObject.SetActive(false);
             skillInstance.preLoad();
@@ -939,23 +939,23 @@ public class Utilities : MonoBehaviour
             return skillInstance;
         }
 
-        public static Skill instantiateSkill(global::Skill skill, Character sender)
+        public static Skill instantiateSkill(Skill skill, Character sender)
         {
             return instantiateSkill(skill, sender, null, 1);
         }
 
-        public static Skill instantiateSkill(global::Skill skill, Character sender, Character target)
+        public static Skill instantiateSkill(Skill skill, Character sender, Character target)
         {
             return instantiateSkill(skill, sender, target, 1);
         }
 
-        public static Skill instantiateSkill(global::Skill skill, Character sender, Character target, float reduce)
+        public static Skill instantiateSkill(Skill skill, Character sender, Character target, float reduce)
         {
             if (skill != null
                 && sender.currentState != CharacterState.attack
                 && sender.currentState != CharacterState.defend)
             {
-                global::Skill activeSkill = Instantiate(skill, sender.transform.position, Quaternion.identity);
+                Skill activeSkill = Instantiate(skill, sender.transform.position, Quaternion.identity);
                 activeSkill.gameObject.SetActive(true);
                 SkillTargetModule targetModule = activeSkill.GetComponent<SkillTargetModule>();
                 SkillSenderModule sendermodule = activeSkill.GetComponent<SkillSenderModule>();
@@ -989,15 +989,15 @@ public class Utilities : MonoBehaviour
                     && getAmountOfSameSkills(skill, sender.activeSkills) >= skill.comboAmount)
                     skill.cooldownTimeLeft = skill.cooldownAfterCombo;*/
 
-                return activeSkill.GetComponent<global::Skill>();
+                return activeSkill.GetComponent<Skill>();
             }
 
             return null;
         }
 
-        public static Skill getSkillByID(List<global::Skill> skillset, int ID, SkillType category)
+        public static Skill getSkillByID(List<Skill> skillset, int ID, SkillType category)
         {
-            foreach (global::Skill skill in skillset)
+            foreach (Skill skill in skillset)
             {
                 SkillBookModule skillBookModule = skill.GetComponent<SkillBookModule>();
 
@@ -1009,9 +1009,9 @@ public class Utilities : MonoBehaviour
             return null;
         }
 
-        public static Skill getSkillByName(List<global::Skill> skillset, string name)
+        public static Skill getSkillByName(List<Skill> skillset, string name)
         {
-            foreach (global::Skill skill in skillset)
+            foreach (Skill skill in skillset)
             {
                 if (name == skill.skillName) return skill;
             }
@@ -1021,16 +1021,16 @@ public class Utilities : MonoBehaviour
 
         public static Skill getSkillByCollision(GameObject collision)
         {
-            return collision.GetComponentInParent<global::Skill>();
+            return collision.GetComponentInParent<Skill>();
         }
 
-        public static void updateSkillset(global::Skill skill, Player player)
+        public static void updateSkillset(Skill skill, Player player)
         {
             if (skill != null)
             {
                 bool found = false;
 
-                foreach (global::Skill elem in player.skillSet)
+                foreach (Skill elem in player.skillSet)
                 {
                     if (elem.skillName == skill.skillName) { found = true; break; }
                 }
@@ -1065,7 +1065,7 @@ public class Utilities : MonoBehaviour
             else player.setTargetHelperActive(true);
         }
 
-        private static bool checkIfHelperActivated(global::Skill skill)
+        private static bool checkIfHelperActivated(Skill skill)
         {
             if (skill != null 
                 && skill.GetComponent<SkillAimingModule>() != null) return true;

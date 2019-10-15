@@ -22,13 +22,6 @@ public class Indicator : MonoBehaviour
         
     }
 
-    /*
-    private void Update()
-    {
-        if(this.skill != null) this.transform.position = this.skill.transform.position;
-    }
-    */
-
     public void setSkill(Skill skill)
     {
         this.skill = skill;

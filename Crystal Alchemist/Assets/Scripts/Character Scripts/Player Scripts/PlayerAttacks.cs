@@ -24,7 +24,7 @@ public class PlayerAttacks : MonoBehaviour
     [HideInInspector]
     public string currentButtonPressed = "";
 
-    private void Awake()
+    private void Start()
     {
         List<Skill> tempSkillSet = new List<Skill>();
 

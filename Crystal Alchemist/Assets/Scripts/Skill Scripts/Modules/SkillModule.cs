@@ -11,5 +11,10 @@ public class SkillModule : MonoBehaviour
     private void Awake()
     {
         this.skill = this.GetComponent<Skill>();
+
+        if(this.skill.skillName.Contains("Teleport"))
+        {
+            string test = "";
+        }
     }
 }

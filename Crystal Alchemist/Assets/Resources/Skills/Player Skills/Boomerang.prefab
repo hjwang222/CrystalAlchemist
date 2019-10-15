@@ -181,7 +181,7 @@ MonoBehaviour:
   speed: 15
   positionOffset: 0.75
   maxAmounts: 1
-  isStationary: 1
+  attachToSender: 0
   doCastDuringDelay: 0
   comboAmount: 1
   cast: 0
@@ -343,6 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  useGameObjectHeight: 0
   positionHeight: 0
   colliderHeightOffset: -0.5
 --- !u!1 &5144022535530275041
@@ -470,7 +471,7 @@ GameObject:
   - component: {fileID: 4017375866082164950}
   - component: {fileID: 3387214931352689131}
   - component: {fileID: 6184954882989843985}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -480,12 +480,12 @@ public class Skill : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
-    public virtual void DestroyIt()
+    public void DestroyIt()
     {
         DestroyIt(0f);
     }
 
-    public virtual void DestroyIt(float delay)
+    public void DestroyIt(float delay)
     {
         this.sender.activeSkills.Remove(this);
         //this.isActive = false;

@@ -20,7 +20,9 @@ public class StatusEffectAnalyseModule : StatusEffectModule
 
             foreach (GameObject gameObject in targets)
             {
-                if (!this.analyseAdded.Contains(gameObject)) //check if already added
+                if (!this.analyseAdded.Contains(gameObject) 
+                    && ( gameObject.GetComponent<AI>() != null 
+                    || (gameObject.GetComponent<Breakable>() != null && gameObject.GetComponent<Breakable>().inventory.Count>0))) //check if already added
                 {
                     GameObject tmp = Instantiate(this.analyseGameObject, gameObject.transform.position, Quaternion.identity, gameObject.transform);
                     tmp.GetComponent<AnalyseUI>().setTarget(gameObject);

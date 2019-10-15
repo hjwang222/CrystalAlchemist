@@ -44,15 +44,14 @@ public class AnalyseUI : MonoBehaviour
 
     public void setTarget(GameObject target)
     {
+        this.enemyInfo.SetActive(false);
+        this.objectInfo.SetActive(false);
+        this.aggrobar.gameObject.SetActive(false);
         this.target = target;
     }
 
     private void init()
     {
-        this.enemyInfo.SetActive(false);
-        this.objectInfo.SetActive(false);
-        this.aggrobar.gameObject.SetActive(false);
-
         //set type of Analyse
         this.transform.position = new Vector2(this.target.transform.position.x + 1.5f, this.target.transform.position.y + 1.5f);
 
@@ -130,7 +129,11 @@ public class AnalyseUI : MonoBehaviour
             {
                 this.ImageObjectitemIndicator.gameObject.SetActive(true);
                 this.ImageObjectitemPreview.sprite = interactable.inventory[0].itemSprite;
-            }            
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }           
         }
         else if (this.character != null)
         {
