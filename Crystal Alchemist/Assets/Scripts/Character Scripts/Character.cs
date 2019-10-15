@@ -65,6 +65,7 @@ public class Character : MonoBehaviour
     private bool showTargetHelp = false;
     private GameObject targetHelpObjectPlayer;
     private DeathAnimation activeDeathAnimation;
+    private float immortalAtStart = 0;
 
     [HideInInspector]
     public float speedMultiply = 5;
@@ -129,7 +130,9 @@ public class Character : MonoBehaviour
 
     public void init()
     {
-        if(!this.isPlayer) this.spawnPosition = this.transform.position;
+        if (this.immortalAtStart > 0) this.setImmortal(this.immortalAtStart);
+
+        if (!this.isPlayer) this.spawnPosition = this.transform.position;
         //getItems();    
 
         setComponents();
@@ -653,6 +656,11 @@ public class Character : MonoBehaviour
     public void gotHit(Skill skill)
     {
         gotHit(skill, 100);
+    }
+
+    public void setImmortalAtStart(float duration)
+    {
+        this.immortalAtStart = duration;
     }
 
     public void setImmortal(float duration)

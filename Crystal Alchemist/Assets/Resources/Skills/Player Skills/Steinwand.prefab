@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 7861167684578161149}
   - component: {fileID: 4657507481048158680}
   - component: {fileID: -7704521156288154744}
+  - component: {fileID: 6956648690299593441}
+  - component: {fileID: 5355710936113022244}
+  - component: {fileID: 8592746762657604845}
   m_Layer: 13
   m_Name: Steinwand
   m_TagString: Skill
@@ -152,7 +155,7 @@ MonoBehaviour:
   speed: 0
   positionOffset: 2
   maxAmounts: 2
-  isStationary: 1
+  attachToSender: 0
   doCastDuringDelay: 0
   comboAmount: 100
   cast: 2
@@ -163,8 +166,8 @@ MonoBehaviour:
   keepHoldTimer: 0
   canAffectedBytimeDistortion: 0
   delay: 0
-  duration: 1
-  cooldown: 0.3
+  duration: 0
+  cooldown: 1
   cooldownAfterCombo: 0
   durationCombo: 0
   elapsed: 0
@@ -223,6 +226,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   summon: {fileID: 1294441505385801003, guid: 6d802ff15d5a854459fa7bcb3f594f43, type: 3}
   summonInstantly: 1
+  immortalTimerPet: 1
 --- !u!114 &-7704521156288154744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,3 +245,58 @@ MonoBehaviour:
   category: 1
   orderIndex: 7
   icon: {fileID: -8271742512168903070, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &6956648690299593441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6912828604413741881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790e6050ddf4a164b8349c725a23765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+--- !u!114 &5355710936113022244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6912828604413741881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -1
+  statusEffects: []
+  thrust: 2
+  knockbackTime: 0.2
+  affectSelf: 0
+  affectOther: 1
+  affectSame: 0
+  affectNeutral: 1
+  affectSkills: 1
+  ignoreInvincibility: 0
+--- !u!58 &8592746762657604845
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6912828604413741881}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.25

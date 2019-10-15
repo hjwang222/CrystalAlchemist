@@ -30,8 +30,7 @@ public enum StatusEffectActionType
     destroy,
     speed,
     time,
-    analyse,
-    blind,
+    module,
     immortal
 }
 
@@ -76,13 +75,10 @@ public class StatusEffectAction
     public float time;
 
     [ShowIf("actionType", StatusEffectActionType.skill)]
-    public List<Skill> skills;
+    public List<Skill> skills;    
 
-    [ShowIf("actionType", StatusEffectActionType.blind)]
-    public GameObject instantiatNewGameObject;
-
-    [ShowIf("actionType", StatusEffectActionType.analyse)]
-    public GameObject analyseUI;
+    [ShowIf("actionType", StatusEffectActionType.module)]
+    public StatusEffectModule module;
 }
 
 [System.Serializable]
@@ -115,10 +111,7 @@ public class StatusEffect : MonoBehaviour
     [FoldoutGroup("RPG Elemente")]
     [TextArea]
     [Tooltip("Beschreibung des Statuseffekts")]
-    public string statusEffectDescriptionEnglish;
-
-
-
+    public string statusEffectDescriptionEnglish;       
 
     [FoldoutGroup("Basis Attribute")]
     [Range(0, Utilities.maxFloatInfinite)]
@@ -147,17 +140,8 @@ public class StatusEffect : MonoBehaviour
     [Tooltip("Handelt es sich um einen positiven oder negativen Effekt?")]
     public StatusEffectType statusEffectType = StatusEffectType.debuff;
 
-
-
-
-
     [FoldoutGroup("Trigger and Actions", expanded: false)]
     public List<StatusEffectEvent> statusEffectEvents = new List<StatusEffectEvent>();
-
-
-
-
-
 
     [FoldoutGroup("Visuals", expanded: false)]
     [Tooltip("Farbe während der Dauer des Statuseffekts")]
@@ -191,10 +175,6 @@ public class StatusEffect : MonoBehaviour
 
     private AudioSource audioSource;
     private float elapsed;
-    private GameObject panel;
-    private List<GameObject> gameObjectApplied = new List<GameObject>();
-    private List<GameObject> analyseAdded = new List<GameObject>();
-
     [HideInInspector]
     public Character target;
     [HideInInspector]
@@ -284,13 +264,9 @@ public class StatusEffect : MonoBehaviour
             {
                 target.updateTimeDistortion(action.time);
             }
-            else if (action.actionType == StatusEffectActionType.blind)
+            else if (action.actionType == StatusEffectActionType.module)
             {
-                this.panel = Instantiate(action.instantiatNewGameObject);
-            }
-            else if (action.actionType == StatusEffectActionType.analyse)
-            {
-                showAnalyse(action.analyseUI);
+                action.module.doAction();
             }
             else if (action.actionType == StatusEffectActionType.stacks)
             {
@@ -314,38 +290,7 @@ public class StatusEffect : MonoBehaviour
         }
     }
 
-    private void showAnalyse(GameObject analyseGameObject)
-    {
-        if (analyseGameObject != null)
-        {
-            GameObject[] objects = GameObject.FindGameObjectsWithTag("Object");
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-            for (int i = 0; i < enemies.Length; i++)
-            {
-                if (!this.analyseAdded.Contains(enemies[i])) //check if already added
-                {
-                    GameObject tmp = Instantiate(analyseGameObject, enemies[i].transform.position, Quaternion.identity, enemies[i].transform);
-                    tmp.GetComponent<AnalyseUI>().target = enemies[i];
-                    //tmp.hideFlags = HideFlags.HideInHierarchy;
-                    this.gameObjectApplied.Add(tmp);
-                    this.analyseAdded.Add(objects[i]);
-                }
-            }
-
-            for (int i = 0; i < objects.Length; i++)
-            {
-                if (!this.analyseAdded.Contains(objects[i])) //check if already added
-                {
-                    GameObject tmp = Instantiate(analyseGameObject, objects[i].transform.position, Quaternion.identity, objects[i].transform);
-                    tmp.GetComponent<AnalyseUI>().target = objects[i];
-                    // tmp.hideFlags = HideFlags.HideInHierarchy;
-                    this.gameObjectApplied.Add(tmp);
-                    this.analyseAdded.Add(objects[i]);
-                }
-            }
-        }
-    }
+    
     public virtual void doOnUpdate()
     {
         this.updateUI.Raise();
@@ -384,9 +329,6 @@ public class StatusEffect : MonoBehaviour
             }            
         }
 
-        this.gameObjectApplied.Clear();
-        this.analyseAdded.Clear();
-
         //GUI updaten und Objekt kurz danach zerstören
         this.updateUI.Raise();
         Destroy(this.gameObject, this.destroyDelay);
@@ -405,21 +347,7 @@ public class StatusEffect : MonoBehaviour
                 else if (action.actionType == StatusEffectActionType.time)
                 {
                     target.updateTimeDistortion(0);
-                }
-                else if (action.actionType == StatusEffectActionType.blind)
-                {
-                    Animator animator = this.panel.transform.GetChild(0).GetComponent<Animator>();
-                    Utilities.UnityUtils.SetAnimatorParameter(animator, "Explode", true);
-                    Destroy(this.panel, 2f);
-                }     
-                else if (action.actionType == StatusEffectActionType.analyse)
-                {
-                    for (int i = 0; i < this.gameObjectApplied.Count; i++)
-                    {
-                        Destroy(this.gameObjectApplied[i]);
-                    }
-                    this.gameObjectApplied.Clear();
-                }
+                }                  
                 else if (action.actionType == StatusEffectActionType.immortal)
                 {
                     if (this.target != null) this.target.cannotDie = false;

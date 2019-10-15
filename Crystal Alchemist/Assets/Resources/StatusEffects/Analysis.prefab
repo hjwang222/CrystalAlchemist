@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2634165681308481018}
   - component: {fileID: 2634165681308481020}
   - component: {fileID: 7056982587471594013}
+  - component: {fileID: 7610270014910835407}
   m_Layer: 0
   m_Name: Analysis
   m_TagString: Untagged
@@ -83,9 +84,7 @@ MonoBehaviour:
       speed: 0
       time: 0
       skills: []
-      instantiatNewGameObject: {fileID: 0}
-      analyseUI: {fileID: 2140673505560165479, guid: f26a64cb4b5c5c549b6018becf166d02,
-        type: 3}
+      module: {fileID: 7610270014910835407}
   - triggers:
     - triggerType: 1
       intervall: 0.5
@@ -103,17 +102,14 @@ MonoBehaviour:
       speed: 0
       time: 0
       skills: []
-      instantiatNewGameObject: {fileID: 0}
-      analyseUI: {fileID: 0}
+      module: {fileID: 0}
     - actionType: 6
       affectedResources: []
       amount: 0
       speed: 0
       time: 0
       skills: []
-      instantiatNewGameObject: {fileID: 0}
-      analyseUI: {fileID: 2140673505560165479, guid: f26a64cb4b5c5c549b6018becf166d02,
-        type: 3}
+      module: {fileID: 7610270014910835407}
   - triggers:
     - triggerType: 4
       intervall: 0
@@ -128,8 +124,7 @@ MonoBehaviour:
       speed: 0
       time: 0
       skills: []
-      instantiatNewGameObject: {fileID: 0}
-      analyseUI: {fileID: 0}
+      module: {fileID: 0}
   destroyDelay: 0.2
   ownAnimator: {fileID: 0}
   changeColor: 0
@@ -139,3 +134,17 @@ MonoBehaviour:
   target: {fileID: 0}
   statusEffectTimeLeft: 0
   timeDistortion: 1
+--- !u!114 &7610270014910835407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2634165681308481017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c7cb061432bf34fa9049995bd7374a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  analyseGameObject: {fileID: 2140673505560165479, guid: f26a64cb4b5c5c549b6018becf166d02,
+    type: 3}

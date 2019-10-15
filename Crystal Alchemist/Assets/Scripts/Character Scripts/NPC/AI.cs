@@ -10,6 +10,10 @@ public class AI : Character
     [BoxGroup("Easy Access")]
     public GameObject dialogPosition;
 
+    [Required]
+    [BoxGroup("Easy Access")]
+    public AIAggroSystem aggroGameObject;
+
     [BoxGroup("AI")]
     public bool flip = true;
 

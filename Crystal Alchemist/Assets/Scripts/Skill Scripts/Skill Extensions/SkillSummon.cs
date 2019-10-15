@@ -5,14 +5,16 @@ using Sirenix.OdinInspector;
 
 public class SkillSummon : SkillExtension
 {
-    [FoldoutGroup("Special Behaviors", expanded: false)]
     [SerializeField]
     private Character summon;
 
-    [FoldoutGroup("Special Behaviors", expanded: false)]
     [Tooltip("true = beim Start, ansonsten nach Delay")]
     [SerializeField]
     private bool summonInstantly = true;
+
+    [SerializeField]
+    [Range(0,6)]
+    private float immortalTimerPet = 0;
 
     private void Start()
     {
@@ -42,6 +44,8 @@ public class SkillSummon : SkillExtension
             AI pet = Instantiate(ai, this.transform.position, Quaternion.Euler(0, 0, 0));
             pet.direction = this.skill.direction;
             pet.partner = this.skill.sender;
+            if (this.immortalTimerPet > 0) pet.setImmortalAtStart(this.immortalTimerPet);
+
             this.skill.sender.activePets.Add(pet);
         }
         else if (breakable != null)
@@ -49,6 +53,9 @@ public class SkillSummon : SkillExtension
             Breakable objectPet = Instantiate(breakable, this.transform.position, Quaternion.Euler(0, 0, 0));
             objectPet.direction = this.skill.direction;
             objectPet.changeAnim(objectPet.direction);
+            if (this.immortalTimerPet > 0) objectPet.setImmortalAtStart(this.immortalTimerPet);
         }
+
+        
     }
 }

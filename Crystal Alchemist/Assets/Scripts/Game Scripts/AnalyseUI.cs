@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class AnalyseUI : MonoBehaviour
 {
-    [Header("Gegner-Info")]
-    public GameObject target;
+    private GameObject target;
 
     [Header("Easy Access Objects")]
     public TextMeshProUGUI TMPcharacterName;
@@ -33,6 +32,11 @@ public class AnalyseUI : MonoBehaviour
     private void Start()
     {
         init();
+    }
+
+    public void setTarget(GameObject target)
+    {
+        this.target = target;
     }
 
     private void init()

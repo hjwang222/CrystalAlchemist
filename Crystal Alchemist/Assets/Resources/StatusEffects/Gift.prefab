@@ -82,8 +82,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: -3996971575727066659, guid: cc34ff18d4cdf5d4f94f1523c7d4007d,
     type: 3}
@@ -135,6 +135,7 @@ MonoBehaviour:
   maxDuration: 7
   canOverride: 1
   canDeactivateIt: 0
+  canBeDispelled: 1
   maxStacks: 1
   stunTarget: 0
   statusEffectType: 1
@@ -156,8 +157,7 @@ MonoBehaviour:
       speed: 0
       time: 0
       skills: []
-      instantiatNewGameObject: {fileID: 0}
-      analyseUI: {fileID: 0}
+      module: {fileID: 0}
   destroyDelay: 0.2
   ownAnimator: {fileID: 0}
   changeColor: 1

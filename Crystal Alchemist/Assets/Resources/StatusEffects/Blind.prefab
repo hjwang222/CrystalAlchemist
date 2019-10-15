@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4381141778963013572}
   - component: {fileID: 4381141778963013570}
   - component: {fileID: 8252149507846792586}
+  - component: {fileID: 747660080166337823}
   m_Layer: 0
   m_Name: Blind
   m_TagString: Untagged
@@ -64,6 +65,7 @@ MonoBehaviour:
   maxDuration: 10
   canOverride: 0
   canDeactivateIt: 0
+  canBeDispelled: 1
   maxStacks: 1
   stunTarget: 0
   statusEffectType: 1
@@ -76,15 +78,13 @@ MonoBehaviour:
       hits: 0
       requireAll: 0
     actions:
-    - actionType: 7
+    - actionType: 6
       affectedResources: []
       amount: 0
       speed: 0
       time: 0
       skills: []
-      instantiatNewGameObject: {fileID: 3875153507443885169, guid: c07991eef82d315498cda38ca7ec8df0,
-        type: 3}
-      analyseUI: {fileID: 0}
+      module: {fileID: 747660080166337823}
   destroyDelay: 0.2
   ownAnimator: {fileID: 0}
   changeColor: 1
@@ -94,3 +94,17 @@ MonoBehaviour:
   target: {fileID: 0}
   statusEffectTimeLeft: 0
   timeDistortion: 1
+--- !u!114 &747660080166337823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4381141778963013575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44b25cd404574a46b47ab1e4489a3a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiatNewGameObject: {fileID: 3875153507443885169, guid: c07991eef82d315498cda38ca7ec8df0,
+    type: 3}
