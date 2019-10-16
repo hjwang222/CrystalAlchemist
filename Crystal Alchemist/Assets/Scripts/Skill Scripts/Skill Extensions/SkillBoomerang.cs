@@ -37,6 +37,29 @@ public class SkillBoomerang : SkillExtension
             moveBackToSender();
         }
     }
+    private void OnTriggerEnter2D(Collider2D hittedCharacter)
+    {
+        checkHit(hittedCharacter);
+    }
+
+    private void OnTriggerStay2D(Collider2D hittedCharacter)
+    {
+        //got Hit -> Back to Target
+        checkHit(hittedCharacter);
+    }
+
+
+    public void checkHit(Collider2D hittedCharacter)
+    {
+        if (this.skill.sender != null
+            && hittedCharacter.tag != this.skill.sender.tag
+            && ((!hittedCharacter.isTrigger
+                 && !hittedCharacter.CompareTag("Object"))
+               || hittedCharacter.CompareTag("Item")))
+        {
+            if (this.GetComponent<SkillBoomerang>() != null) this.GetComponent<SkillBoomerang>().durationThenBackToSender = 0;
+        }
+    }
 
     #region Functions (private)
     private void moveBackToSender()

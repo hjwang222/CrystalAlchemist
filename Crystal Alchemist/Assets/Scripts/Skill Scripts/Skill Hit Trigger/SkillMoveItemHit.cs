@@ -2,48 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillMoveItemHit : SkillHitTrigger
+public class SkillMoveItemHit : MonoBehaviour
 {
-    private Item moveItem;
+    [SerializeField]
+    private Skill skill;
+
+    private Item item;
 
     private void Update()
     {
-        if (this.moveItem != null && this.moveItem.GetComponent<Rigidbody2D>() != null)
+        if (this.item != null && this.item.GetComponent<Rigidbody2D>() != null)
         {
-            this.moveItem.GetComponent<Rigidbody2D>().MovePosition(this.skill.transform.position);
+            this.item.GetComponent<Rigidbody2D>().MovePosition(this.skill.transform.position);
         }
     }
 
-    public void moveThings(Collider2D hittedCharacter)
+    public void moveItem(Collider2D hittedCharacter)
     {
-        if (this.skill.sender != null
-            && hittedCharacter.tag != this.skill.sender.tag
-            && !hittedCharacter.isTrigger
-            && !hittedCharacter.CompareTag("Object"))
-        {
-            if(this.GetComponent<SkillBoomerang>() != null) this.GetComponent<SkillBoomerang>().durationThenBackToSender = 0;
-        }
-
-        if (this.skill.sender != null
-            && hittedCharacter.tag != this.skill.sender.tag
-            && hittedCharacter.CompareTag("Item"))
-        {
-            if (this.GetComponent<SkillBoomerang>() != null) this.GetComponent<SkillBoomerang>().durationThenBackToSender = 0;
-
-            Item hittedItem = hittedCharacter.GetComponent<Item>();
-            if (hittedItem != null && this.moveItem == null)
-                this.moveItem = hittedItem;
-        }
+        Item hittedItem = hittedCharacter.GetComponent<Item>();
+        if (hittedItem != null && this.item == null)
+            this.item = hittedItem;
     }
 
     private void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
-        moveThings(hittedCharacter);
+        moveItem(hittedCharacter);
     }
 
     private void OnTriggerStay2D(Collider2D hittedCharacter)
     {
         //got Hit -> Back to Target
-        moveThings(hittedCharacter);
+        moveItem(hittedCharacter);
     }
 }
