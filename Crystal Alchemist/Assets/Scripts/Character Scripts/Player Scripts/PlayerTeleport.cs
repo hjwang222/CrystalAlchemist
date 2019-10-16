@@ -55,6 +55,7 @@ public class PlayerTeleport : MonoBehaviour
         {
             RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, this.transform.position, Quaternion.identity);
             respawnObject.setCharacter(this.player, true);
+            respawnObject.setStatReset(false);
             yield return new WaitForSeconds(respawnObject.getAnimationLength());
             this.player.enableSpriteRenderer(false);
             //yield return new WaitForSeconds(2f);
@@ -92,6 +93,7 @@ public class PlayerTeleport : MonoBehaviour
 
             RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, playerPositionInNewScene, Quaternion.identity);
             respawnObject.setCharacter(this.player);
+            respawnObject.setStatReset(false);
             yield return new WaitForSeconds(respawnObject.getAnimationLength());
 
             yield return new WaitForSeconds(1f);

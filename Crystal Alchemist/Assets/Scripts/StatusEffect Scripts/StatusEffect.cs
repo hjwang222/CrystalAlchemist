@@ -207,7 +207,7 @@ public class StatusEffect : MonoBehaviour
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
 
-        this.updateUI.Raise();
+        //this.updateUI.Raise();
     }
 
     #endregion

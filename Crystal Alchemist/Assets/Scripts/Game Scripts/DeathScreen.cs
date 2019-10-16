@@ -80,6 +80,12 @@ public class DeathScreen : MonoBehaviour
     private void Awake()
     {
         this.player = this.playerStats.player;
+        init();
+    }
+
+    private void init()
+    {
+        this.cursor.gameObject.SetActive(false);
         this.returnSavePoint.SetActive(false);
         this.returnTitleScreen.SetActive(false);
         this.countDown.gameObject.SetActive(false);
@@ -90,6 +96,7 @@ public class DeathScreen : MonoBehaviour
 
     private void OnEnable()
     {
+        init();
         this.stopMusic.Raise();
         if (this.postProcessVolume.profile.TryGetSettings(out this.colorGrading)) StartCoroutine(FadeOut(this.fadingDelay));
     }

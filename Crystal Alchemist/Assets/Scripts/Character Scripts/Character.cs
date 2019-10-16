@@ -134,7 +134,7 @@ public class Character : MonoBehaviour
         if (!this.isPlayer) this.spawnPosition = this.transform.position;
 
         setComponents();
-        initSpawn();
+        initSpawn(true);
     }
 
     private void setComponents()
@@ -165,30 +165,33 @@ public class Character : MonoBehaviour
         if (this.targetHelpObjectPlayer != null) this.targetHelpObjectPlayer.gameObject.SetActive(value);
     }
 
-    public void initSpawn()
+    public void initSpawn(bool reset)
     {
         destroySkills();
-        setBasicAttributesToNormal();
+        setBasicAttributesToNormal(reset);
         ActivateCharacter();
     }
 
-    private void setBasicAttributesToNormal()
+    private void setBasicAttributesToNormal(bool reset)
     {
         this.direction = new Vector2(0, -1);
 
-        this.life = this.stats.startLife;
-        this.mana = this.stats.startMana;
+        if (reset)
+        {
+            this.life = this.stats.startLife;
+            this.mana = this.stats.startMana;
+            this.buffs.Clear();
+            this.debuffs.Clear();
 
-        //TODO
-        this.speed = (this.stats.startSpeed / 100) * this.speedMultiply;
-        this.animator.speed = 1;
+            //TODO
+            this.speed = (this.stats.startSpeed / 100) * this.speedMultiply;
+            this.animator.speed = 1;
 
-        this.updateTimeDistortion(0);
-        //this.updateSpeed(0);
-        this.updateSpellSpeed(0);
+            this.updateTimeDistortion(0);
+            //this.updateSpeed(0);
+            this.updateSpellSpeed(0);
+        }
 
-        this.buffs.Clear();
-        this.debuffs.Clear();
 
         this.currentState = CharacterState.idle;
         this.animator.enabled = true;
@@ -700,7 +703,7 @@ public class Character : MonoBehaviour
     private IEnumerator immortalCo(float duration)
     {
         this.isImmortal = true;
-        yield return new WaitForSeconds(this.stats.cannotBeHitTime);
+        yield return new WaitForSeconds(duration);
         this.isImmortal = false;
     }
 

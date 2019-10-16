@@ -32,5 +32,5 @@ public class GlobalValues : MonoBehaviour
     public static float getMusicInMenu()
     {
         return backgroundMusicVolume * backgroundMusicVolumeMenu;
-    }
+    }    
 }

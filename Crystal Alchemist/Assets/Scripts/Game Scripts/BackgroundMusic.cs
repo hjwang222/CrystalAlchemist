@@ -9,23 +9,28 @@ public class BackgroundMusic : MonoBehaviour
     public AudioClip loopMusic;
 
     private float volume;
+    private bool playMusic = true;
 
     // Start is called before the first frame update
     void Start()
     {
         this.volume = GlobalValues.backgroundMusicVolume;
         this.audioSource = this.GetComponent<AudioSource>();
+        this.audioSource.volume = this.volume;
 
-        if (this.startMusic != null)
+        if (this.playMusic)
         {
-            this.audioSource.loop = false;
-            this.audioSource.PlayOneShot(this.startMusic, this.volume);
+            if (this.startMusic != null)
+            {
+                this.audioSource.loop = false;
+                this.audioSource.PlayOneShot(this.startMusic);
 
-            StartCoroutine(playLoopMusic());
-        }
-        else
-        {
-            playLoop();
+                StartCoroutine(playLoopMusic());
+            }
+            else
+            {
+                playLoop();
+            }
         }
     }
 
@@ -43,6 +48,7 @@ public class BackgroundMusic : MonoBehaviour
     public void stopMusic()
     {
         this.audioSource.Stop();
+        this.playMusic = false;
     }
 
     private IEnumerator playLoopMusic()
@@ -53,7 +59,7 @@ public class BackgroundMusic : MonoBehaviour
 
     private void playLoop()
     {
-        if (this.loopMusic != null)
+        if (this.loopMusic != null && this.playMusic)
         {
             this.audioSource.volume = this.volume;
             this.audioSource.clip = this.loopMusic;
