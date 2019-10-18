@@ -58,18 +58,18 @@ MonoBehaviour:
   speed: 0
   positionOffset: 0.25
   maxAmounts: 1
-  isStationary: 1
+  attachToSender: 0
   doCastDuringDelay: 0
   comboAmount: 100
   cast: 0
   lockMovementonDuration: 0
-  deactivateByButtonUp: 0
+  deactivateByButtonUp: 1
   deactivateByButtonDown: 0
   isRapidFire: 0
   keepHoldTimer: 0
   canAffectedBytimeDistortion: 1
   delay: 0
-  duration: 1
+  duration: 1.5
   cooldown: 2
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -123,8 +123,8 @@ MonoBehaviour:
   skill: {fileID: 0}
   resourceType: 2
   item: {fileID: 0}
-  addResourceSender: -1
-  intervallSender: 9999
+  addResourceSender: -0.25
+  intervallSender: 0.25
   speedDuringCasting: 0
   speedDuringDuration: -25
   affectAnimation: 1
@@ -148,7 +148,7 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
-    amount: -6
+    amount: -3
   statusEffects: []
   thrust: 0
   knockbackTime: 0.2

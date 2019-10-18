@@ -260,7 +260,7 @@ public class AIAggroSystem : MonoBehaviour
         {
             addToAggroList(newTarget);
 
-            addAggro(newTarget, (this.aggroOnHitIncreaseFactor*damage));
+            addAggro(newTarget, (this.aggroOnHitIncreaseFactor));
             if (this.aggroList.Count == 1 && this.firstHitMaxAggro) addAggro(newTarget, (this.aggroNeededToTarget + (this.aggroDecreaseFactor * (-1))));
 
             if (this.aggroList[newTarget][1] == 0) setParameterOfAggrolist(newTarget, this.aggroDecreaseFactor);
