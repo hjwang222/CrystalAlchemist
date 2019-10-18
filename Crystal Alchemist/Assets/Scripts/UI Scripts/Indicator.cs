@@ -36,6 +36,14 @@ public class Indicator : MonoBehaviour
         }
     }
 
+    public virtual void Update()
+    {
+        if(this.skill == null || this.skill != null && this.skill.sender.currentState == CharacterState.dead)
+        {
+            DestroyIt();
+        }
+    }
+
     public void DestroyIt()
     {
         Destroy(this.gameObject);

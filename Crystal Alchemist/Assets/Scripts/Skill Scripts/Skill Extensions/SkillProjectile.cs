@@ -10,7 +10,7 @@ public class SkillProjectile : SkillExtension
 
     private void Update()
     {
-        if (this.skill.delayTimeLeft <= 0) setVelocity();
+        if (this.skill.delayTimeLeft <= 0 && this.skill.isActive) setVelocity();
     }    
 
     private void setVelocity()

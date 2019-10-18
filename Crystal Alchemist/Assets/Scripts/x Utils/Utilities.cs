@@ -216,7 +216,7 @@ public class Utilities : MonoBehaviour
         {
             if (skill != null && skill.triggerIsActive)
             {
-                if (hittedCharacter.gameObject == skill.sender.gameObject)
+                if (skill.sender != null && hittedCharacter.gameObject == skill.sender.gameObject)
                 {
                     if (skill.GetComponent<SkillTargetModule>() != null
                         && skill.GetComponent<SkillTargetModule>().affectSelf) return true;
@@ -847,8 +847,7 @@ public class Utilities : MonoBehaviour
             gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
 
-        public static void setDirectionAndRotation(Skill skill,
-                                                   out float angle, out Vector2 start, out Vector2 direction, out Vector3 rotation)
+        public static void setDirectionAndRotation(Skill skill, out float angle, out Vector2 start, out Vector2 direction, out Vector3 rotation)
         {
             float snapRotationInDegrees = 0;
             float rotationModifier = 0;
@@ -869,9 +868,13 @@ public class Utilities : MonoBehaviour
             {
                 useCustomPosition = positionModule.useGameObjectHeight;
                 positionHeight = positionModule.positionHeight;                
-            }
+            }                       
 
-            direction = skill.sender.direction.normalized;
+            start = (Vector2)skill.sender.transform.position;
+
+            if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null) direction = (Vector2)skill.sender.GetComponent<AI>().target.transform.position - start;
+            else if (skill.target != null) direction = (Vector2)skill.target.transform.position - start;
+            else direction = skill.sender.direction.normalized;
 
             float positionX = skill.sender.spriteRenderer.transform.position.x + (direction.x * positionOffset);
             float positionY = skill.sender.spriteRenderer.transform.position.y + (direction.y * positionOffset) + positionHeight;
@@ -879,8 +882,9 @@ public class Utilities : MonoBehaviour
             if (useCustomPosition) positionY = skill.sender.shootingPosition.transform.position.y + (direction.y * positionOffset);
 
             start = new Vector2(positionX, positionY);
+            if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null) direction = (Vector2)skill.sender.GetComponent<AI>().target.transform.position - start;
+            else if (skill.target != null) direction = (Vector2)skill.target.transform.position - start;
 
-            if (skill.target != null) direction = (Vector2)skill.target.transform.position - start;
 
             float temp_angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             direction = Utilities.Rotation.DegreeToVector2(temp_angle);

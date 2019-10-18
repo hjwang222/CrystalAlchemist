@@ -163,6 +163,7 @@ public class AIMovement : MonoBehaviour
             }
             else
             {
+                stopMoving();
                 this.startCoroutine = true;
             }
         }

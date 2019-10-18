@@ -12,6 +12,16 @@ public class SkillProjectileHit : SkillHitTrigger
 
     private void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
+        stopProjectile(hittedCharacter);
+    }
+
+    private void OnTriggerStay2D(Collider2D hittedCharacter)
+    {
+        stopProjectile(hittedCharacter);
+    }
+
+    private void stopProjectile(Collider2D hittedCharacter)
+    {
         //Stop Arrow on Hit
         if (this.skill.sender != null
             && hittedCharacter.tag != this.skill.sender.tag

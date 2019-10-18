@@ -393,7 +393,7 @@ public class AIEvents : MonoBehaviour
         {
             if (this.enemy.target != null)
             {
-                if (this.activeAction.skillinstance.target == null) this.activeAction.skillinstance.target = this.enemy.target;
+                if (this.activeAction.skillinstance.target != this.enemy.target) this.activeAction.skillinstance.target = this.enemy.target;
 
                 if (this.activeAction.skillinstance.holdTimer < this.activeAction.skillinstance.cast)
                 {

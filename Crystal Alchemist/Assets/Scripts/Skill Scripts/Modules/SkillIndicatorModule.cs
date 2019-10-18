@@ -7,7 +7,8 @@ public class SkillIndicatorModule : SkillModule
 {
     [FoldoutGroup("Indikatoren", expanded: false)]
     [Tooltip("AOE")]
-    public List<Indicator> indicators = new List<Indicator>();
+    [SerializeField]
+    private Indicator indicator;
 
     [FoldoutGroup("Indikatoren", expanded: false)]
     [Tooltip("Indikator anzeigen")]
@@ -25,30 +26,28 @@ public class SkillIndicatorModule : SkillModule
     public Color indicatorColor;
 
     [HideInInspector]
-    public List<Indicator> activeIndicators = new List<Indicator>();
+    public Indicator activeIndicator;
 
     public void hideIndicator()
     {
-        foreach (Indicator indicator in this.activeIndicators)
+        if (this.indicator != null
+            && this.activeIndicator != null
+            && this.showingIndicator)
         {
-            if (indicator != null) indicator.DestroyIt();
+            this.activeIndicator.DestroyIt();
+            this.activeIndicator = null;
         }
-
-        this.activeIndicators.Clear();
     }
 
     public void showIndicator()
     {
-        if (this.indicators.Count > 0
-            && this.activeIndicators.Count == 0
+        if (this.indicator != null
+            && this.activeIndicator == null
             && this.showingIndicator)
         {
-            foreach (Indicator indicator in this.indicators)
-            {
-                Indicator temp = Instantiate(indicator);
-                temp.setSkill(this.skill);
-                this.activeIndicators.Add(temp);
-            }
+            Indicator temp = Instantiate(this.indicator);
+            temp.setSkill(this.skill);
+            this.activeIndicator = temp;
         }
     }
 }

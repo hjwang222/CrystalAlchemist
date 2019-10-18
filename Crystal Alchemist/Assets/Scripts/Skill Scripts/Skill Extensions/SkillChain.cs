@@ -59,7 +59,7 @@ public class SkillChain : SkillExtension
 
         if (this.indicatorModule != null
             && this.chainSpriteRenderer != null
-            && this.indicatorModule.activeIndicators != null)
+            && this.indicatorModule.activeIndicator != null)
         {
             indicator.indicatorRenderer.sprite = this.chainSpriteRenderer.sprite;
             indicator.indicatorRenderer.color = this.chainSpriteRenderer.color;
@@ -75,10 +75,7 @@ public class SkillChain : SkillExtension
         {
             if (this.changeColor)
             {
-                foreach (Indicator indicator in this.indicatorModule.indicators)
-                {
-                    indicator.indicatorRenderer.color = this.rightColor;
-                }
+                this.indicatorModule.activeIndicator.indicatorRenderer.color = this.rightColor;                
             }
 
             if (this.canBreak && !this.useRange)
@@ -89,12 +86,8 @@ public class SkillChain : SkillExtension
         }
         else
         {
-            if (this.changeColor) foreach (Indicator indicator in this.indicatorModule.indicators)
-                {
-                    indicator.indicatorRenderer.color = this.wrongColor;
-                }
+            this.indicatorModule.activeIndicator.indicatorRenderer.color = this.wrongColor;
         }
-
     }
 
 

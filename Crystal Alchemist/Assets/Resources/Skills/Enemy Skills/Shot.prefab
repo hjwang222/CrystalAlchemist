@@ -210,7 +210,7 @@ MonoBehaviour:
   animator: {fileID: 5853850326603271721}
   shadow: {fileID: 4459175407930688011}
   speed: 20
-  positionOffset: 0.5
+  positionOffset: 0.25
   maxAmounts: 99
   attachToSender: 0
   doCastDuringDelay: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   useGameObjectHeight: 1
   positionHeight: 0.5
-  colliderHeightOffset: -0.5
+  colliderHeightOffset: 0
 --- !u!114 &7983595114080166242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,13 +357,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  indicators:
-  - {fileID: 5604874298435353384, guid: 4c2b4b217381faf4485e28928382b866, type: 3}
+  indicator: {fileID: 5604874298435353384, guid: 4c2b4b217381faf4485e28928382b866,
+    type: 3}
   showingIndicator: 1
   showCastBarForEnemies: 1
   useCustomColor: 1
-  indicatorColor: {r: 1, g: 0, b: 0, a: 1}
-  activeIndicators: []
+  indicatorColor: {r: 1, g: 0, b: 0, a: 0.5019608}
+  activeIndicator: {fileID: 0}
 --- !u!1 &5124404407448343764
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +458,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0047180057, y: -0.003760159}
+  m_Offset: {x: 0.06846884, y: -0.003760159}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -469,7 +469,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9786334, y: 0.17786533}
+  m_Size: {x: 0.74026066, y: 0.17786533}
   m_EdgeRadius: 0
 --- !u!1 &5853850326603271718
 GameObject:

@@ -202,7 +202,7 @@ public class Character : MonoBehaviour
 
         this.activeDeathAnimation = null;
 
-        if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Static;
+        if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
 
         resetColor();
     }
@@ -313,11 +313,13 @@ public class Character : MonoBehaviour
     {
         if (!this.isPlayer)
         {
-            foreach (Skill skill in this.activeSkills)
-            {
-                if (skill.attachToSender) skill.DestroyIt();
-            }
+            //TODO:Destroy on Cast            
 
+            for(int i = 0; i< this.activeSkills.Count; i++)
+            {               
+                if (this.activeSkills[i].attachToSender) this.activeSkills[i].DestroyIt();
+            }
+            
             //TODO: Kill sofort (Skill noch aktiv)
             Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
             Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);

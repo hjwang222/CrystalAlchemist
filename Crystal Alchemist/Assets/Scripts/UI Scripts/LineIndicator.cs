@@ -9,7 +9,7 @@ public class LineIndicator : Indicator
     private float distance = 10;
 
     private Vector2 direction;
-    private SkillChain chain;    
+    private SkillChain chain;
 
     // Start is called before the first frame update
     public override void Start()
@@ -19,9 +19,10 @@ public class LineIndicator : Indicator
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
-        drawLine(this.skill.rotateIt());
+        base.Update();
+        if (this.skill != null) drawLine(this.skill.rotateIt());
     }
 
     private void drawLine(bool updateRotation)
@@ -35,7 +36,6 @@ public class LineIndicator : Indicator
             snapRotationInDegrees = this.skill.GetComponent<SkillRotationModule>().snapRotationInDegrees;
             rotationModifier = this.skill.GetComponent<SkillRotationModule>().rotationModifier;
         }
-
 
         float angle;
         Vector2 startpoint;
@@ -51,8 +51,7 @@ public class LineIndicator : Indicator
             float temp_angle = Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg;
             this.direction = Utilities.Rotation.DegreeToVector2(temp_angle);
         }
-
-            renderLine(startpoint, rotation);
+        renderLine(startpoint, rotation);
     }
 
     private void renderLine(Vector2 startpoint, Vector3 rotation)
@@ -64,9 +63,8 @@ public class LineIndicator : Indicator
         //float offset = 0f;
         Vector2 newPosition = startpoint;
         //newPosition = new Vector2(startpoint.x - (this.direction.x * offset), startpoint.y - (this.direction.y * offset));
-        
 
-        RaycastHit2D hitInfo = Physics2D.CircleCast(newPosition, this.indicatorRenderer.size.y+0.5f, this.direction, distance, layerMask);
+        RaycastHit2D hitInfo = Physics2D.CircleCast(newPosition, this.indicatorRenderer.size.y + 0.5f, this.direction, distance, layerMask);
 
         if (hitInfo && !hitInfo.collider.isTrigger)
         {
@@ -88,16 +86,16 @@ public class LineIndicator : Indicator
 
             this.indicatorRenderer.transform.position = temp;
             this.indicatorRenderer.size = new Vector2(Vector3.Distance(hitpoint, startpoint), this.indicatorRenderer.size.y);
-            this.indicatorRenderer.transform.rotation = Quaternion.Euler(rotation);            
+            this.indicatorRenderer.transform.rotation = Quaternion.Euler(rotation);
         }
         else
         {
-                //Kein Ziel getroffen, zeichne Linie mit max Länge            
-                Vector2 temp = new Vector2(this.direction.x * (this.distance / 2), this.direction.y * (this.distance / 2)) + startpoint;
+            //Kein Ziel getroffen, zeichne Linie mit max Länge            
+            Vector2 temp = new Vector2(this.direction.x * (this.distance / 2), this.direction.y * (this.distance / 2)) + startpoint;
 
-                this.indicatorRenderer.transform.position = temp;
-                this.indicatorRenderer.size = new Vector2(this.distance, this.indicatorRenderer.size.y);
-                this.indicatorRenderer.transform.rotation = Quaternion.Euler(rotation);      
+            this.indicatorRenderer.transform.position = temp;
+            this.indicatorRenderer.size = new Vector2(this.distance, this.indicatorRenderer.size.y);
+            this.indicatorRenderer.transform.rotation = Quaternion.Euler(rotation);
         }
     }
 
