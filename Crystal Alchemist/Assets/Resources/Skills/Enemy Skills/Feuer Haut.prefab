@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224756837918827972}
-  - component: {fileID: 224756837918827970}
   - component: {fileID: 7648501385148924824}
   - component: {fileID: 4244255912294953290}
   - component: {fileID: 543241152754914391}
@@ -35,32 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &224756837918827970
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 224756837918827975}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.031867385, y: -0.058693767}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.81126523, y: 0.75761247}
-  m_EdgeRadius: 0
 --- !u!114 &7648501385148924824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +106,7 @@ MonoBehaviour:
     amount: -1
   statusEffects:
   - {fileID: 71630591074221121, guid: e420e9509f9819f4188748abbdda79ee, type: 3}
-  thrust: 4
+  thrust: 6
   knockbackTime: 0.2
   affectSelf: 0
   affectOther: 1
@@ -167,4 +140,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  boxCollider: {fileID: 224756837918827970}

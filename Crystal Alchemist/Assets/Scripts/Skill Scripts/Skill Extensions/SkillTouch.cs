@@ -1,17 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using UnityEngine;
 
 public class SkillTouch : SkillExtension
 {
-    [SerializeField]
-    [Required]
-    private BoxCollider2D boxCollider;
-
     private void Start()
-    {    
-        this.boxCollider.offset = this.skill.sender.boxCollider.offset;
-        this.boxCollider.size = this.skill.sender.boxCollider.size;
+    {
+        Collider2D temp = this.skill.sender.boxCollider;
+
+        Collider2D te = Utilities.UnityUtils.CopyComponent(temp, this.gameObject);
+        te.isTrigger = true;
     }
 }

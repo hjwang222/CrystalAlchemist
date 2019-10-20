@@ -25,7 +25,7 @@ public class Character : MonoBehaviour
 
     [Required]
     [BoxGroup("Easy Access")]
-    public BoxCollider2D boxCollider;
+    public Collider2D boxCollider;
 
     [BoxGroup("Easy Access")]
     [Required]
@@ -143,7 +143,7 @@ public class Character : MonoBehaviour
         if (this.spriteRenderer == null) this.spriteRenderer = this.GetComponent<SpriteRenderer>();
 
         if (this.animator == null) this.animator = this.GetComponent<Animator>();
-        if (this.boxCollider == null) this.boxCollider = GetComponent<BoxCollider2D>();
+        if (this.boxCollider == null) this.boxCollider = GetComponent<Collider2D>();
 
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;

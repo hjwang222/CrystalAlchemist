@@ -19,10 +19,12 @@ public class AIMovement : MonoBehaviour
 
     [FoldoutGroup("Pathfinding", expanded: false)]
     [SerializeField]
+    [ShowIf("seeker")]
     private float nextWaypointdistance = 0.3f;
 
     [FoldoutGroup("Pathfinding", expanded: false)]
     [SerializeField]
+    [ShowIf("seeker")]
     private float updatePathIntervall = 0.5f;
 
     private Path aPath;
