@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public class CharacterAttributeMenu : MonoBehaviour
 {
@@ -25,7 +26,24 @@ public class CharacterAttributeMenu : MonoBehaviour
     [SerializeField]
     private List<CharacterAttributeStats> statObjects = new List<CharacterAttributeStats>();
 
+
+    [BoxGroup("Signals")]
+    [SerializeField]
+    private FloatSignal musicVolumeSignal;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    [Required]
+    private myCursor cursor;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    [Required]
+    private GameObject blackScreen;
+
+
     private int attributePoints;
+    private CharacterState lastState;
     private int attributePointsMax;
 
     private void Start()
@@ -41,7 +59,39 @@ public class CharacterAttributeMenu : MonoBehaviour
 
     private void OnEnable()
     {
+        this.player = this.playerStats.player;
         this.attributePointsMax = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, true);
+
+        this.lastState = this.player.currentState;
+        this.cursor.gameObject.SetActive(true);
+        this.player.currentState = CharacterState.inMenu;
+
+        this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+    }
+
+    private void OnDisable()
+    {
+        this.cursor.gameObject.SetActive(false);
+
+        this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
+            else exitMenu();
+        }
+        else if (Input.GetButtonDown("Inventory")) exitMenu();
+    }
+
+    public void exitMenu()
+    {
+        this.cursor.infoBox.Hide();
+        this.player.delay(this.lastState);
+        this.transform.parent.gameObject.SetActive(false);
+        this.blackScreen.SetActive(false);
     }
 
     public int getAvailablePoints()

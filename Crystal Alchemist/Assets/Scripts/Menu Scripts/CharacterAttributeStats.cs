@@ -21,7 +21,7 @@ public class CharacterAttributeStats : MonoBehaviour
     [SerializeField]
     private attributeType type;
 
-    public Sprite icon;
+    public Image icon;
 
     public TextMeshProUGUI attributeNameField;
 
@@ -67,15 +67,11 @@ public class CharacterAttributeStats : MonoBehaviour
 
     public void updateButton()
     {
-        if(this.mainMenu.getAvailablePoints() <= 0 || this.points >= 4)
-        {
-            this.buttonIncrease.SetActive(false);
-        }
+        if(this.mainMenu.getAvailablePoints() <= 0 || this.points >= 4) this.buttonIncrease.SetActive(false);
+        else this.buttonIncrease.SetActive(true);
 
-        if(this.points <= 0)
-        {
-            this.buttonReduce.SetActive(false);
-        }
+        if (this.points <= 0) this.buttonReduce.SetActive(false);
+        else this.buttonReduce.SetActive(true);
     }
 
     private void updateAttributes(int value)
@@ -120,8 +116,8 @@ public class CharacterAttributeStats : MonoBehaviour
             case attributeType.debuffMinus: value = this.mainMenu.player.debuffMinus; break;
         }
 
-        if (this.type == attributeType.lifeExpander || this.type == attributeType.manaExpander) result = Array.IndexOf(this.mainMenu.expanderValues, value);
-        else result = Array.IndexOf(this.mainMenu.percentageValues, value);
+        if (this.type == attributeType.lifeExpander || this.type == attributeType.manaExpander) result = indexOf(this.mainMenu.expanderValues, value);
+        else result = indexOf(this.mainMenu.percentageValues, value);
 
         this.points = result;
     }
@@ -133,5 +129,15 @@ public class CharacterAttributeStats : MonoBehaviour
             this.pointsList[i].SetActive(false);
             if(i <= this.points) this.pointsList[i].SetActive(true);
         }
+    }
+
+    private int indexOf(int[] array, float value)
+    {
+        for(int i = 0; i < array.Length; i++)
+        {
+            if (array[i] >= (int)value) return i;
+        }
+
+        return 0;
     }
 }
