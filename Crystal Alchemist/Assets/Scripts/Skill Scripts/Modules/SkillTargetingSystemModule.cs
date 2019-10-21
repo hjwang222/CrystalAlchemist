@@ -16,7 +16,7 @@ public class SkillTargetingSystemModule : SkillModule
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
     [Tooltip("Ob das Ziel erfasst werden soll. Wenn NULL, dann nicht.")]
-    public GameObject lockOn;
+    public GameObject lockOnGameObject;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
     [ShowIf("lockOn")]

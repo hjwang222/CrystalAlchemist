@@ -121,6 +121,9 @@ public class StatusEffect : MonoBehaviour
     public bool canOverride = false;
 
     [FoldoutGroup("Basis Attribute")]
+    public bool canBeChanged = true;
+
+    [FoldoutGroup("Basis Attribute")]
     public bool canDeactivateIt = false;
 
     [FoldoutGroup("Basis Attribute")]
@@ -190,6 +193,17 @@ public class StatusEffect : MonoBehaviour
         init();        
     }
 
+    public void setTarget(Character character)
+    {
+        this.target = character;
+
+        this.gameObject.transform.SetParent(character.activeStatusEffectParent.transform, false);
+        //DontDestroyOnLoad(this.gameObject);
+
+        if (this.statusEffectType == StatusEffectType.debuff) character.debuffs.Add(this);
+        else character.buffs.Add(this);
+    }
+
     public void updateTimeDistortion(float distortion)
     {
         this.timeDistortion = 1 + (distortion/100);
@@ -199,8 +213,8 @@ public class StatusEffect : MonoBehaviour
     {
         if (this.ownAnimator == null) this.ownAnimator = this.GetComponent<Animator>();
         if (this.target != null && this.changeColor) this.target.addColor(this.statusEffectColor);
-        this.statusEffectTimeLeft = this.maxDuration;
 
+        setTime();
         doActions(true);
 
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
@@ -208,6 +222,20 @@ public class StatusEffect : MonoBehaviour
         this.audioSource.playOnAwake = false;
 
         //this.updateUI.Raise();
+    }
+
+    private void setTime()
+    {
+        this.statusEffectTimeLeft = this.maxDuration;
+
+        if (this.canBeChanged)
+        {
+            int percentage = 0;
+            if (this.statusEffectType == StatusEffectType.buff) percentage = this.target.buffPlus;
+            else percentage = this.target.debuffMinus;
+
+            this.statusEffectTimeLeft *= ((100 + percentage) / 100);
+        }        
     }
 
     #endregion

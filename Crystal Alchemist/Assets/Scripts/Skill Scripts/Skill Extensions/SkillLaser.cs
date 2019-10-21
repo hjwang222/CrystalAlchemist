@@ -76,8 +76,8 @@ public class SkillLaser : SkillExtension
 
         SkillTargetingSystemModule targetingSystemModule = this.GetComponent<SkillTargetingSystemModule>();
 
-        if ((targetingSystemModule != null && targetingSystemModule.lockOn != null && this.skill.target != null) 
-            || ((targetingSystemModule == null || (targetingSystemModule != null && targetingSystemModule.lockOn == null)) && hitInfo && !hitInfo.collider.isTrigger))
+        if ((targetingSystemModule != null && targetingSystemModule.lockOnGameObject != null && this.skill.target != null) 
+            || ((targetingSystemModule == null || (targetingSystemModule != null && targetingSystemModule.lockOnGameObject == null)) && hitInfo && !hitInfo.collider.isTrigger))
         {
             //Ziel bzw. Collider wurde getroffen, zeichne Linie bis zum Ziel
             Collider2D hitted = hitInfo.collider;
@@ -130,7 +130,7 @@ public class SkillLaser : SkillExtension
         else
         {
             if (targetingSystemModule == null 
-                || (targetingSystemModule != null && targetingSystemModule.lockOn == null))
+                || (targetingSystemModule != null && targetingSystemModule.lockOnGameObject == null))
             {
                 //Kein Ziel getroffen, zeichne Linie mit max Länge            
                 Vector2 temp = new Vector2(this.skill.direction.x * (this.distance / 2), this.skill.direction.y * (this.distance / 2)) + startpoint;

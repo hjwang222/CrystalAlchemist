@@ -59,7 +59,7 @@ public class Character : MonoBehaviour
 
     #region Attributes
 
-    private float lifeTime;
+    private float regenTimeElapsed;
     private float manaTime;
     private List<Color> colors = new List<Color>();
     private bool showTargetHelp = false;
@@ -85,6 +85,18 @@ public class Character : MonoBehaviour
     public float mana;
     [HideInInspector]
     public float speed;
+
+
+    public float maxLife;
+    public float maxMana;
+    public float lifeRegen;
+    public float manaRegen;
+    public int buffPlus;
+    public int debuffMinus;
+
+
+
+
     [HideInInspector]
     public bool isInvincible;
     [HideInInspector]
@@ -106,7 +118,7 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public float timeDistortion = 1;
     [HideInInspector]
-    public GameObject activeLockOnTarget = null;
+    public TargetingSystem activeLockOnTarget = null;
     [HideInInspector]
     public bool isPlayer = false;
     [HideInInspector]
@@ -134,6 +146,7 @@ public class Character : MonoBehaviour
         if (!this.isPlayer) this.spawnPosition = this.transform.position;
 
         setComponents();
+        setInternalAttributes();
         initSpawn(true);
     }
 
@@ -170,6 +183,16 @@ public class Character : MonoBehaviour
         destroySkills();
         setBasicAttributesToNormal(reset);
         ActivateCharacter();
+    }
+
+    private void setInternalAttributes()
+    {
+        this.maxLife = this.stats.maxLife;
+        this.maxMana = this.stats.maxMana;
+        this.lifeRegen = this.stats.lifeRegeneration;
+        this.manaRegen = this.stats.manaRegeneration;
+        this.buffPlus = this.stats.buffPlus;
+        this.debuffMinus = this.stats.debuffMinus;
     }
 
     private void setBasicAttributesToNormal(bool reset)
@@ -234,7 +257,7 @@ public class Character : MonoBehaviour
 
     private void updateLifeAnimation()
     {
-        float percentage = this.life * 100 / this.stats.maxLife;
+        float percentage = this.life * 100 / this.maxLife;
         Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Life", percentage);
     }
 
@@ -242,28 +265,17 @@ public class Character : MonoBehaviour
     {
         if (this.currentState != CharacterState.dead && this.currentState != CharacterState.respawning)
         {
-            if (this.stats.lifeRegeneration != 0 && this.stats.lifeRegenerationInterval != 0)
+            if (this.stats.regenerationInterval != 0)
             {
-                if (this.lifeTime >= this.stats.lifeRegenerationInterval)
+                if (this.regenTimeElapsed >= this.stats.regenerationInterval)
                 {
-                    this.lifeTime = 0;
-                    updateResource(ResourceType.life, null, this.stats.lifeRegeneration);
+                    this.regenTimeElapsed = 0;
+                    if (this.lifeRegen != 0 && this.life < this.maxLife) updateResource(ResourceType.life, null, this.lifeRegen);
+                    if (this.manaRegen != 0 && this.mana < this.maxMana) updateResource(ResourceType.mana, null, this.manaRegen, false);
                 }
                 else
                 {
-                    this.lifeTime += (Time.deltaTime * this.timeDistortion);
-                }
-            }
-            if (this.stats.manaRegeneration != 0 && this.stats.manaRegenerationInterval != 0)
-            {
-                if (this.manaTime >= this.stats.manaRegenerationInterval)
-                {
-                    this.manaTime = 0;
-                    updateResource(ResourceType.mana, null, this.stats.manaRegeneration, false);
-                }
-                else
-                {
-                    this.manaTime += (Time.deltaTime * this.timeDistortion);
+                    this.regenTimeElapsed += (Time.deltaTime * this.timeDistortion);
                 }
             }
         }
@@ -380,7 +392,7 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life:
                 {
-                    this.life = Utilities.Resources.setResource(this.life, this.stats.maxLife, value);
+                    this.life = Utilities.Resources.setResource(this.life, this.maxLife, value);
 
                     Color[] colorArray = GlobalValues.red;
                     if (value > 0) colorArray = GlobalValues.green;
@@ -391,7 +403,7 @@ public class Character : MonoBehaviour
                 }
             case ResourceType.mana:
                 {
-                    this.mana = Utilities.Resources.setResource(this.mana, this.stats.maxMana, value);
+                    this.mana = Utilities.Resources.setResource(this.mana, this.maxMana, value);
                     if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
                     break;
                 }
@@ -448,8 +460,8 @@ public class Character : MonoBehaviour
     {
         switch (type)
         {
-            case ResourceType.life: return this.stats.maxLife;
-            case ResourceType.mana: return this.stats.maxMana;
+            case ResourceType.life: return this.maxLife;
+            case ResourceType.mana: return this.maxMana;
             case ResourceType.item: return Utilities.Items.getAmountFromInventory(item, this.inventory, true);
         }
 

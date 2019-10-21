@@ -62,6 +62,15 @@ public class InfoBox : MonoBehaviour
         this.descriptionField.text = Utilities.Format.getLanguageDialogText(item.itemDescription, item.itemDescriptionEnglish);
     }
 
+    private void setInfo(CharacterAttributeStats stats)
+    {
+        this.additionalInfo.SetActive(false);
+
+        this.previewImage.sprite = stats.icon;
+        this.nameField.text = stats.attributeNameField.text;
+        this.descriptionField.text = Utilities.Format.getLanguageDialogText(stats.description, stats.descriptionEnglish);
+    }
+
     public void Hide()
     {
         this.gameObject.SetActive(false);
@@ -79,5 +88,9 @@ public class InfoBox : MonoBehaviour
         setInfo(item);
     }
 
-
+    public void Show(CharacterAttributeStats stats)
+    {
+        this.gameObject.SetActive(true);
+        setInfo(stats);
+    }
 }

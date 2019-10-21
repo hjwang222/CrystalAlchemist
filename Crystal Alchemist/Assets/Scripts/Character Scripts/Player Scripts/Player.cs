@@ -61,12 +61,16 @@ public class Player : Character
     [BoxGroup("Pflichtfelder")]
     public FloatValue fadingDuration;
 
+    [HideInInspector]
     public Skill AButton;
+    [HideInInspector]
     public Skill BButton;
+    [HideInInspector]
     public Skill XButton;
+    [HideInInspector]
     public Skill YButton;
+    [HideInInspector]
     public Skill RBButton;
-
     [HideInInspector]
     public Vector3 change;
 

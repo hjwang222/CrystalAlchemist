@@ -537,7 +537,7 @@ public class AIEvents : MonoBehaviour
                     if (!elem.requireAll) return true;
                     else success++;
                 }
-                else if (triggerElem.type == AIEventType.life && this.enemy.life <= (this.enemy.stats.maxLife * triggerElem.life / 100))
+                else if (triggerElem.type == AIEventType.life && this.enemy.life <= (this.enemy.maxLife * triggerElem.life / 100))
                 {
                     if (!elem.requireAll) return true;
                     else success++;

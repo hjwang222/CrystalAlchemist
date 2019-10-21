@@ -71,7 +71,6 @@ public class CharacterStats : ScriptableObject
     public float startSpellSpeed = 100;
 
     [TabGroup("Start-Values")]
-    [Tooltip("Immunität von Statuseffekten")]
     public bool isMassive = false;
 
     [Space(10)]
@@ -84,19 +83,6 @@ public class CharacterStats : ScriptableObject
     [Tooltip("Immunität von Statuseffekten")]
     public List<StatusEffect> immunityToStatusEffects = new List<StatusEffect>();
 
-
-
-
-
-    [TabGroup("Spawn Values")]
-    [Tooltip("Maximales Life")]
-    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
-    public float maxLife = Utilities.minFloat;
-
-    [TabGroup("Spawn Values")]
-    [Tooltip("Maximales Mana")]
-    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
-    public float maxMana = Utilities.minFloat;
 
     [Space(10)]
     [TabGroup("Spawn Values")]
@@ -113,26 +99,44 @@ public class CharacterStats : ScriptableObject
     public DeathAnimation deathAnimation;
 
 
-    [TabGroup("Regeneration")]
+    ////////////////////////////////////////////////////////////////
+
+    [FoldoutGroup("Upgrades", expanded: false)]
+    [Tooltip("Maximales Life")]
+    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
+    public float maxLife = Utilities.minFloat;
+
+    [FoldoutGroup("Upgrades", expanded: false)]
+    [Tooltip("Maximales Mana")]
+    [Range(Utilities.minFloat, Utilities.maxFloatInfinite)]
+    public float maxMana = Utilities.minFloat;
+
+    [Space(10)]
+    [FoldoutGroup("Upgrades", expanded: false)]
     [Tooltip("Höhe der Lebensregeneration")]
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     public float lifeRegeneration = 0;
 
-    [TabGroup("Regeneration")]
-    [Tooltip("Intervall der Lebensregeneration")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float lifeRegenerationInterval = 0;
-
-    [Space(10)]
-    [TabGroup("Regeneration")]
+    [FoldoutGroup("Upgrades", expanded: false)]
     [Tooltip("Höhe der Manaregeneration")]
     [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
     public float manaRegeneration = 0;
 
-    [TabGroup("Regeneration")]
-    [Tooltip("Intervall der Manaregeneration")]
-    [Range(0, Utilities.maxFloatSmall)]
-    public float manaRegenerationInterval = 0;
+    [FoldoutGroup("Upgrades", expanded: false)]
+    [Tooltip("Intervall der Regeneration")]
+    [Range(0, 3)]
+    public float regenerationInterval = 0;
+
+    [Space(10)]
+    [FoldoutGroup("Upgrades", expanded: false)]
+    [Range(0,100)]
+    [Tooltip("Verlängerung von Buffs in Prozent")]
+    public int buffPlus = 0;
+
+    [FoldoutGroup("Upgrades", expanded: false)]
+    [Range(-100, 0)]
+    [Tooltip("Verkürzung von Debuffs in Prozent")]
+    public int debuffMinus = 0;
 
     ////////////////////////////////////////////////////////////////
 

@@ -132,8 +132,9 @@ MonoBehaviour:
   statusEffectNameEnglish: Poison
   statusEffectDescription: "Schaden \xFCber Zeit"
   statusEffectDescriptionEnglish: Damage over time
-  maxDuration: 7
+  maxDuration: 6
   canOverride: 1
+  canBeChanged: 1
   canDeactivateIt: 0
   canBeDispelled: 1
   maxStacks: 1
@@ -142,7 +143,7 @@ MonoBehaviour:
   statusEffectEvents:
   - triggers:
     - triggerType: 1
-      intervall: 0.5
+      intervall: 1
       life: 0
       mana: 0
       hits: 0
@@ -152,7 +153,7 @@ MonoBehaviour:
       affectedResources:
       - resourceType: 1
         item: {fileID: 0}
-        amount: -0.25
+        amount: -0.5
       amount: 0
       speed: 0
       time: 0

@@ -132,6 +132,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                 InventorySlot inventoryslot = this.button.gameObject.GetComponent<InventorySlot>();
                 SkillSlot skillSlot = this.button.gameObject.GetComponent<SkillSlot>();
                 SkillMenuActiveSlots activeSlot = this.button.gameObject.GetComponent<SkillMenuActiveSlots>();
+                CharacterAttributeStats attributesStat = this.button.gameObject.GetComponent<CharacterAttributeStats>();
 
                 if (inventoryslot != null && inventoryslot.getItem() != null)
                 {
@@ -144,6 +145,10 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                 else if (activeSlot != null && activeSlot.skill != null)
                 {
                     this.cursor.infoBox.Show(activeSlot.skill);
+                }
+                else if (attributesStat != null)
+                {
+                    this.cursor.infoBox.Show(attributesStat);
                 }
                 else
                 {

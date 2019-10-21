@@ -218,65 +218,38 @@ public class PlayerAttacks : MonoBehaviour
 
             Utilities.Skills.instantiateSkill(skill, this.player);
         }
-        else if (targetingSystemModule != null && targetingSystemModule.lockOn != null && this.player.activeLockOnTarget == null)
+        else if (targetingSystemModule != null 
+                && targetingSystemModule.lockOnGameObject != null 
+                && targetingSystemModule.lockOnGameObject.GetComponent<TargetingSystem>() != null
+                && this.player.activeLockOnTarget == null)
         {
             //Aktiviere Zielerfassung
-            this.player.activeLockOnTarget = Instantiate(targetingSystemModule.lockOn, this.transform.position, Quaternion.identity, this.transform);
-            TargetingSystem lockOnScript = this.player.activeLockOnTarget.GetComponent<TargetingSystem>();
-            lockOnScript.setParameters(skill, button);
-            //this.activeLockOnTarget.hideFlags = HideFlags.HideInHierarchy; //TODO: Debug Value as Scriptable Object
+            this.player.activeLockOnTarget = Instantiate(targetingSystemModule.lockOnGameObject.GetComponent<TargetingSystem>(), this.transform.position, Quaternion.identity, this.transform);
+            this.player.activeLockOnTarget.setParameters(skill, button);
         }
     }
 
     private void activateSkillFromTargetingSystem(Skill skill)
     {
         if (this.player.activeLockOnTarget != null
-            && this.player.activeLockOnTarget.GetComponent<TargetingSystem>().isReadyToFire(skill))
+            && this.player.activeLockOnTarget.isReadyToFire(skill))
         {
             //Benutze Skill (mit Zielerfassung)   
             if (!skill.isRapidFire) skill.holdTimer = 0;
 
-            TargetingSystem targetingSystem = this.player.activeLockOnTarget.GetComponent<TargetingSystem>();
             SkillTargetingSystemModule targetingSystemModule = skill.GetComponent<SkillTargetingSystemModule>();
 
-            if (targetingSystem.targets.Count == 0
+            if (this.player.activeLockOnTarget.targets.Count == 0
                 && targetingSystemModule.targetingMode != TargetingMode.auto)
             {
-                Destroy(this.player.activeLockOnTarget);
-                this.player.activeLockOnTarget = null;
+                this.player.activeLockOnTarget.DestroyIt();
             }
-            else if (targetingSystem.targets.Count > 0
+            else if (this.player.activeLockOnTarget.targets.Count > 0
                 || targetingSystemModule.targetingMode == TargetingMode.auto)
             {
                 skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
 
-                StartCoroutine(fireSkillToMultipleTargets(targetingSystem, skill));
-                /*
-                if (targetingSystem.selectAll || targetingSystemModule.targetingMode == TargetingMode.autoMulti)
-                {
-                    
-                    for (int i = 0; i < targetingSystem.listOfTargetsWithMark.Count; i++)
-                    {
-                        Destroy(targetingSystem.listOfTargetsWithMark[i].gameObject);
-                    }*/
-
-                    //Multihit!
-                    
-
-                    //Fire Skill one time when no target is there
-                    /*if (targetingSystemModule.targetingMode == TargetingMode.autoMulti && targetingSystem.sortedTargets.Count == 0)
-                        fireSkillToSingleTarget(targetingSystem.currentTarget, 1, true, skill);
-                }
-                else if (!targetingSystem.selectAll || targetingSystemModule.targetingMode == TargetingMode.autoSingle)
-                {
-                    //SingleHit
-                    Destroy(targetingSystem.singleTargetWithMark);
-                    fireSkillToSingleTarget(targetingSystem.currentTarget, 1, true, skill);
-
-                    Destroy(this.player.activeLockOnTarget);
-                    this.player.activeLockOnTarget = null;
-                }
-                }*/
+                StartCoroutine(fireSkillToMultipleTargets(this.player.activeLockOnTarget, skill));
             }
         }
     }
@@ -338,8 +311,7 @@ public class PlayerAttacks : MonoBehaviour
             i++;
         }
 
-        Destroy(this.player.activeLockOnTarget);
-        this.player.activeLockOnTarget = null;
+        this.player.activeLockOnTarget.DestroyIt();
     }
 
     private void fireSkillToSingleTarget(Character target, float damageReduce, bool playSoundeffect, Skill skill)

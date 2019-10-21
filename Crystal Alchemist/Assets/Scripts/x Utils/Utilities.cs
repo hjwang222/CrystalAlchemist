@@ -551,17 +551,6 @@ public class Utilities : MonoBehaviour
 
              return false;
         }
-
-        /*
-        public static Item getItemByFeature(List<Item> inventory, ItemFeature feature)
-        {
-            foreach (Item item in inventory)
-            {
-                if (item.itemFeature == feature) return item;
-            }
-
-            return null;
-        }*/
     }
 
     ///////////////////////////////////////////////////////////////
@@ -665,7 +654,7 @@ public class Utilities : MonoBehaviour
                     if (result.Count < statusEffect.maxStacks)
                     {
                         //Wenn der Effekte die maximale Anzahl Stacks nicht überschritten hat -> Hinzufügen
-                        instantiateStatusEffect(statusEffect, statusEffects, character);
+                        instantiateStatusEffect(statusEffect, character);
                     }
                     else
                     {
@@ -675,7 +664,7 @@ public class Utilities : MonoBehaviour
                             StatusEffect toDestroy = result[0];
                             toDestroy.DestroyIt();
 
-                            instantiateStatusEffect(statusEffect, statusEffects, character);
+                            instantiateStatusEffect(statusEffect, character);
                         }
                         else if (statusEffect.canDeactivateIt)
                         {
@@ -687,17 +676,10 @@ public class Utilities : MonoBehaviour
             }
         }
 
-        private static void instantiateStatusEffect(StatusEffect statusEffect, List<StatusEffect> statusEffects, Character character)
+        private static void instantiateStatusEffect(StatusEffect statusEffect, Character character)
         {
-            GameObject statusEffectClone = Instantiate(statusEffect.gameObject, character.transform.position, Quaternion.identity, character.transform);
-            statusEffectClone.transform.SetParent(character.activeStatusEffectParent.transform, false);
-            DontDestroyOnLoad(statusEffectClone);
-            StatusEffect statusEffectScript = statusEffectClone.GetComponent<StatusEffect>();
-            statusEffectScript.target = character;
-            //statusEffectClone.hideFlags = HideFlags.HideInHierarchy;
-
-            //add to list for better reference
-            statusEffects.Add(statusEffectClone.GetComponent<StatusEffect>());
+            StatusEffect statusEffectClone = Instantiate(statusEffect, character.transform.position, Quaternion.identity, character.transform);
+            statusEffectClone.setTarget(character);
         }
 
         public static List<StatusEffect> GetStatusEffect(StatusEffect statusEffect, Character character, bool getAll)
