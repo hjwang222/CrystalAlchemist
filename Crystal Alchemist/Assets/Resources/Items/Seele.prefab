@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 330836144660511512}
   - component: {fileID: 330836144660511514}
+  - component: {fileID: 4703441983051973527}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -83,6 +84,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4703441983051973527
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330836144660511513}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c00be8cfec6d59b4da64c9c8cd07c0bf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &330836145871899523
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,14 +263,14 @@ MonoBehaviour:
   itemNameEnglish: Soul
   itemDescriptionEnglish: 
   itemGroupEnglish: souls
-  amount: 6
+  amount: 1
   maxAmount: 8
   resourceType: 3
   isKeyItem: 0
   keyItemSignal: {fileID: 0}
   skill: {fileID: 0}
   statusEffects: []
-  collectSoundEffect: {fileID: 0}
+  collectSoundEffect: {fileID: 8300000, guid: 36888cf2843c6ae49962b01f67e19050, type: 3}
   signal: {fileID: 0}
 --- !u!61 &330836146565999747
 BoxCollider2D:

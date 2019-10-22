@@ -50,13 +50,22 @@ public class CharacterAttributeStats : MonoBehaviour
 
     public void setAttributes(int value)
     {
-        this.points = value;
+        if (getActivePoints() == value)
+        {
+            this.points--;
+        }
+        else if ((value - this.points) <= this.mainMenu.getPointsLeft())
+        {
+            this.points = value;
+        }
+        else if ((value - this.points) > this.mainMenu.getPointsLeft())
+        {
+            this.points += this.mainMenu.getPointsLeft();
+        }
 
-        if (getActivePoints() == value) this.points--;
-
-        updateAttributes(this.points);
         this.mainMenu.updatePoints();
         updateUI();
+        updateAttributes(this.points);
     }
 
     public string getDescription()
@@ -77,7 +86,6 @@ public class CharacterAttributeStats : MonoBehaviour
             return this.mainMenu.percentageValues[index] + "%";
         }
     }
-
 
     private void updateAttributes(int value)
     {

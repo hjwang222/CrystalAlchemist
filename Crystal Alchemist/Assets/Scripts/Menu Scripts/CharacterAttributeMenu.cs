@@ -24,6 +24,15 @@ public class CharacterAttributeMenu : MonoBehaviour
     private TextMeshProUGUI pointsField;
 
     [SerializeField]
+    private AudioClip juwelInSound;
+
+    [SerializeField]
+    private AudioClip juwelOutSound;
+
+    [SerializeField]
+    private AudioSource audiosource;
+
+    [SerializeField]
     private List<CharacterAttributeStats> statObjects = new List<CharacterAttributeStats>();
 
 
@@ -46,19 +55,13 @@ public class CharacterAttributeMenu : MonoBehaviour
     private CharacterState lastState;
     private int attributePointsMax;
     private int pointsSpent;
+    private int pointsLeft;
 
-    private void Start()
-    {
-        this.attributePoints = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);
-        this.attributePointsMax = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, true);
-
-        updatePoints();
-    }
 
     private void OnEnable()
     {
         this.player = this.playerStats.player;
-        this.attributePointsMax = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, true);
+        updatePoints();
 
         this.lastState = this.player.currentState;
         this.cursor.gameObject.SetActive(true);
@@ -92,13 +95,22 @@ public class CharacterAttributeMenu : MonoBehaviour
         this.blackScreen.SetActive(false);
     }
 
-    public int getAvailablePoints()
+    public void playJuwelSound(bool insert)
     {
-        return this.attributePoints;
+        if (insert) Utilities.Audio.playSoundEffect(this.audiosource, this.juwelInSound);
+        else Utilities.Audio.playSoundEffect(this.audiosource, this.juwelOutSound);
+    }
+
+    public int getPointsLeft()
+    {
+        return this.pointsLeft;
     }
 
     public void updatePoints()
     {
+        this.attributePoints = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);
+        this.attributePointsMax = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, true);
+
         this.pointsSpent = 0;
 
         foreach (CharacterAttributeStats statObject in this.statObjects)
@@ -106,9 +118,9 @@ public class CharacterAttributeMenu : MonoBehaviour
             this.pointsSpent += statObject.getPointsSpent();
         }
 
-        int pointsLeft = this.attributePoints - this.pointsSpent;
+        this.pointsLeft = this.attributePoints - this.pointsSpent;
 
-        string text = Utilities.Format.formatString(pointsLeft, this.attributePointsMax)+" / " + Utilities.Format.formatString(this.attributePointsMax, this.attributePointsMax);
+        string text = Utilities.Format.formatString(this.pointsLeft, this.attributePointsMax)+" / " + Utilities.Format.formatString(this.attributePointsMax, this.attributePointsMax);
         this.pointsField.text = text;
     }
 
