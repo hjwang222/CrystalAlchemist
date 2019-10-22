@@ -14,6 +14,13 @@ public class LoadSystem : MonoBehaviour
             player.life = data.health;
             player.mana = data.mana;
 
+            player.maxLife = data.maxHealth;
+            player.maxMana = data.maxMana;
+            player.lifeRegen = data.healthRegen;
+            player.manaRegen = data.manaRegen;
+            player.buffPlus = data.buffplus;
+            player.debuffMinus = data.debuffminus;
+
             player.healthSignalUI.Raise();
             player.manaSignalUI.Raise();
 

@@ -8,6 +8,14 @@ public class PlayerData
 {
     public float health;
     public float mana;
+
+    public float maxHealth;
+    public float maxMana;
+    public float healthRegen;
+    public float manaRegen;
+    public int buffplus;
+    public int debuffminus;
+
     public List<string[]> inventory = new List<string[]>();
     public List<string[]> skills = new List<string[]>();
 
@@ -18,6 +26,13 @@ public class PlayerData
     {
         this.health = player.life;
         this.mana = player.mana;
+
+        this.maxHealth = player.maxLife;
+        this.maxMana = player.maxMana;
+        this.healthRegen = player.lifeRegen;
+        this.manaRegen = player.manaRegen;
+        this.buffplus = player.buffPlus;
+        this.debuffminus = player.debuffMinus;
 
         this.position = new float[3];
 
