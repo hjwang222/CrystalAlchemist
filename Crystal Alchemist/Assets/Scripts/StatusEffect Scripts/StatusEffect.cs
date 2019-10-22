@@ -230,11 +230,11 @@ public class StatusEffect : MonoBehaviour
 
         if (this.canBeChanged)
         {
-            int percentage = 0;
-            if (this.statusEffectType == StatusEffectType.buff) percentage = this.target.buffPlus;
-            else percentage = this.target.debuffMinus;
+            float percentage = 0;
+            if (this.statusEffectType == StatusEffectType.buff) percentage = (float)this.target.buffPlus;
+            else percentage = (float)this.target.debuffMinus;
 
-            this.statusEffectTimeLeft *= ((100 + percentage) / 100);
+            this.statusEffectTimeLeft *= ((100f + (float)percentage) / 100f);
         }        
     }
 

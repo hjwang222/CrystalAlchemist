@@ -23,7 +23,8 @@ public class CharacterAttributeStats : MonoBehaviour
 
     public Image icon;
 
-    public TextMeshProUGUI attributeNameField;
+    public string name;
+    public string nameEnglish;
 
     public string description;
     public string descriptionEnglish;
@@ -40,7 +41,6 @@ public class CharacterAttributeStats : MonoBehaviour
     {
         getPoints();
         updateUI();
-        updateButton();
     }
 
     public int getPointsSpent()
@@ -55,14 +55,29 @@ public class CharacterAttributeStats : MonoBehaviour
         if (getActivePoints() == value) this.points--;
 
         updateAttributes(this.points);
-        this.mainMenu.updateAllStats(this.points);
+        this.mainMenu.updatePoints();
         updateUI();
     }
 
-    public void updateButton()
+    public string getDescription()
     {
-
+        string text = Utilities.Format.getLanguageDialogText(this.description, this.descriptionEnglish);
+        text += "\n Aktuell " + getValue(this.points) + " von " + getValue(4);
+        return text;
     }
+
+    public string getValue(int index)
+    {
+        if (this.type == attributeType.lifeExpander || this.type == attributeType.manaExpander)
+        {
+            return this.mainMenu.expanderValues[index] + "";
+        }
+        else
+        {
+            return this.mainMenu.percentageValues[index] + "%";
+        }
+    }
+
 
     private void updateAttributes(int value)
     {
@@ -70,17 +85,19 @@ public class CharacterAttributeStats : MonoBehaviour
         {
             case attributeType.lifeExpander:
                 this.mainMenu.player.maxLife = this.mainMenu.expanderValues[value];
+                if (this.mainMenu.player.life > this.mainMenu.player.maxLife) this.mainMenu.player.life = this.mainMenu.player.maxLife;
                 this.mainMenu.player.callSignal(this.mainMenu.player.healthSignalUI, 1);
                 break;
             case attributeType.manaExpander:
                 this.mainMenu.player.maxMana = this.mainMenu.expanderValues[value];
+                if (this.mainMenu.player.mana > this.mainMenu.player.maxMana) this.mainMenu.player.mana = this.mainMenu.player.maxMana;
                 this.mainMenu.player.callSignal(this.mainMenu.player.manaSignalUI, 1);
                 break;
             case attributeType.lifeRegen:
-                this.mainMenu.player.lifeRegen = this.mainMenu.percentageValues[value] / 100;
+                this.mainMenu.player.lifeRegen = (float)this.mainMenu.percentageValues[value] / 100f;
                 break;
             case attributeType.manaRegen:
-                this.mainMenu.player.manaRegen = this.mainMenu.percentageValues[value] / 100;
+                this.mainMenu.player.manaRegen = (float)this.mainMenu.percentageValues[value] / 100f;
                 break;
             case attributeType.buffPlus:
                 this.mainMenu.player.buffPlus = this.mainMenu.percentageValues[value];

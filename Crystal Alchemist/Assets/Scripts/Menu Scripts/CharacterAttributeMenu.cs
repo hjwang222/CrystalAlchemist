@@ -42,19 +42,17 @@ public class CharacterAttributeMenu : MonoBehaviour
     private GameObject blackScreen;
 
 
-    private int attributePoints;
+    private int attributePoints = 0;
     private CharacterState lastState;
     private int attributePointsMax;
+    private int pointsSpent;
 
     private void Start()
     {
         this.attributePoints = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);
         this.attributePointsMax = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, true);
 
-        foreach (CharacterAttributeStats statObject in this.statObjects)
-        {
-            this.attributePoints -= statObject.getPointsSpent();
-        }
+        updatePoints();
     }
 
     private void OnEnable()
@@ -99,20 +97,19 @@ public class CharacterAttributeMenu : MonoBehaviour
         return this.attributePoints;
     }
 
-    public void updateAllStats(int value)
+    public void updatePoints()
     {
-        this.attributePoints -= (value+4);
+        this.pointsSpent = 0;
 
         foreach (CharacterAttributeStats statObject in this.statObjects)
         {
-            statObject.updateButton();
+            this.pointsSpent += statObject.getPointsSpent();
         }
 
-        updateUI();
+        int pointsLeft = this.attributePoints - this.pointsSpent;
+
+        string text = Utilities.Format.formatString(pointsLeft, this.attributePointsMax)+" / " + Utilities.Format.formatString(this.attributePointsMax, this.attributePointsMax);
+        this.pointsField.text = text;
     }
 
-    private void updateUI()
-    {
-        this.pointsField.text = Utilities.Format.formatString(this.attributePoints, this.attributePointsMax);
-    }
 }

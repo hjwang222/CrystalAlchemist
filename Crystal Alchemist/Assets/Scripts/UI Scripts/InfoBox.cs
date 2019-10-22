@@ -67,7 +67,7 @@ public class InfoBox : MonoBehaviour
         this.additionalInfo.SetActive(false);
 
         this.previewImage.sprite = stats.icon.sprite;
-        this.nameField.text = stats.attributeNameField.text;
+        this.nameField.text = Utilities.Format.getLanguageDialogText(stats.name, stats.nameEnglish);
         this.descriptionField.text = Utilities.Format.getLanguageDialogText(stats.description, stats.descriptionEnglish);
     }
 

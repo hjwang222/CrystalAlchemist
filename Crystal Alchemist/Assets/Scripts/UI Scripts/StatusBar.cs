@@ -60,6 +60,9 @@ public class StatusBar : MonoBehaviour
     private bool playLow;
     private float elapsed;
     private Player player;
+
+    private float maxValue;
+    private float currentValue;
     #endregion
 
 
@@ -95,12 +98,28 @@ public class StatusBar : MonoBehaviour
         }
     }
 
+    private void setValues()
+    {
+        if(this.resourceType == ResourceType.life)
+        {
+            this.maxValue = this.player.maxLife;
+            this.currentValue = this.player.life;
+        }
+        else
+        {
+            this.maxValue = this.player.maxMana;
+            this.currentValue = this.player.mana;
+        }
+    }
+
     private void setStatusBar()
     {
+        setValues();
+
         for (int i = 0; i < this.icons.Count; i++)
         {
             this.icons[i].SetActive(false);
-            if (i + 1 <= this.player.maxLife) this.icons[i].SetActive(true);
+            if (i + 1 <= this.maxValue) this.icons[i].SetActive(true);
         }
     }
     #endregion
@@ -113,21 +132,21 @@ public class StatusBar : MonoBehaviour
 
         Sprite sprite = null;
 
-        for (int i = 0; i < (int)this.player.maxLife; i++)
+        for (int i = 0; i < (int)this.maxValue; i++)
         {
-            if (i <= this.player.life - 1)
+            if (i <= this.currentValue - 1)
             {                
                 sprite = this.full;
             }
-            else if (i <= this.player.life - 0.75f)
+            else if (i <= this.currentValue - 0.75f)
             {
                 sprite = this.quarterhalf;
             }
-            else if (i <= this.player.life - 0.5f)
+            else if (i <= this.currentValue - 0.5f)
             {
                 sprite = this.half;
             }
-            else if (i <= this.player.life - 0.25f)
+            else if (i <= this.currentValue - 0.25f)
             {
                 sprite = this.quarter;
             }
