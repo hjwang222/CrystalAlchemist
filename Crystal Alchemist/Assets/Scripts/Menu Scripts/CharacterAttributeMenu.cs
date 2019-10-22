@@ -101,7 +101,7 @@ public class CharacterAttributeMenu : MonoBehaviour
 
     public void updateAllStats(int value)
     {
-        this.attributePoints -= value;
+        this.attributePoints -= (value+4);
 
         foreach (CharacterAttributeStats statObject in this.statObjects)
         {

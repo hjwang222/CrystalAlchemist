@@ -43,7 +43,7 @@ public class StatusBar : MonoBehaviour
     [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public Sprite empty;
     [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
-    public GameObject icon;
+    public List<GameObject> icons = new List<GameObject>();
     [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public GameObject warning;
 
@@ -56,11 +56,7 @@ public class StatusBar : MonoBehaviour
     [FoldoutGroup("Sound", expanded: false)]
     public float audioInterval = 1.5f;
 
-
-
     private AudioSource audioSource;
-    private float maximum;
-    private float current;
     private bool playLow;
     private float elapsed;
     private Player player;
@@ -78,7 +74,6 @@ public class StatusBar : MonoBehaviour
     {
         this.player = this.playerStats.player;
         this.audioSource = GetComponent<AudioSource>();
-        setValues();
         setStatusBar();
 
         if(this.UIType == UIType.resource) UpdateGUIHealthMana();
@@ -100,21 +95,12 @@ public class StatusBar : MonoBehaviour
         }
     }
 
-    private void setValues()
-    {
-        if (this.player != null)
-        {
-            this.maximum = this.player.getMaxResource(this.resourceType, null);
-            this.current = this.player.getResource(this.resourceType, null);
-        }
-    }
-
     private void setStatusBar()
     {
-        for (int i = 0; i < (int)this.maximum - 1; i++)
+        for (int i = 0; i < this.icons.Count; i++)
         {
-            GameObject temp = Instantiate(icon, this.gameObject.transform);
-            //temp.hideFlags = HideFlags.HideInHierarchy;
+            this.icons[i].SetActive(false);
+            if (i + 1 <= this.player.maxLife) this.icons[i].SetActive(true);
         }
     }
     #endregion
@@ -123,25 +109,25 @@ public class StatusBar : MonoBehaviour
     #region Update Signal Funktionen (Life, Mana, StatusEffects)    
     public void UpdateGUIHealthMana()
     {
-        setValues();
+        setStatusBar();
 
         Sprite sprite = null;
 
-        for (int i = 0; i < (int)this.maximum; i++)
+        for (int i = 0; i < (int)this.player.maxLife; i++)
         {
-            if (i <= this.current - 1)
+            if (i <= this.player.life - 1)
             {                
                 sprite = this.full;
             }
-            else if (i <= this.current - 0.75f)
+            else if (i <= this.player.life - 0.75f)
             {
                 sprite = this.quarterhalf;
             }
-            else if (i <= this.current - 0.5f)
+            else if (i <= this.player.life - 0.5f)
             {
                 sprite = this.half;
             }
-            else if (i <= this.current - 0.25f)
+            else if (i <= this.player.life - 0.25f)
             {
                 sprite = this.quarter;
             }
@@ -162,7 +148,7 @@ public class StatusBar : MonoBehaviour
             
         }
 
-        if (this.current <= 0.5f && this.player.currentState != CharacterState.dead)
+        if (this.player.life <= 0.5f && this.player.currentState != CharacterState.dead)
         {
             this.playLow = true;
             if (this.warning != null) this.warning.SetActive(true);

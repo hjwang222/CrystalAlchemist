@@ -29,12 +29,6 @@ public class CharacterAttributeStats : MonoBehaviour
     public string descriptionEnglish;
 
     [SerializeField]
-    private GameObject buttonReduce;
-
-    [SerializeField]
-    private GameObject buttonIncrease;
-
-    [SerializeField]
     private CharacterAttributeMenu mainMenu;
 
     [SerializeField]
@@ -56,22 +50,18 @@ public class CharacterAttributeStats : MonoBehaviour
 
     public void setAttributes(int value)
     {
-        this.points += value;
-        if (this.points < 0) this.points = 0;
-        else if (this.points > 4) this.points = 4;
+        this.points = value;
+
+        if (getActivePoints() == value) this.points--;
 
         updateAttributes(this.points);
-        this.mainMenu.updateAllStats(value);
+        this.mainMenu.updateAllStats(this.points);
         updateUI();
     }
 
     public void updateButton()
     {
-        if(this.mainMenu.getAvailablePoints() <= 0 || this.points >= 4) this.buttonIncrease.SetActive(false);
-        else this.buttonIncrease.SetActive(true);
 
-        if (this.points <= 0) this.buttonReduce.SetActive(false);
-        else this.buttonReduce.SetActive(true);
     }
 
     private void updateAttributes(int value)
@@ -87,10 +77,10 @@ public class CharacterAttributeStats : MonoBehaviour
                 this.mainMenu.player.callSignal(this.mainMenu.player.manaSignalUI, 1);
                 break;
             case attributeType.lifeRegen:
-                this.mainMenu.player.lifeRegen = 100 / this.mainMenu.percentageValues[value];
+                this.mainMenu.player.lifeRegen = this.mainMenu.percentageValues[value] / 100;
                 break;
             case attributeType.manaRegen:
-                this.mainMenu.player.manaRegen = 100 / this.mainMenu.percentageValues[value];
+                this.mainMenu.player.manaRegen = this.mainMenu.percentageValues[value] / 100;
                 break;
             case attributeType.buffPlus:
                 this.mainMenu.player.buffPlus = this.mainMenu.percentageValues[value];
@@ -127,8 +117,18 @@ public class CharacterAttributeStats : MonoBehaviour
         for(int i = 0; i< this.pointsList.Count; i++)
         {
             this.pointsList[i].SetActive(false);
-            if(i <= this.points) this.pointsList[i].SetActive(true);
+            if(i+1 <= this.points) this.pointsList[i].SetActive(true);
         }
+    }
+
+    private int getActivePoints()
+    {
+        int result = 0;
+        for (int i = 0; i < this.pointsList.Count; i++)
+        {
+            if (this.pointsList[i].activeInHierarchy) result = i+1;
+        }
+        return result;
     }
 
     private int indexOf(int[] array, float value)
