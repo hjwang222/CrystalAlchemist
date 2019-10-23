@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ShopItem : Interactable
+public class ShopItem : Rewardable
 {
 
     [Header("Shop-Item Attribute")]

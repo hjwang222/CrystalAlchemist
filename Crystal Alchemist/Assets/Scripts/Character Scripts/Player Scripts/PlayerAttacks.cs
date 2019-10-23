@@ -220,11 +220,10 @@ public class PlayerAttacks : MonoBehaviour
         }
         else if (targetingSystemModule != null 
                 && targetingSystemModule.lockOnGameObject != null 
-                && targetingSystemModule.lockOnGameObject.GetComponent<TargetingSystem>() != null
                 && this.player.activeLockOnTarget == null)
         {
             //Aktiviere Zielerfassung
-            this.player.activeLockOnTarget = Instantiate(targetingSystemModule.lockOnGameObject.GetComponent<TargetingSystem>(), this.transform.position, Quaternion.identity, this.transform);
+            this.player.activeLockOnTarget = Instantiate(targetingSystemModule.lockOnGameObject, this.transform.position, Quaternion.identity, this.transform);
             this.player.activeLockOnTarget.setParameters(skill, button);
         }
     }

@@ -10,7 +10,7 @@ public enum TreasureType
     lootbox
 }
 
-public class Treasure : Interactable
+public class Treasure : Rewardable
 {
     #region Attribute   
 

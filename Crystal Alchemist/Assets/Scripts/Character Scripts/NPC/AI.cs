@@ -25,7 +25,7 @@ public class AI : Character
 
     private bool isSleeping = true;
 
-    private void Start()
+    private void Awake()
     {
         init();
         this.target = null;

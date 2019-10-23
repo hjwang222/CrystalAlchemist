@@ -2,19 +2,8 @@
 using TMPro;
 using UnityEngine;
 
-public class InventoryMenu : MonoBehaviour
+public class InventoryMenu : MenuControls
 {
-    [SerializeField]
-    [BoxGroup("Mandatory")]
-    private PlayerStats playerStats;
-
-    private Player player;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private myCursor cursor;
-
     [BoxGroup("Mandatory")]
     [SerializeField]
     [Required]
@@ -25,20 +14,9 @@ public class InventoryMenu : MonoBehaviour
     [Required]
     private TextMeshProUGUI keyItemsLabel;
 
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private GameObject blackScreen;
-
-
     [BoxGroup("Signals")]
     [SerializeField]
     private SimpleSignal skillMenuSignal;
-
-    [BoxGroup("Signals")]
-    [SerializeField]
-    private FloatSignal musicVolumeSignal;
-
 
     [BoxGroup("Tabs")]
     [SerializeField]
@@ -52,47 +30,17 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField]
     private GameObject quickmenu;
 
-    private CharacterState lastState;
-
-    private void Awake()
-    {
-        this.player = this.playerStats.player;
-    }
-
     private void Start()
     {
-        this.player = this.playerStats.player;
-        loadInventory();
         showCategory(0);
     }
 
-    private void Update()
+    public override void OnEnable()
     {
-        if (Input.GetButtonDown("Cancel"))
-        {
-            if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
-            else exitMenu();
-        }
-        else if (Input.GetButtonDown("Inventory")) exitMenu();
-    }
-
-    private void OnEnable()
-    {
+        base.OnEnable();
         loadInventory();
-
-        this.lastState = this.player.currentState;
-        this.cursor.gameObject.SetActive(true);
-        this.player.currentState = CharacterState.inMenu;
-
-        this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
     }
 
-    private void OnDisable()
-    {
-        this.cursor.gameObject.SetActive(false);
-
-        this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
-    }
 
     private void loadInventory()
     {      
@@ -104,7 +52,6 @@ public class InventoryMenu : MonoBehaviour
     public void openSkillMenu(Item item)
     {
         this.transform.parent.gameObject.SetActive(false);
-        this.blackScreen.SetActive(false);
         this.player.currentState = this.lastState;
         item.keyItemSignal.Raise();
     }
@@ -112,17 +59,8 @@ public class InventoryMenu : MonoBehaviour
     public void openMap()
     {
         this.transform.parent.gameObject.SetActive(false);
-        this.blackScreen.SetActive(false);
         this.player.currentState = this.lastState;
         //raise Map Signal
-    }
-
-    public void exitMenu()
-    {
-        this.cursor.infoBox.Hide();
-        this.player.delay(this.lastState);
-        this.transform.parent.gameObject.SetActive(false);
-        this.blackScreen.SetActive(false);
     }
 
     public void switchCategory()

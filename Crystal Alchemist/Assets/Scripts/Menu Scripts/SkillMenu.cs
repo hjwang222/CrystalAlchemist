@@ -1,25 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
-using System.Linq;
 
-public class SkillMenu : MonoBehaviour
+public class SkillMenu : MenuControls
 {
     #region Attributes
-    [SerializeField]
-    [BoxGroup("Mandatory")]
-    private PlayerStats playerStats;
-
-    private Player player;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private myCursor cursor;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
@@ -35,11 +22,6 @@ public class SkillMenu : MonoBehaviour
     [SerializeField]
     [Required]
     private TextMeshProUGUI categoryItems;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private GameObject blackScreen;
 
     [BoxGroup("Tabs")]
     [SerializeField]
@@ -74,35 +56,24 @@ public class SkillMenu : MonoBehaviour
     [SerializeField]
     private GameObject nextPage;
 
-    [BoxGroup("Signals")]
-    [SerializeField]
-    private FloatSignal musicVolumeSignal;
-
     [HideInInspector]
     public Skill selectedSkill;
-
-    private CharacterState lastState;
 
     #endregion
 
 
     #region Unity Functions
 
-    private void Awake()
-    {
-        this.player = this.playerStats.player;
-    }
-
     private void Start()
     {
-        this.player = this.playerStats.player;
         setSkillsToSlots(SkillType.physical);
         setSkillsToSlots(SkillType.magical);
         setSkillsToSlots(SkillType.item);
+
         showCategory(1);
     }
 
-    private void Update()
+    public override void Update()
     {
         if (Input.GetButtonDown("Cancel"))
         {
@@ -113,22 +84,17 @@ public class SkillMenu : MonoBehaviour
         else if (Input.GetButtonDown("Inventory")) exitMenu();
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
-        this.lastState = this.player.currentState;
-        selectSkillFromSkillSet(null);
-        this.cursor.gameObject.SetActive(true);
-        this.player.currentState = CharacterState.inMenu;
+        base.OnEnable();
 
-        this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+        selectSkillFromSkillSet(null);
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
         selectSkillFromSkillSet(null);
-        this.cursor.gameObject.SetActive(false);
-
-        this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+        base.OnDisable();
     }
 
     #endregion
@@ -220,14 +186,6 @@ public class SkillMenu : MonoBehaviour
             this.selectedSkill = null;
             this.cursor.setSelectedGameObject(null);
         }
-    }
-
-    public void exitMenu()
-    {
-        this.cursor.infoBox.Hide();
-        this.player.delay(this.lastState);
-        this.transform.parent.gameObject.SetActive(false);
-        this.blackScreen.SetActive(false);
     }
 
     public void setPage(int value)

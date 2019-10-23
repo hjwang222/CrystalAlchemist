@@ -19,21 +19,15 @@ public class Interactable : MonoBehaviour
 
     [FoldoutGroup("Dialog", expanded: false)]
     [Tooltip("Anzeige-Text für die Dialog-Box")]
-    [TextAreaAttribute]
+    [TextArea]
     public string dialogBoxText;
 
     [FoldoutGroup("Dialog", expanded: false)]
     [Tooltip("Englischer Anzeige-Text für die Dialog-Box")]
-    [TextAreaAttribute]
+    [TextArea]
     public string dialogBoxTextEnglish;
 
-    [FoldoutGroup("Loot", expanded: false)]
-    [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
-    public LootTable[] lootTable;
 
-    [FoldoutGroup("Loot", expanded: false)]
-    [Tooltip("Multiloot = alle Items. Ansonsten nur das seltenste Item")]
-    public bool multiLoot = false;
 
     [FoldoutGroup("Activation Requirements", expanded: false)]
     [EnumToggleButtons]
@@ -70,8 +64,7 @@ public class Interactable : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     [HideInInspector]
     public GameObject context;
-    [HideInInspector]
-    public List<Item> inventory = new List<Item>();
+
     [HideInInspector]
     public objectState currentState = objectState.normal;
 
@@ -118,7 +111,7 @@ public class Interactable : MonoBehaviour
         this.audioSource.playOnAwake = false;
         if(this.animator == null && GetComponent<Animator>() != null) this.animator = GetComponent<Animator>();
         setContext();
-        Utilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory);
+       
     }
 
     public void setContext()

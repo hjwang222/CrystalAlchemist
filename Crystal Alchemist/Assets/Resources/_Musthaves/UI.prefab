@@ -7617,7 +7617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   icon: {fileID: 1183161001314566099}
-  name: Lebens Erweiterung
+  attributeName: Lebenserweiterung
   nameEnglish: Life Expander
   description: "Erh\xF6ht die maximale Anzahl an Leben"
   descriptionEnglish: Increase the total amount of life
@@ -30989,7 +30989,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   icon: {fileID: 75556036104289313}
-  name: Mana Erweiterung
+  attributeName: Mana Erweiterung
   nameEnglish: Mana Expander
   description: "Erh\xF6ht die maximale Anzahl an Mana"
   descriptionEnglish: Increase the total amount of mana
@@ -31841,7 +31841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   icon: {fileID: 2526030175928897222}
-  name: "Debuff Verk\xFCrzung"
+  attributeName: "Debuff Verk\xFCrzung"
   nameEnglish: Debuff Reduction
   description: "Verk\xFCrzt die Dauer von negativen Effekten"
   descriptionEnglish: Reduces duration of negative effects
@@ -36106,10 +36106,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fecc3c6ce4d785949b2eb9d7f60e013a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  percentageValues: 0000000019000000320000004b00000064000000
-  expanderValues: 0100000003000000050000000700000009000000
   player: {fileID: 0}
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
+  cursor: {fileID: 2023999579620031235}
+  blackScreen: {fileID: 6972244615326794696}
+  lastState: 0
+  percentageValues: 0000000019000000320000004b00000064000000
+  expanderValues: 0100000003000000050000000700000009000000
   item: {fileID: 330836146565999746, guid: 140240d2ccfaa5d4cbf75cdc23268a11, type: 3}
   pointsField: {fileID: 5045547539913259073}
   juwelInSound: {fileID: 0}
@@ -36122,9 +36126,6 @@ MonoBehaviour:
   - {fileID: 2121323098818858676}
   - {fileID: 3496089090913126112}
   - {fileID: 7723743402024622631}
-  musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
-  cursor: {fileID: 2023999579620031235}
-  blackScreen: {fileID: 6972244615326794696}
 --- !u!1 &5024709433873006639
 GameObject:
   m_ObjectHideFlags: 0
@@ -45700,12 +45701,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7635100212f0a194fabef82456f07e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 2023999579620031235}
+  blackScreen: {fileID: 6972244615326794696}
+  lastState: 0
   categoryWeapons: {fileID: 4957793105739391532}
   categoryMagic: {fileID: 4995702525504684249}
   categoryItems: {fileID: 3717723377580166548}
-  blackScreen: {fileID: 6972244615326794696}
   physicalSkills: {fileID: 3939220589680813680}
   magicalSkills: {fileID: 486789745250865608}
   itemSkills: {fileID: 718143409855638848}
@@ -45716,7 +45720,6 @@ MonoBehaviour:
   previousPage: {fileID: 8410121427328865537}
   pageText: {fileID: 4330214004763951385}
   nextPage: {fileID: 5554928344252231648}
-  musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   selectedSkill: {fileID: 0}
 --- !u!1 &6374917167086580445
 GameObject:
@@ -48222,7 +48225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   icon: {fileID: 4518904464325028141}
-  name: Lebens Regeneration
+  attributeName: Lebensregeneration
   nameEnglish: Life Regeneration
   description: "Erh\xF6ht die Regeneration von Leben"
   descriptionEnglish: Increase the life regeneration
@@ -54922,13 +54925,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c7b1be60ae2c80488ef57913c19c8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 2023999579620031235}
+  blackScreen: {fileID: 6972244615326794696}
+  lastState: 0
   regularItemsLabel: {fileID: 5225022311981069546}
   keyItemsLabel: {fileID: 8891668203618386569}
-  blackScreen: {fileID: 6972244615326794696}
   skillMenuSignal: {fileID: 11400000, guid: a0040097a322aac45b0490d99fbc08a4, type: 2}
-  musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   regularItems: {fileID: 769795466714289323}
   keyItems: {fileID: 8337921199828818438}
   quickmenu: {fileID: 5066842269745166654}
@@ -59466,7 +59471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   icon: {fileID: 8732834458673009756}
-  name: "Buff Verl\xE4ngerung"
+  attributeName: "Buff Verl\xE4ngerung"
   nameEnglish: Buff Extention
   description: "Verl\xE4ngert die Dauer von positiven Effekten"
   descriptionEnglish: Increases duration of positive effects
@@ -60926,7 +60931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   icon: {fileID: 159926467936028055}
-  name: Mana Regeneration
+  attributeName: Mana Regeneration
   nameEnglish: Mana Regeneration
   description: "Erh\xF6ht die Regeneration von Mana"
   descriptionEnglish: Increase the mana regeneration

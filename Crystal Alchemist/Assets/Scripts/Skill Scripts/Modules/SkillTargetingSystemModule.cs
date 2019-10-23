@@ -16,37 +16,37 @@ public class SkillTargetingSystemModule : SkillModule
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
     [Tooltip("Ob das Ziel erfasst werden soll. Wenn NULL, dann nicht.")]
-    public GameObject lockOnGameObject;
+    public TargetingSystem lockOnGameObject;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
-    [ShowIf("lockOn")]
+    [ShowIf("lockOnGameObject")]
     [Tooltip("Manual = Spieler kann Ziele auswählen, Single = näheste Ziel, Multi = Alle in Range, Auto = Sofort ohne Bestätigung")]
     [EnumToggleButtons]
     public TargetingMode targetingMode = TargetingMode.manual;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
-    [ShowIf("lockOn")]
+    [ShowIf("lockOnGameObject")]
     [Range(0, Utilities.maxIntSmall)]
     public int maxAmountOfTargets = 1;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
-    [ShowIf("lockOn")]
+    [ShowIf("lockOnGameObject")]
     [Range(0, Utilities.maxFloatInfinite)]
     public float targetingDuration = 6f;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
-    [ShowIf("lockOn")]
+    [ShowIf("lockOnGameObject")]
     [Tooltip("In welchen Intervallen die Ziele getroffen werden sollen")]
     [Range(0, 10)]
     public float multiHitDelay = 0;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
-    [ShowIf("lockOn")]
+    [ShowIf("lockOnGameObject")]
     [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
     public bool showRange = false;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
-    [ShowIf("lockOn")]
+    [ShowIf("lockOnGameObject")]
     [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
     public bool showIndicator = false;
 }

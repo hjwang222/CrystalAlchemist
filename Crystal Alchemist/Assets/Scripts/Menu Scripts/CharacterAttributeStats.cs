@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
-using Sirenix.OdinInspector;
 
 public enum attributeType
 {
@@ -23,7 +19,7 @@ public class CharacterAttributeStats : MonoBehaviour
 
     public Image icon;
 
-    public string name;
+    public string attributeName;
     public string nameEnglish;
 
     public string description;

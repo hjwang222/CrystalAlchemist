@@ -33,7 +33,7 @@ public class AnalyseUI : MonoBehaviour
     private StatusEffectBar statusEffectBar;
 
     private Character character;
-    private Interactable interactable;
+    private Rewardable rewardableObject;
     private List<StatusEffectUI> activeStatusEffectUIs = new List<StatusEffectUI>();
     private List<StatusEffect> activeStatusEffects = new List<StatusEffect>();
 
@@ -58,7 +58,7 @@ public class AnalyseUI : MonoBehaviour
         if (this.target.GetComponent<Interactable>() != null)
         {
             //set UI to Treasure/Object Info
-            this.interactable = this.target.GetComponent<Interactable>();
+            this.rewardableObject = this.target.GetComponent<Rewardable>();
             this.objectInfo.SetActive(true);
         }
         else if (this.target.GetComponent<Character>() != null)
@@ -98,7 +98,7 @@ public class AnalyseUI : MonoBehaviour
             }
             else showItemInfo();
         }
-        else if (this.interactable != null)
+        else if (this.rewardableObject != null)
         {
             showItemInfo();
         }
@@ -122,13 +122,13 @@ public class AnalyseUI : MonoBehaviour
     {
         this.ImageObjectitemIndicator.gameObject.SetActive(false);
 
-        if (this.interactable != null)
+        if (this.rewardableObject != null)
         {
             //Show Object Information
-            if (interactable.inventory.Count > 0 && this.interactable.currentState != objectState.opened)
+            if (rewardableObject.inventory.Count > 0 && this.rewardableObject.currentState != objectState.opened)
             {
                 this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = interactable.inventory[0].itemSprite;
+                this.ImageObjectitemPreview.sprite = rewardableObject.inventory[0].itemSprite;
             }
             else
             {
