@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class MiniGame : MenuControls
 {
     [SerializeField]
+    [BoxGroup("MiniGame Related")]
     private float maxDuration = 60;
 
     private float elapsed = 0;

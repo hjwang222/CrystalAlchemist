@@ -7,9 +7,10 @@ public class MenuControls : MonoBehaviour
     public Player player;
 
     [SerializeField]
+    [BoxGroup("Mandatory")]
     private PlayerStats playerStats;
 
-    [BoxGroup("Signals")]
+    [BoxGroup("Mandatory")]
     [SerializeField]
     private FloatSignal musicVolumeSignal;
 
@@ -19,7 +20,6 @@ public class MenuControls : MonoBehaviour
 
     [BoxGroup("Mandatory")]
     [SerializeField]
-    [Required]
     private GameObject blackScreen;
 
     [HideInInspector]

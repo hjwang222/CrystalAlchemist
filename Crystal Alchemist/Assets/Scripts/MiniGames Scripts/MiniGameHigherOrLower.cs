@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniGameHigherOrLower : MiniGame
+public class MiniGameHigherOrLower : MonoBehaviour
 {
-    
+    [SerializeField]
+    private MiniGame miniGame;
 
     
 }
