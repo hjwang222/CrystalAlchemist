@@ -33,7 +33,7 @@ public class CharacterAttributeStats : MonoBehaviour
 
     private int points;
 
-    private void Start()
+    public void init()
     {
         getPoints();
         updateUI();

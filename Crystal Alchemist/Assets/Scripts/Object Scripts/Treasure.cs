@@ -43,7 +43,7 @@ public class Treasure : Rewardable
 
     #region Start Funktionen
 
-    private void Start()
+    public override void Start()
     {
         base.Start();
 

@@ -31,12 +31,20 @@ public class CharacterAttributeMenu : MenuControls
     private int attributePointsMax;
     private int pointsSpent;
     private int pointsLeft;
+    private bool initLoad = true;
 
+    private void Start()
+    {
+        foreach (CharacterAttributeStats statObject in this.statObjects) statObject.init();
+        
+        updatePoints();
+        this.initLoad = false;
+    }
 
     public override void OnEnable()
     {
         base.OnEnable();
-        updatePoints();        
+        if(!this.initLoad) updatePoints();        
     }
 
     public void playJuwelSound(bool insert)

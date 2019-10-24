@@ -73,7 +73,7 @@ public class Interactable : MonoBehaviour
 
     #region Start Funktionen (init, ContextClue, Item set bzw. Lootregeln)
 
-    public void Start()
+    public virtual void Start()
     {
         init();
     }

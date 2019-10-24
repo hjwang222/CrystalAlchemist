@@ -17,7 +17,7 @@ public class Rewardable : Interactable
     public List<Item> inventory = new List<Item>();
 
 
-    private new void Start()
+    public override void Start()
     {
         base.Start();
         Utilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory);

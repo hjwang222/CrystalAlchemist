@@ -31,8 +31,6 @@ public class AIMovement : MonoBehaviour
     private int aCurrentWaypoint = 0;
     private bool reachedEndOfPath = false;
 
-
-
     [FoldoutGroup("Movement Attributes", expanded: false)]
     public bool prioritizePartner = false;
 
@@ -71,6 +69,7 @@ public class AIMovement : MonoBehaviour
     private bool startCoroutine = true;
     private bool activateSeeker = true;
     private Vector2 targetPosition = Vector2.zero;
+
 
     #endregion
 
