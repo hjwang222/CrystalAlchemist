@@ -13,8 +13,7 @@ public class MiniGameMachine : Rewardable
 
         if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text))
         {
-            MiniGame miniGame = Instantiate(this.miniGame);
-            miniGame.setRewards(null);
+            MiniGame miniGame = Instantiate(this.miniGame);            
         }
     }
 }

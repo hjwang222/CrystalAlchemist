@@ -3,41 +3,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class MiniGame : MenuControls
+[System.Serializable]
+public struct MiniGameMatch
+{
+    [Range(1, 6)]
+    public int maxRounds;
+
+    [Range(1, 6)]
+    public int winsNeeded;
+
+    [Range(1, 5)]
+    public int difficulty;
+
+    [Range(1, 120)]
+    public float maxDuration;
+
+    public Item item;
+
+    [Range(1, 99)]
+    public int amount;
+}
+
+public class MiniGame : MonoBehaviour
 {
     [SerializeField]
     [BoxGroup("MiniGame Related")]
-    private float maxDuration = 60;
+    [Required]
+    private MiniGameUI uI;
 
-    private float elapsed = 0;
-    private List<Item> rewards = new List<Item>();
+    [SerializeField]
+    [BoxGroup("MiniGame Related")]
+    [Required]
+    private MiniGameRound miniGameRound;
+
+    [SerializeField]
+    [BoxGroup("MiniGame Related")]
+    private List<MiniGameMatch> matches = new List<MiniGameMatch>();
+
+    [SerializeField]
+    [BoxGroup("MiniGame Related")]
+    private string miniGameTitle;
+
+    [SerializeField]
+    [BoxGroup("MiniGame Related")]
+    private string miniGameDescription;
+
+    private MiniGameUI activeUI;
+
+
+
+
+    private void Awake()
+    {
+        this.activeUI = Instantiate(this.uI, this.transform);
+        this.activeUI.setMiniGame(this.miniGameRound, this.matches, this.miniGameTitle, this.miniGameDescription);
+    }
 
     private void Start()
     {
-        this.elapsed = this.maxDuration;
+        
     }
-
-    public void setRewards(List<Item> loot)
-    {
-        this.rewards.AddRange(loot);
-    }
-
-    public override void Update()
-    {
-        base.Update();
-
-        if (this.elapsed > 0) this.elapsed -= Time.deltaTime;
-        else DestroyIt(); //Time is over!
-    }
-
-    public void DestroyIt()
-    {
-        Destroy(this.gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        this.exitMenu();
-    }
-
 }
