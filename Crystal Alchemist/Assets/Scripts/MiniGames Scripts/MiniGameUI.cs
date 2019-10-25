@@ -8,25 +8,16 @@ using UnityEngine.UI;
 public class MiniGameUI : MenuControls
 {
     public MiniGameRound miniGame;
-    private MiniGameRound activeRound;
-
-    private List<MiniGameMatch> matches = new List<MiniGameMatch>();
-    private MiniGameMatch match;
-    private int matchIndex = 0;
-
-    private int success = 0;
-    private int winNeeded = 0;
-    private int maxRounds = 0;
 
     [BoxGroup("Easy Access")]
     [SerializeField]
     [Required]
     private TextMeshProUGUI timeField;
+
     [BoxGroup("Easy Access")]
     [SerializeField]
     [Required]
     private Image timeImage;
-
 
     [BoxGroup("Easy Access")]
     [SerializeField]
@@ -36,13 +27,47 @@ public class MiniGameUI : MenuControls
     [BoxGroup("Easy Access")]
     [SerializeField]
     [Required]
-    [TextArea]
     private TextMeshProUGUI descriptionField;
 
     [BoxGroup("Easy Access")]
     [SerializeField]
     [Required]
     private GameObject mainBoard;
+
+    [BoxGroup("Easy Access")]
+    [SerializeField]
+    [Required]
+    private GameObject textGameObject;
+
+    [BoxGroup("Easy Access")]
+    [SerializeField]
+    [Required]
+    private MiniGameTrys trySlots;
+
+    [BoxGroup("Texts")]
+    [SerializeField]
+    [Required]
+    private MiniGameText successText;
+
+    [BoxGroup("Texts")]
+    [SerializeField]
+    [Required]
+    private MiniGameText failText;
+
+    [BoxGroup("Texts")]
+    [SerializeField]
+    [Required]
+    private MiniGameText winText;
+
+    [BoxGroup("Texts")]
+    [SerializeField]
+    [Required]
+    private MiniGameText loseText;
+
+    private MiniGameRound activeRound;
+    private List<MiniGameMatch> matches = new List<MiniGameMatch>();
+    private MiniGameMatch match;
+    private int matchIndex = 0;
 
     private void Start()
     {
@@ -59,7 +84,7 @@ public class MiniGameUI : MenuControls
         if (this.activeRound != null)
         {
             this.timeField.text = this.activeRound.getSeconds() + "s";
-            this.timeImage.fillAmount = (this.activeRound.getSeconds()*100/ this.match.maxDuration);
+            this.timeImage.fillAmount = (float)((float)this.activeRound.getSeconds()/ this.match.maxDuration);
         }
     }
 
@@ -77,23 +102,9 @@ public class MiniGameUI : MenuControls
 
         this.activeRound = Instantiate(this.miniGame, this.mainBoard.transform);
         this.match = this.matches[this.matchIndex];
+        this.trySlots.setValues(this.match.winsNeeded, this.match.maxRounds);
 
-        this.activeRound.setParameters(this.match.maxDuration, (this.matchIndex+1), this.match.difficulty);
-    }
-
-    private void checkIfRewarded()
-    {
-        if(this.success >= this.winNeeded)
-        {
-            //WIN! Text
-            //Drop loot
-            endGame();
-        }
-        else if((this.matchIndex+1) > this.maxRounds)
-        {
-            //LOSE Text
-            endGame();
-        }
+        this.activeRound.setParameters(this.match.maxDuration, (this.matchIndex+1), this.match.difficulty, this.cursor);
     }
 
     public void endRound()
@@ -106,20 +117,47 @@ public class MiniGameUI : MenuControls
     {
         if (success)
         {
-            this.success++;
-            //Set Mark
-            //Show Text "Success"          
+            this.trySlots.setMark(true);
+            showTexts(this.successText);        
         }
         else
         {
-            //Set Mark
-            //Show Text "Failed"
+            this.trySlots.setMark(false);
+            showTexts(this.failText);
         }
 
         //Delay
-        checkIfRewarded();
-        endRound();
+        //checkIfRewarded();
+        //endRound();
         //show Dialogbox
+    }
+
+    private void showTexts(MiniGameText textObject)
+    {
+        showTexts(textObject, null);
+    }
+
+    private void showTexts(MiniGameText textObject, Item item)
+    {
+        if (textObject != null)
+        {
+            textObject.gameObject.SetActive(true);
+            if (item != null) textObject.setLoot(item); 
+        }
+    }
+
+    private void checkIfRewarded()
+    {
+        if (this.trySlots.successCounter >= this.trySlots.needed)
+        {
+            //set item
+            showTexts(this.winText);
+            //Add loot to player
+        }
+        else if ((this.matchIndex + 1) > this.trySlots.max)
+        {
+            showTexts(this.loseText);
+        }
     }
 
     public void DialogBoxOptions(int value)

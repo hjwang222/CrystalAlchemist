@@ -11,17 +11,25 @@ public class MiniGameRound : MonoBehaviour
     [SerializeField]
     private SimpleSignal endSignal;
 
+    public List<GameObject> buttons = new List<GameObject>();
+
     private int roundNumber = 1;
     private float maxDuration;
     private float elapsed;
     private int difficulty = 1;
     private MiniGameUI ui;
 
-    public void setParameters(float time, int round, int difficulty)
+    public void setParameters(float time, int round, int difficulty, myCursor cursor)
     {
         this.maxDuration = time;
         this.roundNumber = round;
         this.difficulty = difficulty;
+
+        foreach(GameObject button in this.buttons)
+        {
+            if (button.GetComponent<ButtonExtension>() != null)
+                button.GetComponent<ButtonExtension>().setCursor(cursor);
+        }
     }
 
     public virtual void Start()
@@ -55,5 +63,10 @@ public class MiniGameRound : MonoBehaviour
     public void endRound()
     {
         this.endSignal.Raise();
+    }
+
+    public virtual void checkIfWon()
+    {
+
     }
 }

@@ -9,23 +9,24 @@ public class MiniGameHigherOrLower : MiniGameRound
     private int maxRandomNumber = 9;
 
     [SerializeField]
-    private List<TextMeshProUGUI> fields = new List<TextMeshProUGUI>();
+    private List<MiniGameCard> cards = new List<MiniGameCard>();
 
     private List<int> randomNumbers = new List<int>();
     private int index = 0;
+    private int value;
 
     public override void Start()
     {
         base.Start();
 
         setRandomNumbers();
-        this.fields[this.index].text = this.randomNumbers[this.index] + "";
+        this.cards[this.index].show();
         this.index++;
     }
 
     private void setRandomNumbers()
     {
-        for(int i = 0; i < this.fields.Count; i++)
+        for(int i = 0; i < this.cards.Count; i++)
         {
             int rand = 0;
             do
@@ -34,22 +35,33 @@ public class MiniGameHigherOrLower : MiniGameRound
             }
             while (this.randomNumbers.Contains(rand));
             this.randomNumbers.Add(rand);
+            this.cards[i].setValue(rand);
         }
     }
 
-    public void check(bool higher) //ON CLICK
+    public void input(int value) //ON CLICK
     {
-        //Show Animation
-        //Delay
-        //Check
-        this.fields[this.index].text = this.randomNumbers[this.index] + "";
+        this.cards[this.index].show();
 
-        if ((this.randomNumbers[this.index - 1] < this.randomNumbers[this.index] && higher) 
-         || (this.randomNumbers[this.index - 1] > this.randomNumbers[this.index] && !higher)) this.setSuccess(true);
-        else this.setSuccess(false);
+        foreach(GameObject button in this.buttons)
+        {
+            button.SetActive(false);
+        }
 
-        if (this.index < this.fields.Count) this.index++;
-        else endRound();
+        this.value = value;
+    }
+
+    public override void checkIfWon()
+    {
+        if (this.value != 0)
+        {
+            if ((this.randomNumbers[this.index - 1] < this.randomNumbers[this.index] && this.value == 1)
+             || (this.randomNumbers[this.index - 1] > this.randomNumbers[this.index] && this.value == -1)) this.setSuccess(true);
+            else this.setSuccess(false);
+
+            if (this.index < this.cards.Count) this.index++;
+            else endRound();
+        }
     }
 
 }

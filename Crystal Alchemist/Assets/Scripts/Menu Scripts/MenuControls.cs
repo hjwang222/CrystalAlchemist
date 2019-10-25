@@ -55,9 +55,9 @@ public class MenuControls : MonoBehaviour
 
     public void exitMenu()
     {
-        this.cursor.infoBox.Hide();
+        if(this.cursor.infoBox != null) this.cursor.infoBox.Hide();
         this.player.delay(this.lastState);
         this.transform.parent.gameObject.SetActive(false);
-        this.blackScreen.SetActive(false);
+        if(this.blackScreen != null) this.blackScreen.SetActive(false);
     }
 }

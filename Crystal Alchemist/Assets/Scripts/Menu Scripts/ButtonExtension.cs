@@ -53,6 +53,11 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         //Cursor.visible = false;
     }
 
+    public void setCursor(myCursor cursor)
+    {
+        this.cursor = cursor;
+    }
+
     private void OnEnable()
     {
         setFirst();
@@ -60,7 +65,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     private void setFirst()
     {
-        if (this.setFirstSelected)
+        if (this.cursor != null && this.setFirstSelected)
         {
             this.cursor.gameObject.SetActive(true);
 
