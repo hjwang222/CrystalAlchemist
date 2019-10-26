@@ -44,6 +44,12 @@ public class MiniGameUI : MenuControls
     [Required]
     private MiniGameTrys trySlots;
 
+    [BoxGroup("Easy Access")]
+    [SerializeField]
+    [Required]
+    private MiniGameRewardUI rewardUI;
+
+
     [BoxGroup("Texts")]
     [SerializeField]
     [Required]
@@ -75,7 +81,8 @@ public class MiniGameUI : MenuControls
         //Bereit ja/nein
         //Start Animation
         //Start Game
-        startRound();
+        this.rewardUI.setRewardImages(this.matches);
+        startMatch(false);
     }
 
     public override void Update()
@@ -96,40 +103,57 @@ public class MiniGameUI : MenuControls
         this.descriptionField.text = description;
     }
 
-    private void startRound()
+    public void startRound()
     {
-        if (this.activeRound != null) Destroy(this.activeRound);
+        MiniGameState state = this.trySlots.canStartNewRound();
 
-        this.activeRound = Instantiate(this.miniGame, this.mainBoard.transform);
+        if (state == MiniGameState.play)
+        {
+            if (this.activeRound != null) Destroy(this.activeRound);
+
+            this.activeRound = Instantiate(this.miniGame, this.mainBoard.transform);
+            this.activeRound.setParameters(this.match.maxDuration, (this.matchIndex + 1), this.match.difficulty, this.cursor, this);
+        }
+        else 
+        {
+            if (state == MiniGameState.win)
+            {
+                showTexts(this.winText);
+                //Show Dialog if start new match or new round or get loot (quit)
+            }
+            else if (state == MiniGameState.lose)
+            {
+                showTexts(this.loseText); //no reward
+                //Show Dialog if start again or quit
+            }
+        }
+    }
+
+    public void startMatch(bool increaseDifficulty)
+    {
         this.match = this.matches[this.matchIndex];
+        this.trySlots.reset();
         this.trySlots.setValues(this.match.winsNeeded, this.match.maxRounds);
+        startRound();
 
-        this.activeRound.setParameters(this.match.maxDuration, (this.matchIndex+1), this.match.difficulty, this.cursor);
+        if (increaseDifficulty) this.matchIndex++;
+        this.rewardUI.setRewardSlider(this.matchIndex);
     }
 
-    public void endRound()
-    {
-        Destroy(this.activeRound.gameObject);
-        this.activeRound = null;
-    }
-
-    public void setMarks(bool success) //SIGNAL
+    public void setMarkAndEndRound(bool success) //SIGNAL
     {
         if (success)
         {
-            this.trySlots.setMark(true);
-            showTexts(this.successText);        
+            this.trySlots.updateSlots(true);
+            if(this.trySlots.canStartNewRound() == MiniGameState.play) showTexts(this.successText);        
         }
         else
         {
-            this.trySlots.setMark(false);
-            showTexts(this.failText);
+            this.trySlots.updateSlots(false);
+            if (this.trySlots.canStartNewRound() == MiniGameState.play) showTexts(this.failText);
         }
 
-        //Delay
-        //checkIfRewarded();
-        //endRound();
-        //show Dialogbox
+        startRound();
     }
 
     private void showTexts(MiniGameText textObject)
@@ -146,34 +170,20 @@ public class MiniGameUI : MenuControls
         }
     }
 
-    private void checkIfRewarded()
-    {
-        if (this.trySlots.successCounter >= this.trySlots.needed)
-        {
-            //set item
-            showTexts(this.winText);
-            //Add loot to player
-        }
-        else if ((this.matchIndex + 1) > this.trySlots.max)
-        {
-            showTexts(this.loseText);
-        }
-    }
-
     public void DialogBoxOptions(int value)
     {
         if(value == 0)
         {
-            startRound();
+            startMatch(false);
         }
         else if (value > 0)
         {
-            this.matchIndex++;
-            startRound();
+            startMatch(true);
         }
         else
         {
             endGame();
+            //get loot
         }
     }
 

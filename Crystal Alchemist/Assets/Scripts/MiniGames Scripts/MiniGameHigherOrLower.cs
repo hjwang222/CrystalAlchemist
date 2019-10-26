@@ -6,7 +6,7 @@ using TMPro;
 public class MiniGameHigherOrLower : MiniGameRound
 {
     [SerializeField]
-    private int maxRandomNumber = 9;
+    private List<int> maxRandomNumbers = new List<int>();
 
     [SerializeField]
     private List<MiniGameCard> cards = new List<MiniGameCard>();
@@ -26,12 +26,22 @@ public class MiniGameHigherOrLower : MiniGameRound
 
     private void setRandomNumbers()
     {
-        for(int i = 0; i < this.cards.Count; i++)
+        int max = (this.maxRandomNumbers[this.difficulty - 1] + 1);
+        int start = 0;
+
+        if (max == 4)
+        {
+            this.randomNumbers.Add(2);
+            this.cards[0].setValue(2);
+            start = 1;
+        }
+
+        for (int i = start; i < this.cards.Count; i++)
         {
             int rand = 0;
             do
             {
-                rand = Random.Range(1, (this.maxRandomNumber + 1));
+                rand = Random.Range(1, max);
             }
             while (this.randomNumbers.Contains(rand));
             this.randomNumbers.Add(rand);
@@ -56,11 +66,8 @@ public class MiniGameHigherOrLower : MiniGameRound
         if (this.value != 0)
         {
             if ((this.randomNumbers[this.index - 1] < this.randomNumbers[this.index] && this.value == 1)
-             || (this.randomNumbers[this.index - 1] > this.randomNumbers[this.index] && this.value == -1)) this.setSuccess(true);
-            else this.setSuccess(false);
-
-            if (this.index < this.cards.Count) this.index++;
-            else endRound();
+             || (this.randomNumbers[this.index - 1] > this.randomNumbers[this.index] && this.value == -1)) this.setMarkAndEndRound(true);
+            else this.setMarkAndEndRound(false);
         }
     }
 

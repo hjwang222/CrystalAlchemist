@@ -21,6 +21,10 @@ public class MiniGameTrySlot : MonoBehaviour
     public void setMark(bool success)
     {
         if (success) this.successMark.SetActive(true);
-        else this.failMark.SetActive(true);
+        else
+        {
+            this.goldMark.SetActive(false);
+            this.failMark.SetActive(true);
+        }
     }
 }
