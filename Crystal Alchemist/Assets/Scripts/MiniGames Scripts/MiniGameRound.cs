@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MiniGameRound : MonoBehaviour
 {
     public List<GameObject> buttons = new List<GameObject>();
 
+    [HideInInspector]
+    public myCursor cursor;
     private int roundNumber = 1;
     private float maxDuration;
     private float elapsed;
     [HideInInspector]
     public int difficulty = 1;
     private MiniGameUI ui;
-    
+    private bool isTimerStopped = true;
 
     public void setParameters(float time, int round, int difficulty, myCursor cursor, MiniGameUI ui)
     {
@@ -21,21 +21,36 @@ public class MiniGameRound : MonoBehaviour
         this.roundNumber = round;
         this.difficulty = difficulty;
         this.ui = ui;
+        this.cursor = cursor;
 
         foreach(GameObject button in this.buttons)
         {
             if (button.GetComponent<ButtonExtension>() != null)
-                button.GetComponent<ButtonExtension>().setCursor(cursor);
+                button.GetComponent<ButtonExtension>().setCursor(this.cursor);
         }
     }
 
+    public void enableInputs(bool value)
+    {
+        foreach (GameObject button in this.buttons)
+        {
+            button.SetActive(value);
+        }
+        this.cursor.gameObject.SetActive(value);
+        this.isTimerStopped = !value;
+    }
+
+
     public virtual void Start()
     {
+        enableInputs(false);
         this.elapsed = this.maxDuration;
     }
 
     private void Update()
     {
+        if (this.isTimerStopped) return;
+
         if(elapsed <= 0)
         {
             setMarkAndEndRound(false);
@@ -46,9 +61,14 @@ public class MiniGameRound : MonoBehaviour
         }
     }
 
-    public int getSeconds()
+    public void stopTimer()
     {
-        return (int)this.elapsed;
+        this.isTimerStopped = true;
+    }
+
+    public float getSeconds()
+    {
+        return this.elapsed;
     }
 
     public void setMarkAndEndRound(bool value) 

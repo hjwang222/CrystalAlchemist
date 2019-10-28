@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4380594529414291482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3388113583679999700}
+  - component: {fileID: 2175749950124388385}
+  m_Layer: 0
+  m_Name: MiniGame HighLow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3388113583679999700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4380594529414291482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2175749950124388385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4380594529414291482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c3def688684f54e9c5bd1c7eee5a14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uI: {fileID: 5749702337945160310, guid: 5ef46339659be2a49a836fb6ae77af4e, type: 3}
+  miniGameRound: {fileID: 5532593878105003460, guid: 95451f4f668f99e47b6608907ec80d4b,
+    type: 3}
+  matches:
+  - maxRounds: 5
+    winsNeeded: 2
+    difficulty: 1
+    maxDuration: 30
+    item: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659, type: 3}
+    amount: 1
+  - maxRounds: 2
+    winsNeeded: 2
+    difficulty: 2
+    maxDuration: 20
+    item: {fileID: 1005327347346205950, guid: 2b5759bd7bd0b574cadb08f28e359939, type: 3}
+    amount: 1
+  miniGameTitle: "H\xF6her oder Tiefer"
+  miniGameDescription: "Ist die Zahl h\xF6her oder niedriger als die rechte?"

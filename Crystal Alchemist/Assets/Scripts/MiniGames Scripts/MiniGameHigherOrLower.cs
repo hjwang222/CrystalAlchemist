@@ -9,6 +9,9 @@ public class MiniGameHigherOrLower : MiniGameRound
     private List<int> maxRandomNumbers = new List<int>();
 
     [SerializeField]
+    private GameObject inputButtons;
+
+    [SerializeField]
     private List<MiniGameCard> cards = new List<MiniGameCard>();
 
     private List<int> randomNumbers = new List<int>();
@@ -18,11 +21,11 @@ public class MiniGameHigherOrLower : MiniGameRound
     public override void Start()
     {
         base.Start();
-
         setRandomNumbers();
         this.cards[this.index].show();
         this.index++;
     }
+
 
     private void setRandomNumbers()
     {
@@ -52,12 +55,7 @@ public class MiniGameHigherOrLower : MiniGameRound
     public void input(int value) //ON CLICK
     {
         this.cards[this.index].show();
-
-        foreach(GameObject button in this.buttons)
-        {
-            button.SetActive(false);
-        }
-
+        enableInputs(false);
         this.value = value;
     }
 
@@ -68,6 +66,10 @@ public class MiniGameHigherOrLower : MiniGameRound
             if ((this.randomNumbers[this.index - 1] < this.randomNumbers[this.index] && this.value == 1)
              || (this.randomNumbers[this.index - 1] > this.randomNumbers[this.index] && this.value == -1)) this.setMarkAndEndRound(true);
             else this.setMarkAndEndRound(false);
+        }
+        else
+        {
+            enableInputs(true);
         }
     }
 

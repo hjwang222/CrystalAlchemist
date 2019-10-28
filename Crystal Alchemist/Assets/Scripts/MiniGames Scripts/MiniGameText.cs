@@ -6,30 +6,26 @@ using UnityEngine.UI;
 public class MiniGameText : MonoBehaviour
 {
     [SerializeField]
-    private List<Image> itemIcons = new List<Image>();
+    private MiniGameUI miniGameUI;
 
     [SerializeField]
-    private SimpleSignal endGameSignal;
-
-    private List<Item> loot = new List<Item>();
-
-    private void OnEnable()
-    {
-        
-    }
+    private bool showDialogBox = false;
 
     public void Disable()
     {
+        if (this.showDialogBox) showDialog(); //WIN or LOSE
+        else this.miniGameUI.startRound();
         this.gameObject.SetActive(false);
     }
 
     public void setLoot(Item item)
     {
-        this.loot.Add(item);
+        
     }
 
-    public void endGame()
+   public void showDialog()
     {
-        this.endGameSignal.Raise();
+        this.miniGameUI.showDialog();
     }
+
 }

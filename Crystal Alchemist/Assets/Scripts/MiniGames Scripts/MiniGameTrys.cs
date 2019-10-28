@@ -27,6 +27,8 @@ public class MiniGameTrys : MonoBehaviour
 
     public void reset()
     {
+        this.index = 0;
+        this.successCounter = 0;
         setSlots();
     }
 
@@ -60,6 +62,8 @@ public class MiniGameTrys : MonoBehaviour
     {
         for(int i = 0; i < slots.Count; i++)
         {
+            slots[i].reset();
+
             if ((i + 1) <= max) slots[i].gameObject.SetActive(true);
             else slots[i].gameObject.SetActive(false);
         }

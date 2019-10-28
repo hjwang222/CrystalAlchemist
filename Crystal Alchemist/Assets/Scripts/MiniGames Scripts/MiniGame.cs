@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -50,13 +49,10 @@ public class MiniGame : MonoBehaviour
 
     private MiniGameUI activeUI;
 
-
-
-
     private void Awake()
     {
         this.activeUI = Instantiate(this.uI, this.transform);
-        this.activeUI.setMiniGame(this.miniGameRound, this.matches, this.miniGameTitle, this.miniGameDescription);
+        this.activeUI.setMiniGame(this, this.miniGameRound, this.matches, this.miniGameTitle, this.miniGameDescription);
     }
 
     private void Start()

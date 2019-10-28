@@ -11,7 +11,16 @@ public class MiniGameTrySlot : MonoBehaviour
     private GameObject failMark;
 
     [SerializeField]
-    private GameObject goldMark;    
+    private GameObject goldMark;
+
+
+
+    public void reset()
+    {
+        this.successMark.SetActive(false);
+        this.failMark.SetActive(false);
+        this.goldMark.SetActive(false);
+    }
 
     public void setAsNeccessary()
     {

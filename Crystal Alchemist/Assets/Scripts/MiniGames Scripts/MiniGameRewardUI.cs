@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MiniGameRewardUI : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> rewardSlots = new List<GameObject>();
+    private List<ItemUI> rewardSlots = new List<ItemUI>();
 
     [SerializeField]
     private GameObject slider;
@@ -17,11 +15,11 @@ public class MiniGameRewardUI : MonoBehaviour
         {
             if (matches.Count >= (i+1) && matches[i].item != null)
             {
-                rewardSlots[i].GetComponent<Image>().sprite = matches[i].item.itemSprite;
+                rewardSlots[i].setItem(matches[i].item);
             }
             else
             {
-                rewardSlots[i].SetActive(false);
+                rewardSlots[i].gameObject.SetActive(false);
             }
         }
     }
