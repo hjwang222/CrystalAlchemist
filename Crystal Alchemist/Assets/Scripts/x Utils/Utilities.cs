@@ -551,6 +551,12 @@ public class Utilities : MonoBehaviour
 
              return false;
         }
+
+        public static void setItemImage(Image image, Item item)
+        {
+            if (item.itemSpriteInventory != null) image.sprite = item.itemSpriteInventory;
+            else image.sprite = item.itemSprite;
+        }
     }
 
     ///////////////////////////////////////////////////////////////
