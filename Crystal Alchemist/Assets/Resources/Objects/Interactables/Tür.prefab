@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 4733253416364434474}
   - component: {fileID: 2186908886390952267}
   - component: {fileID: 5604222379553186207}
+  - component: {fileID: 6789585119305020204}
   m_Layer: 17
   m_Name: "T\xFCr"
   m_TagString: Untagged
@@ -107,10 +108,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
-  dialogBoxText: 
-  dialogBoxTextEnglish: 
-  lootTable: []
-  multiLoot: 0
   currencyNeeded: 0
   item: {fileID: 0}
   price: 0
@@ -122,7 +119,6 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   spriteRenderer: {fileID: 0}
   context: {fileID: 0}
-  inventory: []
   currentState: 0
   doorType: 0
   boxCollider: {fileID: 6021830739019893530}
@@ -193,6 +189,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6789585119305020204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186908886390952268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f660a5e6a71b040a0929e2af13c4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - trigger: 1
+    dialogBoxText: Du hast <loot amount> <loot name> erhalten!
+    dialogBoxTextEnglish: You obtained <loot amount> <loot name>!
+  - trigger: 2
+    dialogBoxText: "Du kannst d<interactable> nicht \xF6ffnen. Du ben\xF6tigst <price>
+      <item name>."
+    dialogBoxTextEnglish: You cant open the <interactable>. You need <price> <item
+      name>.
+  - trigger: 3
+    dialogBoxText: D<interactable> ist leer... .
+    dialogBoxTextEnglish: The <interactable> is empty... .
 --- !u!1 &6914875820510485348
 GameObject:
   m_ObjectHideFlags: 0

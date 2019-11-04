@@ -32,23 +32,16 @@ public class ShopItem : Rewardable
 
     public override void doSomethingOnSubmit()
     {
-        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text))
+        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
         {
             Item loot = inventory[this.index];
 
-            string itemObtained = Utilities.Format.getDialogBoxText("Du hast", loot.amount, loot, "für");
-            string itemNedded = Utilities.Format.getDialogBoxText("", this.price, this.item, "gekauft!");
-
-            if (GlobalValues.useAlternativeLanguage)
-            {
-                itemObtained = Utilities.Format.getDialogBoxText("You bought", loot.amount, loot, "for");
-                itemNedded = Utilities.Format.getDialogBoxText("", this.price, this.item, "!");
-            }
-
-            this.player.showDialogBox(itemObtained + "\n" + itemNedded);
+            Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success, loot);
             this.player.collect(loot, false);
+        }
+        else
+        {
+            Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
         }
     }
 }

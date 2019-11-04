@@ -32,9 +32,7 @@ public class ItemUI : MonoBehaviour
             //this.GetComponent<Button>().interactable = true;            
 
             if (!item.isKeyItem && item.amount > 0) this.amount.text = "x" + item.amount;
-
             Utilities.Items.setItemImage(this.image, item);
-
             this.image.color = new Color(1f, 1f, 1f, 1f);
         }
     }

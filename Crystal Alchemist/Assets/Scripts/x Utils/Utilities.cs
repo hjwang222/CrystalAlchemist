@@ -507,26 +507,14 @@ public class Utilities : MonoBehaviour
             }
         }
 
-        public static bool canOpenAndUpdateResource(ResourceType currency, Item item, Player player, int price, string defaultText)
+        public static bool canOpenAndUpdateResource(ResourceType currency, Item item, Player player, int price)
         {
-            string text = defaultText;
-
             if (player != null
                 && player.currentState != CharacterState.inDialog
                 && player.currentState != CharacterState.respawning
                 && player.currentState != CharacterState.inMenu)
             {
-                if (hasEnoughCurrencyAndUpdateResource(currency, player, item, -price)) return true;
-                else
-                {
-                    if (text.Replace(" ", "").Length <= 0)
-                    {
-                        text = Format.getDialogBoxText("Du benötigst", price, item, "...");
-                        if (GlobalValues.useAlternativeLanguage) text = Format.getDialogBoxText("You need", price, item, "...");
-                    }
-                    player.showDialogBox(text);
-                    return false;
-                }
+                if (hasEnoughCurrencyAndUpdateResource(currency, player, item, -price)) return true;               
             }
 
             return false;
@@ -725,35 +713,6 @@ public class Utilities : MonoBehaviour
             button.colors = cb;
         }
 
-        public static string getDialogBoxText(string part1, int price, Item item, string part2)
-        {
-            string result = part1 + " " + price + " ";
-
-            switch (item.resourceType)
-            {
-                case ResourceType.item:
-                    {
-                        if (item.isKeyItem)
-                        {
-                            result = part1 + " " + getLanguageDialogText(item.itemName, item.itemNameEnglish);
-                        }
-                        else
-                        {
-                            string typ = getLanguageDialogText(item.itemGroup, item.itemGroupEnglish);
-
-
-                            if (price == 1 && (typ != "Schlüssel" || GlobalValues.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
-
-                            result += typ;
-                        }
-                    }; break;
-                case ResourceType.life: result += "Leben"; break;
-                case ResourceType.mana: result += "Mana"; break;
-            }
-
-            return result + " " + part2;
-        }
-
         public static string getLanguageDialogText(string originalText, string alternativeText)
         {
             if (GlobalValues.useAlternativeLanguage && alternativeText.Replace(" ", "").Length > 1) return alternativeText;
@@ -829,10 +788,33 @@ public class Utilities : MonoBehaviour
 
             hour = Mathf.RoundToInt(fhour);
             minute = Mathf.RoundToInt(fminute);
-        }
-
+        }               
     }
 
+    ///////////////////////////////////////////////////////////////
+
+    public static class DialogBox
+    {
+        public static void showDialog(Interactable interactable, Player player)
+        {
+            showDialog(interactable, player, null);
+        }
+
+        public static void showDialog(Interactable interactable, Player player, DialogTextTrigger trigger)
+        {
+            showDialog(interactable, player, trigger, null);
+        }
+
+        public static void showDialog(Interactable interactable, Player player, Item loot)
+        {
+            if (interactable.gameObject.GetComponent<DialogSystem>() != null) interactable.GetComponent<DialogSystem>().show(player, interactable, loot);
+        }
+
+        public static void showDialog(Interactable interactable, Player player, DialogTextTrigger trigger, Item loot)
+        {
+            if (interactable.gameObject.GetComponent<DialogSystem>() != null) interactable.gameObject.GetComponent<DialogSystem>().show(player, trigger, interactable, loot);
+        }
+    }
 
 
     ///////////////////////////////////////////////////////////////

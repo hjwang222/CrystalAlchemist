@@ -13,21 +13,12 @@ public class Interactable : MonoBehaviour
 {
     #region Attribute
 
+
+
     [Required]
+    [BoxGroup("Mandatory")]
     [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]
     public GameObject contextClueChild;
-
-    [FoldoutGroup("Dialog", expanded: false)]
-    [Tooltip("Anzeige-Text für die Dialog-Box")]
-    [TextArea]
-    public string dialogBoxText;
-
-    [FoldoutGroup("Dialog", expanded: false)]
-    [Tooltip("Englischer Anzeige-Text für die Dialog-Box")]
-    [TextArea]
-    public string dialogBoxTextEnglish;
-
-
 
     [FoldoutGroup("Activation Requirements", expanded: false)]
     [EnumToggleButtons]
@@ -47,8 +38,7 @@ public class Interactable : MonoBehaviour
     [Tooltip("Standard-Soundeffekt")]
     public AudioClip soundEffect;
 
-    [Required]
-    public Animator animator;
+
 
     [HideInInspector]
     public bool isPlayerInRange = false;
@@ -109,7 +99,6 @@ public class Interactable : MonoBehaviour
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
-        if(this.animator == null && GetComponent<Animator>() != null) this.animator = GetComponent<Animator>();
         setContext();
        
     }

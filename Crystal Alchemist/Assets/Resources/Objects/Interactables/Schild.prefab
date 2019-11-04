@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 3927818717087631784}
   - component: {fileID: 3927818717087631783}
   - component: {fileID: 732601350465969925}
+  - component: {fileID: 5541492402763843799}
   m_Layer: 17
   m_Name: Schild
   m_TagString: Object
@@ -106,22 +107,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
-  dialogBoxText: 
-  dialogBoxTextEnglish: 
-  lootTable: []
-  multiLoot: 0
   currencyNeeded: 0
   item: {fileID: 0}
   price: 0
   soundEffect: {fileID: 0}
-  animator: {fileID: 0}
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
   audioSource: {fileID: 0}
   spriteRenderer: {fileID: 0}
   context: {fileID: 0}
-  inventory: []
   currentState: 0
 --- !u!61 &3927818717087631783
 BoxCollider2D:
@@ -160,6 +155,19 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &5541492402763843799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3927818717087631779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f660a5e6a71b040a0929e2af13c4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts: []
 --- !u!1 &4830995373214775512
 GameObject:
   m_ObjectHideFlags: 0

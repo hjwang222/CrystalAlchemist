@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 5527474781253199691}
   - component: {fileID: 5527474781253199684}
   - component: {fileID: 5527474781253199687}
+  - component: {fileID: 3307752706751628677}
   m_Layer: 17
   m_Name: ShopItem
   m_TagString: Object
@@ -271,13 +272,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
-  dialogBoxText: 
-  dialogBoxTextEnglish: 
-  lootTable:
-  - item: {fileID: 1482578370755153414, guid: ca7174dae42a3d74da40fc0c744e4f1d, type: 3}
-    dropRate: 0
-    amount: 1
-  multiLoot: 0
   currencyNeeded: 3
   item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
   price: 25
@@ -289,8 +283,13 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   spriteRenderer: {fileID: 0}
   context: {fileID: 0}
-  inventory: []
   currentState: 0
+  lootTable:
+  - item: {fileID: 1482578370755153414, guid: ca7174dae42a3d74da40fc0c744e4f1d, type: 3}
+    dropRate: 0
+    amount: 1
+  multiLoot: 0
+  inventory: []
   childSprite: {fileID: 5713520751605920869}
   priceText: {fileID: 784103811228868705}
   fontColor: {r: 0, g: 1, b: 0.15686275, a: 1}
@@ -334,6 +333,27 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &3307752706751628677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5527474781253199680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f660a5e6a71b040a0929e2af13c4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - trigger: 1
+    dialogBoxText: "Du hast <loot amount> <loot name> f\xFCr <price> <item name> gekauft!"
+    dialogBoxTextEnglish: You bought <loot amount> <loot name> for <price> <item name>!
+  - trigger: 2
+    dialogBoxText: "Du kannst das nicht kaufen.\nDu ben\xF6tigst <price> <item name>."
+    dialogBoxTextEnglish: 'You cant buy that.
+
+      You need <price> <item name>.'
 --- !u!1 &5713520751144352178
 GameObject:
   m_ObjectHideFlags: 0

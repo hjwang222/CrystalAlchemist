@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 5533910144408278657}
   - component: {fileID: 5102480015612549687}
   - component: {fileID: 1198615762132691332}
+  - component: {fileID: 6780635533492049794}
   m_Layer: 17
   m_Name: Lootbox
   m_TagString: Untagged
@@ -451,8 +452,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
-  dialogBoxText: 
-  dialogBoxTextEnglish: 
+  currencyNeeded: 3
+  item: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659, type: 3}
+  price: 1
+  soundEffect: {fileID: 8300000, guid: 4f7be5fca72aed945b5adc95e382a719, type: 3}
+  animator: {fileID: 4617041708320505071}
+  isPlayerInRange: 0
+  isPlayerLookingAtIt: 0
+  player: {fileID: 0}
+  audioSource: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  context: {fileID: 0}
+  currentState: 0
   lootTable:
   - item: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659, type: 3}
     dropRate: 20
@@ -467,19 +478,7 @@ MonoBehaviour:
     dropRate: 10
     amount: 1
   multiLoot: 0
-  currencyNeeded: 3
-  item: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659, type: 3}
-  price: 1
-  soundEffect: {fileID: 8300000, guid: 4f7be5fca72aed945b5adc95e382a719, type: 3}
-  animator: {fileID: 4617041708320505071}
-  isPlayerInRange: 0
-  isPlayerLookingAtIt: 0
-  player: {fileID: 0}
-  audioSource: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  context: {fileID: 0}
   inventory: []
-  currentState: 0
   anim: {fileID: 4617041708320505071}
   soundEffectTreasure: {fileID: 8300000, guid: 59d34d1df831b0449a4e2f413b1dda3d, type: 3}
   treasureType: 1
@@ -545,6 +544,27 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &6780635533492049794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5533910144408278659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f660a5e6a71b040a0929e2af13c4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - trigger: 1
+    dialogBoxText: "Du hast <loot amount> <loot name> f\xFCr <price> <item name> gekauft!"
+    dialogBoxTextEnglish: You bought <loot amount> <loot name> for <price> <item name>!
+  - trigger: 2
+    dialogBoxText: "Du kannst das nicht kaufen.\nDu ben\xF6tigst <price> <item name>."
+    dialogBoxTextEnglish: 'You cant buy that.
+
+      You need <price> <item name>.'
 --- !u!1 &7563304959205820036
 GameObject:
   m_ObjectHideFlags: 0

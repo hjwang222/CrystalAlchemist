@@ -14,7 +14,6 @@ public class Savepoint : Interactable
 
         this.player.GetComponent<PlayerTeleport>().setLastTeleport(scene.name, this.player.transform.position);
 
-        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-        this.player.showDialogBox(text);
+        Utilities.DialogBox.showDialog(this, this.player);
     }
 }

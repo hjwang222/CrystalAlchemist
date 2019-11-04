@@ -109,8 +109,6 @@ public class Treasure : Rewardable
         Utilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", true);
         this.currentState = objectState.opened;
 
-        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-
         if (this.soundEffect != null && this.inventory.Count > 0)
         {
             //Spiele Soundeffekte ab
@@ -125,26 +123,21 @@ public class Treasure : Rewardable
             foreach (Item item in this.inventory)
             {
                 this.player.collect(item, false);
-                text = Utilities.Format.getDialogBoxText("Du hast", item.amount, item, "erhalten!");
-
-                if (GlobalValues.useAlternativeLanguage) text = Utilities.Format.getDialogBoxText("You obtained", item.amount, item, "!");
+                Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success, item);
             }                
         }
         else
         {
             //Kein Item drin
-            text = "Die Kiste ist leer... .";
-            if (GlobalValues.useAlternativeLanguage) text = "This chest is empty... .";
+            Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.empty);
         }
-
-        if (this.player != null) this.player.showDialogBox(text);
     }
 
 
     private void canOpenChest()
     {
-        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text)) OpenChest();
+        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price)) OpenChest();
+        else Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
     }
 
     public void showTreasureItem()

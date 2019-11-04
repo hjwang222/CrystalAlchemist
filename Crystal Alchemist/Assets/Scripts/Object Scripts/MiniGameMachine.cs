@@ -9,11 +9,13 @@ public class MiniGameMachine : Rewardable
 
     public override void doSomethingOnSubmit()
     {
-        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text))
+        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
         {
-            MiniGame miniGame = Instantiate(this.miniGame);            
+            MiniGame miniGame = Instantiate(this.miniGame);
+        }
+        else
+        {
+            Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
         }
     }
 }
