@@ -55,8 +55,4 @@ public class MiniGame : MonoBehaviour
         this.activeUI.setMiniGame(this, this.miniGameRound, this.matches, this.miniGameTitle, this.miniGameDescription);
     }
 
-    private void Start()
-    {
-        
-    }
 }

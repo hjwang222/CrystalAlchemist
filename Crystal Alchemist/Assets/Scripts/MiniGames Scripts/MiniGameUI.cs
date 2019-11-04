@@ -87,7 +87,7 @@ public class MiniGameUI : MenuControls
         if (this.activeRound != null)
         {
             this.timeField.text = (int)this.activeRound.getSeconds() + "s";
-            this.timeImage.fillAmount = (float)((float)this.activeRound.getSeconds()/ this.match.maxDuration);
+            this.timeImage.fillAmount = (float)((float)this.activeRound.getSeconds() / this.match.maxDuration);
         }
     }
 
@@ -111,21 +111,19 @@ public class MiniGameUI : MenuControls
             this.activeRound = Instantiate(this.miniGame, this.mainBoard.transform);
             this.activeRound.setParameters(this.match.maxDuration, (this.matchIndex + 1), this.match.difficulty, this.cursor, this);
         }
-        else 
+        else
         {
-            
-                this.activeRound.stopTimer();
+            this.activeRound.stopTimer();
 
-                if (state == MiniGameState.win)
-                {
-                    this.player.collect(this.match.item, false);
-                    showTexts(this.winText, this.match.item);
-                }
-                else if (state == MiniGameState.lose)
-                {
-                    showTexts(this.loseText);
-                }
-            
+            if (state == MiniGameState.win)
+            {
+                this.player.collect(this.match.item, false);
+                showTexts(this.winText, this.match.item);
+            }
+            else if (state == MiniGameState.lose)
+            {
+                showTexts(this.loseText);
+            }
         }
     }
 
@@ -146,7 +144,7 @@ public class MiniGameUI : MenuControls
 
     public void startMatch()
     {
-        startRound();  
+        startRound();
     }
 
     public void setMarkAndEndRound(bool success) //SIGNAL
@@ -156,7 +154,7 @@ public class MiniGameUI : MenuControls
         if (success)
         {
             this.trySlots.updateSlots(true);
-            if(state == MiniGameState.play) showTexts(this.successText);        
+            if (state == MiniGameState.play) showTexts(this.successText);
         }
         else
         {
@@ -175,7 +173,7 @@ public class MiniGameUI : MenuControls
         if (textObject != null)
         {
             textObject.gameObject.SetActive(true);
-            if (item != null) textObject.setLoot(item); 
+            if (item != null) textObject.setLoot(item);
         }
     }
 
@@ -185,7 +183,7 @@ public class MiniGameUI : MenuControls
     }
 
     public void endMiniGame()
-    {        
+    {
         Destroy(this.miniGameObject.gameObject);
     }
 
