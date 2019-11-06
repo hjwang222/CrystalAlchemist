@@ -425,22 +425,15 @@ public class Utilities : MonoBehaviour
             //if (this.items.Count > 0) this.text = this.text.Replace("%XY%", this.items[0].GetComponent<Item>().amount + " " + this.items[0].GetComponent<Item>().name);
         }
 
-        private static bool hasEnoughCurrencyAndUpdateResource(ResourceType currency, Player player, Item item, int price)
+        public static bool hasEnoughCurrency(ResourceType currency, Player player, Item item, int price)
         {
             bool result = false;
 
             if (currency == ResourceType.none) result = true;
             else if (currency != ResourceType.skill)
             {
-                if (player.getResource(currency, item) + price >= 0)
-                {
-                    if (!item.isKeyItem) player.updateResource(currency, item, price);
-                    result = true;
-                }
-                else
-                {
-                    result = false;
-                }
+                if (player.getResource(currency, item) - price >= 0) result = true;                
+                else result = false;                
             }
 
             return result;
@@ -514,10 +507,19 @@ public class Utilities : MonoBehaviour
                 && player.currentState != CharacterState.respawning
                 && player.currentState != CharacterState.inMenu)
             {
-                if (hasEnoughCurrencyAndUpdateResource(currency, player, item, -price)) return true;               
+                if (hasEnoughCurrency(currency, player, item, price))
+                {
+                    reduceCurrency(currency, item, player, price);
+                    return true;
+                }
             }
 
             return false;
+        }
+
+        public static void reduceCurrency(ResourceType currency, Item item, Player player, int price)
+        {
+            if (!item.isKeyItem) player.updateResource(currency, item, -price);
         }
 
         public static Item getItemByID(List<Item> inventory, int ID, bool isKeyItem)

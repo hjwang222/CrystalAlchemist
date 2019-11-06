@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
+
 
 public class MiniGameDialogbox : MonoBehaviour
 {
@@ -7,25 +8,55 @@ public class MiniGameDialogbox : MonoBehaviour
     private MiniGameUI miniGameUI;
 
     [SerializeField]
-    private Slider slider;
+    private MiniGameSlider slider;
 
     [SerializeField]
     private ItemUI itemUI;
 
-    private void OnEnable()
+    [SerializeField]
+    private MiniGamePrice priceUI;
+
+    [SerializeField]
+    private GameObject startButton;
+
+    private bool isLoaded = false;
+
+    private void Start()
     {
-        updateSlider();
+        this.slider.setDifficulty(1);
+        this.isLoaded = true;
     }
 
-    public void setSlider(int matches)
+    public void UpdateDialogBox(int value)
     {
-        this.slider.maxValue = matches;
-        updateSlider();
+        this.miniGameUI.setMatch(value);
+        this.itemUI.setItem(this.miniGameUI.getMatch().loot);
+
+        MiniGameMatch match = this.miniGameUI.getMatch();
+        this.priceUI.updatePrice(match.item, match.price, this.miniGameUI.player);
+        bool canStart = Utilities.Items.hasEnoughCurrency(ResourceType.item, this.miniGameUI.player, match.item, match.price);
+
+        this.startButton.SetActive(canStart);
+        this.priceUI.setColor(canStart);
+    }
+
+    private void OnEnable()
+    {
+        if(this.isLoaded) UpdateDialogBox(this.slider.getValue());
+    }
+
+    public void resetTry()
+    {
+        this.miniGameUI.resetTrys();
+    }
+
+    public void setValues(int matches)
+    {
+        this.slider.setValues(matches);
     }
 
     public void startMatch()
     {
-        updateSlider();
         this.miniGameUI.startMatch();
         this.hideIt();
     }
@@ -33,12 +64,6 @@ public class MiniGameDialogbox : MonoBehaviour
     public void endMiniGame()
     {
         this.miniGameUI.endMiniGame();
-    }
-
-    public void updateSlider()
-    {        
-        this.miniGameUI.setMatch((int)this.slider.value);
-        this.itemUI.setItem(this.miniGameUI.getItem());
     }
 
     private void hideIt()

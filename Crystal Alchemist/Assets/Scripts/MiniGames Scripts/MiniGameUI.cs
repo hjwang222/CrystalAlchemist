@@ -77,7 +77,7 @@ public class MiniGameUI : MenuControls
 
     private void Start()
     {
-        this.dialogBox.setSlider(this.matches.Count);
+        this.dialogBox.setValues(this.matches.Count);
         showDialog();
     }
 
@@ -117,8 +117,8 @@ public class MiniGameUI : MenuControls
 
             if (state == MiniGameState.win)
             {
-                this.player.collect(this.match.item, false);
-                showTexts(this.winText, this.match.item);
+                this.player.collect(this.match.loot, false);
+                showTexts(this.winText, this.match.loot);
             }
             else if (state == MiniGameState.lose)
             {
@@ -127,23 +127,31 @@ public class MiniGameUI : MenuControls
         }
     }
 
+    public void resetTrys()
+    {
+        this.trySlots.reset();
+    }
+
     public void setMatch(int difficulty)
     {
         this.matchIndex = difficulty - 1;
 
-        this.match = this.matches[this.matchIndex];
-
-        this.trySlots.setValues(this.match.winsNeeded, this.match.maxRounds);
-        this.trySlots.reset();
+        if (this.matches.Count > 0)
+        {
+            this.match = this.matches[this.matchIndex];
+            this.trySlots.setValues(this.match.winsNeeded, this.match.maxRounds);
+        }
+        resetTrys();
     }
 
-    public Item getItem()
+    public MiniGameMatch getMatch()
     {
-        return this.match.item;
+        return this.match;
     }
 
     public void startMatch()
     {
+        Utilities.Items.reduceCurrency(ResourceType.item, match.item, this.player, match.price);
         startRound();
     }
 
@@ -191,6 +199,12 @@ public class MiniGameUI : MenuControls
     {
         endRound();
         this.dialogBox.gameObject.SetActive(true);
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        Destroy(this.gameObject);
     }
 
     private void OnDestroy()
