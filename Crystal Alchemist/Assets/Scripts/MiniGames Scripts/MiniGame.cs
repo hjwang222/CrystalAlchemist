@@ -69,6 +69,9 @@ public class MiniGame : MonoBehaviour
         this.activeUI.setMiniGame(this, this.miniGameRound, this.matches, this.miniGameTitle, this.miniGameDescription);
     }
 
-
+    public void DestroyIt()
+    {
+        Destroy(this.gameObject);
+    }
 
 }

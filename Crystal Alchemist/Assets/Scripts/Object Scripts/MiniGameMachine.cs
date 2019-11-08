@@ -1,21 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Sirenix.OdinInspector;
 
-public class MiniGameMachine : Rewardable
+public class MiniGameMachine : Interactable
 {
     [SerializeField]
+    [Required]
+    [BoxGroup("Mandatory")]
     private MiniGame miniGame;
 
     public override void doSomethingOnSubmit()
     {
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
-        {
-            MiniGame miniGame = Instantiate(this.miniGame);
-        }
-        else
-        {
-            Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
-        }
+        Instantiate(this.miniGame);        
     }
 }

@@ -118,7 +118,7 @@ public class MiniGameUI : MenuControls
             if (state == MiniGameState.win)
             {
                 this.player.collect(this.match.loot, false);
-                showTexts(this.winText, this.match.loot);
+                showTexts(this.winText);
             }
             else if (state == MiniGameState.lose)
             {
@@ -173,16 +173,7 @@ public class MiniGameUI : MenuControls
 
     private void showTexts(MiniGameText textObject)
     {
-        showTexts(textObject, null);
-    }
-
-    private void showTexts(MiniGameText textObject, Item item)
-    {
-        if (textObject != null)
-        {
-            textObject.gameObject.SetActive(true);
-            if (item != null) textObject.setLoot(item);
-        }
+        if (textObject != null) textObject.gameObject.SetActive(true);
     }
 
     private void endRound()
@@ -192,7 +183,7 @@ public class MiniGameUI : MenuControls
 
     public void endMiniGame()
     {
-        Destroy(this.miniGameObject.gameObject);
+        this.miniGameObject.DestroyIt();
     }
 
     public void showDialog()
