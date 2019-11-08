@@ -58,7 +58,7 @@ TextureImporter:
     second: Star full
   - first:
       213: -566643983450449042
-    second: MiniGames_0
+    second: Win Decoration
   - first:
       213: 3865482470693328606
     second: Headline
@@ -68,6 +68,24 @@ TextureImporter:
   - first:
       213: -1236197652922327406
     second: Inner Box
+  - first:
+      213: -8248476732925350279
+    second: Win Frame
+  - first:
+      213: 2906740823065143335
+    second: Lose Frame
+  - first:
+      213: 8395703925065601138
+    second: Fail Frame
+  - first:
+      213: -226427891268948401
+    second: Success Frame
+  - first:
+      213: -2698296661193104716
+    second: fail
+  - first:
+      213: -3884204314286615850
+    second: ok
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -530,27 +548,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MiniGames_0
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 368
-        width: 144
-        height: 96
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0c83d8bd858228f4b9f84d4f9fa70100
-      internalID: -566643983450449042
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Headline
       rect:
         serializedVersion: 2
@@ -559,7 +556,7 @@ TextureImporter:
         width: 16
         height: 4
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 3, y: 0, z: 3, w: 0}
       outline: []
       physicsShape: []
@@ -580,7 +577,7 @@ TextureImporter:
         width: 22
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -601,7 +598,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 4, z: 4, w: 4}
       outline: []
       physicsShape: []
@@ -609,6 +606,153 @@ TextureImporter:
       bones: []
       spriteID: ba2633e4a5d0d04418d28c670c1b82a5
       internalID: -1236197652922327406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Win Frame
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 448
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6571d741af55f5c4ba437232f23b782c
+      internalID: -8248476732925350279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lose Frame
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 448
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 4, y: 4, z: 4, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dbd317df89fc2740ac5f84c1aef0332
+      internalID: 2906740823065143335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Win Decoration
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 464
+        width: 64
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b29cd2ce3e6357342b535df2dc773418
+      internalID: -566643983450449042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fail Frame
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 464
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a32a0581bcad49b4e905f2ac78ecd7f6
+      internalID: 8395703925065601138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Success Frame
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 448
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 2, y: 2, z: 2, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1e5d50a5bd5a3543b175ef468f657ec
+      internalID: -226427891268948401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fail
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 433
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 383f65f028e4e12488082b87970720a6
+      internalID: -2698296661193104716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ok
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 416
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2604e28f3b32715449bdbc913c9ad323
+      internalID: -3884204314286615850
       vertices: []
       indices: 
       edges: []

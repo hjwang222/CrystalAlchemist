@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using TMPro;
-
+using System.Collections.Generic;
 
 public class MiniGameDialogbox : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class MiniGameDialogbox : MonoBehaviour
     private MiniGameSlider slider;
 
     [SerializeField]
-    private ItemUI itemUI;
+    private List<ItemUI> itemUIs = new List<ItemUI>();
 
     [SerializeField]
     private MiniGamePrice priceUI;
@@ -30,7 +29,11 @@ public class MiniGameDialogbox : MonoBehaviour
     public void UpdateDialogBox(int value)
     {
         this.miniGameUI.setMatch(value);
-        this.itemUI.setItem(this.miniGameUI.getMatch().loot);
+
+        foreach (ItemUI itemUI in this.itemUIs)
+        {
+            itemUI.setItem(this.miniGameUI.getMatch().loot);
+        }
 
         MiniGameMatch match = this.miniGameUI.getMatch();
         this.priceUI.updatePrice(match.item, match.price, this.miniGameUI.player);
