@@ -2,41 +2,6 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[System.Serializable]
-public struct MiniGameMatch
-{
-    [Title("$difficulty", "", bold: true)]
-    [BoxGroup("$difficulty", ShowLabel = false)]
-    [Range(1, 6)]
-    public int maxRounds;
-
-    [BoxGroup("$difficulty")]
-    [Range(1, 6)]
-    public int winsNeeded;
-
-    [BoxGroup("$difficulty")]
-    [Range(1, 5)]
-    public int difficulty;
-
-    [BoxGroup("$difficulty")]
-    [Range(1, 120)]
-    public float maxDuration;
-
-    [BoxGroup("Price")]
-    public Item item;
-
-    [BoxGroup("Price")]
-    [Range(1, 99)]
-    public int price;
-
-    [BoxGroup("Loot")]
-    public Item loot;
-
-    [BoxGroup("Loot")]
-    [Range(1, 99)]
-    public int amount;
-}
-
 public class MiniGame : MonoBehaviour
 {
     [SerializeField]
@@ -51,22 +16,47 @@ public class MiniGame : MonoBehaviour
 
     [SerializeField]
     [BoxGroup("MiniGame Related")]
-    private List<MiniGameMatch> matches = new List<MiniGameMatch>();
+    private string miniGameTitle;
 
     [SerializeField]
     [BoxGroup("MiniGame Related")]
-    private string miniGameTitle;
+    private string miniGameTitleEnglish;
 
     [SerializeField]
     [BoxGroup("MiniGame Related")]
     private string miniGameDescription;
 
+    [SerializeField]
+    [BoxGroup("MiniGame Related")]
+    private string miniGameDescriptionEnglish;
+
+    private List<MiniGameMatch> matches = new List<MiniGameMatch>();
+
     private MiniGameUI activeUI;
 
     private void Start()
     {
+        setItem();
+
         this.activeUI = Instantiate(this.uI, this.transform);
         this.activeUI.setMiniGame(this, this.miniGameRound, this.matches, this.miniGameTitle, this.miniGameDescription);
+    }
+
+    public void setMatch(List<MiniGameMatch> matches)
+    {
+        this.matches = matches;
+    }
+
+    private void setItem()
+    {
+        for (int i = 0; i < this.matches.Count; i++)
+        {
+            MiniGameMatch match = this.matches[i];
+            Item temp = Instantiate(match.loot, this.transform);
+            temp.amount = match.amount;
+            temp.gameObject.SetActive(false);
+            this.matches[i].loot = temp;
+        }
     }
 
     public void DestroyIt()

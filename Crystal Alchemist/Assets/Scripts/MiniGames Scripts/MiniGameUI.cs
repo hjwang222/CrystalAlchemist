@@ -183,7 +183,7 @@ public class MiniGameUI : MenuControls
 
     public void endMiniGame()
     {
-        this.miniGameObject.DestroyIt();
+        this.gameObject.SetActive(false);
     }
 
     public void showDialog()
@@ -195,7 +195,7 @@ public class MiniGameUI : MenuControls
     public override void OnDisable()
     {
         base.OnDisable();
-        Destroy(this.gameObject);
+        this.miniGameObject.DestroyIt();
     }
 
     private void OnDestroy()
