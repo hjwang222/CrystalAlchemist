@@ -14,6 +14,7 @@ public class MiniGame : MonoBehaviour
     [Required]
     private MiniGameRound miniGameRound;
 
+    [Space(10)]
     [SerializeField]
     [BoxGroup("MiniGame Related")]
     private string miniGameTitle;
@@ -22,12 +23,15 @@ public class MiniGame : MonoBehaviour
     [BoxGroup("MiniGame Related")]
     private string miniGameTitleEnglish;
 
+    [Space(10)]
     [SerializeField]
     [BoxGroup("MiniGame Related")]
+    [TextArea]
     private string miniGameDescription;
 
     [SerializeField]
     [BoxGroup("MiniGame Related")]
+    [TextArea]
     private string miniGameDescriptionEnglish;
 
     private List<MiniGameMatch> matches = new List<MiniGameMatch>();
@@ -36,13 +40,26 @@ public class MiniGame : MonoBehaviour
 
     private void Start()
     {
+        setItem();
+
         this.activeUI = Instantiate(this.uI, this.transform);
-        this.activeUI.setMiniGame(this, this.miniGameRound, this.matches, this.miniGameTitle, this.miniGameDescription);
+        this.activeUI.setMiniGame(this, this.miniGameRound, this.matches, 
+                                  this.miniGameTitle, this.miniGameTitleEnglish, this.miniGameDescription, this.miniGameDescriptionEnglish);
     }
 
     public void setMatch(List<MiniGameMatch> matches)
     {
         this.matches = matches;
+    }
+
+    private void setItem()
+    {
+        for (int i = 0; i < this.matches.Count; i++)
+        {
+            MiniGameMatch match = this.matches[i];
+            match.loot.amount = match.amount;
+            this.matches[i] = match;
+        }
     }
 
     public void DestroyIt()

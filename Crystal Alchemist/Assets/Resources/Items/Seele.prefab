@@ -257,13 +257,17 @@ MonoBehaviour:
     type: 3}
   itemSpriteInventory: {fileID: 0}
   itemName: Seele
-  itemDescription: 
+  itemDescription: "Ein Frakment aus purer Energie.\nSeine Reinheit l\xE4sst dich
+    st\xE4rker werden."
   itemGroup: Seelen
   itemSlot: -1
-  itemNameEnglish: Soul
-  itemDescriptionEnglish: 
+  itemNameEnglish: Spirit
+  itemDescriptionEnglish: 'A fragment of pure energy.
+
+    Its purity can make you stronger.'
   itemGroupEnglish: souls
   amount: 1
+  value: 1
   maxAmount: 8
   resourceType: 3
   isKeyItem: 0
@@ -437,6 +441,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 330836146565999749}
     m_Modifications:
+    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
+        type: 3}
+      propertyPath: m_Name
+      value: Item Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2956711678939615906, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -491,11 +500,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
-        type: 3}
-      propertyPath: m_Name
-      value: Item Light
       objectReference: {fileID: 0}
     - target: {fileID: 7454736788490218463, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}

@@ -75,6 +75,9 @@ public class MiniGameUI : MenuControls
     private MiniGameMatch match;
     private int matchIndex = 0;
 
+    [HideInInspector]
+    public string mainDescription = "";
+
     private void Start()
     {
         this.dialogBox.setValues(this.matches.Count);
@@ -91,27 +94,14 @@ public class MiniGameUI : MenuControls
         }
     }
 
-    private void setItem()
-    {
-        for (int i = 0; i < this.matches.Count; i++)
-        {
-            MiniGameMatch match = this.matches[i];
-            Item temp = Instantiate(match.loot, this.transform);
-            temp.amount = match.amount;
-            temp.gameObject.SetActive(false);
-            this.matches[i].loot = temp;
-        }
-    }
-
-    public void setMiniGame(MiniGame main, MiniGameRound miniGame, List<MiniGameMatch> matches, string title, string description)
+    public void setMiniGame(MiniGame main, MiniGameRound miniGame, List<MiniGameMatch> matches, 
+                            string title, string titleEnglish, string description, string descriptionEnglish)
     {
         this.miniGameObject = main;
         this.miniGame = miniGame;
-        this.matches.Clear();
-        this.matches.AddRange(matches);
-        this.titleField.text = title;
-        this.descriptionField.text = description;
-        setItem();
+        this.matches = matches;
+        this.titleField.text = Utilities.Format.getLanguageDialogText(title, titleEnglish); ;
+        this.mainDescription = Utilities.Format.getLanguageDialogText(description, descriptionEnglish);
     }
 
     public void startRound()
