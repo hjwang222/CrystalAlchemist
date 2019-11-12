@@ -91,13 +91,27 @@ public class MiniGameUI : MenuControls
         }
     }
 
+    private void setItem()
+    {
+        for (int i = 0; i < this.matches.Count; i++)
+        {
+            MiniGameMatch match = this.matches[i];
+            Item temp = Instantiate(match.loot, this.transform);
+            temp.amount = match.amount;
+            temp.gameObject.SetActive(false);
+            this.matches[i].loot = temp;
+        }
+    }
+
     public void setMiniGame(MiniGame main, MiniGameRound miniGame, List<MiniGameMatch> matches, string title, string description)
     {
         this.miniGameObject = main;
         this.miniGame = miniGame;
-        this.matches = matches;
+        this.matches.Clear();
+        this.matches.AddRange(matches);
         this.titleField.text = title;
         this.descriptionField.text = description;
+        setItem();
     }
 
     public void startRound()
