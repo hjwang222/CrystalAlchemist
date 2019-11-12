@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using Sirenix.OdinInspector;
+using UnityEditor;
 
 public class LanguageChange : MonoBehaviour
 {
@@ -13,6 +13,15 @@ public class LanguageChange : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI textMeshField;
+
+    [Button]
+    public void setComponent()
+    {
+        this.textMeshField = this.GetComponent<TextMeshProUGUI>();
+        this.alternativeText = this.textMeshField.text;
+        SignalListener temp = this.gameObject.AddComponent<SignalListener>();
+        temp.signal = (SimpleSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/languageChangeSignal.asset", typeof(SimpleSignal));
+    }
 
     private void Awake()
     {

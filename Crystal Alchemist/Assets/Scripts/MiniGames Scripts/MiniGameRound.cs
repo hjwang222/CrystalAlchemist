@@ -30,6 +30,11 @@ public class MiniGameRound : MonoBehaviour
         }
     }
 
+    public virtual string getDifficulty(string text, int difficulty)
+    {
+        return text;
+    }
+
     public void enableInputs(bool value)
     {
         foreach (GameObject button in this.buttons)

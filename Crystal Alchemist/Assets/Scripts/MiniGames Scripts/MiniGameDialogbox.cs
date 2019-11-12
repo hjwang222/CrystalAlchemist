@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class MiniGameDialogbox : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class MiniGameDialogbox : MonoBehaviour
 
     [SerializeField]
     private GameObject startButton;
+
+    [SerializeField]
+    private TextMeshProUGUI descriptionText;
 
     private bool isLoaded = false;
 
@@ -41,7 +45,10 @@ public class MiniGameDialogbox : MonoBehaviour
 
         this.startButton.SetActive(canStart);
         this.priceUI.setColor(canStart);
-    }
+
+        string text = this.miniGameUI.miniGame.getDifficulty(this.miniGameUI.mainDescription, match.difficulty);
+        this.descriptionText.text = text;
+    }    
 
     private void OnEnable()
     {

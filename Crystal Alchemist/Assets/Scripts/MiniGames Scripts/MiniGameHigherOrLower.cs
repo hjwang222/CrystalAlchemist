@@ -26,6 +26,13 @@ public class MiniGameHigherOrLower : MiniGameRound
         this.index++;
     }
 
+    public override string getDifficulty(string text, int difficulty)
+    {
+        string result = text;
+        result = result.Replace("<min>", "1");
+        result = result.Replace("<max>", (this.maxRandomNumbers[difficulty - 1] + 1) + "");
+        return result;
+    }
 
     private void setRandomNumbers()
     {
