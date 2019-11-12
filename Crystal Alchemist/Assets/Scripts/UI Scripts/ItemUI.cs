@@ -10,6 +10,9 @@ public class ItemUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI amount;
 
+    [SerializeField]
+    private bool preferInventoryIcon = true;
+
     private Item item;
 
     public Item getItem()
@@ -34,7 +37,9 @@ public class ItemUI : MonoBehaviour
             if (!item.isKeyItem && item.amount > 1) this.amount.text = "x" + item.amount;
             else this.amount.text = "";
 
-            Utilities.Items.setItemImage(this.image, item);
+            if(this.preferInventoryIcon) Utilities.Items.setItemImage(this.image, item);
+            else this.image.sprite = item.itemSprite;
+
             this.image.color = new Color(1f, 1f, 1f, 1f);
         }
     }

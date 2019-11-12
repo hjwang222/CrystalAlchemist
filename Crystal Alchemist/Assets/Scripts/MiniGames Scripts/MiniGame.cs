@@ -57,10 +57,8 @@ public class MiniGame : MonoBehaviour
         for (int i = 0; i < this.matches.Count; i++)
         {
             MiniGameMatch match = this.matches[i];
-            Item temp = Instantiate(match.loot, this.transform);
-            temp.amount = match.amount;
-            temp.gameObject.SetActive(false);
-            this.matches[i].loot = temp;
+            match.loot.amount = match.amount;
+            this.matches[i] = match;
         }
     }
 

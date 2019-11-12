@@ -30,7 +30,7 @@ public class MiniGameHigherOrLower : MiniGameRound
     {
         string result = text;
         result = result.Replace("<min>", "1");
-        result = result.Replace("<max>", (this.maxRandomNumbers[difficulty - 1] + 1) + "");
+        result = result.Replace("<max>", (this.maxRandomNumbers[difficulty - 1]) + "");
         return result;
     }
 

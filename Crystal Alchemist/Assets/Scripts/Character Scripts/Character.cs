@@ -602,7 +602,7 @@ public class Character : MonoBehaviour
         {
             if (playSound) item.playSounds();
 
-            this.updateResource(item.resourceType, item, item.amount);
+            this.updateResource(item.resourceType, item, item.getTotalAmount());
 
             if (destroyIt) item.DestroyIt();
         }

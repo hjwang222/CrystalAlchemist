@@ -79,6 +79,9 @@ public class Item : MonoBehaviour
     public int amount = 1;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
+    public int value = 1;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
     public int maxAmount;
        
     [FoldoutGroup("Item Attributes", expanded: false)]
@@ -149,6 +152,11 @@ public class Item : MonoBehaviour
     public void playSounds()
     {
         Utilities.Audio.playSoundEffect(this.audioSource, this.collectSoundEffect);        
+    }
+
+    public int getTotalAmount()
+    {
+        return this.value * this.amount;
     }
 
 

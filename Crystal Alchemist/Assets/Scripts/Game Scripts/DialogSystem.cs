@@ -101,12 +101,14 @@ public class DialogSystem : MonoBehaviour
         {
             result = result.Replace("<item name>", getItemName(price, item));
             result = result.Replace("<item amount>", item.amount + "");
+            result = result.Replace("<item value>", item.getTotalAmount() + "");
         }
 
         if (loot != null)
         {
             result = result.Replace("<loot name>", Utilities.Format.getLanguageDialogText(loot.itemName, loot.itemNameEnglish));
             result = result.Replace("<loot amount>", loot.amount + "");
+            result = result.Replace("<loot value>", loot.getTotalAmount() + "");
         }
 
         return result;
