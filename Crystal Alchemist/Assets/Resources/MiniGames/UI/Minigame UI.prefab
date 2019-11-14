@@ -549,8 +549,7 @@ MonoBehaviour:
   cursor: {fileID: 2537619730045242350}
   blackScreen: {fileID: 0}
   lastState: 0
-  miniGame: {fileID: 5532593878105003460, guid: 95451f4f668f99e47b6608907ec80d4b,
-    type: 3}
+  miniGameRound: {fileID: 0}
   timeField: {fileID: 6312356389716529380}
   timeImage: {fileID: 6278725496696721524}
   titleField: {fileID: 8468738003591721296}
@@ -1123,7 +1122,7 @@ MonoBehaviour:
   showDialogBox: 0
   maxDuration: 2
   audioSource: {fileID: 8068806188443461795}
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: df13bcbd53fddcb43a31f144a3319aa1, type: 3}
 --- !u!82 &8068806188443461795
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3112,7 +3111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 2537619730045242350}
-  setFirstSelected: 0
+  setFirstSelected: 1
 --- !u!222 &2482253677267504121
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4884,7 +4883,7 @@ MonoBehaviour:
   showDialogBox: 0
   maxDuration: 2
   audioSource: {fileID: 2859527460214695759}
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 5eaa78700693d6b4391aa83e3e27ba62, type: 3}
 --- !u!82 &2859527460214695759
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9447,7 +9446,7 @@ MonoBehaviour:
   showDialogBox: 1
   maxDuration: 8
   audioSource: {fileID: 71470220901703302}
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: b758840aab0fb77458eff9facea99b0c, type: 3}
 --- !u!82 &71470220901703302
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10202,11 +10201,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1477241949818879635}
     m_Modifications:
-    - target: {fileID: 4691049375023579886, guid: 1a353aabf1c1c6240930831123687ffc,
-        type: 3}
-      propertyPath: m_Name
-      value: Firework
-      objectReference: {fileID: 0}
     - target: {fileID: 919454728139734742, guid: 1a353aabf1c1c6240930831123687ffc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10326,6 +10320,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 30.000017
+      objectReference: {fileID: 0}
+    - target: {fileID: 4691049375023579886, guid: 1a353aabf1c1c6240930831123687ffc,
+        type: 3}
+      propertyPath: m_Name
+      value: Firework
       objectReference: {fileID: 0}
     - target: {fileID: 4494198501151662050, guid: 1a353aabf1c1c6240930831123687ffc,
         type: 3}
