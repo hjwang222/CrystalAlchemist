@@ -46,7 +46,7 @@ public class MiniGameDialogbox : MonoBehaviour
         this.startButton.SetActive(canStart);
         this.priceUI.setColor(canStart);
 
-        string text = this.miniGameUI.miniGame.getDifficulty(this.miniGameUI.mainDescription, match.difficulty);
+        string text = this.miniGameUI.miniGameRound.getDifficulty(this.miniGameUI.mainDescription, match.difficulty);
         this.descriptionText.text = text;
     }    
 

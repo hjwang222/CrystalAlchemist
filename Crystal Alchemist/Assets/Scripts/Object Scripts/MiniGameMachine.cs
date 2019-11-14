@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System;
 
 [System.Serializable]
 public class MiniGameMatch
@@ -35,6 +36,23 @@ public class MiniGameMatch
     [BoxGroup("Loot")]
     [Range(1, 99)]
     public int amount;
+
+    public MiniGameMatch(MiniGameMatch match)
+    {
+        this.maxRounds = match.maxRounds;
+        this.winsNeeded = match.winsNeeded;
+        this.difficulty = match.difficulty;
+        this.maxDuration = match.maxDuration;
+        this.item = match.item;
+        this.price = match.price;
+        this.loot = match.loot;
+        this.amount = match.amount;
+    }
+
+    private Item Instantiate(Item loot, object transform)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 public class MiniGameMachine : Interactable

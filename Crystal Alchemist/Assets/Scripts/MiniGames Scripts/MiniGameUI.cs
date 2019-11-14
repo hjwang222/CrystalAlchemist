@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MiniGameUI : MenuControls
 {
-    public MiniGameRound miniGame;
+    public MiniGameRound miniGameRound;
 
     [BoxGroup("Easy Access")]
     [SerializeField]
@@ -71,7 +71,6 @@ public class MiniGameUI : MenuControls
 
     private MiniGame miniGameObject;
     private MiniGameRound activeRound;
-    private List<MiniGameMatch> matches = new List<MiniGameMatch>();
     private MiniGameMatch match;
     private int matchIndex = 0;
 
@@ -80,7 +79,7 @@ public class MiniGameUI : MenuControls
 
     private void Start()
     {
-        this.dialogBox.setValues(this.matches.Count);
+        this.dialogBox.setValues(this.miniGameObject.getMatches().Count);
         showDialog();
     }
 
@@ -94,12 +93,11 @@ public class MiniGameUI : MenuControls
         }
     }
 
-    public void setMiniGame(MiniGame main, MiniGameRound miniGame, List<MiniGameMatch> matches, 
+    public void setMiniGame(MiniGame main, MiniGameRound miniGameRound, List<MiniGameMatch> matches, 
                             string title, string titleEnglish, string description, string descriptionEnglish)
     {
         this.miniGameObject = main;
-        this.miniGame = miniGame;
-        this.matches = matches;
+        this.miniGameRound = miniGameRound;        
         this.titleField.text = Utilities.Format.getLanguageDialogText(title, titleEnglish); ;
         this.mainDescription = Utilities.Format.getLanguageDialogText(description, descriptionEnglish);
     }
@@ -112,7 +110,7 @@ public class MiniGameUI : MenuControls
         {
             endRound();
 
-            this.activeRound = Instantiate(this.miniGame, this.mainBoard.transform);
+            this.activeRound = Instantiate(this.miniGameRound, this.mainBoard.transform);
             this.activeRound.setParameters(this.match.maxDuration, (this.matchIndex + 1), this.match.difficulty, this.cursor, this);
         }
         else
@@ -140,9 +138,9 @@ public class MiniGameUI : MenuControls
     {
         this.matchIndex = difficulty - 1;
 
-        if (this.matches.Count > 0)
+        if (this.miniGameObject.getMatches().Count > 0)
         {
-            this.match = this.matches[this.matchIndex];
+            this.match = this.miniGameObject.getMatches()[this.matchIndex];
             this.trySlots.setValues(this.match.winsNeeded, this.match.maxRounds);
         }
         resetTrys();

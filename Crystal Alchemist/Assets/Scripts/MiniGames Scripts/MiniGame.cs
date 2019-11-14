@@ -49,15 +49,29 @@ public class MiniGame : MonoBehaviour
 
     public void setMatch(List<MiniGameMatch> matches)
     {
-        this.matches = matches;
+        foreach(MiniGameMatch match in matches)
+        {
+            this.matches.Add(new MiniGameMatch(match));
+        }
+    }
+
+    public List<MiniGameMatch> getMatches()
+    {
+        return this.matches;
     }
 
     private void setItem()
     {
         for (int i = 0; i < this.matches.Count; i++)
         {
+            //Vom Prefab lösen
             MiniGameMatch match = this.matches[i];
-            match.loot.amount = match.amount;
+
+            Item temp = Instantiate(match.loot, this.transform);
+            temp.amount = match.amount;
+            temp.gameObject.SetActive(false);
+
+            match.loot = temp;
             this.matches[i] = match;
         }
     }
