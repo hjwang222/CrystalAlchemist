@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 526825844287091840}
   - component: {fileID: 2264217517180103207}
   - component: {fileID: 8850914608738720034}
-  - component: {fileID: 1344622406160688681}
   - component: {fileID: 857078268545171639}
+  - component: {fileID: 8755193289821927775}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -119,19 +119,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.0192976}
   serializedVersion: 2
   m_Radius: 1.5
---- !u!114 &1344622406160688681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5734340486931179260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b726a1c06928cf9429fe7c60a83ecf2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 857078268545171639}
 --- !u!82 &857078268545171639
 AudioSource:
   m_ObjectHideFlags: 0
@@ -228,3 +215,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8755193289821927775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734340486931179260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f5ddae41e56884489f1e37c0d76a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 857078268545171639}
+  mainObject: {fileID: 5734340486931179260}

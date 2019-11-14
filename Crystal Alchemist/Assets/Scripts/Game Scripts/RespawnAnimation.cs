@@ -11,17 +11,24 @@ public class RespawnAnimation : MonoBehaviour
     private SpriteRenderer characterSpriteBright;
 
     [SerializeField]
-    private List<Animator> animators;
+    private List<Animator> animators;    
 
     [SerializeField]
     private AudioSource audioSource;
 
     private Character character;
     private bool reverse;
+    private bool resetStats = true;
+
 
     public void setCharacter(Character character)
     {
         this.setCharacter(character, false);
+    }
+
+    public void setStatReset(bool value)
+    {
+        this.resetStats = value;
     }
 
     public void setCharacter(Character character, bool reverse)
@@ -54,7 +61,7 @@ public class RespawnAnimation : MonoBehaviour
             this.characterSpriteBright.enabled = false;
         
             character.gameObject.SetActive(true);
-            character.initSpawn();
+            character.initSpawn(this.resetStats);
         }
 
         Destroy(this.gameObject, 0.1f);

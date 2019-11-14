@@ -14,7 +14,7 @@ public class IcedArea : MonoBehaviour
     {
         foreach (Character character in this.characters)
         {
-            if (character.currentState == CharacterState.walk && character.speed < character.startSpeed)
+            if (character.currentState == CharacterState.walk && character.speed < character.stats.startSpeed)
             {
                 character.myRigidbody.AddForce(character.direction.normalized * character.speed * character.timeDistortion, ForceMode2D.Force);
             }                       

@@ -14,22 +14,34 @@ public class LoadSystem : MonoBehaviour
             player.life = data.health;
             player.mana = data.mana;
 
+            player.maxLife = data.maxHealth;
+            player.maxMana = data.maxMana;
+            player.lifeRegen = data.healthRegen;
+            player.manaRegen = data.manaRegen;
+            player.buffPlus = data.buffplus;
+            player.debuffMinus = data.debuffminus;
+
             player.healthSignalUI.Raise();
             player.manaSignalUI.Raise();
 
             player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
 
-            player.setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]));
+            player.GetComponent<PlayerTeleport>().setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]));
 
             if (data.inventory.Count > 0)
             {
                 loadInventory(data, player);                
-            }
+            }            
+        }
+    }
 
-            if (data.skills.Count > 0)
-            {
-                loadSkills(data, player);
-            }
+    public static void loadPlayerSkills(Player player)
+    {
+        PlayerData data = SaveSystem.loadPlayer();
+
+        if (data.skills.Count > 0)
+        {
+            loadSkills(data, player);
         }
     }
 
@@ -40,11 +52,17 @@ public class LoadSystem : MonoBehaviour
         foreach (string[] elem in data.inventory)
         {
             GameObject prefab = Resources.Load("Items/" + elem[0], typeof(GameObject)) as GameObject;
-            GameObject instance = Instantiate(prefab);
-            instance.name = prefab.name;
-            Item item = instance.GetComponent<Item>();
-            item.amount = Convert.ToInt32(elem[1]);
-            player.collect(item, true, false);
+
+            if(prefab == null) prefab = Resources.Load("Items/Key Items/" + elem[0], typeof(GameObject)) as GameObject;
+
+            if (prefab != null)
+            {
+                GameObject instance = Instantiate(prefab);
+                instance.name = prefab.name;
+                Item item = instance.GetComponent<Item>();
+                item.amount = Convert.ToInt32(elem[1]);
+                player.collect(item, true, false);
+            }
         }
     }
 
@@ -52,7 +70,7 @@ public class LoadSystem : MonoBehaviour
     {
         foreach (string[] elem in data.skills)
         {
-            StandardSkill skill = Utilities.Skill.getSkillByName(player.skillSet, elem[1]);
+            Skill skill = Utilities.Skills.getSkillByName(player.skillSet, elem[1]);
             string button = elem[0];
 
             switch (button)

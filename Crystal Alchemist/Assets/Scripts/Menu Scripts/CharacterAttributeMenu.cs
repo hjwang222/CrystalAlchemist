@@ -1,0 +1,78 @@
+﻿using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class CharacterAttributeMenu : MenuControls
+{
+    [HideInInspector]
+    public int[] percentageValues = new int[] { 0, 25, 50, 75, 100 };
+    [HideInInspector]
+    public int[] expanderValues = new int[] { 1, 3, 5, 7, 9 };
+
+    [SerializeField]
+    private Item item;
+
+    [SerializeField]
+    private TextMeshProUGUI pointsField;
+
+    [SerializeField]
+    private AudioClip juwelInSound;
+
+    [SerializeField]
+    private AudioClip juwelOutSound;
+
+    [SerializeField]
+    private AudioSource audiosource;
+
+    [SerializeField]
+    private List<CharacterAttributeStats> statObjects = new List<CharacterAttributeStats>();
+    
+    private int attributePoints = 0;
+    private int attributePointsMax;
+    private int pointsSpent;
+    private int pointsLeft;
+    private bool initLoad = true;
+
+    private void Start()
+    {
+        foreach (CharacterAttributeStats statObject in this.statObjects) statObject.init();
+        
+        updatePoints();
+        this.initLoad = false;
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if(!this.initLoad) updatePoints();        
+    }
+
+    public void playJuwelSound(bool insert)
+    {
+        if (insert) Utilities.Audio.playSoundEffect(this.audiosource, this.juwelInSound);
+        else Utilities.Audio.playSoundEffect(this.audiosource, this.juwelOutSound);
+    }
+
+    public int getPointsLeft()
+    {
+        return this.pointsLeft;
+    }
+
+    public void updatePoints()
+    {
+        this.attributePoints = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);
+        this.attributePointsMax = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, true);
+
+        this.pointsSpent = 0;
+
+        foreach (CharacterAttributeStats statObject in this.statObjects)
+        {
+            this.pointsSpent += statObject.getPointsSpent();
+        }
+
+        this.pointsLeft = this.attributePoints - this.pointsSpent;
+
+        string text = Utilities.Format.formatString(this.pointsLeft, this.attributePointsMax)+" / " + Utilities.Format.formatString(this.attributePointsMax, this.attributePointsMax);
+        this.pointsField.text = text;
+    }
+}

@@ -13,6 +13,9 @@ public enum DoorType
 
 public class Door : Interactable
 {
+    [Required]
+    [BoxGroup("Mandatory")]
+    public Animator animator;
 
     [FoldoutGroup("Tür-Attribute", expanded: false)]
     [EnumToggleButtons]
@@ -20,12 +23,14 @@ public class Door : Interactable
     private DoorType doorType = DoorType.closed;
 
     private bool isOpen;
+
+    [FoldoutGroup("Tür-Attribute", expanded: false)]
+    [SerializeField]
     private BoxCollider2D boxCollider;
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
-        this.boxCollider = GetComponent<BoxCollider2D>();
 
         if (this.isOpen) Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", true);
     }
@@ -48,17 +53,18 @@ public class Door : Interactable
                  if (this.doorType == DoorType.normal)
                 {
                     //Normale Tür, einfach aufmachen
-
-                    string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-                    if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text))
+                    if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
                     {
                         OpenCloseDoor(true, this.context);
+                    }
+                    else
+                    {
+                        Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
                     }
                 }
                 else
                 {
-                    string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-                    if (this.player != null) this.player.showDialogBox(text);
+                    Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success);
                 }
             }                       
         }

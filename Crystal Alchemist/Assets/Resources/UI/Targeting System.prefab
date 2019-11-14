@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1057622316467303391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 669011716365846764}
+  m_Layer: 15
+  m_Name: Range Indicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &669011716365846764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057622316467303391}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7393865508542220009}
+  - {fileID: 1999243172091201610}
+  m_Father: {fileID: 6540191019208669739}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1373567205173479830
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,8 +95,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 'LOCK ON
 
     5s'
@@ -188,8 +218,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
-  m_Father: {fileID: 6540191019208669739}
-  m_RootOrder: 1
+  m_Father: {fileID: 669011716365846764}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5128667106525165996
 SpriteRenderer:
@@ -227,7 +257,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1177715583
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300012, guid: 1c1e5cee8cbc4b54eb913dfa5f9d9ee3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
@@ -251,7 +281,7 @@ GameObject:
   - component: {fileID: 6540191019208669739}
   - component: {fileID: 6540191019208669738}
   - component: {fileID: 6540191019208669749}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Targeting System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,8 +299,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1999243172091201610}
-  - {fileID: 7393865508542220009}
+  - {fileID: 669011716365846764}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -286,23 +315,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 649131827a250684eb00502ee0218e93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  singleTargetWithMark: {fileID: 0}
-  listOfTargetsWithMark: []
-  sortedTargets: []
-  currentTarget: {fileID: 0}
-  lockon: {fileID: 8986203458741278654, guid: 19980263dd6b0984d88cc37609086da5, type: 3}
-  sender: {fileID: 0}
-  skill: {fileID: 0}
-  button: 
-  selectAll: 0
-  skillReadyForActivation: 0
-  durationTime: 0
-  maxAmountOfTargets: 1
-  targetMode: 2
-  text: {fileID: 2506546950070176847}
-  RangeIndicators:
-  - {fileID: 7038866971892472173}
-  - {fileID: 6249871766079310693}
+  targets: []
+  lockOnIndicator: {fileID: 8986203458741278654, guid: 19980263dd6b0984d88cc37609086da5,
+    type: 3}
+  rangeIndicator: {fileID: 1057622316467303391}
 --- !u!60 &6540191019208669749
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -372,8 +388,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8378552391106059963}
-  m_Father: {fileID: 6540191019208669739}
-  m_RootOrder: 0
+  m_Father: {fileID: 669011716365846764}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

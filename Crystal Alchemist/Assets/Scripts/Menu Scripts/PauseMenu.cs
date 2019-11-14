@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    
+    [SerializeField]
+    private PlayerStats playerStats;
+
     private Player player;
 
     [SerializeField]
@@ -29,7 +31,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Awake()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
     }
 
     private void Update()

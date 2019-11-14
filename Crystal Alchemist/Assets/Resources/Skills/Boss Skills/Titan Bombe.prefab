@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 6749847310469528074}
   - component: {fileID: 5012491921192379565}
   - component: {fileID: 2321373597815052200}
-  - component: {fileID: 5209224382793017507}
   - component: {fileID: 5838665306339593789}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,19 +118,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.0192976}
   serializedVersion: 2
   m_Radius: 1.5
---- !u!114 &5209224382793017507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546871329150412918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b726a1c06928cf9429fe7c60a83ecf2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 5838665306339593789}
 --- !u!82 &5838665306339593789
 AudioSource:
   m_ObjectHideFlags: 0
@@ -240,7 +226,7 @@ GameObject:
   - component: {fileID: 7601957053818680531}
   - component: {fileID: 1990091396040281955}
   - component: {fileID: 6937339844267239502}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +344,7 @@ GameObject:
   - component: {fileID: 8022521154477073089}
   - component: {fileID: 8196513688587313968}
   - component: {fileID: 6605432205815712500}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Titan Bombe
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -395,10 +381,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Bombe
   skillNameEnglish: Bomb
+  skillDescription: 
+  skillDescriptionEnglish: 
   category: 0
   animationTriggerName: 
   orderIndex: 8
-  skillDescription: 
   spriteRenderer: {fileID: 7601957053818680531}
   myRigidbody: {fileID: 8196513688587313968}
   animator: {fileID: 1990091396040281955}
@@ -408,12 +395,15 @@ MonoBehaviour:
   showCastBarForEnemies: 1
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
   cast: 0
   keepHoldTimer: 0
   delay: 5
   duration: 0.75
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
   cooldown: 0.5
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -439,6 +429,7 @@ MonoBehaviour:
   colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
+  rotateOnUpdate: 0
   keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
@@ -455,9 +446,9 @@ MonoBehaviour:
   multiHitDelay: 0
   showRange: 0
   affectSelf: 0
-  affectPlayers: 1
-  affectEnemies: 1
-  affectObjects: 1
+  affectOther: 0
+  affectSame: 0
+  affectNeutral: 0
   affectSkills: 0
   ignoreInvincibility: 0
   stateType: 0
@@ -620,7 +611,7 @@ GameObject:
   - component: {fileID: 9222693380281243562}
   - component: {fileID: 3709095694056101576}
   - component: {fileID: 1655859939717254391}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,6 +720,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Smoke
       objectReference: {fileID: 0}
+    - target: {fileID: 1751422926229296004, guid: c6bfb798303180449865aad72cdf8e5c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8467717807765762457, guid: c6bfb798303180449865aad72cdf8e5c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -784,7 +780,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4590215977443957733, guid: c6bfb798303180449865aad72cdf8e5c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c6bfb798303180449865aad72cdf8e5c, type: 3}
 --- !u!4 &2208551687943169571 stripped
 Transform:

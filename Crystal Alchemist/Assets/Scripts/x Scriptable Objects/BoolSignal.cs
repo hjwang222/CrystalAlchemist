@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Signals/BoolSignal")]
 public class BoolSignal : ScriptableObject
 {
     public List<BoolSignalListener> listeners = new List<BoolSignalListener>();

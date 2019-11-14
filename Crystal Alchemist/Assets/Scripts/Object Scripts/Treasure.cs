@@ -10,7 +10,7 @@ public enum TreasureType
     lootbox
 }
 
-public class Treasure : Interactable
+public class Treasure : Rewardable
 {
     #region Attribute   
 
@@ -43,7 +43,7 @@ public class Treasure : Interactable
 
     #region Start Funktionen
 
-    private void Start()
+    public override void Start()
     {
         base.Start();
 
@@ -61,17 +61,17 @@ public class Treasure : Interactable
         if (this.currentState == objectState.opened && this.player != null && this.player.currentState == CharacterState.interact)
         {           
             //Entferne Item aus der Welt und leere die Liste
-            foreach (Item item in this.items)
+            foreach (Item item in this.inventory)
             {
                 Destroy(item.gameObject);
             }
-            this.items.Clear();
+            this.inventory.Clear();
 
             if (this.treasureType == TreasureType.lootbox)
             {
                 Utilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", false);
                 this.currentState = objectState.normal;
-                Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
+                Utilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory);
             }
         }
         /*
@@ -109,9 +109,7 @@ public class Treasure : Interactable
         Utilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", true);
         this.currentState = objectState.opened;
 
-        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-
-        if (this.soundEffect != null && this.items.Count > 0)
+        if (this.soundEffect != null && this.inventory.Count > 0)
         {
             //Spiele Soundeffekte ab
             Utilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
@@ -122,38 +120,33 @@ public class Treasure : Interactable
 
             //OLD, muss besser gehen!
             //Gebe Item dem Spieler
-            foreach (Item item in this.items)
+            foreach (Item item in this.inventory)
             {
                 this.player.collect(item, false);
-                text = Utilities.Format.getDialogBoxText("Du hast", item.amount, item, "erhalten!");
-
-                if (GlobalValues.useAlternativeLanguage) text = Utilities.Format.getDialogBoxText("You obtained", item.amount, item, "!");
+                Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success, item);
             }                
         }
         else
         {
             //Kein Item drin
-            text = "Die Kiste ist leer... .";
-            if (GlobalValues.useAlternativeLanguage) text = "This chest is empty... .";
+            Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.empty);
         }
-
-        if (this.player != null) this.player.showDialogBox(text);
     }
 
 
     private void canOpenChest()
     {
-        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text)) OpenChest();
+        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price)) OpenChest();
+        else Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
     }
 
     public void showTreasureItem()
     {
-        for (int i = 0; i < this.items.Count; i++)
+        for (int i = 0; i < this.inventory.Count; i++)
         {
             //Item instanziieren und der Liste zurück geben und das Item anzeigen
-            this.items[i] = Instantiate(this.items[i], this.transform.position, Quaternion.identity, this.transform);
-            this.items[i].GetComponent<Item>().showFromTreasure();
+            this.inventory[i] = Instantiate(this.inventory[i], this.transform.position, Quaternion.identity, this.transform);
+            this.inventory[i].GetComponent<Item>().showFromTreasure();
         }
     }
 

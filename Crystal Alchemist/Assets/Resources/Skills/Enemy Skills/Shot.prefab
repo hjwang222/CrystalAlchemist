@@ -9,12 +9,19 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7592582800934557975}
-  - component: {fileID: 8367300629129016423}
   - component: {fileID: 4947426794910056175}
   - component: {fileID: 2929363062173014231}
   - component: {fileID: 3912877756296141094}
   - component: {fileID: 1223680476245283199}
-  m_Layer: 14
+  - component: {fileID: 1676703576389572161}
+  - component: {fileID: 1807107929826497410}
+  - component: {fileID: 9157380196124073839}
+  - component: {fileID: 8902859412272811735}
+  - component: {fileID: 4641515620175098231}
+  - component: {fileID: 6451897881035893118}
+  - component: {fileID: 2499700239833832555}
+  - component: {fileID: 7983595114080166242}
+  m_Layer: 13
   m_Name: Shot
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -37,111 +44,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8367300629129016423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511520353593083073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e333cb7d9eccdf149a75af3b5ca70b72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: Schuss
-  skillNameEnglish: Shot
-  skillDescription: 
-  skillDescriptionEnglish: 
-  category: 1
-  animationTriggerName: 
-  orderIndex: 0
-  spriteRenderer: {fileID: 189122765788227639}
-  myRigidbody: {fileID: 3912877756296141094}
-  animator: {fileID: 5853850326603271721}
-  shadow: {fileID: 4459175407930688011}
-  indicators:
-  - {fileID: 5604874298435353384, guid: 4c2b4b217381faf4485e28928382b866, type: 3}
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 1
-  indicatorColor: {r: 1, g: 0, b: 0, a: 1}
-  cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  duration: 2
-  lockMovementonDuration: 0.1
-  deactivateByButtonUp: 1
-  deactivateByButtonDown: 0
-  cooldown: 0.075
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: -0.5
-  statusEffects: []
-  thrust: 0
-  knockbackTime: 0
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: -0.04
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 1
-  isStationary: 1
-  colliderHeightOffset: -0.5
-  speed: 40
-  rotateIt: 1
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0.75
-  positionHeight: 0
-  activeTargetHelper: 1
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 0
-  maxAmountOfTargets: 0
-  targetingDuration: 0
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 9999
-  comboAmount: 99
-  icon: {fileID: 21300014, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
-  sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0.1
-  movementLocked: 0
-  target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  timeDistortion: 1
-  direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setPositionAtStart: 1
-  setActive: 1
-  skillOnImpact: {fileID: 0}
 --- !u!210 &4947426794910056175
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -289,6 +191,179 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1676703576389572161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511520353593083073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Schuss
+  skillNameEnglish: Shot
+  spriteRenderer: {fileID: 189122765788227639}
+  myRigidbody: {fileID: 3912877756296141094}
+  animator: {fileID: 5853850326603271721}
+  shadow: {fileID: 4459175407930688011}
+  speed: 20
+  positionOffset: 0.25
+  maxAmounts: 99
+  attachToSender: 0
+  doCastDuringDelay: 0
+  comboAmount: 100
+  cast: 0
+  lockMovementonDuration: 0
+  deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
+  isRapidFire: 1
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 1
+  delay: 0
+  duration: 10
+  cooldown: 0.075
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  elapsed: 0
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  overridePosition: 1
+  movementLocked: 0
+  target: {fileID: 0}
+  audioSource: {fileID: 0}
+  dontPlayAudio: 0
+  basicRequirementsExists: 1
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setActive: 1
+--- !u!114 &1807107929826497410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511520353593083073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0d3d2225b54824ba4df2b9553ff761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  skillOnImpact: {fileID: 0}
+--- !u!114 &9157380196124073839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511520353593083073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b2c822040a9d9449eed59a8402ec3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+--- !u!114 &8902859412272811735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511520353593083073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -0.5
+  statusEffects: []
+  thrust: 4
+  knockbackTime: 0.2
+  affectSelf: 0
+  affectOther: 1
+  affectSame: 0
+  affectNeutral: 1
+  affectSkills: 0
+  ignoreInvincibility: 0
+--- !u!114 &4641515620175098231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511520353593083073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790e6050ddf4a164b8349c725a23765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+--- !u!114 &6451897881035893118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511520353593083073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b951f28716f63414da5d74b247c0af8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  rotateIt: 1
+  rotateOnUpdate: 0
+  keepOriginalRotation: 0
+  rotationModifier: 0
+  snapRotationInDegrees: 0
+--- !u!114 &2499700239833832555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511520353593083073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85781c900207fc428972075be537857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  useGameObjectHeight: 1
+  positionHeight: 0.5
+  colliderHeightOffset: 0
+--- !u!114 &7983595114080166242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511520353593083073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85dd021f4e88a4469511d8988fcc048, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  indicator: {fileID: 5604874298435353384, guid: 4c2b4b217381faf4485e28928382b866,
+    type: 3}
+  showingIndicator: 1
+  showCastBarForEnemies: 1
+  useCustomColor: 1
+  indicatorColor: {r: 1, g: 0, b: 0, a: 0.5019608}
+  activeIndicator: {fileID: 0}
 --- !u!1 &5124404407448343764
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +375,7 @@ GameObject:
   - component: {fileID: 6021116714921555687}
   - component: {fileID: 4459175407930688011}
   - component: {fileID: 1803074669687505092}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +458,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0047180057, y: -0.003760159}
+  m_Offset: {x: 0.06846884, y: -0.003760159}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -394,7 +469,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9786334, y: 0.17786533}
+  m_Size: {x: 0.74026066, y: 0.17786533}
   m_EdgeRadius: 0
 --- !u!1 &5853850326603271718
 GameObject:
@@ -408,7 +483,7 @@ GameObject:
   - component: {fileID: 189122765788227639}
   - component: {fileID: 5853850326603271721}
   - component: {fileID: 7981231653681903142}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -511,7 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 8367300629129016423}
+  skill: {fileID: 1676703576389572161}
 --- !u!1 &7612512632417800682
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,7 +597,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7546577496279610516}
   - component: {fileID: 2793927456992316905}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

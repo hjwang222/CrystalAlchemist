@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 330836146565999744}
   - component: {fileID: 8537824016139638883}
   - component: {fileID: 2314631220184585089}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: "M\xFCnze"
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -257,17 +257,22 @@ MonoBehaviour:
     type: 3}
   itemSpriteInventory: {fileID: 0}
   itemName: "Goldene M\xFCnze"
-  itemDescription: 
+  itemDescription: "Eine goldene M\xFCnze.\nMan kann sie bei besonderen Shops eintauschen."
   itemGroup: "M\xFCnzen"
   itemSlot: -1
   itemNameEnglish: Golden Coin
-  itemDescriptionEnglish: 
+  itemDescriptionEnglish: 'A golden coin.
+
+    You can trade it in special shops.'
   itemGroupEnglish: coins
   amount: 1
+  value: 1
   maxAmount: 99
   resourceType: 3
   isKeyItem: 0
+  keyItemSignal: {fileID: 0}
   skill: {fileID: 0}
+  statusEffects: []
   collectSoundEffect: {fileID: 8300000, guid: ec4c06267ecfbc94ca8f84ce329e2910, type: 3}
   signal: {fileID: 11400000, guid: d5e659d2c9d6c8c4e8b090b47c1b284f, type: 2}
 --- !u!61 &330836146565999747
@@ -435,6 +440,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 330836146565999749}
     m_Modifications:
+    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
+        type: 3}
+      propertyPath: m_Name
+      value: Item Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2956711678939615906, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -489,11 +499,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
-        type: 3}
-      propertyPath: m_Name
-      value: Item Light
       objectReference: {fileID: 0}
     - target: {fileID: 7454736788490218463, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}

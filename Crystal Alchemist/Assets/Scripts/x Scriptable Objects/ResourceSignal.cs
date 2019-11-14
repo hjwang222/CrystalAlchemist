@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Signals/ResourceSignal")]
 public class ResourceSignal : ScriptableObject
 {
     public List<ResourceSignalListener> listeners = new List<ResourceSignalListener>();

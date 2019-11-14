@@ -6,17 +6,21 @@ using UnityEngine.UI;
 
 public class AnalyseUI : MonoBehaviour
 {
-    [Header("Gegner-Info")]
-    public GameObject target;
+    private GameObject target;
 
     [Header("Easy Access Objects")]
-    public TextMeshProUGUI TMPcharacterName;
-    public TextMeshProUGUI TMPlifeAmount;
-    public Image heartImage;
-    public Image ImageitemPreview;
-    public Image ImageObjectitemIndicator;
-    public Image ImageObjectitemPreview;
-    public GameObject statusEffectHolder;
+    [SerializeField]
+    private TextMeshProUGUI TMPcharacterName;
+    [SerializeField]
+    private TextMeshProUGUI TMPlifeAmount;
+    [SerializeField]
+    private Image heartImage;
+    [SerializeField]
+    private Image ImageitemPreview;
+    [SerializeField]
+    private Image ImageObjectitemIndicator;
+    [SerializeField]
+    private Image ImageObjectitemPreview;
 
     [Header("Gruppen")]
     [SerializeField]
@@ -25,29 +29,36 @@ public class AnalyseUI : MonoBehaviour
     private GameObject objectInfo;
     [SerializeField]
     private AggroBar aggrobar;
+    [SerializeField]
+    private StatusEffectBar statusEffectBar;
 
     private Character character;
-    private Interactable interactable;
-
+    private Rewardable rewardableObject;
+    private List<StatusEffectUI> activeStatusEffectUIs = new List<StatusEffectUI>();
+    private List<StatusEffect> activeStatusEffects = new List<StatusEffect>();
 
     private void Start()
     {
         init();
     }
 
-    private void init()
+    public void setTarget(GameObject target)
     {
         this.enemyInfo.SetActive(false);
         this.objectInfo.SetActive(false);
         this.aggrobar.gameObject.SetActive(false);
+        this.target = target;
+    }
 
+    private void init()
+    {
         //set type of Analyse
         this.transform.position = new Vector2(this.target.transform.position.x + 1.5f, this.target.transform.position.y + 1.5f);
 
         if (this.target.GetComponent<Interactable>() != null)
         {
             //set UI to Treasure/Object Info
-            this.interactable = this.target.GetComponent<Interactable>();
+            this.rewardableObject = this.target.GetComponent<Rewardable>();
             this.objectInfo.SetActive(true);
         }
         else if (this.target.GetComponent<Character>() != null)
@@ -55,10 +66,11 @@ public class AnalyseUI : MonoBehaviour
             //set UI to Character Info
             this.character = this.target.GetComponent<Character>();
 
-            if (this.character.characterType != CharacterType.Object)
+            if (this.character.stats.characterType != CharacterType.Object)
             {
                 //show Basic Information for Enemies
                 this.enemyInfo.SetActive(true);
+                this.statusEffectBar.setCharacter(character);
             }
             else this.objectInfo.SetActive(true);
 
@@ -80,50 +92,15 @@ public class AnalyseUI : MonoBehaviour
     {
         if (this.character != null)
         {
-            if (this.character.characterType != CharacterType.Object)
+            if (this.character.stats.characterType != CharacterType.Object)
             {
-                showEnemyInfo();
-                updateStatusEffects();
+                showEnemyInfo();                
             }
             else showItemInfo();
         }
-        else if (this.interactable != null)
+        else if (this.rewardableObject != null)
         {
             showItemInfo();
-        }
-    }
-
-    private void updateStatusEffects()
-    {
-        if (this.character != null)
-        {
-            for (int i = 1; i < this.statusEffectHolder.transform.childCount; i++)
-            {
-                if (this.statusEffectHolder.transform.GetChild(i).gameObject.activeInHierarchy) Destroy(this.statusEffectHolder.transform.GetChild(i).gameObject);
-            }
-
-            //füge ggf. beide Listen hinzu oder selektiere nur eine
-            List<StatusEffect> effectList = new List<StatusEffect>();
-
-            effectList.AddRange(this.character.buffs);
-            effectList.AddRange(this.character.debuffs);
-
-            for (int i = 0; i < effectList.Count; i++)
-            {
-                //Make a copy
-                GameObject statusEffectGUI = Instantiate(this.statusEffectHolder.transform.GetChild(0), this.statusEffectHolder.transform).gameObject;
-
-                StatusEffect statusEffectFromList = effectList[i];
-                statusEffectGUI.GetComponent<Image>().sprite = statusEffectFromList.iconSprite;
-
-                string seconds = Mathf.RoundToInt(statusEffectFromList.statusEffectTimeLeft) + "s";
-                if (statusEffectFromList.endType == StatusEffectEndType.mana || statusEffectFromList.statusEffectDuration == Utilities.maxFloatInfinite) seconds = "";
-
-                statusEffectGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = seconds;
-
-                statusEffectGUI.SetActive(true);
-                statusEffectGUI.hideFlags = HideFlags.HideInHierarchy;
-            }
         }
     }
 
@@ -131,13 +108,13 @@ public class AnalyseUI : MonoBehaviour
     {
         this.ImageitemPreview.gameObject.SetActive(false);
 
-        this.TMPcharacterName.text = Utilities.Format.getLanguageDialogText(this.character.characterName, this.character.englischCharacterName);
+        this.TMPcharacterName.text = Utilities.Format.getLanguageDialogText(this.character.stats.characterName, this.character.stats.englischCharacterName);
         this.TMPlifeAmount.text = "x" + (this.character.life * 4);
 
-        if (this.character.items.Count > 0 && this.character.currentState != CharacterState.dead)
+        if (this.character.inventory.Count > 0 && this.character.currentState != CharacterState.dead)
         {
             this.ImageitemPreview.gameObject.SetActive(true);
-            this.ImageitemPreview.sprite = this.character.items[0].itemSprite;
+            this.ImageitemPreview.sprite = this.character.inventory[0].itemSprite;
         }
     }
 
@@ -145,22 +122,26 @@ public class AnalyseUI : MonoBehaviour
     {
         this.ImageObjectitemIndicator.gameObject.SetActive(false);
 
-        if (this.interactable != null)
+        if (this.rewardableObject != null)
         {
             //Show Object Information
-            if (interactable.items.Count > 0 && this.interactable.currentState != objectState.opened)
+            if (rewardableObject.inventory.Count > 0 && this.rewardableObject.currentState != objectState.opened)
             {
                 this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = interactable.items[0].itemSprite;
-            }            
+                this.ImageObjectitemPreview.sprite = rewardableObject.inventory[0].itemSprite;
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }           
         }
         else if (this.character != null)
         {
             //Show Object Information
-            if (this.character.items.Count > 0 && this.character.currentState != CharacterState.dead)
+            if (this.character.inventory.Count > 0 && this.character.currentState != CharacterState.dead)
             {
                 this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = this.character.items[0].itemSprite;
+                this.ImageObjectitemPreview.sprite = this.character.inventory[0].itemSprite;
             }            
         }
     }

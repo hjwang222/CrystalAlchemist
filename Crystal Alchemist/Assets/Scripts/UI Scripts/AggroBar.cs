@@ -22,11 +22,11 @@ public class AggroBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (enemy != null && enemy.GetComponent<AIAggroSystem>())
+        if (enemy != null && enemy.aggroGameObject != null)
         {
             float percent = 0f;
             string ziel = "";
-            enemy.GetComponent<AIAggroSystem>().getHighestAggro(out percent, out ziel);
+            enemy.aggroGameObject.getHighestAggro(out percent, out ziel);
 
             if(percent <= 0f) this.zielName.text = "";
 

@@ -79,6 +79,9 @@ public class Item : MonoBehaviour
     public int amount = 1;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
+    public int value = 1;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
     public int maxAmount;
        
     [FoldoutGroup("Item Attributes", expanded: false)]
@@ -90,9 +93,17 @@ public class Item : MonoBehaviour
     public bool isKeyItem = false;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("isKeyItem")]
+    public SimpleSignal keyItemSignal;
+
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.skill)]
-    [EnumToggleButtons]    
-    public StandardSkill skill;
+    public Skill skill;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("resourceType", ResourceType.statuseffect)]
+    public List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     [FoldoutGroup("Sound", expanded: false)]
     public AudioClip collectSoundEffect;
@@ -143,6 +154,11 @@ public class Item : MonoBehaviour
         Utilities.Audio.playSoundEffect(this.audioSource, this.collectSoundEffect);        
     }
 
+    public int getTotalAmount()
+    {
+        return this.value * this.amount;
+    }
+
 
     #region Treasure specific Function
     public void showFromTreasure()
@@ -164,10 +180,10 @@ public class Item : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D character)
     {
-        if (character.CompareTag("Player") && !character.isTrigger)
+        if (!character.isTrigger)
         {
-            Player player = character.GetComponent<Player>();
-            if (player != null) player.collect(this, true);
+            Character chara = character.GetComponent<Character>();
+            if (chara != null) chara.collect(this, true);
         }
     }   
 

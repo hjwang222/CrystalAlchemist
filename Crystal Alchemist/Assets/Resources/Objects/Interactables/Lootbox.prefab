@@ -193,8 +193,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3f1660bebbaef6b4987ec9111be1f411, type: 2}
@@ -410,10 +408,10 @@ GameObject:
   - component: {fileID: 5533910144408278658}
   - component: {fileID: 1198615762132691352}
   - component: {fileID: 5533910144408278657}
-  - component: {fileID: 5533910144408278662}
   - component: {fileID: 5102480015612549687}
   - component: {fileID: 1198615762132691332}
-  m_Layer: 15
+  - component: {fileID: 6780635533492049794}
+  m_Layer: 17
   m_Name: Lootbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,6 +434,7 @@ Transform:
   - {fileID: 1198615760816253507}
   - {fileID: 5096436346067125940}
   - {fileID: 4630310324354112424}
+  - {fileID: 2795764660830615025}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -453,10 +452,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
-  showCurrencyUI: {fileID: 11400000, guid: 81ab4401a7874e940be4896be7fe05a3, type: 2}
-  hideCurrencyUI: {fileID: 11400000, guid: d09786fd819d50f46b7c5bff60408510, type: 2}
-  dialogBoxText: 
-  dialogBoxTextEnglish: 
+  currencyNeeded: 3
+  item: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659, type: 3}
+  price: 1
+  soundEffect: {fileID: 8300000, guid: 4f7be5fca72aed945b5adc95e382a719, type: 3}
+  animator: {fileID: 4617041708320505071}
+  isPlayerInRange: 0
+  isPlayerLookingAtIt: 0
+  player: {fileID: 0}
+  audioSource: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  context: {fileID: 0}
+  currentState: 0
   lootTable:
   - item: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659, type: 3}
     dropRate: 20
@@ -471,19 +478,7 @@ MonoBehaviour:
     dropRate: 10
     amount: 1
   multiLoot: 0
-  currencyNeeded: 3
-  item: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659, type: 3}
-  price: 1
-  soundEffect: {fileID: 8300000, guid: 4f7be5fca72aed945b5adc95e382a719, type: 3}
-  animator: {fileID: 4617041708320505071}
-  isPlayerInRange: 0
-  isPlayerLookingAtIt: 0
-  player: {fileID: 0}
-  audioSource: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  context: {fileID: 0}
-  items: []
-  currentState: 0
+  inventory: []
   anim: {fileID: 4617041708320505071}
   soundEffectTreasure: {fileID: 8300000, guid: 59d34d1df831b0449a4e2f413b1dda3d, type: 3}
   treasureType: 1
@@ -517,32 +512,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9119054, y: 1.5411515}
   m_EdgeRadius: 0
---- !u!61 &5533910144408278662
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5533910144408278659}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.044047296, y: -0.069217205}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.9119054, y: 0.6602068}
-  m_EdgeRadius: 0
 --- !u!50 &5102480015612549687
 Rigidbody2D:
   serializedVersion: 4
@@ -575,6 +544,84 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &6780635533492049794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5533910144408278659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f660a5e6a71b040a0929e2af13c4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - trigger: 1
+    dialogBoxText: "Du hast <loot amount> <loot name> f\xFCr <price> <item name> gekauft!"
+    dialogBoxTextEnglish: You bought <loot amount> <loot name> for <price> <item name>!
+  - trigger: 2
+    dialogBoxText: "Du kannst das nicht kaufen.\nDu ben\xF6tigst <price> <item name>."
+    dialogBoxTextEnglish: 'You cant buy that.
+
+      You need <price> <item name>.'
+--- !u!1 &7563304959205820036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2795764660830615025}
+  - component: {fileID: 6523001519203122960}
+  m_Layer: 13
+  m_Name: Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2795764660830615025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7563304959205820036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5533910144408278658}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &6523001519203122960
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7563304959205820036}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.044047296, y: -0.069217205}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9119054, y: 0.6602068}
+  m_EdgeRadius: 0
 --- !u!1001 &6462874102007048079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -673,6 +720,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5533910144408278658}
     m_Modifications:
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Sprite Light 2D
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -727,16 +784,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Sprite Light 2D
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

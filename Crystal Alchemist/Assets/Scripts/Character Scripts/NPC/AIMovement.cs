@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Pathfinding;
 
 public class AIMovement : MonoBehaviour
 {
@@ -11,6 +12,24 @@ public class AIMovement : MonoBehaviour
     private AI npc;
 
     #region Parameter fürs Verfolgen
+
+    [FoldoutGroup("Pathfinding", expanded: false)]
+    [SerializeField]
+    private Seeker seeker;
+
+    [FoldoutGroup("Pathfinding", expanded: false)]
+    [SerializeField]
+    [ShowIf("seeker")]
+    private float nextWaypointdistance = 0.3f;
+
+    [FoldoutGroup("Pathfinding", expanded: false)]
+    [SerializeField]
+    [ShowIf("seeker")]
+    private float updatePathIntervall = 0.5f;
+
+    private Path aPath;
+    private int aCurrentWaypoint = 0;
+    private bool reachedEndOfPath = false;
 
     [FoldoutGroup("Movement Attributes", expanded: false)]
     public bool prioritizePartner = false;
@@ -48,20 +67,60 @@ public class AIMovement : MonoBehaviour
     private int currentPoint = 0;
     private Transform currentGoal;
     private bool startCoroutine = true;
+    private bool activateSeeker = true;
+    private Vector2 targetPosition = Vector2.zero;
+
 
     #endregion
 
     private void Start()
     {
         Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+
+        if (this.seeker != null) InvokeRepeating("UpdatePath", 0f, this.updatePathIntervall);
     }
 
     #region Update und Movement Funktionen
     private void Update()
     {
-        if(this.npc.currentState != CharacterState.dead
+        if (this.npc.currentState != CharacterState.knockedback && !this.npc.isOnIce)
+        {
+            if (this.npc.myRigidbody.bodyType != RigidbodyType2D.Static) this.npc.myRigidbody.velocity = Vector2.zero;
+        }
+
+        if (this.npc.currentState != CharacterState.dead
         && this.npc.currentState != CharacterState.knockedback
-        && this.npc.currentState != CharacterState.manually) moveCharacter();
+        && this.npc.currentState != CharacterState.manually) getTargetPosition();
+
+        moveTorwardsTarget(this.targetPosition);
+    }
+
+    private void setTargetPath(Vector2 position)
+    {
+        if (this.targetPosition != position) this.targetPosition = position;
+    }
+
+    private void stopMoving()
+    {
+        this.targetPosition = Vector2.zero;
+        Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+    }
+
+    private void UpdatePath()
+    {
+        if (this.seeker.IsDone() && this.targetPosition != Vector2.zero)
+        {
+            this.seeker.StartPath(this.npc.myRigidbody.position, this.targetPosition, OnPathComplete);
+        }
+    }
+
+    private void OnPathComplete(Path p)
+    {
+        if (!p.error)
+        {
+            this.aPath = p;
+            this.aCurrentWaypoint = 0;
+        }
     }
 
     private bool movementPriority(bool priotizePartner)
@@ -93,18 +152,26 @@ public class AIMovement : MonoBehaviour
             {
                 if (this.startCoroutine) StartCoroutine(delayMovementCo());
 
-                if (!this.standStill) moveTorwardsTarget(target.transform.position);
-                else Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+                if (!this.standStill)
+                {
+                    setTargetPath(target.transform.position);
+                    //moveTorwardsTarget(target.transform.position);
+                }
+                else
+                {
+                    this.stopMoving();
+                }
             }
             else
             {
+                stopMoving();
                 this.startCoroutine = true;
             }
         }
     }
 
-    private void moveCharacter()
-    {     
+    private void getTargetPosition()
+    {
         //no target, no partner -> Patrol
         if (!movementPriority(this.prioritizePartner))
         {
@@ -114,25 +181,28 @@ public class AIMovement : MonoBehaviour
                 {
                     if (Vector3.Distance(transform.position, path[currentPoint].position) > followPathPrecision)
                     {
-                        moveTorwardsTarget(path[currentPoint].position);
+                        setTargetPath(path[currentPoint].position);
+                        //moveTorwardsTarget(path[currentPoint].position);
                     }
                     else
                     {
+                        stopMoving();
+
                         this.startCoroutine = true;
                         ChangeGoal();
                         StartCoroutine(delayMovementCo());
                     }
                 }
-                else if (this.backToStart && Vector2.Distance(this.npc.transform.position, this.npc.spawnPosition) > 0.1f) moveTorwardsTarget(this.npc.spawnPosition);
-                else Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+                else if (this.backToStart && Vector2.Distance(this.npc.transform.position, this.npc.spawnPosition) > 0.1f) setTargetPath(this.npc.spawnPosition);
+                else stopMoving();
             }
             else
             {
-                Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+                stopMoving();
             }
             //Utilities.SetAnimatorParameter(this.animator, "isWakeUp", false);
         }
-        
+
         this.npc.currentState = CharacterState.idle;
     }
 
@@ -144,16 +214,72 @@ public class AIMovement : MonoBehaviour
         this.standStill = false;
     }
 
+    private IEnumerator setNewPoint()
+    {
+        this.activateSeeker = false;
+        yield return new WaitForSeconds(this.movementDelay);
+        this.activateSeeker = true;
+    }
+
+    private void moveTorwardsTarget(Vector3 position)
+    {
+        if (this.npc.currentState != CharacterState.knockedback
+            && this.npc.currentState != CharacterState.attack
+            && this.npc.currentState != CharacterState.dead
+            && position != Vector3.zero)
+        {
+            //UpdatePath(position);
+
+            if (this.seeker != null)
+            {
+                if (this.aPath == null) return;
+
+                if (this.aCurrentWaypoint >= this.aPath.vectorPath.Count)
+                {
+                    this.reachedEndOfPath = true;
+                    return;
+                }
+                else this.reachedEndOfPath = false;
+            }
+
+            Vector2 direction = (position - this.transform.position).normalized;
+            if (this.seeker != null) direction = ((Vector2)this.aPath.vectorPath[this.aCurrentWaypoint] - this.npc.myRigidbody.position).normalized;
+
+            Vector3 movement = new Vector3(this.npc.direction.x, this.npc.direction.y + (this.npc.steps * this.npc.direction.x), 0.0f);
+            if (!this.npc.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.speed * this.npc.timeDistortion);
+
+            if (this.seeker != null)
+            {
+                float distance = Vector2.Distance(this.npc.myRigidbody.position, this.aPath.vectorPath[this.aCurrentWaypoint]);
+                if (distance < this.nextWaypointdistance) this.aCurrentWaypoint++;
+            }
+
+            updateAnimation(direction);
+        }
+    }
+
+    private void updateAnimation(Vector2 direction)
+    {
+        if (!Utilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
+
+        if (this.npc.flip)
+        {
+            if (this.npc.direction.x < 0) this.npc.spriteRenderer.flipX = true;
+            else this.npc.spriteRenderer.flipX = false;
+        }
+
+        this.npc.currentState = CharacterState.walk;
+        Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", true);
+    }
+    /*
     private void moveTorwardsTarget(Vector3 position)
     {
         if (this.npc.currentState != CharacterState.knockedback
             && this.npc.currentState != CharacterState.attack
             && this.npc.currentState != CharacterState.dead)
         {
-            //Bewegt den Gegner zum Spieler
-            // Vector3 temp = Vector3.MoveTowards(transform.position, position, this.npc.speed * (Time.deltaTime * this.npc.timeDistortion));
-
             Vector2 direction = (position - this.transform.position).normalized;
+
             if (!Utilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
 
             if (this.npc.flip)
@@ -162,23 +288,19 @@ public class AIMovement : MonoBehaviour
                 else this.npc.spriteRenderer.flipX = false;
             }
 
-            //this.npc.myRigidbody.MovePosition(temp);
-            //this.npc.myRigidbody.velocity = Vector2.zero;
-
             Vector3 movement = new Vector3(this.npc.direction.x, this.npc.direction.y + (this.npc.steps * this.npc.direction.x), 0.0f);
             if (!this.npc.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.speed * this.npc.timeDistortion);
-
 
             this.npc.currentState = CharacterState.walk;
             
             Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", true);
         }
-    }
+    }*/
 
     private void ChangeGoal()
     {
         if (currentPoint == path.Count - 1) //letzter Knoten
-        {          
+        {
             if (this.followPathInCircle)
             {
                 this.currentPoint = 0;
@@ -200,8 +322,8 @@ public class AIMovement : MonoBehaviour
         else
         {
             currentPoint += this.factor;
-        } 
-        
+        }
+
         currentGoal = path[currentPoint];
     }
 

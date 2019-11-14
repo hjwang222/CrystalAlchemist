@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sirenix.OdinInspector;
 
 public class Savepoint : Interactable
 {
@@ -11,9 +12,8 @@ public class Savepoint : Interactable
 
         SaveSystem.Save(this.player, scene.name);
 
-        this.player.setLastTeleport(scene.name, this.player.transform.position);
+        this.player.GetComponent<PlayerTeleport>().setLastTeleport(scene.name, this.player.transform.position);
 
-        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-        this.player.showDialogBox(text);
+        Utilities.DialogBox.showDialog(this, this.player);
     }
 }

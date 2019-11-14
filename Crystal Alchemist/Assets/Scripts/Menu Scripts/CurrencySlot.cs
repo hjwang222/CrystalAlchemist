@@ -6,6 +6,9 @@ using TMPro;
 public class CurrencySlot : MonoBehaviour
 {
     [SerializeField]
+    private PlayerStats playerStats;
+
+    [SerializeField]
     private Item item;
     [SerializeField]
     private int maxValue;
@@ -30,7 +33,7 @@ public class CurrencySlot : MonoBehaviour
 
     private void Start()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;

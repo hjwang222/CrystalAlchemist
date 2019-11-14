@@ -44,7 +44,8 @@ public enum ResourceType
     life,
     mana,
     item,
-    skill
+    skill,
+    statuseffect
 }
 
 #endregion
@@ -56,8 +57,8 @@ public class Utilities : MonoBehaviour
     public const int maxIntInfinite = 9999;
     public const float minFloat = 0.1f;
 
-    public const float maxFloatSmall = 99;
-    public const int maxIntSmall = 99;
+    public const float maxFloatSmall = 100;
+    public const int maxIntSmall = 100;
 
     public const float maxFloatPercent = 1000;
     public const float minFloatPercent = -100;
@@ -177,27 +178,31 @@ public class Utilities : MonoBehaviour
 
         public static bool checkAffections(Character character, bool affectOther, bool affectSame, bool affectNeutral, Collider2D hittedCharacter)
         {
+            Character target = hittedCharacter.GetComponent<Character>();
+
             if (!hittedCharacter.isTrigger
-                && character.currentState != CharacterState.dead
-                && character.currentState != CharacterState.respawning
+                && target != null
+                && target.currentState != CharacterState.dead
+                && target.currentState != CharacterState.respawning
            && (
-               (affectOther && (character.CompareTag("Player") || character.CompareTag("NPC")) && hittedCharacter.CompareTag("Enemy"))
-            || (affectOther && (character.CompareTag("Enemy") && (hittedCharacter.CompareTag("Player") || hittedCharacter.CompareTag("NPC"))))
-            || (affectSame && (character.CompareTag("Player") == hittedCharacter.CompareTag("Player") || character.CompareTag("Player") == hittedCharacter.CompareTag("NPC")))
-            || (affectSame && (character.CompareTag("NPC") == hittedCharacter.CompareTag("NPC") || character.CompareTag("NPC") == hittedCharacter.CompareTag("Player")))
-            || (affectSame && (character.CompareTag("Enemy") == hittedCharacter.CompareTag("Enemy")))
-            || (affectNeutral && hittedCharacter.CompareTag("Object")))) return true;
+               (affectOther && (character.CompareTag("Player") || character.CompareTag("NPC")) && target.CompareTag("Enemy"))
+            || (affectOther && (character.CompareTag("Enemy") && (target.CompareTag("Player") || target.CompareTag("NPC"))))
+            || (affectSame && (character.CompareTag("Player") == target.CompareTag("Player") || character.CompareTag("Player") == target.CompareTag("NPC")))
+            || (affectSame && (character.CompareTag("NPC") == target.CompareTag("NPC") || character.CompareTag("NPC") == target.CompareTag("Player")))
+            || (affectSame && (character.CompareTag("Enemy") == target.CompareTag("Enemy")))
+            || (affectNeutral && target.CompareTag("Object")))) return true;
 
             return false;
         }
 
-        private static bool skillAffected(Collider2D hittedCharacter, StandardSkill skill)
+        private static bool skillAffected(Collider2D hittedCharacter, Skill skill)
         {
-            StandardSkill tempSkill = Skill.getSkillByCollision(hittedCharacter.gameObject);
+            Skill tempSkill = Skills.getSkillByCollision(hittedCharacter.gameObject);
 
             if (tempSkill != null)
             {
-                if (skill.affectSkills
+                if (skill.GetComponent<SkillTargetModule>() != null
+                && skill.GetComponent<SkillTargetModule>().affectSkills
                 && tempSkill.CompareTag("Skill")
                 && tempSkill.skillName != skill.skillName)
                 {
@@ -207,14 +212,15 @@ public class Utilities : MonoBehaviour
             return false;
         }
 
-        public static bool checkCollision(Collider2D hittedCharacter, StandardSkill skill)
+        public static bool checkCollision(Collider2D hittedCharacter, Skill skill)
         {
             if (skill != null && skill.triggerIsActive)
             {
-                if (hittedCharacter.gameObject == skill.sender.gameObject)
+                if (skill.sender != null && hittedCharacter.gameObject == skill.sender.gameObject)
                 {
-                    if (!skill.affectSelf) return false;
-                    else return true;
+                    if (skill.GetComponent<SkillTargetModule>() != null
+                        && skill.GetComponent<SkillTargetModule>().affectSelf) return true;
+                    else return false;
                 }
                 else
                 {
@@ -224,8 +230,10 @@ public class Utilities : MonoBehaviour
                     }
                     else if (!hittedCharacter.isTrigger)
                     {
-                        if (checkAffections(skill.sender, skill.affectOther, skill.affectSame, skill.affectNeutral, hittedCharacter))
-                        {
+                        SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
+                        if (targetModule != null
+                            && checkAffections(skill.sender, targetModule.affectOther, targetModule.affectSame, targetModule.affectNeutral, hittedCharacter))
+                        { 
                             return true;
                         }
                     }
@@ -277,7 +285,7 @@ public class Utilities : MonoBehaviour
 
             foreach (RaycastHit2D hitted in hit)
             {
-                if (hitted != false && !hitted.collider.isTrigger && hitted.collider.gameObject == gameObject) return true;
+                if (hitted != false && !hitted.collider.isTrigger && hitted.collider.transform.parent.gameObject == gameObject) return true;
             }
 
             return false;
@@ -362,6 +370,26 @@ public class Utilities : MonoBehaviour
 
             return false;
         }
+
+        public static T CopyComponent<T>(T original, GameObject destination) where T : Component
+        {
+            System.Type type = original.GetType();
+            var dst = destination.GetComponent(type) as T;
+            if (!dst) dst = destination.AddComponent(type) as T;
+            var fields = type.GetFields();
+            foreach (var field in fields)
+            {
+                if (field.IsStatic) continue;
+                field.SetValue(dst, field.GetValue(original));
+            }
+            var props = type.GetProperties();
+            foreach (var prop in props)
+            {
+                if (!prop.CanWrite || !prop.CanWrite || prop.Name == "name") continue;
+                prop.SetValue(dst, prop.GetValue(original, null), null);
+            }
+            return dst as T;
+        }
     }
 
     ///////////////////////////////////////////////////////////////
@@ -397,22 +425,15 @@ public class Utilities : MonoBehaviour
             //if (this.items.Count > 0) this.text = this.text.Replace("%XY%", this.items[0].GetComponent<Item>().amount + " " + this.items[0].GetComponent<Item>().name);
         }
 
-        private static bool hasEnoughCurrencyAndUpdateResource(ResourceType currency, Player player, Item item, int price)
+        public static bool hasEnoughCurrency(ResourceType currency, Player player, Item item, int price)
         {
             bool result = false;
 
             if (currency == ResourceType.none) result = true;
             else if (currency != ResourceType.skill)
             {
-                if (player.getResource(currency, item) + price >= 0)
-                {
-                    if (!item.isKeyItem) player.updateResource(currency, item, price);
-                    result = true;
-                }
-                else
-                {
-                    result = false;
-                }
+                if (player.getResource(currency, item) - price >= 0) result = true;                
+                else result = false;                
             }
 
             return result;
@@ -479,29 +500,26 @@ public class Utilities : MonoBehaviour
             }
         }
 
-        public static bool canOpenAndUpdateResource(ResourceType currency, Item item, Player player, int price, string defaultText)
+        public static bool canOpenAndUpdateResource(ResourceType currency, Item item, Player player, int price)
         {
-            string text = defaultText;
-
             if (player != null
                 && player.currentState != CharacterState.inDialog
                 && player.currentState != CharacterState.respawning
                 && player.currentState != CharacterState.inMenu)
             {
-                if (hasEnoughCurrencyAndUpdateResource(currency, player, item, -price)) return true;
-                else
+                if (hasEnoughCurrency(currency, player, item, price))
                 {
-                    if (text.Replace(" ", "").Length <= 0)
-                    {
-                        text = Format.getDialogBoxText("Du benötigst", price, item, "...");
-                        if (GlobalValues.useAlternativeLanguage) text = Format.getDialogBoxText("You need", price, item, "...");
-                    }
-                    player.showDialogBox(text);
-                    return false;
+                    reduceCurrency(currency, item, player, price);
+                    return true;
                 }
             }
 
             return false;
+        }
+
+        public static void reduceCurrency(ResourceType currency, Item item, Player player, int price)
+        {
+            if (!item.isKeyItem) player.updateResource(currency, item, -price);
         }
 
         public static Item getItemByID(List<Item> inventory, int ID, bool isKeyItem)
@@ -514,16 +532,21 @@ public class Utilities : MonoBehaviour
             return null;
         }
 
-        /*
-        public static Item getItemByFeature(List<Item> inventory, ItemFeature feature)
+        public static bool hasItemGroup(string itemGroup, List<Item> inventory)
         {
-            foreach (Item item in inventory)
+            foreach (Item elem in inventory)
             {
-                if (item.itemFeature == feature) return item;
+                if (itemGroup.ToUpper() == elem.itemGroup.ToUpper()) return true;                
             }
 
-            return null;
-        }*/
+             return false;
+        }
+
+        public static void setItemImage(Image image, Item item)
+        {
+            if (item.itemSpriteInventory != null) image.sprite = item.itemSpriteInventory;
+            else image.sprite = item.itemSprite;
+        }
     }
 
     ///////////////////////////////////////////////////////////////
@@ -586,17 +609,22 @@ public class Utilities : MonoBehaviour
 
         public static void AddStatusEffect(StatusEffect statusEffect, Character character)
         {
-            if (statusEffect != null && character.characterType != CharacterType.Object)
+            if (statusEffect != null && character.stats.characterType != CharacterType.Object)
             {
                 bool isImmune = false;
 
-                for (int i = 0; i < character.immunityToStatusEffects.Count; i++)
+                if (character.stats.isImmuneToAllDebuffs 
+                    && statusEffect.statusEffectType == StatusEffectType.debuff) isImmune = true;
+                else
                 {
-                    StatusEffect immunityEffect = character.immunityToStatusEffects[i];
-                    if (statusEffect.statusEffectName == immunityEffect.statusEffectName)
+                    for (int i = 0; i < character.stats.immunityToStatusEffects.Count; i++)
                     {
-                        isImmune = true;
-                        break;
+                        StatusEffect immunityEffect = character.stats.immunityToStatusEffects[i];
+                        if (statusEffect.statusEffectName == immunityEffect.statusEffectName)
+                        {
+                            isImmune = true;
+                            break;
+                        }
                     }
                 }
 
@@ -622,19 +650,19 @@ public class Utilities : MonoBehaviour
                     if (result.Count < statusEffect.maxStacks)
                     {
                         //Wenn der Effekte die maximale Anzahl Stacks nicht überschritten hat -> Hinzufügen
-                        instantiateStatusEffect(statusEffect, statusEffects, character);
+                        instantiateStatusEffect(statusEffect, character);
                     }
                     else
                     {
-                        if (statusEffect.canOverride && statusEffect.endType == StatusEffectEndType.time)
+                        if (statusEffect.canOverride)
                         {
                             //Wenn der Effekt überschreiben kann, soll der Effekt mit der kürzesten Dauer entfernt werden
                             StatusEffect toDestroy = result[0];
                             toDestroy.DestroyIt();
 
-                            instantiateStatusEffect(statusEffect, statusEffects, character);
+                            instantiateStatusEffect(statusEffect, character);
                         }
-                        else if (statusEffect.canDeactivateIt && statusEffect.endType == StatusEffectEndType.mana)
+                        else if (statusEffect.canDeactivateIt)
                         {
                             StatusEffect toDestroy = result[0];
                             toDestroy.DestroyIt();
@@ -644,17 +672,35 @@ public class Utilities : MonoBehaviour
             }
         }
 
-        private static void instantiateStatusEffect(StatusEffect statusEffect, List<StatusEffect> statusEffects, Character character)
+        private static void instantiateStatusEffect(StatusEffect statusEffect, Character character)
         {
-            GameObject statusEffectClone = Instantiate(statusEffect.gameObject, character.transform.position, Quaternion.identity, character.transform);
-            statusEffectClone.transform.SetParent(character.activeStatusEffectParent.transform, false);
-            DontDestroyOnLoad(statusEffectClone);
-            StatusEffect statusEffectScript = statusEffectClone.GetComponent<StatusEffect>();
-            statusEffectScript.target = character;
-            //statusEffectClone.hideFlags = HideFlags.HideInHierarchy;
+            StatusEffect statusEffectClone = Instantiate(statusEffect, character.transform.position, Quaternion.identity, character.transform);
+            statusEffectClone.setTarget(character);
+        }
 
-            //add to list for better reference
-            statusEffects.Add(statusEffectClone.GetComponent<StatusEffect>());
+        public static List<StatusEffect> GetStatusEffect(StatusEffect statusEffect, Character character, bool getAll)
+        {
+            List<StatusEffect> result = new List<StatusEffect>();
+
+            foreach(StatusEffect effect in character.buffs)
+            {
+                if (effect.statusEffectName == statusEffect.statusEffectName)
+                {
+                    result.Add(effect);
+                    if (!getAll) break;
+                }
+            }
+
+            foreach (StatusEffect effect in character.debuffs)
+            {
+                if (effect.statusEffectName == statusEffect.statusEffectName)
+                {
+                    result.Add(effect);
+                    if (!getAll) break;
+                }
+            }
+
+            return result;
         }
     }
 
@@ -667,35 +713,6 @@ public class Utilities : MonoBehaviour
             ColorBlock cb = button.colors;
             cb.normalColor = newColor;
             button.colors = cb;
-        }
-
-        public static string getDialogBoxText(string part1, int price, Item item, string part2)
-        {
-            string result = part1 + " " + price + " ";
-
-            switch (item.resourceType)
-            {
-                case ResourceType.item:
-                    {
-                        if (item.isKeyItem)
-                        {
-                            result = part1 + " " + getLanguageDialogText(item.itemName, item.itemNameEnglish);
-                        }
-                        else
-                        {
-                            string typ = getLanguageDialogText(item.itemGroup, item.itemGroupEnglish);
-
-
-                            if (price == 1 && (typ != "Schlüssel" || GlobalValues.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
-
-                            result += typ;
-                        }
-                    }; break;
-                case ResourceType.life: result += "Leben"; break;
-                case ResourceType.mana: result += "Mana"; break;
-            }
-
-            return result + " " + part2;
         }
 
         public static string getLanguageDialogText(string originalText, string alternativeText)
@@ -716,7 +733,10 @@ public class Utilities : MonoBehaviour
 
         public static string setDurationToString(float value)
         {
-            return Mathf.RoundToInt(value).ToString("0");
+            int rounded = Mathf.RoundToInt(value);
+
+            if (rounded > 59) return (rounded/60).ToString("0")+"m";
+            else return rounded.ToString("0")+"s";
         }
 
         public static string formatString(float value, float maxValue)
@@ -728,7 +748,8 @@ public class Utilities : MonoBehaviour
                 formatString += "0";
             }
 
-            return value.ToString(formatString);
+            if (value == 0) return formatString;
+            else return value.ToString(formatString);
         }
 
         public static void set3DText(TextMeshPro tmp, string text, bool bold, Color fontColor, Color outlineColor, float outlineWidth)
@@ -769,9 +790,33 @@ public class Utilities : MonoBehaviour
 
             hour = Mathf.RoundToInt(fhour);
             minute = Mathf.RoundToInt(fminute);
-        }
+        }               
     }
 
+    ///////////////////////////////////////////////////////////////
+
+    public static class DialogBox
+    {
+        public static void showDialog(Interactable interactable, Player player)
+        {
+            showDialog(interactable, player, null);
+        }
+
+        public static void showDialog(Interactable interactable, Player player, DialogTextTrigger trigger)
+        {
+            showDialog(interactable, player, trigger, null);
+        }
+
+        public static void showDialog(Interactable interactable, Player player, Item loot)
+        {
+            if (interactable.gameObject.GetComponent<DialogSystem>() != null) interactable.GetComponent<DialogSystem>().show(player, interactable, loot);
+        }
+
+        public static void showDialog(Interactable interactable, Player player, DialogTextTrigger trigger, Item loot)
+        {
+            if (interactable.gameObject.GetComponent<DialogSystem>() != null) interactable.gameObject.GetComponent<DialogSystem>().show(player, trigger, interactable, loot);
+        }
+    }
 
 
     ///////////////////////////////////////////////////////////////
@@ -795,18 +840,44 @@ public class Utilities : MonoBehaviour
             gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
 
-        public static void setDirectionAndRotation(Character sender, Character target,
-                                                    float positionOffset, float positionHeight, float snapRotationInDegrees, float rotationModifier,
-                                                   out float angle, out Vector2 start, out Vector2 direction, out Vector3 rotation)
+        public static void setDirectionAndRotation(Skill skill, out float angle, out Vector2 start, out Vector2 direction, out Vector3 rotation)
         {
-            direction = sender.direction.normalized;
+            float snapRotationInDegrees = 0;
+            float rotationModifier = 0;
+            float positionOffset = skill.positionOffset;
+            float positionHeight = 0;
+            bool useCustomPosition = false;
 
-            start = new Vector2(sender.spriteRenderer.transform.position.x + (direction.x * positionOffset),
-                                sender.spriteRenderer.transform.position.y + (direction.y * positionOffset) + positionHeight);
+            SkillRotationModule rotationModule = skill.GetComponent<SkillRotationModule>();
+            SkillPositionZModule positionModule = skill.GetComponent<SkillPositionZModule>();
 
-            //if sender is not frozen
+            if (rotationModule != null)
+            {
+                snapRotationInDegrees = rotationModule.snapRotationInDegrees;
+                rotationModifier = rotationModule.rotationModifier;
+            }
 
-            if (target != null) direction = (Vector2)target.transform.position - start;
+            if (positionModule != null)
+            {
+                useCustomPosition = positionModule.useGameObjectHeight;
+                positionHeight = positionModule.positionHeight;                
+            }                       
+
+            start = (Vector2)skill.sender.transform.position;
+
+            if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null) direction = (Vector2)skill.sender.GetComponent<AI>().target.transform.position - start;
+            else if (skill.target != null) direction = (Vector2)skill.target.transform.position - start;
+            else direction = skill.sender.direction.normalized;
+
+            float positionX = skill.sender.spriteRenderer.transform.position.x + (direction.x * positionOffset);
+            float positionY = skill.sender.spriteRenderer.transform.position.y + (direction.y * positionOffset) + positionHeight;
+
+            if (useCustomPosition) positionY = skill.sender.shootingPosition.transform.position.y + (direction.y * positionOffset);
+
+            start = new Vector2(positionX, positionY);
+            if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null) direction = (Vector2)skill.sender.GetComponent<AI>().target.transform.position - start;
+            else if (skill.target != null) direction = (Vector2)skill.target.transform.position - start;
+
 
             float temp_angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             direction = Utilities.Rotation.DegreeToVector2(temp_angle);
@@ -825,28 +896,27 @@ public class Utilities : MonoBehaviour
 
     ///////////////////////////////////////////////////////////////
 
-    public static class Skill
+    public static class Skills
     {
-        public static int getAmountOfSameSkills(StandardSkill skill, List<StandardSkill> activeSkills, List<Character> activePets)
+        public static int getAmountOfSameSkills(Skill skill, List<Skill> activeSkills, List<Character> activePets)
         {
             int result = 0;
 
-            SummonSkill summonSkill = skill.GetComponent<SummonSkill>();
+            SkillSummon summonSkill = skill.GetComponent<SkillSummon>();
 
             if (summonSkill == null)
             {
                 for (int i = 0; i < activeSkills.Count; i++)
                 {
-                    StandardSkill activeSkill = activeSkills[i];
+                    Skill activeSkill = activeSkills[i];
                     if (activeSkill.skillName == skill.skillName) result++;
                 }
             }
             else
             {
-
                 for (int i = 0; i < activePets.Count; i++)
                 {
-                    if (activePets[i] != null && activePets[i].characterName == summonSkill.getPetName())
+                    if (activePets[i] != null && activePets[i].stats.characterName == summonSkill.getPetName())
                     {
                         result++;
                     }
@@ -856,51 +926,59 @@ public class Utilities : MonoBehaviour
             return result;
         }
 
-        public static StandardSkill setSkill(Character character, StandardSkill prefab)
+        public static Skill setSkill(Character character, Skill prefab)
         {
-            StandardSkill skillInstance = MonoBehaviour.Instantiate(prefab, character.skillSetParent.transform) as StandardSkill;
+            Skill skillInstance = MonoBehaviour.Instantiate(prefab, character.skillSetParent.transform) as Skill;
             skillInstance.sender = character;
             skillInstance.gameObject.SetActive(false);
+            skillInstance.preLoad();
 
             return skillInstance;
         }
 
-        public static StandardSkill instantiateSkill(StandardSkill skill, Character sender)
+        public static Skill instantiateSkill(Skill skill, Character sender)
         {
             return instantiateSkill(skill, sender, null, 1);
         }
 
-        public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target)
+        public static Skill instantiateSkill(Skill skill, Character sender, Character target)
         {
             return instantiateSkill(skill, sender, target, 1);
         }
 
-        public static StandardSkill instantiateSkill(StandardSkill skill, Character sender, Character target, float reduce)
+        public static Skill instantiateSkill(Skill skill, Character sender, Character target, float reduce)
         {
             if (skill != null
                 && sender.currentState != CharacterState.attack
                 && sender.currentState != CharacterState.defend)
             {
-                GameObject activeSkill = Instantiate(skill.gameObject, sender.transform.position, Quaternion.identity);
-                activeSkill.SetActive(true);
+                Skill activeSkill = Instantiate(skill, sender.transform.position, Quaternion.identity);
+                activeSkill.gameObject.SetActive(true);
+                SkillTargetModule targetModule = activeSkill.GetComponent<SkillTargetModule>();
+                SkillSenderModule sendermodule = activeSkill.GetComponent<SkillSenderModule>();
 
-                if (!skill.isStationary) activeSkill.transform.parent = sender.activeSkillParent.transform;
+                if (skill.attachToSender) activeSkill.transform.parent = sender.activeSkillParent.transform;
 
-                if (target != null) activeSkill.GetComponent<StandardSkill>().target = target;
-                activeSkill.GetComponent<StandardSkill>().sender = sender;
+                if (target != null) activeSkill.target = target;
+                activeSkill.sender = sender;
 
                 List<affectedResource> temp = new List<affectedResource>();
 
-                for (int i = 0; i < activeSkill.GetComponent<StandardSkill>().affectedResources.Count; i++)
+                if (targetModule != null)
                 {
-                    affectedResource elem = activeSkill.GetComponent<StandardSkill>().affectedResources[i];
-                    elem.amount /= reduce;
-                    temp.Add(elem);
+
+                    for (int i = 0; i < targetModule.affectedResources.Count; i++)
+                    {
+                        affectedResource elem = targetModule.affectedResources[i];
+                        elem.amount /= reduce;
+                        temp.Add(elem);
+                    }
+
+                    targetModule.affectedResources = temp;
+                    if(sendermodule != null) sendermodule.addResourceSender /= reduce;
                 }
 
-                activeSkill.GetComponent<StandardSkill>().affectedResources = temp;
-                activeSkill.GetComponent<StandardSkill>().addResourceSender /= reduce;
-                sender.activeSkills.Add(activeSkill.GetComponent<StandardSkill>());
+                sender.activeSkills.Add(activeSkill);
 
                 /*
                 if (skill.comboAmount > 0 
@@ -908,25 +986,29 @@ public class Utilities : MonoBehaviour
                     && getAmountOfSameSkills(skill, sender.activeSkills) >= skill.comboAmount)
                     skill.cooldownTimeLeft = skill.cooldownAfterCombo;*/
 
-                return activeSkill.GetComponent<StandardSkill>();
+                return activeSkill.GetComponent<Skill>();
             }
 
             return null;
         }
 
-        public static StandardSkill getSkillByID(List<StandardSkill> skillset, int ID, SkillType category)
+        public static Skill getSkillByID(List<Skill> skillset, int ID, SkillType category)
         {
-            foreach (StandardSkill skill in skillset)
+            foreach (Skill skill in skillset)
             {
-                if (category == skill.category && ID == skill.orderIndex) return skill;
+                SkillBookModule skillBookModule = skill.GetComponent<SkillBookModule>();
+
+                if (skillBookModule != null 
+                    && category == skillBookModule.category
+                    && ID == skillBookModule.orderIndex) return skill;
             }
 
             return null;
         }
 
-        public static StandardSkill getSkillByName(List<StandardSkill> skillset, string name)
+        public static Skill getSkillByName(List<Skill> skillset, string name)
         {
-            foreach (StandardSkill skill in skillset)
+            foreach (Skill skill in skillset)
             {
                 if (name == skill.skillName) return skill;
             }
@@ -934,18 +1016,18 @@ public class Utilities : MonoBehaviour
             return null;
         }
 
-        public static StandardSkill getSkillByCollision(GameObject collision)
+        public static Skill getSkillByCollision(GameObject collision)
         {
-            return collision.GetComponentInParent<StandardSkill>();
+            return collision.GetComponentInParent<Skill>();
         }
 
-        public static void updateSkillset(StandardSkill skill, Player player)
+        public static void updateSkillset(Skill skill, Player player)
         {
             if (skill != null)
             {
                 bool found = false;
 
-                foreach (StandardSkill elem in player.skillSet)
+                foreach (Skill elem in player.skillSet)
                 {
                     if (elem.skillName == skill.skillName) { found = true; break; }
                 }
@@ -980,9 +1062,10 @@ public class Utilities : MonoBehaviour
             else player.setTargetHelperActive(true);
         }
 
-        private static bool checkIfHelperActivated(StandardSkill skill)
+        private static bool checkIfHelperActivated(Skill skill)
         {
-            if (skill != null && skill.activeTargetHelper) return true;
+            if (skill != null 
+                && skill.GetComponent<SkillAimingModule>() != null) return true;
             else return false;
         }
     }

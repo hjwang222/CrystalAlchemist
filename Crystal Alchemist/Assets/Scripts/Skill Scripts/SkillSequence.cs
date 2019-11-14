@@ -91,12 +91,12 @@ public class SkillSequence : MonoBehaviour
             {
                 if (!mod.gameObject.activeInHierarchy)
                 {
-                    StandardSkill skill = mod.gameObject.GetComponent<StandardSkill>();
+                    Skill skill = mod.gameObject.GetComponent<Skill>();
 
                     if (skill != null)
                     {
-                        skill.showIndicator();
-                        skill.showCastingAnimation();
+                        if (skill.GetComponent<SkillIndicatorModule>() != null) skill.GetComponent<SkillIndicatorModule>().showIndicator();
+                        if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().showCastingAnimation();
 
                         if (skill.holdTimer < skill.cast)
                         {
@@ -104,8 +104,8 @@ public class SkillSequence : MonoBehaviour
                         }
                         else
                         {
-                            skill.hideIndicator();
-                            skill.hideCastingAnimation();
+                            if (skill.GetComponent<SkillIndicatorModule>() != null) skill.GetComponent<SkillIndicatorModule>().hideIndicator();
+                            if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().hideCastingAnimation();
                             mod.gameObject.SetActive(true);
                         }
                     }
@@ -178,12 +178,12 @@ public class SkillSequence : MonoBehaviour
         {
             for (int i = 0; i < this.transform.childCount; i++)
             {
-                StandardSkill childSkill = this.transform.GetChild(i).GetComponent<StandardSkill>();
+                Skill childSkill = this.transform.GetChild(i).GetComponent<Skill>();
                 if (childSkill != null)
                 {
                     childSkill.sender = this.sender;
                     childSkill.target = this.target;
-                    childSkill.setPositionAtStart = false;
+                    childSkill.overridePosition = false;
                 }
             }
         }

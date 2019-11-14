@@ -21,7 +21,9 @@ public enum UIType
 public class StatusBar : MonoBehaviour
 {
     #region Attribute
-
+    [SerializeField]
+    [BoxGroup("Mandatory")]
+    private PlayerStats playerStats;
 
     [BoxGroup("UI Typ")]
     public UIType UIType = UIType.resource;
@@ -41,9 +43,13 @@ public class StatusBar : MonoBehaviour
     [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public Sprite empty;
     [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
-    public GameObject icon;
+    public List<GameObject> icons = new List<GameObject>();
     [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     public GameObject warning;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    private StatusEffectBar statusEffectBar;
 
     [FoldoutGroup("Sound", expanded: false)]
     public AudioClip lowSoundEffect;
@@ -51,11 +57,12 @@ public class StatusBar : MonoBehaviour
     public float audioInterval = 1.5f;
 
     private AudioSource audioSource;
-    private float maximum;
-    private float current;
     private bool playLow;
     private float elapsed;
     private Player player;
+
+    private float maxValue;
+    private float currentValue;
     #endregion
 
 
@@ -68,9 +75,8 @@ public class StatusBar : MonoBehaviour
 
     private void init()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
         this.audioSource = GetComponent<AudioSource>();
-        setValues();
         setStatusBar();
 
         if(this.UIType == UIType.resource) UpdateGUIHealthMana();
@@ -94,86 +100,53 @@ public class StatusBar : MonoBehaviour
 
     private void setValues()
     {
-        if (this.player != null)
+        if(this.resourceType == ResourceType.life)
         {
-            this.maximum = this.player.getMaxResource(this.resourceType, null);
-            this.current = this.player.getResource(this.resourceType, null);
+            this.maxValue = this.player.maxLife;
+            this.currentValue = this.player.life;
+        }
+        else
+        {
+            this.maxValue = this.player.maxMana;
+            this.currentValue = this.player.mana;
         }
     }
 
     private void setStatusBar()
     {
-        for (int i = 0; i < (int)this.maximum - 1; i++)
+        setValues();
+
+        for (int i = 0; i < this.icons.Count; i++)
         {
-            GameObject temp = Instantiate(icon, this.gameObject.transform);
-            //temp.hideFlags = HideFlags.HideInHierarchy;
+            this.icons[i].SetActive(false);
+            if (i + 1 <= this.maxValue) this.icons[i].SetActive(true);
         }
     }
     #endregion
 
 
-    #region Update Signal Funktionen (Life, Mana, StatusEffects)
-    public void UpdateGUIStatusEffects()
-    {        
-        for (int i = 1; i < this.transform.childCount; i++)
-        {
-            if(this.transform.GetChild(i).gameObject.activeInHierarchy) Destroy(this.transform.GetChild(i).gameObject);
-        }
-
-        //füge ggf. beide Listen hinzu oder selektiere nur eine
-        List<StatusEffect> effectList = new List<StatusEffect>();
-        if (this.UIType == UIType.buffsOnly) effectList = this.player.buffs;
-        else if (this.UIType == UIType.debuffsOnly) effectList = this.player.debuffs;
-        else if (this.UIType == UIType.BuffsAndDebuffs)
-        {
-            effectList.AddRange(this.player.buffs);
-            effectList.AddRange(this.player.debuffs);
-        }
-        else if (this.UIType == UIType.DebuffsAndBuffs)
-        {
-            effectList.AddRange(this.player.debuffs);
-            effectList.AddRange(this.player.buffs);
-        }
-
-        for (int i = 0; i < effectList.Count; i++)
-        {
-            //Make a copy
-            GameObject statusEffectGUI = Instantiate(this.transform.GetChild(0), this.transform).gameObject;
-
-            StatusEffect statusEffectFromList = effectList[i];
-            statusEffectGUI.GetComponent<Image>().sprite = statusEffectFromList.iconSprite;
-
-            string seconds = Utilities.Format.setDurationToString(statusEffectFromList.statusEffectTimeLeft)+"s";
-            if (statusEffectFromList.endType == StatusEffectEndType.mana) seconds = "";
-
-            statusEffectGUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = seconds;
-
-            statusEffectGUI.SetActive(true);
-            statusEffectGUI.hideFlags = HideFlags.HideInHierarchy;
-        }
-    }
-    
+    #region Update Signal Funktionen (Life, Mana, StatusEffects)    
     public void UpdateGUIHealthMana()
     {
-        setValues();
+        setStatusBar();
 
         Sprite sprite = null;
 
-        for (int i = 0; i < (int)this.maximum; i++)
+        for (int i = 0; i < (int)this.maxValue; i++)
         {
-            if (i <= this.current - 1)
+            if (i <= this.currentValue - 1)
             {                
                 sprite = this.full;
             }
-            else if (i <= this.current - 0.75f)
+            else if (i <= this.currentValue - 0.75f)
             {
                 sprite = this.quarterhalf;
             }
-            else if (i <= this.current - 0.5f)
+            else if (i <= this.currentValue - 0.5f)
             {
                 sprite = this.half;
             }
-            else if (i <= this.current - 0.25f)
+            else if (i <= this.currentValue - 0.25f)
             {
                 sprite = this.quarter;
             }
@@ -194,7 +167,7 @@ public class StatusBar : MonoBehaviour
             
         }
 
-        if (this.current <= 0.5f && this.player.currentState != CharacterState.dead)
+        if (this.player.life <= 0.5f && this.player.currentState != CharacterState.dead)
         {
             this.playLow = true;
             if (this.warning != null) this.warning.SetActive(true);

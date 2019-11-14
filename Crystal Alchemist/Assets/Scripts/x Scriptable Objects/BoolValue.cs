@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Values/BoolValue")]
 public class BoolValue : ScriptableObject, ISerializationCallbackReceiver
 {
 

@@ -1,21 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
-using System.Linq;
 
-public class SkillMenu : MonoBehaviour
+public class SkillMenu : MenuControls
 {
     #region Attributes
-    private Player player;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private myCursor cursor;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
@@ -31,11 +22,6 @@ public class SkillMenu : MonoBehaviour
     [SerializeField]
     [Required]
     private TextMeshProUGUI categoryItems;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private GameObject blackScreen;
 
     [BoxGroup("Tabs")]
     [SerializeField]
@@ -70,35 +56,24 @@ public class SkillMenu : MonoBehaviour
     [SerializeField]
     private GameObject nextPage;
 
-    [BoxGroup("Signals")]
-    [SerializeField]
-    private FloatSignal musicVolumeSignal;
-
     [HideInInspector]
-    public StandardSkill selectedSkill;
-
-    private CharacterState lastState;
+    public Skill selectedSkill;
 
     #endregion
 
 
     #region Unity Functions
 
-    private void Awake()
-    {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
-    }
-
     private void Start()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
         setSkillsToSlots(SkillType.physical);
         setSkillsToSlots(SkillType.magical);
         setSkillsToSlots(SkillType.item);
+
         showCategory(1);
     }
 
-    private void Update()
+    public override void Update()
     {
         if (Input.GetButtonDown("Cancel"))
         {
@@ -109,22 +84,17 @@ public class SkillMenu : MonoBehaviour
         else if (Input.GetButtonDown("Inventory")) exitMenu();
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
-        this.lastState = this.player.currentState;
-        selectSkillFromSkillSet(null);
-        this.cursor.gameObject.SetActive(true);
-        this.player.currentState = CharacterState.inMenu;
+        base.OnEnable();
 
-        this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+        selectSkillFromSkillSet(null);
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
         selectSkillFromSkillSet(null);
-        this.cursor.gameObject.SetActive(false);
-
-        this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+        base.OnDisable();
     }
 
     #endregion
@@ -142,24 +112,33 @@ public class SkillMenu : MonoBehaviour
         showSkillDetails(slot.skill);
     }
 
-    private void showSkillDetails(StandardSkill skill)
+    private void showSkillDetails(Skill skill)
     {
         if (skill != null)
         {
+            SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
+            SkillSenderModule senderModule = skill.GetComponent<SkillSenderModule>();
+
             this.skillDetailsName.text = Utilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
-
             float strength = 0;
-            if (skill.affectedResources.Count > 0) strength = Mathf.Abs(skill.affectedResources[0].amount)*4;
-            this.skillDetailsStrength.text = strength + "";
 
-            this.skillDetailsCost.text = Mathf.Abs(skill.addResourceSender)*4 + "";
-
-            if (skill.statusEffects.Count > 0)
+            if(senderModule != null)
             {
-                this.StatusEffects.enabled = true;
-                this.StatusEffects.sprite = skill.statusEffects[0].iconSprite;
+                this.skillDetailsCost.text = Mathf.Abs(senderModule.addResourceSender) * 4 + "";
             }
-            else this.StatusEffects.enabled = false;
+
+            if (targetModule != null)
+            {
+                if (targetModule.affectedResources.Count > 0) strength = Mathf.Abs(targetModule.affectedResources[0].amount) * 4;
+                this.skillDetailsStrength.text = strength + "";
+
+                if (targetModule.statusEffects.Count > 0)
+                {
+                    this.StatusEffects.enabled = true;
+                    this.StatusEffects.sprite = targetModule.statusEffects[0].iconSprite;
+                }
+                else this.StatusEffects.enabled = false;
+            }
         }
         else
         {
@@ -207,14 +186,6 @@ public class SkillMenu : MonoBehaviour
             this.selectedSkill = null;
             this.cursor.setSelectedGameObject(null);
         }
-    }
-
-    public void exitMenu()
-    {
-        this.cursor.infoBox.Hide();
-        this.player.delay(this.lastState);
-        this.transform.parent.gameObject.SetActive(false);
-        this.blackScreen.SetActive(false);
     }
 
     public void setPage(int value)
@@ -293,7 +264,7 @@ public class SkillMenu : MonoBehaviour
                 for (int ID = 0; ID < skills.transform.childCount; ID++)
                 {
                     GameObject slot = skills.transform.GetChild(ID).gameObject;
-                    StandardSkill skill = Utilities.Skill.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
+                    Skill skill = Utilities.Skills.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
                     slot.GetComponent<SkillSlot>().setSkill(skill);
                 }
 

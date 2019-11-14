@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 7380354942667108071}
   - component: {fileID: 3567975042085853115}
   - component: {fileID: 3416433163101705802}
-  m_Layer: 14
+  - component: {fileID: 8177122645714936817}
+  - component: {fileID: 5827068402827264243}
+  m_Layer: 13
   m_Name: Nitro
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -51,94 +53,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Nitro
   skillNameEnglish: Nitro
-  skillDescription: 
-  skillDescriptionEnglish: 
-  category: 0
-  animationTriggerName: 
-  orderIndex: 0
   spriteRenderer: {fileID: 6809401362660781500}
   myRigidbody: {fileID: 3416433163101705802}
   animator: {fileID: 7380354942667108071}
   shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 0
-  showCastBarForEnemies: 0
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  speed: 0
+  positionOffset: 0
+  maxAmounts: 1
+  attachToSender: 0
+  doCastDuringDelay: 0
+  comboAmount: 99
   cast: 3
-  keepHoldTimer: 0
-  delay: 0
-  duration: 0
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
   deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 1
+  delay: 0
+  duration: 1
   cooldown: 0
   cooldownAfterCombo: 0
   durationCombo: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: -4
-  statusEffects: []
-  thrust: 4
-  knockbackTime: 0.2
-  resourceType: 0
-  item: {fileID: 0}
-  addResourceSender: -1
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 0
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 1
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 1
-  affectOther: 1
-  affectSame: 1
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: 0}
-  activeIndicators: []
+  elapsed: 0
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: -0.0073119123
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
   dontPlayAudio: 0
+  basicRequirementsExists: 1
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
-  setPositionAtStart: 1
   setActive: 1
 --- !u!58 &5378670148574386762
 CircleCollider2D:
@@ -342,6 +294,45 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &8177122645714936817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999009161233943469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790e6050ddf4a164b8349c725a23765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+--- !u!114 &5827068402827264243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999009161233943469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -5
+  statusEffects: []
+  thrust: 4
+  knockbackTime: 0.2
+  affectSelf: 1
+  affectOther: 1
+  affectSame: 1
+  affectNeutral: 1
+  affectSkills: 0
+  ignoreInvincibility: 0
 --- !u!1 &3004850705707648969
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1502724174826137234}
   - component: {fileID: 7463159621387111647}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}

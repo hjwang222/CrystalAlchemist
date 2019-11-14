@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1686841199074002818}
   - component: {fileID: 1686841199074002816}
   - component: {fileID: 1686841199074002817}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 9195858179702765917}
   - component: {fileID: 3892282753549994084}
   - component: {fileID: 7362822136730295133}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Circle Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1177715583
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 4635883900927747720, guid: 0e42d4d669e893c45a23472f2f4d3429,
     type: 3}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 6666988620013854383}
   - component: {fileID: 4787189421986897758}
   - component: {fileID: 6979217386041115320}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Todes-Turm
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -283,10 +283,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Todes-Turm
   skillNameEnglish: Todes-Turm
+  skillDescription: 
+  skillDescriptionEnglish: 
   category: 1
   animationTriggerName: 
   orderIndex: 0
-  skillDescription: 
   spriteRenderer: {fileID: 1686841199074002818}
   myRigidbody: {fileID: 4787189421986897758}
   animator: {fileID: 1686841199074002817}
@@ -296,12 +297,15 @@ MonoBehaviour:
   showCastBarForEnemies: 0
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
   cast: 0
   keepHoldTimer: 0
   delay: 3
   duration: 0
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
   cooldown: 1
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -327,6 +331,7 @@ MonoBehaviour:
   colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
+  rotateOnUpdate: 0
   keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
@@ -343,9 +348,9 @@ MonoBehaviour:
   multiHitDelay: 0
   showRange: 0
   affectSelf: 0
-  affectPlayers: 1
-  affectEnemies: 0
-  affectObjects: 0
+  affectOther: 0
+  affectSame: 0
+  affectNeutral: 0
   affectSkills: 0
   ignoreInvincibility: 0
   stateType: 0

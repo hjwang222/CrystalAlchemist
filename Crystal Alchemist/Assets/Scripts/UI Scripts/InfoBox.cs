@@ -28,19 +28,23 @@ public class InfoBox : MonoBehaviour
     private TextMeshProUGUI statusEffectDescriptionField;
 
 
-    private void setInfo(StandardSkill skill)
+    private void setInfo(Skill skill)
     {
         this.additionalInfo.SetActive(false);
 
-        this.previewImage.sprite = skill.icon;
         this.nameField.text = Utilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
-        this.descriptionField.text = Utilities.Format.getLanguageDialogText(skill.skillDescription, skill.skillDescriptionEnglish);
 
-        if(skill.statusEffects.Count > 0)
+        if (skill.GetComponent<SkillBookModule>() != null)
+        {
+            this.previewImage.sprite = skill.GetComponent<SkillBookModule>().icon;
+            this.descriptionField.text = Utilities.Format.getLanguageDialogText(skill.GetComponent<SkillBookModule>().skillDescription, skill.GetComponent<SkillBookModule>().skillDescriptionEnglish);
+        }
+
+        if (skill.GetComponent<SkillTargetModule>() != null && skill.GetComponent<SkillTargetModule>().statusEffects.Count > 0)
         {
             this.additionalInfo.SetActive(true);
 
-            StatusEffect statusEffect = skill.statusEffects[0];
+            StatusEffect statusEffect = skill.GetComponent<SkillTargetModule>().statusEffects[0];
 
             this.statusEffectPreviewImage.sprite = statusEffect.iconSprite;
             this.statusEffectNameField.text = Utilities.Format.getLanguageDialogText(statusEffect.statusEffectName, statusEffect.statusEffectNameEnglish);
@@ -53,9 +57,19 @@ public class InfoBox : MonoBehaviour
     {
         this.additionalInfo.SetActive(false);
 
-        this.previewImage.sprite = item.itemSpriteInventory;
+        Utilities.Items.setItemImage(this.previewImage, item);
+
         this.nameField.text = Utilities.Format.getLanguageDialogText(item.itemName, item.itemNameEnglish);
         this.descriptionField.text = Utilities.Format.getLanguageDialogText(item.itemDescription, item.itemDescriptionEnglish);
+    }
+
+    private void setInfo(CharacterAttributeStats stats)
+    {
+        this.additionalInfo.SetActive(false);
+
+        this.previewImage.sprite = stats.icon.sprite;
+        this.nameField.text = Utilities.Format.getLanguageDialogText(stats.attributeName, stats.nameEnglish);
+        this.descriptionField.text = Utilities.Format.getLanguageDialogText(stats.description, stats.descriptionEnglish);
     }
 
     public void Hide()
@@ -63,7 +77,7 @@ public class InfoBox : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public void Show(StandardSkill skill)
+    public void Show(Skill skill)
     {
         this.gameObject.SetActive(true);
         setInfo(skill);
@@ -75,5 +89,9 @@ public class InfoBox : MonoBehaviour
         setInfo(item);
     }
 
-
+    public void Show(CharacterAttributeStats stats)
+    {
+        this.gameObject.SetActive(true);
+        setInfo(stats);
+    }
 }

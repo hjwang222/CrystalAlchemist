@@ -13,29 +13,12 @@ public class Interactable : MonoBehaviour
 {
     #region Attribute
 
+
+
     [Required]
+    [BoxGroup("Mandatory")]
     [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]
     public GameObject contextClueChild;
-
-
-
-    [FoldoutGroup("Dialog", expanded: false)]
-    [Tooltip("Anzeige-Text für die Dialog-Box")]
-    [TextAreaAttribute]
-    public string dialogBoxText;
-
-    [FoldoutGroup("Dialog", expanded: false)]
-    [Tooltip("Englischer Anzeige-Text für die Dialog-Box")]
-    [TextAreaAttribute]
-    public string dialogBoxTextEnglish;
-
-    [FoldoutGroup("Loot", expanded: false)]
-    [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
-    public LootTable[] lootTable;
-
-    [FoldoutGroup("Loot", expanded: false)]
-    [Tooltip("Multiloot = alle Items. Ansonsten nur das seltenste Item")]
-    public bool multiLoot = false;
 
     [FoldoutGroup("Activation Requirements", expanded: false)]
     [EnumToggleButtons]
@@ -55,8 +38,7 @@ public class Interactable : MonoBehaviour
     [Tooltip("Standard-Soundeffekt")]
     public AudioClip soundEffect;
 
-    [Required]
-    public Animator animator;
+
 
     [HideInInspector]
     public bool isPlayerInRange = false;
@@ -64,9 +46,7 @@ public class Interactable : MonoBehaviour
     public bool isPlayerLookingAtIt = false;
 
     [HideInInspector]
-    public Player player;
-    
-
+    public Player player; 
 
     [HideInInspector]
     public AudioSource audioSource;
@@ -74,8 +54,7 @@ public class Interactable : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     [HideInInspector]
     public GameObject context;
-    [HideInInspector]
-    public List<Item> items = new List<Item>();
+
     [HideInInspector]
     public objectState currentState = objectState.normal;
 
@@ -84,7 +63,7 @@ public class Interactable : MonoBehaviour
 
     #region Start Funktionen (init, ContextClue, Item set bzw. Lootregeln)
 
-    public void Start()
+    public virtual void Start()
     {
         init();
     }
@@ -120,9 +99,8 @@ public class Interactable : MonoBehaviour
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
-        if(this.animator == null && GetComponent<Animator>() != null) this.animator = GetComponent<Animator>();
         setContext();
-        Utilities.Items.setItem(this.lootTable, this.multiLoot, this.items);
+       
     }
 
     public void setContext()

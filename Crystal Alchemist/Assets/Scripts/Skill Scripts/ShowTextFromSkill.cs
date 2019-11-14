@@ -9,7 +9,7 @@ public class ShowTextFromSkill : MonoBehaviour
     private TextMeshPro textField;
 
     [SerializeField]
-    private StandardSkill skill;
+    private Skill skill;
 
     // Update is called once per frame
     private void FixedUpdate()

@@ -17,19 +17,28 @@ public class ProtectedArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        foreach (AI enemy in this.protectingNPCs)
-        {
-            if(enemy.gameObject.activeInHierarchy && enemy.GetComponent<AIAggroSystem>() != null)
-                enemy.GetComponent<AIAggroSystem>().increaseAggro(collision.GetComponent<Character>(), this.aggroIncreaseFactor);
-        }        
+        setAggro(collision, false);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        foreach (AI enemy in this.protectingNPCs)
+        setAggro(collision, true);
+    }
+
+    private void setAggro(Collider2D collision, bool decrease)
+    {
+        Character character = collision.GetComponent<Character>();
+
+        if (character != null)
         {
-            if (enemy.gameObject.activeInHierarchy && enemy.GetComponent<AIAggroSystem>() != null)
-                enemy.GetComponent<AIAggroSystem>().decreaseAggro(collision.GetComponent<Character>(), this.aggroIncreaseFactor);
+            foreach (AI enemy in this.protectingNPCs)
+            {
+                if (enemy.gameObject.activeInHierarchy && enemy.aggroGameObject != null)
+                {
+                    if(!decrease) enemy.aggroGameObject.increaseAggro(character, this.aggroIncreaseFactor);
+                    else enemy.aggroGameObject.decreaseAggro(character, this.aggroDecreaseFactor);
+                }
+            }
         }
     }
 }

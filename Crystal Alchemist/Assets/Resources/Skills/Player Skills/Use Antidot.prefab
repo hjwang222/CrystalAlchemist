@@ -10,10 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 6771622126804119593}
   - component: {fileID: 5259732704196363089}
-  - component: {fileID: 7736697032808662322}
   - component: {fileID: 8956259282679186702}
   - component: {fileID: -2803908752990074219}
-  m_Layer: 14
+  - component: {fileID: 958098431524863669}
+  - component: {fileID: 4807108123544480538}
+  - component: {fileID: 1287777754196665183}
+  - component: {fileID: 7190475878050500905}
+  - component: {fileID: 6457082249453623787}
+  - component: {fileID: 5724001265021433924}
+  m_Layer: 13
   m_Name: Use Antidot
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -131,109 +136,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7736697032808662322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2332328483500600831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 830c76880be9a6747af1e5bc13fc9a1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: Anti
-  skillNameEnglish: Anti
-  skillDescription: Entfernt einen negativen Effekt
-  skillDescriptionEnglish: Removes a negative effect
-  category: 2
-  animationTriggerName: 
-  orderIndex: 3
-  spriteRenderer: {fileID: 0}
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
-  shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  duration: 60
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  cooldown: 3
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  affectedResources: []
-  statusEffects: []
-  thrust: 0
-  knockbackTime: 0
-  resourceType: 3
-  item: {fileID: 5093969795789574484, guid: 7068d4f0f4dace14b99ad94094add34c, type: 3}
-  addResourceSender: -1
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 0
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 1
-  affectOther: 0
-  affectSame: 0
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 1
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: 5217516531157938199, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
-  sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: -0.0061827544
-  movementLocked: 0
-  target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  timeDistortion: 1
-  direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setPositionAtStart: 1
-  setActive: 1
-  supportType: 2
-  useCollider: 0
-  targetColor: {r: 0.8442608, g: 1, b: 0, a: 1}
 --- !u!95 &8956259282679186702
 Animator:
   serializedVersion: 3
@@ -302,6 +204,150 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &958098431524863669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332328483500600831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Anti
+  skillNameEnglish: Anti
+  spriteRenderer: {fileID: -2803908752990074219}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 8956259282679186702}
+  shadow: {fileID: 0}
+  speed: 0
+  positionOffset: 1
+  maxAmounts: 1
+  attachToSender: 1
+  doCastDuringDelay: 0
+  comboAmount: 100
+  cast: 0
+  lockMovementonDuration: 0
+  deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 1
+  delay: 0
+  duration: 60
+  cooldown: 3
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  elapsed: 0
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  overridePosition: 1
+  movementLocked: 0
+  target: {fileID: 0}
+  audioSource: {fileID: 0}
+  dontPlayAudio: 0
+  basicRequirementsExists: 1
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setActive: 1
+--- !u!114 &4807108123544480538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332328483500600831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 958098431524863669}
+  skillDescription: Entfernt einen negativen Effekt
+  skillDescriptionEnglish: Removes a negative effect
+  category: 2
+  orderIndex: 3
+  icon: {fileID: 5217516531157938199, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &1287777754196665183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332328483500600831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  resourceType: 3
+  item: {fileID: 5093969795789574484, guid: 7068d4f0f4dace14b99ad94094add34c, type: 3}
+  addResourceSender: -1
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  affectAnimation: 0
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0
+--- !u!114 &7190475878050500905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332328483500600831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65144b73769891f41a72088043398bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 958098431524863669}
+  immortalTimer: 0
+--- !u!114 &6457082249453623787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332328483500600831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff888da11674d454bb4936a9c97fb6c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 958098431524863669}
+  affectAllOfKind: 1
+  dispellIt: 1
+  allTheSame: 0
+  extendTimePercentage: 0
+--- !u!114 &5724001265021433924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332328483500600831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e01b756280d164eb9e557d11c981f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  animationTriggerName: 
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
+  targetColor: {r: 0.8431373, g: 1, b: 0, a: 1}
+  useColor: 1
 --- !u!1001 &2651323312123974777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -368,6 +414,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1555326793583579602}
-  - component: {fileID: 1555326793583579601}
   - component: {fileID: 1555326793583579607}
   - component: {fileID: 1555326793583579606}
   - component: {fileID: 1426243044926737952}
-  m_Layer: 15
+  - component: {fileID: 1268306952617975115}
+  m_Layer: 17
   m_Name: Truhe
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -33,35 +33,10 @@ Transform:
   m_Children:
   - {fileID: 3293973927404700897}
   - {fileID: 4589597711886439785}
+  - {fileID: 8772655283959596818}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1555326793583579601
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555326793583579603}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0275, y: -0.075}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.9375, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.875, y: 0.6}
-  m_EdgeRadius: 0
 --- !u!114 &1555326793583579607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,15 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
-  showCurrencyUI: {fileID: 11400000, guid: 81ab4401a7874e940be4896be7fe05a3, type: 2}
-  hideCurrencyUI: {fileID: 11400000, guid: d09786fd819d50f46b7c5bff60408510, type: 2}
-  dialogBoxText: 
-  dialogBoxTextEnglish: 
-  lootTable:
-  - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
-    dropRate: 100
-    amount: 1
-  multiLoot: 0
   currencyNeeded: 3
   item: {fileID: 3692160304636444062, guid: 0aea2ca1a4e017d4d9f7b1ccd427e54a, type: 3}
   price: 1
@@ -96,8 +62,13 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   spriteRenderer: {fileID: 0}
   context: {fileID: 0}
-  items: []
   currentState: 0
+  lootTable:
+  - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
+    dropRate: 100
+    amount: 1
+  multiLoot: 0
+  inventory: []
   anim: {fileID: 3895695428969083601}
   soundEffectTreasure: {fileID: 8300000, guid: 59d34d1df831b0449a4e2f413b1dda3d, type: 3}
   treasureType: 0
@@ -142,6 +113,87 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &1268306952617975115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555326793583579603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f660a5e6a71b040a0929e2af13c4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - trigger: 1
+    dialogBoxText: Du hast <loot amount> <loot name> erhalten!
+    dialogBoxTextEnglish: You obtained <loot amount> <loot name>!
+  - trigger: 2
+    dialogBoxText: "Du kannst d<interactable> nicht \xF6ffnen. Du ben\xF6tigst <price>
+      <item name>."
+    dialogBoxTextEnglish: You cant open the <interactable>. You need <price> <item
+      name>.
+  - trigger: 3
+    dialogBoxText: D<interactable> ist leer... .
+    dialogBoxTextEnglish: The <interactable> is empty... .
+--- !u!1 &4269877452499084863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8772655283959596818}
+  - component: {fileID: 7430100649759542894}
+  m_Layer: 13
+  m_Name: Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8772655283959596818
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4269877452499084863}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1555326793583579602}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &7430100649759542894
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4269877452499084863}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0275, y: -0.075}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.9375, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.875, y: 0.6}
+  m_EdgeRadius: 0
 --- !u!1 &5444656700998898092
 GameObject:
   m_ObjectHideFlags: 0

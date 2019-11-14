@@ -63,8 +63,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300412, guid: b0b8d75b616ba6e42aa4ea4103267705, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -88,6 +86,7 @@ GameObject:
   - component: {fileID: 8986203458741278650}
   - component: {fileID: 8986203458741278651}
   - component: {fileID: 8986203458741278652}
+  - component: {fileID: 197620902122930858}
   m_Layer: 5
   m_Name: Lock On Frame
   m_TagString: LockOn
@@ -175,7 +174,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 32567
+    m_Bits: 32055
 --- !u!114 &8986203458741278652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +189,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 8986203458741278649}
   cam: {fileID: 0}
+--- !u!114 &197620902122930858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8986203458741278654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c4923319e524644b274de10afeb481, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textField: {fileID: 8986203459396034342}
 --- !u!1 &8986203459396034360
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,8 +265,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3f1660bebbaef6b4987ec9111be1f411, type: 2}

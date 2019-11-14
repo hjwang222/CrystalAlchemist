@@ -10,9 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 3198320152754607256}
   - component: {fileID: 4135789139748317152}
-  - component: {fileID: 1929037885388743043}
-  - component: {fileID: 3229661110501609832}
-  m_Layer: 14
+  - component: {fileID: 783293887223134462}
+  - component: {fileID: 2383572904453914523}
+  - component: {fileID: 3093429781149975171}
+  - component: {fileID: 3928851992748964709}
+  - component: {fileID: 3758539739716528196}
+  - component: {fileID: 6489710300846754372}
+  - component: {fileID: 8334679080110393763}
+  m_Layer: 13
   m_Name: Teleport
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -129,7 +134,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1929037885388743043
+--- !u!114 &783293887223134462
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,117 +143,148 @@ MonoBehaviour:
   m_GameObject: {fileID: 5892130185635481934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 830c76880be9a6747af1e5bc13fc9a1f, type: 3}
+  m_Script: {fileID: 11500000, guid: b0a40c805296abb4c851b2ce64fd3152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Teleportation
-  skillNameEnglish: Teleport
-  skillDescription: "Bringt dich zur\xFCck zum letzten Speicherpunkt"
-  skillDescriptionEnglish: Returns you to the last save point
-  category: 1
-  animationTriggerName: 
-  orderIndex: 7
-  spriteRenderer: {fileID: 0}
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
-  shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 0
-  showCastBarForEnemies: 0
-  useCustomColor: 0
-  indicatorColor: {r: 1, g: 1, b: 1, a: 1}
-  castingAnimation: {fileID: 2159891387579794337, guid: 4bea464adb12fb4419adec9db5f4305b,
-    type: 3}
-  castingAnimationCharacterKey: 
-  cast: 4
-  keepHoldTimer: 0
-  delay: 0
-  duration: 0.3
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  cooldown: 60
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  affectedResources: []
-  statusEffects: []
-  thrust: 0
-  knockbackTime: 0
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: -3
-  intervallSender: 0
-  speedDuringCasting: -100
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 0
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 1
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 1
-  affectOther: 0
-  affectSame: 1
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 1
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: 21300010, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
-  sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  movementLocked: 0
-  target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  timeDistortion: 1
-  direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setPositionAtStart: 1
-  setActive: 1
-  supportType: 3
-  useCollider: 0
-  targetColor: {r: 0, g: 0, b: 0, a: 0}
-  showAnimation: 1
---- !u!58 &3229661110501609832
-CircleCollider2D:
+  skill: {fileID: 0}
+--- !u!114 &2383572904453914523
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5892130185635481934}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Teleportation
+  skillNameEnglish: Teleport
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  shadow: {fileID: 0}
+  speed: 0
+  positionOffset: 0
+  maxAmounts: 1
+  attachToSender: 1
+  doCastDuringDelay: 0
+  comboAmount: 100
+  cast: 4
+  lockMovementonDuration: 0
+  deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 0
+  delay: 0
+  duration: 0.3
+  cooldown: 30
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  elapsed: 0
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  overridePosition: 1
+  movementLocked: 0
+  target: {fileID: 0}
+  audioSource: {fileID: 0}
+  dontPlayAudio: 0
+  basicRequirementsExists: 1
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setActive: 1
+--- !u!114 &3093429781149975171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892130185635481934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  skillDescription: "Bringt dich zur\xFCck zum letzten Speicherpunkt"
+  skillDescriptionEnglish: Returns you to the last save point
+  category: 1
+  orderIndex: 11
+  icon: {fileID: 21300010, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &3928851992748964709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892130185635481934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: -3
+  intervallSender: 0
+  speedDuringCasting: -100
+  speedDuringDuration: 0
+  affectAnimation: 0
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0
+--- !u!114 &3758539739716528196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892130185635481934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979f2acfd3b6633459166fa11c6acd26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+--- !u!114 &6489710300846754372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892130185635481934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e01b756280d164eb9e557d11c981f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  animationTriggerName: 
+  castingAnimation: {fileID: 2159891387579794337, guid: 4bea464adb12fb4419adec9db5f4305b,
+    type: 3}
+  castingAnimationCharacterKey: 
+  targetColor: {r: 0, g: 0, b: 0, a: 0}
+  useColor: 0
+--- !u!114 &8334679080110393763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892130185635481934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65144b73769891f41a72088043398bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  immortalTimer: 1

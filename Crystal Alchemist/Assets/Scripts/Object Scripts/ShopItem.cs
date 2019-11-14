@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ShopItem : Interactable
+public class ShopItem : Rewardable
 {
 
     [Header("Shop-Item Attribute")]
@@ -18,37 +18,30 @@ public class ShopItem : Interactable
 
     private int index = 0;
 
-    private void Start()
+    private new void Start()
     {
         base.Start();
 
         Utilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
-        this.items.Add(this.lootTable[this.index].item);
+        this.inventory.Add(this.lootTable[this.index].item);
 
         //this.amountText.text = this.amount + "";
-        this.childSprite.sprite = this.items[this.index].itemSprite;
+        this.childSprite.sprite = this.inventory[this.index].itemSprite;
     }
 
     public override void doSomethingOnSubmit()
     {
-        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price, text))
+        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
         {
-            Item loot = items[this.index];
+            Item loot = inventory[this.index];
 
-            string itemObtained = Utilities.Format.getDialogBoxText("Du hast", loot.amount, loot, "für");
-            string itemNedded = Utilities.Format.getDialogBoxText("", this.price, this.item, "gekauft!");
-
-            if (GlobalValues.useAlternativeLanguage)
-            {
-                itemObtained = Utilities.Format.getDialogBoxText("You bought", loot.amount, loot, "for");
-                itemNedded = Utilities.Format.getDialogBoxText("", this.price, this.item, "!");
-            }
-
-            this.player.showDialogBox(itemObtained + "\n" + itemNedded);
+            Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success, loot);
             this.player.collect(loot, false);
+        }
+        else
+        {
+            Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
         }
     }
 }
