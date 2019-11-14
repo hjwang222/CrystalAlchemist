@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 8392694415358600199}
   - component: {fileID: 3366528352554020260}
   - component: {fileID: 134258178168183256}
-  m_Layer: 0
+  - component: {fileID: 2350050367639092041}
+  - component: {fileID: 2719762394651127494}
+  m_Layer: 12
   m_Name: Flamme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,95 +99,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Feuer
-  skillNameEnglish: 
-  skillDescription: 
-  skillDescriptionEnglish: 
-  category: 1
-  animationTriggerName: 
-  orderIndex: 1
-  spriteRenderer: {fileID: 0}
+  skillNameEnglish: Fire
+  spriteRenderer: {fileID: 8192737785937678925}
   myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
+  animator: {fileID: 134258178168183256}
   shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  speed: 0
+  positionOffset: 0
+  maxAmounts: 9999
+  isStationary: 1
+  doCastDuringDelay: 0
+  comboAmount: 99
   cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  duration: 3
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
   deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 1
+  delay: 0
+  duration: 4
   cooldown: 0
   cooldownAfterCombo: 0
   durationCombo: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: -1
-  statusEffects: []
-  thrust: 4
-  knockbackTime: 0.2
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: 0
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 0
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 0
-  maxAmountOfTargets: 0
-  targetingDuration: 0
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 1
-  affectOther: 1
-  affectSame: 1
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 9999
-  comboAmount: 99
-  icon: {fileID: 0}
-  activeIndicators: []
+  elapsed: 0
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
   dontPlayAudio: 0
+  basicRequirementsExists: 1
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
-  setPositionAtStart: 1
   setActive: 1
 --- !u!58 &3366528352554020260
 CircleCollider2D:
@@ -222,6 +174,46 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2350050367639092041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474452125293546285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790e6050ddf4a164b8349c725a23765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+--- !u!114 &2719762394651127494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474452125293546285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -1
+  statusEffects:
+  - {fileID: 71630591074221121, guid: e420e9509f9819f4188748abbdda79ee, type: 3}
+  thrust: 4
+  knockbackTime: 0.2
+  affectSelf: 1
+  affectOther: 1
+  affectSame: 1
+  affectNeutral: 1
+  affectSkills: 0
+  ignoreInvincibility: 0
 --- !u!1 &9016259458083899856
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8953147139253660846}
   - component: {fileID: 3621780190218933715}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

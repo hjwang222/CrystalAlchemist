@@ -9,6 +9,10 @@ public class CombatButtons : MonoBehaviour
 {
     private Player player;
 
+    [SerializeField]
+    [BoxGroup("Mandatory")]
+    private PlayerStats playerStats;
+
     [FoldoutGroup("A Button UI", expanded: false)]
     [SerializeField]
     private Image iconAButton;
@@ -91,7 +95,7 @@ public class CombatButtons : MonoBehaviour
 
     private void Awake()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
     }
 
     void Start()
@@ -116,11 +120,11 @@ public class CombatButtons : MonoBehaviour
 
     private void FixedUpdate()
     {
-        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton, this.ammoA, this.skillIconAButtonTrans, this.player.isButtonUsable("A-Button"));
-        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB, this.skillIconBButtonTrans, this.player.isButtonUsable("B-Button"));
-        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX, this.skillIconXButtonTrans, this.player.isButtonUsable("X-Button"));
-        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY, this.skillIconYButtonTrans, this.player.isButtonUsable("Y-Button"));
-        updateButton(this.skillIconRBButton, this.iconRBButton, this.cooldownRB, this.player.RBButton, this.ammoRB, this.skillIconRBButtonTrans, this.player.isButtonUsable("RB-Button"));
+        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton, this.ammoA, this.skillIconAButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("A-Button"));
+        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB, this.skillIconBButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("B-Button"));
+        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX, this.skillIconXButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("X-Button"));
+        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY, this.skillIconYButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("Y-Button"));
+        updateButton(this.skillIconRBButton, this.iconRBButton, this.cooldownRB, this.player.RBButton, this.ammoRB, this.skillIconRBButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("RB-Button"));
     }
 
     private void setFontSize(TextMeshProUGUI textfield)
@@ -131,14 +135,16 @@ public class CombatButtons : MonoBehaviour
     }
 
 
-    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, StandardSkill skill, TextMeshProUGUI ammo, Image buttonUITrans, bool isUsable)
+    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, Skill skill, TextMeshProUGUI ammo, Image buttonUITrans, bool isUsable)
     {
         if (skill != null)
         {       
             float cooldownLeft = skill.cooldownTimeLeft / (player.timeDistortion * player.spellspeed);
             float cooldownValue = skill.cooldown / (player.timeDistortion * player.spellspeed);
 
-            if (skill.item != null) ammo.text = (int)player.getResource(skill.resourceType, skill.item)+"";
+            SkillSenderModule senderModule = skill.GetComponent<SkillSenderModule>();
+
+            if (senderModule != null && senderModule.item != null) ammo.text = (int)player.getResource(senderModule.resourceType, senderModule.item)+"";
             else ammo.text = "";            
 
             if (!isUsable ||
@@ -147,9 +153,10 @@ public class CombatButtons : MonoBehaviour
                 this.player.currentState == CharacterState.knockedback ||
                 this.player.currentState == CharacterState.inDialog ||
                 this.player.currentState == CharacterState.respawning ||
-                (player.getResource(skill.resourceType, skill.item) + skill.addResourceSender < 0 && skill.addResourceSender != -Utilities.maxFloatInfinite)
-                || Utilities.Skill.getAmountOfSameSkills(skill, player.activeSkills, player.activePets) >= skill.maxAmounts
-                || cooldownLeft == Utilities.maxFloatInfinite)
+                (!skill.isResourceEnough(player))
+                || Utilities.Skills.getAmountOfSameSkills(skill, player.activeSkills, player.activePets) >= skill.maxAmounts
+                || cooldownLeft == Utilities.maxFloatInfinite
+                || !skill.basicRequirementsExists)
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
                 string cooldownText = "X";
@@ -163,7 +170,7 @@ public class CombatButtons : MonoBehaviour
                 buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
             }
             else if (player.activeLockOnTarget != null
-              && player.activeLockOnTarget.GetComponent<TargetingSystem>().skill == skill)
+              && player.activeLockOnTarget.getSkill() == skill)
             {
                 //ist Skill in Zielerfassung
                 string cooldownText = "[+]";
@@ -179,7 +186,7 @@ public class CombatButtons : MonoBehaviour
             else if (cooldownLeft > 0 && cooldownValue > 0.5f)
             {
                 //Ist Skill in der Abklingzeit
-                string cooldownText = Utilities.Format.setDurationToString(cooldownLeft) + "s";
+                string cooldownText = Utilities.Format.setDurationToString(cooldownLeft);
                 cooldown.text = cooldownText;
                 setFontSize(cooldown);
 
@@ -208,7 +215,7 @@ public class CombatButtons : MonoBehaviour
         }
     }
 
-    private void setButton(StandardSkill skill, Image skillUI, Image buttonUI)
+    private void setButton(Skill skill, Image skillUI, Image buttonUI)
     {
         if (skill == null)
         {
@@ -218,7 +225,7 @@ public class CombatButtons : MonoBehaviour
         else
         {
             skillUI.gameObject.SetActive(true);
-            skillUI.sprite = skill.icon;
+            if(skill.GetComponent<SkillBookModule>() != null) skillUI.sprite = skill.GetComponent<SkillBookModule>().icon;
             buttonUI.color = new Color(1f, 1f, 1f, 1f);
             buttonUI.fillAmount = 1;
         }

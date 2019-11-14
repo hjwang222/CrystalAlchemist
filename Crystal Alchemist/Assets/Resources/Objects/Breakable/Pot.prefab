@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 4378207659174940500}
   - component: {fileID: 546327852}
   - component: {fileID: 2509453432209138342}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Pot
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -271,48 +271,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50edb187effa6214081b297a24971a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Krug
-  englischCharacterName: 
+  stats: {fileID: 11400000, guid: 2e707ea95b2c5c342be8d3895175e9f5, type: 2}
   myRigidbody: {fileID: 546327852}
   animator: {fileID: 2094131440841753910}
   spriteRenderer: {fileID: 3542870481894826020}
   boxCollider: {fileID: 4378207659174940502}
   shadowRenderer: {fileID: 1580008844188032001}
+  startSpriteForRespawn: {fileID: 0}
+  startSpriteForRespawnWhite: {fileID: 0}
   activeSkillParent: {fileID: 9010662488490252655}
   activeStatusEffectParent: {fileID: 6899571501455701071}
   skillSetParent: {fileID: 0}
-  startLife: 3
-  startMana: 0.1
-  startSpeed: 0
-  startSpellSpeed: 100
-  respawnTime: 9999
-  immunityToStatusEffects: []
-  maxLife: 0.1
-  maxMana: 0.1
-  lifeRegeneration: 0
-  lifeRegenerationInterval: 0
-  manaRegeneration: 0
-  manaRegenerationInterval: 0
-  initializeSkill: {fileID: 0}
-  deathSkill: {fileID: 0}
-  damageNumber: {fileID: 0}
-  antiKnockback: 0
-  cannotBeHitTime: 0.3
-  isTouchable: 1
-  showHitcolor: 1
-  hitColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
-  lootTable:
-  - item: {fileID: 8069356869073092967, guid: 6b191b04f9a7dbc49920d197f5070449, type: 3}
-    dropRate: 10
-    amount: 0
-  multiLoot: 0
-  canCollectAll: 0
-  canCollect: []
-  hitSoundEffect: {fileID: 8300000, guid: 8626eccd88e6ac64dbad21210560d315, type: 3}
-  killSoundEffect: {fileID: 8300000, guid: c1c64c941c14979489abf63f84a92cae, type: 3}
-  characterSpecies: "Gef\xE4\xDF"
-  characterGender: 2
-  characterType: 3
+  aggro: {fileID: 0}
+  speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
   activeCastbar: {fileID: 0}
@@ -322,6 +293,7 @@ MonoBehaviour:
   mana: 0
   speed: 0
   isInvincible: 0
+  isImmortal: 0
   isHit: 0
   items: []
   buffs: []
@@ -333,6 +305,9 @@ MonoBehaviour:
   activeLockOnTarget: {fileID: 0}
   isPlayer: 0
   inventory: []
+  activePets: []
+  steps: 0
+  isOnIce: 0
 --- !u!50 &546327852
 Rigidbody2D:
   serializedVersion: 4

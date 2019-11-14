@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3748240976588841789}
   - component: {fileID: 7200088797145471585}
   - component: {fileID: 9007690894452071312}
-  m_Layer: 14
+  m_Layer: 12
   m_Name: Meteor
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -50,10 +50,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Meteor
   skillNameEnglish: Meteor
+  skillDescription: 
+  skillDescriptionEnglish: 
   category: 1
   animationTriggerName: 
   orderIndex: 0
-  skillDescription: 
   spriteRenderer: {fileID: 871444941940220006}
   myRigidbody: {fileID: 9007690894452071312}
   animator: {fileID: 3748240976588841789}
@@ -64,12 +65,15 @@ MonoBehaviour:
   showCastBarForEnemies: 1
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
   cast: 5
   keepHoldTimer: 0
   delay: 0
   duration: 0
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
   cooldown: 0
   cooldownAfterCombo: 0
   durationCombo: 0
@@ -95,6 +99,7 @@ MonoBehaviour:
   colliderHeightOffset: 0
   speed: 0
   rotateIt: 0
+  rotateOnUpdate: 0
   keepOriginalRotation: 0
   blendTree: 0
   useOffSetToBlendTree: 0
@@ -111,9 +116,9 @@ MonoBehaviour:
   multiHitDelay: 0
   showRange: 0
   affectSelf: 0
-  affectPlayers: 1
-  affectEnemies: 0
-  affectObjects: 1
+  affectOther: 0
+  affectSame: 0
+  affectNeutral: 0
   affectSkills: 0
   ignoreInvincibility: 0
   stateType: 0

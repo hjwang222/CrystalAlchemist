@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6553018102672601274}
   - component: {fileID: 6503146050514314381}
   - component: {fileID: 7653854717709258060}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Scene Transition
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -73,7 +73,6 @@ MonoBehaviour:
   targetScene: 
   playerPositionInNewScene: {x: 0, y: 0}
   vcamSignal: {fileID: 11400000, guid: a33ae82561921e840bfadec36a9feb04, type: 2}
-  locationSignal: {fileID: 11400000, guid: 607a9253355ca954388700e0704f8968, type: 2}
-  fadeInPanel: {fileID: 0}
-  fadeOutPanel: {fileID: 0}
-  fadeWait: 0
+  fadeSignal: {fileID: 0}
+  transitionDuration: {fileID: 0}
+  showAnimation: 0

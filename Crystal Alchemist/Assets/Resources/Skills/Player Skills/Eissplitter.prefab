@@ -9,12 +9,20 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7710717558811602010}
-  - component: {fileID: 8104124904149976495}
-  - component: {fileID: 5432061724297285009}
   - component: {fileID: 8003971335365348661}
   - component: {fileID: 1412753294250155141}
   - component: {fileID: 2478493376106607620}
-  m_Layer: 14
+  - component: {fileID: 9012234495704110565}
+  - component: {fileID: 8133105546896252298}
+  - component: {fileID: 2890860741540156332}
+  - component: {fileID: 8485538978608916237}
+  - component: {fileID: 6588353089081165236}
+  - component: {fileID: 3772284571761737148}
+  - component: {fileID: 2106465046035776382}
+  - component: {fileID: 2697588482501113128}
+  - component: {fileID: 9119982907900064386}
+  - component: {fileID: 5432061724297285009}
+  m_Layer: 13
   m_Name: Eissplitter
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -36,128 +44,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8104124904149976495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4607741441608745160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e333cb7d9eccdf149a75af3b5ca70b72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: Eissplitter
-  skillNameEnglish: Ice Shard
-  skillDescription: Ein langsamer Eis-Zauber
-  skillDescriptionEnglish: A slow ice spell
-  category: 1
-  animationTriggerName: 
-  orderIndex: 4
-  spriteRenderer: {fileID: 597466489169404831}
-  myRigidbody: {fileID: 8003971335365348661}
-  animator: {fileID: 1781594353715446578}
-  shadow: {fileID: 157402643467407502}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  duration: 10
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  cooldown: 1
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: -0.5
-  statusEffects:
-  - {fileID: 2841143901546363653, guid: 49f1ebd00c6ca964c8e6d197f4187346, type: 3}
-  thrust: 0
-  knockbackTime: 0.2
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: -0.25
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 1
-  isStationary: 1
-  colliderHeightOffset: -0.5
-  speed: 10
-  rotateIt: 1
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 45
-  positionOffset: 0.75
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 99
-  comboAmount: 99
-  icon: {fileID: -2174905366303013736, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
-  sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: -0.0048119426
-  movementLocked: 0
-  target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  timeDistortion: 1
-  direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setPositionAtStart: 1
-  setActive: 1
-  skillOnImpact: {fileID: 0}
---- !u!114 &5432061724297285009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4607741441608745160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a37b145246250f4b98d09b1b3d7d2e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ghost: {fileID: 634257569416937404, guid: f11b09210e7962848bddb256727f4657, type: 3}
-  mainObject: {fileID: 4607741441608745160}
-  delay: 0.1
-  destroyAfter: 0.6
-  useCharacterSprite: 0
 --- !u!50 &8003971335365348661
 Rigidbody2D:
   serializedVersion: 4
@@ -286,6 +172,219 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &9012234495704110565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607741441608745160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Eissplitter
+  skillNameEnglish: Ice Shard
+  spriteRenderer: {fileID: 597466489169404831}
+  myRigidbody: {fileID: 8003971335365348661}
+  animator: {fileID: 1781594353715446578}
+  shadow: {fileID: 157402643467407502}
+  speed: 10
+  positionOffset: 0.75
+  maxAmounts: 99
+  attachToSender: 0
+  doCastDuringDelay: 0
+  comboAmount: 100
+  cast: 0
+  lockMovementonDuration: 0
+  deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
+  isRapidFire: 1
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 1
+  delay: 0
+  duration: 10
+  cooldown: 1
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  elapsed: 0
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  overridePosition: 1
+  movementLocked: 0
+  target: {fileID: 0}
+  audioSource: {fileID: 0}
+  dontPlayAudio: 0
+  basicRequirementsExists: 1
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setActive: 1
+--- !u!114 &8133105546896252298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607741441608745160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  skillDescription: Ein langsamer Eis-Zauber
+  skillDescriptionEnglish: A slow ice spell
+  category: 1
+  orderIndex: 4
+  icon: {fileID: -2174905366303013736, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &2890860741540156332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607741441608745160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: -0.25
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0
+--- !u!114 &8485538978608916237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607741441608745160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -0.5
+  statusEffects:
+  - {fileID: 5157658974536148423, guid: 49f1ebd00c6ca964c8e6d197f4187346, type: 3}
+  thrust: 0
+  knockbackTime: 0.2
+  affectSelf: 0
+  affectOther: 1
+  affectSame: 0
+  affectNeutral: 1
+  affectSkills: 0
+  ignoreInvincibility: 0
+--- !u!114 &6588353089081165236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607741441608745160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85781c900207fc428972075be537857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  useGameObjectHeight: 0
+  positionHeight: 0
+  colliderHeightOffset: -0.5
+--- !u!114 &3772284571761737148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607741441608745160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b951f28716f63414da5d74b247c0af8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  rotateIt: 1
+  rotateOnUpdate: 0
+  keepOriginalRotation: 0
+  rotationModifier: 0
+  snapRotationInDegrees: 45
+--- !u!114 &2106465046035776382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607741441608745160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0d3d2225b54824ba4df2b9553ff761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  skillOnImpact: {fileID: 0}
+--- !u!114 &2697588482501113128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607741441608745160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790e6050ddf4a164b8349c725a23765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+--- !u!114 &9119982907900064386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607741441608745160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b2c822040a9d9449eed59a8402ec3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+--- !u!114 &5432061724297285009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607741441608745160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a37b145246250f4b98d09b1b3d7d2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghost: {fileID: 634257569416937404, guid: f11b09210e7962848bddb256727f4657, type: 3}
+  mainObject: {fileID: 4607741441608745160}
+  delay: 0.1
+  destroyAfter: 0.6
+  useCharacterSprite: 0
 --- !u!1 &6622626158085490062
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +397,7 @@ GameObject:
   - component: {fileID: 597466489169404831}
   - component: {fileID: 1781594353715446578}
   - component: {fileID: 1156435307969178262}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -402,7 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 8104124904149976495}
+  skill: {fileID: 9012234495704110565}
 --- !u!1 &8507274686393064075
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +514,7 @@ GameObject:
   - component: {fileID: 157402643467407502}
   - component: {fileID: 152738269668406305}
   - component: {fileID: 4177264768934889194}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,11 +638,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2760690574085642328}
     m_Modifications:
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
-      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -598,6 +692,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

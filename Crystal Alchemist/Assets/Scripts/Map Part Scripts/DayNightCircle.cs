@@ -44,6 +44,7 @@ public class DayNightCircle : MonoBehaviour
 
             //Change color
             light.color = Color.Lerp(fromColor, toColor, counter / duration);
+            
             //Wait for a frame
             yield return null;
         }

@@ -8,17 +8,19 @@ public class SkillMenuActiveSlots : MonoBehaviour
     private Player player;
 
     [SerializeField]
+    private PlayerStats playerStats;
+    [SerializeField]
     private Image skillImage;
     [SerializeField]
     private enumButton button;
     [SerializeField]
     private SimpleSignal newAssignedSkillSignal;
 
-    public StandardSkill skill;
+    public Skill skill;
 
     void Start()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
         setImage();
     }
 
@@ -34,7 +36,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
         if (this.skill != null)
         {
             this.skillImage.gameObject.SetActive(true);
-            this.skillImage.sprite = this.skill.icon;
+            if(this.skill.GetComponent<SkillBookModule>() != null) this.skillImage.sprite = this.skill.GetComponent<SkillBookModule>().icon;
         }
         else
         {
@@ -52,7 +54,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
         this.newAssignedSkillSignal.Raise();
     }
 
-    private StandardSkill getSkill()
+    private Skill getSkill()
     {
         if (this.player != null)
         {
@@ -69,7 +71,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
         return null;
     }
 
-    private void setSkill(StandardSkill skill)
+    private void setSkill(Skill skill)
     {           
         switch (this.button)
         {

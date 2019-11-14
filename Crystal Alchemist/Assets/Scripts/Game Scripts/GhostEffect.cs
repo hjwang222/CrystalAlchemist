@@ -31,7 +31,7 @@ public class GhostEffect : MonoBehaviour
         {
             float distortion = 1;
 
-            if (this.mainObject.GetComponent<StandardSkill>() != null) distortion = this.mainObject.GetComponent<StandardSkill>().timeDistortion;
+            if (this.mainObject.GetComponent<Skill>() != null) distortion = this.mainObject.GetComponent<Skill>().timeDistortion;
             else if (this.mainObject.GetComponent<Character>() != null) distortion = this.mainObject.GetComponent<Character>().timeDistortion;
 
             if (ghostDelay > 0)
@@ -44,8 +44,8 @@ public class GhostEffect : MonoBehaviour
 
                 if (this.useCharacterSprite)
                 {
-                    if (this.mainObject.GetComponent<StandardSkill>() != null)
-                        currentGhost.GetComponent<SpriteRenderer>().sprite = this.mainObject.GetComponent<StandardSkill>().GetComponent<SpriteRenderer>().sprite;
+                    if (this.mainObject.GetComponent<Skill>() != null)
+                        currentGhost.GetComponent<SpriteRenderer>().sprite = this.mainObject.GetComponent<Skill>().GetComponent<SpriteRenderer>().sprite;
                     else if (this.mainObject.GetComponent<Character>() != null)
                         currentGhost.GetComponent<SpriteRenderer>().sprite = this.mainObject.GetComponent<Character>().GetComponent<SpriteRenderer>().sprite;
                 }

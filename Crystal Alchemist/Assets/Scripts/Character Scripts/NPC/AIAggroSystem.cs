@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using System;
 
 public class AIAggroSystem : MonoBehaviour
 {
@@ -13,64 +12,10 @@ public class AIAggroSystem : MonoBehaviour
     [BoxGroup("Required")]
     private AI enemy;
 
-
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
     [SerializeField]
-    private bool firstHitMaxAggro = true;
-
-
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
-    [SerializeField]
-    [Range(0, 120)]
-    private float aggroIncreaseFactor = 25;
-
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
-    [SerializeField]
-    [Range(0, 120)]
-    private float aggroOnHitIncreaseFactor = 25;
-
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
-    [SerializeField]
-    [Range(-120, 0)]
-    private float aggroDecreaseFactor = -25;
-
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
-    [SerializeField]
-    private float aggroNeededToTarget = 100;
-
-    [FoldoutGroup("Aggro Attributes", expanded: false)]
-    [SerializeField]
-    private float targetChangeDelay = 0f;
-
-
-    [FoldoutGroup("Aggro Object Attributes", expanded: false)]
-    [SerializeField]
-    private GameObject targetFoundClue;
-
-    [FoldoutGroup("Aggro Object Attributes", expanded: false)]
-    [SerializeField]
-    private float foundClueDuration = 1;
-
-    [FoldoutGroup("Aggro Object Attributes", expanded: false)]
-    [SerializeField]
-    private GameObject targetActiveClue;
-
-    [FoldoutGroup("Aggro Object Attributes", expanded: false)]
-    [SerializeField]
-    private float activeClueDuration = 1;
-
-
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
-    [Tooltip("wirkt auf alle Spieler")]
-    public bool affectOther = false;
-
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
-    [Tooltip("wirkt auf alle Gegner")]
-    public bool affectSame = false;
-
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
-    [Tooltip("wirkt auf alle Gegner")]
-    public bool affectNeutral = false;
+    [Required]
+    [BoxGroup("Required")]
+    private AggroStats aggroStats;
 
     private GameObject activeClue;
     private Dictionary<Character, float[]> aggroList = new Dictionary<Character, float[]>();
@@ -113,12 +58,12 @@ public class AIAggroSystem : MonoBehaviour
             if (currentAggro > aggro)
             {
                 aggro = currentAggro;
-                target = Utilities.Format.getLanguageDialogText(character.characterName, character.englischCharacterName);
+                target = Utilities.Format.getLanguageDialogText(character.stats.characterName, character.stats.englischCharacterName);
             }
         }
     }
 
-    public void clearAggro()
+    private void OnDisable()
     {
         this.enemy.target = null;
         this.hideClue();
@@ -145,7 +90,7 @@ public class AIAggroSystem : MonoBehaviour
 
             //if (this.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.aggroList[character][0] + " Aggro auf" + character.characterName);
 
-            if (this.aggroList[character][0] >= (this.aggroNeededToTarget/100))
+            if (this.aggroList[character][0] >= (this.aggroStats.aggroNeededToTarget /100))
             {
                 //this.aggroList[character][0] = 1f; //aggro                             
 
@@ -158,7 +103,7 @@ public class AIAggroSystem : MonoBehaviour
                 {
                     if(this.aggroList[this.enemy.target][1] < this.aggroList[character][1])
                     {
-                        StartCoroutine(switchTargetCo(this.targetChangeDelay, character));
+                        StartCoroutine(switchTargetCo(this.aggroStats.targetChangeDelay, character));
                     }
                 }
             }
@@ -184,7 +129,7 @@ public class AIAggroSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         this.enemy.target = character;
-        StartCoroutine(showClueCo(this.targetActiveClue, this.activeClueDuration));
+        StartCoroutine(showClueCo(this.aggroStats.targetActiveClue, this.aggroStats.activeClueDuration));
     }
 
 
@@ -240,17 +185,17 @@ public class AIAggroSystem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Utilities.Collisions.checkAffections(this.enemy, this.affectOther, this.affectSame, this.affectNeutral, collision))
+        if (Utilities.Collisions.checkAffections(this.enemy, this.aggroStats.affectOther, this.aggroStats.affectSame, this.aggroStats.affectNeutral, collision))
         {
-            increaseAggro(collision.GetComponent<Character>(), this.aggroIncreaseFactor);
+            increaseAggro(collision.GetComponent<Character>(), this.aggroStats.aggroIncreaseFactor);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (Utilities.Collisions.checkAffections(this.enemy, this.affectOther, this.affectSame, this.affectNeutral, collision))
+        if (Utilities.Collisions.checkAffections(this.enemy, this.aggroStats.affectOther, this.aggroStats.affectSame, this.aggroStats.affectNeutral, collision))
         {
-            decreaseAggro(collision.GetComponent<Character>(), this.aggroDecreaseFactor);
+            decreaseAggro(collision.GetComponent<Character>(), this.aggroStats.aggroDecreaseFactor);
         }
     }
 
@@ -260,11 +205,11 @@ public class AIAggroSystem : MonoBehaviour
         {
             addToAggroList(newTarget);
 
-            addAggro(newTarget, (this.aggroOnHitIncreaseFactor*damage));
-            if (this.aggroList.Count == 1 && this.firstHitMaxAggro) addAggro(newTarget, (this.aggroNeededToTarget + (this.aggroDecreaseFactor * (-1))));
+            addAggro(newTarget, (this.aggroStats.aggroOnHitIncreaseFactor));
+            if (this.aggroList.Count == 1 && this.aggroStats.firstHitMaxAggro) addAggro(newTarget, (this.aggroStats.aggroNeededToTarget + (this.aggroStats.aggroDecreaseFactor * (-1))));
 
-            if (this.aggroList[newTarget][1] == 0) setParameterOfAggrolist(newTarget, this.aggroDecreaseFactor);
-            if (this.enemy.target == null) StartCoroutine(showClueCo(this.targetFoundClue, this.foundClueDuration));
+            if (this.aggroList[newTarget][1] == 0) setParameterOfAggrolist(newTarget, this.aggroStats.aggroDecreaseFactor);
+            if (this.enemy.target == null) StartCoroutine(showClueCo(this.aggroStats.targetFoundClue, this.aggroStats.foundClueDuration));
         }
     }
 
@@ -275,7 +220,7 @@ public class AIAggroSystem : MonoBehaviour
         {
             addToAggroList(newTarget);
             setParameterOfAggrolist(newTarget, aggroIncrease);
-            if (this.enemy.target == null) StartCoroutine(showClueCo(this.targetFoundClue, this.foundClueDuration));
+            if (this.enemy.target == null) StartCoroutine(showClueCo(this.aggroStats.targetFoundClue, this.aggroStats.foundClueDuration));
         }
     }
 

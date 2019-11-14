@@ -134,7 +134,7 @@ public class AIAction
     [ShowIf("type", AIActionType.skill)]
     [VerticalGroup("Type")]
     [HideLabel]
-    public StandardSkill skill;
+    public Skill skill;
 
     [ShowIf("type", AIActionType.skill)]
     [HorizontalGroup("Properties/Tab1", 0.5f, LabelWidth = 45)]
@@ -163,7 +163,7 @@ public class AIAction
     public float gcd = 2.5f;
 
     [HideInInspector]
-    public StandardSkill skillinstance;
+    public Skill skillinstance;
 }
 
 [System.Serializable]
@@ -271,8 +271,10 @@ public class AIEvents : MonoBehaviour
             {                
                 if (action.skillinstance == null && action.skill != null)
                 {
-                    action.skillinstance = Utilities.Skill.setSkill(this.enemy, action.skill);
-                    action.skillinstance.showingIndicator = true;                    
+                    action.skillinstance = Utilities.Skills.setSkill(this.enemy, action.skill);
+
+                    SkillIndicatorModule indicatorModule = action.skillinstance.GetComponent<SkillIndicatorModule>();
+                    if(indicatorModule != null) indicatorModule.showingIndicator = true;                    
                 }
 
                 useAction(action);
@@ -290,8 +292,8 @@ public class AIEvents : MonoBehaviour
     {
         checkStart();
 
-        if((this.enemy.characterType == CharacterType.Enemy && this.AIstarted)
-            || this.enemy.characterType == CharacterType.NPC) handleDialogs();
+        if((this.enemy.stats.characterType == CharacterType.Enemy && this.AIstarted)
+            || this.enemy.stats.characterType == CharacterType.NPC) handleDialogs();
 
         if (this.AIstarted || this.startImmediately)
         {
@@ -360,7 +362,9 @@ public class AIEvents : MonoBehaviour
                 {
                     if (this.activeAction.cast >= 0) this.activeAction.skillinstance.cast = this.activeAction.cast;
                     if (this.activeAction.cD >= 0) this.activeAction.skillinstance.cooldown = this.activeAction.cD;
-                    if (this.activeAction.skillinstance.setTargetAutomatically) this.activeAction.skillinstance.target = this.enemy.target;
+                    if (this.activeAction.skillinstance.GetComponent<SkillTargetingSystemModule>() != null
+                        && this.activeAction.skillinstance.GetComponent<SkillTargetingSystemModule>().setTargetAutomatically)
+                        this.activeAction.skillinstance.target = this.enemy.target;
                 }
 
                 casting();
@@ -389,17 +393,21 @@ public class AIEvents : MonoBehaviour
         {
             if (this.enemy.target != null)
             {
-                if (this.activeAction.skillinstance.target == null) this.activeAction.skillinstance.target = this.enemy.target;
+                if (this.activeAction.skillinstance.target != this.enemy.target) this.activeAction.skillinstance.target = this.enemy.target;
 
                 if (this.activeAction.skillinstance.holdTimer < this.activeAction.skillinstance.cast)
                 {
                     this.activeAction.skillinstance.holdTimer += (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
 
-                    this.activeAction.skillinstance.showIndicator(); //Zeige Indikator beim Casten
-                    this.activeAction.skillinstance.showCastingAnimation();
+                    SkillIndicatorModule indicatorModule = this.activeAction.skillinstance.GetComponent<SkillIndicatorModule>();
+                    if (indicatorModule != null) indicatorModule.showIndicator(); //Zeige Indikator beim Casten
+
+                    SkillAnimationModule animationModule = this.activeAction.skillinstance.GetComponent<SkillAnimationModule>();
+                    if (animationModule != null) animationModule.showCastingAnimation();
+
                     this.activeAction.skillinstance.doOnCast();
 
-                    if (this.activeAction.skillinstance.showCastBarForEnemies)
+                    if (indicatorModule != null && indicatorModule.showCastBarForEnemies)
                     {
                         if (this.enemy.activeCastbar == null)
                         {
@@ -586,8 +594,10 @@ public class AIEvents : MonoBehaviour
         {
             if (action.skillinstance == null && action.skill != null)
             {
-                action.skillinstance = Utilities.Skill.setSkill(this.enemy, action.skill);
-                action.skillinstance.showingIndicator = true;
+                action.skillinstance = Utilities.Skills.setSkill(this.enemy, action.skill);
+
+                SkillIndicatorModule indicatorModule = action.skillinstance.GetComponent<SkillIndicatorModule>();
+                if (indicatorModule != null) indicatorModule.showingIndicator = true;
             }
 
             this.activeAction = action;
@@ -614,7 +624,7 @@ public class AIEvents : MonoBehaviour
         }
     }
 
-    private bool skillCanBeUsed(StandardSkill skill)
+    private bool skillCanBeUsed(Skill skill)
     {
         if (skill != null)
         {
@@ -624,7 +634,7 @@ public class AIEvents : MonoBehaviour
             }
             else 
             {
-                int currentAmountOfSameSkills = Utilities.Skill.getAmountOfSameSkills(skill, this.enemy.activeSkills, this.enemy.activePets);
+                int currentAmountOfSameSkills = Utilities.Skills.getAmountOfSameSkills(skill, this.enemy.activeSkills, this.enemy.activePets);
 
                 if (currentAmountOfSameSkills < skill.maxAmounts)
                 {
@@ -652,7 +662,7 @@ public class AIEvents : MonoBehaviour
         if (action.type == AIActionType.skill && skillCanBeUsed(action.skillinstance))
         {
             //useskill
-            StandardSkill usedSkill = Utilities.Skill.instantiateSkill(action.skillinstance, this.enemy, this.enemy.target);
+            Skill usedSkill = Utilities.Skills.instantiateSkill(action.skillinstance, this.enemy, this.enemy.target);
             action.skillinstance.target = null;
             action.skillinstance.cooldownTimeLeft = action.skillinstance.cooldown;
             actionUsed = true;

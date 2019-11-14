@@ -13,7 +13,13 @@ GameObject:
   - component: {fileID: 5387825760302318934}
   - component: {fileID: 6939719257136123582}
   - component: {fileID: 2211265516280113145}
-  m_Layer: 14
+  - component: {fileID: 2364107896226381483}
+  - component: {fileID: 932218811717101138}
+  - component: {fileID: 1866098264831722018}
+  - component: {fileID: 2452030230981208128}
+  - component: {fileID: 1293588450421558207}
+  - component: {fileID: 6423164893705659178}
+  m_Layer: 13
   m_Name: Schwert
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -49,94 +55,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Schwert
   skillNameEnglish: Sword
-  skillDescription: Ein normales Schwert
-  skillDescriptionEnglish: A normal sword
-  category: 0
-  animationTriggerName: sword
-  orderIndex: 1
   spriteRenderer: {fileID: 5387825760302318934}
   myRigidbody: {fileID: 2211265516280113145}
   animator: {fileID: 6939719257136123582}
   shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
+  speed: 0
+  positionOffset: 0
+  maxAmounts: 1
+  attachToSender: 1
+  doCastDuringDelay: 0
+  comboAmount: 99
   cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  duration: 9999
   lockMovementonDuration: 1
   deactivateByButtonUp: 0
   deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 0
+  delay: 0
+  duration: 9999
   cooldown: 0.3
   cooldownAfterCombo: 0
   durationCombo: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: -1
-  statusEffects: []
-  thrust: 4
-  knockbackTime: 0.2
-  resourceType: 0
-  item: {fileID: 0}
-  addResourceSender: 0
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: -99
-  affectAnimation: 0
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 0
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 1
-  useOffSetToBlendTree: 0
-  rotationModifier: 90
-  snapRotationInDegrees: 90
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 0
-  maxAmountOfTargets: 0
-  targetingDuration: 0
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 1
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: 21300000, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
+  elapsed: 0
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: -0.0028667413
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
   dontPlayAudio: 0
+  basicRequirementsExists: 1
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
-  setPositionAtStart: 1
   setActive: 1
 --- !u!212 &5387825760302318934
 SpriteRenderer:
@@ -227,6 +183,119 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &2364107896226381483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  skillDescription: Ein normales Schwert
+  skillDescriptionEnglish: A normal sword
+  category: 0
+  orderIndex: 1
+  icon: {fileID: 21300000, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &932218811717101138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790e6050ddf4a164b8349c725a23765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+--- !u!114 &1866098264831722018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  resourceType: 0
+  item: {fileID: 0}
+  addResourceSender: 0
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: -100
+  affectAnimation: 0
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 1
+--- !u!114 &2452030230981208128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -1
+  statusEffects: []
+  thrust: 4
+  knockbackTime: 0.2
+  affectSelf: 0
+  affectOther: 1
+  affectSame: 0
+  affectNeutral: 1
+  affectSkills: 0
+  ignoreInvincibility: 0
+--- !u!114 &1293588450421558207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f850b25bbe1d943abae8f460828fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  useOffSetToBlendTree: 0
+--- !u!114 &6423164893705659178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e01b756280d164eb9e557d11c981f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  animationTriggerName: sword
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
+  targetColor: {r: 0, g: 0, b: 0, a: 0}
+  useColor: 0
 --- !u!1 &1288681395139722514
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5590416017817286310}
   - component: {fileID: 8355835792145004362}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: collider
   m_TagString: Attack
   m_Icon: {fileID: 0}

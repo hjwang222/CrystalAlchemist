@@ -10,10 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 7078582995585776847}
   - component: {fileID: 8591703498699444151}
-  - component: {fileID: 6096689982342564308}
   - component: {fileID: 3512976782353714778}
   - component: {fileID: 4578934989978650050}
-  m_Layer: 14
+  - component: {fileID: 1391069695141147922}
+  - component: {fileID: 1539368179659864175}
+  - component: {fileID: 831464589411682057}
+  - component: {fileID: 3985939456034709136}
+  - component: {fileID: 3946483602041766719}
+  - component: {fileID: 6308066740312309571}
+  m_Layer: 13
   m_Name: Use Health Potion
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -131,112 +136,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6096689982342564308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2277580816030834969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 830c76880be9a6747af1e5bc13fc9a1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: Lebenstrank
-  skillNameEnglish: Health Potion
-  skillDescription: Stellt einen Teil deiner Leben wieder her
-  skillDescriptionEnglish: Restores your life a bit
-  category: 2
-  animationTriggerName: 
-  orderIndex: 1
-  spriteRenderer: {fileID: 0}
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
-  shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  duration: 60
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  cooldown: 3
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: 1
-  statusEffects: []
-  thrust: 0
-  knockbackTime: 0
-  resourceType: 3
-  item: {fileID: 1482578370755153414, guid: ca7174dae42a3d74da40fc0c744e4f1d, type: 3}
-  addResourceSender: -1
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 0
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 1
-  affectOther: 0
-  affectSame: 0
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 1
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: -8825673795923600958, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
-  sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: -0.0075883623
-  movementLocked: 0
-  target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  timeDistortion: 1
-  direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setPositionAtStart: 1
-  setActive: 1
-  supportType: 1
-  useCollider: 0
-  targetColor: {r: 0, g: 0.7264151, b: 0.051900968, a: 1}
 --- !u!95 &3512976782353714778
 Animator:
   serializedVersion: 3
@@ -305,6 +204,159 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1391069695141147922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Lebenstrank
+  skillNameEnglish: Health Potion
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  shadow: {fileID: 0}
+  speed: 0
+  positionOffset: 0
+  maxAmounts: 1
+  attachToSender: 1
+  doCastDuringDelay: 0
+  comboAmount: 100
+  cast: 0
+  lockMovementonDuration: 0
+  deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 0
+  delay: 0
+  duration: 1
+  cooldown: 5
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  elapsed: 0
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  overridePosition: 1
+  movementLocked: 0
+  target: {fileID: 0}
+  audioSource: {fileID: 0}
+  dontPlayAudio: 0
+  basicRequirementsExists: 1
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setActive: 1
+--- !u!114 &1539368179659864175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  skillDescription: Stellt einen Teil deiner Leben wieder her
+  skillDescriptionEnglish: Restores your life a bit
+  category: 2
+  orderIndex: 1
+  icon: {fileID: -8825673795923600958, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &831464589411682057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  resourceType: 3
+  item: {fileID: 1482578370755153414, guid: ca7174dae42a3d74da40fc0c744e4f1d, type: 3}
+  addResourceSender: -1
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0
+--- !u!114 &3985939456034709136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: 2
+  statusEffects: []
+  thrust: 0
+  knockbackTime: 0.2
+  affectSelf: 1
+  affectOther: 0
+  affectSame: 0
+  affectNeutral: 0
+  affectSkills: 0
+  ignoreInvincibility: 1
+--- !u!114 &3946483602041766719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65144b73769891f41a72088043398bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  immortalTimer: 0
+--- !u!114 &6308066740312309571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e01b756280d164eb9e557d11c981f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  animationTriggerName: 
+  castingAnimation: {fileID: 0}
+  castingAnimationCharacterKey: 
+  targetColor: {r: 0, g: 0.7254902, b: 0.050980397, a: 1}
+  useColor: 1
 --- !u!1001 &7981406291649803579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -371,6 +423,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

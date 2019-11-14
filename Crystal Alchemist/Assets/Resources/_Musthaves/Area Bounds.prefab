@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 7281069460026701471}
   - component: {fileID: 7281069460026701468}
   - component: {fileID: 2164579594926868820}
-  m_Layer: 13
+  m_Layer: 17
   m_Name: Area Bounds
   m_TagString: Room
   m_Icon: {fileID: 0}
@@ -161,7 +161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 7281069460335663299}
+  objectsInArea: {fileID: 0}
   mapName: 
+  mapNameEnglish: 
   locationSignal: {fileID: 0}
 --- !u!114 &2164579594926868820
 MonoBehaviour:
@@ -190,8 +192,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!1 &7281069460335663299
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 7281069460335663296}
   - component: {fileID: 7281069460335663297}
   - component: {fileID: 7281069460335663294}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: CM vcam1
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -258,8 +258,6 @@ MonoBehaviour:
     m_OnCameraLive:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 7281069459843513824}
 --- !u!114 &7281069460335663294

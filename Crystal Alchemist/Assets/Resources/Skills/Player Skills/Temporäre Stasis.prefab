@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4965492089199087505}
   - component: {fileID: 3873323168966697526}
   - component: {fileID: 3879661264799306001}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,8 +113,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 20s
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3f1660bebbaef6b4987ec9111be1f411, type: 2}
@@ -239,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textField: {fileID: 4965492089199087505}
-  skill: {fileID: 4199971107470901696}
+  skill: {fileID: 0}
 --- !u!1 &4199971107470901726
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,13 +247,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5183345667786185736}
-  - component: {fileID: 4199971107470901696}
   - component: {fileID: 7632370484108339151}
   - component: {fileID: 438965276390481352}
   - component: {fileID: 1800843014181641273}
   - component: {fileID: 4199971107470901727}
   - component: {fileID: 4199971107470901697}
-  m_Layer: 14
+  - component: {fileID: 1305183267125815762}
+  - component: {fileID: 8809590031850786827}
+  - component: {fileID: 5758942587671381034}
+  - component: {fileID: 907840878756441047}
+  - component: {fileID: 8873387076501772117}
+  m_Layer: 13
   m_Name: "Tempor\xE4re Stasis"
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -279,110 +281,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4199971107470901696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4199971107470901726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f87d115901e90746a9d743582453de7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: Stase
-  skillNameEnglish: Stasis
-  skillDescription: Verlangsamt die Zeit
-  skillDescriptionEnglish: Slows down time
-  category: 2
-  animationTriggerName: 
-  orderIndex: 4
-  spriteRenderer: {fileID: 0}
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
-  shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  cast: 2
-  keepHoldTimer: 0
-  delay: 0
-  duration: 30
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  cooldown: 2
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  affectedResources: []
-  statusEffects: []
-  thrust: 0
-  knockbackTime: 0
-  resourceType: 3
-  item: {fileID: 6577156445127767014, guid: 9eed5a7d4c3ca4f49b552c626d2d4ee7, type: 3}
-  addResourceSender: -1
-  intervallSender: 0
-  speedDuringCasting: -50
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 1
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 1
-  affectNeutral: 1
-  affectSkills: 1
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: -126482093299932471, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
-  sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: -0.0062103495
-  movementLocked: 0
-  target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  timeDistortion: 1
-  direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setPositionAtStart: 1
-  setActive: 1
-  TimeDistortion: -99
-  timeEffect: {fileID: 7657858759490871350, guid: 7c83829c933de2f458035ae6dddde1d3,
-    type: 3}
-  invertColor: 1
 --- !u!212 &7632370484108339151
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -619,6 +517,141 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1305183267125815762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199971107470901726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Stase
+  skillNameEnglish: Stasis
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  shadow: {fileID: 0}
+  speed: 0
+  positionOffset: 0
+  maxAmounts: 1
+  isStationary: 1
+  doCastDuringDelay: 0
+  comboAmount: 100
+  cast: 2
+  lockMovementonDuration: 0
+  deactivateByButtonUp: 0
+  deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 0
+  delay: 0
+  duration: 20
+  cooldown: 2
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  elapsed: 0
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  overridePosition: 1
+  movementLocked: 0
+  target: {fileID: 0}
+  audioSource: {fileID: 0}
+  dontPlayAudio: 0
+  basicRequirementsExists: 1
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setActive: 1
+--- !u!114 &8809590031850786827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199971107470901726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  skillDescription: Verlangsamt die Zeit
+  skillDescriptionEnglish: Slows down time
+  category: 2
+  orderIndex: 4
+  icon: {fileID: -126482093299932471, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &5758942587671381034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199971107470901726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  resourceType: 3
+  item: {fileID: 6577156445127767014, guid: 9eed5a7d4c3ca4f49b552c626d2d4ee7, type: 3}
+  addResourceSender: -1
+  intervallSender: 0
+  speedDuringCasting: -50
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0
+--- !u!114 &907840878756441047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199971107470901726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f87d115901e90746a9d743582453de7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  TimeDistortion: -99
+  timeEffect: {fileID: 8924175854143672294, guid: 7c83829c933de2f458035ae6dddde1d3,
+    type: 3}
+  invertColor: 1
+--- !u!114 &8873387076501772117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199971107470901726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectedResources: []
+  statusEffects: []
+  thrust: 0
+  knockbackTime: 0.2
+  affectSelf: 0
+  affectOther: 1
+  affectSame: 1
+  affectNeutral: 1
+  affectSkills: 1
+  ignoreInvincibility: 0
 --- !u!1 &5075986525323100902
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5075986525323100903}
   - component: {fileID: 5075986525323100904}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: BodenSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,7 +743,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2563732198302763149}
   - component: {fileID: 4628686981486418788}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Sanduhr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,6 +830,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

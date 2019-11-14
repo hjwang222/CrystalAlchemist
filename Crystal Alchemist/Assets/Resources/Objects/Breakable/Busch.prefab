@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1301488769302884366}
   - component: {fileID: 7794983885249979872}
   - component: {fileID: 5863874315535871781}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Busch
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -60,8 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50edb187effa6214081b297a24971a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Busch
-  englischCharacterName: 
+  stats: {fileID: 11400000, guid: b0a76af33d38bc4429c115714bd4c66b, type: 2}
   myRigidbody: {fileID: 7794983885249979872}
   animator: {fileID: 7100320595481495861}
   spriteRenderer: {fileID: 7100320595481495857}
@@ -72,38 +71,8 @@ MonoBehaviour:
   activeSkillParent: {fileID: 1720950400238353364}
   activeStatusEffectParent: {fileID: 7916120204381260195}
   skillSetParent: {fileID: 0}
-  startLife: 0.1
-  startMana: 0.1
-  startSpeed: 0
-  startSpellSpeed: 100
-  immunityToStatusEffects: []
-  maxLife: 0.1
-  maxMana: 0.1
-  respawnTime: 60
-  respawnAnimation: {fileID: 0}
-  deathAnimation: {fileID: 0}
-  lifeRegeneration: 0
-  lifeRegenerationInterval: 0
-  manaRegeneration: 0
-  manaRegenerationInterval: 0
-  damageNumber: {fileID: 0}
-  antiKnockback: 0
-  cannotBeHitTime: 0.3
-  isTouchable: 1
-  showHitcolor: 1
-  hitColor: {r: 1, g: 1, b: 1, a: 1}
-  lootTable:
-  - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
-    dropRate: 25
-    amount: 0
-  multiLoot: 0
-  canCollectAll: 0
-  canCollect: []
-  hitSoundEffect: {fileID: 0}
-  killSoundEffect: {fileID: 8300000, guid: f3e28be844c0e4d4797d1de8e8394680, type: 3}
-  characterSpecies: Vegetation
-  characterGender: 2
-  characterType: 3
+  shootingPosition: {fileID: 0}
+  speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 0}
   activeCastbar: {fileID: 0}
@@ -114,8 +83,8 @@ MonoBehaviour:
   speed: 0
   isInvincible: 0
   isImmortal: 0
+  cannotDie: 0
   isHit: 0
-  items: []
   buffs: []
   debuffs: []
   activeSkills: []
@@ -126,6 +95,8 @@ MonoBehaviour:
   isPlayer: 0
   inventory: []
   activePets: []
+  steps: 0
+  isOnIce: 0
 --- !u!50 &7794983885249979872
 Rigidbody2D:
   serializedVersion: 4
@@ -182,7 +153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9204019898060049678}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: activeSkills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1600296579018327035}
   - component: {fileID: 3139136754922538361}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +267,7 @@ GameObject:
   - component: {fileID: 7100320595481495857}
   - component: {fileID: 7100320595481495861}
   - component: {fileID: 868693920496948498}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9061500987585007145}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: activeStatusEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}

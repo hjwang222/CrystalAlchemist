@@ -10,9 +10,7 @@ public class TitleScreen : MonoBehaviour
 {
 
     [SerializeField]
-    private GameObject mainMenu;
-    [SerializeField]
-    private GameObject optionMenu;
+    private List<GameObject> menues = new List<GameObject>(); 
     [SerializeField]
     private AudioClip music;
 
@@ -34,7 +32,7 @@ public class TitleScreen : MonoBehaviour
     {
         SaveSystem.loadOptions();
         Cursor.visible = true;
-        showMenu(this.mainMenu);
+        showMenu(this.menues[0]);
 
         if (this.music != null)
         {
@@ -82,6 +80,10 @@ public class TitleScreen : MonoBehaviour
 
     public void exitGame()
     {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+
         Application.Quit();
     }
 
@@ -92,8 +94,10 @@ public class TitleScreen : MonoBehaviour
 
     public void showMenu(GameObject newActiveMenu)
     {
-        this.mainMenu.SetActive(false);
-        this.optionMenu.SetActive(false);
+        foreach(GameObject gameObject in this.menues)
+        {
+            gameObject.SetActive(false);
+        }
 
         newActiveMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(newActiveMenu.transform.GetChild(0).gameObject);

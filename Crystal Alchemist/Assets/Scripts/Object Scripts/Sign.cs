@@ -7,8 +7,6 @@ public class Sign : Interactable
 {
     public override void doSomethingOnSubmit()
     {
-        string text = Utilities.Format.getLanguageDialogText(this.dialogBoxText, this.dialogBoxTextEnglish);
-
-        this.player.showDialogBox(text);        
+        Utilities.DialogBox.showDialog(this, this.player);
     }
 }

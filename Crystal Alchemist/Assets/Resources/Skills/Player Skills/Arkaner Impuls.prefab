@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1866628593189516363}
   - component: {fileID: 8613971535191392423}
   - component: {fileID: 6011491638290907752}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0047180057, y: 0.000000059604645}
+  m_Offset: {x: 0.0018668026, y: 0.000000059604645}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -105,7 +105,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9786334, y: 0.313232}
+  m_Size: {x: 0.87599003, y: 0.313232}
   m_EdgeRadius: 0
 --- !u!1 &1969718782558145674
 GameObject:
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 5257727404935883419}
   - component: {fileID: 1969718782558145669}
   - component: {fileID: 2642437566886130826}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 4500866824247064267}
+  skill: {fileID: 3816868808247662347}
 --- !u!1 &6814274785137477229
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,12 +231,22 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2537374611990174651}
-  - component: {fileID: 4500866824247064267}
   - component: {fileID: 1062884032966687811}
   - component: {fileID: 7120161598169946747}
   - component: {fileID: 8945697548278569866}
   - component: {fileID: 6526762562809975763}
-  m_Layer: 14
+  - component: {fileID: 3816868808247662347}
+  - component: {fileID: 1904830263585329868}
+  - component: {fileID: 6919527800721261145}
+  - component: {fileID: 3149495725526973359}
+  - component: {fileID: 6564433060163094277}
+  - component: {fileID: 69357154066809696}
+  - component: {fileID: 3902379296848135066}
+  - component: {fileID: 4079701766306708918}
+  - component: {fileID: 4588277751585783558}
+  - component: {fileID: 6866986401814778853}
+  - component: {fileID: 7657995963615701156}
+  m_Layer: 13
   m_Name: Arkaner Impuls
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -259,111 +269,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4500866824247064267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814274785137477229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e333cb7d9eccdf149a75af3b5ca70b72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillName: Impuls
-  skillNameEnglish: Impulse
-  skillDescription: Ein magischer Impuls
-  skillDescriptionEnglish: A magical pulse
-  category: 1
-  animationTriggerName: 
-  orderIndex: 22
-  spriteRenderer: {fileID: 5257727404935883419}
-  myRigidbody: {fileID: 8945697548278569866}
-  animator: {fileID: 1969718782558145669}
-  shadow: {fileID: 8613971535191392423}
-  indicators:
-  - {fileID: 5604874298435353384, guid: 4c2b4b217381faf4485e28928382b866, type: 3}
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 1
-  indicatorColor: {r: 1, g: 0, b: 0, a: 1}
-  cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  duration: 2
-  lockMovementonDuration: 0.1
-  deactivateByButtonUp: 1
-  deactivateByButtonDown: 0
-  cooldown: 0.075
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: -0.5
-  statusEffects: []
-  thrust: 0
-  knockbackTime: 0
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: -0.04
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 1
-  isStationary: 1
-  colliderHeightOffset: -0.5
-  speed: 40
-  rotateIt: 1
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0.75
-  positionHeight: 0
-  activeTargetHelper: 1
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 0
-  maxAmountOfTargets: 0
-  targetingDuration: 0
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 9999
-  comboAmount: 99
-  icon: {fileID: 21300014, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
-  sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0.1
-  movementLocked: 0
-  target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  timeDistortion: 1
-  direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setPositionAtStart: 1
-  setActive: 1
-  skillOnImpact: {fileID: 0}
 --- !u!210 &1062884032966687811
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -488,7 +393,7 @@ Rigidbody2D:
   m_AngularDrag: 0.5
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -511,6 +416,233 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3816868808247662347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Impuls
+  skillNameEnglish: Impulse
+  spriteRenderer: {fileID: 5257727404935883419}
+  myRigidbody: {fileID: 8945697548278569866}
+  animator: {fileID: 1969718782558145669}
+  shadow: {fileID: 8613971535191392423}
+  speed: 40
+  positionOffset: 0.75
+  maxAmounts: 9999
+  attachToSender: 0
+  doCastDuringDelay: 0
+  comboAmount: 100
+  cast: 0
+  lockMovementonDuration: 0.1
+  deactivateByButtonUp: 1
+  deactivateByButtonDown: 0
+  isRapidFire: 1
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 1
+  delay: 0
+  duration: 2
+  cooldown: 0.075
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  elapsed: 0
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  overridePosition: 1
+  movementLocked: 0
+  target: {fileID: 0}
+  audioSource: {fileID: 0}
+  dontPlayAudio: 0
+  basicRequirementsExists: 1
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setActive: 1
+--- !u!114 &1904830263585329868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3816868808247662347}
+  skillDescription: Ein magischer Impuls
+  skillDescriptionEnglish: A magical pulse
+  category: 1
+  orderIndex: 22
+  icon: {fileID: 21300014, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &6919527800721261145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b2c822040a9d9449eed59a8402ec3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3816868808247662347}
+--- !u!114 &3149495725526973359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0d3d2225b54824ba4df2b9553ff761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3816868808247662347}
+  skillOnImpact: {fileID: 0}
+--- !u!114 &6564433060163094277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b951f28716f63414da5d74b247c0af8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3816868808247662347}
+  rotateIt: 1
+  rotateOnUpdate: 0
+  keepOriginalRotation: 0
+  rotationModifier: 0
+  snapRotationInDegrees: 0
+--- !u!114 &69357154066809696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3816868808247662347}
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -0.5
+  statusEffects: []
+  thrust: 0
+  knockbackTime: 0.2
+  affectSelf: 0
+  affectOther: 1
+  affectSame: 0
+  affectNeutral: 1
+  affectSkills: 0
+  ignoreInvincibility: 0
+--- !u!114 &3902379296848135066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3816868808247662347}
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: -0.04
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0
+--- !u!114 &4079701766306708918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85dd021f4e88a4469511d8988fcc048, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3816868808247662347}
+  indicator: {fileID: 0}
+  showingIndicator: 1
+  showCastBarForEnemies: 1
+  useCustomColor: 1
+  indicatorColor: {r: 1, g: 0, b: 0, a: 1}
+  activeIndicator: {fileID: 0}
+--- !u!114 &4588277751585783558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac6fcb9090d6f649a19066a030d25b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3816868808247662347}
+--- !u!114 &6866986401814778853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790e6050ddf4a164b8349c725a23765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3816868808247662347}
+--- !u!114 &7657995963615701156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85781c900207fc428972075be537857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  useGameObjectHeight: 0
+  positionHeight: 0
+  colliderHeightOffset: -0.25
 --- !u!1001 &4484190714160488513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -518,16 +650,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2537374611990174651}
     m_Modifications:
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 14
-      objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -582,6 +704,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

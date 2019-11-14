@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8069356869073092966}
   - component: {fileID: 3337888604394354563}
   - component: {fileID: -7750091567262405981}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Blauer Kristall
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -55,17 +55,22 @@ MonoBehaviour:
   itemSpriteInventory: {fileID: 8368822998687311816, guid: da2b8cd3ab5195945ab9099a1134a852,
     type: 3}
   itemName: Blauer Kristall
-  itemDescription: 
+  itemDescription: "Ein blau funkelnder Kristall. \nSein Wert entspricht dem von 5
+    Kristallen."
   itemGroup: Kristalle
   itemSlot: -1
   itemNameEnglish: Blue Crystal
-  itemDescriptionEnglish: 
+  itemDescriptionEnglish: "A blue glittering crystal. \nIts value is 5 times higher
+    than a normal crystal."
   itemGroupEnglish: crystals
-  amount: 5
+  amount: 1
+  value: 5
   maxAmount: 9999
   resourceType: 3
   isKeyItem: 0
+  keyItemSignal: {fileID: 0}
   skill: {fileID: 0}
+  statusEffects: []
   collectSoundEffect: {fileID: 8300000, guid: ec4c06267ecfbc94ca8f84ce329e2910, type: 3}
   signal: {fileID: 11400000, guid: 2637d39002796b84991e8c9d3d373c17, type: 2}
 --- !u!61 &8069356869073092964
@@ -336,6 +341,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8069356869073092965}
     m_Modifications:
+    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
+        type: 3}
+      propertyPath: m_Name
+      value: Item Light
+      objectReference: {fileID: 0}
     - target: {fileID: 2956711678939615906, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -390,11 +400,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2888951737898366940, guid: 9545455d17740e94f8071d7b4854ef7a,
-        type: 3}
-      propertyPath: m_Name
-      value: Item Light
       objectReference: {fileID: 0}
     - target: {fileID: 7454736788490218463, guid: 9545455d17740e94f8071d7b4854ef7a,
         type: 3}

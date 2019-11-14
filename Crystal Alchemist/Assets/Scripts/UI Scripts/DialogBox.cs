@@ -7,6 +7,8 @@ public class DialogBox : MonoBehaviour
 {
     #region Attribute
     [Header("Dialog-Attribute")]
+    [SerializeField]
+    private PlayerStats playerStats;
     [Tooltip("DialogBox Child-Objekt")]
     [SerializeField]
     private GameObject dialogBox;
@@ -34,7 +36,7 @@ public class DialogBox : MonoBehaviour
     #region Unity Funktionen (Start, Update)
     private void Awake()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
         this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;

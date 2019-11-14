@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Game/Time")]
 public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
 {
     private float seconds = 0;

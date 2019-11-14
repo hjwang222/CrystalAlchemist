@@ -7,8 +7,12 @@ using System;
 public class AI : Character
 {
     [Required]
-    [BoxGroup("Pflichtfelder")]
+    [BoxGroup("Easy Access")]
     public GameObject dialogPosition;
+
+    [Required]
+    [BoxGroup("Easy Access")]
+    public AIAggroSystem aggroGameObject;
 
     [BoxGroup("AI")]
     public bool flip = true;
@@ -21,7 +25,7 @@ public class AI : Character
 
     private bool isSleeping = true;
 
-    private void Start()
+    private void Awake()
     {
         init();
         this.target = null;

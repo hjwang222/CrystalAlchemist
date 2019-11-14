@@ -51,7 +51,7 @@ public class DateLocation : MonoBehaviour
 
     private void Start()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        
     }
     
     private void Update()

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7363475295885747724}
   - component: {fileID: 7363475295885747722}
-  - component: {fileID: 2841143901546363653}
   - component: {fileID: 5171202800015985860}
   - component: {fileID: 5231157900605460847}
+  - component: {fileID: 5157658974536148423}
   m_Layer: 0
   m_Name: Eis
   m_TagString: Untagged
@@ -48,43 +48,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363475295885747727}
   m_CullTransparentMesh: 0
---- !u!114 &2841143901546363653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7363475295885747727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6bfa8c62a0291943b1ece203eccccb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statusEffectName: Eis
-  statusEffectNameEnglish: Ice
-  statusEffectDescription: "Unterbricht das Ziel und macht es bewegungsunf\xE4hig"
-  statusEffectDescriptionEnglish: Interrupts and stuns the target
-  maxStacks: 1
-  canBeDispelled: 1
-  stunTarget: 1
-  statusEffectType: 1
-  endType: 0
-  statusEffectDuration: 8
-  statusEffectInterval: 0
-  canOverride: 0
-  statusEffectManaDrain: 0
-  statusEffectManaDrainInterval: 1
-  canDeactivateIt: 0
-  destroyDelay: 1
-  ownAnimator: {fileID: 5231157900605460847}
-  changeColor: 1
-  statusEffectColor: {r: 0, g: 0.9450981, b: 1, a: 1}
-  iconSprite: {fileID: 21300002, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
-  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
-  target: {fileID: 0}
-  statusEffectTimeLeft: 0
-  timeDistortion: 1
-  speed: -100
 --- !u!212 &5171202800015985860
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -120,8 +83,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 3269329793996756958, guid: cc34ff18d4cdf5d4f94f1523c7d4007d,
     type: 3}
@@ -154,6 +117,54 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5157658974536148423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363475295885747727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe38f3cb00c4c84ea801bab87a6e5a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffectName: Eis
+  statusEffectNameEnglish: Ice
+  statusEffectDescription: 
+  statusEffectDescriptionEnglish: 
+  maxDuration: 6
+  canOverride: 1
+  canDeactivateIt: 0
+  canBeDispelled: 1
+  maxStacks: 1
+  stunTarget: 1
+  statusEffectType: 1
+  statusEffectEvents:
+  - triggers:
+    - triggerType: 0
+      intervall: 0
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 4
+      affectedResources: []
+      amount: 0
+      speed: -100
+      time: 0
+      skills: []
+      module: {fileID: 0}
+  destroyDelay: 1
+  ownAnimator: {fileID: 0}
+  changeColor: 1
+  statusEffectColor: {r: 0, g: 0.9450981, b: 1, a: 1}
+  iconSprite: {fileID: 21300002, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
+  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}
+  target: {fileID: 0}
+  statusEffectTimeLeft: 0
+  timeDistortion: 1
 --- !u!1001 &2031398800673163660
 PrefabInstance:
   m_ObjectHideFlags: 0

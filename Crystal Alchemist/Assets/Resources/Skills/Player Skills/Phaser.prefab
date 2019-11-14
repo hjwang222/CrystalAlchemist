@@ -9,8 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1969711209088018435}
+  - component: {fileID: 6303950438319133966}
+  - component: {fileID: 8919183028540199766}
+  - component: {fileID: 9035295312565223651}
+  - component: {fileID: 862621948294645814}
   - component: {fileID: 1969711209088018432}
-  m_Layer: 14
+  - component: {fileID: 965314693086916177}
+  m_Layer: 13
   m_Name: Phaser
   m_TagString: Skill
   m_Icon: {fileID: 0}
@@ -32,6 +37,127 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6303950438319133966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969711209088018434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: Phaser
+  skillNameEnglish: Phaser
+  spriteRenderer: {fileID: 3924551678506968721}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 3924551678506968720}
+  shadow: {fileID: 0}
+  speed: 0
+  positionOffset: 0.25
+  maxAmounts: 1
+  attachToSender: 0
+  doCastDuringDelay: 0
+  comboAmount: 100
+  cast: 0
+  lockMovementonDuration: 0
+  deactivateByButtonUp: 1
+  deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 1
+  delay: 0
+  duration: 1.5
+  cooldown: 2
+  cooldownAfterCombo: 0
+  durationCombo: 0
+  elapsed: 0
+  sender: {fileID: 0}
+  delayTimeLeft: 0
+  durationTimeLeft: 0
+  cooldownTimeLeft: 0
+  overridePosition: 1
+  movementLocked: 0
+  target: {fileID: 0}
+  audioSource: {fileID: 0}
+  dontPlayAudio: 0
+  basicRequirementsExists: 1
+  timeDistortion: 1
+  direction: {x: 0, y: 0}
+  isActive: 1
+  holdTimer: 0
+  triggerIsActive: 1
+  setActive: 1
+--- !u!114 &8919183028540199766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969711209088018434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  skillDescription: Feuert einen Laser ab
+  skillDescriptionEnglish: Firing mah LaZor
+  category: 1
+  orderIndex: 23
+  icon: {fileID: 21300020, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+--- !u!114 &9035295312565223651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969711209088018434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  resourceType: 2
+  item: {fileID: 0}
+  addResourceSender: -0.25
+  intervallSender: 0.25
+  speedDuringCasting: 0
+  speedDuringDuration: -25
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0
+--- !u!114 &862621948294645814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969711209088018434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectedResources:
+  - resourceType: 1
+    item: {fileID: 0}
+    amount: -3
+  statusEffects: []
+  thrust: 0
+  knockbackTime: 0.2
+  affectSelf: 0
+  affectOther: 1
+  affectSame: 0
+  affectNeutral: 1
+  affectSkills: 0
+  ignoreInvincibility: 0
 --- !u!114 &1969711209088018432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,101 +170,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11f98c751e773d4abb705eaf65aa040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Phaser
-  skillNameEnglish: Phaser
-  skillDescription: Feuert einen Laser ab
-  skillDescriptionEnglish: Firing mah LaZor
-  category: 1
-  animationTriggerName: 
-  orderIndex: 23
-  spriteRenderer: {fileID: 3924551678506968721}
-  myRigidbody: {fileID: 0}
-  animator: {fileID: 0}
-  shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 1
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  cast: 0
-  keepHoldTimer: 0
-  delay: 0
-  duration: 1
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 1
-  deactivateByButtonDown: 0
-  cooldown: 0
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  affectedResources:
-  - resourceType: 1
-    item: {fileID: 0}
-    amount: -8
-  statusEffects: []
-  thrust: 0
-  knockbackTime: 0
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: -1
-  intervallSender: 9999
-  speedDuringCasting: 0
-  speedDuringDuration: -25
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 1
-  colliderHeightOffset: 0
-  speed: 0
-  rotateIt: 1
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0.25
-  positionHeight: 0
-  activeTargetHelper: 1
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 0
-  targetingDuration: 0
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 1
-  comboAmount: 99
-  icon: {fileID: 21300020, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
-  activeIndicators: []
-  sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  movementLocked: 0
-  target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  timeDistortion: 1
-  direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0.1
-  triggerIsActive: 1
-  setPositionAtStart: 1
-  setActive: 1
+  skill: {fileID: 0}
   impactEffect: {fileID: 7205093712895476430, guid: efabcdb5ae4c402409665969345fd7e7,
     type: 3}
   distance: 99
   laserSprite: {fileID: 3924551678506968721}
+--- !u!114 &965314693086916177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969711209088018434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b951f28716f63414da5d74b247c0af8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  rotateIt: 1
+  rotateOnUpdate: 0
+  keepOriginalRotation: 0
+  rotationModifier: 0
+  snapRotationInDegrees: 0
 --- !u!1 &3924551678506968723
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +205,7 @@ GameObject:
   - component: {fileID: 3924551678506968721}
   - component: {fileID: 3924551678506968720}
   - component: {fileID: 4156987265135631255}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,4 +306,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 1969711209088018432}
+  skill: {fileID: 6303950438319133966}

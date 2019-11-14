@@ -10,6 +10,10 @@ public class DeathScreen : MonoBehaviour
 {
     [SerializeField]
     [BoxGroup("Mandatory")]
+    private PlayerStats playerStats;
+
+    [SerializeField]
+    [BoxGroup("Mandatory")]
     private SimpleSignal stopMusic;
 
     [BoxGroup("Mandatory")]
@@ -75,7 +79,13 @@ public class DeathScreen : MonoBehaviour
 
     private void Awake()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
+        init();
+    }
+
+    private void init()
+    {
+        this.cursor.gameObject.SetActive(false);
         this.returnSavePoint.SetActive(false);
         this.returnTitleScreen.SetActive(false);
         this.countDown.gameObject.SetActive(false);
@@ -86,6 +96,7 @@ public class DeathScreen : MonoBehaviour
 
     private void OnEnable()
     {
+        init();
         this.stopMusic.Raise();
         if (this.postProcessVolume.profile.TryGetSettings(out this.colorGrading)) StartCoroutine(FadeOut(this.fadingDelay));
     }
@@ -112,7 +123,7 @@ public class DeathScreen : MonoBehaviour
     {
         this.cursor.gameObject.SetActive(true);
         this.returnTitleScreen.SetActive(true);
-        if (this.player.getLastTeleport()) this.returnSavePoint.SetActive(true);
+        if (this.player.GetComponent<PlayerTeleport>().getLastTeleport()) this.returnSavePoint.SetActive(true);
 
         this.countDown.gameObject.SetActive(true);
         StartCoroutine(this.countDownCo());
@@ -128,7 +139,7 @@ public class DeathScreen : MonoBehaviour
         string scene;
         Vector2 position;
 
-        if (this.player.getLastTeleport(out scene, out position))
+        if (this.player.GetComponent<PlayerTeleport>().getLastTeleport(out scene, out position))
         {
             this.colorGrading.saturation.value = 0;
             this.colorGrading.colorFilter.value = Color.white;
@@ -137,7 +148,7 @@ public class DeathScreen : MonoBehaviour
             this.UI.SetActive(true);
             //SceneManager.LoadSceneAsync(this.lastSavepoint);
             this.player.initPlayer();
-            this.player.teleportPlayer(scene, position, true);
+            this.player.GetComponent<PlayerTeleport>().teleportPlayer(scene, position, true);
         }
     }
 

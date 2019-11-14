@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using Sirenix.OdinInspector;
 using UnityEngine.UI;
 
 public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandler
@@ -31,6 +28,11 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     */
     private void Start()
     {
+        if(this.cursor == null)
+        {
+            Debug.Log("<color=red>Cursor not found in: "+this.gameObject.name+"</color>");
+        }
+
         RectTransform rt = (RectTransform)this.transform;
         this.size = new Vector2(rt.rect.width, rt.rect.height);
         this.scale = rt.lossyScale;
@@ -53,6 +55,11 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         //Cursor.visible = false;
     }
 
+    public void setCursor(myCursor cursor)
+    {
+        this.cursor = cursor;
+    }
+
     private void OnEnable()
     {
         setFirst();
@@ -60,7 +67,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     private void setFirst()
     {
-        if (this.setFirstSelected)
+        if (this.cursor != null && this.setFirstSelected)
         {
             this.cursor.gameObject.SetActive(true);
 
@@ -129,13 +136,14 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                     panelRectTransform.position = new Vector3((this.cursorScale.x * distance), (Screen.height / 2) + 40, 0);
                 }
 
-                InventorySlot inventoryslot = this.button.gameObject.GetComponent<InventorySlot>();
+                ItemUI itemUI = this.button.gameObject.GetComponent<ItemUI>();
                 SkillSlot skillSlot = this.button.gameObject.GetComponent<SkillSlot>();
                 SkillMenuActiveSlots activeSlot = this.button.gameObject.GetComponent<SkillMenuActiveSlots>();
+                CharacterAttributeStats attributesStat = this.button.gameObject.GetComponent<CharacterAttributeStats>();
 
-                if (inventoryslot != null && inventoryslot.getItem() != null)
+                if (itemUI != null && itemUI.getItem() != null)
                 {
-                    this.cursor.infoBox.Show(inventoryslot.getItem());
+                    this.cursor.infoBox.Show(itemUI.getItem());
                 }
                 else if (skillSlot != null && skillSlot.skill != null)
                 {
@@ -144,6 +152,10 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                 else if (activeSlot != null && activeSlot.skill != null)
                 {
                     this.cursor.infoBox.Show(activeSlot.skill);
+                }
+                else if (attributesStat != null)
+                {
+                    this.cursor.infoBox.Show(attributesStat);
                 }
                 else
                 {

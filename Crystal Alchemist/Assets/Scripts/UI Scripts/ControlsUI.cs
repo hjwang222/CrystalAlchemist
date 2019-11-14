@@ -7,6 +7,8 @@ public class ControlsUI : MonoBehaviour
     private Player player;
 
     [SerializeField]
+    private PlayerStats playerStats;
+    [SerializeField]
     private GameObject combat;
     [SerializeField]
     private GameObject menu;
@@ -15,7 +17,7 @@ public class ControlsUI : MonoBehaviour
 
     private void Awake()
     {
-        this.player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        this.player = this.playerStats.player;
     }
 
     // Update is called once per frame
