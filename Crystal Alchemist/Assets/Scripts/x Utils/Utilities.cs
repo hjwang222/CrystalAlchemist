@@ -519,7 +519,7 @@ public class Utilities : MonoBehaviour
 
         public static void reduceCurrency(ResourceType currency, Item item, Player player, int price)
         {
-            if (!item.isKeyItem) player.updateResource(currency, item, -price);
+            if ((item != null && !item.isKeyItem) || item == null) player.updateResource(currency, item, -price);
         }
 
         public static Item getItemByID(List<Item> inventory, int ID, bool isKeyItem)
