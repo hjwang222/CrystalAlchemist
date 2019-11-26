@@ -35,7 +35,7 @@ public class ItemUI : MonoBehaviour
             //this.GetComponent<Button>().interactable = true;            
 
             if (!item.isKeyItem && item.amount > 1) this.amount.text = "x" + item.amount;
-            else this.amount.text = "";
+            else if (this.amount != null) this.amount.text = "";
 
             if(this.preferInventoryIcon) Utilities.Items.setItemImage(this.image, item);
             else this.image.sprite = item.itemSprite;
