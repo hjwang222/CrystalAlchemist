@@ -65,7 +65,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         setFirst();
     }
 
-    private void setFirst()
+    public void setFirst()
     {
         if (this.cursor != null && this.setFirstSelected)
         {

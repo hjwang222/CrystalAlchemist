@@ -14,10 +14,6 @@ public class InventoryMenu : MenuControls
     [Required]
     private TextMeshProUGUI keyItemsLabel;
 
-    [BoxGroup("Signals")]
-    [SerializeField]
-    private SimpleSignal skillMenuSignal;
-
     [BoxGroup("Tabs")]
     [SerializeField]
     private GameObject regularItems;

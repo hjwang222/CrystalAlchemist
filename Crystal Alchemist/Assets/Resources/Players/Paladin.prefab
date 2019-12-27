@@ -46,6 +46,8 @@ GameObject:
   - component: {fileID: 6736401842150179436}
   - component: {fileID: 759644400424337060}
   - component: {fileID: 5650224180514046960}
+  - component: {fileID: 3574493720463300672}
+  - component: {fileID: 9082647090224766926}
   m_Layer: 10
   m_Name: Paladin
   m_TagString: Player
@@ -108,6 +110,12 @@ MonoBehaviour:
   spellspeed: 0
   mana: 0
   speed: 0
+  maxLife: 0
+  maxMana: 0
+  lifeRegen: 0
+  manaRegen: 0
+  buffPlus: 0
+  debuffMinus: 0
   isInvincible: 0
   isImmortal: 0
   cannotDie: 0
@@ -163,6 +171,7 @@ MonoBehaviour:
   targetHelpObject: {fileID: 8153952292305783526}
   loadGame: {fileID: 11400000, guid: 6235bec172bdebb4b9dfed7e628eb8cc, type: 2}
   fadingDuration: {fileID: 11400000, guid: a2cc0078d349f9245bd74b3f5813a450, type: 2}
+  maps: []
   AButton: {fileID: 0}
   BButton: {fileID: 0}
   XButton: {fileID: 0}
@@ -272,6 +281,46 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.614625, y: 0.36394513}
   m_EdgeRadius: 0
+--- !u!114 &3574493720463300672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759644400424337056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3fc66ef9f32f2944bc30facf4600ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 90ad66b62787f5e4890b6fa4b73a251e, type: 2}
+  signalEventString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9082647090224766926}
+        m_MethodName: changeMapLocation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9082647090224766926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759644400424337056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b32e99a08649554cb7ed3482bbb5f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapLocation: 
 --- !u!1 &1487360461578692118
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +400,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -504,6 +554,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -582,6 +633,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Direction Ring
       objectReference: {fileID: 0}
+    - target: {fileID: 5349438606657991408, guid: 1c27a61d4b7f3984eb11097accadce1d,
+        type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 5074818981556205378}
     - target: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -637,11 +693,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5349438606657991408, guid: 1c27a61d4b7f3984eb11097accadce1d,
-        type: 3}
-      propertyPath: character
-      value: 
-      objectReference: {fileID: 5074818981556205378}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c27a61d4b7f3984eb11097accadce1d, type: 3}
 --- !u!1 &8153952292305783526 stripped

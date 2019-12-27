@@ -96,10 +96,9 @@ public class Item : MonoBehaviour
     [ShowIf("isKeyItem")]
     public SimpleSignal keyItemSignal;
 
-
     [FoldoutGroup("Item Attributes", expanded: false)]
-    [ShowIf("resourceType", ResourceType.skill)]
-    public Skill skill;
+    [ShowIf("resourceType", ResourceType.special)]
+    public GameObject specialObject;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.statuseffect)]
