@@ -38,7 +38,7 @@ public class Room : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            string text = Utilities.Format.getLanguageDialogText(this.mapName, this.mapNameEnglish);
+            string text = CustomUtilities.Format.getLanguageDialogText(this.mapName, this.mapNameEnglish);
 
             setObjects(true);
             this.virtualCamera.SetActive(true);

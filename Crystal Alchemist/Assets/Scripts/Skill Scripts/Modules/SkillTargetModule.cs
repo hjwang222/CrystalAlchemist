@@ -15,12 +15,12 @@ public class SkillTargetModule : SkillModule
 
     [Space(10)]
     [TabGroup("Ziel Attribute")]
-    [Range(0, Utilities.maxFloatSmall)]
+    [Range(0, CustomUtilities.maxFloatSmall)]
     [Tooltip("Stärke des Knockbacks")]
     public float thrust = 4;
 
     [TabGroup("Ziel Attribute")]
-    [Range(0, Utilities.maxFloatSmall)]
+    [Range(0, CustomUtilities.maxFloatSmall)]
     [Tooltip("Dauer des Knockbacks")]
     [HideIf("thrust", 0f)]
     public float knockbackTime = 0.2f;

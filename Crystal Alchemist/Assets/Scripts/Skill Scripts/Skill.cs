@@ -48,7 +48,7 @@ public class Skill : MonoBehaviour
 
     [FoldoutGroup("Behavior", expanded: false)]
     [Tooltip("Geschwindigkeit des Projektils")]
-    [Range(0, Utilities.maxFloatSmall)]
+    [Range(0, CustomUtilities.maxFloatSmall)]
     public float speed = 0;
 
     [FoldoutGroup("Behavior", expanded: false)]
@@ -57,9 +57,9 @@ public class Skill : MonoBehaviour
     public float positionOffset = 1f;
 
     [FoldoutGroup("Behavior", expanded: false)]
-    [Range(1, Utilities.maxIntInfinite)]
+    [Range(1, CustomUtilities.maxIntInfinite)]
     [Tooltip("Maximale Anzahl aktiver gleicher Angriffe")]
-    public int maxAmounts = Utilities.maxIntInfinite;
+    public int maxAmounts = CustomUtilities.maxIntInfinite;
 
     [Space(10)]
     [FoldoutGroup("Behavior", expanded: false)]
@@ -72,18 +72,18 @@ public class Skill : MonoBehaviour
 
     [FoldoutGroup("Behavior", expanded: false)]
     [Tooltip("Maximale Anzahl aktiver gleicher Angriffe in einer Combo")]
-    public int comboAmount = Utilities.maxIntSmall;
+    public int comboAmount = CustomUtilities.maxIntSmall;
 
 
     [FoldoutGroup("Controls", expanded: false)]
     [Tooltip("Castzeit bis zur Instanziierung (für Außen)")]
-    [Range(0, Utilities.maxFloatSmall)]
+    [Range(0, CustomUtilities.maxFloatSmall)]
     public float cast = 0;
 
     [FoldoutGroup("Controls", expanded: false)]
     [Tooltip("Soll der Charakter während des Schießens weiterhin in die gleiche Richtung schauen?")]
     [SerializeField]
-    [Range(0, Utilities.maxFloatInfinite)]
+    [Range(0, CustomUtilities.maxFloatInfinite)]
     private float lockMovementonDuration = 0;
 
     [Space(10)]
@@ -108,28 +108,28 @@ public class Skill : MonoBehaviour
     
     [FoldoutGroup("Time", expanded: false)]
     [Tooltip("Verzögerung bis Aktivierung")]
-    [Range(0, Utilities.maxFloatInfinite)]
+    [Range(0, CustomUtilities.maxFloatInfinite)]
     public float delay = 0;
 
     [FoldoutGroup("Time", expanded: false)]
     [Tooltip("Dauer des Angriffs. 0 = Animation, max bis Trigger")]
-    [Range(0, Utilities.maxFloatInfinite)]
+    [Range(0, CustomUtilities.maxFloatInfinite)]
     public float duration = 1;
 
     [FoldoutGroup("Time", expanded: false)]
     [Tooltip("Abklingzeit nach Aktivierung (für Außen)")]
-    [Range(0, Utilities.maxFloatSmall)]
+    [Range(0, CustomUtilities.maxFloatSmall)]
     public float cooldown = 1;
 
     [Space(10)]
     [FoldoutGroup("Time", expanded: false)]
     [Tooltip("Abklingzeit nach Kombo")]
-    [Range(0, Utilities.maxFloatSmall)]
+    [Range(0, CustomUtilities.maxFloatSmall)]
     public float cooldownAfterCombo = 0;
 
     [FoldoutGroup("Time", expanded: false)]
     [Tooltip("Zeit für eine Kombo")]
-    [Range(0, Utilities.maxFloatSmall)]
+    [Range(0, CustomUtilities.maxFloatSmall)]
     public float durationCombo = 0;
 
 
@@ -268,8 +268,8 @@ public class Skill : MonoBehaviour
 
         if (this.animator != null && this.sender != null && !this.movementLocked)
         {
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
+            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
+            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
         }
 
         if (this.delayTimeLeft > 0)
@@ -279,13 +279,13 @@ public class Skill : MonoBehaviour
 
             this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
 
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Time", this.delayTimeLeft);
+            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Time", this.delayTimeLeft);
 
             if (this.doCastDuringDelay) doOnCast();
         }
         else
         {
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Active", true);
+            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Active", true);
             SkillIndicatorModule indicatorModule = this.GetComponent<SkillIndicatorModule>();
             if (indicatorModule != null) indicatorModule.hideIndicator();
 
@@ -293,7 +293,7 @@ public class Skill : MonoBehaviour
             if (animationModule != null) animationModule.hideCastingAnimation();
 
             //Prüfe ob der Skill eine Maximale Dauer hat
-            if (this.durationTimeLeft < Utilities.maxFloatInfinite)
+            if (this.durationTimeLeft < CustomUtilities.maxFloatInfinite)
             {
                 if (this.durationTimeLeft > 0)
                 {
@@ -301,9 +301,9 @@ public class Skill : MonoBehaviour
                 }
                 else
                 {
-                    Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Explode", true);
+                    CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Explode", true);
 
-                    if (this.animator == null || !Utilities.UnityUtils.HasParameter(this.animator, "Explode"))
+                    if (this.animator == null || !CustomUtilities.UnityUtils.HasParameter(this.animator, "Explode"))
                     {
                         //Debug.Log(this.skillName + " hat kein Animator oder Explode-Parameter");
                         SetTriggerActive(1);
@@ -393,7 +393,7 @@ public class Skill : MonoBehaviour
         {
             if (!keepOriginalRotation)
             {
-                Utilities.Rotation.setDirectionAndRotation(this, out angle, out start, out this.direction, out rotation);
+                CustomUtilities.Rotation.setDirectionAndRotation(this, out angle, out start, out this.direction, out rotation);
             }
 
             //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;                       
@@ -402,7 +402,7 @@ public class Skill : MonoBehaviour
 
             if (keepOriginalRotation)
             {
-                this.direction = Utilities.Rotation.DegreeToVector2(this.transform.rotation.eulerAngles.z);
+                this.direction = CustomUtilities.Rotation.DegreeToVector2(this.transform.rotation.eulerAngles.z);
             }
 
             if (rotateIt && !keepOriginalRotation) transform.rotation = Quaternion.Euler(rotation);
@@ -418,8 +418,8 @@ public class Skill : MonoBehaviour
 
         if (this.animator != null)
         {
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
-            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
+            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
+            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
         }
 
         if (this.shadow != null)
@@ -438,7 +438,7 @@ public class Skill : MonoBehaviour
         else
         {
             if (character.getResource(senderModule.resourceType, senderModule.item) + senderModule.addResourceSender >= 0 //new method: Check if enough resource on skill
-                           || senderModule.addResourceSender == -Utilities.maxFloatInfinite) return true;
+                           || senderModule.addResourceSender == -CustomUtilities.maxFloatInfinite) return true;
             else return false;
         }
     }
@@ -454,13 +454,13 @@ public class Skill : MonoBehaviour
 
     public void PlaySoundEffect(AudioClip audioClip)
     {
-        Utilities.Audio.playSoundEffect(this.audioSource, audioClip);
+        CustomUtilities.Audio.playSoundEffect(this.audioSource, audioClip);
     }
 
     public void PlaySoundEffectOnce(AudioClip audioClip)
     {
         if (this.audioSource == null) this.audioSource = this.gameObject.AddComponent<AudioSource>();
-        if (!this.dontPlayAudio) Utilities.Audio.playSoundEffect(this.audioSource, audioClip);
+        if (!this.dontPlayAudio) CustomUtilities.Audio.playSoundEffect(this.audioSource, audioClip);
         this.dontPlayAudio = true;
     }
 

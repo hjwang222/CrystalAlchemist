@@ -22,7 +22,7 @@ public class ShopItem : Rewardable
     {
         base.Start();
 
-        Utilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
         this.inventory.Add(this.lootTable[this.index].item);
 
@@ -32,16 +32,16 @@ public class ShopItem : Rewardable
 
     public override void doSomethingOnSubmit()
     {
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
+        if (CustomUtilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
         {
             Item loot = inventory[this.index];
 
-            Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success, loot);
+            CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success, loot);
             this.player.collect(loot, false);
         }
         else
         {
-            Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
+            CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
         }
     }
 }

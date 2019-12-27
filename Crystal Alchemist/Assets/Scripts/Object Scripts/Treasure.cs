@@ -47,7 +47,7 @@ public class Treasure : Rewardable
     {
         base.Start();
 
-        Utilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
     }
 
     #endregion
@@ -69,9 +69,9 @@ public class Treasure : Rewardable
 
             if (this.treasureType == TreasureType.lootbox)
             {
-                Utilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", false);
+                CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", false);
                 this.currentState = objectState.normal;
-                Utilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory);
+                CustomUtilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory);
             }
         }
         /*
@@ -106,14 +106,14 @@ public class Treasure : Rewardable
 
     private void OpenChest()
     {        
-        Utilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", true);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", true);
         this.currentState = objectState.opened;
 
         if (this.soundEffect != null && this.inventory.Count > 0)
         {
             //Spiele Soundeffekte ab
-            Utilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
-            Utilities.Audio.playSoundEffect(this.audioSource, this.soundEffectTreasure);
+            CustomUtilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
+            CustomUtilities.Audio.playSoundEffect(this.audioSource, this.soundEffectTreasure);
 
             //Zeige Item
             this.showTreasureItem();
@@ -123,21 +123,21 @@ public class Treasure : Rewardable
             foreach (Item item in this.inventory)
             {
                 this.player.collect(item, false);
-                Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success, item);
+                CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success, item);
             }                
         }
         else
         {
             //Kein Item drin
-            Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.empty);
+            CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.empty);
         }
     }
 
 
     private void canOpenChest()
     {
-        if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price)) OpenChest();
-        else Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
+        if (CustomUtilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price)) OpenChest();
+        else CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
     }
 
     public void showTreasureItem()

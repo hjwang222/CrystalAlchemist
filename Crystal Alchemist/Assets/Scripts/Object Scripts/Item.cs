@@ -142,7 +142,7 @@ public class Item : MonoBehaviour
         if (this.isKeyItem)
         {
             Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-            if (player != null && Utilities.Items.getAmountFromInventory(this,player.inventory,false) > 0) Destroy(this.gameObject);
+            if (player != null && CustomUtilities.Items.getAmountFromInventory(this,player.inventory,false) > 0) Destroy(this.gameObject);
         }
     }
 
@@ -151,7 +151,7 @@ public class Item : MonoBehaviour
 
     public void playSounds()
     {
-        Utilities.Audio.playSoundEffect(this.audioSource, this.collectSoundEffect);        
+        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.collectSoundEffect);        
     }
 
     public int getTotalAmount()

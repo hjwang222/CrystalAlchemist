@@ -98,8 +98,8 @@ public class MiniGameUI : MenuControls
     {
         this.miniGameObject = main;
         this.miniGameRound = miniGameRound;        
-        this.titleField.text = Utilities.Format.getLanguageDialogText(title, titleEnglish); ;
-        this.mainDescription = Utilities.Format.getLanguageDialogText(description, descriptionEnglish);
+        this.titleField.text = CustomUtilities.Format.getLanguageDialogText(title, titleEnglish); ;
+        this.mainDescription = CustomUtilities.Format.getLanguageDialogText(description, descriptionEnglish);
     }
 
     public void startRound()
@@ -153,7 +153,7 @@ public class MiniGameUI : MenuControls
 
     public void startMatch()
     {
-        Utilities.Items.reduceCurrency(ResourceType.item, match.item, this.player, match.price);
+        CustomUtilities.Items.reduceCurrency(ResourceType.item, match.item, this.player, match.price);
         startRound();
     }
 

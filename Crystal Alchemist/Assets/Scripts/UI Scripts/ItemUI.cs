@@ -37,7 +37,7 @@ public class ItemUI : MonoBehaviour
             if (!item.isKeyItem && item.amount > 1) this.amount.text = "x" + item.amount;
             else if (this.amount != null) this.amount.text = "";
 
-            if(this.preferInventoryIcon) Utilities.Items.setItemImage(this.image, item);
+            if(this.preferInventoryIcon) CustomUtilities.Items.setItemImage(this.image, item);
             else this.image.sprite = item.itemSprite;
 
             this.image.color = new Color(1f, 1f, 1f, 1f);

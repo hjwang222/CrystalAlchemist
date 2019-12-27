@@ -12,7 +12,7 @@ public class SkillLaser : SkillExtension
     private GameObject impactEffect;
 
     [SerializeField]
-    [Range(0, Utilities.maxFloatSmall)]
+    [Range(0, CustomUtilities.maxFloatSmall)]
     private float distance = 0;
 
     [SerializeField]
@@ -51,13 +51,13 @@ public class SkillLaser : SkillExtension
         Vector2 startpoint;
         Vector3 rotation;
 
-        Utilities.Rotation.setDirectionAndRotation(this.skill, out angle, out startpoint, out this.skill.direction, out rotation);
+        CustomUtilities.Rotation.setDirectionAndRotation(this.skill, out angle, out startpoint, out this.skill.direction, out rotation);
 
         if (this.skill.target != null && updateRotation)
         {
             this.skill.direction = (Vector2)this.skill.target.transform.position - startpoint;
             float temp_angle = Mathf.Atan2(this.skill.direction.y, this.skill.direction.x) * Mathf.Rad2Deg;
-            this.skill.direction = Utilities.Rotation.DegreeToVector2(temp_angle);
+            this.skill.direction = CustomUtilities.Rotation.DegreeToVector2(temp_angle);
         }
 
         renderLine(startpoint, rotation);
@@ -94,7 +94,7 @@ public class SkillLaser : SkillExtension
                 hitpoint = this.skill.target.transform.position;
             }
 
-            if (Utilities.Collisions.checkCollision(hitted, this.skill)) this.skill.hitIt(hitted);
+            if (CustomUtilities.Collisions.checkCollision(hitted, this.skill)) this.skill.hitIt(hitted);
 
             Vector2 temp = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y - startpoint.y) / 2) + startpoint;
 

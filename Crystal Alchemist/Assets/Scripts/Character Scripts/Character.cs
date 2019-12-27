@@ -233,7 +233,7 @@ public class Character : MonoBehaviour
     public void ActivateCharacter()
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
-        Utilities.Items.setItem(this.stats.lootTable, this.stats.multiLoot, this.inventory);
+        CustomUtilities.Items.setItem(this.stats.lootTable, this.stats.multiLoot, this.inventory);
 
         AIEvents eventAI = this.GetComponent<AIEvents>();
         if (eventAI != null) eventAI.init();
@@ -258,7 +258,7 @@ public class Character : MonoBehaviour
     private void updateLifeAnimation()
     {
         float percentage = this.life * 100 / this.maxLife;
-        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Life", percentage);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Life", percentage);
     }
 
     private void regeneration()
@@ -333,8 +333,8 @@ public class Character : MonoBehaviour
             }
             
             //TODO: Kill sofort (Skill noch aktiv)
-            Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
-            Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
+            CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
+            CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
 
             this.spriteRenderer.color = Color.white;
             this.currentState = CharacterState.dead;
@@ -349,14 +349,14 @@ public class Character : MonoBehaviour
             {
                 PlayDeathAnimation();
             }
-            else Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead");
+            else CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead");
         }
     }
 
 
     public void PlaySoundEffect(AudioClip clip)
     {
-        Utilities.Audio.playSoundEffect(this.audioSource, clip);
+        CustomUtilities.Audio.playSoundEffect(this.audioSource, clip);
     }
 
     public void DestroyIt()
@@ -392,7 +392,7 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life:
                 {
-                    this.life = Utilities.Resources.setResource(this.life, this.maxLife, value);
+                    this.life = CustomUtilities.Resources.setResource(this.life, this.maxLife, value);
 
                     Color[] colorArray = GlobalValues.red;
                     if (value > 0) colorArray = GlobalValues.green;
@@ -403,7 +403,7 @@ public class Character : MonoBehaviour
                 }
             case ResourceType.mana:
                 {
-                    this.mana = Utilities.Resources.setResource(this.mana, this.maxMana, value);
+                    this.mana = CustomUtilities.Resources.setResource(this.mana, this.maxMana, value);
                     if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
                     break;
                 }
@@ -411,7 +411,7 @@ public class Character : MonoBehaviour
                 {
                     if (item != null)
                     {
-                        Utilities.Items.updateInventory(item, this, Mathf.RoundToInt(value));
+                        CustomUtilities.Items.updateInventory(item, this, Mathf.RoundToInt(value));
                         callSignal(item.signal, value);
                     }
                     break;
@@ -420,7 +420,7 @@ public class Character : MonoBehaviour
                 {
                     if (item != null && item.skill != null && this.GetComponent<Player>() != null)
                     {
-                        Utilities.Skills.updateSkillset(item.skill, this.GetComponent<Player>());
+                        CustomUtilities.Skills.updateSkillset(item.skill, this.GetComponent<Player>());
                     }
                     break;
                 }
@@ -430,7 +430,7 @@ public class Character : MonoBehaviour
                     {
                         foreach (StatusEffect effect in item.statusEffects)
                         {
-                            Utilities.StatusEffectUtil.AddStatusEffect(effect, this);
+                            CustomUtilities.StatusEffectUtil.AddStatusEffect(effect, this);
                         }
                     }
                     break;
@@ -450,7 +450,7 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life: return this.life;
             case ResourceType.mana: return this.mana;
-            case ResourceType.item: return Utilities.Items.getAmountFromInventory(item, this.inventory, false);
+            case ResourceType.item: return CustomUtilities.Items.getAmountFromInventory(item, this.inventory, false);
         }
 
         return 0;
@@ -462,7 +462,7 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life: return this.maxLife;
             case ResourceType.mana: return this.maxMana;
-            case ResourceType.item: return Utilities.Items.getAmountFromInventory(item, this.inventory, true);
+            case ResourceType.item: return CustomUtilities.Items.getAmountFromInventory(item, this.inventory, true);
         }
 
         return 0;
@@ -522,7 +522,7 @@ public class Character : MonoBehaviour
 
     public void startAttackAnimation(string parameter)
     {
-        Utilities.UnityUtils.SetAnimatorParameter(this.animator, parameter);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, parameter);
     }
 
     public void resetCast(Skill skill)
@@ -628,7 +628,7 @@ public class Character : MonoBehaviour
                 {
                     foreach (StatusEffect effect in targetModule.statusEffects)
                     {
-                        Utilities.StatusEffectUtil.AddStatusEffect(effect, this);
+                        CustomUtilities.StatusEffectUtil.AddStatusEffect(effect, this);
                     }
                 }
 
@@ -645,7 +645,7 @@ public class Character : MonoBehaviour
                             this.GetComponent<AI>().aggroGameObject.increaseAggroOnHit(skill.sender, elem.amount);
 
                         //Charakter-Treffer (Schaden) animieren
-                        Utilities.Audio.playSoundEffect(this.audioSource, this.stats.hitSoundEffect);
+                        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.stats.hitSoundEffect);
                         StartCoroutine(hitCo());
                     }
                 }

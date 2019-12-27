@@ -30,7 +30,7 @@ public class PlayerAttacks : MonoBehaviour
 
         foreach (Skill skill in this.player.skillSet)
         {
-            tempSkillSet.Add(Utilities.Skills.setSkill(this.player, skill));
+            tempSkillSet.Add(CustomUtilities.Skills.setSkill(this.player, skill));
         }
 
         this.player.skillSet = tempSkillSet;
@@ -79,11 +79,11 @@ public class PlayerAttacks : MonoBehaviour
 
         if (skill != null)
         {
-            int currentAmountOfSameSkills = Utilities.Skills.getAmountOfSameSkills(skill, this.player.activeSkills, this.player.activePets);
+            int currentAmountOfSameSkills = CustomUtilities.Skills.getAmountOfSameSkills(skill, this.player.activeSkills, this.player.activePets);
 
             if (currentAmountOfSameSkills >= skill.maxAmounts
                 && ((skill.deactivateByButtonUp || skill.deactivateByButtonDown)
-                || skill.delay == Utilities.maxFloatInfinite))
+                || skill.delay == CustomUtilities.maxFloatInfinite))
             {
                 deactivateSkill(button, skill);
             }
@@ -97,7 +97,7 @@ public class PlayerAttacks : MonoBehaviour
                      && this.player.currentState != CharacterState.inDialog
                      && this.player.currentState != CharacterState.respawning
                      && this.player.currentState != CharacterState.inMenu
-                     && !Utilities.StatusEffectUtil.isCharacterStunned(this.player))
+                     && !CustomUtilities.StatusEffectUtil.isCharacterStunned(this.player))
                 {
                     if (currentAmountOfSameSkills < skill.maxAmounts
                             && skill.isResourceEnough(this.player)
@@ -113,7 +113,7 @@ public class PlayerAttacks : MonoBehaviour
                 }
             }
 
-            if (Utilities.StatusEffectUtil.isCharacterStunned(this.player))
+            if (CustomUtilities.StatusEffectUtil.isCharacterStunned(this.player))
             {
                 if (!skill.keepHoldTimer) skill.holdTimer = 0;
             }
@@ -216,7 +216,7 @@ public class PlayerAttacks : MonoBehaviour
             skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
             if (!skill.isRapidFire) skill.holdTimer = 0;
 
-            Utilities.Skills.instantiateSkill(skill, this.player);
+            CustomUtilities.Skills.instantiateSkill(skill, this.player);
         }
         else if (targetingSystemModule != null 
                 && targetingSystemModule.lockOnGameObject != null 
@@ -315,7 +315,7 @@ public class PlayerAttacks : MonoBehaviour
 
     private void fireSkillToSingleTarget(Character target, float damageReduce, bool playSoundeffect, Skill skill)
     {
-        Skill temp = Utilities.Skills.instantiateSkill(skill, this.player, target, damageReduce);
+        Skill temp = CustomUtilities.Skills.instantiateSkill(skill, this.player, target, damageReduce);
         //Vermeidung, dass Audio zu stark abgespielt wird
         if (!playSoundeffect) temp.dontPlayAudio = true;
     }

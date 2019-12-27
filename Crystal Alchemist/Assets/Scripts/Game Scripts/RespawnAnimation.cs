@@ -39,7 +39,7 @@ public class RespawnAnimation : MonoBehaviour
         {
             foreach(Animator animator in this.animators)
             {
-                Utilities.UnityUtils.SetAnimatorParameter(animator, "Reverse");
+                CustomUtilities.UnityUtils.SetAnimatorParameter(animator, "Reverse");
             }
         }
         this.character = character;

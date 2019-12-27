@@ -20,7 +20,7 @@ public class Rewardable : Interactable
     public override void Start()
     {
         base.Start();
-        Utilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory);
+        CustomUtilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory);
     }
 
     

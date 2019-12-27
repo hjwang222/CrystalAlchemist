@@ -75,7 +75,7 @@ public class AIMovement : MonoBehaviour
 
     private void Start()
     {
-        Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
 
         if (this.seeker != null) InvokeRepeating("UpdatePath", 0f, this.updatePathIntervall);
     }
@@ -103,7 +103,7 @@ public class AIMovement : MonoBehaviour
     private void stopMoving()
     {
         this.targetPosition = Vector2.zero;
-        Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
     }
 
     private void UpdatePath()
@@ -260,7 +260,7 @@ public class AIMovement : MonoBehaviour
 
     private void updateAnimation(Vector2 direction)
     {
-        if (!Utilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
+        if (!CustomUtilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
 
         if (this.npc.flip)
         {
@@ -269,7 +269,7 @@ public class AIMovement : MonoBehaviour
         }
 
         this.npc.currentState = CharacterState.walk;
-        Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", true);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", true);
     }
     /*
     private void moveTorwardsTarget(Vector3 position)

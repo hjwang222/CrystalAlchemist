@@ -154,8 +154,8 @@ public class CombatButtons : MonoBehaviour
                 this.player.currentState == CharacterState.inDialog ||
                 this.player.currentState == CharacterState.respawning ||
                 (!skill.isResourceEnough(player))
-                || Utilities.Skills.getAmountOfSameSkills(skill, player.activeSkills, player.activePets) >= skill.maxAmounts
-                || cooldownLeft == Utilities.maxFloatInfinite
+                || CustomUtilities.Skills.getAmountOfSameSkills(skill, player.activeSkills, player.activePets) >= skill.maxAmounts
+                || cooldownLeft == CustomUtilities.maxFloatInfinite
                 || !skill.basicRequirementsExists)
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
@@ -186,7 +186,7 @@ public class CombatButtons : MonoBehaviour
             else if (cooldownLeft > 0 && cooldownValue > 0.5f)
             {
                 //Ist Skill in der Abklingzeit
-                string cooldownText = Utilities.Format.setDurationToString(cooldownLeft);
+                string cooldownText = CustomUtilities.Format.setDurationToString(cooldownLeft);
                 cooldown.text = cooldownText;
                 setFontSize(cooldown);
 

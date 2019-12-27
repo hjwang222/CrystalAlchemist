@@ -26,12 +26,12 @@ public class SkillTargetingSystemModule : SkillModule
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
     [ShowIf("lockOnGameObject")]
-    [Range(0, Utilities.maxIntSmall)]
+    [Range(0, CustomUtilities.maxIntSmall)]
     public int maxAmountOfTargets = 1;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]
     [ShowIf("lockOnGameObject")]
-    [Range(0, Utilities.maxFloatInfinite)]
+    [Range(0, CustomUtilities.maxFloatInfinite)]
     public float targetingDuration = 6f;
 
     [FoldoutGroup("Zielerfassung", expanded: false)]

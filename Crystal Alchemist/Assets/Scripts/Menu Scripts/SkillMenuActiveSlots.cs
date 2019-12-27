@@ -48,7 +48,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
     {
         setSkill(skillMenu.selectedSkill);
         skillMenu.selectSkillFromSkillSet(null);
-        Utilities.Helper.checkIfHelperDeactivate(this.player);
+        CustomUtilities.Helper.checkIfHelperDeactivate(this.player);
 
         setImage();
         this.newAssignedSkillSignal.Raise();
