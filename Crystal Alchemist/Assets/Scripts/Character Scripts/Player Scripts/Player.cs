@@ -61,11 +61,6 @@ public class Player : Character
     [BoxGroup("Pflichtfelder")]
     public FloatValue fadingDuration;
 
-    [FoldoutGroup("Maps", expanded: false)]
-    [Tooltip("Karteninventar")]
-    public List<MapPage> maps = new List<MapPage>();
-
-
 
     [HideInInspector]
     public Skill AButton;

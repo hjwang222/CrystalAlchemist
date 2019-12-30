@@ -416,11 +416,11 @@ public class Character : MonoBehaviour
                     }
                     break;
                 }
-            case ResourceType.special:
+            case ResourceType.skill:
                 {
-                    if (item != null && item.specialObject != null && this.GetComponent<Player>() != null)
+                    if (item != null && item.skillItem != null && this.GetComponent<Player>() != null)
                     {
-                        CustomUtilities.Skills.updateSpecialObject(item.specialObject, this.GetComponent<Player>());
+                        CustomUtilities.Skills.updateSkillSet(item.skillItem, this.GetComponent<Player>());
                     }
                     break;
                 }

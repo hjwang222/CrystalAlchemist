@@ -5,40 +5,54 @@ using UnityEngine;
 public class MapMenu : MenuControls
 {
     [SerializeField]
-    private GameObject targetObject;
+    private List<MapPage> pages = new List<MapPage>();
+
+    [SerializeField]
+    private GameObject locationCursor;
 
     public override void OnEnable()
     {
         base.OnEnable();
-
-        //load all maps, set false
-        //get map, set true
-        //get area, set cursor
+        setMapAndCursor();
     }
 
     private void setMapAndCursor()
     {
+        foreach(MapPage page in this.pages)
+        {
+            page.gameObject.SetActive(false);
+        }
+
         PlayerUtils temp = this.player.GetComponent<PlayerUtils>();
 
         if (temp != null)
         {
-            foreach (MapPage page in this.player.maps)
+            foreach(MapPage page in this.pages)
             {
+                //set Map visible if Player contains map
+                if (CustomUtilities.Items.getMaps(this.player).Contains(page.mapID))
+                {
+                    page.showMap = true;
+                }
+
+                //set Map active of current location of player
                 if (page.mapID == temp.mapID)
                 {
-                    //setActive
+                    page.gameObject.SetActive(true);
 
-                    foreach (MapPagePoint point in page.points)
+                    if (page.showMap)
                     {
-                        if (point.areaID == temp.areaID)
+                        foreach (MapPagePoint point in page.points)
                         {
-                            if (point.GetComponent<ButtonExtension>() != null) point.GetComponent<ButtonExtension>().setFirst();
-                            //set Cursor
-                            break;
+                            if (point.areaID == temp.areaID)
+                            {
+                                //set cursor of current location
+                                if (point.GetComponent<ButtonExtension>() != null) point.GetComponent<ButtonExtension>().setFirst();
+                                this.locationCursor.transform.position = point.transform.position;
+                                break;
+                            }
                         }
                     }
-
-                    break;
                 }
             }
         }

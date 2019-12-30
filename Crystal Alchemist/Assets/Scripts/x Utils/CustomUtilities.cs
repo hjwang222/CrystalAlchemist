@@ -44,7 +44,7 @@ public enum ResourceType
     life,
     mana,
     item,
-    special,
+    skill,
     statuseffect
 }
 
@@ -430,7 +430,7 @@ public class CustomUtilities : MonoBehaviour
             bool result = false;
 
             if (currency == ResourceType.none) result = true;
-            else if (currency != ResourceType.special)
+            else if (currency != ResourceType.skill)
             {
                 if (player.getResource(currency, item) - price >= 0) result = true;                
                 else result = false;                
@@ -546,6 +546,18 @@ public class CustomUtilities : MonoBehaviour
         {
             if (item.itemSpriteInventory != null) image.sprite = item.itemSpriteInventory;
             else image.sprite = item.itemSprite;
+        }
+
+        public static List<string> getMaps(Player player)
+        {
+            List<string> result = new List<string>();
+
+            foreach(Item item in player.inventory)
+            {
+                if (item.isMap) result.Add(item.mapName);
+            }
+
+            return result;
         }
     }
 
@@ -1021,11 +1033,8 @@ public class CustomUtilities : MonoBehaviour
             return collision.GetComponentInParent<Skill>();
         }
 
-        public static void updateSpecialObject(GameObject gameObject, Player player)
+        public static void updateSkillSet(Skill skill, Player player)
         {
-            Skill skill = gameObject.GetComponent<Skill>();
-            MapPage map = gameObject.GetComponent<MapPage>();
-
             if (skill != null)
             {
                 bool found = false;
@@ -1036,10 +1045,6 @@ public class CustomUtilities : MonoBehaviour
                 }
 
                 if (!found) player.skillSet.Add(skill);
-            }
-            else if(map != null)
-            {
-                player.maps.Add(map);
             }
         }
 

@@ -94,11 +94,19 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("isKeyItem")]
+    public bool isMap = false;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("isMap")]
+    public string mapName;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("isKeyItem")]
     public SimpleSignal keyItemSignal;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
-    [ShowIf("resourceType", ResourceType.special)]
-    public GameObject specialObject;
+    [ShowIf("resourceType", ResourceType.skill)]
+    public Skill skillItem;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.statuseffect)]
