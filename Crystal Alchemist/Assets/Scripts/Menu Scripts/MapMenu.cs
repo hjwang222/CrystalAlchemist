@@ -1,12 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class MapMenu : MenuControls
 {
+    [BoxGroup("Mandatory")]
+    [Required]
     [SerializeField]
-    private List<MapPage> pages = new List<MapPage>();
+    private GameObject pages;
 
+    [BoxGroup("Mandatory")]
+    [Required]
     [SerializeField]
     private GameObject locationCursor;
 
@@ -18,38 +21,41 @@ public class MapMenu : MenuControls
 
     private void setMapAndCursor()
     {
-        foreach(MapPage page in this.pages)
-        {
-            page.gameObject.SetActive(false);
-        }
-
         PlayerUtils temp = this.player.GetComponent<PlayerUtils>();
 
         if (temp != null)
         {
-            foreach(MapPage page in this.pages)
+            for (int j = 0; j < this.pages.transform.childCount; j++)
             {
-                //set Map visible if Player contains map
-                if (CustomUtilities.Items.getMaps(this.player).Contains(page.mapID))
-                {
-                    page.showMap = true;
-                }
+                MapPage page = this.pages.transform.GetChild(j).GetComponent<MapPage>();
 
-                //set Map active of current location of player
-                if (page.mapID == temp.mapID)
+                if (page != null)
                 {
-                    page.gameObject.SetActive(true);
+                    page.gameObject.SetActive(false);
 
-                    if (page.showMap)
+                    //set Map visible if Player contains map
+                    if (CustomUtilities.Items.getMaps(this.player).Contains(page.mapID))
                     {
-                        foreach (MapPagePoint point in page.points)
+                        page.showMap = true;
+                    }
+
+                    //set Map active of current location of player
+                    if (page.mapID == temp.mapID)
+                    {
+                        page.gameObject.SetActive(true);
+
+                        if (page.showMap)
                         {
-                            if (point.areaID == temp.areaID)
+                            for (int i = 0; i < page.points.transform.childCount; i++)
                             {
-                                //set cursor of current location
-                                if (point.GetComponent<ButtonExtension>() != null) point.GetComponent<ButtonExtension>().setFirst();
-                                this.locationCursor.transform.position = point.transform.position;
-                                break;
+                                MapPagePoint point = page.points.transform.GetChild(i).GetComponent<MapPagePoint>();
+                                if (point != null && point.areaID == temp.areaID)
+                                {
+                                    //set cursor of current location
+                                    if (point.GetComponent<ButtonExtension>() != null) point.GetComponent<ButtonExtension>().setFirst();
+                                    this.locationCursor.transform.position = new Vector2(point.transform.position.x, point.transform.position.y+(16*point.transform.localScale.y));
+                                    break;
+                                }
                             }
                         }
                     }

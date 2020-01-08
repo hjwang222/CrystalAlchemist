@@ -1,28 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MapPage : MonoBehaviour
 {
-    public string mapID;
+    public string mapID;    
 
     [SerializeField]
-    private GameObject map;
+    private string titleName;
+    [SerializeField]
+    private string titleNameEnglish;
+    [SerializeField]
+    private TextMeshProUGUI titleField;
 
-    public List<MapPagePoint> points = new List<MapPagePoint>();
+    public GameObject points;
 
     public bool showMap;
 
     private void OnEnable()
     {
+        this.titleField.text = CustomUtilities.Format.getLanguageDialogText(this.titleName, this.titleNameEnglish);
         if (this.showMap)
         {
-            this.map.SetActive(true);
+            this.gameObject.SetActive(true);
         }
-        else this.map.SetActive(false);
-
-
+        else this.gameObject.SetActive(false);
     }
 
 }

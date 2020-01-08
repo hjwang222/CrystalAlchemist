@@ -28,6 +28,8 @@ public class InfoBox : MonoBehaviour
     private TextMeshProUGUI statusEffectDescriptionField;
 
 
+    #region setInfo
+
     private void setInfo(Skill skill)
     {
         this.additionalInfo.SetActive(false);
@@ -72,6 +74,20 @@ public class InfoBox : MonoBehaviour
         this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(stats.description, stats.descriptionEnglish);
     }
 
+    private void setInfo(MapPagePoint mapPoint)
+    {
+        this.additionalInfo.SetActive(false);
+
+        this.previewImage.sprite = mapPoint.areaSprite;
+        this.nameField.text = CustomUtilities.Format.getLanguageDialogText(mapPoint.areaName, mapPoint.areaNameEnglish);
+        this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(mapPoint.areaDescription, mapPoint.areaDescriptionEnglish);
+    }
+
+    #endregion
+
+
+    #region show and hide
+
     public void Hide()
     {
         this.gameObject.SetActive(false);
@@ -94,4 +110,11 @@ public class InfoBox : MonoBehaviour
         this.gameObject.SetActive(true);
         setInfo(stats);
     }
+
+    public void Show(MapPagePoint mapPoint)
+    {
+        this.gameObject.SetActive(true);
+        setInfo(mapPoint);
+    }
+    #endregion
 }

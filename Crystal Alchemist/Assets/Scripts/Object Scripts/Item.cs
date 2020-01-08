@@ -94,6 +94,10 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("isKeyItem")]
+    public Item alternativeItem;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("isKeyItem")]
     public bool isMap = false;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
@@ -149,7 +153,11 @@ public class Item : MonoBehaviour
         if (this.isKeyItem)
         {
             Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-            if (player != null && CustomUtilities.Items.getAmountFromInventory(this,player.inventory,false) > 0) Destroy(this.gameObject);
+            if (player != null && CustomUtilities.Items.getAmountFromInventory(this, player.inventory, false) > 0)
+            {
+                //TODO: if (this.alternativeItem != null) Instantiate(this.alternativeItem, this.gameObject.transform.position, this.gameObject.transform.rotation, this.gameObject.transform.parent);
+                Destroy(this.gameObject);
+            }
         }
     }
 
