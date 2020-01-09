@@ -5,7 +5,6 @@ using TMPro;
 
 public class ShopItem : Rewardable
 {
-
     [Header("Shop-Item Attribute")]
     public SpriteRenderer childSprite;
 
@@ -28,6 +27,9 @@ public class ShopItem : Rewardable
 
         //this.amountText.text = this.amount + "";
         this.childSprite.sprite = this.inventory[this.index].itemSprite;
+
+        //TODO:
+        if (this.inventory.Count == 0) Destroy(this.gameObject);
     }
 
     public override void doSomethingOnSubmit()

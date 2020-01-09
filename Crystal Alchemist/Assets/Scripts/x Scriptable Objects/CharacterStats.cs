@@ -171,7 +171,7 @@ public class CharacterStats : ScriptableObject
 
     [FoldoutGroup("Loot", expanded: false)]
     [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
-    public LootTable[] lootTable;
+    public List<LootTable> lootTable = new List<LootTable>();
 
     [Space(10)]
     [FoldoutGroup("Loot", expanded: false)]
@@ -212,4 +212,5 @@ public class CharacterStats : ScriptableObject
     [Tooltip("Um welchen Typ handelt es sich?")]
     [EnumToggleButtons]
     public CharacterType characterType = CharacterType.Object;
+
 }

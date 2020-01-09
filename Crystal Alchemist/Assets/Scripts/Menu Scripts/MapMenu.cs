@@ -42,21 +42,27 @@ public class MapMenu : MenuControls
                     //set Map active of current location of player
                     if (page.mapID == temp.mapID)
                     {
-                        page.gameObject.SetActive(true);
+                        page.gameObject.SetActive(true);                        
 
                         if (page.showMap)
                         {
+                            bool locationFound = false;
+
                             for (int i = 0; i < page.points.transform.childCount; i++)
                             {
                                 MapPagePoint point = page.points.transform.GetChild(i).GetComponent<MapPagePoint>();
                                 if (point != null && point.areaID == temp.areaID)
                                 {
                                     //set cursor of current location
-                                    if (point.GetComponent<ButtonExtension>() != null) point.GetComponent<ButtonExtension>().setFirst();
-                                    this.locationCursor.transform.position = new Vector2(point.transform.position.x, point.transform.position.y+(16*point.transform.localScale.y));
+                                    this.locationCursor.SetActive(true);
+                                    //if (point.GetComponent<ButtonExtension>() != null) point.GetComponent<ButtonExtension>().setFirst();
+                                    this.locationCursor.transform.position = new Vector2(point.transform.position.x, point.transform.position.y+(8*point.transform.localScale.y));
+                                    locationFound = true;
                                     break;
                                 }
                             }
+
+                            if (!locationFound) this.locationCursor.SetActive(false);
                         }
                     }
                 }

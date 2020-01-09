@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 #region Objects
 [System.Serializable]
-public struct LootTable
+public class LootTable
 {
     [VerticalGroup("Split")]
     public Item item;
@@ -17,12 +17,12 @@ public struct LootTable
     [HorizontalGroup("Split/Box", 50)]
     [ShowIf("item")]
     [Range(0, 100)]
-    public int dropRate;
+    public int dropRate = 100;
 
     [ShowIf("item")]
     [HorizontalGroup("Split/Box", 50)]
     [Range(1, 99)]
-    public int amount;
+    public int amount = 1;
 }
 
 [System.Serializable]
@@ -63,6 +63,97 @@ public class CustomUtilities : MonoBehaviour
     public const float maxFloatPercent = 1000;
     public const float minFloatPercent = -100;
     #endregion
+
+
+    public static class UnityFunctions
+    {
+        public static void UpdateItemsInEditor(List<LootTable> lootTable, GameObject lootParentObject, GameObject gameObject)
+        {
+            if (lootTable.Count > 0 && lootParentObject == null) //Wenn kein Unterobjekt exisitert aber die Loottable
+            {
+                if (lootParentObject == null)
+                {
+                    GameObject emptyGO = new GameObject("lootParent");
+                    emptyGO.transform.SetParent(gameObject.transform);
+                    emptyGO.transform.SetPositionAndRotation(gameObject.transform.position, Quaternion.identity);
+                    lootParentObject = emptyGO;
+                }
+
+                for (int i = 0; i < lootTable.Count; i++)
+                {
+                    GameObject temp = UnityEditor.PrefabUtility.InstantiatePrefab(lootTable[i].item.gameObject, lootParentObject.transform) as GameObject;
+                    temp.transform.position = gameObject.transform.position;
+                    temp.SetActive(false);
+                    temp.name = temp.name.Replace("(Clone)", "");
+                    lootTable[i].item = temp.GetComponent<Item>();
+                }
+            }
+            else if (lootParentObject != null && lootParentObject.transform.childCount > 0) //wenn keine Loottable existiert
+            {
+                lootTable.Clear();
+
+                for (int i = 0; i < lootParentObject.transform.childCount; i++)
+                {
+                    Item item = lootParentObject.transform.GetChild(i).GetComponent<Item>();
+
+                    if (item != null)
+                    {
+                        LootTable temp = new LootTable();
+                        temp.amount = 1;
+                        temp.dropRate = 100;
+                        temp.item = item;
+                        lootTable.Add(temp);
+                    }
+
+                    lootParentObject.transform.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+
+
+        public static void UpdateItemsInEditor(List<MiniGameMatch> matches, GameObject lootParentObject, GameObject gameObject)
+        {
+            if (matches.Count > 0 && lootParentObject == null)
+            {
+                if (lootParentObject == null)
+                {
+                    GameObject emptyGO = new GameObject("lootParent");
+                    emptyGO.transform.SetParent(gameObject.transform);
+                    emptyGO.transform.SetPositionAndRotation(gameObject.transform.position, Quaternion.identity);
+                    lootParentObject = emptyGO;
+                }
+
+                for (int i = 0; i < matches.Count; i++)
+                {
+                    GameObject temp = UnityEditor.PrefabUtility.InstantiatePrefab(matches[i].loot.gameObject, lootParentObject.transform) as GameObject;
+                    temp.transform.position = gameObject.transform.position;
+                    temp.SetActive(false);
+                    temp.name = temp.name.Replace("(Clone)", "");
+                    matches[i].loot = temp.GetComponent<Item>();
+                }
+            }
+            else if (lootParentObject != null && lootParentObject.transform.childCount > 0)
+            {
+                matches.Clear();
+
+                for (int i = 0; i < lootParentObject.transform.childCount; i++)
+                {
+                    Item item = lootParentObject.transform.GetChild(i).GetComponent<Item>();
+
+                    if (item != null)
+                    {
+                        MiniGameMatch temp = new MiniGameMatch();
+                        temp.difficulty = i;
+                        temp.loot = item;
+                        matches.Add(temp);
+                    }
+
+                    lootParentObject.transform.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
 
 
     public static class Resources
@@ -233,7 +324,7 @@ public class CustomUtilities : MonoBehaviour
                         SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
                         if (targetModule != null
                             && checkAffections(skill.sender, targetModule.affectOther, targetModule.affectSame, targetModule.affectNeutral, hittedCharacter))
-                        { 
+                        {
                             return true;
                         }
                     }
@@ -396,30 +487,46 @@ public class CustomUtilities : MonoBehaviour
 
     public static class Items
     {
-        public static void setItem(LootTable[] lootTable, bool multiLoot, List<Item> items)
+        public static void setItem(List<LootTable> lootTable, bool multiLoot, List<Item> items, GameObject lootParentObject)
         {
             int rng = UnityEngine.Random.Range(1, CustomUtilities.maxIntSmall);
             int lowestDropRate = 101;
 
-            foreach (LootTable loot in lootTable)
+            if (lootTable.Count > 0)
             {
-                if (rng <= loot.dropRate)
+                foreach (LootTable loot in lootTable)
                 {
-                    if (!multiLoot)
+                    if (rng <= loot.dropRate)
                     {
-                        if (lowestDropRate > loot.dropRate)
+                        if (!multiLoot)
                         {
-                            lowestDropRate = loot.dropRate;
+                            if (lowestDropRate > loot.dropRate)
+                            {
+                                lowestDropRate = loot.dropRate;
 
-                            items.Clear();
+                                items.Clear();
+                                items.Add(loot.item);
+                            }
+                        }
+                        else
+                        {
                             items.Add(loot.item);
                         }
                     }
-                    else
-                    {
-                        items.Add(loot.item);
-                    }
                 }
+            }
+            else
+            {
+                for (int i = 0; i < lootParentObject.transform.childCount; i++)
+                {
+                    Item item = lootParentObject.transform.GetChild(i).GetComponent<Item>();
+                    if (item != null) items.Add(item);
+                }
+            }
+
+            for (int i = 0; i < lootParentObject.transform.childCount; i++)
+            {
+                lootParentObject.transform.GetChild(i).gameObject.SetActive(false);
             }
 
             //if (this.items.Count > 0) this.text = this.text.Replace("%XY%", this.items[0].GetComponent<Item>().amount + " " + this.items[0].GetComponent<Item>().name);
@@ -432,8 +539,8 @@ public class CustomUtilities : MonoBehaviour
             if (currency == ResourceType.none) result = true;
             else if (currency != ResourceType.skill)
             {
-                if (player.getResource(currency, item) - price >= 0) result = true;                
-                else result = false;                
+                if (player.getResource(currency, item) - price >= 0) result = true;
+                else result = false;
             }
 
             return result;
@@ -469,6 +576,22 @@ public class CustomUtilities : MonoBehaviour
                 }
             }
             return null;
+        }
+
+        public static bool hasKeyItemAlready(Item item, List<Item> inventory)
+        {
+            foreach (Item elem in inventory)
+            {
+                if (item.isKeyItem)
+                {
+                    if (item.itemName.ToUpper() == elem.itemName.ToUpper())
+                    {
+                        if ((item.hasUniqueID && item.keyItemID.ToUpper() == elem.keyItemID.ToUpper())
+                         || !item.hasUniqueID) return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public static void updateInventory(Item item, Character character, int amount)
@@ -536,10 +659,10 @@ public class CustomUtilities : MonoBehaviour
         {
             foreach (Item elem in inventory)
             {
-                if (itemGroup.ToUpper() == elem.itemGroup.ToUpper()) return true;                
+                if (itemGroup.ToUpper() == elem.itemGroup.ToUpper()) return true;
             }
 
-             return false;
+            return false;
         }
 
         public static void setItemImage(Image image, Item item)
@@ -552,7 +675,7 @@ public class CustomUtilities : MonoBehaviour
         {
             List<string> result = new List<string>();
 
-            foreach(Item item in player.inventory)
+            foreach (Item item in player.inventory)
             {
                 if (item.isMap) result.Add(item.mapName);
             }
@@ -625,7 +748,7 @@ public class CustomUtilities : MonoBehaviour
             {
                 bool isImmune = false;
 
-                if (character.stats.isImmuneToAllDebuffs 
+                if (character.stats.isImmuneToAllDebuffs
                     && statusEffect.statusEffectType == StatusEffectType.debuff) isImmune = true;
                 else
                 {
@@ -694,7 +817,7 @@ public class CustomUtilities : MonoBehaviour
         {
             List<StatusEffect> result = new List<StatusEffect>();
 
-            foreach(StatusEffect effect in character.buffs)
+            foreach (StatusEffect effect in character.buffs)
             {
                 if (effect.statusEffectName == statusEffect.statusEffectName)
                 {
@@ -747,8 +870,8 @@ public class CustomUtilities : MonoBehaviour
         {
             int rounded = Mathf.RoundToInt(value);
 
-            if (rounded > 59) return (rounded/60).ToString("0")+"m";
-            else return rounded.ToString("0")+"s";
+            if (rounded > 59) return (rounded / 60).ToString("0") + "m";
+            else return rounded.ToString("0") + "s";
         }
 
         public static string formatString(float value, float maxValue)
@@ -802,7 +925,7 @@ public class CustomUtilities : MonoBehaviour
 
             hour = Mathf.RoundToInt(fhour);
             minute = Mathf.RoundToInt(fminute);
-        }               
+        }
     }
 
     ///////////////////////////////////////////////////////////////
@@ -872,8 +995,8 @@ public class CustomUtilities : MonoBehaviour
             if (positionModule != null)
             {
                 useCustomPosition = positionModule.useGameObjectHeight;
-                positionHeight = positionModule.positionHeight;                
-            }                       
+                positionHeight = positionModule.positionHeight;
+            }
 
             start = (Vector2)skill.sender.transform.position;
 
@@ -987,7 +1110,7 @@ public class CustomUtilities : MonoBehaviour
                     }
 
                     targetModule.affectedResources = temp;
-                    if(sendermodule != null) sendermodule.addResourceSender /= reduce;
+                    if (sendermodule != null) sendermodule.addResourceSender /= reduce;
                 }
 
                 sender.activeSkills.Add(activeSkill);
@@ -1010,7 +1133,7 @@ public class CustomUtilities : MonoBehaviour
             {
                 SkillBookModule skillBookModule = skill.GetComponent<SkillBookModule>();
 
-                if (skillBookModule != null 
+                if (skillBookModule != null
                     && category == skillBookModule.category
                     && ID == skillBookModule.orderIndex) return skill;
             }
@@ -1076,7 +1199,7 @@ public class CustomUtilities : MonoBehaviour
 
         private static bool checkIfHelperActivated(Skill skill)
         {
-            if (skill != null 
+            if (skill != null
                 && skill.GetComponent<SkillAimingModule>() != null) return true;
             else return false;
         }

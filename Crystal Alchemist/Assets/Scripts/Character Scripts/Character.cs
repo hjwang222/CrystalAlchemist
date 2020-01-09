@@ -5,6 +5,11 @@ using Sirenix.OdinInspector;
 
 public class Character : MonoBehaviour
 {
+    [BoxGroup("Required")]
+    [SerializeField]
+    [Required]
+    private GameObject lootParentObject;
+
     [Required]
     [BoxGroup("Pflichtfelder")]
     public CharacterStats stats;
@@ -56,6 +61,7 @@ public class Character : MonoBehaviour
     public GameObject shootingPosition;
 
     #endregion
+
 
     #region Attributes
 
@@ -132,6 +138,19 @@ public class Character : MonoBehaviour
 
 
     #endregion
+
+
+
+#if UNITY_EDITOR
+    [Button]
+    [BoxGroup("Loot")]
+    private void UpdateItems()
+    {
+        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.stats.lootTable, this.lootParentObject, this.gameObject);
+    }
+#endif
+
+
 
 
     #region Start Functions (Spawn, Init)
@@ -233,7 +252,7 @@ public class Character : MonoBehaviour
     public void ActivateCharacter()
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
-        CustomUtilities.Items.setItem(this.stats.lootTable, this.stats.multiLoot, this.inventory);
+        CustomUtilities.Items.setItem(this.stats.lootTable, this.stats.multiLoot, this.inventory, this.lootParentObject);
 
         AIEvents eventAI = this.GetComponent<AIEvents>();
         if (eventAI != null) eventAI.init();

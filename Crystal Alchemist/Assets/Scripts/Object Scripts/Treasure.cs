@@ -18,6 +18,10 @@ public class Treasure : Rewardable
     [Required]
     public Animator anim;
 
+    [BoxGroup("Mandatory")]
+    [Required]
+    public GameObject showItem;
+
     [FoldoutGroup("Treasure Options", expanded: false)]
     public AudioClip soundEffectTreasure;
 
@@ -36,6 +40,8 @@ public class Treasure : Rewardable
 
     [FoldoutGroup("TextMeshPro Options", expanded: false)]
     public float outlineWidth = 0.25f;
+
+
 
 
     #endregion
@@ -71,7 +77,7 @@ public class Treasure : Rewardable
             {
                 CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", false);
                 this.currentState = objectState.normal;
-                CustomUtilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory);
+                CustomUtilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory, this.lootParentObject);
             }
         }
         /*
@@ -145,10 +151,32 @@ public class Treasure : Rewardable
         for (int i = 0; i < this.inventory.Count; i++)
         {
             //Item instanziieren und der Liste zurück geben und das Item anzeigen
-            this.inventory[i] = Instantiate(this.inventory[i], this.transform.position, Quaternion.identity, this.transform);
-            this.inventory[i].GetComponent<Item>().showFromTreasure();
+            
+            this.showItem.SetActive(true);
+            Item item = Instantiate(this.inventory[i], this.showItem.transform.position, Quaternion.identity, this.showItem.transform);
+            item.GetComponent<BoxCollider2D>().enabled = false;
+            if (item.shadowRenderer != null) item.shadowRenderer.enabled = false;
+
+            //this.inventory[i].GetComponent<Item>().showFromTreasure();
         }
     }
 
     #endregion
+
+
+    /*
+    #region Treasure specific Function
+    public void showFromTreasure()
+    {
+        //Als Kisten-Item darf es nicht einsammelbar sein und muss als Position die Kiste haben
+
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f);
+        //SortingGroup group = this.GetComponent<SortingGroup>();
+        //if (group != null) group.sortingOrder = 1;
+        this.GetComponent<BoxCollider2D>().enabled = false;
+        this.anim.enabled = true;
+       // if (this.shadowRenderer != null) this.shadowRenderer.enabled = false;
+    }
+
+    #endregion*/
 }
