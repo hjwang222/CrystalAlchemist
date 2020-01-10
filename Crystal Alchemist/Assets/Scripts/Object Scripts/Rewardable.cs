@@ -21,10 +21,12 @@ public class Rewardable : Interactable
     [HideInInspector]
     public List<Item> inventory = new List<Item>();
 
+    public List<LootTable> lootTableInternal = new List<LootTable>();
+
     public override void Start()
     {
         base.Start();
-        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.lootTable, this.lootParentObject, this.gameObject);
-        CustomUtilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory, this.lootParentObject);
+        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.lootTable, this.lootTableInternal, this.lootParentObject, this.gameObject);
+        CustomUtilities.Items.setItem(this.lootTableInternal, this.multiLoot, this.inventory, this.lootParentObject);
     }
 }

@@ -33,6 +33,10 @@ public class Item : MonoBehaviour
 
     [Required]
     [BoxGroup("Pflichtfeld")]
+    public GameObject graphics;
+
+    [Required]
+    [BoxGroup("Pflichtfeld")]
     public Sprite itemSpriteInventory;
 
     [FoldoutGroup("Item Texts", expanded: false)]
@@ -93,10 +97,6 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("isKeyItem")]
-    public Item alternativeItem;
-
-    [FoldoutGroup("Item Attributes", expanded: false)]
-    [ShowIf("isKeyItem")]
     public bool isMap = false;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
@@ -150,6 +150,11 @@ public class Item : MonoBehaviour
     private void Start()
     {
         //Check if keyItem already in Inventory
+        if (checkIfAlreadyThere()) Destroy(this.gameObject);
+    }
+
+    public bool checkIfAlreadyThere()
+    {
         if (this.isKeyItem)
         {
             Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -157,9 +162,12 @@ public class Item : MonoBehaviour
             {
                 //TODO Item:
                 //TODO: if (this.alternativeItem != null) Instantiate(this.alternativeItem, this.gameObject.transform.position, this.gameObject.transform.rotation, this.gameObject.transform.parent);
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
+                return true;
             }
         }
+
+        return false;
     }
 
     #endregion

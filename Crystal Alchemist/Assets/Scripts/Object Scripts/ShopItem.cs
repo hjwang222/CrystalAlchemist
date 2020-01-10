@@ -23,13 +23,13 @@ public class ShopItem : Rewardable
 
         CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
-        this.inventory.Add(this.lootTable[this.index].item);
+        this.inventory.Add(this.lootTableInternal[this.index].item);
 
         //this.amountText.text = this.amount + "";
         this.childSprite.sprite = this.inventory[this.index].itemSprite;
 
         //TODO Item:
-        if (this.inventory.Count == 0) Destroy(this.gameObject);
+        if (this.inventory.Count == 0) this.gameObject.SetActive(false);
     }
 
     public override void doSomethingOnSubmit()

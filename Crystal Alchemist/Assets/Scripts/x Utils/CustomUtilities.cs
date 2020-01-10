@@ -23,6 +23,22 @@ public class LootTable
     [HorizontalGroup("Split/Box", 50)]
     [Range(1, 99)]
     public int amount = 1;
+
+    [VerticalGroup("Split2")]
+    [Tooltip("Ersetzt den Schlüsselgegenstände wenn diese bereits vorhanden sind")]
+    public Item alternativeLoot;
+
+    [HorizontalGroup("Split2/Box", 50)]
+    [ShowIf("alternativeLoot")]
+    [Range(1, 99)]
+    public int alternativeAmount;
+
+    public LootTable(LootTable table)
+    {
+        this.dropRate = table.dropRate;
+        this.amount = table.amount;
+        this.alternativeAmount = table.alternativeAmount;
+    }
 }
 
 [System.Serializable]
@@ -67,35 +83,61 @@ public class CustomUtilities : MonoBehaviour
 
     public static class UnityFunctions
     {
-        public static void UpdateItemsInEditor(List<LootTable> lootTable, GameObject lootParentObject, GameObject gameObject)
+        public static void UpdateItemsInEditor(List<LootTable> lootTable, List<LootTable> lootTableInternal, GameObject lootParentObject, GameObject gameObject)
         {
             if (lootTable.Count > 0 && lootParentObject != null) 
             {
                 for (int i = 0; i < lootTable.Count; i++)
                 {
-                    GameObject temp = Instantiate(lootTable[i].item.gameObject, lootParentObject.transform.position, Quaternion.identity, lootParentObject.transform) as GameObject;
-                    temp.SetActive(false);
-                    temp.name = temp.name.Replace("(Clone)", "");
-                    lootTable[i].item = temp.GetComponent<Item>();
-                    lootTable[i].item.amount = lootTable[i].amount;
+                    bool useAlternative = lootTable[i].item.checkIfAlreadyThere();
+
+                    if (!useAlternative || lootTable[i].alternativeLoot != null)
+                    {
+                        LootTable table = new LootTable(lootTable[i]);
+
+                        table.item = instantiateItem(lootTable[i].item, lootTable[i].alternativeLoot, lootParentObject, useAlternative);
+                        table.item.amount = lootTable[i].amount;
+                        if (lootTable[i].alternativeLoot != null && useAlternative) table.item.amount = lootTable[i].alternativeAmount;
+
+                        lootTableInternal.Add(table);
+                    }
                 }
             }            
         }
 
 
-        public static void UpdateItemsInEditor(List<MiniGameMatch> matches, GameObject lootParentObject, GameObject gameObject)
+        public static void UpdateItemsInEditor(List<MiniGameMatch> matches, List<MiniGameMatch> internalMatches, GameObject lootParentObject, GameObject gameObject)
         {
             if (matches.Count > 0 && lootParentObject != null)
             {           
                 for (int i = 0; i < matches.Count; i++)
                 {
-                    GameObject temp = Instantiate(matches[i].loot.gameObject, lootParentObject.transform.position, Quaternion.identity, lootParentObject.transform) as GameObject;
-                    temp.SetActive(false);
-                    temp.name = temp.name.Replace("(Clone)", "");
-                    matches[i].loot = temp.GetComponent<Item>();
-                    matches[i].loot.amount = matches[i].amount;
+                    bool useAlternative = matches[i].item.checkIfAlreadyThere();
+
+                    if (!useAlternative || matches[i].alternativeLoot != null)
+                    {
+                        MiniGameMatch table = new MiniGameMatch(matches[i]);
+
+                        table.item = instantiateItem(matches[i].loot, matches[i].alternativeLoot, lootParentObject, useAlternative);
+                        table.item.amount = matches[i].amount;
+                        if (matches[i].alternativeLoot != null && useAlternative) table.item.amount = matches[i].alternativeAmount;
+
+                        internalMatches.Add(table);
+                    }
                 }
             }            
+        }
+
+        private static Item instantiateItem(Item item, Item alternative, GameObject lootParentObject, bool useAlternative)
+        {
+            Item temp = item;
+            if (alternative != null && useAlternative) temp = alternative;
+
+            GameObject itemGO = Instantiate(temp.gameObject, lootParentObject.transform.position, Quaternion.identity, lootParentObject.transform) as GameObject;
+            itemGO.SetActive(false);
+            itemGO.name = itemGO.name.Replace("(Clone)", "");
+            Item result = itemGO.GetComponent<Item>();
+            return result;
         }
     }
 
