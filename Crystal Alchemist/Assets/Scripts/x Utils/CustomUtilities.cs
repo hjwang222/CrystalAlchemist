@@ -69,88 +69,33 @@ public class CustomUtilities : MonoBehaviour
     {
         public static void UpdateItemsInEditor(List<LootTable> lootTable, GameObject lootParentObject, GameObject gameObject)
         {
-            if (lootTable.Count > 0 && lootParentObject == null) //Wenn kein Unterobjekt exisitert aber die Loottable
+            if (lootTable.Count > 0 && lootParentObject != null) 
             {
-                if (lootParentObject == null)
-                {
-                    GameObject emptyGO = new GameObject("lootParent");
-                    emptyGO.transform.SetParent(gameObject.transform);
-                    emptyGO.transform.SetPositionAndRotation(gameObject.transform.position, Quaternion.identity);
-                    lootParentObject = emptyGO;
-                }
-
                 for (int i = 0; i < lootTable.Count; i++)
                 {
-                    GameObject temp = UnityEditor.PrefabUtility.InstantiatePrefab(lootTable[i].item.gameObject, lootParentObject.transform) as GameObject;
-                    temp.transform.position = gameObject.transform.position;
+                    GameObject temp = Instantiate(lootTable[i].item.gameObject, lootParentObject.transform.position, Quaternion.identity, lootParentObject.transform) as GameObject;
                     temp.SetActive(false);
                     temp.name = temp.name.Replace("(Clone)", "");
                     lootTable[i].item = temp.GetComponent<Item>();
+                    lootTable[i].item.amount = lootTable[i].amount;
                 }
-            }
-            else if (lootParentObject != null && lootParentObject.transform.childCount > 0) //wenn keine Loottable existiert
-            {
-                lootTable.Clear();
-
-                for (int i = 0; i < lootParentObject.transform.childCount; i++)
-                {
-                    Item item = lootParentObject.transform.GetChild(i).GetComponent<Item>();
-
-                    if (item != null)
-                    {
-                        LootTable temp = new LootTable();
-                        temp.amount = 1;
-                        temp.dropRate = 100;
-                        temp.item = item;
-                        lootTable.Add(temp);
-                    }
-
-                    lootParentObject.transform.GetChild(i).gameObject.SetActive(false);
-                }
-            }
+            }            
         }
 
 
         public static void UpdateItemsInEditor(List<MiniGameMatch> matches, GameObject lootParentObject, GameObject gameObject)
         {
-            if (matches.Count > 0 && lootParentObject == null)
-            {
-                if (lootParentObject == null)
-                {
-                    GameObject emptyGO = new GameObject("lootParent");
-                    emptyGO.transform.SetParent(gameObject.transform);
-                    emptyGO.transform.SetPositionAndRotation(gameObject.transform.position, Quaternion.identity);
-                    lootParentObject = emptyGO;
-                }
-
+            if (matches.Count > 0 && lootParentObject != null)
+            {           
                 for (int i = 0; i < matches.Count; i++)
                 {
-                    GameObject temp = UnityEditor.PrefabUtility.InstantiatePrefab(matches[i].loot.gameObject, lootParentObject.transform) as GameObject;
-                    temp.transform.position = gameObject.transform.position;
+                    GameObject temp = Instantiate(matches[i].loot.gameObject, lootParentObject.transform.position, Quaternion.identity, lootParentObject.transform) as GameObject;
                     temp.SetActive(false);
                     temp.name = temp.name.Replace("(Clone)", "");
                     matches[i].loot = temp.GetComponent<Item>();
+                    matches[i].loot.amount = matches[i].amount;
                 }
-            }
-            else if (lootParentObject != null && lootParentObject.transform.childCount > 0)
-            {
-                matches.Clear();
-
-                for (int i = 0; i < lootParentObject.transform.childCount; i++)
-                {
-                    Item item = lootParentObject.transform.GetChild(i).GetComponent<Item>();
-
-                    if (item != null)
-                    {
-                        MiniGameMatch temp = new MiniGameMatch();
-                        temp.difficulty = i;
-                        temp.loot = item;
-                        matches.Add(temp);
-                    }
-
-                    lootParentObject.transform.GetChild(i).gameObject.SetActive(false);
-                }
-            }
+            }            
         }
     }
 
@@ -586,8 +531,10 @@ public class CustomUtilities : MonoBehaviour
                 {
                     if (item.itemName.ToUpper() == elem.itemName.ToUpper())
                     {
-                        if ((item.hasUniqueID && item.keyItemID.ToUpper() == elem.keyItemID.ToUpper())
-                         || !item.hasUniqueID) return true;
+                        return true;
+
+                        //if ((item.hasUniqueID && item.keyItemID.ToUpper() == elem.keyItemID.ToUpper())
+                        // || !item.hasUniqueID) return true;
                     }
                 }
             }

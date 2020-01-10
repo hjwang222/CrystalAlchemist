@@ -103,13 +103,7 @@ public class Item : MonoBehaviour
     [ShowIf("isMap")]
     public string mapName;
 
-    [FoldoutGroup("Item Attributes", expanded: false)]
-    [ShowIf("isKeyItem")]
-    public bool hasUniqueID = false;
 
-    [FoldoutGroup("Item Attributes", expanded: false)]
-    [ShowIf("hasUniqueID")]
-    public string keyItemID;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("isKeyItem")]
@@ -161,6 +155,7 @@ public class Item : MonoBehaviour
             Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
             if (player != null && CustomUtilities.Items.hasKeyItemAlready(this, player.inventory))
             {
+                //TODO Item:
                 //TODO: if (this.alternativeItem != null) Instantiate(this.alternativeItem, this.gameObject.transform.position, this.gameObject.transform.rotation, this.gameObject.transform.parent);
                 Destroy(this.gameObject);
             }
@@ -179,9 +174,6 @@ public class Item : MonoBehaviour
     {
         return this.value * this.amount;
     }
-
-
-
 
 
     #region Collect Item Funktionen

@@ -499,7 +499,19 @@ MonoBehaviour:
   context: {fileID: 0}
   currentState: 0
   lootParentObject: {fileID: 1822187999}
-  lootTable: []
+  lootTable:
+  - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
+    dropRate: 60
+    amount: 1
+  - item: {fileID: 8069356869073092967, guid: 6b191b04f9a7dbc49920d197f5070449, type: 3}
+    dropRate: 40
+    amount: 1
+  - item: {fileID: 7715491483693814758, guid: ff61f4065ad8e734d83ed008fddeb967, type: 3}
+    dropRate: 20
+    amount: 1
+  - item: {fileID: 6577156445127767014, guid: 9eed5a7d4c3ca4f49b552c626d2d4ee7, type: 3}
+    dropRate: 10
+    amount: 1
   multiLoot: 0
   inventory: []
   anim: {fileID: 4617041708320505071}
@@ -591,6 +603,9 @@ MonoBehaviour:
     dialogBoxTextEnglish: 'You cant buy that.
 
       You need <price> <item name>.'
+  - trigger: 3
+    dialogBoxText: Niete... .
+    dialogBoxTextEnglish: Nothing there... .
 --- !u!1 &7563304959205820036
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8845218106338493517}
+  - component: {fileID: 441041725308382435}
   m_Layer: 0
   m_Name: ItemShow
   m_TagString: Untagged
@@ -678,6 +694,25 @@ Transform:
   m_Father: {fileID: 5533910144408278658}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &441041725308382435
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7730469263089929576}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f676e889684436a4bbaa06f050afc5b5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &6462874102007048079
 PrefabInstance:
   m_ObjectHideFlags: 0

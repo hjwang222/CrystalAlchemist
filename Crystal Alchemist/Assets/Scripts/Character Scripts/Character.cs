@@ -141,22 +141,11 @@ public class Character : MonoBehaviour
 
 
 
-#if UNITY_EDITOR
-    [Button]
-    [BoxGroup("Loot")]
-    private void UpdateItems()
-    {
-        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.stats.lootTable, this.lootParentObject, this.gameObject);
-    }
-#endif
-
-
-
-
     #region Start Functions (Spawn, Init)
     private void Awake()
     {
         init();
+        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.stats.lootTable, this.lootParentObject, this.gameObject);
     }
 
     public void init()
@@ -310,6 +299,7 @@ public class Character : MonoBehaviour
         foreach (Item itemObject in this.inventory)
         {
             GameObject itemClone = Instantiate(itemObject.gameObject, this.transform.position, Quaternion.identity);
+            itemClone.SetActive(true);
         }
     }
 

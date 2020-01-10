@@ -28,7 +28,7 @@ public class ShopItem : Rewardable
         //this.amountText.text = this.amount + "";
         this.childSprite.sprite = this.inventory[this.index].itemSprite;
 
-        //TODO:
+        //TODO Item:
         if (this.inventory.Count == 0) Destroy(this.gameObject);
     }
 

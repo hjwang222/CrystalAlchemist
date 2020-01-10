@@ -32,6 +32,10 @@ public class MiniGameMatch
 
     [BoxGroup("Loot")]
     public Item loot;
+
+    [BoxGroup("Loot")]
+    [Range(1, 99)]
+    public int amount;
 }
 
 public class MiniGameMachine : Interactable
@@ -52,14 +56,11 @@ public class MiniGameMachine : Interactable
     private List<MiniGameMatch> matches = new List<MiniGameMatch>();
 
 
-#if UNITY_EDITOR
-    [Button]
-    [BoxGroup("Mandatory")]
-    private void UpdateItems()
+    public override void Start()
     {
+        base.Start();
         CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.matches, this.lootParentObject, this.gameObject);
     }
-#endif
 
 
     public override void doSomethingOnSubmit()

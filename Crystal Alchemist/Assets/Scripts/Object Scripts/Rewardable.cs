@@ -21,20 +21,10 @@ public class Rewardable : Interactable
     [HideInInspector]
     public List<Item> inventory = new List<Item>();
 
-
-#if UNITY_EDITOR
-    [Button]
-    [FoldoutGroup("Loot", expanded: false)]
-    private void UpdateItems()
-    {
-        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.lootTable, this.lootParentObject, this.gameObject);
-    }
-#endif
-
-
     public override void Start()
     {
         base.Start();
+        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.lootTable, this.lootParentObject, this.gameObject);
         CustomUtilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory, this.lootParentObject);
     }
 }
