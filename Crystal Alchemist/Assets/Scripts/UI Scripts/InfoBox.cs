@@ -28,16 +28,18 @@ public class InfoBox : MonoBehaviour
     private TextMeshProUGUI statusEffectDescriptionField;
 
 
+    #region setInfo
+
     private void setInfo(Skill skill)
     {
         this.additionalInfo.SetActive(false);
 
-        this.nameField.text = Utilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
+        this.nameField.text = CustomUtilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
 
         if (skill.GetComponent<SkillBookModule>() != null)
         {
             this.previewImage.sprite = skill.GetComponent<SkillBookModule>().icon;
-            this.descriptionField.text = Utilities.Format.getLanguageDialogText(skill.GetComponent<SkillBookModule>().skillDescription, skill.GetComponent<SkillBookModule>().skillDescriptionEnglish);
+            this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(skill.GetComponent<SkillBookModule>().skillDescription, skill.GetComponent<SkillBookModule>().skillDescriptionEnglish);
         }
 
         if (skill.GetComponent<SkillTargetModule>() != null && skill.GetComponent<SkillTargetModule>().statusEffects.Count > 0)
@@ -47,8 +49,8 @@ public class InfoBox : MonoBehaviour
             StatusEffect statusEffect = skill.GetComponent<SkillTargetModule>().statusEffects[0];
 
             this.statusEffectPreviewImage.sprite = statusEffect.iconSprite;
-            this.statusEffectNameField.text = Utilities.Format.getLanguageDialogText(statusEffect.statusEffectName, statusEffect.statusEffectNameEnglish);
-            this.statusEffectDescriptionField.text = Utilities.Format.getLanguageDialogText(statusEffect.statusEffectDescription, statusEffect.statusEffectDescriptionEnglish);
+            this.statusEffectNameField.text = CustomUtilities.Format.getLanguageDialogText(statusEffect.statusEffectName, statusEffect.statusEffectNameEnglish);
+            this.statusEffectDescriptionField.text = CustomUtilities.Format.getLanguageDialogText(statusEffect.statusEffectDescription, statusEffect.statusEffectDescriptionEnglish);
         }
     }
 
@@ -57,10 +59,10 @@ public class InfoBox : MonoBehaviour
     {
         this.additionalInfo.SetActive(false);
 
-        Utilities.Items.setItemImage(this.previewImage, item);
+        CustomUtilities.Items.setItemImage(this.previewImage, item);
 
-        this.nameField.text = Utilities.Format.getLanguageDialogText(item.itemName, item.itemNameEnglish);
-        this.descriptionField.text = Utilities.Format.getLanguageDialogText(item.itemDescription, item.itemDescriptionEnglish);
+        this.nameField.text = CustomUtilities.Format.getLanguageDialogText(item.itemName, item.itemNameEnglish);
+        this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(item.itemDescription, item.itemDescriptionEnglish);
     }
 
     private void setInfo(CharacterAttributeStats stats)
@@ -68,9 +70,23 @@ public class InfoBox : MonoBehaviour
         this.additionalInfo.SetActive(false);
 
         this.previewImage.sprite = stats.icon.sprite;
-        this.nameField.text = Utilities.Format.getLanguageDialogText(stats.attributeName, stats.nameEnglish);
-        this.descriptionField.text = Utilities.Format.getLanguageDialogText(stats.description, stats.descriptionEnglish);
+        this.nameField.text = CustomUtilities.Format.getLanguageDialogText(stats.attributeName, stats.nameEnglish);
+        this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(stats.description, stats.descriptionEnglish);
     }
+
+    private void setInfo(MapPagePoint mapPoint)
+    {
+        this.additionalInfo.SetActive(false);
+
+        this.previewImage.sprite = mapPoint.areaSprite;
+        this.nameField.text = CustomUtilities.Format.getLanguageDialogText(mapPoint.areaName, mapPoint.areaNameEnglish);
+        this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(mapPoint.areaDescription, mapPoint.areaDescriptionEnglish);
+    }
+
+    #endregion
+
+
+    #region show and hide
 
     public void Hide()
     {
@@ -94,4 +110,11 @@ public class InfoBox : MonoBehaviour
         this.gameObject.SetActive(true);
         setInfo(stats);
     }
+
+    public void Show(MapPagePoint mapPoint)
+    {
+        this.gameObject.SetActive(true);
+        setInfo(mapPoint);
+    }
+    #endregion
 }

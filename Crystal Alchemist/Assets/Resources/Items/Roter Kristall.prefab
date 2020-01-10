@@ -45,6 +45,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -127,6 +128,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -229,6 +231,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -295,7 +298,6 @@ GameObject:
   - component: {fileID: 7715491483693814756}
   - component: {fileID: 7715491483693814758}
   - component: {fileID: 7715491483693814757}
-  - component: {fileID: 7715491483693814759}
   - component: {fileID: 1090819537146742931}
   - component: {fileID: -7309778779660707386}
   m_Layer: 15
@@ -339,21 +341,26 @@ MonoBehaviour:
   itemSpriteInventory: {fileID: 8368822998687311816, guid: da2b8cd3ab5195945ab9099a1134a852,
     type: 3}
   itemName: Roter Kristall
-  itemDescription: "Ein rot leuchtender Kristall. \nSein Wert entspricht dem von 10
-    Kristallen."
+  itemDescription: "Ein rot leuchtender Kristall. \nSein Wert entspricht dem von
+    10 Kristallen."
   itemGroup: Kristalle
   itemSlot: -1
   itemNameEnglish: Red Crystal
-  itemDescriptionEnglish: "A shining red crystal. \nIts value is 10 times higher than
-    a normal crystal."
+  itemDescriptionEnglish: "A shining red crystal. \nIts value is 10 times higher
+    than a normal crystal."
   itemGroupEnglish: crystals
   amount: 1
   value: 10
   maxAmount: 9999
   resourceType: 3
   isKeyItem: 0
+  alternativeItem: {fileID: 0}
+  isMap: 0
+  mapName: 
+  hasUniqueID: 0
+  keyItemID: 
   keyItemSignal: {fileID: 0}
-  skill: {fileID: 0}
+  skillItem: {fileID: 0}
   statusEffects: []
   collectSoundEffect: {fileID: 8300000, guid: ec4c06267ecfbc94ca8f84ce329e2910, type: 3}
   signal: {fileID: 11400000, guid: 2637d39002796b84991e8c9d3d373c17, type: 2}
@@ -383,25 +390,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.75}
   m_EdgeRadius: 0
---- !u!95 &7715491483693814759
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7715491483693814763}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 47d8aab5788a8e147966f94bfd2288ab, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!210 &1090819537146742931
 SortingGroup:
   m_ObjectHideFlags: 0

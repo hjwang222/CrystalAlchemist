@@ -22,8 +22,8 @@ public class StatusEffectUI : MonoBehaviour
 
     public void updateUI()
     {
-        string seconds = Utilities.Format.setDurationToString(statusEffect.statusEffectTimeLeft);
-        if (statusEffect.statusEffectTimeLeft <= 0 || statusEffect.maxDuration == Utilities.maxFloatInfinite) seconds = "";
+        string seconds = CustomUtilities.Format.setDurationToString(statusEffect.statusEffectTimeLeft);
+        if (statusEffect.statusEffectTimeLeft <= 0 || statusEffect.maxDuration == CustomUtilities.maxFloatInfinite) seconds = "";
         this.textfield.text = seconds;        
     }
 

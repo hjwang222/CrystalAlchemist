@@ -17,13 +17,13 @@ public class SkillSenderModule : SkillModule
 
     [TabGroup("Sender Attribute")]
     [HideIf("resourceType", ResourceType.none)]
-    [Range(-Utilities.maxFloatInfinite, Utilities.maxFloatInfinite)]
+    [Range(-CustomUtilities.maxFloatInfinite, CustomUtilities.maxFloatInfinite)]
     [Tooltip("Höhe der Resource des Senders. Negativ = Schaden, Positiv = Heilung")]
     public float addResourceSender = 0;
 
     [TabGroup("Sender Attribute")]
     [HideIf("resourceType", ResourceType.none)]
-    [Range(0, Utilities.maxFloatInfinite)]
+    [Range(0, CustomUtilities.maxFloatInfinite)]
     [Tooltip("Intervall während der Dauer des Skills Leben oder Mana verändert werden.")]
     public float intervallSender = 0;
 
@@ -48,13 +48,13 @@ public class SkillSenderModule : SkillModule
     private bool forward = false;
 
     [TabGroup("Sender Attribute")]
-    [Range(0, Utilities.maxFloatSmall)]
+    [Range(0, CustomUtilities.maxFloatSmall)]
     [Tooltip("Stärke des Knockbacks")]
     [SerializeField]
     private float selfThrust = 0;
 
     [TabGroup("Sender Attribute")]
-    [Range(0, Utilities.maxFloatSmall)]
+    [Range(0, CustomUtilities.maxFloatSmall)]
     [Tooltip("Dauer des Knockbacks")]
     [HideIf("selfThrust", 0f)]
     [SerializeField]

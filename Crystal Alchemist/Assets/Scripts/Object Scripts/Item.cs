@@ -24,13 +24,16 @@ public class Item : MonoBehaviour
     #region Attribute
 
     [Required]
-    [SerializeField]
     [BoxGroup("Pflichtfeld")]
-    private SpriteRenderer shadowRenderer;
+    public SpriteRenderer shadowRenderer;
 
     [Required]
     [BoxGroup("Pflichtfeld")]
     public Sprite itemSprite;
+
+    [Required]
+    [BoxGroup("Pflichtfeld")]
+    public GameObject graphics;
 
     [Required]
     [BoxGroup("Pflichtfeld")]
@@ -94,12 +97,21 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("isKeyItem")]
-    public SimpleSignal keyItemSignal;
+    public bool isMap = false;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("isMap")]
+    public string mapName;
+
 
 
     [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("isKeyItem")]
+    public SimpleSignal keyItemSignal;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.skill)]
-    public Skill skill;
+    public Skill skillItem;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.statuseffect)]
@@ -138,12 +150,24 @@ public class Item : MonoBehaviour
     private void Start()
     {
         //Check if keyItem already in Inventory
+        if (checkIfAlreadyThere()) Destroy(this.gameObject);
+    }
 
+    public bool checkIfAlreadyThere()
+    {
         if (this.isKeyItem)
         {
             Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-            if (player != null && Utilities.Items.getAmountFromInventory(this,player.inventory,false) > 0) Destroy(this.gameObject);
+            if (player != null && CustomUtilities.Items.hasKeyItemAlready(this, player.inventory))
+            {
+                //TODO Item:
+                //TODO: if (this.alternativeItem != null) Instantiate(this.alternativeItem, this.gameObject.transform.position, this.gameObject.transform.rotation, this.gameObject.transform.parent);
+                //Destroy(this.gameObject);
+                return true;
+            }
         }
+
+        return false;
     }
 
     #endregion
@@ -151,29 +175,13 @@ public class Item : MonoBehaviour
 
     public void playSounds()
     {
-        Utilities.Audio.playSoundEffect(this.audioSource, this.collectSoundEffect);        
+        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.collectSoundEffect);        
     }
 
     public int getTotalAmount()
     {
         return this.value * this.amount;
     }
-
-
-    #region Treasure specific Function
-    public void showFromTreasure()
-    {
-        //Als Kisten-Item darf es nicht einsammelbar sein und muss als Position die Kiste haben
-
-        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f);
-        SortingGroup group = this.GetComponent<SortingGroup>();
-        if (group != null) group.sortingOrder = 1;
-        this.GetComponent<BoxCollider2D>().enabled = false;   
-        this.anim.enabled = true;
-        if(this.shadowRenderer != null) this.shadowRenderer.enabled = false;
-    }
-
-    #endregion
 
 
     #region Collect Item Funktionen

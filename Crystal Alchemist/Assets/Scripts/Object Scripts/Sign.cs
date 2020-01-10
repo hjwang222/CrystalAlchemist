@@ -7,6 +7,6 @@ public class Sign : Interactable
 {
     public override void doSomethingOnSubmit()
     {
-        Utilities.DialogBox.showDialog(this, this.player);
+        CustomUtilities.DialogBox.showDialog(this, this.player);
     }
 }

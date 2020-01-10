@@ -43,13 +43,13 @@ public class SkillAffectStatusEffects : SkillExtension
             {
                 foreach (StatusEffect effect in changeEffects)
                 {
-                    if (this.dispellIt) Utilities.StatusEffectUtil.RemoveStatusEffect(effect, false, character);
+                    if (this.dispellIt) CustomUtilities.StatusEffectUtil.RemoveStatusEffect(effect, false, character);
                     if (this.extendTimePercentage > 0) effect.statusEffectTimeLeft += (effect.statusEffectTimeLeft * extendTimePercentage) / 100;
                 }
             }
             else
             {
-                if (this.dispellIt) Utilities.StatusEffectUtil.RemoveStatusEffect(changeEffects[0], false, character);
+                if (this.dispellIt) CustomUtilities.StatusEffectUtil.RemoveStatusEffect(changeEffects[0], false, character);
                 if (this.extendTimePercentage > 0) changeEffects[0].statusEffectTimeLeft += (changeEffects[0].statusEffectTimeLeft * extendTimePercentage) / 100;
             }
         }

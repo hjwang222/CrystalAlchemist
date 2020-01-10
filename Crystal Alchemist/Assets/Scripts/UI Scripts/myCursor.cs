@@ -71,7 +71,7 @@ public class myCursor : MonoBehaviour
 
     private IEnumerator playAudioEffect()
     {
-        Utilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
+        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
         float length = this.soundEffect.length;
         yield return new WaitForSeconds(length);
         this.isPlaying = false;

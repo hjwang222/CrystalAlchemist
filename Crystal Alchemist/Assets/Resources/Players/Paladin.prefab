@@ -46,6 +46,8 @@ GameObject:
   - component: {fileID: 6736401842150179436}
   - component: {fileID: 759644400424337060}
   - component: {fileID: 5650224180514046960}
+  - component: {fileID: 3574493720463300672}
+  - component: {fileID: 9082647090224766926}
   m_Layer: 10
   m_Name: Paladin
   m_TagString: Player
@@ -70,6 +72,7 @@ Transform:
   - {fileID: 5007069744063628954}
   - {fileID: 1359776168893412036}
   - {fileID: 1608567932204615848}
+  - {fileID: 6599523314254448234}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -85,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 946fe45f31af8544caf372295024317d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lootParentObject: {fileID: 1633981480254796401}
   stats: {fileID: 11400000, guid: f489034bab4a8c34eb316a47f0cf1f8a, type: 2}
   myRigidbody: {fileID: 759644400424337060}
   animator: {fileID: 4187403449301391866}
@@ -108,6 +112,12 @@ MonoBehaviour:
   spellspeed: 0
   mana: 0
   speed: 0
+  maxLife: 0
+  maxMana: 0
+  lifeRegen: 0
+  manaRegen: 0
+  buffPlus: 0
+  debuffMinus: 0
   isInvincible: 0
   isImmortal: 0
   cannotDie: 0
@@ -272,6 +282,47 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.614625, y: 0.36394513}
   m_EdgeRadius: 0
+--- !u!114 &3574493720463300672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759644400424337056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3fc66ef9f32f2944bc30facf4600ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 90ad66b62787f5e4890b6fa4b73a251e, type: 2}
+  signalEventString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9082647090224766926}
+        m_MethodName: changeMapLocation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9082647090224766926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759644400424337056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b32e99a08649554cb7ed3482bbb5f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapID: 
+  areaID: 
 --- !u!1 &1487360461578692118
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,6 +352,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 759644400424337062}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1633981480254796401
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6599523314254448234}
+  m_Layer: 10
+  m_Name: lootParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6599523314254448234
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633981480254796401}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 759644400424337062}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5158803107809188404
 GameObject:
@@ -351,6 +432,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -504,6 +586,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -582,6 +665,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Direction Ring
       objectReference: {fileID: 0}
+    - target: {fileID: 5349438606657991408, guid: 1c27a61d4b7f3984eb11097accadce1d,
+        type: 3}
+      propertyPath: character
+      value: 
+      objectReference: {fileID: 5074818981556205378}
     - target: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -637,11 +725,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5349438606657991408, guid: 1c27a61d4b7f3984eb11097accadce1d,
-        type: 3}
-      propertyPath: character
-      value: 
-      objectReference: {fileID: 5074818981556205378}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c27a61d4b7f3984eb11097accadce1d, type: 3}
 --- !u!1 &8153952292305783526 stripped

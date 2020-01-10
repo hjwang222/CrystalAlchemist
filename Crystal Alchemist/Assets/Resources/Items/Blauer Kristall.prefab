@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8069356869073092965}
   - component: {fileID: 8069356869073092967}
   - component: {fileID: 8069356869073092964}
-  - component: {fileID: 8069356869073092966}
   - component: {fileID: 3337888604394354563}
   - component: {fileID: -7750091567262405981}
   m_Layer: 15
@@ -55,8 +54,8 @@ MonoBehaviour:
   itemSpriteInventory: {fileID: 8368822998687311816, guid: da2b8cd3ab5195945ab9099a1134a852,
     type: 3}
   itemName: Blauer Kristall
-  itemDescription: "Ein blau funkelnder Kristall. \nSein Wert entspricht dem von 5
-    Kristallen."
+  itemDescription: "Ein blau funkelnder Kristall. \nSein Wert entspricht dem von
+    5 Kristallen."
   itemGroup: Kristalle
   itemSlot: -1
   itemNameEnglish: Blue Crystal
@@ -68,8 +67,13 @@ MonoBehaviour:
   maxAmount: 9999
   resourceType: 3
   isKeyItem: 0
+  alternativeItem: {fileID: 0}
+  isMap: 0
+  mapName: 
+  hasUniqueID: 0
+  keyItemID: 
   keyItemSignal: {fileID: 0}
-  skill: {fileID: 0}
+  skillItem: {fileID: 0}
   statusEffects: []
   collectSoundEffect: {fileID: 8300000, guid: ec4c06267ecfbc94ca8f84ce329e2910, type: 3}
   signal: {fileID: 11400000, guid: 2637d39002796b84991e8c9d3d373c17, type: 2}
@@ -99,25 +103,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.75}
   m_EdgeRadius: 0
---- !u!95 &8069356869073092966
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8069356869073092970}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 47d8aab5788a8e147966f94bfd2288ab, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!210 &3337888604394354563
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -198,6 +183,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -298,6 +284,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -446,6 +433,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8069356869642040130}
     m_Modifications:
+    - target: {fileID: 634257569416937403, guid: f11b09210e7962848bddb256727f4657,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 634257569416937404, guid: f11b09210e7962848bddb256727f4657,
         type: 3}
       propertyPath: m_Name
@@ -506,11 +498,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 634257569416937403, guid: f11b09210e7962848bddb256727f4657,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f11b09210e7962848bddb256727f4657, type: 3}
 --- !u!4 &8069356869867652894 stripped

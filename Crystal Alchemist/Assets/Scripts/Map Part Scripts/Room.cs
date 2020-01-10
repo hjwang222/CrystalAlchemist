@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Cinemachine;
 using Sirenix.OdinInspector;
+using UnityEditor;
 
 public class Room : MonoBehaviour
 {
@@ -14,6 +13,12 @@ public class Room : MonoBehaviour
     private GameObject objectsInArea;
 
     [SerializeField]
+    private string mapID;
+
+    [SerializeField]
+    private string areaID;
+
+    [SerializeField]
     private string mapName;
 
     [SerializeField]
@@ -21,6 +26,28 @@ public class Room : MonoBehaviour
 
     [SerializeField]
     private StringSignal locationSignal;
+
+    [SerializeField]
+    private StringSignal mapLocationSignal;
+
+
+
+#if UNITY_EDITOR
+    [Button]
+    public void setComponent()
+    {
+        this.mapID = "Overworld";
+        this.areaID = "???";
+        this.locationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/locationSignal.asset", typeof(StringSignal));
+        this.mapLocationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/mapLocationSignal.asset", typeof(StringSignal));
+    }
+#endif
+
+
+
+
+
+
 
     private void Awake()
     {
@@ -38,12 +65,14 @@ public class Room : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            string text = Utilities.Format.getLanguageDialogText(this.mapName, this.mapNameEnglish);
+            string text = CustomUtilities.Format.getLanguageDialogText(this.mapName, this.mapNameEnglish);
 
             setObjects(true);
             this.virtualCamera.SetActive(true);
 
             this.locationSignal.Raise(text);
+            this.mapLocationSignal.Raise(this.mapID + "|" + this.areaID);
+
             CinemachineVirtualCamera vcam = this.virtualCamera.GetComponent<CinemachineVirtualCamera>();
             if(vcam.Follow == null) vcam.Follow = other.transform;
         }

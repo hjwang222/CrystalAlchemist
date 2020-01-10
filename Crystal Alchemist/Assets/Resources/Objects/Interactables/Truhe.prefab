@@ -31,9 +31,11 @@ Transform:
   m_LocalPosition: {x: 1.25, y: 10.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 6606501738247019565}
   - {fileID: 3293973927404700897}
   - {fileID: 4589597711886439785}
   - {fileID: 8772655283959596818}
+  - {fileID: 8147629401564952725}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -55,7 +57,6 @@ MonoBehaviour:
   item: {fileID: 3692160304636444062, guid: 0aea2ca1a4e017d4d9f7b1ccd427e54a, type: 3}
   price: 1
   soundEffect: {fileID: 8300000, guid: 4f7be5fca72aed945b5adc95e382a719, type: 3}
-  animator: {fileID: 0}
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
@@ -63,13 +64,16 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   context: {fileID: 0}
   currentState: 0
+  lootParentObject: {fileID: 6308135320858048071}
   lootTable:
   - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
     dropRate: 100
     amount: 1
   multiLoot: 0
   inventory: []
+  lootTableInternal: []
   anim: {fileID: 3895695428969083601}
+  showItem: {fileID: 7029677174918689967}
   soundEffectTreasure: {fileID: 8300000, guid: 59d34d1df831b0449a4e2f413b1dda3d, type: 3}
   treasureType: 0
   priceText: {fileID: 0}
@@ -166,7 +170,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1555326793583579602}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &7430100649759542894
 BoxCollider2D:
@@ -224,7 +228,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1555326793583579602}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2690269064363045098
 SpriteRenderer:
@@ -240,10 +244,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -286,6 +291,86 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f58bc89447d427d4a86c5e8fdb90404c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &6308135320858048071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8147629401564952725}
+  m_Layer: 0
+  m_Name: lootParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8147629401564952725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6308135320858048071}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.25, y: -13.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1555326793583579602}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7029677174918689967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6606501738247019565}
+  - component: {fileID: 1647022002143510000}
+  m_Layer: 0
+  m_Name: ItemShow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6606501738247019565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7029677174918689967}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.25, y: -13.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1555326793583579602}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1647022002143510000
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7029677174918689967}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f676e889684436a4bbaa06f050afc5b5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -349,7 +434,7 @@ PrefabInstance:
     - target: {fileID: 2236758614029836603, guid: c2fcea4a156b7e04197a6fecb1d6366b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2236758614029836603, guid: c2fcea4a156b7e04197a6fecb1d6366b,
         type: 3}

@@ -6,8 +6,8 @@ public class Breakable : Character
 {
     private void setAnimFloat(Vector2 setVector)
     {
-        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", setVector.x);
-        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", setVector.y);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", setVector.x);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", setVector.y);
     }
 
     public void changeAnim(Vector2 direction)

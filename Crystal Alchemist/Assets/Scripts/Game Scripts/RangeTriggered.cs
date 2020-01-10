@@ -28,21 +28,21 @@ public class RangeTriggered : MonoBehaviour
 
     private void Update()
     {
-        Utilities.Rotation.rotateCollider(this.npc, this.gameObject);
+        CustomUtilities.Rotation.rotateCollider(this.npc, this.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Utilities.Collisions.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.isTriggered = true;
+        if (CustomUtilities.Collisions.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.isTriggered = true;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Utilities.Collisions.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.isTriggered = true;
+        if (CustomUtilities.Collisions.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.isTriggered = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (Utilities.Collisions.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.isTriggered = false;
+        if (CustomUtilities.Collisions.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.isTriggered = false;
     }
 }

@@ -41,7 +41,7 @@ public class LineIndicator : Indicator
         Vector2 startpoint;
         Vector3 rotation;
 
-        Utilities.Rotation.setDirectionAndRotation(this.skill, out angle, out startpoint, out this.direction, out rotation);
+        CustomUtilities.Rotation.setDirectionAndRotation(this.skill, out angle, out startpoint, out this.direction, out rotation);
 
         startpoint = this.skill.sender.spriteRenderer.transform.position;
 
@@ -49,7 +49,7 @@ public class LineIndicator : Indicator
         {
             this.direction = (Vector2)this.skill.target.transform.position - startpoint;
             float temp_angle = Mathf.Atan2(this.direction.y, this.direction.x) * Mathf.Rad2Deg;
-            this.direction = Utilities.Rotation.DegreeToVector2(temp_angle);
+            this.direction = CustomUtilities.Rotation.DegreeToVector2(temp_angle);
         }
         renderLine(startpoint, rotation);
     }

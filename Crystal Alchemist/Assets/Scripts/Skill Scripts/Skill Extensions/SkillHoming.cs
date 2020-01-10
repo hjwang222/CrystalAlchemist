@@ -52,7 +52,7 @@ public class SkillHoming : SkillExtension
             else
             {
                 //Starte End-Animation wenn der Skill sein Ziel erreicht hat
-                Utilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Explode", true);
+                CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Explode", true);
             }
         }
         else
