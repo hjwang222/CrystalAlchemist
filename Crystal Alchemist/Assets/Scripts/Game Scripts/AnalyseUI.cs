@@ -108,7 +108,7 @@ public class AnalyseUI : MonoBehaviour
     {
         this.ImageitemPreview.gameObject.SetActive(false);
 
-        this.TMPcharacterName.text = CustomUtilities.Format.getLanguageDialogText(this.character.stats.characterName, this.character.stats.englischCharacterName);
+        this.TMPcharacterName.text = Utilities.Format.getLanguageDialogText(this.character.stats.characterName, this.character.stats.englischCharacterName);
         this.TMPlifeAmount.text = "x" + (this.character.life * 4);
 
         if (this.character.inventory.Count > 0 && this.character.currentState != CharacterState.dead)

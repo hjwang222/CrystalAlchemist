@@ -39,12 +39,12 @@ public class AI : Character
 
         if(this.target != null && this.isSleeping)
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "WakeUp");
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "WakeUp");
             this.isSleeping = false;
         }
         else if(this.target == null && !this.isSleeping)
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Sleep");
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Sleep");
             this.isSleeping = true;
         }
     }
@@ -52,8 +52,8 @@ public class AI : Character
 
     private void setAnimFloat(Vector2 setVector)
     {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", setVector.x);
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", setVector.y);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", setVector.x);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", setVector.y);
     }
 
     public void changeAnim(Vector2 direction)

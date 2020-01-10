@@ -39,7 +39,7 @@ public class SkillFollow : SkillExtension
         else
         {
             this.startCoroutine = true;
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Moving", false);
+            Utilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Moving", false);
         }
     }
 
@@ -52,6 +52,6 @@ public class SkillFollow : SkillExtension
         this.skill.myRigidbody.MovePosition(temp);
         this.skill.myRigidbody.velocity = Vector2.zero;
 
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Moving", true);
+        Utilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Moving", true);
     }
 }

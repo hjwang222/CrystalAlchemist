@@ -61,7 +61,6 @@ public class Player : Character
     [BoxGroup("Pflichtfelder")]
     public FloatValue fadingDuration;
 
-
     [HideInInspector]
     public Skill AButton;
     [HideInInspector]
@@ -95,11 +94,11 @@ public class Player : Character
         if (this.loadGame.getValue()) LoadSystem.loadPlayerData(this);
 
         if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);
-        CustomUtilities.Helper.checkIfHelperDeactivate(this);
+        Utilities.Helper.checkIfHelperDeactivate(this);
 
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", false);
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", false);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
+        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
 
         this.direction = new Vector2(0, -1);
         updateResource(ResourceType.life, null, 0);
@@ -109,7 +108,7 @@ public class Player : Character
 
     public void delay(CharacterState newState)
     {
-        StartCoroutine(CustomUtilities.Skills.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
+        StartCoroutine(Utilities.Skills.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
     }
 
     public void showDialogBox(string text)
@@ -125,14 +124,14 @@ public class Player : Character
             this.direction = new Vector2(0, -1);
 
             //TODO: Kill sofort (Skill noch aktiv)
-            CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
-            CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
+            Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
+            Utilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
 
             this.spriteRenderer.color = Color.white;
 
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", true);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
+            Utilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", true);
 
             this.currentState = CharacterState.dead;
             this.deathSignal.Raise();

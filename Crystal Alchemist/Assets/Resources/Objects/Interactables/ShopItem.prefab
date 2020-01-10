@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1828073282
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1828073283}
-  m_Layer: 0
-  m_Name: lootParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1828073283
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1828073282}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5527474781253199686}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &670546093944201419
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,8 +59,6 @@ MonoBehaviour:
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0
-  m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -152,7 +120,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -283,7 +250,6 @@ RectTransform:
   - {fileID: 4023638513116507170}
   - {fileID: 542181805581806930}
   - {fileID: 311446268539228047}
-  - {fileID: 1828073283}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -308,8 +274,9 @@ MonoBehaviour:
     type: 3}
   currencyNeeded: 3
   item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
-  price: 10
+  price: 25
   soundEffect: {fileID: 0}
+  animator: {fileID: 0}
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
@@ -317,10 +284,9 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   context: {fileID: 0}
   currentState: 0
-  lootParentObject: {fileID: 1828073282}
   lootTable:
-  - item: {fileID: 0}
-    dropRate: 100
+  - item: {fileID: 1482578370755153414, guid: ca7174dae42a3d74da40fc0c744e4f1d, type: 3}
+    dropRate: 0
     amount: 1
   multiLoot: 0
   inventory: []
@@ -381,10 +347,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texts:
   - trigger: 1
-    dialogBoxText: "Du hast <loot amount> <loot name> f\xFCr <price> <item name>
-      gekauft!"
-    dialogBoxTextEnglish: You bought <loot amount> <loot name> for <price> <item
-      name>!
+    dialogBoxText: "Du hast <loot amount> <loot name> f\xFCr <price> <item name> gekauft!"
+    dialogBoxTextEnglish: You bought <loot amount> <loot name> for <price> <item name>!
   - trigger: 2
     dialogBoxText: "Du kannst das nicht kaufen.\nDu ben\xF6tigst <price> <item name>."
     dialogBoxTextEnglish: 'You cant buy that.
@@ -444,7 +408,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -513,7 +476,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282384128
+    rgba: 4282318592
   m_fontColor: {r: 0, g: 1, b: 0.24667287, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -570,7 +533,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.3749528, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 784103811228868705}
     characterCount: 2
@@ -658,7 +621,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

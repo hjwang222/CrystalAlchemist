@@ -27,6 +27,6 @@ public class DeathAnimation : MonoBehaviour
 
     public void PlayDeathSoundEffect(AudioClip soundEffect)
     {
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, soundEffect);
+        Utilities.Audio.playSoundEffect(this.audioSource, soundEffect);
     }
 }

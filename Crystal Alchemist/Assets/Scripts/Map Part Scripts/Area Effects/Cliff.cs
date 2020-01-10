@@ -12,7 +12,7 @@ public class Cliff : MonoBehaviour
 
     private void Start()
     {
-        this.direction = CustomUtilities.Rotation.DegreeToVector2(this.transform.rotation.z-90);
+        this.direction = Utilities.Rotation.DegreeToVector2(this.transform.rotation.z-90);
     }
 
     private void Update()

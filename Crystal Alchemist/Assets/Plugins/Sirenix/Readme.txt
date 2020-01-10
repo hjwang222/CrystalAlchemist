@@ -5,10 +5,11 @@ Open up the Getting Started guide from "Tools > Odin Inspector > Getting Started
 
 ------------------------------------- Helpful Links -------------------------------------
 
-Tutorials:          https://odininspector.com/tutorials
-API Documentaion:   https://odininspector.com/documentation
-Roadmap:            https://odininspector.com/roadmap
-Release Notes:      https://odininspector.com/patch-notes
+Manual:             https://sirenix.net/odininspector/manual/introduction/getting-started
+API Documentaion:   https://sirenix.net/odininspector/documentation
+FAQ:                https://sirenix.net/odininspector/faq
+Roadmap:            https://sirenix.net/odininspector/roadmap
+Release Notes:      https://sirenix.net/odininspector/releasenotes
 Issue Tracker:      https://bitbucket.org/sirenix/odin-inspector
 
 
@@ -17,8 +18,8 @@ Issue Tracker:      https://bitbucket.org/sirenix/odin-inspector
 If you have any issues, suggestions or want advice, then you're more than welcome 
 to join us on Discord, or reach out to us by any other means.
 
-Support:            https://odininspector.com/support
-Community Addons:   https://odininspector.com/community-tools
+Support:            https://sirenix.net/support
+Community Addons:   https://devdog.io/unity-assets/odin-inspector-and-serializer/community-bonus/
 Discord:            https://discord.gg/AgDmStu
 
 

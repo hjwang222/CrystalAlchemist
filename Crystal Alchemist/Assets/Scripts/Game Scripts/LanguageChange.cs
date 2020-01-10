@@ -14,7 +14,6 @@ public class LanguageChange : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textMeshField;
 
-#if UNITY_EDITOR
     [Button]
     public void setComponent()
     {
@@ -23,7 +22,6 @@ public class LanguageChange : MonoBehaviour
         SignalListener temp = this.gameObject.AddComponent<SignalListener>();
         temp.signal = (SimpleSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/languageChangeSignal.asset", typeof(SimpleSignal));
     }
-#endif
 
     private void Awake()
     {
@@ -37,6 +35,6 @@ public class LanguageChange : MonoBehaviour
 
     public void ChangeLanguageText()
     {
-        this.textMeshField.text = CustomUtilities.Format.getLanguageDialogText(this.originalText, this.alternativeText);
+        this.textMeshField.text = Utilities.Format.getLanguageDialogText(this.originalText, this.alternativeText);
     }
 }

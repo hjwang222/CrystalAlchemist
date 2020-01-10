@@ -16,7 +16,7 @@ public class CastBar : MonoBehaviour
     private void Start()
     {
         this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1f);
-        this.skillName.text = CustomUtilities.Format.getLanguageDialogText(this.skill.skillName, this.skill.skillNameEnglish);
+        this.skillName.text = Utilities.Format.getLanguageDialogText(this.skill.skillName, this.skill.skillNameEnglish);
         this.percentage.text = "0%";
     }
 

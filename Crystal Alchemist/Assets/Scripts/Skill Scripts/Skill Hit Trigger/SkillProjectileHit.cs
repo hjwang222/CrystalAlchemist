@@ -28,7 +28,7 @@ public class SkillProjectileHit : SkillHitTrigger
             && !hittedCharacter.isTrigger
             && !hittedCharacter.CompareTag("Room"))
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Hit");
+            Utilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Hit");
             // if (this.shadow != null) this.shadow.gameObject.SetActive(false);
             if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = Vector2.zero;
 

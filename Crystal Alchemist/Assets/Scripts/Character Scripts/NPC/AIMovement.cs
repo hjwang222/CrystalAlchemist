@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Pathfinding;
 
 public class AIMovement : MonoBehaviour
 {
@@ -11,6 +12,25 @@ public class AIMovement : MonoBehaviour
     private AI npc;
 
     #region Parameter fürs Verfolgen
+
+    [FoldoutGroup("Pathfinding", expanded: false)]
+    [SerializeField]
+    private Seeker seeker;
+
+    [FoldoutGroup("Pathfinding", expanded: false)]
+    [SerializeField]
+    [ShowIf("seeker")]
+    private float nextWaypointdistance = 0.3f;
+
+    [FoldoutGroup("Pathfinding", expanded: false)]
+    [SerializeField]
+    [ShowIf("seeker")]
+    private float updatePathIntervall = 0.5f;
+
+    private Path aPath;
+    private int aCurrentWaypoint = 0;
+    private bool reachedEndOfPath = false;
+
     [FoldoutGroup("Movement Attributes", expanded: false)]
     public bool prioritizePartner = false;
 
@@ -55,7 +75,9 @@ public class AIMovement : MonoBehaviour
 
     private void Start()
     {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+        Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+
+        if (this.seeker != null) InvokeRepeating("UpdatePath", 0f, this.updatePathIntervall);
     }
 
     #region Update und Movement Funktionen
@@ -81,7 +103,24 @@ public class AIMovement : MonoBehaviour
     private void stopMoving()
     {
         this.targetPosition = Vector2.zero;
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+        Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+    }
+
+    private void UpdatePath()
+    {
+        if (this.seeker.IsDone() && this.targetPosition != Vector2.zero)
+        {
+            this.seeker.StartPath(this.npc.myRigidbody.position, this.targetPosition, OnPathComplete);
+        }
+    }
+
+    private void OnPathComplete(Path p)
+    {
+        if (!p.error)
+        {
+            this.aPath = p;
+            this.aCurrentWaypoint = 0;
+        }
     }
 
     private bool movementPriority(bool priotizePartner)
@@ -189,10 +228,31 @@ public class AIMovement : MonoBehaviour
             && this.npc.currentState != CharacterState.dead
             && position != Vector3.zero)
         {
+            //UpdatePath(position);
+
+            if (this.seeker != null)
+            {
+                if (this.aPath == null) return;
+
+                if (this.aCurrentWaypoint >= this.aPath.vectorPath.Count)
+                {
+                    this.reachedEndOfPath = true;
+                    return;
+                }
+                else this.reachedEndOfPath = false;
+            }
+
             Vector2 direction = (position - this.transform.position).normalized;
-            
+            if (this.seeker != null) direction = ((Vector2)this.aPath.vectorPath[this.aCurrentWaypoint] - this.npc.myRigidbody.position).normalized;
+
             Vector3 movement = new Vector3(this.npc.direction.x, this.npc.direction.y + (this.npc.steps * this.npc.direction.x), 0.0f);
-            if (!this.npc.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.speed * this.npc.timeDistortion);           
+            if (!this.npc.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.speed * this.npc.timeDistortion);
+
+            if (this.seeker != null)
+            {
+                float distance = Vector2.Distance(this.npc.myRigidbody.position, this.aPath.vectorPath[this.aCurrentWaypoint]);
+                if (distance < this.nextWaypointdistance) this.aCurrentWaypoint++;
+            }
 
             updateAnimation(direction);
         }
@@ -200,7 +260,7 @@ public class AIMovement : MonoBehaviour
 
     private void updateAnimation(Vector2 direction)
     {
-        if (!CustomUtilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
+        if (!Utilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
 
         if (this.npc.flip)
         {
@@ -209,7 +269,7 @@ public class AIMovement : MonoBehaviour
         }
 
         this.npc.currentState = CharacterState.walk;
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", true);
+        Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", true);
     }
     /*
     private void moveTorwardsTarget(Vector3 position)

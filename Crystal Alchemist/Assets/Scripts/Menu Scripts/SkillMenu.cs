@@ -119,7 +119,7 @@ public class SkillMenu : MenuControls
             SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
             SkillSenderModule senderModule = skill.GetComponent<SkillSenderModule>();
 
-            this.skillDetailsName.text = CustomUtilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
+            this.skillDetailsName.text = Utilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
             float strength = 0;
 
             if(senderModule != null)
@@ -264,7 +264,7 @@ public class SkillMenu : MenuControls
                 for (int ID = 0; ID < skills.transform.childCount; ID++)
                 {
                     GameObject slot = skills.transform.GetChild(ID).gameObject;
-                    Skill skill = CustomUtilities.Skills.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
+                    Skill skill = Utilities.Skills.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
                     slot.GetComponent<SkillSlot>().setSkill(skill);
                 }
 

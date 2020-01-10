@@ -15,7 +15,7 @@ public class Indicator : MonoBehaviour
     [Required]
     public Animator animator;
 
-    public UnityEngine.Experimental.Rendering.Universal.Light2D light;
+    public Light2D light;
 
     public virtual void Start()
     {

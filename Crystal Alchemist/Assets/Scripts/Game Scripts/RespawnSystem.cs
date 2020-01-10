@@ -37,7 +37,7 @@ public class RespawnSystem : MonoBehaviour
 
     private void setRespawn(Character character)
     {
-        if (character.stats.respawnTime < CustomUtilities.maxFloatInfinite)
+        if (character.stats.respawnTime < Utilities.maxFloatInfinite)
         {
             StartCoroutine(respawnCo(character));
             character.currentState = CharacterState.respawning;
@@ -63,7 +63,7 @@ public class RespawnSystem : MonoBehaviour
             //spawn character immediately
             character.gameObject.SetActive(true);
             character.initSpawn(true);
-            CustomUtilities.UnityUtils.SetAnimatorParameter(character.animator, "Respawn");
+            Utilities.UnityUtils.SetAnimatorParameter(character.animator, "Respawn");
         }
     }
 

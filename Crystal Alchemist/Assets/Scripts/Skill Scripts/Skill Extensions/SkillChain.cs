@@ -18,7 +18,7 @@ public class SkillChain : SkillExtension
     [SerializeField]
     [HideIf("useRange", true)]
     [FoldoutGroup("Special Behaviors", expanded: false)]
-    [Range(0, CustomUtilities.maxFloatSmall)]
+    [Range(0, Utilities.maxFloatSmall)]
     private float distanceNeeded = 0f;
 
     [HideIf("useRange", true)]
@@ -98,7 +98,7 @@ public class SkillChain : SkillExtension
 
     private void checkMechanics(Collider2D hittedCharacter)
     {
-        if (CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this.skill))
         {
             //update Target Resource Affections
             if (!this.hasRightDistance()) this.skill.hitIt(hittedCharacter);
@@ -112,7 +112,7 @@ public class SkillChain : SkillExtension
             if (this.useStartDistance && this.startDistance <= 0)
                 this.startDistance = Vector3.Distance(this.skill.target.transform.position, this.skill.sender.transform.position);
 
-            return CustomUtilities.Collisions.checkDistance(this.skill.target,
+            return Utilities.Collisions.checkDistance(this.skill.target,
                                                       this.skill.sender.gameObject, rangeNeeded.x, rangeNeeded.y,
                                                       this.startDistance, this.distanceNeeded,
                                                       this.useStartDistance, this.useRange);

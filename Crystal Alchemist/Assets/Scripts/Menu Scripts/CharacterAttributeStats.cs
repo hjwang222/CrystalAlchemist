@@ -66,7 +66,7 @@ public class CharacterAttributeStats : MonoBehaviour
 
     public string getDescription()
     {
-        string text = CustomUtilities.Format.getLanguageDialogText(this.description, this.descriptionEnglish);
+        string text = Utilities.Format.getLanguageDialogText(this.description, this.descriptionEnglish);
         text += "\n Aktuell " + getValue(this.points) + " von " + getValue(4);
         return text;
     }

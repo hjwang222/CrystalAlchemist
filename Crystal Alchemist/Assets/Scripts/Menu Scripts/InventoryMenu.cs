@@ -14,6 +14,10 @@ public class InventoryMenu : MenuControls
     [Required]
     private TextMeshProUGUI keyItemsLabel;
 
+    [BoxGroup("Signals")]
+    [SerializeField]
+    private SimpleSignal skillMenuSignal;
+
     [BoxGroup("Tabs")]
     [SerializeField]
     private GameObject regularItems;
@@ -93,7 +97,7 @@ public class InventoryMenu : MenuControls
                 //else 
 
                 int ID = iSlot.getID();
-                item = CustomUtilities.Items.getItemByID(this.player.inventory, ID, showKeyItems);
+                item = Utilities.Items.getItemByID(this.player.inventory, ID, showKeyItems);
 
                 slot.GetComponent<InventorySlot>().setItemToSlot(item);
             }

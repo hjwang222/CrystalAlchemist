@@ -17,6 +17,6 @@ public class AnimationUtil : MonoBehaviour
 
     public void playSoundEffect(AudioClip clip)
     {
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, clip);
+        Utilities.Audio.playSoundEffect(this.audioSource, clip);
     }
 }

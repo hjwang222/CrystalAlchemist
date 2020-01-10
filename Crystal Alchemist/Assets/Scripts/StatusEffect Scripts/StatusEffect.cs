@@ -114,7 +114,7 @@ public class StatusEffect : MonoBehaviour
     public string statusEffectDescriptionEnglish;       
 
     [FoldoutGroup("Basis Attribute")]
-    [Range(0, CustomUtilities.maxFloatInfinite)]
+    [Range(0, Utilities.maxFloatInfinite)]
     public float maxDuration = 0;
 
     [FoldoutGroup("Basis Attribute")]
@@ -131,7 +131,7 @@ public class StatusEffect : MonoBehaviour
 
     [FoldoutGroup("Basis Attribute")]
     [Tooltip("Anzahl der maximalen gleichen Effekte (Stacks)")]
-    [Range(1, CustomUtilities.maxFloatSmall)]
+    [Range(1, Utilities.maxFloatSmall)]
     public float maxStacks = 1;
 
     [FoldoutGroup("Basis Attribute")]
@@ -300,13 +300,13 @@ public class StatusEffect : MonoBehaviour
             }
             else if (action.actionType == StatusEffectActionType.stacks)
             {
-                CustomUtilities.StatusEffectUtil.RemoveStatusEffect(this, false, this.target);
+                Utilities.StatusEffectUtil.RemoveStatusEffect(this, false, this.target);
             }
             else if (action.actionType == StatusEffectActionType.skill)
             {
                 foreach (Skill skill in action.skills)
                 {
-                    CustomUtilities.Skills.instantiateSkill(skill, this.target);
+                    Utilities.Skills.instantiateSkill(skill, this.target);
                 }
             }
             else if (action.actionType == StatusEffectActionType.immortal)
@@ -325,7 +325,7 @@ public class StatusEffect : MonoBehaviour
     {
         this.updateUI.Raise();
 
-        if (this.maxDuration < CustomUtilities.maxFloatInfinite)
+        if (this.maxDuration < Utilities.maxFloatInfinite)
         {
             this.statusEffectTimeLeft -= (Time.deltaTime * this.timeDistortion);            
         }
@@ -339,7 +339,7 @@ public class StatusEffect : MonoBehaviour
  
     public void DestroyIt()
     {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.ownAnimator, "End");
+        Utilities.UnityUtils.SetAnimatorParameter(this.ownAnimator, "End");
                
         if (this.target != null)
         {
@@ -389,7 +389,7 @@ public class StatusEffect : MonoBehaviour
     
     public void PlaySoundEffect(AudioClip audioClip)
     {
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, audioClip);
+        Utilities.Audio.playSoundEffect(this.audioSource, audioClip);
     }
 
 

@@ -96,7 +96,7 @@ public class SkillStack : SkillExtension
 
     private void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
-        if (CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this.skill))
         {
             if (!this.hurtCharacter)
             {
@@ -113,7 +113,7 @@ public class SkillStack : SkillExtension
 
     private void OnTriggerExit2D(Collider2D hittedCharacter)
     {
-        if (!this.hurtCharacter && CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
+        if (!this.hurtCharacter && Utilities.Collisions.checkCollision(hittedCharacter, this.skill))
         {
             Character character = hittedCharacter.GetComponent<Character>();
             if (character != null && this.listOfCharacters.Contains(character)) this.listOfCharacters.Remove(character);

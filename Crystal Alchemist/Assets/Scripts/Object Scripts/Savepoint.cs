@@ -14,6 +14,6 @@ public class Savepoint : Interactable
 
         this.player.GetComponent<PlayerTeleport>().setLastTeleport(scene.name, this.player.transform.position);
 
-        CustomUtilities.DialogBox.showDialog(this, this.player);
+        Utilities.DialogBox.showDialog(this, this.player);
     }
 }

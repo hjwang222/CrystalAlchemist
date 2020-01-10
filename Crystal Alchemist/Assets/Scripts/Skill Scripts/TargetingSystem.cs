@@ -67,7 +67,7 @@ public class TargetingSystem : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-        if (CustomUtilities.Collisions.checkCollision(collision, this.skill) && character != null)
+        if (Utilities.Collisions.checkCollision(collision, this.skill) && character != null)
         {
             if (!this.targetsInRange.Contains(character)) this.targetsInRange.Add(character);
         }
@@ -76,7 +76,7 @@ public class TargetingSystem : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-        if (CustomUtilities.Collisions.checkCollision(collision, this.skill) && character != null)
+        if (Utilities.Collisions.checkCollision(collision, this.skill) && character != null)
         {
             if (this.targetsInRange.Contains(character)) this.targetsInRange.Remove(character);
             if (this.targets.Contains(character)) this.targets.Remove(character);
@@ -176,10 +176,10 @@ public class TargetingSystem : MonoBehaviour
     {
         foreach (Character target in this.targets)
         {
-            if (CustomUtilities.UnityUtils.hasChildWithTag(target, this.lockOnIndicator.tag) == null)
+            if (Utilities.UnityUtils.hasChildWithTag(target, this.lockOnIndicator.tag) == null)
             {
                 GameObject indicator = Instantiate(this.lockOnIndicator, target.transform.position, Quaternion.identity, target.transform);
-                indicator.GetComponent<LockOnFrame>().setValues(CustomUtilities.Format.getLanguageDialogText(target.stats.characterName, target.stats.englischCharacterName));
+                indicator.GetComponent<LockOnFrame>().setValues(Utilities.Format.getLanguageDialogText(target.stats.characterName, target.stats.englischCharacterName));
                 this.appliedIndicators.Add(indicator);
             }
         }

@@ -18,6 +18,6 @@ public class MiniGameCard : MonoBehaviour
 
     public void show()
     {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "Show");
+        Utilities.UnityUtils.SetAnimatorParameter(this.anim, "Show");
     }
 }

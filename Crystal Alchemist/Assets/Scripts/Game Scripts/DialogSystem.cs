@@ -91,7 +91,7 @@ public class DialogSystem : MonoBehaviour
 
     private string getText(DialogText text, int price, Item item, Item loot, Player player)
     {
-        string result = CustomUtilities.Format.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
+        string result = Utilities.Format.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
 
         result = result.Replace("<price>", price + "");
         result = result.Replace("<name>", player.name);
@@ -106,7 +106,7 @@ public class DialogSystem : MonoBehaviour
 
         if (loot != null)
         {
-            result = result.Replace("<loot name>", CustomUtilities.Format.getLanguageDialogText(loot.itemName, loot.itemNameEnglish));
+            result = result.Replace("<loot name>", Utilities.Format.getLanguageDialogText(loot.itemName, loot.itemNameEnglish));
             result = result.Replace("<loot amount>", loot.amount + "");
             result = result.Replace("<loot value>", loot.getTotalAmount() + "");
         }
@@ -116,8 +116,8 @@ public class DialogSystem : MonoBehaviour
 
     private string getInteractableType()
     {
-        if (this.GetComponent<Door>() != null) return CustomUtilities.Format.getLanguageDialogText("ie Tür", "door");
-        if (this.GetComponent<Treasure>() != null) return CustomUtilities.Format.getLanguageDialogText("ie Truhe", "chest");
+        if (this.GetComponent<Door>() != null) return Utilities.Format.getLanguageDialogText("ie Tür", "door");
+        if (this.GetComponent<Treasure>() != null) return Utilities.Format.getLanguageDialogText("ie Truhe", "chest");
         return "";
     }
 
@@ -131,11 +131,11 @@ public class DialogSystem : MonoBehaviour
                 {
                     if (item.isKeyItem)
                     {
-                        result = CustomUtilities.Format.getLanguageDialogText(item.itemName, item.itemNameEnglish);
+                        result = Utilities.Format.getLanguageDialogText(item.itemName, item.itemNameEnglish);
                     }
                     else
                     {
-                        string typ = CustomUtilities.Format.getLanguageDialogText(item.itemGroup, item.itemGroupEnglish);
+                        string typ = Utilities.Format.getLanguageDialogText(item.itemGroup, item.itemGroupEnglish);
                         if (price == 1 && (typ != "Schlüssel" || GlobalValues.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
 
                         result = typ;

@@ -6,7 +6,7 @@ using UnityEngine.Experimental.Rendering.LWRP;
 public class DayNightCircle : MonoBehaviour
 {
     [SerializeField]
-    private UnityEngine.Experimental.Rendering.Universal.Light2D light;
+    private Light2D light;
 
     [SerializeField]
     private TimeValue timeValue;
@@ -31,7 +31,7 @@ public class DayNightCircle : MonoBehaviour
         if (newColor != light.color && !this.isRunning) StartCoroutine(lerpColor(light, light.color, newColor, duration));
     }
 
-    IEnumerator lerpColor(UnityEngine.Experimental.Rendering.Universal.Light2D light, Color fromColor, Color toColor, float duration)
+    IEnumerator lerpColor(Light2D light, Color fromColor, Color toColor, float duration)
     {
         this.isRunning = true;
         float counter = 0;

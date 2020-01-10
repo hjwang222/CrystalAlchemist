@@ -31,7 +31,7 @@ public class SkillTimeDistortionHit : SkillExtension
 
         foreach(Character character in this.affectedCharacters)
         {
-            CustomUtilities.StatusEffectUtil.RemoveStatusEffect(this.timeEffect, true, character);
+            Utilities.StatusEffectUtil.RemoveStatusEffect(this.timeEffect, true, character);
         }
 
         //Skills wieder normalisieren
@@ -47,21 +47,21 @@ public class SkillTimeDistortionHit : SkillExtension
     private void OnTriggerExit2D(Collider2D hittedCharacter)
     {
         //Normalisiere Zeit beim Austritt aus dem Feld
-        if (CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this.skill))
             removeTimeDistorion(hittedCharacter.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
         //Setze Zeit beim Eintritt in das Feld
-        if (CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this.skill))
             setTimeDistorion(hittedCharacter.gameObject, this.TimeDistortion);
     }
 
     private void OnTriggerStay2D(Collider2D hittedCharacter)
     {
         //Setze Zeit beim Eintritt in das Feld
-        if (CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
+        if (Utilities.Collisions.checkCollision(hittedCharacter, this.skill))
             setTimeDistorion(hittedCharacter.gameObject, this.TimeDistortion);
     }
 
@@ -71,7 +71,7 @@ public class SkillTimeDistortionHit : SkillExtension
     #region Functions (private)
     private void removeTimeDistorion(GameObject hittedCharacter)
     {
-        Skill skill = CustomUtilities.Skills.getSkillByCollision(hittedCharacter);
+        Skill skill = Utilities.Skills.getSkillByCollision(hittedCharacter);
 
         if (skill != null)
         {
@@ -83,7 +83,7 @@ public class SkillTimeDistortionHit : SkillExtension
 
         if (character != null)
         {
-            CustomUtilities.StatusEffectUtil.RemoveStatusEffect(this.timeEffect, true, character);
+            Utilities.StatusEffectUtil.RemoveStatusEffect(this.timeEffect, true, character);
             this.affectedCharacters.Remove(character);
         }
     }
@@ -91,11 +91,11 @@ public class SkillTimeDistortionHit : SkillExtension
     private void setTimeDistorion(GameObject hittedCharacter, float destortion)
     {
         Character character = hittedCharacter.GetComponent<Character>();
-        Skill skill = CustomUtilities.Skills.getSkillByCollision(hittedCharacter);
+        Skill skill = Utilities.Skills.getSkillByCollision(hittedCharacter);
 
         if (character != null)
         {
-            CustomUtilities.StatusEffectUtil.AddStatusEffect(this.timeEffect, character);
+            Utilities.StatusEffectUtil.AddStatusEffect(this.timeEffect, character);
             if (!this.affectedCharacters.Contains(character)) this.affectedCharacters.Add(character);
         }
 

@@ -26,7 +26,7 @@ public class MiniGameText : MonoBehaviour
     private void OnEnable()
     {
         this.duration = this.maxDuration;
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.audioClip);
+        Utilities.Audio.playSoundEffect(this.audioSource, this.audioClip);
         StartCoroutine(delayInput());
     }
 

@@ -7,7 +7,7 @@ public class SkillBoomerang : SkillExtension
 {
     #region Attributes
     [Tooltip("Zeitpunkt der Scriptaktivierung")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
+    [Range(0, Utilities.maxFloatSmall)]
     public float timeToMoveBack = 0;
 
     [HideInInspector]

@@ -38,7 +38,7 @@ public class PlayerControls : MonoBehaviour
         {
             if (this.player.currentState == CharacterState.inDialog || this.player.currentState == CharacterState.inMenu || this.player.currentState == CharacterState.respawning)
             {
-                CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", false);
+                Utilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", false);
                 return;
             }
 
@@ -52,7 +52,7 @@ public class PlayerControls : MonoBehaviour
                 this.player.openPauseSignal.Raise();
             }
 
-            if (!CustomUtilities.StatusEffectUtil.isCharacterStunned(this.player))
+            if (!Utilities.StatusEffectUtil.isCharacterStunned(this.player))
             {
                 player.change = Vector3.zero;
                 this.player.change.x = Input.GetAxisRaw("Horizontal");

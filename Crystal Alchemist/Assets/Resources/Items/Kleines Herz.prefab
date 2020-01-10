@@ -45,7 +45,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -93,6 +92,7 @@ GameObject:
   - component: {fileID: 8525589707579411227}
   - component: {fileID: 8525589707579411224}
   - component: {fileID: 8525589707579411225}
+  - component: {fileID: 8525589707579411222}
   - component: {fileID: 3928213745636417567}
   - component: {fileID: 3281040534560913379}
   m_Layer: 15
@@ -141,17 +141,10 @@ MonoBehaviour:
   itemDescriptionEnglish: 
   itemGroupEnglish: 
   amount: 1
-  value: 1
   maxAmount: 0
   resourceType: 1
   isKeyItem: 0
-  alternativeItem: {fileID: 0}
-  isMap: 0
-  mapName: 
-  hasUniqueID: 0
-  keyItemID: 
-  keyItemSignal: {fileID: 0}
-  skillItem: {fileID: 0}
+  skill: {fileID: 0}
   statusEffects: []
   collectSoundEffect: {fileID: 8300000, guid: 36888cf2843c6ae49962b01f67e19050, type: 3}
   signal: {fileID: 0}
@@ -181,6 +174,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.75}
   m_EdgeRadius: 0
+--- !u!95 &8525589707579411222
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525589707579411223}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 47d8aab5788a8e147966f94bfd2288ab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!210 &3928213745636417567
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -261,7 +273,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -363,7 +374,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

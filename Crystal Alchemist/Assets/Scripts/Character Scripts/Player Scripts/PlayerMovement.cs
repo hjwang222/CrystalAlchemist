@@ -31,15 +31,15 @@ public class PlayerMovement : MonoBehaviour
             {
                 this.player.direction = this.player.change;
 
-                CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "moveX", this.player.change.x);
-                CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "moveY", this.player.change.y);
+                Utilities.UnityUtils.SetAnimatorParameter(this.player.animator, "moveX", this.player.change.x);
+                Utilities.UnityUtils.SetAnimatorParameter(this.player.animator, "moveY", this.player.change.y);
             }
 
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", true);
+            Utilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", true);
         }
         else
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", false);
+            Utilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", false);
             if (this.player.currentState == CharacterState.walk) this.player.currentState = CharacterState.idle;
         }
     }

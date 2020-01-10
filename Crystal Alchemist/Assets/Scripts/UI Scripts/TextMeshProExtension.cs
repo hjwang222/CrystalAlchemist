@@ -17,7 +17,7 @@ public class TextMeshProExtension : MonoBehaviour
 
     void Start()
     {
-        CustomUtilities.Format.set3DText(this.text, null, this.bold, this.fontColor, this.outlineColor, this.outlineWidth);
-        CustomUtilities.Format.set3DText(this.textGUI, null, this.bold, this.fontColor, this.outlineColor, this.outlineWidth);
+        Utilities.Format.set3DText(this.text, null, this.bold, this.fontColor, this.outlineColor, this.outlineWidth);
+        Utilities.Format.set3DText(this.textGUI, null, this.bold, this.fontColor, this.outlineColor, this.outlineWidth);
     }
 }
