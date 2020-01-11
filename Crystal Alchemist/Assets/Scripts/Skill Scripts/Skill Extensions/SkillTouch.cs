@@ -6,7 +6,7 @@ public class SkillTouch : SkillExtension
     {
         Collider2D temp = this.skill.sender.boxCollider;
 
-        Collider2D te = Utilities.UnityUtils.CopyComponent(temp, this.gameObject);
+        Collider2D te = CustomUtilities.UnityUtils.CopyComponent(temp, this.gameObject);
         te.isTrigger = true;
     }
 }

@@ -50,12 +50,12 @@ public class CurrencySlot : MonoBehaviour
 
     public void updateCurrency()
     {
-        this.newValue = Utilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);
+        this.newValue = CustomUtilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);
 
         if (this.playSound)
         {
             //this.playOnce = true;
-            Utilities.Audio.playSoundEffect(this.audioSource, this.raiseSoundEffect);
+            CustomUtilities.Audio.playSoundEffect(this.audioSource, this.raiseSoundEffect);
         }
 
         if(!this.isRunning) StartCoroutine(Countdown());
@@ -81,11 +81,11 @@ public class CurrencySlot : MonoBehaviour
                 this.isRunning = false;
                 this.hideSignal.Raise(this.hideDelay);
                 //this.playOnce = false;
-                this.textField.text = Utilities.Format.formatString(this.currentValue, this.maxValue);
+                this.textField.text = CustomUtilities.Format.formatString(this.currentValue, this.maxValue);
                 break;
             }   
 
-            this.textField.text = Utilities.Format.formatString(this.currentValue, this.maxValue);
+            this.textField.text = CustomUtilities.Format.formatString(this.currentValue, this.maxValue);
             
             yield return new WaitForSeconds(counterDelay);
         }

@@ -31,7 +31,7 @@ public class Interactable : MonoBehaviour
     public Item item;
 
     [FoldoutGroup("Activation Requirements", expanded: false)]
-    [Range(0, Utilities.maxIntInfinite)]
+    [Range(0, CustomUtilities.maxIntInfinite)]
     public int price = 0;
 
     [FoldoutGroup("Sound", expanded: false)]
@@ -142,7 +142,7 @@ public class Interactable : MonoBehaviour
              || character.currentState == CharacterState.walk))
         {
             if (this.isPlayerInRange
-                && Utilities.Collisions.checkIfGameObjectIsViewed(character, this.gameObject))
+                && CustomUtilities.Collisions.checkIfGameObjectIsViewed(character, this.gameObject))
             {
                 player.currentState = CharacterState.interact;
                 this.context.SetActive(true);                

@@ -12,7 +12,7 @@ public class TimeHandler : MonoBehaviour
         int minute = 0;
         int hour = 0;
 
-        Utilities.Format.getStartTime(this.timeValue.factor, out hour, out minute);
+        CustomUtilities.Format.getStartTime(this.timeValue.factor, out hour, out minute);
         this.timeValue.setTime(minute, hour);
         this.timeValue.factor = this.timeValue.normalFactor;
     }

@@ -271,7 +271,7 @@ public class AIEvents : MonoBehaviour
             {                
                 if (action.skillinstance == null && action.skill != null)
                 {
-                    action.skillinstance = Utilities.Skills.setSkill(this.enemy, action.skill);
+                    action.skillinstance = CustomUtilities.Skills.setSkill(this.enemy, action.skill);
 
                     SkillIndicatorModule indicatorModule = action.skillinstance.GetComponent<SkillIndicatorModule>();
                     if(indicatorModule != null) indicatorModule.showingIndicator = true;                    
@@ -349,7 +349,7 @@ public class AIEvents : MonoBehaviour
 
     private void doEvents()
     {
-        if (!Utilities.StatusEffectUtil.isCharacterStunned(this.enemy))
+        if (!CustomUtilities.StatusEffectUtil.isCharacterStunned(this.enemy))
         {
             this.timeElapsed += (Time.deltaTime * this.enemy.timeDistortion);
 
@@ -484,7 +484,7 @@ public class AIEvents : MonoBehaviour
         GameObject dialog = Instantiate(this.box.gameObject, this.enemy.dialogPosition.transform);
 
         MiniDialogBox temp = dialog.GetComponent<MiniDialogBox>();
-        temp.setText(Utilities.Format.getLanguageDialogText(action.de, action.en));
+        temp.setText(CustomUtilities.Format.getLanguageDialogText(action.de, action.en));
         temp.setDuration(action.duration);
         this.activeDialog = temp;
         this.activeDialogAction = null;
@@ -594,7 +594,7 @@ public class AIEvents : MonoBehaviour
         {
             if (action.skillinstance == null && action.skill != null)
             {
-                action.skillinstance = Utilities.Skills.setSkill(this.enemy, action.skill);
+                action.skillinstance = CustomUtilities.Skills.setSkill(this.enemy, action.skill);
 
                 SkillIndicatorModule indicatorModule = action.skillinstance.GetComponent<SkillIndicatorModule>();
                 if (indicatorModule != null) indicatorModule.showingIndicator = true;
@@ -634,7 +634,7 @@ public class AIEvents : MonoBehaviour
             }
             else 
             {
-                int currentAmountOfSameSkills = Utilities.Skills.getAmountOfSameSkills(skill, this.enemy.activeSkills, this.enemy.activePets);
+                int currentAmountOfSameSkills = CustomUtilities.Skills.getAmountOfSameSkills(skill, this.enemy.activeSkills, this.enemy.activePets);
 
                 if (currentAmountOfSameSkills < skill.maxAmounts)
                 {
@@ -662,7 +662,7 @@ public class AIEvents : MonoBehaviour
         if (action.type == AIActionType.skill && skillCanBeUsed(action.skillinstance))
         {
             //useskill
-            Skill usedSkill = Utilities.Skills.instantiateSkill(action.skillinstance, this.enemy, this.enemy.target);
+            Skill usedSkill = CustomUtilities.Skills.instantiateSkill(action.skillinstance, this.enemy, this.enemy.target);
             action.skillinstance.target = null;
             action.skillinstance.cooldownTimeLeft = action.skillinstance.cooldown;
             actionUsed = true;
@@ -704,7 +704,7 @@ public class AIEvents : MonoBehaviour
         }
         else if (action.type == AIActionType.animation)
         {
-            Utilities.UnityUtils.SetAnimatorParameter(this.enemy.animator, action.animation);
+            CustomUtilities.UnityUtils.SetAnimatorParameter(this.enemy.animator, action.animation);
         }
         else if (action.type == AIActionType.immortal)
         {

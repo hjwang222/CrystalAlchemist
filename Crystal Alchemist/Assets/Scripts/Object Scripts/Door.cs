@@ -32,7 +32,7 @@ public class Door : Interactable
     {
         base.Start();
 
-        if (this.isOpen) Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", true);
+        if (this.isOpen) CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", true);
     }
 
     public override void doOnUpdate()
@@ -53,18 +53,18 @@ public class Door : Interactable
                  if (this.doorType == DoorType.normal)
                 {
                     //Normale Tür, einfach aufmachen
-                    if (Utilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
+                    if (CustomUtilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
                     {
                         OpenCloseDoor(true, this.context);
                     }
                     else
                     {
-                        Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
+                        CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
                     }
                 }
                 else
                 {
-                    Utilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success);
+                    CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success);
                 }
             }                       
         }
@@ -86,7 +86,7 @@ public class Door : Interactable
     private void OpenCloseDoor(bool isOpen, GameObject contextClueChild)
     {
         this.isOpen = isOpen;
-        Utilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", this.isOpen);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", this.isOpen);
         this.boxCollider.enabled = !this.isOpen;
 
         if (contextClueChild != null)
@@ -97,6 +97,6 @@ public class Door : Interactable
             else contextClueChild.SetActive(false);
         }
 
-        Utilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
+        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
     }
 }

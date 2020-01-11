@@ -40,7 +40,7 @@ public class SkillAnimationModule : SkillModule
         {
             this.activeCastingAnimation = Instantiate(this.castingAnimation, this.skill.sender.transform);
             this.activeCastingAnimation.setCastingAnimation(this.skill, this.skill.sender);
-            Utilities.UnityUtils.SetAnimatorParameter(this.skill.sender.animator, this.castingAnimationCharacterKey, true);
+            CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.sender.animator, this.castingAnimationCharacterKey, true);
         }
     }
 
@@ -50,7 +50,7 @@ public class SkillAnimationModule : SkillModule
         {
             Destroy(this.activeCastingAnimation.gameObject);
             this.activeCastingAnimation = null;
-            Utilities.UnityUtils.SetAnimatorParameter(this.skill.sender.animator, this.castingAnimationCharacterKey, false);
+            CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.sender.animator, this.castingAnimationCharacterKey, false);
         }
     }
 }

@@ -37,26 +37,33 @@ public class MiniGameMatch
     [Range(1, 99)]
     public int amount;
 
+    [BoxGroup("Loot")]
+    public Item alternativeLoot;
+
+    [BoxGroup("Loot")]
+    [Range(1, 99)]
+    public int alternativeAmount;
+
     public MiniGameMatch(MiniGameMatch match)
     {
         this.maxRounds = match.maxRounds;
         this.winsNeeded = match.winsNeeded;
         this.difficulty = match.difficulty;
         this.maxDuration = match.maxDuration;
-        this.item = match.item;
         this.price = match.price;
-        this.loot = match.loot;
+        this.item = match.item;
         this.amount = match.amount;
-    }
-
-    private Item Instantiate(Item loot, object transform)
-    {
-        throw new NotImplementedException();
+        this.alternativeAmount = match.alternativeAmount;
     }
 }
 
 public class MiniGameMachine : Interactable
 {
+    [BoxGroup("Required")]
+    [SerializeField]
+    [Required]
+    private GameObject lootParentObject;
+
     [SerializeField]
     [Required]
     [BoxGroup("Mandatory")]
@@ -67,9 +74,18 @@ public class MiniGameMachine : Interactable
     [BoxGroup("Mandatory")]   
     private List<MiniGameMatch> matches = new List<MiniGameMatch>();
 
+    public List<MiniGameMatch> internalMatches = new List<MiniGameMatch>();
+
+    public override void Start()
+    {
+        base.Start();
+        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.matches, this.internalMatches, this.lootParentObject, this.gameObject);
+    }
+
+
     public override void doSomethingOnSubmit()
     {
-        MiniGame temp = Instantiate(this.miniGame);
-        temp.setMatch(this.matches);
+        MiniGame miniGame = Instantiate(this.miniGame);
+        miniGame.setMiniGame(this.internalMatches);
     }
 }

@@ -41,7 +41,7 @@ public class MiniGameDialogbox : MonoBehaviour
 
         MiniGameMatch match = this.miniGameUI.getMatch();
         this.priceUI.updatePrice(match.item, match.price, this.miniGameUI.player);
-        bool canStart = Utilities.Items.hasEnoughCurrency(ResourceType.item, this.miniGameUI.player, match.item, match.price);
+        bool canStart = CustomUtilities.Items.hasEnoughCurrency(ResourceType.item, this.miniGameUI.player, match.item, match.price);
 
         this.startButton.SetActive(canStart);
         this.priceUI.setColor(canStart);

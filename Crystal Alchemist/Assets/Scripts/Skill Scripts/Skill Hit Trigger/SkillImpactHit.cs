@@ -40,25 +40,25 @@ public class SkillImpactHit : SkillHitTrigger
 
         private void checkMechanics(Collider2D hittedCharacter)
         {
-            if (Utilities.Collisions.checkCollision(hittedCharacter, this.skill))
+            if (CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
             {
                 if (this.type == aoeType.hide)
                 {
                     //hide AOE
-                    bool isHiding = Utilities.Collisions.checkBehindObstacle(hittedCharacter.GetComponent<Character>(), this.gameObject);
+                    bool isHiding = CustomUtilities.Collisions.checkBehindObstacle(hittedCharacter.GetComponent<Character>(), this.gameObject);
                     if (!isHiding) this.skill.hitIt(hittedCharacter);
                 }
                 else if (this.type == aoeType.range)
                 {
                     //range AOE
-                    float percentage = Utilities.Collisions.checkDistanceReduce(hittedCharacter.GetComponent<Character>(),
+                    float percentage = CustomUtilities.Collisions.checkDistanceReduce(hittedCharacter.GetComponent<Character>(),
                                                                                 this.gameObject, rangePercentage.x, rangePercentage.y);
                     this.skill.hitIt(hittedCharacter, percentage);
                 }
                 else if (this.type == aoeType.look)
                 {
                     //normal AOE
-                    bool isLookingAt = Utilities.Collisions.checkIfGameObjectIsViewed(hittedCharacter.GetComponent<Character>(), this.gameObject, this.viewRange);
+                    bool isLookingAt = CustomUtilities.Collisions.checkIfGameObjectIsViewed(hittedCharacter.GetComponent<Character>(), this.gameObject, this.viewRange);
                     if ((this.mustLookAway && isLookingAt) || (!this.mustLookAway && !isLookingAt)) this.skill.hitIt(hittedCharacter);
                 }
                 else
