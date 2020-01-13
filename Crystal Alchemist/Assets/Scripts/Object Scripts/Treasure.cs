@@ -55,10 +55,7 @@ public class Treasure : Rewardable
         CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
         //TODO Item:
-        if (this.inventory.Count == 0 && this.treasureType == TreasureType.normal)
-        {
-            changeTreasureState(true);
-        }
+        if (this.inventory.Count == 0 && this.treasureType == TreasureType.normal) this.currentState = objectState.opened;
     }
 
     #endregion
@@ -75,8 +72,9 @@ public class Treasure : Rewardable
 
             if (this.treasureType == TreasureType.lootbox)
             {
-                changeTreasureState(false);
-                CustomUtilities.Items.setItem(this.lootTableInternal, this.multiLoot, this.inventory, this.lootParentObject);
+                CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", false);
+                this.currentState = objectState.normal;
+                CustomUtilities.Items.setItem(this.lootTable, this.multiLoot, this.inventory, this.lootParentObject);
             }
 
             //Verstecke gezeigtes Item wieder
@@ -116,23 +114,10 @@ public class Treasure : Rewardable
 
     #region Treasure Chest Funktionen (open, show Item)
 
-    private void changeTreasureState(bool openChest)
-    {
-        if (openChest)
-        {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", true);
-            this.currentState = objectState.opened;            
-        }
-        else
-        {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", false);
-            this.currentState = objectState.normal;
-        }
-    }
-
     private void OpenChest()
-    {
-        changeTreasureState(true);
+    {        
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", true);
+        this.currentState = objectState.opened;
         CustomUtilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
 
         if (this.soundEffect != null && this.inventory.Count > 0)
@@ -169,14 +154,12 @@ public class Treasure : Rewardable
     {
         for (int i = 0; i < this.inventory.Count; i++)
         {
-            //Item instanziieren und der Liste zurück geben und das Item anzeigen            
+            //Item instanziieren und der Liste zurück geben und das Item anzeigen
+            
             this.showItem.SetActive(true);
-
-            //TODO: Instantiate(this.inventory[i].graphics, this.showItem.transform.position, Quaternion.identity, this.showItem.transform);
             Item item = Instantiate(this.inventory[i], this.showItem.transform.position, Quaternion.identity, this.showItem.transform);
             item.gameObject.SetActive(true);
             item.GetComponent<BoxCollider2D>().enabled = false;
-            item.enabled = false;
             if (item.shadowRenderer != null) item.shadowRenderer.enabled = false;
 
             //this.inventory[i].GetComponent<Item>().showFromTreasure();

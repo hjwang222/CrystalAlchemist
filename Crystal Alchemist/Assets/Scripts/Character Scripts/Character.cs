@@ -136,7 +136,6 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public bool isOnIce = false;
 
-    public List<LootTable> lootTableInternal = new List<LootTable>();
 
     #endregion
 
@@ -146,7 +145,7 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         init();
-        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.stats.lootTable, this.lootTableInternal, this.lootParentObject, this.gameObject);
+        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.stats.lootTable, this.lootParentObject, this.gameObject);
     }
 
     public void init()
@@ -242,7 +241,7 @@ public class Character : MonoBehaviour
     public void ActivateCharacter()
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
-        CustomUtilities.Items.setItem(this.lootTableInternal, this.stats.multiLoot, this.inventory, this.lootParentObject);
+        CustomUtilities.Items.setItem(this.stats.lootTable, this.stats.multiLoot, this.inventory, this.lootParentObject);
 
         AIEvents eventAI = this.GetComponent<AIEvents>();
         if (eventAI != null) eventAI.init();
