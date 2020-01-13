@@ -4,6 +4,10 @@ using Sirenix.OdinInspector;
 
 public class MiniGame : MonoBehaviour
 {
+    [BoxGroup("Required")]
+    [Required]
+    public GameObject lootParentObject;
+
     [SerializeField]
     [BoxGroup("MiniGame Related")]
     [Required]
@@ -36,12 +40,14 @@ public class MiniGame : MonoBehaviour
 
     private List<MiniGameMatch> matches = new List<MiniGameMatch>();
 
+    public List<MiniGameMatch> internalMatches = new List<MiniGameMatch>();
+
     private MiniGameUI activeUI;
 
     private void Start()
     {      
         this.activeUI = Instantiate(this.uI, this.transform);
-        this.activeUI.setMiniGame(this, this.miniGameRound, this.matches, 
+        this.activeUI.setMiniGame(this, this.miniGameRound,  
                                   this.miniGameTitle, this.miniGameTitleEnglish, this.miniGameDescription, this.miniGameDescriptionEnglish);
     }
 
@@ -50,9 +56,15 @@ public class MiniGame : MonoBehaviour
         this.matches = matches;
     }
 
+    public void updateInternalMatches()
+    {
+        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.matches, this.internalMatches, this.lootParentObject);
+    }
+
+
     public List<MiniGameMatch> getMatches()
     {
-        return this.matches;
+        return this.internalMatches;
     }
 
     public void DestroyIt()

@@ -2648,9 +2648,9 @@ MonoBehaviour:
   m_fontSize: 38
   m_fontSizeBase: 38
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 20
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_textAlignment: 1025
   m_characterSpacing: 0
@@ -5316,8 +5316,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Hier steht etwas, was interessant sein k\xF6nnte... Hier steht etwas, was
-    interessant sein k\xF6nnte... Hier steht etwas, was interessant sein k\xF6nnte...
+  m_text: "Hier steht etwas, was interessant sein k\xF6nnte... Hier steht etwas,
+    was interessant sein k\xF6nnte... Hier steht etwas, was interessant sein k\xF6nnte...
     Hier steht etwas, was interessant sein k\xF6nnte... Hier steht etwas, was interessant
     sein k\xF6nnte..."
   m_isRightToLeft: 0
@@ -7627,9 +7627,9 @@ MonoBehaviour:
   m_fontSize: 38
   m_fontSizeBase: 38
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 20
+  m_fontSizeMax: 40
   m_fontStyle: 0
   m_textAlignment: 1025
   m_characterSpacing: 0
@@ -10059,11 +10059,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3431908323318481942}
     m_Modifications:
-    - target: {fileID: 9001193634930676107, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_Name
-      value: Cursor
-      objectReference: {fileID: 0}
     - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10174,6 +10169,11 @@ PrefabInstance:
       propertyPath: infoBox
       value: 
       objectReference: {fileID: 6126018133534229154}
+    - target: {fileID: 9001193634930676107, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
+        type: 3}
+      propertyPath: m_Name
+      value: Cursor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbc98f741df6b884f91b4cccb1cfc8bc, type: 3}
 --- !u!224 &1633656221996539542 stripped
@@ -10321,10 +10321,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 30.000017
       objectReference: {fileID: 0}
-    - target: {fileID: 4691049375023579886, guid: 1a353aabf1c1c6240930831123687ffc,
+    - target: {fileID: 3266887349461075349, guid: 1a353aabf1c1c6240930831123687ffc,
         type: 3}
-      propertyPath: m_Name
-      value: Firework
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3266887349461075349, guid: 1a353aabf1c1c6240930831123687ffc,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4494198501151662050, guid: 1a353aabf1c1c6240930831123687ffc,
         type: 3}
@@ -10341,15 +10346,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 3266887349461075349, guid: 1a353aabf1c1c6240930831123687ffc,
+    - target: {fileID: 4691049375023579886, guid: 1a353aabf1c1c6240930831123687ffc,
         type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3266887349461075349, guid: 1a353aabf1c1c6240930831123687ffc,
-        type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
+      propertyPath: m_Name
+      value: Firework
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a353aabf1c1c6240930831123687ffc, type: 3}

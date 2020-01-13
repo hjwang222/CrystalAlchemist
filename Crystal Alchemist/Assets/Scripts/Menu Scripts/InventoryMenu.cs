@@ -29,6 +29,7 @@ public class InventoryMenu : MenuControls
     private void Start()
     {
         showCategory(0);
+        loadInventory();
     }
 
     public override void OnEnable()

@@ -23,6 +23,22 @@ public class LootTable
     [HorizontalGroup("Split/Box", 50)]
     [Range(1, 99)]
     public int amount = 1;
+
+    [VerticalGroup("Split2")]
+    [Tooltip("Ersetzt den Schlüsselgegenstände wenn diese bereits vorhanden sind")]
+    public Item alternativeLoot;
+
+    [HorizontalGroup("Split2/Box", 50)]
+    [ShowIf("alternativeLoot")]
+    [Range(1, 99)]
+    public int alternativeAmount;
+
+    public LootTable(LootTable table)
+    {
+        this.dropRate = table.dropRate;
+        this.amount = table.amount;
+        this.alternativeAmount = table.alternativeAmount;
+    }
 }
 
 [System.Serializable]
@@ -67,35 +83,72 @@ public class CustomUtilities : MonoBehaviour
 
     public static class UnityFunctions
     {
-        public static void UpdateItemsInEditor(List<LootTable> lootTable, GameObject lootParentObject, GameObject gameObject)
+        public static void UpdateItemsInEditor(List<LootTable> lootTable, List<LootTable> lootTableInternal, GameObject lootParentObject)
         {
-            if (lootTable.Count > 0 && lootParentObject != null) 
+            lootTableInternal.Clear();
+            for(int i = 0; i < lootParentObject.transform.childCount; i++)
+            {
+                Destroy(lootParentObject.transform.GetChild(i).gameObject);
+            }
+
+            if (lootTable.Count > 0 && lootParentObject != null)
             {
                 for (int i = 0; i < lootTable.Count; i++)
                 {
-                    GameObject temp = Instantiate(lootTable[i].item.gameObject, lootParentObject.transform.position, Quaternion.identity, lootParentObject.transform) as GameObject;
-                    temp.SetActive(false);
-                    temp.name = temp.name.Replace("(Clone)", "");
-                    lootTable[i].item = temp.GetComponent<Item>();
-                    lootTable[i].item.amount = lootTable[i].amount;
+                    bool useAlternative = lootTable[i].item.checkIfAlreadyThere();
+
+                    if (!useAlternative || lootTable[i].alternativeLoot != null)
+                    {
+                        LootTable table = new LootTable(lootTable[i]);
+
+                        table.item = instantiateItem(lootTable[i].item, lootTable[i].alternativeLoot, lootParentObject, useAlternative);
+                        table.item.amount = lootTable[i].amount;
+                        if (lootTable[i].alternativeLoot != null && useAlternative) table.item.amount = lootTable[i].alternativeAmount;
+
+                        lootTableInternal.Add(table);
+                    }
                 }
-            }            
+            }
         }
 
-
-        public static void UpdateItemsInEditor(List<MiniGameMatch> matches, GameObject lootParentObject, GameObject gameObject)
+        public static void UpdateItemsInEditor(List<MiniGameMatch> matches, List<MiniGameMatch> internalMatches, GameObject lootParentObject)
         {
+            internalMatches.Clear();
+            for (int i = 0; i < lootParentObject.transform.childCount; i++)
+            {
+                Destroy(lootParentObject.transform.GetChild(i).gameObject);
+            }
+
             if (matches.Count > 0 && lootParentObject != null)
-            {           
+            {
                 for (int i = 0; i < matches.Count; i++)
                 {
-                    GameObject temp = Instantiate(matches[i].loot.gameObject, lootParentObject.transform.position, Quaternion.identity, lootParentObject.transform) as GameObject;
-                    temp.SetActive(false);
-                    temp.name = temp.name.Replace("(Clone)", "");
-                    matches[i].loot = temp.GetComponent<Item>();
-                    matches[i].loot.amount = matches[i].amount;
+                    bool useAlternative = matches[i].loot.checkIfAlreadyThere();
+
+                    if (!useAlternative || matches[i].alternativeLoot != null)
+                    {
+                        MiniGameMatch table = new MiniGameMatch(matches[i]);
+
+                        table.loot = instantiateItem(matches[i].loot, matches[i].alternativeLoot, lootParentObject, useAlternative);
+                        table.loot.amount = matches[i].amount;
+                        if (matches[i].alternativeLoot != null && useAlternative) table.loot.amount = matches[i].alternativeAmount;
+
+                        internalMatches.Add(table);
+                    }
                 }
-            }            
+            }
+        }
+
+        private static Item instantiateItem(Item item, Item alternative, GameObject lootParentObject, bool useAlternative)
+        {
+            Item temp = item;
+            if (alternative != null && useAlternative) temp = alternative;
+
+            GameObject itemGO = Instantiate(temp.gameObject, lootParentObject.transform.position, Quaternion.identity, lootParentObject.transform) as GameObject;
+            itemGO.SetActive(false);
+            itemGO.name = itemGO.name.Replace("(Clone)", "");
+            Item result = itemGO.GetComponent<Item>();
+            return result;
         }
     }
 
@@ -491,17 +544,22 @@ public class CustomUtilities : MonoBehaviour
             return result;
         }
 
-        public static int getAmountFromInventory(Item item, List<Item> inventory, bool maxAmount)
+        public static int getAmountFromInventory(Item item, List<Item> inventory)
         {
-            Item itemFound = getItemFromInventory(item, inventory);
+            int amount = 0;
 
-            if (itemFound != null)
+            foreach (Item elem in inventory)
             {
-                if (!maxAmount) return itemFound.amount;
-                else return itemFound.maxAmount;
+                if (!item.isKeyItem || item.useItemGroup)
+                {
+                    if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper()) amount += elem.amount;
+                }
+                else
+                {
+                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) amount += elem.amount;
+                }
             }
-
-            return 0;
+            return amount;
         }
 
         public static Item getItemFromInventory(Item item, List<Item> inventory)
@@ -510,14 +568,11 @@ public class CustomUtilities : MonoBehaviour
             {
                 if (item.isKeyItem)
                 {
-                    if (item.itemName.ToUpper() == elem.itemName.ToUpper()) return elem;
+                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) return elem;     
                 }
                 else
                 {
-                    if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper())
-                    {
-                        return elem;
-                    }
+                    if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper()) return elem;                    
                 }
             }
             return null;
@@ -525,17 +580,11 @@ public class CustomUtilities : MonoBehaviour
 
         public static bool hasKeyItemAlready(Item item, List<Item> inventory)
         {
-            foreach (Item elem in inventory)
+            if (item.isKeyItem)
             {
-                if (item.isKeyItem)
+                foreach (Item elem in inventory)
                 {
-                    if (item.itemName.ToUpper() == elem.itemName.ToUpper())
-                    {
-                        return true;
-
-                        //if ((item.hasUniqueID && item.keyItemID.ToUpper() == elem.keyItemID.ToUpper())
-                        // || !item.hasUniqueID) return true;
-                    }
+                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) return true;                    
                 }
             }
             return false;

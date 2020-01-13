@@ -36,15 +36,29 @@ public class MiniGameMatch
     [BoxGroup("Loot")]
     [Range(1, 99)]
     public int amount;
+
+    [BoxGroup("Loot")]
+    public Item alternativeLoot;
+
+    [BoxGroup("Loot")]
+    [Range(1, 99)]
+    public int alternativeAmount;
+
+    public MiniGameMatch(MiniGameMatch match)
+    {
+        this.maxRounds = match.maxRounds;
+        this.winsNeeded = match.winsNeeded;
+        this.difficulty = match.difficulty;
+        this.maxDuration = match.maxDuration;
+        this.price = match.price;
+        this.item = match.item;
+        this.amount = match.amount;
+        this.alternativeAmount = match.alternativeAmount;
+    }
 }
 
 public class MiniGameMachine : Interactable
 {
-    [BoxGroup("Required")]
-    [SerializeField]
-    [Required]
-    private GameObject lootParentObject;
-
     [SerializeField]
     [Required]
     [BoxGroup("Mandatory")]
@@ -55,13 +69,10 @@ public class MiniGameMachine : Interactable
     [BoxGroup("Mandatory")]   
     private List<MiniGameMatch> matches = new List<MiniGameMatch>();
 
-
     public override void Start()
     {
         base.Start();
-        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.matches, this.lootParentObject, this.gameObject);
     }
-
 
     public override void doSomethingOnSubmit()
     {

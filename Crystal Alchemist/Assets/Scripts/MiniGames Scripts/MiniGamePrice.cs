@@ -12,7 +12,7 @@ public class MiniGamePrice : MonoBehaviour
 
     public void updatePrice(Item item, int amount, Player player)
     {
-        int inventory = CustomUtilities.Items.getAmountFromInventory(item, player.inventory, false);
+        int inventory = CustomUtilities.Items.getAmountFromInventory(item, player.inventory);
         CustomUtilities.Items.setItemImage(this.image, item);
         this.textField.text = amount + " / " + inventory; 
     }
