@@ -14,6 +14,10 @@ public class TODOLIST : MonoBehaviour
     //- Unterwasser
 
     //Destroy Handler?
+    //FIXES (0.2.4.0)
+    //- Options Rework (Resolution)
+    //- Input Rework (new Unity Feature)
+    //- Clunky Button und Cursor (all Menues)
 
     //TODO (0.2.4.5):
     //- Wetter Script (Position und Größe)
