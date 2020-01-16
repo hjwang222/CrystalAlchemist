@@ -128,7 +128,7 @@ public class CharacterAttributeStats : MonoBehaviour
         }
 
         if (this.type == attributeType.lifeExpander || this.type == attributeType.manaExpander) result = indexOf(this.mainMenu.expanderValues, value);
-        else result = indexOf(this.mainMenu.percentageValues, value);
+        else result = indexOf(this.mainMenu.percentageValues, (value*100));
 
         this.points = result;
     }

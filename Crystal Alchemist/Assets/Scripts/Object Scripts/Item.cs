@@ -33,10 +33,6 @@ public class Item : MonoBehaviour
 
     [Required]
     [BoxGroup("Pflichtfeld")]
-    public GameObject graphics;
-
-    [Required]
-    [BoxGroup("Pflichtfeld")]
     public Sprite itemSpriteInventory;
 
     [FoldoutGroup("Item Texts", expanded: false)]
@@ -94,6 +90,10 @@ public class Item : MonoBehaviour
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.item)]
     public bool isKeyItem = false;
+
+    [FoldoutGroup("Item Attributes", expanded: false)]
+    [ShowIf("isKeyItem")]
+    public bool useItemGroup = false;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("isKeyItem")]
@@ -175,7 +175,7 @@ public class Item : MonoBehaviour
 
     public void playSounds()
     {
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.collectSoundEffect);        
+        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.collectSoundEffect);        
     }
 
     public int getTotalAmount()

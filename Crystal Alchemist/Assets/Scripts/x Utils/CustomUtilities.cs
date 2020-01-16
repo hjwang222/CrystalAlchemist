@@ -83,49 +83,82 @@ public class CustomUtilities : MonoBehaviour
 
     public static class UnityFunctions
     {
-        public static void UpdateItemsInEditor(List<LootTable> lootTable, List<LootTable> lootTableInternal, GameObject lootParentObject, GameObject gameObject)
+        public static void initLoot(GameObject main, GameObject lootParentGameObject, 
+                                    List<LootTable> lootTable, List<LootTable> lootTableInternal,
+                                    bool multiLoot, List<Item> inventory)
         {
-            if (lootTable.Count > 0 && lootParentObject != null) 
-            {
-                for (int i = 0; i < lootTable.Count; i++)
-                {
-                    bool useAlternative = lootTable[i].item.checkIfAlreadyThere();
-
-                    if (!useAlternative || lootTable[i].alternativeLoot != null)
-                    {
-                        LootTable table = new LootTable(lootTable[i]);
-
-                        table.item = instantiateItem(lootTable[i].item, lootTable[i].alternativeLoot, lootParentObject, useAlternative);
-                        table.item.amount = lootTable[i].amount;
-                        if (lootTable[i].alternativeLoot != null && useAlternative) table.item.amount = lootTable[i].alternativeAmount;
-
-                        lootTableInternal.Add(table);
-                    }
-                }
-            }            
+           createLootParent(main, lootParentGameObject); //erstelle Parent wenn nicht vorhanden
+           UpdateItemsInEditor(lootTable, lootTableInternal, lootParentGameObject); //instanziiere Items in den Parent als Vorlage
+           Items.setItem(lootTableInternal, multiLoot, inventory, lootParentGameObject); //setze Items ins Inventar (LOOT)
         }
 
-
-        public static void UpdateItemsInEditor(List<MiniGameMatch> matches, List<MiniGameMatch> internalMatches, GameObject lootParentObject, GameObject gameObject)
+        public static void createLootParent(GameObject main, GameObject lootParentObject)
         {
+            if (lootParentObject == null)
+            {
+                GameObject lootparent = new GameObject();
+                lootparent.transform.SetParent(main.transform);
+                lootParentObject = lootparent;
+            }
+        }
+
+        public static void UpdateItemsInEditor(List<LootTable> lootTable, List<LootTable> lootTableInternal, GameObject lootParentObject)
+        {
+            if (lootTableInternal.Count == 0)
+            {
+                lootTableInternal.Clear();
+                for (int i = 0; i < lootParentObject.transform.childCount; i++)
+                {
+                    Destroy(lootParentObject.transform.GetChild(i).gameObject);
+                }
+
+                if (lootTable.Count > 0 && lootParentObject != null)
+                {
+                    for (int i = 0; i < lootTable.Count; i++)
+                    {
+                        bool useAlternative = lootTable[i].item.checkIfAlreadyThere();
+
+                        if (!useAlternative || lootTable[i].alternativeLoot != null)
+                        {
+                            LootTable table = new LootTable(lootTable[i]);
+
+                            table.item = instantiateItem(lootTable[i].item, lootTable[i].alternativeLoot, lootParentObject, useAlternative);
+                            table.item.amount = lootTable[i].amount;
+                            if (lootTable[i].alternativeLoot != null && useAlternative) table.item.amount = lootTable[i].alternativeAmount;
+
+                            lootTableInternal.Add(table);
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void UpdateItemsInEditor(List<MiniGameMatch> matches, List<MiniGameMatch> internalMatches, GameObject lootParentObject)
+        {
+            internalMatches.Clear();
+            for (int i = 0; i < lootParentObject.transform.childCount; i++)
+            {
+                Destroy(lootParentObject.transform.GetChild(i).gameObject);
+            }
+
             if (matches.Count > 0 && lootParentObject != null)
-            {           
+            {
                 for (int i = 0; i < matches.Count; i++)
                 {
-                    bool useAlternative = matches[i].item.checkIfAlreadyThere();
+                    bool useAlternative = matches[i].loot.checkIfAlreadyThere();
 
                     if (!useAlternative || matches[i].alternativeLoot != null)
                     {
                         MiniGameMatch table = new MiniGameMatch(matches[i]);
 
-                        table.item = instantiateItem(matches[i].loot, matches[i].alternativeLoot, lootParentObject, useAlternative);
-                        table.item.amount = matches[i].amount;
-                        if (matches[i].alternativeLoot != null && useAlternative) table.item.amount = matches[i].alternativeAmount;
+                        table.loot = instantiateItem(matches[i].loot, matches[i].alternativeLoot, lootParentObject, useAlternative);
+                        table.loot.amount = matches[i].amount;
+                        if (matches[i].alternativeLoot != null && useAlternative) table.loot.amount = matches[i].alternativeAmount;
 
                         internalMatches.Add(table);
                     }
                 }
-            }            
+            }
         }
 
         private static Item instantiateItem(Item item, Item alternative, GameObject lootParentObject, bool useAlternative)
@@ -163,10 +196,83 @@ public class CustomUtilities : MonoBehaviour
 
     public static class Audio
     {
-        public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect)
+        private static Dictionary<AudioClip, float> soundsAlreadyPlayed = new Dictionary<AudioClip, float>();
+        private static AudioSource blub;
+
+        public static void playSoundEffect(AudioClip soundeffect)
+        {
+            playSoundEffect(null, soundeffect);
+        }
+
+        public static void playSoundEffect(AudioClip soundeffect, float volume)
+        {
+            playSoundEffect(null, soundeffect, volume);
+        }
+
+        public static void playSoundEffect(GameObject gameObject, AudioClip soundeffect)
+        {
+            playSoundEffect(gameObject, soundeffect, GlobalValues.soundEffectVolume);
+        }
+
+        public static void playSoundEffect(GameObject gameObject, AudioClip soundeffect, float volume)
+        {
+            if (soundeffect != null)
+            {
+                GameObject parent = GameObject.FindWithTag("Audio");
+
+                if (canPlaySound(soundeffect))
+                {
+                    GameObject temp = new GameObject(soundeffect.name);
+                    if (parent != null) temp.transform.SetParent(parent.transform);
+
+                    AudioSource source = temp.AddComponent<AudioSource>();
+                    source.pitch = GlobalValues.soundEffectPitch;
+                    source.volume = volume;
+                    source.clip = soundeffect;
+
+                    if (gameObject != null)
+                    {
+                        temp.transform.position = gameObject.transform.position;
+                        source.maxDistance = 100f;
+                        source.spatialBlend = 1f;
+                        source.rolloffMode = AudioRolloffMode.Linear;
+                        source.dopplerLevel = 0f;
+                    }
+                    source.Play();
+                    Destroy(temp, soundeffect.length);
+                }
+            }
+        }
+
+        private static bool canPlaySound(AudioClip clip)
+        {
+            if (soundsAlreadyPlayed.ContainsKey(clip))
+            {
+                float lastTimePlayed = soundsAlreadyPlayed[clip];
+                float maximum = .05f;
+                if (lastTimePlayed + maximum < Time.time)
+                {
+                    soundsAlreadyPlayed[clip] = Time.time;                   
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                soundsAlreadyPlayed.Add(clip, Time.time);
+                return true;
+            }
+        }
+
+        /*
+        public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect, bool temp)
         {
             playSoundEffect(audioSource, soundeffect, GlobalValues.soundEffectVolume);
         }
+        
 
         public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect, float volume)
         {
@@ -176,7 +282,7 @@ public class CustomUtilities : MonoBehaviour
 
                 audioSource.PlayOneShot(soundeffect, volume);
             }
-        }
+        }*/
     }
 
     ///////////////////////////////////////////////////////////////
@@ -533,17 +639,22 @@ public class CustomUtilities : MonoBehaviour
             return result;
         }
 
-        public static int getAmountFromInventory(Item item, List<Item> inventory, bool maxAmount)
+        public static int getAmountFromInventory(Item item, List<Item> inventory)
         {
-            Item itemFound = getItemFromInventory(item, inventory);
+            int amount = 0;
 
-            if (itemFound != null)
+            foreach (Item elem in inventory)
             {
-                if (!maxAmount) return itemFound.amount;
-                else return itemFound.maxAmount;
+                if (!item.isKeyItem || item.useItemGroup)
+                {
+                    if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper()) amount += elem.amount;
+                }
+                else
+                {
+                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) amount += elem.amount;
+                }
             }
-
-            return 0;
+            return amount;
         }
 
         public static Item getItemFromInventory(Item item, List<Item> inventory)
@@ -552,14 +663,11 @@ public class CustomUtilities : MonoBehaviour
             {
                 if (item.isKeyItem)
                 {
-                    if (item.itemName.ToUpper() == elem.itemName.ToUpper()) return elem;
+                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) return elem;     
                 }
                 else
                 {
-                    if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper())
-                    {
-                        return elem;
-                    }
+                    if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper()) return elem;                    
                 }
             }
             return null;
@@ -567,17 +675,11 @@ public class CustomUtilities : MonoBehaviour
 
         public static bool hasKeyItemAlready(Item item, List<Item> inventory)
         {
-            foreach (Item elem in inventory)
+            if (item.isKeyItem)
             {
-                if (item.isKeyItem)
+                foreach (Item elem in inventory)
                 {
-                    if (item.itemName.ToUpper() == elem.itemName.ToUpper())
-                    {
-                        return true;
-
-                        //if ((item.hasUniqueID && item.keyItemID.ToUpper() == elem.keyItemID.ToUpper())
-                        // || !item.hasUniqueID) return true;
-                    }
+                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) return true;                    
                 }
             }
             return false;

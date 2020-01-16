@@ -30,9 +30,9 @@ public class MiniGameDialogbox : MonoBehaviour
         this.isLoaded = true;
     }
 
-    public void UpdateDialogBox(int value)
-    {
-        this.miniGameUI.setMatch(value);
+    public void UpdateDialogBox()
+    {        
+        this.miniGameUI.setMatch(this.slider.getValue());
 
         foreach (ItemUI itemUI in this.itemUIs)
         {
@@ -52,7 +52,7 @@ public class MiniGameDialogbox : MonoBehaviour
 
     private void OnEnable()
     {
-        if(this.isLoaded) UpdateDialogBox(this.slider.getValue());
+        if(this.isLoaded) UpdateDialogBox();
     }
 
     public void resetTry()

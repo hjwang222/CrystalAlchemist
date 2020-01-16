@@ -59,11 +59,6 @@ public class MiniGameMatch
 
 public class MiniGameMachine : Interactable
 {
-    [BoxGroup("Required")]
-    [SerializeField]
-    [Required]
-    private GameObject lootParentObject;
-
     [SerializeField]
     [Required]
     [BoxGroup("Mandatory")]
@@ -74,18 +69,14 @@ public class MiniGameMachine : Interactable
     [BoxGroup("Mandatory")]   
     private List<MiniGameMatch> matches = new List<MiniGameMatch>();
 
-    public List<MiniGameMatch> internalMatches = new List<MiniGameMatch>();
-
     public override void Start()
     {
         base.Start();
-        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.matches, this.internalMatches, this.lootParentObject, this.gameObject);
     }
-
 
     public override void doSomethingOnSubmit()
     {
         MiniGame miniGame = Instantiate(this.miniGame);
-        miniGame.setMiniGame(this.internalMatches);
+        miniGame.setMiniGame(this.matches);
     }
 }

@@ -49,8 +49,8 @@ public class CharacterAttributeMenu : MenuControls
 
     public void playJuwelSound(bool insert)
     {
-        if (insert) CustomUtilities.Audio.playSoundEffect(this.audiosource, this.juwelInSound);
-        else CustomUtilities.Audio.playSoundEffect(this.audiosource, this.juwelOutSound);
+        if (insert) CustomUtilities.Audio.playSoundEffect(this.gameObject, this.juwelInSound);
+        else CustomUtilities.Audio.playSoundEffect(this.gameObject, this.juwelOutSound);
     }
 
     public int getPointsLeft()
@@ -60,8 +60,8 @@ public class CharacterAttributeMenu : MenuControls
 
     public void updatePoints()
     {
-        this.attributePoints = CustomUtilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);
-        this.attributePointsMax = CustomUtilities.Items.getAmountFromInventory(this.item, this.player.inventory, true);
+        this.attributePoints = CustomUtilities.Items.getAmountFromInventory(this.item, this.player.inventory);
+        this.attributePointsMax = this.item.maxAmount;
 
         this.pointsSpent = 0;
 

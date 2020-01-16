@@ -44,10 +44,13 @@ public class SkillHoming : SkillExtension
                 }
 
                 //Bewege Skill zum Ziel
-                Vector3 temp = Vector3.MoveTowards(this.transform.position, targetPosition, this.skill.speed * (Time.deltaTime * this.skill.timeDistortion));
+                //Vector3 temp = Vector3.MoveTowards(this.transform.position, targetPosition, this.skill.speed * (Time.deltaTime * this.skill.timeDistortion));
 
-                this.skill.myRigidbody.MovePosition(temp);
-                this.skill.myRigidbody.velocity = Vector2.zero;
+                //this.skill.myRigidbody.MovePosition(temp);
+                //this.skill.myRigidbody.velocity = Vector2.zero;
+
+                this.skill.direction = targetPosition - (Vector2)this.transform.position;
+                this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
             }
             else
             {

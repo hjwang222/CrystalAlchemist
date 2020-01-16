@@ -79,8 +79,9 @@ public class MiniGameUI : MenuControls
 
     private void Start()
     {
-        this.dialogBox.setValues(this.miniGameObject.getMatches().Count);
         showDialog();
+        this.dialogBox.setValues(this.miniGameObject.getMatches().Count);
+        
     }
 
     public override void Update()
@@ -93,7 +94,7 @@ public class MiniGameUI : MenuControls
         }
     }
 
-    public void setMiniGame(MiniGame main, MiniGameRound miniGameRound, List<MiniGameMatch> matches, 
+    public void setMiniGame(MiniGame main, MiniGameRound miniGameRound, 
                             string title, string titleEnglish, string description, string descriptionEnglish)
     {
         this.miniGameObject = main;
@@ -191,6 +192,9 @@ public class MiniGameUI : MenuControls
     public void showDialog()
     {
         endRound();
+
+        this.miniGameObject.updateInternalMatches();
+        this.dialogBox.UpdateDialogBox();
         this.dialogBox.gameObject.SetActive(true);
     }
 

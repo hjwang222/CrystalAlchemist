@@ -43,7 +43,7 @@ public class MiniGameSlider : MonoBehaviour
             if(i < this.value) this.stars[i].transform.GetChild(0).gameObject.SetActive(true);
         }
 
-        this.dialogBox.UpdateDialogBox(this.value);
+        this.dialogBox.UpdateDialogBox();
     }
 
     public int getValue()

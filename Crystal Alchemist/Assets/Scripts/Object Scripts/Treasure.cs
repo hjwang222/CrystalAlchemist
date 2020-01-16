@@ -121,24 +121,26 @@ public class Treasure : Rewardable
         if (openChest)
         {
             CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", true);
-            this.currentState = objectState.opened;            
+            this.currentState = objectState.opened;
+            this.context.SetActive(false);
         }
         else
         {
             CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", false);
             this.currentState = objectState.normal;
+            this.context.SetActive(true);
         }
     }
 
     private void OpenChest()
     {
         changeTreasureState(true);
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
+        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffect);
 
         if (this.soundEffect != null && this.inventory.Count > 0)
         {
             //Spiele Soundeffekte ab            
-            CustomUtilities.Audio.playSoundEffect(this.audioSource, this.soundEffectTreasure);
+            CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffectTreasure);
 
             //Zeige Item
             this.showTreasureItem();

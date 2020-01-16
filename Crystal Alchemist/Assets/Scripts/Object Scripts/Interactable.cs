@@ -12,9 +12,6 @@ public enum objectState
 public class Interactable : MonoBehaviour
 {
     #region Attribute
-
-
-
     [Required]
     [BoxGroup("Mandatory")]
     [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]
@@ -114,9 +111,6 @@ public class Interactable : MonoBehaviour
     #endregion
 
     #region Context Clue Funktionen
-
-
-
 
     private void interact(Collider2D characterCollisionBox)
     {
