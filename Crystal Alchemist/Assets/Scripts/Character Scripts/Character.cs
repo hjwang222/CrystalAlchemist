@@ -145,7 +145,7 @@ public class Character : MonoBehaviour
     {
         init();
         //TODO: BUG! (Inventar leer)
-        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.stats.lootTable, this.lootTableInternal, this.lootParentObject);
+        //CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.stats.lootTable, this.lootTableInternal, this.lootParentObject);
     }
 
     public void init()
@@ -239,9 +239,14 @@ public class Character : MonoBehaviour
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
 
-        //TODO: BUG! (Inventar leer)
-        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.stats.lootTable, this.lootTableInternal, this.lootParentObject);
-        CustomUtilities.Items.setItem(this.lootTableInternal, this.stats.multiLoot, this.inventory, this.lootParentObject);
+        if(this.lootParentObject == null)
+        {
+            GameObject lootparent = new GameObject();
+            lootparent.transform.SetParent(this.gameObject.transform);
+            this.lootParentObject = lootparent;
+        }
+
+        CustomUtilities.UnityFunctions.initLoot(this.gameObject, this.lootParentObject, this.stats.lootTable, this.lootTableInternal, this.stats.multiLoot, this.inventory);
 
         AIEvents eventAI = this.GetComponent<AIEvents>();
         if (eventAI != null) eventAI.init();
@@ -337,7 +342,8 @@ public class Character : MonoBehaviour
             //TODO:Destroy on Cast            
 
             for(int i = 0; i< this.activeSkills.Count; i++)
-            {               
+            {
+                resetCast(this.activeSkills[i]);
                 if (this.activeSkills[i].attachToSender) this.activeSkills[i].DestroyIt();
             }
             

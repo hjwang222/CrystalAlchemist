@@ -95,7 +95,7 @@ public class DialogSystem : MonoBehaviour
 
         result = result.Replace("<price>", price + "");
         result = result.Replace("<name>", player.name);
-        result = result.Replace("<object>", getInteractableType());
+        result = result.Replace("<interactable>", getInteractableType());
 
         if (item != null)
         {

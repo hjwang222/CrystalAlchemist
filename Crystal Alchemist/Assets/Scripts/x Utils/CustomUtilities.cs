@@ -83,29 +83,51 @@ public class CustomUtilities : MonoBehaviour
 
     public static class UnityFunctions
     {
+        public static void initLoot(GameObject main, GameObject lootParentGameObject, 
+                                    List<LootTable> lootTable, List<LootTable> lootTableInternal,
+                                    bool multiLoot, List<Item> inventory)
+        {
+           createLootParent(main, lootParentGameObject); //erstelle Parent wenn nicht vorhanden
+           UpdateItemsInEditor(lootTable, lootTableInternal, lootParentGameObject); //instanziiere Items in den Parent als Vorlage
+           Items.setItem(lootTableInternal, multiLoot, inventory, lootParentGameObject); //setze Items ins Inventar (LOOT)
+        }
+
+        public static void createLootParent(GameObject main, GameObject lootParentObject)
+        {
+            if (lootParentObject == null)
+            {
+                GameObject lootparent = new GameObject();
+                lootparent.transform.SetParent(main.transform);
+                lootParentObject = lootparent;
+            }
+        }
+
         public static void UpdateItemsInEditor(List<LootTable> lootTable, List<LootTable> lootTableInternal, GameObject lootParentObject)
         {
-            lootTableInternal.Clear();
-            for(int i = 0; i < lootParentObject.transform.childCount; i++)
+            if (lootTableInternal.Count == 0)
             {
-                Destroy(lootParentObject.transform.GetChild(i).gameObject);
-            }
-
-            if (lootTable.Count > 0 && lootParentObject != null)
-            {
-                for (int i = 0; i < lootTable.Count; i++)
+                lootTableInternal.Clear();
+                for (int i = 0; i < lootParentObject.transform.childCount; i++)
                 {
-                    bool useAlternative = lootTable[i].item.checkIfAlreadyThere();
+                    Destroy(lootParentObject.transform.GetChild(i).gameObject);
+                }
 
-                    if (!useAlternative || lootTable[i].alternativeLoot != null)
+                if (lootTable.Count > 0 && lootParentObject != null)
+                {
+                    for (int i = 0; i < lootTable.Count; i++)
                     {
-                        LootTable table = new LootTable(lootTable[i]);
+                        bool useAlternative = lootTable[i].item.checkIfAlreadyThere();
 
-                        table.item = instantiateItem(lootTable[i].item, lootTable[i].alternativeLoot, lootParentObject, useAlternative);
-                        table.item.amount = lootTable[i].amount;
-                        if (lootTable[i].alternativeLoot != null && useAlternative) table.item.amount = lootTable[i].alternativeAmount;
+                        if (!useAlternative || lootTable[i].alternativeLoot != null)
+                        {
+                            LootTable table = new LootTable(lootTable[i]);
 
-                        lootTableInternal.Add(table);
+                            table.item = instantiateItem(lootTable[i].item, lootTable[i].alternativeLoot, lootParentObject, useAlternative);
+                            table.item.amount = lootTable[i].amount;
+                            if (lootTable[i].alternativeLoot != null && useAlternative) table.item.amount = lootTable[i].alternativeAmount;
+
+                            lootTableInternal.Add(table);
+                        }
                     }
                 }
             }

@@ -1323,7 +1323,7 @@ PrefabInstance:
     - target: {fileID: 2186908886390952264, guid: 12a4fc3ce47a23948a398b288322d9ae,
         type: 3}
       propertyPath: doorType
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2186908886390952264, guid: 12a4fc3ce47a23948a398b288322d9ae,
         type: 3}
@@ -1397,7 +1397,7 @@ PrefabInstance:
     - target: {fileID: 2186908886390952265, guid: 12a4fc3ce47a23948a398b288322d9ae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2186908886390952265, guid: 12a4fc3ce47a23948a398b288322d9ae,
         type: 3}
@@ -1448,6 +1448,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789585119305020204, guid: 12a4fc3ce47a23948a398b288322d9ae,
+        type: 3}
+      propertyPath: texts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789585119305020204, guid: 12a4fc3ce47a23948a398b288322d9ae,
+        type: 3}
+      propertyPath: texts.Array.data[0].trigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789585119305020204, guid: 12a4fc3ce47a23948a398b288322d9ae,
+        type: 3}
+      propertyPath: texts.Array.data[0].dialogBoxText
+      value: Verschlossen...
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789585119305020204, guid: 12a4fc3ce47a23948a398b288322d9ae,
+        type: 3}
+      propertyPath: texts.Array.data[0].dialogBoxTextEnglish
+      value: Closed...
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789585119305020204, guid: 12a4fc3ce47a23948a398b288322d9ae,
+        type: 3}
+      propertyPath: texts.Array.data[1].trigger
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789585119305020204, guid: 12a4fc3ce47a23948a398b288322d9ae,
+        type: 3}
+      propertyPath: texts.Array.data[1].dialogBoxText
+      value: D<interactable> ist leer... .
+      objectReference: {fileID: 0}
+    - target: {fileID: 6789585119305020204, guid: 12a4fc3ce47a23948a398b288322d9ae,
+        type: 3}
+      propertyPath: texts.Array.data[1].dialogBoxTextEnglish
+      value: The <interactable> is empty... .
       objectReference: {fileID: 0}
     - target: {fileID: 6914875821552467743, guid: 12a4fc3ce47a23948a398b288322d9ae,
         type: 3}
@@ -20135,12 +20170,13 @@ PrefabInstance:
     - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
         type: 3}
       propertyPath: texts.Array.data[0].dialogBoxText
-      value: Hier gehts zum Wald
+      value: "Dieser Weg f\xFChrt zum gef\xE4hrlichen Blob-Wald.\nWir haben dich
+        gewarnt..."
       objectReference: {fileID: 0}
     - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
         type: 3}
       propertyPath: texts.Array.data[0].dialogBoxTextEnglish
-      value: To the forest this way
+      value: "This way leads to the dangerous Forest of Blobs. \nYou have been warned..."
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3927818717087631785, guid: b38228c375f915f44932624529e24a1f, type: 3}
@@ -36105,6 +36141,21 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].dialogBoxText
+      value: "Sch\xF6ner See"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].dialogBoxTextEnglish
+      value: Nice lake
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3927818717087631785, guid: b38228c375f915f44932624529e24a1f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b38228c375f915f44932624529e24a1f, type: 3}
@@ -37194,10 +37245,10 @@ Transform:
   - {fileID: 1951081787}
   - {fileID: 1090136540}
   - {fileID: 369320117}
+  - {fileID: 1282375878}
   - {fileID: 1754571652}
   - {fileID: 188888608}
   - {fileID: 1773797232}
-  - {fileID: 1282375878}
   - {fileID: 1218462713}
   - {fileID: 1075505251}
   - {fileID: 2074226211}
@@ -47283,7 +47334,7 @@ PrefabInstance:
     - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
         type: 3}
@@ -47329,6 +47380,21 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].dialogBoxText
+      value: Nicht aus dem Brunnen trinken!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].dialogBoxTextEnglish
+      value: Dont drink this water!
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3927818717087631785, guid: b38228c375f915f44932624529e24a1f, type: 3}
@@ -52605,7 +52671,7 @@ PrefabInstance:
     - target: {fileID: 2186908886390952265, guid: 12a4fc3ce47a23948a398b288322d9ae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2186908886390952265, guid: 12a4fc3ce47a23948a398b288322d9ae,
         type: 3}
@@ -52697,7 +52763,7 @@ PrefabInstance:
     - target: {fileID: 8525589707579411227, guid: 4f1623ac219c06a40aa2cbe59058c6b2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8525589707579411227, guid: 4f1623ac219c06a40aa2cbe59058c6b2,
         type: 3}
@@ -53099,6 +53165,26 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].dialogBoxText
+      value: "Das ist meine Kiste!\nMEINE KISTE!\n\ngez. K\xF6nig Glibber"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].dialogBoxTextEnglish
+      value: 'Thats my treasure!
+
+        MY TREASURE!
+
+
+        signed King Goo'
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3927818717087631785, guid: b38228c375f915f44932624529e24a1f, type: 3}

@@ -14,12 +14,4 @@ public class TODOLIST : MonoBehaviour
     //- Unterwasser
 
     //Destroy Handler?
-
-    //Bug: Item Drop 
-    //Bug: Schilder leer
-    //Bug: Steinwand unverwundbar und mit Schaden
-    //Bug: Dialog Text falsch
-    //Bug: Attributspunkte negativ
-    //Bug: Lasermarkierung (Tower)
-    //Bug: Schrittgeschwindigkeit Cast
 }

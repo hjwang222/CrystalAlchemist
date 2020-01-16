@@ -12,16 +12,16 @@ public class MiniGameText : MonoBehaviour
     private bool showDialogBox = false;
 
     [SerializeField]
-    private float maxDuration = 0;
-
-    [SerializeField]
     private AudioClip audioClip;
 
     private float duration;
     private bool inputPossible = false;
+    private float maxDuration = 3f;
 
     private void OnEnable()
     {
+        if (this.audioClip != null && this.audioClip.length > 3) this.maxDuration = this.audioClip.length + 1f;
+
         this.duration = this.maxDuration;
         CustomUtilities.Audio.playSoundEffect(this.audioClip);
         StartCoroutine(delayInput());

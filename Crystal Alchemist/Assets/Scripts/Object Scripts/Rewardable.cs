@@ -26,7 +26,6 @@ public class Rewardable : Interactable
     public override void Start()
     {
         base.Start();
-        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.lootTable, this.lootTableInternal, this.lootParentObject);
-        CustomUtilities.Items.setItem(this.lootTableInternal, this.multiLoot, this.inventory, this.lootParentObject);
+        CustomUtilities.UnityFunctions.initLoot(this.gameObject, this.lootParentObject, this.lootTable, this.lootTableInternal, this.multiLoot, this.inventory);
     }
 }

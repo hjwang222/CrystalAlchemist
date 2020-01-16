@@ -20,6 +20,10 @@ public class InventoryMenu : MenuControls
 
     [BoxGroup("Tabs")]
     [SerializeField]
+    private GameObject currencyItems;
+
+    [BoxGroup("Tabs")]
+    [SerializeField]
     private GameObject keyItems;
 
     [BoxGroup("Tabs")]
@@ -37,7 +41,6 @@ public class InventoryMenu : MenuControls
         base.OnEnable();
         loadInventory();
     }
-
 
     private void loadInventory()
     {      
@@ -70,12 +73,13 @@ public class InventoryMenu : MenuControls
     {
         this.regularItems.SetActive(false);
         this.regularItemsLabel.gameObject.SetActive(false);
+        this.currencyItems.SetActive(false);
         this.keyItems.SetActive(false);
         this.keyItemsLabel.gameObject.SetActive(false);
 
         switch (category)
         {
-            case 1: this.keyItems.SetActive(true); this.keyItemsLabel.gameObject.SetActive(true); break;
+            case 1: this.keyItems.SetActive(true); this.keyItemsLabel.gameObject.SetActive(true); this.currencyItems.SetActive(true); break;
             default: this.regularItems.SetActive(true); this.regularItemsLabel.gameObject.SetActive(true); break;
         }
     }
