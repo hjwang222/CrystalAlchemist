@@ -14,4 +14,10 @@ public class TODOLIST : MonoBehaviour
     //- Unterwasser
 
     //Destroy Handler?
+
+    //TODO (0.2.4.5):
+    //- Wetter Script (Position und Größe)
+    //- Charakter Creator
+    //- Savegames (3)
+    //- Bosskampf (Titania)
 }

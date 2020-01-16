@@ -51,20 +51,23 @@ public class Door : Interactable
             if (!this.isOpen)           
             {
                  if (this.doorType == DoorType.normal)
-                {
-                    //Normale Tür, einfach aufmachen
+                {  
                     if (CustomUtilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
                     {
+                        //Tür offen!
                         OpenCloseDoor(true, this.context);
+                        CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success);
                     }
                     else
                     {
+                        //Tür kann nicht geöffnet werden
                         CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
                     }
                 }
                 else
                 {
-                    CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success);
+                    //Tür verschlossen
+                    CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
                 }
             }                       
         }
@@ -75,7 +78,9 @@ public class Door : Interactable
         else if (this.doorType == DoorType.button)
         {
             //Wenn Knopf gedrückt wurde, OpenDoor()
-        }        
+        }
+
+        CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.none);
     }
 
     private void OpenCloseDoor(bool isOpen)
