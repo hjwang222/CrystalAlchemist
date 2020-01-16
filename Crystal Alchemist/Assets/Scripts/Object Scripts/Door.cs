@@ -97,6 +97,6 @@ public class Door : Interactable
             else contextClueChild.SetActive(false);
         }
 
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
+        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffect);
     }
 }

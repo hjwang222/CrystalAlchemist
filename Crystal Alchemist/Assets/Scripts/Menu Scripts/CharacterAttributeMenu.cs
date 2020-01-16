@@ -49,8 +49,8 @@ public class CharacterAttributeMenu : MenuControls
 
     public void playJuwelSound(bool insert)
     {
-        if (insert) CustomUtilities.Audio.playSoundEffect(this.audiosource, this.juwelInSound);
-        else CustomUtilities.Audio.playSoundEffect(this.audiosource, this.juwelOutSound);
+        if (insert) CustomUtilities.Audio.playSoundEffect(this.gameObject, this.juwelInSound);
+        else CustomUtilities.Audio.playSoundEffect(this.gameObject, this.juwelOutSound);
     }
 
     public int getPointsLeft()

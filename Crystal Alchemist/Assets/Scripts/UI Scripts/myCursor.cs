@@ -7,8 +7,7 @@ public class myCursor : MonoBehaviour
 {
     [SerializeField]
     private AudioClip soundEffect;
-    private AudioSource audioSource;
-    private bool isPlaying = false;
+    //private bool isPlaying = false;
 
     public InfoBox infoBox;
 
@@ -23,10 +22,6 @@ public class myCursor : MonoBehaviour
 
     private void Start()
     {
-        this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
-        this.audioSource.loop = false;
-        this.audioSource.playOnAwake = false;
-
         this.image.sprite = null;
         this.cursorSelected.SetActive(false);
         this.cursor.SetActive(true);
@@ -34,12 +29,12 @@ public class myCursor : MonoBehaviour
 
     private void OnEnable()
     {
-        this.isPlaying = false;
+        //this.isPlaying = false;
     }
 
     private void OnDisable()
     {
-        this.isPlaying = false;
+        //this.isPlaying = false;
     }
 
     public void setSelectedGameObject(Image image)
@@ -60,6 +55,12 @@ public class myCursor : MonoBehaviour
 
     public void playSoundEffect()
     {
+        CustomUtilities.Audio.playSoundEffect(this.soundEffect);
+    }
+
+    /*
+    public void playSoundEffect()
+    {
         //Debug.Log(isPlaying);
 
         if (!this.isPlaying)
@@ -71,10 +72,10 @@ public class myCursor : MonoBehaviour
 
     private IEnumerator playAudioEffect()
     {
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
+        CustomUtilities.Audio.playSoundEffect(this.soundEffect);
         float length = this.soundEffect.length;
         yield return new WaitForSeconds(length);
         this.isPlaying = false;
         //Debug.Log(isPlaying+" "+length);
-    }
+    }*/
 }

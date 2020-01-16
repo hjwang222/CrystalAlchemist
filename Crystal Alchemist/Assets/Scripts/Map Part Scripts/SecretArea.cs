@@ -8,23 +8,19 @@ public class SecretArea : MonoBehaviour
     private Tilemap map;
     [SerializeField]
     private float delay = .0025f;
-    private AudioSource audioSource;
     [SerializeField]
     private AudioClip secretSoundEffect;
 
     void Start()
     {
         this.map = GetComponent<Tilemap>();
-        this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
-        this.audioSource.loop = false;
-        this.audioSource.playOnAwake = false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
-            CustomUtilities.Audio.playSoundEffect(this.audioSource, this.secretSoundEffect, GlobalValues.backgroundMusicVolume);
+            CustomUtilities.Audio.playSoundEffect(this.secretSoundEffect, GlobalValues.backgroundMusicVolume);
             StartCoroutine(FadeOut());
         }
     }

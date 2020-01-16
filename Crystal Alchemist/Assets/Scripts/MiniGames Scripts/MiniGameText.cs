@@ -15,9 +15,6 @@ public class MiniGameText : MonoBehaviour
     private float maxDuration = 0;
 
     [SerializeField]
-    private AudioSource audioSource;
-
-    [SerializeField]
     private AudioClip audioClip;
 
     private float duration;
@@ -26,7 +23,7 @@ public class MiniGameText : MonoBehaviour
     private void OnEnable()
     {
         this.duration = this.maxDuration;
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.audioClip);
+        CustomUtilities.Audio.playSoundEffect(this.audioClip);
         StartCoroutine(delayInput());
     }
 

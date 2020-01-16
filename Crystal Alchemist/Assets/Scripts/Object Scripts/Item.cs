@@ -175,7 +175,7 @@ public class Item : MonoBehaviour
 
     public void playSounds()
     {
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.collectSoundEffect);        
+        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.collectSoundEffect);        
     }
 
     public int getTotalAmount()

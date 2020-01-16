@@ -55,7 +55,7 @@ public class CurrencySlot : MonoBehaviour
         if (this.playSound)
         {
             //this.playOnce = true;
-            CustomUtilities.Audio.playSoundEffect(this.audioSource, this.raiseSoundEffect);
+            CustomUtilities.Audio.playSoundEffect(this.gameObject, this.raiseSoundEffect);
         }
 
         if(!this.isRunning) StartCoroutine(Countdown());

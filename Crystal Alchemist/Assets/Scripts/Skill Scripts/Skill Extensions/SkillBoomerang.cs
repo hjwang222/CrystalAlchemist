@@ -17,7 +17,7 @@ public class SkillBoomerang : SkillExtension
     private float minDistance = 0.1f;
 
     private bool speedup = true;
-    private Vector2 tempVelocity;
+    //private Vector2 tempVelocity;
     #endregion
     
 
@@ -68,13 +68,18 @@ public class SkillBoomerang : SkillExtension
         {
             //Bewege den Skill zurück zum Sender
 
-            this.skill.myRigidbody.velocity = Vector2.zero;
+            //this.skill.myRigidbody.velocity = Vector2.zero;
             if (Vector3.Distance(this.skill.sender.transform.position, this.transform.position) > this.minDistance)
             {
-                Vector3 newPosition = Vector3.MoveTowards(this.transform.position, this.skill.sender.transform.position, this.skill.speed * (Time.deltaTime * this.skill.timeDistortion));
+                //Vector3 newPosition = Vector3.MoveTowards(this.transform.position, this.skill.sender.transform.position, this.skill.speed * (Time.deltaTime * this.skill.timeDistortion));
 
-                this.skill.myRigidbody.MovePosition(newPosition);
-                this.skill.myRigidbody.velocity = Vector2.zero;                
+                //this.skill.myRigidbody.MovePosition(newPosition);
+                //this.skill.myRigidbody.velocity = Vector2.zero;     
+
+                this.skill.direction = this.skill.sender.transform.position - this.transform.position;
+                this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
+                //this.tempVelocity = this.skill.myRigidbody.velocity;
+
             }
             else
             {

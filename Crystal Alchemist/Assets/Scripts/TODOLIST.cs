@@ -13,8 +13,13 @@ public class TODOLIST : MonoBehaviour
     //- Wüste
     //- Unterwasser
 
-    //Sound Handler?
     //Destroy Handler?
 
-    // http://forum.unity.com/threads/post-processing-stack-v2-0-not-working-with-universal-rendering-pipeline.735137/page-2
+    //Bug: Item Drop 
+    //Bug: Schilder leer
+    //Bug: Steinwand unverwundbar und mit Schaden
+    //Bug: Dialog Text falsch
+    //Bug: Attributspunkte negativ
+    //Bug: Lasermarkierung (Tower)
+    //Bug: Schrittgeschwindigkeit Cast
 }

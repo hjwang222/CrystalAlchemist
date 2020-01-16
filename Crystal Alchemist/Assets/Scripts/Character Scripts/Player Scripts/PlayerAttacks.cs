@@ -300,10 +300,10 @@ public class PlayerAttacks : MonoBehaviour
             if (target.currentState != CharacterState.dead
                 && target.currentState != CharacterState.respawning)
             {
-                bool playSoundEffect = false;
-                if (i == 0 || skill.GetComponent<SkillTargetingSystemModule>().multiHitDelay > 0.3f) playSoundEffect = true;
+                //bool playSoundEffect = false;
+                //if (i == 0 || skill.GetComponent<SkillTargetingSystemModule>().multiHitDelay > 0.3f) playSoundEffect = true;
 
-                fireSkillToSingleTarget(target, damageReduce, playSoundEffect, skill);
+                fireSkillToSingleTarget(target, damageReduce, skill);
 
                 yield return new WaitForSeconds(skill.GetComponent<SkillTargetingSystemModule>().multiHitDelay);
             }
@@ -313,11 +313,11 @@ public class PlayerAttacks : MonoBehaviour
         this.player.activeLockOnTarget.DestroyIt();
     }
 
-    private void fireSkillToSingleTarget(Character target, float damageReduce, bool playSoundeffect, Skill skill)
+    private void fireSkillToSingleTarget(Character target, float damageReduce, Skill skill)
     {
         Skill temp = CustomUtilities.Skills.instantiateSkill(skill, this.player, target, damageReduce);
         //Vermeidung, dass Audio zu stark abgespielt wird
-        if (!playSoundeffect) temp.dontPlayAudio = true;
+        //if (!playSoundeffect) temp.dontPlayAudio = true;
     }
 
     public bool isButtonUsable(string button)

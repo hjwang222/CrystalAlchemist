@@ -389,7 +389,7 @@ public class StatusEffect : MonoBehaviour
     
     public void PlaySoundEffect(AudioClip audioClip)
     {
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, audioClip);
+        CustomUtilities.Audio.playSoundEffect(this.gameObject, audioClip);
     }
 
 

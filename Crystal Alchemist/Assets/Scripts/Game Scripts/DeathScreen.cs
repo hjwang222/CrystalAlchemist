@@ -23,10 +23,6 @@ public class DeathScreen : MonoBehaviour
 
     [BoxGroup("Mandatory")]
     [SerializeField]
-    private AudioSource audiosource;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
     private AudioClip deathMusic;
 
     [BoxGroup("Mandatory")]
@@ -111,7 +107,7 @@ public class DeathScreen : MonoBehaviour
 
     public void playMusic(AudioClip clip)
     {
-        CustomUtilities.Audio.playSoundEffect(this.audiosource, clip, GlobalValues.backgroundMusicVolume);
+        CustomUtilities.Audio.playSoundEffect(clip, GlobalValues.backgroundMusicVolume);
     }
 
     public void ShowText(float delay)

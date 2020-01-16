@@ -78,8 +78,6 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public Vector3 spawnPosition;
     [HideInInspector]
-    public AudioSource audioSource;
-    [HideInInspector]
     public CastBar activeCastbar;
     [HideInInspector]
     public CharacterState currentState;
@@ -127,7 +125,7 @@ public class Character : MonoBehaviour
     public TargetingSystem activeLockOnTarget = null;
     [HideInInspector]
     public bool isPlayer = false;
-    [HideInInspector]
+
     public List<Item> inventory = new List<Item>();
     [HideInInspector]
     public List<Character> activePets = new List<Character>();
@@ -146,6 +144,7 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         init();
+        //TODO: BUG! (Inventar leer)
         CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.stats.lootTable, this.lootTableInternal, this.lootParentObject);
     }
 
@@ -167,9 +166,6 @@ public class Character : MonoBehaviour
         if (this.animator == null) this.animator = this.GetComponent<Animator>();
         if (this.boxCollider == null) this.boxCollider = GetComponent<Collider2D>();
 
-        this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
-        this.audioSource.loop = false;
-        this.audioSource.playOnAwake = false;
         this.colors.Add(this.spriteRenderer.color);
 
         this.transform.gameObject.tag = this.stats.characterType.ToString();
@@ -242,6 +238,9 @@ public class Character : MonoBehaviour
     public void ActivateCharacter()
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
+
+        //TODO: BUG! (Inventar leer)
+        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.stats.lootTable, this.lootTableInternal, this.lootParentObject);
         CustomUtilities.Items.setItem(this.lootTableInternal, this.stats.multiLoot, this.inventory, this.lootParentObject);
 
         AIEvents eventAI = this.GetComponent<AIEvents>();
@@ -366,7 +365,7 @@ public class Character : MonoBehaviour
 
     public void PlaySoundEffect(AudioClip clip)
     {
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, clip);
+        CustomUtilities.Audio.playSoundEffect(this.gameObject, clip);
     }
 
     public void DestroyIt()
@@ -509,7 +508,7 @@ public class Character : MonoBehaviour
 
         updateAnimatorSpeed(this.timeDistortion);
 
-        if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
+        //if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
 
         foreach (StatusEffect effect in this.buffs)
         {
@@ -655,7 +654,7 @@ public class Character : MonoBehaviour
                             this.GetComponent<AI>().aggroGameObject.increaseAggroOnHit(skill.sender, elem.amount);
 
                         //Charakter-Treffer (Schaden) animieren
-                        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.stats.hitSoundEffect);
+                        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.stats.hitSoundEffect);
                         StartCoroutine(hitCo());
                     }
                 }

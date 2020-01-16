@@ -135,12 +135,12 @@ public class Treasure : Rewardable
     private void OpenChest()
     {
         changeTreasureState(true);
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, this.soundEffect);
+        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffect);
 
         if (this.soundEffect != null && this.inventory.Count > 0)
         {
             //Spiele Soundeffekte ab            
-            CustomUtilities.Audio.playSoundEffect(this.audioSource, this.soundEffectTreasure);
+            CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffectTreasure);
 
             //Zeige Item
             this.showTreasureItem();
