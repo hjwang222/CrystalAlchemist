@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
@@ -22,15 +23,11 @@ public class DeathScreen : MonoBehaviour
 
     [BoxGroup("Mandatory")]
     [SerializeField]
-    private AudioSource audiosource;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
     private AudioClip deathMusic;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
-    private PostProcessVolume postProcessVolume;
+    private Volume volume;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
@@ -74,7 +71,7 @@ public class DeathScreen : MonoBehaviour
 
     private string currentText;
     private string fullText;
-    private ColorGrading colorGrading;
+    private ColorAdjustments colorGrading;
     private Player player;
 
     private void Awake()
@@ -98,7 +95,7 @@ public class DeathScreen : MonoBehaviour
     {
         init();
         this.stopMusic.Raise();
-        if (this.postProcessVolume.profile.TryGetSettings(out this.colorGrading)) StartCoroutine(FadeOut(this.fadingDelay));
+        if (this.volume.profile.TryGet(out this.colorGrading)) StartCoroutine(FadeOut(this.fadingDelay));
     }
 
     private void showText()
@@ -110,7 +107,7 @@ public class DeathScreen : MonoBehaviour
 
     public void playMusic(AudioClip clip)
     {
-        CustomUtilities.Audio.playSoundEffect(this.audiosource, clip, GlobalValues.backgroundMusicVolume);
+        CustomUtilities.Audio.playSoundEffect(clip, GlobalValues.backgroundMusicVolume);
     }
 
     public void ShowText(float delay)

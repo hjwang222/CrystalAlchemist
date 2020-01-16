@@ -46,6 +46,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -147,6 +148,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -213,7 +215,6 @@ GameObject:
   - component: {fileID: 4572899733548692630}
   - component: {fileID: 5468855535257663949}
   - component: {fileID: 8040079805902109033}
-  - component: {fileID: 1377208524211316953}
   - component: {fileID: 4572899733548692631}
   - component: {fileID: 3251415627611802052}
   m_Layer: 12
@@ -252,93 +253,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Bergsturz
   skillNameEnglish: Landslide
-  skillDescription: 
-  skillDescriptionEnglish: 
-  category: 1
-  animationTriggerName: 
-  orderIndex: 0
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 8040079805902109033}
   animator: {fileID: 3251415627611802052}
   shadow: {fileID: 0}
-  indicators: []
-  showingIndicator: 0
-  showCastBarForEnemies: 0
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  castingAnimation: {fileID: 0}
-  castingAnimationCharacterKey: 
+  speed: 25
+  positionOffset: 0
+  maxAmounts: 9999
+  attachToSender: 0
+  doCastDuringDelay: 0
+  comboAmount: 99
   cast: 0
-  keepHoldTimer: 0
-  delay: 1.5
-  duration: 3
   lockMovementonDuration: 0
   deactivateByButtonUp: 0
   deactivateByButtonDown: 0
+  isRapidFire: 0
+  keepHoldTimer: 0
+  canAffectedBytimeDistortion: 1
+  delay: 1.5
+  duration: 3
   cooldown: 1
   cooldownAfterCombo: 0
   durationCombo: 0
-  affectedResources: []
-  statusEffects: []
-  thrust: 16
-  knockbackTime: 0.5
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: 0
-  intervallSender: 0
-  speedDuringCasting: 0
-  speedDuringDuration: 0
-  affectAnimation: 1
-  forward: 0
-  selfThrust: 0
-  selfThrustTime: 0
-  isRapidFire: 0
-  isStationary: 1
-  colliderHeightOffset: 0
-  speed: 25
-  rotateIt: 0
-  rotateOnUpdate: 0
-  keepOriginalRotation: 1
-  blendTree: 0
-  useOffSetToBlendTree: 0
-  rotationModifier: 0
-  snapRotationInDegrees: 0
-  positionOffset: 0
-  positionHeight: 0
-  activeTargetHelper: 0
-  setTargetAutomatically: 0
-  lockOn: {fileID: 0}
-  targetingMode: 2
-  maxAmountOfTargets: 1
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  affectSelf: 0
-  affectOther: 0
-  affectSame: 0
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 0
-  stateType: 0
-  doCastDuringDelay: 0
-  maxAmounts: 9999
-  comboAmount: 99
-  icon: {fileID: 0}
-  activeIndicators: []
+  elapsed: 0
   sender: {fileID: 0}
   delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
+  overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
   audioSource: {fileID: 0}
   dontPlayAudio: 0
+  basicRequirementsExists: 1
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
   holdTimer: 0
   triggerIsActive: 1
-  setPositionAtStart: 1
   setActive: 1
 --- !u!114 &5468855535257663949
 MonoBehaviour:
@@ -378,102 +330,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!82 &1377208524211316953
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3006779488917846497}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!61 &4572899733548692631
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -565,6 +421,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -666,6 +523,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -767,6 +625,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -904,6 +763,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

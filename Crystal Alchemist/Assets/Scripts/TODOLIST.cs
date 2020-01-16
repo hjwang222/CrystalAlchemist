@@ -2,20 +2,22 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //Map
-    //Key-Item Alternative für Loot (minigames, shop, treasure)
-    /* 
-     * Minigames = neues Item !
-     * Shop = Inactive !
-     * Treasure = opened oder neues Item!
-     * Drop = Destroy oder neues Item !
-     * 
-     */
     //Wetter
-    //Sound Handler?
-    //Destroy Handler?
-    //Treasure Animation
+    //- Regen (x)
+    //- Schnee (x)
+    //- Gewitter
+    //- Nebel
+    //- Wolken
 
-    //Context Clue Deactivation
-    //Glitter Prefab
+    //- Grau
+    //- Wüste
+    //- Unterwasser
+
+    //Destroy Handler?
+
+    //TODO (0.2.4.5):
+    //- Wetter Script (Position und Größe)
+    //- Charakter Creator
+    //- Savegames (3)
+    //- Bosskampf (Titania)
 }

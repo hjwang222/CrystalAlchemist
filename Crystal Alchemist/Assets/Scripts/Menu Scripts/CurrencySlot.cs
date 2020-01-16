@@ -50,12 +50,12 @@ public class CurrencySlot : MonoBehaviour
 
     public void updateCurrency()
     {
-        this.newValue = CustomUtilities.Items.getAmountFromInventory(this.item, this.player.inventory, false);
+        this.newValue = CustomUtilities.Items.getAmountFromInventory(this.item, this.player.inventory);
 
         if (this.playSound)
         {
             //this.playOnce = true;
-            CustomUtilities.Audio.playSoundEffect(this.audioSource, this.raiseSoundEffect);
+            CustomUtilities.Audio.playSoundEffect(this.gameObject, this.raiseSoundEffect);
         }
 
         if(!this.isRunning) StartCoroutine(Countdown());

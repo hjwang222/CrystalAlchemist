@@ -454,13 +454,13 @@ public class Skill : MonoBehaviour
 
     public void PlaySoundEffect(AudioClip audioClip)
     {
-        CustomUtilities.Audio.playSoundEffect(this.audioSource, audioClip);
+        CustomUtilities.Audio.playSoundEffect(this.gameObject, audioClip);
     }
 
     public void PlaySoundEffectOnce(AudioClip audioClip)
     {
         if (this.audioSource == null) this.audioSource = this.gameObject.AddComponent<AudioSource>();
-        if (!this.dontPlayAudio) CustomUtilities.Audio.playSoundEffect(this.audioSource, audioClip);
+        if (!this.dontPlayAudio) CustomUtilities.Audio.playSoundEffect(this.gameObject, audioClip);
         this.dontPlayAudio = true;
     }
 

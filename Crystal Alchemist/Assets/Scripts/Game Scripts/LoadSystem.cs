@@ -54,6 +54,7 @@ public class LoadSystem : MonoBehaviour
             GameObject prefab = Resources.Load("Items/" + elem[0], typeof(GameObject)) as GameObject;
 
             if(prefab == null) prefab = Resources.Load("Items/Key Items/" + elem[0], typeof(GameObject)) as GameObject;
+            if (prefab == null) prefab = Resources.Load("Items/Attribute Points/" + elem[0], typeof(GameObject)) as GameObject;
 
             if (prefab != null)
             {
