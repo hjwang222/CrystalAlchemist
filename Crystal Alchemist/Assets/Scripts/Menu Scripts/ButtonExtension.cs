@@ -15,7 +15,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     private Vector2 cursorSize;
 
     [SerializeField]
-    private bool setFirstSelected = false;
+    public bool setFirstSelected = false;
     private Button button;
 
     private int distance = 400;

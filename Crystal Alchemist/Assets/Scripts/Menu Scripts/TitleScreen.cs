@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
 
@@ -15,9 +15,14 @@ public class TitleScreen : MonoBehaviour
     private AudioClip music;
 
     [SerializeField]
-    private TextMeshProUGUI continueUGUI;
+    private GameObject mainFrame;
     [SerializeField]
-    private Color color;
+    private GameObject darkFrame;
+
+    [SerializeField]
+    private Image continueUGUI;
+    [SerializeField]
+    private Color disabledColor;
     [SerializeField]
     private BoolValue loadGame;
 
@@ -33,6 +38,7 @@ public class TitleScreen : MonoBehaviour
         SaveSystem.loadOptions();
         Cursor.visible = true;
         showMenu(this.menues[0]);
+        this.darkFrame.SetActive(false);
 
         if (this.music != null)
         {
@@ -46,8 +52,8 @@ public class TitleScreen : MonoBehaviour
         PlayerData data = SaveSystem.loadPlayer();
         if (data != null && data.scene != null && data.scene != "") this.lastSavepoint = data.scene;
 
-        if (this.lastSavepoint == null) this.continueUGUI.color = Color.gray;
-        else this.continueUGUI.color = this.color;
+        if (this.lastSavepoint == null) this.continueUGUI.color = this.disabledColor;
+        else this.continueUGUI.color = Color.white;
 
         destroySignal.Raise();
     }
@@ -68,7 +74,7 @@ public class TitleScreen : MonoBehaviour
     {
         SaveSystem.DeleteSave();
         this.lastSavepoint = null;
-        this.continueUGUI.color = Color.gray;
+        this.continueUGUI.color = this.disabledColor;
     }
 
     public void continueGame()
@@ -100,7 +106,25 @@ public class TitleScreen : MonoBehaviour
         }
 
         newActiveMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(newActiveMenu.transform.GetChild(0).gameObject);
+        
+        for(int i = 0; i < newActiveMenu.transform.childCount; i++)
+        {
+            ButtonExtension temp = newActiveMenu.transform.GetChild(i).GetComponent<ButtonExtension>();
+            if(temp != null && temp.setFirstSelected)
+            {
+                temp.setFirst();
+                break;
+            }
+        }
+    }
+
+    public void showBackground(bool dark)
+    {
+        this.mainFrame.SetActive(false);
+        this.darkFrame.SetActive(false);
+
+        if (dark) this.darkFrame.SetActive(true);
+        else this.mainFrame.SetActive(true);
     }
 
    
