@@ -6,11 +6,15 @@ using TMPro;
 public class ChangeVolumeMenu : TitleScreenMenues
 {
     [SerializeField]
-    private AudioSource musicSource;
+    private FloatSignal musicVolumeSignal;
+
+    [SerializeField]
+    private bool isTitleScreen = false;
 
     private void OnEnable()
-    {
-        setVolumeText(getVolumeFromEnum());
+    {        
+        this.slider.value = (getVolumeFromEnum() * 100f);
+        setVolumeText(this.slider.value);
     }
 
     private float getVolumeFromEnum()
@@ -28,20 +32,21 @@ public class ChangeVolumeMenu : TitleScreenMenues
     {
         if (this.volumeType == VolumeType.music)
         {
-            GlobalValues.backgroundMusicVolume = this.slider.value;
-            setVolumeText(GlobalValues.backgroundMusicVolume);
-            this.musicSource.volume = GlobalValues.backgroundMusicVolume;
+            GlobalValues.backgroundMusicVolume = (this.slider.value / 100f);                     
+
+            if(!this.isTitleScreen) this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+            else this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
         }
         else if (this.volumeType == VolumeType.effects)
         {
-            GlobalValues.soundEffectVolume = this.slider.value;
-            setVolumeText(GlobalValues.soundEffectVolume);
+            GlobalValues.soundEffectVolume = (this.slider.value / 100f);            
         }
+
+        setVolumeText(this.slider.value);
     }
 
     private void setVolumeText(float volume)
-    {
-        this.slider.value = volume;
-        this.textField.text = Mathf.RoundToInt(volume * 100) + "%";
+    {        
+        this.textField.text = Mathf.RoundToInt(volume) + "%";
     }    
 }

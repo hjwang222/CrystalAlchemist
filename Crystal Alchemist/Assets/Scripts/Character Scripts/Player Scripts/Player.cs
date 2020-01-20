@@ -94,8 +94,7 @@ public class Player : Character
 
         if (this.loadGame.getValue()) LoadSystem.loadPlayerData(this);
 
-        if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);
-        CustomUtilities.Helper.checkIfHelperDeactivate(this);
+        if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);        
 
         CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", false);
         CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);

@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 
 public class TitleScreen : MonoBehaviour
 {
-
     [SerializeField]
     private List<GameObject> menues = new List<GameObject>(); 
     [SerializeField]
@@ -26,36 +25,41 @@ public class TitleScreen : MonoBehaviour
     [SerializeField]
     private BoolValue loadGame;
 
+
+
     [Required]
     [SerializeField]
-    private SimpleSignal destroySignal;
+    private FloatSignal musicVolumeSignal;
 
-    private AudioSource musicSource;
+    [SerializeField]
+    private bool checkSavepoint = true;
+
     private string lastSavepoint = null;
 
     void Start()
     {
-        SaveSystem.loadOptions();
+        if (this.darkFrame != null) this.darkFrame.SetActive(false);
+        
         Cursor.visible = true;
         showMenu(this.menues[0]);
-        this.darkFrame.SetActive(false);
 
-        if (this.music != null)
+        if (this.checkSavepoint)
         {
-            this.musicSource = this.transform.gameObject.GetComponent<AudioSource>();
-            this.musicSource.clip = this.music;
-            this.musicSource.volume = GlobalValues.backgroundMusicVolume;
-            this.musicSource.loop = true;
-            this.musicSource.Play();
+            SaveSystem.loadOptions();
+            PlayerData data = SaveSystem.loadPlayer();
+            if (data != null && data.scene != null && data.scene != "") this.lastSavepoint = data.scene;
+
+            if (this.lastSavepoint == null) this.continueUGUI.color = this.disabledColor;
+            else this.continueUGUI.color = Color.white;
         }
 
-        PlayerData data = SaveSystem.loadPlayer();
-        if (data != null && data.scene != null && data.scene != "") this.lastSavepoint = data.scene;
+        if(this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+        
+    }
 
-        if (this.lastSavepoint == null) this.continueUGUI.color = this.disabledColor;
-        else this.continueUGUI.color = Color.white;
-
-        destroySignal.Raise();
+    private void Update()
+    {
+        //if (Input.GetButtonDown("Cancel")) showMenu();
     }
 
     private void LateUpdate()
@@ -98,6 +102,12 @@ public class TitleScreen : MonoBehaviour
         SaveSystem.SaveOptions();        
     }
 
+    private void OnDisable()
+    {
+        showMenu(this.menues[0]);
+        this.mainFrame.SetActive(true);
+    }
+
     public void showMenu(GameObject newActiveMenu)
     {
         foreach(GameObject gameObject in this.menues)
@@ -121,10 +131,10 @@ public class TitleScreen : MonoBehaviour
     public void showBackground(bool dark)
     {
         this.mainFrame.SetActive(false);
-        this.darkFrame.SetActive(false);
+        if(this.darkFrame != null) this.darkFrame.SetActive(false);
 
-        if (dark) this.darkFrame.SetActive(true);
-        else this.mainFrame.SetActive(true);
+        if (dark && this.darkFrame != null) this.darkFrame.SetActive(true);
+        else if(!dark) this.mainFrame.SetActive(true);
     }
 
    

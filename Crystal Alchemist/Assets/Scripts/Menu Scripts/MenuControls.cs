@@ -39,7 +39,6 @@ public class MenuControls : MonoBehaviour
     public virtual void OnDisable()
     {
         this.cursor.gameObject.SetActive(false);
-
         this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
     }
 
@@ -50,7 +49,7 @@ public class MenuControls : MonoBehaviour
             if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
             else exitMenu();
         }
-        else if (Input.GetButtonDown("Inventory")) exitMenu();
+        else if (Input.GetButtonDown("Inventory") || Input.GetButtonDown("Pause")) exitMenu();
     }
 
     public void exitMenu()

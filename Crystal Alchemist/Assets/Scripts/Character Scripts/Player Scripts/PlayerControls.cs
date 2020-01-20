@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using UnityEngine;
+
 
 public class PlayerControls : MonoBehaviour
 {
@@ -34,7 +32,7 @@ public class PlayerControls : MonoBehaviour
             if (this.player.myRigidbody.bodyType != RigidbodyType2D.Static) this.player.myRigidbody.velocity = Vector2.zero;
         }
 
-        if (this.player.currentState != CharacterState.dead)
+        if (this.player.currentState != CharacterState.dead && this.player.currentState != CharacterState.respawning)
         {
             if (this.player.currentState == CharacterState.inDialog || this.player.currentState == CharacterState.inMenu || this.player.currentState == CharacterState.respawning)
             {
@@ -60,8 +58,7 @@ public class PlayerControls : MonoBehaviour
 
                 if (this.player.currentState != CharacterState.dead
                     && this.player.currentState != CharacterState.inDialog
-                    && this.player.currentState != CharacterState.inMenu
-                    && this.player.currentState != CharacterState.respawning)
+                    && this.player.currentState != CharacterState.inMenu)
                 {
                     this.playerMovement.UpdateAnimationAndMove();
                 }
@@ -81,8 +78,6 @@ public class PlayerControls : MonoBehaviour
                 this.playerAttacks.updateSkillButtons("Y-Button");
                 this.playerAttacks.updateSkillButtons("RB-Button");
             }
-
-
         }
     }
 }

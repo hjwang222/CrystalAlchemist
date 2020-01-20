@@ -10,7 +10,7 @@ public class GetVersion : MonoBehaviour
 
     void Start()
     {
-        this.versionText.text = "Version: "+Application.version + "\n(Pre-Alpha)";
+        this.versionText.text = "Version: "+Application.version + " (Pre-Alpha)";
     }
 
 }

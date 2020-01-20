@@ -73,15 +73,11 @@ public class DeathScreen : MonoBehaviour
     private string fullText;
     private ColorAdjustments colorGrading;
     private Player player;
-
-    private void Awake()
-    {
-        this.player = this.playerStats.player;
-        init();
-    }
+    private bool skip = false;
 
     private void init()
     {
+        this.skip = false;
         this.cursor.gameObject.SetActive(false);
         this.returnSavePoint.SetActive(false);
         this.returnTitleScreen.SetActive(false);
@@ -90,9 +86,14 @@ public class DeathScreen : MonoBehaviour
         this.UI.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.anyKeyDown) this.skip = true;
+    }
 
     private void OnEnable()
     {
+        this.player = this.playerStats.player;
         init();
         this.stopMusic.Raise();
         if (this.volume.profile.TryGet(out this.colorGrading)) StartCoroutine(FadeOut(this.fadingDelay));
@@ -152,8 +153,15 @@ public class DeathScreen : MonoBehaviour
     private IEnumerator ShowTextCo(float delay)
     {
         for(int i = 0; i <= this.fullText.Length; i++)
-        {
-            currentText = this.fullText.Substring(0, i);
+        {           
+            this.currentText = this.fullText.Substring(0, i);
+
+            if (skip)
+            {
+                this.currentText = this.fullText;
+                i = this.fullText.Length;
+            }
+
             this.textField.text = this.currentText;
 
             if (i >= this.fullText.Length)

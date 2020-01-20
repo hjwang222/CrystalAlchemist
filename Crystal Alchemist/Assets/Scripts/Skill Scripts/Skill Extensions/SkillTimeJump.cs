@@ -38,7 +38,7 @@ public class SkillTimeJump : SkillExtension
     }
     
     private void OnDestroy()
-    {
+    {        
         this.timeValue.factor = this.timeValue.normalFactor;
         GlobalValues.backgroundMusicPitch = 1f;
         this.musicPitchSignal.Raise();
