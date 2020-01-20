@@ -16,7 +16,7 @@ public class PlayerTeleport : MonoBehaviour
         this.lastSaveGamePosition = position;
         this.lastSaveGameScene = targetScene;
 
-        foreach(Skill skill in player.skillSet)
+        foreach (Skill skill in player.skillSet)
         {
             skill.preLoad();
         }
@@ -94,13 +94,13 @@ public class PlayerTeleport : MonoBehaviour
             RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, playerPositionInNewScene, Quaternion.identity);
             respawnObject.setCharacter(this.player);
             respawnObject.setStatReset(false);
-            yield return new WaitForSeconds(respawnObject.getAnimationLength());
-
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds((respawnObject.getAnimationLength() + 1f));
         }
-
-        //this.transform.position = playerPositionInNewScene;
-        this.player.enableSpriteRenderer(true);
-        this.player.currentState = CharacterState.idle;
+        else
+        {
+            //this.transform.position = playerPositionInNewScene;
+            this.player.enableSpriteRenderer(true);
+            this.player.currentState = CharacterState.idle;
+        }
     }
 }

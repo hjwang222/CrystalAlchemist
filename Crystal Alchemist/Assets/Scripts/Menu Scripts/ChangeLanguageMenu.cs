@@ -1,19 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-public class ChangeLanguageMenu : MonoBehaviour
+public class ChangeLanguageMenu : TitleScreenMenues
 {
-    [SerializeField]
-    private Image germanFlag;
-
-    [SerializeField]
-    private Image englishFlag;
-
-    [SerializeField]
-    private SimpleSignal changeLanguageSignal;
-
     private void OnEnable()
     {
         getFlag();
@@ -21,36 +9,23 @@ public class ChangeLanguageMenu : MonoBehaviour
 
     private void getFlag()
     {
-        if (GlobalValues.useAlternativeLanguage)
-        {
-            this.englishFlag.gameObject.SetActive(true);
-            this.germanFlag.gameObject.SetActive(false);
-        }
-        else
-        {
-            this.englishFlag.gameObject.SetActive(false);
-            this.germanFlag.gameObject.SetActive(true);
-        }
+        if (GlobalValues.useAlternativeLanguage) this.switchButtons(this.secondButton, this.firstButton);
+        else this.switchButtons(this.firstButton, this.secondButton);
     }
 
-    public void changeLanguage()
+    public void changeLanguage(GameObject gameObject)
     {
-        if (GlobalValues.useAlternativeLanguage) GlobalValues.useAlternativeLanguage = false;
-        else GlobalValues.useAlternativeLanguage = true;
-
+        changeLanguageWithoutSave(gameObject);
         SaveSystem.SaveOptions();
-        getFlag();
-
-        this.changeLanguageSignal.Raise();
     }
 
-    public void changeLanguageWithoutSave()
+    public void changeLanguageWithoutSave(GameObject gameObject)
     {
-        if (GlobalValues.useAlternativeLanguage) GlobalValues.useAlternativeLanguage = false;
+        if(gameObject.name.ToUpper() == "GER") GlobalValues.useAlternativeLanguage = false;
         else GlobalValues.useAlternativeLanguage = true;
 
         getFlag();
 
-        this.changeLanguageSignal.Raise();
+        this.switchSignal.Raise();
     }
 }

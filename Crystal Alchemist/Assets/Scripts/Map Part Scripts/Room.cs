@@ -12,24 +12,29 @@ public class Room : MonoBehaviour
     [SerializeField]
     private GameObject objectsInArea;
 
+    [BoxGroup("Map")]
     [SerializeField]
     private string mapID;
 
+    [BoxGroup("Map")]
     [SerializeField]
     private string areaID;
 
+    [BoxGroup("Map")]
     [SerializeField]
     private string mapName;
 
+    [BoxGroup("Map")]
     [SerializeField]
     private string mapNameEnglish;
 
+    [BoxGroup("Map")]
     [SerializeField]
     private StringSignal locationSignal;
 
+    [BoxGroup("Map")]
     [SerializeField]
     private StringSignal mapLocationSignal;
-
 
 
 #if UNITY_EDITOR
@@ -41,12 +46,16 @@ public class Room : MonoBehaviour
         this.locationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/locationSignal.asset", typeof(StringSignal));
         this.mapLocationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/mapLocationSignal.asset", typeof(StringSignal));
     }
+
+    /*
+    [Button]
+    public void setAudio()
+    {        
+        this.audioClipSignalStart = (AudioClipSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/BGMClipStartSignal.asset", typeof(AudioClipSignal));
+        this.audioClipSignalLoop = (AudioClipSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/BGMClipLoopSignal.asset", typeof(AudioClipSignal));
+        this.startMusicSignal = (SimpleSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/startBackgroundMusic.asset", typeof(SimpleSignal));
+    }*/
 #endif
-
-
-
-
-
 
 
     private void Awake()
@@ -65,6 +74,10 @@ public class Room : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            /*if (this.audioClipSignalStart != null) this.audioClipSignalStart.Raise(this.musicStart);
+            if (this.audioClipSignalLoop != null) this.audioClipSignalLoop.Raise(this.musicLoop);
+            if (this.startMusicSignal != null) this.startMusicSignal.Raise();*/
+
             string text = CustomUtilities.Format.getLanguageDialogText(this.mapName, this.mapNameEnglish);
 
             setObjects(true);

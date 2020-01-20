@@ -11,14 +11,11 @@ public class SkillIndicatorModule : SkillModule
     private Indicator indicator;
 
     [FoldoutGroup("Indikatoren", expanded: false)]
-    [Tooltip("Indikator anzeigen")]
-    public bool showingIndicator = true;
-
-    [FoldoutGroup("Indikatoren", expanded: false)]
     [Tooltip("Cast anzeigen")]
     public bool showCastBarForEnemies = true;
 
     [FoldoutGroup("Indikatoren", expanded: false)]
+    [ShowIf("indicator")]
     public bool useCustomColor;
 
     [FoldoutGroup("Indikatoren", expanded: false)]
@@ -31,8 +28,7 @@ public class SkillIndicatorModule : SkillModule
     public void hideIndicator()
     {
         if (this.indicator != null
-            && this.activeIndicator != null
-            && this.showingIndicator)
+            && this.activeIndicator != null)
         {
             this.activeIndicator.DestroyIt();
             this.activeIndicator = null;
@@ -42,8 +38,7 @@ public class SkillIndicatorModule : SkillModule
     public void showIndicator()
     {
         if (this.indicator != null
-            && this.activeIndicator == null
-            && this.showingIndicator)
+            && this.activeIndicator == null)
         {
             Indicator temp = Instantiate(this.indicator);
             temp.setSkill(this.skill);

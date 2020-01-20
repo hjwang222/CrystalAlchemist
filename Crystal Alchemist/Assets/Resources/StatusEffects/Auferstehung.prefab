@@ -63,6 +63,7 @@ MonoBehaviour:
   statusEffectDescriptionEnglish: 
   maxDuration: 180
   canOverride: 1
+  canBeChanged: 1
   canDeactivateIt: 0
   canBeDispelled: 1
   maxStacks: 1
@@ -77,14 +78,13 @@ MonoBehaviour:
       hits: 0
       requireAll: 0
     actions:
-    - actionType: 8
+    - actionType: 7
       affectedResources: []
       amount: 0
       speed: 0
       time: 0
       skills: []
-      instantiatNewGameObject: {fileID: 0}
-      analyseUI: {fileID: 0}
+      module: {fileID: 0}
   - triggers:
     - triggerType: 3
       intervall: 0
@@ -100,16 +100,14 @@ MonoBehaviour:
       time: 0
       skills:
       - {fileID: 3576738453253014613, guid: 11202d6f47cfaec4380bf94430734912, type: 3}
-      instantiatNewGameObject: {fileID: 0}
-      analyseUI: {fileID: 0}
+      module: {fileID: 0}
     - actionType: 3
       affectedResources: []
       amount: 0
       speed: 0
       time: 0
       skills: []
-      instantiatNewGameObject: {fileID: 0}
-      analyseUI: {fileID: 0}
+      module: {fileID: 0}
   destroyDelay: 0.2
   ownAnimator: {fileID: 0}
   changeColor: 0

@@ -138,7 +138,8 @@ public class CombatButtons : MonoBehaviour
     private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, Skill skill, TextMeshProUGUI ammo, Image buttonUITrans, bool isUsable)
     {
         if (skill != null)
-        {       
+        {
+            buttonUI.enabled = true;
             float cooldownLeft = skill.cooldownTimeLeft / (player.timeDistortion * player.spellspeed);
             float cooldownValue = skill.cooldown / (player.timeDistortion * player.spellspeed);
 
@@ -211,7 +212,9 @@ public class CombatButtons : MonoBehaviour
         }
         else
         {
+            buttonUI.enabled = false;
             buttonUITrans.enabled = true;
+            ammo.text = "";
         }
     }
 

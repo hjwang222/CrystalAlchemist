@@ -36,6 +36,8 @@ public class PlayerAttacks : MonoBehaviour
         this.player.skillSet = tempSkillSet;
 
         if (this.player.loadGame.getValue()) LoadSystem.loadPlayerSkills(this.player);
+
+        CustomUtilities.Helper.checkIfHelperDeactivate(this.player);
     }
 
     public void loadSkillsFromSkillSet(string name, enumButton button)
