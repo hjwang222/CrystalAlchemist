@@ -26,35 +26,45 @@ public class StatusBar : MonoBehaviour
     private PlayerStats playerStats;
 
     [BoxGroup("UI Typ")]
-    public UIType UIType = UIType.resource;
+    [SerializeField]
+    private UIType UIType = UIType.resource;
 
     [BoxGroup("UI Typ")]
     [ShowIf("UIType", UIType.resource)]
-    public ResourceType resourceType;
-
-    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
-    public Sprite full;
-    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
-    public Sprite quarterhalf;
-    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
-    public Sprite half;
-    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
-    public Sprite quarter;
-    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
-    public Sprite empty;
-    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
-    public List<GameObject> icons = new List<GameObject>();
-    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
-    public GameObject warning;
-
-    [BoxGroup("Mandatory")]
     [SerializeField]
-    private StatusEffectBar statusEffectBar;
+    private ResourceType resourceType;
 
-    [FoldoutGroup("Sound", expanded: false)]
-    public AudioClip lowSoundEffect;
-    [FoldoutGroup("Sound", expanded: false)]
-    public float audioInterval = 1.5f;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private Sprite full;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private Sprite quarterhalf;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private Sprite half;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private Sprite quarter;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private Sprite empty;
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private List<GameObject> icons = new List<GameObject>();
+
+    [FoldoutGroup("Warning", expanded: false)]
+    [SerializeField]
+    private GameObject warning;
+    [SerializeField]
+    [FoldoutGroup("Warning", expanded: false)]
+    private AudioClip lowSoundEffect;
+    [SerializeField]
+    [FoldoutGroup("Warning", expanded: false)]
+    private float schwelle = 0.5f;
+    [FoldoutGroup("Warning", expanded: false)]
+    [SerializeField]
+    private float audioInterval = 1.5f;
 
     private AudioSource audioSource;
     private bool playLow;
@@ -89,7 +99,7 @@ public class StatusBar : MonoBehaviour
             if (elapsed <= 0)
             {
                 elapsed = audioInterval;
-                CustomUtilities.Audio.playSoundEffect(this.gameObject, this.lowSoundEffect);
+                CustomUtilities.Audio.playSoundEffect(this.lowSoundEffect);
             }
             else
             {
@@ -167,7 +177,7 @@ public class StatusBar : MonoBehaviour
             
         }
 
-        if (this.player.life <= 0.5f && this.player.currentState != CharacterState.dead)
+        if (this.currentValue <= this.schwelle && this.player.currentState != CharacterState.dead)
         {
             this.playLow = true;
             if (this.warning != null) this.warning.SetActive(true);

@@ -5,11 +5,14 @@ using UnityEngine;
 public class BackgroundMusic : MonoBehaviour
 {
     private AudioSource audioSource;
-    public AudioClip startMusic;
-    public AudioClip loopMusic;
+
+    [SerializeField]
+    private AudioClip startMusic;
+
+    [SerializeField]
+    private AudioClip loopMusic;
 
     private float volume;
-    private bool playMusic = true;
 
     // Start is called before the first frame update
     void Start()
@@ -18,20 +21,7 @@ public class BackgroundMusic : MonoBehaviour
         this.audioSource = this.GetComponent<AudioSource>();
         this.audioSource.volume = this.volume;
 
-        if (this.playMusic)
-        {
-            if (this.startMusic != null)
-            {
-                this.audioSource.loop = false;
-                this.audioSource.PlayOneShot(this.startMusic);
-
-                StartCoroutine(playLoopMusic());
-            }
-            else
-            {
-                playLoop();
-            }
-        }
+        startPlaying();
     }
 
     public void changePitch()
@@ -45,10 +35,27 @@ public class BackgroundMusic : MonoBehaviour
         this.volume = volume;
     }
 
+    public void startPlaying()
+    {
+            stopMusic();
+
+            if (this.startMusic != null)
+            {                
+                this.audioSource.loop = false;
+                this.audioSource.PlayOneShot(this.startMusic);
+
+                StartCoroutine(playLoopMusic());
+            }
+            else 
+            {                                
+                playLoop();
+            }
+        
+    }
+
     public void stopMusic()
     {
         this.audioSource.Stop();
-        this.playMusic = false;
     }
 
     private IEnumerator playLoopMusic()
@@ -59,7 +66,7 @@ public class BackgroundMusic : MonoBehaviour
 
     private void playLoop()
     {
-        if (this.loopMusic != null && this.playMusic)
+        if (this.loopMusic != null)
         {
             this.audioSource.volume = this.volume;
             this.audioSource.clip = this.loopMusic;

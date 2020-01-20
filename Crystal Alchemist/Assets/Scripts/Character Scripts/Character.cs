@@ -73,6 +73,7 @@ public class Character : MonoBehaviour
     private DeathAnimation activeDeathAnimation;
     private float immortalAtStart = 0;
 
+
     [HideInInspector]
     public float speedMultiply = 5;
     [HideInInspector]
@@ -144,8 +145,6 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         init();
-        //TODO: BUG! (Inventar leer)
-        //CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.stats.lootTable, this.lootTableInternal, this.lootParentObject);
     }
 
     public void init()
@@ -167,6 +166,7 @@ public class Character : MonoBehaviour
         if (this.boxCollider == null) this.boxCollider = GetComponent<Collider2D>();
 
         this.colors.Add(this.spriteRenderer.color);
+
 
         this.transform.gameObject.tag = this.stats.characterType.ToString();
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
@@ -203,6 +203,8 @@ public class Character : MonoBehaviour
     private void setBasicAttributesToNormal(bool reset)
     {
         this.direction = new Vector2(0, -1);
+        this.spriteRenderer.gameObject.transform.localScale = new Vector3(1, 1, 1);
+        this.spriteRenderer.color = this.colors[0];
 
         if (reset)
         {
@@ -220,12 +222,9 @@ public class Character : MonoBehaviour
             this.updateSpellSpeed(0);
         }
 
-
         this.currentState = CharacterState.idle;
         this.animator.enabled = true;
-        this.spriteRenderer.enabled = true;
-
-        this.shadowRenderer.enabled = true;
+        enableSpriteRenderer(true);
         if(!this.isPlayer) this.transform.position = this.spawnPosition;
 
         this.activeDeathAnimation = null;
@@ -358,6 +357,8 @@ public class Character : MonoBehaviour
             //StartCoroutine(colliderDisable());
             if (this.boxCollider != null) this.boxCollider.enabled = false;
             this.shadowRenderer.enabled = false;
+
+            //if (this.GetComponent<AIEvents>() != null) this.GetComponent<AIEvents>().enabled = false;
 
             //Play Death Effect
             if (this.stats.deathAnimation != null)
@@ -688,6 +689,11 @@ public class Character : MonoBehaviour
     public void setImmortal(float duration)
     {
         StartCoroutine(immortalCo(duration));
+    }
+
+    public void setCannotDie(bool value)
+    {
+        this.cannotDie = !value;
     }
 
     public void knockBack(float knockTime, float thrust, Vector2 direction)

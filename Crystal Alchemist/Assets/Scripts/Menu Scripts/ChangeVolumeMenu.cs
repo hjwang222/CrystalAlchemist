@@ -3,63 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class ChangeVolumeMenu : MonoBehaviour
+public class ChangeVolumeMenu : TitleScreenMenues
 {
     [SerializeField]
-    private TextMeshProUGUI musicUGUI;
-    [SerializeField]
-    private TextMeshProUGUI effectUGUI;
-    [SerializeField]
-    private AudioSource musicSource;
+    private FloatSignal musicVolumeSignal;
 
+    [SerializeField]
+    private bool isTitleScreen = false;
 
     private void OnEnable()
-    {
-        setVolumeText(this.musicUGUI, GlobalValues.backgroundMusicVolume);
-        setVolumeText(this.effectUGUI, GlobalValues.soundEffectVolume);
+    {        
+        this.slider.value = (getVolumeFromEnum() * 100f);
+        setVolumeText(this.slider.value);
     }
 
-    public void addVolume(TextMeshProUGUI ugui)
+    private float getVolumeFromEnum()
     {
-        changeVolume(ugui, 1);
-    }
-
-    public void reduceVolume(TextMeshProUGUI ugui)
-    {
-        changeVolume(ugui, -1);
-    }
-
-    private void changeVolume(TextMeshProUGUI ugui, int value)
-    {
-        if (ugui.gameObject.transform.parent.GetComponent<TextMeshProUGUI>().text.Contains("Musik") || ugui.gameObject.transform.parent.GetComponent<TextMeshProUGUI>().text.Contains("Music"))
+        switch (this.volumeType)
         {
-            GlobalValues.backgroundMusicVolume = addVolume(GlobalValues.backgroundMusicVolume, value);
-            setVolumeText(ugui, GlobalValues.backgroundMusicVolume);
-            this.musicSource.volume = GlobalValues.backgroundMusicVolume;
-        }
-        else
-        {
-            GlobalValues.soundEffectVolume = addVolume(GlobalValues.soundEffectVolume, value);
-            setVolumeText(ugui, GlobalValues.soundEffectVolume);
-        }
-    }
-
-    private void setVolumeText(TextMeshProUGUI ugui, float volume)
-    {
-        ugui.text = Mathf.RoundToInt(volume * 100) + "%";
-    }
-
-    private float addVolume(float volume, float addvolume)
-    {
-        if (addvolume != 0)
-        {
-            //if (this.cursorSound != null) Utilities.playSoundEffect(this.audioSource, this.cursorSound);
-            volume += (addvolume / 100);
-            if (volume < 0) volume = 0;
-            else if (volume > 2f) volume = 2f;
+            case VolumeType.effects: return GlobalValues.soundEffectVolume;
+            case VolumeType.music: return GlobalValues.backgroundMusicVolume;
         }
 
-        return volume;
+        return 0;
     }
-    
+
+    public void ChangeVolume()
+    {
+        if (this.volumeType == VolumeType.music)
+        {
+            GlobalValues.backgroundMusicVolume = (this.slider.value / 100f);                     
+
+            if(!this.isTitleScreen) this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+            else this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+        }
+        else if (this.volumeType == VolumeType.effects)
+        {
+            GlobalValues.soundEffectVolume = (this.slider.value / 100f);            
+        }
+
+        setVolumeText(this.slider.value);
+    }
+
+    private void setVolumeText(float volume)
+    {        
+        this.textField.text = Mathf.RoundToInt(volume) + "%";
+    }    
 }

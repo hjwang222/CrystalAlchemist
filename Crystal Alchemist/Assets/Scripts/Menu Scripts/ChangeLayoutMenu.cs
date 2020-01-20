@@ -1,19 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-public class ChangeLayoutMenu : MonoBehaviour
+public class ChangeLayoutMenu : TitleScreenMenues
 {
-    [SerializeField]
-    private Image buttonGamepad;
-
-    [SerializeField]
-    private Image buttonKeyboard;
-
-    [SerializeField]
-    private SimpleSignal layoutSignal;
-
     private void OnEnable()
     {
         getLayout();
@@ -21,25 +9,17 @@ public class ChangeLayoutMenu : MonoBehaviour
 
     private void getLayout()
     {
-        if (GlobalValues.layoutType == LayoutType.keyboard)
-        {
-            this.buttonKeyboard.gameObject.SetActive(true);
-            this.buttonGamepad.gameObject.SetActive(false);
-        }
-        else
-        {
-            this.buttonKeyboard.gameObject.SetActive(false);
-            this.buttonGamepad.gameObject.SetActive(true);
-        }
+        if (GlobalValues.layoutType == LayoutType.keyboard) this.switchButtons(this.secondButton, this.firstButton);
+        else this.switchButtons(this.firstButton, this.secondButton);
     }
 
-    public void changeLayout()
+    public void changeLayout(GameObject gameObject)
     {
-        if (GlobalValues.layoutType == LayoutType.keyboard) GlobalValues.layoutType = LayoutType.gamepad;
-        else GlobalValues.layoutType = LayoutType.keyboard;
+        if (gameObject.name.ToLower() == "keyboard") GlobalValues.layoutType = LayoutType.keyboard;
+        else GlobalValues.layoutType = LayoutType.gamepad;
         
         getLayout();
 
-        this.layoutSignal.Raise();
+        this.switchSignal.Raise();
     }
 }

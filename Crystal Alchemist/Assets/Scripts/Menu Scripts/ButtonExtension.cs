@@ -15,17 +15,11 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     private Vector2 cursorSize;
 
     [SerializeField]
-    private bool setFirstSelected = false;
+    public bool setFirstSelected = false;
     private Button button;
 
     private int distance = 400;
-
-    /*
-    private void Awake()
-    {
-        //this.cursor.gameObject.SetActive(false);
-    }
-    */
+    
     private void Start()
     {
         if(this.cursor == null)
@@ -41,8 +35,6 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         this.cursorSize = new Vector2(rt.rect.width, rt.rect.height);
         this.cursorScale = rt.lossyScale;
 
-        this.button = this.gameObject.GetComponent<Button>();
-
         /*Debug.Log(this.name + " - "
                     + this.transform.localScale + " - "
                     + this.transform.parent.localScale + " - "
@@ -51,8 +43,6 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                     + WordToScenePoint(this.transform.localPosition));*/
 
         setFirst();
-
-        //Cursor.visible = false;
     }
 
     public void setCursor(myCursor cursor)
@@ -67,12 +57,18 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     public void setFirst()
     {
-        if (this.cursor != null && this.setFirstSelected)
+        if(this.button == null) this.button = this.gameObject.GetComponent<Button>();
+
+        if (this.cursor != null && this.setFirstSelected  && this.gameObject.activeInHierarchy)
         {
             this.cursor.gameObject.SetActive(true);
 
-            EventSystem.current.firstSelectedGameObject = this.gameObject;
-            EventSystem.current.SetSelectedGameObject(this.gameObject);
+            if (EventSystem.current != null)
+            {
+                EventSystem.current.firstSelectedGameObject = this.gameObject;
+                EventSystem.current.SetSelectedGameObject(this.gameObject);
+            }
+
             setCursor(true, false);
         }
     }

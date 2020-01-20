@@ -24,7 +24,6 @@ public class CurrencySlot : MonoBehaviour
 
     private Player player;
 
-    private AudioSource audioSource;
     //private bool playOnce = false;
     private int currentValue;
     private bool isRunning = false;
@@ -34,9 +33,6 @@ public class CurrencySlot : MonoBehaviour
     private void Start()
     {
         this.player = this.playerStats.player;
-        this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
-        this.audioSource.loop = false;
-        this.audioSource.playOnAwake = false;
 
         updateCurrency();
 
@@ -55,7 +51,7 @@ public class CurrencySlot : MonoBehaviour
         if (this.playSound)
         {
             //this.playOnce = true;
-            CustomUtilities.Audio.playSoundEffect(this.gameObject, this.raiseSoundEffect);
+            CustomUtilities.Audio.playSoundEffect(this.raiseSoundEffect);
         }
 
         if(!this.isRunning) StartCoroutine(Countdown());

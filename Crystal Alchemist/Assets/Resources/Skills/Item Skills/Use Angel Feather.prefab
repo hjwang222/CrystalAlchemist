@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3576738453253014613}
   - component: {fileID: 3818622815184204766}
   - component: {fileID: 502403076174282921}
+  - component: {fileID: 8973195830946279714}
   m_Layer: 12
   m_Name: Use Angel Feather
   m_TagString: Skill
@@ -197,6 +198,23 @@ MonoBehaviour:
   affectNeutral: 0
   affectSkills: 0
   ignoreInvincibility: 1
+--- !u!114 &8973195830946279714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff888da11674d454bb4936a9c97fb6c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  affectAllOfKind: 1
+  dispellIt: 1
+  allTheSame: 1
+  extendTimePercentage: 0
 --- !u!1001 &7981406291649803579
 PrefabInstance:
   m_ObjectHideFlags: 0

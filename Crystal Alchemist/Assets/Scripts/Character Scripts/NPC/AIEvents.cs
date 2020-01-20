@@ -17,6 +17,7 @@ public enum AIActionType
     transition, 
     immortal,
     kill,
+    cannotDie,
     animation
 }
 
@@ -90,11 +91,6 @@ public class AIAction
     [HideLabel]
     public AIActionType type;
 
-    [ShowIf("type", AIActionType.immortal)]
-    [VerticalGroup("Properties")]
-    [LabelWidth(100)]
-    public bool isImmortal;
-
     [ShowIf("type", AIActionType.movement)]
     [TableColumnWidth(150)]
     [VerticalGroup("Properties")]
@@ -120,6 +116,11 @@ public class AIAction
     [VerticalGroup("Type")]
     [LabelWidth(75)]
     public float dauer = 4f;
+
+    [ShowIf("type", AIActionType.cannotDie)]
+    [VerticalGroup("Type")]
+    [LabelWidth(75)]
+    public bool canDie = false;
 
     [ShowIf("type", AIActionType.transition)]
     [VerticalGroup("Properties")]
@@ -261,6 +262,11 @@ public class AIEvents : MonoBehaviour
         init();
     }
 
+    private void OnDisable()
+    {
+        resetAllEvents();
+    }
+
     public void init()
     {
         resetAllEvents();
@@ -271,10 +277,7 @@ public class AIEvents : MonoBehaviour
             {                
                 if (action.skillinstance == null && action.skill != null)
                 {
-                    action.skillinstance = CustomUtilities.Skills.setSkill(this.enemy, action.skill);
-
-                    SkillIndicatorModule indicatorModule = action.skillinstance.GetComponent<SkillIndicatorModule>();
-                    if(indicatorModule != null) indicatorModule.showingIndicator = true;                    
+                    action.skillinstance = CustomUtilities.Skills.setSkill(this.enemy, action.skill);                  
                 }
 
                 useAction(action);
@@ -595,9 +598,6 @@ public class AIEvents : MonoBehaviour
             if (action.skillinstance == null && action.skill != null)
             {
                 action.skillinstance = CustomUtilities.Skills.setSkill(this.enemy, action.skill);
-
-                SkillIndicatorModule indicatorModule = action.skillinstance.GetComponent<SkillIndicatorModule>();
-                if (indicatorModule != null) indicatorModule.showingIndicator = true;
             }
 
             this.activeAction = action;
@@ -705,6 +705,11 @@ public class AIEvents : MonoBehaviour
         else if (action.type == AIActionType.animation)
         {
             CustomUtilities.UnityUtils.SetAnimatorParameter(this.enemy.animator, action.animation);
+        }
+        else if (action.type == AIActionType.cannotDie)
+        {
+            //suicide
+            this.enemy.setCannotDie(action.canDie);
         }
         else if (action.type == AIActionType.immortal)
         {
