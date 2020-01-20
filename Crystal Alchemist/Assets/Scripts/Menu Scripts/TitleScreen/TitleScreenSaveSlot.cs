@@ -1,27 +1,11 @@
 ﻿using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
+using System;
 
 public class TitleScreenSaveSlot : MonoBehaviour
 {
-    [Required]
-    [SerializeField]
-    [BoxGroup("Main")]
-    private string slotName;
-
-    [Required]
-    [SerializeField]
-    [BoxGroup("Main")]
-    private StringValue saveGameSlot;
-
-    [Required]
-    [SerializeField]
-    [BoxGroup("Main")]
-    private string firstScene = "Haus";
-
     [Required]
     [SerializeField]
     [BoxGroup("Main")]
@@ -36,11 +20,16 @@ public class TitleScreenSaveSlot : MonoBehaviour
     [BoxGroup("Easy Access")]
     [SerializeField]
     private TextMeshProUGUI characterName;
+    /*
+    [Required]
+    [BoxGroup("Easy Access")]
+    [SerializeField]
+    private Image characterPreview;*/
 
     [Required]
     [BoxGroup("Easy Access")]
     [SerializeField]
-    private Image characterPreview;
+    private TextMeshProUGUI slotname;
 
     [Required]
     [BoxGroup("Easy Access")]
@@ -52,10 +41,21 @@ public class TitleScreenSaveSlot : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI timePlayed;
 
-    private PlayerData data;
+    [Required]
+    [BoxGroup("Easy Access")]
+    [SerializeField]
+    private GameObject health;
+
+    [Required]
+    [BoxGroup("Easy Access")]
+    [SerializeField]
+    private GameObject mana;
+
+    public PlayerData data;
 
     private void OnEnable()
     {
+        this.slotname.text = this.gameObject.name;
         getData();
     }
 
@@ -64,48 +64,38 @@ public class TitleScreenSaveSlot : MonoBehaviour
         this.newGame.SetActive(false);
         this.loadGame.SetActive(false);
 
-        this.data = SaveSystem.loadPlayer(this.slotName);
+        this.data = SaveSystem.loadPlayer(this.gameObject.name);
 
         if (this.data != null)
         {
             string name = data.name;
             float timePlayed = data.timePlayed;
             string ort = data.scene;
-            float life = data.health;
             float maxLife = data.maxHealth;
-            float mana = data.mana;
             float maxMana = data.maxMana;
 
             this.loadGame.SetActive(true);
-            //show save
+
+            setLifeMana((int)maxLife, this.health);
+            setLifeMana((int)maxMana, this.mana);
+            this.characterName.text = name;
+            this.characterLocation.text = ort;
+
+            TimeSpan span = TimeSpan.FromMilliseconds(timePlayed);
+            this.timePlayed.text = span.ToString(@"hh\:mm\:ss");
         }
         else
         {
             this.newGame.SetActive(true);
-            //show empty
         }
     }
 
-    private void startGame()
+    private void setLifeMana(int value, GameObject temp)
     {
-        if(this.data != null)
+        for (int i = 0; i < temp.transform.childCount; i++)
         {
-            this.saveGameSlot.setValue(this.slotName);
-            SceneManager.LoadSceneAsync(data.scene);            
+            temp.transform.GetChild(i).gameObject.SetActive(false);
+            if(i < value) temp.transform.GetChild(i).gameObject.SetActive(true);
         }
-        else
-        {
-            this.saveGameSlot.setValue(null);
-            SceneManager.LoadSceneAsync(this.firstScene);
-        }
-
-        Cursor.visible = false;
-    }
-
-    private void deleteGame()
-    {
-        string path = Application.persistentDataPath + "/"+this.slotName+"."+GlobalValues.saveGameFiletype;
-        File.Delete(path);
-        getData();
     }
 }

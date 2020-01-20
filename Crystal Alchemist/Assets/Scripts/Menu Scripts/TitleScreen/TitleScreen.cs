@@ -1,13 +1,23 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 public class TitleScreen : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> menues = new List<GameObject>(); 
+
     [SerializeField]
     private AudioClip music;
+
+    [Required]
+    [SerializeField]
+    private string firstScene = "Haus";
+
+    [Required]
+    [SerializeField]
+    private StringValue saveGameSlot;
 
     [SerializeField]
     private GameObject mainFrame;
@@ -50,6 +60,18 @@ public class TitleScreen : MonoBehaviour
         #endif
 
         Application.Quit();
+    }
+
+    public void startNewGame()
+    {
+        startTheGame(this.firstScene, "");
+    }
+
+    public void startTheGame(string scene, string saveSlot)
+    {
+        this.saveGameSlot.setValue(saveSlot);
+        SceneManager.LoadSceneAsync(scene);
+        Cursor.visible = false;
     }
 
     public void save()
