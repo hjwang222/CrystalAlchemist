@@ -140,7 +140,7 @@ public class Treasure : Rewardable
         if (this.soundEffect != null && this.inventory.Count > 0)
         {
             //Spiele Soundeffekte ab            
-            CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffectTreasure);
+            CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffectTreasure, GlobalValues.backgroundMusicVolume);
 
             //Zeige Item
             this.showTreasureItem();

@@ -59,7 +59,7 @@ public class TitleScreenSaveSlot : MonoBehaviour
         getData();
     }
 
-    private void getData()
+    public void getData()
     {
         this.newGame.SetActive(false);
         this.loadGame.SetActive(false);

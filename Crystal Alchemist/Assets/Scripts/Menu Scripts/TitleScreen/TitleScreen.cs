@@ -32,6 +32,7 @@ public class TitleScreen : MonoBehaviour
 
     void Start()
     {
+        this.mainFrame.SetActive(true);
         if (this.darkFrame != null) this.darkFrame.SetActive(false);
 
         SaveSystem.loadOptions();

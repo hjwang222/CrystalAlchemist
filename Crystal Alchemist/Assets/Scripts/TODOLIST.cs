@@ -20,7 +20,7 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.4.5):
     //- Wetter Script (Position und Größe)
     //- Charakter Creator
-    //- Savegames (3)
+    //x Savegames (3) 
     //- Bosskampf (Titania)
     //- Character onEnable/onDisable
     //- TimeJump skaliert mit allem (Update Speed oder anderes)
