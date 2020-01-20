@@ -285,7 +285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &67703987
 Transform:
   m_ObjectHideFlags: 0
@@ -306,6 +306,7 @@ Transform:
   - {fileID: 987322488}
   - {fileID: 1622383030}
   - {fileID: 47647059}
+  - {fileID: 1584285665}
   - {fileID: 470188381}
   m_Father: {fileID: 1251275148}
   m_RootOrder: 3
@@ -9073,6 +9074,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1570218537}
   m_CullTransparentMesh: 0
+--- !u!1 &1584285664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1584285665}
+  m_Layer: 0
+  m_Name: SaveSlots
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1584285665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584285664}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 67703987}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1588455287
 GameObject:
   m_ObjectHideFlags: 0
@@ -11284,14 +11315,11 @@ MonoBehaviour:
   - {fileID: 987322487}
   - {fileID: 1622383029}
   - {fileID: 47647058}
+  - {fileID: 1584285664}
   music: {fileID: 8300000, guid: 84f47336cfff4304eabea4c51f2915d0, type: 3}
   mainFrame: {fileID: 1588455287}
   darkFrame: {fileID: 1300247785}
-  continueUGUI: {fileID: 1479799922}
-  disabledColor: {r: 0.7169812, g: 0, b: 0, a: 0.48235294}
-  loadGame: {fileID: 11400000, guid: 6235bec172bdebb4b9dfed7e628eb8cc, type: 2}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
-  checkSavepoint: 1
 --- !u!114 &614963581401797004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11868,11 +11896,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 592733662847864682}
-        m_MethodName: startGame
-        m_Mode: 5
+        m_MethodName: showMenu
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1584285664}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Haus
@@ -16621,7 +16649,7 @@ PrefabInstance:
     - target: {fileID: 8457243064567944268, guid: 40a2df96fb1149d4ea4b7f14d1d431c1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8457243064567944268, guid: 40a2df96fb1149d4ea4b7f14d1d431c1,
         type: 3}

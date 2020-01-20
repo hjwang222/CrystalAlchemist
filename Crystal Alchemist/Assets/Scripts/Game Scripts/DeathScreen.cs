@@ -19,7 +19,7 @@ public class DeathScreen : MonoBehaviour
 
     [BoxGroup("Mandatory")]
     [SerializeField]
-    private BoolValue loadGame;
+    private StringValue loadGame;
 
     [BoxGroup("Mandatory")]
     [SerializeField]

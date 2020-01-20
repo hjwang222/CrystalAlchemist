@@ -28,6 +28,8 @@ public class GlobalValues : MonoBehaviour
 
     public static float transitionDuration = 1f;
 
+    public static string saveGameFiletype = "dat";
+
 
     public static float getMusicInMenu()
     {

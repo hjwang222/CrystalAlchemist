@@ -5,9 +5,9 @@ using System;
 
 public class LoadSystem : MonoBehaviour
 {
-    public static void loadPlayerData(Player player)
+    public static void loadPlayerData(Player player, string saveGameSlot)
     {
-        PlayerData data = SaveSystem.loadPlayer();
+        PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
 
         if (data != null)
         {
@@ -24,6 +24,9 @@ public class LoadSystem : MonoBehaviour
             player.healthSignalUI.Raise();
             player.manaSignalUI.Raise();
 
+            player.stats.characterName = data.name;
+            player.GetComponent<PlayerUtils>().secondsPlayed = data.timePlayed;
+
             player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
 
             player.GetComponent<PlayerTeleport>().setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]));
@@ -35,11 +38,11 @@ public class LoadSystem : MonoBehaviour
         }
     }
 
-    public static void loadPlayerSkills(Player player)
+    public static void loadPlayerSkills(Player player, string saveGameSlot)
     {
-        PlayerData data = SaveSystem.loadPlayer();
+        PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
 
-        if (data.skills.Count > 0)
+        if (data != null && data.skills.Count > 0)
         {
             loadSkills(data, player);
         }

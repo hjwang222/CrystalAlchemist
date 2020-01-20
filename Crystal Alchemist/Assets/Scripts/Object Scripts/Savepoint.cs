@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using Sirenix.OdinInspector;
+﻿using UnityEngine.SceneManagement;
 
 public class Savepoint : Interactable
 {
@@ -10,7 +6,7 @@ public class Savepoint : Interactable
     {
         Scene scene = SceneManager.GetActiveScene();
 
-        SaveSystem.Save(this.player, scene.name);
+        SaveSystem.Save(this.player, scene.name, "Slot1");
 
         this.player.GetComponent<PlayerTeleport>().setLastTeleport(scene.name, this.player.transform.position);
 

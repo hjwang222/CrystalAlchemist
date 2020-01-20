@@ -21,6 +21,9 @@ public class PlayerData
 
     public float[] position;
     public string scene;
+    public string name;
+
+    public float timePlayed;
 
     public PlayerData(Player player, string scene)
     {
@@ -44,6 +47,8 @@ public class PlayerData
         setSkills(player);
 
         this.scene = scene;
+        this.name = player.stats.characterName;
+        this.timePlayed = player.GetComponent<PlayerUtils>().secondsPlayed;
     }
 
     private void setInventory(Player player)

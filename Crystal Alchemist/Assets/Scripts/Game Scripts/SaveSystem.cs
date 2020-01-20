@@ -7,10 +7,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class SaveSystem
 {
-    public static void Save(Player player, string scene)
+    public static void Save(Player player, string scene, string name)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.fun";
+        string path = Application.persistentDataPath + "/" + name + "." + GlobalValues.saveGameFiletype;
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerData data = new PlayerData(player, scene);
@@ -20,16 +20,10 @@ public class SaveSystem
         stream.Dispose();
     }
 
-    public static void DeleteSave()
-    {
-        string path = Application.persistentDataPath + "/player.fun";
-        File.Delete(path);
-    }
-
     public static void SaveOptions()
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/options.fun";
+        string path = Application.persistentDataPath + "/options."+GlobalValues.saveGameFiletype;
         FileStream stream = new FileStream(path, FileMode.Create);
 
         GameOptions data = new GameOptions();
@@ -39,33 +33,34 @@ public class SaveSystem
         stream.Dispose();
     }
 
-    public static PlayerData loadPlayer()
+    public static PlayerData loadPlayer(string name)
     {
-        string path = Application.persistentDataPath + "/player.fun";
-
-        if (File.Exists(path))
+        if (name != null)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+            string path = Application.persistentDataPath + "/" + name + "." + GlobalValues.saveGameFiletype;
 
-            if (stream.Length <= 0) return null;
+            if (File.Exists(path))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                FileStream stream = new FileStream(path, FileMode.Open);
 
-            PlayerData data = formatter.Deserialize(stream) as PlayerData;
+                if (stream.Length <= 0) return null;
 
-            stream.Close();
-            stream.Dispose();
+                PlayerData data = formatter.Deserialize(stream) as PlayerData;
 
-            return data;
+                stream.Close();
+                stream.Dispose();
+
+                return data;
+            }
         }
-        else
-        {
-            return null;
-        }
+
+        return null;
     }
 
     public static void loadOptions()
     {
-        string path = Application.persistentDataPath + "/options.fun";
+        string path = Application.persistentDataPath + "/options." + GlobalValues.saveGameFiletype;
 
         if (File.Exists(path))
         {

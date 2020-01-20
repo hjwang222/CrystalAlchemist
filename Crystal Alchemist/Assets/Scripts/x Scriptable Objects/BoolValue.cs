@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Values/BoolValue")]
 public class BoolValue : ScriptableObject, ISerializationCallbackReceiver
 {
-
     [SerializeField]
     private bool value;
 

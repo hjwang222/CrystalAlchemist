@@ -55,7 +55,7 @@ public class Player : Character
 
     [Required]
     [BoxGroup("Pflichtfelder")]
-    public BoolValue loadGame;
+    public StringValue saveGameSlot;
 
     [Required]
     [BoxGroup("Pflichtfelder")]
@@ -92,7 +92,7 @@ public class Player : Character
         this.isPlayer = true;
         this.init();
 
-        if (this.loadGame.getValue()) LoadSystem.loadPlayerData(this);
+        LoadSystem.loadPlayerData(this, this.saveGameSlot.getValue());
 
         if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);        
 

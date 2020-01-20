@@ -1,10 +1,6 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using Sirenix.OdinInspector;
-using UnityEngine.EventSystems;
 
 public class TitleScreen : MonoBehaviour
 {
@@ -18,40 +14,20 @@ public class TitleScreen : MonoBehaviour
     [SerializeField]
     private GameObject darkFrame;
 
-    [SerializeField]
-    private Image continueUGUI;
-    [SerializeField]
-    private Color disabledColor;
-    [SerializeField]
-    private BoolValue loadGame;
-
-
-
     [Required]
     [SerializeField]
     private FloatSignal musicVolumeSignal;
-
-    [SerializeField]
-    private bool checkSavepoint = true;
 
     private string lastSavepoint = null;
 
     void Start()
     {
         if (this.darkFrame != null) this.darkFrame.SetActive(false);
-        
+
+        SaveSystem.loadOptions();
+
         Cursor.visible = true;
         showMenu(this.menues[0]);
-
-        if (this.checkSavepoint)
-        {
-            SaveSystem.loadOptions();
-            PlayerData data = SaveSystem.loadPlayer();
-            if (data != null && data.scene != null && data.scene != "") this.lastSavepoint = data.scene;
-
-            if (this.lastSavepoint == null) this.continueUGUI.color = this.disabledColor;
-            else this.continueUGUI.color = Color.white;
-        }
 
         if(this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
         
@@ -66,28 +42,7 @@ public class TitleScreen : MonoBehaviour
     {
         if (!Cursor.visible) Cursor.visible = true;
     }
-
-    public void startGame(string scene)
-    {
-        this.loadGame.setValue(false);
-        SceneManager.LoadSceneAsync(scene);
-        Cursor.visible = false;
-    }
-
-    public void deleteSaveGame()
-    {
-        SaveSystem.DeleteSave();
-        this.lastSavepoint = null;
-        this.continueUGUI.color = this.disabledColor;
-    }
-
-    public void continueGame()
-    {
-        this.loadGame.setValue(true);
-        if(this.lastSavepoint != null) SceneManager.LoadSceneAsync(this.lastSavepoint);
-        Cursor.visible = false;
-    }
-
+       
     public void exitGame()
     {
         #if UNITY_EDITOR
