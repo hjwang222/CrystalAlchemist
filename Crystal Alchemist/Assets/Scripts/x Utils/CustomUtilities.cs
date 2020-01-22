@@ -500,6 +500,14 @@ public class CustomUtilities : MonoBehaviour
             return result;
         }
 
+        public static void SetAnimatorParameter(List<Animator> animators, string parameter, bool value)
+        {
+            foreach(Animator animator in animators)
+            {
+                SetAnimatorParameter(animator, parameter, value);
+            }
+        }
+
         /// <summary>
         /// set bool value for Animator
         /// </summary>
@@ -514,9 +522,14 @@ public class CustomUtilities : MonoBehaviour
             }
         }
 
-        /// <summary>
-        /// set Trigger for Animator
-        /// </summary>
+        public static void SetAnimatorParameter(List<Animator> animators, string parameter)
+        {
+            foreach (Animator animator in animators)
+            {
+                SetAnimatorParameter(animator, parameter);
+            }
+        }
+
         public static void SetAnimatorParameter(Animator animator, string parameter)
         {
             if (animator != null)
@@ -528,9 +541,14 @@ public class CustomUtilities : MonoBehaviour
             }
         }
 
-        /// <summary>
-        /// set float value for Animator
-        /// </summary>
+        public static void SetAnimatorParameter(List<Animator> animators, string parameter, float value)
+        {
+            foreach (Animator animator in animators)
+            {
+                SetAnimatorParameter(animator, parameter, value);
+            }
+        }
+
         public static void SetAnimatorParameter(Animator animator, string parameter, float value)
         {
             if (animator != null)
@@ -539,6 +557,22 @@ public class CustomUtilities : MonoBehaviour
                 {
                     if (param.name == parameter) animator.SetFloat(parameter, value);
                 }
+            }
+        }
+
+        public static void enableAnimator(List<Animator> animators, bool value)
+        {
+            foreach (Animator animator in animators)
+            {
+                animator.enabled = value;
+            }
+        }
+
+        public static void SetAnimatorSpeed(List<Animator> animators, float value)
+        {
+            foreach (Animator animator in animators)
+            {
+                animator.speed = value;
             }
         }
 
