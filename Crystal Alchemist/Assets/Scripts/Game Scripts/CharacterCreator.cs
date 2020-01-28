@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEditor;
+using System.IO;
+using System.Linq;
 
 public enum Races
 {
@@ -18,6 +19,9 @@ public struct Race
     public Races race;
     public List<GameObject> parts;
 }
+
+
+
 
 public class CharacterCreator : MonoBehaviour
 {
@@ -41,10 +45,6 @@ public class CharacterCreator : MonoBehaviour
     [SerializeField]
     private List<GameObject> parts = new List<GameObject>();
 
-    [FoldoutGroup("Internal", Expanded = false)]
-    [SerializeField]
-    private AnimationClip anim;
-
     [BoxGroup]
     [SerializeField]
     private Color hairColor;
@@ -61,19 +61,46 @@ public class CharacterCreator : MonoBehaviour
     [SerializeField]
     private Races race;
 
-
-#if UNITY_EDITOR
-    [Button]
-    public void setColor()
+    [ButtonGroup("Test")]
+    public void setRace()
     {
-        foreach(GameObject temp in this.parts)
+        setRace(this.race, this.bodyColor, this.hairColor, this.eyeColor);
+    }
+
+    [ButtonGroup("Test")]
+    public void setHuman()
+    {
+        setRace(Races.human, new Color(0.92f,0.75f, 0.6f), new Color(1, 0.9f, 0), new Color(0.2f, 0.6f, 0.9f));
+    }
+
+    [ButtonGroup("Test")]
+    public void setElf()
+    {
+        setRace(Races.elves, new Color(0.95f, 0.85f, 0.75f), new Color(0.8f, 0.6f, 0.4f), new Color(0.9f, 0.3f, 0.3f));
+    }
+
+    [ButtonGroup("Test")]
+    public void setLamia()
+    {
+        setRace(Races.lamia, new Color(0.92f, 0.75f, 0.6f), new Color(1, 0.9f, 0.9f), new Color(0.2f, 0.6f, 0.4f));
+    }
+
+    [ButtonGroup("Test")]
+    public void setPony()
+    {
+        setRace(Races.ponies, new Color(1, 0.7f, 0.7f), new Color(1, 0.5f, 0.8f), new Color(0.2f, 0.6f, 0.65f));
+    }
+         
+    private void setRace(Races ra, Color body, Color hair, Color eyes)
+    {
+        foreach (GameObject temp in this.parts)
         {
             temp.SetActive(false);
         }
 
-        foreach(Race temp in this.races)
+        foreach (Race temp in this.races)
         {
-            if(temp.race == this.race)
+            if (temp.race == ra)
             {
                 foreach (GameObject temp1 in temp.parts)
                 {
@@ -82,76 +109,17 @@ public class CharacterCreator : MonoBehaviour
             }
         }
 
-        foreach(SpriteRenderer temp in this.bodyParts)
+        foreach (SpriteRenderer temp in this.bodyParts)
         {
-            temp.color = this.bodyColor;
+            temp.color = body;
         }
 
         foreach (SpriteRenderer temp in this.hairParts)
         {
-            temp.color = this.hairColor;
+            temp.color = hair;
         }
 
-        this.eyePart.color = this.eyeColor;
+        this.eyePart.color = eyes;
     }
-
-    [Button]
-    public void test()
-    {
-        addProperties();
-    }
-#endif
-
-
-    public void addProperties()
-    {
-        List<GameObject> temp = new List<GameObject>();
-
-        foreach(Transform child in this.transform)
-        {
-            foreach (Transform child2 in child)
-            {
-                foreach (Transform child3 in child2)
-                {
-                    if (child3.GetComponent<SpriteRenderer>() != null) temp.Add(child3.gameObject);
-                }
-            }
-        }
-
-        Object[] sprite = AssetDatabase.LoadAllAssetsAtPath("Assets/Art/Graphics/Characters/Player Sprites/Legs.png");
-
-        foreach (GameObject blub in temp)
-        {
-            EditorCurveBinding spriteBinding = new EditorCurveBinding();
-            spriteBinding.type = typeof(SpriteRenderer);
-            spriteBinding.path = GetGameObjectPath(blub.transform);
-            spriteBinding.propertyName = "m_Sprite";
-
-            ObjectReferenceKeyframe[] spriteKeyFrames = new ObjectReferenceKeyframe[sprite.Length];
-            
-            for (int i = 0; i < (sprite.Length); i++)
-            {
-                spriteKeyFrames[i] = new ObjectReferenceKeyframe();
-                spriteKeyFrames[i].time = i;
-                spriteKeyFrames[i].value = sprite[i];
-            }
-
-            AnimationUtility.SetObjectReferenceCurve(this.anim, spriteBinding, spriteKeyFrames);
-
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-        }
-    }
-
-    private string GetGameObjectPath(Transform transform)
-    {
-        string path = transform.name;
-        while (transform.parent != null && transform.parent != this.transform)
-        {
-            transform = transform.parent;
-            path = transform.name + "/" + path;
-        }
-        return path;
-    }
-
+        
 }
