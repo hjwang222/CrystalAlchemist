@@ -49,6 +49,8 @@ public class SpriteAndAnimationUtil : MonoBehaviour
                 //set all animation clips foreach object
                 SetAnimationClips(clip, childObject);
             }
+
+            Debug.Log("<color=blue>Set Animation of: " + clip.name + " for " + childObjects.Count + " GameObjects.</color>");
         }
     }
 
@@ -204,5 +206,6 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
         ti.spritesheet = newData.ToArray();
         AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+        Debug.Log("<color=blue>Sliced and Named: " + file.path + " into " + newData.Count + " sprites</color>");
     }
 }
