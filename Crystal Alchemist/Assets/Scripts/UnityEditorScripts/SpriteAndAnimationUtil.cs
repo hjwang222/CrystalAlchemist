@@ -24,7 +24,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
     [FoldoutGroup("Animations", Expanded = false)]
     [SerializeField]
-    private int intervall = 10;
+    private int intervall = 10;   
 
     private string[] animArray = new string[] { "Down", "Right", "Left", "Up" };
 
@@ -177,7 +177,8 @@ public class SpriteAndAnimationUtil : MonoBehaviour
             Vector2 pivot = new Vector2(0.5f, 0.5f);
 
             string animTyp = "Idle";
-            if (count > 0) animTyp = "Walk";
+            if (count >= 1) animTyp = "Walk";
+            else if (count >= 5) animTyp = "Sword";
 
             for (int j = myTexture.height; j > 0 && animDirection < 4; j -= SliceHeight)
             {
