@@ -16,6 +16,7 @@ public class TODOLIST : MonoBehaviour
     //Destroy Handler?
 
     //Bug: Titelbildschirm selektiert nicht den ersten Button korrekt (button.select())
+    //TODO: Item DialogBox
 
     //TODO (0.2.4.5):
     //- Wetter Script (Position und Größe)
