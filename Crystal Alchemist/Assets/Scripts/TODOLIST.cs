@@ -18,8 +18,6 @@ public class TODOLIST : MonoBehaviour
     //Bug: Titelbildschirm selektiert nicht den ersten Button korrekt (button.select())
     //TODO: Item DialogBox
 
-    //BUG: Colors
-
     //TODO (0.2.4.5):
     //- Wetter Script (Position und Größe)
     //- Charakter Creator

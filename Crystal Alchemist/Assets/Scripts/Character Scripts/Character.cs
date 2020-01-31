@@ -7,7 +7,7 @@ public class Character : MonoBehaviour
 {
     [System.Serializable]
     public class ColorPalette
-    {        
+    {
         public SpriteRenderer spriteRenderer;
         public List<Color> colors = new List<Color>();
 
@@ -199,7 +199,7 @@ public class Character : MonoBehaviour
 
         if (this.animator == null) this.animator = this.GetComponent<Animator>();
         if (this.boxCollider == null) this.boxCollider = GetComponent<Collider2D>();
-        
+
         this.initColor();
 
         this.transform.gameObject.tag = this.stats.characterType.ToString();
@@ -259,7 +259,7 @@ public class Character : MonoBehaviour
         this.currentState = CharacterState.idle;
         this.animator.enabled = true;
         enableSpriteRenderer(true);
-        if(!this.isPlayer) this.transform.position = this.spawnPosition;
+        if (!this.isPlayer) this.transform.position = this.spawnPosition;
 
         this.activeDeathAnimation = null;
 
@@ -272,7 +272,7 @@ public class Character : MonoBehaviour
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
 
-        if(this.lootParentObject == null)
+        if (this.lootParentObject == null)
         {
             GameObject lootparent = new GameObject();
             lootparent.transform.SetParent(this.gameObject.transform);
@@ -374,12 +374,12 @@ public class Character : MonoBehaviour
         {
             //TODO:Destroy on Cast            
 
-            for(int i = 0; i< this.activeSkills.Count; i++)
+            for (int i = 0; i < this.activeSkills.Count; i++)
             {
                 resetCast(this.activeSkills[i]);
                 if (this.activeSkills[i].attachToSender) this.activeSkills[i].DestroyIt();
             }
-            
+
             //TODO: Kill sofort (Skill noch aktiv)
             CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
             CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
@@ -448,7 +448,7 @@ public class Character : MonoBehaviour
                     if (value > 0) colorArray = GlobalValues.green;
 
                     if (this.life > 0 && this.currentState != CharacterState.dead && showingDamageNumber) showDamageNumber(value, colorArray);
-                    
+
                     break;
                 }
             case ResourceType.mana:
@@ -541,10 +541,10 @@ public class Character : MonoBehaviour
     {
         this.timeDistortion = 1 + (distortion / 100);
 
-         /*if (this.CompareTag("Player"))
-         {
-             this.GetComponent<Player>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
-         }*/
+        /*if (this.CompareTag("Player"))
+        {
+            this.GetComponent<Player>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
+        }*/
 
         updateAnimatorSpeed(this.timeDistortion);
 
@@ -603,7 +603,7 @@ public class Character : MonoBehaviour
         {
             if (colorPalette.colors.Count > 0) colorPalette.spriteRenderer.color = colorPalette.colors[0];
             colorPalette.colors.Clear();
-            this.addColor(colorPalette.spriteRenderer.color);
+            this.addColor(colorPalette.spriteRenderer.color, colorPalette);
         }
     }
 
@@ -622,29 +622,32 @@ public class Character : MonoBehaviour
         {
             colorPalette.spriteRenderer.enabled = value;
         }
-        if(this.shadowRenderer != null) this.shadowRenderer.enabled = value;
+        if (this.shadowRenderer != null) this.shadowRenderer.enabled = value;
     }
 
     public void addColor(Color color)
     {
         foreach (ColorPalette colorPalette in this.colors)
         {
-            if (colorPalette.colors.Contains(color))
-            {
-                colorPalette.spriteRenderer.color = colorPalette.colors[colorPalette.colors.IndexOf(color)];
-            }
-            else
-            {
-                colorPalette.colors.Add(color);
-                colorPalette.spriteRenderer.color = colorPalette.colors[colorPalette.colors.Count - 1];
-            }
+            addColor(color, colorPalette);
+        }
+    }
+
+    public void addColor(Color color, ColorPalette colorPalette)
+    {
+        if (colorPalette.colors.Contains(color))
+        {
+            colorPalette.spriteRenderer.color = colorPalette.colors[colorPalette.colors.IndexOf(color)];
+        }
+        else
+        {
+            colorPalette.colors.Add(color);
+            colorPalette.spriteRenderer.color = colorPalette.colors[colorPalette.colors.Count - 1];
         }
     }
 
     public void initColor()
     {
-        //this.colors.Clear();
-
         foreach (SpriteRenderer renderer in this.spriteRenderers)
         {
             this.colors.Add(new ColorPalette(renderer, renderer.color));
@@ -735,7 +738,7 @@ public class Character : MonoBehaviour
                 if (this.life > 0)
                 {
                     //Rückstoß ermitteln
-                    float knockbackTrust = targetModule.thrust - (this.stats.antiKnockback/100* targetModule.thrust);
+                    float knockbackTrust = targetModule.thrust - (this.stats.antiKnockback / 100 * targetModule.thrust);
                     knockBack(targetModule.knockbackTime, knockbackTrust, skill);
                 }
             }

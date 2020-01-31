@@ -102,37 +102,39 @@ public class SpriteAndAnimationUtil : MonoBehaviour
             spriteBinding.path = GetGameObjectPath(spriteObject.transform);
             spriteBinding.propertyName = "m_Sprite";
 
-
-            int intervall = getAnimationClipIntervall(sprites[0].name);
-            int arrayLength = sprites.Count + 1;
-            if (intervall <= 0) arrayLength = 1;
-
-            ObjectReferenceKeyframe[] spriteKeyFrames = new ObjectReferenceKeyframe[arrayLength];
-            float time = 0f;            
-
-            try
+            if (sprites.Count > 0)
             {
-                for (int i = 0; i < spriteKeyFrames.Length; i++)
+                int intervall = getAnimationClipIntervall(sprites[0].name);
+                int arrayLength = sprites.Count + 1;
+                if (intervall <= 0) arrayLength = 1;
+
+                ObjectReferenceKeyframe[] spriteKeyFrames = new ObjectReferenceKeyframe[arrayLength];
+                float time = 0f;
+
+                try
                 {
-                    spriteKeyFrames[i] = new ObjectReferenceKeyframe();
-                    spriteKeyFrames[i].time = time;
+                    for (int i = 0; i < spriteKeyFrames.Length; i++)
+                    {
+                        spriteKeyFrames[i] = new ObjectReferenceKeyframe();
+                        spriteKeyFrames[i].time = time;
 
-                    if (i == spriteKeyFrames.Length - 1) spriteKeyFrames[i].value = sprites[i - 1];
-                    else spriteKeyFrames[i].value = sprites[i];
-                    
-                    time += (float)(intervall / 60f);
+                        if (i == spriteKeyFrames.Length - 1) spriteKeyFrames[i].value = sprites[i - 1];
+                        else spriteKeyFrames[i].value = sprites[i];
+
+                        time += (float)(intervall / 60f);
+                    }
                 }
-            }
-            catch
-            {
-                Debug.Log("<color=red>Error: " + childObject.gameObject.name + " (" + childObject.path + ")</color>");
-            }
+                catch
+                {
+                    Debug.Log("<color=red>Error: " + childObject.gameObject.name + " (" + childObject.path + ")</color>");
+                }
 
-            AnimationUtility.SetObjectReferenceCurve(clip, spriteBinding, spriteKeyFrames);
-            //if(file.setSortOrder) clip.SetCurve("", typeof(SpriteRenderer), "m_SortOrder", AnimationCurve.Linear(0, file.sortOrder, 0, file.sortOrder));
+                AnimationUtility.SetObjectReferenceCurve(clip, spriteBinding, spriteKeyFrames);
+                //if(file.setSortOrder) clip.SetCurve("", typeof(SpriteRenderer), "m_SortOrder", AnimationCurve.Linear(0, file.sortOrder, 0, file.sortOrder));
 
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
         }
         else
         {
