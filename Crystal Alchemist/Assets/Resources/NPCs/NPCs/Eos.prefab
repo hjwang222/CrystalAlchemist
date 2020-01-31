@@ -54,6 +54,8 @@ MonoBehaviour:
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 2
@@ -115,6 +117,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -182,7 +185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9189589815307079105}
-  m_Father: {fileID: 4283048916830764583}
+  m_Father: {fileID: 5766702269380246153}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2652810396879462138
@@ -199,6 +202,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -296,6 +300,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4322055140194454580}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3336859231645334308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1983168318463249484}
+  m_Layer: 11
+  m_Name: Sprites
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1983168318463249484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3336859231645334308}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5766702269380246153}
+  m_Father: {fileID: 4283048916830764583}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3722434751308757473
 GameObject:
@@ -400,10 +435,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lootParentObject: {fileID: 0}
   stats: {fileID: 11400000, guid: acdb7e089d2b9dc449dc40f1dfdf12c5, type: 2}
   myRigidbody: {fileID: 4322055140194454582}
   animator: {fileID: 2652810396879462137}
-  spriteRenderer: {fileID: 2652810396879462138}
+  mainSprite: {fileID: 6261774556482826731}
   boxCollider: {fileID: 0}
   shadowRenderer: {fileID: 2652810396556960420}
   startSpriteForRespawn: {fileID: 0}
@@ -411,20 +447,27 @@ MonoBehaviour:
   activeSkillParent: {fileID: 2652810397108339306}
   activeStatusEffectParent: {fileID: 8669415238972280400}
   skillSetParent: {fileID: 3722434751308757473}
-  aggro: {fileID: 0}
+  skillStartPosition: {fileID: 6261774556482826731}
+  spriteRenderers:
+  - {fileID: 2652810396879462138}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
-  audioSource: {fileID: 0}
   activeCastbar: {fileID: 0}
   currentState: 0
   life: 0
   spellspeed: 0
   mana: 0
   speed: 0
+  maxLife: 0
+  maxMana: 0
+  lifeRegen: 0
+  manaRegen: 0
+  buffPlus: 0
+  debuffMinus: 0
   isInvincible: 0
   isImmortal: 0
+  cannotDie: 0
   isHit: 0
-  items: []
   buffs: []
   debuffs: []
   activeSkills: []
@@ -437,7 +480,8 @@ MonoBehaviour:
   activePets: []
   steps: 0
   isOnIce: 0
-  dialogPosition: {fileID: 2652810396879462133}
+  lootTableInternal: []
+  aggroGameObject: {fileID: 0}
   flip: 1
   target: {fileID: 0}
   partner: {fileID: 0}
@@ -480,12 +524,12 @@ MonoBehaviour:
   startImmediately: 1
   initialActions:
   - type: 1
-    isImmortal: 0
     position: {x: 0, y: 0}
     de: "F\xFCrchte nicht die Dunkelheit."
     en: Dont fear the darkness.
     duration: 4
     dauer: 4
+    canDie: 0
     nextPhase: 
     animation: 
     skill: {fileID: 0}
@@ -507,12 +551,12 @@ MonoBehaviour:
       rangeTrigger: []
     actions:
     - type: 1
-      isImmortal: 0
       position: {x: 0, y: 0}
       de: Machs gut!
       en: Bye bye!
       duration: 4
       dauer: 4
+      canDie: 0
       nextPhase: 
       animation: 
       skill: {fileID: 0}
@@ -524,12 +568,12 @@ MonoBehaviour:
       gcd: 0
       skillinstance: {fileID: 0}
     - type: 7
-      isImmortal: 0
       position: {x: 0, y: 0}
       de: 
       en: 
       duration: 4
       dauer: 4
+      canDie: 0
       nextPhase: 
       animation: 
       skill: {fileID: 0}
@@ -600,9 +644,40 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2652810396879462136}
+  - {fileID: 1983168318463249484}
   - {fileID: 2652810396556960423}
   m_Father: {fileID: 4322055140194454580}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6261774556482826731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5766702269380246153}
+  m_Layer: 15
+  m_Name: Character
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5766702269380246153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6261774556482826731}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2652810396879462136}
+  m_Father: {fileID: 1983168318463249484}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8669415238972280400

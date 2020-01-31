@@ -5,6 +5,19 @@ using Sirenix.OdinInspector;
 
 public class Character : MonoBehaviour
 {
+    [System.Serializable]
+    public class ColorPalette
+    {        
+        public SpriteRenderer spriteRenderer;
+        public List<Color> colors = new List<Color>();
+
+        public ColorPalette(SpriteRenderer renderer, Color color)
+        {
+            this.spriteRenderer = renderer;
+            this.colors.Add(color);
+        }
+    }
+
     [BoxGroup("Required")]
     [SerializeField]
     [Required]
@@ -26,7 +39,7 @@ public class Character : MonoBehaviour
 
     [Required]
     [BoxGroup("Easy Access")]
-    public SpriteRenderer spriteRenderer;
+    public GameObject mainSprite;
 
     [Required]
     [BoxGroup("Easy Access")]
@@ -58,7 +71,7 @@ public class Character : MonoBehaviour
 
     [BoxGroup("Easy Access")]
     [Required]
-    public GameObject shootingPosition;
+    public GameObject skillStartPosition;
 
     #endregion
 
@@ -67,12 +80,12 @@ public class Character : MonoBehaviour
 
     private float regenTimeElapsed;
     private float manaTime;
-    private List<Color> colors = new List<Color>();
+    public List<ColorPalette> colors = new List<ColorPalette>();
     private bool showTargetHelp = false;
     private GameObject targetHelpObjectPlayer;
     private DeathAnimation activeDeathAnimation;
     private float immortalAtStart = 0;
-
+    public List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
 
     [HideInInspector]
     public float speedMultiply = 5;
@@ -90,18 +103,18 @@ public class Character : MonoBehaviour
     public float mana;
     [HideInInspector]
     public float speed;
-
-
+    [HideInInspector]
     public float maxLife;
+    [HideInInspector]
     public float maxMana;
+    [HideInInspector]
     public float lifeRegen;
+    [HideInInspector]
     public float manaRegen;
+    [HideInInspector]
     public int buffPlus;
+    [HideInInspector]
     public int debuffMinus;
-
-
-
-
     [HideInInspector]
     public bool isInvincible;
     [HideInInspector]
@@ -140,6 +153,26 @@ public class Character : MonoBehaviour
     #endregion
 
 
+#if UNITY_EDITOR
+    [Button]
+    public void addToSpriteRenderers()
+    {
+        this.spriteRenderers.Clear();
+        GetChildObjects(this.mainSprite.transform, this.spriteRenderers);
+    }
+
+    private void GetChildObjects(Transform transform, List<SpriteRenderer> childObjects)
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.GetComponent<SpriteRenderer>() != null) childObjects.Add(child.GetComponent<SpriteRenderer>());
+
+            GetChildObjects(child, childObjects);
+        }
+    }
+#endif
+
+
 
     #region Start Functions (Spawn, Init)
     private void Awake()
@@ -160,13 +193,14 @@ public class Character : MonoBehaviour
     private void setComponents()
     {
         if (this.myRigidbody == null) this.myRigidbody = this.GetComponent<Rigidbody2D>();
-        if (this.spriteRenderer == null) this.spriteRenderer = this.GetComponent<SpriteRenderer>();
+
+        if (this.skillStartPosition == null) this.skillStartPosition = this.gameObject;
+        //if (this.spriteRenderer == null) this.spriteRenderer = this.GetComponent<SpriteRenderer>();
 
         if (this.animator == null) this.animator = this.GetComponent<Animator>();
         if (this.boxCollider == null) this.boxCollider = GetComponent<Collider2D>();
-
-        this.colors.Add(this.spriteRenderer.color);
-
+        
+        this.initColor();
 
         this.transform.gameObject.tag = this.stats.characterType.ToString();
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
@@ -203,8 +237,8 @@ public class Character : MonoBehaviour
     private void setBasicAttributesToNormal(bool reset)
     {
         this.direction = new Vector2(0, -1);
-        this.spriteRenderer.gameObject.transform.localScale = new Vector3(1, 1, 1);
-        this.spriteRenderer.color = this.colors[0];
+        //this.spriteRenderer.gameObject.transform.localScale = new Vector3(1, 1, 1);
+        setStartColor();
 
         if (reset)
         {
@@ -350,7 +384,7 @@ public class Character : MonoBehaviour
             CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
             CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
 
-            this.spriteRenderer.color = Color.white;
+            setStartColor();
             this.currentState = CharacterState.dead;
 
             if (this.myRigidbody != null && this.myRigidbody.bodyType != RigidbodyType2D.Static) this.myRigidbody.velocity = Vector2.zero;
@@ -453,7 +487,6 @@ public class Character : MonoBehaviour
                 }
         }
     }
-
 
     public void callSignal(SimpleSignal signal, float addResource)
     {
@@ -566,39 +599,72 @@ public class Character : MonoBehaviour
 
     public void resetColor()
     {
-        if (this.spriteRenderer != null)
+        foreach (ColorPalette colorPalette in this.colors)
         {
-            if (this.colors.Count > 0) this.spriteRenderer.color = this.colors[0];
-            this.colors.Clear();
-            this.addColor(this.spriteRenderer.color);
+            if (colorPalette.colors.Count > 0) colorPalette.spriteRenderer.color = colorPalette.colors[0];
+            colorPalette.colors.Clear();
+            this.addColor(colorPalette.spriteRenderer.color);
         }
     }
 
     public void resetColor(Color color)
     {
-        if (this.spriteRenderer != null)
+        foreach (ColorPalette colorPalette in this.colors)
         {
-            this.colors.Remove(color);
-            this.spriteRenderer.color = this.colors[this.colors.Count - 1];
+            colorPalette.colors.Remove(color);
+            colorPalette.spriteRenderer.color = colorPalette.colors[colorPalette.colors.Count - 1];
         }
     }
 
     public void enableSpriteRenderer(bool value)
     {
-        this.spriteRenderer.enabled = value;
+        foreach (ColorPalette colorPalette in this.colors)
+        {
+            colorPalette.spriteRenderer.enabled = value;
+        }
         if(this.shadowRenderer != null) this.shadowRenderer.enabled = value;
     }
 
     public void addColor(Color color)
     {
-        if (this.colors.Contains(color))
+        foreach (ColorPalette colorPalette in this.colors)
         {
-            this.spriteRenderer.color = this.colors[this.colors.IndexOf(color)];
+            if (colorPalette.colors.Contains(color))
+            {
+                colorPalette.spriteRenderer.color = colorPalette.colors[colorPalette.colors.IndexOf(color)];
+            }
+            else
+            {
+                colorPalette.colors.Add(color);
+                colorPalette.spriteRenderer.color = colorPalette.colors[colorPalette.colors.Count - 1];
+            }
         }
-        else
+    }
+
+    public void initColor()
+    {
+        //this.colors.Clear();
+
+        foreach (SpriteRenderer renderer in this.spriteRenderers)
         {
-            this.colors.Add(color);
-            this.spriteRenderer.color = this.colors[this.colors.Count - 1];
+            this.colors.Add(new ColorPalette(renderer, renderer.color));
+        }
+    }
+
+    public void setStartColor()
+    {
+        foreach (ColorPalette colorPalette in this.colors)
+        {
+            colorPalette.spriteRenderer.color = colorPalette.colors[0];
+        }
+    }
+
+    public void setFlip()
+    {
+        foreach (ColorPalette colorPalette in this.colors)
+        {
+            if (this.direction.x < 0) colorPalette.spriteRenderer.flipX = true;
+            else colorPalette.spriteRenderer.flipX = false;
         }
     }
 

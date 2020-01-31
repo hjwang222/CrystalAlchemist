@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2452030230981208128}
   - component: {fileID: 1293588450421558207}
   - component: {fileID: 6423164893705659178}
+  - component: {fileID: 6163491140064400503}
   m_Layer: 13
   m_Name: Schwert
   m_TagString: Skill
@@ -108,6 +109,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -137,7 +139,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -277,7 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  useOffSetToBlendTree: 0
+  useOffSetToBlendTree: 1
 --- !u!114 &6423164893705659178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +298,22 @@ MonoBehaviour:
   castingAnimationCharacterKey: 
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   useColor: 0
+--- !u!114 &6163491140064400503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661548303189921719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85781c900207fc428972075be537857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  useGameObjectHeight: 0
+  positionHeight: 0.5
+  colliderHeightOffset: 0
 --- !u!1 &1288681395139722514
 GameObject:
   m_ObjectHideFlags: 0

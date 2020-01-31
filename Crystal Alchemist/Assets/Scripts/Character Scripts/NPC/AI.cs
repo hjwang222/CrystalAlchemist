@@ -8,10 +8,6 @@ public class AI : Character
 {
     [Required]
     [BoxGroup("Easy Access")]
-    public GameObject dialogPosition;
-
-    [Required]
-    [BoxGroup("Easy Access")]
     public AIAggroSystem aggroGameObject;
 
     [BoxGroup("AI")]

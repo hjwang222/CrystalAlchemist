@@ -201,12 +201,7 @@ public class AIMovement : MonoBehaviour
     private void updateAnimation(Vector2 direction)
     {
         if (!CustomUtilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
-
-        if (this.npc.flip)
-        {
-            if (this.npc.direction.x < 0) this.npc.spriteRenderer.flipX = true;
-            else this.npc.spriteRenderer.flipX = false;
-        }
+        if (this.npc.flip) this.npc.setFlip();        
 
         this.npc.currentState = CharacterState.walk;
         CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", true);

@@ -63,7 +63,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6405626492518989134}
-  - {fileID: 4536096100035205209}
+  - {fileID: 6352430910874225563}
   - {fileID: 4536096100877042890}
   - {fileID: 5973893920803166065}
   - {fileID: 3988850082350623239}
@@ -109,7 +109,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 2ecf4e93db9bd0a43a3dda9972716fe8, type: 2}
   myRigidbody: {fileID: 2438936824352443031}
   animator: {fileID: 4536096100035205208}
-  spriteRenderer: {fileID: 4536096100035205211}
+  mainSprite: {fileID: 3547521921856296989}
   boxCollider: {fileID: 4536096100201619651}
   shadowRenderer: {fileID: 4536096099553321989}
   startSpriteForRespawn: {fileID: 7674188754514733644, guid: bba5f92a22649c6499e4206f67431dc5,
@@ -119,10 +119,11 @@ MonoBehaviour:
   activeSkillParent: {fileID: 4536096100877042891}
   activeStatusEffectParent: {fileID: 7092093423516748017}
   skillSetParent: {fileID: 2993592967878901568}
-  shootingPosition: {fileID: 1536248267194378282}
+  skillStartPosition: {fileID: 1536248267194378282}
+  spriteRenderers:
+  - {fileID: 4536096100035205211}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
-  audioSource: {fileID: 0}
   activeCastbar: {fileID: 0}
   currentState: 0
   life: 0
@@ -151,6 +152,7 @@ MonoBehaviour:
   activePets: []
   steps: 0
   isOnIce: 0
+  lootTableInternal: []
   dialogPosition: {fileID: 4536096100035205204}
   aggroGameObject: {fileID: 6272208109676738659}
   flip: 0
@@ -178,12 +180,12 @@ MonoBehaviour:
     phaseDescription: 
     actions:
     - type: 3
-      isImmortal: 0
       position: {x: 0, y: 0}
       de: 
       en: 
       duration: 4
       dauer: 4
+      canDie: 0
       nextPhase: 
       animation: 
       skill: {fileID: 1676703576389572161, guid: ebbcacfde9010dc489df5125a980db67,
@@ -325,6 +327,37 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
+--- !u!1 &3547521921856296989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7739253640987121290}
+  m_Layer: 15
+  m_Name: Character
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7739253640987121290
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3547521921856296989}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4536096100035205209}
+  m_Father: {fileID: 6352430910874225563}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4394980694008798191
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,8 +498,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4536096100035205209}
-  m_RootOrder: 2
+  m_Father: {fileID: 6352430910874225563}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4536096099553321989
 SpriteRenderer:
@@ -551,9 +584,8 @@ Transform:
   m_Children:
   - {fileID: 4536096100807201278}
   - {fileID: 5375814465470714267}
-  - {fileID: 4536096099553321990}
-  m_Father: {fileID: 2438936824352443029}
-  m_RootOrder: 1
+  m_Father: {fileID: 7739253640987121290}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4536096100035205211
 SpriteRenderer:
@@ -769,4 +801,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2438936824352443029}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8934739815055267464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6352430910874225563}
+  m_Layer: 11
+  m_Name: Sprites
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6352430910874225563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8934739815055267464}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7739253640987121290}
+  - {fileID: 4536096099553321990}
+  m_Father: {fileID: 2438936824352443029}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

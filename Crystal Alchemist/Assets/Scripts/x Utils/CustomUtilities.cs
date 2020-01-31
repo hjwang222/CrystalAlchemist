@@ -1106,7 +1106,6 @@ public class CustomUtilities : MonoBehaviour
             float rotationModifier = 0;
             float positionOffset = skill.positionOffset;
             float positionHeight = 0;
-            bool useCustomPosition = false;
 
             SkillRotationModule rotationModule = skill.GetComponent<SkillRotationModule>();
             SkillPositionZModule positionModule = skill.GetComponent<SkillPositionZModule>();
@@ -1118,8 +1117,7 @@ public class CustomUtilities : MonoBehaviour
             }
 
             if (positionModule != null)
-            {
-                useCustomPosition = positionModule.useGameObjectHeight;
+            {                
                 positionHeight = positionModule.positionHeight;
             }
 
@@ -1129,10 +1127,10 @@ public class CustomUtilities : MonoBehaviour
             else if (skill.target != null) direction = (Vector2)skill.target.transform.position - start;
             else direction = skill.sender.direction.normalized;
 
-            float positionX = skill.sender.spriteRenderer.transform.position.x + (direction.x * positionOffset);
-            float positionY = skill.sender.spriteRenderer.transform.position.y + (direction.y * positionOffset) + positionHeight;
+            float positionX = skill.sender.skillStartPosition.transform.position.x + (direction.x * positionOffset);
+            float positionY = skill.sender.skillStartPosition.transform.position.y + (direction.y * positionOffset) + positionHeight;
 
-            if (useCustomPosition) positionY = skill.sender.shootingPosition.transform.position.y + (direction.y * positionOffset);
+            //if (useCustomPosition) positionY = skill.sender.shootingPosition.transform.position.y + (direction.y * positionOffset);
 
             start = new Vector2(positionX, positionY);
             if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null) direction = (Vector2)skill.sender.GetComponent<AI>().target.transform.position - start;
@@ -1329,5 +1327,4 @@ public class CustomUtilities : MonoBehaviour
             else return false;
         }
     }
-
 }

@@ -127,7 +127,7 @@ public class Player : Character
             CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
             CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
 
-            this.spriteRenderer.color = Color.white;
+            //this.spriteRenderer.color = Color.white;
 
             CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
             CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);

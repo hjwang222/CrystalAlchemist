@@ -42,6 +42,8 @@ public class RespawnAnimation : MonoBehaviour
                 CustomUtilities.UnityUtils.SetAnimatorParameter(animator, "Reverse");
             }
         }
+
+        //REWORK!
         this.character = character;
         this.characterSprite.sprite = character.startSpriteForRespawn;
         this.characterSpriteBright.sprite = character.startSpriteForRespawnWhite;

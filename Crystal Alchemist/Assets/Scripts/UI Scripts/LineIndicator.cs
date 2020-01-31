@@ -43,7 +43,7 @@ public class LineIndicator : Indicator
 
         CustomUtilities.Rotation.setDirectionAndRotation(this.skill, out angle, out startpoint, out this.direction, out rotation);
 
-        startpoint = this.skill.sender.spriteRenderer.transform.position;
+        startpoint = this.skill.sender.skillStartPosition.transform.position;
 
         if (this.skill.target != null && updateRotation)
         {

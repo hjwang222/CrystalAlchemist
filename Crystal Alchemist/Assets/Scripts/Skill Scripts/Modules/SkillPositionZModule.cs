@@ -5,9 +5,9 @@ using Sirenix.OdinInspector;
 
 public class SkillPositionZModule : SkillModule
 {
-    [BoxGroup("Position Z")]
-    [Tooltip("Position anhand GameObject verwenden")]
-    public bool useGameObjectHeight = false;
+    //[BoxGroup("Position Z")]
+    //[Tooltip("Position anhand GameObject verwenden")]
+    //public bool useGameObjectHeight = false;
 
     [BoxGroup("Position Z")]
     [Range(0, 2)]

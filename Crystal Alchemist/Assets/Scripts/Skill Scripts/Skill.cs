@@ -360,7 +360,6 @@ public class Skill : MonoBehaviour
         bool useOffSetToBlendTree = false;
         bool keepOriginalRotation = false;
         bool rotateIt = false;
-        bool useCustomPosition = false;
 
         float positionOffset = this.positionOffset;
         float positionHeight = 0;
@@ -384,7 +383,7 @@ public class Skill : MonoBehaviour
 
         if(positionModule != null)
         {
-            useCustomPosition = positionModule.useGameObjectHeight;
+            //useCustomPosition = positionModule.useGameObjectHeight;
             positionHeight = positionModule.positionHeight;            
             colliderHeightOffset = positionModule.colliderHeightOffset;
         }
@@ -412,7 +411,7 @@ public class Skill : MonoBehaviour
             float positionX = this.sender.transform.position.x + (this.sender.direction.x * positionOffset);
             float positionY = this.sender.transform.position.y + (this.sender.direction.y * positionOffset) + positionHeight;
 
-            if (useCustomPosition) positionY = this.sender.shootingPosition.transform.position.y + (this.sender.direction.y * positionOffset);
+            //if (useCustomPosition) positionY = this.sender.skillStartPosition.transform.position.y + (this.sender.direction.y * positionOffset);
             if (useOffSetToBlendTree) this.transform.position = new Vector2(positionX, positionY);
         }
 

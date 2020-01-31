@@ -484,7 +484,7 @@ public class AIEvents : MonoBehaviour
         float wait = action.gcd + action.duration;
         //Debug.Log("Talk: " + action.dialogText+" (wait "+ wait +"s)");
 
-        GameObject dialog = Instantiate(this.box.gameObject, this.enemy.dialogPosition.transform);
+        GameObject dialog = Instantiate(this.box.gameObject, this.enemy.skillStartPosition.transform);
 
         MiniDialogBox temp = dialog.GetComponent<MiniDialogBox>();
         temp.setText(CustomUtilities.Format.getLanguageDialogText(action.de, action.en));

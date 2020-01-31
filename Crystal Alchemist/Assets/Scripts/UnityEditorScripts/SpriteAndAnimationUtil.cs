@@ -12,6 +12,14 @@ public struct FileList
     public string path;
 }
 
+[System.Serializable]
+public struct AnimationKey
+{
+    public int startIndex;
+    public string animTyp;
+    public int intervall;
+}
+
 public class SpriteAndAnimationUtil : MonoBehaviour
 {
     [FoldoutGroup("Animations", Expanded = false)]
@@ -24,7 +32,11 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
     [FoldoutGroup("Animations", Expanded = false)]
     [SerializeField]
-    private int intervall = 10;   
+    private List<AnimationKey> animationKeys = new List<AnimationKey>();
+
+    [FoldoutGroup("Animations", Expanded = false)]
+    [SerializeField]
+    private Character character;
 
     private string[] animArray = new string[] { "Down", "Right", "Left", "Up" };
 
@@ -90,9 +102,13 @@ public class SpriteAndAnimationUtil : MonoBehaviour
             spriteBinding.path = GetGameObjectPath(spriteObject.transform);
             spriteBinding.propertyName = "m_Sprite";
 
-            ObjectReferenceKeyframe[] spriteKeyFrames = new ObjectReferenceKeyframe[sprites.Count + 1];
 
-            float time = 0f;
+            int intervall = getAnimationClipIntervall(sprites[0].name);
+            int arrayLength = sprites.Count + 1;
+            if (intervall <= 0) arrayLength = 1;
+
+            ObjectReferenceKeyframe[] spriteKeyFrames = new ObjectReferenceKeyframe[arrayLength];
+            float time = 0f;            
 
             try
             {
@@ -103,7 +119,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
                     if (i == spriteKeyFrames.Length - 1) spriteKeyFrames[i].value = sprites[i - 1];
                     else spriteKeyFrames[i].value = sprites[i];
-
+                    
                     time += (float)(intervall / 60f);
                 }
             }
@@ -167,7 +183,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
         List<SpriteMetaData> newData = new List<SpriteMetaData>();
 
         int SliceWidth = 32;
-        int count = 0;
+        int spriteIndex = 0;
 
         for (int i = 0; i < myTexture.width; i += SliceWidth)
         {
@@ -176,9 +192,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
             int SliceHeight = 48;
             Vector2 pivot = new Vector2(0.5f, 0.5f);
 
-            string animTyp = "Idle";
-            if (count >= 1) animTyp = "Walk";
-            else if (count >= 5) animTyp = "Sword";
+            string animTyp = getAnimationClipName(spriteIndex);
 
             for (int j = myTexture.height; j > 0 && animDirection < 4; j -= SliceHeight)
             {
@@ -189,11 +203,11 @@ public class SpriteAndAnimationUtil : MonoBehaviour
                 }
 
                 SpriteMetaData smd = new SpriteMetaData();
-                smd.pivot = new Vector2(0.5f, 0.5f);
+                smd.pivot = pivot;
                 smd.alignment = 9;
 
                 smd.name = animTyp + " " + this.animArray[animDirection];
-                if (count > 0) smd.name = animTyp + " " + this.animArray[animDirection] + " " + count;
+                if (spriteIndex > 0) smd.name = animTyp + " " + this.animArray[animDirection] + " " + spriteIndex;
 
                 smd.rect = new Rect(i, j - SliceHeight, SliceWidth, SliceHeight);
 
@@ -202,11 +216,43 @@ public class SpriteAndAnimationUtil : MonoBehaviour
                 animDirection++;
             }
 
-            count++;
+            spriteIndex++;
         }
 
         ti.spritesheet = newData.ToArray();
         AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
         Debug.Log("<color=blue>Sliced and Named: " + file.path + " into " + newData.Count + " sprites</color>");
+    }
+
+    private string getAnimationClipName(int spriteIndex)
+    {
+        string result = "Unbekannt";
+
+        for (int i = this.animationKeys.Count - 1; i >= 0; i--)
+        {
+            if (spriteIndex >= this.animationKeys[i].startIndex)
+            {
+                result = this.animationKeys[i].animTyp;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    private int getAnimationClipIntervall(string name)
+    {
+        int result = 10;
+
+        for (int i = this.animationKeys.Count - 1; i >= 0; i--)
+        {
+            if (name.ToUpper().Contains(this.animationKeys[i].animTyp.ToUpper()))
+            {
+                result = this.animationKeys[i].intervall;
+                break;
+            }
+        }
+
+        return result;
     }
 }
