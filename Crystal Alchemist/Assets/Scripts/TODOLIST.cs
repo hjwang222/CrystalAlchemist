@@ -16,13 +16,18 @@ public class TODOLIST : MonoBehaviour
     //Destroy Handler?
 
     //Bug: Titelbildschirm selektiert nicht den ersten Button korrekt (button.select())
+    
     //TODO: Item DialogBox
+    //TODO: Graphics Rework (Walls, Enemies, Houses, Items, etc, Menues)
+    //TODO: Character Creator Screen (Name, Race, Colors)
+
 
     //TODO (0.2.4.5):
     //- Wetter Script (Position und Größe)
     //- Charakter Creator
     //x Savegames (3) 
     //- Bosskampf (Titania)
+
     //- Character onEnable/onDisable
     //- TimeJump skaliert mit allem (Update Speed oder anderes)
     //- Options Rework (Resolution)
@@ -33,4 +38,7 @@ public class TODOLIST : MonoBehaviour
     //- Cutscenes
     //- Quests und Story
     //- Content!
+
+    //TODO (1.5)
+    //- Multiplayer!
 }

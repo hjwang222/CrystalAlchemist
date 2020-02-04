@@ -12,7 +12,7 @@ public class SkillPositionZModule : SkillModule
     [BoxGroup("Position Z")]
     [Range(0, 2)]
     [Tooltip("Positions-Höhe")]
-    [HideIf("useGameObjectHeight")]
+    //[HideIf("useGameObjectHeight")]
     public float positionHeight = 0f;
 
     [BoxGroup("Position Z")]

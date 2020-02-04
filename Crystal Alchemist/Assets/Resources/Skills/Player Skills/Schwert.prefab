@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 2452030230981208128}
   - component: {fileID: 1293588450421558207}
   - component: {fileID: 6423164893705659178}
-  - component: {fileID: 6163491140064400503}
   m_Layer: 13
   m_Name: Schwert
   m_TagString: Skill
@@ -298,22 +297,6 @@ MonoBehaviour:
   castingAnimationCharacterKey: 
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   useColor: 0
---- !u!114 &6163491140064400503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661548303189921719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f85781c900207fc428972075be537857, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  useGameObjectHeight: 0
-  positionHeight: 0.5
-  colliderHeightOffset: 0
 --- !u!1 &1288681395139722514
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,8 +353,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.1059806, y: -0.7040792}
-      - {x: 0.033898294, y: -1.3254206}
-      - {x: -1.0306826, y: -0.64413}
-      - {x: -0.5877852, y: -0.0075989515}
-      - {x: 0.7796742, y: -0.0075980723}
+    - - {x: 1.0033138, y: -0.5015788}
+      - {x: 0.75208956, y: -0.9969674}
+      - {x: -0.009054691, y: -1.2682188}
+      - {x: -0.7475189, y: -0.9981669}
+      - {x: -1.0054795, y: -0.49585813}
+      - {x: -1.0097378, y: 0.13920683}
+      - {x: 1.0079057, y: 0.14190114}
