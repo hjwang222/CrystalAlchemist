@@ -12,9 +12,7 @@ public class AnalyseUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI TMPcharacterName;
     [SerializeField]
-    private TextMeshProUGUI TMPlifeAmount;
-    [SerializeField]
-    private Image heartImage;
+    private Image lifeBar;
     [SerializeField]
     private Image ImageitemPreview;
     [SerializeField]
@@ -27,8 +25,8 @@ public class AnalyseUI : MonoBehaviour
     private GameObject enemyInfo;
     [SerializeField]
     private GameObject objectInfo;
-    [SerializeField]
-    private AggroBar aggrobar;
+    //[SerializeField]
+    //private AggroBar aggrobar;
     [SerializeField]
     private StatusEffectBar statusEffectBar;
 
@@ -46,7 +44,7 @@ public class AnalyseUI : MonoBehaviour
     {
         this.enemyInfo.SetActive(false);
         this.objectInfo.SetActive(false);
-        this.aggrobar.gameObject.SetActive(false);
+        //this.aggrobar.gameObject.SetActive(false);
         this.target = target;
     }
 
@@ -75,11 +73,11 @@ public class AnalyseUI : MonoBehaviour
             else this.objectInfo.SetActive(true);
 
             AI enemy = this.character.GetComponent<AI>();
-            if (enemy != null)
+            /*if (enemy != null)
             {
                 this.aggrobar.gameObject.SetActive(true);
                 this.aggrobar.setEnemy(enemy);
-            }
+            }*/
         }
     }
 
@@ -109,7 +107,7 @@ public class AnalyseUI : MonoBehaviour
         this.ImageitemPreview.gameObject.SetActive(false);
 
         this.TMPcharacterName.text = CustomUtilities.Format.getLanguageDialogText(this.character.stats.characterName, this.character.stats.englischCharacterName);
-        this.TMPlifeAmount.text = "x" + (this.character.life * 4);
+        this.lifeBar.fillAmount = (this.character.maxLife / this.character.life);
 
         if (this.character.inventory.Count > 0 && this.character.currentState != CharacterState.dead)
         {

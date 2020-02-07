@@ -18,9 +18,9 @@ public class TODOLIST : MonoBehaviour
     //Bug: Titelbildschirm selektiert nicht den ersten Button korrekt (button.select())
     
     //TODO: Item DialogBox
-    //TODO: Graphics Rework (Walls, Enemies, Houses, Items, etc, Menues)
+    //TODO: Graphics Rework (Spawn, Creeper, Targetsystem, Analyse, Haus, Herz, Münze)
+    //TODO: Player-Sprites (Spawn, Death, Rotes Outfit, Schwarzes Outfit, Blaues Outfit, Zopf, Lange Haare)
     //TODO: Character Creator Screen (Name, Race, Colors)
-
 
     //TODO (0.2.4.5):
     //- Wetter Script (Position und Größe)

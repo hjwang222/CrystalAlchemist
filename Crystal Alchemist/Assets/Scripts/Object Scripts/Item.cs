@@ -21,6 +21,9 @@ public enum ItemFeature
 public class Item : MonoBehaviour
 {
 
+
+
+
     #region Attribute
 
     [Required]
@@ -49,12 +52,6 @@ public class Item : MonoBehaviour
     [SerializeField]
     public string itemGroup;
 
-    /*
-    [FoldoutGroup("Item Texts", expanded: false)]
-    [ShowIf("resourceType", ResourceType.item)]
-    [SerializeField]
-    public ItemFeature itemFeature = ItemFeature.none;*/
-
     [Tooltip("Slot-Nummer im Inventar. Wenn -1 dann kein Platz im Inventar")]
     [FoldoutGroup("Item Texts", expanded: false)]
     [SerializeField]
@@ -82,7 +79,7 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     public int maxAmount;
-       
+
     [FoldoutGroup("Item Attributes", expanded: false)]
     [EnumToggleButtons]
     public ResourceType resourceType;
@@ -102,8 +99,6 @@ public class Item : MonoBehaviour
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("isMap")]
     public string mapName;
-
-
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("isKeyItem")]
@@ -125,7 +120,6 @@ public class Item : MonoBehaviour
 
     private AudioSource audioSource;
     private Animator anim;
-
     #endregion
 
 
