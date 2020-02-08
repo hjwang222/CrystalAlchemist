@@ -76,10 +76,10 @@ TextureImporter:
     second: Health Pot
   - first:
       213: -5115724647623679475
-    second: Herz 1
+    second: Herz
   - first:
       213: 3765623945196329015
-    second: Herz 2
+    second: Coins
   - first:
       213: 9162445464510267407
     second: Herz 3
@@ -88,7 +88,7 @@ TextureImporter:
     second: Herz 4
   - first:
       213: 2619668221281467793
-    second: Coin 1
+    second: Coin Sack
   - first:
       213: -7445818638769322687
     second: Coin 2
@@ -140,6 +140,9 @@ TextureImporter:
   - first:
       213: 2614719038445677065
     second: Spirit 5
+  - first:
+      213: -1740157615657646003
+    second: Coin Icon
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -686,32 +689,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Health Pot
+      name: Herz
       rect:
         serializedVersion: 2
         x: 32
         y: 144
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1a0fbeb8467a99140afd2f8d4df65998
-      internalID: -1837009243611627881
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Herz 1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
         width: 16
         height: 16
       alignment: 0
@@ -728,7 +710,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Herz 2
+      name: Coins
       rect:
         serializedVersion: 2
         x: 16
@@ -749,53 +731,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Herz 3
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 128
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 713c7185edb49424dbffc7b334c9682b
-      internalID: 9162445464510267407
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Herz 4
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 128
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ca37cc2463c9a345af0064b69352105
-      internalID: -6317738245955497926
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Coin 1
+      name: Coin Sack
       rect:
         serializedVersion: 2
         x: 0
-        y: 112
+        y: 128
         width: 16
         height: 16
       alignment: 0
@@ -807,69 +747,6 @@ TextureImporter:
       bones: []
       spriteID: 570a4b19bc8756140b6199c141f9bd85
       internalID: 2619668221281467793
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Coin 2
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8fff027f6fb75de49acf075a52e72554
-      internalID: -7445818638769322687
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Coin 3
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf48fc6bc21b3b444be5c9890d1db02b
-      internalID: -115133729626271356
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Coin 4
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4423f97f91cf83944aabb239b8cd63a2
-      internalID: 2983329133290763648
       vertices: []
       indices: 
       edges: []
@@ -1135,7 +1012,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1156,7 +1033,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1164,6 +1041,27 @@ TextureImporter:
       bones: []
       spriteID: 90a6102bc19594420800000000000000
       internalID: 2614719038445677065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Coin Icon
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4809894ed7b9d7e0800000000000000
+      internalID: -1740157615657646003
       vertices: []
       indices: 
       edges: []

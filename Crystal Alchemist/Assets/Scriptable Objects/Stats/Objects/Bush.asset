@@ -21,15 +21,16 @@ MonoBehaviour:
   isMassive: 0
   isImmuneToAllDebuffs: 0
   immunityToStatusEffects: []
-  maxLife: 0.1
-  maxMana: 0.1
   respawnTime: 30
   respawnAnimation: {fileID: 0}
   deathAnimation: {fileID: 0}
+  maxLife: 0.1
+  maxMana: 0.1
   lifeRegeneration: 0
-  lifeRegenerationInterval: 0
   manaRegeneration: 0
-  manaRegenerationInterval: 0
+  regenerationInterval: 0
+  buffPlus: 0
+  debuffMinus: 0
   damageNumber: {fileID: 0}
   antiKnockback: 0
   cannotBeHitTime: 0.3
@@ -39,6 +40,13 @@ MonoBehaviour:
   - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
     dropRate: 25
     amount: 1
+    alternativeLoot: {fileID: 0}
+    alternativeAmount: 0
+  - item: {fileID: 330836146565999746, guid: 98cff32a40d85d94cb5938ce950a2659, type: 3}
+    dropRate: 5
+    amount: 1
+    alternativeLoot: {fileID: 0}
+    alternativeAmount: 0
   multiLoot: 0
   canCollectAll: 0
   canCollect: []
