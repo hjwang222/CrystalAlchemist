@@ -78,7 +78,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.068243325, y: -0.3757913}
+  m_Offset: {x: -0.068243325, y: -0.60370946}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -89,7 +89,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8505088, y: 1.9064145}
+  m_Size: {x: 1.8505088, y: 2.3622508}
   m_EdgeRadius: 0
 --- !u!50 &708320607938715907
 Rigidbody2D:
@@ -284,7 +284,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0015816689, y: -0.11256468}
+  m_Offset: {x: 0.0015816689, y: -0.055846572}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -295,7 +295,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0031633, y: 0.74690175}
+  m_Size: {x: 0.7276764, y: 0.6334655}
   m_EdgeRadius: 0
 --- !u!1001 &1298002413828932381
 PrefabInstance:
@@ -371,6 +371,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5438960208231086915, guid: 0053029995641684484b1154763deb53,
         type: 3}
+      propertyPath: m_Color.r
+      value: 0.15686274
+      objectReference: {fileID: 0}
+    - target: {fileID: 5438960208231086915, guid: 0053029995641684484b1154763deb53,
+        type: 3}
       propertyPath: m_Color.g
       value: 0.7300884
       objectReference: {fileID: 0}
@@ -408,11 +413,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PointLightInnerRadius
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5438960208231086915, guid: 0053029995641684484b1154763deb53,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0.15686274
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0053029995641684484b1154763deb53, type: 3}

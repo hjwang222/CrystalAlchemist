@@ -23,12 +23,12 @@ public class SkillAnimationModule : SkillModule
     private void Start()
     {
         this.skill.sender.startAttackAnimation(this.animationTriggerName);
-        if(this.useColor) this.skill.sender.addColor(this.targetColor);
+        if(this.useColor) this.skill.sender.changeColor(this.targetColor);
     }
 
     private void OnDestroy()
     {
-        if (this.useColor) this.skill.sender.resetColor(this.targetColor);
+        if (this.useColor) this.skill.sender.removeColor(this.targetColor);
     }
 
     public void showCastingAnimation()

@@ -18,15 +18,14 @@ public class TODOLIST : MonoBehaviour
     //Bug: Titelbildschirm selektiert nicht den ersten Button korrekt (button.select())
     
     //TODO: Item DialogBox
-    //TODO: Spawn Rework
     //TODO: New Nitro Sprite
-    //TODO: Player-Sprites (Spawn, Death, Rotes Outfit, Schwarzes Outfit, Blaues Outfit, Zopf, Lange Haare)
-    //TODO: Character Creator Screen (Name, Race, Colors)
+    //TODO: Player-Sprites (Rotes Outfit, Schwarzes Outfit, Blaues Outfit, Zopf, Lange Haare)
 
+    //TODO: Character Creator Screen (Name, Race, Colors)
+    
     //TODO (0.2.4.5):
     //- Wetter Script (Position und Größe)
     //- Charakter Creator
-    //x Savegames (3) 
     //- Bosskampf (Titania)
 
     //- Character onEnable/onDisable

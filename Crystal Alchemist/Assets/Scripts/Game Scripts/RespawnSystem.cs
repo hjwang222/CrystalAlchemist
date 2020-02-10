@@ -62,11 +62,9 @@ public class RespawnSystem : MonoBehaviour
         {
             //spawn character immediately
             character.gameObject.SetActive(true);
+            character.PlayRespawnAnimation();
             character.initSpawn(true);
-            CustomUtilities.UnityUtils.SetAnimatorParameter(character.animator, "Respawn");
         }
     }
-
-
 }
 

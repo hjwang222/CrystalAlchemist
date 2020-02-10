@@ -51,14 +51,6 @@ public class Character : MonoBehaviour
 
     [BoxGroup("Easy Access")]
     [Required]
-    public Sprite startSpriteForRespawn;
-
-    [BoxGroup("Easy Access")]
-    [Required]
-    public Sprite startSpriteForRespawnWhite;
-
-    [BoxGroup("Easy Access")]
-    [Required]
     public GameObject activeSkillParent;
 
     [BoxGroup("Easy Access")]
@@ -265,7 +257,7 @@ public class Character : MonoBehaviour
 
         if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
 
-        resetColor();
+        resetColors();
     }
 
     public void ActivateCharacter()
@@ -399,7 +391,7 @@ public class Character : MonoBehaviour
             {
                 PlayDeathAnimation();
             }
-            else CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead");
+            else CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", true);
         }
     }
 
@@ -429,6 +421,12 @@ public class Character : MonoBehaviour
             deathObject.setCharacter(this);
             this.activeDeathAnimation = deathObject;
         }
+    }
+
+    public void PlayRespawnAnimation()
+    {
+        this.changeColor(Color.white);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Respawn");
     }
 
     public void updateResource(ResourceType type, Item item, float addResource)
@@ -568,6 +566,16 @@ public class Character : MonoBehaviour
 
     #endregion
 
+    public void enableScripts(bool value)
+    {
+        if (this.GetComponent<AIAggroSystem>() != null) this.GetComponent<AIAggroSystem>().enabled = value;
+        if (this.GetComponent<AIEvents>() != null) this.GetComponent<AIEvents>().enabled = value;
+        if (this.GetComponent<AIMovement>() != null) this.GetComponent<AIMovement>().enabled = value;
+
+        if (this.GetComponent<PlayerAttacks>() != null) this.GetComponent<PlayerAttacks>().enabled = value;
+        if (this.GetComponent<PlayerControls>() != null) this.GetComponent<PlayerControls>().enabled = value;
+        if (this.GetComponent<PlayerMovement>() != null) this.GetComponent<PlayerMovement>().enabled = value;
+    }
 
     public void startAttackAnimation(string parameter)
     {
@@ -597,21 +605,21 @@ public class Character : MonoBehaviour
 
     #region Color Changes
 
-    public void resetColor()
+    public void resetColors()
     {
         foreach (ColorPalette colorPalette in this.colors)
         {
             if (colorPalette.colors.Count > 0) colorPalette.spriteRenderer.color = colorPalette.colors[0];
             colorPalette.colors.Clear();
-            this.addColor(colorPalette.spriteRenderer.color, colorPalette);
+            this.changeColor(colorPalette.spriteRenderer.color, colorPalette);
         }
     }
 
-    public void resetColor(Color color)
+    public void removeColor(Color color)
     {
         foreach (ColorPalette colorPalette in this.colors)
         {
-            colorPalette.colors.Remove(color);
+            if(colorPalette.colors.Count > 1) colorPalette.colors.Remove(color); //dont remove first color
             colorPalette.spriteRenderer.color = colorPalette.colors[colorPalette.colors.Count - 1];
         }
     }
@@ -625,15 +633,15 @@ public class Character : MonoBehaviour
         if (this.shadowRenderer != null) this.shadowRenderer.enabled = value;
     }
 
-    public void addColor(Color color)
+    public void changeColor(Color color)
     {
         foreach (ColorPalette colorPalette in this.colors)
         {
-            addColor(color, colorPalette);
+            changeColor(color, colorPalette);
         }
     }
 
-    public void addColor(Color color, ColorPalette colorPalette)
+    public void changeColor(Color color, ColorPalette colorPalette)
     {
         if (colorPalette.colors.Contains(color))
         {
@@ -798,10 +806,10 @@ public class Character : MonoBehaviour
     private IEnumerator hitCo()
     {
         this.isInvincible = true;
-        if (this.stats.showHitcolor) this.addColor(this.stats.hitColor);
+        if (this.stats.showHitcolor) this.changeColor(this.stats.hitColor);
 
         yield return new WaitForSeconds(this.stats.cannotBeHitTime);
-        this.resetColor(this.stats.hitColor);
+        this.removeColor(this.stats.hitColor);
         this.isInvincible = false;
     }
 

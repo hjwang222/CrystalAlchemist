@@ -212,7 +212,7 @@ public class StatusEffect : MonoBehaviour
     private void init()
     {
         if (this.ownAnimator == null) this.ownAnimator = this.GetComponent<Animator>();
-        if (this.target != null && this.changeColor) this.target.addColor(this.statusEffectColor);
+        if (this.target != null && this.changeColor) this.target.changeColor(this.statusEffectColor);
 
         setTime();
         doActions(true);
@@ -344,7 +344,7 @@ public class StatusEffect : MonoBehaviour
         if (this.target != null)
         {
             //Charakter-Farbe zurücksetzen
-            if(this.changeColor) this.target.resetColor(this.statusEffectColor);
+            if(this.changeColor) this.target.removeColor(this.statusEffectColor);
 
             this.resetValues();
 

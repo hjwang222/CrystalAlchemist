@@ -5,12 +5,6 @@ using UnityEngine;
 public class RespawnAnimation : MonoBehaviour
 {
     [SerializeField]
-    private SpriteRenderer characterSprite;
-
-    [SerializeField]
-    private SpriteRenderer characterSpriteBright;
-
-    [SerializeField]
     private List<Animator> animators;    
 
     [SerializeField]
@@ -43,10 +37,12 @@ public class RespawnAnimation : MonoBehaviour
             }
         }
 
-        //REWORK!
         this.character = character;
-        this.characterSprite.sprite = character.startSpriteForRespawn;
-        this.characterSpriteBright.sprite = character.startSpriteForRespawnWhite;
+        this.character.gameObject.SetActive(true);
+        this.character.enableSpriteRenderer(true);
+        this.character.enableScripts(false);
+        this.character.initSpawn(this.resetStats);
+        this.character.PlayRespawnAnimation();
     }
 
     public float getAnimationLength()
@@ -59,11 +55,9 @@ public class RespawnAnimation : MonoBehaviour
     {
         if (!this.reverse)
         {
-            this.characterSprite.enabled = false;
-            this.characterSpriteBright.enabled = false;
-        
-            character.gameObject.SetActive(true);
-            character.initSpawn(this.resetStats);
+            this.character.enableScripts(true);
+            this.character.removeColor(Color.white);
+            //this.character.PlayRespawnAnimation(false);
         }
 
         Destroy(this.gameObject, 0.1f);

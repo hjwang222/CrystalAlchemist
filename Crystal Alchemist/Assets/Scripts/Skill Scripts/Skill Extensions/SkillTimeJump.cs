@@ -33,7 +33,7 @@ public class SkillTimeJump : SkillExtension
 
         if (this.targetColor != null)
         {
-            this.skill.sender.addColor(this.targetColor);
+            this.skill.sender.changeColor(this.targetColor);
         }
     }
     
@@ -42,6 +42,6 @@ public class SkillTimeJump : SkillExtension
         this.timeValue.factor = this.timeValue.normalFactor;
         GlobalValues.backgroundMusicPitch = 1f;
         this.musicPitchSignal.Raise();
-        this.skill.sender.resetColor(this.targetColor);
+        this.skill.sender.removeColor(this.targetColor);
     }
 }

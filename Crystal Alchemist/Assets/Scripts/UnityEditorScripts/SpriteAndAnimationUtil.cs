@@ -13,11 +13,22 @@ public struct FileList
 }
 
 [System.Serializable]
-public struct AnimationKey
+public class AnimationKey
 {
     public int startIndex;
+    public int endIndex;
+    public int rowStartIndex;
+    public int rowEndIndex;
     public string animTyp;
     public int intervall;
+}
+
+[System.Serializable]
+public class AnimationRowKey
+{
+    public string directionName;
+    public Vector2 pivot;
+    public int SliceHeight;
 }
 
 public class SpriteAndAnimationUtil : MonoBehaviour
@@ -38,7 +49,9 @@ public class SpriteAndAnimationUtil : MonoBehaviour
     [SerializeField]
     private Character character;
 
-    private string[] animArray = new string[] { "Down", "Right", "Left", "Up" };
+    [FoldoutGroup("Animations", Expanded = false)]
+    [SerializeField]
+    private List<AnimationRowKey> rows = new List<AnimationRowKey>();
 
 #if UNITY_EDITOR
     [Button]
@@ -55,7 +68,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
         }
 
         foreach (AnimationClip clip in clips)
-        {      
+        {
             foreach (PlayerAnimationPart childObject in childObjects)
             {
                 //set all animation clips foreach object
@@ -159,8 +172,8 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
         foreach (string file in files)
         {
-            string path = "Assets/"+file.Replace(Application.dataPath, "");
-            clips.Add(AssetDatabase.LoadAssetAtPath(path, typeof(AnimationClip))as AnimationClip);
+            string path = "Assets/" + file.Replace(Application.dataPath, "");
+            clips.Add(AssetDatabase.LoadAssetAtPath(path, typeof(AnimationClip)) as AnimationClip);
         }
 
         return clips;
@@ -185,40 +198,44 @@ public class SpriteAndAnimationUtil : MonoBehaviour
         List<SpriteMetaData> newData = new List<SpriteMetaData>();
 
         int SliceWidth = 32;
-        int spriteIndex = 0;
+        int SliceHeight = 48;
+        int columnIndex = 0;
+
+        List<string> spriteNames = new List<string>();
 
         for (int i = 0; i < myTexture.width; i += SliceWidth)
         {
-            int animDirection = 0;
+            int rowIndex = 0;
 
-            int SliceHeight = 48;
-            Vector2 pivot = new Vector2(0.5f, 0.5f);
-
-            string animTyp = getAnimationClipName(spriteIndex);
-
-            for (int j = myTexture.height; j > 0 && animDirection < 4; j -= SliceHeight)
+            for (int j = myTexture.height; j > 0; j -= SliceHeight)
             {
-                if (animDirection >= 3 && file.isTail)
+                AnimationKey column = getAnimationKey(columnIndex, rowIndex);
+                AnimationRowKey row = getAnimationRowKey(rowIndex);
+
+                if (column != null && row != null)
                 {
-                    SliceHeight = 64;
-                    pivot = new Vector2(0.5f, 0.625f);
+                    SliceHeight = row.SliceHeight;
+                    Vector2 pivot = row.pivot;
+                    string direction = row.directionName;
+                    string animationName = column.animTyp;
+
+                    SpriteMetaData smd = new SpriteMetaData();
+                    smd.pivot = pivot;
+                    smd.alignment = 9;
+
+                    string spriteName = animationName + " " + direction;
+                    if (column.endIndex - column.startIndex > 0) spriteName = animationName + " " + direction + " " + columnIndex;
+
+                    smd.name = spriteName;
+                    smd.rect = new Rect(i, j - SliceHeight, SliceWidth, SliceHeight);
+
+                    newData.Add(smd);
                 }
 
-                SpriteMetaData smd = new SpriteMetaData();
-                smd.pivot = pivot;
-                smd.alignment = 9;
-
-                smd.name = animTyp + " " + this.animArray[animDirection];
-                if (spriteIndex > 0) smd.name = animTyp + " " + this.animArray[animDirection] + " " + spriteIndex;
-
-                smd.rect = new Rect(i, j - SliceHeight, SliceWidth, SliceHeight);
-
-                newData.Add(smd);
-
-                animDirection++;
+                rowIndex++;
             }
 
-            spriteIndex++;
+            columnIndex++;
         }
 
         ti.spritesheet = newData.ToArray();
@@ -226,20 +243,26 @@ public class SpriteAndAnimationUtil : MonoBehaviour
         Debug.Log("<color=blue>Sliced and Named: " + file.path + " into " + newData.Count + " sprites</color>");
     }
 
-    private string getAnimationClipName(int spriteIndex)
+    private AnimationKey getAnimationKey(int columnIndex, int rowIndex)
     {
-        string result = "Unbekannt";
-
-        for (int i = this.animationKeys.Count - 1; i >= 0; i--)
+        foreach(AnimationKey column in this.animationKeys)
         {
-            if (spriteIndex >= this.animationKeys[i].startIndex)
+            if (columnIndex >= column.startIndex
+               && columnIndex <= column.endIndex
+               && rowIndex >= column.rowStartIndex
+               && rowIndex <= column.rowEndIndex)
             {
-                result = this.animationKeys[i].animTyp;
-                break;
+                return column;
             }
         }
 
-        return result;
+        return null;
+    }
+
+    private AnimationRowKey getAnimationRowKey(int rowIndex)
+    {
+        if (rowIndex < this.rows.Count) return this.rows[rowIndex];
+        return null;
     }
 
     private int getAnimationClipIntervall(string name)
