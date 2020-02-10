@@ -20,8 +20,14 @@ public struct Race
     public List<GameObject> parts;
 }
 
-
-
+[System.Serializable]
+public struct Preset
+{
+    public Races race;
+    public Color hair;
+    public Color skin;
+    public Color eyes;
+}
 
 public class CharacterCreator : MonoBehaviour
 {
@@ -45,6 +51,10 @@ public class CharacterCreator : MonoBehaviour
     [SerializeField]
     private List<GameObject> parts = new List<GameObject>();
 
+    [FoldoutGroup("Internal", Expanded = false)]
+    [SerializeField]
+    private List<Preset> presets = new List<Preset>();
+
     [BoxGroup]
     [SerializeField]
     private Color hairColor;
@@ -67,29 +77,41 @@ public class CharacterCreator : MonoBehaviour
         setRace(this.race, this.bodyColor, this.hairColor, this.eyeColor);
     }
 
+    private void setPreset(Races race)
+    {
+        foreach(Preset preset in this.presets)
+        {
+            if(preset.race == race)
+            {
+                setRace(preset.race, preset.skin, preset.hair, preset.eyes);
+                break;
+            }
+        }
+    }
+
     [ButtonGroup("Test")]
     public void setHuman()
     {
-        setRace(Races.human, new Color(0.92f,0.75f, 0.6f), new Color(0.9f, 0.7f, 0.5f), new Color(0.2f, 0.6f, 0.9f));
+        setPreset(Races.human);
     }
 
 
     [ButtonGroup("Test")]
     public void setElf()
     {
-        setRace(Races.elves, new Color(0.95f, 0.85f, 0.75f), new Color(0.6f, 0.3f, 0.1f), new Color(0.9f, 0.3f, 0.3f));
+        setPreset(Races.elves);
     }
 
     [ButtonGroup("Test")]
     public void setLamia()
     {
-        setRace(Races.lamia, new Color(0.92f, 0.75f, 0.6f), new Color(1, 0.9f, 0.9f), new Color(0.5f, 0.3f, 0f));
+        setPreset(Races.lamia);
     }
 
     [ButtonGroup("Test")]
     public void setPony()
     {
-        setRace(Races.ponies, new Color(0.75f, 0.75f, 0.9f), new Color(1, 0.5f, 0.8f), new Color(0.2f, 0.6f, 0.65f));
+        setPreset(Races.ponies);
     }
          
     private void setRace(Races ra, Color body, Color hair, Color eyes)
