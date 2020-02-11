@@ -19,7 +19,7 @@ public class TODOLIST : MonoBehaviour
     
     //TODO: Item DialogBox
     //TODO: New Nitro Sprite
-    //TODO: Player-Sprites (Magier, Jäger)
+    //TODO: Player-Sprites (Magier)
 
     //TODO: Character Creator Screen (Name, Race, Colors)
     

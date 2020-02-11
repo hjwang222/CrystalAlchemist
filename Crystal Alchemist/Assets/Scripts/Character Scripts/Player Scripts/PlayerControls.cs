@@ -32,9 +32,12 @@ public class PlayerControls : MonoBehaviour
             if (this.player.myRigidbody.bodyType != RigidbodyType2D.Static) this.player.myRigidbody.velocity = Vector2.zero;
         }
 
-        if (this.player.currentState != CharacterState.dead && this.player.currentState != CharacterState.respawning)
+        if (this.player.currentState != CharacterState.dead 
+         && this.player.currentState != CharacterState.respawning)
         {
-            if (this.player.currentState == CharacterState.inDialog || this.player.currentState == CharacterState.inMenu || this.player.currentState == CharacterState.respawning)
+            if (this.player.currentState == CharacterState.inDialog 
+             || this.player.currentState == CharacterState.inMenu 
+             || this.player.currentState == CharacterState.respawning)
             {
                 CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", false);
                 return;

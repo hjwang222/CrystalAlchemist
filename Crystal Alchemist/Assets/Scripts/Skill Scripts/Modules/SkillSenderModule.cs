@@ -66,17 +66,19 @@ public class SkillSenderModule : SkillModule
     public StateType stateType = StateType.none;
 
 
-
-
     private void Start()
     {
-        if (this.stateType == StateType.attack) this.skill.sender.currentState = CharacterState.attack;
-        else if (this.stateType == StateType.defend) this.skill.sender.currentState = CharacterState.defend;
+        if (this.skill.sender.currentState != CharacterState.dead
+        && this.skill.sender.currentState != CharacterState.respawning)
+        {
+            if (this.stateType == StateType.attack) this.skill.sender.currentState = CharacterState.attack;
+            else if (this.stateType == StateType.defend) this.skill.sender.currentState = CharacterState.defend;
 
-        updateResourceSender();
-        setSelfTrust();
+            updateResourceSender();
+            setSelfTrust();
 
-        this.skill.elapsed = this.intervallSender;
+            this.skill.elapsed = this.intervallSender;
+        }
     }
 
     private void Update()
