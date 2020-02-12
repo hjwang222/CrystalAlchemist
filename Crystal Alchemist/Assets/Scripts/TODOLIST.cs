@@ -19,7 +19,7 @@ public class TODOLIST : MonoBehaviour
     
     //TODO: Item DialogBox
     //TODO: New Nitro Sprite
-    //TODO: Player-Sprites (Magier)
+    //TODO: Player-Sprites (Mage red, Archer blue, Ohren und Krone fix, Schuppen, Schlangenschwanz neu)
 
     //TODO: Character Creator Screen (Name, Race, Colors)
     
