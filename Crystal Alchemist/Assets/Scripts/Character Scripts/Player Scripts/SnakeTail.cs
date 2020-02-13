@@ -1,27 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SnakeTail : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> segments = new List<GameObject>();
+    private GameObject parent;
 
     [SerializeField]
-    private float dist = 1f;
+    private Player player;
 
-    // Update is called once per frame
+    private float maxDistance = 0f;
+
+    private void Start()
+    {
+        this.maxDistance = Vector2.Distance(this.parent.transform.position, this.transform.position);
+    }
+
     void Update()
     {
-        for (int i = 0; i < segments.Count; i++)
-        {
-            var segment = segments[i];
-            Vector3 positionS = segments[i].transform.position;
-            Vector3 targetS = i == 0 ? transform.position : segments[i - 1].transform.position;
-            segments[i].transform.rotation = Quaternion.LookRotation(Vector3.forward, (targetS - positionS).normalized);
-            Vector3 diff = positionS - targetS;  //vector pointing from p[i - 1] to p[i]
-            diff.Normalize();
-            segment.transform.position = targetS + dist * diff;
+        float distance = Vector2.Distance(this.parent.transform.position, this.transform.position);
+
+        if(distance > this.maxDistance)
+        {            
+            Vector2 direction = ((Vector2)this.parent.transform.position - (Vector2)this.transform.position).normalized;
+            this.GetComponent<Rigidbody2D>().velocity = (direction * this.player.myRigidbody.velocity.magnitude);
         }
+        else
+        {
+            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
+
+        int modify = 0;
+
+        if(this.parent.transform.position.y > this.transform.position.y) modify = 1;       
+        else modify = - 1;        
+
+        if(this.parent.GetComponent<SpriteRenderer>() != null)
+            this.GetComponent<SpriteRenderer>().sortingOrder = this.parent.GetComponent<SpriteRenderer>().sortingOrder + modify;
+
+        if (this.parent.GetComponent<SortingGroup>() != null)
+            this.parent.GetComponent<SortingGroup>().sortingOrder = modify;
     }
 }

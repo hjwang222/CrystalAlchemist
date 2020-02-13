@@ -23,14 +23,6 @@ public class AnimationKey
     public int intervall;
 }
 
-[System.Serializable]
-public class AnimationRowKey
-{
-    public string directionName;
-    public Vector2 pivot;
-    public int SliceHeight;
-}
-
 public class SpriteAndAnimationUtil : MonoBehaviour
 {
     [FoldoutGroup("Animations", Expanded = false)]
@@ -51,7 +43,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
     [FoldoutGroup("Animations", Expanded = false)]
     [SerializeField]
-    private List<AnimationRowKey> rows = new List<AnimationRowKey>();
+    private List<string> rows = new List<string>();
 
 #if UNITY_EDITOR
     [Button]
@@ -210,17 +202,15 @@ public class SpriteAndAnimationUtil : MonoBehaviour
             for (int j = myTexture.height; j > 0; j -= SliceHeight)
             {
                 AnimationKey column = getAnimationKey(columnIndex, rowIndex);
-                AnimationRowKey row = getAnimationRowKey(rowIndex);
+                string row = getAnimationRowKey(rowIndex);
 
-                if (column != null && row != null)
+                if (column != null)
                 {
-                    SliceHeight = row.SliceHeight;
-                    Vector2 pivot = row.pivot;
-                    string direction = row.directionName;
+                    string direction = row;
                     string animationName = column.animTyp;
 
                     SpriteMetaData smd = new SpriteMetaData();
-                    smd.pivot = pivot;
+                    smd.pivot = new Vector2(0.5f, 0.5f);
                     smd.alignment = 9;
 
                     string spriteName = animationName + " " + direction;
@@ -259,7 +249,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
         return null;
     }
 
-    private AnimationRowKey getAnimationRowKey(int rowIndex)
+    private string getAnimationRowKey(int rowIndex)
     {
         if (rowIndex < this.rows.Count) return this.rows[rowIndex];
         return null;
