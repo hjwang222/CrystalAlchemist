@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEditor;
-using System.IO;
-using System.Linq;
 
 public enum Races
 {
@@ -27,6 +24,9 @@ public struct Preset
     public Color hair;
     public Color skin;
     public Color eyes;
+
+    [ShowIf("race", Races.lamia)]
+    public Color scales;
 }
 
 public class CharacterCreator : MonoBehaviour
@@ -34,6 +34,10 @@ public class CharacterCreator : MonoBehaviour
     [FoldoutGroup("Internal", Expanded = false)]
     [SerializeField]
     private List<SpriteRenderer> bodyParts = new List<SpriteRenderer>();
+
+    [FoldoutGroup("Internal", Expanded = false)]
+    [SerializeField]
+    private List<SpriteRenderer> scaleParts = new List<SpriteRenderer>();
 
     [FoldoutGroup("Internal", Expanded = false)]
     [SerializeField]
@@ -69,12 +73,16 @@ public class CharacterCreator : MonoBehaviour
 
     [BoxGroup]
     [SerializeField]
+    private Color scaleColor;
+
+    [BoxGroup]
+    [SerializeField]
     private Races race;
 
     [ButtonGroup("Test")]
     public void setRace()
     {
-        setRace(this.race, this.bodyColor, this.hairColor, this.eyeColor);
+        setRace(this.race, this.bodyColor, this.hairColor, this.eyeColor, this.scaleColor);
     }
 
     private void setPreset(Races race)
@@ -83,7 +91,7 @@ public class CharacterCreator : MonoBehaviour
         {
             if(preset.race == race)
             {
-                setRace(preset.race, preset.skin, preset.hair, preset.eyes);
+                setRace(preset.race, preset.skin, preset.hair, preset.eyes, preset.scales);
                 break;
             }
         }
@@ -114,7 +122,7 @@ public class CharacterCreator : MonoBehaviour
         setPreset(Races.ponies);
     }
          
-    private void setRace(Races ra, Color body, Color hair, Color eyes)
+    private void setRace(Races ra, Color body, Color hair, Color eyes, Color scales)
     {
         foreach (GameObject temp in this.parts)
         {
@@ -140,6 +148,12 @@ public class CharacterCreator : MonoBehaviour
         foreach (SpriteRenderer temp in this.hairParts)
         {
             temp.color = hair;
+        }
+
+
+        foreach (SpriteRenderer temp in this.scaleParts)
+        {
+            temp.color = scales;
         }
 
         this.eyePart.color = eyes;

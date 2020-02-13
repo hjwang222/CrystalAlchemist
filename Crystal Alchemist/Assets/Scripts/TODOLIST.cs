@@ -16,13 +16,14 @@ public class TODOLIST : MonoBehaviour
     //Destroy Handler?
 
     //Bug: Titelbildschirm selektiert nicht den ersten Button korrekt (button.select())
-    
-    //TODO: Item DialogBox
-    //TODO: New Nitro Sprite
-    //TODO: Player-Sprites (Mage red, Archer blue, Schuppen)
 
     //TODO: Character Creator Screen (Name, Race, Colors)
-    
+    //TODO: Player Rework
+
+    //TODO: Item DialogBox
+    //TODO: New Nitro Sprite
+    //TODO: Player-Sprites (Mage red, Archer blue)
+
     //TODO (0.2.4.5):
     //- Wetter Script (Position und Größe)
     //- Charakter Creator

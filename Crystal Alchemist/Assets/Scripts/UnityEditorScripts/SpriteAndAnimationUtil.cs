@@ -93,7 +93,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
             List<Object> sprite = AssetDatabase.LoadAllAssetsAtPath(path).ToList();
             List<Sprite> sprites = new List<Sprite>();
-
+                                 
             foreach (Object obj in sprite)
             {
                 if (obj is Sprite && obj.name.Contains(clip.name)) sprites.Add((Sprite)obj);
@@ -101,6 +101,11 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
             //sprites = sprites.OrderBy(c => int.Parse(c.name.Split('_').Last())).ToList();
             sprites = sprites.OrderBy(c => c.name).ToList();
+
+            if (childObject.GetComponent<SpriteRenderer>() != null 
+                && clip.name.Contains("Idle Down")
+                && sprites.Count > 0)
+                childObject.GetComponent<SpriteRenderer>().sprite = sprites[0];
 
             EditorCurveBinding spriteBinding = new EditorCurveBinding();
             spriteBinding.type = typeof(SpriteRenderer);
@@ -138,7 +143,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
                 //if(file.setSortOrder) clip.SetCurve("", typeof(SpriteRenderer), "m_SortOrder", AnimationCurve.Linear(0, file.sortOrder, 0, file.sortOrder));
 
                 AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
+                AssetDatabase.Refresh();                
             }
         }
         else
@@ -230,6 +235,9 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
         ti.spritesheet = newData.ToArray();
         AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
+
+        AssetDatabase.LoadAssetAtPath<Texture2D>(assetpath);
+
         Debug.Log("<color=blue>Sliced and Named: " + file.path + " into " + newData.Count + " sprites</color>");
     }
 

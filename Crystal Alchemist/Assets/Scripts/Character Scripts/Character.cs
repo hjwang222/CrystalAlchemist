@@ -5,19 +5,6 @@ using Sirenix.OdinInspector;
 
 public class Character : MonoBehaviour
 {
-    [System.Serializable]
-    public class ColorPalette
-    {
-        public SpriteRenderer spriteRenderer;
-        public List<Color> colors = new List<Color>();
-
-        public ColorPalette(SpriteRenderer renderer, Color color)
-        {
-            this.spriteRenderer = renderer;
-            this.colors.Add(color);
-        }
-    }
-
     [BoxGroup("Required")]
     [SerializeField]
     [Required]
@@ -36,10 +23,6 @@ public class Character : MonoBehaviour
     [Required]
     [BoxGroup("Easy Access")]
     public Animator animator;
-
-    [Required]
-    [BoxGroup("Easy Access")]
-    public GameObject mainSprite;
 
     [Required]
     [BoxGroup("Easy Access")]
@@ -72,12 +55,10 @@ public class Character : MonoBehaviour
 
     private float regenTimeElapsed;
     private float manaTime;
-    public List<ColorPalette> colors = new List<ColorPalette>();
     private bool showTargetHelp = false;
     private GameObject targetHelpObjectPlayer;
     private DeathAnimation activeDeathAnimation;
     private float immortalAtStart = 0;
-    public List<SpriteRenderer> spriteRenderers = new List<SpriteRenderer>();
 
     [HideInInspector]
     public float speedMultiply = 5;
@@ -143,28 +124,7 @@ public class Character : MonoBehaviour
     public List<LootTable> lootTableInternal = new List<LootTable>();
 
     #endregion
-
-
-#if UNITY_EDITOR
-    [Button]
-    public void addToSpriteRenderers()
-    {
-        this.spriteRenderers.Clear();
-        GetChildObjects(this.mainSprite.transform, this.spriteRenderers);
-    }
-
-    private void GetChildObjects(Transform transform, List<SpriteRenderer> childObjects)
-    {
-        foreach (Transform child in transform)
-        {
-            if (child.GetComponent<SpriteRenderer>() != null) childObjects.Add(child.GetComponent<SpriteRenderer>());
-
-            GetChildObjects(child, childObjects);
-        }
-    }
-#endif
-
-
+          
 
     #region Start Functions (Spawn, Init)
     private void Awake()
@@ -192,7 +152,7 @@ public class Character : MonoBehaviour
         if (this.animator == null) this.animator = this.GetComponent<Animator>();
         if (this.boxCollider == null) this.boxCollider = GetComponent<Collider2D>();
 
-        this.initColor();
+        if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().init();
 
         this.transform.gameObject.tag = this.stats.characterType.ToString();
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
@@ -230,7 +190,7 @@ public class Character : MonoBehaviour
     {
         this.direction = new Vector2(0, -1);
         //this.spriteRenderer.gameObject.transform.localScale = new Vector3(1, 1, 1);
-        setStartColor();
+        this.setStartColor();
 
         if (reset)
         {
@@ -250,14 +210,14 @@ public class Character : MonoBehaviour
 
         this.currentState = CharacterState.idle;
         this.animator.enabled = true;
-        enableSpriteRenderer(true);
+        this.enableSpriteRenderer(true);
         if (!this.isPlayer) this.transform.position = this.spawnPosition;
 
         this.activeDeathAnimation = null;
 
         if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
 
-        resetColors();
+        if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().resetColors();
     }
 
     public void ActivateCharacter()
@@ -376,7 +336,7 @@ public class Character : MonoBehaviour
             CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
             CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
 
-            setStartColor();
+            this.setStartColor();
             this.currentState = CharacterState.dead;
 
             if (this.myRigidbody != null && this.myRigidbody.bodyType != RigidbodyType2D.Static) this.myRigidbody.velocity = Vector2.zero;
@@ -605,78 +565,36 @@ public class Character : MonoBehaviour
 
     #region Color Changes
 
-    public void resetColors()
-    {
-        foreach (ColorPalette colorPalette in this.colors)
-        {
-            if (colorPalette.colors.Count > 0) colorPalette.spriteRenderer.color = colorPalette.colors[0];
-            colorPalette.colors.Clear();
-            this.changeColor(colorPalette.spriteRenderer.color, colorPalette);
-        }
-    }
-
-    public void removeColor(Color color)
-    {
-        foreach (ColorPalette colorPalette in this.colors)
-        {
-            if(colorPalette.colors.Count > 1) colorPalette.colors.Remove(color); //dont remove first color
-            colorPalette.spriteRenderer.color = colorPalette.colors[colorPalette.colors.Count - 1];
-        }
-    }
-
     public void enableSpriteRenderer(bool value)
     {
-        foreach (ColorPalette colorPalette in this.colors)
-        {
-            colorPalette.spriteRenderer.enabled = value;
-        }
+        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
+            this.GetComponent<SpriteRendererExtensionHandler>().enableSpriteRenderer(value);
+
         if (this.shadowRenderer != null) this.shadowRenderer.enabled = value;
-    }
-
-    public void changeColor(Color color)
-    {
-        foreach (ColorPalette colorPalette in this.colors)
-        {
-            changeColor(color, colorPalette);
-        }
-    }
-
-    public void changeColor(Color color, ColorPalette colorPalette)
-    {
-        if (colorPalette.colors.Contains(color))
-        {
-            colorPalette.spriteRenderer.color = colorPalette.colors[colorPalette.colors.IndexOf(color)];
-        }
-        else
-        {
-            colorPalette.colors.Add(color);
-            colorPalette.spriteRenderer.color = colorPalette.colors[colorPalette.colors.Count - 1];
-        }
-    }
-
-    public void initColor()
-    {
-        foreach (SpriteRenderer renderer in this.spriteRenderers)
-        {
-            this.colors.Add(new ColorPalette(renderer, renderer.color));
-        }
     }
 
     public void setStartColor()
     {
-        foreach (ColorPalette colorPalette in this.colors)
-        {
-            colorPalette.spriteRenderer.color = colorPalette.colors[0];
-        }
+        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
+            this.GetComponent<SpriteRendererExtensionHandler>().setStartColor();
+    }
+
+    public void removeColor(Color color)
+    {
+        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
+            this.GetComponent<SpriteRendererExtensionHandler>().removeColor(color);
+    }
+
+    public void changeColor(Color color)
+    {
+        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
+            this.GetComponent<SpriteRendererExtensionHandler>().changeColor(color);
     }
 
     public void setFlip()
     {
-        foreach (ColorPalette colorPalette in this.colors)
-        {
-            if (this.direction.x < 0) colorPalette.spriteRenderer.flipX = true;
-            else colorPalette.spriteRenderer.flipX = false;
-        }
+        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
+            this.GetComponent<SpriteRendererExtensionHandler>().flipSprite(this.direction);
     }
 
     #endregion

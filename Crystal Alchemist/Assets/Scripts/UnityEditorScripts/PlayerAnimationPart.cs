@@ -6,5 +6,4 @@ public class PlayerAnimationPart : MonoBehaviour
     public bool setSortOrder = false;
     public int sortOrder = 0;
     public bool isTail = false;
-
 }
