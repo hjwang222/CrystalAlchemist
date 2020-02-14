@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CharacterPartHandler : MonoBehaviour
 {
-    [SerializeField]
-    private CharacterCreationData creationData;
-
     private List<CharacterPart> parts = new List<CharacterPart>();
 
     private void GetParts(Transform transform, List<CharacterPart> childObjects)
@@ -19,7 +16,7 @@ public class CharacterPartHandler : MonoBehaviour
         }
     }
 
-    public void UpdateCharacterParts()
+    public void UpdateCharacterParts(CharacterPreset preset)
     {
         GetParts(this.transform, this.parts);
 
@@ -27,12 +24,12 @@ public class CharacterPartHandler : MonoBehaviour
         {
             part.gameObject.SetActive(false);
 
-                foreach (CharacterPartData data in creationData.datas)
+                foreach (CharacterPartData data in preset.datas)
                 {
                     if ((data.type == part.colorGroup)
-                        && (part.restrictedRaces.Count == 0 || part.restrictedRaces.Contains(creationData.race))
+                        && (part.restrictedRaces.Count == 0 || part.restrictedRaces.Contains(preset.race))
                         && (!part.useName || (data.name.ToUpper() == part.gameObject.name.ToUpper()))
-                        && (!part.isEarHorn || (part.isEarHorn && creationData.addEarsHorns)))
+                        && (!part.isEarHorn || (part.isEarHorn && preset.addEarsHorns)))
                     {
                         part.gameObject.SetActive(true);
                         if (part.dyeable) part.GetComponent<SpriteRenderer>().color = data.color;

@@ -2,14 +2,14 @@
 using UnityEngine.Events;
 
 [System.Serializable]
-public class SingleColor : UnityEvent<Color>
+public class ColorEvent : UnityEvent<Color>
 {
 }
 
 public class ColorSignalListener : MonoBehaviour
 {
     public ColorSignal signal;
-    public SingleColor signalEventColor;
+    public ColorEvent signalEventColor;
 
     public void OnSignalRaised(Color color)
     {

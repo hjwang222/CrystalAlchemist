@@ -7,8 +7,10 @@ public class SpriteRendererExtension : MonoBehaviour
     [SerializeField]
     private bool canChangeColor = true;
 
+    [HideInInspector]
     public SpriteRenderer spriteRenderer;
 
+    [HideInInspector]
     public List<Color> colors = new List<Color>();
 
     private void Awake()

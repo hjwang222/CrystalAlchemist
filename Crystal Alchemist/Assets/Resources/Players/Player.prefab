@@ -813,7 +813,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0015462041, y: -0.6596044}
+  m_Offset: {x: 0.0015462041, y: -0.62915045}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -824,7 +824,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63154984, y: 0.37449372}
+  m_Size: {x: 0.63154984, y: 0.43540156}
   m_EdgeRadius: 0
 --- !u!114 &3574493720463300672
 MonoBehaviour:
@@ -3571,7 +3571,7 @@ GameObject:
   - component: {fileID: 7603080202167088895}
   - component: {fileID: 7737797839179922646}
   - component: {fileID: 1739089613219331593}
-  - component: {fileID: 3768792381769706416}
+  - component: {fileID: 3141180579503870950}
   m_Layer: 10
   m_Name: Character
   m_TagString: test
@@ -3586,7 +3586,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4374979008052220324}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3685,8 +3685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b357db719dfa44c863201ae23de277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creationData: {fileID: 11400000, guid: 28724241a4af8294d943178e82305982, type: 2}
---- !u!114 &3768792381769706416
+--- !u!114 &3141180579503870950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3695,16 +3694,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4374979008052220324}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 78d0a202444a759408f189db6035e5ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: b61d37950c5457343bf4dec9efab0dd4, type: 2}
-  signalEvent:
+  signal: {fileID: 11400000, guid: 54abe254f2dda014fb5e5c89b87a6eb3, type: 2}
+  signalEventColor:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1739089613219331593}
         m_MethodName: UpdateCharacterParts
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5246,7 +5245,7 @@ MonoBehaviour:
   colorGroup: 2
   useName: 0
   dyeable: 1
-  isEarHorn: 1
+  isEarHorn: 0
 --- !u!1 &6801100730941020082
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,11 +31,11 @@ public class CharacterPartData
     public string name;
 }
 
-[CreateAssetMenu(menuName = "Game/Character Creation Data")]
-public class CharacterCreationData : ScriptableObject, ISerializationCallbackReceiver
+[CreateAssetMenu(menuName = "Game/Character Preset")]
+public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
 {
     [SerializeField]
-    private SimpleSignal signal;
+    private CharacterPresetSignal signal;
 
     public Race race;
     public string characterName;
@@ -46,7 +46,7 @@ public class CharacterCreationData : ScriptableObject, ISerializationCallbackRec
     [Button]
     private void UpdateCharacter()
     {
-        this.signal.Raise();
+        this.signal.Raise(this);
     }
 
     public void OnAfterDeserialize() { }

@@ -16,9 +16,8 @@ public class TODOLIST : MonoBehaviour
     //Destroy Handler?
 
     //Bug: Titelbildschirm selektiert nicht den ersten Button korrekt (button.select())
-
     //TODO: Character Creator Screen (Name, Race, Colors)
-    //TODO: Player Rework
+    //BUG: Sort Order (gegner vor dem Char obwohl dahinter)
 
     //TODO: Item DialogBox
     //TODO: New Nitro Sprite
@@ -29,13 +28,12 @@ public class TODOLIST : MonoBehaviour
     //- Charakter Creator
     //- Bosskampf (Titania)
 
-    //- Character onEnable/onDisable
     //- TimeJump skaliert mit allem (Update Speed oder anderes)
     //- Options Rework (Resolution)
     //- Input Rework (new Unity Feature)
 
     //TODO (1.0)
-    //- Grafiken und Sound austauschen
+    //- Sound austauschen
     //- Cutscenes
     //- Quests und Story
     //- Content!
