@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [CreateAssetMenu(menuName = "Game/Time")]
 public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
 {

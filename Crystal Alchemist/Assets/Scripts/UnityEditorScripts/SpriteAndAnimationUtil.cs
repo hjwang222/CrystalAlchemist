@@ -73,6 +73,11 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
 #endif
 
+    private void Awake()
+    {
+        Destroy(this);
+    }
+
     private string GetGameObjectPath(Transform transform)
     {
         string path = transform.name;

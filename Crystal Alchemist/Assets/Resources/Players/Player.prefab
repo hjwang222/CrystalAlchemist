@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6770845575700988551}
   - component: {fileID: 8802136449103135456}
   - component: {fileID: 4190670377901084157}
+  - component: {fileID: 409260142229745474}
   m_Layer: 10
   m_Name: Zopf
   m_TagString: Untagged
@@ -145,8 +146,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &409260142229745474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95302504649802960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 0
+  useName: 1
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &242878290860008501
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +208,7 @@ GameObject:
   - component: {fileID: 1501232940955605100}
   - component: {fileID: 3616989485661982444}
   - component: {fileID: 1086583885296715335}
+  - component: {fileID: 3908668408633056677}
   m_Layer: 10
   m_Name: Snake Horn
   m_TagString: Untagged
@@ -289,8 +309,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &3908668408633056677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321771687958363269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 02000000
+  colorGroup: 3
+  useName: 0
+  dyeable: 1
+  isEarHorn: 1
 --- !u!1 &471883463282746764
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,6 +341,7 @@ GameObject:
   - component: {fileID: 9176573443055539087}
   - component: {fileID: 3141163229557063568}
   - component: {fileID: 7381180882993942835}
+  - component: {fileID: 3986570726034234664}
   m_Layer: 10
   m_Name: Female Legs
   m_TagString: Untagged
@@ -403,8 +442,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &3986570726034234664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471883463282746764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 0000000001000000
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &512862745202962679
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +473,7 @@ GameObject:
   - component: {fileID: 4923773389683555781}
   - component: {fileID: 8150681280305418924}
   - component: {fileID: 1525686685215613802}
+  - component: {fileID: 3501565708941776061}
   m_Layer: 10
   m_Name: Haut
   m_TagString: Untagged
@@ -500,8 +558,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &3501565708941776061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512862745202962679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &759644400424337056
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,6 +894,7 @@ GameObject:
   - component: {fileID: 7110802437537493781}
   - component: {fileID: 5424800443235646099}
   - component: {fileID: 8641604676154296967}
+  - component: {fileID: 2606456833657193284}
   m_Layer: 10
   m_Name: Blindfold
   m_TagString: Untagged
@@ -837,7 +914,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4487456104614602066}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7110802437537493781
 SpriteRenderer:
@@ -918,8 +995,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &2606456833657193284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975198640377551992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 4
+  useName: 1
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &1005786831246754604
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +1027,7 @@ GameObject:
   - component: {fileID: 8628674638379285477}
   - component: {fileID: 6549263499651434954}
   - component: {fileID: 7826635359498205851}
+  - component: {fileID: 8078993405372728768}
   m_Layer: 10
   m_Name: Lang
   m_TagString: Untagged
@@ -1032,8 +1128,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &8078993405372728768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005786831246754604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 0
+  useName: 1
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &1021639468127888232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,6 +1160,7 @@ GameObject:
   - component: {fileID: 587511717043856324}
   - component: {fileID: 4004844507677126046}
   - component: {fileID: 835493360758608588}
+  - component: {fileID: 4026237404101918475}
   m_Layer: 10
   m_Name: Adventurer
   m_TagString: Untagged
@@ -1146,8 +1261,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &4026237404101918475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021639468127888232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 7
+  useName: 1
+  dyeable: 0
+  isEarHorn: 0
 --- !u!1 &1072215561895514748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1323,7 @@ GameObject:
   - component: {fileID: 8900969343886593837}
   - component: {fileID: 5777209680993112449}
   - component: {fileID: 531764165805953724}
+  - component: {fileID: 1768888590313701365}
   m_Layer: 10
   m_Name: Schuppen
   m_TagString: Untagged
@@ -1274,8 +1408,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &1768888590313701365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177544069759218920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 3
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &1256021585710192036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,6 +1439,7 @@ GameObject:
   - component: {fileID: 650305062914072194}
   - component: {fileID: 4461699665218650520}
   - component: {fileID: 8779562276395258991}
+  - component: {fileID: 8493442067885857200}
   m_Layer: 10
   m_Name: Schuppen
   m_TagString: Untagged
@@ -1371,8 +1524,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &8493442067885857200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256021585710192036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 3
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &1262586421367216340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,6 +1556,7 @@ GameObject:
   - component: {fileID: 7343352704871331249}
   - component: {fileID: 7391909494047538000}
   - component: {fileID: 3179955661660351982}
+  - component: {fileID: 7541347074298499375}
   m_Layer: 10
   m_Name: Crown
   m_TagString: Untagged
@@ -1404,7 +1576,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4487456104614602066}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7343352704871331249
 SpriteRenderer:
@@ -1485,8 +1657,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &7541347074298499375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262586421367216340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 5
+  useName: 1
+  dyeable: 0
+  isEarHorn: 0
 --- !u!1 &1326730502702176852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,6 +1831,7 @@ GameObject:
   - component: {fileID: 6407916053676565476}
   - component: {fileID: 7950939089487138541}
   - component: {fileID: 8380592881843229623}
+  - component: {fileID: 4187467769606742028}
   m_Layer: 10
   m_Name: Pony Tail
   m_TagString: Untagged
@@ -1741,8 +1932,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &4187467769606742028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752617236134511361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 01000000
+  colorGroup: 0
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &1911256015727849463
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,6 +2077,7 @@ GameObject:
   - component: {fileID: 2462200563191241830}
   - component: {fileID: 3552614384823674082}
   - component: {fileID: 350057289258424137}
+  - component: {fileID: 2576910076501759207}
   m_Layer: 10
   m_Name: Haut
   m_TagString: Untagged
@@ -1951,8 +2161,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &2576910076501759207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137063251709544719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &2434814370137526126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,6 +2192,7 @@ GameObject:
   - component: {fileID: 3705992005029085511}
   - component: {fileID: 1773875744599786965}
   - component: {fileID: 6042892070008986282}
+  - component: {fileID: 3733336808532287376}
   m_Layer: 10
   m_Name: Schuppen
   m_TagString: Untagged
@@ -2048,8 +2277,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &3733336808532287376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434814370137526126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 3
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &2466434457100144685
 GameObject:
   m_ObjectHideFlags: 0
@@ -2061,6 +2308,7 @@ GameObject:
   - component: {fileID: 7687804038337821285}
   - component: {fileID: 8175160944691907115}
   - component: {fileID: 6490960643584030762}
+  - component: {fileID: 8730776087267559873}
   m_Layer: 10
   m_Name: Schuppen
   m_TagString: Untagged
@@ -2145,8 +2393,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &8730776087267559873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466434457100144685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 3
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &2753405203520201154
 GameObject:
   m_ObjectHideFlags: 0
@@ -2158,6 +2424,7 @@ GameObject:
   - component: {fileID: 5392634365491033132}
   - component: {fileID: 6373709542990470002}
   - component: {fileID: 2505292683013180559}
+  - component: {fileID: 7069618989565006219}
   m_Layer: 10
   m_Name: Haut
   m_TagString: Untagged
@@ -2242,8 +2509,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &7069618989565006219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2753405203520201154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &2809103510590663831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2255,6 +2540,7 @@ GameObject:
   - component: {fileID: 3190786455433199294}
   - component: {fileID: 6286363566133564351}
   - component: {fileID: 8575619382827791498}
+  - component: {fileID: 4662558222212572646}
   m_Layer: 10
   m_Name: Schuppen
   m_TagString: Untagged
@@ -2339,8 +2625,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &4662558222212572646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2809103510590663831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 3
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &3033269085961140032
 GameObject:
   m_ObjectHideFlags: 0
@@ -2517,6 +2821,7 @@ GameObject:
   - component: {fileID: 2448829311055925717}
   - component: {fileID: 6199365458865567806}
   - component: {fileID: 31296961553628615}
+  - component: {fileID: 6048700996704874741}
   m_Layer: 10
   m_Name: Gold Armor
   m_TagString: Untagged
@@ -2617,8 +2922,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &6048700996704874741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3592110818911809196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 0000000001000000
+  colorGroup: 8
+  useName: 1
+  dyeable: 0
+  isEarHorn: 0
 --- !u!1 &3823563689619472982
 GameObject:
   m_ObjectHideFlags: 0
@@ -2630,6 +2953,7 @@ GameObject:
   - component: {fileID: 5323619800446909231}
   - component: {fileID: 130001894003143957}
   - component: {fileID: 2788359723780279773}
+  - component: {fileID: 697727438547306943}
   m_Layer: 10
   m_Name: Schuppen
   m_TagString: Untagged
@@ -2714,8 +3038,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &697727438547306943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3823563689619472982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 3
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &4029163707243410380
 GameObject:
   m_ObjectHideFlags: 0
@@ -2729,6 +3071,7 @@ GameObject:
   - component: {fileID: 4808602955732118420}
   - component: {fileID: 5126023984451986083}
   - component: {fileID: 2081945556631816469}
+  - component: {fileID: 3935605835864811506}
   m_Layer: 10
   m_Name: Standard
   m_TagString: Untagged
@@ -2848,8 +3191,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &3935605835864811506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4029163707243410380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &4073572632548245758
 GameObject:
   m_ObjectHideFlags: 0
@@ -2862,6 +3223,7 @@ GameObject:
   - component: {fileID: 1204617722859554551}
   - component: {fileID: 5176653847194264981}
   - component: {fileID: 2981990035102279123}
+  - component: {fileID: 656126206322874529}
   m_Layer: 10
   m_Name: Silver Armor
   m_TagString: Untagged
@@ -2962,8 +3324,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &656126206322874529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4073572632548245758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 0000000001000000
+  colorGroup: 8
+  useName: 1
+  dyeable: 0
+  isEarHorn: 0
 --- !u!1 &4116173028636151532
 GameObject:
   m_ObjectHideFlags: 0
@@ -3058,6 +3438,7 @@ GameObject:
   - component: {fileID: 5378522484459726072}
   - component: {fileID: 8989668734905857889}
   - component: {fileID: 5781288009880067617}
+  - component: {fileID: 641440514477150640}
   m_Layer: 10
   m_Name: Gold Armor
   m_TagString: Untagged
@@ -3158,8 +3539,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &641440514477150640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4354810949683193159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 7
+  useName: 1
+  dyeable: 0
+  isEarHorn: 0
 --- !u!1 &4374979008052220324
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,8 +3569,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8855196423487406611}
   - component: {fileID: 7603080202167088895}
-  - component: {fileID: 3193982077828055535}
   - component: {fileID: 7737797839179922646}
+  - component: {fileID: 1739089613219331593}
+  - component: {fileID: 3768792381769706416}
   m_Layer: 10
   m_Name: Character
   m_TagString: test
@@ -3215,125 +3615,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3193982077828055535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4374979008052220324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad82c05a1ee749345830b71e8e638d8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyParts:
-  - {fileID: 535317754006317676}
-  - {fileID: 9176573443055539087}
-  - {fileID: 3745387689898513800}
-  - {fileID: 7369645804400566023}
-  - {fileID: 1729255779498595441}
-  - {fileID: 7516410793631631401}
-  - {fileID: 5510872307520408297}
-  - {fileID: 1501232940955605100}
-  scaleParts:
-  - {fileID: 1773875744599786965}
-  - {fileID: 5777209680993112449}
-  - {fileID: 6286363566133564351}
-  - {fileID: 130001894003143957}
-  - {fileID: 8175160944691907115}
-  - {fileID: 3561241360298319603}
-  - {fileID: 1501232940955605100}
-  - {fileID: 7419571891391142114}
-  - {fileID: 4461699665218650520}
-  hairParts:
-  - {fileID: 6407916053676565476}
-  - {fileID: 6393766928252567179}
-  - {fileID: 6770845575700988551}
-  eyePart: {fileID: 4422417920489987136}
-  races:
-  - race: 0
-    parts:
-    - {fileID: 471883463282746764}
-    - {fileID: 5626743392653252872}
-    - {fileID: 8336361314519064171}
-    - {fileID: 4073572632548245758}
-    - {fileID: 5299263692711461503}
-  - race: 1
-    parts:
-    - {fileID: 471883463282746764}
-    - {fileID: 8902662917169287793}
-    - {fileID: 1005786831246754604}
-    - {fileID: 7434880858711599919}
-    - {fileID: 7448096020595454397}
-    - {fileID: 1262586421367216340}
-  - race: 2
-    parts:
-    - {fileID: 4424775684052126852}
-    - {fileID: 7194829641595624735}
-    - {fileID: 5626743392653252872}
-    - {fileID: 4354810949683193159}
-    - {fileID: 321771687958363269}
-    - {fileID: 7238812120148122795}
-  - race: 3
-    parts:
-    - {fileID: 1752617236134511361}
-    - {fileID: 471883463282746764}
-    - {fileID: 6690366131890270948}
-    - {fileID: 95302504649802960}
-    - {fileID: 7282126600667706148}
-    - {fileID: 1021639468127888232}
-    - {fileID: 7102809816350738138}
-  parts:
-  - {fileID: 6690366131890270948}
-  - {fileID: 4424775684052126852}
-  - {fileID: 471883463282746764}
-  - {fileID: 1752617236134511361}
-  - {fileID: 8902662917169287793}
-  - {fileID: 7194829641595624735}
-  - {fileID: 1262586421367216340}
-  - {fileID: 5626743392653252872}
-  - {fileID: 95302504649802960}
-  - {fileID: 1005786831246754604}
-  - {fileID: 975198640377551992}
-  - {fileID: 7282126600667706148}
-  - {fileID: 1021639468127888232}
-  - {fileID: 3592110818911809196}
-  - {fileID: 4354810949683193159}
-  - {fileID: 7434880858711599919}
-  - {fileID: 7448096020595454397}
-  - {fileID: 8336361314519064171}
-  - {fileID: 4073572632548245758}
-  - {fileID: 5299263692711461503}
-  - {fileID: 7102809816350738138}
-  - {fileID: 321771687958363269}
-  - {fileID: 7238812120148122795}
-  presets:
-  - race: 0
-    hair: {r: 0.3962264, g: 0.34243855, b: 0.25605196, a: 1}
-    skin: {r: 0.8396226, g: 0.72896206, b: 0.61387503, a: 1}
-    eyes: {r: 0.10586506, g: 0.3679245, b: 0.18790928, a: 1}
-    scales: {r: 0, g: 0, b: 0, a: 0}
-  - race: 1
-    hair: {r: 1, g: 0.9607844, b: 0.49411768, a: 1}
-    skin: {r: 0.9433962, g: 0.8757739, b: 0.80544674, a: 1}
-    eyes: {r: 0.18503025, g: 0.36646113, b: 0.6226415, a: 1}
-    scales: {r: 0, g: 0, b: 0, a: 0}
-  - race: 2
-    hair: {r: 1, g: 1, b: 1, a: 1}
-    skin: {r: 0.9450981, g: 0.8745099, b: 0.80392164, a: 1}
-    eyes: {r: 0.7372549, g: 0.08492536, b: 0.07450982, a: 1}
-    scales: {r: 1, g: 0.7337059, b: 0, a: 1}
-  - race: 3
-    hair: {r: 1, g: 0.97647065, b: 0.7411765, a: 1}
-    skin: {r: 0.57254905, g: 0.67058825, b: 0.7058824, a: 1}
-    eyes: {r: 0.46274513, g: 0.46274513, b: 0.46274513, a: 1}
-    scales: {r: 0, g: 0, b: 0, a: 0}
-  hairColor: {r: 1, g: 1, b: 1, a: 1}
-  eyeColor: {r: 0.7372549, g: 0.08627451, b: 0.07450981, a: 1}
-  bodyColor: {r: 0.9450981, g: 0.8745099, b: 0.80392164, a: 1}
-  scaleColor: {r: 0.745283, g: 0.61566365, b: 0.2988163, a: 1}
-  race: 2
 --- !u!114 &7737797839179922646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3392,6 +3673,46 @@ MonoBehaviour:
   - Left
   - Up
   - 
+--- !u!114 &1739089613219331593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4374979008052220324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b357db719dfa44c863201ae23de277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creationData: {fileID: 11400000, guid: 28724241a4af8294d943178e82305982, type: 2}
+--- !u!114 &3768792381769706416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4374979008052220324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: b61d37950c5457343bf4dec9efab0dd4, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1739089613219331593}
+        m_MethodName: UpdateCharacterParts
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4424775684052126852
 GameObject:
   m_ObjectHideFlags: 0
@@ -3404,6 +3725,7 @@ GameObject:
   - component: {fileID: 535317754006317676}
   - component: {fileID: 6485709172531491562}
   - component: {fileID: 6112940577886979832}
+  - component: {fileID: 2416776434008707744}
   m_Layer: 10
   m_Name: Snake Tail
   m_TagString: Untagged
@@ -3505,8 +3827,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &2416776434008707744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4424775684052126852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 02000000
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &4738032833504916450
 GameObject:
   m_ObjectHideFlags: 0
@@ -3519,6 +3859,7 @@ GameObject:
   - component: {fileID: 4422417920489987136}
   - component: {fileID: 2918157888085900006}
   - component: {fileID: 4308145297338823326}
+  - component: {fileID: 5542681665652184834}
   m_Layer: 0
   m_Name: Iris
   m_TagString: Untagged
@@ -3619,8 +3960,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &5542681665652184834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4738032833504916450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 1
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &5148608333310061015
 GameObject:
   m_ObjectHideFlags: 0
@@ -3711,6 +4070,7 @@ GameObject:
   - component: {fileID: 9152589144027385904}
   - component: {fileID: 8023356559724281659}
   - component: {fileID: 6073125837116750399}
+  - component: {fileID: 1584706827741355727}
   m_Layer: 10
   m_Name: Tiara
   m_TagString: Untagged
@@ -3730,7 +4090,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4487456104614602066}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9152589144027385904
 SpriteRenderer:
@@ -3811,8 +4171,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &1584706827741355727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299263692711461503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 5
+  useName: 1
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &5560550507651410817
 GameObject:
   m_ObjectHideFlags: 0
@@ -3824,6 +4202,7 @@ GameObject:
   - component: {fileID: 3581358739522328110}
   - component: {fileID: 1705748641387263271}
   - component: {fileID: 8160229067134789820}
+  - component: {fileID: 6960754113563729317}
   m_Layer: 10
   m_Name: Haut
   m_TagString: Untagged
@@ -3908,8 +4287,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &6960754113563729317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5560550507651410817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &5626743392653252872
 GameObject:
   m_ObjectHideFlags: 0
@@ -3922,6 +4319,7 @@ GameObject:
   - component: {fileID: 6393766928252567179}
   - component: {fileID: 2600767645337272303}
   - component: {fileID: 1185076398277250610}
+  - component: {fileID: 6804658020225422879}
   m_Layer: 10
   m_Name: Bob
   m_TagString: Untagged
@@ -4022,8 +4420,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &6804658020225422879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5626743392653252872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 0
+  useName: 1
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &5793569042416981621
 GameObject:
   m_ObjectHideFlags: 0
@@ -4117,6 +4533,7 @@ GameObject:
   - component: {fileID: 3183420606513110167}
   - component: {fileID: 8469098718631597574}
   - component: {fileID: 5989150915147089471}
+  - component: {fileID: 8702615734880674582}
   m_Layer: 10
   m_Name: Haut
   m_TagString: Untagged
@@ -4201,8 +4618,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &8702615734880674582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106486631212854896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &6106642612588088733
 GameObject:
   m_ObjectHideFlags: 0
@@ -4214,6 +4649,7 @@ GameObject:
   - component: {fileID: 1467139757678420291}
   - component: {fileID: 3561241360298319603}
   - component: {fileID: 1191728659814774901}
+  - component: {fileID: 55293184062565197}
   m_Layer: 10
   m_Name: Schuppen
   m_TagString: Untagged
@@ -4298,8 +4734,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &55293184062565197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106642612588088733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 3
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &6454129392702626780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4312,6 +4766,7 @@ GameObject:
   - component: {fileID: 4063840013671430237}
   - component: {fileID: 8292439282182374848}
   - component: {fileID: 4969465568078503768}
+  - component: {fileID: 7034843600546841880}
   m_Layer: 10
   m_Name: Underwear
   m_TagString: Untagged
@@ -4412,8 +4867,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &7034843600546841880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6454129392702626780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 6
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &6462027546483407772
 GameObject:
   m_ObjectHideFlags: 0
@@ -4527,6 +5000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
 --- !u!1 &6479002063353221705
@@ -4652,6 +5126,7 @@ GameObject:
   - component: {fileID: 1729255779498595441}
   - component: {fileID: 7991529056104300193}
   - component: {fileID: 1806044283515610433}
+  - component: {fileID: 2246220596059737681}
   m_Layer: 10
   m_Name: Pony Ears
   m_TagString: Untagged
@@ -4752,8 +5227,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &2246220596059737681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6690366131890270948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 01000000
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 1
 --- !u!1 &6801100730941020082
 GameObject:
   m_ObjectHideFlags: 0
@@ -4766,6 +5259,7 @@ GameObject:
   - component: {fileID: 3745387689898513800}
   - component: {fileID: 1575313991602235928}
   - component: {fileID: 4475433914692397779}
+  - component: {fileID: 123893963848144188}
   m_Layer: 10
   m_Name: Female
   m_TagString: Untagged
@@ -4866,8 +5360,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &123893963848144188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6801100730941020082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &6932312291783976304
 GameObject:
   m_ObjectHideFlags: 0
@@ -4914,6 +5426,7 @@ GameObject:
   - component: {fileID: 2824785009147244887}
   - component: {fileID: 1186641503564225982}
   - component: {fileID: 8889012366613774107}
+  - component: {fileID: 6767488611564966728}
   m_Layer: 10
   m_Name: Haut
   m_TagString: Untagged
@@ -4998,8 +5511,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &6767488611564966728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6991141133525722460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &7102809816350738138
 GameObject:
   m_ObjectHideFlags: 0
@@ -5012,6 +5543,7 @@ GameObject:
   - component: {fileID: 5510872307520408297}
   - component: {fileID: 3125952642142747973}
   - component: {fileID: 539965747661797006}
+  - component: {fileID: 5460486933031541883}
   m_Layer: 10
   m_Name: Pony Horn
   m_TagString: Untagged
@@ -5112,8 +5644,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &5460486933031541883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7102809816350738138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 01000000
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 1
 --- !u!1 &7194829641595624735
 GameObject:
   m_ObjectHideFlags: 0
@@ -5126,6 +5676,7 @@ GameObject:
   - component: {fileID: 8227980316480720318}
   - component: {fileID: 682045731210367299}
   - component: {fileID: 2103905596341571712}
+  - component: {fileID: 2151964059838612595}
   m_Layer: 10
   m_Name: Glasses
   m_TagString: Untagged
@@ -5145,7 +5696,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4487456104614602066}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8227980316480720318
 SpriteRenderer:
@@ -5226,8 +5777,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &2151964059838612595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7194829641595624735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 4
+  useName: 1
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &7238812120148122795
 GameObject:
   m_ObjectHideFlags: 0
@@ -5240,6 +5809,7 @@ GameObject:
   - component: {fileID: 7419571891391142114}
   - component: {fileID: 8170946326247688389}
   - component: {fileID: 497500132108798705}
+  - component: {fileID: 7244902135348747536}
   m_Layer: 10
   m_Name: Snake Scales
   m_TagString: Untagged
@@ -5340,8 +5910,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &7244902135348747536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7238812120148122795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 02000000
+  colorGroup: 3
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &7244733927466490670
 GameObject:
   m_ObjectHideFlags: 0
@@ -5435,6 +6023,7 @@ GameObject:
   - component: {fileID: 2309685067912544482}
   - component: {fileID: 550114897705032212}
   - component: {fileID: 5121479055356651248}
+  - component: {fileID: 3924822791583033643}
   m_Layer: 10
   m_Name: Adventurer
   m_TagString: Untagged
@@ -5535,8 +6124,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &3924822791583033643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7282126600667706148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 0000000001000000
+  colorGroup: 8
+  useName: 1
+  dyeable: 0
+  isEarHorn: 0
 --- !u!1 &7434880858711599919
 GameObject:
   m_ObjectHideFlags: 0
@@ -5549,6 +6156,7 @@ GameObject:
   - component: {fileID: 4271155678154848097}
   - component: {fileID: 4912524970075097929}
   - component: {fileID: 824274798869498719}
+  - component: {fileID: 6297928280412775180}
   m_Layer: 10
   m_Name: Dress
   m_TagString: Untagged
@@ -5649,8 +6257,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &6297928280412775180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434880858711599919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 7
+  useName: 1
+  dyeable: 0
+  isEarHorn: 0
 --- !u!1 &7448096020595454397
 GameObject:
   m_ObjectHideFlags: 0
@@ -5663,6 +6289,7 @@ GameObject:
   - component: {fileID: 7886323285643663220}
   - component: {fileID: 6479268714364945220}
   - component: {fileID: 6033108843844269854}
+  - component: {fileID: 2006817936816788365}
   m_Layer: 10
   m_Name: Dress
   m_TagString: Untagged
@@ -5763,8 +6390,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &2006817936816788365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7448096020595454397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 0000000001000000
+  colorGroup: 8
+  useName: 1
+  dyeable: 0
+  isEarHorn: 0
 --- !u!1 &7515466788744794185
 GameObject:
   m_ObjectHideFlags: 0
@@ -5792,10 +6437,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5208109850021492669}
   - {fileID: 3256712962891404299}
-  - {fileID: 8677253749604914910}
   - {fileID: 2655284288071923671}
+  - {fileID: 5208109850021492669}
+  - {fileID: 8677253749604914910}
   m_Father: {fileID: 1568593860106701791}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5810,6 +6455,7 @@ GameObject:
   - component: {fileID: 6862011340280035218}
   - component: {fileID: 2597947641722777270}
   - component: {fileID: 3925361549708461811}
+  - component: {fileID: 4966102480828066173}
   m_Layer: 10
   m_Name: Haut
   m_TagString: Untagged
@@ -5893,8 +6539,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &4966102480828066173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7537415380379613840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 0
 --- !u!1 &7763303920462198931
 GameObject:
   m_ObjectHideFlags: 0
@@ -5989,6 +6653,7 @@ GameObject:
   - component: {fileID: 5107195929045200338}
   - component: {fileID: 7364439465862590065}
   - component: {fileID: 81017346809900029}
+  - component: {fileID: 4500430169305841974}
   m_Layer: 10
   m_Name: Silver Armor
   m_TagString: Untagged
@@ -6089,8 +6754,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &4500430169305841974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8336361314519064171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 
+  colorGroup: 7
+  useName: 1
+  dyeable: 0
+  isEarHorn: 0
 --- !u!1 &8478010790877026463
 GameObject:
   m_ObjectHideFlags: 0
@@ -6180,6 +6863,7 @@ GameObject:
   - component: {fileID: 7516410793631631401}
   - component: {fileID: 4819395387437441978}
   - component: {fileID: 1647694275860432515}
+  - component: {fileID: 2005236670837242800}
   m_Layer: 10
   m_Name: Elf
   m_TagString: Untagged
@@ -6280,8 +6964,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &2005236670837242800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8902662917169287793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb817f7fc1f55e489ab71b5bc21cdd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedRaces: 00000000
+  colorGroup: 2
+  useName: 0
+  dyeable: 1
+  isEarHorn: 1
 --- !u!1 &9116587063939130167
 GameObject:
   m_ObjectHideFlags: 0
@@ -6488,15 +7190,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c27a61d4b7f3984eb11097accadce1d, type: 3}
---- !u!4 &1359776168893412036 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
-    type: 3}
-  m_PrefabInstance: {fileID: 4859328780346409498}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8153952292305783526 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3622976228295641340, guid: 1c27a61d4b7f3984eb11097accadce1d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4859328780346409498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1359776168893412036 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5886531263758577886, guid: 1c27a61d4b7f3984eb11097accadce1d,
     type: 3}
   m_PrefabInstance: {fileID: 4859328780346409498}
   m_PrefabAsset: {fileID: 0}
