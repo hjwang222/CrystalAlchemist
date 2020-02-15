@@ -16,6 +16,9 @@ public class TitleScreenStart : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textfield;
 
+    [SerializeField]
+    private FloatSignal musicVolumeSignal;
+
     private bool inputPossible = false;
 
     private void Awake()
@@ -23,6 +26,14 @@ public class TitleScreenStart : MonoBehaviour
         if (this.destroySignal != null) destroySignal.Raise();
         this.mainMenu.SetActive(false);
         StartCoroutine(this.delayInput());
+    }
+
+    private void Start()
+    {
+        SaveSystem.loadOptions();
+
+        if (this.musicVolumeSignal != null)
+            this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
     }
 
     private void Update()

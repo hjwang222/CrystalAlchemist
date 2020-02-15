@@ -17,7 +17,7 @@ public class TODOLIST : MonoBehaviour
 
     //Bug: Titelbildschirm selektiert nicht den ersten Button korrekt (button.select())
     //TODO: Character Creator Screen (Name, Race, Colors)
-    //BUG: Sort Order (gegner vor dem Char obwohl dahinter)
+    //TODO: Cursor Rework
 
     //TODO: Item DialogBox
     //TODO: New Nitro Sprite

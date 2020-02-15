@@ -24,10 +24,6 @@ public class TitleScreen : MonoBehaviour
     [SerializeField]
     private GameObject darkFrame;
 
-    [Required]
-    [SerializeField]
-    private FloatSignal musicVolumeSignal;
-
     private string lastSavepoint = null;
 
     void Start()
@@ -35,13 +31,8 @@ public class TitleScreen : MonoBehaviour
         this.mainFrame.SetActive(true);
         if (this.darkFrame != null) this.darkFrame.SetActive(false);
 
-        SaveSystem.loadOptions();
-
         Cursor.visible = true;
         showMenu(this.menues[0]);
-
-        if(this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
-        
     }
 
     private void Update()
@@ -93,15 +84,18 @@ public class TitleScreen : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        newActiveMenu.SetActive(true);
-        
-        for(int i = 0; i < newActiveMenu.transform.childCount; i++)
+        if (newActiveMenu != null)
         {
-            ButtonExtension temp = newActiveMenu.transform.GetChild(i).GetComponent<ButtonExtension>();
-            if(temp != null && temp.setFirstSelected)
+            newActiveMenu.SetActive(true);
+
+            for (int i = 0; i < newActiveMenu.transform.childCount; i++)
             {
-                temp.setFirst();
-                break;
+                ButtonExtension temp = newActiveMenu.transform.GetChild(i).GetComponent<ButtonExtension>();
+                if (temp != null && temp.setFirstSelected)
+                {
+                    temp.setFirst();
+                    break;
+                }
             }
         }
     }

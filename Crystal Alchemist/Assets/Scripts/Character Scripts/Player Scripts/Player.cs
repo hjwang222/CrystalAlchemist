@@ -134,6 +134,7 @@ public class Player : Character
             CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", true);
 
             this.currentState = CharacterState.dead;
+            this.myRigidbody.bodyType = RigidbodyType2D.Static;
             this.deathSignal.Raise();
         }
     }

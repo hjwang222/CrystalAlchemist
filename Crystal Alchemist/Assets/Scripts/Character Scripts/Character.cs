@@ -209,6 +209,7 @@ public class Character : MonoBehaviour
         }
 
         this.currentState = CharacterState.idle;
+        this.myRigidbody.bodyType = RigidbodyType2D.Dynamic;
         this.animator.enabled = true;
         this.enableSpriteRenderer(true);
         if (!this.isPlayer) this.transform.position = this.spawnPosition;

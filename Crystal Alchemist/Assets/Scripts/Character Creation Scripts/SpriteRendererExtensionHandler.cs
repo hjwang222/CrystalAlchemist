@@ -7,6 +7,7 @@ public class SpriteRendererExtensionHandler : MonoBehaviour
     [SerializeField]
     private GameObject characterSprite;
 
+    [HideInInspector]
     public List<SpriteRendererExtension> colorpalettes = new List<SpriteRendererExtension>();
 
     private void Start()

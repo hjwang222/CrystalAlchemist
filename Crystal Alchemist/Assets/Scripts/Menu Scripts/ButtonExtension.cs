@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 {   
     [SerializeField]
+    [Required]
     private myCursor cursor;
     private float offset = 16;
 
@@ -19,13 +21,10 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     private Button button;
 
     private int distance = 400;
-    
-    private void Start()
+
+    private void init()
     {
-        if(this.cursor == null)
-        {
-            Debug.Log("<color=red>Cursor not found in: "+this.gameObject.name+"</color>");
-        }
+        if (this.cursor == null) this.cursor = GameObject.FindWithTag("Cursor").GetComponent<myCursor>();
 
         RectTransform rt = (RectTransform)this.transform;
         this.size = new Vector2(rt.rect.width, rt.rect.height);
@@ -34,6 +33,16 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         rt = (RectTransform)this.cursor.transform;
         this.cursorSize = new Vector2(rt.rect.width, rt.rect.height);
         this.cursorScale = rt.lossyScale;
+    }
+    
+    private void Start()
+    {
+        init();
+
+        if(this.cursor == null)
+        {
+            Debug.Log("<color=red>Cursor not found in: "+this.gameObject.name+"</color>");
+        }
 
         /*Debug.Log(this.name + " - "
                     + this.transform.localScale + " - "
@@ -52,6 +61,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     private void OnEnable()
     {
+        init();
         setFirst();
     }
 
@@ -59,17 +69,19 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     {
         if(this.button == null) this.button = this.gameObject.GetComponent<Button>();
 
-        if (this.cursor != null && this.setFirstSelected  && this.gameObject.activeInHierarchy)
+        if (this.cursor != null 
+            && this.setFirstSelected  
+            && this.gameObject.activeInHierarchy)
         {
             this.cursor.gameObject.SetActive(true);
 
-            if (EventSystem.current != null)
-            {
-                EventSystem.current.firstSelectedGameObject = this.gameObject;
-                EventSystem.current.SetSelectedGameObject(this.gameObject);
-            }
+                if (EventSystem.current != null)
+                {
+                    EventSystem.current.firstSelectedGameObject = this.gameObject;
+                    EventSystem.current.SetSelectedGameObject(this.gameObject);
+                }
 
-            setCursor(true, false);
+                setCursor(true, false);            
         }
     }
 
@@ -84,26 +96,33 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     }
 
     private void setCursor(bool showCursor, bool playEffect)
-    {       
-        if (this.cursor != null)
+    {
+        if (this.cursor.selectedObject != this.gameObject)
         {
-            if (!this.cursor.gameObject.activeInHierarchy && showCursor) this.cursor.gameObject.SetActive(true);            
-            if(!showCursor) this.cursor.gameObject.SetActive(false);
+            this.cursor.selectedObject = this.gameObject;
 
-            float x_new = (((this.size.x * this.scale.x) + (this.cursorSize.x * this.cursorScale.x)) / 2) - this.offset;
-            float y_new = (((this.size.y * this.scale.y) + (this.cursorSize.y * this.cursorScale.y)) / 2) - this.offset;
+            if (this.cursor != null)
+            {
+                if (!this.cursor.gameObject.activeInHierarchy && showCursor) this.cursor.gameObject.SetActive(true);
+                if (!showCursor) this.cursor.gameObject.SetActive(false);
 
-            this.cursor.transform.position = new Vector2(this.transform.position.x - (x_new), 
-                                                         this.transform.position.y + (y_new));
+                float x_new = (((this.size.x * this.scale.x) + (this.cursorSize.x * this.cursorScale.x)) / 2) - this.offset;
+                float y_new = (((this.size.y * this.scale.y) + (this.cursorSize.y * this.cursorScale.y)) / 2) - this.offset;
 
-            setInfoBox();
 
-            //Debug.Log("Button: "+this.size + " - " + this.scale);
-            //Debug.Log("Cursor: "+this.cursorSize + " - " + this.cursorScale);
-            
-            if (playEffect) this.cursor.GetComponent<myCursor>().playSoundEffect();
+                this.cursor.transform.position = new Vector2(this.transform.position.x - (x_new),
+                                                             this.transform.position.y + (y_new));
+
+                setInfoBox();
+
+                //Debug.Log("Button: "+this.size + " - " + this.scale);
+                //Debug.Log("Cursor: "+this.cursorSize + " - " + this.cursorScale);
+
+                if (playEffect) this.cursor.GetComponent<myCursor>().playSoundEffect();
+            }
         }
     }
+
 
     private void setInfoBox()
     {

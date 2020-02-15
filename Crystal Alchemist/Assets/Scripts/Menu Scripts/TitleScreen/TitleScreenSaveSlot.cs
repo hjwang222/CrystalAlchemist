@@ -1,11 +1,15 @@
-﻿using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
 using System;
 
 public class TitleScreenSaveSlot : MonoBehaviour
 {
+    [SerializeField]
+    [Required]
+    [BoxGroup("Main")]
+    private GameObject mainGameObject;
+
     [Required]
     [SerializeField]
     [BoxGroup("Main")]
@@ -59,6 +63,15 @@ public class TitleScreenSaveSlot : MonoBehaviour
         getData();
     }
 
+    public void SaveOrStartGame()
+    {
+        if(this.mainGameObject != null)
+        {
+            if (this.mainGameObject.GetComponent<SaveGameMenu>() != null) this.mainGameObject.GetComponent<SaveGameMenu>().saveGame(this.gameObject);
+            else if (this.mainGameObject.GetComponent<TitleScreen>() != null && this.data != null) this.mainGameObject.GetComponent<TitleScreen>().startTheGame(data.scene, this.gameObject.name);
+        }
+    }
+
     public void getData()
     {
         this.newGame.SetActive(false);
@@ -95,7 +108,7 @@ public class TitleScreenSaveSlot : MonoBehaviour
         for (int i = 0; i < temp.transform.childCount; i++)
         {
             temp.transform.GetChild(i).gameObject.SetActive(false);
-            if(i < value) temp.transform.GetChild(i).gameObject.SetActive(true);
+            if (i < value) temp.transform.GetChild(i).gameObject.SetActive(true);
         }
     }
 }
