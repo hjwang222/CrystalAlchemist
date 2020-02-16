@@ -54,10 +54,10 @@ public class LoadSystem : MonoBehaviour
 
         foreach (string[] elem in data.inventory)
         {
-            GameObject prefab = Resources.Load("Items/" + elem[0], typeof(GameObject)) as GameObject;
+            GameObject prefab = Resources.Load("Prefabs/Items/" + elem[0], typeof(GameObject)) as GameObject;
 
-            if(prefab == null) prefab = Resources.Load("Items/Key Items/" + elem[0], typeof(GameObject)) as GameObject;
-            if (prefab == null) prefab = Resources.Load("Items/Attribute Points/" + elem[0], typeof(GameObject)) as GameObject;
+            if(prefab == null) prefab = Resources.Load("Prefabs/Items/Key Items/" + elem[0], typeof(GameObject)) as GameObject;
+            if (prefab == null) prefab = Resources.Load("Prefabs/Items/Attribute Points/" + elem[0], typeof(GameObject)) as GameObject;
 
             if (prefab != null)
             {

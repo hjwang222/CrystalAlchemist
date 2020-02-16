@@ -172,6 +172,16 @@ public class CustomUtilities : MonoBehaviour
             Item result = itemGO.GetComponent<Item>();
             return result;
         }
+
+        public static void GetChildObjects<T>(Transform transform, List<T> childObjects)
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.GetComponent<T>() != null 
+                    && !childObjects.Contains(child.GetComponent<T>())) childObjects.Add(child.GetComponent<T>());
+                GetChildObjects(child, childObjects);
+            }
+        }        
     }
 
 

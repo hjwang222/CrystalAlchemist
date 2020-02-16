@@ -43,8 +43,8 @@ public class Room : MonoBehaviour
     {
         this.mapID = "Overworld";
         this.areaID = "???";
-        this.locationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/locationSignal.asset", typeof(StringSignal));
-        this.mapLocationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/mapLocationSignal.asset", typeof(StringSignal));
+        this.locationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Resources/Scriptable Objects/Signals/locationSignal.asset", typeof(StringSignal));
+        this.mapLocationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Resources/Scriptable Objects/Signals/mapLocationSignal.asset", typeof(StringSignal));
     }
 
     /*

@@ -21,7 +21,7 @@ public class LanguageChange : MonoBehaviour
         this.textMeshField = this.GetComponent<TextMeshProUGUI>();
         this.alternativeText = this.textMeshField.text;
         SignalListener temp = this.gameObject.AddComponent<SignalListener>();
-        temp.signal = (SimpleSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/languageChangeSignal.asset", typeof(SimpleSignal));
+        temp.signal = (SimpleSignal)AssetDatabase.LoadAssetAtPath("Assets/Resources/Scriptable Objects/Signals/languageChangeSignal.asset", typeof(SimpleSignal));
     }
 #endif
 

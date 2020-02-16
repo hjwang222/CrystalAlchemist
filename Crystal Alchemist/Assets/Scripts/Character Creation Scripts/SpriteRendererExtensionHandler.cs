@@ -12,7 +12,7 @@ public class SpriteRendererExtensionHandler : MonoBehaviour
 
     private void Start()
     {
-        getColorSprite(this.characterSprite.transform, this.colorpalettes);
+        CustomUtilities.UnityFunctions.GetChildObjects<SpriteRendererExtension>(this.characterSprite.transform, this.colorpalettes);
         init();
     }
 
@@ -29,16 +29,6 @@ public class SpriteRendererExtensionHandler : MonoBehaviour
         foreach (SpriteRendererExtension colorsprite in this.colorpalettes)
         {
             colorsprite.setStartColor();
-        }
-    }
-
-    private void getColorSprite(Transform transform, List<SpriteRendererExtension> childObjects)
-    {
-        foreach (Transform child in transform)
-        {
-            if (child.GetComponent<SpriteRendererExtension>() != null) childObjects.Add(child.GetComponent<SpriteRendererExtension>());
-
-            getColorSprite(child, childObjects);
         }
     }
 

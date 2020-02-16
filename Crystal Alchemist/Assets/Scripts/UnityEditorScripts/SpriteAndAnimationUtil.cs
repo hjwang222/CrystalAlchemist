@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using System.IO;
 using System.Linq;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct FileList
@@ -27,11 +28,11 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 {
     [FoldoutGroup("Animations", Expanded = false)]
     [SerializeField]
-    private string assetPath = "Assets/Art/Graphics/Characters/Player Sprites/";
+    private string assetPath = "Assets/Resources/Art/Characters/Player Sprites/";
 
     [FoldoutGroup("Animations", Expanded = false)]
     [SerializeField]
-    private string animationPath = "Animations/Player Animations/";
+    private string animationPath = "Resources/Animations/Player Animations/";
 
     [FoldoutGroup("Animations", Expanded = false)]
     [SerializeField]
@@ -50,7 +51,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
     public void UpdateSpritesAndAnimations()
     {
         List<PlayerAnimationPart> childObjects = new List<PlayerAnimationPart>();
-        GetChildObjects(this.transform, childObjects); //get all children from GameObject
+        CustomUtilities.UnityFunctions.GetChildObjects(this.transform, childObjects); //get all children from GameObject
 
         List<AnimationClip> clips = getAnimationClips(); //get all AnimationClips from Asset Folder
 
@@ -68,6 +69,18 @@ public class SpriteAndAnimationUtil : MonoBehaviour
             }
 
             Debug.Log("<color=blue>Set Animation of: " + clip.name + " for " + childObjects.Count + " GameObjects.</color>");
+        }
+    }
+
+    [Button]
+    public void UpdatePreview()
+    {
+        List<CharacterPart> childObjects = new List<CharacterPart>();
+        CustomUtilities.UnityFunctions.GetChildObjects(this.transform, childObjects);
+
+        foreach(CharacterPart part in childObjects)
+        {            
+            if (part.GetComponent<PlayerAnimationPart>() != null) part.assetPath = part.GetComponent<PlayerAnimationPart>().path;
         }
     }
 
@@ -157,15 +170,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
         }
     }
 
-    private void GetChildObjects(Transform transform, List<PlayerAnimationPart> childObjects)
-    {
-        foreach (Transform child in transform)
-        {
-            if (child.GetComponent<PlayerAnimationPart>() != null) childObjects.Add(child.GetComponent<PlayerAnimationPart>());
 
-            GetChildObjects(child, childObjects);
-        }
-    }
 
     private List<AnimationClip> getAnimationClips()
     {
