@@ -3,14 +3,11 @@ using UnityEngine;
 
 public class CharacterCreatorButton : MonoBehaviour
 {
-    public CharacterPreset creatorPreset;
-
-    [SerializeField]
-    private CharacterPresetSignal signal;
+    public CharacterCreatorMenu mainMenu;
 
     public virtual void Click()
     {
-        this.signal.Raise(this.creatorPreset);
+        this.mainMenu.presetSignal.Raise(this.mainMenu.creatorPreset);
     }
 
 

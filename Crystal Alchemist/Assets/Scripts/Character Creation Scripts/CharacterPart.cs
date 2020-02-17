@@ -6,4 +6,6 @@ public class CharacterPart : MonoBehaviour
     public string partName;
     public bool neverDisable = true;
     public ColorGroup colorGroup;
+
+    public CharacterCreatorPartProperty property;
 }

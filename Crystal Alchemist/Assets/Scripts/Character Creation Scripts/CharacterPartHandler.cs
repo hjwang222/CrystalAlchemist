@@ -14,7 +14,7 @@ public class CharacterPartHandler : MonoBehaviour
         {
             part.gameObject.SetActive(false);
 
-            CharacterPartData data = preset.GetCharacterPartData(part.partName, part.parentName);
+            CharacterPartData data = preset.GetCharacterPartData(part.parentName, part.partName);
             Color color = preset.getColor(part.colorGroup);
 
             if (data != null || part.neverDisable) part.gameObject.SetActive(true); 

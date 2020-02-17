@@ -13,7 +13,7 @@ public class CharacterCreatorColor : CharacterCreatorButton
 
     public override void Click()
     {
-        this.creatorPreset.AddColorGroup(this.colorGroup, this.image.color);
+        this.mainMenu.creatorPreset.AddColorGroup(this.colorGroup, this.image.color);
 
         base.Click();
     }

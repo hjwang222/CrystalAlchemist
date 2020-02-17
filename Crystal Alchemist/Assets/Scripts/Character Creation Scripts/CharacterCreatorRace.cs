@@ -7,14 +7,9 @@ public class CharacterCreatorRace : CharacterCreatorButton
     [SerializeField]
     private Race race;
 
-    [SerializeField]
-    private SimpleSignal characterPartSignal;
-
     public override void Click()
     {
-        this.creatorPreset.race = this.race;
-        this.characterPartSignal.Raise();
-
-        base.Click();
+        this.mainMenu.creatorPreset.race = this.race;
+        this.mainMenu.updateGear();
     }
 }

@@ -30,19 +30,19 @@ public class CharacterCreatorPreview : MonoBehaviour
         {       
             foreach (Transform child in preview.transform)
             {
-                CharacterCreatorPart part = child.GetComponent<CharacterCreatorPart>();
+                CharacterCreatorPreviewPart part = child.GetComponent<CharacterCreatorPreviewPart>();
 
                 if (part != null)
                 {
-                    part.gameObject.SetActive(false);
-                    Image image = part.GetComponent<Image>();
+                    part.gameObject.SetActive(false); //set inactive
 
+                    Image image = part.GetComponent<Image>();
                     CharacterPartData data = preset.GetCharacterPartData(part.partGroup);
                     Color color = preset.getColor(part.colorGroup);
 
-                    if (data != null || part.neverDisable) part.gameObject.SetActive(true);
+                    if (data != null || part.neverDisable) part.gameObject.SetActive(true); //set active when found (tail?) or always active
 
-                    if (part.gameObject.activeInHierarchy && image != null)
+                    if (part.gameObject.activeInHierarchy && image != null) //set Image and Color when active
                     {                        
                         image.color = color;
 

@@ -7,11 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class CharacterCreatorMenu : MonoBehaviour
 {
-    [SerializeField]
-    private CharacterPreset creatorPreset;
+    public CharacterPreset creatorPreset;
 
     [SerializeField]
     private CharacterPreset playerPreset;
+
+    public CharacterPresetSignal presetSignal;
+
+    [SerializeField]
+    private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
 
     [Required]
     [SerializeField]
@@ -28,22 +32,20 @@ public class CharacterCreatorMenu : MonoBehaviour
         SceneManager.LoadSceneAsync(scene);
         Cursor.visible = false;
     }
-
-
+    
     public void updateGear()
     {
-        foreach(Transform child in this.transform)
+        foreach (CharacterCreatorPartProperty part in this.properties)
         {
-            CharacterCreatorGear gearButton = child.GetComponent<CharacterCreatorGear>();
-            if (gearButton != null)
-            {
-                CharacterPartData characterPartData = this.creatorPreset.GetCharacterPartData(gearButton.partName, gearButton.parentName);
+            CharacterPartData data = this.creatorPreset.GetCharacterPartData(part.parentName, part.name);
+            bool enableIt = part.enableIt(this.creatorPreset.race, data);
 
-                if (!gearButton.raceEnabled(this.creatorPreset.race) && (characterPartData != null))
-                    this.creatorPreset.RemoveCharacterPartData(gearButton.partName, gearButton.parentName);               
-            }
+            if (enableIt)
+                this.creatorPreset.AddCharacterPartData(part.parentName, part.partName); //Pony Ohren werden überschrieben da gleicher Parent
+            else
+                this.creatorPreset.RemoveCharacterPartData(part.parentName, part.partName);
         }
+
+        this.presetSignal.Raise(this.creatorPreset); //Update Preview
     }
-
-
 }

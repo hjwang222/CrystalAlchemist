@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CharacterCreatorPart : MonoBehaviour
+public class CharacterCreatorPreviewPart : MonoBehaviour
 {
     public string directory = "";
     public string partGroup = "";
@@ -8,4 +8,6 @@ public class CharacterCreatorPart : MonoBehaviour
 
     public ColorGroup colorGroup;
     public bool neverDisable = false;
+
+    public CharacterCreatorPartProperty property;
 }
