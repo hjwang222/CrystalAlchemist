@@ -170,11 +170,9 @@ public class SpriteAndAnimationUtil : MonoBehaviour
         }
     }
 
-
-
     private List<AnimationClip> getAnimationClips()
     {
-        List<string> files = Directory.GetFiles(Application.dataPath + "/" + this.animationPath, "*.anim").ToList();
+        List<string> files = Directory.GetFiles(Application.dataPath + "/Resources/" + this.animationPath, "*.anim").ToList();
         List<AnimationClip> clips = new List<AnimationClip>();
 
         foreach (string file in files)

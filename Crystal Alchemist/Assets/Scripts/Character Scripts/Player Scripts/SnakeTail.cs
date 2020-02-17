@@ -27,28 +27,31 @@ public class SnakeTail : MonoBehaviour
     }
 
     void Update()
-    {        
-        float distance = Vector2.Distance(this.parent.transform.position, this.transform.position);
-
-        if(distance > this.maxDistance)
-        {            
-            Vector2 direction = ((Vector2)this.parent.transform.position - (Vector2)this.transform.position).normalized;
-            this.GetComponent<Rigidbody2D>().velocity = (direction * this.player.myRigidbody.velocity.magnitude);
-        }
-        else
+    {
+        if (this.player != null && this.player.myRigidbody != null)
         {
-            this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            float distance = Vector2.Distance(this.parent.transform.position, this.transform.position);
+
+            if (distance > this.maxDistance)
+            {
+                Vector2 direction = ((Vector2)this.parent.transform.position - (Vector2)this.transform.position).normalized;
+                this.GetComponent<Rigidbody2D>().velocity = (direction * this.player.myRigidbody.velocity.magnitude);
+            }
+            else
+            {
+                this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+
+            int modify = 0;
+
+            if (this.parent.transform.position.y > this.transform.position.y) modify = 1;
+            else modify = -1;
+
+            if (this.parent != null && this.parent.GetComponent<SortingGroup>() != null)
+                this.GetComponent<SortingGroup>().sortingOrder = this.parent.GetComponent<SortingGroup>().sortingOrder + modify;
+
+            if (this.isHead && this.parent.GetComponent<SortingGroup>() != null)
+                this.parent.GetComponent<SortingGroup>().sortingOrder = modify;
         }
-
-        int modify = 0;
-
-        if(this.parent.transform.position.y > this.transform.position.y) modify = 1;       
-        else modify = - 1;
-
-        if (this.parent != null && this.parent.GetComponent<SortingGroup>() != null)
-            this.GetComponent<SortingGroup>().sortingOrder = this.parent.GetComponent<SortingGroup>().sortingOrder + modify;
-
-        if (this.isHead && this.parent.GetComponent<SortingGroup>() != null)
-            this.parent.GetComponent<SortingGroup>().sortingOrder = modify;
     }
 }

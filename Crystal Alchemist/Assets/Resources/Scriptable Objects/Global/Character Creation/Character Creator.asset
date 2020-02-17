@@ -13,35 +13,40 @@ MonoBehaviour:
   m_Name: Character Creator
   m_EditorClassIdentifier: 
   signal: {fileID: 11400000, guid: 54abe254f2dda014fb5e5c89b87a6eb3, type: 2}
-  race: 0
+  race: 2
   characterName: Alandrea
-  addEarsHorns: 1
-  preview: []
-  datas:
-  - type: 0
-    color: {r: 1, g: 1, b: 1, a: 1}
-    name: Bob
-  - type: 1
-    color: {r: 0.7411765, g: 0.08627451, b: 0.07450981, a: 1}
-    name: 
-  - type: 2
-    color: {r: 0.9490197, g: 0.87843144, b: 0.80392164, a: 1}
-    name: 
-  - type: 3
-    color: {r: 0.8490566, g: 0.69589895, b: 0.2683339, a: 1}
-    name: 
-  - type: 5
-    color: {r: 0.7411765, g: 0.08627451, b: 0.07450981, a: 1}
-    name: Tiara
-  - type: 4
-    color: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 1}
-    name: Glasses
-  - type: 6
-    color: {r: 0.2924528, g: 0.2274852, b: 0.048282295, a: 1}
-    name: 
-  - type: 7
-    color: {r: 0.6698113, g: 0.21168563, b: 0.21168563, a: 1}
-    name: Gold Armor
-  - type: 8
-    color: {r: 0.3333037, g: 0.42774284, b: 0.6603774, a: 1}
-    name: Dress
+  colorGroups:
+  - colorGroup: 0
+    color: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
+  - colorGroup: 1
+    color: {r: 0.4000089, g: 0.5075018, b: 0.9528302, a: 1}
+  - colorGroup: 2
+    color: {r: 0.9150943, g: 0.8088804, b: 0.64315593, a: 1}
+  - colorGroup: 3
+    color: {r: 0.8666667, g: 0.7303516, b: 0.31372547, a: 1}
+  characterParts:
+  - name: Bob
+    parentName: Hairstyle
+    previewImages:
+    - {fileID: -8543379145089725134, guid: e9cbffee3db78ac4c94bc7271f6aa1b2, type: 3}
+    - {fileID: -5260679801054297698, guid: e9cbffee3db78ac4c94bc7271f6aa1b2, type: 3}
+  - name: Gold Armor
+    parentName: Upper Gear
+    previewImages:
+    - {fileID: -8543379145089725134, guid: 7b0322f43fa08c1499150b32d6a44ad5, type: 3}
+    - {fileID: -5260679801054297698, guid: 7b0322f43fa08c1499150b32d6a44ad5, type: 3}
+  - name: Gold Armor
+    parentName: Lower Gear
+    previewImages:
+    - {fileID: -8543379145089725134, guid: 07744d6ce9d9ce240a83e67b22d8d9e0, type: 3}
+    - {fileID: -5260679801054297698, guid: 07744d6ce9d9ce240a83e67b22d8d9e0, type: 3}
+  - name: Female
+    parentName: Legs
+    previewImages:
+    - {fileID: -8543379145089725134, guid: 15c8187d50c69dd45a95daa59c514011, type: 3}
+    - {fileID: -5260679801054297698, guid: 15c8187d50c69dd45a95daa59c514011, type: 3}
+  - name: Crown
+    parentName: Head Gear
+    previewImages:
+    - {fileID: -8543379145089725134, guid: 391269cc447ebfb478e65453c61d13ed, type: 3}
+    - {fileID: -5260679801054297698, guid: 391269cc447ebfb478e65453c61d13ed, type: 3}

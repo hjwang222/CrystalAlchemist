@@ -177,8 +177,7 @@ public class CustomUtilities : MonoBehaviour
         {
             foreach (Transform child in transform)
             {
-                if (child.GetComponent<T>() != null 
-                    && !childObjects.Contains(child.GetComponent<T>())) childObjects.Add(child.GetComponent<T>());
+                if (child.GetComponent<T>() != null) childObjects.Add(child.GetComponent<T>());
                 GetChildObjects(child, childObjects);
             }
         }        

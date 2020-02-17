@@ -16,27 +16,63 @@ public class CharacterCreatorPreview : MonoBehaviour
 
     private void Start()
     {
-        UpdatePreview();
+        UpdatePreview(this.preset);
     }
 
-    private void UpdatePreview()
+    private void UpdatePreview(CharacterPreset preset)
     {
-        setImage();        
+        //setImage(preset);
     }
 
-    private void setImage()
+    private void savePreview(CharacterPartData data, CharacterPart part)
     {
-        for (int i = 0; i < this.previews.Count; i++)
+        Sprite front = null;
+        Sprite back = null;
+
+        string path = "Art/Characters/Player Sprites/" + part.assetPath.Replace(".png", "");
+        Sprite[] sprites = Resources.LoadAll<Sprite>(path);
+
+        foreach (Sprite sprite in sprites)
         {
-            foreach (Transform imageGO in previews[i].transform)
+            if (sprite.name.Contains("Idle Down")) front = sprite;
+            if (sprite.name.Contains("Idle Up")) back = sprite;
+        }
+        data.parentName = part.transform.parent.name;
+        data.setSprites(front, back);
+    }
+
+    public void setImage(CharacterPreset preset)
+    {
+        for (int i = 0; i < previews.Count; i++)
+        {
+            GameObject preview = previews[i];
+
+            foreach (Transform trans in preview.transform)
             {
-                CharacterPreviewData data = preset.getPreviewData(imageGO.name);
-                if (data != null)
+                GameObject imageGO = trans.gameObject;    
+                CharacterCreatorPart part = imageGO.GetComponent<CharacterCreatorPart>();
+
+                if (part != null)
                 {
-                    if(data.previewImages[i] != null) imageGO.GetComponent<Image>().sprite = data.previewImages[i];
-                    imageGO.GetComponent<Image>().color = data.previewColor;                    
+                    imageGO.SetActive(false);
+                    Image image = part.GetComponent<Image>();
+
+                    CharacterPartData data = preset.getData(null, imageGO.name);
+                    Color color = preset.getColor(part.colorGroup);
+
+                    if (data != null || part.neverDisable) imageGO.SetActive(true);
+
+                    if (imageGO.activeInHierarchy)
+                    {                        
+                        image.color = color;
+
+                        if (data != null)
+                        {
+                            List<Sprite> sprites = data.previewImages;
+                            if (sprites.Count > 0) image.sprite = sprites[i];
+                        }
+                    }
                 }
-                else imageGO.gameObject.SetActive(false);
             }
         }
     }

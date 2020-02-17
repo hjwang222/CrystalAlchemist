@@ -20,34 +20,33 @@ public enum ColorGroup
     headGear,
     underwear,
     upperGear,
-    lowerGear
+    lowerGear,
+    none
+}
+
+[System.Serializable]
+public class ColorGroupData
+{
+    public ColorGroup colorGroup;
+    public Color color = Color.white;
 }
 
 [System.Serializable]
 public class CharacterPartData
 {
-    public ColorGroup type;
-    public Color color = Color.white;
     public string name;
-}
+    public string parentName;
+    public List<Sprite> previewImages = new List<Sprite>();
 
-[System.Serializable]
-public class CharacterPreviewData
-{
-    public string previewPart;
-    public Sprite[] previewImages = new Sprite[2];
-    public Color previewColor;
-
-    public CharacterPreviewData(string name, Sprite front, Sprite back, Color color)
+    public void setSprites(Sprite front, Sprite back)
     {
-        this.previewPart = name;
-        this.previewImages[0] = front;
-        this.previewImages[1] = back;
-        this.previewColor = color;
+        this.previewImages.Clear();
+        this.previewImages.Add(front);
+        this.previewImages.Add(back);
     }
 }
 
-    [CreateAssetMenu(menuName = "Game/Character Preset")]
+[CreateAssetMenu(menuName = "Game/Character Preset")]
 public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
 {
     [SerializeField]
@@ -55,34 +54,27 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
 
     public Race race;
     public string characterName;
-    public bool addEarsHorns;
-    public List<CharacterPreviewData> preview = new List<CharacterPreviewData>();
 
-    public List<CharacterPartData> datas = new List<CharacterPartData>();
+    public List<ColorGroupData> colorGroups = new List<ColorGroupData>();
+    public List<CharacterPartData> characterParts = new List<CharacterPartData>();
 
-    public void setPreview(string name, Sprite previewFront, Sprite previewBack, Color color)
+    public CharacterPartData getData(string name, string parentName)
     {
-        CharacterPreviewData temp = getPreviewData(name);
-
-        if(temp == null)
+        foreach (CharacterPartData data in this.characterParts)
         {
-            this.preview.Add(new CharacterPreviewData(name, previewFront, previewBack, color));
-        }
-        else
-        {
-            temp.previewImages[0] = previewFront;
-            temp.previewImages[1] = previewBack;
-            temp.previewColor = color;
-        }     
-    }
-
-    public CharacterPreviewData getPreviewData(string name)
-    {
-        foreach (CharacterPreviewData previewData in this.preview)
-        {
-            if (previewData.previewPart.ToUpper() == name.ToUpper()) return previewData;
+            if (((data.parentName.ToUpper() == parentName.ToUpper())
+                    && (name == null || data.name.ToUpper() == name.ToUpper()))) return data;
         }
         return null;
+    }
+
+    public Color getColor(ColorGroup colorGroup)
+    {
+        foreach (ColorGroupData data in this.colorGroups)
+        {
+            if (data.colorGroup == colorGroup) return data.color;
+        }
+        return Color.white;
     }
 
     [Button]
