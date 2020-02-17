@@ -8,7 +8,7 @@ public class CharacterCreatorPreview : MonoBehaviour
 {
     [BoxGroup("Required")]
     [SerializeField]
-    private CharacterPreset preset;
+    private CharacterPreset creatorPreset;
 
     [BoxGroup("Required")]
     [SerializeField]
@@ -16,64 +16,57 @@ public class CharacterCreatorPreview : MonoBehaviour
 
     private void Start()
     {
-        UpdatePreview(this.preset);
+        UpdatePreview();
     }
 
-    private void UpdatePreview(CharacterPreset preset)
+    private void UpdatePreview()
     {
-        //setImage(preset);
-    }
-
-    private void savePreview(CharacterPartData data, CharacterPart part)
-    {
-        Sprite front = null;
-        Sprite back = null;
-
-        string path = "Art/Characters/Player Sprites/" + part.assetPath.Replace(".png", "");
-        Sprite[] sprites = Resources.LoadAll<Sprite>(path);
-
-        foreach (Sprite sprite in sprites)
-        {
-            if (sprite.name.Contains("Idle Down")) front = sprite;
-            if (sprite.name.Contains("Idle Up")) back = sprite;
-        }
-        data.parentName = part.transform.parent.name;
-        data.setSprites(front, back);
+        setImage(this.creatorPreset);
     }
 
     public void setImage(CharacterPreset preset)
     {
-        for (int i = 0; i < previews.Count; i++)
-        {
-            GameObject preview = previews[i];
-
-            foreach (Transform trans in preview.transform)
+        foreach(GameObject preview in previews)
+        {       
+            foreach (Transform child in preview.transform)
             {
-                GameObject imageGO = trans.gameObject;    
-                CharacterCreatorPart part = imageGO.GetComponent<CharacterCreatorPart>();
+                CharacterCreatorPart part = child.GetComponent<CharacterCreatorPart>();
 
                 if (part != null)
                 {
-                    imageGO.SetActive(false);
+                    part.gameObject.SetActive(false);
                     Image image = part.GetComponent<Image>();
 
-                    CharacterPartData data = preset.getData(null, imageGO.name);
+                    CharacterPartData data = preset.GetCharacterPartData(part.partGroup);
                     Color color = preset.getColor(part.colorGroup);
 
-                    if (data != null || part.neverDisable) imageGO.SetActive(true);
+                    if (data != null || part.neverDisable) part.gameObject.SetActive(true);
 
-                    if (imageGO.activeInHierarchy)
+                    if (part.gameObject.activeInHierarchy && image != null)
                     {                        
                         image.color = color;
 
                         if (data != null)
                         {
-                            List<Sprite> sprites = data.previewImages;
-                            if (sprites.Count > 0) image.sprite = sprites[i];
+                            Sprite sprite = getSprite(data, part.directory, part.direction);
+                            if (sprite != null) image.sprite = sprite;
                         }
                     }
                 }
             }
         }
+    }
+
+    private Sprite getSprite(CharacterPartData data, string directory, string direction)
+    {
+        string path = "Art/Characters/Player Sprites/" + directory + "/" + data.parentName + "/" + data.name;
+        Sprite[] sprites = Resources.LoadAll<Sprite>(path);
+
+        foreach (Sprite sprite in sprites)
+        {
+            if (sprite.name.Contains(("Idle " + direction))) return sprite;
+        }
+
+        return null;
     }
 }

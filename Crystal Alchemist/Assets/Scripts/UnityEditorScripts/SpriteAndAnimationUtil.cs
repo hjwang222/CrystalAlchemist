@@ -79,8 +79,12 @@ public class SpriteAndAnimationUtil : MonoBehaviour
         CustomUtilities.UnityFunctions.GetChildObjects(this.transform, childObjects);
 
         foreach(CharacterPart part in childObjects)
-        {            
-            if (part.GetComponent<PlayerAnimationPart>() != null) part.assetPath = part.GetComponent<PlayerAnimationPart>().path;
+        {
+            if (part.GetComponent<PlayerAnimationPart>() != null)
+            {
+                part.partName = part.GetComponent<PlayerAnimationPart>().fileName;
+                part.parentName = part.GetComponent<PlayerAnimationPart>().subFolder;
+            }
         }
     }
 
@@ -106,7 +110,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
     {
         if (clip != null)
         {
-            string path = this.assetPath + "/" + childObject.path;
+            string path = this.assetPath + "/" + childObject.getFullPath();
             GameObject spriteObject = childObject.gameObject;
 
             List<Object> sprite = AssetDatabase.LoadAllAssetsAtPath(path).ToList();
@@ -154,7 +158,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
                 }
                 catch
                 {
-                    Debug.Log("<color=red>Error: " + childObject.gameObject.name + " (" + childObject.path + ")</color>");
+                    Debug.Log("<color=red>Error: " + childObject.gameObject.name + " (" + childObject.getFullPath() + ")</color>");
                 }
 
                 AnimationUtility.SetObjectReferenceCurve(clip, spriteBinding, spriteKeyFrames);
@@ -186,10 +190,10 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
     private void SliceAndNameSprites(PlayerAnimationPart file)
     {
-        string assetpath = this.assetPath + "/" + file.path;
+        string assetpath = this.assetPath + "/" + file.getFullPath();
         Texture2D myTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(assetpath);
 
-        File.Delete(Application.dataPath + "/" + this.assetPath.Replace("Assets", "") + "/" + file.path + ".meta");
+        File.Delete(Application.dataPath + "/" + this.assetPath.Replace("Assets", "") + "/" + file.getFullPath() + ".meta");
 
         string path = AssetDatabase.GetAssetPath(myTexture);
         TextureImporter ti = AssetImporter.GetAtPath(path) as TextureImporter;
@@ -246,7 +250,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
         AssetDatabase.LoadAssetAtPath<Texture2D>(assetpath);
 
-        Debug.Log("<color=blue>Sliced and Named: " + file.path + " into " + newData.Count + " sprites</color>");
+        Debug.Log("<color=blue>Sliced and Named: " + file.getFullPath() + " into " + newData.Count + " sprites</color>");
     }
 
     private AnimationKey getAnimationKey(int columnIndex, int rowIndex)

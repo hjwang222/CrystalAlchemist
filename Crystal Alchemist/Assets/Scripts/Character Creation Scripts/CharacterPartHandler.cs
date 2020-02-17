@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterPartHandler : MonoBehaviour
@@ -15,14 +14,11 @@ public class CharacterPartHandler : MonoBehaviour
         {
             part.gameObject.SetActive(false);
 
-            CharacterPartData data = preset.getData(part.gameObject.name, part.transform.parent.name);
+            CharacterPartData data = preset.GetCharacterPartData(part.partName, part.parentName);
             Color color = preset.getColor(part.colorGroup);
-            bool isEnabledByRace = part.raceEnabled(preset.race);
 
-            if (part.enableIt(preset.race, data)) part.gameObject.SetActive(true); 
-            if (part.gameObject.activeInHierarchy && part.dyeable) part.GetComponent<SpriteRenderer>().color = color;            
+            if (data != null || part.neverDisable) part.gameObject.SetActive(true); 
+            if (part.gameObject.activeInHierarchy) part.GetComponent<SpriteRenderer>().color = color;            
         }
     }
-
-
 }

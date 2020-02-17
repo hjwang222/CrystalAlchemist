@@ -13,10 +13,6 @@ public class TitleScreen : MonoBehaviour
 
     [Required]
     [SerializeField]
-    private string firstScene = "Haus";
-
-    [Required]
-    [SerializeField]
     private StringValue saveGameSlot;
 
     [SerializeField]
@@ -52,11 +48,6 @@ public class TitleScreen : MonoBehaviour
         #endif
 
         Application.Quit();
-    }
-
-    public void startNewGame()
-    {
-        startTheGame(this.firstScene, "");
     }
 
     public void startTheGame(string scene, string saveSlot)

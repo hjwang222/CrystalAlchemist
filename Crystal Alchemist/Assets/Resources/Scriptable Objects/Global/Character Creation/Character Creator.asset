@@ -17,36 +17,23 @@ MonoBehaviour:
   characterName: Alandrea
   colorGroups:
   - colorGroup: 0
-    color: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
+    color: {r: 0.735849, g: 0.48246706, b: 0.48246706, a: 1}
   - colorGroup: 1
     color: {r: 0.4000089, g: 0.5075018, b: 0.9528302, a: 1}
   - colorGroup: 2
     color: {r: 0.9150943, g: 0.8088804, b: 0.64315593, a: 1}
   - colorGroup: 3
     color: {r: 0.8666667, g: 0.7303516, b: 0.31372547, a: 1}
+  - colorGroup: 7
+    color: {r: 0.6603774, g: 0.32084376, b: 0.32084376, a: 1}
   characterParts:
-  - name: Bob
-    parentName: Hairstyle
-    previewImages:
-    - {fileID: -8543379145089725134, guid: e9cbffee3db78ac4c94bc7271f6aa1b2, type: 3}
-    - {fileID: -5260679801054297698, guid: e9cbffee3db78ac4c94bc7271f6aa1b2, type: 3}
-  - name: Gold Armor
-    parentName: Upper Gear
-    previewImages:
-    - {fileID: -8543379145089725134, guid: 7b0322f43fa08c1499150b32d6a44ad5, type: 3}
-    - {fileID: -5260679801054297698, guid: 7b0322f43fa08c1499150b32d6a44ad5, type: 3}
-  - name: Gold Armor
-    parentName: Lower Gear
-    previewImages:
-    - {fileID: -8543379145089725134, guid: 07744d6ce9d9ce240a83e67b22d8d9e0, type: 3}
-    - {fileID: -5260679801054297698, guid: 07744d6ce9d9ce240a83e67b22d8d9e0, type: 3}
-  - name: Female
-    parentName: Legs
-    previewImages:
-    - {fileID: -8543379145089725134, guid: 15c8187d50c69dd45a95daa59c514011, type: 3}
-    - {fileID: -5260679801054297698, guid: 15c8187d50c69dd45a95daa59c514011, type: 3}
-  - name: Crown
-    parentName: Head Gear
-    previewImages:
-    - {fileID: -8543379145089725134, guid: 391269cc447ebfb478e65453c61d13ed, type: 3}
-    - {fileID: -5260679801054297698, guid: 391269cc447ebfb478e65453c61d13ed, type: 3}
+  - parentName: Hairstyle
+    name: Bob
+  - parentName: Upper Gear
+    name: Plate
+  - parentName: Lower Gear
+    name: Mage Shoes
+  - parentName: Legs
+    name: Female
+  - parentName: Head Gear
+    name: Crown

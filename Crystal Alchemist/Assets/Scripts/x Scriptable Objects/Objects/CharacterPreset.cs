@@ -29,20 +29,24 @@ public class ColorGroupData
 {
     public ColorGroup colorGroup;
     public Color color = Color.white;
+
+    public ColorGroupData(ColorGroup colorGroup, Color color)
+    {
+        this.colorGroup = colorGroup;
+        this.color = color;
+    }
 }
 
 [System.Serializable]
 public class CharacterPartData
 {
-    public string name;
     public string parentName;
-    public List<Sprite> previewImages = new List<Sprite>();
+    public string name;
 
-    public void setSprites(Sprite front, Sprite back)
+    public CharacterPartData(string parent, string name)
     {
-        this.previewImages.Clear();
-        this.previewImages.Add(front);
-        this.previewImages.Add(back);
+        this.parentName = parent;
+        this.name = name;
     }
 }
 
@@ -58,7 +62,7 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
     public List<ColorGroupData> colorGroups = new List<ColorGroupData>();
     public List<CharacterPartData> characterParts = new List<CharacterPartData>();
 
-    public CharacterPartData getData(string name, string parentName)
+    public CharacterPartData GetCharacterPartData(string name, string parentName)
     {
         foreach (CharacterPartData data in this.characterParts)
         {
@@ -67,6 +71,51 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
         }
         return null;
     }
+
+    public CharacterPartData GetCharacterPartData(string parentName)
+    {
+        foreach (CharacterPartData characterPartData in this.characterParts)
+        {
+            if (characterPartData.parentName.ToUpper() == parentName.ToUpper()) return characterPartData;
+        }
+        return null;
+    }
+
+    public void AddCharacterPartData(string parentName, string name)
+    {
+        CharacterPartData characterPartData = this.GetCharacterPartData(parentName);
+        if (characterPartData != null) characterPartData.name = name;
+        else this.characterParts.Add(new CharacterPartData(parentName, name));
+    }
+
+    public void RemoveCharacterPartData(string parentName, string name)
+    {
+        CharacterPartData characterPartData = this.GetCharacterPartData(parentName);
+        if (characterPartData != null) this.characterParts.Remove(characterPartData);
+    }
+
+
+
+
+    public ColorGroupData GetColorGroupData(ColorGroup colorGroup)
+    {
+        foreach (ColorGroupData colorGroupData in this.colorGroups)
+        {
+            if (colorGroupData.colorGroup == colorGroup) return colorGroupData;
+        }
+        return null;
+    }
+
+    public void AddColorGroup(ColorGroup colorGroup, Color color)
+    {
+        ColorGroupData colorGroupData = this.GetColorGroupData(colorGroup);
+        if (colorGroupData != null) colorGroupData.color = color;
+        else this.colorGroups.Add(new ColorGroupData(colorGroup, color));
+    }
+
+
+
+
 
     public Color getColor(ColorGroup colorGroup)
     {
