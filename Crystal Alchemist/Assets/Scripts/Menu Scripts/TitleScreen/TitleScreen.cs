@@ -3,11 +3,8 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
 
-public class TitleScreen : MonoBehaviour
-{
-    [SerializeField]
-    private List<GameObject> menues = new List<GameObject>(); 
-
+public class TitleScreen : BasicMenu
+{    
     [SerializeField]
     private AudioClip music;
 
@@ -22,13 +19,13 @@ public class TitleScreen : MonoBehaviour
 
     private string lastSavepoint = null;
 
-    void Start()
+    public override void Start()
     {
         this.mainFrame.SetActive(true);
         if (this.darkFrame != null) this.darkFrame.SetActive(false);
 
         Cursor.visible = true;
-        showMenu(this.menues[0]);
+        base.Start();
     }
 
     private void Update()
@@ -62,34 +59,13 @@ public class TitleScreen : MonoBehaviour
         SaveSystem.SaveOptions();        
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
-        showMenu(this.menues[0]);
+        base.Start();
         this.mainFrame.SetActive(true);
     }
 
-    public void showMenu(GameObject newActiveMenu)
-    {
-        foreach(GameObject gameObject in this.menues)
-        {
-            gameObject.SetActive(false);
-        }
 
-        if (newActiveMenu != null)
-        {
-            newActiveMenu.SetActive(true);
-
-            for (int i = 0; i < newActiveMenu.transform.childCount; i++)
-            {
-                ButtonExtension temp = newActiveMenu.transform.GetChild(i).GetComponent<ButtonExtension>();
-                if (temp != null && temp.setFirstSelected)
-                {
-                    temp.setFirst();
-                    break;
-                }
-            }
-        }
-    }
 
     public void showBackground(bool dark)
     {

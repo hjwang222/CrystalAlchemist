@@ -13,7 +13,7 @@ public class UniversalMenuControls : MonoBehaviour
         if (this.mainGameObject != null)
         {
             if (this.mainGameObject.GetComponent<SaveGameMenu>() != null) this.mainGameObject.GetComponent<SaveGameMenu>().exitMenu();
-            else if (this.mainGameObject.GetComponent<TitleScreen>() != null) this.mainGameObject.GetComponent<TitleScreen>().showMenu(mainMenu);
+            else if (this.mainGameObject.GetComponent<BasicMenu>() != null) this.mainGameObject.GetComponent<BasicMenu>().showMenu(mainMenu);
         }
     }
 

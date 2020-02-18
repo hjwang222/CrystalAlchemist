@@ -94,6 +94,12 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
         if (characterPartData != null) this.characterParts.Remove(characterPartData);
     }
 
+    public void RemoveCharacterPartData(string parentName)
+    {
+        CharacterPartData characterPartData = this.GetCharacterPartData(parentName);
+        if (characterPartData != null) this.characterParts.Remove(characterPartData);
+    }
+
     public ColorGroupData GetColorGroupData(ColorGroup colorGroup)
     {
         foreach (ColorGroupData colorGroupData in this.colorGroups)
@@ -108,6 +114,12 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
         ColorGroupData colorGroupData = this.GetColorGroupData(colorGroup);
         if (colorGroupData != null) colorGroupData.color = color;
         else this.colorGroups.Add(new ColorGroupData(colorGroup, color));
+    }
+
+    public void RemoveColorGroup(ColorGroup colorGroup)
+    {
+        ColorGroupData colorGroupData = this.GetColorGroupData(colorGroup);
+        if (colorGroupData != null) this.colorGroups.Remove(colorGroupData);
     }
 
     public Color getColor(ColorGroup colorGroup)

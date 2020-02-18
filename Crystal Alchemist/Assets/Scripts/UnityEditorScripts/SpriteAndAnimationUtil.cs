@@ -73,18 +73,14 @@ public class SpriteAndAnimationUtil : MonoBehaviour
     }
 
     [Button]
-    public void UpdatePreview()
+    public void temp()
     {
-        List<CharacterPart> childObjects = new List<CharacterPart>();
-        CustomUtilities.UnityFunctions.GetChildObjects(this.transform, childObjects);
+        List<CharacterCreatorPart> childObjects = new List<CharacterCreatorPart>();
+        CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorPart>(this.transform, childObjects); //get all children from GameObject
 
-        foreach(CharacterPart part in childObjects)
+        foreach (CharacterCreatorPart part in childObjects)
         {
-            if (part.GetComponent<PlayerAnimationPart>() != null)
-            {
-                part.partName = part.GetComponent<PlayerAnimationPart>().fileName;
-                part.parentName = part.GetComponent<PlayerAnimationPart>().subFolder;
-            }
+            part.properties.Add(part.property);
         }
     }
 
@@ -110,7 +106,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
     {
         if (clip != null)
         {
-            string path = this.assetPath + "/" + childObject.getFullPath();
+            string path = this.assetPath + "/" + childObject.property.getFullPath();
             GameObject spriteObject = childObject.gameObject;
 
             List<Object> sprite = AssetDatabase.LoadAllAssetsAtPath(path).ToList();
@@ -158,7 +154,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
                 }
                 catch
                 {
-                    Debug.Log("<color=red>Error: " + childObject.gameObject.name + " (" + childObject.getFullPath() + ")</color>");
+                    Debug.Log("<color=red>Error: " + childObject.gameObject.name + " (" + childObject.property.getFullPath() + ")</color>");
                 }
 
                 AnimationUtility.SetObjectReferenceCurve(clip, spriteBinding, spriteKeyFrames);
@@ -190,10 +186,10 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
     private void SliceAndNameSprites(PlayerAnimationPart file)
     {
-        string assetpath = this.assetPath + "/" + file.getFullPath();
+        string assetpath = this.assetPath + "/" + file.property.getFullPath();
         Texture2D myTexture = AssetDatabase.LoadAssetAtPath<Texture2D>(assetpath);
 
-        File.Delete(Application.dataPath + "/" + this.assetPath.Replace("Assets", "") + "/" + file.getFullPath() + ".meta");
+        File.Delete(Application.dataPath + "/" + this.assetPath.Replace("Assets", "") + "/" + file.property.getFullPath() + ".meta");
 
         string path = AssetDatabase.GetAssetPath(myTexture);
         TextureImporter ti = AssetImporter.GetAtPath(path) as TextureImporter;
@@ -250,7 +246,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
         AssetDatabase.LoadAssetAtPath<Texture2D>(assetpath);
 
-        Debug.Log("<color=blue>Sliced and Named: " + file.getFullPath() + " into " + newData.Count + " sprites</color>");
+        Debug.Log("<color=blue>Sliced and Named: " + file.property.getFullPath() + " into " + newData.Count + " sprites</color>");
     }
 
     private AnimationKey getAnimationKey(int columnIndex, int rowIndex)

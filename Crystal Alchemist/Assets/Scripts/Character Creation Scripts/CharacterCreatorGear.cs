@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class CharacterCreatorGear : CharacterCreatorButton
 {
+    public CharacterCreatorPartProperty property;
+
     [SerializeField]
-    private CharacterCreatorPartProperty property;
+    private bool removeIt = false;
 
     public override void Click()
     {
-        this.mainMenu.creatorPreset.AddCharacterPartData(this.property.parentName, this.property.partName);
+        if(!this.removeIt) this.mainMenu.creatorPreset.AddCharacterPartData(this.property.parentName, this.property.partName);
+        else this.mainMenu.creatorPreset.RemoveCharacterPartData(this.property.parentName);
+        this.mainMenu.updateColor(this.property);
         base.Click();
     }           
     

@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class CharacterCreatorColor : CharacterCreatorButton
 {
-    [SerializeField]
-    private ColorGroup colorGroup;
+    public ColorGroup colorGroup;
 
     [SerializeField]
     private Image image;
@@ -14,7 +13,6 @@ public class CharacterCreatorColor : CharacterCreatorButton
     public override void Click()
     {
         this.mainMenu.creatorPreset.AddColorGroup(this.colorGroup, this.image.color);
-
         base.Click();
     }
 

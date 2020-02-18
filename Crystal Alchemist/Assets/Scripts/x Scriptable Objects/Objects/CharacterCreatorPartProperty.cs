@@ -13,25 +13,28 @@ public enum EnableMode
 public class CharacterCreatorPartProperty : ScriptableObject
 {
     [BoxGroup("Enable Info")]
+    public bool neverDisable = false;
+
+    [HideIf("neverDisable", true)]
+    [BoxGroup("Enable Info")]
     [SerializeField]
     private EnableMode enableMode;
 
+    [HideIf("neverDisable", true)]
     [HideIf("enableMode", EnableMode.name)]
     [BoxGroup("Enable Info")]
     [SerializeField]
     private List<Race> restrictedRaces = new List<Race>();
 
+    [ShowIf("isDyeable", true)]
     [BoxGroup("Color Info")]
-    [SerializeField]
-    private ColorGroup colorGroup;
+    public ColorGroup colorGroup;
 
     [BoxGroup("Color Info")]
-    [SerializeField]
-    private bool isDyeable = true;
+    public bool isDyeable = true;
 
     [BoxGroup("Part Info")]
-    [SerializeField]
-    private string category = "Head";
+    public string category = "Head";
 
     [BoxGroup("Part Info")]
     public string parentName = "Ears";
@@ -40,6 +43,10 @@ public class CharacterCreatorPartProperty : ScriptableObject
     public string partName = "Elf Ears";
 
 
+    public string getFullPath()
+    {
+        return this.category + "/" + this.parentName + "/" + this.partName + ".png";
+    }
 
     public bool enableIt(Race race, CharacterPartData data)
     {
