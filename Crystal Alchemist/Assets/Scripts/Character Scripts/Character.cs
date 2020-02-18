@@ -209,7 +209,6 @@ public class Character : MonoBehaviour
         }
 
         this.currentState = CharacterState.idle;
-        this.myRigidbody.bodyType = RigidbodyType2D.Dynamic;
         this.animator.enabled = true;
         this.enableSpriteRenderer(true);
         if (!this.isPlayer) this.transform.position = this.spawnPosition;
@@ -217,6 +216,7 @@ public class Character : MonoBehaviour
         this.activeDeathAnimation = null;
 
         if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
+        else this.myRigidbody.bodyType = RigidbodyType2D.Dynamic;
 
         if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().resetColors();
     }

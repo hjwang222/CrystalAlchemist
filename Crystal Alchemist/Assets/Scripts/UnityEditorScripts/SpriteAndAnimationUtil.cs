@@ -92,6 +92,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
         Destroy(this);
     }
 
+#if UNITY_EDITOR
     private string GetGameObjectPath(Transform transform)
     {
         string path = transform.name;
@@ -287,4 +288,5 @@ public class SpriteAndAnimationUtil : MonoBehaviour
 
         return result;
     }
+#endif
 }
