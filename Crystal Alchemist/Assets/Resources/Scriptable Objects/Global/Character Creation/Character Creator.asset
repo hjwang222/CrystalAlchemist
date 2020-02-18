@@ -12,32 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17a2b03240e5c4c4eab3922301d66a96, type: 3}
   m_Name: Character Creator
   m_EditorClassIdentifier: 
+  readOnly: 0
   signal: {fileID: 11400000, guid: 54abe254f2dda014fb5e5c89b87a6eb3, type: 2}
-  race: 1
+  race: 0
   characterName: Alandrea
   colorGroups:
   - colorGroup: 0
-    color: {r: 0.8490566, g: 0.8290317, b: 0.8290317, a: 1}
+    color: {r: 0.5471698, g: 0.395066, b: 0.31229973, a: 1}
   - colorGroup: 1
-    color: {r: 0.4000089, g: 0.5075018, b: 0.9528302, a: 1}
+    color: {r: 0.15307939, g: 0.35835218, b: 0.754717, a: 1}
   - colorGroup: 2
-    color: {r: 0.9150943, g: 0.8088804, b: 0.64315593, a: 1}
-  - colorGroup: 3
-    color: {r: 0.8666667, g: 0.46843213, b: 0.31372547, a: 1}
-  - colorGroup: 7
-    color: {r: 1, g: 1, b: 1, a: 1}
+    color: {r: 0.9622642, g: 0.83886933, b: 0.64907444, a: 1}
+  - colorGroup: 5
+    color: {r: 0.14117648, g: 0.1783488, b: 0.8509804, a: 1}
   characterParts:
+  - parentName: Head Gear
+    name: Tiara
+  - parentName: Upper Gear
+    name: Mage
+  - parentName: Lower Gear
+    name: Mage Shoes
   - parentName: Hairstyle
     name: Bob
-  - parentName: Face Gear
-    name: Glasses
-  - parentName: Upper Gear
-    name: Plate
   - parentName: Legs
     name: Legs
-  - parentName: Ears
-    name: Pony Ears
-  - parentName: Tail
-    name: Pony Tail
-  - parentName: Lower Gear
-    name: Plate Boots

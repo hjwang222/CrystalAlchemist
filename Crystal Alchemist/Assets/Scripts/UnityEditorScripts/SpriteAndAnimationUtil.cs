@@ -72,6 +72,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
         }
     }
 
+    /*
     [Button]
     public void temp()
     {
@@ -82,7 +83,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
         {
             part.properties.Add(part.property);
         }
-    }
+    }*/
 
 #endif
 

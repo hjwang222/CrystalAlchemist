@@ -7,7 +7,7 @@ public class CharacterCreatorButton : MonoBehaviour
 
     public virtual void Click()
     {
-        this.mainMenu.presetSignal.Raise(this.mainMenu.creatorPreset);
+        this.mainMenu.updatePreview();
     }
 
 

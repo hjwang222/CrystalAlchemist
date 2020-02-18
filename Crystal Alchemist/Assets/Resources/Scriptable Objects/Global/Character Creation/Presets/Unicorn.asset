@@ -12,67 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17a2b03240e5c4c4eab3922301d66a96, type: 3}
   m_Name: Unicorn
   m_EditorClassIdentifier: 
+  readOnly: 1
   signal: {fileID: 11400000, guid: 54abe254f2dda014fb5e5c89b87a6eb3, type: 2}
   race: 1
-  characterName: Infia
-  addEarsHorns: 1
-  datas:
-  - type: 0
-    color: {r: 0.9529412, g: 0.50980395, b: 0.8762331, a: 1}
-    name: Bob
-    previewFront: {fileID: -8543379145089725134, guid: c10cd6e53facd3441be4b30ffed00c06,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: c10cd6e53facd3441be4b30ffed00c06,
-      type: 3}
-  - type: 1
-    color: {r: 0.3183896, g: 0.8207547, b: 0.2748754, a: 1}
-    name: 
-    previewFront: {fileID: -8543379145089725134, guid: 6f6afad7a8ce0764c90d966295a231fb,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: 6f6afad7a8ce0764c90d966295a231fb,
-      type: 3}
-  - type: 2
-    color: {r: 0.9716981, g: 0.9315308, b: 0.5179334, a: 1}
-    name: 
-    previewFront: {fileID: -8543379145089725134, guid: da78fac0d670e1d4fb8c3c4f937186f6,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: da78fac0d670e1d4fb8c3c4f937186f6,
-      type: 3}
-  - type: 3
-    color: {r: 0.8490566, g: 0.69589895, b: 0.2683339, a: 1}
-    name: 
-    previewFront: {fileID: -8543379145089725134, guid: da78fac0d670e1d4fb8c3c4f937186f6,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: da78fac0d670e1d4fb8c3c4f937186f6,
-      type: 3}
-  - type: 5
-    color: {r: 0.7411765, g: 0.08627451, b: 0.07450981, a: 1}
-    name: 
-    previewFront: {fileID: 0}
-    previewBack: {fileID: 0}
-  - type: 4
-    color: {r: 0.5, g: 0.20518869, b: 0.38724265, a: 1}
+  characterName: Serente
+  colorGroups:
+  - colorGroup: 2
+    color: {r: 0.9607843, g: 0.93405384, b: 0.6509804, a: 1}
+  - colorGroup: 1
+    color: {r: 0.7264151, g: 0.18845676, b: 0.67291635, a: 1}
+  - colorGroup: 0
+    color: {r: 0.9716981, g: 0.62793696, b: 0.8722631, a: 1}
+  - colorGroup: 4
+    color: {r: 0.854902, g: 0.23137257, b: 0.14117648, a: 1}
+  characterParts:
+  - parentName: Ears
+    name: Pony Ears
+  - parentName: Legs
+    name: Legs
+  - parentName: Tail
+    name: Pony Tail
+  - parentName: Hairstyle
+    name: Zopf
+  - parentName: Face Gear
     name: Glasses
-    previewFront: {fileID: -8543379145089725134, guid: a82395e4e2ad9174fb5946806fa51e86,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: a82395e4e2ad9174fb5946806fa51e86,
-      type: 3}
-  - type: 6
-    color: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
-    name: 
-    previewFront: {fileID: -8543379145089725134, guid: 9c68ab299e97cfb4784e7d009913983b,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: 9c68ab299e97cfb4784e7d009913983b,
-      type: 3}
-  - type: 7
-    color: {r: 0.6698113, g: 0.21168563, b: 0.21168563, a: 1}
-    name: 
-    previewFront: {fileID: 0}
-    previewBack: {fileID: 0}
-  - type: 8
-    color: {r: 0.3333037, g: 0.42774284, b: 0.6603774, a: 1}
-    name: Adventurer
-    previewFront: {fileID: -8543379145089725134, guid: 5b71e2385392f24409cc683c73dfd474,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: 5b71e2385392f24409cc683c73dfd474,
-      type: 3}
+  - parentName: Upper Gear
+    name: Plate
+  - parentName: Lower Gear
+    name: Plate Boots
+  - parentName: Horns
+    name: Pony Horn

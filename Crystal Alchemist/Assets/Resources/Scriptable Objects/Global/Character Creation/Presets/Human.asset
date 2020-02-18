@@ -12,69 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17a2b03240e5c4c4eab3922301d66a96, type: 3}
   m_Name: Human
   m_EditorClassIdentifier: 
+  readOnly: 1
   signal: {fileID: 11400000, guid: 54abe254f2dda014fb5e5c89b87a6eb3, type: 2}
   race: 0
   characterName: Adelheid
-  addEarsHorns: 0
-  datas:
-  - type: 0
-    color: {r: 0.4811321, g: 0.3763364, b: 0.2791474, a: 1}
+  colorGroups:
+  - colorGroup: 0
+    color: {r: 0.5471698, g: 0.395066, b: 0.31229973, a: 1}
+  - colorGroup: 1
+    color: {r: 0.15307939, g: 0.35835218, b: 0.754717, a: 1}
+  - colorGroup: 2
+    color: {r: 0.9622642, g: 0.83886933, b: 0.64907444, a: 1}
+  - colorGroup: 5
+    color: {r: 0.14117648, g: 0.1783488, b: 0.8509804, a: 1}
+  characterParts:
+  - parentName: Legs
+    name: Legs
+  - parentName: Hairstyle
     name: Bob
-    previewFront: {fileID: -8543379145089725134, guid: e9cbffee3db78ac4c94bc7271f6aa1b2,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: e9cbffee3db78ac4c94bc7271f6aa1b2,
-      type: 3}
-  - type: 1
-    color: {r: 0.16522783, g: 0.4433962, b: 0.25364077, a: 1}
-    name: 
-    previewFront: {fileID: -8543379145089725134, guid: 6f6afad7a8ce0764c90d966295a231fb,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: 6f6afad7a8ce0764c90d966295a231fb,
-      type: 3}
-  - type: 2
-    color: {r: 0.9490197, g: 0.87843144, b: 0.80392164, a: 1}
-    name: 
-    previewFront: {fileID: -8543379145089725134, guid: da78fac0d670e1d4fb8c3c4f937186f6,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: da78fac0d670e1d4fb8c3c4f937186f6,
-      type: 3}
-  - type: 3
-    color: {r: 0.8490566, g: 0.69589895, b: 0.2683339, a: 1}
-    name: 
-    previewFront: {fileID: -8543379145089725134, guid: da78fac0d670e1d4fb8c3c4f937186f6,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: da78fac0d670e1d4fb8c3c4f937186f6,
-      type: 3}
-  - type: 5
-    color: {r: 0.074509785, g: 0.37764677, b: 0.7411765, a: 1}
+  - parentName: Head Gear
     name: Tiara
-    previewFront: {fileID: -8543379145089725134, guid: 5244090ce30279747ac52035a9096f17,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: 5244090ce30279747ac52035a9096f17,
-      type: 3}
-  - type: 4
-    color: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 1}
-    name: 
-    previewFront: {fileID: 0}
-    previewBack: {fileID: 0}
-  - type: 6
-    color: {r: 0.2924528, g: 0.2274852, b: 0.048282295, a: 1}
-    name: 
-    previewFront: {fileID: -8543379145089725134, guid: 9c68ab299e97cfb4784e7d009913983b,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: 9c68ab299e97cfb4784e7d009913983b,
-      type: 3}
-  - type: 7
-    color: {r: 0.6698113, g: 0.21168563, b: 0.21168563, a: 1}
-    name: Silver Armor
-    previewFront: {fileID: -8543379145089725134, guid: 1ea5fc185cd501745971c240a0e3b70f,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: 1ea5fc185cd501745971c240a0e3b70f,
-      type: 3}
-  - type: 8
-    color: {r: 0.3333037, g: 0.42774284, b: 0.6603774, a: 1}
-    name: Silver Armor
-    previewFront: {fileID: -8543379145089725134, guid: 5dcb76053d928734abab72fdbfd8b35d,
-      type: 3}
-    previewBack: {fileID: -5260679801054297698, guid: 5dcb76053d928734abab72fdbfd8b35d,
-      type: 3}
+  - parentName: Upper Gear
+    name: Mage
+  - parentName: Lower Gear
+    name: Mage Shoes

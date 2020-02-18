@@ -12,7 +12,8 @@ public class CharacterCreatorMenu : BasicMenu
     [SerializeField]
     private CharacterPreset playerPreset;
 
-    public CharacterPresetSignal presetSignal;
+    [SerializeField]
+    private CharacterPresetSignal presetSignal;
 
     [SerializeField]
     private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
@@ -39,6 +40,26 @@ public class CharacterCreatorMenu : BasicMenu
         Cursor.visible = false;
     }
 
+    public void updatePreview()
+    {
+        this.presetSignal.Raise(this.creatorPreset);
+    }
+
+    public void setRandomPreset()
+    {
+        List<CharacterCreatorButton> children = new List<CharacterCreatorButton>();
+        CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorButton>(this.transform, children);
+
+        foreach(CharacterCreatorButton child in children)
+        {
+            if (child.GetComponent<CharacterCreatorPreset>() == null)
+            {
+                int random = Random.Range(0, 101);
+                if (random < 50) child.Click();
+            }
+        }
+    }
+
     public void updateGear()
     {
         List<CharacterCreatorGear> gearButtons = new List<CharacterCreatorGear>();
@@ -48,13 +69,11 @@ public class CharacterCreatorMenu : BasicMenu
         {
             enableGearButton(gearButtons, part);
             CharacterPartData data = this.creatorPreset.GetCharacterPartData(part.parentName, part.partName);
-            bool enableIt = part.enableIt(this.creatorPreset.race, data);
+            bool enableIt = part.enableIt(this.creatorPreset.getRace(), data);
 
             if (enableIt) this.creatorPreset.AddCharacterPartData(part.parentName, part.partName);
             else this.creatorPreset.RemoveCharacterPartData(part.parentName, part.partName);
         }
-
-        this.presetSignal.Raise(this.creatorPreset); //Update Preview
     }
 
     public void updateColor(CharacterCreatorPartProperty property)
@@ -70,8 +89,6 @@ public class CharacterCreatorMenu : BasicMenu
                 if (!property.isDyeable) this.creatorPreset.RemoveColorGroup(property.colorGroup);
             }
         }
-
-        this.presetSignal.Raise(this.creatorPreset); //Update Preview
     }
 
     private void enableGearButton(List<CharacterCreatorGear> gearButtons, CharacterCreatorPartProperty part)
@@ -79,7 +96,7 @@ public class CharacterCreatorMenu : BasicMenu
         foreach (CharacterCreatorGear button in gearButtons)
         {
             if (button.property == part)
-                button.gameObject.SetActive(part.raceEnabled(this.creatorPreset.race));
+                button.gameObject.SetActive(part.raceEnabled(this.creatorPreset.getRace()));
         }
     }
 }

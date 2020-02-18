@@ -54,13 +54,35 @@ public class CharacterPartData
 public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
 {
     [SerializeField]
+    private bool readOnly = false;
+
+    [SerializeField]
     private CharacterPresetSignal signal;
 
-    public Race race;
+    [SerializeField]
+    private Race race;
+
     public string characterName;
 
-    public List<ColorGroupData> colorGroups = new List<ColorGroupData>();
-    public List<CharacterPartData> characterParts = new List<CharacterPartData>();
+    [SerializeField]
+    private List<ColorGroupData> colorGroups = new List<ColorGroupData>();
+
+    [SerializeField]
+    private List<CharacterPartData> characterParts = new List<CharacterPartData>();
+
+
+    public Race getRace()
+    {
+        return this.race;
+    }
+
+    public void setRace(Race race)
+    {
+        if (!this.readOnly) this.race = race;
+    }
+
+
+    #region CharacterPartData
 
     public CharacterPartData GetCharacterPartData(string parentName, string name)
     {
@@ -81,25 +103,70 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
         return null;
     }
 
+    public List<CharacterPartData> GetCharacterPartDataRange()
+    {
+        return this.characterParts;
+    }
+
+
+    public void AddCharacterPartData(CharacterPartData data)
+    {
+        AddCharacterPartData(data.parentName, data.name);
+    }
+
     public void AddCharacterPartData(string parentName, string name)
     {
-        CharacterPartData characterPartData = this.GetCharacterPartData(parentName);
-        if (characterPartData != null) characterPartData.name = name;
-        else this.characterParts.Add(new CharacterPartData(parentName, name));
+        if (!this.readOnly)
+        {
+            CharacterPartData characterPartData = this.GetCharacterPartData(parentName);
+            this.characterParts.Remove(characterPartData);
+
+            CharacterPartData newGroup = new CharacterPartData(parentName, name);
+            this.characterParts.Add(newGroup);
+        }
     }
+
+    public void AddCharacterPartDataRange(List<CharacterPartData> groups)
+    {
+        if (!this.readOnly)
+        {
+            this.characterParts.Clear();
+
+            foreach (CharacterPartData group in groups)
+            {
+                AddCharacterPartData(group);
+            }
+        }
+    }
+
 
     public void RemoveCharacterPartData(string parentName, string name)
     {
-        CharacterPartData characterPartData = this.GetCharacterPartData(parentName, name);
-        if (characterPartData != null) this.characterParts.Remove(characterPartData);
+        if (!this.readOnly)
+        {
+            CharacterPartData characterPartData = this.GetCharacterPartData(parentName, name);
+            if (characterPartData != null) this.characterParts.Remove(characterPartData);
+        }
     }
 
     public void RemoveCharacterPartData(string parentName)
     {
-        CharacterPartData characterPartData = this.GetCharacterPartData(parentName);
-        if (characterPartData != null) this.characterParts.Remove(characterPartData);
+        if (!this.readOnly)
+        {
+            CharacterPartData characterPartData = this.GetCharacterPartData(parentName);
+            if (characterPartData != null) this.characterParts.Remove(characterPartData);
+        }
     }
 
+
+
+
+
+    #endregion
+    
+
+    #region ColorGroups
+          
     public ColorGroupData GetColorGroupData(ColorGroup colorGroup)
     {
         foreach (ColorGroupData colorGroupData in this.colorGroups)
@@ -109,18 +176,52 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
         return null;
     }
 
+    public List<ColorGroupData> GetColorGroupRange()
+    {
+        return this.colorGroups;
+    }
+
+
     public void AddColorGroup(ColorGroup colorGroup, Color color)
     {
-        ColorGroupData colorGroupData = this.GetColorGroupData(colorGroup);
-        if (colorGroupData != null) colorGroupData.color = color;
-        else this.colorGroups.Add(new ColorGroupData(colorGroup, color));
+        if (!this.readOnly)
+        {
+            ColorGroupData colorGroupData = this.GetColorGroupData(colorGroup);
+            this.colorGroups.Remove(colorGroupData);
+
+            ColorGroupData newGroup = new ColorGroupData(colorGroup, color);
+            this.colorGroups.Add(newGroup);
+        }
     }
+
+    public void AddColorGroup(ColorGroupData data)
+    {
+        AddColorGroup(data.colorGroup, data.color);
+    }
+
+    public void AddColorGroupRange(List<ColorGroupData> groups)
+    {
+        if (!this.readOnly)
+        {
+            this.colorGroups.Clear();
+
+            foreach (ColorGroupData group in groups)
+            {
+                AddColorGroup(group);
+            }
+        }
+    }
+
 
     public void RemoveColorGroup(ColorGroup colorGroup)
     {
-        ColorGroupData colorGroupData = this.GetColorGroupData(colorGroup);
-        if (colorGroupData != null) this.colorGroups.Remove(colorGroupData);
+        if (!this.readOnly)
+        {
+            ColorGroupData colorGroupData = this.GetColorGroupData(colorGroup);
+            if (colorGroupData != null) this.colorGroups.Remove(colorGroupData);
+        }
     }
+
 
     public Color getColor(ColorGroup colorGroup)
     {
@@ -130,6 +231,9 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
         }
         return Color.white;
     }
+
+    #endregion
+
 
     [Button]
     public void UpdateCharacter()

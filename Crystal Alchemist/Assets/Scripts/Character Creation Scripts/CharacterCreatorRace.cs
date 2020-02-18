@@ -9,7 +9,8 @@ public class CharacterCreatorRace : CharacterCreatorButton
 
     public override void Click()
     {
-        this.mainMenu.creatorPreset.race = this.race;
+        this.mainMenu.creatorPreset.setRace(this.race);
         this.mainMenu.updateGear();
+        base.Click();
     }
 }
