@@ -3,9 +3,17 @@ using UnityEngine;
 
 public class CharacterPartHandler : MonoBehaviour
 {
+    [SerializeField]
+    private CharacterPreset preset;
+
     private List<CharacterCreatorPart> parts = new List<CharacterCreatorPart>();
 
-    public void UpdateCharacterParts(CharacterPreset preset)
+    private void Start()
+    {
+        UpdateCharacterParts();
+    }
+
+    public void UpdateCharacterParts()
     {
         this.parts.Clear();
         CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorPart>(this.transform, this.parts);

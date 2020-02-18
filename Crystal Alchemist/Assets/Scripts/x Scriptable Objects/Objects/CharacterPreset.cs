@@ -57,9 +57,6 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
     private bool readOnly = false;
 
     [SerializeField]
-    private CharacterPresetSignal signal;
-
-    [SerializeField]
     private Race race;
 
     public string characterName;
@@ -234,12 +231,6 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
 
     #endregion
 
-
-    [Button]
-    public void UpdateCharacter()
-    {
-        this.signal.Raise(this);
-    }
 
     public void OnAfterDeserialize() { }
 

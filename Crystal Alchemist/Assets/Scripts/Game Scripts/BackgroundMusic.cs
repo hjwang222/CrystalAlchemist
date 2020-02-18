@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BackgroundMusic : MonoBehaviour
 {
+    [SerializeField]
     private AudioSource audioSource;
 
     [SerializeField]

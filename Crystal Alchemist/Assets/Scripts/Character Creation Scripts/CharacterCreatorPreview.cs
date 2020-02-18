@@ -15,12 +15,7 @@ public class CharacterCreatorPreview : MonoBehaviour
         UpdatePreview();
     }
 
-    private void UpdatePreview()
-    {
-        setImage(this.mainMenu.creatorPreset);
-    }
-
-    public void setImage(CharacterPreset preset)
+    public void UpdatePreview()
     {
         List<CharacterCreatorPart> parts = new List<CharacterCreatorPart>();
         CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorPart>(this.transform, parts);
@@ -32,11 +27,11 @@ public class CharacterCreatorPreview : MonoBehaviour
                 part.gameObject.SetActive(false); //set inactive
 
                 Image image = part.GetComponent<Image>();
-                CharacterPartData data = preset.GetCharacterPartData(part.property.parentName);
-                Color color = preset.getColor(part.property.colorGroup);
+                CharacterPartData data = this.mainMenu.creatorPreset.GetCharacterPartData(part.property.parentName);
+                Color color = this.mainMenu.creatorPreset.getColor(part.property.colorGroup);
 
                 if ((data != null
-                    && (part.restrictedRaces.Count == 0 || part.restrictedRaces.Contains(preset.getRace())))
+                    && (part.restrictedRaces.Count == 0 || part.restrictedRaces.Contains(this.mainMenu.creatorPreset.getRace())))
                     || part.property.neverDisable) part.gameObject.SetActive(true); //set active when found (tail?) or always active
 
                 if (part.gameObject.activeInHierarchy && image != null) //set Image and Color when active

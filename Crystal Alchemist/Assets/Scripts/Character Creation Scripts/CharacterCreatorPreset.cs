@@ -16,19 +16,9 @@ public class CharacterCreatorPreset : CharacterCreatorButton
         if (isRandom)
             this.mainMenu.setRandomPreset(); //buggy!
         else 
-            setPreset(preset);
+            this.mainMenu.setPreset(this.preset, this.mainMenu.creatorPreset);
 
         base.Click();
-    }
-
-    private void setPreset(CharacterPreset preset)
-    {
-        this.mainMenu.creatorPreset.setRace(preset.getRace());
-
-        this.mainMenu.creatorPreset.AddColorGroupRange(preset.GetColorGroupRange());
-
-        this.mainMenu.creatorPreset.AddCharacterPartDataRange(preset.GetCharacterPartDataRange());
-
     }
 
     private bool setByRandom()

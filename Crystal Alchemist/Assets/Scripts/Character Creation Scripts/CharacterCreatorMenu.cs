@@ -13,7 +13,7 @@ public class CharacterCreatorMenu : BasicMenu
     private CharacterPreset playerPreset;
 
     [SerializeField]
-    private CharacterPresetSignal presetSignal;
+    private SimpleSignal presetSignal;
 
     [SerializeField]
     private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
@@ -25,7 +25,9 @@ public class CharacterCreatorMenu : BasicMenu
     public override void Start()
     {
         base.Start();
+        setPreset(this.playerPreset, this.creatorPreset);
         updateGear();
+        updatePreview();
     }
 
     public void Confirm()
@@ -36,13 +38,21 @@ public class CharacterCreatorMenu : BasicMenu
 
     public void startTheGame(string scene)
     {
+        setPreset(this.creatorPreset, this.playerPreset);
         SceneManager.LoadSceneAsync(scene);
         Cursor.visible = false;
     }
 
+    public void setPreset(CharacterPreset source, CharacterPreset target)
+    {
+        target.setRace(source.getRace());
+        target.AddColorGroupRange(source.GetColorGroupRange());
+        target.AddCharacterPartDataRange(source.GetCharacterPartDataRange());
+    }
+
     public void updatePreview()
     {
-        this.presetSignal.Raise(this.creatorPreset);
+        this.presetSignal.Raise();
     }
 
     public void setRandomPreset()
