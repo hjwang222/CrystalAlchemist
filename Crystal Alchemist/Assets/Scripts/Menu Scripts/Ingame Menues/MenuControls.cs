@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class MenuControls : MonoBehaviour
+public class MenuControls : PreventDeselection
 {
     [HideInInspector]
     public Player player;
@@ -42,8 +42,10 @@ public class MenuControls : MonoBehaviour
         this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
     }
 
-    public virtual void Update()
+    public override void Update()
     {
+        base.Update();
+
         if (Input.GetButtonDown("Cancel"))
         {
             if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();

@@ -28,11 +28,6 @@ public class TitleScreen : BasicMenu
         base.Start();
     }
 
-    private void Update()
-    {
-        //if (Input.GetButtonDown("Cancel")) showMenu();
-    }
-
     private void LateUpdate()
     {
         if (!Cursor.visible) Cursor.visible = true;

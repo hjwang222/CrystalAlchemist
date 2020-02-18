@@ -3,7 +3,8 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
 
-public class BasicMenu : MonoBehaviour
+
+public class BasicMenu : PreventDeselection
 {
     public List<GameObject> menues = new List<GameObject>();
 

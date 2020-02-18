@@ -16,12 +16,18 @@ public class TODOLIST : MonoBehaviour
     //Destroy Handler?
 
     //Bug: Titelbildschirm selektiert nicht den ersten Button korrekt (button.select())
-    //TODO: Character Creator Screen (Name, Race, Colors)
-    //TODO: Sprites update (hauttöne statt grau)
+
+    //TODO: Namensleiste besser machen (Cursor)
+    //TODO: Spiegel (Character Creator Object)
+    //TODO: Presets speichern
+    //TODO: Standard-Preset
+    //TODO: Menü aufräumen
+    //TODO: Farbpaletten
+    //TODO: Slider onClick Select
+    //TODO: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
 
     //TODO: Item DialogBox
     //TODO: New Nitro Sprite
-    //TODO: Player-Sprites (Mage red, Archer blue)
 
     //TODO (0.2.4.5):
     //- Wetter Script (Position und Größe)

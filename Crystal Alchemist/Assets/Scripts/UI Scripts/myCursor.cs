@@ -55,7 +55,7 @@ public class myCursor : MonoBehaviour
         //this.isPlaying = false;
     }
 
-    public void setCursorPosition(bool showCursor, bool playEffect, Button button, Vector2 size, Vector2 scale)
+    public void setCursorPosition(bool showCursor, bool playEffect, Selectable button, Vector2 size, Vector2 scale)
     {
         if (button != null && this.selectedObject != button.gameObject)
         {
@@ -77,7 +77,7 @@ public class myCursor : MonoBehaviour
         }
     }
 
-    private void setInfoBox(Button button)
+    private void setInfoBox(Selectable button)
     {
         if (button != null)
         {

@@ -14,7 +14,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     [SerializeField]
     public bool setFirstSelected = false;
-    private Button button;
+    private Selectable button;
 
     private void init()
     {
@@ -57,7 +57,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     public void setFirst()
     {
-        if(this.button == null) this.button = this.gameObject.GetComponent<Button>();
+        if(this.button == null) this.button = this.gameObject.GetComponent<Selectable>();
 
         if (this.cursor != null 
             && this.setFirstSelected  
