@@ -93,7 +93,7 @@ public class CharacterCreatorMenu : BasicMenu
 
         foreach (CharacterCreatorColor button in colorButtons)
         {
-            if (button.colorGroup == property.colorGroup)
+            if (button.GetColorGroup() == property.colorGroup)
             {
                 button.gameObject.SetActive(property.isDyeable);
                 if (!property.isDyeable) this.creatorPreset.RemoveColorGroup(property.colorGroup);

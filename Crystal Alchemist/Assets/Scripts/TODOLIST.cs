@@ -16,13 +16,15 @@ public class TODOLIST : MonoBehaviour
     //Destroy Handler?
 
     //Bug: Titelbildschirm selektiert nicht den ersten Button korrekt (button.select())
+    //BUG: Charakter behält Preset nicht bei
+    //BUG: Farbauswahl mit einem zu viel
+    //BUG: Bein-Button trotz Schlange anwählbar
+    //BUG: Buttons nicht immer klickbar
 
     //TODO: Namensleiste besser machen (Cursor)
     //TODO: Spiegel (Character Creator Object)
     //TODO: Presets speichern
-    //TODO: Standard-Preset
-    //TODO: Menü aufräumen
-    //TODO: Farbpaletten
+    //TODO: Menü aufräumen (Button-Navigation)
     //TODO: Slider onClick Select
     //TODO: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
 

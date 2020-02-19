@@ -50,7 +50,7 @@ public class CharacterPartData
     }
 }
 
-[CreateAssetMenu(menuName = "Game/Character Preset")]
+[CreateAssetMenu(menuName = "CharacterCreation/Character Preset")]
 public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
 {
     [SerializeField]

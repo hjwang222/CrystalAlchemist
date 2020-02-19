@@ -1,20 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterCreatorColor : CharacterCreatorButton
+public class CharacterCreatorColor : MonoBehaviour
 {
-    public ColorGroup colorGroup;
-
     [SerializeField]
     private Image image;
 
-    public override void Click()
+    [SerializeField]
+    private CharacterCreatorColorPaletteHandler handler;
+
+    public void Click()
     {
-        this.mainMenu.creatorPreset.AddColorGroup(this.colorGroup, this.image.color);
-        base.Click();
+        this.handler.mainMenu.creatorPreset.AddColorGroup(this.handler.colorGroup, this.image.color);
+        handler.Click();
     }
 
-
+    public ColorGroup GetColorGroup()
+    {
+        return this.handler.colorGroup;
+    }
 }
