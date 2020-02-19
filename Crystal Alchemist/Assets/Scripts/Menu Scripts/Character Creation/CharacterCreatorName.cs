@@ -23,4 +23,14 @@ public class CharacterCreatorName : CharacterCreatorButton
         this.previewText.text = this.textfield.text;
         this.mainMenu.creatorPreset.characterName = this.textfield.text;
     }
+
+    public void activeOnSelect()
+    {
+        this.textfield.ActivateInputField();
+    }
+
+    public void Update()
+    {
+        if (Input.GetAxisRaw("Vertical") < 0) this.textfield.DeactivateInputField(); 
+    }
 }

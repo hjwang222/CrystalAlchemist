@@ -8,7 +8,7 @@ public class TitleScreenSaveSlot : MonoBehaviour
     [SerializeField]
     [Required]
     [BoxGroup("Main")]
-    private GameObject mainGameObject;
+    private BasicMenu mainGameObject;
 
     [Required]
     [SerializeField]

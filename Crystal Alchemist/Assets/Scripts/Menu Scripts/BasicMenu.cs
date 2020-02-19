@@ -10,34 +10,31 @@ public class BasicMenu : PreventDeselection
 
     public virtual void Start()
     {
-        showMenu(this.menues[0]);
+        this.setFirstMenu();
+    }
+
+    public virtual void OnEnable()
+    {
+        this.setFirstMenu();
     }
 
     public virtual void OnDisable()
     {
-        showMenu(this.menues[0]);
+        this.setFirstMenu();
     }
 
-    public void showMenu(GameObject newActiveMenu)
+    private void setFirstMenu()
     {
-        foreach (GameObject gameObject in this.menues)
-        {
-            gameObject.SetActive(false);
-        }
+        if(this.menues.Count > 0) CustomUtilities.UI.ShowMenu(this.menues[0], this.menues);
+    }
 
-        if (newActiveMenu != null)
-        {
-            newActiveMenu.SetActive(true);
+    public virtual void ShowMenu(GameObject menu)
+    {
+        CustomUtilities.UI.ShowMenu(menu, this.menues);
+    }
 
-            for (int i = 0; i < newActiveMenu.transform.childCount; i++)
-            {
-                ButtonExtension temp = newActiveMenu.transform.GetChild(i).GetComponent<ButtonExtension>();
-                if (temp != null && temp.setFirstSelected)
-                {
-                    temp.setFirst();
-                    break;
-                }
-            }
-        }
+    public void save()
+    {
+        SaveSystem.SaveOptions();
     }
 }

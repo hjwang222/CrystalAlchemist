@@ -77,7 +77,7 @@ public class CharacterCreatorMenu : BasicMenu
 
         foreach (CharacterCreatorPartProperty part in this.properties)
         {
-            enableGearButton(gearButtons, part);
+            //enableGearButton(gearButtons, part);
             CharacterPartData data = this.creatorPreset.GetCharacterPartData(part.parentName, part.partName);
             bool enableIt = part.enableIt(this.creatorPreset.getRace(), data);
 
@@ -95,12 +95,13 @@ public class CharacterCreatorMenu : BasicMenu
         {
             if (button.GetColorGroup() == property.colorGroup)
             {
-                button.gameObject.SetActive(property.isDyeable);
+                //button.gameObject.SetActive(property.isDyeable);
                 if (!property.isDyeable) this.creatorPreset.RemoveColorGroup(property.colorGroup);
             }
         }
     }
 
+    /*
     private void enableGearButton(List<CharacterCreatorGear> gearButtons, CharacterCreatorPartProperty part)
     {
         foreach (CharacterCreatorGear button in gearButtons)
@@ -108,5 +109,5 @@ public class CharacterCreatorMenu : BasicMenu
             if (button.property == part)
                 button.gameObject.SetActive(part.raceEnabled(this.creatorPreset.getRace()));
         }
-    }
+    }*/
 }

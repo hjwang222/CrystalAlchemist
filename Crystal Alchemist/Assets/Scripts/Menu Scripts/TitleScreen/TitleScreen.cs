@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class TitleScreen : BasicMenu
 {    
-    [SerializeField]
-    private AudioClip music;
-
     [Required]
     [SerializeField]
     private StringValue saveGameSlot;
@@ -49,18 +46,13 @@ public class TitleScreen : BasicMenu
         Cursor.visible = false;
     }
 
-    public void save()
-    {
-        SaveSystem.SaveOptions();        
-    }
+
 
     public override void OnDisable()
     {
         base.Start();
         this.mainFrame.SetActive(true);
     }
-
-
 
     public void showBackground(bool dark)
     {
@@ -70,6 +62,4 @@ public class TitleScreen : BasicMenu
         if (dark && this.darkFrame != null) this.darkFrame.SetActive(true);
         else if(!dark) this.mainFrame.SetActive(true);
     }
-
-   
 }

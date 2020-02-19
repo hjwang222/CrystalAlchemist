@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class MenuControls : PreventDeselection
+public class MenuControls : BasicMenu
 {
     [HideInInspector]
     public Player player;
