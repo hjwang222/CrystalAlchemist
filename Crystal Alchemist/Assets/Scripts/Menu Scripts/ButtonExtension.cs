@@ -37,8 +37,16 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     [SerializeField]
     private List<Selectable> right = new List<Selectable>();
 
+
+
 #if UNITY_EDITOR
     [Button]
+    public void setNavigation()
+    {
+        setButtonNavigation();
+    }
+
+#endif
     public void setButtonNavigation()
     {
         if (this.overrideNavigation)
@@ -58,9 +66,6 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
             }
         }
     }
-
-#endif
-
 
     private void init()
     {

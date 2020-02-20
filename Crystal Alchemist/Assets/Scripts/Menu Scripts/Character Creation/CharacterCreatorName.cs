@@ -9,18 +9,31 @@ public class CharacterCreatorName : CharacterCreatorButton
     [SerializeField]
     private TMP_InputField textfield;
 
+
+
     [SerializeField]
-    private TextMeshProUGUI previewText;
+    private Selectable confirmButton;
 
     private void Start()
     {
-        this.textfield.text = "";
-        this.previewText.text = "";
+        setNameFromPreset();
+        this.confirmButton.gameObject.SetActive(false);
+    }
+
+    private void setNameFromPreset()
+    {
+        this.textfield.text = this.mainMenu.creatorPreset.characterName;
+        this.mainMenu.updatePreview();
+    }
+
+    private void OnEnable()
+    {
+        setNameFromPreset();
     }
 
     public void textChanged()
     {
-        this.previewText.text = this.textfield.text;
+        this.mainMenu.updatePreview();
         this.mainMenu.creatorPreset.characterName = this.textfield.text;
     }
 
@@ -31,6 +44,9 @@ public class CharacterCreatorName : CharacterCreatorButton
 
     public void Update()
     {
-        if (Input.GetAxisRaw("Vertical") < 0) this.textfield.DeactivateInputField(); 
+        if (Input.GetAxisRaw("Vertical") < 0) this.textfield.DeactivateInputField();
+
+        if (this.textfield.text.Length > 1) this.confirmButton.gameObject.SetActive(true);
+        else this.confirmButton.gameObject.SetActive(false);
     }
 }

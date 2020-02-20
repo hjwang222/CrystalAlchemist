@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using TMPro;
 
 public class CharacterCreatorPreview : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class CharacterCreatorPreview : MonoBehaviour
     [SerializeField]
     private CharacterCreatorMenu mainMenu;
 
-    private void Start()
-    {
-        UpdatePreview();
-    }
+    [SerializeField]
+    private TextMeshProUGUI previewText;
 
     public void UpdatePreview()
     {
+        this.previewText.text = this.mainMenu.creatorPreset.characterName;
+
         List<CharacterCreatorPart> parts = new List<CharacterCreatorPart>();
         CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorPart>(this.transform, parts);
 

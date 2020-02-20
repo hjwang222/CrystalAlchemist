@@ -6,6 +6,9 @@ public class CharacterPartHandler : MonoBehaviour
     [SerializeField]
     private CharacterPreset preset;
 
+    [SerializeField]
+    private SpriteRendererExtensionHandler handler;
+
     private List<CharacterCreatorPart> parts = new List<CharacterCreatorPart>();
 
     private void Start()
@@ -28,5 +31,7 @@ public class CharacterPartHandler : MonoBehaviour
             if (data != null || part.property.neverDisable) part.gameObject.SetActive(true); 
             if (part.gameObject.activeInHierarchy) part.GetComponent<SpriteRenderer>().color = color;            
         }
+
+        this.handler.init();
     }
 }

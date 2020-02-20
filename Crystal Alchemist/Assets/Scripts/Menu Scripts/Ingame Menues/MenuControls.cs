@@ -25,7 +25,7 @@ public class MenuControls : BasicMenu
     [HideInInspector]
     public CharacterState lastState;
 
-    public virtual void OnEnable()
+    public override void OnEnable()
     {
         this.player = this.playerStats.player;
 
@@ -34,12 +34,16 @@ public class MenuControls : BasicMenu
         this.player.currentState = CharacterState.inMenu;
 
         this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+
+        base.OnEnable();
     }
 
-    public virtual void OnDisable()
+    public override void OnDisable()
     {
         this.cursor.gameObject.SetActive(false);
         this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+
+        base.OnDisable();
     }
 
     public override void Update()

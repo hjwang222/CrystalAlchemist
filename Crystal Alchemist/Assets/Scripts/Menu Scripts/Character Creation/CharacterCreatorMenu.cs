@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
 
-public class CharacterCreatorMenu : BasicMenu
+public class CharacterCreatorMenu : MenuControls
 {
     public CharacterPreset creatorPreset;
 
@@ -25,6 +23,17 @@ public class CharacterCreatorMenu : BasicMenu
     public override void Start()
     {
         base.Start();
+        init();
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        init();
+    }
+
+    private void init()
+    {
         setPreset(this.playerPreset, this.creatorPreset);
         updateGear();
         updatePreview();
@@ -32,8 +41,8 @@ public class CharacterCreatorMenu : BasicMenu
 
     public void Confirm()
     {
-        this.playerPreset = this.creatorPreset; //save Preset
-        startTheGame(this.firstScene); //TitleScreen only
+        this.setPreset(this.creatorPreset, this.playerPreset); //save Preset
+        updatePreview();
     }
 
     public void startTheGame(string scene)
@@ -85,29 +94,4 @@ public class CharacterCreatorMenu : BasicMenu
             else this.creatorPreset.RemoveCharacterPartData(part.parentName, part.partName);
         }
     }
-
-    public void updateColor(CharacterCreatorPartProperty property)
-    {
-        List<CharacterCreatorColor> colorButtons = new List<CharacterCreatorColor>();
-        CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorColor>(this.transform, colorButtons);
-
-        foreach (CharacterCreatorColor button in colorButtons)
-        {
-            if (button.GetColorGroup() == property.colorGroup)
-            {
-                //button.gameObject.SetActive(property.isDyeable);
-                if (!property.isDyeable) this.creatorPreset.RemoveColorGroup(property.colorGroup);
-            }
-        }
-    }
-
-    /*
-    private void enableGearButton(List<CharacterCreatorGear> gearButtons, CharacterCreatorPartProperty part)
-    {
-        foreach (CharacterCreatorGear button in gearButtons)
-        {
-            if (button.property == part)
-                button.gameObject.SetActive(part.raceEnabled(this.creatorPreset.getRace()));
-        }
-    }*/
 }

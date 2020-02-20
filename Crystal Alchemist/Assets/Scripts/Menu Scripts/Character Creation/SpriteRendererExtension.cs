@@ -20,7 +20,8 @@ public class SpriteRendererExtension : MonoBehaviour
     public void init()
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
-        if (this.colors.Count == 0) this.colors.Add(this.spriteRenderer.color);
+        this.colors.Clear();
+        this.colors.Add(this.spriteRenderer.color);
     }
 
     public void resetColors()

@@ -14,12 +14,15 @@ public class TODOLIST : MonoBehaviour
     //- Unterwasser
 
     //TODO (0.2.4.0):
-    //TODO: Presets speichern (unter Name)
 
+    //TODO: Preset in Savegame speichern
     //TODO: Item DialogBox
 
-    //TODO: Spiegel (Character Creator Object)
 
+    //BUG: Schwanz nach Szenenwechsel falsch
+    //BUG: Menu Controls im Titlescreen
+    //BUG: Player Access beim Dialogbox
+    //BUG: B Knopf überspringt Dialogbox
 
 
     //TODO (0.2.4.3):

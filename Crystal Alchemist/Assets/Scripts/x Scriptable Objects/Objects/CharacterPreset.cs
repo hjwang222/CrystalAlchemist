@@ -81,6 +81,11 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
 
     #region CharacterPartData
 
+    public CharacterPartData GetCharacterPartData(CharacterCreatorPartProperty property)
+    {
+        return GetCharacterPartData(property.parentName, property.partName);
+    }
+
     public CharacterPartData GetCharacterPartData(string parentName, string name)
     {
         foreach (CharacterPartData data in this.characterParts)
