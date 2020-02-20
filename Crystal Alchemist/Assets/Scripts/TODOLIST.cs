@@ -16,14 +16,7 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.4.0):
 
     //TODO: Preset in Savegame speichern
-    //TODO: Item DialogBox
-
-
     //BUG: Schwanz nach Szenenwechsel falsch
-    //BUG: Menu Controls im Titlescreen
-    //BUG: Player Access beim Dialogbox
-    //BUG: B Knopf überspringt Dialogbox
-
 
     //TODO (0.2.4.3):
     //TODO: Projectile canReflect Attribute

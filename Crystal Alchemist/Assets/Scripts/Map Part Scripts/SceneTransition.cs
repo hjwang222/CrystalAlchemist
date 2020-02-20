@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using Cinemachine;
 using Sirenix.OdinInspector;
 
 public class SceneTransition : MonoBehaviour
@@ -10,33 +7,48 @@ public class SceneTransition : MonoBehaviour
 
     [Header("New Scene Variables")]
     [Tooltip("Name der nächsten Map")]
+    [BoxGroup("Required")]
     [Required]
     [SerializeField]
     private string targetScene;
 
     [Tooltip("Spawnpunkt des Spielers")]
     [SerializeField]
+    [BoxGroup("Required")]
+    [Required]
     private Vector2 playerPositionInNewScene;
 
-    [Required]
+    [BoxGroup("Transition")]
+    [SerializeField]
+    private bool showTransition = false;
+
+
+    [ShowIf("showTransition", true)]
+    [BoxGroup("Transition")]
     [SerializeField]
     private SimpleSignal vcamSignal;
 
+    [ShowIf("showTransition", true)]
+    [BoxGroup("Transition")]
     [Required]
     [SerializeField]
     private BoolSignal fadeSignal;
 
+    [ShowIf("showTransition", true)]
+    [BoxGroup("Transition")]
     [Required]
     [SerializeField]
     private FloatValue transitionDuration;
 
+    [ShowIf("showTransition", true)]
+    [BoxGroup("Transition")]
     [SerializeField]
     private bool showAnimation = false;
 
 
     public void Awake()
     {
-        this.fadeSignal.Raise(true);
+        if(this.fadeSignal != null) this.fadeSignal.Raise(true);
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -46,35 +58,10 @@ public class SceneTransition : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                this.vcamSignal.Raise();
+                if(this.vcamSignal != null) this.vcamSignal.Raise();
                 player.GetComponent<PlayerTeleport>().teleportPlayer(this.targetScene, this.playerPositionInNewScene, this.transitionDuration.getValue(), this.showAnimation);
-               // StartCoroutine(LoadScene(player));
             }
         }
     }
-  
-    /*
-    private IEnumerator LoadScene(Player player)
-    {
-        this.fadeSignal.Raise(false);
-        player.currentState = CharacterState.inDialog;
-        player.deactivateAllSkills();
-
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.targetScene);
-        asyncOperation.allowSceneActivation = false;
-        this.vcamSignal.Raise();
-
-        while (!asyncOperation.isDone)
-        {
-            if (asyncOperation.progress >= 0.9f)
-            {
-                yield return new WaitForSeconds(this.transitionDuration.getValue());
-
-                asyncOperation.allowSceneActivation = true;
-                player.setNewPosition(this.playerPositionInNewScene);
-            }
-            yield return null;
-        }      
-    }*/
 }
 

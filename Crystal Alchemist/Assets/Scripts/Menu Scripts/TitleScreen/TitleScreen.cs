@@ -4,17 +4,11 @@ using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
 
 public class TitleScreen : BasicMenu
-{    
-    [Required]
-    [SerializeField]
-    private StringValue saveGameSlot;
-
+{        
     [SerializeField]
     private GameObject mainFrame;
     [SerializeField]
     private GameObject darkFrame;
-
-    private string lastSavepoint = null;
 
     public override void Start()
     {
@@ -37,16 +31,7 @@ public class TitleScreen : BasicMenu
         #endif
 
         Application.Quit();
-    }
-
-    public void startTheGame(string scene, string saveSlot)
-    {
-        this.saveGameSlot.setValue(saveSlot);
-        SceneManager.LoadSceneAsync(scene);
-        Cursor.visible = false;
-    }
-
-
+    }    
 
     public override void OnDisable()
     {

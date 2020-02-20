@@ -32,9 +32,4 @@ public class BasicMenu : PreventDeselection
     {
         CustomUtilities.UI.ShowMenu(menu, this.menues);
     }
-
-    public void save()
-    {
-        SaveSystem.SaveOptions();
-    }
 }

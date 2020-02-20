@@ -8,7 +8,12 @@ public class MenuControls : BasicMenu
 
     [SerializeField]
     [BoxGroup("Mandatory")]
+    [Required]
     private PlayerStats playerStats;
+
+    [SerializeField]
+    [BoxGroup("Mandatory")]
+    private GameObject child;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
@@ -22,18 +27,29 @@ public class MenuControls : BasicMenu
     [SerializeField]
     private GameObject blackScreen;
 
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    private GameObject exitDialogBox;
+
     [HideInInspector]
     public CharacterState lastState;
 
+    public bool disableMenuControls = false;
+
     public override void OnEnable()
     {
-        this.player = this.playerStats.player;
+        if (!this.disableMenuControls)
+        {
+            this.player = this.playerStats.player;
 
-        this.lastState = this.player.currentState;
-        this.cursor.gameObject.SetActive(true);
-        this.player.currentState = CharacterState.inMenu;
+            this.lastState = this.player.currentState;
+            this.cursor.gameObject.SetActive(true);
+            this.player.currentState = CharacterState.inMenu;
 
-        this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+            this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+        }
+
+        if (this.exitDialogBox != null) this.exitDialogBox.SetActive(false);
 
         base.OnEnable();
     }
@@ -48,21 +64,30 @@ public class MenuControls : BasicMenu
 
     public override void Update()
     {
-        base.Update();
-
-        if (Input.GetButtonDown("Cancel"))
+        if (!this.disableMenuControls)
         {
-            if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
-            else exitMenu();
+            base.Update();
+
+            if (Input.GetButtonDown("Cancel"))
+            {
+                if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
+                else showExitDialogBox();
+            }
+            else if (Input.GetButtonDown("Inventory") || Input.GetButtonDown("Pause")) showExitDialogBox();
         }
-        else if (Input.GetButtonDown("Inventory") || Input.GetButtonDown("Pause")) exitMenu();
+    }
+
+    public void showExitDialogBox()
+    {
+        if (this.exitDialogBox != null && !this.exitDialogBox.activeInHierarchy) this.exitDialogBox.SetActive(true);
+        else if (this.exitDialogBox == null) exitMenu();
     }
 
     public void exitMenu()
     {
-        if(this.cursor.infoBox != null) this.cursor.infoBox.Hide();
-        this.player.delay(this.lastState);
-        this.transform.parent.gameObject.SetActive(false);
-        if(this.blackScreen != null) this.blackScreen.SetActive(false);
+        if (this.cursor.infoBox != null) this.cursor.infoBox.Hide();
+        if (this.player != null) this.player.delay(this.lastState);
+        if (this.child != null) this.child.SetActive(false);
+        if (this.blackScreen != null) this.blackScreen.SetActive(false);
     }
 }

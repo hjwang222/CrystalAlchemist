@@ -77,6 +77,14 @@ public class DialogSystem : MonoBehaviour
         }
     }
 
+    public void show(Player player, Item item)
+    {
+        if (this.texts.Count > 0)
+        {
+            player.showDialogBox(getText(this.texts[0], item, player));
+        }
+    }
+
     public void show(Player player, DialogTextTrigger trigger, Interactable interactable, Item loot)
     {
         foreach(DialogText text in this.texts)
@@ -87,6 +95,22 @@ public class DialogSystem : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private string getText(DialogText text, Item loot, Player player)
+    {
+        string result = CustomUtilities.Format.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
+
+        result = result.Replace("<name>", player.name);
+        result = result.Replace("<interactable>", getInteractableType());
+
+        if (loot != null)
+        {
+            result = result.Replace("<loot name>", CustomUtilities.Format.getLanguageDialogText(loot.itemName, loot.itemNameEnglish));
+            result = result.Replace("<loot amount>", loot.amount + "");
+            result = result.Replace("<loot value>", loot.getTotalAmount() + "");
+        }
+        return result;
     }
 
     private string getText(DialogText text, int price, Item item, Item loot, Player player)

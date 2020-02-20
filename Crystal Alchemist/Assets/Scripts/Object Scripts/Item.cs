@@ -20,10 +20,7 @@ public enum ItemFeature
 
 public class Item : MonoBehaviour
 {
-
-
-
-
+    
     #region Attribute
 
     [Required]
@@ -185,7 +182,13 @@ public class Item : MonoBehaviour
         if (!character.isTrigger)
         {
             Character chara = character.GetComponent<Character>();
-            if (chara != null) chara.collect(this, true);
+            if (chara != null)
+            {
+                chara.collect(this, true);
+
+                if(chara.GetComponent<Player>() != null && this.GetComponent<DialogSystem>() != null)
+                    this.GetComponent<DialogSystem>().show(chara.GetComponent<Player>(), this);
+            }
         }
     }   
 

@@ -5,20 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class CharacterCreatorMenu : MenuControls
 {
+    [BoxGroup("Character Creator")]
+    [Required]
     public CharacterPreset creatorPreset;
 
+    [BoxGroup("Character Creator")]
+    [Required]
     [SerializeField]
     private CharacterPreset playerPreset;
 
+    [BoxGroup("Character Creator")]
+    [Required]
     [SerializeField]
     private SimpleSignal presetSignal;
 
-    [SerializeField]
-    private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
-
+    [BoxGroup("Character Creator")]
     [Required]
     [SerializeField]
-    private string firstScene = "Haus";
+    private GameObject confirmDialogBox;
+
+    [BoxGroup("Character Creator")]
+    [Required]
+    [SerializeField]
+    private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
 
     public override void Start()
     {
@@ -39,17 +48,16 @@ public class CharacterCreatorMenu : MenuControls
         updatePreview();
     }
 
+    public void showConfirmDialog()
+    {
+        if (this.confirmDialogBox != null) this.confirmDialogBox.SetActive(true);
+    }
+
     public void Confirm()
     {
         this.setPreset(this.creatorPreset, this.playerPreset); //save Preset
         updatePreview();
-    }
-
-    public void startTheGame(string scene)
-    {
-        setPreset(this.creatorPreset, this.playerPreset);
-        SceneManager.LoadSceneAsync(scene);
-        Cursor.visible = false;
+        exitMenu();
     }
 
     public void setPreset(CharacterPreset source, CharacterPreset target)
@@ -62,21 +70,6 @@ public class CharacterCreatorMenu : MenuControls
     public void updatePreview()
     {
         this.presetSignal.Raise();
-    }
-
-    public void setRandomPreset()
-    {
-        List<CharacterCreatorButton> children = new List<CharacterCreatorButton>();
-        CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorButton>(this.transform, children);
-
-        foreach(CharacterCreatorButton child in children)
-        {
-            if (child.GetComponent<CharacterCreatorPreset>() == null)
-            {
-                int random = Random.Range(0, 101);
-                if (random < 50) child.Click();
-            }
-        }
     }
 
     public void updateGear()

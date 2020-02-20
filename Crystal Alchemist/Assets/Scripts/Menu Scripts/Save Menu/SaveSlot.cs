@@ -3,13 +3,8 @@ using TMPro;
 using Sirenix.OdinInspector;
 using System;
 
-public class TitleScreenSaveSlot : MonoBehaviour
+public class SaveSlot : MonoBehaviour
 {
-    [SerializeField]
-    [Required]
-    [BoxGroup("Main")]
-    private BasicMenu mainGameObject;
-
     [Required]
     [SerializeField]
     [BoxGroup("Main")]
@@ -24,11 +19,6 @@ public class TitleScreenSaveSlot : MonoBehaviour
     [BoxGroup("Easy Access")]
     [SerializeField]
     private TextMeshProUGUI characterName;
-    /*
-    [Required]
-    [BoxGroup("Easy Access")]
-    [SerializeField]
-    private Image characterPreview;*/
 
     [Required]
     [BoxGroup("Easy Access")]
@@ -61,15 +51,6 @@ public class TitleScreenSaveSlot : MonoBehaviour
     {
         this.slotname.text = this.gameObject.name;
         getData();
-    }
-
-    public void SaveOrStartGame()
-    {
-        if(this.mainGameObject != null)
-        {
-            if (this.mainGameObject.GetComponent<SaveGameMenu>() != null) this.mainGameObject.GetComponent<SaveGameMenu>().saveGame(this.gameObject);
-            else if (this.mainGameObject.GetComponent<TitleScreen>() != null && this.data != null) this.mainGameObject.GetComponent<TitleScreen>().startTheGame(data.scene, this.gameObject.name);
-        }
     }
 
     public void getData()
