@@ -101,6 +101,7 @@ public class Player : Character
         CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
 
         this.direction = new Vector2(0, -1);
+
         updateResource(ResourceType.life, null, 0);
         updateResource(ResourceType.mana, null, 0);
         //this.currencySignalUI.Raise();

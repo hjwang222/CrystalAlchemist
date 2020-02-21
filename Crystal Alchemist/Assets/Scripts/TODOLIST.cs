@@ -14,9 +14,8 @@ public class TODOLIST : MonoBehaviour
     //- Unterwasser
 
     //TODO (0.2.4.0):
-
     //TODO: Preset in Savegame speichern
-    //BUG: Schwanz nach Szenenwechsel falsch
+    //BUG: Spieler steht rechts nach Tür raus
 
     //TODO (0.2.4.3):
     //TODO: Projectile canReflect Attribute
