@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 929082024}
   - component: {fileID: 929082027}
   - component: {fileID: 929082028}
+  - component: {fileID: 8293357237318993219}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -115,6 +116,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 4482648712296496520}
+--- !u!114 &8293357237318993219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929082023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canChangeColor: 1
+  spriteRenderer: {fileID: 0}
+  colors: []
 --- !u!1 &1158493752
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +330,7 @@ GameObject:
   - component: {fileID: 4482648712296496522}
   - component: {fileID: 1028641328}
   - component: {fileID: 7129135206912136028}
+  - component: {fileID: 1769147606524362081}
   m_Layer: 11
   m_Name: Blob
   m_TagString: Untagged
@@ -543,6 +560,20 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &1769147606524362081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2246077131478480992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0cc24a6a87c5941b5d156e081d6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSprite: {fileID: 7201104449445602734}
+  colorpalettes: []
 --- !u!1 &6674156776865872386
 GameObject:
   m_ObjectHideFlags: 0

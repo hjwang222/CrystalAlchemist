@@ -109,7 +109,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7247743900210993475
@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 8793839158660886954}
   - component: {fileID: 1294441505385801003}
   - component: {fileID: 2433579770756760863}
+  - component: {fileID: -7635502744899308147}
   m_Layer: 0
   m_Name: Steinwand
   m_TagString: Untagged
@@ -324,17 +325,12 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 0b7cb418ef38be240a9bf72bb575785f, type: 2}
   myRigidbody: {fileID: 0}
   animator: {fileID: 5540190085609823372}
-  mainSprite: {fileID: 7247743900210993475}
   boxCollider: {fileID: 30635547035960434}
   shadowRenderer: {fileID: 4870180117773829343}
-  startSpriteForRespawn: {fileID: 0}
-  startSpriteForRespawnWhite: {fileID: 0}
   activeSkillParent: {fileID: 9215530842851801714}
   activeStatusEffectParent: {fileID: 422663672048093189}
   skillSetParent: {fileID: 0}
   skillStartPosition: {fileID: 7247743900210993475}
-  spriteRenderers:
-  - {fileID: 8864143077619904186}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -377,6 +373,20 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &-7635502744899308147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8793839158660886956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0cc24a6a87c5941b5d156e081d6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSprite: {fileID: 7247743900210993475}
+  colorpalettes: []
 --- !u!1 &9215530842851801714
 GameObject:
   m_ObjectHideFlags: 0

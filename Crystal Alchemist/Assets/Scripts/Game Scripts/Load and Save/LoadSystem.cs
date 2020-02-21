@@ -24,7 +24,7 @@ public class LoadSystem : MonoBehaviour
             player.healthSignalUI.Raise();
             player.manaSignalUI.Raise();
 
-            player.stats.characterName = data.name;
+            player.stats.characterName = data.characterName;
             player.GetComponent<PlayerUtils>().secondsPlayed = data.timePlayed;
 
             player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
@@ -46,7 +46,53 @@ public class LoadSystem : MonoBehaviour
         {
             loadSkills(data, player);
         }
+    }    
+
+    public static void loadPreset(Player player, string saveGameSlot)
+    {
+        PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
+
+        if (data != null && data.characterParts.Count > 0)
+        {
+            loadPresetData(data, player);
+        }
     }
+
+    private static void loadPresetData(PlayerData data, Player player)
+    {
+        player.stats.characterName = data.characterName;
+
+        CharacterPreset preset = player.preset;
+        preset.characterName = data.characterName;
+
+        if (Enum.TryParse(data.race, out Race race)) preset.setRace(race);
+        
+        foreach(string[] colorGroup in data.colorGroups)
+        {
+            string colorGroupName = colorGroup[0];
+            float r = float.Parse(colorGroup[1]);
+            float g = float.Parse(colorGroup[2]);
+            float b = float.Parse(colorGroup[3]);
+            float a = float.Parse(colorGroup[4]);
+
+            Color color = new Color(r,g,b,a);
+            if (Enum.TryParse(colorGroup[0], out ColorGroup group)) preset.AddColorGroup(group, color);
+        }
+
+        foreach(string[] characterPart in data.characterParts)
+        {
+            string parentName = characterPart[0];
+            string name = characterPart[1];
+
+            preset.AddCharacterPartData(parentName, name);
+        }
+    }
+
+
+
+
+
+
 
     private static void loadInventory(PlayerData data, Player player)
     {

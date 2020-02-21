@@ -4,7 +4,7 @@ using UnityEngine;
 public class CharacterPartHandler : MonoBehaviour
 {
     [SerializeField]
-    private CharacterPreset preset;
+    private Player player;
 
     [SerializeField]
     private SpriteRendererExtensionHandler handler;
@@ -13,6 +13,7 @@ public class CharacterPartHandler : MonoBehaviour
 
     private void Start()
     {
+        LoadSystem.loadPreset(this.player, this.player.saveGameSlot.getValue());
         UpdateCharacterParts();
     }
 
@@ -25,8 +26,8 @@ public class CharacterPartHandler : MonoBehaviour
         {
             part.gameObject.SetActive(false);
 
-            CharacterPartData data = preset.GetCharacterPartData(part.property.parentName, part.property.partName);
-            Color color = preset.getColor(part.property.colorGroup);
+            CharacterPartData data = this.player.preset.GetCharacterPartData(part.property.parentName, part.property.partName);
+            Color color = this.player.preset.getColor(part.property.colorGroup);
 
             if (data != null || part.property.neverDisable) part.gameObject.SetActive(true); 
             if (part.gameObject.activeInHierarchy) part.GetComponent<SpriteRenderer>().color = color;            

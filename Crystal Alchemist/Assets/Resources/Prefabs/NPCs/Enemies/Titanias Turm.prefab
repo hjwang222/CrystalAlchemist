@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 55980665602690937}
   - component: {fileID: 4536096100201619651}
   - component: {fileID: 6637379978092093871}
+  - component: {fileID: -2857999511042139106}
   m_Layer: 11
   m_Name: Titanias Turm
   m_TagString: Untagged
@@ -109,20 +110,12 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 2ecf4e93db9bd0a43a3dda9972716fe8, type: 2}
   myRigidbody: {fileID: 2438936824352443031}
   animator: {fileID: 4536096100035205208}
-  mainSprite: {fileID: 3547521921856296989}
   boxCollider: {fileID: 4536096100201619651}
   shadowRenderer: {fileID: 4252439317337786063}
-  startSpriteForRespawn: {fileID: 7674188754514733644, guid: bba5f92a22649c6499e4206f67431dc5,
-    type: 3}
-  startSpriteForRespawnWhite: {fileID: 6052447260609748655, guid: bba5f92a22649c6499e4206f67431dc5,
-    type: 3}
   activeSkillParent: {fileID: 4536096100877042891}
   activeStatusEffectParent: {fileID: 7092093423516748017}
   skillSetParent: {fileID: 2993592967878901568}
   skillStartPosition: {fileID: 1536248267194378282}
-  colors: []
-  spriteRenderers:
-  - {fileID: 4536096100035205211}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -235,6 +228,20 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &-2857999511042139106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438936824352443027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0cc24a6a87c5941b5d156e081d6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSprite: {fileID: 3547521921856296989}
+  colorpalettes: []
 --- !u!1 &2993592967878901568
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +489,7 @@ GameObject:
   - component: {fileID: 4536096100035205211}
   - component: {fileID: 4536096100035205208}
   - component: {fileID: 4536096100035205215}
+  - component: {fileID: 640011820555366839}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -588,6 +596,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 55980665602690939}
+--- !u!114 &640011820555366839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4536096100035205204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canChangeColor: 1
+  spriteRenderer: {fileID: 0}
+  colors: []
 --- !u!1 &4536096100807201265
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,15 +844,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b15da4d5551d0eb4895d1dc3d6390eaa, type: 3}
---- !u!212 &4252439317337786063 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4251366256092687360, guid: b15da4d5551d0eb4895d1dc3d6390eaa,
-    type: 3}
-  m_PrefabInstance: {fileID: 143077328735333071}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8612992611356329901 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8537469436013784418, guid: b15da4d5551d0eb4895d1dc3d6390eaa,
+    type: 3}
+  m_PrefabInstance: {fileID: 143077328735333071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &4252439317337786063 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4251366256092687360, guid: b15da4d5551d0eb4895d1dc3d6390eaa,
     type: 3}
   m_PrefabInstance: {fileID: 143077328735333071}
   m_PrefabAsset: {fileID: 0}

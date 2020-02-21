@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 3542870481894826020}
   - component: {fileID: 2094131440841753910}
   - component: {fileID: 6973333569712887044}
+  - component: {fileID: 5974902126137117086}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -291,6 +292,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 4378207659174940500}
+--- !u!114 &5974902126137117086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2849347175416658031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canChangeColor: 1
+  spriteRenderer: {fileID: 0}
+  colors: []
 --- !u!1 &4378207659174940328
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +320,7 @@ GameObject:
   - component: {fileID: 4378207659174940500}
   - component: {fileID: 546327852}
   - component: {fileID: 2509453432209138342}
+  - component: {fileID: 1525219476823323414}
   m_Layer: 11
   m_Name: Pot
   m_TagString: Object
@@ -371,18 +388,12 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 2e707ea95b2c5c342be8d3895175e9f5, type: 2}
   myRigidbody: {fileID: 546327852}
   animator: {fileID: 2094131440841753910}
-  mainSprite: {fileID: 643234597281888973}
   boxCollider: {fileID: 4378207659174940502}
   shadowRenderer: {fileID: 1580008844188032001}
-  startSpriteForRespawn: {fileID: 0}
-  startSpriteForRespawnWhite: {fileID: 0}
   activeSkillParent: {fileID: 9010662488490252655}
   activeStatusEffectParent: {fileID: 6899571501455701071}
   skillSetParent: {fileID: 0}
   skillStartPosition: {fileID: 643234597281888973}
-  colors: []
-  spriteRenderers:
-  - {fileID: 3542870481894826020}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -446,6 +457,20 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &1525219476823323414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378207659174940328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0cc24a6a87c5941b5d156e081d6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSprite: {fileID: 643234597281888973}
+  colorpalettes: []
 --- !u!1 &6899571501455701071
 GameObject:
   m_ObjectHideFlags: 0

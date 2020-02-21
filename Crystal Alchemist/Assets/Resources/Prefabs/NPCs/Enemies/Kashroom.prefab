@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 1107838214050882015}
   - component: {fileID: 1107838214050882012}
   - component: {fileID: 1107838214050882011}
+  - component: {fileID: 2762090324754505581}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -211,6 +212,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 3560735132152297215}
+--- !u!114 &2762090324754505581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107838214050882000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canChangeColor: 1
+  spriteRenderer: {fileID: 0}
+  colors: []
 --- !u!1 &1185713049241957143
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +242,7 @@ GameObject:
   - component: {fileID: 3560735132152297213}
   - component: {fileID: 1107838214220306759}
   - component: {fileID: 7903837475167082539}
+  - component: {fileID: 6415677170383339479}
   m_Layer: 11
   m_Name: Kashroom
   m_TagString: Untagged
@@ -291,20 +308,12 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: b7b833ce9b649fa4c8138635634c8ad4, type: 2}
   myRigidbody: {fileID: 1185713049241957139}
   animator: {fileID: 1107838214050882012}
-  mainSprite: {fileID: 3892359947461909517}
   boxCollider: {fileID: 1107838214220306759}
   shadowRenderer: {fileID: 2016206444539810997}
-  startSpriteForRespawn: {fileID: -5474531637377310399, guid: bba5f92a22649c6499e4206f67431dc5,
-    type: 3}
-  startSpriteForRespawnWhite: {fileID: -5402886042099761866, guid: bba5f92a22649c6499e4206f67431dc5,
-    type: 3}
   activeSkillParent: {fileID: 1107838212211391823}
   activeStatusEffectParent: {fileID: 6034976085599367541}
   skillSetParent: {fileID: 1740578941778675396}
   skillStartPosition: {fileID: 3892359947461909517}
-  colors: []
-  spriteRenderers:
-  - {fileID: 1107838214050882015}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -504,6 +513,20 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &6415677170383339479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185713049241957143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0cc24a6a87c5941b5d156e081d6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSprite: {fileID: 3892359947461909517}
+  colorpalettes: []
 --- !u!1 &1740578941778675396
 GameObject:
   m_ObjectHideFlags: 0

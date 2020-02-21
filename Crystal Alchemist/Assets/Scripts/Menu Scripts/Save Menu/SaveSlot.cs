@@ -62,7 +62,7 @@ public class SaveSlot : MonoBehaviour
 
         if (this.data != null)
         {
-            string name = data.name;
+            string name = data.characterName;
             float timePlayed = data.timePlayed;
             string ort = data.scene;
             float maxLife = data.maxHealth;

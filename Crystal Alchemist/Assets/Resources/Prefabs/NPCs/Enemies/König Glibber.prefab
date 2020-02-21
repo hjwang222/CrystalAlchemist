@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 3020177092142690265}
   - component: {fileID: 3020177092142690266}
   - component: {fileID: 3020177092142690269}
+  - component: {fileID: 8451706886356656604}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -206,6 +207,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1719322071491950841}
+--- !u!114 &8451706886356656604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3020177092142690262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canChangeColor: 1
+  spriteRenderer: {fileID: 0}
+  colors: []
 --- !u!1 &3338578078561740491
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,6 +268,7 @@ GameObject:
   - component: {fileID: 1719322071491950843}
   - component: {fileID: 3020177091971815233}
   - component: {fileID: 5406032190703523373}
+  - component: {fileID: -2033235849666499790}
   m_Layer: 11
   m_Name: "K\xF6nig Glibber"
   m_TagString: Untagged
@@ -317,20 +334,12 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 071c75d9e981e5748aaddf91a57b8143, type: 2}
   myRigidbody: {fileID: 3945848509854940437}
   animator: {fileID: 3020177092142690266}
-  mainSprite: {fileID: 3338578078561740491}
   boxCollider: {fileID: 3020177091971815233}
   shadowRenderer: {fileID: 5485388855570139274}
-  startSpriteForRespawn: {fileID: -3843519524448524331, guid: 31b27746767e84a41bc6844ae9007ede,
-    type: 3}
-  startSpriteForRespawnWhite: {fileID: -6377099425841671997, guid: 31b27746767e84a41bc6844ae9007ede,
-    type: 3}
   activeSkillParent: {fileID: 3020177091833525065}
   activeStatusEffectParent: {fileID: 8464107762506563443}
   skillSetParent: {fileID: 4508596630270412994}
   skillStartPosition: {fileID: 3338578078561740491}
-  colors: []
-  spriteRenderers:
-  - {fileID: 3020177092142690265}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -529,6 +538,20 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &-2033235849666499790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945848509854940433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0cc24a6a87c5941b5d156e081d6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSprite: {fileID: 3338578078561740491}
+  colorpalettes: []
 --- !u!1 &4508596630270412994
 GameObject:
   m_ObjectHideFlags: 0

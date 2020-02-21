@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 5026383991709977233}
   - component: {fileID: 8932006801697793323}
   - component: {fileID: 1809068735410250823}
+  - component: {fileID: -8954306522490569902}
   m_Layer: 11
   m_Name: Magma Gel
   m_TagString: Untagged
@@ -204,20 +205,12 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: eafe20572b3378f4b8231efd676d60f7, type: 2}
   myRigidbody: {fileID: 7268659838857056127}
   animator: {fileID: 8932006801801387440}
-  mainSprite: {fileID: 7914839587969846799}
   boxCollider: {fileID: 8932006801697793323}
   shadowRenderer: {fileID: 9101974201244086688}
-  startSpriteForRespawn: {fileID: 3018436140445916847, guid: bba5f92a22649c6499e4206f67431dc5,
-    type: 3}
-  startSpriteForRespawnWhite: {fileID: -876002081585225699, guid: bba5f92a22649c6499e4206f67431dc5,
-    type: 3}
   activeSkillParent: {fileID: 8932006801567842595}
   activeStatusEffectParent: {fileID: 2840507917755813145}
   skillSetParent: {fileID: 7821854749448993448}
   skillStartPosition: {fileID: 7914839587969846799}
-  colors: []
-  spriteRenderers:
-  - {fileID: 8932006801801387443}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -377,6 +370,20 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &-8954306522490569902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7268659838857056123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0cc24a6a87c5941b5d156e081d6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSprite: {fileID: 7914839587969846799}
+  colorpalettes: []
 --- !u!1 &7821854749448993448
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +589,7 @@ GameObject:
   - component: {fileID: 8932006801801387443}
   - component: {fileID: 8932006801801387440}
   - component: {fileID: 8932006801801387447}
+  - component: {fileID: 7303095536852381337}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -686,6 +694,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 5026383991709977235}
+--- !u!114 &7303095536852381337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932006801801387452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canChangeColor: 1
+  spriteRenderer: {fileID: 0}
+  colors: []
 --- !u!1001 &4949269460512988576
 PrefabInstance:
   m_ObjectHideFlags: 0

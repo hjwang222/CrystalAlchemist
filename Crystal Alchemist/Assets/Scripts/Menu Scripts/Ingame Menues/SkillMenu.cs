@@ -124,12 +124,12 @@ public class SkillMenu : MenuControls
 
             if(senderModule != null)
             {
-                this.skillDetailsCost.text = Mathf.Abs(senderModule.addResourceSender) * 4 + "";
+                this.skillDetailsCost.text = Mathf.Abs(senderModule.addResourceSender) + "";
             }
 
             if (targetModule != null)
             {
-                if (targetModule.affectedResources.Count > 0) strength = Mathf.Abs(targetModule.affectedResources[0].amount) * 4;
+                if (targetModule.affectedResources.Count > 0) strength = Mathf.Abs(targetModule.affectedResources[0].amount);
                 this.skillDetailsStrength.text = strength + "";
 
                 if (targetModule.statusEffects.Count > 0)

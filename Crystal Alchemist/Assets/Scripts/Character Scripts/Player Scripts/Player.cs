@@ -20,6 +20,10 @@ public class Player : Character
     [Required]
     public PlayerStats playerStats;
 
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public CharacterPreset preset;
+
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
     public StringSignal dialogBoxSignal;
@@ -97,10 +101,8 @@ public class Player : Character
         if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);
 
         CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", false);
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
 
-        this.direction = new Vector2(0, -1);
+        this.characterLookDown();
 
         updateResource(ResourceType.life, null, 0);
         updateResource(ResourceType.mana, null, 0);
@@ -122,16 +124,13 @@ public class Player : Character
         if (this.currentState != CharacterState.dead)
         {
             this.change = Vector2.zero;
-            this.direction = new Vector2(0, -1);
+            this.characterLookDown();
 
             //TODO: Kill sofort (Skill noch aktiv)
             CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
             CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
 
             //this.spriteRenderer.color = Color.white;
-
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
             CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", true);
 
             this.currentState = CharacterState.dead;

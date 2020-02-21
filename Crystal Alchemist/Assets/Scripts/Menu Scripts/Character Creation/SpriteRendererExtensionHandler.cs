@@ -1,14 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class SpriteRendererExtensionHandler : MonoBehaviour
 {
     [SerializeField]
+    [Required]
     private GameObject characterSprite;
 
     [HideInInspector]
     public List<SpriteRendererExtension> colorpalettes = new List<SpriteRendererExtension>();
+
+#if UNITY_EDITOR
+    [Button]
+    public void setExtensions()
+    {
+        if(this.characterSprite != null)
+        {
+            List<SpriteRenderer> renderers = new List<SpriteRenderer>();
+            renderers.Clear();
+
+            CustomUtilities.UnityFunctions.GetChildObjects<SpriteRenderer>(this.characterSprite.transform, renderers);
+
+            foreach(SpriteRenderer renderer in renderers)
+            {
+                if (renderer.gameObject.GetComponent<SpriteRendererExtension>() == null)
+                {
+                    renderer.gameObject.AddComponent<SpriteRendererExtension>();
+                    Debug.Log("Set Extension for " + renderer.name);
+                }
+            }
+        }
+    }
+#endif
 
     private void Start()
     {

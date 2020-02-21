@@ -19,11 +19,15 @@ public class PlayerData
     public List<string[]> inventory = new List<string[]>();
     public List<string[]> skills = new List<string[]>();
 
+    public string characterName;
+    public string race;
+    public List<string[]> colorGroups = new List<string[]>();
+    public List<string[]> characterParts = new List<string[]>();
+
     public float[] position;
     public string scene;
-    public string name;
-
     public float timePlayed;
+
 
     public PlayerData(Player player, string scene)
     {
@@ -45,9 +49,10 @@ public class PlayerData
 
         setInventory(player);
         setSkills(player);
+        setPreset(player.preset);
 
         this.scene = scene;
-        this.name = player.stats.characterName;
+        this.characterName = player.stats.characterName;
         this.timePlayed = player.GetComponent<PlayerUtils>().secondsPlayed;
     }
 
@@ -74,6 +79,32 @@ public class PlayerData
         if (player.YButton != null) this.skills.Add(new string[] { "Y", player.YButton.skillName });
         if (player.RBButton != null) this.skills.Add(new string[] { "RB", player.RBButton.skillName });
     }
+
+    private void setPreset(CharacterPreset preset)
+    {
+        this.characterName = preset.characterName;
+        this.race = preset.getRace().ToString();
+
+        this.colorGroups.Clear();
+        this.characterParts.Clear();
+
+        foreach(ColorGroupData data in preset.GetColorGroupRange())
+        {
+            string[] temp = new string[5];
+            temp[0] = data.colorGroup.ToString();
+            temp[1] = data.color.r + "";
+            temp[2] = data.color.g + "";
+            temp[3] = data.color.b + "";
+            temp[4] = data.color.a + "";
+        }
+
+        foreach (CharacterPartData data in preset.GetCharacterPartDataRange())
+        {
+            string[] temp = new string[2];
+            temp[0] = data.parentName;
+            temp[1] = data.name;
+        }
+    }
 }
 
 [System.Serializable]
@@ -90,17 +121,5 @@ public class GameOptions
         this.soundVolume = GlobalValues.soundEffectVolume;
         this.layout = GlobalValues.layoutType.ToString().ToLower();
         this.useAlternativeLanguage = GlobalValues.useAlternativeLanguage;
-    }
-}
-
-
-[System.Serializable]
-public class InventoryData
-{
-    public List<Item> items;
-
-    public InventoryData(List<Item> items)
-    {
-        this.items = items;
     }
 }

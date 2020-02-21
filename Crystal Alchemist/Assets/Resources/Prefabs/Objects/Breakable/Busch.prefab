@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1301488769302884366}
   - component: {fileID: 7794983885249979872}
   - component: {fileID: 5863874315535871781}
+  - component: {fileID: 4021360541268615187}
   m_Layer: 11
   m_Name: Busch
   m_TagString: Object
@@ -65,18 +66,12 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: b0a76af33d38bc4429c115714bd4c66b, type: 2}
   myRigidbody: {fileID: 7794983885249979872}
   animator: {fileID: 7100320595481495861}
-  mainSprite: {fileID: 5790654499668884513}
   boxCollider: {fileID: 5863874315535871781}
   shadowRenderer: {fileID: 5487949860688999190}
-  startSpriteForRespawn: {fileID: 0}
-  startSpriteForRespawnWhite: {fileID: 0}
   activeSkillParent: {fileID: 1720950400238353364}
   activeStatusEffectParent: {fileID: 7916120204381260195}
   skillSetParent: {fileID: 0}
   skillStartPosition: {fileID: 5790654499668884513}
-  colors: []
-  spriteRenderers:
-  - {fileID: 7100320595481495857}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -155,6 +150,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.87628317, y: 0.6176028}
   m_EdgeRadius: 0
+--- !u!114 &4021360541268615187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301488769302884362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0cc24a6a87c5941b5d156e081d6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSprite: {fileID: 5790654499668884513}
+  colorpalettes: []
 --- !u!1 &1720950400238353364
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +349,7 @@ GameObject:
   - component: {fileID: 7100320595481495857}
   - component: {fileID: 7100320595481495861}
   - component: {fileID: 868693920496948498}
+  - component: {fileID: 7047750212601242005}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -444,6 +454,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1301488769302884366}
+--- !u!114 &7047750212601242005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100320595481495856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canChangeColor: 1
+  spriteRenderer: {fileID: 0}
+  colors: []
 --- !u!1 &7731839015675234653
 GameObject:
   m_ObjectHideFlags: 0

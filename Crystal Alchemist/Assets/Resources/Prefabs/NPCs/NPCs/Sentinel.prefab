@@ -486,6 +486,7 @@ GameObject:
   - component: {fileID: 5280788646405828720}
   - component: {fileID: 7496823447159223706}
   - component: {fileID: 756343447151364331}
+  - component: {fileID: 1077067671459461634}
   m_Layer: 11
   m_Name: Sentinel
   m_TagString: Untagged
@@ -551,18 +552,12 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 044d5a2f62542b141ab2f44c3e80795b, type: 2}
   myRigidbody: {fileID: 7518508113067193758}
   animator: {fileID: 3591206468238266611}
-  mainSprite: {fileID: 2607846382137571988}
   boxCollider: {fileID: 756343447151364331}
   shadowRenderer: {fileID: 3065126659358519017}
-  startSpriteForRespawn: {fileID: 0}
-  startSpriteForRespawnWhite: {fileID: 0}
   activeSkillParent: {fileID: 8609950149900843970}
   activeStatusEffectParent: {fileID: 3162633258840045560}
   skillSetParent: {fileID: 6918834853960073289}
   skillStartPosition: {fileID: 3573479377580327976}
-  colors: []
-  spriteRenderers:
-  - {fileID: 8609950150137522002}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -760,6 +755,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6190985, y: 0.5030763}
   m_EdgeRadius: 0
+--- !u!114 &1077067671459461634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7518508113067193754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0cc24a6a87c5941b5d156e081d6c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterSprite: {fileID: 2607846382137571988}
+  colorpalettes: []
 --- !u!1 &8609950149900843970
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,6 +811,7 @@ GameObject:
   - component: {fileID: 8609950150137522002}
   - component: {fileID: 8609950150137522006}
   - component: {fileID: 3591206468238266611}
+  - component: {fileID: 8935539159494956674}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -906,6 +916,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8935539159494956674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8609950150137522013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canChangeColor: 1
+  spriteRenderer: {fileID: 0}
+  colors: []
 --- !u!1001 &1186249218887009001
 PrefabInstance:
   m_ObjectHideFlags: 0

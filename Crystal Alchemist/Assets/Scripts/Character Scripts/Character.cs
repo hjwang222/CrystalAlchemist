@@ -186,9 +186,17 @@ public class Character : MonoBehaviour
         this.debuffMinus = this.stats.debuffMinus;
     }
 
-    private void setBasicAttributesToNormal(bool reset)
+    public void characterLookDown()
     {
         this.direction = new Vector2(0, -1);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
+    }
+
+    private void setBasicAttributesToNormal(bool reset)
+    {
+        this.characterLookDown();
+
         //this.spriteRenderer.gameObject.transform.localScale = new Vector3(1, 1, 1);
         this.setStartColor();
 
