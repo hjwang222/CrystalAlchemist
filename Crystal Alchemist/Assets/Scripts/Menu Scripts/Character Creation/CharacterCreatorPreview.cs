@@ -11,13 +11,8 @@ public class CharacterCreatorPreview : MonoBehaviour
     [SerializeField]
     private CharacterCreatorMenu mainMenu;
 
-    [SerializeField]
-    private TextMeshProUGUI previewText;
-
     public void UpdatePreview()
     {
-        this.previewText.text = this.mainMenu.creatorPreset.characterName;
-
         List<CharacterCreatorPart> parts = new List<CharacterCreatorPart>();
         CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorPart>(this.transform, parts);
 

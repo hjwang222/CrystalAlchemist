@@ -160,15 +160,11 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
         }
     }
 
-
-
-
-
     #endregion
-    
+
 
     #region ColorGroups
-          
+
     public ColorGroupData GetColorGroupData(ColorGroup colorGroup)
     {
         foreach (ColorGroupData colorGroupData in this.colorGroups)
@@ -213,7 +209,6 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
             }
         }
     }
-
 
     public void RemoveColorGroup(ColorGroup colorGroup)
     {

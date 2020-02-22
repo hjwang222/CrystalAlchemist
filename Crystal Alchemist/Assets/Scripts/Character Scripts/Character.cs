@@ -186,12 +186,7 @@ public class Character : MonoBehaviour
         this.debuffMinus = this.stats.debuffMinus;
     }
 
-    public void characterLookDown()
-    {
-        this.direction = new Vector2(0, -1);
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
-    }
+   
 
     private void setBasicAttributesToNormal(bool reset)
     {
@@ -250,7 +245,7 @@ public class Character : MonoBehaviour
 
     #region Updates
 
-    public void Update()
+    public virtual void Update()
     {
         if (this.currentState == CharacterState.dead)
             return;
@@ -303,6 +298,38 @@ public class Character : MonoBehaviour
     }
 
     #endregion
+
+
+    #region animation
+    public void characterLookDown()
+    {
+        this.direction = new Vector2(0, -1);
+        updateAnimDirection(this.direction);
+    }
+
+    public void updateAnimDirection(Vector2 direction)
+    {
+        CustomUtilities.UnityUtils.SetAnimDirection(direction, this.animator);
+    }
+
+    public void changeAnim(Vector2 direction)
+    {
+        //TODO: To be tested
+        this.direction = direction;
+
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+        {
+            if (direction.x > 0) updateAnimDirection(Vector2.right);
+            else if (direction.x < 0) updateAnimDirection(Vector2.left);
+        }
+        else if (Mathf.Abs(direction.x) < Mathf.Abs(direction.y))
+        {
+            if (direction.y > 0) updateAnimDirection(Vector2.up);
+            else if (direction.y < 0) updateAnimDirection(Vector2.down);
+        }
+    }
+    #endregion
+
 
 
     #region Update Functions (Signals?)  

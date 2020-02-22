@@ -268,8 +268,7 @@ public class Skill : MonoBehaviour
 
         if (this.animator != null && this.sender != null && !this.movementLocked)
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
+            CustomUtilities.UnityUtils.SetAnimDirection(this.sender.direction, this.animator);
         }
 
         if (this.delayTimeLeft > 0)
@@ -314,7 +313,6 @@ public class Skill : MonoBehaviour
         }
 
         if (this.target != null && !this.target.gameObject.activeInHierarchy) this.durationTimeLeft = 0;
-
     }
 
     public float getDurationLeft()
@@ -415,11 +413,7 @@ public class Skill : MonoBehaviour
             if (useOffSetToBlendTree) this.transform.position = new Vector2(positionX, positionY);
         }
 
-        if (this.animator != null)
-        {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", this.sender.direction.x);
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", this.sender.direction.y);
-        }
+        CustomUtilities.UnityUtils.SetAnimDirection(this.sender.direction, this.animator);        
 
         if (this.shadow != null)
         {

@@ -509,6 +509,15 @@ public class CustomUtilities : MonoBehaviour
             return result;
         }
 
+        public static void SetAnimDirection(Vector2 direction, Animator animator)
+        {
+            if (animator != null)
+            {
+                SetAnimatorParameter(animator, "moveX", direction.x);
+                SetAnimatorParameter(animator, "moveY", direction.y);
+            }
+        }
+
         public static void SetAnimatorParameter(List<Animator> animators, string parameter, bool value)
         {
             foreach(Animator animator in animators)

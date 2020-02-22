@@ -34,16 +34,22 @@ public class MenuControls : BasicMenu
     [HideInInspector]
     public CharacterState lastState;
 
-    public bool disableMenuControls = false;
+    [BoxGroup("Menu Controls")]
+    [SerializeField]
+    private bool disableMenuControlsScript = false;
+
+    [BoxGroup("Menu Controls")]
+    [SerializeField]
+    private bool disableExitButtonPress = false;
 
     public override void OnEnable()
     {
-        if (!this.disableMenuControls)
+        if(this.cursor != null) this.cursor.gameObject.SetActive(true);
+
+        if (!this.disableMenuControlsScript)
         {
             this.player = this.playerStats.player;
-
             this.lastState = this.player.currentState;
-            this.cursor.gameObject.SetActive(true);
             this.player.currentState = CharacterState.inMenu;
 
             this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
@@ -64,10 +70,10 @@ public class MenuControls : BasicMenu
 
     public override void Update()
     {
-        if (!this.disableMenuControls)
-        {
-            base.Update();
+        base.Update();
 
+        if (!this.disableMenuControlsScript && !disableExitButtonPress)
+        {
             if (Input.GetButtonDown("Cancel"))
             {
                 if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();

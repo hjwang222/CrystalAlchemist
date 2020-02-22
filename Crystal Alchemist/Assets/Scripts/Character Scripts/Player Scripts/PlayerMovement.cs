@@ -30,9 +30,7 @@ public class PlayerMovement : MonoBehaviour
             if (!lockAnimation)
             {
                 this.player.direction = this.player.change;
-
-                CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "moveX", this.player.change.x);
-                CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "moveY", this.player.change.y);
+                this.player.updateAnimDirection(this.player.change);
             }
 
             CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", true);

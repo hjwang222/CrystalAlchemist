@@ -100,7 +100,9 @@ public class PlayerTeleport : MonoBehaviour
         {
             //this.transform.position = playerPositionInNewScene;
             this.player.enableSpriteRenderer(true);
-            this.player.currentState = CharacterState.idle;
+            this.player.currentState = CharacterState.idle;               
         }
+
+        this.player.updateAnimDirection(this.player.direction);
     }
 }

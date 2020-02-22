@@ -7,9 +7,7 @@ using UnityEngine.UI;
 public class CharacterCreatorName : CharacterCreatorButton
 {
     [SerializeField]
-    private TMP_InputField textfield;
-
-
+    private TMP_InputField inputField;
 
     [SerializeField]
     private Selectable confirmButton;
@@ -22,8 +20,7 @@ public class CharacterCreatorName : CharacterCreatorButton
 
     private void setNameFromPreset()
     {
-        this.textfield.text = this.mainMenu.creatorPreset.characterName;
-        this.mainMenu.updatePreview();
+        this.inputField.text = this.mainMenu.creatorPreset.characterName;
     }
 
     private void OnEnable()
@@ -31,22 +28,21 @@ public class CharacterCreatorName : CharacterCreatorButton
         setNameFromPreset();
     }
 
-    public void textChanged()
+    public void Confirm()
     {
-        this.mainMenu.updatePreview();
-        this.mainMenu.creatorPreset.characterName = this.textfield.text;
+        this.mainMenu.creatorPreset.characterName = this.inputField.text;
     }
 
     public void activeOnSelect()
     {
-        this.textfield.ActivateInputField();
+        this.inputField.ActivateInputField();
     }
 
     public void Update()
     {
-        if (Input.GetAxisRaw("Vertical") < 0) this.textfield.DeactivateInputField();
+        if (Input.GetAxisRaw("Vertical") < 0) this.inputField.DeactivateInputField();
 
-        if (this.textfield.text.Length > 1) this.confirmButton.gameObject.SetActive(true);
+        if (this.inputField.text.Length > 1) this.confirmButton.gameObject.SetActive(true);
         else this.confirmButton.gameObject.SetActive(false);
     }
 }

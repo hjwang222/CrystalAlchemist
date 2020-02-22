@@ -23,6 +23,16 @@ public class SaveSlot : MonoBehaviour
     [Required]
     [BoxGroup("Easy Access")]
     [SerializeField]
+    private GameObject factions;
+
+    [Required]
+    [BoxGroup("Easy Access")]
+    [SerializeField]
+    private TextMeshProUGUI race;
+
+    [Required]
+    [BoxGroup("Easy Access")]
+    [SerializeField]
     private TextMeshProUGUI slotname;
 
     [Required]
@@ -58,11 +68,17 @@ public class SaveSlot : MonoBehaviour
         this.newGame.SetActive(false);
         this.loadGame.SetActive(false);
 
+        foreach(Transform child in this.factions.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+
         this.data = SaveSystem.loadPlayer(this.gameObject.name);
 
         if (this.data != null)
         {
             string name = data.characterName;
+            string race = data.race;
             float timePlayed = data.timePlayed;
             string ort = data.scene;
             float maxLife = data.maxHealth;
@@ -73,6 +89,18 @@ public class SaveSlot : MonoBehaviour
             setLifeMana((int)maxLife, this.health);
             setLifeMana((int)maxMana, this.mana);
             this.characterName.text = name;
+
+            this.race.text = race;
+
+            foreach (Transform child in this.factions.transform)
+            {
+                if (child.name == race)
+                {
+                    child.gameObject.SetActive(true);
+                    break;
+                }
+            }
+
             this.characterLocation.text = ort;
 
             TimeSpan span = TimeSpan.FromMilliseconds(timePlayed);

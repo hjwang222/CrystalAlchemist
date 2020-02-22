@@ -50,9 +50,9 @@ public class PlayerData
         setInventory(player);
         setSkills(player);
         setPreset(player.preset);
+        player.stats.characterName = this.characterName;
 
         this.scene = scene;
-        this.characterName = player.stats.characterName;
         this.timePlayed = player.GetComponent<PlayerUtils>().secondsPlayed;
     }
 
@@ -82,7 +82,7 @@ public class PlayerData
 
     private void setPreset(CharacterPreset preset)
     {
-        this.characterName = preset.characterName;
+        this.characterName = preset.characterName;        
         this.race = preset.getRace().ToString();
 
         this.colorGroups.Clear();
@@ -96,6 +96,7 @@ public class PlayerData
             temp[2] = data.color.g + "";
             temp[3] = data.color.b + "";
             temp[4] = data.color.a + "";
+            this.colorGroups.Add(temp);
         }
 
         foreach (CharacterPartData data in preset.GetCharacterPartDataRange())
@@ -103,6 +104,7 @@ public class PlayerData
             string[] temp = new string[2];
             temp[0] = data.parentName;
             temp[1] = data.name;
+            this.characterParts.Add(temp);
         }
     }
 }

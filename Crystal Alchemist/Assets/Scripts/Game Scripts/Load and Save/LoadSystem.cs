@@ -66,7 +66,9 @@ public class LoadSystem : MonoBehaviour
         preset.characterName = data.characterName;
 
         if (Enum.TryParse(data.race, out Race race)) preset.setRace(race);
-        
+
+        List<ColorGroupData> colorGroups = new List<ColorGroupData>();
+
         foreach(string[] colorGroup in data.colorGroups)
         {
             string colorGroupName = colorGroup[0];
@@ -76,22 +78,23 @@ public class LoadSystem : MonoBehaviour
             float a = float.Parse(colorGroup[4]);
 
             Color color = new Color(r,g,b,a);
-            if (Enum.TryParse(colorGroup[0], out ColorGroup group)) preset.AddColorGroup(group, color);
+            if (Enum.TryParse(colorGroup[0], out ColorGroup group)) colorGroups.Add(new ColorGroupData(group, color));
         }
 
-        foreach(string[] characterPart in data.characterParts)
+        preset.AddColorGroupRange(colorGroups);
+
+        List<CharacterPartData> parts = new List<CharacterPartData>();
+
+        foreach (string[] characterPart in data.characterParts)
         {
             string parentName = characterPart[0];
             string name = characterPart[1];
 
-            preset.AddCharacterPartData(parentName, name);
+            parts.Add(new CharacterPartData(parentName, name));
         }
+
+        preset.AddCharacterPartDataRange(parts);
     }
-
-
-
-
-
 
 
     private static void loadInventory(PlayerData data, Player player)
