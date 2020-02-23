@@ -1006,7 +1006,7 @@ public class CustomUtilities : MonoBehaviour
             //if (Mathf.Abs(value) >= 10)
             //    return value.ToString("#");
             //else return value.ToString("#.0");
-            return value + "";
+            return value.ToString("N1");
         }
 
         public static string setDurationToString(float value)

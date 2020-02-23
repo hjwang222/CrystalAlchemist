@@ -2,28 +2,39 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //TODO (0.2.5):
+    //TODO (0.2.5.0):
     //BUG: Stromschlag stark verzögert...
-    //TODO: Projectile canReflect Attribute
-    //TODO: Skill: Reflektor Shield
-    //TODO: HUD change (Herz oder Leiste)
-    //TODO: Character Creator Scene
-    //TODO: Brille (Bool Value)
-    //TODO: Bett (Tag/Nacht)
-    //TODO: Schlafen Sprites
-    //TODO: Skillmenu Kosten Icons und Button-Navigation
-    //TODO: Skillmenu RB/LB
-    //TODO: Wetter Script (Position und Größe)
-    //TODO: Bosskampf (Titania)
-    //TODO: TimeJump skaliert mit allem (Update Speed oder anderes)
-    //TODO: Options Rework (Resolution)
-    //TODO: Input Rework (new Unity Feature)
-    //TODO: TitleScreen Background Update
-    //TODO: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
-    //TODO: New Nitro Sprite
-    //TODO: Empty Map Prefab Update
-    //TODO: Character Creator Area https://answers.unity.com/questions/9729/how-can-i-display-a-flat-background-2d-image-not-a.html
-    
+    //BUG: Maus beim Charakter Editor nicht aktiv?
+
+    //SKILL: Projectile canReflect Attribute
+    //SKILL: Reflektor Shield
+
+    //UI: HUD change (Herz oder Leiste)
+    //UI: Skillmenu Kosten Icons und Button-Navigation
+    //UI: Skillmenu RB/LB
+
+    //ITEM: Brille (Bool Value)
+
+    //OBJECT: Bett (Tag/Nacht)
+
+    //NPC: Bosskampf (Titania)
+
+    //GRAPHICS: Sprites für Wasser und Berge (siehe Void)
+    //GRAPHICS: Schlafen, Zaubern, Pfeil, Speer Sprites
+    //GRAPHICS: TitleScreen Background Update
+    //GRAPHICS: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
+    //GRAPHICS: New Nitro Sprite
+
+    //SCENE: Character Creator Area 
+    //SCENE: Titania Arena
+
+    //MAYBE: Empty Map Prefab Update
+    //MAYBE: Input Rework (new Unity Feature)
+    //MAYBE: TimeJump skaliert mit allem (Update Speed oder anderes)
+    //MAYBE: Options Rework (Resolution)
+    //MAYBE: Wetter Script (Position und Größe)
+
+    //-----------------------------------------------------------------------------
 
     //TODO (1.0)
     //- Sound austauschen
@@ -31,10 +42,12 @@ public class TODOLIST : MonoBehaviour
     //- Quests und Story
     //- Content!
 
+    //-----------------------------------------------------------------------------
 
     //TODO (1.5)
     //- Multiplayer!
-    
+
+    //-----------------------------------------------------------------------------
 
     //Wetter
     //- Regen (x)
