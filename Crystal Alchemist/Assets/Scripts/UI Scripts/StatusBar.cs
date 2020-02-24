@@ -36,6 +36,10 @@ public class StatusBar : MonoBehaviour
 
     [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     [SerializeField]
+    private Image fillBar;
+
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
+    [SerializeField]
     private Sprite full;
     [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     [SerializeField]
@@ -139,7 +143,7 @@ public class StatusBar : MonoBehaviour
     public void UpdateGUIHealthMana()
     {
         setStatusBar();
-
+        this.fillBar.fillAmount = (float)(this.currentValue / this.maxValue);
         Sprite sprite = null;
 
         for (int i = 0; i < (int)this.maxValue; i++)
@@ -167,14 +171,13 @@ public class StatusBar : MonoBehaviour
 
             try
             {
-                Transform temp = this.gameObject.transform.GetChild(i);
+                Transform temp = this.icons[i].transform;
                 temp.GetComponent<Image>().sprite = sprite;
             }
             catch(Exception ex)
             {
                 string temp = ex.ToString();
             }
-            
         }
 
         if (this.currentValue <= this.schwelle && this.player.currentState != CharacterState.dead)
