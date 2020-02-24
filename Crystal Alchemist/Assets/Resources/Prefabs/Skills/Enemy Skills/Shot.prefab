@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  canBeReflected: 1
   skillOnImpact: {fileID: 0}
 --- !u!114 &9157380196124073839
 MonoBehaviour:
@@ -244,7 +245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  useGameObjectHeight: 1
   positionHeight: 0.5
   colliderHeightOffset: 0
 --- !u!114 &7983595114080166242
@@ -262,7 +262,6 @@ MonoBehaviour:
   skill: {fileID: 0}
   indicator: {fileID: 5604874298435353384, guid: 4c2b4b217381faf4485e28928382b866,
     type: 3}
-  showingIndicator: 1
   showCastBarForEnemies: 1
   useCustomColor: 1
   indicatorColor: {r: 1, g: 0, b: 0, a: 1}
@@ -278,6 +277,7 @@ GameObject:
   - component: {fileID: 6021116714921555687}
   - component: {fileID: 4459175407930688011}
   - component: {fileID: 1803074669687505092}
+  - component: {fileID: 7375787680842229076}
   m_Layer: 13
   m_Name: shadow
   m_TagString: Untagged
@@ -375,6 +375,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.74026066, y: 0.17786533}
   m_EdgeRadius: 0
+--- !u!114 &7375787680842229076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124404407448343764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447332f77bd7a8848bedd2b53d4e93a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 1676703576389572161}
 --- !u!1 &5853850326603271718
 GameObject:
   m_ObjectHideFlags: 0

@@ -1101,6 +1101,13 @@ public class CustomUtilities : MonoBehaviour
 
     public static class Rotation
     {
+        public static Quaternion getRotation(Vector2 direction)
+        {
+            float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+            Vector3 rotation = new Vector3(0, 0, angle);
+            return Quaternion.Euler(rotation);
+        }
+
         public static Vector2 RadianToVector2(float radian)
         {
             return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));

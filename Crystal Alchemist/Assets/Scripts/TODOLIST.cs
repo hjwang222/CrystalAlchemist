@@ -3,8 +3,6 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-    //SKILL: Reflektor Shield
-
     //UI: HUD change (Herz oder Leiste)
     //UI: Skillmenu Kosten Icons und Button-Navigation
     //UI: Skillmenu RB/LB

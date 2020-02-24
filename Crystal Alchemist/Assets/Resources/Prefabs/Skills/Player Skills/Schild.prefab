@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 8675766369740622298}
   - component: {fileID: 7817998858656526167}
   - component: {fileID: 5219678606332422380}
+  - component: {fileID: 3693980903657387680}
+  - component: {fileID: 3741579703708068224}
   m_Layer: 13
   m_Name: Schild
   m_TagString: Skill
@@ -31,7 +33,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6086066880683234544}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -237,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  useOffSetToBlendTree: 0
+  useOffSetToBlendTree: 1
 --- !u!114 &5219678606332422380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +254,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
   ignoredCollider2D: {fileID: 6821413945222853649}
+--- !u!114 &3693980903657387680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086066880683234544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b713dd2c97c4fa245bfccb8d16fcd85c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+--- !u!114 &3741579703708068224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086066880683234544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85781c900207fc428972075be537857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  positionHeight: -0.1
+  colliderHeightOffset: 0
 --- !u!1 &8110846557276872138
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5246980305061559774}
   - component: {fileID: 6821413945222853649}
+  - component: {fileID: 3082277638975285726}
   m_Layer: 13
   m_Name: collision
   m_TagString: Skill
@@ -276,8 +307,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8110846557276872138}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1290228, y: -0.28257814, z: 0.19966708}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3013391392474220838}
@@ -296,7 +327,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000000029802322, y: -0.18734062}
+  m_Offset: {x: 0, y: -0.36}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -307,5 +338,18 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7474976, y: 0.49499536}
+  m_Size: {x: 1, y: 0.375}
   m_EdgeRadius: 0
+--- !u!114 &3082277638975285726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8110846557276872138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447332f77bd7a8848bedd2b53d4e93a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 975855144787553018}

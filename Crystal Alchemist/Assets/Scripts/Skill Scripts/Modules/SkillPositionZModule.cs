@@ -10,7 +10,7 @@ public class SkillPositionZModule : SkillModule
     //public bool useGameObjectHeight = false;
 
     [BoxGroup("Position Z")]
-    [Range(0, 2)]
+    [Range(-1, 2)]
     [Tooltip("Positions-Höhe")]
     //[HideIf("useGameObjectHeight")]
     public float positionHeight = 0f;

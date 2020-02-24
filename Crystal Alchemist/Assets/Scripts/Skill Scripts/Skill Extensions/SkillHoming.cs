@@ -20,7 +20,7 @@ public class SkillHoming : SkillExtension
     {
         if (this.skill.target != null)
         {
-            this.skill.myRigidbody.velocity = Vector2.zero;
+            this.skill.stopVelocity();
             if (Vector3.Distance(this.skill.target.transform.position, this.transform.position) > 0.25f)
             {
                 //Ermittle Position des Ziels
@@ -50,7 +50,8 @@ public class SkillHoming : SkillExtension
                 //this.skill.myRigidbody.velocity = Vector2.zero;
 
                 this.skill.direction = targetPosition - (Vector2)this.transform.position;
-                this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
+                //this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
+                this.skill.setVelocity();
             }
             else
             {

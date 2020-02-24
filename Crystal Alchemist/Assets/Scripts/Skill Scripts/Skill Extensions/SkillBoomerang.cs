@@ -77,7 +77,8 @@ public class SkillBoomerang : SkillExtension
                 //this.skill.myRigidbody.velocity = Vector2.zero;     
 
                 this.skill.direction = this.skill.sender.transform.position - this.transform.position;
-                this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
+                //this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
+                this.skill.setVelocity();
                 //this.tempVelocity = this.skill.myRigidbody.velocity;
 
             }

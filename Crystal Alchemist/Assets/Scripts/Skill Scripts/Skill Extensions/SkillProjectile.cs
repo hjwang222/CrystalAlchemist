@@ -5,9 +5,6 @@ using Sirenix.OdinInspector;
 
 public class SkillProjectile : SkillExtension
 {
-    [SerializeField]
-    private bool canBeReflected = false;
-
     private bool speedup = true;
     private Vector2 tempVelocity;
 
@@ -20,7 +17,7 @@ public class SkillProjectile : SkillExtension
     {
         if (this.skill.myRigidbody != null && this.speedup)
         {
-            this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
+            this.skill.setVelocity();
             this.tempVelocity = this.skill.myRigidbody.velocity;
             this.speedup = false;
         }

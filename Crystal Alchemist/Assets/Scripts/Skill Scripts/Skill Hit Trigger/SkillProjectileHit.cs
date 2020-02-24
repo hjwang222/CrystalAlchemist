@@ -5,11 +5,13 @@ using Sirenix.OdinInspector;
 
 public class SkillProjectileHit : SkillHitTrigger
 {
+    public bool canBeReflected = false;
+
     [Space(10)]
-    [InfoBox("Projektile stoppen beim Aufprall und triggern die \"Hit\"-Animation. Kein Schaden!", InfoMessageType.None)]    
+    [InfoBox("Projektile stoppen beim Aufprall und triggern die \"Hit\"-Animation. Kein Schaden!", InfoMessageType.None)]
     [SerializeField]
     private Skill skillOnImpact;
-
+       
     private void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
         stopProjectile(hittedCharacter);
@@ -26,16 +28,26 @@ public class SkillProjectileHit : SkillHitTrigger
         if (this.skill.sender != null
             && hittedCharacter.tag != this.skill.sender.tag
             && !hittedCharacter.isTrigger
-            && !hittedCharacter.CompareTag("Room"))
+            && !hittedCharacter.CompareTag("Room")
+            && !isReflected(hittedCharacter))
         {
             CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Hit");
             // if (this.shadow != null) this.shadow.gameObject.SetActive(false);
-            if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = Vector2.zero;
+            this.skill.stopVelocity();
 
             placeFire();
 
             this.skill.isActive = false;
         }
+    }
+
+    private bool isReflected(Collider2D hittedCharacter)
+    {
+        if (hittedCharacter.GetComponent<SkillCollider2DHelper>() != null
+            && hittedCharacter.GetComponent<SkillCollider2DHelper>().skill.GetComponent<SkillReflector>() != null
+            && this.canBeReflected) return true;
+
+        return false;
     }
 
     private void placeFire()

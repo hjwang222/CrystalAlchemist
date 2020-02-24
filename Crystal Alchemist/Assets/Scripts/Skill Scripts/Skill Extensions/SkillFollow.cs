@@ -50,7 +50,7 @@ public class SkillFollow : SkillExtension
         Vector2 direction = position - this.transform.position;
 
         this.skill.myRigidbody.MovePosition(temp);
-        this.skill.myRigidbody.velocity = Vector2.zero;
+        this.skill.stopVelocity();
 
         CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Moving", true);
     }

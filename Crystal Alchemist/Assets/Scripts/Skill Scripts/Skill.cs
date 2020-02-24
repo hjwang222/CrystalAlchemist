@@ -411,9 +411,11 @@ public class Skill : MonoBehaviour
 
             //if (useCustomPosition) positionY = this.sender.skillStartPosition.transform.position.y + (this.sender.direction.y * positionOffset);
             if (useOffSetToBlendTree) this.transform.position = new Vector2(positionX, positionY);
+            this.direction = this.sender.direction;
+            CustomUtilities.UnityUtils.SetAnimDirection(this.sender.direction, this.animator);
         }
 
-        CustomUtilities.UnityUtils.SetAnimDirection(this.sender.direction, this.animator);        
+        //CustomUtilities.UnityUtils.SetAnimDirection(this.sender.direction, this.animator);    
 
         if (this.shadow != null)
         {
@@ -499,8 +501,18 @@ public class Skill : MonoBehaviour
 
             if (this.animator != null) this.animator.speed = this.timeDistortion;
             if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
-            if (this.myRigidbody != null && this.isActive) this.myRigidbody.velocity = this.direction.normalized * this.speed * this.timeDistortion;
+            if (this.isActive) setVelocity();
         }
+    }
+
+    public void setVelocity()
+    {
+        if (this.myRigidbody != null) this.myRigidbody.velocity = this.direction.normalized * this.speed * this.timeDistortion;
+    }
+
+    public void stopVelocity()
+    {
+        if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
     }
 
     #endregion
