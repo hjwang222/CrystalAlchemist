@@ -3,10 +3,6 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-    //BUG: Stromschlag stark verzögert...
-    //BUG: Maus beim Charakter Editor nicht aktiv?
-
-    //SKILL: Projectile canReflect Attribute
     //SKILL: Reflektor Shield
 
     //UI: HUD change (Herz oder Leiste)

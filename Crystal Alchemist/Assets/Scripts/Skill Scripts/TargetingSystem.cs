@@ -64,13 +64,25 @@ public class TargetingSystem : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void addTarget(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
         if (CustomUtilities.Collisions.checkCollision(collision, this.skill) && character != null)
         {
             if (!this.targetsInRange.Contains(character)) this.targetsInRange.Add(character);
         }
+
+        this.targetsInRange = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.skill.sender.transform.position))).ToList<Character>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        addTarget(collision);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        addTarget(collision);
     }
 
     private void OnTriggerExit2D(Collider2D collision)

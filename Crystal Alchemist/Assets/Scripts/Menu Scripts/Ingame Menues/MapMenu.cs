@@ -51,7 +51,7 @@ public class MapMenu : MenuControls
                             for (int i = 0; i < page.points.transform.childCount; i++)
                             {
                                 MapPagePoint point = page.points.transform.GetChild(i).GetComponent<MapPagePoint>();
-                                if (point != null && point.areaID == temp.areaID)
+                                if (point != null && point.areaID == temp.areaID && this.locationCursor != null)
                                 {
                                     //set cursor of current location
                                     this.locationCursor.SetActive(true);
@@ -62,7 +62,7 @@ public class MapMenu : MenuControls
                                 }
                             }
 
-                            if (!locationFound) this.locationCursor.SetActive(false);
+                            if (!locationFound && this.locationCursor != null) this.locationCursor.SetActive(false);
                         }
                     }
                 }

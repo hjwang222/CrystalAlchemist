@@ -267,8 +267,8 @@ GameObject:
   - component: {fileID: 3945848509854940424}
   - component: {fileID: 1719322071491950843}
   - component: {fileID: 3020177091971815233}
-  - component: {fileID: 5406032190703523373}
   - component: {fileID: -2033235849666499790}
+  - component: {fileID: 1770962052738937737}
   m_Layer: 11
   m_Name: "K\xF6nig Glibber"
   m_TagString: Untagged
@@ -527,17 +527,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3675382, y: 0.8193705}
   m_EdgeRadius: 0
---- !u!210 &5406032190703523373
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3945848509854940433}
-  m_Enabled: 1
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
-  m_SortingOrder: 0
 --- !u!114 &-2033235849666499790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +541,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterSprite: {fileID: 3338578078561740491}
   colorpalettes: []
+--- !u!114 &1770962052738937737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945848509854940433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22065c0876f3d5e47b226a71d855722d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 683472866742487509, guid: fcab8f75e8a217e42b8193cb4efdbfb3, type: 3}
 --- !u!1 &4508596630270412994
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,6 +685,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5213885188516233629}
+  - component: {fileID: 7188781060678321158}
   m_Layer: 11
   m_Name: Sprites
   m_TagString: Untagged
@@ -706,6 +709,17 @@ Transform:
   m_Father: {fileID: 3945848509854940439}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &7188781060678321158
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8963986593583041703}
+  m_Enabled: 1
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0
 --- !u!1001 &8565819056070435978
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -39,6 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6647095290164230761}
+  - component: {fileID: 7968715183259301535}
   m_Layer: 11
   m_Name: Sprites
   m_TagString: Untagged
@@ -62,6 +63,17 @@ Transform:
   m_Father: {fileID: 7268659838857056125}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &7968715183259301535
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6047521772711148100}
+  m_Enabled: 1
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0
 --- !u!1 &6897580102996888132
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,8 +150,8 @@ GameObject:
   - component: {fileID: 7268659838857056098}
   - component: {fileID: 5026383991709977233}
   - component: {fileID: 8932006801697793323}
-  - component: {fileID: 1809068735410250823}
   - component: {fileID: -8954306522490569902}
+  - component: {fileID: 1379375270786425069}
   m_Layer: 11
   m_Name: Magma Gel
   m_TagString: Untagged
@@ -359,17 +371,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6241722, y: 0.43122172}
   m_EdgeRadius: 0
---- !u!210 &1809068735410250823
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7268659838857056123}
-  m_Enabled: 1
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
-  m_SortingOrder: 0
 --- !u!114 &-8954306522490569902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +385,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterSprite: {fileID: 7914839587969846799}
   colorpalettes: []
+--- !u!114 &1379375270786425069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7268659838857056123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22065c0876f3d5e47b226a71d855722d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 683472866742487509, guid: 9676f77d535802944ac0b0aef93ed606, type: 3}
 --- !u!1 &7821854749448993448
 GameObject:
   m_ObjectHideFlags: 0

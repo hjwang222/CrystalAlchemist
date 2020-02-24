@@ -170,6 +170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6384556302418182256}
+  - component: {fileID: 3906483081004671439}
   m_Layer: 11
   m_Name: Sprites
   m_TagString: Untagged
@@ -193,6 +194,17 @@ Transform:
   m_Father: {fileID: 2246077131478480998}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &3906483081004671439
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52354138809817314}
+  m_Enabled: 1
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0
 --- !u!1 &190451848395776994
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,8 +341,8 @@ GameObject:
   - component: {fileID: 2246077131478481017}
   - component: {fileID: 4482648712296496522}
   - component: {fileID: 1028641328}
-  - component: {fileID: 7129135206912136028}
   - component: {fileID: 1769147606524362081}
+  - component: {fileID: 971109533881019453}
   m_Layer: 11
   m_Name: Blob
   m_TagString: Untagged
@@ -549,17 +561,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.62823045, y: 0.43934107}
   m_EdgeRadius: 0
---- !u!210 &7129135206912136028
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2246077131478480992}
-  m_Enabled: 1
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
-  m_SortingOrder: 0
 --- !u!114 &1769147606524362081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,6 +575,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterSprite: {fileID: 7201104449445602734}
   colorpalettes: []
+--- !u!114 &971109533881019453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2246077131478480992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22065c0876f3d5e47b226a71d855722d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 683472866742487509, guid: 9676f77d535802944ac0b0aef93ed606, type: 3}
 --- !u!1 &6674156776865872386
 GameObject:
   m_ObjectHideFlags: 0

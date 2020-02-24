@@ -293,7 +293,6 @@ GameObject:
   - component: {fileID: 1938021464261085658}
   - component: {fileID: 4322055140194454571}
   - component: {fileID: 1938021464261085656}
-  - component: {fileID: 4298136363205430322}
   - component: {fileID: 7016091898417923367}
   m_Layer: 11
   m_Name: Eos
@@ -357,18 +356,12 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: acdb7e089d2b9dc449dc40f1dfdf12c5, type: 2}
   myRigidbody: {fileID: 4322055140194454582}
   animator: {fileID: 2652810396879462137}
-  mainSprite: {fileID: 6261774556482826731}
   boxCollider: {fileID: 0}
   shadowRenderer: {fileID: 3588978413753434420}
-  startSpriteForRespawn: {fileID: 0}
-  startSpriteForRespawnWhite: {fileID: 0}
   activeSkillParent: {fileID: 2652810397108339306}
   activeStatusEffectParent: {fileID: 8669415238972280400}
   skillSetParent: {fileID: 3722434751308757473}
   skillStartPosition: {fileID: 6261774556482826731}
-  colors: []
-  spriteRenderers:
-  - {fileID: 2652810396879462138}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -508,17 +501,6 @@ MonoBehaviour:
     requireAll: 0
     startTime: 0
     isActive: 1
---- !u!210 &4298136363205430322
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4322055140194454578}
-  m_Enabled: 1
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
-  m_SortingOrder: 0
 --- !u!114 &7016091898417923367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,6 +527,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4283048916830764583}
+  - component: {fileID: 2526810975550627741}
   m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
@@ -568,6 +551,17 @@ Transform:
   m_Father: {fileID: 4322055140194454580}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &2526810975550627741
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624666807855673779}
+  m_Enabled: 1
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0
 --- !u!1 &6261774556482826731
 GameObject:
   m_ObjectHideFlags: 0

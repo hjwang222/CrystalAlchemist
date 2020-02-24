@@ -5,6 +5,9 @@ using Sirenix.OdinInspector;
 
 public class SkillProjectile : SkillExtension
 {
+    [SerializeField]
+    private bool canBeReflected = false;
+
     private bool speedup = true;
     private Vector2 tempVelocity;
 
