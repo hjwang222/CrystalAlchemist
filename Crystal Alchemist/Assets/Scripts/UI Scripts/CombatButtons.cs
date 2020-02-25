@@ -93,6 +93,22 @@ public class CombatButtons : MonoBehaviour
     [SerializeField]
     private Image skillIconRBButtonTrans;
 
+    [FoldoutGroup("LB Button UI", expanded: false)]
+    [SerializeField]
+    private Image iconLBButton;
+    [FoldoutGroup("LB Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconLBButton;
+    [FoldoutGroup("LB Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI cooldownLB;
+    [FoldoutGroup("LB Button UI", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI ammoLB;
+    [FoldoutGroup("LB Button UI", expanded: false)]
+    [SerializeField]
+    private Image skillIconLBButtonTrans;
+
     private void Awake()
     {
         this.player = this.playerStats.player;
@@ -116,6 +132,7 @@ public class CombatButtons : MonoBehaviour
         setButton(this.player.XButton, this.skillIconXButton, this.iconXButton);
         setButton(this.player.YButton, this.skillIconYButton, this.iconYButton);
         setButton(this.player.RBButton, this.skillIconRBButton, this.iconRBButton);
+        setButton(this.player.LBButton, this.skillIconLBButton, this.iconLBButton);
     }
 
     private void FixedUpdate()
@@ -125,6 +142,7 @@ public class CombatButtons : MonoBehaviour
         updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX, this.skillIconXButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("X-Button"));
         updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY, this.skillIconYButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("Y-Button"));
         updateButton(this.skillIconRBButton, this.iconRBButton, this.cooldownRB, this.player.RBButton, this.ammoRB, this.skillIconRBButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("RB-Button"));
+        updateButton(this.skillIconLBButton, this.iconLBButton, this.cooldownLB, this.player.LBButton, this.ammoLB, this.skillIconLBButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("LB-Button"));
     }
 
     private void setFontSize(TextMeshProUGUI textfield)

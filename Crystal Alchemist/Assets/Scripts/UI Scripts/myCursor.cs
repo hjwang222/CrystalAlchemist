@@ -85,7 +85,7 @@ public class myCursor : MonoBehaviour
 
             if (this.infoBox != null)
             {
-                if (this.cursor.transform.localPosition.x < 0)
+                if (this.transform.localPosition.x < 0)
                 {
                     //right
                     RectTransform panelRectTransform = (RectTransform)this.infoBox.transform;

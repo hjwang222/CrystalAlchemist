@@ -1339,7 +1339,8 @@ public class CustomUtilities : MonoBehaviour
                 && !checkIfHelperActivated(player.BButton)
                 && !checkIfHelperActivated(player.XButton)
                 && !checkIfHelperActivated(player.YButton)
-                && !checkIfHelperActivated(player.RBButton)) player.setTargetHelperActive(false);
+                && !checkIfHelperActivated(player.RBButton)
+                && !checkIfHelperActivated(player.LBButton)) player.setTargetHelperActive(false);
             else player.setTargetHelperActive(true);
         }
 

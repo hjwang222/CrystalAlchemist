@@ -85,6 +85,8 @@ public class Player : Character
     [HideInInspector]
     public Skill RBButton;
     [HideInInspector]
+    public Skill LBButton;
+    [HideInInspector]
     public Vector3 change;
 
 

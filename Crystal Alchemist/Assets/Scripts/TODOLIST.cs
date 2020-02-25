@@ -3,9 +3,6 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-    //UI: Skillmenu Kosten Icons und Button-Navigation
-    //UI: Skillmenu RB/LB
-
     //ITEM: Brille (Bool Value)
 
     //OBJECT: Bett (Tag/Nacht)
@@ -14,9 +11,9 @@ public class TODOLIST : MonoBehaviour
 
     //GRAPHICS: Terrain: Sprites für Wasser und Berge (siehe Void)
     //GRAPHICS: Terrain: Sprites für Void (Kristalle, Siegel, etc)
-    //GRAPHICS: Player: Schlafen, Zaubern, Pfeil, Speer Sprites
     //GRAPHICS: TitleScreen: Background 
     //GRAPHICS: Player: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
+    //GRAPHICS: Player: Schlafen, Zaubern, Pfeil, Speer Sprites
     //GRAPHICS: Skills: New Nitro Sprite
 
     //SCENE: Character Creator Area 
@@ -27,6 +24,7 @@ public class TODOLIST : MonoBehaviour
     //MAYBE: TimeJump skaliert mit allem (Update Speed oder anderes)
     //MAYBE: Options Rework (Resolution)
     //MAYBE: Wetter Script (Position und Größe)
+    //MAYBE: Button Rework
 
     //-----------------------------------------------------------------------------
 

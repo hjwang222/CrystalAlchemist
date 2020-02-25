@@ -9,7 +9,8 @@ public enum enumButton
     BButton,
     XButton,
     YButton,
-    RBButton
+    RBButton,
+    LBButton
 }
 
 public class PlayerAttacks : MonoBehaviour
@@ -53,6 +54,7 @@ public class PlayerAttacks : MonoBehaviour
                     case enumButton.XButton: this.player.XButton = skill; break;
                     case enumButton.YButton: this.player.YButton = skill; break;
                     case enumButton.RBButton: this.player.RBButton = skill; break;
+                    case enumButton.LBButton: this.player.LBButton = skill; break;
                 }
 
                 break;
@@ -71,6 +73,7 @@ public class PlayerAttacks : MonoBehaviour
             case "X-Button": return this.player.XButton;
             case "Y-Button": return this.player.YButton;
             case "RB-Button": return this.player.RBButton;
+            case "LB-Button": return this.player.LBButton;
             default: return null;
         }
     }

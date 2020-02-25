@@ -82,6 +82,8 @@ public class SkillMenu : MenuControls
             else exitMenu();
         }
         else if (Input.GetButtonDown("Inventory")) exitMenu();
+        else if (Input.GetButtonDown("RB-Button")) setPage(1);
+        else if (Input.GetButtonDown("LB-Button")) setPage(-1);
     }
 
     public override void OnEnable()

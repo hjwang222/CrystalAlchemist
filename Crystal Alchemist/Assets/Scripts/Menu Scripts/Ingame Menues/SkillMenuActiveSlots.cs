@@ -65,6 +65,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
                 case enumButton.XButton: return this.player.XButton;
                 case enumButton.YButton: return this.player.YButton;
                 case enumButton.RBButton: return this.player.RBButton;
+                case enumButton.LBButton: return this.player.LBButton;
                 default: return null;
             }
         }
@@ -80,6 +81,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
             case enumButton.XButton: this.player.XButton = skill; break;
             case enumButton.YButton: this.player.YButton = skill; break;
             case enumButton.RBButton: this.player.RBButton = skill; break;
+            case enumButton.LBButton: this.player.LBButton = skill; break;
             default: this.player.RBButton = skill; break;
         }
     }

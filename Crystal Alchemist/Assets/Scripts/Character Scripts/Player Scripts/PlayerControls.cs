@@ -73,13 +73,15 @@ public class PlayerControls : MonoBehaviour
                 && !isButtonPressed("B-Button")
                 && !isButtonPressed("X-Button")
                 && !isButtonPressed("Y-Button")
-                && !isButtonPressed("RB-Button")) this.playerAttacks.currentButtonPressed = "";
+                && !isButtonPressed("RB-Button")
+                && !isButtonPressed("LB-Button")) this.playerAttacks.currentButtonPressed = "";
 
                 this.playerAttacks.updateSkillButtons("A-Button");
                 this.playerAttacks.updateSkillButtons("B-Button");
                 this.playerAttacks.updateSkillButtons("X-Button");
                 this.playerAttacks.updateSkillButtons("Y-Button");
                 this.playerAttacks.updateSkillButtons("RB-Button");
+                this.playerAttacks.updateSkillButtons("LB-Button");
             }
         }
     }

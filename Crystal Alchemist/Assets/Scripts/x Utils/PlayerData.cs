@@ -78,6 +78,7 @@ public class PlayerData
         if (player.XButton != null) this.skills.Add(new string[] { "X", player.XButton.skillName });
         if (player.YButton != null) this.skills.Add(new string[] { "Y", player.YButton.skillName });
         if (player.RBButton != null) this.skills.Add(new string[] { "RB", player.RBButton.skillName });
+        if (player.LBButton != null) this.skills.Add(new string[] { "LB", player.LBButton.skillName });
     }
 
     private void setPreset(CharacterPreset preset)
