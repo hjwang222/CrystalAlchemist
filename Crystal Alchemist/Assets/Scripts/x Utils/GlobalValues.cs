@@ -19,6 +19,8 @@ public class GlobalValues : MonoBehaviour
 
     public static LayoutType layoutType = LayoutType.gamepad;
     public static bool useAlternativeLanguage = false;
+    public static bool healthBar = false;
+    public static bool manaBar = false;
 
     public static Color[] red = new Color[] { new Color32(255, 0, 0, 255) , new Color32(125, 0, 0, 255) };
     public static Color[] blue = new Color[] { new Color32(0, 125, 255, 255), new Color32(0, 25, 125, 255) };

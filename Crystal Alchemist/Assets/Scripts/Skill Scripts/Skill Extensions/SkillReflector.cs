@@ -4,17 +4,20 @@ public class SkillReflector : SkillExtension
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Skill skill = collision.GetComponent<SkillCollider2DHelper>().skill;
-
-        if (skill != null && isReflected(skill))
+        if (GetComponent<SkillCollider2DHelper>() != null)
         {
-            skill.sender = this.skill.sender;
+            Skill skill = collision.GetComponent<SkillCollider2DHelper>().skill;
 
-            if (skill.myRigidbody != null)
+            if (skill != null && isReflected(skill))
             {
-                skill.direction = Vector2.Reflect(skill.direction, this.skill.direction);
-                skill.setVelocity();
-                skill.transform.rotation = CustomUtilities.Rotation.getRotation(skill.direction);
+                skill.sender = this.skill.sender;
+
+                if (skill.myRigidbody != null)
+                {
+                    skill.direction = Vector2.Reflect(skill.direction, this.skill.direction);
+                    skill.setVelocity();
+                    skill.transform.rotation = CustomUtilities.Rotation.getRotation(skill.direction);
+                }
             }
         }
     }

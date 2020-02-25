@@ -124,7 +124,7 @@ public class SkillMenu : MenuControls
 
             if(senderModule != null)
             {
-                this.skillDetailsCost.text = Mathf.Abs(senderModule.addResourceSender) + "";
+                this.skillDetailsCost.text = Mathf.Abs(senderModule.addResourceSender).ToString("N1");
             }
 
             if (targetModule != null)

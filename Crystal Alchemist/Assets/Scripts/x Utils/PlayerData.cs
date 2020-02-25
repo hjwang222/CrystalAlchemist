@@ -116,6 +116,8 @@ public class GameOptions
     public float soundVolume;
     public string layout;
     public bool useAlternativeLanguage;
+    public bool useHealthBar;
+    public bool useManaBar;
 
     public GameOptions()
     {
@@ -123,5 +125,8 @@ public class GameOptions
         this.soundVolume = GlobalValues.soundEffectVolume;
         this.layout = GlobalValues.layoutType.ToString().ToLower();
         this.useAlternativeLanguage = GlobalValues.useAlternativeLanguage;
+
+        this.useHealthBar = GlobalValues.healthBar;
+        this.useManaBar = GlobalValues.manaBar;
     }
 }

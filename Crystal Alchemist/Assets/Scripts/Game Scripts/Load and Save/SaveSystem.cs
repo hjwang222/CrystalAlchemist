@@ -76,6 +76,9 @@ public class SaveSystem
             GlobalValues.soundEffectVolume = data.soundVolume;
             GlobalValues.useAlternativeLanguage = data.useAlternativeLanguage;
 
+            GlobalValues.healthBar = data.useHealthBar;
+            GlobalValues.manaBar = data.useManaBar;
+
             if (data.layout == "keyboard") GlobalValues.layoutType = LayoutType.keyboard;
             else GlobalValues.layoutType = LayoutType.gamepad;
         }

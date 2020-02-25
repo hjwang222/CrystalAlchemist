@@ -3,7 +3,6 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-    //UI: HUD change (Herz oder Leiste)
     //UI: Skillmenu Kosten Icons und Button-Navigation
     //UI: Skillmenu RB/LB
 
@@ -13,11 +12,12 @@ public class TODOLIST : MonoBehaviour
 
     //NPC: Bosskampf (Titania)
 
-    //GRAPHICS: Sprites für Wasser und Berge (siehe Void)
-    //GRAPHICS: Schlafen, Zaubern, Pfeil, Speer Sprites
-    //GRAPHICS: TitleScreen Background Update
-    //GRAPHICS: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
-    //GRAPHICS: New Nitro Sprite
+    //GRAPHICS: Terrain: Sprites für Wasser und Berge (siehe Void)
+    //GRAPHICS: Terrain: Sprites für Void (Kristalle, Siegel, etc)
+    //GRAPHICS: Player: Schlafen, Zaubern, Pfeil, Speer Sprites
+    //GRAPHICS: TitleScreen: Background 
+    //GRAPHICS: Player: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
+    //GRAPHICS: Skills: New Nitro Sprite
 
     //SCENE: Character Creator Area 
     //SCENE: Titania Arena

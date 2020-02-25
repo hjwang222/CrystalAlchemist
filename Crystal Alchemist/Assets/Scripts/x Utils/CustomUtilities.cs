@@ -999,13 +999,11 @@ public class CustomUtilities : MonoBehaviour
             else return originalText;
         }
 
-        public static string setDamageNumber(float value, float schwelle)
+        public static string formatFloatToString(float value, float schwelle)
         {
-            //if (Mathf.Abs(value) < schwelle)
-            //    return value.ToString("0.0");
-            //if (Mathf.Abs(value) >= 10)
-            //    return value.ToString("#");
-            //else return value.ToString("#.0");
+            if (Mathf.Abs(value) >= 10) return value.ToString("N0");
+            else if(value % 1 == 0) return value.ToString("N0");
+
             return value.ToString("N1");
         }
 

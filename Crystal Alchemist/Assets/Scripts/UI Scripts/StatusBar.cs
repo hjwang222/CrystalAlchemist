@@ -34,9 +34,33 @@ public class StatusBar : MonoBehaviour
     [SerializeField]
     private ResourceType resourceType;
 
-    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
+    [FoldoutGroup("Leiste für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private GameObject bar;
+
+    [FoldoutGroup("Leiste für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private float maxLength = 900;
+
+    [FoldoutGroup("Leiste für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private Image frameBar;
+
+    [FoldoutGroup("Leiste für Mana und Leben", expanded: false)]
     [SerializeField]
     private Image fillBar;
+
+    [FoldoutGroup("Leiste für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private Image backgroundBar;
+
+    [FoldoutGroup("Leiste für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private TextMeshProUGUI textFieldBar;
+
+    [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
+    [SerializeField]
+    private GameObject symbol;
 
     [FoldoutGroup("Sprites für Mana und Leben", expanded: false)]
     [SerializeField]
@@ -94,6 +118,7 @@ public class StatusBar : MonoBehaviour
         setStatusBar();
 
         if(this.UIType == UIType.resource) UpdateGUIHealthMana();
+        setBarOrSymbol();
     }
 
     private void LateUpdate()
@@ -136,6 +161,36 @@ public class StatusBar : MonoBehaviour
             if (i + 1 <= this.maxValue) this.icons[i].SetActive(true);
         }
     }
+
+    private void setBarValues()
+    {
+        this.fillBar.fillAmount = (float)(this.currentValue / this.maxValue);
+        this.textFieldBar.text = this.currentValue.ToString("N1") + " / " + this.maxValue.ToString("N1");
+    }
+
+    private void setSizeAndPositionBar(Image image, float value)
+    {
+        float temp = value * 100;
+        float offset = (this.maxLength - temp) / 2;
+        image.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(temp, 100);
+        image.transform.position = new Vector2(image.transform.position.x-offset, image.transform.position.y);
+    }
+
+    public void setBarOrSymbol()
+    {
+        this.bar.SetActive(false);
+        this.symbol.SetActive(false);
+
+        if (this.resourceType == ResourceType.life) setLayout(GlobalValues.healthBar);
+        else if (this.resourceType == ResourceType.mana) setLayout(GlobalValues.manaBar);
+    }
+
+    private void setLayout(bool value)
+    {
+        if (value) this.bar.SetActive(true);
+        else this.symbol.SetActive(true);
+    }
+
     #endregion
 
 
@@ -143,7 +198,8 @@ public class StatusBar : MonoBehaviour
     public void UpdateGUIHealthMana()
     {
         setStatusBar();
-        this.fillBar.fillAmount = (float)(this.currentValue / this.maxValue);
+        setBarValues();
+
         Sprite sprite = null;
 
         for (int i = 0; i < (int)this.maxValue; i++)

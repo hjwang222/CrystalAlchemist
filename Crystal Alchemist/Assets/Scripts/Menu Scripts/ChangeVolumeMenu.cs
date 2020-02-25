@@ -2,14 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Sirenix.OdinInspector;
+using UnityEngine.UI;
 
-public class ChangeVolumeMenu : TitleScreenMenues
+public class ChangeVolumeMenu : MonoBehaviour
 {
     [SerializeField]
     private FloatSignal musicVolumeSignal;
 
     [SerializeField]
     private bool isTitleScreen = false;
+
+    [BoxGroup("Volume Buttons")]
+    public TextMeshProUGUI textField;
+    [BoxGroup("Volume Buttons")]
+    public Slider slider;
+    [BoxGroup("Volume Buttons")]
+    public VolumeType volumeType;
 
     private void OnEnable()
     {        

@@ -8,6 +8,12 @@ public class BasicMenu : PreventDeselection
 {
     public List<GameObject> menues = new List<GameObject>();
 
+    [SerializeField]
+    private BoolValue healthBar;
+
+    [SerializeField]
+    private BoolValue manaBar;
+
     public virtual void Start()
     {
         this.setFirstMenu();
@@ -31,5 +37,10 @@ public class BasicMenu : PreventDeselection
     public virtual void ShowMenu(GameObject menu)
     {
         CustomUtilities.UI.ShowMenu(menu, this.menues);
+    }
+
+    public void saveSettings()
+    {
+        SaveSystem.SaveOptions();
     }
 }

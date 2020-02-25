@@ -65,6 +65,14 @@ public class Player : Character
     [BoxGroup("Pflichtfelder")]
     public FloatValue fadingDuration;
 
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    public BoolValue healthbar;
+
+    [Required]
+    [BoxGroup("Pflichtfelder")]
+    public BoolValue manabar;
+
 
     [HideInInspector]
     public Skill AButton;

@@ -18,14 +18,6 @@ public class TitleScreenMenues : MonoBehaviour
     [BoxGroup("Switch Buttons")]
     public SimpleSignal switchSignal;
 
-    [BoxGroup("Volume Buttons")]
-    public TextMeshProUGUI textField;
-    [BoxGroup("Volume Buttons")]
-    public Slider slider;
-    [BoxGroup("Volume Buttons")]
-    public VolumeType volumeType;
-
-
     public void switchButtons(Image active, Image notActive)
     {
         active.color = setAlpha(active, 1f);

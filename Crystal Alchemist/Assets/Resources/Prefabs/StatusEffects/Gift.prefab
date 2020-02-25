@@ -61,6 +61,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -132,7 +133,7 @@ MonoBehaviour:
   statusEffectNameEnglish: Poison
   statusEffectDescription: "Schaden \xFCber Zeit"
   statusEffectDescriptionEnglish: Damage over time
-  maxDuration: 6
+  maxDuration: 18
   canOverride: 1
   canBeChanged: 1
   canDeactivateIt: 0
@@ -143,7 +144,7 @@ MonoBehaviour:
   statusEffectEvents:
   - triggers:
     - triggerType: 1
-      intervall: 1
+      intervall: 3
       life: 0
       mana: 0
       hits: 0
