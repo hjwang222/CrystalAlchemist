@@ -9,14 +9,16 @@ public class TODOLIST : MonoBehaviour
 
     //NPC: Bosskampf (Titania)
 
-    //GRAPHICS: Terrain: Sprites für Wasser und Berge (siehe Void)
-    //GRAPHICS: Terrain: Sprites für Void (Kristalle, Siegel, etc)
+    //BUG: Doppelte Spawn-Animation
+    //BUG: Position vom Spieler nicht übernommen
+    //BUG: LoadSystem besser
+
     //GRAPHICS: TitleScreen: Background 
     //GRAPHICS: Player: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
     //GRAPHICS: Player: Schlafen, Zaubern, Pfeil, Speer Sprites
     //GRAPHICS: Skills: New Nitro Sprite
 
-    //SCENE: Character Creator Area 
+    
     //SCENE: Titania Arena
 
     //MAYBE: Empty Map Prefab Update

@@ -45,6 +45,11 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     private bool showAnimation = false;
 
+    [BoxGroup("Required")]
+    [Required]
+    [SerializeField]
+    private TeleportStats teleportStat;
+
 
     public void Awake()
     {
@@ -57,9 +62,13 @@ public class SceneTransition : MonoBehaviour
         {
             Player player = other.GetComponent<Player>();
             if (player != null)
-            {
+            {                
                 if(this.vcamSignal != null) this.vcamSignal.Raise();
-                player.GetComponent<PlayerTeleport>().teleportPlayer(this.targetScene, this.playerPositionInNewScene, this.transitionDuration.getValue(), this.showAnimation);
+
+                this.teleportStat.location = this.targetScene;
+                this.teleportStat.position = this.playerPositionInNewScene;
+
+                player.GetComponent<PlayerTeleport>().teleportPlayer(this.transitionDuration.getValue(), this.showAnimation);
             }
         }
     }

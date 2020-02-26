@@ -12,7 +12,7 @@ public class TeleportRequirements : PreLoadModule
 
             if (player != null)
             {
-                bool teleportEnabled = player.GetComponent<PlayerTeleport>().getLastTeleport();
+                bool teleportEnabled = player.GetComponent<PlayerTeleport>().lastTeleportEnabled();
 
                 if (!teleportEnabled) this.skill.basicRequirementsExists = false;
                 else this.skill.basicRequirementsExists = true;

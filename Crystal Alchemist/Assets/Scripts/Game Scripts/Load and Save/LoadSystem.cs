@@ -27,8 +27,6 @@ public class LoadSystem : MonoBehaviour
             player.stats.characterName = data.characterName;
             player.GetComponent<PlayerUtils>().secondsPlayed = data.timePlayed;
 
-            player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-
             player.GetComponent<PlayerTeleport>().setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]));
 
             if (data.inventory.Count > 0)
@@ -36,6 +34,8 @@ public class LoadSystem : MonoBehaviour
                 loadInventory(data, player);                
             }            
         }
+
+        player.GetComponent<PlayerTeleport>().playTeleport(true); //TODO
     }
 
     public static void loadPlayerSkills(Player player, string saveGameSlot)
@@ -52,7 +52,7 @@ public class LoadSystem : MonoBehaviour
     {
         PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
 
-        if (data != null && data.characterParts.Count > 0)
+        if (data != null && data.characterParts != null && data.characterParts.Count > 0)
         {
             loadPresetData(data, player);
         }

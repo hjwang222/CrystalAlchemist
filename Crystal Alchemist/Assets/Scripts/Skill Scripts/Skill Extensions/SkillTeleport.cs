@@ -14,15 +14,12 @@ public class SkillTeleport : SkillExtension
     {
         Player player = this.skill.sender.GetComponent<Player>();
 
-        string scene;
-        Vector2 position;
-
         if (character != null
             && character.isPlayer
             && player != null
-            && player.GetComponent<PlayerTeleport>().getLastTeleport(out scene, out position))
+            && player.GetComponent<PlayerTeleport>().lastTeleportEnabled())
         {
-            character.GetComponent<Player>().GetComponent<PlayerTeleport>().teleportPlayer(scene, position, true);
+            character.GetComponent<Player>().GetComponent<PlayerTeleport>().teleportPlayer(true);
         }
     }
 }

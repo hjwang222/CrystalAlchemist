@@ -29,6 +29,11 @@ public class SaveAndLoadScript : MonoBehaviour
     [BoxGroup("Load Menu")]
     private Vector2 playerPositionInNewScene = new Vector2(0,0);
 
+    [BoxGroup("Required")]
+    [Required]
+    [SerializeField]
+    private TeleportStats teleportStat;
+
     private Player player;
 
     private void OnEnable()
@@ -58,6 +63,9 @@ public class SaveAndLoadScript : MonoBehaviour
     public void loadGame()
     {
         this.saveGameSlot.setValue("");
+        this.teleportStat.location = this.firstScene;
+        this.teleportStat.position = this.playerPositionInNewScene;
+
         SceneManager.LoadSceneAsync(this.firstScene);
         //this.player.spawnPosition = this.playerPositionInNewScene; TODO
         Cursor.visible = false;

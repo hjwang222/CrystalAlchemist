@@ -121,7 +121,7 @@ public class DeathScreen : MonoBehaviour
     {
         this.cursor.gameObject.SetActive(true);
         this.returnTitleScreen.SetActive(true);
-        if (this.player.GetComponent<PlayerTeleport>().getLastTeleport()) this.returnSavePoint.SetActive(true);
+        if (this.player.GetComponent<PlayerTeleport>().lastTeleportEnabled()) this.returnSavePoint.SetActive(true);
 
         this.countDown.gameObject.SetActive(true);
         StartCoroutine(this.countDownCo());
@@ -134,10 +134,7 @@ public class DeathScreen : MonoBehaviour
 
     public void returnSaveGame()
     {
-        string scene;
-        Vector2 position;
-
-        if (this.player.GetComponent<PlayerTeleport>().getLastTeleport(out scene, out position))
+        if (this.player.GetComponent<PlayerTeleport>().lastTeleportEnabled())
         {
             this.colorGrading.saturation.value = 0;
             this.colorGrading.colorFilter.value = Color.white;
@@ -146,7 +143,7 @@ public class DeathScreen : MonoBehaviour
             this.UI.SetActive(true);
             //SceneManager.LoadSceneAsync(this.lastSavepoint);
             this.player.initPlayer();
-            this.player.GetComponent<PlayerTeleport>().teleportPlayer(scene, position, true);
+            this.player.GetComponent<PlayerTeleport>().teleportPlayer(true);
         }
     }
 

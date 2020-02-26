@@ -12,6 +12,11 @@ public class BackgroundImageHandler : MonoBehaviour
         if (this.spriteRenderer != null) this.spriteRenderer.sprite = sprite;
     }
 
+    public void SetMaterial(Material material)
+    {
+        if (this.spriteRenderer != null) this.spriteRenderer.material = material;
+    }
+
     public void SetScale(float value)
     {
         this.transform.localScale = new Vector3(value, value);

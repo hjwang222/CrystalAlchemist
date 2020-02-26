@@ -8,13 +8,13 @@ public class PlayerTeleport : MonoBehaviour
     [SerializeField]
     private Player player;
 
-    private Vector2 lastSaveGamePosition;
-    private string lastSaveGameScene;
+    [SerializeField]
+    private TeleportStats teleportStat;
 
     public void setLastTeleport(string targetScene, Vector2 position)
     {
-        this.lastSaveGamePosition = position;
-        this.lastSaveGameScene = targetScene;
+        this.teleportStat.position = position;
+        this.teleportStat.location = targetScene;
 
         foreach (Skill skill in player.skillSet)
         {
@@ -22,65 +22,63 @@ public class PlayerTeleport : MonoBehaviour
         }
     }
 
-    public bool getLastTeleport()
+    public bool lastTeleportEnabled()
     {
-        return getLastTeleport(out string scene, out Vector2 position);
+        return this.teleportStat.getLastTeleport();
     }
 
-    public bool getLastTeleport(out string scene, out Vector2 position)
+    public void playTeleport(bool showAnimation)
     {
-        scene = this.lastSaveGameScene;
-        position = this.lastSaveGamePosition;
-
-        if (scene != null && position != null) return true;
-        else return false;
+        StartCoroutine(LoadScene(this.player.fadingDuration.getValue(), showAnimation, false));
     }
 
-    public void teleportPlayer(string targetScene, Vector2 position, bool showAnimation)
+    public void teleportPlayer(bool showAnimation)
     {
-        StartCoroutine(LoadScene(targetScene, position, this.player.fadingDuration.getValue(), showAnimation));
+        StartCoroutine(LoadScene(this.player.fadingDuration.getValue(), showAnimation, true));
     }
 
-    public void teleportPlayer(string targetScene, Vector2 position, float duration, bool showAnimation)
+    public void teleportPlayer(float duration, bool showAnimation)
     {
-        StartCoroutine(LoadScene(targetScene, position, duration, showAnimation));
+        StartCoroutine(LoadScene(duration, showAnimation, true));
     }
 
-    private IEnumerator LoadScene(string targetScene, Vector2 position, float duration, bool showAnimation)
+    private IEnumerator LoadScene(float duration, bool showAnimation, bool loadScene)
     {
+        string targetScene = this.teleportStat.location;
+        Vector2 position = this.teleportStat.position;
+
+        this.player.myRigidbody.velocity = Vector2.zero;
         this.player.currentState = CharacterState.respawning;
         this.gameObject.GetComponent<PlayerAttacks>().deactivateAllSkills();
-
-        if (showAnimation && this.player.stats.respawnAnimation != null)
-        {
-            RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, this.transform.position, Quaternion.identity);
-            respawnObject.setCharacter(this.player, true);
-            respawnObject.setStatReset(false);
-            yield return new WaitForSeconds(respawnObject.getAnimationLength());
-            this.player.enableSpriteRenderer(false);
-            //yield return new WaitForSeconds(2f);
-        }
-        else
-        {
-            this.player.enableSpriteRenderer(false);
-        }
-
+        this.player.enableSpriteRenderer(false);
         this.player.fadeSignal.Raise(false);
 
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(targetScene);
-        asyncOperation.allowSceneActivation = false;
-
-        while (!asyncOperation.isDone)
+        if (loadScene) //Play De-Spawn
         {
-            if (asyncOperation.progress >= 0.9f)
+            if (showAnimation && this.player.stats.respawnAnimation != null)
             {
-                yield return new WaitForSeconds(duration);
-
-                asyncOperation.allowSceneActivation = true;
-                StartCoroutine(positionCo(position, showAnimation));
+                RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, this.transform.position, Quaternion.identity);
+                respawnObject.setCharacter(this.player, true);
+                respawnObject.setStatReset(false);
+                yield return new WaitForSeconds(respawnObject.getAnimationLength());
             }
-            yield return null;
+        
+            AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(targetScene);
+            asyncOperation.allowSceneActivation = false;
+
+            while (!asyncOperation.isDone)
+            {
+                if (asyncOperation.progress >= 0.9f)
+                {
+                    yield return new WaitForSeconds(duration);
+
+                    asyncOperation.allowSceneActivation = true;
+                    StartCoroutine(positionCo(position, showAnimation)); //Play Spawn
+                }
+                yield return null;
+            }
         }
+        else StartCoroutine(positionCo(position, showAnimation)); //Play Spawn         
     }
 
     private IEnumerator positionCo(Vector2 playerPositionInNewScene, bool showAnimation)
