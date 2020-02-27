@@ -543,12 +543,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9d701d701ecf644b67291f54ef3494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menues: []
+  healthBar: {fileID: 0}
+  manaBar: {fileID: 0}
   player: {fileID: 0}
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  child: {fileID: 0}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 2537619730045242350}
   blackScreen: {fileID: 0}
+  exitDialogBox: {fileID: 0}
   lastState: 0
+  disableMenuControlsScript: 0
+  disableExitButtonPress: 0
   miniGameRound: {fileID: 0}
   timeField: {fileID: 6312356389716529380}
   timeImage: {fileID: 6278725496696721524}
@@ -1660,7 +1667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: FEHLSCHLAG
+  alternativeText: FAIL
   textMeshField: {fileID: 3832706828514659201}
 --- !u!114 &6302031164283222374
 MonoBehaviour:
@@ -3013,6 +3020,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 2537619730045242350}
   setFirstSelected: 1
+  overrideNavigation: 0
+  up: []
+  down: []
+  left: []
+  right: []
 --- !u!222 &2482253677267504121
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3158,6 +3170,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 2537619730045242350}
   setFirstSelected: 0
+  overrideNavigation: 0
+  up: []
+  down: []
+  left: []
+  right: []
 --- !u!222 &2008637177979883947
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3760,6 +3777,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 2537619730045242350}
   setFirstSelected: 0
+  overrideNavigation: 0
+  up: []
+  down: []
+  left: []
+  right: []
 --- !u!222 &3196978144296913819
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4209,6 +4231,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 2537619730045242350}
   setFirstSelected: 0
+  overrideNavigation: 0
+  up: []
+  down: []
+  left: []
+  right: []
 --- !u!222 &3776974433040061414
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5304,6 +5331,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 2537619730045242350}
   setFirstSelected: 0
+  overrideNavigation: 0
+  up: []
+  down: []
+  left: []
+  right: []
 --- !u!1 &5021771472698715865
 GameObject:
   m_ObjectHideFlags: 0
@@ -7588,6 +7620,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 2537619730045242350}
   setFirstSelected: 0
+  overrideNavigation: 0
+  up: []
+  down: []
+  left: []
+  right: []
 --- !u!114 &6893494197519207099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7914,6 +7951,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 2537619730045242350}
   setFirstSelected: 0
+  overrideNavigation: 0
+  up: []
+  down: []
+  left: []
+  right: []
 --- !u!222 &6191300385296242426
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8140,6 +8182,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 2537619730045242350}
   setFirstSelected: 0
+  overrideNavigation: 0
+  up: []
+  down: []
+  left: []
+  right: []
 --- !u!1 &8070651516568253416
 GameObject:
   m_ObjectHideFlags: 0
@@ -9076,6 +9123,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 2537619730045242350}
   setFirstSelected: 0
+  overrideNavigation: 0
+  up: []
+  down: []
+  left: []
+  right: []
 --- !u!114 &5349906483942292339
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,9 +27,6 @@ public class LoadSystem : MonoBehaviour
             player.healthSignalUI.Raise();
             player.manaSignalUI.Raise();
 
-            loadPlayerSkills(player, saveGameSlot);
-            player.buttonSignalUI.Raise();
-
             player.stats.characterName = data.characterName;
             player.GetComponent<PlayerUtils>().secondsPlayed = data.timePlayed;
 
@@ -46,7 +43,7 @@ public class LoadSystem : MonoBehaviour
         }
     }
 
-    private static void loadPlayerSkills(Player player, string saveGameSlot)
+    public static void loadPlayerSkills(Player player, string saveGameSlot)
     {
         PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
 

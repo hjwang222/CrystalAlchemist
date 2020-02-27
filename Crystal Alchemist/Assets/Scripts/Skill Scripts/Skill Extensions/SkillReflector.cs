@@ -4,7 +4,7 @@ public class SkillReflector : SkillExtension
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (GetComponent<SkillCollider2DHelper>() != null)
+        if (collision.GetComponent<SkillCollider2DHelper>() != null)
         {
             Skill skill = collision.GetComponent<SkillCollider2DHelper>().skill;
 
