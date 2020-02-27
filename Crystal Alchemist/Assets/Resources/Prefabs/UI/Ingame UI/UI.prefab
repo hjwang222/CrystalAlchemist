@@ -52963,7 +52963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 6484733103868894448}
   buttonNavigationSignal: {fileID: 0}
-  preset: {fileID: 11400000, guid: 70ec66dcbea896743a2702a5f429728c, type: 2}
+  preset: {fileID: 0}
 --- !u!114 &5008408549603337368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79740,36 +79740,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
-  iconAButton: {fileID: 2150205765408316083}
-  skillIconAButton: {fileID: 7349711350973021414}
-  cooldownA: {fileID: 4798024979473533329}
-  ammoA: {fileID: 2566086285305722252}
-  skillIconAButtonTrans: {fileID: 3123393697281111223}
-  iconBButton: {fileID: 6220893815878456490}
-  skillIconBButton: {fileID: 8442663806767926855}
-  cooldownB: {fileID: 1514289684833422197}
-  ammoB: {fileID: 2313608042403153016}
-  skillIconBButtonTrans: {fileID: 1283908698136912005}
-  iconXButton: {fileID: 2402766055290185999}
-  skillIconXButton: {fileID: 2929054772849121417}
-  cooldownX: {fileID: 1217981308490635108}
-  ammoX: {fileID: 629822171730353796}
-  skillIconXButtonTrans: {fileID: 8297632548718898854}
-  iconYButton: {fileID: 7699880006874317097}
-  skillIconYButton: {fileID: 2683886762677614940}
-  cooldownY: {fileID: 7648227241594404010}
-  ammoY: {fileID: 4120604282316896902}
-  skillIconYButtonTrans: {fileID: 7557091585098970416}
-  iconRBButton: {fileID: 7483781224985651338}
-  skillIconRBButton: {fileID: 7044982624333406141}
-  cooldownRB: {fileID: 7760385116177476709}
-  ammoRB: {fileID: 4256128242929261745}
-  skillIconRBButtonTrans: {fileID: 118372035403846615}
-  iconLBButton: {fileID: 1252416100064767681}
-  skillIconLBButton: {fileID: 251516702360481717}
-  cooldownLB: {fileID: 6957076928058399111}
-  ammoLB: {fileID: 4225982244720790912}
-  skillIconLBButtonTrans: {fileID: 1485288090867874876}
+  buttonUIs:
+  - buttonType: 0
+    skillIconButton: {fileID: 7349711350973021414}
+    iconButton: {fileID: 2150205765408316083}
+    cooldown: {fileID: 4798024979473533329}
+    iconButtonTrans: {fileID: 3123393697281111223}
+    ammo: {fileID: 2566086285305722252}
+  - buttonType: 1
+    skillIconButton: {fileID: 8442663806767926855}
+    iconButton: {fileID: 6220893815878456490}
+    cooldown: {fileID: 1514289684833422197}
+    iconButtonTrans: {fileID: 1283908698136912005}
+    ammo: {fileID: 2313608042403153016}
+  - buttonType: 2
+    skillIconButton: {fileID: 2929054772849121417}
+    iconButton: {fileID: 2402766055290185999}
+    cooldown: {fileID: 1217981308490635108}
+    iconButtonTrans: {fileID: 8297632548718898854}
+    ammo: {fileID: 629822171730353796}
+  - buttonType: 3
+    skillIconButton: {fileID: 2683886762677614940}
+    iconButton: {fileID: 7699880006874317097}
+    cooldown: {fileID: 7648227241594404010}
+    iconButtonTrans: {fileID: 7557091585098970416}
+    ammo: {fileID: 4120604282316896902}
+  - buttonType: 4
+    skillIconButton: {fileID: 7044982624333406141}
+    iconButton: {fileID: 7483781224985651338}
+    cooldown: {fileID: 7760385116177476709}
+    iconButtonTrans: {fileID: 118372035403846615}
+    ammo: {fileID: 4256128242929261745}
+  - buttonType: 5
+    skillIconButton: {fileID: 251516702360481717}
+    iconButton: {fileID: 1252416100064767681}
+    cooldown: {fileID: 6957076928058399111}
+    iconButtonTrans: {fileID: 1485288090867874876}
+    ammo: {fileID: 4225982244720790912}
 --- !u!114 &954304671355492731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86653,36 +86660,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
-  iconAButton: {fileID: 2552584294390767635}
-  skillIconAButton: {fileID: 3474585728483773704}
-  cooldownA: {fileID: 2522786794576148265}
-  ammoA: {fileID: 4896185298079654247}
-  skillIconAButtonTrans: {fileID: 2644589825968931298}
-  iconBButton: {fileID: 4473741266720525497}
-  skillIconBButton: {fileID: 4554601755330896710}
-  cooldownB: {fileID: 1411703828879722338}
-  ammoB: {fileID: 5920129664537703915}
-  skillIconBButtonTrans: {fileID: 214240889664993653}
-  iconXButton: {fileID: 175719530710537433}
-  skillIconXButton: {fileID: 8353573370959072844}
-  cooldownX: {fileID: 8969695803116340397}
-  ammoX: {fileID: 4993518572130451500}
-  skillIconXButtonTrans: {fileID: 1716651709065019238}
-  iconYButton: {fileID: 7423662697383440692}
-  skillIconYButton: {fileID: 1264380709181260741}
-  cooldownY: {fileID: 9131491113631025767}
-  ammoY: {fileID: 2558375805035590673}
-  skillIconYButtonTrans: {fileID: 5390025937651570656}
-  iconRBButton: {fileID: 6634770327279327116}
-  skillIconRBButton: {fileID: 3393983689134612101}
-  cooldownRB: {fileID: 4246874254841799966}
-  ammoRB: {fileID: 7815696926378491899}
-  skillIconRBButtonTrans: {fileID: 7125918632300961173}
-  iconLBButton: {fileID: 53428661245322513}
-  skillIconLBButton: {fileID: 5834381152907676649}
-  cooldownLB: {fileID: 185780281742054291}
-  ammoLB: {fileID: 7282488359542140723}
-  skillIconLBButtonTrans: {fileID: 5798821815712788346}
+  buttonUIs:
+  - buttonType: 0
+    skillIconButton: {fileID: 3474585728483773704}
+    iconButton: {fileID: 2552584294390767635}
+    cooldown: {fileID: 2522786794576148265}
+    iconButtonTrans: {fileID: 2644589825968931298}
+    ammo: {fileID: 4896185298079654247}
+  - buttonType: 1
+    skillIconButton: {fileID: 4554601755330896710}
+    iconButton: {fileID: 4473741266720525497}
+    cooldown: {fileID: 1411703828879722338}
+    iconButtonTrans: {fileID: 214240889664993653}
+    ammo: {fileID: 5920129664537703915}
+  - buttonType: 2
+    skillIconButton: {fileID: 8353573370959072844}
+    iconButton: {fileID: 175719530710537433}
+    cooldown: {fileID: 8969695803116340397}
+    iconButtonTrans: {fileID: 1716651709065019238}
+    ammo: {fileID: 4993518572130451500}
+  - buttonType: 3
+    skillIconButton: {fileID: 1264380709181260741}
+    iconButton: {fileID: 7423662697383440692}
+    cooldown: {fileID: 9131491113631025767}
+    iconButtonTrans: {fileID: 5390025937651570656}
+    ammo: {fileID: 2558375805035590673}
+  - buttonType: 4
+    skillIconButton: {fileID: 3393983689134612101}
+    iconButton: {fileID: 6634770327279327116}
+    cooldown: {fileID: 4246874254841799966}
+    iconButtonTrans: {fileID: 7125918632300961173}
+    ammo: {fileID: 7815696926378491899}
+  - buttonType: 5
+    skillIconButton: {fileID: 5834381152907676649}
+    iconButton: {fileID: 53428661245322513}
+    cooldown: {fileID: 185780281742054291}
+    iconButtonTrans: {fileID: 5798821815712788346}
+    ammo: {fileID: 7282488359542140723}
 --- !u!114 &8523432971558818491
 MonoBehaviour:
   m_ObjectHideFlags: 0

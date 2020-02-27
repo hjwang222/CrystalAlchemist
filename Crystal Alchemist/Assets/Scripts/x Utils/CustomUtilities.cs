@@ -54,6 +54,16 @@ public class affectedResource
     public float amount;
 }
 
+public enum enumButton
+{
+    AButton,
+    BButton,
+    XButton,
+    YButton,
+    RBButton,
+    LBButton
+}
+
 public enum ResourceType
 {
     none,
@@ -83,13 +93,13 @@ public class CustomUtilities : MonoBehaviour
 
     public static class UnityFunctions
     {
-        public static void initLoot(GameObject main, GameObject lootParentGameObject, 
+        public static void initLoot(GameObject main, GameObject lootParentGameObject,
                                     List<LootTable> lootTable, List<LootTable> lootTableInternal,
                                     bool multiLoot, List<Item> inventory)
         {
-           createLootParent(main, lootParentGameObject); //erstelle Parent wenn nicht vorhanden
-           UpdateItemsInEditor(lootTable, lootTableInternal, lootParentGameObject); //instanziiere Items in den Parent als Vorlage
-           Items.setItem(lootTableInternal, multiLoot, inventory, lootParentGameObject); //setze Items ins Inventar (LOOT)
+            createLootParent(main, lootParentGameObject); //erstelle Parent wenn nicht vorhanden
+            UpdateItemsInEditor(lootTable, lootTableInternal, lootParentGameObject); //instanziiere Items in den Parent als Vorlage
+            Items.setItem(lootTableInternal, multiLoot, inventory, lootParentGameObject); //setze Items ins Inventar (LOOT)
         }
 
         public static void createLootParent(GameObject main, GameObject lootParentObject)
@@ -180,7 +190,7 @@ public class CustomUtilities : MonoBehaviour
                 if (child.GetComponent<T>() != null) childObjects.Add(child.GetComponent<T>());
                 GetChildObjects(child, childObjects);
             }
-        }        
+        }
     }
 
 
@@ -270,7 +280,7 @@ public class CustomUtilities : MonoBehaviour
                 float maximum = .05f;
                 if (lastTimePlayed + maximum < Time.time)
                 {
-                    soundsAlreadyPlayed[clip] = Time.time;                   
+                    soundsAlreadyPlayed[clip] = Time.time;
                     return true;
                 }
                 else
@@ -529,7 +539,7 @@ public class CustomUtilities : MonoBehaviour
 
         public static void SetAnimatorParameter(List<Animator> animators, string parameter, bool value)
         {
-            foreach(Animator animator in animators)
+            foreach (Animator animator in animators)
             {
                 SetAnimatorParameter(animator, parameter, value);
             }
@@ -724,11 +734,11 @@ public class CustomUtilities : MonoBehaviour
             {
                 if (item.isKeyItem)
                 {
-                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) return elem;     
+                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) return elem;
                 }
                 else
                 {
-                    if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper()) return elem;                    
+                    if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper()) return elem;
                 }
             }
             return null;
@@ -740,7 +750,7 @@ public class CustomUtilities : MonoBehaviour
             {
                 foreach (Item elem in inventory)
                 {
-                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) return true;                    
+                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) return true;
                 }
             }
             return false;
@@ -837,6 +847,22 @@ public class CustomUtilities : MonoBehaviour
     }
 
     ///////////////////////////////////////////////////////////////
+
+    public static class Input
+    {
+        public static string getButton(enumButton button)
+        {
+            return button.ToString();
+        }
+
+
+
+
+    }
+
+
+
+
 
     public static class StatusEffectUtil
     {
@@ -1024,7 +1050,7 @@ public class CustomUtilities : MonoBehaviour
         public static string formatFloatToString(float value, float schwelle)
         {
             if (Mathf.Abs(value) >= 10) return value.ToString("N0");
-            else if(value % 1 == 0) return value.ToString("N0");
+            else if (value % 1 == 0) return value.ToString("N0");
 
             return value.ToString("N1");
         }
@@ -1162,7 +1188,7 @@ public class CustomUtilities : MonoBehaviour
             }
 
             if (positionModule != null)
-            {                
+            {
                 positionHeight = positionModule.positionHeight;
             }
 

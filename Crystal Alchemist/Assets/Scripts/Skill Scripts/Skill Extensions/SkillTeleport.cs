@@ -19,7 +19,7 @@ public class SkillTeleport : SkillExtension
             && player != null
             && player.GetComponent<PlayerTeleport>().lastTeleportEnabled())
         {
-            character.GetComponent<Player>().GetComponent<PlayerTeleport>().teleportPlayerLast(true, true);
+            character.GetComponent<Player>().GetComponent<PlayerTeleport>().teleportPlayerToLastSavepoint();
         }
     }
 }

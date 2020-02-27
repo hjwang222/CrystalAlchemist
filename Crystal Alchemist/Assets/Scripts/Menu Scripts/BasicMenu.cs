@@ -8,12 +8,6 @@ public class BasicMenu : PreventDeselection
 {
     public List<GameObject> menues = new List<GameObject>();
 
-    [SerializeField]
-    private BoolValue healthBar;
-
-    [SerializeField]
-    private BoolValue manaBar;
-
     public virtual void Start()
     {
         this.setFirstMenu();

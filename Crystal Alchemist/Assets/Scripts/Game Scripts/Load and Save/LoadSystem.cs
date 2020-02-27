@@ -28,18 +28,17 @@ public class LoadSystem : MonoBehaviour
             player.manaSignalUI.Raise();
 
             player.stats.characterName = data.characterName;
-            player.GetComponent<PlayerUtils>().secondsPlayed = data.timePlayed;
-
-            player.GetComponent<PlayerTeleport>().setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]), true);
+            player.GetComponent<PlayerUtils>().secondsPlayed = data.timePlayed;            
 
             if (data.inventory.Count > 0) loadInventory(data, player);
 
-            player.GetComponent<PlayerTeleport>().teleportPlayerLast(false, true, false); //letzter
+            player.GetComponent<PlayerTeleport>().setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]), true);
+            player.GetComponent<PlayerTeleport>().teleportPlayerToLastSavepoint(true); //letzter Savepoint, no Scene Loading
         }
         else
         {
             player.GetComponent<PlayerTeleport>().setLastTeleport("", Vector2.zero, false);
-            player.GetComponent<PlayerTeleport>().teleportPlayer(false, true, false); //normal
+            player.GetComponent<PlayerTeleport>().teleportPlayerToScene(true); //Starpunkt, no Scene Loading
         }
     }
 

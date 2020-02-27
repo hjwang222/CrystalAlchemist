@@ -71,13 +71,18 @@ public class DeathScreen : MonoBehaviour
 
     [BoxGroup("Time")]
     [SerializeField]
-    private float buttonDelay = 2f;
+    private float cursorDelay = 2f;
+
+    [BoxGroup("Time")]
+    [SerializeField]
+    private float inputDelay = 3f;
 
     private string currentText;
     private string fullText;
     private ColorAdjustments colorGrading;
     private Player player;
     private bool skip = false;
+    private bool inputPossible = false; 
 
     private void init()
     {
@@ -88,11 +93,19 @@ public class DeathScreen : MonoBehaviour
         this.countDown.gameObject.SetActive(false);
         this.textField.gameObject.SetActive(false);
         this.UI.SetActive(false);
+        StartCoroutine(delayCo(this.inputDelay));
+    }
+
+    private IEnumerator delayCo(float delay)
+    {
+        this.inputPossible = false;
+        yield return new WaitForSeconds(delay);
+        this.inputPossible = true;
     }
 
     private void Update()
     {
-        if (Input.anyKeyDown) this.skip = true;
+        if (Input.anyKeyDown && this.inputPossible) this.skip = true;
     }
 
     private void OnEnable()
@@ -170,7 +183,7 @@ public class DeathScreen : MonoBehaviour
 
             if (i >= this.fullText.Length)
             {
-                StartCoroutine(showButtonCo(this.buttonDelay));
+                StartCoroutine(showButtonCo(this.cursorDelay));
                 break;
             }
 

@@ -8,7 +8,7 @@ public class PlayerTeleport : MonoBehaviour
     private Player player;
 
     [SerializeField]
-    private TeleportStats teleportStat;
+    private TeleportStats nextTeleport;
 
     public TeleportStats lastTeleport;
 
@@ -29,29 +29,39 @@ public class PlayerTeleport : MonoBehaviour
         return this.lastTeleport.lastTeleportSet;
     }
 
-    public void teleportPlayer(bool showAnimationOut, bool showAnimationIn, bool loadScene) //LoadConfig
+    public void teleportPlayerToScene(bool showAnimationIn) //LoadConfig with no Data
     {
-        StartCoroutine(DematerializePlayer(this.player.fadingDuration.getValue(), showAnimationIn, showAnimationOut, loadScene, this.teleportStat));
+        teleportPlayer(showAnimationIn, false, false, this.nextTeleport);
     }
 
-    public void teleportPlayerLast(bool showAnimationOut, bool showAnimationIn, bool loadScene) //LoadConfig
+    public void teleportPlayerToLastSavepoint(bool showAnimationIn) //LoadConfig with Data
     {
-        StartCoroutine(DematerializePlayer(this.player.fadingDuration.getValue(), showAnimationIn, showAnimationOut, loadScene, this.lastTeleport));
+        teleportPlayer(false, showAnimationIn, false, this.lastTeleport);
     }
 
-    public void teleportPlayerLast() //Skill Teleport
+    public void teleportPlayerToLastSavepoint() //Skill Teleport
     {
-        StartCoroutine(DematerializePlayer(this.player.fadingDuration.getValue(), true, true, true, this.lastTeleport));
+        teleportPlayerToLastSavepoint(true, true);
     }
 
-    public void teleportPlayerLast(bool showAnimationOut, bool showAnimationIn) //Death Screen
+    public void teleportPlayerToLastSavepoint(bool showAnimationOut, bool showAnimationIn) //Death Screen
     {
-        StartCoroutine(DematerializePlayer(this.player.fadingDuration.getValue(), showAnimationIn, showAnimationOut, true, this.lastTeleport));
+        teleportPlayer(this.player.fadingDuration.getValue(), showAnimationIn, showAnimationOut, true, this.lastTeleport);
     }
 
-    public void teleportPlayer(float duration, bool showAnimationOut, bool showAnimationIn) //Scene Transition
+    public void teleportPlayer(bool showAnimationOut, bool showAnimationIn, bool loadScene, TeleportStats stat) 
     {
-        StartCoroutine(DematerializePlayer(duration, showAnimationIn, showAnimationOut, true, this.teleportStat));
+        teleportPlayer(this.player.fadingDuration.getValue(), showAnimationIn, showAnimationOut, loadScene, stat);
+    }
+
+    public void teleportPlayerToNextScene(float duration, bool showAnimationOut, bool showAnimationIn) //Scene Transition
+    {
+        teleportPlayer(duration, showAnimationIn, showAnimationOut, true, this.nextTeleport);
+    }
+
+    public void teleportPlayer(float duration, bool showAnimationIn, bool showAnimationOut, bool loadScene, TeleportStats stat)
+    {
+        StartCoroutine(DematerializePlayer(duration, showAnimationIn, showAnimationOut, loadScene, stat));
     }
 
     private IEnumerator DematerializePlayer(float duration, bool showAnimationIn, bool showAnimationOut, bool loadScene, TeleportStats stat)

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -18320,7 +18320,8 @@ MonoBehaviour:
   transitionDuration: {fileID: 11400000, guid: a2cc0078d349f9245bd74b3f5813a450, type: 2}
   showAnimationIn: 0
   showAnimationOut: 0
-  teleportStat: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
+  nextTeleport: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
+  cleanUp: {fileID: 11400000, guid: b54e26b967be19b438afcd08a36c95b2, type: 2}
 --- !u!1001 &8223605062821766462
 PrefabInstance:
   m_ObjectHideFlags: 0

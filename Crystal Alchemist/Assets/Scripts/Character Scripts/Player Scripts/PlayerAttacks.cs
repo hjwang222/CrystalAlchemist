@@ -3,15 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public enum enumButton
-{
-    AButton,
-    BButton,
-    XButton,
-    YButton,
-    RBButton,
-    LBButton
-}
+
 
 public class PlayerAttacks : MonoBehaviour
 {
@@ -62,23 +54,21 @@ public class PlayerAttacks : MonoBehaviour
         }
     }
 
-    private Skill getSkillFromButton(string button)
+    public Skill getSkillFromButton(enumButton button)
     {
-        //TODO: GEHT BESSER!
-
         switch (button)
         {
-            case "A-Button": return this.player.AButton;
-            case "B-Button": return this.player.BButton;
-            case "X-Button": return this.player.XButton;
-            case "Y-Button": return this.player.YButton;
-            case "RB-Button": return this.player.RBButton;
-            case "LB-Button": return this.player.LBButton;
+            case enumButton.AButton: return this.player.AButton;
+            case enumButton.BButton: return this.player.BButton;
+            case enumButton.XButton: return this.player.XButton;
+            case enumButton.YButton: return this.player.YButton;
+            case enumButton.RBButton: return this.player.RBButton;
+            case enumButton.LBButton: return this.player.LBButton;
             default: return null;
         }
     }
 
-    public void updateSkillButtons(string button)
+    public void updateSkillButtons(enumButton button)
     {
         Skill skill = this.getSkillFromButton(button);
 
@@ -125,9 +115,11 @@ public class PlayerAttacks : MonoBehaviour
         }
     }
 
-    private bool isSkillReadyToUse(string button, Skill skill)
+    private bool isSkillReadyToUse(enumButton buttonInput, Skill skill)
     {
-        if (isButtonUsable(button))
+        string button = CustomUtilities.Input.getButton(buttonInput);
+
+        if (isButtonUsable(buttonInput))
         {
             if (Input.GetButtonDown(button) && (skill.isRapidFire || skill.cast == 0))
             {
@@ -209,8 +201,9 @@ public class PlayerAttacks : MonoBehaviour
         return false;
     }
 
-    private void activateSkill(string button, Skill skill)
+    private void activateSkill(enumButton buttonInput, Skill skill)
     {
+        string button = CustomUtilities.Input.getButton(buttonInput);
         this.player.hideCastBarAndIndicator(skill);
 
         SkillTargetingSystemModule targetingSystemModule = skill.GetComponent<SkillTargetingSystemModule>();
@@ -267,8 +260,10 @@ public class PlayerAttacks : MonoBehaviour
         }
     }
 
-    private void deactivateSkill(string button, Skill skill)
+    private void deactivateSkill(enumButton buttonInput, Skill skill)
     {
+        string button = CustomUtilities.Input.getButton(buttonInput);
+
         //Skill deaktivieren
         bool destroyit = false;
 
@@ -325,8 +320,10 @@ public class PlayerAttacks : MonoBehaviour
         //if (!playSoundeffect) temp.dontPlayAudio = true;
     }
 
-    public bool isButtonUsable(string button)
+    public bool isButtonUsable(enumButton buttonInput)
     {
+        string button = CustomUtilities.Input.getButton(buttonInput);
+
         if (button == this.currentButtonPressed
             || this.currentButtonPressed == null
             || this.currentButtonPressed == "") return true;

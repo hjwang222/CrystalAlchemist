@@ -53,7 +53,7 @@ public class SceneTransition : MonoBehaviour
     [BoxGroup("Required")]
     [Required]
     [SerializeField]
-    private TeleportStats teleportStat;
+    private TeleportStats nextTeleport;
 
     [BoxGroup("Required")]
     [Required]
@@ -75,12 +75,12 @@ public class SceneTransition : MonoBehaviour
             {                
                 if(this.vcamSignal != null) this.vcamSignal.Raise();
 
-                this.teleportStat.location = this.targetScene;
-                this.teleportStat.position = this.playerPositionInNewScene;
+                this.nextTeleport.location = this.targetScene;
+                this.nextTeleport.position = this.playerPositionInNewScene;
 
                 if (this.cleanUp != null) this.cleanUp.Raise(null);
 
-                player.GetComponent<PlayerTeleport>().teleportPlayer(this.transitionDuration.getValue(), this.showAnimationOut, this.showAnimationIn);
+                player.GetComponent<PlayerTeleport>().teleportPlayerToNextScene(this.transitionDuration.getValue(), this.showAnimationOut, this.showAnimationIn);
 
             }
         }

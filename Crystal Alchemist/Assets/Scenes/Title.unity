@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -7277,8 +7277,6 @@ MonoBehaviour:
   - {fileID: 1622383029}
   - {fileID: 47647058}
   - {fileID: 1584285664}
-  healthBar: {fileID: 0}
-  manaBar: {fileID: 0}
   mainFrame: {fileID: 1588455287}
   darkFrame: {fileID: 1300247785}
 --- !u!114 &614963581401797004
@@ -11416,6 +11414,12 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 32
       objectReference: {fileID: 0}
+    - target: {fileID: 9128686344211944662, guid: a0fea906fabfcfe429926638f98f0ac0,
+        type: 3}
+      propertyPath: teleportStat
+      value: 
+      objectReference: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82,
+        type: 2}
     - target: {fileID: 9184243677745998644, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
       propertyPath: m_AnchorMin.y

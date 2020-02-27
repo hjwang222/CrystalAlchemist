@@ -5,6 +5,17 @@ using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
 
+[System.Serializable]
+public class ButtonConfigUI
+{
+    public enumButton buttonType;
+    public Image skillIconButton;
+    public Image iconButton;
+    public TextMeshProUGUI cooldown;
+    public Image iconButtonTrans;
+    public TextMeshProUGUI ammo;
+}
+
 public class CombatButtons : MonoBehaviour
 {
     private Player player;
@@ -13,101 +24,10 @@ public class CombatButtons : MonoBehaviour
     [BoxGroup("Mandatory")]
     private PlayerStats playerStats;
 
-    [FoldoutGroup("A Button UI", expanded: false)]
     [SerializeField]
-    private Image iconAButton;
-    [FoldoutGroup("A Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconAButton;
-    [FoldoutGroup("A Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI cooldownA;
-    [FoldoutGroup("A Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI ammoA;
-    [FoldoutGroup("A Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconAButtonTrans;
+    [BoxGroup("Mandatory")]
+    private List<ButtonConfigUI> buttonUIs = new List<ButtonConfigUI>();
 
-    [FoldoutGroup("B Button UI", expanded: false)]
-    [SerializeField]
-    private Image iconBButton;
-    [FoldoutGroup("B Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconBButton;
-    [FoldoutGroup("B Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI cooldownB;
-    [FoldoutGroup("B Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI ammoB;
-    [FoldoutGroup("B Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconBButtonTrans;
-
-    [FoldoutGroup("X Button UI", expanded: false)]
-    [SerializeField]
-    private Image iconXButton;
-    [FoldoutGroup("X Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconXButton;
-    [FoldoutGroup("X Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI cooldownX;
-    [FoldoutGroup("X Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI ammoX;
-    [FoldoutGroup("X Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconXButtonTrans;
-
-    [FoldoutGroup("Y Button UI", expanded: false)]
-    [SerializeField]
-    private Image iconYButton;
-    [FoldoutGroup("Y Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconYButton;
-    [FoldoutGroup("Y Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI cooldownY;
-    [FoldoutGroup("Y Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI ammoY;
-    [FoldoutGroup("Y Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconYButtonTrans;
-
-    [FoldoutGroup("RB Button UI", expanded: false)]
-    [SerializeField]
-    private Image iconRBButton;
-    [FoldoutGroup("RB Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconRBButton;
-    [FoldoutGroup("RB Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI cooldownRB;
-    [FoldoutGroup("RB Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI ammoRB;
-    [FoldoutGroup("RB Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconRBButtonTrans;
-
-    [FoldoutGroup("LB Button UI", expanded: false)]
-    [SerializeField]
-    private Image iconLBButton;
-    [FoldoutGroup("LB Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconLBButton;
-    [FoldoutGroup("LB Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI cooldownLB;
-    [FoldoutGroup("LB Button UI", expanded: false)]
-    [SerializeField]
-    private TextMeshProUGUI ammoLB;
-    [FoldoutGroup("LB Button UI", expanded: false)]
-    [SerializeField]
-    private Image skillIconLBButtonTrans;
 
     private void Awake()
     {
@@ -121,22 +41,19 @@ public class CombatButtons : MonoBehaviour
 
     public void setButtonSkillImages()
     {
-        setButton(this.player.AButton, this.skillIconAButton, this.iconAButton);
-        setButton(this.player.BButton, this.skillIconBButton, this.iconBButton);
-        setButton(this.player.XButton, this.skillIconXButton, this.iconXButton);
-        setButton(this.player.YButton, this.skillIconYButton, this.iconYButton);
-        setButton(this.player.RBButton, this.skillIconRBButton, this.iconRBButton);
-        setButton(this.player.LBButton, this.skillIconLBButton, this.iconLBButton);
+        foreach(ButtonConfigUI buttonConfigUI in this.buttonUIs)
+        {
+            setButton(buttonConfigUI.buttonType, buttonConfigUI.skillIconButton, buttonConfigUI.iconButton);
+        }
     }
 
     private void FixedUpdate()
     {
-        updateButton(this.skillIconAButton, this.iconAButton, this.cooldownA, this.player.AButton, this.ammoA, this.skillIconAButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("A-Button"));
-        updateButton(this.skillIconBButton, this.iconBButton, this.cooldownB, this.player.BButton, this.ammoB, this.skillIconBButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("B-Button"));
-        updateButton(this.skillIconXButton, this.iconXButton, this.cooldownX, this.player.XButton, this.ammoX, this.skillIconXButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("X-Button"));
-        updateButton(this.skillIconYButton, this.iconYButton, this.cooldownY, this.player.YButton, this.ammoY, this.skillIconYButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("Y-Button"));
-        updateButton(this.skillIconRBButton, this.iconRBButton, this.cooldownRB, this.player.RBButton, this.ammoRB, this.skillIconRBButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("RB-Button"));
-        updateButton(this.skillIconLBButton, this.iconLBButton, this.cooldownLB, this.player.LBButton, this.ammoLB, this.skillIconLBButtonTrans, this.player.GetComponent<PlayerAttacks>().isButtonUsable("LB-Button"));
+        foreach (ButtonConfigUI buttonConfigUI in this.buttonUIs)
+        {
+            setButton(buttonConfigUI.buttonType, buttonConfigUI.skillIconButton, buttonConfigUI.iconButton);
+            updateButton(buttonConfigUI);
+        }
     }
 
     private void setFontSize(TextMeshProUGUI textfield)
@@ -145,20 +62,22 @@ public class CombatButtons : MonoBehaviour
         else if (textfield.text == "[+]") textfield.fontSize = 50;
         else textfield.fontSize = 48;
     }
-
-
-    private void updateButton(Image skillUI, Image buttonUI, TextMeshProUGUI cooldown, Skill skill, TextMeshProUGUI ammo, Image buttonUITrans, bool isUsable)
+    
+    private void updateButton(ButtonConfigUI configUI)
     {
+        Skill skill = this.player.GetComponent<PlayerAttacks>().getSkillFromButton(configUI.buttonType);
+        bool isUsable = this.player.GetComponent<PlayerAttacks>().isButtonUsable(configUI.buttonType);
+
         if (skill != null)
         {
-            buttonUI.enabled = true;
+            configUI.iconButton.enabled = true;
             float cooldownLeft = skill.cooldownTimeLeft / (player.timeDistortion * player.spellspeed);
             float cooldownValue = skill.cooldown / (player.timeDistortion * player.spellspeed);
 
             SkillSenderModule senderModule = skill.GetComponent<SkillSenderModule>();
 
-            if (senderModule != null && senderModule.item != null) ammo.text = (int)player.getResource(senderModule.resourceType, senderModule.item)+"";
-            else ammo.text = "";            
+            if (senderModule != null && senderModule.item != null) configUI.ammo.text = (int)player.getResource(senderModule.resourceType, senderModule.item) + "";
+            else configUI.ammo.text = "";
 
             if (!isUsable ||
                 this.player.currentState == CharacterState.attack ||
@@ -173,65 +92,67 @@ public class CombatButtons : MonoBehaviour
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
                 string cooldownText = "X";
-                cooldown.text = cooldownText;
-                setFontSize(cooldown);
+                configUI.cooldown.text = cooldownText;
+                setFontSize(configUI.cooldown);
 
-                cooldown.color = new Color(0.8f, 0, 0);
-                cooldown.outlineColor = new Color32(75, 0, 0, 255);
-                cooldown.outlineWidth = 0.25f;
-                skillUI.color = new Color(1f, 1f, 1f, 0.2f);
-                buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
+                configUI.cooldown.color = new Color(0.8f, 0, 0);
+                configUI.cooldown.outlineColor = new Color32(75, 0, 0, 255);
+                configUI.cooldown.outlineWidth = 0.25f;
+                configUI.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
+                configUI.iconButton.color = new Color(1f, 1f, 1f, 0.2f);
             }
             else if (player.activeLockOnTarget != null
               && player.activeLockOnTarget.getSkill() == skill)
             {
                 //ist Skill in Zielerfassung
                 string cooldownText = "[+]";
-                cooldown.text = cooldownText;
-                setFontSize(cooldown);
+                configUI.cooldown.text = cooldownText;
+                setFontSize(configUI.cooldown);
 
-                cooldown.color = new Color(0.8f, 0.75f, 0);
-                cooldown.outlineColor = new Color32(75, 65, 0, 255);
-                cooldown.outlineWidth = 0.25f;
-                skillUI.color = new Color(1f, 1f, 1f, 0.2f);
-                buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
+                configUI.cooldown.color = new Color(0.8f, 0.75f, 0);
+                configUI.cooldown.outlineColor = new Color32(75, 65, 0, 255);
+                configUI.cooldown.outlineWidth = 0.25f;
+                configUI.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
+                configUI.iconButton.color = new Color(1f, 1f, 1f, 0.2f);
             }
             else if (cooldownLeft > 0 && cooldownValue > 0.5f)
             {
                 //Ist Skill in der Abklingzeit
                 string cooldownText = CustomUtilities.Format.setDurationToString(cooldownLeft);
-                cooldown.text = cooldownText;
-                setFontSize(cooldown);
+                configUI.cooldown.text = cooldownText;
+                setFontSize(configUI.cooldown);
 
-                buttonUI.fillAmount = 1 - (cooldownLeft / cooldownValue);
-                cooldown.color = new Color(1f, 1f, 1f, 1f);
-                cooldown.outlineColor = new Color32(75, 75, 75, 255);
-                cooldown.outlineWidth = 0.25f;
-                skillUI.color = new Color(1f, 1f, 1f, 0.2f);
-                buttonUI.color = new Color(1f, 1f, 1f, 1f);
+                configUI.iconButton.fillAmount = 1 - (cooldownLeft / cooldownValue);
+                configUI.cooldown.color = new Color(1f, 1f, 1f, 1f);
+                configUI.cooldown.outlineColor = new Color32(75, 75, 75, 255);
+                configUI.cooldown.outlineWidth = 0.25f;
+                configUI.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
+                configUI.iconButton.color = new Color(1f, 1f, 1f, 1f);
             }
             else
             {
                 //Skill ist einsatzbereit
-                cooldown.text = "";
-                setFontSize(cooldown);
+                configUI.cooldown.text = "";
+                setFontSize(configUI.cooldown);
 
-                cooldown.outlineColor = new Color32(75, 75, 75, 255);
-                skillUI.color = new Color(1f, 1f, 1f, 1f);
-                buttonUI.color = new Color(1f, 1f, 1f, 1f);
-                buttonUI.fillAmount = 1;                
+                configUI.cooldown.outlineColor = new Color32(75, 75, 75, 255);
+                configUI.skillIconButton.color = new Color(1f, 1f, 1f, 1f);
+                configUI.iconButton.color = new Color(1f, 1f, 1f, 1f);
+                configUI.iconButton.fillAmount = 1;
             }
         }
         else
         {
-            buttonUI.enabled = false;
-            buttonUITrans.enabled = true;
-            ammo.text = "";
+            configUI.iconButton.enabled = false;
+            configUI.iconButtonTrans.enabled = true;
+            configUI.ammo.text = "";
         }
     }
 
-    private void setButton(Skill skill, Image skillUI, Image buttonUI)
+    private void setButton(enumButton buttonInput, Image skillUI, Image buttonUI)
     {
+        Skill skill = this.player.GetComponent<PlayerAttacks>().getSkillFromButton(buttonInput);
+
         if (skill == null)
         {
             skillUI.gameObject.SetActive(false);
@@ -240,7 +161,7 @@ public class CombatButtons : MonoBehaviour
         else
         {
             skillUI.gameObject.SetActive(true);
-            if(skill.GetComponent<SkillBookModule>() != null) skillUI.sprite = skill.GetComponent<SkillBookModule>().icon;
+            if (skill.GetComponent<SkillBookModule>() != null) skillUI.sprite = skill.GetComponent<SkillBookModule>().icon;
             buttonUI.color = new Color(1f, 1f, 1f, 1f);
             buttonUI.fillAmount = 1;
         }

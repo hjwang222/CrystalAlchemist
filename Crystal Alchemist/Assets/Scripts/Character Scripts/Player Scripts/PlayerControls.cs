@@ -17,8 +17,10 @@ public class PlayerControls : MonoBehaviour
         playerInputs();
     }
 
-    private bool isButtonPressed(string button)
+    private bool isButtonPressed(enumButton buttonInput)
     {
+        string button = CustomUtilities.Input.getButton(buttonInput);
+
         if (Input.GetButton(button)
             || Input.GetButtonUp(button)
             || Input.GetButtonDown(button)) return true;
@@ -69,19 +71,19 @@ public class PlayerControls : MonoBehaviour
 
             if (this.player.currentState != CharacterState.knockedback)
             {
-                if (!isButtonPressed("A-Button")
-                && !isButtonPressed("B-Button")
-                && !isButtonPressed("X-Button")
-                && !isButtonPressed("Y-Button")
-                && !isButtonPressed("RB-Button")
-                && !isButtonPressed("LB-Button")) this.playerAttacks.currentButtonPressed = "";
+                if (!isButtonPressed(enumButton.AButton)
+                && !isButtonPressed(enumButton.BButton)
+                && !isButtonPressed(enumButton.XButton)
+                && !isButtonPressed(enumButton.YButton)
+                && !isButtonPressed(enumButton.RBButton)
+                && !isButtonPressed(enumButton.LBButton)) this.playerAttacks.currentButtonPressed = "";
 
-                this.playerAttacks.updateSkillButtons("A-Button");
-                this.playerAttacks.updateSkillButtons("B-Button");
-                this.playerAttacks.updateSkillButtons("X-Button");
-                this.playerAttacks.updateSkillButtons("Y-Button");
-                this.playerAttacks.updateSkillButtons("RB-Button");
-                this.playerAttacks.updateSkillButtons("LB-Button");
+                this.playerAttacks.updateSkillButtons(enumButton.AButton);
+                this.playerAttacks.updateSkillButtons(enumButton.BButton);
+                this.playerAttacks.updateSkillButtons(enumButton.XButton);
+                this.playerAttacks.updateSkillButtons(enumButton.YButton);
+                this.playerAttacks.updateSkillButtons(enumButton.RBButton);
+                this.playerAttacks.updateSkillButtons(enumButton.LBButton);
             }
         }
     }
