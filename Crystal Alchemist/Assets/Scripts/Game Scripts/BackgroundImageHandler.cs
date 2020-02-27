@@ -4,26 +4,11 @@ using UnityEngine;
 
 public class BackgroundImageHandler : MonoBehaviour
 {
-    [SerializeField]
-    private SpriteRenderer spriteRenderer;
+    private GameObject background;
 
-    public void SetSprite(Sprite sprite)
+    public void setGameObject(GameObject gameObject)
     {
-        if (this.spriteRenderer != null) this.spriteRenderer.sprite = sprite;
-    }
-
-    public void SetMaterial(Material material)
-    {
-        if (this.spriteRenderer != null) this.spriteRenderer.material = material;
-    }
-
-    public void SetScale(float value)
-    {
-        this.transform.localScale = new Vector3(value, value);
-    }
-
-    public void SetPosition(float value)
-    {
-        this.transform.localPosition = new Vector3(0, value, 1);
+        if (this.background != null) Destroy(this.background);
+        if (gameObject != null) this.background = Instantiate(gameObject, this.transform.parent);
     }
 }

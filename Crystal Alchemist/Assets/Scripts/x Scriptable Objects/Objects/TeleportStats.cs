@@ -8,12 +8,7 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
 {
     public string location;
     public Vector2 position;
-
-    public bool getLastTeleport()
-    {
-        if (this.location != null && this.position != null) return true;
-        else return false;
-    }
+    public bool lastTeleportSet = false;
 
     public void OnAfterDeserialize() { }
 

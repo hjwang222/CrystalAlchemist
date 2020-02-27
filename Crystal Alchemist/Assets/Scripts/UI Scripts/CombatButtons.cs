@@ -119,14 +119,8 @@ public class CombatButtons : MonoBehaviour
         setButtonSkillImages();
     }
 
-    private void OnEnable()
-    {
-        setButtonSkillImages();
-    }
-
     public void setButtonSkillImages()
     {
-
         setButton(this.player.AButton, this.skillIconAButton, this.iconAButton);
         setButton(this.player.BButton, this.skillIconBButton, this.iconBButton);
         setButton(this.player.XButton, this.skillIconXButton, this.iconXButton);

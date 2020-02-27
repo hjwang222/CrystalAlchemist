@@ -12,37 +12,27 @@ public class RespawnAnimation : MonoBehaviour
 
     private Character character;
     private bool reverse;
-    private bool resetStats = true;
 
-
-    public void setCharacter(Character character)
+    public void resetCharacter(Character character)
     {
-        this.setCharacter(character, false);
+        this.setCharacter(character, false, true);
     }
 
-    public void setStatReset(bool value)
-    {
-        this.resetStats = value;
-    }
-
-    public void setCharacter(Character character, bool reverse)
+    public void setCharacter(Character character, bool reverse, bool reset)
     {
         this.reverse = reverse;
+        this.character = character;
 
         if (this.reverse)
         {
-            foreach(Animator animator in this.animators)
+            this.character.prepareSpawnOut();
+
+            foreach (Animator animator in this.animators)
             {
                 CustomUtilities.UnityUtils.SetAnimatorParameter(animator, "Reverse");
             }
         }
-
-        this.character = character;
-        this.character.gameObject.SetActive(true);
-        this.character.enableSpriteRenderer(true);
-        this.character.enableScripts(false);
-        this.character.initSpawn(this.resetStats);
-        this.character.PlayRespawnAnimation();
+        else this.character.prepareSpawnFromAnimation(reset); //show Character but no Actions!     
     }
 
     public float getAnimationLength()
@@ -53,13 +43,7 @@ public class RespawnAnimation : MonoBehaviour
 
     public void DestroyIt()
     {
-        if (!this.reverse)
-        {
-            this.character.enableScripts(true);
-            this.character.removeColor(Color.white);
-            //this.character.PlayRespawnAnimation(false);
-        }
-
+        if (!this.reverse) this.character.completeSpawnFromAnimation(); //spawn complete, now ACTION!
         Destroy(this.gameObject, 0.1f);
     }
 }

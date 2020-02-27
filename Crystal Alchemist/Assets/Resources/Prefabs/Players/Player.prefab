@@ -605,10 +605,13 @@ MonoBehaviour:
   timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
   preset: {fileID: 11400000, guid: 5dc2fa268205b3e49ad9b4b984467965, type: 2}
+  defaultPreset: {fileID: 11400000, guid: f85bfbd28a416dd43b2f759b5b3a0d35, type: 2}
   dialogBoxSignal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
   deathSignal: {fileID: 11400000, guid: dda75ee433c9b274f8925d7dc56f9851, type: 2}
   healthSignalUI: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
   manaSignalUI: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}
+  buttonSignalUI: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684, type: 2}
+  presetSignal: {fileID: 11400000, guid: 1794675380e483345a378de158326f5f, type: 2}
   openInventorySignal: {fileID: 11400000, guid: 2d989f4dd631a3d4f9286a7be6c33d95,
     type: 2}
   openPauseSignal: {fileID: 11400000, guid: fe8d16e1c87adbc46bf6d8de8ceae041, type: 2}
@@ -616,8 +619,6 @@ MonoBehaviour:
   targetHelpObject: {fileID: 8153952292305783526}
   saveGameSlot: {fileID: 11400000, guid: d3073c05c40c81e439f6ce9706afae30, type: 2}
   fadingDuration: {fileID: 11400000, guid: a2cc0078d349f9245bd74b3f5813a450, type: 2}
-  healthbar: {fileID: 0}
-  manabar: {fileID: 0}
   AButton: {fileID: 0}
   BButton: {fileID: 0}
   XButton: {fileID: 0}
@@ -682,6 +683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5074818981556205378}
   teleportStat: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
+  lastTeleport: {fileID: 11400000, guid: 19238642f2af7884a957462e5938d59e, type: 2}
 --- !u!114 &9082647090224766926
 MonoBehaviour:
   m_ObjectHideFlags: 0

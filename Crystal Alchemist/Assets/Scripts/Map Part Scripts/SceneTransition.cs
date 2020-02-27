@@ -43,12 +43,22 @@ public class SceneTransition : MonoBehaviour
     [ShowIf("showTransition", true)]
     [BoxGroup("Transition")]
     [SerializeField]
-    private bool showAnimation = false;
+    private bool showAnimationIn = false;
+
+    [ShowIf("showTransition", true)]
+    [BoxGroup("Transition")]
+    [SerializeField]
+    private bool showAnimationOut = false;
 
     [BoxGroup("Required")]
     [Required]
     [SerializeField]
     private TeleportStats teleportStat;
+
+    [BoxGroup("Required")]
+    [Required]
+    [SerializeField]
+    private GameObjectSignal cleanUp;
 
 
     public void Awake()
@@ -61,14 +71,17 @@ public class SceneTransition : MonoBehaviour
         if (other.CompareTag("Player") && !other.isTrigger)
         {
             Player player = other.GetComponent<Player>();
-            if (player != null)
+            if (player != null && player.currentState != CharacterState.respawning)
             {                
                 if(this.vcamSignal != null) this.vcamSignal.Raise();
 
                 this.teleportStat.location = this.targetScene;
                 this.teleportStat.position = this.playerPositionInNewScene;
 
-                player.GetComponent<PlayerTeleport>().teleportPlayer(this.transitionDuration.getValue(), this.showAnimation);
+                if (this.cleanUp != null) this.cleanUp.Raise(null);
+
+                player.GetComponent<PlayerTeleport>().teleportPlayer(this.transitionDuration.getValue(), this.showAnimationOut, this.showAnimationIn);
+
             }
         }
     }

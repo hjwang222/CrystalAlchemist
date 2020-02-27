@@ -27,6 +27,10 @@ public class DeathScreen : MonoBehaviour
 
     [BoxGroup("Mandatory")]
     [SerializeField]
+    private AudioSource audioSource;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
     private Volume volume;
 
     [BoxGroup("Mandatory")]
@@ -108,7 +112,7 @@ public class DeathScreen : MonoBehaviour
 
     public void playMusic(AudioClip clip)
     {
-        CustomUtilities.Audio.playSoundEffect(clip, GlobalValues.backgroundMusicVolume);
+        CustomUtilities.Audio.playSoundEffect(clip, this.audioSource, GlobalValues.backgroundMusicVolume);
     }
 
     public void ShowText(float delay)
@@ -129,21 +133,24 @@ public class DeathScreen : MonoBehaviour
 
     public void returnToTitleScreen()
     {
+        this.audioSource.Stop();
         SceneManager.LoadSceneAsync(0);
     }
 
     public void returnSaveGame()
     {
-        if (this.player.GetComponent<PlayerTeleport>().lastTeleportEnabled())
+        this.audioSource.Stop();
+        PlayerTeleport playerTeleport = this.player.GetComponent<PlayerTeleport>();
+
+        if (playerTeleport.lastTeleportEnabled())
         {
             this.colorGrading.saturation.value = 0;
             this.colorGrading.colorFilter.value = Color.white;
 
             this.gameObject.SetActive(false);
             this.UI.SetActive(true);
-            //SceneManager.LoadSceneAsync(this.lastSavepoint);
+            SceneManager.LoadSceneAsync(playerTeleport.lastTeleport.location);
             this.player.initPlayer();
-            this.player.GetComponent<PlayerTeleport>().teleportPlayer(true);
         }
     }
 

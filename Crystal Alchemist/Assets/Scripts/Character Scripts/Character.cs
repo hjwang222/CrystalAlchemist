@@ -184,9 +184,7 @@ public class Character : MonoBehaviour
         this.manaRegen = this.stats.manaRegeneration;
         this.buffPlus = this.stats.buffPlus;
         this.debuffMinus = this.stats.debuffMinus;
-    }
-
-   
+    }   
 
     private void setBasicAttributesToNormal(bool reset)
     {
@@ -241,6 +239,41 @@ public class Character : MonoBehaviour
         if (eventAI != null) eventAI.init();
     }
     #endregion
+          
+    public void spawnASAP()
+    {
+        this.gameObject.SetActive(true);
+        this.PlayRespawnAnimation();
+        this.initSpawn(true);
+    }
+
+    public virtual void prepareSpawnOut()
+    {
+        this.myRigidbody.velocity = Vector2.zero;
+        this.currentState = CharacterState.respawning;
+        this.enableSpriteRenderer(false);
+        this.enableScripts(false); //wait until full Respawn
+    }
+
+
+    public void prepareSpawnFromAnimation(bool reset)
+    {
+        this.gameObject.SetActive(true);
+        this.enableSpriteRenderer(true);
+        this.enableScripts(false); //wait until full Respawn
+        this.initSpawn(reset);
+        this.PlayRespawnAnimation();
+    }
+
+    public void completeSpawnFromAnimation()
+    {
+        this.currentState = CharacterState.idle;
+        this.enableScripts(true);
+        this.enableSpriteRenderer(true);
+        this.removeColor(Color.white);
+    }
+
+
 
 
     #region Updates

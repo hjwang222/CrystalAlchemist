@@ -9,7 +9,7 @@ public class Savepoint : Interactable
     public override void doSomethingOnSubmit()
     {
         Scene scene = SceneManager.GetActiveScene();
-        this.player.GetComponent<PlayerTeleport>().setLastTeleport(scene.name, this.player.transform.position);
+        this.player.GetComponent<PlayerTeleport>().setLastTeleport(scene.name, this.player.transform.position, true);
         openSaveMenu.Raise();        
     }
 }

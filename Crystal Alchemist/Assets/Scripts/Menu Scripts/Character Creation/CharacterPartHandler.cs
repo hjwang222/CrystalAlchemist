@@ -13,7 +13,6 @@ public class CharacterPartHandler : MonoBehaviour
 
     private void Start()
     {
-        LoadSystem.loadPreset(this.player, this.player.saveGameSlot.getValue());
         UpdateCharacterParts();
     }
 

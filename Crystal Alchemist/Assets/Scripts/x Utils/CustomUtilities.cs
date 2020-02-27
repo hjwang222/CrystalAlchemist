@@ -218,6 +218,15 @@ public class CustomUtilities : MonoBehaviour
             playSoundEffect(null, soundeffect, volume);
         }
 
+        public static void playSoundEffect(AudioClip music, AudioSource source, float volume)
+        {
+            source.volume = volume;
+            source.clip = music;
+            source.playOnAwake = false;
+            source.loop = false;
+            source.Play();
+        }
+
         public static void playSoundEffect(GameObject gameObject, AudioClip soundeffect)
         {
             playSoundEffect(gameObject, soundeffect, GlobalValues.soundEffectVolume);
@@ -979,6 +988,19 @@ public class CustomUtilities : MonoBehaviour
             }
 
             return result;
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////
+
+    public static class Preset
+    {
+        public static void setPreset(CharacterPreset source, CharacterPreset target)
+        {
+            target.setRace(source.getRace());
+            target.characterName = source.characterName;
+            target.AddColorGroupRange(source.GetColorGroupRange());
+            target.AddCharacterPartDataRange(source.GetCharacterPartDataRange());
         }
     }
 

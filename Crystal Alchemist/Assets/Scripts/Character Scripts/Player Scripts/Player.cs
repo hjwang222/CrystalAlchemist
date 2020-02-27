@@ -24,6 +24,10 @@ public class Player : Character
     [Required]
     public CharacterPreset preset;
 
+    [BoxGroup("Pflichtfelder")]
+    [Required]
+    public CharacterPreset defaultPreset;
+
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
     public StringSignal dialogBoxSignal;
@@ -39,6 +43,14 @@ public class Player : Character
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
     public SimpleSignal manaSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal buttonSignalUI;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    public SimpleSignal presetSignal;
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
@@ -64,15 +76,6 @@ public class Player : Character
     [Required]
     [BoxGroup("Pflichtfelder")]
     public FloatValue fadingDuration;
-
-    [Required]
-    [BoxGroup("Pflichtfelder")]
-    public BoolValue healthbar;
-
-    [Required]
-    [BoxGroup("Pflichtfelder")]
-    public BoolValue manabar;
-
 
     [HideInInspector]
     public Skill AButton;
@@ -119,6 +122,13 @@ public class Player : Character
         //this.currencySignalUI.Raise();
     }
 
+    public override void prepareSpawnOut()
+    {
+        base.prepareSpawnOut();
+        this.GetComponent<PlayerAttacks>().deactivateAllSkills();
+        this.fadeSignal.Raise(false);
+    }
+
     public void delay(CharacterState newState)
     {
         StartCoroutine(CustomUtilities.Skills.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
@@ -144,7 +154,7 @@ public class Player : Character
             CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", true);
 
             this.currentState = CharacterState.dead;
-            this.myRigidbody.bodyType = RigidbodyType2D.Static;
+            this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
             this.deathSignal.Raise();
         }
     }

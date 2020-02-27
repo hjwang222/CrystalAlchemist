@@ -9,6 +9,9 @@ public class LoadSystem : MonoBehaviour
     {
         PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
 
+        loadPreset(player, saveGameSlot);
+        player.presetSignal.Raise();
+
         if (data != null)
         {
             player.life = data.health;
@@ -24,21 +27,26 @@ public class LoadSystem : MonoBehaviour
             player.healthSignalUI.Raise();
             player.manaSignalUI.Raise();
 
+            loadPlayerSkills(player, saveGameSlot);
+            player.buttonSignalUI.Raise();
+
             player.stats.characterName = data.characterName;
             player.GetComponent<PlayerUtils>().secondsPlayed = data.timePlayed;
 
-            player.GetComponent<PlayerTeleport>().setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]));
+            player.GetComponent<PlayerTeleport>().setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]), true);
 
-            if (data.inventory.Count > 0)
-            {
-                loadInventory(data, player);                
-            }            
+            if (data.inventory.Count > 0) loadInventory(data, player);
+
+            player.GetComponent<PlayerTeleport>().teleportPlayerLast(false, true, false); //letzter
         }
-
-        player.GetComponent<PlayerTeleport>().playTeleport(true); //TODO
+        else
+        {
+            player.GetComponent<PlayerTeleport>().setLastTeleport("", Vector2.zero, false);
+            player.GetComponent<PlayerTeleport>().teleportPlayer(false, true, false); //normal
+        }
     }
 
-    public static void loadPlayerSkills(Player player, string saveGameSlot)
+    private static void loadPlayerSkills(Player player, string saveGameSlot)
     {
         PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
 
@@ -46,15 +54,19 @@ public class LoadSystem : MonoBehaviour
         {
             loadSkills(data, player);
         }
-    }    
+    }
 
-    public static void loadPreset(Player player, string saveGameSlot)
+    private static void loadPreset(Player player, string saveGameSlot)
     {
         PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
 
         if (data != null && data.characterParts != null && data.characterParts.Count > 0)
         {
             loadPresetData(data, player);
+        }
+        else
+        {
+            CustomUtilities.Preset.setPreset(player.defaultPreset, player.preset);
         }
     }
 

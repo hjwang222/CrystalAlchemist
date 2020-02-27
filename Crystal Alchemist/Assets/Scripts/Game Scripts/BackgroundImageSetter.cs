@@ -5,34 +5,14 @@ using UnityEngine;
 public class BackgroundImageSetter : MonoBehaviour
 {
     [SerializeField]
-    private SpriteSignal spriteSignal;
+    private GameObjectSignal signal;
 
     [SerializeField]
-    private FloatSignal scaleSignal;
-
-    [SerializeField]
-    private FloatSignal positionSignal;
-
-    [SerializeField]
-    private MaterialSignal materialSignal;
-
-    [SerializeField]
-    private Sprite backgroundSprite;
-
-    [SerializeField]
-    private float backgroundScale = 6;
-
-    [SerializeField]
-    private float positionY = 0;
-
-    [SerializeField]
-    private Material material;
+    private GameObject backgroundObject;
 
     void Start()
     {
-        this.spriteSignal.Raise(this.backgroundSprite);
-        this.scaleSignal.Raise(this.backgroundScale);
-        this.positionSignal.Raise(this.positionY);
-        this.materialSignal.Raise(this.material);
+        if (this.backgroundObject != null && this.signal != null) this.signal.Raise(this.backgroundObject);
+        this.gameObject.SetActive(false);
     }
 }

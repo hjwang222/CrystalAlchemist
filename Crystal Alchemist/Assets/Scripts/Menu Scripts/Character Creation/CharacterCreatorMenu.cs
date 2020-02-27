@@ -43,7 +43,7 @@ public class CharacterCreatorMenu : MenuControls
 
     private void init()
     {
-        setPreset(this.playerPreset, this.creatorPreset);
+        CustomUtilities.Preset.setPreset(this.playerPreset, this.creatorPreset);
         updateGear();
         updatePreview();
     }
@@ -55,17 +55,9 @@ public class CharacterCreatorMenu : MenuControls
 
     public void Confirm()
     {
-        this.setPreset(this.creatorPreset, this.playerPreset); //save Preset
+        CustomUtilities.Preset.setPreset(this.creatorPreset, this.playerPreset); //save Preset
         updatePreview();
         exitMenu();
-    }
-
-    public void setPreset(CharacterPreset source, CharacterPreset target)
-    {
-        target.setRace(source.getRace());
-        target.characterName = source.characterName;
-        target.AddColorGroupRange(source.GetColorGroupRange());
-        target.AddCharacterPartDataRange(source.GetCharacterPartDataRange());
     }
 
     public void updatePreview()

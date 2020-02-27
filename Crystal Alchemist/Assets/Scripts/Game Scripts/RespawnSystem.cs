@@ -56,14 +56,13 @@ public class RespawnSystem : MonoBehaviour
         {
             //spawn character after animation
             RespawnAnimation respawnObject = Instantiate(character.stats.respawnAnimation, character.spawnPosition, Quaternion.identity);
-            respawnObject.setCharacter(character);
+            respawnObject.resetCharacter(character);
         }
         else
         {
             //spawn character immediately
             character.gameObject.SetActive(true);
-            character.PlayRespawnAnimation();
-            character.initSpawn(true);
+            character.spawnASAP();
         }
     }
 }
