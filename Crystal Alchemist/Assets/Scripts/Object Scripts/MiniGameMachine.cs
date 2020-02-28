@@ -66,6 +66,16 @@ public class MiniGameMachine : Interactable
 
     [SerializeField]
     [Required]
+    [BoxGroup("Mandatory")]
+    private SimpleSignal openMiniGameMenuSignal;
+
+    [SerializeField]
+    [Required]
+    [BoxGroup("Mandatory")]
+    private GameObjectSignal miniGameSignal;
+
+    [SerializeField]
+    [Required]
     [BoxGroup("Mandatory")]   
     private List<MiniGameMatch> matches = new List<MiniGameMatch>();
 
@@ -78,5 +88,8 @@ public class MiniGameMachine : Interactable
     {
         MiniGame miniGame = Instantiate(this.miniGame);
         miniGame.setMiniGame(this.matches);
+
+        this.openMiniGameMenuSignal.Raise();
+        this.miniGameSignal.Raise(miniGame.gameObject);
     }
 }

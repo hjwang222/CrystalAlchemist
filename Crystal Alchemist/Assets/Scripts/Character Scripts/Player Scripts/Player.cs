@@ -18,6 +18,10 @@ public class Player : Character
 
     [BoxGroup("Pflichtfelder")]
     [Required]
+    public FloatValue secondsPlayed;
+
+    [BoxGroup("Pflichtfelder")]
+    [Required]
     public PlayerStats playerStats;
 
     [BoxGroup("Pflichtfelder")]

@@ -79,7 +79,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5031225405888053161
@@ -147,6 +147,9 @@ MonoBehaviour:
   currentState: 0
   miniGame: {fileID: 2175749950124388385, guid: eabd3c0f4c166ba40b83f590a01393da,
     type: 3}
+  openMiniGameMenuSignal: {fileID: 11400000, guid: 89aaa7b72e0d77f4aade4bacacb134a7,
+    type: 2}
+  miniGameSignal: {fileID: 11400000, guid: daf7c46dd8efc4e4cac43cc104163fdc, type: 2}
   matches:
   - maxRounds: 5
     winsNeeded: 1

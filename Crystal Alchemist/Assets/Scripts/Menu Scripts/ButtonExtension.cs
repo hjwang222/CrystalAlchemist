@@ -69,8 +69,15 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     private void init()
     {
-        if (this.cursor == null) this.cursor = GameObject.FindWithTag("Cursor").GetComponent<myCursor>();
-        if (this.button == null) this.button = this.gameObject.GetComponent<Selectable>();
+        try
+        {
+            if (this.cursor == null) this.cursor = GameObject.FindWithTag("Cursor").GetComponent<myCursor>();
+            if (this.button == null) this.button = this.gameObject.GetComponent<Selectable>();
+        }
+        catch
+        {
+            Debug.Log(this.gameObject.name);
+        }
 
         this.setButtonNavigation();
 

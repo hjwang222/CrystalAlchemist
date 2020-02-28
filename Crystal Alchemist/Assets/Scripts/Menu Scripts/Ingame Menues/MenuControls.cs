@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class MenuControls : BasicMenu
 {
@@ -11,9 +14,8 @@ public class MenuControls : BasicMenu
     [Required]
     private PlayerStats playerStats;
 
-    [SerializeField]
     [BoxGroup("Mandatory")]
-    private GameObject child;
+    public GameObject child;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
@@ -27,20 +29,19 @@ public class MenuControls : BasicMenu
     [SerializeField]
     private GameObject blackScreen;
 
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    private GameObject exitDialogBox;
-
     [HideInInspector]
     public CharacterState lastState;
 
     [BoxGroup("Menu Controls")]
-    [SerializeField]
-    private bool disableMenuControlsScript = false;
+    public bool disableMenuControlsScript = false;
 
     [BoxGroup("Menu Controls")]
     [SerializeField]
     private bool disableExitButtonPress = false;
+
+    [BoxGroup("Menu Controls")]
+    [SerializeField]
+    private MenuDialogBoxLauncher dialogBoxLauncher;
 
     public override void OnEnable()
     {
@@ -54,8 +55,6 @@ public class MenuControls : BasicMenu
 
             this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
         }
-
-        if (this.exitDialogBox != null) this.exitDialogBox.SetActive(false);
 
         base.OnEnable();
     }
@@ -85,15 +84,35 @@ public class MenuControls : BasicMenu
 
     public void showExitDialogBox()
     {
-        if (this.exitDialogBox != null && !this.exitDialogBox.activeInHierarchy) this.exitDialogBox.SetActive(true);
-        else if (this.exitDialogBox == null) exitMenu();
+        if (this.dialogBoxLauncher != null)
+        {
+            enableButtons(false);
+            this.dialogBoxLauncher.raise();
+        }
+        else exitMenu();
     }
 
-    public void exitMenu()
+    public void enableButtons(bool value)  //called from Signal from Dialogbox
     {
+        List<ButtonExtension> selectables = new List<ButtonExtension>();
+        CustomUtilities.UnityFunctions.GetChildObjects<ButtonExtension>(this.transform, selectables);
+
+        foreach(ButtonExtension selectable in selectables)
+        {
+            selectable.GetComponent<Selectable>().interactable = value;
+            selectable.enabled = value;
+        }
+    }
+
+    public virtual void exitMenu()
+    { 
         if (this.cursor.infoBox != null) this.cursor.infoBox.Hide();
-        if (this.player != null) this.player.delay(this.lastState);
         if (this.child != null) this.child.SetActive(false);
-        if (this.blackScreen != null) this.blackScreen.SetActive(false);
+
+        if (!this.disableMenuControlsScript)
+        {
+            if (this.player != null) this.player.delay(this.lastState);
+            if (this.blackScreen != null) this.blackScreen.SetActive(false);
+        }
     }
 }

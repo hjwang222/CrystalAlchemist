@@ -2,6 +2,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class CharacterCreatorMenu : MenuControls
 {
@@ -22,12 +23,11 @@ public class CharacterCreatorMenu : MenuControls
     [BoxGroup("Character Creator")]
     [Required]
     [SerializeField]
-    private GameObject confirmDialogBox;
+    private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
 
     [BoxGroup("Character Creator")]
-    [Required]
     [SerializeField]
-    private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
+    private MenuDialogBoxLauncher dialogBoxLauncherConfirm;
 
     public override void Start()
     {
@@ -50,7 +50,7 @@ public class CharacterCreatorMenu : MenuControls
 
     public void showConfirmDialog()
     {
-        if (this.confirmDialogBox != null) this.confirmDialogBox.SetActive(true);
+        if (this.dialogBoxLauncherConfirm != null) this.dialogBoxLauncherConfirm.raise();
     }
 
     public void Confirm()

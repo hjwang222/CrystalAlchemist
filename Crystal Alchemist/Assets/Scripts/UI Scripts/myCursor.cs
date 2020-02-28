@@ -138,10 +138,7 @@ public class myCursor : MonoBehaviour
         }
     }
 
-
-
-
-
+         
     /*
     public void setCursor(Vector2 size, Vector2 scale, Button button)
     {

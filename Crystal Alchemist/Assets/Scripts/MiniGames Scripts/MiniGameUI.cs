@@ -77,13 +77,6 @@ public class MiniGameUI : MenuControls
     [HideInInspector]
     public string mainDescription = "";
 
-    private void Start()
-    {
-        showDialog();
-        this.dialogBox.setValues(this.miniGameObject.getMatches().Count);
-        
-    }
-
     public override void Update()
     {
         base.Update();
@@ -94,13 +87,19 @@ public class MiniGameUI : MenuControls
         }
     }
 
-    public void setMiniGame(MiniGame main, MiniGameRound miniGameRound, 
-                            string title, string titleEnglish, string description, string descriptionEnglish)
+    public void setMiniGame(GameObject miniGameObject)
     {
-        this.miniGameObject = main;
-        this.miniGameRound = miniGameRound;        
-        this.titleField.text = CustomUtilities.Format.getLanguageDialogText(title, titleEnglish); ;
-        this.mainDescription = CustomUtilities.Format.getLanguageDialogText(description, descriptionEnglish);
+        MiniGame miniGame = miniGameObject.GetComponent<MiniGame>();
+        if (miniGame != null)
+        {
+            this.miniGameObject = miniGame;
+            this.miniGameRound = miniGame.miniGameRound;
+            this.titleField.text = CustomUtilities.Format.getLanguageDialogText(miniGame.miniGameTitle, miniGame.miniGameTitleEnglish); ;
+            this.mainDescription = CustomUtilities.Format.getLanguageDialogText(miniGame.miniGameDescription, miniGame.miniGameDescriptionEnglish);
+        }
+
+        showDialog();
+        this.dialogBox.setValues(this.miniGameObject.getMatches().Count);
     }
 
     public void startRound()
@@ -186,7 +185,7 @@ public class MiniGameUI : MenuControls
 
     public void endMiniGame()
     {
-        this.gameObject.SetActive(false);
+        this.showExitDialogBox();
     }
 
     public void showDialog()
@@ -203,10 +202,4 @@ public class MiniGameUI : MenuControls
         base.OnDisable();
         this.miniGameObject.DestroyIt();
     }
-
-    private void OnDestroy()
-    {
-        this.exitMenu();
-    }
-
 }

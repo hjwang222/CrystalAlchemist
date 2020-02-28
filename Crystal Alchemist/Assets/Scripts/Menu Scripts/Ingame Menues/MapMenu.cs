@@ -16,9 +16,10 @@ public class MapMenu : MenuControls
     public override void OnEnable()
     {
         base.OnEnable();
-        setMapAndCursor();
+        //setMapAndCursor();
     }
 
+    /*
     private void setMapAndCursor()
     {
         PlayerUtils temp = this.player.GetComponent<PlayerUtils>();
@@ -68,5 +69,5 @@ public class MapMenu : MenuControls
                 }
             }
         }
-    }
+    }*/
 }

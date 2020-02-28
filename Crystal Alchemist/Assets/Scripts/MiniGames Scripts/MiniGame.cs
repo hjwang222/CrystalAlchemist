@@ -8,48 +8,30 @@ public class MiniGame : MonoBehaviour
     [Required]
     public GameObject lootParentObject;
 
-    [SerializeField]
     [BoxGroup("MiniGame Related")]
     [Required]
-    private MiniGameUI uI;
-
-    [SerializeField]
-    [BoxGroup("MiniGame Related")]
-    [Required]
-    private MiniGameRound miniGameRound;
+    public MiniGameRound miniGameRound;
 
     [Space(10)]
-    [SerializeField]
     [BoxGroup("MiniGame Related")]
-    private string miniGameTitle;
+    public string miniGameTitle;
 
-    [SerializeField]
     [BoxGroup("MiniGame Related")]
-    private string miniGameTitleEnglish;
+    public string miniGameTitleEnglish;
 
     [Space(10)]
-    [SerializeField]
     [BoxGroup("MiniGame Related")]
     [TextArea]
-    private string miniGameDescription;
+    public string miniGameDescription;
 
-    [SerializeField]
     [BoxGroup("MiniGame Related")]
     [TextArea]
-    private string miniGameDescriptionEnglish;
+    public string miniGameDescriptionEnglish;
 
     private List<MiniGameMatch> matches = new List<MiniGameMatch>();
 
     public List<MiniGameMatch> internalMatches = new List<MiniGameMatch>();
 
-    private MiniGameUI activeUI;
-
-    private void Start()
-    {      
-        this.activeUI = Instantiate(this.uI, this.transform);
-        this.activeUI.setMiniGame(this, this.miniGameRound,  
-                                  this.miniGameTitle, this.miniGameTitleEnglish, this.miniGameDescription, this.miniGameDescriptionEnglish);
-    }
 
     public void setMiniGame(List<MiniGameMatch> matches)
     {
@@ -60,7 +42,6 @@ public class MiniGame : MonoBehaviour
     {
         CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.matches, this.internalMatches, this.lootParentObject);
     }
-
 
     public List<MiniGameMatch> getMatches()
     {

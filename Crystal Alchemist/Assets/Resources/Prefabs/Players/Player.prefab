@@ -488,7 +488,6 @@ GameObject:
   - component: {fileID: 956710362935593805}
   - component: {fileID: 4119075977138840259}
   - component: {fileID: 6736401842150179436}
-  - component: {fileID: 9082647090224766926}
   - component: {fileID: 3574493720463300672}
   - component: {fileID: 7031345861447154720}
   - component: {fileID: 759644400424337060}
@@ -603,6 +602,7 @@ MonoBehaviour:
   - {fileID: 3896315027544183879, guid: 7693768a878661948aefd9181f7a2d01, type: 3}
   - {fileID: 681246859040662206, guid: 829f95c3bd5d9984793723ed6e29d15d, type: 3}
   timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
+  secondsPlayed: {fileID: 11400000, guid: 00cd839769dce6446985fb0093bd539f, type: 2}
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
   preset: {fileID: 11400000, guid: 5dc2fa268205b3e49ad9b4b984467965, type: 2}
   defaultPreset: {fileID: 11400000, guid: f85bfbd28a416dd43b2f759b5b3a0d35, type: 2}
@@ -684,21 +684,6 @@ MonoBehaviour:
   player: {fileID: 5074818981556205378}
   nextTeleport: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
   lastTeleport: {fileID: 11400000, guid: 19238642f2af7884a957462e5938d59e, type: 2}
---- !u!114 &9082647090224766926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759644400424337056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b32e99a08649554cb7ed3482bbb5f28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapID: 
-  areaID: 
-  secondsPlayed: 0
 --- !u!114 &3574493720463300672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,7 +700,7 @@ MonoBehaviour:
   signalEventString:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9082647090224766926}
+      - m_Target: {fileID: 0}
         m_MethodName: changeMapLocation
         m_Mode: 0
         m_Arguments:

@@ -28,7 +28,7 @@ public class LoadSystem : MonoBehaviour
             player.manaSignalUI.Raise();
 
             player.stats.characterName = data.characterName;
-            player.GetComponent<PlayerUtils>().secondsPlayed = data.timePlayed;            
+            player.secondsPlayed.setValue(data.timePlayed);            
 
             if (data.inventory.Count > 0) loadInventory(data, player);
 

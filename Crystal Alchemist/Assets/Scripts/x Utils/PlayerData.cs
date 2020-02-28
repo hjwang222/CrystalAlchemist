@@ -53,7 +53,7 @@ public class PlayerData
         player.stats.characterName = this.characterName;
 
         this.scene = scene;
-        this.timePlayed = player.GetComponent<PlayerUtils>().secondsPlayed;
+        this.timePlayed = player.secondsPlayed.getValue();
     }
 
     private void setInventory(Player player)
