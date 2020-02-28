@@ -12,6 +12,7 @@ public class TODOLIST : MonoBehaviour
     //NPC: Bosskampf (Titania)    
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena
+    //TEST
 
     //GRAPHICS: TitleScreen: Background 
     //GRAPHICS: Player: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
