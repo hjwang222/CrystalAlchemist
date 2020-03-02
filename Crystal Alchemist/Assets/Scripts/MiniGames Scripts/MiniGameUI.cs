@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MiniGameUI : MenuControls
 {
+    [HideInInspector]
     public MiniGameRound miniGameRound;
 
     [BoxGroup("Easy Access")]

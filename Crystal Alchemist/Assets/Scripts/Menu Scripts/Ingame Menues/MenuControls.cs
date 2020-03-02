@@ -33,7 +33,7 @@ public class MenuControls : BasicMenu
     public CharacterState lastState;
 
     [BoxGroup("Menu Controls")]
-    public bool disableMenuControlsScript = false;
+    public bool isIngameMenu = false;
 
     [BoxGroup("Menu Controls")]
     [SerializeField]
@@ -41,18 +41,18 @@ public class MenuControls : BasicMenu
 
     [BoxGroup("Menu Controls")]
     [SerializeField]
-    private MenuDialogBoxLauncher dialogBoxLauncher;
+    private MenuDialogBoxLauncher exitDialogBox;
 
     public override void OnEnable()
     {
-        if(this.cursor != null) this.cursor.gameObject.SetActive(true);
+        if (this.cursor != null) this.cursor.gameObject.SetActive(true);
+        if (this.blackScreen != null) this.blackScreen.SetActive(true);
 
-        if (!this.disableMenuControlsScript)
+        if (this.isIngameMenu)
         {
             this.player = this.playerStats.player;
             this.lastState = this.player.currentState;
             this.player.currentState = CharacterState.inMenu;
-
             this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
         }
 
@@ -61,8 +61,15 @@ public class MenuControls : BasicMenu
 
     public override void OnDisable()
     {
-        this.cursor.gameObject.SetActive(false);
-        this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+        if (this.cursor.infoBox != null) this.cursor.infoBox.Hide();
+
+        if (this.isIngameMenu)
+        {
+            if (this.player != null) this.player.delay(this.lastState);
+            if (this.cursor != null) this.cursor.gameObject.SetActive(false);
+            if (this.blackScreen != null) this.blackScreen.SetActive(false);
+            this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+        }
 
         base.OnDisable();
     }
@@ -71,7 +78,7 @@ public class MenuControls : BasicMenu
     {
         base.Update();
 
-        if (!this.disableMenuControlsScript && !disableExitButtonPress)
+        if (!disableExitButtonPress)
         {
             if (Input.GetButtonDown("Cancel"))
             {
@@ -84,35 +91,12 @@ public class MenuControls : BasicMenu
 
     public void showExitDialogBox()
     {
-        if (this.dialogBoxLauncher != null)
-        {
-            enableButtons(false);
-            this.dialogBoxLauncher.raise();
-        }
+        if (this.exitDialogBox != null) this.exitDialogBox.raiseDialogBox();        
         else exitMenu();
-    }
-
-    public void enableButtons(bool value)  //called from Signal from Dialogbox
-    {
-        List<ButtonExtension> selectables = new List<ButtonExtension>();
-        CustomUtilities.UnityFunctions.GetChildObjects<ButtonExtension>(this.transform, selectables);
-
-        foreach(ButtonExtension selectable in selectables)
-        {
-            selectable.GetComponent<Selectable>().interactable = value;
-            selectable.enabled = value;
-        }
     }
 
     public virtual void exitMenu()
     { 
-        if (this.cursor.infoBox != null) this.cursor.infoBox.Hide();
         if (this.child != null) this.child.SetActive(false);
-
-        if (!this.disableMenuControlsScript)
-        {
-            if (this.player != null) this.player.delay(this.lastState);
-            if (this.blackScreen != null) this.blackScreen.SetActive(false);
-        }
     }
 }

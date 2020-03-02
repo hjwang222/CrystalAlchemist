@@ -7,28 +7,13 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     [BoxGroup("DialogBox")]
     [SerializeField]
     [Required]
-    private StringSignal menuDialogBoxSignal;
+    private GameObjectSignal signal;
 
     [BoxGroup("DialogBox")]
-    [SerializeField]
-    [Required]
-    private BoolSignal showMenuDialogBoxSignal;
+    public UnityEvent onYes;
 
     [BoxGroup("DialogBox")]
-    [SerializeField]
-    private ActionSignal actionYes;
-
-    [BoxGroup("DialogBox")]
-    [SerializeField]
-    private ActionSignal actionNo;
-
-    [BoxGroup("DialogBox")]
-    [SerializeField]
-    private UnityEvent onYes;
-
-    [BoxGroup("DialogBox")]
-    [SerializeField]
-    private UnityEvent onNo;
+    public UnityEvent onNo;
 
     [BoxGroup("DialogBox")]
     [SerializeField]
@@ -36,25 +21,27 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     private string menuDialogBoxText;
 
     [BoxGroup("DialogBox")]
-    [SerializeField]
     [TextArea]
+    [SerializeField]
     private string menuDialogBoxTextEnglish;
 
     [BoxGroup("DialogBox")]
-    [SerializeField]
-    private bool isAdditionalDialog = true;
+    public bool isAdditionalDialog = true;
 
-    public void raise()
+    [BoxGroup("DialogBox")]
+    public bool setYesButtonFirst = true;
+
+    [HideInInspector]
+    public string dialogText;
+
+    public void raiseDialogBox()
     {
         this.raiseDialogBox(this.menuDialogBoxText, this.menuDialogBoxTextEnglish, this.onYes, this.onNo);
     }
 
     public void raiseDialogBox(string text, string textEnglish, UnityEvent yes, UnityEvent no)
     {
-        this.showMenuDialogBoxSignal.Raise(this.isAdditionalDialog);
-        string dialogtext = CustomUtilities.Format.getLanguageDialogText(text, textEnglish);
-        this.menuDialogBoxSignal.Raise(dialogtext);
-        this.actionYes.Raise(yes);
-        this.actionNo.Raise(no);
+        this.dialogText = CustomUtilities.Format.getLanguageDialogText(text, textEnglish);
+        this.signal.Raise(this.gameObject);
     }
 }

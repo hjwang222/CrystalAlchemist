@@ -11,15 +11,30 @@ public class MenuDialogBox : MenuControls
 
     [BoxGroup("DialogBox")]
     [SerializeField]
-    private SimpleSignal enableButtonSignal;
+    private ButtonExtension YesButton;
+
+    [BoxGroup("DialogBox")]
+    [SerializeField]
+    private ButtonExtension NoButton;
 
     private UnityEvent actionYes;
     private UnityEvent actionNo;
 
-    public void setActive(bool isadditionalDialog)
+    public void setActive(GameObject launcherObject)
     {
-        this.disableMenuControlsScript = isadditionalDialog;
-        this.child.SetActive(true);
+        MenuDialogBoxLauncher launcher = launcherObject.GetComponent<MenuDialogBoxLauncher>();
+
+        if (launcher != null)
+        {
+            this.child.SetActive(true);
+            this.isIngameMenu = !launcher.isAdditionalDialog;
+            this.actionYes = launcher.onYes;
+            this.actionNo = launcher.onNo;
+            this.textfield.text = launcher.dialogText;
+
+            if (launcher.setYesButtonFirst) this.YesButton.setFirst();
+            else this.NoButton.setFirst();
+        }
     }
 
     public void Yes()
@@ -36,7 +51,6 @@ public class MenuDialogBox : MenuControls
 
     private void closeDialog()
     {
-        this.enableButtonSignal.Raise();
         this.exitMenu();
     }
 

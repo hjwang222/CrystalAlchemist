@@ -50,7 +50,7 @@ public class CharacterCreatorMenu : MenuControls
 
     public void showConfirmDialog()
     {
-        if (this.dialogBoxLauncherConfirm != null) this.dialogBoxLauncherConfirm.raise();
+        if (this.dialogBoxLauncherConfirm != null) this.dialogBoxLauncherConfirm.raiseDialogBox();
     }
 
     public void Confirm()
