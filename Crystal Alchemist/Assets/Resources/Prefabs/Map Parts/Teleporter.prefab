@@ -300,6 +300,38 @@ Transform:
   m_Father: {fileID: 462480945279146113}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1759734194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8730417105107985888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77986e177388f34594c39f9c358dd6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: a5b92c3aee4a70f4781aa8ddae1adae7, type: 2}
+  onYes:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7808392554565731848}
+        m_MethodName: transferToScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  menuDialogBoxText: "M\xF6chtest du zum Areal?"
+  menuDialogBoxTextEnglish: Switch to Area?
+  isAdditionalDialog: 0
+  setYesButtonFirst: 0
+  dialogText: 
 --- !u!1001 &462480945538140996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -405,9 +437,27 @@ PrefabInstance:
         type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3013b6f476dac0b46b653b76149a0fb6, type: 3}
+--- !u!1 &8730417105107985888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9170353456387763876, guid: 3013b6f476dac0b46b653b76149a0fb6,
+    type: 3}
+  m_PrefabInstance: {fileID: 462480945538140996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6673192008266365950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6553018102672601274, guid: 3013b6f476dac0b46b653b76149a0fb6,
     type: 3}
   m_PrefabInstance: {fileID: 462480945538140996}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7808392554565731848 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7653854717709258060, guid: 3013b6f476dac0b46b653b76149a0fb6,
+    type: 3}
+  m_PrefabInstance: {fileID: 462480945538140996}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8730417105107985888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984c8cd5ec6ccb644b586222917fbfad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

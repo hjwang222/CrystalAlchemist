@@ -13,9 +13,6 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     public UnityEvent onYes;
 
     [BoxGroup("DialogBox")]
-    public UnityEvent onNo;
-
-    [BoxGroup("DialogBox")]
     [SerializeField]
     [TextArea]
     private string menuDialogBoxText;
@@ -36,10 +33,16 @@ public class MenuDialogBoxLauncher : MonoBehaviour
 
     public void raiseDialogBox()
     {
-        this.raiseDialogBox(this.menuDialogBoxText, this.menuDialogBoxTextEnglish, this.onYes, this.onNo);
+        this.raiseDialogBox(this.menuDialogBoxText, this.menuDialogBoxTextEnglish, this.onYes);
     }
 
-    public void raiseDialogBox(string text, string textEnglish, UnityEvent yes, UnityEvent no)
+    public void raiseDialogBox(MenuDialogBoxEvent dialogBoxEvent)
+    {
+        this.onYes = dialogBoxEvent.action;
+        this.raiseDialogBox(this.menuDialogBoxText, this.menuDialogBoxTextEnglish, this.onYes);
+    }
+
+    private void raiseDialogBox(string text, string textEnglish, UnityEvent yes)
     {
         this.dialogText = CustomUtilities.Format.getLanguageDialogText(text, textEnglish);
         this.signal.Raise(this.gameObject);

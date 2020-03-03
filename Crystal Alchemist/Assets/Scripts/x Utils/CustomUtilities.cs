@@ -497,7 +497,10 @@ public class CustomUtilities : MonoBehaviour
 
             foreach (RaycastHit2D hitted in hit)
             {
-                if (hitted != false && !hitted.collider.isTrigger && hitted.collider.transform.parent.gameObject == gameObject) return true;
+                if (hitted != false 
+                    && !hitted.collider.isTrigger 
+                    && hitted.collider.transform.parent != null
+                    && hitted.collider.transform.parent.gameObject == gameObject) return true;
             }
 
             return false;

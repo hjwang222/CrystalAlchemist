@@ -17,24 +17,26 @@ public class MenuDialogBox : MenuControls
     [SerializeField]
     private ButtonExtension NoButton;
 
-    private UnityEvent actionYes;
-    private UnityEvent actionNo;
+    private UnityEvent actionYes; 
+    private MenuControls lastMainMenu;
 
     public void setActive(GameObject launcherObject)
     {
         MenuDialogBoxLauncher launcher = launcherObject.GetComponent<MenuDialogBoxLauncher>();
 
         if (launcher != null)
-        {
-            this.child.SetActive(true);
+        {            
             this.isIngameMenu = !launcher.isAdditionalDialog;
+            this.child.SetActive(true);
             this.actionYes = launcher.onYes;
-            this.actionNo = launcher.onNo;
             this.textfield.text = launcher.dialogText;
 
             if (launcher.setYesButtonFirst) this.YesButton.setFirst();
             else this.NoButton.setFirst();
         }
+
+        this.lastMainMenu = launcherObject.GetComponent<MenuControls>();
+        if (this.lastMainMenu != null) this.lastMainMenu.enableButtons(false);
     }
 
     public void Yes()
@@ -45,12 +47,12 @@ public class MenuDialogBox : MenuControls
 
     public void No()
     {
-        if (this.actionNo != null) this.actionNo.Invoke();
         this.closeDialog();
     }
 
     private void closeDialog()
     {
+        if (this.lastMainMenu != null) this.lastMainMenu.enableButtons(true);   
         this.exitMenu();
     }
 
@@ -62,10 +64,5 @@ public class MenuDialogBox : MenuControls
     public void setYes(UnityEvent action)
     {
         this.actionYes = action;
-    }
-
-    public void setNo(UnityEvent action)
-    {
-        this.actionNo = action;
     }
 }

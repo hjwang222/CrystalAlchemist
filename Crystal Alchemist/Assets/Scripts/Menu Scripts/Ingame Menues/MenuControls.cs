@@ -43,6 +43,17 @@ public class MenuControls : BasicMenu
     [SerializeField]
     private MenuDialogBoxLauncher exitDialogBox;
 
+    [BoxGroup("Menu Controls")]
+    [SerializeField]
+    private Texture2D cursorTexture;
+
+    public override void Start()
+    {
+        base.Start();
+        Cursor.SetCursor(cursorTexture, new Vector2(0, 0), CursorMode.ForceSoftware);
+        Cursor.visible = true;
+    }
+
     public override void OnEnable()
     {
         if (this.cursor != null) this.cursor.gameObject.SetActive(true);
@@ -50,10 +61,11 @@ public class MenuControls : BasicMenu
 
         if (this.isIngameMenu)
         {
+            Cursor.visible = true;
             this.player = this.playerStats.player;
             this.lastState = this.player.currentState;
             this.player.currentState = CharacterState.inMenu;
-            this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+            if(this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
         }
 
         base.OnEnable();
@@ -65,10 +77,11 @@ public class MenuControls : BasicMenu
 
         if (this.isIngameMenu)
         {
+            Cursor.visible = false;
             if (this.player != null) this.player.delay(this.lastState);
             if (this.cursor != null) this.cursor.gameObject.SetActive(false);
             if (this.blackScreen != null) this.blackScreen.SetActive(false);
-            this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+            if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
         }
 
         base.OnDisable();
@@ -98,5 +111,22 @@ public class MenuControls : BasicMenu
     public virtual void exitMenu()
     { 
         if (this.child != null) this.child.SetActive(false);
+    }
+
+    public void enableButtons(bool value)
+    {
+        List<Selectable> selectables = new List<Selectable>();
+        CustomUtilities.UnityFunctions.GetChildObjects<Selectable>(this.transform, selectables);
+
+        foreach (Selectable selectable in selectables)
+        {
+            selectable.interactable = value;
+            ButtonExtension buttonExtension = selectable.GetComponent<ButtonExtension>();
+            if (buttonExtension != null)
+            {
+                buttonExtension.enabled = value;
+                buttonExtension.setFirst();
+            }
+        }
     }
 }

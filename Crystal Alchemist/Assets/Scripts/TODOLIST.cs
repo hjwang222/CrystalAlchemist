@@ -4,9 +4,11 @@ public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
     //SKILL: Flammenwerfer
+
     //OBJECT: Mirror Costs
     //INPUT: Virtuelle Tastatur
-    //MENU: DialogBox (Teleporter benutzen, MiniGame abbrechen)
+    //MENU: DialogBox (Kostenfeld, Icon-Feld)
+
     //NPC: Bosskampf (Titania)    
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena

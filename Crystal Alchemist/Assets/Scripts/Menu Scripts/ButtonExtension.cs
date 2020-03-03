@@ -111,7 +111,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                     + this.transform.parent.parent.parent.localScale + " - "
                     + WordToScenePoint(this.transform.localPosition));*/
 
-        setFirst();
+        if(this.setFirstSelected) setFirst();
     }
 
     public void setCursor(myCursor cursor)
@@ -122,7 +122,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     private void OnEnable()
     {
         init();
-        setFirst();
+        if (this.setFirstSelected) setFirst();
     }
 
     public void setFirst()
@@ -130,7 +130,6 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         if(this.button == null) this.button = this.gameObject.GetComponent<Selectable>();
 
         if (this.cursor != null 
-            && this.setFirstSelected  
             && this.gameObject.activeInHierarchy)
         {
             this.cursor.gameObject.SetActive(true);

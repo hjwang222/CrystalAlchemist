@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEngine.SceneManagement;
-using UnityEngine.Events;
 
 public class CharacterCreatorMenu : MenuControls
 {

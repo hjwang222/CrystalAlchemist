@@ -4,7 +4,6 @@ using Sirenix.OdinInspector;
 
 public class SceneTransition : MonoBehaviour
 {
-
     [Header("New Scene Variables")]
     [Tooltip("Name der nächsten Map")]
     [BoxGroup("Required")]
@@ -21,7 +20,6 @@ public class SceneTransition : MonoBehaviour
     [BoxGroup("Transition")]
     [SerializeField]
     private bool showTransition = false;
-
 
     [ShowIf("showTransition", true)]
     [BoxGroup("Transition")]
@@ -60,29 +58,41 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     private GameObjectSignal cleanUp;
 
+    private MenuDialogBoxLauncher dialogBox;
+    private Player player;
 
     public void Awake()
     {
         if(this.fadeSignal != null) this.fadeSignal.Raise(true);
     }
 
+    private void Start()
+    {
+        this.dialogBox = this.GetComponent<MenuDialogBoxLauncher>();
+    }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            Player player = other.GetComponent<Player>();
-            if (player != null && player.currentState != CharacterState.respawning)
-            {                
-                if(this.vcamSignal != null) this.vcamSignal.Raise();
+            this.player = other.GetComponent<Player>();
+            if (this.dialogBox == null) transferToScene();
+            else this.dialogBox.raiseDialogBox();
+        }
+    }
 
-                this.nextTeleport.location = this.targetScene;
-                this.nextTeleport.position = this.playerPositionInNewScene;
+    public void transferToScene()
+    {
+        if (this.player != null && this.player.currentState != CharacterState.respawning)
+        {
+            if (this.vcamSignal != null) this.vcamSignal.Raise();
 
-                if (this.cleanUp != null) this.cleanUp.Raise(null);
+            this.nextTeleport.location = this.targetScene;
+            this.nextTeleport.position = this.playerPositionInNewScene;
 
-                player.GetComponent<PlayerTeleport>().teleportPlayerToNextScene(this.transitionDuration.getValue(), this.showAnimationOut, this.showAnimationIn);
+            if (this.cleanUp != null) this.cleanUp.Raise(null);
 
-            }
+            this.player.GetComponent<PlayerTeleport>().teleportPlayerToNextScene(this.transitionDuration.getValue(), this.showAnimationOut, this.showAnimationIn);
         }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class BasicMenu : PreventDeselection
 {
+    [BoxGroup("Basic")]
     public List<GameObject> menues = new List<GameObject>();
 
     public virtual void Start()
