@@ -133,7 +133,13 @@ public class Player : Character
         this.fadeSignal.Raise(false);
     }
 
-    public void delay(CharacterState newState)
+    public void setStateMenuOpened(CharacterState newState)
+    {
+        StopCoroutine(CustomUtilities.Skills.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
+        this.currentState = newState;
+    }
+
+    public void setStateAfterMenuClose(CharacterState newState)
     {
         StartCoroutine(CustomUtilities.Skills.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
     }

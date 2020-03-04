@@ -3,12 +3,6 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-    //SKILL: Flammenwerfer
-
-    //OBJECT: Mirror Costs
-    //INPUT: Virtuelle Tastatur
-    //MENU: DialogBox (Kostenfeld, Icon-Feld)
-
     //NPC: Bosskampf (Titania)    
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena
@@ -20,6 +14,9 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.5)
     //OBJECT: Bett (Tag/Nacht)
     //ITEM: Brille (Bool Value)
+    //INPUT: Virtuelle Tastatur
+    //CONTENT: Collectable Skills
+
     //GRAPHICS: Player: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
     //GRAPHICS: Player: Schlafen, Zaubern, Pfeil, Speer Sprites
     //GRAPHICS: Skills: New Nitro Sprite

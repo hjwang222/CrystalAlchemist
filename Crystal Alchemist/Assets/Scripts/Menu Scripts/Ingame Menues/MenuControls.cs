@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEngine.Events;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -29,9 +28,6 @@ public class MenuControls : BasicMenu
     [SerializeField]
     private GameObject blackScreen;
 
-    [HideInInspector]
-    public CharacterState lastState;
-
     [BoxGroup("Menu Controls")]
     public bool isIngameMenu = false;
 
@@ -55,17 +51,24 @@ public class MenuControls : BasicMenu
     }
 
     public override void OnEnable()
-    {
+    {      
         if (this.cursor != null) this.cursor.gameObject.SetActive(true);
         if (this.blackScreen != null) this.blackScreen.SetActive(true);
 
         if (this.isIngameMenu)
         {
-            Cursor.visible = true;
             this.player = this.playerStats.player;
-            this.lastState = this.player.currentState;
-            this.player.currentState = CharacterState.inMenu;
-            if(this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+            IngameMenuHandler.openedMenues.Add(this);
+
+            if (IngameMenuHandler.openedMenues.Count <= 1)
+            {
+                Cursor.visible = true;
+
+                IngameMenuHandler.lastState = this.player.currentState;
+                this.player.setStateAfterMenuClose(CharacterState.inMenu);
+
+                if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+            }
         }
 
         base.OnEnable();
@@ -73,17 +76,20 @@ public class MenuControls : BasicMenu
 
     public override void OnDisable()
     {
-        if (this.cursor.infoBox != null) this.cursor.infoBox.Hide();
+        IngameMenuHandler.openedMenues.Remove(this);
 
-        if (this.isIngameMenu)
+        if (this.isIngameMenu && IngameMenuHandler.openedMenues.Count <= 0)
         {
             Cursor.visible = false;
-            if (this.player != null) this.player.delay(this.lastState);
+
+            if (this.player != null) this.player.setStateAfterMenuClose(IngameMenuHandler.lastState); //avoid reclick!
+
             if (this.cursor != null) this.cursor.gameObject.SetActive(false);
             if (this.blackScreen != null) this.blackScreen.SetActive(false);
             if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
         }
 
+        if (this.cursor.infoBox != null) this.cursor.infoBox.Hide();
         base.OnDisable();
     }
 
@@ -109,7 +115,7 @@ public class MenuControls : BasicMenu
     }
 
     public virtual void exitMenu()
-    { 
+    {
         if (this.child != null) this.child.SetActive(false);
     }
 

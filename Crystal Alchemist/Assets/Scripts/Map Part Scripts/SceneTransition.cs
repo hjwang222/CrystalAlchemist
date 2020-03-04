@@ -58,17 +58,36 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     private GameObjectSignal cleanUp;
 
+    [BoxGroup("Required")]
+    [SerializeField]
     private MenuDialogBoxLauncher dialogBox;
+
+    [FoldoutGroup("Activation Requirements", expanded: false)]
+    [EnumToggleButtons]
+    [Tooltip("Was benötigt wird um zu öffnen")]
+    public ResourceType currencyNeeded = ResourceType.none;
+
+    [FoldoutGroup("Activation Requirements", expanded: false)]
+    [ShowIf("currencyNeeded", ResourceType.item)]
+    [Tooltip("Benötigtes Item")]
+    public Item item;
+
+    [FoldoutGroup("Activation Requirements", expanded: false)]
+    [HideIf("currencyNeeded", ResourceType.none)]
+    [Range(0, CustomUtilities.maxIntInfinite)]
+    public int price = 0;
+
     private Player player;
 
     public void Awake()
     {
         if(this.fadeSignal != null) this.fadeSignal.Raise(true);
-    }
-
-    private void Start()
-    {
-        this.dialogBox = this.GetComponent<MenuDialogBoxLauncher>();
+        if(this.dialogBox != null)
+        {
+            this.dialogBox.currencyNeeded = this.currencyNeeded;
+            this.dialogBox.itemNeeded = this.item;
+            this.dialogBox.price = this.price;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)

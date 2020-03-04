@@ -30,8 +30,9 @@ public class InventoryMenu : MenuControls
     [SerializeField]
     private GameObject quickmenu;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         showCategory(0);
         loadInventory();
     }
@@ -47,20 +48,6 @@ public class InventoryMenu : MenuControls
         setItemsToSlots(this.regularItems, false);
         setItemsToSlots(this.keyItems, true);
         setItemsToSlots(this.quickmenu, true);
-    }
-
-    public void openSkillMenu(Item item)
-    {
-        this.transform.parent.gameObject.SetActive(false);
-        this.player.currentState = this.lastState;
-        item.keyItemSignal.Raise();
-    }
-
-    public void openMap()
-    {
-        this.transform.parent.gameObject.SetActive(false);
-        this.player.currentState = this.lastState;
-        //raise Map Signal
     }
 
     public void switchCategory()

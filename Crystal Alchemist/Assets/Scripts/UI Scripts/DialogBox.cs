@@ -45,7 +45,7 @@ public class DialogBox : MenuControls
     private void hideDialogBox()
     {
         //Blende DialogBox aus
-        this.player.delay(CharacterState.interact);
+        this.player.setStateAfterMenuClose(CharacterState.interact);
         this.index = 0;    
     }
 

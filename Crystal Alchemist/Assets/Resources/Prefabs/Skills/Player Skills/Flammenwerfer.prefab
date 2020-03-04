@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1866628593189516363}
   - component: {fileID: 8613971535191392423}
-  - component: {fileID: 6011491638290907752}
+  - component: {fileID: 5301774647903305041}
   m_Layer: 13
   m_Name: shadow
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7418100249069785436}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8613971535191392423
 SpriteRenderer:
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
-  m_Color: {r: 0, g: 0.254717, b: 0.044298414, a: 0}
+  m_Color: {r: 0.25490198, g: 0, b: 0.009879561, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -82,8 +82,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6011491638290907752
-BoxCollider2D:
+--- !u!58 &5301774647903305041
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95,19 +95,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0018668026, y: 0.000000059604645}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.3125}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.87599003, y: 0.313232}
-  m_EdgeRadius: 0
+  m_Radius: 0.25
 --- !u!1 &1969718782558145674
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,9 +128,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 2509069244965516856}
   - {fileID: 1866628593189516363}
   m_Father: {fileID: 2537374611990174651}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5257727404935883419
 SpriteRenderer:
@@ -181,7 +172,8 @@ SpriteRenderer:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300040, guid: f3e0ea032db470442af7fcac9d83f1cb, type: 3}
+  m_Sprite: {fileID: 4032477290653903744, guid: f3e0ea032db470442af7fcac9d83f1cb,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -202,7 +194,7 @@ Animator:
   m_GameObject: {fileID: 1969718782558145674}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5162ecbf4b201a14998a1d354fac1094, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8d9918be1d6b8674fbd8ba1f42ee7ea2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -239,16 +231,14 @@ GameObject:
   - component: {fileID: 3816868808247662347}
   - component: {fileID: 1904830263585329868}
   - component: {fileID: 6919527800721261145}
-  - component: {fileID: 3149495725526973359}
   - component: {fileID: 6564433060163094277}
   - component: {fileID: 69357154066809696}
   - component: {fileID: 3902379296848135066}
-  - component: {fileID: 4079701766306708918}
-  - component: {fileID: 4588277751585783558}
   - component: {fileID: 6866986401814778853}
   - component: {fileID: 7657995963615701156}
+  - component: {fileID: 7353042941051542758}
   m_Layer: 13
-  m_Name: Arkaner Impuls
+  m_Name: Flammenwerfer
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,7 +255,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2509069244965516856}
   - {fileID: 7418100249069785436}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -312,7 +301,7 @@ Animator:
   m_GameObject: {fileID: 6814274785137477229}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cd4771f91cf9afb45bb4b55530dcbc97, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -333,13 +322,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Impuls
-  skillNameEnglish: Impulse
+  skillName: Flammenwerfer
+  skillNameEnglish: Flamethrower
   spriteRenderer: {fileID: 5257727404935883419}
   myRigidbody: {fileID: 8945697548278569866}
   animator: {fileID: 1969718782558145669}
   shadow: {fileID: 8613971535191392423}
-  speed: 40
+  speed: 10
   positionOffset: 0.75
   maxAmounts: 9999
   attachToSender: 0
@@ -351,10 +340,10 @@ MonoBehaviour:
   deactivateByButtonDown: 0
   isRapidFire: 1
   keepHoldTimer: 0
-  canAffectedBytimeDistortion: 1
+  canAffectedBytimeDistortion: 0
   delay: 0
-  duration: 2
-  cooldown: 0.075
+  duration: 1
+  cooldown: 0.01
   cooldownAfterCombo: 0
   durationCombo: 0
   elapsed: 0
@@ -387,11 +376,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 3816868808247662347}
-  skillDescription: Ein magischer Impuls
-  skillDescriptionEnglish: A magical pulse
+  skillDescription: Flammenwerfer
+  skillDescriptionEnglish: Flamethrower
   category: 1
-  orderIndex: 22
-  icon: {fileID: 21300014, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  orderIndex: 2
+  icon: {fileID: 2084251073510830269, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
 --- !u!114 &6919527800721261145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,21 +394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 3816868808247662347}
---- !u!114 &3149495725526973359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814274785137477229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d0d3d2225b54824ba4df2b9553ff761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 3816868808247662347}
-  canBeReflected: 0
-  skillOnImpact: {fileID: 0}
 --- !u!114 &6564433060163094277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,8 +428,9 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
-    amount: -1
-  statusEffects: []
+    amount: -0.25
+  statusEffects:
+  - {fileID: 71630591074221121, guid: e420e9509f9819f4188748abbdda79ee, type: 3}
   thrust: 0
   knockbackTime: 0.2
   affectSelf: 0
@@ -479,7 +454,7 @@ MonoBehaviour:
   skill: {fileID: 3816868808247662347}
   resourceType: 2
   item: {fileID: 0}
-  addResourceSender: -0.1
+  addResourceSender: -0.0125
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0
@@ -488,37 +463,6 @@ MonoBehaviour:
   selfThrust: 0
   selfThrustTime: 0
   stateType: 0
---- !u!114 &4079701766306708918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814274785137477229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f85dd021f4e88a4469511d8988fcc048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 3816868808247662347}
-  indicator: {fileID: 0}
-  showCastBarForEnemies: 1
-  useCustomColor: 1
-  indicatorColor: {r: 1, g: 0, b: 0, a: 1}
-  activeIndicator: {fileID: 0}
---- !u!114 &4588277751585783558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814274785137477229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cac6fcb9090d6f649a19066a030d25b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 3816868808247662347}
 --- !u!114 &6866986401814778853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,12 +491,27 @@ MonoBehaviour:
   skill: {fileID: 0}
   positionHeight: 0
   colliderHeightOffset: -0.25
+--- !u!114 &7353042941051542758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814274785137477229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0d3d2225b54824ba4df2b9553ff761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  canBeReflected: 0
+  skillOnImpact: {fileID: 0}
 --- !u!1001 &4484190714160488513
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2537374611990174651}
+    m_TransformParent: {fileID: 7418100249069785436}
     m_Modifications:
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
@@ -619,6 +578,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 2159138791925674759, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_FalloffIntensity
@@ -627,7 +591,7 @@ PrefabInstance:
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.023826122
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
@@ -643,6 +607,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PointLightOuterRadius
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.58431375
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a4137c3904df94aa0b798edf1c5d6b, type: 3}

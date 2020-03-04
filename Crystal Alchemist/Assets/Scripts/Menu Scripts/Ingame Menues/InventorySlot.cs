@@ -15,12 +15,12 @@ public class InventorySlot : MonoBehaviour
 
     public void openKeyItem(InventoryMenu menu)
     {
-        if (this.itemUI.getItem() != null) menu.openSkillMenu(this.itemUI.getItem());
-    }
-
-    public void openMap(InventoryMenu menu)
-    {
-        if (this.itemUI.getItem() != null) menu.openMap();
+        if (this.itemUI.getItem() != null 
+         && this.itemUI.getItem().keyItemSignal != null)
+        {
+            this.itemUI.getItem().keyItemSignal.Raise();
+            menu.exitMenu();
+        }
     }
 
     public int getID()

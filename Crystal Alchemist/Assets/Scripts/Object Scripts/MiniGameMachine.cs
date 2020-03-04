@@ -24,6 +24,10 @@ public class MiniGameMatch
     public float maxDuration;
 
     [BoxGroup("Price")]
+    public ResourceType currencyType = ResourceType.item;
+
+    [BoxGroup("Price")]
+    [ShowIf("currencyType", ResourceType.item)]
     public Item item;
 
     [BoxGroup("Price")]

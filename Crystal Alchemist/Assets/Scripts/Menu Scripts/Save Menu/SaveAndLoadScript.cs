@@ -13,7 +13,7 @@ public class SaveAndLoadScript : MonoBehaviour
 
     [BoxGroup("Save Menu")]
     [SerializeField]
-    private GameObject success;
+    private MenuDialogBoxLauncher launcher;
 
     [SerializeField]
     [BoxGroup("Save Menu")]
@@ -39,7 +39,6 @@ public class SaveAndLoadScript : MonoBehaviour
     private void OnEnable()
     {
         this.player = this.playerStats.player;
-        if (this.success != null) this.success.SetActive(false);
     }
 
     public void saveGame(SaveSlot slot)
@@ -47,7 +46,7 @@ public class SaveAndLoadScript : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         SaveSystem.Save(this.player, scene.name, slot.name);
 
-        if (this.success != null) this.success.SetActive(true);
+        if (this.launcher != null) this.launcher.raiseDialogBox();
     }
 
     public void loadGame(SaveSlot slot)
