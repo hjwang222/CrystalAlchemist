@@ -6,8 +6,14 @@ public class TODOLIST : MonoBehaviour
     //NPC: Bosskampf (Titania)    
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena
-
     //GRAPHICS: TitleScreen: Background 
+    //Skills: Reflektor (wind)
+
+    //TODO: Skill Sequence Instantiate
+    //TODO: Skills Rework (Cooldown und Co)
+    //TODO: Skill Rework Impact und Chain
+    //TODO: Skill Hit All
+    //TODO: Skill Hit on Target Graphic
 
     //-----------------------------------------------------------------------------
 
@@ -15,7 +21,6 @@ public class TODOLIST : MonoBehaviour
     //OBJECT: Bett (Tag/Nacht)
     //ITEM: Brille (Bool Value)
     //INPUT: Virtuelle Tastatur
-    //CONTENT: Collectable Skills
 
     //GRAPHICS: Player: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
     //GRAPHICS: Player: Schlafen, Zaubern, Pfeil, Speer Sprites
@@ -27,6 +32,11 @@ public class TODOLIST : MonoBehaviour
     //MAYBE: Options Rework (Resolution)
     //MAYBE: Wetter Script (Position und Größe)
     //MAYBE: DialogBox
+
+    //TODO (0.2.6.0)
+    //CONTENT: Collectable Skills
+    //CONTENT: Collectable Skins
+    //TODO: Einleitung beim Start
 
     //-----------------------------------------------------------------------------
 

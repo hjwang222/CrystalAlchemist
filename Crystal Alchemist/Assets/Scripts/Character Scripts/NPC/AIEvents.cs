@@ -158,6 +158,17 @@ public class AIAction
     [HideLabel]
     public SkillSequence sequence;
 
+    [ShowIf("type", AIActionType.sequence)]
+    [VerticalGroup("Properties")]
+    [HideLabel]
+    public modificationType sequencePositionType;
+
+    [ShowIf("type", AIActionType.sequence)]
+    [ShowIf("sequencePositionType", modificationType.fix)]
+    [VerticalGroup("Properties")]
+    [HideLabel]
+    public Vector2 sequencePosition;
+
     [TableColumnWidth(15)]
     [VerticalGroup("GCD")]
     [HideLabel]
@@ -305,7 +316,34 @@ public class AIEvents : MonoBehaviour
                 && this.enemy != null
                 && this.enemy.activeCastbar != null) this.enemy.activeCastbar.destroyIt();
 
-            if (!this.AIstopped) doEvents();            
+            if (!this.AIstopped) doEvents();
+
+            
+        }
+    }
+
+    private void updateCoolDownForSkills()
+    {
+        foreach (AIEvent AIevent in this.events)
+        {
+            foreach (AIAction action in AIevent.actions)
+            {
+                if (action.skillinstance != null && action.type == AIActionType.skill)
+                {
+                    action.skillinstance.cooldownTimeLeft -= (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
+                }
+            }
+        }
+
+        foreach (AIPhase phase in this.phases)
+        {
+            foreach (AIAction action in phase.actions)
+            {
+                if (action.skillinstance != null && action.type == AIActionType.skill)
+                {
+                    action.skillinstance.cooldownTimeLeft -= (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
+                }
+            }
         }
     }
 
@@ -628,11 +666,7 @@ public class AIEvents : MonoBehaviour
     {
         if (skill != null)
         {
-            if (skill.cooldownTimeLeft > 0)
-            {
-                skill.cooldownTimeLeft -= (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
-            }
-            else 
+            if (skill.cooldownTimeLeft <= 0)            
             {
                 int currentAmountOfSameSkills = CustomUtilities.Skills.getAmountOfSameSkills(skill, this.enemy.activeSkills, this.enemy.activePets);
 
@@ -679,6 +713,7 @@ public class AIEvents : MonoBehaviour
             SkillSequence sequence = Instantiate(action.sequence);
             sequence.setSender(this.enemy);
             sequence.setTarget(this.enemy.target);
+            sequence.setPosition(action.sequencePositionType, action.sequencePosition);
             actionUsed = true;
         }
         else if (action.type == AIActionType.transition)

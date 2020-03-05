@@ -693,7 +693,7 @@ public class Character : MonoBehaviour
 
     #region Damage Functions (hit, statuseffect, knockback)
 
-    public void gotHit(Skill skill, float percentage)
+    public void gotHit(Skill skill, float percentage, bool knockback)
     {
         SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
 
@@ -730,7 +730,7 @@ public class Character : MonoBehaviour
                     }
                 }
 
-                if (this.life > 0)
+                if (this.life > 0 && knockback)
                 {
                     //Rückstoß ermitteln
                     float knockbackTrust = targetModule.thrust - (this.stats.antiKnockback / 100 * targetModule.thrust);
@@ -743,6 +743,11 @@ public class Character : MonoBehaviour
     public void gotHit(Skill skill)
     {
         gotHit(skill, 100);
+    }
+
+    public void gotHit(Skill skill, float percentage)
+    {
+        gotHit(skill, percentage, true);
     }
 
     public void setImmortalAtStart(float duration)

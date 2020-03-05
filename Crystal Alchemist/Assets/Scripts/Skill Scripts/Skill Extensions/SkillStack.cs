@@ -41,12 +41,12 @@ public class SkillStack : SkillExtension
     private void Start()
     {
         this.skill.SetTriggerActive(1);
-        this.joinCollider.enabled = true;
-        if (this.hurtCollider != null) this.hurtCollider.enabled = false;
+        this.joinCollider.gameObject.SetActive(true);
+        if (this.hurtCollider != null) this.hurtCollider.gameObject.SetActive(false);
 
         //this.timeLeft = followTimeMax;
         //if (this.useRandomTime) this.timeLeft = Random.Range(followTimeMin, followTimeMax);
-        if (this.timeLeft > this.skill.delay) this.timeLeft = this.skill.delay - 0.01f;
+        //if (this.timeLeft > this.skill.delay) this.timeLeft = this.skill.delay - 0.01f;
     }
 
     private void Update()
@@ -57,8 +57,8 @@ public class SkillStack : SkillExtension
 
             if (this.hurtCollider != null)
             {
-                this.joinCollider.enabled = false;
-                this.hurtCollider.enabled = true;
+                this.joinCollider.gameObject.SetActive(false);
+                this.hurtCollider.gameObject.SetActive(true);
             }
         }
     }
@@ -106,7 +106,7 @@ public class SkillStack : SkillExtension
             else
             {
                 float percentage = percentageByAmount();
-                this.skill.hitIt(hittedCharacter, percentage);
+                if(percentage > 0) this.skill.hitIt(hittedCharacter, percentage);
             }
         }
     }

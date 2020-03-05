@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class LineIndicator : Indicator
@@ -9,7 +7,7 @@ public class LineIndicator : Indicator
     private float distance = 10;
 
     private Vector2 direction;
-    private SkillChain chain;
+
 
     // Start is called before the first frame update
     public override void Start()

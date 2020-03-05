@@ -3,80 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillChain : SkillExtension
+public class SkillChainHit : SkillExtension
 {
-
-    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [BoxGroup("Special Behaviors")]
     public bool useRange = false;
 
     [SerializeField]
     [ShowIf("useRange", true)]
-    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [BoxGroup("Special Behaviors")]
     private Vector2 rangeNeeded;
-
 
     [SerializeField]
     [HideIf("useRange", true)]
-    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [BoxGroup("Special Behaviors")]
     [Range(0, CustomUtilities.maxFloatSmall)]
     private float distanceNeeded = 0f;
 
     [HideIf("useRange", true)]
-    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [BoxGroup("Special Behaviors")]
     public bool canBreak = false;
 
     [HideIf("useRange", true)]
-    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [BoxGroup("Special Behaviors")]
     [SerializeField]
     private bool useStartDistance = false;
 
-    [Space(10)]
-    [FoldoutGroup("Special Behaviors", expanded: false)]
-    public SpriteRenderer chainSpriteRenderer;
-
-    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [BoxGroup("Special Behaviors")]
     public bool changeColor = false;
 
-    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [BoxGroup("Special Behaviors")]
     [ShowIf("changeColor", true)]
     public Color rightColor;
 
-    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [BoxGroup("Special Behaviors")]
     [ShowIf("changeColor", true)]
     public Color wrongColor;
 
     private float startDistance = 0;
+
+    [BoxGroup("Special Behaviors")]
+    [SerializeField]
+    [Required]
     private SkillIndicatorModule indicatorModule;
-
-    private void Start()
-    {
-        this.indicatorModule = this.GetComponent<SkillIndicatorModule>();
-    }
-
-    public void initializeIndicator(Indicator indicator)
-    {
-        //base.initializeIndicator(indicator);
-
-        if (this.indicatorModule != null
-            && this.chainSpriteRenderer != null
-            && this.indicatorModule.activeIndicator != null)
-        {
-            indicator.indicatorRenderer.sprite = this.chainSpriteRenderer.sprite;
-            indicator.indicatorRenderer.color = this.chainSpriteRenderer.color;
-            indicator.indicatorRenderer.size = new Vector2(indicator.indicatorRenderer.size.x, this.chainSpriteRenderer.size.y);
-
-            indicator.animator.enabled = false;
-        }
-    }
 
     public void doOnCast()
     {
         if (this.hasRightDistance())
         {
-            if (this.changeColor)
-            {
-                this.indicatorModule.activeIndicator.indicatorRenderer.color = this.rightColor;                
-            }
+            if (this.changeColor) this.indicatorModule.activeIndicator.indicatorRenderer.color = this.rightColor;  
 
             if (this.canBreak && !this.useRange)
             {
@@ -86,7 +60,7 @@ public class SkillChain : SkillExtension
         }
         else
         {
-            this.indicatorModule.activeIndicator.indicatorRenderer.color = this.wrongColor;
+            if (this.changeColor) this.indicatorModule.activeIndicator.indicatorRenderer.color = this.wrongColor;            
         }
     }
 

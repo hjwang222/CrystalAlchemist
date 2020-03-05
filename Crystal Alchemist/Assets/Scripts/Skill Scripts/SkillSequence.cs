@@ -11,7 +11,9 @@ public enum modificationType
     target,
     sender,
     randomArea,
-    random
+    random,
+    fix,
+    normalized
 }
 
 [System.Serializable]
@@ -49,7 +51,6 @@ public class SkillSequence : MonoBehaviour
 
     [SerializeField]
     private List<customSequence> modifcations = new List<customSequence>();
-
 
     private bool useDurationTime = false;
     private float duration = 0;
@@ -170,6 +171,10 @@ public class SkillSequence : MonoBehaviour
 
             modification.gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
+        else if (modification.rotation == modificationType.normalized)
+        {
+            modification.gameObject.transform.rotation = Quaternion.identity;
+        }
     }
 
     private void setChildObjects()
@@ -214,6 +219,16 @@ public class SkillSequence : MonoBehaviour
     public void setTarget(Character target)
     {
         this.target = target;
+    }
+
+    public void setPosition(modificationType positionType, Vector2 fixPosition)
+    {
+        switch (positionType)
+        {
+            case modificationType.fix: this.transform.position = fixPosition; break;
+            case modificationType.sender: this.transform.position = this.sender.transform.position; break;
+            case modificationType.target: this.transform.position = this.target.transform.position; break;
+        }
     }
 
     private int getRandomRotation(int randomRotations)

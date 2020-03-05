@@ -178,9 +178,6 @@ public class Skill : MonoBehaviour
     public bool triggerIsActive = true;
     [HideInInspector]
     public bool setActive = true;
-
-
-
     #endregion
 
 
@@ -322,7 +319,7 @@ public class Skill : MonoBehaviour
 
     public void doOnCast()
     {
-        if (this.GetComponent<SkillChain>() != null) this.GetComponent<SkillChain>().doOnCast();
+        if (this.GetComponent<SkillChainHit>() != null) this.GetComponent<SkillChainHit>().doOnCast();
     }    
 
     public void hitIt(Collider2D hittedObject)
