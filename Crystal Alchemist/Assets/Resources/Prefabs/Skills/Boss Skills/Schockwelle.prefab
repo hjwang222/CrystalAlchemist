@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 5842637486026811126}
   - component: {fileID: 6930555127175221515}
   m_Layer: 12
-  m_Name: Meteor
+  m_Name: Schockwelle
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,10 +249,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  percentage: 100
+  hitType: 2
   type: 0
   mustLookAway: 1
   viewRange: 45
-  rangePercentage: {x: 0, y: 0}
+  deadDistance: 0
+  saveDistance: 0
 --- !u!114 &6930555127175221515
 MonoBehaviour:
   m_ObjectHideFlags: 0

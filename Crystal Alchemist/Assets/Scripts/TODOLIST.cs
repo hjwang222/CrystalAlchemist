@@ -8,12 +8,12 @@ public class TODOLIST : MonoBehaviour
     //GRAPHICS: Titania, Titanias Arena
     //GRAPHICS: TitleScreen: Background 
     //Skills: Reflektor (wind)
-
     //TODO: Skill Sequence Instantiate
-    //TODO: Skills Rework (Cooldown und Co)
-    //TODO: Skill Rework Impact und Chain
-    //TODO: Skill Hit All
-    //TODO: Skill Hit on Target Graphic
+
+    //REWORK: Skills
+    //REWORK: Items
+    //REWORK: Player Attacks und AI Events
+    //REWORK: Indicators
 
     //-----------------------------------------------------------------------------
 

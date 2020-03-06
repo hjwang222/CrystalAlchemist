@@ -407,6 +407,41 @@ public class CustomUtilities : MonoBehaviour
             return false;
         }
 
+        public static List<Character> getAffectedCharacters(Skill skill)
+        {
+            List<GameObject> result = new List<GameObject>();
+            List<Character> targets = new List<Character>();
+            SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
+
+            if (targetModule != null)
+            {
+                if ((skill.sender.CompareTag("Player") || skill.sender.CompareTag("NPC")) && targetModule.affectOther)
+                {
+                    result.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+                }
+                if (skill.sender.CompareTag("Enemy") && targetModule.affectOther)
+                {
+                    result.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+                    result.AddRange(GameObject.FindGameObjectsWithTag("NPC"));
+                }
+                if (targetModule.affectSame)
+                {
+                    result.AddRange(GameObject.FindGameObjectsWithTag(skill.sender.tag));
+                }
+                if (targetModule.affectNeutral)
+                {
+                    result.AddRange(GameObject.FindGameObjectsWithTag("Other"));
+                }
+            }
+
+            foreach(GameObject res in result)
+            {
+                if (res.GetComponent<Character>() != null) targets.Add(res.GetComponent<Character>());
+            }
+
+            return targets;
+        }
+
         private static bool skillAffected(Collider2D hittedCharacter, Skill skill)
         {
             Skill tempSkill = Skills.getSkillByCollision(hittedCharacter.gameObject);
@@ -1261,7 +1296,7 @@ public class CustomUtilities : MonoBehaviour
         }
 
         public static Skill setSkill(Character character, Skill prefab)
-        {
+        { 
             Skill skillInstance = MonoBehaviour.Instantiate(prefab, character.skillSetParent.transform) as Skill;
             skillInstance.sender = character;
             skillInstance.gameObject.SetActive(false);

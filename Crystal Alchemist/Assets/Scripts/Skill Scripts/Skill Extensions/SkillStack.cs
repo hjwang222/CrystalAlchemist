@@ -11,58 +11,29 @@ public enum aoeShareType
     more
 }
 
-//TODO: Show Timer
-//TODO: Override Cast
-
-public class SkillStack : SkillExtension
-{   
-    [FoldoutGroup("Special Behaviors", expanded: false)]
-    [SerializeField]
-    [Required]
-    private Collider2D joinCollider;
-
-    [FoldoutGroup("Special Behaviors", expanded: false)]
-    [SerializeField]
-    [Required]
-    private Collider2D hurtCollider;
-
-    [FoldoutGroup("Special Behaviors", expanded: false)]
+public class SkillStack : SkillMechanicHit
+{
+    [BoxGroup("Mechanics")]
     [SerializeField]
     private int amountNeeded;
 
-    [FoldoutGroup("Special Behaviors", expanded: false)]
+    [BoxGroup("Mechanics")]
     [SerializeField]
     private aoeShareType type;
 
     private float timeLeft = 0;
-    private bool hurtCharacter = false;
     private List<Character> listOfCharacters = new List<Character>();
 
     private void Start()
     {
         this.skill.SetTriggerActive(1);
-        this.joinCollider.gameObject.SetActive(true);
-        if (this.hurtCollider != null) this.hurtCollider.gameObject.SetActive(false);
-
-        //this.timeLeft = followTimeMax;
-        //if (this.useRandomTime) this.timeLeft = Random.Range(followTimeMin, followTimeMax);
-        //if (this.timeLeft > this.skill.delay) this.timeLeft = this.skill.delay - 0.01f;
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        if (this.skill.delayTimeLeft <= 0)
-        {
-            this.hurtCharacter = true;
-
-            if (this.hurtCollider != null)
-            {
-                this.joinCollider.gameObject.SetActive(false);
-                this.hurtCollider.gameObject.SetActive(true);
-            }
-        }
+        this.percentage = percentageByAmount();
+        this.hitAllCharacters();
     }
-
 
     private float calculatePercentage()
     {
@@ -98,22 +69,14 @@ public class SkillStack : SkillExtension
     {
         if (CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
         {
-            if (!this.hurtCharacter)
-            {
-                Character character = hittedCharacter.GetComponent<Character>();
-                if (character != null && !this.listOfCharacters.Contains(character)) this.listOfCharacters.Add(character);
-            }
-            else
-            {
-                float percentage = percentageByAmount();
-                if(percentage > 0) this.skill.hitIt(hittedCharacter, percentage);
-            }
+            Character character = hittedCharacter.GetComponent<Character>();
+            if (character != null && !this.listOfCharacters.Contains(character)) this.listOfCharacters.Add(character);
         }
     }
 
     private void OnTriggerExit2D(Collider2D hittedCharacter)
     {
-        if (!this.hurtCharacter && CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
+        if (CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
         {
             Character character = hittedCharacter.GetComponent<Character>();
             if (character != null && this.listOfCharacters.Contains(character)) this.listOfCharacters.Remove(character);

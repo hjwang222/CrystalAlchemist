@@ -105,7 +105,7 @@ public class Skill : MonoBehaviour
     [SerializeField]
     private bool canAffectedBytimeDistortion = true;
 
-    
+
     [FoldoutGroup("Time", expanded: false)]
     [Tooltip("Verzögerung bis Aktivierung")]
     [Range(0, CustomUtilities.maxFloatInfinite)]
@@ -188,7 +188,7 @@ public class Skill : MonoBehaviour
         PreLoadModule preLoadModule = this.GetComponent<PreLoadModule>();
         if (preLoadModule != null) preLoadModule.checkRequirements();
     }
-    
+
     public void Start()
     {
         setBasicAttributes();
@@ -320,24 +320,34 @@ public class Skill : MonoBehaviour
     public void doOnCast()
     {
         if (this.GetComponent<SkillChainHit>() != null) this.GetComponent<SkillChainHit>().doOnCast();
-    }    
+    }
 
     public void hitIt(Collider2D hittedObject)
     {
         if (hittedObject.GetComponent<Character>() != null)
         {
-            //Gegner zurückstoßen + Hit
-            hittedObject.GetComponent<Character>().gotHit(this);
+            hitIt(hittedObject.GetComponent<Character>());
         }
+    }
+
+    public void hitIt(Character target)
+    {
+        //Gegner zurückstoßen + Hit
+        target.gotHit(this);
     }
 
     public void hitIt(Collider2D hittedObject, float percentage)
     {
         if (hittedObject.GetComponent<Character>() != null)
         {
-            //Gegner zurückstoßen + Hit
-            hittedObject.GetComponent<Character>().gotHit(this, percentage);
+            hitIt(hittedObject.GetComponent<Character>(), percentage);
         }
+    }
+
+    public void hitIt(Character target, float percentage)
+    {
+        //Gegner zurückstoßen + Hit
+        target.gotHit(this, percentage);
     }
 
     #endregion
@@ -366,20 +376,20 @@ public class Skill : MonoBehaviour
 
         if (rotationModule != null)
         {
-            keepOriginalRotation = rotationModule.keepOriginalRotation;            
-            rotateIt = rotationModule.rotateIt;            
+            keepOriginalRotation = rotationModule.keepOriginalRotation;
+            rotateIt = rotationModule.rotateIt;
         }
 
-        if(blendTreeModule != null)
+        if (blendTreeModule != null)
         {
             blendTree = true;
             useOffSetToBlendTree = blendTreeModule.useOffSetToBlendTree;
         }
 
-        if(positionModule != null)
+        if (positionModule != null)
         {
             //useCustomPosition = positionModule.useGameObjectHeight;
-            positionHeight = positionModule.positionHeight;            
+            positionHeight = positionModule.positionHeight;
             colliderHeightOffset = positionModule.colliderHeightOffset;
         }
 
@@ -421,7 +431,7 @@ public class Skill : MonoBehaviour
             this.shadow.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + colliderHeightOffset + (colliderHeightOffset * changeX));
         }
     }
-       
+
     public bool isResourceEnough(Character character)
     {
         SkillSenderModule senderModule = this.GetComponent<SkillSenderModule>();
