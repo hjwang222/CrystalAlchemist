@@ -461,9 +461,14 @@ public class CustomUtilities : MonoBehaviour
 
         public static bool checkCollision(Collider2D hittedCharacter, Skill skill)
         {
+            return checkCollision(hittedCharacter, skill, skill.sender);
+        }
+
+        public static bool checkCollision(Collider2D hittedCharacter, Skill skill, Character sender)
+        {
             if (skill != null && skill.triggerIsActive)
             {
-                if (skill.sender != null && hittedCharacter.gameObject == skill.sender.gameObject)
+                if (sender != null && hittedCharacter.gameObject == sender.gameObject)
                 {
                     if (skill.GetComponent<SkillTargetModule>() != null
                         && skill.GetComponent<SkillTargetModule>().affectSelf) return true;
@@ -479,7 +484,7 @@ public class CustomUtilities : MonoBehaviour
                     {
                         SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
                         if (targetModule != null
-                            && checkAffections(skill.sender, targetModule.affectOther, targetModule.affectSame, targetModule.affectNeutral, hittedCharacter))
+                            && checkAffections(sender, targetModule.affectOther, targetModule.affectSame, targetModule.affectNeutral, hittedCharacter))
                         {
                             return true;
                         }
@@ -1322,7 +1327,6 @@ public class CustomUtilities : MonoBehaviour
                 && sender.currentState != CharacterState.defend)
             {
                 Skill activeSkill = Instantiate(skill, sender.transform.position, Quaternion.identity);
-                activeSkill.gameObject.SetActive(true);
                 SkillTargetModule targetModule = activeSkill.GetComponent<SkillTargetModule>();
                 SkillSenderModule sendermodule = activeSkill.GetComponent<SkillSenderModule>();
 
@@ -1335,7 +1339,6 @@ public class CustomUtilities : MonoBehaviour
 
                 if (targetModule != null)
                 {
-
                     for (int i = 0; i < targetModule.affectedResources.Count; i++)
                     {
                         affectedResource elem = targetModule.affectedResources[i];
@@ -1348,13 +1351,6 @@ public class CustomUtilities : MonoBehaviour
                 }
 
                 sender.activeSkills.Add(activeSkill);
-
-                /*
-                if (skill.comboAmount > 0 
-                    && skill.cooldownAfterCombo > skill.cooldown
-                    && getAmountOfSameSkills(skill, sender.activeSkills) >= skill.comboAmount)
-                    skill.cooldownTimeLeft = skill.cooldownAfterCombo;*/
-
                 return activeSkill.GetComponent<Skill>();
             }
 

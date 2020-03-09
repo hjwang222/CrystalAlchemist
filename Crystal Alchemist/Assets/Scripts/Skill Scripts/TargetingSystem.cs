@@ -5,11 +5,9 @@ using System.Linq;
 
 public class TargetingSystem : MonoBehaviour
 {
-    [HideInInspector]
     public List<Character> targets = new List<Character>();
-    private List<Character> targetsInRange = new List<Character>();
+    public List<Character> targetsInRange = new List<Character>();
     private List<GameObject> appliedIndicators = new List<GameObject>();
-    private Skill skill;
 
     [SerializeField]
     private GameObject lockOnIndicator;
@@ -22,27 +20,33 @@ public class TargetingSystem : MonoBehaviour
     private TargetingMode mode;
     private int index;
     private bool showIndicator;
-    private bool readyToFire = false;
     private string button = "";
     private bool selectAll = false;
     private bool inputPossible = true;
     private bool showRange = false;
+    public Skill skill;
+    private Character sender; 
+    private Ability ability;
 
-    public void setParameters(Skill skill, string button)
+    public void setParameters(Ability ability, Character sender)
     {
-        this.skill = skill;
-        this.button = button;
+        this.duration = ability.targetingSystem.targetingDuration;
+        this.maxAmount = ability.targetingSystem.maxAmountOfTargets;
+        this.mode = ability.targetingSystem.targetingMode;
+        this.showIndicator = ability.targetingSystem.showIndicator;
+        this.showRange = ability.targetingSystem.showRange;
+        this.skill = ability.skill;
+        this.ability = ability;
+        this.button = "AButton";
+        this.sender = sender;
     }
+
+
+
+
 
     private void Start()
     {
-        this.duration = this.skill.GetComponent<SkillTargetingSystemModule>().targetingDuration;
-        this.maxAmount = this.skill.GetComponent<SkillTargetingSystemModule>().maxAmountOfTargets;
-        this.mode = this.skill.GetComponent<SkillTargetingSystemModule>().targetingMode;
-        this.showIndicator = this.skill.GetComponent<SkillTargetingSystemModule>().showIndicator;
-        this.showRange = this.skill.GetComponent<SkillTargetingSystemModule>().showRange;
-        this.skill.sender.activeLockOnTarget = this;
-
         if (!this.showRange) this.rangeIndicator.SetActive(false);
         else this.rangeIndicator.SetActive(true);
 
@@ -51,28 +55,17 @@ public class TargetingSystem : MonoBehaviour
 
     private void Update()
     {
-        if (!this.readyToFire)
+        if (this.ability.state == AbilityState.targeting)
         {
             if (this.mode == TargetingMode.auto)
             {
                 selectAllNearestTargets();
-                this.readyToFire = true;
+                this.ability.state = AbilityState.targetLocked;
             }
             else selectTargetManually();
 
             updateIndicator();
         }
-    }
-
-    private void addTarget(Collider2D collision)
-    {
-        Character character = collision.GetComponent<Character>();
-        if (CustomUtilities.Collisions.checkCollision(collision, this.skill) && character != null)
-        {
-            if (!this.targetsInRange.Contains(character)) this.targetsInRange.Add(character);
-        }
-
-        this.targetsInRange = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.skill.sender.transform.position))).ToList<Character>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -88,28 +81,32 @@ public class TargetingSystem : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-        if (CustomUtilities.Collisions.checkCollision(collision, this.skill) && character != null)
+        if (CustomUtilities.Collisions.checkCollision(collision, this.skill, this.sender) && character != null)
         {
             if (this.targetsInRange.Contains(character)) this.targetsInRange.Remove(character);
             if (this.targets.Contains(character)) this.targets.Remove(character);
         }
     }
 
+
+
+
+
+
+    private void addTarget(Collider2D collision)
+    {
+        Character character = collision.GetComponent<Character>();
+        if (CustomUtilities.Collisions.checkCollision(collision, this.skill, this.sender) && character != null)
+        {
+            if (!this.targetsInRange.Contains(character)) this.targetsInRange.Add(character);
+        }
+
+        this.targetsInRange = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
+    }
+
     public void DestroyIt()
     {
-        this.skill.sender.activeLockOnTarget = null;
         Destroy(this.gameObject);
-    }
-
-    public Skill getSkill()
-    {
-        return this.skill;
-    }
-
-    public bool isReadyToFire(Skill skill)
-    {
-        if (this.readyToFire && this.skill == skill) return true;
-        return false;
     }
 
     private void selectTargetManually()
@@ -121,7 +118,7 @@ public class TargetingSystem : MonoBehaviour
         {
             if (Input.GetButtonDown(this.button))
             {
-                this.readyToFire = true;
+                this.ability.state = AbilityState.targetLocked;
                 return;
             }
 
@@ -147,7 +144,7 @@ public class TargetingSystem : MonoBehaviour
     private void selectNextTarget(int value)
     {
         this.targets.Clear();
-        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.skill.sender.transform.position))).ToList<Character>();
+        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
 
         if (this.targetsInRange.Count > 0)
         {
@@ -162,7 +159,7 @@ public class TargetingSystem : MonoBehaviour
     private void selectAllNearestTargets()
     {
         this.targets.Clear();
-        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.skill.sender.transform.position))).ToList<Character>();
+        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
 
         for (int i = 0; i < this.maxAmount && i < sorted.Count; i++)
         {
