@@ -7,13 +7,16 @@ public class TODOLIST : MonoBehaviour
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena
     //GRAPHICS: TitleScreen: Background 
-    //Skills: Reflektor (wind)
 
+    //SKILL: Rundumschlag (wind)
     //TODO: Skill Sequence Instantiate
-    //TODO: Skills Rework (Cooldown und Co)
-    //TODO: Skill Rework Impact und Chain
-    //TODO: Skill Hit All
-    //TODO: Skill Hit on Target Graphic
+    //TODO: Skills ändern (Bombe, Turm, Schild Knockback)
+    //TODO: Sentinel Schuss ändern
+
+    //REWORK: Skills
+    //REWORK: Items
+    //REWORK: Player Attacks und AI Events
+    //REWORK: Indicators
 
     //-----------------------------------------------------------------------------
 
@@ -50,6 +53,7 @@ public class TODOLIST : MonoBehaviour
 
     //TODO (1.5)
     //- Multiplayer!
+    //- Pathfinding
 
     //-----------------------------------------------------------------------------
 

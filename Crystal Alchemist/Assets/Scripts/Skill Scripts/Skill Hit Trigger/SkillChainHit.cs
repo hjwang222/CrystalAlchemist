@@ -3,45 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillChainHit : SkillExtension
+public class SkillChainHit : SkillMechanicHit
 {
-    [BoxGroup("Special Behaviors")]
+    [BoxGroup("Mechanics")]
     public bool useRange = false;
 
     [SerializeField]
     [ShowIf("useRange", true)]
-    [BoxGroup("Special Behaviors")]
+    [BoxGroup("Mechanics")]
     private Vector2 rangeNeeded;
 
     [SerializeField]
     [HideIf("useRange", true)]
-    [BoxGroup("Special Behaviors")]
+    [BoxGroup("Mechanics")]
     [Range(0, CustomUtilities.maxFloatSmall)]
     private float distanceNeeded = 0f;
 
     [HideIf("useRange", true)]
-    [BoxGroup("Special Behaviors")]
+    [BoxGroup("Mechanics")]
     public bool canBreak = false;
 
     [HideIf("useRange", true)]
-    [BoxGroup("Special Behaviors")]
+    [BoxGroup("Mechanics")]
     [SerializeField]
     private bool useStartDistance = false;
 
-    [BoxGroup("Special Behaviors")]
+    [BoxGroup("Mechanics")]
     public bool changeColor = false;
 
-    [BoxGroup("Special Behaviors")]
+    [BoxGroup("Mechanics")]
     [ShowIf("changeColor", true)]
     public Color rightColor;
 
-    [BoxGroup("Special Behaviors")]
+    [BoxGroup("Mechanics")]
     [ShowIf("changeColor", true)]
     public Color wrongColor;
 
     private float startDistance = 0;
 
-    [BoxGroup("Special Behaviors")]
+    [BoxGroup("Mechanics")]
     [SerializeField]
     [Required]
     private SkillIndicatorModule indicatorModule;
@@ -50,6 +50,7 @@ public class SkillChainHit : SkillExtension
     {
         if (this.hasRightDistance())
         {
+            this.percentage = 0;
             if (this.changeColor) this.indicatorModule.activeIndicator.indicatorRenderer.color = this.rightColor;  
 
             if (this.canBreak && !this.useRange)
@@ -60,22 +61,8 @@ public class SkillChainHit : SkillExtension
         }
         else
         {
+            this.percentage = 100;
             if (this.changeColor) this.indicatorModule.activeIndicator.indicatorRenderer.color = this.wrongColor;            
-        }
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D hittedCharacter)
-    {
-        checkMechanics(hittedCharacter);
-    }
-
-    private void checkMechanics(Collider2D hittedCharacter)
-    {
-        if (CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
-        {
-            //update Target Resource Affections
-            if (!this.hasRightDistance()) this.skill.hitIt(hittedCharacter);
         }
     }
 

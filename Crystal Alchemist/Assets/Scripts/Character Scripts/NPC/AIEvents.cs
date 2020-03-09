@@ -404,7 +404,8 @@ public class AIEvents : MonoBehaviour
                     if (this.activeAction.cast >= 0) this.activeAction.skillinstance.cast = this.activeAction.cast;
                     if (this.activeAction.cD >= 0) this.activeAction.skillinstance.cooldown = this.activeAction.cD;
                     if (this.activeAction.skillinstance.GetComponent<SkillTargetingSystemModule>() != null
-                        && this.activeAction.skillinstance.GetComponent<SkillTargetingSystemModule>().setTargetAutomatically)
+                        //&& this.activeAction.skillinstance.GetComponent<SkillTargetingSystemModule>().setTargetAutomatically
+                        )
                         this.activeAction.skillinstance.target = this.enemy.target;
                 }
 
@@ -455,12 +456,12 @@ public class AIEvents : MonoBehaviour
                             GameObject temp = Instantiate(this.castbar.gameObject, this.transform.position, Quaternion.identity, this.transform);
                             //temp.hideFlags = HideFlags.HideInHierarchy;
                             this.enemy.activeCastbar = temp.GetComponent<CastBar>();
-                            this.enemy.activeCastbar.target = this.enemy;
-                            this.enemy.activeCastbar.skill = this.activeAction.skillinstance;
+                            //this.enemy.activeCastbar.target = this.enemy;
+                            //this.enemy.activeCastbar.skill = this.activeAction.skillinstance;
                         }
                         else
                         {
-                            this.enemy.activeCastbar.showCastBar();
+                           //this.enemy.activeCastbar.showCastBar();
                         }
                     }
                 }

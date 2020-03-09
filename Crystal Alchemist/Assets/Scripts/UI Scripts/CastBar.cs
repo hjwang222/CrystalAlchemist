@@ -6,40 +6,42 @@ using TMPro;
 
 public class CastBar : MonoBehaviour
 {
-    public Character target;
-    public Image charging;
-    public Image full;
-    public TextMeshProUGUI skillName;
-    public TextMeshProUGUI percentage;
-    public Skill skill;
+    [SerializeField]
+    private Image charging;
+    [SerializeField]
+    private Image full;
+    [SerializeField]
+    private TextMeshProUGUI skillName;
+    [SerializeField]
+    private TextMeshProUGUI percentage;
 
-    private void Start()
+    private Ability skill;
+
+
+    public void setCastBar(Character character, Ability skill)
     {
         this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1f);
-        this.skillName.text = CustomUtilities.Format.getLanguageDialogText(this.skill.skillName, this.skill.skillNameEnglish);
-        this.percentage.text = "0%";
+        this.transform.parent = character.transform;
+        this.skill = skill;
+        this.skillName.text = this.skill.name;
     }
 
-    public void showCastBar()
+    private void Update()
     {
-        if (this.skill.cast > 0)
-        {
-            float percent = skill.holdTimer / this.skill.cast;
-            this.charging.fillAmount = (percent);
+        float percent = skill.holdTimer / this.skill.castTime;
+        this.charging.fillAmount = (percent);
 
-            string text = (int)(percent * 100) + "%";
-            if (percent * 100 >= 100) text = "BEREIT!";
+        string text = (int)(percent * 100) + "%";
+        if (percent * 100 >= 100) text = "BEREIT!";
 
-            this.percentage.text = text;
+        this.percentage.text = text;
 
-            if (skill.holdTimer >= this.skill.cast) this.full.enabled = true;
-            else this.full.enabled = false;            
-        }
+        if (skill.holdTimer >= this.skill.castTime) this.full.enabled = true;
+        else this.full.enabled = false;
     }
 
     public void destroyIt()
     {
-        target.activeCastbar = null;
         Destroy(this.gameObject, 0.1f);
     }
 }

@@ -166,8 +166,8 @@ public class PlayerAttacks : MonoBehaviour
                     GameObject temp = Instantiate(this.castbar.gameObject, this.transform.position, Quaternion.identity, this.transform);
                     //temp.hideFlags = HideFlags.HideInHierarchy;
                     this.player.activeCastbar = temp.GetComponent<CastBar>();
-                    this.player.activeCastbar.target = this.player;
-                    this.player.activeCastbar.skill = skill;
+                    //this.player.activeCastbar.target = this.player;
+                    //this.player.activeCastbar.skill = skill;
                 }
                 else if (skill.cast > 0
                     && skill.holdTimer >= skill.cast
@@ -178,7 +178,7 @@ public class PlayerAttacks : MonoBehaviour
                 }
                 else if (skill.cast > 0 && this.player.activeCastbar != null && skill.holdTimer > 0)
                 {
-                    this.player.activeCastbar.showCastBar();
+                    //this.player.activeCastbar.showCastBar();
                     if (skill.GetComponent<SkillIndicatorModule>() != null) skill.GetComponent<SkillIndicatorModule>().showIndicator();
                     if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().showCastingAnimation();
                 }
@@ -217,19 +217,20 @@ public class PlayerAttacks : MonoBehaviour
             CustomUtilities.Skills.instantiateSkill(skill, this.player);
         }
         else if (targetingSystemModule != null 
-                && targetingSystemModule.lockOnGameObject != null 
+                //&& targetingSystemModule.lockOnGameObject != null 
                 && this.player.activeLockOnTarget == null)
         {
             //Aktiviere Zielerfassung
-            this.player.activeLockOnTarget = Instantiate(targetingSystemModule.lockOnGameObject, this.transform.position, Quaternion.identity, this.transform);
-            this.player.activeLockOnTarget.setParameters(skill, button);
+            //this.player.activeLockOnTarget = Instantiate(targetingSystemModule.lockOnGameObject, this.transform.position, Quaternion.identity, this.transform);
+            //this.player.activeLockOnTarget.setParameters(skill, button);
         }
     }
 
     private void activateSkillFromTargetingSystem(Skill skill)
     {
         if (this.player.activeLockOnTarget != null
-            && this.player.activeLockOnTarget.isReadyToFire(skill))
+            //&& this.player.activeLockOnTarget.isReadyToFire(skill)
+            )
         {
             //Benutze Skill (mit Zielerfassung)   
             if (!skill.isRapidFire) skill.holdTimer = 0;
@@ -237,12 +238,14 @@ public class PlayerAttacks : MonoBehaviour
             SkillTargetingSystemModule targetingSystemModule = skill.GetComponent<SkillTargetingSystemModule>();
 
             if (this.player.activeLockOnTarget.targets.Count == 0
-                && targetingSystemModule.targetingMode != TargetingMode.auto)
+                //&& targetingSystemModule.targetingMode != TargetingMode.auto
+                )
             {
                 this.player.activeLockOnTarget.DestroyIt();
             }
             else if (this.player.activeLockOnTarget.targets.Count > 0
-                || targetingSystemModule.targetingMode == TargetingMode.auto)
+                //|| targetingSystemModule.targetingMode == TargetingMode.auto
+                )
             {
                 skill.cooldownTimeLeft = skill.cooldown; //Reset cooldown
 
@@ -300,12 +303,9 @@ public class PlayerAttacks : MonoBehaviour
             if (target.currentState != CharacterState.dead
                 && target.currentState != CharacterState.respawning)
             {
-                //bool playSoundEffect = false;
-                //if (i == 0 || skill.GetComponent<SkillTargetingSystemModule>().multiHitDelay > 0.3f) playSoundEffect = true;
-
                 fireSkillToSingleTarget(target, damageReduce, skill);
 
-                yield return new WaitForSeconds(skill.GetComponent<SkillTargetingSystemModule>().multiHitDelay);
+                yield return new WaitForSeconds(1f);
             }
             i++;
         }
@@ -316,8 +316,6 @@ public class PlayerAttacks : MonoBehaviour
     private void fireSkillToSingleTarget(Character target, float damageReduce, Skill skill)
     {
         Skill temp = CustomUtilities.Skills.instantiateSkill(skill, this.player, target, damageReduce);
-        //Vermeidung, dass Audio zu stark abgespielt wird
-        //if (!playSoundeffect) temp.dontPlayAudio = true;
     }
 
     public bool isButtonUsable(enumButton buttonInput)
@@ -333,12 +331,6 @@ public class PlayerAttacks : MonoBehaviour
     private void setLastButtonPressed(string button)
     {
         if (this.currentButtonPressed == "") this.currentButtonPressed = button;
-        /*
-        if (this.lastButtonPressed != button)
-        {
-            //if (!skill.keepHoldTimer) skill.holdTimer = 0;
-            this.lastButtonPressed = button;
-        }*/
     }
 
 }
