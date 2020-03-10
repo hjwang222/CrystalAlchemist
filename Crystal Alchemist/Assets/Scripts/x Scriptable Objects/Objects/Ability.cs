@@ -5,7 +5,6 @@ using UnityEngine;
 
 public enum AbilityState
 {
-    toMany,
     onCooldown,
     notCharged,
     charged,
@@ -14,63 +13,83 @@ public enum AbilityState
     ready
 }
 
-
 [CreateAssetMenu(menuName = "Game/Ability")]
 public class Ability : ScriptableObject
 {
+    [BoxGroup("Objects")]
+    [Required]
     public Skill skill;
 
-    [SerializeField]
-    private float cooldown;
-
-    public float castTime;
-
-    [SerializeField]
-    public int maxAmount = 1;
-
-    [SerializeField]
-    public bool isRapidFire = false;
-
-    [SerializeField]
-    public bool keepCast = false;
-
+    [BoxGroup("Objects")]
     [SerializeField]
     public LockOnSystem targetingSystem;
 
-    public float cooldownLeft;
-    public float holdTimer;
 
+    [BoxGroup("Restrictions")]
+    [SerializeField]
+    private float cooldown;
+
+    [BoxGroup("Restrictions")]
+    public float castTime;
+
+    [BoxGroup("Restrictions")]
+    [SerializeField]
+    public int maxAmount = 1;
+
+
+    [BoxGroup("Booleans")]
+    [SerializeField]
+    public bool isRapidFire = false;
+
+    [BoxGroup("Booleans")]
+    [SerializeField]
+    public bool remoteActivation = false;
+
+    [BoxGroup("Booleans")]
+    [SerializeField]
+    public bool deactivateButtonUp = false;
+
+    [BoxGroup("Booleans")]
+    [SerializeField]
+    public bool keepCast = false;
+
+
+
+    [BoxGroup("Debug")]
+    public float cooldownLeft;
+    [BoxGroup("Debug")]
+    public float holdTimer;
+    [BoxGroup("Debug")]
     public AbilityState state;
 
     #region Update Functions
 
-    public void Update()
+    public void Start()
     {
-        updateTimers();
+        setStartParameters();
     }
 
-    private void updateTimers()
+    public void Update()
     {
-        if (this.cooldownLeft > 0)
-        {
-            this.cooldownLeft -= Time.deltaTime;
-            this.state = AbilityState.onCooldown;
-        }
-        else
-        {
-            this.cooldownLeft = 0;
+        updateCooldown();
+    }
 
-            if (this.castTime > 0)
-            {
-                if (this.holdTimer <= this.castTime) this.state = AbilityState.notCharged;
-                else this.state = AbilityState.charged;
-            }
-            else if (this.targetingSystem != null)
-            {
-                if(this.state != AbilityState.lockOn) this.state = AbilityState.targetRequired;
-            }
-            else this.state = AbilityState.ready;
+    private void updateCooldown()
+    {
+        if (this.state == AbilityState.onCooldown)
+        {
+            if (this.cooldownLeft > 0) this.cooldownLeft -= Time.deltaTime;
+            else setStartParameters();            
         }
+    }
+
+    private void setStartParameters()
+    {
+        this.cooldownLeft = 0;
+
+        if (this.targetingSystem != null) this.state = AbilityState.targetRequired;
+        else if (this.castTime > 0) this.state = AbilityState.notCharged;
+        else this.state = AbilityState.ready;
     }
 
     #endregion
@@ -80,7 +99,12 @@ public class Ability : ScriptableObject
 
     public void Charge()
     {
-        if (this.holdTimer <= this.castTime) this.holdTimer += Time.deltaTime;        
+        if (this.holdTimer <= this.castTime)
+        {
+            this.holdTimer += Time.deltaTime;
+            this.state = AbilityState.notCharged;
+        }
+        else this.state = AbilityState.charged;
     }
 
     public void ResetCharge()
@@ -92,7 +116,8 @@ public class Ability : ScriptableObject
     public void ResetCoolDown()
     {
         this.cooldownLeft = this.cooldown;
-    }    
+        this.state = AbilityState.onCooldown;
+    }
 
     #endregion
 

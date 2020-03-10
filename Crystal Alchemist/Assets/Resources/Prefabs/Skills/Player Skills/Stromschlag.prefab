@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 1786086293429796885}
   - component: {fileID: 8534472210655833774}
   - component: {fileID: 6063059781987790246}
-  - component: {fileID: 4444995445623203262}
   m_Layer: 13
   m_Name: Stromschlag
   m_TagString: Skill
@@ -59,6 +58,7 @@ MonoBehaviour:
   impactEffect: {fileID: 0}
   distance: 50
   laserSprite: {fileID: 6508292816955024436}
+  targetRequired: 1
 --- !u!212 &4229681705441237260
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -282,28 +282,6 @@ MonoBehaviour:
   skill: {fileID: 0}
   positionHeight: 1
   colliderHeightOffset: 0
---- !u!114 &4444995445623203262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680506914304237522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c721391c65cfc84284c99d625406f0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  setTargetAutomatically: 0
-  lockOnGameObject: {fileID: 6540191019208669738, guid: 5b2939f613b001c4a9eb3296ae0d2093,
-    type: 3}
-  targetingMode: 1
-  maxAmountOfTargets: 3
-  targetingDuration: 6
-  multiHitDelay: 0
-  showRange: 0
-  showIndicator: 0
 --- !u!1 &6508292816955024442
 GameObject:
   m_ObjectHideFlags: 0

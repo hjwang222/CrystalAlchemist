@@ -402,11 +402,7 @@ public class AIEvents : MonoBehaviour
                 if (this.activeAction.skillinstance != null)
                 {
                     if (this.activeAction.cast >= 0) this.activeAction.skillinstance.cast = this.activeAction.cast;
-                    if (this.activeAction.cD >= 0) this.activeAction.skillinstance.cooldown = this.activeAction.cD;
-                    if (this.activeAction.skillinstance.GetComponent<SkillTargetingSystemModule>() != null
-                        //&& this.activeAction.skillinstance.GetComponent<SkillTargetingSystemModule>().setTargetAutomatically
-                        )
-                        this.activeAction.skillinstance.target = this.enemy.target;
+                    if (this.activeAction.cD >= 0) this.activeAction.skillinstance.cooldown = this.activeAction.cD;                    
                 }
 
                 casting();

@@ -27,7 +27,7 @@ public class PlayerAbilities : MonoBehaviour
     {
         this.targetingSystem.gameObject.SetActive(false);
 
-        this.AButton.state = AbilityState.ready;
+        this.AButton.Start();
         //this.AButton = Instantiate(this.AButton);
     }
 
@@ -41,7 +41,7 @@ public class PlayerAbilities : MonoBehaviour
                      && this.player.currentState != CharacterState.inMenu
                      && !CustomUtilities.StatusEffectUtil.isCharacterStunned(this.player))
         {
-            useSkill(this.AButton, "AButton");
+            useSkill(this.AButton, "AButton");            
         }
     }
 
@@ -63,7 +63,7 @@ public class PlayerAbilities : MonoBehaviour
             UnChargeAbility(ability);
 
             if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbility(ability); //use Skill when charged
-            else if (ability.state == AbilityState.lockOn && ability.isRapidFire) hideTargetingSystem(ability, 1); //hide Targeting System when released         
+            else if (ability.state == AbilityState.lockOn && ability.isRapidFire) hideTargetingSystem(ability, 1); //hide Targeting System when released
         }
         else if (Input.GetButtonDown(button)) //press Button
         {
@@ -72,20 +72,6 @@ public class PlayerAbilities : MonoBehaviour
             else if (ability.state == AbilityState.lockOn) UseAbilityOnTargets(ability, true);//use Skill on locked Targets and hide Targeting System
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private void ChargeAbility(Ability ability)
     {
@@ -104,8 +90,9 @@ public class PlayerAbilities : MonoBehaviour
 
     private void UnChargeAbility(Ability ability)
     {
-        ability.ResetCharge(); //reset charge when not full   
+        ability.ResetCharge(); //reset charge when not full  
         if (this.activeCastbar != null) this.activeCastbar.destroyIt();
+        if (ability.deactivateButtonUp) deactivateSkill(ability);
 
         //Speed
         //Indicators
@@ -130,7 +117,7 @@ public class PlayerAbilities : MonoBehaviour
         if (amountOfAbilities(ability))
         {
             CustomUtilities.Skills.instantiateSkill(ability.skill, this.player);
-            ability.ResetCoolDown();
+            if(!ability.deactivateButtonUp && !ability.remoteActivation) ability.ResetCoolDown();
         }
     }
 
@@ -140,7 +127,10 @@ public class PlayerAbilities : MonoBehaviour
         targets.AddRange(this.targetingSystem.getTargets());
         if (hideTargetingSystem) this.hideTargetingSystem(ability, targets.Count);
 
-        if(amountOfAbilities(ability)) StartCoroutine(useSkill(ability, targets));
+        if (amountOfAbilities(ability))
+        {
+            StartCoroutine(useSkill(ability, targets));
+        }
     }
 
     private IEnumerator useSkill(Ability ability, List<Character> targets)
@@ -175,4 +165,20 @@ public class PlayerAbilities : MonoBehaviour
     {
         return (CustomUtilities.Skills.getAmountOfSameSkills(ability.skill, this.player.activeSkills, this.player.activePets) <= ability.maxAmount);
     }
+
+    private void deactivateSkill(Ability ability)
+    {
+        foreach(Skill skill in this.player.activeSkills)
+        {
+            if (skill.skillName == ability.skill.skillName)
+            {
+                skill.durationTimeLeft = 0;
+                break;
+            }
+        }
+
+        ability.ResetCoolDown();
+    }
+
+
 }

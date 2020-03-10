@@ -206,6 +206,7 @@ public class PlayerAttacks : MonoBehaviour
         string button = CustomUtilities.Input.getButton(buttonInput);
         this.player.hideCastBarAndIndicator(skill);
 
+        /*
         SkillTargetingSystemModule targetingSystemModule = skill.GetComponent<SkillTargetingSystemModule>();
 
         if (targetingSystemModule == null)
@@ -223,7 +224,7 @@ public class PlayerAttacks : MonoBehaviour
             //Aktiviere Zielerfassung
             //this.player.activeLockOnTarget = Instantiate(targetingSystemModule.lockOnGameObject, this.transform.position, Quaternion.identity, this.transform);
             //this.player.activeLockOnTarget.setParameters(skill, button);
-        }
+        }*/
     }
 
     private void activateSkillFromTargetingSystem(Skill skill)

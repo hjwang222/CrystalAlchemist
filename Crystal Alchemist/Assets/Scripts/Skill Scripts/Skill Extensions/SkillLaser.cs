@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 public class SkillLaser : SkillExtension
 {
@@ -9,7 +7,7 @@ public class SkillLaser : SkillExtension
 
     [InfoBox("Kein Hit-Script notwendig, da kein Collider verwendet wird")]
     [SerializeField]
-    private GameObject impactEffect;
+    private Skill impactEffect;
 
     [SerializeField]
     [Range(0, CustomUtilities.maxFloatSmall)]
@@ -19,14 +17,14 @@ public class SkillLaser : SkillExtension
     private SpriteRenderer laserSprite;
 
     [SerializeField]
-    private bool autoAim = false;
+    private bool targetRequired = false;
 
-    private GameObject fire;
-    private bool placeFire = true;
-
-
+    private Skill hitpointSkill;
 
     #endregion
+
+
+    #region Unity Functions
 
     private void Start()
     {
@@ -37,11 +35,13 @@ public class SkillLaser : SkillExtension
     {
         drawLine(this.skill.rotateIt());
     }
+
     private void OnDestroy()
     {
-        this.placeFire = false;
-        this.fire = null;
+        this.hitpointSkill = null;
     }
+
+    #endregion
 
 
     #region Functions (private)
@@ -73,97 +73,101 @@ public class SkillLaser : SkillExtension
 
         float offset = 1f;
         Vector2 newPosition = new Vector2(startpoint.x - (this.skill.direction.x * offset), startpoint.y - (this.skill.direction.y * offset));
-
-        Collider2D hitted = new Collider2D();
-        Vector2 hitpoint;
-
-        if (this.autoAim)
+               
+        if (this.targetRequired)
         {
-            if (this.skill.target != null)
-            {
-                //Übernehme Position, wenn ein Ziel vorhanden ist
-                foreach (Collider2D collider in this.skill.target.GetComponentsInChildren<Collider2D>(false))
-                {
-                    if (!collider.isTrigger)
-                    {
-                        hitted = collider;
-                        break;
-                    }
-                }
-
-                hitpoint = this.skill.target.transform.position;
-
-                if (CustomUtilities.Collisions.checkCollision(hitted, this.skill)) this.skill.hitIt(hitted);
-
-                Vector2 temp = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y - startpoint.y) / 2) + startpoint;
-
-                this.laserSprite.transform.position = temp;
-                this.laserSprite.size = new Vector2(Vector3.Distance(hitpoint, startpoint), this.laserSprite.size.y);
-                this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
-            }
-            else
-            {
-                //Wenn ein Lockon vorhanden aber kein Ziel existiert, kein Laser!
-                this.laserSprite.size = new Vector2(0, 0);
-            }
+            if (this.skill.target != null) setLaserToTarget(startpoint, rotation, this.skill.target); //laser to target
+            else drawLaser(); //no Laser
         }
         else
         {
             RaycastHit2D hitInfo = Physics2D.CircleCast(newPosition, this.laserSprite.size.y / 5, this.skill.direction, distance, layerMask);
 
-            hitted = hitInfo.collider;
-            hitpoint = hitInfo.point;
+            Collider2D hitted = hitInfo.collider;
+            Vector2 hitpoint = hitInfo.point;
 
-            if (hitInfo && !hitInfo.collider.isTrigger)
-            {
-                //Ziel bzw. Collider wurde getroffen, zeichne Linie bis zum Ziel
-                if (CustomUtilities.Collisions.checkCollision(hitted, this.skill)) this.skill.hitIt(hitted);
-
-                Vector2 temp = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y - startpoint.y) / 2) + startpoint;
-
-                this.laserSprite.transform.position = temp;
-                this.laserSprite.size = new Vector2(Vector3.Distance(hitpoint, startpoint), this.laserSprite.size.y);
-                this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
-            }
-            else
-            {
-                //Kein Ziel getroffen, zeichne Linie mit max Länge            
-                Vector2 temp = new Vector2(this.skill.direction.x * (this.distance / 2), this.skill.direction.y * (this.distance / 2)) + startpoint;
-
-                this.laserSprite.transform.position = temp;
-                this.laserSprite.size = new Vector2(this.distance, this.laserSprite.size.y);
-                this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
-            }
+            if (hitInfo && !hitInfo.collider.isTrigger) drawLaser(startpoint, hitpoint, rotation, hitted); //Laser         
+            else drawLaser(startpoint, rotation); //Laser max Length
         }
     }
 
-    private void temp(Vector2 hitpoint)
+    private Collider2D getCollider(Character character)
+    {
+        //Übernehme Position, wenn ein Ziel vorhanden ist
+        foreach (Collider2D collider in character.GetComponentsInChildren<Collider2D>(false))
+        {
+            if (!collider.isTrigger) return collider;
+        }
+
+        return null;
+    }
+
+    private void setLaserToTarget(Vector2 startpoint, Vector3 rotation, Character character)
+    {
+        Collider2D collider = getCollider(character);
+
+        if (collider != null)
+        {
+            Vector2 hitpoint = character.transform.position;
+            drawLaser(startpoint, hitpoint, rotation, collider);
+        }
+    }
+
+    #endregion
+
+
+    #region Laser und Impact
+
+    private void drawLaser(Vector2 startpoint, Vector2 hitpoint, Vector3 rotation, Collider2D collider)
+    {
+        if (CustomUtilities.Collisions.checkCollision(collider, this.skill)) this.skill.hitIt(collider);
+        Vector2 position = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y - startpoint.y) / 2) + startpoint;
+
+        this.laserSprite.transform.position = position;
+        this.laserSprite.size = new Vector2(Vector3.Distance(hitpoint, startpoint), this.laserSprite.size.y);
+        this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
+
+        setImpactEffect(hitpoint);
+    }
+
+    private void drawLaser(Vector2 startpoint, Vector3 rotation)
+    {
+        Vector2 position = new Vector2(this.skill.direction.x * (this.distance / 2), this.skill.direction.y * (this.distance / 2)) + startpoint;
+
+        this.laserSprite.transform.position = position;
+        this.laserSprite.size = new Vector2(this.distance, this.laserSprite.size.y);
+        this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
+    }
+
+    private void drawLaser()
+    {
+        this.laserSprite.size = new Vector2(0, 0);
+    }
+
+    private void setImpactEffect(Vector2 hitpoint)
     {
         if (this.impactEffect != null)
         {
             //Generiere einen Treffer
-
-            if (this.fire == null && this.placeFire)
+            if (this.hitpointSkill == null)
             {
-                this.fire = Instantiate(this.impactEffect, hitpoint, Quaternion.identity);
-                this.fire.transform.position = hitpoint;
-                Skill fireSkill = this.fire.GetComponent<Skill>();
+                this.hitpointSkill = Instantiate(this.impactEffect, hitpoint, Quaternion.identity);
+                this.hitpointSkill.transform.position = hitpoint;
 
-                if (fireSkill != null)
+                if (this.hitpointSkill != null)
                 {
                     //Position nicht überschreiben
-                    fireSkill.overridePosition = false;
-                    fireSkill.sender = this.skill.sender;
+                    this.hitpointSkill.overridePosition = false;
+                    this.hitpointSkill.sender = this.skill.sender;
                 }
-
-                fire.hideFlags = HideFlags.HideInHierarchy;
             }
-            else if (this.fire != null && this.placeFire)
+            else
             {
-                this.fire.transform.position = hitpoint;
+                this.hitpointSkill.transform.position = hitpoint;
             }
         }
     }
+
 
     #endregion
 }
