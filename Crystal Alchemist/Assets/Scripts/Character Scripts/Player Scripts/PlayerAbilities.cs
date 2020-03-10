@@ -22,10 +22,12 @@ public class PlayerAbilities : MonoBehaviour
     private TargetingSystem targetingSystem;
 
     public CastBar activeCastbar;
-    public TargetingSystem activeTargetingSystem;
 
     private void Start()
     {
+        this.targetingSystem.gameObject.SetActive(false);
+
+        this.AButton.state = AbilityState.ready;
         //this.AButton = Instantiate(this.AButton);
     }
 
@@ -44,31 +46,30 @@ public class PlayerAbilities : MonoBehaviour
     }
 
     private void useSkill(Ability ability, string button)
-    {        
-        if(Input.GetButton(button)) //hold Button
+    {
+        if (Input.GetButton(button)) //hold Button
         {
-            if (ability.state == AbilityState.notCharged) ability.Charge(); //charge Skill when not full
-            else if (ability.state == AbilityState.charged && ability.isRapidFire) ability.Use(this.player); //use rapidFire when charged
-            else if (ability.state == AbilityState.ready && ability.isRapidFire) ability.Use(this.player); //use rapidFire     
-
-            //Speed during casting
-            showCastBar(ability);
+            if (ability.state == AbilityState.notCharged) ChargeAbility(ability);
+            else if (ability.isRapidFire)
+            {
+                if (ability.state == AbilityState.charged) UseAbility(ability); //use rapidFire when charged
+                else if (ability.state == AbilityState.ready) UseAbility(ability); //use rapidFire
+                else if (ability.state == AbilityState.targetRequired) showTargetingSystem(ability); //show TargetingSystem
+                else if (ability.state == AbilityState.lockOn) UseAbilityOnTargets(ability, false); //use TargetingSystem rapidfire
+            }
         }
         if (Input.GetButtonUp(button)) //release Button
         {
-            if (ability.state == AbilityState.charged && !ability.isRapidFire) ability.Use(this.player); //use Skill when charged
+            UnChargeAbility(ability);
 
-            //Speed during casting reset
-            ability.ResetCharge(); //reset charge when not full
-            hideCastBar();
+            if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbility(ability); //use Skill when charged
+            else if (ability.state == AbilityState.lockOn && ability.isRapidFire) hideTargetingSystem(ability, 1); //hide Targeting System when released         
         }
         else if (Input.GetButtonDown(button)) //press Button
         {
-            if (ability.state == AbilityState.ready) ability.Use(this.player); //use Skill
-            if (ability.state == AbilityState.targeting) showTargetingSystem(ability); //activate Targeting System
-            if (ability.state == AbilityState.targetLocked) ability.Use(this.player, this.activeTargetingSystem.targets); //use Skill from Targeting System
-
-            //hideTargetingSystem(); //hide targeting system
+            if (ability.state == AbilityState.ready) UseAbility(ability); //use Skill
+            else if (ability.state == AbilityState.targetRequired) showTargetingSystem(ability); //activate Targeting System
+            else if (ability.state == AbilityState.lockOn) UseAbilityOnTargets(ability, true);//use Skill on locked Targets and hide Targeting System
         }
     }
 
@@ -85,37 +86,93 @@ public class PlayerAbilities : MonoBehaviour
 
 
 
-    private void showCastBar(Ability ability)
+
+    private void ChargeAbility(Ability ability)
     {
+        ability.Charge(); //charge Skill when not full
+
         if (this.activeCastbar == null && ability.castTime > 0)
         {
             this.activeCastbar = Instantiate(this.castbar, this.player.transform.position, Quaternion.identity);
             this.activeCastbar.setCastBar(this.player, ability);
         }
 
+        //Speed
         //Indicators
         //Animations
     }
 
-    private void hideCastBar()
+    private void UnChargeAbility(Ability ability)
     {
+        ability.ResetCharge(); //reset charge when not full   
         if (this.activeCastbar != null) this.activeCastbar.destroyIt();
 
+        //Speed
         //Indicators
         //Animations
     }
 
     private void showTargetingSystem(Ability ability)
     {
-        if (ability.targetingSystem != null && this.activeTargetingSystem == null)
+        if (!this.targetingSystem.gameObject.activeInHierarchy)
         {
-            this.activeTargetingSystem = Instantiate(this.targetingSystem, this.transform.position, Quaternion.identity, this.transform);
-            this.activeTargetingSystem.setParameters(ability, this.player);
+            ability.state = AbilityState.lockOn;
+            this.targetingSystem.setParameters(ability);
+            this.targetingSystem.gameObject.SetActive(true);
         }
     }
 
-    private void hideTargetingSystem()
+
+    #region useAbility
+
+    private void UseAbility(Ability ability)
     {
-        if (this.activeTargetingSystem != null) this.activeTargetingSystem.DestroyIt();
+        if (amountOfAbilities(ability))
+        {
+            CustomUtilities.Skills.instantiateSkill(ability.skill, this.player);
+            ability.ResetCoolDown();
+        }
+    }
+
+    private void UseAbilityOnTargets(Ability ability, bool hideTargetingSystem)
+    {
+        List<Character> targets = new List<Character>();
+        targets.AddRange(this.targetingSystem.getTargets());
+        if (hideTargetingSystem) this.hideTargetingSystem(ability, targets.Count);
+
+        if(amountOfAbilities(ability)) StartCoroutine(useSkill(ability, targets));
+    }
+
+    private IEnumerator useSkill(Ability ability, List<Character> targets)
+    {
+        float damageReduce = targets.Count;
+        int i = 0;
+
+        foreach (Character target in targets)
+        {
+            if (target.currentState != CharacterState.dead
+                && target.currentState != CharacterState.respawning)
+            {
+                CustomUtilities.Skills.instantiateSkill(ability.skill, this.player, target, damageReduce);
+                yield return new WaitForSeconds(this.targetingSystem.getDelay());
+            }
+            i++;
+        }
+    }
+
+    private void hideTargetingSystem(Ability ability, int count)
+    {
+        this.targetingSystem.gameObject.SetActive(false);
+
+        if (count > 0) ability.ResetCoolDown(); //reset cooldown only when targets attacked
+        else ability.state = AbilityState.targetRequired;
+    }
+
+    #endregion
+
+
+    private bool amountOfAbilities(Ability ability)
+    {
+        return (CustomUtilities.Skills.getAmountOfSameSkills(ability.skill, this.player.activeSkills, this.player.activePets) <= ability.maxAmount);
     }
 }

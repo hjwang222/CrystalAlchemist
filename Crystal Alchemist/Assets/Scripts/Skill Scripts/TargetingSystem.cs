@@ -5,9 +5,8 @@ using System.Linq;
 
 public class TargetingSystem : MonoBehaviour
 {
-    public List<Character> targets = new List<Character>();
-    public List<Character> targetsInRange = new List<Character>();
-    private List<GameObject> appliedIndicators = new List<GameObject>();
+    [SerializeField]
+    private Player player;
 
     [SerializeField]
     private GameObject lockOnIndicator;
@@ -15,39 +14,22 @@ public class TargetingSystem : MonoBehaviour
     [SerializeField]
     private GameObject rangeIndicator;
 
-    private float duration;
-    private float maxAmount;
-    private TargetingMode mode;
+    private List<Character> targets = new List<Character>();
+    private List<Character> targetsInRange = new List<Character>();
+    private List<GameObject> appliedIndicators = new List<GameObject>();
     private int index;
-    private bool showIndicator;
-    private string button = "";
     private bool selectAll = false;
     private bool inputPossible = true;
-    private bool showRange = false;
-    public Skill skill;
-    private Character sender; 
-    private Ability ability;
 
-    public void setParameters(Ability ability, Character sender)
+    private LockOnSystem properties;
+    private Skill skill;
+
+
+    #region Unity Functions
+
+    private void OnEnable()
     {
-        this.duration = ability.targetingSystem.targetingDuration;
-        this.maxAmount = ability.targetingSystem.maxAmountOfTargets;
-        this.mode = ability.targetingSystem.targetingMode;
-        this.showIndicator = ability.targetingSystem.showIndicator;
-        this.showRange = ability.targetingSystem.showRange;
-        this.skill = ability.skill;
-        this.ability = ability;
-        this.button = "AButton";
-        this.sender = sender;
-    }
-
-
-
-
-
-    private void Start()
-    {
-        if (!this.showRange) this.rangeIndicator.SetActive(false);
+        if (!this.properties.showRange) this.rangeIndicator.SetActive(false);
         else this.rangeIndicator.SetActive(true);
 
         StartCoroutine(delayCo());
@@ -55,17 +37,10 @@ public class TargetingSystem : MonoBehaviour
 
     private void Update()
     {
-        if (this.ability.state == AbilityState.targeting)
-        {
-            if (this.mode == TargetingMode.auto)
-            {
-                selectAllNearestTargets();
-                this.ability.state = AbilityState.targetLocked;
-            }
-            else selectTargetManually();
+        if (this.properties.targetingMode == TargetingMode.auto) selectAllNearestTargets();
+        else selectTargetManually();
 
-            updateIndicator();
-        }
+        updateIndicator();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,32 +56,61 @@ public class TargetingSystem : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-        if (CustomUtilities.Collisions.checkCollision(collision, this.skill, this.sender) && character != null)
+        if (CustomUtilities.Collisions.checkCollision(collision, this.skill, this.player) && character != null)
         {
             if (this.targetsInRange.Contains(character)) this.targetsInRange.Remove(character);
             if (this.targets.Contains(character)) this.targets.Remove(character);
         }
     }
 
-
-
-
-
-
-    private void addTarget(Collider2D collision)
+    private void OnDisable()
     {
-        Character character = collision.GetComponent<Character>();
-        if (CustomUtilities.Collisions.checkCollision(collision, this.skill, this.sender) && character != null)
+        foreach (GameObject applied in this.appliedIndicators)
         {
-            if (!this.targetsInRange.Contains(character)) this.targetsInRange.Add(character);
+            Destroy(applied);
         }
-
-        this.targetsInRange = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
+        this.appliedIndicators.Clear();
     }
 
-    public void DestroyIt()
+    #endregion
+
+
+    #region get set
+
+    public void setParameters(Ability ability)
     {
-        Destroy(this.gameObject);
+        this.properties = ability.targetingSystem;
+        this.skill = ability.skill;
+    }
+
+    public List<Character> getTargets()
+    {
+        return this.targets;
+    }
+
+    public float getDelay()
+    {
+        return this.properties.multiHitDelay;
+    }
+
+    #endregion
+
+
+    #region Target Functions
+
+    private void selectNextTarget(int value)
+    {
+        this.targets.Clear();
+        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.player.transform.position))).ToList<Character>();
+
+        if (this.targetsInRange.Count > 0)
+        {
+            this.index += value;
+            if (this.index >= sorted.Count) this.index = 0;
+            else if (index < 0) this.index = sorted.Count - 1;
+
+            addTarget(sorted[this.index]);
+        }
     }
 
     private void selectTargetManually()
@@ -116,12 +120,6 @@ public class TargetingSystem : MonoBehaviour
 
         if (this.inputPossible)
         {
-            if (Input.GetButtonDown(this.button))
-            {
-                this.ability.state = AbilityState.targetLocked;
-                return;
-            }
-
             float valueX = Input.GetAxisRaw("Cursor Horizontal");
             float valueY = Input.GetAxisRaw("Cursor Vertical");
 
@@ -141,30 +139,26 @@ public class TargetingSystem : MonoBehaviour
         }
     }
 
-    private void selectNextTarget(int value)
-    {
-        this.targets.Clear();
-        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
-
-        if (this.targetsInRange.Count > 0)
-        {
-            this.index += value;
-            if (this.index >= sorted.Count) this.index = 0;
-            else if (index < 0) this.index = sorted.Count - 1;
-
-            addTarget(sorted[this.index]);
-        }
-    }
-
     private void selectAllNearestTargets()
     {
         this.targets.Clear();
-        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
+        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.player.transform.position))).ToList<Character>();
 
-        for (int i = 0; i < this.maxAmount && i < sorted.Count; i++)
+        for (int i = 0; i < this.properties.maxAmountOfTargets && i < sorted.Count; i++)
         {
             addTarget(sorted[i]);
         }
+    }
+
+    private void addTarget(Collider2D collision)
+    {
+        Character character = collision.GetComponent<Character>();
+        if (CustomUtilities.Collisions.checkCollision(collision, this.skill, this.player) && character != null)
+        {
+            if (!this.targetsInRange.Contains(character)) this.targetsInRange.Add(character);
+        }
+
+        this.targetsInRange = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.player.transform.position))).ToList<Character>();
     }
 
     private void addTarget(Character character)
@@ -172,9 +166,14 @@ public class TargetingSystem : MonoBehaviour
         if (!this.targets.Contains(character)) this.targets.Add(character);
     }
 
+    #endregion
+
+
+    #region Indicator Functions
+
     private void updateIndicator()
     {
-        if (this.showIndicator)
+        if (this.properties.showIndicator)
         {
             addIndicator();
             removeIndicator();
@@ -209,6 +208,9 @@ public class TargetingSystem : MonoBehaviour
         this.appliedIndicators = tempAppliedList;
     }
 
+    #endregion
+
+
     private IEnumerator delayCo()
     {
         this.inputPossible = false;
@@ -216,12 +218,4 @@ public class TargetingSystem : MonoBehaviour
         this.inputPossible = true;
     }
 
-    private void OnDestroy()
-    {
-        foreach (GameObject applied in this.appliedIndicators)
-        {
-            Destroy(applied);
-        }
-        this.appliedIndicators.Clear();
-    }
 }

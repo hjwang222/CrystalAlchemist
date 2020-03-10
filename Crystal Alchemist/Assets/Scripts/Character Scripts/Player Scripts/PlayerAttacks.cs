@@ -227,7 +227,7 @@ public class PlayerAttacks : MonoBehaviour
     }
 
     private void activateSkillFromTargetingSystem(Skill skill)
-    {
+    {/*
         if (this.player.activeLockOnTarget != null
             //&& this.player.activeLockOnTarget.isReadyToFire(skill)
             )
@@ -241,7 +241,7 @@ public class PlayerAttacks : MonoBehaviour
                 //&& targetingSystemModule.targetingMode != TargetingMode.auto
                 )
             {
-                this.player.activeLockOnTarget.DestroyIt();
+                //this.player.activeLockOnTarget.DestroyIt();
             }
             else if (this.player.activeLockOnTarget.targets.Count > 0
                 //|| targetingSystemModule.targetingMode == TargetingMode.auto
@@ -251,7 +251,7 @@ public class PlayerAttacks : MonoBehaviour
 
                 StartCoroutine(fireSkillToMultipleTargets(this.player.activeLockOnTarget, skill));
             }
-        }
+        }*/
     }
 
     public void deactivateAllSkills()
@@ -295,6 +295,8 @@ public class PlayerAttacks : MonoBehaviour
 
     private IEnumerator fireSkillToMultipleTargets(TargetingSystem targetingSystem, Skill skill)
     {
+        yield return new WaitForSeconds(1f);
+        /*
         float damageReduce = targetingSystem.targets.Count;
         int i = 0;
 
@@ -308,9 +310,9 @@ public class PlayerAttacks : MonoBehaviour
                 yield return new WaitForSeconds(1f);
             }
             i++;
-        }
+        }*/
 
-        this.player.activeLockOnTarget.DestroyIt();
+        //this.player.activeLockOnTarget.DestroyIt();
     }
 
     private void fireSkillToSingleTarget(Character target, float damageReduce, Skill skill)

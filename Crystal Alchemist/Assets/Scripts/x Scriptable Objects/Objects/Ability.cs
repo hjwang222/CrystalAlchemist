@@ -9,10 +9,11 @@ public enum AbilityState
     onCooldown,
     notCharged,
     charged,
-    targeting,
-    targetLocked,
+    targetRequired,
+    lockOn,
     ready
 }
+
 
 [CreateAssetMenu(menuName = "Game/Ability")]
 public class Ability : ScriptableObject
@@ -25,7 +26,7 @@ public class Ability : ScriptableObject
     public float castTime;
 
     [SerializeField]
-    private int maxAmount = 1;
+    public int maxAmount = 1;
 
     [SerializeField]
     public bool isRapidFire = false;
@@ -40,7 +41,8 @@ public class Ability : ScriptableObject
     public float holdTimer;
 
     public AbilityState state;
-       
+
+    #region Update Functions
 
     public void Update()
     {
@@ -65,11 +67,13 @@ public class Ability : ScriptableObject
             }
             else if (this.targetingSystem != null)
             {
-                this.state = AbilityState.targeting;
+                if(this.state != AbilityState.lockOn) this.state = AbilityState.targetRequired;
             }
             else this.state = AbilityState.ready;
         }
     }
+
+    #endregion
 
 
     #region functions
@@ -85,43 +89,10 @@ public class Ability : ScriptableObject
         else if (this.keepCast && this.holdTimer > this.castTime) this.holdTimer = 0;
     }
 
-    public void Use(Character sender)
-    {
-        Use(sender, null);
-    }
-
-    public void Use(Character sender, List<Character> targets)
+    public void ResetCoolDown()
     {
         this.cooldownLeft = this.cooldown;
-        //Coroutine
-    }
-
-
-
-
-    private IEnumerator useSkill(Character sender, List<Character> targets, Skill skill)
-    {
-        if (targets != null && targets.Count > 0)
-        {
-            float damageReduce = targets.Count;
-            int i = 0;
-
-            foreach (Character target in targets)
-            {
-                if (target.currentState != CharacterState.dead
-                    && target.currentState != CharacterState.respawning)
-                {                    
-                    CustomUtilities.Skills.instantiateSkill(skill, sender, target, damageReduce);
-                    yield return new WaitForSeconds(1f);
-                }
-                i++;
-            }
-        }
-        else
-        {
-            CustomUtilities.Skills.instantiateSkill(skill, sender);
-        }
-    }
+    }    
 
     #endregion
 
