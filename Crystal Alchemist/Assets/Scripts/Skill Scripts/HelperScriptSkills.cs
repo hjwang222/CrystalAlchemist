@@ -20,11 +20,6 @@ public class HelperScriptSkills : MonoBehaviour
         this.skill.PlaySoundEffectOnce(clip);
     }
 
-    public void ActivateIt()
-    {
-        this.skill.ActivateIt();
-    }
-
     public void SetTriggerActive(int value)
     {
         this.skill.SetTriggerActive(value);

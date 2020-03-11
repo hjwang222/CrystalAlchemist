@@ -32,12 +32,10 @@ public class SkillProjectileHit : SkillHitTrigger
             && !isReflected(hittedCharacter))
         {
             CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Hit");
-            // if (this.shadow != null) this.shadow.gameObject.SetActive(false);
-            this.skill.stopVelocity();
+            this.skill.GetComponent<SkillProjectile>().stopVelocity();
 
             placeFire();
-
-            this.skill.isActive = false;
+            this.skill.SetTriggerActive(0);
         }
     }
 

@@ -42,13 +42,20 @@ public class LoadSystem : MonoBehaviour
         }
     }
 
-    public static void loadPlayerSkills(Player player, string saveGameSlot)
+    public static void loadPlayerSkills(PlayerAbilities playerAbilities, string saveGameSlot)
     {
         PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
 
-        if (data != null && data.skills.Count > 0)
+        if (data != null && data.abilities.Count > 0)
         {
-            loadSkills(data, player);
+            foreach(string[] elem in data.abilities)
+            {
+                string name = elem[1];
+                string button = elem[0];
+
+                Ability ability = playerAbilities.skillSet.getAbilityByName(name);
+                playerAbilities.buttons.SetAbilityToButton(button, ability);
+            }
         }
     }
 
@@ -127,22 +134,5 @@ public class LoadSystem : MonoBehaviour
         }
     }
 
-    private static void loadSkills(PlayerData data, Player player)
-    {
-        foreach (string[] elem in data.skills)
-        {
-            Skill skill = CustomUtilities.Skills.getSkillByName(player.skillSet, elem[1]);
-            string button = elem[0];
-
-            switch (button)
-            {
-                case "A": player.AButton = skill; break;
-                case "B": player.BButton = skill; break;
-                case "X": player.XButton = skill; break;
-                case "Y": player.YButton = skill; break;
-                case "RB": player.RBButton = skill; break;
-                case "LB": player.LBButton = skill; break;
-            }
-        }
-    }
+    
 }

@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-
-
+using System.Collections;
 
 public class Player : Character
 {
-    [FoldoutGroup("Skills", expanded: false)]
-    [Tooltip("Skills, welcher der Character verwenden kann")]
-    public List<Skill> skillSet = new List<Skill>();
-
     [BoxGroup("Pflichtfelder")]
     [Required]
     public TimeValue timeValue;
@@ -82,18 +74,6 @@ public class Player : Character
     public FloatValue fadingDuration;
 
     [HideInInspector]
-    public Skill AButton;
-    [HideInInspector]
-    public Skill BButton;
-    [HideInInspector]
-    public Skill XButton;
-    [HideInInspector]
-    public Skill YButton;
-    [HideInInspector]
-    public Skill RBButton;
-    [HideInInspector]
-    public Skill LBButton;
-    [HideInInspector]
     public Vector3 change;
 
 
@@ -123,30 +103,22 @@ public class Player : Character
 
         updateResource(ResourceType.life, null, 0);
         updateResource(ResourceType.mana, null, 0);
-        //this.currencySignalUI.Raise();
     }
 
     public override void prepareSpawnOut()
     {
         base.prepareSpawnOut();
-        this.GetComponent<PlayerAttacks>().deactivateAllSkills();
+        this.deactivateAllSkills();
         this.fadeSignal.Raise(false);
     }
 
-    public void setStateMenuOpened(CharacterState newState)
+    private void deactivateAllSkills()
     {
-        StopCoroutine(CustomUtilities.Skills.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
-        this.currentState = newState;
-    }
-
-    public void setStateAfterMenuClose(CharacterState newState)
-    {
-        StartCoroutine(CustomUtilities.Skills.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
-    }
-
-    public void showDialogBox(string text)
-    {
-        if (this.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
+        for (int i = 0; i < this.activeSkills.Count; i++)
+        {
+            Skill activeSkill = this.activeSkills[i];
+            activeSkill.DeactivateIt();
+        }
     }
 
     public override void KillIt()
@@ -177,22 +149,36 @@ public class Player : Character
 
         switch (type)
         {
-            case ResourceType.life:
-                {
-                    callSignal(this.healthSignalUI, value); break;
-                }
-            case ResourceType.mana:
-                {
-                    callSignal(this.manaSignalUI, value); break;
-                }
+            case ResourceType.life: callSignal(this.healthSignalUI, value); break;
+            case ResourceType.mana: callSignal(this.manaSignalUI, value); break;
         }
     }
 
 
+    #region Menu und DialogBox
 
+    public void setStateMenuOpened(CharacterState newState)
+    {
+        StopCoroutine(delayInputPlayerCO(GlobalValues.playerDelay, newState));
+        this.currentState = newState;
+    }
 
+    public void setStateAfterMenuClose(CharacterState newState)
+    {
+        StartCoroutine(delayInputPlayerCO(GlobalValues.playerDelay, newState));
+    }
 
+    public void showDialogBox(string text)
+    {
+        if (this.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
+    }
 
+    public IEnumerator delayInputPlayerCO(float delay, CharacterState newState)
+    {
+        //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
+        yield return new WaitForSeconds(delay);
+        this.currentState = newState;
+    }
 
-
+    #endregion
 }

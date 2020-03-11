@@ -330,7 +330,7 @@ public class AIEvents : MonoBehaviour
             {
                 if (action.skillinstance != null && action.type == AIActionType.skill)
                 {
-                    action.skillinstance.cooldownTimeLeft -= (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
+                    //action.skillinstance.cooldownTimeLeft -= (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
                 }
             }
         }
@@ -341,7 +341,7 @@ public class AIEvents : MonoBehaviour
             {
                 if (action.skillinstance != null && action.type == AIActionType.skill)
                 {
-                    action.skillinstance.cooldownTimeLeft -= (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
+                    //action.skillinstance.cooldownTimeLeft -= (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
                 }
             }
         }
@@ -401,8 +401,10 @@ public class AIEvents : MonoBehaviour
             {
                 if (this.activeAction.skillinstance != null)
                 {
+                    /*
                     if (this.activeAction.cast >= 0) this.activeAction.skillinstance.cast = this.activeAction.cast;
-                    if (this.activeAction.cD >= 0) this.activeAction.skillinstance.cooldown = this.activeAction.cD;                    
+                    if (this.activeAction.cD >= 0) this.activeAction.skillinstance.cooldown = this.activeAction.cD;   
+                    */
                 }
 
                 casting();
@@ -428,11 +430,11 @@ public class AIEvents : MonoBehaviour
     {
         if (this.activeAction.type == AIActionType.skill
          && this.activeAction.skillinstance != null)
-        {
+        {/*
             if (this.enemy.target != null)
             {
                 if (this.activeAction.skillinstance.target != this.enemy.target) this.activeAction.skillinstance.target = this.enemy.target;
-
+                
                 if (this.activeAction.skillinstance.holdTimer < this.activeAction.skillinstance.cast)
                 {
                     this.activeAction.skillinstance.holdTimer += (Time.deltaTime * this.enemy.timeDistortion * this.enemy.spellspeed);
@@ -466,7 +468,7 @@ public class AIEvents : MonoBehaviour
                     //cast done, use action                
                     useAction(this.activeAction);
                 }
-            }            
+            }     */
         }
         else
         {
@@ -662,16 +664,17 @@ public class AIEvents : MonoBehaviour
     private bool skillCanBeUsed(Skill skill)
     {
         if (skill != null)
-        {
+        {/*
             if (skill.cooldownTimeLeft <= 0)            
             {
                 int currentAmountOfSameSkills = CustomUtilities.Skills.getAmountOfSameSkills(skill, this.enemy.activeSkills, this.enemy.activePets);
 
+                
                 if (currentAmountOfSameSkills < skill.maxAmounts)
                 {
                     return true;
                 }
-            }
+        }*/
         }
 
         return false;
@@ -695,7 +698,7 @@ public class AIEvents : MonoBehaviour
             //useskill
             Skill usedSkill = CustomUtilities.Skills.instantiateSkill(action.skillinstance, this.enemy, this.enemy.target);
             action.skillinstance.target = null;
-            action.skillinstance.cooldownTimeLeft = action.skillinstance.cooldown;
+            //action.skillinstance.cooldownTimeLeft = action.skillinstance.cooldown;
             actionUsed = true;
             //Debug.Log("Using action: " + usedSkill.skillName);
         }

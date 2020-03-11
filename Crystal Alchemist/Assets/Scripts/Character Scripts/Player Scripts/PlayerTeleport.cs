@@ -17,11 +17,6 @@ public class PlayerTeleport : MonoBehaviour
         this.lastTeleport.position = position;
         this.lastTeleport.location = targetScene;
         this.lastTeleport.lastTeleportSet = last;
-
-        foreach (Skill skill in player.skillSet)
-        {
-            skill.preLoad();
-        }
     }
 
     public bool lastTeleportEnabled()

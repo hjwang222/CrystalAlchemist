@@ -99,6 +99,7 @@ public class SkillSequence : MonoBehaviour
                         if (skill.GetComponent<SkillIndicatorModule>() != null) skill.GetComponent<SkillIndicatorModule>().showIndicator();
                         if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().showCastingAnimation();
 
+                        /*
                         if (skill.holdTimer < skill.cast)
                         {
                             skill.holdTimer += (Time.deltaTime * this.sender.timeDistortion * this.sender.spellspeed);
@@ -108,7 +109,7 @@ public class SkillSequence : MonoBehaviour
                             if (skill.GetComponent<SkillIndicatorModule>() != null) skill.GetComponent<SkillIndicatorModule>().hideIndicator();
                             if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().hideCastingAnimation();
                             mod.gameObject.SetActive(true);
-                        }
+                        }*/
                     }
                     else
                     {

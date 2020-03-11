@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4229681705441237260}
   - component: {fileID: 4229681705441237250}
   - component: {fileID: 5889971261589698111}
-  - component: {fileID: 7277092723367886335}
   - component: {fileID: 2029259155831185462}
   - component: {fileID: 1786086293429796885}
   - component: {fileID: 8534472210655833774}
@@ -146,59 +145,24 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  speed: 0
   positionOffset: 0
-  maxAmounts: 1
   attachToSender: 1
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 0
   lockMovementonDuration: 0
-  deactivateByButtonUp: 1
-  deactivateByButtonDown: 0
-  isRapidFire: 1
-  keepHoldTimer: 0
   canAffectedBytimeDistortion: 0
-  delay: 0
-  duration: 9999
-  cooldown: 1
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 0
+  maxDuration: 9999
   sender: {fileID: 0}
-  delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
   overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
   basicRequirementsExists: 1
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
-  holdTimer: 0
   triggerIsActive: 1
   setActive: 1
---- !u!114 &7277092723367886335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680506914304237522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  skillDescription: Elektrisiert Ziele im Umkreis
-  skillDescriptionEnglish: Shocks near targets
-  category: 1
-  orderIndex: 18
-  icon: {fileID: 21300028, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
 --- !u!114 &2029259155831185462
 MonoBehaviour:
   m_ObjectHideFlags: 0

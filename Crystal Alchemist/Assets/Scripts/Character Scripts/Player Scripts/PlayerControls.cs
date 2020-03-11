@@ -7,9 +7,6 @@ public class PlayerControls : MonoBehaviour
     private Player player;
 
     [SerializeField]
-    private PlayerAttacks playerAttacks;
-
-    [SerializeField]
     private PlayerMovement playerMovement;
 
     private void Update()
@@ -67,24 +64,7 @@ public class PlayerControls : MonoBehaviour
                 {
                     this.playerMovement.UpdateAnimationAndMove();
                 }
-            }
-
-            if (this.player.currentState != CharacterState.knockedback)
-            {
-                if (!isButtonPressed(enumButton.AButton)
-                && !isButtonPressed(enumButton.BButton)
-                && !isButtonPressed(enumButton.XButton)
-                && !isButtonPressed(enumButton.YButton)
-                && !isButtonPressed(enumButton.RBButton)
-                && !isButtonPressed(enumButton.LBButton)) this.playerAttacks.currentButtonPressed = "";
-
-                this.playerAttacks.updateSkillButtons(enumButton.AButton);
-                this.playerAttacks.updateSkillButtons(enumButton.BButton);
-                this.playerAttacks.updateSkillButtons(enumButton.XButton);
-                this.playerAttacks.updateSkillButtons(enumButton.YButton);
-                this.playerAttacks.updateSkillButtons(enumButton.RBButton);
-                this.playerAttacks.updateSkillButtons(enumButton.LBButton);
-            }
+            }            
         }
     }
 }

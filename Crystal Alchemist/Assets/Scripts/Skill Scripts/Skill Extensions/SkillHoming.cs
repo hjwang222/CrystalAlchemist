@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillHoming : SkillExtension
+public class SkillHoming : SkillProjectile
 {
     [BoxGroup("Homing-spezifische Attribute")]
     public float offSetTime;
@@ -20,7 +20,7 @@ public class SkillHoming : SkillExtension
     {
         if (this.skill.target != null)
         {
-            this.skill.stopVelocity();
+            this.stopVelocity();
             if (Vector3.Distance(this.skill.target.transform.position, this.transform.position) > 0.25f)
             {
                 //Ermittle Position des Ziels
@@ -51,7 +51,7 @@ public class SkillHoming : SkillExtension
 
                 this.skill.direction = targetPosition - (Vector2)this.transform.position;
                 //this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
-                this.skill.setVelocity();
+                this.setVelocity();
             }
             else
             {

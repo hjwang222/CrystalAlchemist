@@ -7,25 +7,22 @@ using UnityEngine.UI;
 public class SkillSlot : MonoBehaviour
 {    
     public Image image;
-    public Skill skill;
+    public Ability ability;
     public int ID;
 
     private void Awake()
     {
-        // this.ID = ((int.Parse(this.gameObject.transform.parent.name.Replace("Page ",""))-1)*10)+ int.Parse(this.gameObject.transform.name);
         this.ID = (this.gameObject.transform.parent.transform.parent.transform.GetSiblingIndex() * 10) + (this.gameObject.transform.GetSiblingIndex() + 1);
     }
 
-    public void setSkill(Skill skill)
+    public void setSkill(Ability ability)
     {
-        if (skill == null || skill.GetComponent<SkillBookModule>() == null)
-            //this.image.color = new Color(1f, 1f, 1f, 0.2f);
-            this.image.enabled = false;
+        if (ability == null || ability.info == null) this.image.enabled = false;
         else
         {
-            this.skill = skill;
+            this.ability = ability;
             this.image.enabled = true;
-            this.image.sprite = skill.GetComponent<SkillBookModule>().icon;
+            this.image.sprite = ability.info.icon;
             this.image.color = new Color(1f, 1f, 1f, 1f);
         }
     }    

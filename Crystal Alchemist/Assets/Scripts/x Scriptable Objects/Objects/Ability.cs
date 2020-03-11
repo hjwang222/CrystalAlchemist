@@ -1,10 +1,10 @@
 ﻿using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum AbilityState
 {
+    disabled,
     onCooldown,
     notCharged,
     charged,
@@ -13,7 +13,13 @@ public enum AbilityState
     ready
 }
 
-[CreateAssetMenu(menuName = "Game/Ability")]
+public enum AbilityRequirements
+{
+    none,
+    teleport
+}
+
+[CreateAssetMenu(menuName = "Skills/Ability")]
 public class Ability : ScriptableObject
 {
     [BoxGroup("Objects")]
@@ -24,18 +30,24 @@ public class Ability : ScriptableObject
     [SerializeField]
     public LockOnSystem targetingSystem;
 
+    [BoxGroup("Objects")]
+    [SerializeField]
+    public SkillBookInfo info;
 
     [BoxGroup("Restrictions")]
     [SerializeField]
-    private float cooldown;
+    public float cooldown;
 
     [BoxGroup("Restrictions")]
     public float castTime;
 
     [BoxGroup("Restrictions")]
     [SerializeField]
-    public int maxAmount = 1;
+    private int maxAmount = 1;
 
+    [BoxGroup("Restrictions")]
+    [SerializeField]
+    public AbilityRequirements requirements = AbilityRequirements.none;
 
     [BoxGroup("Booleans")]
     [SerializeField]
@@ -52,8 +64,6 @@ public class Ability : ScriptableObject
     [BoxGroup("Booleans")]
     [SerializeField]
     public bool keepCast = false;
-
-
 
     [BoxGroup("Debug")]
     public float cooldownLeft;
@@ -117,6 +127,53 @@ public class Ability : ScriptableObject
     {
         this.cooldownLeft = this.cooldown;
         this.state = AbilityState.onCooldown;
+    }
+
+    public bool canUseAbility(Character character)
+    {
+        bool enoughResource = this.isResourceEnough(character);
+        bool notToMany = (getAmountOfSameSkills(this.skill, character.activeSkills, character.activePets) <= this.maxAmount);
+
+        return (notToMany && enoughResource);
+    }
+
+    private int getAmountOfSameSkills(Skill skill, List<Skill> activeSkills, List<Character> activePets)
+    {
+        int result = 0;
+        SkillSummon summonSkill = skill.GetComponent<SkillSummon>();
+
+        if (summonSkill == null)
+        {
+            for (int i = 0; i < activeSkills.Count; i++)
+            {
+                Skill activeSkill = activeSkills[i];
+                if (activeSkill.skillName == skill.skillName) result++;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < activePets.Count; i++)
+            {
+                if (activePets[i] != null && activePets[i].stats.characterName == summonSkill.getPetName())
+                {
+                    result++;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private bool isResourceEnough(Character character)
+    {
+        SkillSenderModule senderModule = this.skill.GetComponent<SkillSenderModule>();
+
+        if (senderModule == null) return true;
+        else
+        {
+            if (character.getResource(senderModule.resourceType, senderModule.item) + senderModule.addResourceSender >= 0) return true;
+            else return false;
+        }
     }
 
     #endregion

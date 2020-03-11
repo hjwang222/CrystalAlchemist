@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 564329192152756961}
   - component: {fileID: 8557586700020975895}
   - component: {fileID: 6086066880683234547}
-  - component: {fileID: 6029647470300104532}
   - component: {fileID: 8675766369740622298}
   - component: {fileID: 7817998858656526167}
   - component: {fileID: 5219678606332422380}
@@ -59,41 +58,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 8557586700020975895}
   animator: {fileID: 6086066880683234547}
   shadow: {fileID: 0}
-  speed: 0
   positionOffset: 0.125
-  maxAmounts: 1
   attachToSender: 1
-  doCastDuringDelay: 0
-  comboAmount: 99
-  cast: 0
-  lockMovementonDuration: 9999
-  deactivateByButtonUp: 1
-  deactivateByButtonDown: 0
-  isRapidFire: 1
-  keepHoldTimer: 0
+  lockDirection: 1
   canAffectedBytimeDistortion: 0
-  delay: 0
-  duration: 9999
-  cooldown: 0
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 0
+  maxDuration: 1
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
+  overridePosition: 1
 --- !u!212 &564329192152756961
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -185,24 +159,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6029647470300104532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6086066880683234544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  skillDescription: "Sch\xFCtzt vor den meisten Angriffen"
-  skillDescriptionEnglish: Protecting over the most attacks
-  category: 0
-  orderIndex: 4
-  icon: {fileID: 21300002, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
 --- !u!114 &8675766369740622298
 MonoBehaviour:
   m_ObjectHideFlags: 0

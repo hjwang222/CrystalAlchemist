@@ -15,7 +15,7 @@ public class SkillReflector : SkillExtension
                 if (skill.myRigidbody != null)
                 {
                     skill.direction = Vector2.Reflect(skill.direction, this.skill.direction);
-                    skill.setVelocity();
+                    skill.GetComponent<SkillProjectile>().setVelocity();
                     skill.transform.rotation = CustomUtilities.Rotation.getRotation(skill.direction);
                 }
             }

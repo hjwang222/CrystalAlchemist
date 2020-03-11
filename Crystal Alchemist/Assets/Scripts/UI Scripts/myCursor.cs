@@ -114,13 +114,13 @@ public class myCursor : MonoBehaviour
                 {
                     this.infoBox.Show(itemUI.getItem());
                 }
-                else if (skillSlot != null && skillSlot.skill != null)
+                else if (skillSlot != null && skillSlot.ability != null)
                 {
-                    this.infoBox.Show(skillSlot.skill);
+                    this.infoBox.Show(skillSlot.ability);
                 }
-                else if (activeSlot != null && activeSlot.skill != null)
+                else if (activeSlot != null && activeSlot.ability != null)
                 {
-                    this.infoBox.Show(activeSlot.skill);
+                    this.infoBox.Show(activeSlot.ability);
                 }
                 else if (attributesStat != null)
                 {

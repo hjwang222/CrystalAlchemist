@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 266771f26e0200047a77d2d39c8b8900, type: 3}
-  m_Name: Sword
+  m_Name: Stromschlag
   m_EditorClassIdentifier: 
   skill: {fileID: 5889971261589698111, guid: 8d38c6d44fc7878428ee4d926eeff611, type: 3}
+  targetingSystem: {fileID: 11400000, guid: 9f069becde8299f49baf9e14943581a9, type: 2}
+  info: {fileID: 11400000, guid: 2e6328e13742cd241809b60a236f07cc, type: 2}
   cooldown: 2
   castTime: 0
   maxAmount: 1
   isRapidFire: 1
   remoteActivation: 0
-  deactivateButtonUp: 0
+  deactivateButtonUp: 1
   keepCast: 0
-  targetingSystem: {fileID: 11400000, guid: 9f069becde8299f49baf9e14943581a9, type: 2}
   cooldownLeft: 0
   holdTimer: 0
-  state: 5
+  state: 3

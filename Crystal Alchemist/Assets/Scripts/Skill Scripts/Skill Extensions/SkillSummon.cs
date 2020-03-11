@@ -8,25 +8,13 @@ public class SkillSummon : SkillExtension
     [SerializeField]
     private Character summon;
 
-    [Tooltip("true = beim Start, ansonsten nach Delay")]
-    [SerializeField]
-    private bool summonInstantly = true;
-
     [SerializeField]
     [Range(0,6)]
     private float immortalTimerPet = 0;
 
     private void Start()
     {
-        if (this.summonInstantly) summoning();
-    }
-
-    private void Update()
-    {
-        if (this.skill.delayTimeLeft <= 0 && !this.summonInstantly)
-        {
-            summoning();
-        }
+        summoning();
     }
 
     public string getPetName()
@@ -54,8 +42,6 @@ public class SkillSummon : SkillExtension
             objectPet.direction = this.skill.direction;
             objectPet.changeAnim(objectPet.direction);
             if (this.immortalTimerPet > 0) objectPet.setImmortalAtStart(this.immortalTimerPet);
-        }
-
-        
+        }        
     }
 }

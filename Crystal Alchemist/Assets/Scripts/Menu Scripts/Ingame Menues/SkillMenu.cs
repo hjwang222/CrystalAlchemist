@@ -57,15 +57,17 @@ public class SkillMenu : MenuControls
     private GameObject nextPage;
 
     [HideInInspector]
-    public Skill selectedSkill;
+    public Ability selectedAbility;
 
     #endregion
 
 
     #region Unity Functions
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+
         setSkillsToSlots(SkillType.physical);
         setSkillsToSlots(SkillType.magical);
         setSkillsToSlots(SkillType.item);
@@ -77,7 +79,7 @@ public class SkillMenu : MenuControls
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            if (this.selectedSkill != null) selectSkillFromSkillSet(null);
+            if (this.selectedAbility != null) selectSkillFromSkillSet(null);
             else if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
             else exitMenu();
         }
@@ -106,22 +108,22 @@ public class SkillMenu : MenuControls
 
     public void showSkillDetails(SkillSlot slot)
     {
-        showSkillDetails(slot.skill);
+        showSkillDetails(slot.ability);
     }
 
     public void showSkillDetails(SkillMenuActiveSlots slot)
     {
-        showSkillDetails(slot.skill);
+        showSkillDetails(slot.ability);
     }
 
-    private void showSkillDetails(Skill skill)
+    private void showSkillDetails(Ability ability)
     {
-        if (skill != null)
+        if (ability != null)
         {
-            SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
-            SkillSenderModule senderModule = skill.GetComponent<SkillSenderModule>();
+            SkillTargetModule targetModule = ability.skill.GetComponent<SkillTargetModule>();
+            SkillSenderModule senderModule = ability.skill.GetComponent<SkillSenderModule>();
 
-            this.skillDetailsName.text = CustomUtilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
+            this.skillDetailsName.text = CustomUtilities.Format.getLanguageDialogText(ability.skill.skillName, ability.skill.skillNameEnglish);
             float strength = 0;
 
             if(senderModule != null)
@@ -178,14 +180,14 @@ public class SkillMenu : MenuControls
 
     public void selectSkillFromSkillSet(SkillSlot skillSlot)
     {
-        if (skillSlot != null && skillSlot.skill != null)
+        if (skillSlot != null && skillSlot.ability != null)
         {
-            this.selectedSkill = skillSlot.skill;
+            this.selectedAbility = skillSlot.ability;
             this.cursor.setSelectedGameObject(skillSlot.image);
         }
         else
         {
-            this.selectedSkill = null;
+            this.selectedAbility = null;
             this.cursor.setSelectedGameObject(null);
         }
     }
@@ -266,8 +268,8 @@ public class SkillMenu : MenuControls
                 for (int ID = 0; ID < skills.transform.childCount; ID++)
                 {
                     GameObject slot = skills.transform.GetChild(ID).gameObject;
-                    Skill skill = CustomUtilities.Skills.getSkillByID(this.player.skillSet, slot.GetComponent<SkillSlot>().ID, category);                    
-                    slot.GetComponent<SkillSlot>().setSkill(skill);
+                    Ability ability = this.player.GetComponent<PlayerAbilities>().skillSet.getSkillByID(slot.GetComponent<SkillSlot>().ID, category);                    
+                    slot.GetComponent<SkillSlot>().setSkill(ability);
                 }
 
                 if (page.transform.GetSiblingIndex() > 0) page.SetActive(false);

@@ -46,189 +46,68 @@ public class Skill : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////
 
-    [FoldoutGroup("Behavior", expanded: false)]
-    [Tooltip("Geschwindigkeit des Projektils")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
-    public float speed = 0;
-
-    [FoldoutGroup("Behavior", expanded: false)]
-    [Range(0, 2)]
+    [BoxGroup("Restrictions")]
     [Tooltip("Positions-Offset, damit es nicht im Character anfängt")]
     public float positionOffset = 1f;
 
-    [FoldoutGroup("Behavior", expanded: false)]
-    [Range(1, CustomUtilities.maxIntInfinite)]
-    [Tooltip("Maximale Anzahl aktiver gleicher Angriffe")]
-    public int maxAmounts = CustomUtilities.maxIntInfinite;
-
     [Space(10)]
-    [FoldoutGroup("Behavior", expanded: false)]
-    [Tooltip("Folgt der Skill dem Sender")]
+    [BoxGroup("Restrictions")]
+    [Tooltip("Folgt der Skill dem Charakter")]
     public bool attachToSender = false;
 
-    [FoldoutGroup("Behavior", expanded: false)]
-    [Tooltip("Soll etwas während des Delays getan werden (DoCast Methode)")]
-    public bool doCastDuringDelay = false;
+    [BoxGroup("Restrictions")]
+    [Tooltip("Während des Skills schaut der Charakter in die gleiche Richtung")]
+    public bool lockDirection = false;
 
-    [FoldoutGroup("Behavior", expanded: false)]
-    [Tooltip("Maximale Anzahl aktiver gleicher Angriffe in einer Combo")]
-    public int comboAmount = CustomUtilities.maxIntSmall;
-
-
-    [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Castzeit bis zur Instanziierung (für Außen)")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
-    public float cast = 0;
-
-    [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Soll der Charakter während des Schießens weiterhin in die gleiche Richtung schauen?")]
-    [SerializeField]
-    [Range(0, CustomUtilities.maxFloatInfinite)]
-    private float lockMovementonDuration = 0;
-
-    [Space(10)]
-    [FoldoutGroup("Controls", expanded: false)]
-    public bool deactivateByButtonUp = false;
-
-    [FoldoutGroup("Controls", expanded: false)]
-    public bool deactivateByButtonDown = false;
-
-    [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Kann der Knopf gedrückt gehalten werden für weitere Schüsse?")]
-    public bool isRapidFire = false;
-
-    [FoldoutGroup("Controls", expanded: false)]
-    [Tooltip("Soll die Castzeit gespeichert bleiben. True = ja. Ansonsten reset bei Abbruch ")]
-    public bool keepHoldTimer = false;
-
-    [FoldoutGroup("Controls", expanded: false)]
+    [BoxGroup("Restrictions")]
+    [Tooltip("Soll der Skill einer Zeitstörung beeinträchtigt werden?")]
     [SerializeField]
     private bool canAffectedBytimeDistortion = true;
 
+    [BoxGroup("Restrictions")]
+    [Tooltip("Hat der Skill eine maximale Dauer?")]
+    public bool hasDuration = true;
 
-    [FoldoutGroup("Time", expanded: false)]
-    [Tooltip("Verzögerung bis Aktivierung")]
-    [Range(0, CustomUtilities.maxFloatInfinite)]
-    public float delay = 0;
-
-    [FoldoutGroup("Time", expanded: false)]
-    [Tooltip("Dauer des Angriffs. 0 = Animation, max bis Trigger")]
-    [Range(0, CustomUtilities.maxFloatInfinite)]
-    public float duration = 1;
-
-    [FoldoutGroup("Time", expanded: false)]
-    [Tooltip("Abklingzeit nach Aktivierung (für Außen)")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
-    public float cooldown = 1;
-
-    [Space(10)]
-    [FoldoutGroup("Time", expanded: false)]
-    [Tooltip("Abklingzeit nach Kombo")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
-    public float cooldownAfterCombo = 0;
-
-    [FoldoutGroup("Time", expanded: false)]
-    [Tooltip("Zeit für eine Kombo")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
-    public float durationCombo = 0;
-
-
-
-
+    [BoxGroup("Restrictions")]
+    [ShowIf("hasDuration")]
+    [Tooltip("Maximale Dauer des Skills. Zerstört sich danach selbst.")]
+    public float maxDuration = 1;
 
 
     ////////////////////////////////////////////////////////////////
 
-    private bool playStartEffectAlready = false;
-
-    [HideInInspector]
-    public float elapsed;
-    private float LockElapsed;
-
     [HideInInspector]
     public Character sender;
     [HideInInspector]
-    public float delayTimeLeft;
-    [HideInInspector]
-    public float durationTimeLeft;
-    [HideInInspector]
-    public float cooldownTimeLeft;
-    [HideInInspector]
-    public bool overridePosition = true;
-    [HideInInspector]
-    public bool movementLocked;
-
-    [HideInInspector]
     public Character target;
     [HideInInspector]
-    public AudioSource audioSource;
-    [HideInInspector]
-    public bool dontPlayAudio = false;
-    [HideInInspector]
-    public bool basicRequirementsExists = true;
-    [HideInInspector]
-    public float timeDistortion = 1;
-    [HideInInspector]
     public Vector2 direction;
+    
+    private float durationTimeLeft;
+    private float timeDistortion = 1;
+    private bool triggerIsActive = true;
+
     [HideInInspector]
-    public bool isActive = true; //damit kein Zeitstop bei einem stumpfen Pfeil gemacht wird
-    [HideInInspector]
-    public float holdTimer = 0;
-    [HideInInspector]
-    public bool triggerIsActive = true;
-    [HideInInspector]
-    public bool setActive = true;
+    public bool overridePosition = true;
     #endregion
 
 
     #region Start Funktionen (Init, set Basics, Update Sender, set Position
 
-    public void preLoad()
-    {
-        PreLoadModule preLoadModule = this.GetComponent<PreLoadModule>();
-        if (preLoadModule != null) preLoadModule.checkRequirements();
-    }
-
     public void Start()
     {
         setBasicAttributes();
         setPostionAndDirection();
-
-        if (this.sender == null)
-        {
-            throw new System.Exception("No SENDER found! Must be player!");
-        }
     }
 
     private void setBasicAttributes()
     {
-        //Setze Basis-Attribute, damit auch alles funktioniert
-
-        this.name = this.skillName + Time.deltaTime;
-
         if (this.myRigidbody == null) this.myRigidbody = GetComponent<Rigidbody2D>();
         if (this.spriteRenderer == null) this.spriteRenderer = GetComponent<SpriteRenderer>();
         if (this.animator == null) this.animator = GetComponent<Animator>();
+        if (this.shadow != null && this.spriteRenderer != null) this.shadow.sprite = this.spriteRenderer.sprite;
 
-        if (this.shadow != null && this.spriteRenderer != null)
-        {
-            this.shadow.sprite = this.spriteRenderer.sprite;
-        }
-
-        this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
-        this.audioSource.loop = false;
-        this.audioSource.playOnAwake = false;
-
-        this.delayTimeLeft = this.delay;
-        this.durationTimeLeft = this.duration;
-
-        this.LockElapsed = this.lockMovementonDuration;
-        if (this.LockElapsed > 0) this.movementLocked = true;
-
-        if (this.sender == null)
-        {
-            this.sender = this.transform.parent.GetComponent<Character>(); //SET SENDER IF NULL (IMPORTANT!)            
-        }
+        this.durationTimeLeft = this.maxDuration;
     }
 
     private void setTag(GameObject gameobject, string tag)
@@ -249,67 +128,29 @@ public class Skill : MonoBehaviour
 
     public void Update()
     {
-        if (this.LockElapsed > 0)
-        {
-            this.LockElapsed -= Time.deltaTime;
-        }
-        else
-        {
-            this.movementLocked = false;
-        }
+        if (this.spriteRenderer != null && this.shadow != null) this.shadow.sprite = this.spriteRenderer.sprite;
 
-        if (this.spriteRenderer != null && this.shadow != null)
-        {
-            this.shadow.sprite = this.spriteRenderer.sprite;
-        }
-
-        if (this.animator != null && this.sender != null && !this.movementLocked)
-        {
+        if (this.animator != null && this.sender != null && !this.lockDirection)
             CustomUtilities.UnityUtils.SetAnimDirection(this.sender.direction, this.animator);
-        }
+        
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Active", true);
+        SkillIndicatorModule indicatorModule = this.GetComponent<SkillIndicatorModule>();
+        if (indicatorModule != null) indicatorModule.hideIndicator();
 
-        if (this.delayTimeLeft > 0)
+        SkillAnimationModule animationModule = this.GetComponent<SkillAnimationModule>();
+        if (animationModule != null) animationModule.hideCastingAnimation();
+
+        //Prüfe ob der Skill eine Maximale Dauer hat
+        if (this.hasDuration)
         {
-            SkillIndicatorModule indicatorModule = this.GetComponent<SkillIndicatorModule>();
-            if (indicatorModule != null) indicatorModule.showIndicator();
-
-            this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
-
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Time", this.delayTimeLeft);
-
-            if (this.doCastDuringDelay) doOnCast();
-        }
-        else
-        {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Active", true);
-            SkillIndicatorModule indicatorModule = this.GetComponent<SkillIndicatorModule>();
-            if (indicatorModule != null) indicatorModule.hideIndicator();
-
-            SkillAnimationModule animationModule = this.GetComponent<SkillAnimationModule>();
-            if (animationModule != null) animationModule.hideCastingAnimation();
-
-            //Prüfe ob der Skill eine Maximale Dauer hat
-            if (this.durationTimeLeft < CustomUtilities.maxFloatInfinite)
+            if (this.durationTimeLeft > 0)
             {
-                if (this.durationTimeLeft > 0)
-                {
-                    this.durationTimeLeft -= (Time.deltaTime * this.timeDistortion);
-                }
-                else
-                {
-                    CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Explode", true);
-
-                    if (this.animator == null || !CustomUtilities.UnityUtils.HasParameter(this.animator, "Explode"))
-                    {
-                        //Debug.Log(this.skillName + " hat kein Animator oder Explode-Parameter");
-                        SetTriggerActive(1);
-                        DestroyIt();
-                    }
-                }
+                this.durationTimeLeft -= (Time.deltaTime * this.timeDistortion);
             }
+            else this.DeactivateIt();
         }
 
-        if (this.target != null && !this.target.gameObject.activeInHierarchy) this.durationTimeLeft = 0;
+        if (this.target != null && !this.target.gameObject.activeInHierarchy) this.DeactivateIt();
     }
 
     public float getDurationLeft()
@@ -432,19 +273,6 @@ public class Skill : MonoBehaviour
         }
     }
 
-    public bool isResourceEnough(Character character)
-    {
-        SkillSenderModule senderModule = this.GetComponent<SkillSenderModule>();
-
-        if (senderModule == null) return true;
-        else
-        {
-            if (character.getResource(senderModule.resourceType, senderModule.item) + senderModule.addResourceSender >= 0 //new method: Check if enough resource on skill
-                           || senderModule.addResourceSender == -CustomUtilities.maxFloatInfinite) return true;
-            else return false;
-        }
-    }
-
     public bool rotateIt()
     {
         if (this.GetComponent<SkillRotationModule>() != null) return this.GetComponent<SkillRotationModule>().rotateIt;
@@ -461,14 +289,7 @@ public class Skill : MonoBehaviour
 
     public void PlaySoundEffectOnce(AudioClip audioClip)
     {
-        if (this.audioSource == null) this.audioSource = this.gameObject.AddComponent<AudioSource>();
-        if (!this.dontPlayAudio) CustomUtilities.Audio.playSoundEffect(this.gameObject, audioClip);
-        this.dontPlayAudio = true;
-    }
-
-    public void ActivateIt()
-    {
-        this.delayTimeLeft = 0;
+        CustomUtilities.Audio.playSoundEffect(this.gameObject, audioClip);
     }
 
     public void SetTriggerActive(int value)
@@ -477,9 +298,26 @@ public class Skill : MonoBehaviour
         else this.triggerIsActive = true;
     }
 
+    public bool GetTriggerActive()
+    {
+        return this.triggerIsActive;
+    }
+
     public void resetRotation()
     {
         this.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    public void DeactivateIt()
+    {
+        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Explode", true);
+
+        if (this.animator == null || !CustomUtilities.UnityUtils.HasParameter(this.animator, "Explode"))
+        {
+            //Debug.Log(this.skillName + " hat kein Animator oder Explode-Parameter");
+            SetTriggerActive(1);
+            DestroyIt();
+        }
     }
 
     public void DestroyIt()
@@ -488,9 +326,8 @@ public class Skill : MonoBehaviour
     }
 
     public void DestroyIt(float delay)
-    {
+    {  
         this.sender.activeSkills.Remove(this);
-        //this.isActive = false;
         Destroy(this.gameObject, delay);
     }
 
@@ -507,19 +344,13 @@ public class Skill : MonoBehaviour
             this.timeDistortion = 1 + (distortion / 100);
 
             if (this.animator != null) this.animator.speed = this.timeDistortion;
-            if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
-            if (this.isActive) setVelocity();
+            if (this.triggerIsActive && this.GetComponent<SkillProjectile>() != null) this.GetComponent<SkillProjectile>().setVelocity();
         }
     }
 
-    public void setVelocity()
+    public float getTimeDistortion()
     {
-        if (this.myRigidbody != null) this.myRigidbody.velocity = this.direction.normalized * this.speed * this.timeDistortion;
-    }
-
-    public void stopVelocity()
-    {
-        if (this.myRigidbody != null) this.myRigidbody.velocity = Vector2.zero;
+        return this.timeDistortion;
     }
 
     #endregion

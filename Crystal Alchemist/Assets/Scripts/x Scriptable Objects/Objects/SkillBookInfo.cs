@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillBookModule : SkillModule
-{ 
+[CreateAssetMenu(menuName = "Skills/Skill Book Info")]
+public class SkillBookInfo : ScriptableObject
+{
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
     [TextArea]
@@ -24,8 +23,7 @@ public class SkillBookModule : SkillModule
     [Tooltip("Sortierung")]
     public int orderIndex = 10;
 
-    [FoldoutGroup("Sound und Icons", expanded: false)]
+    [BoxGroup("Sound und Icons")]
     [Tooltip("Icon für den Spieler")]
     public Sprite icon;
-
 }

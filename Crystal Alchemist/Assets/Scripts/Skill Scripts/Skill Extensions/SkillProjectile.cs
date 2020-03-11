@@ -5,21 +5,27 @@ using Sirenix.OdinInspector;
 
 public class SkillProjectile : SkillExtension
 {
-    private bool speedup = true;
     private Vector2 tempVelocity;
 
-    private void Update()
-    {
-        if (this.skill.delayTimeLeft <= 0 && this.skill.isActive) setVelocity();
-    }    
+    public float speed = 1;
 
-    private void setVelocity()
+
+    private void Start()
     {
-        if (this.skill.myRigidbody != null && this.speedup)
+        if (this.skill.myRigidbody != null)
         {
-            this.skill.setVelocity();
+            this.setVelocity();
             this.tempVelocity = this.skill.myRigidbody.velocity;
-            this.speedup = false;
         }
-    }        
+    }
+
+    public void setVelocity()
+    {
+        if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.speed * this.skill.getTimeDistortion();
+    }
+
+    public void stopVelocity()
+    {
+        if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = Vector2.zero;
+    }
 }

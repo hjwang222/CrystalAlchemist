@@ -54,16 +54,6 @@ public class affectedResource
     public float amount;
 }
 
-public enum enumButton
-{
-    AButton,
-    BButton,
-    XButton,
-    YButton,
-    RBButton,
-    LBButton
-}
-
 public enum ResourceType
 {
     none,
@@ -466,7 +456,7 @@ public class CustomUtilities : MonoBehaviour
 
         public static bool checkCollision(Collider2D hittedCharacter, Skill skill, Character sender)
         {
-            if (skill != null && skill.triggerIsActive)
+            if (skill != null && skill.GetTriggerActive())
             {
                 if (sender != null && hittedCharacter.gameObject == sender.gameObject)
                 {
@@ -899,10 +889,6 @@ public class CustomUtilities : MonoBehaviour
         {
             return button.ToString();
         }
-
-
-
-
     }
 
 
@@ -1272,42 +1258,15 @@ public class CustomUtilities : MonoBehaviour
 
     public static class Skills
     {
-        public static int getAmountOfSameSkills(Skill skill, List<Skill> activeSkills, List<Character> activePets)
-        {
-            int result = 0;
-
-            SkillSummon summonSkill = skill.GetComponent<SkillSummon>();
-
-            if (summonSkill == null)
-            {
-                for (int i = 0; i < activeSkills.Count; i++)
-                {
-                    Skill activeSkill = activeSkills[i];
-                    if (activeSkill.skillName == skill.skillName) result++;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < activePets.Count; i++)
-                {
-                    if (activePets[i] != null && activePets[i].stats.characterName == summonSkill.getPetName())
-                    {
-                        result++;
-                    }
-                }
-            }
-
-            return result;
-        }
-
         public static Skill setSkill(Character character, Skill prefab)
-        { 
+        {
+            /*
             Skill skillInstance = MonoBehaviour.Instantiate(prefab, character.skillSetParent.transform) as Skill;
             skillInstance.sender = character;
             skillInstance.gameObject.SetActive(false);
-            skillInstance.preLoad();
 
-            return skillInstance;
+            return skillInstance;*/
+            return prefab;
         }
 
         public static Skill instantiateSkill(Skill skill, Character sender)
@@ -1357,59 +1316,9 @@ public class CustomUtilities : MonoBehaviour
             return null;
         }
 
-        public static Skill getSkillByID(List<Skill> skillset, int ID, SkillType category)
-        {
-            foreach (Skill skill in skillset)
-            {
-                SkillBookModule skillBookModule = skill.GetComponent<SkillBookModule>();
-
-                if (skillBookModule != null
-                    && category == skillBookModule.category
-                    && ID == skillBookModule.orderIndex) return skill;
-            }
-
-            return null;
-        }
-
-        public static Skill getSkillByName(List<Skill> skillset, string name)
-        {
-            foreach (Skill skill in skillset)
-            {
-                if (name == skill.skillName) return skill;
-            }
-
-            return null;
-        }
-
         public static Skill getSkillByCollision(GameObject collision)
         {
             return collision.GetComponentInParent<Skill>();
-        }
-
-        public static void updateSkillSet(Skill skill, Player player)
-        {
-            if (skill != null)
-            {
-                bool found = false;
-
-                foreach (Skill elem in player.skillSet)
-                {
-                    if (elem.skillName == skill.skillName) { found = true; break; }
-                }
-
-                if (!found) player.skillSet.Add(skill);
-            }
-        }
-
-        public static IEnumerator delayInputPlayerCO(float delay, Player player, CharacterState newState)
-        {
-            //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
-            yield return new WaitForSeconds(delay);
-
-            if (player != null)
-            {
-                player.currentState = newState;
-            }
         }
     }
 
@@ -1417,21 +1326,22 @@ public class CustomUtilities : MonoBehaviour
 
     public static class Helper
     {
-        public static void checkIfHelperDeactivate(Player player)
+        public static void checkIfHelperDeactivate(PlayerAbilities playerAbilities)
         {
-            if (!checkIfHelperActivated(player.AButton)
-                && !checkIfHelperActivated(player.BButton)
-                && !checkIfHelperActivated(player.XButton)
-                && !checkIfHelperActivated(player.YButton)
-                && !checkIfHelperActivated(player.RBButton)
-                && !checkIfHelperActivated(player.LBButton)) player.setTargetHelperActive(false);
-            else player.setTargetHelperActive(true);
+            /*
+            if (!checkIfHelperActivated(playerAbilities.AButton)
+                && !checkIfHelperActivated(playerAbilities.BButton)
+                && !checkIfHelperActivated(playerAbilities.XButton)
+                && !checkIfHelperActivated(playerAbilities.YButton)
+                && !checkIfHelperActivated(playerAbilities.RBButton)
+                && !checkIfHelperActivated(playerAbilities.LBButton)) playerAbilities.setTargetHelperActive(false);
+            else playerAbilities.setTargetHelperActive(true);*/
         }
 
-        private static bool checkIfHelperActivated(Skill skill)
+        private static bool checkIfHelperActivated(Ability ability)
         {
-            if (skill != null
-                && skill.GetComponent<SkillAimingModule>() != null) return true;
+            if (ability != null
+                && ability.skill.GetComponent<SkillAimingModule>() != null) return true;
             else return false;
         }
     }

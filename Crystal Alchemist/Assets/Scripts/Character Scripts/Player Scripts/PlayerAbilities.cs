@@ -5,16 +5,14 @@ using Sirenix.OdinInspector;
 
 public class PlayerAbilities : MonoBehaviour
 {
-    //[SerializeField]
-    private List<Ability> abilities = new List<Ability>();
+    public PlayerSkillset skillSet;
+
+    public PlayerButtons buttons;
 
     [SerializeField]
     [Required]
     private Player player;
-
-    [SerializeField]
-    private Ability AButton;
-
+           
     [SerializeField]
     private CastBar castbar;
 
@@ -27,21 +25,21 @@ public class PlayerAbilities : MonoBehaviour
     {
         this.targetingSystem.gameObject.SetActive(false);
 
-        this.AButton.Start();
-        //this.AButton = Instantiate(this.AButton);
+        //Instantiate to make a copy
+        this.skillSet.Start();
     }
 
     private void Update()
     {
-        this.AButton.Update();
+        this.skillSet.Update();
 
-        if (this.player.currentState != CharacterState.interact
-                     && this.player.currentState != CharacterState.inDialog
-                     && this.player.currentState != CharacterState.respawning
-                     && this.player.currentState != CharacterState.inMenu
-                     && !CustomUtilities.StatusEffectUtil.isCharacterStunned(this.player))
+        if (this.canUseAllAbilities())
         {
-            useSkill(this.AButton, "AButton");            
+            Ability ability;
+            string currentButton;
+
+            this.buttons.GetAbilityFromButton(out ability, out currentButton);
+            if(ability != null) useSkill(ability, currentButton);
         }
     }
 
@@ -60,10 +58,10 @@ public class PlayerAbilities : MonoBehaviour
         }
         if (Input.GetButtonUp(button)) //release Button
         {
-            UnChargeAbility(ability);
-
             if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbility(ability); //use Skill when charged
             else if (ability.state == AbilityState.lockOn && ability.isRapidFire) hideTargetingSystem(ability, 1); //hide Targeting System when released
+
+            UnChargeAbility(ability);
         }
         else if (Input.GetButtonDown(button)) //press Button
         {
@@ -83,7 +81,7 @@ public class PlayerAbilities : MonoBehaviour
             this.activeCastbar.setCastBar(this.player, ability);
         }
 
-        //Speed
+        //Speed during casting
         //Indicators
         //Animations
     }
@@ -94,7 +92,7 @@ public class PlayerAbilities : MonoBehaviour
         if (this.activeCastbar != null) this.activeCastbar.destroyIt();
         if (ability.deactivateButtonUp) deactivateSkill(ability);
 
-        //Speed
+        //Speed during casting
         //Indicators
         //Animations
     }
@@ -114,10 +112,10 @@ public class PlayerAbilities : MonoBehaviour
 
     private void UseAbility(Ability ability)
     {
-        if (amountOfAbilities(ability))
+        if (ability.canUseAbility(this.player))
         {
             CustomUtilities.Skills.instantiateSkill(ability.skill, this.player);
-            if(!ability.deactivateButtonUp && !ability.remoteActivation) ability.ResetCoolDown();
+            if (!ability.deactivateButtonUp && !ability.remoteActivation) ability.ResetCoolDown();
         }
     }
 
@@ -127,7 +125,7 @@ public class PlayerAbilities : MonoBehaviour
         targets.AddRange(this.targetingSystem.getTargets());
         if (hideTargetingSystem) this.hideTargetingSystem(ability, targets.Count);
 
-        if (amountOfAbilities(ability))
+        if (ability.canUseAbility(this.player))
         {
             StartCoroutine(useSkill(ability, targets));
         }
@@ -160,19 +158,13 @@ public class PlayerAbilities : MonoBehaviour
 
     #endregion
 
-
-    private bool amountOfAbilities(Ability ability)
-    {
-        return (CustomUtilities.Skills.getAmountOfSameSkills(ability.skill, this.player.activeSkills, this.player.activePets) <= ability.maxAmount);
-    }
-
     private void deactivateSkill(Ability ability)
     {
-        foreach(Skill skill in this.player.activeSkills)
+        foreach (Skill skill in this.player.activeSkills)
         {
             if (skill.skillName == ability.skill.skillName)
             {
-                skill.durationTimeLeft = 0;
+                skill.DeactivateIt();
                 break;
             }
         }
@@ -180,5 +172,14 @@ public class PlayerAbilities : MonoBehaviour
         ability.ResetCoolDown();
     }
 
-
+    public bool canUseAllAbilities()
+    {
+        if (this.player.currentState != CharacterState.interact
+          && this.player.currentState != CharacterState.inDialog
+          && this.player.currentState != CharacterState.respawning
+          && this.player.currentState != CharacterState.inMenu
+          && this.player.currentState != CharacterState.dead
+          && !CustomUtilities.StatusEffectUtil.isCharacterStunned(this.player)) return true;
+        return false;
+    }
 }

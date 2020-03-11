@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1617736545736281247}
   - component: {fileID: 8873797952626383179}
   - component: {fileID: 4276017439626974549}
-  - component: {fileID: 2058806927827625058}
   - component: {fileID: 5379300759147678762}
   - component: {fileID: 8493204685426419127}
   - component: {fileID: 7231699721397585316}
@@ -165,59 +164,24 @@ MonoBehaviour:
   myRigidbody: {fileID: 1757583206438321652}
   animator: {fileID: 8873797952626383179}
   shadow: {fileID: 0}
-  speed: 5
   positionOffset: 0
-  maxAmounts: 99
   attachToSender: 0
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 0
   lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 0
-  keepHoldTimer: 0
   canAffectedBytimeDistortion: 1
-  delay: 0
-  duration: 10
-  cooldown: 1
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 1
+  maxDuration: 180
   sender: {fileID: 0}
-  delayTimeLeft: 0
   durationTimeLeft: 0
   cooldownTimeLeft: 0
   overridePosition: 1
   movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
   basicRequirementsExists: 1
   timeDistortion: 1
   direction: {x: 0, y: 0}
   isActive: 1
-  holdTimer: 0
   triggerIsActive: 1
   setActive: 1
---- !u!114 &2058806927827625058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4238057447665557523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  skillDescription: Ein zielsuchender Feuer-Zauber
-  skillDescriptionEnglish: A homing fire spell
-  category: 1
-  orderIndex: 3
-  icon: {fileID: 21300026, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
 --- !u!114 &5379300759147678762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  speed: 5
   offSetTime: 10
   offSetStrength: 25
 --- !u!114 &6519838300148503483

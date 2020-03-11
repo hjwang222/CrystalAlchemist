@@ -17,7 +17,12 @@ public class SkillSenderModule : SkillModule
 
     [TabGroup("Sender Attribute")]
     [HideIf("resourceType", ResourceType.none)]
-    [Range(-CustomUtilities.maxFloatInfinite, CustomUtilities.maxFloatInfinite)]
+    [Tooltip("Komplette Resource?")]
+    public bool allResourceSender = false;
+
+    [TabGroup("Sender Attribute")]
+    [HideIf("resourceType", ResourceType.none)]
+    [HideIf("allResourceSender")]
     [Tooltip("Höhe der Resource des Senders. Negativ = Schaden, Positiv = Heilung")]
     public float addResourceSender = 0;
 
@@ -65,6 +70,8 @@ public class SkillSenderModule : SkillModule
     [EnumToggleButtons]
     public StateType stateType = StateType.none;
 
+    private float elapsed;
+
 
     private void Start()
     {
@@ -77,7 +84,7 @@ public class SkillSenderModule : SkillModule
             updateResourceSender();
             setSelfTrust();
 
-            this.skill.elapsed = this.intervallSender;
+            this.elapsed = this.intervallSender;
         }
     }
 
@@ -87,17 +94,16 @@ public class SkillSenderModule : SkillModule
 
         if (this.intervallSender > 0)
         {
-            if (this.skill.elapsed > 0) this.skill.elapsed -= (Time.deltaTime * this.skill.timeDistortion);
+            if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.skill.getTimeDistortion());
             else
             {
                 if (this.skill.sender != null)
                 {
-                    if (this.skill.sender.getResource(this.resourceType, this.item) + this.addResourceSender < 0)
-                        this.skill.durationTimeLeft = 0;
+                    if (this.skill.sender.getResource(this.resourceType, this.item) + this.addResourceSender < 0) this.skill.DeactivateIt();
                     else
                     {
-                        this.skill.elapsed = this.intervallSender;
-                        this.skill.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
+                        this.elapsed = this.intervallSender;
+                        this.updateResourceSender();
                     }
                 }
             }
@@ -112,18 +118,14 @@ public class SkillSenderModule : SkillModule
 
     private void updateResourceSender()
     {
-        if (this.skill.sender != null)
-        {
-            this.skill.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
-            //setPostionAndDirection();
-        }
+        if (this.skill.sender != null) this.skill.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
     }
 
     private void setSelfTrust()
     {
         if (this.selfThrust > 0)
         {
-            this.skill.duration = this.selfThrustTime;
+            this.skill.maxDuration = this.selfThrustTime;
             int trustdirection = -1; //knockback
             if (forward) trustdirection = 1; //dash
 

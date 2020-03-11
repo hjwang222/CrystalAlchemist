@@ -30,23 +30,23 @@ public class InfoBox : MonoBehaviour
 
     #region setInfo
 
-    private void setInfo(Skill skill)
+    private void setInfo(Ability ability)
     {
         this.additionalInfo.SetActive(false);
 
-        this.nameField.text = CustomUtilities.Format.getLanguageDialogText(skill.skillName, skill.skillNameEnglish);
+        this.nameField.text = CustomUtilities.Format.getLanguageDialogText(ability.skill.skillName, ability.skill.skillNameEnglish);
 
-        if (skill.GetComponent<SkillBookModule>() != null)
+        if (ability.info != null)
         {
-            this.previewImage.sprite = skill.GetComponent<SkillBookModule>().icon;
-            this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(skill.GetComponent<SkillBookModule>().skillDescription, skill.GetComponent<SkillBookModule>().skillDescriptionEnglish);
+            this.previewImage.sprite = ability.info.icon;
+            this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(ability.info.skillDescription, ability.info.skillDescriptionEnglish);
         }
 
-        if (skill.GetComponent<SkillTargetModule>() != null && skill.GetComponent<SkillTargetModule>().statusEffects.Count > 0)
+        if (ability.skill.GetComponent<SkillTargetModule>() != null && ability.skill.GetComponent<SkillTargetModule>().statusEffects.Count > 0)
         {
             this.additionalInfo.SetActive(true);
 
-            StatusEffect statusEffect = skill.GetComponent<SkillTargetModule>().statusEffects[0];
+            StatusEffect statusEffect = ability.skill.GetComponent<SkillTargetModule>().statusEffects[0];
 
             this.statusEffectPreviewImage.sprite = statusEffect.iconSprite;
             this.statusEffectNameField.text = CustomUtilities.Format.getLanguageDialogText(statusEffect.statusEffectName, statusEffect.statusEffectNameEnglish);
@@ -93,10 +93,10 @@ public class InfoBox : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public void Show(Skill skill)
+    public void Show(Ability ability)
     {
         this.gameObject.SetActive(true);
-        setInfo(skill);
+        setInfo(ability);
     }
 
     public void Show(Item item)

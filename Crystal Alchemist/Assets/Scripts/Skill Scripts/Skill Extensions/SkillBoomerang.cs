@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillBoomerang : SkillExtension
+public class SkillBoomerang : SkillProjectile
 {
     #region Attributes
     [Tooltip("Zeitpunkt der Scriptaktivierung")]
@@ -30,7 +30,7 @@ public class SkillBoomerang : SkillExtension
     {
         if (this.durationThenBackToSender > 0)
         {
-            this.durationThenBackToSender -= (Time.deltaTime * this.skill.timeDistortion);
+            this.durationThenBackToSender -= (Time.deltaTime * this.skill.getTimeDistortion());
         }
         else
         {
@@ -47,8 +47,7 @@ public class SkillBoomerang : SkillExtension
         //got Hit -> Back to Target
         checkHit(hittedCharacter);
     }
-
-
+    
     public void checkHit(Collider2D hittedCharacter)
     {
         if (this.skill.sender != null
@@ -67,20 +66,10 @@ public class SkillBoomerang : SkillExtension
         if (this.skill.sender != null)
         {
             //Bewege den Skill zurück zum Sender
-
-            //this.skill.myRigidbody.velocity = Vector2.zero;
             if (Vector3.Distance(this.skill.sender.transform.position, this.transform.position) > this.minDistance)
-            {
-                //Vector3 newPosition = Vector3.MoveTowards(this.transform.position, this.skill.sender.transform.position, this.skill.speed * (Time.deltaTime * this.skill.timeDistortion));
-
-                //this.skill.myRigidbody.MovePosition(newPosition);
-                //this.skill.myRigidbody.velocity = Vector2.zero;     
-
+            { 
                 this.skill.direction = this.skill.sender.transform.position - this.transform.position;
-                //this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
-                this.skill.setVelocity();
-                //this.tempVelocity = this.skill.myRigidbody.velocity;
-
+                this.setVelocity();
             }
             else
             {

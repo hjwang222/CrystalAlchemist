@@ -103,7 +103,7 @@ public class Item : MonoBehaviour
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.skill)]
-    public Skill skillItem;
+    public Ability ability;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     [ShowIf("resourceType", ResourceType.statuseffect)]

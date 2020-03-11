@@ -65,30 +65,22 @@ public class CombatButtons : MonoBehaviour
     
     private void updateButton(ButtonConfigUI configUI)
     {
-        Skill skill = this.player.GetComponent<PlayerAttacks>().getSkillFromButton(configUI.buttonType);
-        bool isUsable = this.player.GetComponent<PlayerAttacks>().isButtonUsable(configUI.buttonType);
+        Ability ability = this.player.GetComponent<PlayerAbilities>().buttons.GetAbilityFromButton(configUI.buttonType);
 
-        if (skill != null)
+        if (ability != null)
         {
             configUI.iconButton.enabled = true;
-            float cooldownLeft = skill.cooldownTimeLeft / (player.timeDistortion * player.spellspeed);
-            float cooldownValue = skill.cooldown / (player.timeDistortion * player.spellspeed);
+            float cooldownLeft = ability.cooldownLeft / (this.player.timeDistortion * this.player.spellspeed);
+            float cooldownValue = ability.cooldown / (this.player.timeDistortion * this.player.spellspeed);
 
-            SkillSenderModule senderModule = skill.GetComponent<SkillSenderModule>();
+            SkillSenderModule senderModule = ability.skill.GetComponent<SkillSenderModule>();
 
-            if (senderModule != null && senderModule.item != null) configUI.ammo.text = (int)player.getResource(senderModule.resourceType, senderModule.item) + "";
+            if (senderModule != null && senderModule.item != null)
+                configUI.ammo.text = (int)this.player.getResource(senderModule.resourceType, senderModule.item) + "";
             else configUI.ammo.text = "";
 
-            if (!isUsable ||
-                this.player.currentState == CharacterState.attack ||
-                this.player.currentState == CharacterState.defend ||
-                this.player.currentState == CharacterState.knockedback ||
-                this.player.currentState == CharacterState.inDialog ||
-                this.player.currentState == CharacterState.respawning ||
-                (!skill.isResourceEnough(player))
-                || CustomUtilities.Skills.getAmountOfSameSkills(skill, player.activeSkills, player.activePets) >= skill.maxAmounts
-                || cooldownLeft == CustomUtilities.maxFloatInfinite
-                || !skill.basicRequirementsExists)
+            if (!this.player.GetComponent<PlayerAbilities>().canUseAllAbilities() 
+                || !ability.canUseAbility(this.player))
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
                 string cooldownText = "X";
@@ -101,9 +93,7 @@ public class CombatButtons : MonoBehaviour
                 configUI.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
                 configUI.iconButton.color = new Color(1f, 1f, 1f, 0.2f);
             }
-            else if (player.activeLockOnTarget != null
-              //&& player.activeLockOnTarget.skill == skill
-              )
+            else if (ability.targetingSystem != null && ability.state == AbilityState.lockOn)
             {
                 //ist Skill in Zielerfassung
                 string cooldownText = "[+]";
@@ -152,9 +142,9 @@ public class CombatButtons : MonoBehaviour
 
     private void setButton(enumButton buttonInput, Image skillUI, Image buttonUI)
     {
-        Skill skill = this.player.GetComponent<PlayerAttacks>().getSkillFromButton(buttonInput);
+        Ability ability = this.player.GetComponent<PlayerAbilities>().buttons.GetAbilityFromButton(buttonInput);
 
-        if (skill == null)
+        if (ability == null || ability.skill == null)
         {
             skillUI.gameObject.SetActive(false);
             buttonUI.color = new Color(1f, 1f, 1f, 0.2f);
@@ -162,10 +152,9 @@ public class CombatButtons : MonoBehaviour
         else
         {
             skillUI.gameObject.SetActive(true);
-            if (skill.GetComponent<SkillBookModule>() != null) skillUI.sprite = skill.GetComponent<SkillBookModule>().icon;
+            if (ability.info != null) skillUI.sprite = ability.info.icon;
             buttonUI.color = new Color(1f, 1f, 1f, 1f);
             buttonUI.fillAmount = 1;
         }
     }
-
 }

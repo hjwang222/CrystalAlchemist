@@ -42,10 +42,6 @@ public class Character : MonoBehaviour
 
     [BoxGroup("Easy Access")]
     [Required]
-    public GameObject skillSetParent;
-
-    [BoxGroup("Easy Access")]
-    [Required]
     public GameObject skillStartPosition;
 
     #endregion
@@ -55,7 +51,7 @@ public class Character : MonoBehaviour
 
     private float regenTimeElapsed;
     private float manaTime;
-    private bool showTargetHelp = false;
+
     private GameObject targetHelpObjectPlayer;
     private DeathAnimation activeDeathAnimation;
     private float immortalAtStart = 0;
@@ -108,8 +104,6 @@ public class Character : MonoBehaviour
     public bool lockAnimation = false;
     [HideInInspector]
     public float timeDistortion = 1;
-    [HideInInspector]
-    public TargetingSystem activeLockOnTarget = null;
     [HideInInspector]
     public bool isPlayer = false;
 
@@ -383,7 +377,7 @@ public class Character : MonoBehaviour
         //TODO: Exception
         foreach (Skill skill in this.activeSkills)
         {
-            skill.durationTimeLeft = 0;
+            skill.DeactivateIt();
         }
 
         this.activeSkills.Clear();
@@ -495,9 +489,10 @@ public class Character : MonoBehaviour
                 }
             case ResourceType.skill:
                 {
-                    if (item != null && item.skillItem != null && this.GetComponent<Player>() != null)
+                    if (item != null && item.ability != null && this.GetComponent<Player>() != null)
                     {
-                        CustomUtilities.Skills.updateSkillSet(item.skillItem, this.GetComponent<Player>());
+                        //CustomUtilities.Skills.updateSkillSet(item.skillItem, this.GetComponent<Player>());
+                        this.GetComponent<PlayerAbilities>().skillSet.AddAbility(item.ability);
                     }
                     break;
                 }
@@ -601,7 +596,7 @@ public class Character : MonoBehaviour
         if (this.GetComponent<AIEvents>() != null) this.GetComponent<AIEvents>().enabled = value;
         if (this.GetComponent<AIMovement>() != null) this.GetComponent<AIMovement>().enabled = value;
 
-        if (this.GetComponent<PlayerAttacks>() != null) this.GetComponent<PlayerAttacks>().enabled = value;
+        if (this.GetComponent<PlayerAbilities>() != null) this.GetComponent<PlayerAbilities>().enabled = value;
         if (this.GetComponent<PlayerControls>() != null) this.GetComponent<PlayerControls>().enabled = value;
         if (this.GetComponent<PlayerMovement>() != null) this.GetComponent<PlayerMovement>().enabled = value;
     }
@@ -615,7 +610,7 @@ public class Character : MonoBehaviour
     {
         if (skill != null)
         {
-            if (!skill.keepHoldTimer) skill.holdTimer = 0;
+            //if (!skill.keepHoldTimer) skill.holdTimer = 0;
             hideCastBarAndIndicator(skill);
         }
     }

@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
             foreach (Skill skill in this.player.activeSkills)
             {
-                if (skill.movementLocked)
+                if (skill.lockDirection)
                 {
                     lockAnimation = true;
                     break;

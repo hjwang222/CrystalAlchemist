@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillFollow : SkillExtension
+public class SkillFollow : SkillProjectile
 {
     [FoldoutGroup("Special Behaviors", expanded: false)]
     [SerializeField]
@@ -46,11 +46,11 @@ public class SkillFollow : SkillExtension
     private void moveTorwardsTarget(Vector3 position)
     {
         //Bewegt den Gegner zum Spieler
-        Vector3 temp = Vector3.MoveTowards(transform.position, position, this.skill.speed * (Time.deltaTime * this.skill.timeDistortion));
+        Vector3 temp = Vector3.MoveTowards(transform.position, position, this.speed * (Time.deltaTime * this.skill.getTimeDistortion()));
         Vector2 direction = position - this.transform.position;
 
         this.skill.myRigidbody.MovePosition(temp);
-        this.skill.stopVelocity();
+        this.stopVelocity();
 
         CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Moving", true);
     }

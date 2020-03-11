@@ -17,7 +17,7 @@ public class PlayerData
     public int debuffminus;
 
     public List<string[]> inventory = new List<string[]>();
-    public List<string[]> skills = new List<string[]>();
+    public List<string[]> abilities = new List<string[]>();
 
     public string characterName;
     public string race;
@@ -48,7 +48,9 @@ public class PlayerData
         this.position[2] = player.transform.position.z;
 
         setInventory(player);
-        setSkills(player);
+
+        this.abilities = player.GetComponent<PlayerAbilities>().buttons.saveButtonConfig();
+
         setPreset(player.preset);
         player.stats.characterName = this.characterName;
 
@@ -67,18 +69,6 @@ public class PlayerData
             temp[1] = item.amount + "";
             this.inventory.Add(temp);
         }
-    }
-
-    private void setSkills(Player player)
-    {
-        this.skills.Clear();
-
-        if (player.AButton != null) this.skills.Add(new string[] { "A", player.AButton.skillName });
-        if (player.BButton != null) this.skills.Add(new string[] { "B", player.BButton.skillName });
-        if (player.XButton != null) this.skills.Add(new string[] { "X", player.XButton.skillName });
-        if (player.YButton != null) this.skills.Add(new string[] { "Y", player.YButton.skillName });
-        if (player.RBButton != null) this.skills.Add(new string[] { "RB", player.RBButton.skillName });
-        if (player.LBButton != null) this.skills.Add(new string[] { "LB", player.LBButton.skillName });
     }
 
     private void setPreset(CharacterPreset preset)

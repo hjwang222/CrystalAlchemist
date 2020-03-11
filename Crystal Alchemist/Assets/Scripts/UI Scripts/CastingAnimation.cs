@@ -33,7 +33,7 @@ public class CastingAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.progress = this.skill.holdTimer * 100 / this.skill.cast;
+        //this.progress = this.skill.holdTimer * 100 / this.skill.cast;
 
         if (this.matchAnimationProgress)
         {
