@@ -120,7 +120,6 @@ GameObject:
   - component: {fileID: 1942275408024995949}
   - component: {fileID: 7590480515954381518}
   - component: {fileID: 4944835584636789073}
-  - component: {fileID: 2032245511988121417}
   - component: {fileID: 6618190075303712838}
   - component: {fileID: 8972037604900382335}
   - component: {fileID: 4856966281268114537}
@@ -200,59 +199,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 1942275408024995949}
   animator: {fileID: 1421051230670556681}
   shadow: {fileID: 8280449274916686873}
-  speed: 10
   positionOffset: 0.75
-  maxAmounts: 99
   attachToSender: 0
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 0
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 1
-  keepHoldTimer: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 1
-  delay: 0
-  duration: 10
-  cooldown: 1.5
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 1
+  maxDuration: 20
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
---- !u!114 &2032245511988121417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4053507289354720650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  skillDescription: Feuert einen Feuerball ab
-  skillDescriptionEnglish: Fires a fireball
-  category: 1
-  orderIndex: 1
-  icon: {fileID: 2415121650574243764, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  overridePosition: 1
 --- !u!114 &6618190075303712838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +224,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   resourceType: 2
   item: {fileID: 0}
+  allResourceSender: 0
   addResourceSender: -0.5
   intervallSender: 0
   speedDuringCasting: 0
@@ -317,7 +274,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  useGameObjectHeight: 0
   positionHeight: 0
   colliderHeightOffset: -0.5
 --- !u!114 &1040386303507051939
@@ -351,6 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  speed: 10
 --- !u!114 &7116430054111049167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  canBeReflected: 0
   skillOnImpact: {fileID: 8392694415358600199, guid: d1056da7aa1a39a4083ef2fc5c4f1bc1,
     type: 3}
 --- !u!114 &1978907326292618844

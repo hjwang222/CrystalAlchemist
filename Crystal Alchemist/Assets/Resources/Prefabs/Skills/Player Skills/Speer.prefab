@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5387825760302318934}
   - component: {fileID: 2211265516280113145}
   - component: {fileID: 936580078306894737}
-  - component: {fileID: 5052346188936570892}
   - component: {fileID: 4925182744882300458}
   - component: {fileID: 1457326785795499306}
   - component: {fileID: 2676114091999809723}
@@ -59,41 +58,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 2211265516280113145}
   animator: {fileID: 936580078306894737}
   shadow: {fileID: 5387825760302318934}
-  speed: 0
   positionOffset: 0
-  maxAmounts: 1
   attachToSender: 1
-  doCastDuringDelay: 0
-  comboAmount: 99
-  cast: 0
-  lockMovementonDuration: 1
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 0
-  keepHoldTimer: 0
+  lockDirection: 1
   canAffectedBytimeDistortion: 0
-  delay: 0
-  duration: 5
-  cooldown: 1
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 0
+  maxDuration: 1
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: -0.014371086
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
+  overridePosition: 1
 --- !u!212 &5387825760302318934
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -108,6 +82,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -183,24 +158,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5052346188936570892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661548303189921719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  skillDescription: Der Speer eines Dragoons
-  skillDescriptionEnglish: The spear of a Dragoon
-  category: 0
-  orderIndex: 2
-  icon: {fileID: -2313266835999037447, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
 --- !u!114 &4925182744882300458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +186,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   resourceType: 0
   item: {fileID: 0}
+  allResourceSender: 0
   addResourceSender: 0
   intervallSender: 0
   speedDuringCasting: 0

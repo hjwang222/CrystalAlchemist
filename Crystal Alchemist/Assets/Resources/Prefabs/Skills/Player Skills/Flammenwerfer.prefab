@@ -229,7 +229,6 @@ GameObject:
   - component: {fileID: 8945697548278569866}
   - component: {fileID: 6526762562809975763}
   - component: {fileID: 3816868808247662347}
-  - component: {fileID: 1904830263585329868}
   - component: {fileID: 6919527800721261145}
   - component: {fileID: 6564433060163094277}
   - component: {fileID: 69357154066809696}
@@ -328,59 +327,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 8945697548278569866}
   animator: {fileID: 1969718782558145669}
   shadow: {fileID: 8613971535191392423}
-  speed: 10
   positionOffset: 0.75
-  maxAmounts: 9999
   attachToSender: 0
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 0
-  lockMovementonDuration: 0.1
-  deactivateByButtonUp: 1
-  deactivateByButtonDown: 0
-  isRapidFire: 1
-  keepHoldTimer: 0
+  lockDirection: 1
   canAffectedBytimeDistortion: 0
-  delay: 0
-  duration: 1
-  cooldown: 0.01
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 0
+  maxDuration: 1
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
---- !u!114 &1904830263585329868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6814274785137477229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 3816868808247662347}
-  skillDescription: Flammenwerfer
-  skillDescriptionEnglish: Flamethrower
-  category: 1
-  orderIndex: 2
-  icon: {fileID: 2084251073510830269, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  overridePosition: 1
 --- !u!114 &6919527800721261145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 3816868808247662347}
+  speed: 10
 --- !u!114 &6564433060163094277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +411,7 @@ MonoBehaviour:
   skill: {fileID: 3816868808247662347}
   resourceType: 2
   item: {fileID: 0}
+  allResourceSender: 0
   addResourceSender: -0.0125
   intervallSender: 0
   speedDuringCasting: 0

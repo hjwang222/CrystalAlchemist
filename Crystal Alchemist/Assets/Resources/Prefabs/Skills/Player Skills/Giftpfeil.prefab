@@ -236,7 +236,6 @@ GameObject:
   - component: {fileID: 1942275408024995949}
   - component: {fileID: 1145922771081805388}
   - component: {fileID: 8182664675407730783}
-  - component: {fileID: 4523596787057636032}
   - component: {fileID: 4990070898326458771}
   - component: {fileID: 1161617724197733977}
   - component: {fileID: 7040829052717372369}
@@ -317,59 +316,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 1942275408024995949}
   animator: {fileID: 2130774073635876181}
   shadow: {fileID: 8528484996259057469}
-  speed: 20
   positionOffset: 0.25
-  maxAmounts: 99
   attachToSender: 0
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 0
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 1
-  keepHoldTimer: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 1
-  delay: 0
-  duration: 10
-  cooldown: 0.25
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 0
+  maxDuration: 1
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
---- !u!114 &4523596787057636032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4053507289354720650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  skillDescription: "Verschie\xDFt einen giftigen Pfeil"
-  skillDescriptionEnglish: Fires a poisonous arrow
-  category: 0
-  orderIndex: 7
-  icon: {fileID: 21300004, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  overridePosition: 1
 --- !u!114 &4990070898326458771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +341,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   resourceType: 3
   item: {fileID: 4136168518151711949, guid: 0c21e8ac001e9c842ad6c6af30b3581d, type: 3}
+  allResourceSender: 0
   addResourceSender: -1
   intervallSender: 0
   speedDuringCasting: 0
@@ -434,7 +391,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  useGameObjectHeight: 0
   positionHeight: 0
   colliderHeightOffset: -0.5
 --- !u!114 &6683749249998826823
@@ -468,6 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  speed: 20
 --- !u!114 &2117475987174398556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,6 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  canBeReflected: 0
   skillOnImpact: {fileID: 0}
 --- !u!114 &5085618712826816977
 MonoBehaviour:
@@ -509,7 +467,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
   indicator: {fileID: 0}
-  showingIndicator: 0
   showCastBarForEnemies: 1
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}

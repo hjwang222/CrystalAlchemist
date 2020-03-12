@@ -10,7 +10,7 @@ public class SkillProjectile : SkillExtension
     public float speed = 1;
 
 
-    private void Start()
+    public virtual void Start()
     {
         if (this.skill.myRigidbody != null)
         {

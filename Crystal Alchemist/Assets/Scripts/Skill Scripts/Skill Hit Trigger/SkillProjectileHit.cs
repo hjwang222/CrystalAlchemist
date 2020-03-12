@@ -35,7 +35,6 @@ public class SkillProjectileHit : SkillHitTrigger
             this.skill.GetComponent<SkillProjectile>().stopVelocity();
 
             placeFire();
-            this.skill.SetTriggerActive(0);
         }
     }
 
@@ -52,10 +51,7 @@ public class SkillProjectileHit : SkillHitTrigger
     {
         if (this.skillOnImpact != null)
         {
-            //if (!Utilities.Collisions.checkCollision(hittedCharacter, this)) hitpoint = this.transform.position;
-
             GameObject fire = Instantiate(this.skillOnImpact.gameObject, this.skill.transform.position, Quaternion.identity);
-            //fire.transform.position = hittedCharacter.transform.position;
             Skill fireSkill = fire.GetComponent<Skill>();
 
             if (fireSkill != null)

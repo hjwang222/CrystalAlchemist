@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8003971335365348661}
   - component: {fileID: 2478493376106607620}
   - component: {fileID: 9012234495704110565}
-  - component: {fileID: 8133105546896252298}
   - component: {fileID: 2890860741540156332}
   - component: {fileID: 8485538978608916237}
   - component: {fileID: 6588353089081165236}
@@ -93,59 +92,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 8003971335365348661}
   animator: {fileID: 1781594353715446578}
   shadow: {fileID: 157402643467407502}
-  speed: 10
   positionOffset: 0.75
-  maxAmounts: 99
   attachToSender: 0
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 0
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 1
-  keepHoldTimer: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 1
-  delay: 0
-  duration: 10
-  cooldown: 1
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 1
+  maxDuration: 20
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
---- !u!114 &8133105546896252298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4607741441608745160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  skillDescription: Ein langsamer Eis-Zauber
-  skillDescriptionEnglish: A slow ice spell
-  category: 1
-  orderIndex: 4
-  icon: {fileID: -2174905366303013736, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  overridePosition: 1
 --- !u!114 &2890860741540156332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +117,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   resourceType: 2
   item: {fileID: 0}
+  allResourceSender: 0
   addResourceSender: -0.25
   intervallSender: 0
   speedDuringCasting: 0
@@ -210,7 +167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  useGameObjectHeight: 0
   positionHeight: 0
   colliderHeightOffset: -0.5
 --- !u!114 &3772284571761737148
@@ -244,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  canBeReflected: 0
   skillOnImpact: {fileID: 0}
 --- !u!114 &2697588482501113128
 MonoBehaviour:
@@ -271,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  speed: 10
 --- !u!114 &5432061724297285009
 MonoBehaviour:
   m_ObjectHideFlags: 0

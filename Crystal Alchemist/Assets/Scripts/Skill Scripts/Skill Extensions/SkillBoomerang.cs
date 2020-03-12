@@ -21,8 +21,9 @@ public class SkillBoomerang : SkillProjectile
     #endregion
     
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         this.durationThenBackToSender = timeToMoveBack;
     }
 

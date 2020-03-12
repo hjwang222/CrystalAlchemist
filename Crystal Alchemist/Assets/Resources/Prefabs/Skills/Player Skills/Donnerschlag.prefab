@@ -258,7 +258,6 @@ GameObject:
   - component: {fileID: 8447962352314022297}
   - component: {fileID: 8447962352314022296}
   - component: {fileID: 3642085611436221261}
-  - component: {fileID: 6143307659993726014}
   - component: {fileID: 5268098636354024001}
   - component: {fileID: 1923927075157159488}
   - component: {fileID: 3952502290191180676}
@@ -412,59 +411,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  speed: 0
   positionOffset: 0
-  maxAmounts: 3
   attachToSender: 0
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 0
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 0
-  keepHoldTimer: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 1
-  delay: 9999
-  duration: 9999
-  cooldown: 3
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 0
+  maxDuration: 1
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
---- !u!114 &6143307659993726014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8447962352314022299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  skillDescription: "L\xE4sst bis zu 3 Ziele vom Blitz treffen"
-  skillDescriptionEnglish: Can hit up to 3 targets by a lightning
-  category: 1
-  orderIndex: 17
-  icon: {fileID: 21300022, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  overridePosition: 1
 --- !u!114 &5268098636354024001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +436,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   resourceType: 2
   item: {fileID: 0}
+  allResourceSender: 0
   addResourceSender: -1
   intervallSender: 0
   speedDuringCasting: 0

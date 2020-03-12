@@ -90,11 +90,9 @@ GameObject:
   - component: {fileID: 8174385160141502716}
   - component: {fileID: 3342286359297243341}
   - component: {fileID: 980826649107003252}
-  - component: {fileID: 6121157086252661720}
   - component: {fileID: 3431575031854180345}
   - component: {fileID: 6645383839218661956}
   - component: {fileID: 6245188876430014898}
-  - component: {fileID: 9126402854830815058}
   - component: {fileID: 1017361218172941164}
   - component: {fileID: 1703904006245648454}
   m_Layer: 13
@@ -159,59 +157,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 3342286359297243341}
   animator: {fileID: 5144022535530275040}
   shadow: {fileID: 3387214931352689131}
-  speed: 15
   positionOffset: 0.75
-  maxAmounts: 1
   attachToSender: 0
-  doCastDuringDelay: 0
-  comboAmount: 1
-  cast: 0
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 0
-  keepHoldTimer: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 1
-  delay: 0
-  duration: 99
-  cooldown: 0.3
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 0
+  maxDuration: 1
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
---- !u!114 &6121157086252661720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925074013887456554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 980826649107003252}
-  skillDescription: "Kann Gegenst\xE4nde her ziehen"
-  skillDescriptionEnglish: Can move items to you
-  category: 0
-  orderIndex: 3
-  icon: {fileID: 21300012, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  overridePosition: 1
 --- !u!114 &3431575031854180345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 980826649107003252}
+  speed: 10
   timeToMoveBack: 0.75
   durationThenBackToSender: 0
   minDistance: 0.15
@@ -272,19 +228,6 @@ MonoBehaviour:
   keepOriginalRotation: 0
   rotationModifier: 0
   snapRotationInDegrees: 0
---- !u!114 &9126402854830815058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925074013887456554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07b2c822040a9d9449eed59a8402ec3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 980826649107003252}
 --- !u!114 &1017361218172941164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,7 +254,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  useGameObjectHeight: 0
   positionHeight: 0
   colliderHeightOffset: -0.5
 --- !u!1 &5144022535530275041

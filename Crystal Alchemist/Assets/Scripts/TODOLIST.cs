@@ -13,10 +13,10 @@ public class TODOLIST : MonoBehaviour
     //TODO: Skills ändern (Bombe, Turm, Schild Knockback)
     //TODO: Sentinel Schuss ändern
 
-    //REWORK: Skills
-    //REWORK: Items
-    //REWORK: Player Attacks und AI Events
-    //REWORK: Indicators
+    //REWORK: Items (Scriptable Object)
+    //REWORK: Inventory (Scriptable Object)
+    //REWORK: AI Events (Initial, Phases, Actions, Events Scriptable Objects)
+    //REWORK: Indicators (Scriptable Object?)
 
     //-----------------------------------------------------------------------------
 

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8843811712285971331}
   - component: {fileID: 7861167684578161149}
   - component: {fileID: 4657507481048158680}
-  - component: {fileID: -7704521156288154744}
   - component: {fileID: 6956648690299593441}
   - component: {fileID: 5355710936113022244}
   - component: {fileID: 8592746762657604845}
@@ -55,41 +54,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  speed: 0
   positionOffset: 2
-  maxAmounts: 2
   attachToSender: 0
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 2
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 0
-  keepHoldTimer: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 0
-  delay: 0
-  duration: 0
-  cooldown: 1
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 1
+  maxDuration: 30
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
+  overridePosition: 1
 --- !u!114 &7861167684578161149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +79,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   resourceType: 2
   item: {fileID: 0}
+  allResourceSender: 0
   addResourceSender: -1
   intervallSender: 0
   speedDuringCasting: -50
@@ -128,26 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
   summon: {fileID: 1294441505385801003, guid: 6d802ff15d5a854459fa7bcb3f594f43, type: 3}
-  summonInstantly: 1
   immortalTimerPet: 1
---- !u!114 &-7704521156288154744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6912828604413741881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  skillDescription: Erschafft eine Wand aus Fels
-  skillDescriptionEnglish: Creates a Wall of Stone
-  category: 1
-  orderIndex: 7
-  icon: {fileID: -8271742512168903070, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
 --- !u!114 &6956648690299593441
 MonoBehaviour:
   m_ObjectHideFlags: 0

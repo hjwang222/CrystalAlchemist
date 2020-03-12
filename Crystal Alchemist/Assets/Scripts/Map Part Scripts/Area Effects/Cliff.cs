@@ -10,6 +10,9 @@ public class Cliff : MonoBehaviour
     [SerializeField]
     private float speed = 32;
 
+    [SerializeField]
+    private Collider2D collider;
+
     private void Start()
     {
         this.direction = CustomUtilities.Rotation.DegreeToVector2(this.transform.rotation.z-90);
@@ -28,6 +31,8 @@ public class Cliff : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        this.collider.enabled = false;
+
         Character character = collision.GetComponent<Character>();
         if (character != null && !this.characters.Contains(character))
         {
@@ -37,6 +42,8 @@ public class Cliff : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        this.collider.enabled = true;
+
         Character character = collision.GetComponent<Character>();
         if (character != null && this.characters.Contains(character))
         {

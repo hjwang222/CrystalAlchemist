@@ -287,11 +287,6 @@ public class Skill : MonoBehaviour
         CustomUtilities.Audio.playSoundEffect(this.gameObject, audioClip);
     }
 
-    public void PlaySoundEffectOnce(AudioClip audioClip)
-    {
-        CustomUtilities.Audio.playSoundEffect(this.gameObject, audioClip);
-    }
-
     public void SetTriggerActive(int value)
     {
         if (value == 0) this.triggerIsActive = false;

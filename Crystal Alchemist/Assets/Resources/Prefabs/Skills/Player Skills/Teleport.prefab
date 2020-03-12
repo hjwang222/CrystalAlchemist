@@ -9,9 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3198320152754607256}
-  - component: {fileID: 783293887223134462}
   - component: {fileID: 2383572904453914523}
-  - component: {fileID: 3093429781149975171}
   - component: {fileID: 3928851992748964709}
   - component: {fileID: 3758539739716528196}
   - component: {fileID: 6489710300846754372}
@@ -37,19 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &783293887223134462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5892130185635481934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0a40c805296abb4c851b2ce64fd3152, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
 --- !u!114 &2383572904453914523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,59 +53,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  speed: 0
   positionOffset: 0
-  maxAmounts: 1
   attachToSender: 1
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 4
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 0
-  keepHoldTimer: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 0
-  delay: 0
-  duration: 0.3
-  cooldown: 30
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 0
+  maxDuration: 1
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
---- !u!114 &3093429781149975171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5892130185635481934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58e50479319f0dd448d647d4150c8401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  skillDescription: "Bringt dich zur\xFCck zum letzten Speicherpunkt"
-  skillDescriptionEnglish: Returns you to the last save point
-  category: 1
-  orderIndex: 11
-  icon: {fileID: 21300010, guid: e86ccf897272d444f99d929f4a7151e9, type: 3}
+  overridePosition: 1
 --- !u!114 &3928851992748964709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +78,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   resourceType: 2
   item: {fileID: 0}
+  allResourceSender: 0
   addResourceSender: -3
   intervallSender: 0
   speedDuringCasting: -100

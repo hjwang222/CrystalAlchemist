@@ -39,9 +39,19 @@ public class Ability : ScriptableObject
     public float cooldown;
 
     [BoxGroup("Restrictions")]
+    [ShowIf("isRapidFire")]
+    [SerializeField]
+    private float rapidFireDelay = 1;
+
+    [BoxGroup("Restrictions")]
     public float castTime;
 
     [BoxGroup("Restrictions")]
+    [SerializeField]
+    private bool hasMaxAmount = false;
+
+    [BoxGroup("Restrictions")]
+    [ShowIf("hasMaxAmount")]
     [SerializeField]
     private int maxAmount = 1;
 
@@ -53,16 +63,20 @@ public class Ability : ScriptableObject
     [SerializeField]
     public bool isRapidFire = false;
 
+
+
     [BoxGroup("Booleans")]
     [SerializeField]
     public bool remoteActivation = false;
 
     [BoxGroup("Booleans")]
+    [HideIf("isRapidFire")]
     [SerializeField]
     public bool deactivateButtonUp = false;
 
     [BoxGroup("Booleans")]
     [SerializeField]
+    [HideIf("castTime", 0f)]
     public bool keepCast = false;
 
     [BoxGroup("Debug")]
@@ -95,6 +109,8 @@ public class Ability : ScriptableObject
 
     private void setStartParameters()
     {
+        if (this.isRapidFire && this.deactivateButtonUp) this.deactivateButtonUp = false;
+
         this.cooldownLeft = 0;
 
         if (this.targetingSystem != null) this.state = AbilityState.targetRequired;
@@ -132,7 +148,8 @@ public class Ability : ScriptableObject
     public bool canUseAbility(Character character)
     {
         bool enoughResource = this.isResourceEnough(character);
-        bool notToMany = (getAmountOfSameSkills(this.skill, character.activeSkills, character.activePets) <= this.maxAmount);
+        bool notToMany = true;
+        if (this.hasMaxAmount) notToMany = (getAmountOfSameSkills(this.skill, character.activeSkills, character.activePets) <= this.maxAmount);        
 
         return (notToMany && enoughResource);
     }
