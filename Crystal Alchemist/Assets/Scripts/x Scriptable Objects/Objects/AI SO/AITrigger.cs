@@ -24,15 +24,23 @@ public class AITrigger : ScriptableObject
     [SerializeField]
     private float life;
 
-    [ShowIf("type", AITriggerType.range)]
-    [SerializeField]
     private List<RangeTriggered> rangeTrigger;
-
     private bool timesUp = false;
+    private float elapsed = 0;
 
-    public void Start()
+    public void Start(List<RangeTriggered> ranges)
     {
-        ExternalCoroutine.instance.StartCoroutine(this.countDownCO());
+        this.rangeTrigger = ranges;
+        startTimer();
+    }
+
+    public void Update()
+    {
+        if (this.time > 0)
+        {
+            if (this.elapsed > 0) this.elapsed -= Time.deltaTime;
+            else { this.elapsed = 0; this.timesUp = true; }
+        }
     }
 
     public bool isTriggered(AI npc)
@@ -50,17 +58,19 @@ public class AITrigger : ScriptableObject
 
     private bool checkRange()
     {
-        foreach (RangeTriggered range in this.rangeTrigger)
+        if (this.rangeTrigger != null)
         {
-            if (range.isTriggered) return true;
+            foreach (RangeTriggered range in this.rangeTrigger)
+            {
+                if (range.isTriggered) return true;
+            }
         }
         return false;
     }
 
-    private IEnumerator countDownCO()
+    private void startTimer()
     {
+        this.elapsed = this.time;
         this.timesUp = false;
-        yield return new WaitForSeconds(this.time);
-        this.timesUp = true;
     }
 }

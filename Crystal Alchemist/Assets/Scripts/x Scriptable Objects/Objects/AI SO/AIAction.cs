@@ -111,6 +111,14 @@ public class AIAction : ScriptableObject
     [SerializeField]
     private Vector2 sequencePosition;
 
+    private bool isActive = false;
+
+    public void Start()
+    {
+        Ability ability = Instantiate(this.ability);
+        this.ability = ability;
+    }
+
     public void useAction(AI npc)
     {
         switch (this.type)
@@ -121,6 +129,7 @@ public class AIAction : ScriptableObject
             case AIActionType.animation: CustomUtilities.UnityUtils.SetAnimatorParameter(npc.animator, this.animation); break;
             case AIActionType.cannotDie: npc.setCannotDie(this.canDie); break;
             case AIActionType.invincible: npc.setInvincible(this.duration, false); break;
+            case AIActionType.dialog: break;
             case AIActionType.movement: break;
             case AIActionType.switchPhase: break;
             case AIActionType.wait: break;
@@ -142,5 +151,10 @@ public class AIAction : ScriptableObject
         sequence.setSender(npc);
         sequence.setTarget(npc.target);
         sequence.setPosition(this.sequencePositionType, this.sequencePosition);
+    }
+
+    public bool getIsActive()
+    {
+        return this.isActive;
     }
 }

@@ -2,6 +2,12 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+public struct PhaseInfo
+{
+    public AIPhase phase;
+    public List<RangeTriggered> ranges;
+}
+
 public class AIEvents : MonoBehaviour
 {
     #region Attributes
@@ -27,7 +33,7 @@ public class AIEvents : MonoBehaviour
 
     [BoxGroup("AI")]
     [SerializeField]
-    private List<AIPhase> phases = new List<AIPhase>();
+    private List<PhaseInfo> phases = new List<PhaseInfo>();
 
     private CastBar activeCastBar;
     private MiniDialogBox activeDialog;
@@ -41,41 +47,19 @@ public class AIEvents : MonoBehaviour
 
     private void Update()
     {
-        //this.activePhase.Update(this.npc);
+        UpdatePhase(this.npc);
     }
 
-    private void startPhase(AIPhase phase)
+    private void startPhase(PhaseInfo phase)
     {
-        this.activePhase = phase;
-        this.activePhase.Start();
-
-        foreach (AIEvent aiEvent in this.activePhase.events)
-        {
-            aiEvent.Start();
-        }
+        this.activePhase = phase.phase;
+        this.activePhase.Start(phase.ranges);
     }
 
-    private void UpdatePhase()
+    private void UpdatePhase(AI npc)
     {
-        foreach(AIAction action in this.activePhase.actions)
-        {
-            foreach(AIEvent aiEvent in this.activePhase.events)
-            {
-                aiEvent.Update(this.npc);
-            }
-
-            action.useAction(this.npc);
-        }
+        this.activePhase.Update(npc);       
     }
-
-
-
-
-
-
-
-
-
 
 
 

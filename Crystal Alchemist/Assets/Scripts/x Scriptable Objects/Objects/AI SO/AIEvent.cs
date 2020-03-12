@@ -32,17 +32,29 @@ public class AIEvent : ScriptableObject
     private bool eventActive = true;
     private float timeLeft = 0;
 
-    public void Start()
+    public void Start(List<RangeTriggered> ranges)
     {
         foreach (AITrigger trigger in this.triggers)
         {
-            trigger.Start();
+            trigger.Start(ranges);
         }
     }
 
     public void Update(AI npc)
     {
-        if (this.eventActive && this.isTriggered(npc)) this.doActions(npc);        
+        foreach(AITrigger trigger in this.triggers)
+        {
+            trigger.Update();
+        }
+
+        if (!this.eventActive && this.repeatEvent) updateTimer();
+              
+    }
+
+    private void updateTimer()
+    {
+        if (this.timeLeft > 0) this.timeLeft -= Time.deltaTime;
+        else { this.timeLeft = 0; this.eventActive = true; }
     }
 
     private bool isTriggered(AI npc)
@@ -60,20 +72,18 @@ public class AIEvent : ScriptableObject
         return false;
     }
 
-    private void doActions(AI npc)
+    public bool eventEnabled(AI npc)
     {
-        foreach(AIAction action in this.actions)
-        {
-            action.useAction(npc);
-        }
-
-        ExternalCoroutine.instance.StartCoroutine(timerCO(this.eventCooldown));
+        if (this.eventActive && this.isTriggered(npc)) return true;
+        return false;
     }
 
-    private IEnumerator timerCO(float delay)
+    public List<AIAction> getActions()
     {
         this.eventActive = false;
-        yield return new WaitForSeconds(delay);
-        if(this.repeatEvent) this.eventActive = true;
+        this.timeLeft = this.eventCooldown;
+        return this.actions;
     }
+
+
 }
