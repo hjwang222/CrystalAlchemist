@@ -6461,84 +6461,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 4482648710634036694}
+  npc: {fileID: 0}
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   box: {fileID: 5104834203016797782, guid: 4828c807745ed894ea715e12180742d8, type: 3}
   startImmediately: 0
-  initialActions:
-  - type: 3
-    position: {x: 0, y: 0}
-    de: 
-    en: 
-    duration: 4
-    dauer: 4
-    canDie: 0
-    nextPhase: 
-    animation: 
-    skill: {fileID: 8448882386689954494, guid: 65b268bfda2fa0e4bb41978a974d71d5, type: 3}
-    cast: -1
-    cD: -1
-    amount: 0
-    castGroup: 0
-    sequence: {fileID: 0}
-    sequencePositionType: 0
-    sequencePosition: {x: 0, y: 0}
-    gcd: 2.5
-    skillinstance: {fileID: 0}
   phases:
-  - phaseName: Phase 1
-    phaseDescription: Startphase
-    actions:
-    - type: 3
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      dauer: 4
-      canDie: 0
-      nextPhase: 
-      animation: 
-      skill: {fileID: 5107232112540213192, guid: fb95bd2a1053b1f4b8dc90b8f7f408ce,
-        type: 3}
-      cast: 3
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      sequencePositionType: 0
-      sequencePosition: {x: 0, y: 0}
-      gcd: 5
-      skillinstance: {fileID: 0}
-    - type: 3
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      dauer: 4
-      canDie: 0
-      nextPhase: 
-      animation: 
-      skill: {fileID: 5107232112540213192, guid: 64a6fabeed524da47a1bd635a555574c,
-        type: 3}
-      cast: 3
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      sequencePositionType: 0
-      sequencePosition: {x: 0, y: 0}
-      gcd: 5
-      skillinstance: {fileID: 0}
-  events:
-  - eventName: 
-    eventDescription: 
-    trigger: []
-    actions: []
-    affectedPhases: []
-    repeatEvent: 0
-    requireAll: 0
-    startTime: 0
-    isActive: 1
+  - {fileID: 0}
 --- !u!114 &4482648710634036694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6574,8 +6502,8 @@ MonoBehaviour:
   manaRegen: 0
   buffPlus: 0
   debuffMinus: 0
+  cantBeHit: 0
   isInvincible: 0
-  isImmortal: 0
   cannotDie: 0
   isHit: 0
   buffs: []

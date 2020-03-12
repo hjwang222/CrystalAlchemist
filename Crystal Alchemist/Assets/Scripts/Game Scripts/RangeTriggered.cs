@@ -5,7 +5,6 @@ using Sirenix.OdinInspector;
 
 public class RangeTriggered : MonoBehaviour
 {
-
     [FoldoutGroup("Wirkungsbereich", expanded: false)]
     [Tooltip("wirkt auf alle Spieler")]
     [SerializeField]

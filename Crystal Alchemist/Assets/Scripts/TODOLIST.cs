@@ -14,6 +14,7 @@ public class TODOLIST : MonoBehaviour
     //TODO: Sentinel Schuss ändern
 
     //REWORK: Items (Scriptable Object)
+    //REWORK: StatusEffects (Scriptable Object)
     //REWORK: Inventory (Scriptable Object)
     //REWORK: AI Events (Initial, Phases, Actions, Events Scriptable Objects)
     //REWORK: Indicators (Scriptable Object?)

@@ -54,7 +54,6 @@ public class Character : MonoBehaviour
 
     private GameObject targetHelpObjectPlayer;
     private DeathAnimation activeDeathAnimation;
-    private float immortalAtStart = 0;
 
     [HideInInspector]
     public float speedMultiply = 5;
@@ -85,9 +84,9 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public int debuffMinus;
     [HideInInspector]
-    public bool isInvincible;
+    public bool cantBeHit;
     [HideInInspector]
-    public bool isImmortal = false;
+    public bool isInvincible = false;
     [HideInInspector]
     public bool cannotDie = false;
     [HideInInspector]
@@ -128,7 +127,6 @@ public class Character : MonoBehaviour
 
     public void init()
     {
-        if (this.immortalAtStart > 0) this.setImmortal(this.immortalAtStart);
         if (!this.isPlayer) this.spawnPosition = this.transform.position;
 
         setComponents();
@@ -228,9 +226,6 @@ public class Character : MonoBehaviour
         }
 
         CustomUtilities.UnityFunctions.initLoot(this.gameObject, this.lootParentObject, this.stats.lootTable, this.lootTableInternal, this.stats.multiLoot, this.inventory);
-
-        AIEvents eventAI = this.GetComponent<AIEvents>();
-        if (eventAI != null) eventAI.init();
     }
     #endregion
           
@@ -280,7 +275,10 @@ public class Character : MonoBehaviour
         regeneration();
         updateLifeAnimation();
 
-        if (this.life <= 0 && !this.cannotDie && !this.isImmortal && !this.isInvincible)
+        if (this.life <= 0 
+            && !this.cannotDie //Item
+            && !this.isInvincible //Event
+            && !this.cantBeHit) //after Hit
             KillIt();
     }
 
@@ -696,7 +694,7 @@ public class Character : MonoBehaviour
          && this.currentState != CharacterState.dead
          && targetModule != null)
         {
-            if ((!this.isInvincible && !this.isImmortal) || targetModule.ignoreInvincibility)
+            if ((!this.cantBeHit && !this.isInvincible) || targetModule.ignoreInvincibility)
             {
                 //Status Effekt hinzufügen
                 if (targetModule.statusEffects != null)
@@ -721,7 +719,7 @@ public class Character : MonoBehaviour
 
                         //Charakter-Treffer (Schaden) animieren
                         CustomUtilities.Audio.playSoundEffect(this.gameObject, this.stats.hitSoundEffect);
-                        StartCoroutine(hitCo());
+                        setInvincible();
                     }
                 }
 
@@ -745,14 +743,15 @@ public class Character : MonoBehaviour
         gotHit(skill, percentage, true);
     }
 
-    public void setImmortalAtStart(float duration)
+    public void setInvincible()
     {
-        this.immortalAtStart = duration;
+        setInvincible(this.stats.cannotBeHitTime, true);
     }
 
-    public void setImmortal(float duration)
+    public void setInvincible(float delay, bool showHitcolor)
     {
-        StartCoroutine(immortalCo(duration));
+        StopCoroutine(hitCo(delay, showHitcolor));
+        StartCoroutine(hitCo(delay, showHitcolor));
     }
 
     public void setCannotDie(bool value)
@@ -790,21 +789,17 @@ public class Character : MonoBehaviour
         if (this.boxCollider != null) this.boxCollider.enabled = false;
     }
 
-    private IEnumerator hitCo()
+    private IEnumerator hitCo(float duration, bool showColor)
     {
-        this.isInvincible = true;
-        if (this.stats.showHitcolor) this.changeColor(this.stats.hitColor);
+        this.cantBeHit = true;
 
-        yield return new WaitForSeconds(this.stats.cannotBeHitTime);
-        this.removeColor(this.stats.hitColor);
-        this.isInvincible = false;
-    }
+        if (this.stats.showHitcolor && showColor) this.changeColor(this.stats.hitColor);
 
-    private IEnumerator immortalCo(float duration)
-    {
-        this.isImmortal = true;
         yield return new WaitForSeconds(duration);
-        this.isImmortal = false;
+
+        if(showColor) this.removeColor(this.stats.hitColor);
+
+        this.cantBeHit = false;
     }
 
     private IEnumerator knockCo(float knockTime)

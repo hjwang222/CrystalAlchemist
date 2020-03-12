@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu(menuName = "Stats/AggroStats")]
+[CreateAssetMenu(menuName = "AI/AggroStats")]
 public class AggroStats : ScriptableObject
 {
     [FoldoutGroup("Aggro Attributes", expanded: false)]
     public bool firstHitMaxAggro = true;
-
 
     [FoldoutGroup("Aggro Attributes", expanded: false)]
     [Range(0, 120)]
