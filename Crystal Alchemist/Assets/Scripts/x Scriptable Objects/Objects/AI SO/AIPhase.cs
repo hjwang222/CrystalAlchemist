@@ -9,57 +9,82 @@ public class AIPhase : ScriptableObject
     [SerializeField]
     private List<AIAction> actions;
 
+    [BoxGroup("Action Sequence")]
+    [SerializeField]
+    private bool repeat;
+
     [BoxGroup("Triggered Events")]
     [SerializeField]
     private List<AIEvent> events;
 
-    private List<AIAction> currentActions = new List<AIAction>();
-    private List<AIAction> currentDialog = new List<AIAction>();
-    private List<AIAction> currentEvents = new List<AIAction>();
+    private AIAction currentAction;
+    private AIAction currentDialog;
+    private AIAction currentEventAction;
+
+    private List<AIAction> eventActions = new List<AIAction>();
 
     private int index;
+    private int eventIndex;
 
-    public void Start(List<RangeTriggered> ranges)
-    {       
+    public void Initialize(List<RangeTriggered> ranges)
+    {
+        ResetActions();
 
         foreach (AIEvent aiEvent in this.events)
         {
-            aiEvent.Start(ranges);
+            aiEvent.Initialize(ranges);
         }
-
-        fillActions();
     }
 
-    private void initializeActions()
+    public void Updating(AI npc)
     {
-        List<AIAction> temp = new List<AIAction>();
-
-        foreach (AIAction action in this.actions)
+        foreach(AIEvent aiEvent in this.events)
         {
-            AIAction act = Instantiate(action);
-            act.Start();
-            temp.Add(act);
+            aiEvent.Updating(npc);
+            aiEvent.SetEventActions(npc, this.eventActions, this);
         }
 
-        this.actions = temp;
+        if (this.eventActions.Count == 0) this.index = SetNextAction(npc, this.index, this.actions, false);
+        else this.eventIndex = SetNextAction(npc, this.eventIndex, this.eventActions, true);
+
+        UpdatingAction(npc);
     }
 
-    public void fillActions()
+    private int SetNextAction(AI npc, int index, List<AIAction> actions, bool isEvent)
     {
-        this.currentActions.AddRange(this.actions);
-    }
-
-    public void Update(AI npc)
-    {
-        
-    }
-
-    public void useAction(AI npc)
-    {
-        if (this.currentActions.Count > 0)
+        if (index < actions.Count)
         {
-            this.currentActions[0].useAction(npc);
-            this.currentActions.RemoveAt(0);
+            if (this.currentDialog == null && actions[index].isDialog())
+                SetActiveAction(this.currentDialog, actions[index], npc);
+
+            else if (this.currentAction == null && !actions[index].isDialog())
+                SetActiveAction(this.currentAction, actions[index], npc);
+
+            if (index >= actions.Count)
+            {
+                if (this.repeat && !isEvent) index = 0;
+                if (isEvent) { actions.Clear(); index = 0; }
+            }            
         }
+        return index;
+    }
+
+    private void SetActiveAction(AIAction current, AIAction action, AI npc)
+    {
+        current = Instantiate(action);
+        current.Initialize(npc);
+        this.index++;
+    }
+
+    private void UpdatingAction(AI npc)
+    {
+        if (this.currentAction != null) this.currentAction.Updating(npc);
+        if (this.currentDialog != null) this.currentDialog.Updating(npc);
+    }
+
+    public void ResetActions()
+    {
+        Destroy(this.currentAction);
+        Destroy(this.currentDialog);
     }
 }

@@ -15,13 +15,9 @@ public class MiniDialogBox : MonoBehaviour
         Destroy(this.gameObject, this.duration);
     }
 
-    public void setText(string text)
-    {        
-        this.textfield.text = text;
-    }
-
-    public void setDuration(float duration)
+    public void setDialogBox(string text, float duration)
     {
         this.duration = duration;
+        this.textfield.text = text;
     }
 }

@@ -2,7 +2,8 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public struct PhaseInfo
+[System.Serializable]
+public class PhaseInfo
 {
     public AIPhase phase;
     public List<RangeTriggered> ranges;
@@ -38,29 +39,66 @@ public class AIEvents : MonoBehaviour
     private CastBar activeCastBar;
     private MiniDialogBox activeDialog;
     private AIPhase activePhase;
+    private bool isActive;
     #endregion
-
-    private void Start()
-    {
-        startPhase(this.phases[0]);
-    }
 
     private void Update()
     {
-        UpdatePhase(this.npc);
+        if(!this.isActive && this.npc.target != null) StartPhase(this.phases[0]);
+        else if (this.isActive && this.npc.target == null) DestroyIt();
+
+        if (this.activePhase != null) this.activePhase.Updating(this.npc);
     }
 
-    private void startPhase(PhaseInfo phase)
+    private void OnDisable()
     {
-        this.activePhase = phase.phase;
-        this.activePhase.Start(phase.ranges);
+        DestroyIt();
     }
 
-    private void UpdatePhase(AI npc)
+    private void OnDestroy()
     {
-        this.activePhase.Update(npc);       
+        DestroyIt();
     }
 
+    private void DestroyIt()
+    {
+        this.isActive = false;
+        Destroy(this.activePhase);
+    }
+
+    private void StartPhase(PhaseInfo phase)
+    {
+        if (phase != null)
+        {
+            this.isActive = true;
+
+            if (this.activePhase != null)
+            {
+                this.activePhase.ResetActions();
+                Destroy(this.activePhase);
+            }
+            this.activePhase = Instantiate(phase.phase);
+            this.activePhase.Initialize(phase.ranges);
+        }
+    }
+
+    public void SwitchPhase(AIPhase phase)
+    {
+        foreach(PhaseInfo info in this.phases)
+        {
+            if (info.phase == phase)
+            {
+                StartPhase(info);
+                break;
+            }
+        }
+    }
+
+    public void ShowDialog(string text, float duration)
+    {
+        this.activeDialog = Instantiate(this.box, this.npc.skillStartPosition.transform);
+        this.activeDialog.setDialogBox(text, duration);
+    }
 
 
 

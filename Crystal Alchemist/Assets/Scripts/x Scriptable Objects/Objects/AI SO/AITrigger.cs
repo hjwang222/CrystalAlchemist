@@ -28,13 +28,13 @@ public class AITrigger : ScriptableObject
     private bool timesUp = false;
     private float elapsed = 0;
 
-    public void Start(List<RangeTriggered> ranges)
+    public void Initialize(List<RangeTriggered> ranges)
     {
         this.rangeTrigger = ranges;
         startTimer();
     }
 
-    public void Update()
+    public void Updating()
     {
         if (this.time > 0)
         {

@@ -22,6 +22,9 @@ public class AIEvent : ScriptableObject
     private bool repeatEvent = false;
 
     [SerializeField]
+    private bool startImmediately = false;
+
+    [SerializeField]
     [ShowIf("repeatEvent")]
     private float eventCooldown = 0;
 
@@ -32,23 +35,25 @@ public class AIEvent : ScriptableObject
     private bool eventActive = true;
     private float timeLeft = 0;
 
-    public void Start(List<RangeTriggered> ranges)
+    public void Initialize(List<RangeTriggered> ranges)
     {
         foreach (AITrigger trigger in this.triggers)
         {
-            trigger.Start(ranges);
+            trigger.Initialize(ranges);
         }
     }
 
-    public void Update(AI npc)
+    public void Updating(AI npc)
     {
-        foreach(AITrigger trigger in this.triggers)
+        if (this.eventActive)
         {
-            trigger.Update();
+            foreach (AITrigger trigger in this.triggers)
+            {
+                trigger.Updating();
+            }
         }
 
-        if (!this.eventActive && this.repeatEvent) updateTimer();
-              
+        if (!this.eventActive && this.repeatEvent) updateTimer();              
     }
 
     private void updateTimer()
@@ -72,18 +77,14 @@ public class AIEvent : ScriptableObject
         return false;
     }
 
-    public bool eventEnabled(AI npc)
+    public void SetEventActions(AI npc, List<AIAction> actions, AIPhase phase)
     {
-        if (this.eventActive && this.isTriggered(npc)) return true;
-        return false;
+        if (this.eventActive && this.isTriggered(npc))
+        {
+            this.eventActive = false;
+            if(this.repeatEvent) this.timeLeft = this.eventCooldown;
+            actions.AddRange(this.actions);
+            if (this.startImmediately) phase.ResetActions();
+        }
     }
-
-    public List<AIAction> getActions()
-    {
-        this.eventActive = false;
-        this.timeLeft = this.eventCooldown;
-        return this.actions;
-    }
-
-
 }
