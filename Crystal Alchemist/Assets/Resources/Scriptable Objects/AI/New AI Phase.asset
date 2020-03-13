@@ -12,5 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a19f9cb4d358498823753290d243d, type: 3}
   m_Name: New AI Phase
   m_EditorClassIdentifier: 
-  phaseName: 
-  actions: []
+  actions:
+  - type: 3
+    position: {x: 0, y: 0}
+    de: 
+    en: 
+    duration: 4
+    canDie: 0
+    nextPhase: {fileID: 0}
+    animations: 
+    ability: {fileID: 11400000, guid: 344bff932339c474a9590c9e3eb7df98, type: 2}
+    overrideCastTime: 1
+    castTime: 5
+    overrideCooldown: 1
+    cooldown: 5
+    repeatAmount: 0
+    sequence: {fileID: 0}
+    sequencePositionType: 0
+    sequencePosition: {x: 0, y: 0}
+  repeat: 1

@@ -9,8 +9,8 @@ public enum RequirementType
     all
 }
 
-[CreateAssetMenu(menuName = "AI/AI Event")]
-public class AIEvent : ScriptableObject
+[System.Serializable]
+public class AIEvent
 {
     [SerializeField]
     private List<AITrigger> triggers;
@@ -34,14 +34,6 @@ public class AIEvent : ScriptableObject
 
     private bool eventActive = true;
     private float timeLeft = 0;
-
-    public void Initialize(List<RangeTriggered> ranges)
-    {
-        foreach (AITrigger trigger in this.triggers)
-        {
-            trigger.Initialize(ranges);
-        }
-    }
 
     public void Updating(AI npc)
     {

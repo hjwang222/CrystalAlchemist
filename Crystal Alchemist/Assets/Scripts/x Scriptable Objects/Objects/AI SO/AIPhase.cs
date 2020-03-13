@@ -2,6 +2,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+
 [CreateAssetMenu(menuName = "AI/AI Phase")]
 public class AIPhase : ScriptableObject
 {
@@ -13,31 +14,28 @@ public class AIPhase : ScriptableObject
     [SerializeField]
     private bool repeat;
 
-    [BoxGroup("Triggered Events")]
-    [SerializeField]
-    private List<AIEvent> events;
+
 
     private AIAction currentAction;
     private AIAction currentDialog;
     private AIAction currentEventAction;
-
     private List<AIAction> eventActions = new List<AIAction>();
-
+    private List<AIEvent> events = new List<AIEvent>();
     private int index;
     private int eventIndex;
 
-    public void Initialize(List<RangeTriggered> ranges)
+
+    public void Initialize(List<AIEvent> events)
     {
         ResetActions();
-
-        foreach (AIEvent aiEvent in this.events)
-        {
-            aiEvent.Initialize(ranges);
-        }
+        this.events = events;
     }
 
     public void Updating(AI npc)
     {
+        if (this.currentAction.getActive()) this.currentAction = null;
+        if (this.currentDialog.getActive()) this.currentDialog = null;
+
         foreach(AIEvent aiEvent in this.events)
         {
             aiEvent.Updating(npc);
@@ -70,8 +68,8 @@ public class AIPhase : ScriptableObject
     }
 
     private void SetActiveAction(AIAction current, AIAction action, AI npc)
-    {
-        current = Instantiate(action);
+    {        
+        current = action;
         current.Initialize(npc);
         this.index++;
     }
@@ -84,7 +82,10 @@ public class AIPhase : ScriptableObject
 
     public void ResetActions()
     {
-        Destroy(this.currentAction);
-        Destroy(this.currentDialog);
+        this.currentAction = null;
+        this.currentDialog = null;
+
+        //Destroy(this.currentAction);
+        //Destroy(this.currentDialog);
     }
 }

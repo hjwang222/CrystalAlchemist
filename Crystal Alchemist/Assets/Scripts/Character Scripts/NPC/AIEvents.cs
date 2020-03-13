@@ -5,8 +5,21 @@ using Sirenix.OdinInspector;
 [System.Serializable]
 public class PhaseInfo
 {
-    public AIPhase phase;
-    public List<RangeTriggered> ranges;
+    [SerializeField]
+    private AIPhase phase;
+
+    [SerializeField]
+    private List<AIEvent> events;
+
+    public AIPhase getPhase()
+    {
+        return this.phase;
+    }
+
+    public List<AIEvent> getEvents()
+    {
+        return this.events;
+    }
 }
 
 public class AIEvents : MonoBehaviour
@@ -66,9 +79,9 @@ public class AIEvents : MonoBehaviour
         Destroy(this.activePhase);
     }
 
-    private void StartPhase(PhaseInfo phase)
+    private void StartPhase(PhaseInfo phaseInfo)
     {
-        if (phase != null)
+        if (phaseInfo != null)
         {
             this.isActive = true;
 
@@ -77,18 +90,18 @@ public class AIEvents : MonoBehaviour
                 this.activePhase.ResetActions();
                 Destroy(this.activePhase);
             }
-            this.activePhase = Instantiate(phase.phase);
-            this.activePhase.Initialize(phase.ranges);
+            this.activePhase = Instantiate(phaseInfo.getPhase());
+            this.activePhase.Initialize(phaseInfo.getEvents());
         }
     }
 
     public void SwitchPhase(AIPhase phase)
     {
-        foreach(PhaseInfo info in this.phases)
+        foreach(PhaseInfo phaseInfo in this.phases)
         {
-            if (info.phase == phase)
+            if (phaseInfo.getPhase() == phase)
             {
-                StartPhase(info);
+                StartPhase(phaseInfo);
                 break;
             }
         }
@@ -96,11 +109,25 @@ public class AIEvents : MonoBehaviour
 
     public void ShowDialog(string text, float duration)
     {
-        this.activeDialog = Instantiate(this.box, this.npc.skillStartPosition.transform);
-        this.activeDialog.setDialogBox(text, duration);
+        if (this.activeDialog == null)
+        {
+            this.activeDialog = Instantiate(this.box, this.npc.skillStartPosition.transform);
+            this.activeDialog.setDialogBox(text, duration);
+        }
     }
 
+    public void ShowCastBar()
+    {
+        if(this.activeCastBar == null)
+        {
+            this.activeCastBar = Instantiate(this.activeCastBar, this.npc.transform);
+        }
+    }
 
+    public void HideCastBar()
+    {
+        if (this.activeCastBar != null) Destroy(this.activeCastBar);
+    }
 
     /*if (this.immortalAtStart > 0) this.setInvincible(this.immortalAtStart, false);
 

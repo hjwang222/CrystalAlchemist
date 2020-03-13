@@ -15,8 +15,9 @@ public enum AIActionType
     animation
 }
 
-[CreateAssetMenu(menuName = "AI/AI Action")]
-public class AIAction : ScriptableObject
+//[CreateAssetMenu(menuName = "AI/AI Action")]
+[System.Serializable]
+public class AIAction //: ScriptableObject
 {
     #region Attributes
 
@@ -62,7 +63,7 @@ public class AIAction : ScriptableObject
     [ShowIf("type", AIActionType.animation)]
     [BoxGroup("Properties")]
     [SerializeField]
-    private string animation;
+    private string animations;
 
     [ShowIf("type", AIActionType.ability)]
     [BoxGroup("Properties")]
@@ -115,15 +116,16 @@ public class AIAction : ScriptableObject
     #endregion
 
     private float waitTimer = 0;
+    private bool isActive = true;
 
-    //casting
     //interrupted
-
 
     #region Main Functions
 
     public void Initialize(AI npc)
     {
+        this.isActive = true;
+
         switch (this.type)
         {
             case AIActionType.ability: StartSkill(); break;
@@ -153,6 +155,11 @@ public class AIAction : ScriptableObject
         return (this.type == AIActionType.dialog);
     }
 
+    public bool getActive()
+    {
+        return this.isActive;
+    }
+
     #endregion
 
 
@@ -160,18 +167,32 @@ public class AIAction : ScriptableObject
 
     private void StartSkill()
     {
-        Ability ability = Instantiate(this.ability);
-        this.ability = ability;
+        this.ability = CustomUtilities.Skills.setAbility(this.ability);
+        if (this.overrideCastTime) this.ability.castTime = this.castTime;
+        if (this.overrideCooldown) this.ability.cooldown = this.cooldown;
     }
 
     private void UpdateSkill(AI npc)
     {
-        //casting here
-        Skill usedSkill = CustomUtilities.Skills.instantiateSkill(this.ability.skill, npc, npc.target);
-        if (this.overrideCastTime) this.ability.castTime = this.castTime;
-        if (this.overrideCooldown) this.ability.cooldown = this.cooldown;
+        if (this.ability.state == AbilityState.notCharged)
+        {
+            npc.GetComponent<AIEvents>().ShowCastBar();
+            this.ability.Charge();
+        }
+        else if (this.ability.state == AbilityState.charged 
+              || this.ability.state == AbilityState.ready) UseSkill(npc);
+    }
+
+    private void UseSkill(AI npc)
+    {
+        for (int i = 0; i < this.repeatAmount; i++)
+        {
+            Skill usedSkill = CustomUtilities.Skills.instantiateSkill(this.ability.skill, npc, npc.target);
+        }
+
         this.ability.ResetCoolDown();
-        Destroy(this);
+        npc.GetComponent<AIEvents>().HideCastBar();
+        Deactivate();
     }
 
     #endregion
@@ -181,12 +202,9 @@ public class AIAction : ScriptableObject
 
     private void UpdateSequence(AI npc)
     {
-        //casting here
-        SkillSequence sequence = Instantiate(this.sequence);
-        sequence.setSender(npc);
-        sequence.setTarget(npc.target);
-        sequence.setPosition(this.sequencePositionType, this.sequencePosition);
-        Destroy(this);
+        //casting here       
+        CustomUtilities.Skills.instantiateSequence(this.sequence, npc, this.sequencePosition, this.sequencePositionType);
+        Deactivate();
     }
 
     #endregion
@@ -202,7 +220,7 @@ public class AIAction : ScriptableObject
     private void UpdateWait()
     {
         if (this.waitTimer > 0) this.waitTimer -= Time.deltaTime;
-        else Destroy(this);
+        else Deactivate();
     }
 
     #endregion
@@ -213,7 +231,7 @@ public class AIAction : ScriptableObject
     private void StartKill(AI npc)
     {
         npc.KillIt();
-        Destroy(this);
+        Deactivate();
     }
 
     #endregion
@@ -223,8 +241,8 @@ public class AIAction : ScriptableObject
 
     private void StartAnimation(AI npc)
     {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(npc.animator, this.animation);
-        Destroy(this);
+        CustomUtilities.UnityUtils.SetAnimatorParameter(npc.animator, this.animations);
+        Deactivate();
     }
 
     #endregion
@@ -235,7 +253,7 @@ public class AIAction : ScriptableObject
     private void StartInvinicible(AI npc)
     {
         npc.setInvincible(this.duration, false);
-        Destroy(this);
+        Deactivate();
     }
 
     #endregion
@@ -246,7 +264,7 @@ public class AIAction : ScriptableObject
     private void StartCannotDie(AI npc)
     {
         npc.setCannotDie(this.canDie);
-        Destroy(this);
+        Deactivate();
     }
 
     #endregion
@@ -264,7 +282,7 @@ public class AIAction : ScriptableObject
     private void UpdateDialog()
     {
         if (this.waitTimer > 0) this.waitTimer -= Time.deltaTime;
-        else Destroy(this);
+        else Deactivate();
     }
 
     #endregion
@@ -279,9 +297,10 @@ public class AIAction : ScriptableObject
 
     #endregion
 
-
-    private void OnDestroy()
+    private void Deactivate()
     {
-        
+        //Destroy(this);
+        this.isActive = false;
     }
+
 }

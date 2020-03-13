@@ -10,8 +10,8 @@ public enum AITriggerType
     range
 }
 
-[CreateAssetMenu(menuName = "AI/AI Trigger")]
-public class AITrigger : ScriptableObject
+[System.Serializable]
+public class AITrigger
 {
     [SerializeField]
     private AITriggerType type;
@@ -24,13 +24,15 @@ public class AITrigger : ScriptableObject
     [SerializeField]
     private float life;
 
+    [ShowIf("type", AITriggerType.range)]
+    [SerializeField]
     private List<RangeTriggered> rangeTrigger;
+
     private bool timesUp = false;
     private float elapsed = 0;
 
-    public void Initialize(List<RangeTriggered> ranges)
+    public void Initialize()
     {
-        this.rangeTrigger = ranges;
         startTimer();
     }
 

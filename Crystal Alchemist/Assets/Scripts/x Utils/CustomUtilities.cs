@@ -1269,6 +1269,21 @@ public class CustomUtilities : MonoBehaviour
             return prefab;
         }
 
+        public static Ability setAbility(Ability ability)
+        {
+            return Instantiate(ability);
+        }
+
+        public static SkillSequence instantiateSequence(SkillSequence skillSequence, AI npc, Vector2 sequencePosition, modificationType type)
+        {
+            SkillSequence sequence = Instantiate(skillSequence);
+
+            sequence.setSender(npc);
+            sequence.setTarget(npc.target);
+            sequence.setPosition(type, sequencePosition);
+            return sequence;
+        }
+
         public static Skill instantiateSkill(Skill skill, Character sender)
         {
             return instantiateSkill(skill, sender, null, 1);
