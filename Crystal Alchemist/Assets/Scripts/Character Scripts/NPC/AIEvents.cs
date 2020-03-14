@@ -2,26 +2,6 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[System.Serializable]
-public class PhaseInfo
-{
-    [SerializeField]
-    private AIPhase phase;
-
-    [SerializeField]
-    private List<AIEvent> events;
-
-    public AIPhase getPhase()
-    {
-        return this.phase;
-    }
-
-    public List<AIEvent> getEvents()
-    {
-        return this.events;
-    }
-}
-
 public class AIEvents : MonoBehaviour
 {
     #region Attributes
@@ -47,7 +27,7 @@ public class AIEvents : MonoBehaviour
 
     [BoxGroup("AI")]
     [SerializeField]
-    private List<PhaseInfo> phases = new List<PhaseInfo>();
+    private List<AIPhase> phases = new List<AIPhase>();
 
     private CastBar activeCastBar;
     private MiniDialogBox activeDialog;
@@ -55,33 +35,39 @@ public class AIEvents : MonoBehaviour
     private bool isActive;
     #endregion
 
+    private void Start()
+    {
+        if(this.phases.Count > 0) StartPhase(this.phases[0]);
+    }
+
     private void Update()
     {
+        /*
         if(!this.isActive && this.npc.target != null) StartPhase(this.phases[0]);
-        else if (this.isActive && this.npc.target == null) DestroyIt();
+        else if (this.isActive && this.npc.target == null) DestroyIt();*/
 
         if (this.activePhase != null) this.activePhase.Updating(this.npc);
     }
 
     private void OnDisable()
     {
-        DestroyIt();
+        EndPhase();
     }
 
     private void OnDestroy()
     {
-        DestroyIt();
+        EndPhase();
     }
 
-    private void DestroyIt()
+    public void EndPhase()
     {
         this.isActive = false;
-        Destroy(this.activePhase);
+        if(this.activePhase != null) Destroy(this.activePhase);
     }
 
-    private void StartPhase(PhaseInfo phaseInfo)
+    public void StartPhase(AIPhase phase)
     {
-        if (phaseInfo != null)
+        if (phase != null)
         {
             this.isActive = true;
 
@@ -90,20 +76,8 @@ public class AIEvents : MonoBehaviour
                 this.activePhase.ResetActions();
                 Destroy(this.activePhase);
             }
-            this.activePhase = Instantiate(phaseInfo.getPhase());
-            this.activePhase.Initialize(phaseInfo.getEvents());
-        }
-    }
-
-    public void SwitchPhase(AIPhase phase)
-    {
-        foreach(PhaseInfo phaseInfo in this.phases)
-        {
-            if (phaseInfo.getPhase() == phase)
-            {
-                StartPhase(phaseInfo);
-                break;
-            }
+            this.activePhase = Instantiate(phase);
+            this.activePhase.Initialize();
         }
     }
 
@@ -116,17 +90,18 @@ public class AIEvents : MonoBehaviour
         }
     }
 
-    public void ShowCastBar()
+    public void ShowCastBar(Ability ability)
     {
         if(this.activeCastBar == null)
         {
-            this.activeCastBar = Instantiate(this.activeCastBar, this.npc.transform);
+            this.activeCastBar = Instantiate(this.castbar, this.npc.transform.position, Quaternion.identity);
+            this.activeCastBar.setCastBar(this.npc, ability);
         }
     }
 
     public void HideCastBar()
     {
-        if (this.activeCastBar != null) Destroy(this.activeCastBar);
+        if (this.activeCastBar != null) this.activeCastBar.destroyIt();
     }
 
     /*if (this.immortalAtStart > 0) this.setInvincible(this.immortalAtStart, false);

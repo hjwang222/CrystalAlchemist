@@ -1225,9 +1225,12 @@ public class CustomUtilities : MonoBehaviour
 
             start = (Vector2)skill.sender.transform.position;
 
-            if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null) direction = (Vector2)skill.sender.GetComponent<AI>().target.transform.position - start;
-            else if (skill.target != null) direction = (Vector2)skill.target.transform.position - start;
-            else direction = skill.sender.direction.normalized;
+            if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null)
+                direction = ((Vector2)skill.sender.GetComponent<AI>().target.transform.position - start).normalized;
+            else if (skill.target != null)
+                direction = ((Vector2)skill.target.transform.position - start).normalized;
+            else
+                direction = skill.sender.direction.normalized;
 
             float positionX = skill.sender.skillStartPosition.transform.position.x + (direction.x * positionOffset);
             float positionY = skill.sender.skillStartPosition.transform.position.y + (direction.y * positionOffset) + positionHeight;
@@ -1269,7 +1272,7 @@ public class CustomUtilities : MonoBehaviour
             return prefab;
         }
 
-        public static Ability setAbility(Ability ability)
+        public static Ability InstantiateAbility(Ability ability)
         {
             return Instantiate(ability);
         }

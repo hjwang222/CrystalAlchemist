@@ -11,7 +11,7 @@ public class PlayerSkillset : ScriptableObject
     {
         foreach (Ability ability in this.abilities)
         {
-            ability.Start();
+            ability.Initialize();
             //this.AButton = Instantiate(this.AButton);
         }
     }

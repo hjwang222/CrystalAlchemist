@@ -8,7 +8,8 @@ public enum AIActionType
     wait,
     ability,
     sequence,
-    switchPhase,
+    startPhase,
+    endPhase,
     invincible,
     kill,
     cannotDie,
@@ -21,7 +22,7 @@ public class AIAction //: ScriptableObject
 {
     #region Attributes
 
-    [BoxGroup("Type")]
+    [BoxGroup("Properties")]
     [SerializeField]
     private AIActionType type;
 
@@ -29,6 +30,8 @@ public class AIAction //: ScriptableObject
     [BoxGroup("Properties")]
     [SerializeField]
     private Vector2 position;
+
+    //Movement: Fixed, follow, path, evade
 
     [ShowIf("type", AIActionType.dialog)]
     [BoxGroup("Properties")]
@@ -41,7 +44,7 @@ public class AIAction //: ScriptableObject
     private string en;
 
     [HideIf("type", AIActionType.movement)]
-    [HideIf("type", AIActionType.switchPhase)]
+    [HideIf("type", AIActionType.startPhase)]
     [HideIf("type", AIActionType.animation)]
     [HideIf("type", AIActionType.ability)]
     [HideIf("type", AIActionType.sequence)]
@@ -55,7 +58,7 @@ public class AIAction //: ScriptableObject
     [SerializeField]
     private bool canDie = false;
 
-    [ShowIf("type", AIActionType.switchPhase)]
+    [ShowIf("type", AIActionType.startPhase)]
     [BoxGroup("Properties")]
     [SerializeField]
     private AIPhase nextPhase;
@@ -79,7 +82,7 @@ public class AIAction //: ScriptableObject
     [ShowIf("overrideCastTime")]
     [BoxGroup("Properties")]
     [SerializeField]
-    private float castTime = -1;
+    private float castTime = 0;
 
     [ShowIf("type", AIActionType.ability)]
     [BoxGroup("Properties")]
@@ -90,12 +93,12 @@ public class AIAction //: ScriptableObject
     [ShowIf("overrideCooldown")]
     [BoxGroup("Properties")]
     [SerializeField]
-    private float cooldown = -1;
+    private float cooldown = 0;
 
     [ShowIf("type", AIActionType.ability)]
     [BoxGroup("Properties")]
     [SerializeField]
-    private int repeatAmount = 0;
+    private int repeatAmount = 1;
 
     [ShowIf("type", AIActionType.sequence)]
     [BoxGroup("Properties")]
@@ -117,6 +120,8 @@ public class AIAction //: ScriptableObject
 
     private float waitTimer = 0;
     private bool isActive = true;
+    private Ability tempAbility;
+    private int skillCounter = 0;
 
     //interrupted
 
@@ -135,7 +140,8 @@ public class AIAction //: ScriptableObject
             case AIActionType.invincible: StartInvinicible(npc); break;
             case AIActionType.wait: StartWait(); break;
             case AIActionType.dialog: StartDialog(npc); break;
-            case AIActionType.switchPhase: StartPhase(npc); break;
+            case AIActionType.startPhase: StartPhase(npc); break;
+            case AIActionType.endPhase: EndPhase(npc); break;
         }
     }
 
@@ -167,32 +173,52 @@ public class AIAction //: ScriptableObject
 
     private void StartSkill()
     {
-        this.ability = CustomUtilities.Skills.setAbility(this.ability);
-        if (this.overrideCastTime) this.ability.castTime = this.castTime;
-        if (this.overrideCooldown) this.ability.cooldown = this.cooldown;
+        this.tempAbility = CustomUtilities.Skills.InstantiateAbility(this.ability);
+        if (this.overrideCastTime) this.tempAbility.castTime = this.castTime;
+        if (this.overrideCooldown) this.tempAbility.cooldown = this.cooldown;
+        this.tempAbility.Initialize();
+        this.skillCounter = 0;
     }
 
     private void UpdateSkill(AI npc)
     {
-        if (this.ability.state == AbilityState.notCharged)
-        {
-            npc.GetComponent<AIEvents>().ShowCastBar();
-            this.ability.Charge();
-        }
-        else if (this.ability.state == AbilityState.charged 
-              || this.ability.state == AbilityState.ready) UseSkill(npc);
+        this.tempAbility.Update();
+
+        if (this.tempAbility.state == AbilityState.notCharged) Charge(npc);
+        else if (this.tempAbility.state == AbilityState.targetRequired) LockOn(npc);
+        else if (this.tempAbility.state == AbilityState.charged
+              || this.tempAbility.state == AbilityState.ready
+              || this.tempAbility.state == AbilityState.lockOn) UseSkill(npc);
+
+        ResetCharge();
+    }
+
+    private void Charge(AI npc)
+    {
+        npc.GetComponent<AIEvents>().ShowCastBar(this.tempAbility);
+        this.tempAbility.Charge();
+    }
+
+    private void LockOn(AI npc)
+    {
+        if(npc.target != null) this.tempAbility.state = AbilityState.lockOn;
     }
 
     private void UseSkill(AI npc)
     {
-        for (int i = 0; i < this.repeatAmount; i++)
-        {
-            Skill usedSkill = CustomUtilities.Skills.instantiateSkill(this.ability.skill, npc, npc.target);
-        }
-
-        this.ability.ResetCoolDown();
         npc.GetComponent<AIEvents>().HideCastBar();
-        Deactivate();
+        CustomUtilities.Skills.instantiateSkill(this.tempAbility.skill, npc, npc.target);
+        this.tempAbility.ResetCoolDown();
+        this.skillCounter++;
+    }
+
+    private void ResetCharge()
+    {
+        if (this.skillCounter >= this.repeatAmount)
+        {
+            this.tempAbility.ResetCharge();
+            Deactivate();
+        }
     }
 
     #endregion
@@ -292,7 +318,12 @@ public class AIAction //: ScriptableObject
 
     private void StartPhase(AI npc)
     {
-        npc.GetComponent<AIEvents>().SwitchPhase(this.nextPhase);
+        npc.GetComponent<AIEvents>().StartPhase(this.nextPhase);
+    }
+
+    private void EndPhase(AI npc)
+    {
+        npc.GetComponent<AIEvents>().EndPhase();
     }
 
     #endregion

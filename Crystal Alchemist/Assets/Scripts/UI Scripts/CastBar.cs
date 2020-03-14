@@ -20,8 +20,8 @@ public class CastBar : MonoBehaviour
 
     public void setCastBar(Character character, Ability skill)
     {
-        this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1f);
         this.transform.parent = character.transform;
+        this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1f);
         this.skill = skill;
         this.skillName.text = this.skill.name;
     }

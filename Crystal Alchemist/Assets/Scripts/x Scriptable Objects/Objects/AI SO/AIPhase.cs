@@ -2,7 +2,6 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-
 [CreateAssetMenu(menuName = "AI/AI Phase")]
 public class AIPhase : ScriptableObject
 {
@@ -14,27 +13,32 @@ public class AIPhase : ScriptableObject
     [SerializeField]
     private bool repeat;
 
-
+    [BoxGroup("Events")]
+    [SerializeField]
+    private List<AIEvent> events;
 
     private AIAction currentAction;
     private AIAction currentDialog;
     private AIAction currentEventAction;
     private List<AIAction> eventActions = new List<AIAction>();
-    private List<AIEvent> events = new List<AIEvent>();
     private int index;
     private int eventIndex;
 
 
-    public void Initialize(List<AIEvent> events)
+    public void Initialize()
     {
+        foreach (AIEvent aiEvent in this.events)
+        {
+            aiEvent.Initialize();
+        }
+
         ResetActions();
-        this.events = events;
     }
 
     public void Updating(AI npc)
     {
-        if (this.currentAction.getActive()) this.currentAction = null;
-        if (this.currentDialog.getActive()) this.currentDialog = null;
+        if (this.currentAction != null && !this.currentAction.getActive()) this.currentAction = null;
+        if (this.currentDialog != null && !this.currentDialog.getActive()) this.currentDialog = null;
 
         foreach(AIEvent aiEvent in this.events)
         {
@@ -42,37 +46,64 @@ public class AIPhase : ScriptableObject
             aiEvent.SetEventActions(npc, this.eventActions, this);
         }
 
-        if (this.eventActions.Count == 0) this.index = SetNextAction(npc, this.index, this.actions, false);
-        else this.eventIndex = SetNextAction(npc, this.eventIndex, this.eventActions, true);
-
+        SetNextAction(npc);
         UpdatingAction(npc);
     }
 
-    private int SetNextAction(AI npc, int index, List<AIAction> actions, bool isEvent)
+    private void SetNextAction(AI npc)
     {
-        if (index < actions.Count)
+        if(this.eventActions.Count == 0)
         {
-            if (this.currentDialog == null && actions[index].isDialog())
-                SetActiveAction(this.currentDialog, actions[index], npc);
-
-            else if (this.currentAction == null && !actions[index].isDialog())
-                SetActiveAction(this.currentAction, actions[index], npc);
-
-            if (index >= actions.Count)
+            if (this.index < this.actions.Count)
             {
-                if (this.repeat && !isEvent) index = 0;
-                if (isEvent) { actions.Clear(); index = 0; }
-            }            
+                if (this.currentDialog == null && this.actions[this.index].isDialog())
+                {
+                    this.currentDialog = this.actions[this.index];
+                    this.currentDialog.Initialize(npc);
+                    this.index++;
+                }
+                else if (this.currentAction == null && !this.actions[this.index].isDialog())
+                {
+                    this.currentAction = this.actions[this.index];
+                    this.currentAction.Initialize(npc);
+                    this.index++;
+                }
+            }
+            else
+            {
+                if (this.currentAction == null
+                    && this.currentDialog == null
+                    && this.repeat)
+                    this.index = 0;                
+            }
         }
-        return index;
+        else
+        {
+            if (this.eventIndex < this.eventActions.Count)
+            {
+                if (this.currentDialog == null && this.eventActions[this.eventIndex].isDialog())
+                {
+                    this.currentDialog = this.eventActions[this.eventIndex];
+                    this.currentDialog.Initialize(npc);
+                    this.eventIndex++;
+                }
+                else if (this.currentAction == null && !this.eventActions[this.eventIndex].isDialog())
+                {
+                    this.currentAction = this.eventActions[this.eventIndex];
+                    this.currentAction.Initialize(npc);
+                    this.eventIndex++;
+                }
+            }
+            else
+            {
+                this.eventIndex = 0;
+                this.eventActions.Clear();
+            }
+        }
     }
 
-    private void SetActiveAction(AIAction current, AIAction action, AI npc)
-    {        
-        current = action;
-        current.Initialize(npc);
-        this.index++;
-    }
+
+
 
     private void UpdatingAction(AI npc)
     {

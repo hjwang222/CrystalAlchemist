@@ -7,7 +7,9 @@ public enum AITriggerType
 {
     time,
     life,
-    range
+    range, 
+    aggro,
+    aggroLost
 }
 
 [System.Serializable]
@@ -47,9 +49,11 @@ public class AITrigger
 
     public bool isTriggered(AI npc)
     {
-        if (this.type == AITriggerType.life) return checkLife(npc);
+        if (this.type == AITriggerType.aggro) return checkAggro(npc);
+        else if (this.type == AITriggerType.aggroLost) return checkAggroLost(npc);
+        else if (this.type == AITriggerType.life) return checkLife(npc);
         else if (this.type == AITriggerType.range) return checkRange();
-        else if (this.type == AITriggerType.time && this.timesUp) return true;
+        else if (this.type == AITriggerType.time) return checkTime();
         return false;
     }
 
@@ -69,6 +73,22 @@ public class AITrigger
         }
         return false;
     }
+
+    private bool checkAggro(AI npc)
+    {
+        return (npc.target != null);
+    }
+
+    private bool checkAggroLost(AI npc)
+    {
+        return (npc.target == null);
+    }
+
+    private bool checkTime()
+    {
+        return this.timesUp;
+    }
+
 
     private void startTimer()
     {

@@ -13,16 +13,16 @@ public enum RequirementType
 public class AIEvent
 {
     [SerializeField]
-    private List<AITrigger> triggers;
+    private List<AITrigger> triggers = new List<AITrigger>();
 
     [SerializeField]
-    private List<AIAction> actions;
+    private List<AIAction> actions = new List<AIAction>();
 
     [SerializeField]
     private bool repeatEvent = false;
 
     [SerializeField]
-    private bool startImmediately = false;
+    private bool interruptCurrentAction = false;
 
     [SerializeField]
     [ShowIf("repeatEvent")]
@@ -30,10 +30,19 @@ public class AIEvent
 
     [SerializeField]
     [EnumToggleButtons]
-    private RequirementType type;
+    private RequirementType requirementsNeeded = RequirementType.single;
 
     private bool eventActive = true;
     private float timeLeft = 0;
+
+
+    public void Initialize()
+    {
+        foreach (AITrigger trigger in this.triggers)
+        {
+            trigger.Initialize();
+        }
+    }
 
     public void Updating(AI npc)
     {
@@ -63,8 +72,8 @@ public class AIEvent
             if (trigger.isTriggered(npc)) triggerCount++;
         }
 
-        if ((this.type == RequirementType.all && triggerCount == this.triggers.Count)
-         || (this.type == RequirementType.single && triggerCount > 0)) return true;
+        if ((this.requirementsNeeded == RequirementType.all && triggerCount == this.triggers.Count)
+         || (this.requirementsNeeded == RequirementType.single && triggerCount > 0)) return true;
 
         return false;
     }
@@ -76,7 +85,7 @@ public class AIEvent
             this.eventActive = false;
             if(this.repeatEvent) this.timeLeft = this.eventCooldown;
             actions.AddRange(this.actions);
-            if (this.startImmediately) phase.ResetActions();
+            if (this.interruptCurrentAction) phase.ResetActions();
         }
     }
 }

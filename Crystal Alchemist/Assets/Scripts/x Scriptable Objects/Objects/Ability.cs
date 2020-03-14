@@ -88,7 +88,7 @@ public class Ability : ScriptableObject
 
     #region Update Functions
 
-    public void Start()
+    public void Initialize()
     {
         setStartParameters();
     }
@@ -112,9 +112,9 @@ public class Ability : ScriptableObject
         if (this.isRapidFire && this.deactivateButtonUp) this.deactivateButtonUp = false;
 
         this.cooldownLeft = 0;
-
-        if (this.targetingSystem != null) this.state = AbilityState.targetRequired;
-        else if (this.castTime > 0) this.state = AbilityState.notCharged;
+        
+        if (this.castTime > 0 && this.holdTimer < this.castTime) this.state = AbilityState.notCharged;
+        else if (this.targetingSystem != null) this.state = AbilityState.targetRequired;
         else this.state = AbilityState.ready;
     }
 
@@ -128,9 +128,13 @@ public class Ability : ScriptableObject
         if (this.holdTimer <= this.castTime)
         {
             this.holdTimer += Time.deltaTime;
-            this.state = AbilityState.notCharged;
+            this.state = AbilityState.notCharged; //?
         }
-        else this.state = AbilityState.charged;
+        else
+        {
+            if (this.targetingSystem != null) this.state = AbilityState.targetRequired; //aufgeladen, aber Ziel benötigt!
+            else this.state = AbilityState.charged; //aufgeladen!
+        }
     }
 
     public void ResetCharge()
