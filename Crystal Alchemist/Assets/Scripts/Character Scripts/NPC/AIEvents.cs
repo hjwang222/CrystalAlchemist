@@ -21,13 +21,9 @@ public class AIEvents : MonoBehaviour
     [BoxGroup("Required")]
     private MiniDialogBox box;
 
-    [SerializeField]
-    [BoxGroup("Required")]
-    private bool startImmediately = false;
-
     [BoxGroup("AI")]
     [SerializeField]
-    private List<AIPhase> phases = new List<AIPhase>();
+    private AIPhase startPhase;
 
     private CastBar activeCastBar;
     private MiniDialogBox activeDialog;
@@ -35,17 +31,17 @@ public class AIEvents : MonoBehaviour
     private bool isActive;
     #endregion
 
-    private void Start()
+    //TODO: Indicators
+    //BUG: To many events
+    //BUG: Gifthaut doppelt
+
+    private void OnEnable()
     {
-        if(this.phases.Count > 0) StartPhase(this.phases[0]);
+        if (this.startPhase != null) StartPhase(this.startPhase);
     }
 
     private void Update()
     {
-        /*
-        if(!this.isActive && this.npc.target != null) StartPhase(this.phases[0]);
-        else if (this.isActive && this.npc.target == null) DestroyIt();*/
-
         if (this.activePhase != null) this.activePhase.Updating(this.npc);
     }
 

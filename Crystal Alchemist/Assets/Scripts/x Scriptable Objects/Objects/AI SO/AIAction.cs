@@ -46,17 +46,13 @@ public class AIAction //: ScriptableObject
     [HideIf("type", AIActionType.movement)]
     [HideIf("type", AIActionType.startPhase)]
     [HideIf("type", AIActionType.animation)]
+    [HideIf("type", AIActionType.cannotDie)]
     [HideIf("type", AIActionType.ability)]
     [HideIf("type", AIActionType.sequence)]
     [HideIf("type", AIActionType.kill)]
     [BoxGroup("Properties")]
     [SerializeField]
     private float duration = 4f;
-
-    [ShowIf("type", AIActionType.cannotDie)]
-    [BoxGroup("Properties")]
-    [SerializeField]
-    private bool canDie = false;
 
     [ShowIf("type", AIActionType.startPhase)]
     [BoxGroup("Properties")]
@@ -98,7 +94,13 @@ public class AIAction //: ScriptableObject
     [ShowIf("type", AIActionType.ability)]
     [BoxGroup("Properties")]
     [SerializeField]
-    private int repeatAmount = 1;
+    private bool repeatSkill = false;
+
+    [ShowIf("type", AIActionType.ability)]
+    [ShowIf("repeatSkill")]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private int amount = 1;
 
     [ShowIf("type", AIActionType.sequence)]
     [BoxGroup("Properties")]
@@ -123,7 +125,7 @@ public class AIAction //: ScriptableObject
     private Ability tempAbility;
     private int skillCounter = 0;
 
-    //interrupted
+    //TODO: Add status effect
 
     #region Main Functions
 
@@ -177,12 +179,16 @@ public class AIAction //: ScriptableObject
         if (this.overrideCastTime) this.tempAbility.castTime = this.castTime;
         if (this.overrideCooldown) this.tempAbility.cooldown = this.cooldown;
         this.tempAbility.Initialize();
+
+        if (!this.repeatSkill) this.amount = 1;
         this.skillCounter = 0;
     }
 
     private void UpdateSkill(AI npc)
     {
         this.tempAbility.Update();
+
+        if (CustomUtilities.StatusEffectUtil.isCharacterStunned(npc)) this.tempAbility.ResetCharge();
 
         if (this.tempAbility.state == AbilityState.notCharged) Charge(npc);
         else if (this.tempAbility.state == AbilityState.targetRequired) LockOn(npc);
@@ -206,15 +212,18 @@ public class AIAction //: ScriptableObject
 
     private void UseSkill(AI npc)
     {
-        npc.GetComponent<AIEvents>().HideCastBar();
-        CustomUtilities.Skills.instantiateSkill(this.tempAbility.skill, npc, npc.target);
-        this.tempAbility.ResetCoolDown();
-        this.skillCounter++;
+        if (ability.canUseAbility(npc))
+        {
+            npc.GetComponent<AIEvents>().HideCastBar();
+            CustomUtilities.Skills.instantiateSkill(this.tempAbility.skill, npc, npc.target);
+            this.tempAbility.ResetCoolDown();
+            this.skillCounter++;
+        }
     }
 
     private void ResetCharge()
     {
-        if (this.skillCounter >= this.repeatAmount)
+        if (this.skillCounter >= this.amount)
         {
             this.tempAbility.ResetCharge();
             Deactivate();
@@ -289,7 +298,7 @@ public class AIAction //: ScriptableObject
 
     private void StartCannotDie(AI npc)
     {
-        npc.setCannotDie(this.canDie);
+        npc.setCannotDie(true);
         Deactivate();
     }
 

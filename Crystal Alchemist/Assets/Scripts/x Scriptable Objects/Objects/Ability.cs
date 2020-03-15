@@ -152,6 +152,8 @@ public class Ability : ScriptableObject
     public bool canUseAbility(Character character)
     {
         bool enoughResource = this.isResourceEnough(character);
+        if (character.GetComponent<AI>()) enoughResource = true;
+
         bool notToMany = true;
         if (this.hasMaxAmount) notToMany = (getAmountOfSameSkills(this.skill, character.activeSkills, character.activePets) <= this.maxAmount);        
 

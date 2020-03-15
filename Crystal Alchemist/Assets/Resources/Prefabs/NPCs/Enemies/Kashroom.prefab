@@ -312,7 +312,6 @@ MonoBehaviour:
   shadowRenderer: {fileID: 2016206444539810997}
   activeSkillParent: {fileID: 1107838212211391823}
   activeStatusEffectParent: {fileID: 6034976085599367541}
-  skillSetParent: {fileID: 1740578941778675396}
   skillStartPosition: {fileID: 3892359947461909517}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
@@ -328,9 +327,8 @@ MonoBehaviour:
   manaRegen: 0
   buffPlus: 0
   debuffMinus: 0
+  cantBeHit: 0
   isInvincible: 0
-  isImmortal: 0
-  cannotDie: 0
   isHit: 0
   buffs: []
   debuffs: []
@@ -338,7 +336,6 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   lockAnimation: 0
   timeDistortion: 1
-  activeLockOnTarget: {fileID: 0}
   isPlayer: 0
   inventory: []
   activePets: []
@@ -382,100 +379,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 3560735132152297215}
+  npc: {fileID: 3560735132152297215}
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   box: {fileID: 5104834203016797782, guid: 4828c807745ed894ea715e12180742d8, type: 3}
-  startImmediately: 0
-  initialActions:
-  - type: 8
-    position: {x: 0, y: 0}
-    de: 
-    en: 
-    duration: 4
-    dauer: 9999
-    canDie: 0
-    nextPhase: 
-    animation: 
-    skill: {fileID: 0}
-    cast: -1
-    cD: -1
-    amount: 0
-    castGroup: 0
-    sequence: {fileID: 0}
-    gcd: 0
-    skillinstance: {fileID: 0}
-  phases: []
-  events:
-  - eventName: Blow Up
-    eventDescription: 
-    trigger:
-    - type: 2
-      time: 0
-      life: 0
-      rangeTrigger:
-      - {fileID: 3414693221161278285}
-    - type: 1
-      time: 0
-      life: 1
-      rangeTrigger: []
-    actions:
-    - type: 9
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      dauer: 4
-      canDie: 0
-      nextPhase: 
-      animation: BlowUp
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 0
-      skillinstance: {fileID: 0}
-    - type: 3
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      dauer: 4
-      canDie: 0
-      nextPhase: 
-      animation: 
-      skill: {fileID: 6062358614824039847, guid: 2c86898fd46cc7c42b10e7708ba73ec4,
-        type: 3}
-      cast: 0.5
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 0
-      skillinstance: {fileID: 0}
-    - type: 7
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      dauer: 2
-      canDie: 0
-      nextPhase: 
-      animation: 
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 0
-      skillinstance: {fileID: 0}
-    affectedPhases: []
-    repeatEvent: 0
-    requireAll: 0
-    startTime: 0
-    isActive: 1
+  startPhase: {fileID: 11400000, guid: 6f9f42d316a1a6640aa9a14b7cc4fd78, type: 2}
 --- !u!61 &1107838214220306759
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -54,6 +54,7 @@ public class Character : MonoBehaviour
 
     private GameObject targetHelpObjectPlayer;
     private DeathAnimation activeDeathAnimation;
+    private bool cannotDie = false;
 
     [HideInInspector]
     public float speedMultiply = 5;
@@ -87,8 +88,6 @@ public class Character : MonoBehaviour
     public bool cantBeHit;
     [HideInInspector]
     public bool isInvincible = false;
-    [HideInInspector]
-    public bool cannotDie = false;
     [HideInInspector]
     public bool isHit;
     [HideInInspector]
@@ -756,7 +755,7 @@ public class Character : MonoBehaviour
 
     public void setCannotDie(bool value)
     {
-        this.cannotDie = !value;
+        this.cannotDie = value;
     }
 
     public void knockBack(float knockTime, float thrust, Vector2 direction)

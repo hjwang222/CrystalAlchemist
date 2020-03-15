@@ -38,6 +38,8 @@ public class AIEvent
 
     public void Initialize()
     {
+        this.eventActive = true;
+
         foreach (AITrigger trigger in this.triggers)
         {
             trigger.Initialize();

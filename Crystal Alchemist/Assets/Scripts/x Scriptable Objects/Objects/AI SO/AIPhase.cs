@@ -11,7 +11,7 @@ public class AIPhase : ScriptableObject
 
     [BoxGroup("Action Sequence")]
     [SerializeField]
-    private bool repeat;
+    private bool loopActions;
 
     [BoxGroup("Events")]
     [SerializeField]
@@ -73,7 +73,7 @@ public class AIPhase : ScriptableObject
             {
                 if (this.currentAction == null
                     && this.currentDialog == null
-                    && this.repeat)
+                    && this.loopActions)
                     this.index = 0;                
             }
         }

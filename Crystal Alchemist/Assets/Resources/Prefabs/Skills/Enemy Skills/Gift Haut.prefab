@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224756837918827972}
-  - component: {fileID: 2574719380784309251}
   - component: {fileID: 8448882386689954494}
+  - component: {fileID: 2574719380784309251}
   - component: {fileID: 2332043399795314237}
   - component: {fileID: 1138260715516183020}
   m_Layer: 13
@@ -34,19 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2574719380784309251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 224756837918827975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c58017665bc47f34a8164611dde67d7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
 --- !u!114 &8448882386689954494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,41 +52,29 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  speed: 0
   positionOffset: 0
-  maxAmounts: 1
   attachToSender: 1
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 0
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 0
-  keepHoldTimer: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 0
-  delay: 0
-  duration: 9999
-  cooldown: 0
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 0
+  maxDuration: 1
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
+  overridePosition: 1
+--- !u!114 &2574719380784309251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224756837918827975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c58017665bc47f34a8164611dde67d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
 --- !u!114 &2332043399795314237
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -90,6 +90,11 @@ public class StatusEffectEvent
 
 #endregion
 
+
+//TODO: ActionType StatusEffect (add Effect when triggered)
+//TODO: As Scriptable Object!
+
+
 public class StatusEffect : MonoBehaviour
 {
     #region Attribute
@@ -311,7 +316,7 @@ public class StatusEffect : MonoBehaviour
             }
             else if (action.actionType == StatusEffectActionType.immortal)
             {
-                if(this.target != null) this.target.cannotDie = true;
+                if(this.target != null) this.target.setCannotDie(true);
             }
             else if (action.actionType == StatusEffectActionType.destroy)
             {
@@ -380,7 +385,7 @@ public class StatusEffect : MonoBehaviour
                 }                  
                 else if (action.actionType == StatusEffectActionType.immortal)
                 {
-                    if (this.target != null) this.target.cannotDie = false;
+                    if (this.target != null) this.target.setCannotDie(false);
                 }                
             }
         }

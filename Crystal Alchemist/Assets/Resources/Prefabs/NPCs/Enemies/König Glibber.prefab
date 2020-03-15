@@ -338,7 +338,6 @@ MonoBehaviour:
   shadowRenderer: {fileID: 5485388855570139274}
   activeSkillParent: {fileID: 3020177091833525065}
   activeStatusEffectParent: {fileID: 8464107762506563443}
-  skillSetParent: {fileID: 4508596630270412994}
   skillStartPosition: {fileID: 3338578078561740491}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
@@ -354,9 +353,8 @@ MonoBehaviour:
   manaRegen: 0
   buffPlus: 0
   debuffMinus: 0
+  cantBeHit: 0
   isInvincible: 0
-  isImmortal: 0
-  cannotDie: 0
   isHit: 0
   buffs: []
   debuffs: []
@@ -364,7 +362,6 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   lockAnimation: 0
   timeDistortion: 1
-  activeLockOnTarget: {fileID: 0}
   isPlayer: 0
   inventory: []
   activePets: []
@@ -408,99 +405,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1719322071491950841}
+  npc: {fileID: 1719322071491950841}
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   box: {fileID: 5104834203016797782, guid: 4828c807745ed894ea715e12180742d8, type: 3}
-  startImmediately: 0
-  initialActions: []
-  phases:
-  - phaseName: Startphase
-    phaseDescription: 
-    actions:
-    - type: 3
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      dauer: 4
-      canDie: 0
-      nextPhase: 
-      animation: 
-      skill: {fileID: 8182664675407730783, guid: 478564dcd28512a4a88aeeac6dcd1b25,
-        type: 3}
-      cast: 3
-      cD: -1
-      amount: 7
-      castGroup: 1
-      sequence: {fileID: 0}
-      gcd: 2.5
-      skillinstance: {fileID: 0}
-    - type: 1
-      position: {x: 0, y: 0}
-      de: Nimm DAS!
-      en: Take THIS!
-      duration: 4
-      dauer: 4
-      canDie: 0
-      nextPhase: 
-      animation: 
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 0
-      skillinstance: {fileID: 0}
-    - type: 3
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      dauer: 4
-      canDie: 0
-      nextPhase: 
-      animation: 
-      skill: {fileID: 4276017439626974549, guid: d9d5c19e4e61ad142865732f1f61048b,
-        type: 3}
-      cast: 3
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 5
-      skillinstance: {fileID: 0}
-  events:
-  - eventName: Startup
-    eventDescription: 
-    trigger:
-    - type: 0
-      time: 0
-      life: 0
-      rangeTrigger: []
-    actions:
-    - type: 1
-      position: {x: 0, y: 0}
-      de: Wer wagt es?
-      en: Who dares...?
-      duration: 2
-      dauer: 4
-      canDie: 0
-      nextPhase: 
-      animation: 
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 2.5
-      skillinstance: {fileID: 0}
-    affectedPhases: []
-    repeatEvent: 0
-    requireAll: 0
-    startTime: 0
-    isActive: 1
+  startPhase: {fileID: 11400000, guid: cb13a087f2d8b3a4dbf86c75af062824, type: 2}
 --- !u!61 &3020177091971815233
 BoxCollider2D:
   m_ObjectHideFlags: 0
