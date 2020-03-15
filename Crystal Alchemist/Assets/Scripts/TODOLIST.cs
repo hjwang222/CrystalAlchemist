@@ -16,7 +16,7 @@ public class TODOLIST : MonoBehaviour
     //REWORK: Items (Scriptable Object)
     //REWORK: StatusEffects (Scriptable Object)
     //REWORK: Inventory (Scriptable Object)
-    //REWORK: AI Events (Initial, Phases, Actions, Events Scriptable Objects)
+    //REWORK: AI Events (Bugfixes)
     //REWORK: Indicators (Scriptable Object?)
 
     //-----------------------------------------------------------------------------
