@@ -110,7 +110,7 @@ public class StatusEffect : ScriptableObject
         else this.target.buffs.Add(this);
 
         if (this.target != null && this.changeColor) this.target.changeColor(this.statusEffectColor);
-        this.activeObject = Instantiate(this.StatusEffectObject, this.target.activeStatusEffectParent.transform);
+        this.activeObject = Instantiate(this.StatusEffectObject, this.target.activeStatusEffectParent.transform.position, Quaternion.identity, this.target.transform);
 
         setTime();
         initActions();

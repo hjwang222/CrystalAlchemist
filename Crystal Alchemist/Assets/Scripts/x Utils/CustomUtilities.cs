@@ -1004,33 +1004,8 @@ public class CustomUtilities : MonoBehaviour
 
         private static void instantiateStatusEffect(StatusEffect statusEffect, Character character)
         {
-            StatusEffect statusEffectClone = Instantiate(statusEffect, character.transform.position, Quaternion.identity, character.transform);
+            StatusEffect statusEffectClone = Instantiate(statusEffect);
             statusEffectClone.Initialize(character);
-        }
-
-        public static List<StatusEffect> GetStatusEffect(StatusEffect statusEffect, Character character, bool getAll)
-        {
-            List<StatusEffect> result = new List<StatusEffect>();
-
-            foreach (StatusEffect effect in character.buffs)
-            {
-                if (effect.statusEffectName == statusEffect.statusEffectName)
-                {
-                    result.Add(effect);
-                    if (!getAll) break;
-                }
-            }
-
-            foreach (StatusEffect effect in character.debuffs)
-            {
-                if (effect.statusEffectName == statusEffect.statusEffectName)
-                {
-                    result.Add(effect);
-                    if (!getAll) break;
-                }
-            }
-
-            return result;
         }
     }
 
