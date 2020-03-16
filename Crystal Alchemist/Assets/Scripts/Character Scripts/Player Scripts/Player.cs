@@ -71,6 +71,10 @@ public class Player : Character
 
     [Required]
     [BoxGroup("Pflichtfelder")]
+    public PlayerInventory playerInventory;
+
+    [Required]
+    [BoxGroup("Pflichtfelder")]
     public FloatValue fadingDuration;
 
     [HideInInspector]

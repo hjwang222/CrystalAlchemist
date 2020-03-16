@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
-using UnityEditor;
 
-public class Item : MonoBehaviour
+[CreateAssetMenu(menuName = "Game/Item")]
+public class ItemStats : ScriptableObject
 {
     [Required]
     [BoxGroup("Pflichtfeld")]
@@ -91,78 +89,13 @@ public class Item : MonoBehaviour
     [FoldoutGroup("Signals", expanded: false)]
     public SimpleSignal signal;
 
-
-    private Animator anim;
-
-    #region Start Funktionen
-
-    private void Awake()
+    public void Initialize()
     {
-        init();
+        if (this.itemSpriteInventory == null) this.itemSpriteInventory = this.itemSprite;
     }
 
     public int getTotalAmount()
     {
         return this.value * this.amount;
     }
-
-    private void init()
-    {
-        this.anim = this.GetComponent<Animator>();
-        if (this.itemSpriteInventory == null) this.itemSpriteInventory = this.itemSprite;
-    }
-
-    private void Start()
-    {
-        //Check if keyItem already in Inventory
-        if (checkIfAlreadyThere()) Destroy(this.gameObject);
-    }
-
-    public bool checkIfAlreadyThere()
-    {
-        if (this.isKeyItem)
-        {
-            Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-            if (player != null && CustomUtilities.Items.hasKeyItemAlready(this, player.inventory)) return true;            
-        }
-
-        return false;
-    }
-
-    #endregion
-
-
-    public void playSounds()
-    {
-        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.collectSoundEffect);        
-    }
-
-    #region Collect Item Funktionen
-
-    public void OnTriggerEnter2D(Collider2D character)
-    {
-        if (!character.isTrigger)
-        {
-            Character chara = character.GetComponent<Character>();
-            if (chara != null)
-            {
-                chara.collect(this, true);
-
-                if(chara.GetComponent<Player>() != null && this.GetComponent<DialogSystem>() != null)
-                    this.GetComponent<DialogSystem>().show(chara.GetComponent<Player>(), this);
-            }
-        }
-    }   
-
-    public void DestroyIt()
-    {
-        this.GetComponent<BoxCollider2D>().enabled = false;
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        Destroy(this.gameObject, 2f);
-    }
-        #endregion
 }

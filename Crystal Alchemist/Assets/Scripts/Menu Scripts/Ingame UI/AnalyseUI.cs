@@ -33,7 +33,7 @@ public class AnalyseUI : MonoBehaviour
     private Character character;
     private Rewardable rewardableObject;
     private List<StatusEffectUI> activeStatusEffectUIs = new List<StatusEffectUI>();
-    private List<StatusEffect> activeStatusEffects = new List<StatusEffect>();
+    private List<StatusEffectGameObject> activeStatusEffects = new List<StatusEffectGameObject>();
 
     private void Start()
     {

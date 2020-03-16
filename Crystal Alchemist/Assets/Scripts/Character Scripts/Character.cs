@@ -261,9 +261,6 @@ public class Character : MonoBehaviour
         this.removeColor(Color.white);
     }
 
-
-
-
     #region Updates
 
     public virtual void Update()
@@ -273,12 +270,26 @@ public class Character : MonoBehaviour
 
         regeneration();
         updateLifeAnimation();
+        updateStatusEffects();
 
         if (this.life <= 0 
             && !this.cannotDie //Item
             && !this.isInvincible //Event
             && !this.cantBeHit) //after Hit
             KillIt();
+    }
+
+    private void updateStatusEffects()
+    {
+        foreach(StatusEffect effect in this.buffs)
+        {
+            effect.Updating();
+        }
+
+        foreach (StatusEffect effect in this.debuffs)
+        {
+            effect.Updating();
+        }
     }
 
     private void updateLifeAnimation()

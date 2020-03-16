@@ -867,18 +867,6 @@ public class CustomUtilities : MonoBehaviour
             if (item.itemSpriteInventory != null) image.sprite = item.itemSpriteInventory;
             else image.sprite = item.itemSprite;
         }
-
-        public static List<string> getMaps(Player player)
-        {
-            List<string> result = new List<string>();
-
-            foreach (Item item in player.inventory)
-            {
-                if (item.isMap) result.Add(item.mapName);
-            }
-
-            return result;
-        }
     }
 
     ///////////////////////////////////////////////////////////////
@@ -891,9 +879,7 @@ public class CustomUtilities : MonoBehaviour
         }
     }
 
-
-
-
+    ///////////////////////////////////////////////////////////////
 
     public static class StatusEffectUtil
     {
@@ -1019,7 +1005,7 @@ public class CustomUtilities : MonoBehaviour
         private static void instantiateStatusEffect(StatusEffect statusEffect, Character character)
         {
             StatusEffect statusEffectClone = Instantiate(statusEffect, character.transform.position, Quaternion.identity, character.transform);
-            statusEffectClone.setTarget(character);
+            statusEffectClone.Initialize(character);
         }
 
         public static List<StatusEffect> GetStatusEffect(StatusEffect statusEffect, Character character, bool getAll)
@@ -1261,17 +1247,6 @@ public class CustomUtilities : MonoBehaviour
 
     public static class Skills
     {
-        public static Skill setSkill(Character character, Skill prefab)
-        {
-            /*
-            Skill skillInstance = MonoBehaviour.Instantiate(prefab, character.skillSetParent.transform) as Skill;
-            skillInstance.sender = character;
-            skillInstance.gameObject.SetActive(false);
-
-            return skillInstance;*/
-            return prefab;
-        }
-
         public static Ability InstantiateAbility(Ability ability)
         {
             return Instantiate(ability);

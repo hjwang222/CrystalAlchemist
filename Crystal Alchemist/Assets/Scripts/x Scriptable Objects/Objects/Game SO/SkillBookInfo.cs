@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu(menuName = "Skills/Skill Book Info")]
+[CreateAssetMenu(menuName = "Game/Ability/Skill Book Info")]
 public class SkillBookInfo : ScriptableObject
 {
     [BoxGroup("Pflichtfelder")]

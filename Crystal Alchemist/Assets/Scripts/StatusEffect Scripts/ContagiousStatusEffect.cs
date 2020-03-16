@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class ContagiousStatusEffect : MonoBehaviour
@@ -10,15 +8,13 @@ public class ContagiousStatusEffect : MonoBehaviour
     [SerializeField]
     private BoxCollider2D effectCollider;
 
-    [BoxGroup("Statuseffekt Pflichtfelder")]
-    [Required]
-    [SerializeField]
-    private StatusEffect statuseffect;
+    private StatusEffect activeEffect;
 
     private void Start()
     {
-        this.effectCollider.size = this.statuseffect.target.GetComponent<BoxCollider2D>().size;
-        this.effectCollider.offset = this.statuseffect.target.GetComponent<BoxCollider2D>().offset;
+        this.activeEffect = this.GetComponent<StatusEffectGameObject>().getEffect();
+        this.effectCollider.size = this.activeEffect.getTarget().GetComponent<BoxCollider2D>().size;
+        this.effectCollider.offset = this.activeEffect.getTarget().GetComponent<BoxCollider2D>().offset;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,7 +22,7 @@ public class ContagiousStatusEffect : MonoBehaviour
         if (!collision.isTrigger)
         {
             Character character = collision.GetComponent<Character>();
-            if (character != null) CustomUtilities.StatusEffectUtil.AddStatusEffect(this.statuseffect, character);
+            if (character != null) CustomUtilities.StatusEffectUtil.AddStatusEffect(this.activeEffect, character);
         }
     }
 
@@ -35,7 +31,7 @@ public class ContagiousStatusEffect : MonoBehaviour
         if (!collision.isTrigger)
         {
             Character character = collision.GetComponent<Character>();
-            if (character != null) CustomUtilities.StatusEffectUtil.AddStatusEffect(this.statuseffect, character);
+            if (character != null) CustomUtilities.StatusEffectUtil.AddStatusEffect(this.activeEffect, character);
         }
     }
 }

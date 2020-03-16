@@ -19,7 +19,7 @@ public enum AbilityRequirements
     teleport
 }
 
-[CreateAssetMenu(menuName = "Skills/Ability")]
+[CreateAssetMenu(menuName = "Game/Ability/Ability")]
 public class Ability : ScriptableObject
 {
     [BoxGroup("Objects")]

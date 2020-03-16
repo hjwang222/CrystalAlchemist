@@ -38,7 +38,7 @@ public enum Gender
 
 #endregion
 
-[CreateAssetMenu(menuName = "Stats/CharacterStats")]
+[CreateAssetMenu(menuName = "Game/CharacterStats")]
 public class CharacterStats : ScriptableObject
 {
     [Required]
