@@ -52,22 +52,22 @@ public class Door : Interactable
             {
                  if (this.doorType == DoorType.normal)
                 {  
-                    if (CustomUtilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
+                    if (this.player.GetComponent<PlayerUtils>().canOpenAndUpdateResource(this.price))
                     {
                         //Tür offen!
                         OpenCloseDoor(true, this.context);
-                        CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success);
+                        this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success);
                     }
                     else
                     {
                         //Tür kann nicht geöffnet werden
-                        CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
+                        this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.failed);
                     }
                 }
                 else
                 {
                     //Tür verschlossen
-                    CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
+                    this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.failed);
                 }
             }                       
         }
@@ -80,7 +80,7 @@ public class Door : Interactable
             //Wenn Knopf gedrückt wurde, OpenDoor()
         }
 
-        CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.none);
+        this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.none);
     }
 
     private void OpenCloseDoor(bool isOpen)

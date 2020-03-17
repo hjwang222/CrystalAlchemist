@@ -7,65 +7,6 @@ using System;
 using UnityEngine.UI;
 
 
-#region Objects
-[System.Serializable]
-public class LootTable
-{
-    [VerticalGroup("Split")]
-    public Item item;
-
-    [HorizontalGroup("Split/Box", 50)]
-    [ShowIf("item")]
-    [Range(0, 100)]
-    public int dropRate = 100;
-
-    [ShowIf("item")]
-    [HorizontalGroup("Split/Box", 50)]
-    [Range(1, 99)]
-    public int amount = 1;
-
-    [VerticalGroup("Split2")]
-    [Tooltip("Ersetzt den Schlüsselgegenstände wenn diese bereits vorhanden sind")]
-    public Item alternativeLoot;
-
-    [HorizontalGroup("Split2/Box", 50)]
-    [ShowIf("alternativeLoot")]
-    [Range(1, 99)]
-    public int alternativeAmount;
-
-    public LootTable(LootTable table)
-    {
-        this.dropRate = table.dropRate;
-        this.amount = table.amount;
-        this.alternativeAmount = table.alternativeAmount;
-    }
-}
-
-[System.Serializable]
-public class affectedResource
-{
-    public ResourceType resourceType;
-
-    [ShowIf("resourceType", ResourceType.item)]
-    [Tooltip("Benötigtes Item")]
-    public Item item;
-
-    [Range(-CustomUtilities.maxFloatInfinite, CustomUtilities.maxFloatInfinite)]
-    public float amount;
-}
-
-public enum ResourceType
-{
-    none,
-    life,
-    mana,
-    item,
-    skill,
-    statuseffect
-}
-
-#endregion
-
 public class CustomUtilities : MonoBehaviour
 {
     #region Konstanten
@@ -82,97 +23,7 @@ public class CustomUtilities : MonoBehaviour
 
 
     public static class UnityFunctions
-    {
-        public static void initLoot(GameObject main, GameObject lootParentGameObject,
-                                    List<LootTable> lootTable, List<LootTable> lootTableInternal,
-                                    bool multiLoot, List<Item> inventory)
-        {
-            createLootParent(main, lootParentGameObject); //erstelle Parent wenn nicht vorhanden
-            UpdateItemsInEditor(lootTable, lootTableInternal, lootParentGameObject); //instanziiere Items in den Parent als Vorlage
-            Items.setItem(lootTableInternal, multiLoot, inventory, lootParentGameObject); //setze Items ins Inventar (LOOT)
-        }
-
-        public static void createLootParent(GameObject main, GameObject lootParentObject)
-        {
-            if (lootParentObject == null)
-            {
-                GameObject lootparent = new GameObject();
-                lootparent.transform.SetParent(main.transform);
-                lootParentObject = lootparent;
-            }
-        }
-
-        public static void UpdateItemsInEditor(List<LootTable> lootTable, List<LootTable> lootTableInternal, GameObject lootParentObject)
-        {
-            if (lootTableInternal.Count == 0)
-            {
-                lootTableInternal.Clear();
-                for (int i = 0; i < lootParentObject.transform.childCount; i++)
-                {
-                    Destroy(lootParentObject.transform.GetChild(i).gameObject);
-                }
-
-                if (lootTable.Count > 0 && lootParentObject != null)
-                {
-                    for (int i = 0; i < lootTable.Count; i++)
-                    {
-                        bool useAlternative = lootTable[i].item.checkIfAlreadyThere();
-
-                        if (!useAlternative || lootTable[i].alternativeLoot != null)
-                        {
-                            LootTable table = new LootTable(lootTable[i]);
-
-                            table.item = instantiateItem(lootTable[i].item, lootTable[i].alternativeLoot, lootParentObject, useAlternative);
-                            table.item.amount = lootTable[i].amount;
-                            if (lootTable[i].alternativeLoot != null && useAlternative) table.item.amount = lootTable[i].alternativeAmount;
-
-                            lootTableInternal.Add(table);
-                        }
-                    }
-                }
-            }
-        }
-
-        public static void UpdateItemsInEditor(List<MiniGameMatch> matches, List<MiniGameMatch> internalMatches, GameObject lootParentObject)
-        {
-            internalMatches.Clear();
-            for (int i = 0; i < lootParentObject.transform.childCount; i++)
-            {
-                Destroy(lootParentObject.transform.GetChild(i).gameObject);
-            }
-
-            if (matches.Count > 0 && lootParentObject != null)
-            {
-                for (int i = 0; i < matches.Count; i++)
-                {
-                    bool useAlternative = matches[i].loot.checkIfAlreadyThere();
-
-                    if (!useAlternative || matches[i].alternativeLoot != null)
-                    {
-                        MiniGameMatch table = new MiniGameMatch(matches[i]);
-
-                        table.loot = instantiateItem(matches[i].loot, matches[i].alternativeLoot, lootParentObject, useAlternative);
-                        table.loot.amount = matches[i].amount;
-                        if (matches[i].alternativeLoot != null && useAlternative) table.loot.amount = matches[i].alternativeAmount;
-
-                        internalMatches.Add(table);
-                    }
-                }
-            }
-        }
-
-        private static Item instantiateItem(Item item, Item alternative, GameObject lootParentObject, bool useAlternative)
-        {
-            Item temp = item;
-            if (alternative != null && useAlternative) temp = alternative;
-
-            GameObject itemGO = Instantiate(temp.gameObject, lootParentObject.transform.position, Quaternion.identity, lootParentObject.transform) as GameObject;
-            itemGO.SetActive(false);
-            itemGO.name = itemGO.name.Replace("(Clone)", "");
-            Item result = itemGO.GetComponent<Item>();
-            return result;
-        }
-
+    {      
         public static void GetChildObjects<T>(Transform transform, List<T> childObjects)
         {
             foreach (Transform child in transform)
@@ -284,23 +135,6 @@ public class CustomUtilities : MonoBehaviour
                 return true;
             }
         }
-
-        /*
-        public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect, bool temp)
-        {
-            playSoundEffect(audioSource, soundeffect, GlobalValues.soundEffectVolume);
-        }
-        
-
-        public static void playSoundEffect(AudioSource audioSource, AudioClip soundeffect, float volume)
-        {
-            if (soundeffect != null && audioSource != null)
-            {
-                audioSource.pitch = GlobalValues.soundEffectPitch;
-
-                audioSource.PlayOneShot(soundeffect, volume);
-            }
-        }*/
     }
 
     ///////////////////////////////////////////////////////////////
@@ -683,71 +517,13 @@ public class CustomUtilities : MonoBehaviour
     ///////////////////////////////////////////////////////////////
 
     public static class Items
-    {
-        public static void setItem(List<LootTable> lootTable, bool multiLoot, List<Item> items, GameObject lootParentObject)
-        {
-            int rng = UnityEngine.Random.Range(1, CustomUtilities.maxIntSmall);
-            int lowestDropRate = 101;
-
-            if (lootTable.Count > 0)
-            {
-                foreach (LootTable loot in lootTable)
-                {
-                    if (rng <= loot.dropRate)
-                    {
-                        if (!multiLoot)
-                        {
-                            if (lowestDropRate > loot.dropRate)
-                            {
-                                lowestDropRate = loot.dropRate;
-
-                                items.Clear();
-                                items.Add(loot.item);
-                            }
-                        }
-                        else
-                        {
-                            items.Add(loot.item);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                for (int i = 0; i < lootParentObject.transform.childCount; i++)
-                {
-                    Item item = lootParentObject.transform.GetChild(i).GetComponent<Item>();
-                    if (item != null) items.Add(item);
-                }
-            }
-
-            for (int i = 0; i < lootParentObject.transform.childCount; i++)
-            {
-                lootParentObject.transform.GetChild(i).gameObject.SetActive(false);
-            }
-
-            //if (this.items.Count > 0) this.text = this.text.Replace("%XY%", this.items[0].GetComponent<Item>().amount + " " + this.items[0].GetComponent<Item>().name);
-        }
-
-        public static bool hasEnoughCurrency(ResourceType currency, Player player, Item item, int price)
-        {
-            bool result = false;
-
-            if (currency == ResourceType.none) result = true;
-            else if (currency != ResourceType.skill)
-            {
-                if (player.getResource(currency, item) - price >= 0) result = true;
-                else result = false;
-            }
-
-            return result;
-        }
-
-        public static int getAmountFromInventory(Item item, List<Item> inventory)
+    {  
+        
+        public static int getAmountFromInventory(InventoryItem item, List<InventoryItem> inventory)
         {
             int amount = 0;
 
-            foreach (Item elem in inventory)
+            foreach (InventoryItem elem in inventory)
             {
                 if (!item.isKeyItem || item.useItemGroup)
                 {
@@ -755,19 +531,19 @@ public class CustomUtilities : MonoBehaviour
                 }
                 else
                 {
-                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) amount += elem.amount;
+                    if (item.name.ToUpper() == elem.name.ToUpper()) amount += elem.amount;
                 }
             }
             return amount;
         }
 
-        public static Item getItemFromInventory(Item item, List<Item> inventory)
+        public static InventoryItem getItemFromInventory(InventoryItem item, List<InventoryItem> inventory)
         {
-            foreach (Item elem in inventory)
+            foreach (InventoryItem elem in inventory)
             {
                 if (item.isKeyItem)
                 {
-                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) return elem;
+                    if (item.name.ToUpper() == elem.name.ToUpper()) return elem;
                 }
                 else
                 {
@@ -777,31 +553,29 @@ public class CustomUtilities : MonoBehaviour
             return null;
         }
 
-        public static bool hasKeyItemAlready(Item item, List<Item> inventory)
+        public static bool hasKeyItemAlready(InventoryItem item, List<InventoryItem> inventory)
         {
             if (item.isKeyItem)
             {
-                foreach (Item elem in inventory)
+                foreach (InventoryItem elem in inventory)
                 {
-                    if (item.gameObject.name.ToUpper() == elem.gameObject.name.ToUpper()) return true;
+                    if (item.name.ToUpper() == elem.name.ToUpper()) return true;
                 }
             }
             return false;
         }
 
-        public static void updateInventory(Item item, Character character, int amount)
+        public static void updateInventory(InventoryItem item, Character character, int amount)
         {
             if (item != null)
             {
-                Item found = getItemFromInventory(item, character.inventory);
+                InventoryItem found = getItemFromInventory(item, character.inventory);
 
                 if (found == null)
                 {
-                    GameObject temp = Instantiate(item.gameObject, character.transform);
+                    InventoryItem temp = Instantiate(item);
                     temp.name = item.name;
-                    temp.SetActive(false);
-                    temp.hideFlags = HideFlags.HideInHierarchy;
-                    character.inventory.Add(temp.GetComponent<Item>());
+                    character.inventory.Add(temp);
                 }
                 else
                 {
@@ -816,35 +590,11 @@ public class CustomUtilities : MonoBehaviour
                     }
                 }
             }
-        }
+        }        
 
-        public static bool canOpenAndUpdateResource(ResourceType currency, Item item, Player player, int price)
+        public static InventoryItem getItemByID(List<InventoryItem> inventory, int ID, bool isKeyItem)
         {
-            if (player != null
-                && player.currentState != CharacterState.inDialog
-                && player.currentState != CharacterState.respawning
-                && player.currentState != CharacterState.inMenu)
-            {
-                if (hasEnoughCurrency(currency, player, item, price))
-                {
-                    reduceCurrency(currency, item, player, price);
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public static void reduceCurrency(ResourceType currency, Item item, Player player, int price)
-        {
-            if (player != null 
-                && ((item != null && !item.isKeyItem) || item == null))
-                player.updateResource(currency, item, -price);
-        }
-
-        public static Item getItemByID(List<Item> inventory, int ID, bool isKeyItem)
-        {
-            foreach (Item item in inventory)
+            foreach (InventoryItem item in inventory)
             {
                 if (item.isKeyItem == isKeyItem && item.itemSlot == ID) return item;
             }
@@ -852,9 +602,9 @@ public class CustomUtilities : MonoBehaviour
             return null;
         }
 
-        public static bool hasItemGroup(string itemGroup, List<Item> inventory)
+        public static bool hasItemGroup(string itemGroup, List<InventoryItem> inventory)
         {
-            foreach (Item elem in inventory)
+            foreach (InventoryItem elem in inventory)
             {
                 if (itemGroup.ToUpper() == elem.itemGroup.ToUpper()) return true;
             }
@@ -862,7 +612,7 @@ public class CustomUtilities : MonoBehaviour
             return false;
         }
 
-        public static void setItemImage(Image image, Item item)
+        public static void setItemImage(Image image, InventoryItem item)
         {
             if (item.itemSpriteInventory != null) image.sprite = item.itemSpriteInventory;
             else image.sprite = item.itemSprite;
@@ -1111,32 +861,6 @@ public class CustomUtilities : MonoBehaviour
 
     ///////////////////////////////////////////////////////////////
 
-    public static class DialogBox
-    {
-        public static void showDialog(Interactable interactable, Player player)
-        {
-            showDialog(interactable, player, null);
-        }
-
-        public static void showDialog(Interactable interactable, Player player, DialogTextTrigger trigger)
-        {
-            showDialog(interactable, player, trigger, null);
-        }
-
-        public static void showDialog(Interactable interactable, Player player, Item loot)
-        {
-            if (interactable.gameObject.GetComponent<DialogSystem>() != null) interactable.GetComponent<DialogSystem>().show(player, interactable, loot);
-        }
-
-        public static void showDialog(Interactable interactable, Player player, DialogTextTrigger trigger, Item loot)
-        {
-            if (interactable.gameObject.GetComponent<DialogSystem>() != null) interactable.gameObject.GetComponent<DialogSystem>().show(player, trigger, interactable, loot);
-        }
-    }
-
-
-    ///////////////////////////////////////////////////////////////
-
     public static class Rotation
     {
         public static Quaternion getRotation(Vector2 direction)
@@ -1262,13 +986,13 @@ public class CustomUtilities : MonoBehaviour
                 if (target != null) activeSkill.target = target;
                 activeSkill.sender = sender;
 
-                List<affectedResource> temp = new List<affectedResource>();
+                List<Price> temp = new List<Price>();
 
                 if (targetModule != null)
                 {
                     for (int i = 0; i < targetModule.affectedResources.Count; i++)
                     {
-                        affectedResource elem = targetModule.affectedResources[i];
+                        Price elem = targetModule.affectedResources[i];
                         elem.amount /= reduce;
                         temp.Add(elem);
                     }

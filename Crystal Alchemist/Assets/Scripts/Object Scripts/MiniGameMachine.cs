@@ -24,29 +24,10 @@ public class MiniGameMatch
     public float maxDuration;
 
     [BoxGroup("Price")]
-    public ResourceType currencyType = ResourceType.item;
-
-    [BoxGroup("Price")]
-    [ShowIf("currencyType", ResourceType.item)]
-    public Item item;
-
-    [BoxGroup("Price")]
-    [Range(1, 99)]
-    public int price;
+    public Price price;
 
     [BoxGroup("Loot")]
-    public Item loot;
-
-    [BoxGroup("Loot")]
-    [Range(1, 99)]
-    public int amount;
-
-    [BoxGroup("Loot")]
-    public Item alternativeLoot;
-
-    [BoxGroup("Loot")]
-    [Range(1, 99)]
-    public int alternativeAmount;
+    public Loot loot;
 
     public MiniGameMatch(MiniGameMatch match)
     {
@@ -55,9 +36,7 @@ public class MiniGameMatch
         this.difficulty = match.difficulty;
         this.maxDuration = match.maxDuration;
         this.price = match.price;
-        this.item = match.item;
-        this.amount = match.amount;
-        this.alternativeAmount = match.alternativeAmount;
+        this.loot = match.loot;
     }
 }
 

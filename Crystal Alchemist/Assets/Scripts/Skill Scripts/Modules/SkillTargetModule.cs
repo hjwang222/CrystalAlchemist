@@ -7,7 +7,7 @@ public class SkillTargetModule : SkillModule
 {    
     [TabGroup("Ziel Attribute")]
     [Tooltip("Veränderung des Ziels. Negativ = Schaden, Positiv = Heilung")]
-    public List<affectedResource> affectedResources;
+    public List<Price> affectedResources;
 
     [TabGroup("Ziel Attribute")]
     [Tooltip("Statuseffekte")]

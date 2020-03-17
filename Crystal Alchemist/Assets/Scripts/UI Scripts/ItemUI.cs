@@ -23,16 +23,18 @@ public class ItemUI : MonoBehaviour
     public void setItem(Item item)
     {
         this.item = item;
+        setItem(item.GetInventoryItem());
+    }
 
-        if (this.item == null)
+    public void setItem(InventoryItem item)
+    {
+        if (item == null)
         {
             this.image.gameObject.SetActive(false);
-            //this.GetComponent<Button>().interactable = false;
         }
         else
         {
-            this.image.gameObject.SetActive(true);
-            //this.GetComponent<Button>().interactable = true;            
+            this.image.gameObject.SetActive(true);       
 
             if (!item.isKeyItem && item.amount > 1) this.amount.text = "x" + item.amount;
             else if (this.amount != null) this.amount.text = "";

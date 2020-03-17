@@ -59,10 +59,10 @@ public class InfoBox : MonoBehaviour
     {
         this.additionalInfo.SetActive(false);
 
-        CustomUtilities.Items.setItemImage(this.previewImage, item);
+        CustomUtilities.Items.setItemImage(this.previewImage, item.GetInventoryItem());
 
-        this.nameField.text = CustomUtilities.Format.getLanguageDialogText(item.itemName, item.itemNameEnglish);
-        this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(item.itemDescription, item.itemDescriptionEnglish);
+        this.nameField.text = item.getName();
+        this.descriptionField.text = item.getDescription();
     }
 
     private void setInfo(CharacterAttributeStats stats)

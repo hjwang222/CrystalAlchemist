@@ -62,20 +62,8 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     private MenuDialogBoxLauncher dialogBox;
 
-    [FoldoutGroup("Activation Requirements", expanded: false)]
-    [EnumToggleButtons]
-    [Tooltip("Was benötigt wird um zu öffnen")]
-    public ResourceType currencyNeeded = ResourceType.none;
-
-    [FoldoutGroup("Activation Requirements", expanded: false)]
-    [ShowIf("currencyNeeded", ResourceType.item)]
-    [Tooltip("Benötigtes Item")]
-    public Item item;
-
-    [FoldoutGroup("Activation Requirements", expanded: false)]
-    [HideIf("currencyNeeded", ResourceType.none)]
-    [Range(0, CustomUtilities.maxIntInfinite)]
-    public int price = 0;
+    [SerializeField]
+    private Price price;
 
     private Player player;
 
@@ -84,9 +72,7 @@ public class SceneTransition : MonoBehaviour
         if(this.fadeSignal != null) this.fadeSignal.Raise(true);
         if(this.dialogBox != null)
         {
-            this.dialogBox.currencyNeeded = this.currencyNeeded;
-            this.dialogBox.itemNeeded = this.item;
-            this.dialogBox.price = this.price;
+            this.dialogBox.price = price;
         }
     }
 

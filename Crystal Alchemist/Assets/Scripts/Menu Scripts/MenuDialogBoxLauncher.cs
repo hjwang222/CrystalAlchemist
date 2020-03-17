@@ -39,13 +39,7 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     public bool setYesButtonFirst = true;
 
     [HideInInspector]
-    public ResourceType currencyNeeded = ResourceType.none;
-
-    [HideInInspector]
-    public Item itemNeeded;
-
-    [HideInInspector]
-    public int price;
+    public Price price;
 
     [HideInInspector]
     public string dialogText;

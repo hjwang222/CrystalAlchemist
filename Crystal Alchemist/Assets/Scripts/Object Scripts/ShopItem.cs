@@ -23,10 +23,10 @@ public class ShopItem : Rewardable
 
         CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
-        this.inventory.Add(this.lootTable[this.index].item);
+        this.inventory.Add(this.lootTable[this.index].loot.item);
 
         //this.amountText.text = this.amount + "";
-        this.childSprite.sprite = this.inventory[this.index].itemSprite;
+        this.childSprite.sprite = this.inventory[this.index].GetInventoryItem().itemSprite;
 
         //TODO Item:
         if (this.inventory.Count == 0) Destroy(this.gameObject);
@@ -34,16 +34,16 @@ public class ShopItem : Rewardable
 
     public override void doSomethingOnSubmit()
     {
-        if (CustomUtilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
+        if (this.player.GetComponent<PlayerUtils>().canOpenAndUpdateResource(this.price))
         {
             Item loot = inventory[this.index];
 
-            CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success, loot);
-            this.player.collect(loot, false);
+            this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success, loot);
+            this.player.GetComponent<PlayerUtils>().CollectItem(loot);
         }
         else
         {
-            CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
+            this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.failed);
         }
     }
 }

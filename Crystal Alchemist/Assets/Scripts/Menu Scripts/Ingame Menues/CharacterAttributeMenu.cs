@@ -10,7 +10,7 @@ public class CharacterAttributeMenu : MenuControls
     public int[] expanderValues = new int[] { 1, 3, 5, 7, 9 };
 
     [SerializeField]
-    private Item item;
+    private InventoryItem item;
 
     [SerializeField]
     private TextMeshProUGUI pointsField;

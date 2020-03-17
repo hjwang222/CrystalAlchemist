@@ -9,7 +9,7 @@ public class CurrencySlot : MonoBehaviour
     private PlayerStats playerStats;
 
     [SerializeField]
-    private Item item;
+    private InventoryItem item;
     [SerializeField]
     private int maxValue;
     [SerializeField]

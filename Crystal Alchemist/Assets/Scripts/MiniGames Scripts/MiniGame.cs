@@ -4,10 +4,6 @@ using Sirenix.OdinInspector;
 
 public class MiniGame : MonoBehaviour
 {
-    [BoxGroup("Required")]
-    [Required]
-    public GameObject lootParentObject;
-
     [BoxGroup("MiniGame Related")]
     [Required]
     public MiniGameRound miniGameRound;
@@ -40,7 +36,7 @@ public class MiniGame : MonoBehaviour
 
     public void updateInternalMatches()
     {
-        CustomUtilities.UnityFunctions.UpdateItemsInEditor(this.matches, this.internalMatches, this.lootParentObject);
+        //TODO
     }
 
     public List<MiniGameMatch> getMatches()

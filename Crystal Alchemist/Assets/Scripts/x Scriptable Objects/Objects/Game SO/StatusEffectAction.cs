@@ -22,7 +22,7 @@ public class StatusEffectAction
 
     [ShowIf("actionType", StatusEffectActionType.resource)]
     [SerializeField]
-    private List<affectedResource> affectedResources;
+    private List<Price> resources;
 
     [ShowIf("actionType", StatusEffectActionType.stacks)]
     private int amount;
@@ -40,7 +40,7 @@ public class StatusEffectAction
     {
         if (this.actionType == StatusEffectActionType.resource && character != null)
         {
-            foreach (affectedResource resource in this.affectedResources)
+            foreach (Price resource in this.resources)
             {
                 character.updateResource(resource.resourceType, resource.item, resource.amount);
             }

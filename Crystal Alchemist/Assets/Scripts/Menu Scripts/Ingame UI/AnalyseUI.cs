@@ -126,7 +126,7 @@ public class AnalyseUI : MonoBehaviour
             if (rewardableObject.inventory.Count > 0 && this.rewardableObject.currentState != objectState.opened)
             {
                 this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = rewardableObject.inventory[0].itemSprite;
+                this.ImageObjectitemPreview.sprite = rewardableObject.inventory[0].GetInventoryItem().itemSprite;
             }
             else
             {

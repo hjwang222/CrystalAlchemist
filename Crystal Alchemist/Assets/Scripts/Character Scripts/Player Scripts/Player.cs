@@ -98,9 +98,6 @@ public class Player : Character
         this.init();
 
         LoadSystem.loadPlayerData(this, this.saveGameSlot.getValue());
-
-        if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);
-
         CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", false);
 
         this.characterLookDown();
@@ -115,6 +112,8 @@ public class Player : Character
         this.deactivateAllSkills();
         this.fadeSignal.Raise(false);
     }
+
+    
 
     private void deactivateAllSkills()
     {
@@ -147,7 +146,7 @@ public class Player : Character
 
     ///////////////////////////////////////////////////////////////
 
-    public override void updateResource(ResourceType type, Item item, float value, bool showingDamageNumber)
+    public override void updateResource(ResourceType type, InventoryItem item, float value, bool showingDamageNumber)
     {
         base.updateResource(type, item, value, showingDamageNumber);
 

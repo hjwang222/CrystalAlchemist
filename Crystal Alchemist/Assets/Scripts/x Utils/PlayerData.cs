@@ -62,10 +62,10 @@ public class PlayerData
     {
         this.inventory.Clear();
 
-        foreach (Item item in player.inventory)
+        foreach (InventoryItem item in player.inventory)
         {
             string[] temp = new string[2];
-            temp[0] = item.gameObject.name.Replace(" (", "(").Split('(')[0];
+            temp[0] = item.name.Replace(" (", "(").Split('(')[0];
             temp[1] = item.amount + "";
             this.inventory.Add(temp);
         }

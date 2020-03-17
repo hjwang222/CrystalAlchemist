@@ -11,13 +11,13 @@ public class CurrencyInventoryUI : MonoBehaviour
     private TextMeshProUGUI amountField;
 
     [SerializeField]
-    private Item item;
+    private InventoryItem item;
 
     private void OnEnable()
     {
         Player player = this.playerStats.player;
 
-        Item item = CustomUtilities.Items.getItemFromInventory(this.item, player.inventory);
+        InventoryItem item = CustomUtilities.Items.getItemFromInventory(this.item, player.inventory);
         if (item != null) this.amountField.text = CustomUtilities.Format.formatString(item.amount, item.maxAmount);        
     }
 }

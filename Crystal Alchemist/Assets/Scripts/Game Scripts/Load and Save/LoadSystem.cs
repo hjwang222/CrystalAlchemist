@@ -123,14 +123,7 @@ public class LoadSystem : MonoBehaviour
             if(prefab == null) prefab = Resources.Load("Prefabs/Items/Key Items/" + elem[0], typeof(GameObject)) as GameObject;
             if (prefab == null) prefab = Resources.Load("Prefabs/Items/Attribute Points/" + elem[0], typeof(GameObject)) as GameObject;
 
-            if (prefab != null)
-            {
-                GameObject instance = Instantiate(prefab);
-                instance.name = prefab.name;
-                Item item = instance.GetComponent<Item>();
-                item.amount = Convert.ToInt32(elem[1]);
-                player.collect(item, true, false);
-            }
+            //add to inventory here
         }
     }
 

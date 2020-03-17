@@ -76,7 +76,7 @@ public class Treasure : Rewardable
             if (this.treasureType == TreasureType.lootbox)
             {
                 changeTreasureState(false);
-                CustomUtilities.Items.setItem(this.lootTableInternal, this.multiLoot, this.inventory, this.lootParentObject);
+                //CustomUtilities.Items.setItem(this.lootTableInternal, this.multiLoot, this.inventory, this.lootParentObject);
             }
 
             //Verstecke gezeigtes Item wieder
@@ -149,22 +149,22 @@ public class Treasure : Rewardable
             //Gebe Item dem Spieler
             foreach (Item item in this.inventory)
             {
-                this.player.collect(item, false);
-                CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success, item);
+                this.player.GetComponent<PlayerUtils>().CollectItem(item);
+                this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success, item);
             }                
         }
         else
         {
             //Kein Item drin
-            CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.empty);
+            this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.empty);
         }
     }
 
 
     private void canOpenChest()
     {
-        if (CustomUtilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price)) OpenChest();
-        else CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
+        if (this.player.GetComponent<PlayerUtils>().canOpenAndUpdateResource(this.price)) OpenChest();
+        else this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.failed);
     }
 
     public void showTreasureItem()
@@ -175,12 +175,13 @@ public class Treasure : Rewardable
             this.showItem.SetActive(true);
 
             //TODO: Instantiate(this.inventory[i].graphics, this.showItem.transform.position, Quaternion.identity, this.showItem.transform);
-            Item item = Instantiate(this.inventory[i], this.showItem.transform.position, Quaternion.identity, this.showItem.transform);
+            /*
+            ItemGameObject item = Instantiate(this.inventory[i], this.showItem.transform.position, Quaternion.identity, this.showItem.transform);
             item.gameObject.SetActive(true);
             item.GetComponent<BoxCollider2D>().enabled = false;
             item.enabled = false;
             if (item.shadowRenderer != null) item.shadowRenderer.enabled = false;
-
+            */
             //this.inventory[i].GetComponent<Item>().showFromTreasure();
         }
     }

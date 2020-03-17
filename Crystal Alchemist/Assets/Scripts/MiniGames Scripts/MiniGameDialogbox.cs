@@ -37,11 +37,11 @@ public class MiniGameDialogbox : MonoBehaviour
 
         foreach (ItemUI itemUI in this.itemUIs)
         {
-            itemUI.setItem(this.miniGameUI.getMatch().loot);
+            itemUI.setItem(this.miniGameUI.getMatch().loot.item);
         }
 
         MiniGameMatch match = this.miniGameUI.getMatch();
-        bool enableStart = this.priceUI.updatePrice(match.currencyType, match.item, match.price, this.miniGameUI.player);
+        bool enableStart = this.priceUI.updatePrice(this.miniGameUI.player, match.price);
         this.startButton.interactable = enableStart;
 
         string text = this.miniGameUI.miniGameRound.getDifficulty(this.miniGameUI.mainDescription, match.difficulty);

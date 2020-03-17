@@ -35,9 +35,7 @@ public class MenuDialogBox : MenuControls
     private UnityEvent actionYes; 
     private MenuControls lastMainMenu;
 
-    private ResourceType currencyNeeded = ResourceType.none;
-    private Item itemNeeded;
-    private int price;
+    private Price price;
 
     [HideInInspector]
     public string dialogText;
@@ -54,8 +52,6 @@ public class MenuDialogBox : MenuControls
         if (launcher != null)
         {
             this.price = launcher.price;
-            this.itemNeeded = launcher.itemNeeded;
-            this.currencyNeeded = launcher.currencyNeeded;
 
             this.child.SetActive(true);
             this.actionYes = launcher.actionOnConfirm;
@@ -70,10 +66,10 @@ public class MenuDialogBox : MenuControls
                 this.YesButton.gameObject.SetActive(true);
                 this.NoButton.gameObject.SetActive(true);
 
-                if (launcher.currencyNeeded != ResourceType.none)
+                if (launcher.price.resourceType != ResourceType.none)
                 {
                     this.priceField.gameObject.SetActive(true);
-                    bool canActivateYES = this.priceField.updatePrice(this.currencyNeeded, this.itemNeeded, this.price, this.player);
+                    bool canActivateYES = this.priceField.updatePrice(this.player, this.price);
                     this.YesButton.GetComponent<Selectable>().interactable = canActivateYES;
                 }
 
@@ -91,7 +87,7 @@ public class MenuDialogBox : MenuControls
         this.closeDialog();
         if (this.actionYes != null)
         {
-            CustomUtilities.Items.reduceCurrency(this.currencyNeeded, this.itemNeeded, this.player, this.price);
+            this.player.GetComponent<PlayerUtils>().reduceCurrency(this.price);
             this.actionYes.Invoke();
         }
     }

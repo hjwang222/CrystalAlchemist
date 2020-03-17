@@ -6,5 +6,10 @@ using UnityEngine;
 public class PlayerInventory : ScriptableObject
 {
     [SerializeField]
-    private List<ItemStats> inventory = new List<ItemStats>();
+    private List<InventoryItem> inventory = new List<InventoryItem>();
+
+    public void addItem(InventoryItem item)
+    {
+
+    }
 }

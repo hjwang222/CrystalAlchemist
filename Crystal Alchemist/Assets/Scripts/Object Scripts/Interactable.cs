@@ -18,24 +18,11 @@ public class Interactable : MonoBehaviour
     public GameObject contextClueChild;
 
     [FoldoutGroup("Activation Requirements", expanded: false)]
-    [EnumToggleButtons]
-    [Tooltip("Was benötigt wird um zu öffnen")]
-    public ResourceType currencyNeeded = ResourceType.none;
-
-    [FoldoutGroup("Activation Requirements", expanded: false)]
-    [ShowIf("currencyNeeded", ResourceType.item)]
-    [Tooltip("Benötigtes Item")]
-    public Item item;
-
-    [FoldoutGroup("Activation Requirements", expanded: false)]
-    [Range(0, CustomUtilities.maxIntInfinite)]
-    public int price = 0;
+    public Price price;
 
     [FoldoutGroup("Sound", expanded: false)]
     [Tooltip("Standard-Soundeffekt")]
     public AudioClip soundEffect;
-
-
 
     [HideInInspector]
     public bool isPlayerInRange = false;

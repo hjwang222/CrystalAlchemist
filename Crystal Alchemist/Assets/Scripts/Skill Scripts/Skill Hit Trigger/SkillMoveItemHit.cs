@@ -7,7 +7,7 @@ public class SkillMoveItemHit : MonoBehaviour
     [SerializeField]
     private Skill skill;
 
-    private Item item;
+    private Collectable item;
 
     private void Update()
     {
@@ -19,7 +19,7 @@ public class SkillMoveItemHit : MonoBehaviour
 
     public void moveItem(Collider2D hittedCharacter)
     {
-        Item hittedItem = hittedCharacter.GetComponent<Item>();
+        Collectable hittedItem = hittedCharacter.GetComponent<Collectable>();
         if (hittedItem != null && this.item == null)
             this.item = hittedItem;
     }

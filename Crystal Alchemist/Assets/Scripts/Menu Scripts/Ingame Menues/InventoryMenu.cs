@@ -79,7 +79,7 @@ public class InventoryMenu : MenuControls
             {
                 GameObject slot = categoryGameobject.transform.GetChild(i).gameObject;
                 InventorySlot iSlot = slot.GetComponent<InventorySlot>();
-                Item item = null;
+                InventoryItem item = null;
 
                 //if (iSlot.getFeature() != ItemFeature.none) item = Utilities.Items.getItemByFeature(this.player.inventory, iSlot.getFeature());
                 //else 

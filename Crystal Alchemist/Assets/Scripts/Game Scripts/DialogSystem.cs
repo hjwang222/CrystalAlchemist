@@ -73,7 +73,7 @@ public class DialogSystem : MonoBehaviour
     {
         if (this.texts.Count > 0)
         {
-            player.showDialogBox(getText(this.texts[0], interactable.price, interactable.item, loot, player));
+            player.showDialogBox(getText(this.texts[0], interactable.price.amount, interactable.price.item, loot, player));
         }
     }
 
@@ -91,7 +91,7 @@ public class DialogSystem : MonoBehaviour
         {
             if(text.trigger == trigger)
             {
-                player.showDialogBox(getText(text, interactable.price, interactable.item, loot, player));
+                player.showDialogBox(getText(text, interactable.price.amount, interactable.price.item, loot, player));
                 break;
             }
         }
@@ -106,14 +106,14 @@ public class DialogSystem : MonoBehaviour
 
         if (loot != null)
         {
-            result = result.Replace("<loot name>", CustomUtilities.Format.getLanguageDialogText(loot.itemName, loot.itemNameEnglish));
-            result = result.Replace("<loot amount>", loot.amount + "");
+            result = result.Replace("<loot name>", loot.getName());
+            result = result.Replace("<loot amount>", loot.GetInventoryItem().amount + "");
             result = result.Replace("<loot value>", loot.getTotalAmount() + "");
         }
         return result;
     }
 
-    private string getText(DialogText text, int price, Item item, Item loot, Player player)
+    private string getText(DialogText text, float price, InventoryItem item, Item loot, Player player)
     {
         string result = CustomUtilities.Format.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
 
@@ -125,13 +125,12 @@ public class DialogSystem : MonoBehaviour
         {
             result = result.Replace("<item name>", getItemName(price, item));
             result = result.Replace("<item amount>", item.amount + "");
-            result = result.Replace("<item value>", item.getTotalAmount() + "");
         }
 
         if (loot != null)
         {
-            result = result.Replace("<loot name>", CustomUtilities.Format.getLanguageDialogText(loot.itemName, loot.itemNameEnglish));
-            result = result.Replace("<loot amount>", loot.amount + "");
+            result = result.Replace("<loot name>", loot.getName());
+            result = result.Replace("<loot amount>", loot.GetInventoryItem().amount + "");
             result = result.Replace("<loot value>", loot.getTotalAmount() + "");
         }
 
@@ -145,25 +144,18 @@ public class DialogSystem : MonoBehaviour
         return "";
     }
 
-    private string getItemName(int price, Item item)
+    private string getItemName(float price, InventoryItem item)
     {
         string result = "";
 
         switch (item.resourceType)
         {
             case ResourceType.item:
-                {
-                    if (item.isKeyItem)
-                    {
-                        result = CustomUtilities.Format.getLanguageDialogText(item.itemName, item.itemNameEnglish);
-                    }
-                    else
-                    {
-                        string typ = CustomUtilities.Format.getLanguageDialogText(item.itemGroup, item.itemGroupEnglish);
+                {                    
+                        string typ = item.getItemGroup();
                         if (price == 1 && (typ != "Schlüssel" || GlobalValues.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
 
-                        result = typ;
-                    }
+                        result = typ;                    
                 }; break;
             case ResourceType.life: result = "Leben"; break;
             case ResourceType.mana: result = "Mana"; break;

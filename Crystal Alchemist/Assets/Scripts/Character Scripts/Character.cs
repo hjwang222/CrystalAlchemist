@@ -5,11 +5,6 @@ using Sirenix.OdinInspector;
 
 public class Character : MonoBehaviour
 {
-    [BoxGroup("Required")]
-    [SerializeField]
-    [Required]
-    private GameObject lootParentObject;
-
     [Required]
     [BoxGroup("Pflichtfelder")]
     public CharacterStats stats;
@@ -52,7 +47,6 @@ public class Character : MonoBehaviour
     private float regenTimeElapsed;
     private float manaTime;
 
-    private GameObject targetHelpObjectPlayer;
     private DeathAnimation activeDeathAnimation;
     private bool cannotDie = false;
 
@@ -105,7 +99,7 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public bool isPlayer = false;
 
-    public List<Item> inventory = new List<Item>();
+
     [HideInInspector]
     public List<Character> activePets = new List<Character>();
     [HideInInspector]
@@ -113,10 +107,12 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public bool isOnIce = false;
 
-    public List<LootTable> lootTableInternal = new List<LootTable>();
+
+    [HideInInspector]
+    public List<InventoryItem> inventory = new List<InventoryItem>();
 
     #endregion
-          
+
 
     #region Start Functions (Spawn, Init)
     private void Awake()
@@ -149,16 +145,6 @@ public class Character : MonoBehaviour
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
     }
 
-    public void setTargetHelper(GameObject targetHelper)
-    {
-        this.targetHelpObjectPlayer = targetHelper;
-        this.targetHelpObjectPlayer.SetActive(false);
-    }
-
-    public void setTargetHelperActive(bool value)
-    {
-        if (this.targetHelpObjectPlayer != null) this.targetHelpObjectPlayer.gameObject.SetActive(value);
-    }
 
     public void initSpawn(bool reset)
     {
@@ -175,7 +161,7 @@ public class Character : MonoBehaviour
         this.manaRegen = this.stats.manaRegeneration;
         this.buffPlus = this.stats.buffPlus;
         this.debuffMinus = this.stats.debuffMinus;
-    }   
+    }
 
     private void setBasicAttributesToNormal(bool reset)
     {
@@ -217,17 +203,10 @@ public class Character : MonoBehaviour
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
 
-        if (this.lootParentObject == null)
-        {
-            GameObject lootparent = new GameObject();
-            lootparent.transform.SetParent(this.gameObject.transform);
-            this.lootParentObject = lootparent;
-        }
-
-        CustomUtilities.UnityFunctions.initLoot(this.gameObject, this.lootParentObject, this.stats.lootTable, this.lootTableInternal, this.stats.multiLoot, this.inventory);
+        //init Loot
     }
     #endregion
-          
+
     public void spawnASAP()
     {
         this.gameObject.SetActive(true);
@@ -272,7 +251,7 @@ public class Character : MonoBehaviour
         updateLifeAnimation();
         updateStatusEffects();
 
-        if (this.life <= 0 
+        if (this.life <= 0
             && !this.cannotDie //Item
             && !this.isInvincible //Event
             && !this.cantBeHit) //after Hit
@@ -281,7 +260,7 @@ public class Character : MonoBehaviour
 
     private void updateStatusEffects()
     {
-        foreach(StatusEffect effect in this.buffs)
+        foreach (StatusEffect effect in this.buffs)
         {
             effect.Updating();
         }
@@ -325,11 +304,7 @@ public class Character : MonoBehaviour
 
     public void dropItem()
     {
-        foreach (Item itemObject in this.inventory)
-        {
-            GameObject itemClone = Instantiate(itemObject.gameObject, this.transform.position, Quaternion.identity);
-            itemClone.SetActive(true);
-        }
+        
     }
 
     #endregion
@@ -460,12 +435,12 @@ public class Character : MonoBehaviour
         CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Respawn");
     }
 
-    public void updateResource(ResourceType type, Item item, float addResource)
+    public void updateResource(ResourceType type, InventoryItem item, float addResource)
     {
         updateResource(type, item, addResource, true);
     }
 
-    public virtual void updateResource(ResourceType type, Item item, float value, bool showingDamageNumber)
+    public virtual void updateResource(ResourceType type, InventoryItem item, float value, bool showingDamageNumber)
     {
         switch (type)
         {
@@ -488,34 +463,25 @@ public class Character : MonoBehaviour
                 }
             case ResourceType.item:
                 {
-                    if (item != null)
-                    {
-                        CustomUtilities.Items.updateInventory(item, this, Mathf.RoundToInt(value));
-                        callSignal(item.signal, value);
-                    }
+                    CustomUtilities.Items.updateInventory(item, this, Mathf.RoundToInt(value));
+                    this.callSignal(item.signal, value);
                     break;
                 }
             case ResourceType.skill:
                 {
-                    if (item != null && item.ability != null && this.GetComponent<Player>() != null)
-                    {
-                        //CustomUtilities.Skills.updateSkillSet(item.skillItem, this.GetComponent<Player>());
-                        this.GetComponent<PlayerAbilities>().skillSet.AddAbility(item.ability);
-                    }
                     break;
                 }
             case ResourceType.statuseffect:
                 {
-                    if (item != null && item.statusEffects.Count > 0)
+                    foreach (StatusEffect effect in item.statusEffects)
                     {
-                        foreach (StatusEffect effect in item.statusEffects)
-                        {
-                            CustomUtilities.StatusEffectUtil.AddStatusEffect(effect, this);
-                        }
+                        CustomUtilities.StatusEffectUtil.AddStatusEffect(effect, this);
                     }
+
                     break;
                 }
         }
+
     }
 
     public void callSignal(SimpleSignal signal, float addResource)
@@ -523,7 +489,7 @@ public class Character : MonoBehaviour
         if (signal != null && addResource != 0) signal.Raise();
     }
 
-    public float getResource(ResourceType type, Item item)
+    public float getResource(ResourceType type, InventoryItem item)
     {
         switch (type)
         {
@@ -535,7 +501,7 @@ public class Character : MonoBehaviour
         return 0;
     }
 
-    public float getMaxResource(ResourceType type, Item item)
+    public float getMaxResource(ResourceType type, InventoryItem item)
     {
         switch (type)
         {
@@ -672,28 +638,6 @@ public class Character : MonoBehaviour
     #endregion
 
 
-    #region Item Collect
-
-    public void collect(Item item, bool destroyIt)
-    {
-        collect(item, destroyIt, true);
-    }
-
-    public void collect(Item item, bool destroyIt, bool playSound)
-    {
-        if (this.stats.canCollectAll || this.stats.canCollect.Contains(item.itemGroup))
-        {
-            if (playSound) item.playSounds();
-
-            this.updateResource(item.resourceType, item, item.getTotalAmount());
-
-            if (destroyIt) item.DestroyIt();
-        }
-    }
-
-    #endregion
-
-
     #region Damage Functions (hit, statuseffect, knockback)
 
     public void gotHit(Skill skill, float percentage, bool knockback)
@@ -715,7 +659,7 @@ public class Character : MonoBehaviour
                     }
                 }
 
-                foreach (affectedResource elem in targetModule.affectedResources)
+                foreach (Price elem in targetModule.affectedResources)
                 {
                     float amount = elem.amount * percentage / 100;
 
@@ -807,7 +751,7 @@ public class Character : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
-        if(showColor) this.removeColor(this.stats.hitColor);
+        if (showColor) this.removeColor(this.stats.hitColor);
 
         this.cantBeHit = false;
     }

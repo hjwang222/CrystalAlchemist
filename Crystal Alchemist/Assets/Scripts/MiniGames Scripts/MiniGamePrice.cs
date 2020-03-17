@@ -10,23 +10,23 @@ public class MiniGamePrice : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textField;
 
-    public bool updatePrice(ResourceType currencyType, Item item, int amount, Player player)
+    public bool updatePrice(Player player, Price price)
     {
         this.image.enabled = false;
 
-        if (item != null && currencyType == ResourceType.item)
+        if (price.item != null && price.resourceType == ResourceType.item)
         {
             this.image.enabled = true;
-            int inventory = CustomUtilities.Items.getAmountFromInventory(item, player.inventory);
-            CustomUtilities.Items.setItemImage(this.image, item);
-            this.textField.text = amount + " / " + inventory;
+            int inventory = CustomUtilities.Items.getAmountFromInventory(price.item, player.inventory);
+            CustomUtilities.Items.setItemImage(this.image, price.item);
+            this.textField.text = price.amount + " / " + inventory;
         }
-        else if (currencyType == ResourceType.none)
+        else if (price.resourceType == ResourceType.none)
         {
             this.textField.text = CustomUtilities.Format.getLanguageDialogText("GRATIS", "FREE");
         }
 
-        bool canStart = CustomUtilities.Items.hasEnoughCurrency(currencyType, player, item, amount);
+        bool canStart = player.GetComponent<PlayerUtils>().hasEnoughCurrency(price);
         setColor(canStart);
 
         return canStart;

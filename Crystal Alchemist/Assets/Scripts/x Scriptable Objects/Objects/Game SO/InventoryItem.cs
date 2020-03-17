@@ -3,12 +3,8 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [CreateAssetMenu(menuName = "Game/Item")]
-public class ItemStats : ScriptableObject
+public class InventoryItem : ScriptableObject
 {
-    [Required]
-    [BoxGroup("Pflichtfeld")]
-    public SpriteRenderer shadowRenderer;
-
     [Required]
     [BoxGroup("Pflichtfeld")]
     public Sprite itemSprite;
@@ -17,44 +13,24 @@ public class ItemStats : ScriptableObject
     [BoxGroup("Pflichtfeld")]
     public Sprite itemSpriteInventory;
 
-    [FoldoutGroup("Item Texts", expanded: false)]
-    [SerializeField]
-    public string itemName;
-
-    [FoldoutGroup("Item Texts", expanded: false)]
-    [Tooltip("Beschreibung des Skills")]
-    [TextArea]
-    public string itemDescription;
-
+    [Space(10)]
     [FoldoutGroup("Item Texts", expanded: false)]
     [ShowIf("resourceType", ResourceType.item)]
     [SerializeField]
     public string itemGroup;
 
+    [FoldoutGroup("Item Texts", expanded: false)]
+    [SerializeField]
+    public string itemGroupEnglish;
+
+    [Space(10)]
     [Tooltip("Slot-Nummer im Inventar. Wenn -1 dann kein Platz im Inventar")]
     [FoldoutGroup("Item Texts", expanded: false)]
     [SerializeField]
     public int itemSlot = -1;
 
-    [Space(10)]
-    [FoldoutGroup("Item Texts", expanded: false)]
-    [SerializeField]
-    public string itemNameEnglish;
-
-    [FoldoutGroup("Item Texts", expanded: false)]
-    [Tooltip("Beschreibung des Skills")]
-    [TextArea]
-    public string itemDescriptionEnglish;
-
-    [FoldoutGroup("Item Texts", expanded: false)]
-    [SerializeField]
-    public string itemGroupEnglish;
-
     [FoldoutGroup("Item Attributes", expanded: false)]
     public int amount = 1;
-
-    [FoldoutGroup("Item Attributes", expanded: false)]
-    public int value = 1;
 
     [FoldoutGroup("Item Attributes", expanded: false)]
     public int maxAmount;
@@ -94,8 +70,19 @@ public class ItemStats : ScriptableObject
         if (this.itemSpriteInventory == null) this.itemSpriteInventory = this.itemSprite;
     }
 
-    public int getTotalAmount()
+    public bool checkIfAlreadyThere()
     {
-        return this.value * this.amount;
+        if (this.isKeyItem)
+        {
+            Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+            if (player != null && CustomUtilities.Items.hasKeyItemAlready(this, player.inventory)) return true;
+        }
+
+        return false;
+    }
+
+    public string getItemGroup()
+    {
+        return CustomUtilities.Format.getLanguageDialogText(this.itemGroup, this.itemGroupEnglish);
     }
 }
