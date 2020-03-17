@@ -13,13 +13,11 @@ public enum ResourceType
 [System.Serializable]
 public class Price
 {
-    [BoxGroup("Price")]
     public ResourceType resourceType = ResourceType.item;
 
-    [BoxGroup("Price")]
     [ShowIf("resourceType", ResourceType.item)]
     public ItemStats item;
 
-    [BoxGroup("Price")]
+    [HideIf("resourceType", ResourceType.none)]
     public float amount = 1;
 }

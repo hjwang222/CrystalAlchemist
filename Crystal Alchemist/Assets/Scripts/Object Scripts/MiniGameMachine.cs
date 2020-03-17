@@ -2,8 +2,6 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 
-
-
 public class MiniGameMachine : Interactable
 {
     [SerializeField]
@@ -23,8 +21,8 @@ public class MiniGameMachine : Interactable
 
     [SerializeField]
     [Required]
-    [BoxGroup("Mandatory")]   
-    private List<MiniGameMatch> matches = new List<MiniGameMatch>();
+    [BoxGroup("Mandatory")]
+    private MiniGameMatches matches;
 
     public override void Start()
     {

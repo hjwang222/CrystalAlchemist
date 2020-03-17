@@ -37,7 +37,7 @@ public class MiniGameDialogbox : MonoBehaviour
 
         foreach (ItemUI itemUI in this.itemUIs)
         {
-            itemUI.setItem(this.miniGameUI.getMatch().reward.lootEntry.item.stats);
+            itemUI.setItem(this.miniGameUI.getMatch().reward.getLoot().item.stats);
         }
 
         MiniGameMatch match = this.miniGameUI.getMatch();

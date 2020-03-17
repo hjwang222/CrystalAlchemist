@@ -24,31 +24,22 @@ public class MiniGame : MonoBehaviour
     [TextArea]
     public string miniGameDescriptionEnglish;
 
-    private List<MiniGameMatch> matches = new List<MiniGameMatch>();
+    private MiniGameMatches matches;
 
-    public void setMiniGame(List<MiniGameMatch> matches)
+    public void setMiniGame(MiniGameMatches matches)
     {
-        matches.Clear();
-
-        foreach(MiniGameMatch match in matches)
-        {
-            MiniGameMatch temp = Instantiate(match);
-            temp.reward.setLoot();
-            this.matches.Add(temp);
-        }
+        this.matches = Instantiate(matches);
+        this.matches.Initialize();
     }
 
     public void updateInternalMatches()
     {
-        foreach (MiniGameMatch match in matches)
-        {
-            match.reward.setLoot();
-        }
+        this.matches.Initialize();
     }
 
     public List<MiniGameMatch> getMatches()
     {
-        return this.matches;
+        return this.matches.GetMatches();
     }
 
     public void DestroyIt()

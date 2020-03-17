@@ -9,9 +9,6 @@ public class MiniGameHigherOrLower : MiniGameRound
     private List<int> maxRandomNumbers = new List<int>();
 
     [SerializeField]
-    private GameObject inputButtons;
-
-    [SerializeField]
     private List<MiniGameCard> cards = new List<MiniGameCard>();
 
     private List<int> randomNumbers = new List<int>();

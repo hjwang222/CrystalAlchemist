@@ -12,10 +12,10 @@ public class Loot
 [System.Serializable]
 public class LootTableEntry
 {
-    public int dropRate = 100;
+    public bool hasDropRate = true;
 
-    [HideInInspector]
-    public Loot lootEntry;
+    [ShowIf("hasDropRate")]
+    public int dropRate = 100;
 
     [SerializeField]
     private Loot firstLoot;
@@ -23,10 +23,17 @@ public class LootTableEntry
     [SerializeField]
     private Loot alternativeLoot;
 
-    public void setLoot()
+    private Loot loot;
+
+    public void Initialize()
     {
-        this.lootEntry = this.firstLoot;
-        if (this.lootEntry.item.stats.alreadyThere()) this.lootEntry = this.alternativeLoot;
+        if (this.firstLoot.item.stats.alreadyThere()) this.loot = this.alternativeLoot;
+        else this.loot = this.firstLoot;
+    }
+
+    public Loot getLoot()
+    {
+        return this.loot;
     }
 }
 
@@ -42,12 +49,13 @@ public class LootTable : ScriptableObject
 
         foreach (LootTableEntry entry in this.entries)
         {
-            entry.setLoot();
+            entry.Initialize();
+            Loot lootItem = entry.getLoot();
 
-            if(entry.dropRate > randomNumber)
+            if(entry.dropRate > randomNumber || !entry.hasDropRate)
             {
-                ItemDrop item = Instantiate(entry.lootEntry.item);
-                item.Initialize(entry.lootEntry.amount);
+                ItemDrop item = Instantiate(lootItem.item);
+                item.Initialize(lootItem.amount);
                 loot.Add(item);
             }
         }
