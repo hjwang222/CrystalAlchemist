@@ -20,21 +20,26 @@ public class Collectable : MonoBehaviour
     [Required]
     [BoxGroup("Pflichtfeld")]
     [SerializeField]
-    private Item loot;
+    private ItemStats item;
 
     #region Start Funktionen
+
+    public void SetItem(ItemStats item)
+    {
+        this.item = item;
+    }
 
     private void Start()
     {
         //Check if keyItem already in Inventory
-        if (this.loot.alreadyThere()) Destroy(this.gameObject);
+        if (this.item.alreadyThere()) Destroy(this.gameObject);
     }
 
     #endregion
 
     public void playSounds()
     {
-        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.loot.getSoundEffect());        
+        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.item.getSoundEffect());
     }
 
     #region Collect Item Funktionen
@@ -46,15 +51,24 @@ public class Collectable : MonoBehaviour
             Player player = character.GetComponent<Player>();
             if (player != null)
             {
-                player.GetComponent<PlayerUtils>().CollectItem(this.loot);
+                player.GetComponent<PlayerUtils>().CollectItem(this.item);
                 DestroyIt();
             }
         }
-    }   
+    }
+
+    public void SetAsTreasureItem(Transform parent)
+    {
+        this.transform.parent = parent;
+        this.transform.position = parent.position;
+        if (this.shadowRenderer != null) this.shadowRenderer.enabled = false;
+        this.GetComponent<BoxCollider2D>().enabled = false;
+        this.enabled = false;
+    }
 
     public void DestroyIt()
     {
         Destroy(this.gameObject);
     }
-        #endregion
+    #endregion
 }

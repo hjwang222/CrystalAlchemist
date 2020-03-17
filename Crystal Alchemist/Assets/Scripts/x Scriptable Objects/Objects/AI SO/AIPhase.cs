@@ -2,7 +2,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu(menuName = "AI/AI Phase")]
+[CreateAssetMenu(menuName = "Game/AI/AI Phase")]
 public class AIPhase : ScriptableObject
 {
     [BoxGroup("Action Sequence")]

@@ -12,7 +12,7 @@ public enum enumButton
     LBButton
 }
 
-[CreateAssetMenu(menuName = "Player/Player Buttons")]
+[CreateAssetMenu(menuName = "Game/Player/Player Buttons")]
 public class PlayerButtons : ScriptableObject
 {
     public Ability AButton;

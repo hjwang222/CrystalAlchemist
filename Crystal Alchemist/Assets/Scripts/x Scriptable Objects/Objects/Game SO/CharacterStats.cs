@@ -171,21 +171,7 @@ public class CharacterStats : ScriptableObject
 
     [FoldoutGroup("Loot", expanded: false)]
     [Tooltip("Items und deren Wahrscheinlichkeit zwischen 1 und 100")]
-    public List<LootTable> lootTable = new List<LootTable>();
-
-    [Space(10)]
-    [FoldoutGroup("Loot", expanded: false)]
-    [Tooltip("Multiloot = alle Items. Ansonsten nur das seltenste Item")]
-    public bool multiLoot = false;
-
-    [Space(10)]
-    [FoldoutGroup("Loot", expanded: false)]
-    [Tooltip("Was darf der Charakter einsammeln. All = alles, ansonsten nur anhand der Liste")]
-    public bool canCollectAll = false;
-
-    [FoldoutGroup("Loot", expanded: false)]
-    [HideIf("canCollectAll")]
-    public List<string> canCollect = new List<string>();
+    public LootTable lootTable;
 
 
     ////////////////////////////////////////////////////////////////

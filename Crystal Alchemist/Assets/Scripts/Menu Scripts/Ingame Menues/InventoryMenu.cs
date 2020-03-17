@@ -79,13 +79,9 @@ public class InventoryMenu : MenuControls
             {
                 GameObject slot = categoryGameobject.transform.GetChild(i).gameObject;
                 InventorySlot iSlot = slot.GetComponent<InventorySlot>();
-                InventoryItem item = null;
-
-                //if (iSlot.getFeature() != ItemFeature.none) item = Utilities.Items.getItemByFeature(this.player.inventory, iSlot.getFeature());
-                //else 
 
                 int ID = iSlot.getID();
-                item = CustomUtilities.Items.getItemByID(this.player.inventory, ID, showKeyItems);
+                ItemStats item = this.player.GetComponent<PlayerUtils>().getItem(ID, showKeyItems);
 
                 slot.GetComponent<InventorySlot>().setItemToSlot(item);
             }

@@ -17,8 +17,8 @@ public class Price
     public ResourceType resourceType = ResourceType.item;
 
     [BoxGroup("Price")]
-    [ShowIf("currencyType", ResourceType.item)]
-    public InventoryItem item;
+    [ShowIf("resourceType", ResourceType.item)]
+    public ItemStats item;
 
     [BoxGroup("Price")]
     public float amount = 1;

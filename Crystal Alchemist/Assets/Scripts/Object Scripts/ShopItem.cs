@@ -22,13 +22,7 @@ public class ShopItem : Rewardable
         base.Start();
 
         CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
-
-        this.inventory.Add(this.lootTable[this.index].loot.item);
-
-        //this.amountText.text = this.amount + "";
-        this.childSprite.sprite = this.inventory[this.index].GetInventoryItem().itemSprite;
-
-        //TODO Item:
+        this.childSprite.sprite = this.inventory[this.index].stats.itemSprite;
         if (this.inventory.Count == 0) Destroy(this.gameObject);
     }
 
@@ -36,7 +30,7 @@ public class ShopItem : Rewardable
     {
         if (this.player.GetComponent<PlayerUtils>().canOpenAndUpdateResource(this.price))
         {
-            Item loot = inventory[this.index];
+            ItemStats loot = inventory[this.index].stats;
 
             this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success, loot);
             this.player.GetComponent<PlayerUtils>().CollectItem(loot);

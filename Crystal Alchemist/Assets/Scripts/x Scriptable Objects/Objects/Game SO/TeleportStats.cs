@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Game/Teleport")]
+[CreateAssetMenu(menuName = "Game/Player/Teleport")]
 
 public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
 {

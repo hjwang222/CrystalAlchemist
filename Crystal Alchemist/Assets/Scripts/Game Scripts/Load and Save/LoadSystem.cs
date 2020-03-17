@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -118,12 +117,12 @@ public class LoadSystem : MonoBehaviour
 
         foreach (string[] elem in data.inventory)
         {
-            GameObject prefab = Resources.Load("Prefabs/Items/" + elem[0], typeof(GameObject)) as GameObject;
+            ItemStats stats = Resources.Load("Scriptable Objects/Items/" + elem[0], typeof(ItemStats)) as ItemStats;
 
-            if(prefab == null) prefab = Resources.Load("Prefabs/Items/Key Items/" + elem[0], typeof(GameObject)) as GameObject;
-            if (prefab == null) prefab = Resources.Load("Prefabs/Items/Attribute Points/" + elem[0], typeof(GameObject)) as GameObject;
+            if (stats == null) stats = Resources.Load("Scriptable Objects/Items/Key Items/" + elem[0], typeof(ItemStats)) as ItemStats;
+            if (stats == null) stats = Resources.Load("Scriptable Objects/Items/Attribute Points/" + elem[0], typeof(ItemStats)) as ItemStats;
 
-            //add to inventory here
+            player.GetComponent<PlayerUtils>().CollectItem(stats);
         }
     }
 

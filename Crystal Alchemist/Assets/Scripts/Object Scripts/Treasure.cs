@@ -40,10 +40,6 @@ public class Treasure : Rewardable
 
     [FoldoutGroup("TextMeshPro Options", expanded: false)]
     public float outlineWidth = 0.25f;
-
-
-
-
     #endregion
 
 
@@ -54,11 +50,7 @@ public class Treasure : Rewardable
         base.Start();
         CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
-        //TODO Item:
-        if (this.inventory.Count == 0 && this.treasureType == TreasureType.normal)
-        {
-            changeTreasureState(true);
-        }
+        if (this.inventory.Count == 0 && this.treasureType == TreasureType.normal) changeTreasureState(true);        
     }
 
     #endregion
@@ -76,7 +68,7 @@ public class Treasure : Rewardable
             if (this.treasureType == TreasureType.lootbox)
             {
                 changeTreasureState(false);
-                //CustomUtilities.Items.setItem(this.lootTableInternal, this.multiLoot, this.inventory, this.lootParentObject);
+                this.setLoot();
             }
 
             //Verstecke gezeigtes Item wieder
@@ -86,14 +78,6 @@ public class Treasure : Rewardable
             }
             this.showItem.SetActive(false);
         }
-        /*
-        if (this.context != null)
-        {
-            //Wenn Spieler in Reichweite ist und Truhe zu ist -> Context Clue anzeigen! Ansonsten nicht.
-            if (this.currentState == objectState.opened) this.context.SetActive(false);
-            else if (this.currentState != objectState.opened && this.isPlayerInRange) this.context.SetActive(true);
-            else this.context.SetActive(false);
-        }*/
     }
 
     public override void doSomethingOnSubmit()
@@ -145,12 +129,11 @@ public class Treasure : Rewardable
             //Zeige Item
             this.showTreasureItem();
 
-            //OLD, muss besser gehen!
             //Gebe Item dem Spieler
-            foreach (Item item in this.inventory)
+            foreach (ItemDrop item in this.inventory)
             {
-                this.player.GetComponent<PlayerUtils>().CollectItem(item);
-                this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success, item);
+                this.player.GetComponent<PlayerUtils>().CollectItem(item.stats);
+                this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success, item.stats);
             }                
         }
         else
@@ -174,34 +157,10 @@ public class Treasure : Rewardable
             //Item instanziieren und der Liste zurück geben und das Item anzeigen            
             this.showItem.SetActive(true);
 
-            //TODO: Instantiate(this.inventory[i].graphics, this.showItem.transform.position, Quaternion.identity, this.showItem.transform);
-            /*
-            ItemGameObject item = Instantiate(this.inventory[i], this.showItem.transform.position, Quaternion.identity, this.showItem.transform);
-            item.gameObject.SetActive(true);
-            item.GetComponent<BoxCollider2D>().enabled = false;
-            item.enabled = false;
-            if (item.shadowRenderer != null) item.shadowRenderer.enabled = false;
-            */
-            //this.inventory[i].GetComponent<Item>().showFromTreasure();
+            Collectable collectable = this.inventory[i].Instantiate(this.showItem.transform.position);
+            collectable.SetAsTreasureItem(this.showItem.transform);
         }
     }
 
     #endregion
-
-
-    /*
-    #region Treasure specific Function
-    public void showFromTreasure()
-    {
-        //Als Kisten-Item darf es nicht einsammelbar sein und muss als Position die Kiste haben
-
-        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f);
-        //SortingGroup group = this.GetComponent<SortingGroup>();
-        //if (group != null) group.sortingOrder = 1;
-        this.GetComponent<BoxCollider2D>().enabled = false;
-        this.anim.enabled = true;
-       // if (this.shadowRenderer != null) this.shadowRenderer.enabled = false;
-    }
-
-    #endregion*/
 }

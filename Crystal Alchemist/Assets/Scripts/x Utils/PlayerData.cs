@@ -62,7 +62,7 @@ public class PlayerData
     {
         this.inventory.Clear();
 
-        foreach (InventoryItem item in player.inventory)
+        foreach (ItemStats item in player.GetComponent<PlayerUtils>().GetItemStats())
         {
             string[] temp = new string[2];
             temp[0] = item.name.Replace(" (", "(").Split('(')[0];

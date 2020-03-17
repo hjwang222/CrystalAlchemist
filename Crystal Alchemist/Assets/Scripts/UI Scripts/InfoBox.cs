@@ -55,11 +55,11 @@ public class InfoBox : MonoBehaviour
     }
 
 
-    private void setInfo(Item item)
+    private void setInfo(ItemStats item)
     {
         this.additionalInfo.SetActive(false);
 
-        CustomUtilities.Items.setItemImage(this.previewImage, item.GetInventoryItem());
+        this.previewImage.sprite = item.getSprite();
 
         this.nameField.text = item.getName();
         this.descriptionField.text = item.getDescription();
@@ -99,7 +99,7 @@ public class InfoBox : MonoBehaviour
         setInfo(ability);
     }
 
-    public void Show(Item item)
+    public void Show(ItemStats item)
     {
         this.gameObject.SetActive(true);
         setInfo(item);

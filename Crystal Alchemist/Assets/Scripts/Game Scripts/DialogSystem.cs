@@ -69,7 +69,7 @@ public class DialogSystem : MonoBehaviour
     [SerializeField]
     private List<DialogText> texts = new List<DialogText>();
 
-    public void show(Player player, Interactable interactable, Item loot)
+    public void show(Player player, Interactable interactable, ItemStats loot)
     {
         if (this.texts.Count > 0)
         {
@@ -77,7 +77,7 @@ public class DialogSystem : MonoBehaviour
         }
     }
 
-    public void show(Player player, Item item)
+    public void show(Player player, ItemStats item)
     {
         if (this.texts.Count > 0)
         {
@@ -85,7 +85,7 @@ public class DialogSystem : MonoBehaviour
         }
     }
 
-    public void show(Player player, DialogTextTrigger trigger, Interactable interactable, Item loot)
+    public void show(Player player, DialogTextTrigger trigger, Interactable interactable, ItemStats loot)
     {
         foreach(DialogText text in this.texts)
         {
@@ -97,7 +97,7 @@ public class DialogSystem : MonoBehaviour
         }
     }
 
-    private string getText(DialogText text, Item loot, Player player)
+    private string getText(DialogText text, ItemStats loot, Player player)
     {
         string result = CustomUtilities.Format.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
 
@@ -107,13 +107,13 @@ public class DialogSystem : MonoBehaviour
         if (loot != null)
         {
             result = result.Replace("<loot name>", loot.getName());
-            result = result.Replace("<loot amount>", loot.GetInventoryItem().amount + "");
+            result = result.Replace("<loot amount>", loot.amount + "");
             result = result.Replace("<loot value>", loot.getTotalAmount() + "");
         }
         return result;
     }
 
-    private string getText(DialogText text, float price, InventoryItem item, Item loot, Player player)
+    private string getText(DialogText text, float price, ItemStats item, ItemStats loot, Player player)
     {
         string result = CustomUtilities.Format.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
 
@@ -123,14 +123,14 @@ public class DialogSystem : MonoBehaviour
 
         if (item != null)
         {
-            result = result.Replace("<item name>", getItemName(price, item));
+            result = result.Replace("<item name>", item.getItemName(price));
             result = result.Replace("<item amount>", item.amount + "");
         }
 
         if (loot != null)
         {
             result = result.Replace("<loot name>", loot.getName());
-            result = result.Replace("<loot amount>", loot.GetInventoryItem().amount + "");
+            result = result.Replace("<loot amount>", loot.amount + "");
             result = result.Replace("<loot value>", loot.getTotalAmount() + "");
         }
 
@@ -144,23 +144,5 @@ public class DialogSystem : MonoBehaviour
         return "";
     }
 
-    private string getItemName(float price, InventoryItem item)
-    {
-        string result = "";
 
-        switch (item.resourceType)
-        {
-            case ResourceType.item:
-                {                    
-                        string typ = item.getItemGroup();
-                        if (price == 1 && (typ != "Schlüssel" || GlobalValues.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
-
-                        result = typ;                    
-                }; break;
-            case ResourceType.life: result = "Leben"; break;
-            case ResourceType.mana: result = "Mana"; break;
-        }
-
-        return result;
-    }
 }

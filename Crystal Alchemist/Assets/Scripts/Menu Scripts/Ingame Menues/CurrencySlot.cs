@@ -9,7 +9,7 @@ public class CurrencySlot : MonoBehaviour
     private PlayerStats playerStats;
 
     [SerializeField]
-    private InventoryItem item;
+    private ItemStats item;
     [SerializeField]
     private int maxValue;
     [SerializeField]
@@ -46,7 +46,7 @@ public class CurrencySlot : MonoBehaviour
 
     public void updateCurrency()
     {
-        this.newValue = CustomUtilities.Items.getAmountFromInventory(this.item, this.player.inventory);
+        this.newValue = this.player.GetComponent<PlayerUtils>().getItemAmount(this.item);
 
         if (this.playSound)
         {

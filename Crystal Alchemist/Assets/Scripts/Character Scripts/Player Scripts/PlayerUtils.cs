@@ -10,9 +10,37 @@ public class PlayerUtils : MonoBehaviour
     [SerializeField]
     private PlayerInventory inventory;
 
-    public void CollectItem(Item item)
+    public List<ItemStats> GetItemStats()
     {
-        this.inventory.addItem(item.GetInventoryItem());
+        return this.inventory.inventory;
+    }
+
+    public void CollectItem(ItemStats item)
+    {
+        this.inventory.UpdateInventory(item, item.getTotalAmount());
+    }
+
+    public ItemStats getItem(ItemStats item)
+    {
+        return this.inventory.GetItem(item);
+    }
+
+    public ItemStats getItem(int ID, bool keyItem)
+    {
+        return this.inventory.GetItem(ID, keyItem);
+    }
+
+    public int getItemAmount(ItemStats item)
+    {
+        int result = 0;
+        ItemStats temp = getItem(item);
+        if (temp != null) result = temp.amount;
+        return result;
+    }
+
+    public void UpdateInventory(ItemStats item, int amount)
+    {
+        this.inventory.UpdateInventory(item, amount);
     }
 
     public bool hasEnoughCurrency(Price price)
@@ -27,6 +55,11 @@ public class PlayerUtils : MonoBehaviour
         }
 
         return result;
+    }
+
+    public bool hasKeyItemAlready(ItemStats item)
+    {
+        return this.inventory.hasKeyItemAlready(item);
     }
 
     public bool canOpenAndUpdateResource(Price price)
@@ -51,6 +84,11 @@ public class PlayerUtils : MonoBehaviour
             this.player.updateResource(price.resourceType, price.item, -price.amount);
     }
 
+    
+
+
+
+
 
 
 
@@ -64,12 +102,12 @@ public class PlayerUtils : MonoBehaviour
         showDialog(interactable, trigger, null);
     }
 
-    public void showDialog(Interactable interactable, Item loot)
+    public void showDialog(Interactable interactable, ItemStats loot)
     {
         if (interactable.gameObject.GetComponent<DialogSystem>() != null) interactable.GetComponent<DialogSystem>().show(this.player, interactable, loot);
     }
 
-    public void showDialog(Interactable interactable, DialogTextTrigger trigger, Item loot)
+    public void showDialog(Interactable interactable, DialogTextTrigger trigger, ItemStats loot)
     {
         if (interactable.gameObject.GetComponent<DialogSystem>() != null) interactable.gameObject.GetComponent<DialogSystem>().show(this.player, trigger, interactable, loot);
     }

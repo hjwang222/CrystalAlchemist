@@ -109,7 +109,7 @@ public class Character : MonoBehaviour
 
 
     [HideInInspector]
-    public List<InventoryItem> inventory = new List<InventoryItem>();
+    public List<ItemDrop> inventory = new List<ItemDrop>();
 
     #endregion
 
@@ -202,8 +202,7 @@ public class Character : MonoBehaviour
     public void ActivateCharacter()
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
-
-        //init Loot
+        if(this.stats.lootTable != null) this.inventory = this.stats.lootTable.SetLoot();
     }
     #endregion
 
@@ -304,7 +303,10 @@ public class Character : MonoBehaviour
 
     public void dropItem()
     {
-        
+        foreach(ItemDrop item in this.inventory)
+        {
+            item.Instantiate(this.transform.position);
+        }
     }
 
     #endregion
@@ -435,12 +437,12 @@ public class Character : MonoBehaviour
         CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Respawn");
     }
 
-    public void updateResource(ResourceType type, InventoryItem item, float addResource)
+    public void updateResource(ResourceType type, ItemStats item, float addResource)
     {
         updateResource(type, item, addResource, true);
     }
 
-    public virtual void updateResource(ResourceType type, InventoryItem item, float value, bool showingDamageNumber)
+    public virtual void updateResource(ResourceType type, ItemStats item, float value, bool showingDamageNumber)
     {
         switch (type)
         {
@@ -460,28 +462,8 @@ public class Character : MonoBehaviour
                     this.mana = CustomUtilities.Resources.setResource(this.mana, this.maxMana, value);
                     if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
                     break;
-                }
-            case ResourceType.item:
-                {
-                    CustomUtilities.Items.updateInventory(item, this, Mathf.RoundToInt(value));
-                    this.callSignal(item.signal, value);
-                    break;
-                }
-            case ResourceType.skill:
-                {
-                    break;
-                }
-            case ResourceType.statuseffect:
-                {
-                    foreach (StatusEffect effect in item.statusEffects)
-                    {
-                        CustomUtilities.StatusEffectUtil.AddStatusEffect(effect, this);
-                    }
-
-                    break;
-                }
+                }            
         }
-
     }
 
     public void callSignal(SimpleSignal signal, float addResource)
@@ -489,25 +471,12 @@ public class Character : MonoBehaviour
         if (signal != null && addResource != 0) signal.Raise();
     }
 
-    public float getResource(ResourceType type, InventoryItem item)
+    public virtual float getResource(ResourceType type, ItemStats item)
     {
         switch (type)
         {
             case ResourceType.life: return this.life;
-            case ResourceType.mana: return this.mana;
-            case ResourceType.item: return CustomUtilities.Items.getAmountFromInventory(item, this.inventory);
-        }
-
-        return 0;
-    }
-
-    public float getMaxResource(ResourceType type, InventoryItem item)
-    {
-        switch (type)
-        {
-            case ResourceType.life: return this.maxLife;
-            case ResourceType.mana: return this.maxMana;
-            case ResourceType.item: return item.maxAmount;
+            case ResourceType.mana: return this.mana;            
         }
 
         return 0;
@@ -573,6 +542,7 @@ public class Character : MonoBehaviour
         if (this.GetComponent<PlayerAbilities>() != null) this.GetComponent<PlayerAbilities>().enabled = value;
         if (this.GetComponent<PlayerControls>() != null) this.GetComponent<PlayerControls>().enabled = value;
         if (this.GetComponent<PlayerMovement>() != null) this.GetComponent<PlayerMovement>().enabled = value;
+        if (this.GetComponent<PlayerUtils>() != null) this.GetComponent<PlayerUtils>().enabled = value;
     }
 
     public void startAttackAnimation(string parameter)

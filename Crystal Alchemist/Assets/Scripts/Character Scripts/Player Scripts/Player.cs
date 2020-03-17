@@ -146,7 +146,27 @@ public class Player : Character
 
     ///////////////////////////////////////////////////////////////
 
-    public override void updateResource(ResourceType type, InventoryItem item, float value, bool showingDamageNumber)
+    public override float getResource(ResourceType type, ItemStats item)
+    {
+        float amount = base.getResource(type, item);
+        if (type == ResourceType.item && item != null)
+            amount = this.GetComponent<PlayerUtils>().getItemAmount(item);
+        return amount;
+    }
+
+    public float getMaxResource(ResourceType type, ItemStats item)
+    {
+        switch (type)
+        {
+            case ResourceType.life: return this.maxLife;
+            case ResourceType.mana: return this.maxMana;
+            case ResourceType.item: return item.maxAmount;
+        }
+
+        return 0;
+    }
+
+    public override void updateResource(ResourceType type, ItemStats item, float value, bool showingDamageNumber)
     {
         base.updateResource(type, item, value, showingDamageNumber);
 
@@ -154,6 +174,25 @@ public class Player : Character
         {
             case ResourceType.life: callSignal(this.healthSignalUI, value); break;
             case ResourceType.mana: callSignal(this.manaSignalUI, value); break;
+            case ResourceType.item:
+                {
+                    this.GetComponent<PlayerUtils>().UpdateInventory(item, Mathf.RoundToInt(value));
+                    this.callSignal(item.signal, value);
+                    break;
+                }
+            case ResourceType.skill:
+                {
+                    break;
+                }
+            case ResourceType.statuseffect:
+                {
+                    foreach (StatusEffect effect in item.statusEffects)
+                    {
+                        CustomUtilities.StatusEffectUtil.AddStatusEffect(effect, this);
+                    }
+
+                    break;
+                }
         }
     }
 

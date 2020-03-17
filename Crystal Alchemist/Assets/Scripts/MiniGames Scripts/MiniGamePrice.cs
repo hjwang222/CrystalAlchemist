@@ -17,9 +17,9 @@ public class MiniGamePrice : MonoBehaviour
         if (price.item != null && price.resourceType == ResourceType.item)
         {
             this.image.enabled = true;
-            int inventory = CustomUtilities.Items.getAmountFromInventory(price.item, player.inventory);
-            CustomUtilities.Items.setItemImage(this.image, price.item);
-            this.textField.text = price.amount + " / " + inventory;
+            int inventoryAmount = player.GetComponent<PlayerUtils>().getItemAmount(price.item);
+            this.image.sprite = price.item.getSprite();
+            this.textField.text = price.amount + " / " + inventoryAmount;
         }
         else if (price.resourceType == ResourceType.none)
         {

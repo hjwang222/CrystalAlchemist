@@ -13,9 +13,9 @@ public class MiniGameRewardUI : MonoBehaviour
     {
         for (int i = 0; i < this.rewardSlots.Count; i++)
         {
-            if (matches.Count >= (i+1) && matches[i].loot != null)
+            if (matches.Count >= (i+1) && matches[i].reward != null)
             {
-                rewardSlots[i].setItem(matches[i].loot.item);
+                rewardSlots[i].setItem(matches[i].reward.lootEntry.item.stats);
             }
             else
             {

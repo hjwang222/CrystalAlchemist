@@ -26,22 +26,29 @@ public class MiniGame : MonoBehaviour
 
     private List<MiniGameMatch> matches = new List<MiniGameMatch>();
 
-    public List<MiniGameMatch> internalMatches = new List<MiniGameMatch>();
-
-
     public void setMiniGame(List<MiniGameMatch> matches)
     {
-        this.matches = matches;
+        matches.Clear();
+
+        foreach(MiniGameMatch match in matches)
+        {
+            MiniGameMatch temp = Instantiate(match);
+            temp.reward.setLoot();
+            this.matches.Add(temp);
+        }
     }
 
     public void updateInternalMatches()
     {
-        //TODO
+        foreach (MiniGameMatch match in matches)
+        {
+            match.reward.setLoot();
+        }
     }
 
     public List<MiniGameMatch> getMatches()
     {
-        return this.internalMatches;
+        return this.matches;
     }
 
     public void DestroyIt()

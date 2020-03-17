@@ -9,7 +9,7 @@ public enum EnableMode
     nameAndRace
 }
 
-[CreateAssetMenu(menuName = "CharacterCreation/Property")]
+[CreateAssetMenu(menuName = "Game/CharacterCreation/Property")]
 public class CharacterCreatorPartProperty : ScriptableObject
 {
     [BoxGroup("Enable Info")]

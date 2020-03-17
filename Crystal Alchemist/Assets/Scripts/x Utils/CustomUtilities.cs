@@ -34,8 +34,6 @@ public class CustomUtilities : MonoBehaviour
         }
     }
 
-
-
     public static class Resources
     {
         public static float setResource(float resource, float max, float addResource)
@@ -511,111 +509,6 @@ public class CustomUtilities : MonoBehaviour
                 prop.SetValue(dst, prop.GetValue(original, null), null);
             }
             return dst as T;
-        }
-    }
-
-    ///////////////////////////////////////////////////////////////
-
-    public static class Items
-    {  
-        
-        public static int getAmountFromInventory(InventoryItem item, List<InventoryItem> inventory)
-        {
-            int amount = 0;
-
-            foreach (InventoryItem elem in inventory)
-            {
-                if (!item.isKeyItem || item.useItemGroup)
-                {
-                    if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper()) amount += elem.amount;
-                }
-                else
-                {
-                    if (item.name.ToUpper() == elem.name.ToUpper()) amount += elem.amount;
-                }
-            }
-            return amount;
-        }
-
-        public static InventoryItem getItemFromInventory(InventoryItem item, List<InventoryItem> inventory)
-        {
-            foreach (InventoryItem elem in inventory)
-            {
-                if (item.isKeyItem)
-                {
-                    if (item.name.ToUpper() == elem.name.ToUpper()) return elem;
-                }
-                else
-                {
-                    if (item.itemGroup.ToUpper() == elem.itemGroup.ToUpper()) return elem;
-                }
-            }
-            return null;
-        }
-
-        public static bool hasKeyItemAlready(InventoryItem item, List<InventoryItem> inventory)
-        {
-            if (item.isKeyItem)
-            {
-                foreach (InventoryItem elem in inventory)
-                {
-                    if (item.name.ToUpper() == elem.name.ToUpper()) return true;
-                }
-            }
-            return false;
-        }
-
-        public static void updateInventory(InventoryItem item, Character character, int amount)
-        {
-            if (item != null)
-            {
-                InventoryItem found = getItemFromInventory(item, character.inventory);
-
-                if (found == null)
-                {
-                    InventoryItem temp = Instantiate(item);
-                    temp.name = item.name;
-                    character.inventory.Add(temp);
-                }
-                else
-                {
-                    if (!item.isKeyItem)
-                    {
-                        found.amount += amount;
-
-                        if (found.amount <= 0)
-                        {
-                            character.inventory.Remove(found);
-                        }
-                    }
-                }
-            }
-        }        
-
-        public static InventoryItem getItemByID(List<InventoryItem> inventory, int ID, bool isKeyItem)
-        {
-            foreach (InventoryItem item in inventory)
-            {
-                if (item.isKeyItem == isKeyItem && item.itemSlot == ID) return item;
-            }
-
-            return null;
-        }
-
-        public static bool hasItemGroup(string itemGroup, List<InventoryItem> inventory)
-        {
-            foreach (InventoryItem elem in inventory)
-            {
-                if (itemGroup.ToUpper() == elem.itemGroup.ToUpper()) return true;
-            }
-
-            return false;
-        }
-
-        public static void setItemImage(Image image, InventoryItem item)
-        {
-            if (item.itemSpriteInventory != null) image.sprite = item.itemSpriteInventory;
-            else image.sprite = item.itemSprite;
         }
     }
 

@@ -13,7 +13,7 @@ public class SkillSenderModule : SkillModule
     [TabGroup("Sender Attribute")]
     [ShowIf("resourceType", ResourceType.item)]
     [Tooltip("Benötigtes Item")]
-    public InventoryItem item;
+    public ItemStats item;
 
     [TabGroup("Sender Attribute")]
     [HideIf("resourceType", ResourceType.none)]

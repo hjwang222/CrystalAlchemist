@@ -493,6 +493,7 @@ GameObject:
   - component: {fileID: 5650224180514046960}
   - component: {fileID: 7374600907851842522}
   - component: {fileID: 1605216952823830739}
+  - component: {fileID: 7698867005937363429}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -535,7 +536,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 946fe45f31af8544caf372295024317d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootParentObject: {fileID: 1633981480254796401}
   stats: {fileID: 11400000, guid: f489034bab4a8c34eb316a47f0cf1f8a, type: 2}
   myRigidbody: {fileID: 759644400424337060}
   animator: {fileID: 7603080202167088895}
@@ -543,7 +543,6 @@ MonoBehaviour:
   shadowRenderer: {fileID: 4196475930209643464}
   activeSkillParent: {fileID: 8638893490402070047}
   activeStatusEffectParent: {fileID: 1487360461578692118}
-  skillSetParent: {fileID: 242878290860008501}
   skillStartPosition: {fileID: 9116587063939130167}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
@@ -559,9 +558,8 @@ MonoBehaviour:
   manaRegen: 0
   buffPlus: 0
   debuffMinus: 0
+  cantBeHit: 0
   isInvincible: 0
-  isImmortal: 0
-  cannotDie: 0
   isHit: 0
   buffs: []
   debuffs: []
@@ -570,11 +568,10 @@ MonoBehaviour:
   lockAnimation: 0
   timeDistortion: 1
   isPlayer: 0
-  inventory: []
   activePets: []
   steps: 0
   isOnIce: 0
-  lootTableInternal: []
+  inventory: []
   timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
   secondsPlayed: {fileID: 11400000, guid: 00cd839769dce6446985fb0093bd539f, type: 2}
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
@@ -592,6 +589,7 @@ MonoBehaviour:
   fadeSignal: {fileID: 11400000, guid: 7d067face1c3f4149b245c6294d12635, type: 2}
   targetHelpObject: {fileID: 8153952292305783526}
   saveGameSlot: {fileID: 11400000, guid: d3073c05c40c81e439f6ce9706afae30, type: 2}
+  playerInventory: {fileID: 0}
   fadingDuration: {fileID: 11400000, guid: a2cc0078d349f9245bd74b3f5813a450, type: 2}
   change: {x: 0, y: 0, z: 0}
 --- !u!114 &8348133576447681433
@@ -755,6 +753,20 @@ MonoBehaviour:
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   targetingSystem: {fileID: 6568870739131367059}
   activeCastbar: {fileID: 0}
+--- !u!114 &7698867005937363429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759644400424337056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d513839fa274e48afd9a7bb2f1e9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5074818981556205378}
+  inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
 --- !u!1 &1005786831246754604
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu(menuName = "AI/AggroStats")]
+[CreateAssetMenu(menuName = "Game/AI/AggroStats")]
 public class AggroStats : ScriptableObject
 {
     [FoldoutGroup("Aggro Attributes", expanded: false)]

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Player/Player Skillset")]
+[CreateAssetMenu(menuName = "Game/Player/Player Skillset")]
 public class PlayerSkillset : ScriptableObject
 {
     [SerializeField]

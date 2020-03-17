@@ -7,7 +7,7 @@ public enum TargetingMode
     auto
 }
 
-[CreateAssetMenu(menuName = "Game/Targeting System")]
+[CreateAssetMenu(menuName = "Game/Player/Targeting System")]
 public class LockOnSystem : ScriptableObject
 {
     [BoxGroup("Zielerfassung")]
