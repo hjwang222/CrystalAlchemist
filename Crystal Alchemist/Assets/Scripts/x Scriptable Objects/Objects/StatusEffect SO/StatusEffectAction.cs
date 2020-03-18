@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 
 public enum StatusEffectActionType
 {
-    resource,
+    changeResource,
     stacks,
     ability,
     effect,
@@ -20,25 +20,33 @@ public class StatusEffectAction
 {
     public StatusEffectActionType actionType;
 
-    [ShowIf("actionType", StatusEffectActionType.resource)]
+    [ShowIf("actionType", StatusEffectActionType.changeResource)]
     [SerializeField]
     private List<Price> resources;
 
     [ShowIf("actionType", StatusEffectActionType.stacks)]
+    [SerializeField]
     private int amount;
 
     [ShowIf("actionType", StatusEffectActionType.speed)]
+    [SerializeField]
     private float speed;
 
     [ShowIf("actionType", StatusEffectActionType.time)]
+    [SerializeField]
     private float time;
 
     [ShowIf("actionType", StatusEffectActionType.ability)]
+    [SerializeField]
     private List<Ability> abilities;
+
+    [ShowIf("actionType", StatusEffectActionType.effect)]
+    [SerializeField]
+    private List<StatusEffect> effects;
 
     public void DoAction(Character character, StatusEffect effect)
     {
-        if (this.actionType == StatusEffectActionType.resource && character != null)
+        if (this.actionType == StatusEffectActionType.changeResource && character != null)
         {
             foreach (Price resource in this.resources)
             {

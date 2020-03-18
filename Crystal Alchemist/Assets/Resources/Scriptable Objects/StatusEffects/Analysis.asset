@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusEffectName: Analysis
   statusEffectNameEnglish: Analysis
-  statusEffectDescription: 
-  statusEffectDescriptionEnglish: 
+  statusEffectDescription: Zeigt Werte
+  statusEffectDescriptionEnglish: Show stuff
   hasDuration: 0
   maxDuration: 0
   canOverride: 0
@@ -25,10 +25,62 @@ MonoBehaviour:
   maxStacks: 1
   stunTarget: 0
   statusEffectType: 0
-  statusEffectEvents: []
+  statusEffectEvents:
+  - trigger:
+      triggerType: 0
+      intervall: 0
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 7
+      resources:
+      - resourceType: 3
+        item: {fileID: 0}
+        amount: 1
+      amount: 0
+      speed: 0
+      time: 0
+      abilities: []
+      effects: []
+  - trigger:
+      triggerType: 1
+      intervall: 1
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 0
+      resources:
+      - resourceType: 2
+        item: {fileID: 0}
+        amount: -0.25
+      amount: 0
+      speed: 0
+      time: 0
+      abilities: []
+      effects: []
+  - trigger:
+      triggerType: 4
+      intervall: 0
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 4
+      resources: []
+      amount: 0
+      speed: 0
+      time: 0
+      abilities: []
+      effects: []
   destroyDelay: 0.2
-  changeColor: 1
+  changeColor: 0
   statusEffectColor: {r: 0, g: 0, b: 0, a: 1}
-  StatusEffectObject: {fileID: 0}
-  iconSprite: {fileID: 0}
+  StatusEffectObject: {fileID: 7056982587471594013, guid: c133ea91399c3144ab317096acc94303,
+    type: 3}
+  iconSprite: {fileID: 21300034, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
   updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}

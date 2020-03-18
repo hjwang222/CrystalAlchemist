@@ -12,22 +12,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b22a3ebb90863458dba94076083e2b, type: 3}
   m_Name: Ressurrection
   m_EditorClassIdentifier: 
-  statusEffectName: 
-  statusEffectNameEnglish: 
+  statusEffectName: Auferstehung
+  statusEffectNameEnglish: Ressurrection
   statusEffectDescription: 
   statusEffectDescriptionEnglish: 
-  hasDuration: 0
-  maxDuration: 0
-  canOverride: 0
+  hasDuration: 1
+  maxDuration: 180
+  canOverride: 1
   canBeModified: 1
   canDeactivateIt: 0
   canBeDispelled: 0
   maxStacks: 1
   stunTarget: 0
-  statusEffectType: 1
-  statusEffectEvents: []
+  statusEffectType: 0
+  statusEffectEvents:
+  - trigger:
+      triggerType: 0
+      intervall: 0
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 8
+      resources: []
+      amount: 0
+      speed: 0
+      time: 0
+      abilities: []
+      effects: []
+  - trigger:
+      triggerType: 3
+      intervall: 0
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 2
+      resources:
+      - resourceType: 5
+        item: {fileID: 0}
+        amount: 1
+      amount: 0
+      speed: 0
+      time: 0
+      abilities: []
+      effects: []
+    - actionType: 4
+      resources: []
+      amount: 0
+      speed: 0
+      time: 0
+      abilities: []
+      effects: []
   destroyDelay: 0.2
-  changeColor: 1
+  changeColor: 0
   statusEffectColor: {r: 0, g: 0, b: 0, a: 1}
   StatusEffectObject: {fileID: 0}
   iconSprite: {fileID: 0}

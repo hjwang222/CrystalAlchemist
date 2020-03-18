@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [System.Serializable]
 public class StatusEffectEvent
 {
     [SerializeField]
+    [BoxGroup("Trigger")]
     private StatusEffectTrigger trigger;
 
     [SerializeField]
