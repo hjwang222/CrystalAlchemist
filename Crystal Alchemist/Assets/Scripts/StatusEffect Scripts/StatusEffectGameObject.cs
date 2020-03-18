@@ -20,7 +20,8 @@ public class StatusEffectGameObject : MonoBehaviour
 
     public void SetEnd()
     {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "End");
+        if (this.anim != null) CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "End");
+        else DestroyIt();
     }
 
     public void DestroyIt()

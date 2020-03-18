@@ -33,14 +33,17 @@ public class StatusEffect : ScriptableObject
     public string statusEffectDescriptionEnglish;
 
     [FoldoutGroup("Basis Attribute")]
-    [Range(0, CustomUtilities.maxFloatInfinite)]
+    public bool hasDuration = true;
+
+    [FoldoutGroup("Basis Attribute")]
+    [ShowIf("hasDuration")]
     public float maxDuration = 0;
 
     [FoldoutGroup("Basis Attribute")]
     public bool canOverride = false;
 
     [FoldoutGroup("Basis Attribute")]
-    public bool canBeChanged = true;
+    public bool canBeModified = true;
 
     [FoldoutGroup("Basis Attribute")]
     public bool canDeactivateIt = false;
@@ -125,7 +128,7 @@ public class StatusEffect : ScriptableObject
     {
         this.statusEffectTimeLeft = this.maxDuration;
 
-        if (this.canBeChanged)
+        if (this.canBeModified)
         {
             float percentage = 0;
             if (this.statusEffectType == StatusEffectType.buff) percentage = (float)this.target.buffPlus;
@@ -133,6 +136,8 @@ public class StatusEffect : ScriptableObject
 
             this.statusEffectTimeLeft *= ((100f + (float)percentage) / 100f);
         }
+
+        if (!this.hasDuration) this.statusEffectTimeLeft = 1;
     }
 
     #endregion
@@ -149,7 +154,7 @@ public class StatusEffect : ScriptableObject
     {
         this.updateUI.Raise();
 
-        if (this.maxDuration < CustomUtilities.maxFloatInfinite)
+        if (this.hasDuration && this.statusEffectTimeLeft > 0)
         {
             this.statusEffectTimeLeft -= (Time.deltaTime * this.timeDistortion);
         }
