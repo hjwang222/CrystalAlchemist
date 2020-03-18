@@ -26,7 +26,7 @@ public class MiniGameMatch
     public Price price;
 
     [BoxGroup("Loot")]
-    public LootTableEntry reward;
+    public Reward reward;
 
     public void Initialize()
     {

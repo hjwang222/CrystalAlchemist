@@ -1,33 +1,53 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+
 
 [System.Serializable]
 public class Loot
 {
+    [HorizontalGroup("Item")]
     public ItemDrop item;
+
+    [HorizontalGroup("Item")]
     public int amount = 1;
 }
 
 [System.Serializable]
 public class LootTableEntry
 {
+    [HorizontalGroup("Droprate")]
     public bool hasDropRate = false;
 
+    [HorizontalGroup("Droprate")]
     [ShowIf("hasDropRate")]
     public int dropRate = 100;
 
     [SerializeField]
-    [BoxGroup("First")]
+    private Reward reward;
+
+    public void Initialize()
+    {
+        this.reward.Initialize();
+    }
+
+    public Loot getLoot()
+    {
+        return this.reward.getLoot();
+    }
+}
+
+[System.Serializable]
+public class Reward
+{    
+    [SerializeField]
     private Loot firstLoot;
 
     [SerializeField]
-    [BoxGroup("Second")]
     private bool hasAlternative = false;
 
     [ShowIf("hasAlternative")]
     [SerializeField]
-    [BoxGroup("Second")]
     private Loot alternativeLoot;
 
     private Loot loot;
@@ -47,7 +67,8 @@ public class LootTableEntry
 [CreateAssetMenu(menuName = "Game/Items/Loot Table")]
 public class LootTable : ScriptableObject
 {
-    public List<LootTableEntry> entries = new List<LootTableEntry>();
+    [SerializeField]
+    private List<LootTableEntry> entries = new List<LootTableEntry>();
 
     public List<ItemDrop> SetLoot()
     {
@@ -59,7 +80,7 @@ public class LootTable : ScriptableObject
             entry.Initialize();
             Loot lootItem = entry.getLoot();
 
-            if(entry.dropRate > randomNumber || !entry.hasDropRate)
+            if (entry.dropRate > randomNumber || !entry.hasDropRate)
             {
                 ItemDrop item = Instantiate(lootItem.item);
                 item.Initialize(lootItem.amount);
@@ -70,4 +91,3 @@ public class LootTable : ScriptableObject
         return loot;
     }
 }
-
