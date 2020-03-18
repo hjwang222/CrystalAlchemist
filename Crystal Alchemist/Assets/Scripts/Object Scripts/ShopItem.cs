@@ -22,7 +22,7 @@ public class ShopItem : Rewardable
         base.Start();
 
         CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
-        this.childSprite.sprite = this.inventory[this.index].stats.itemSprite;
+        this.childSprite.sprite = this.inventory[this.index].stats.getSprite();
         if (this.inventory.Count == 0) Destroy(this.gameObject);
     }
 

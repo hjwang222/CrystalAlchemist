@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b22a3ebb90863458dba94076083e2b, type: 3}
   m_Name: Death Sentence
   m_EditorClassIdentifier: 
-  statusEffectName: 
-  statusEffectNameEnglish: 
-  statusEffectDescription: 
-  statusEffectDescriptionEnglish: 
-  hasDuration: 0
-  maxDuration: 0
+  statusEffectName: Todesurteil
+  statusEffectNameEnglish: Death Sentence
+  statusEffectDescription: "Ein t\xF6dlicher Fluch"
+  statusEffectDescriptionEnglish: A deadly curse
+  hasDuration: 1
+  maxDuration: 21
   canOverride: 0
   canBeModified: 1
   canDeactivateIt: 0
@@ -25,10 +25,29 @@ MonoBehaviour:
   maxStacks: 1
   stunTarget: 0
   statusEffectType: 1
-  statusEffectEvents: []
+  statusEffectEvents:
+  - trigger:
+      triggerType: 5
+      intervall: 0
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 0
+      resources:
+      - resourceType: 1
+        item: {fileID: 0}
+        amount: -9999
+      amount: 0
+      speed: 0
+      time: 0
+      abilities: []
+      effects: []
   destroyDelay: 0.2
   changeColor: 1
   statusEffectColor: {r: 0, g: 0, b: 0, a: 1}
-  StatusEffectObject: {fileID: 0}
-  iconSprite: {fileID: 0}
+  StatusEffectObject: {fileID: 6292753503574655383, guid: 68fddcb9815147e4a9ed24d6c61fbda0,
+    type: 3}
+  iconSprite: {fileID: 21300010, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
   updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}

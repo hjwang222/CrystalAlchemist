@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 public enum StatusEffectType
 {
     buff,
-    debuff
+    debuff    
 }
 
 [CreateAssetMenu(menuName = "Game/StatusEffect")]

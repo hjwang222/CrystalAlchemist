@@ -21,14 +21,30 @@ MonoBehaviour:
   canOverride: 0
   canBeModified: 1
   canDeactivateIt: 0
-  canBeDispelled: 0
+  canBeDispelled: 1
   maxStacks: 1
   stunTarget: 0
   statusEffectType: 1
-  statusEffectEvents: []
+  statusEffectEvents:
+  - trigger:
+      triggerType: 0
+      intervall: 0
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 7
+      resources: []
+      amount: 0
+      speed: 0
+      time: 0
+      abilities: []
+      effects: []
   destroyDelay: 0.2
   changeColor: 1
-  statusEffectColor: {r: 0, g: 0, b: 0, a: 1}
-  StatusEffectObject: {fileID: 0}
-  iconSprite: {fileID: 0}
+  statusEffectColor: {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}
+  StatusEffectObject: {fileID: 8252149507846792586, guid: 89c1e2e30ceabdb4a890342f63a46c71,
+    type: 3}
+  iconSprite: {fileID: 21300012, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
   updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}

@@ -5,94 +5,86 @@ using System.Collections.Generic;
 [CreateAssetMenu(menuName = "Game/Items/Item Stats")]
 public class ItemStats : ScriptableObject
 {
-    [FoldoutGroup("Item Texts", expanded: false)]
-    [SerializeField]
-    private string itemNameEnglish;
-
-    [FoldoutGroup("Item Texts", expanded: false)]
+    [BoxGroup("Item Texts")]
     [SerializeField]
     private string itemName;
 
+    [BoxGroup("Item Texts")]
+    [SerializeField]
+    private string itemNameEnglish;
+
+
+
     [Space(10)]
-    [FoldoutGroup("Item Texts", expanded: false)]
-    [Tooltip("Beschreibung des Skills")]
+    [BoxGroup("Item Texts")]
     [TextArea]
     [SerializeField]
     private string itemDescription;
 
-    [FoldoutGroup("Item Texts", expanded: false)]
-    [Tooltip("Beschreibung des Skills")]
+    [BoxGroup("Item Texts")]
     [TextArea]
     [SerializeField]
     private string itemDescriptionEnglish;
 
-    [FoldoutGroup("Item Attributes", expanded: false)]
+
+
+    [BoxGroup("Attributes")]
     [SerializeField]
     private int value = 1;
 
-    [Required]
-    [BoxGroup("Pflichtfeld")]
-    [SerializeField]
-    public Sprite itemSprite;
 
-    [Required]
-    [BoxGroup("Pflichtfeld")]
-    [SerializeField]
-    private Sprite itemSpriteInventory;
-
-    [Space(10)]
-    [FoldoutGroup("Item Texts", expanded: false)]
-    [SerializeField]
-    public ItemGroup itemGroup;
-
-    [Space(10)]
-    [Tooltip("Slot-Nummer im Inventar. Wenn -1 dann kein Platz im Inventar")]
-    [FoldoutGroup("Item Texts", expanded: false)]
-    [SerializeField]
-    public int itemSlot = -1;
-
-    [HideInInspector]
-    public int amount = 1;
-
-    [FoldoutGroup("Item Attributes", expanded: false)]
-    public int maxAmount;
-
-    [FoldoutGroup("Item Attributes", expanded: false)]
+    [BoxGroup("Attributes")]
     [EnumToggleButtons]
     [SerializeField]
     private ResourceType resourceType;
 
-    [FoldoutGroup("Item Attributes", expanded: false)]
-    [ShowIf("resourceType", ResourceType.item)]
-    [SerializeField]
-    public bool isKeyItem = false;
-
-    [FoldoutGroup("Item Attributes", expanded: false)]
-    [ShowIf("isKeyItem")]
-    [SerializeField]
-    public SimpleSignal keyItemSignal;
-
-    [FoldoutGroup("Item Attributes", expanded: false)]
+    [BoxGroup("Attributes")]
     [ShowIf("resourceType", ResourceType.skill)]
     [SerializeField]
     private Ability ability;
 
-    [FoldoutGroup("Item Attributes", expanded: false)]
+    [BoxGroup("Attributes")]
     [ShowIf("resourceType", ResourceType.statuseffect)]
     [SerializeField]
     public List<StatusEffect> statusEffects = new List<StatusEffect>();
 
-    [FoldoutGroup("Sound", expanded: false)]
+
+    [BoxGroup("Inventory")]
+    [SerializeField]
+    [ShowIf("resourceType", ResourceType.item)]
+    public ItemGroup itemGroup;
+
+
+
+  
+
+    [HideInInspector]
+    public int amount = 1;
+
+    [BoxGroup("Signals")]
     [SerializeField]
     private AudioClip collectSoundEffect;
 
-    [FoldoutGroup("Signals", expanded: false)]
+    [BoxGroup("Signals")]
     [SerializeField]
     public SimpleSignal signal;
 
+
+
+    public ItemStats getInventoryItem(int ID, bool keyItem)
+    {
+        if (this.itemGroup != null
+            && this.itemGroup.inventoryItem
+            && this.itemGroup.isKeyItem == keyItem
+            && this.itemGroup.itemSlot == ID) return this;
+
+        return null;
+    }
+
+
+
     public void Initialize(int amount)
     {
-        if (this.itemSpriteInventory == null) this.itemSpriteInventory = this.itemSprite;
         this.amount = amount;
     }
 
@@ -102,9 +94,26 @@ public class ItemStats : ScriptableObject
         else return "";
     }
 
+    public bool isKeyItem()
+    {
+        if (this.itemGroup != null && this.itemGroup.isKeyItem) return true;
+        return false;
+    }
+
+    public int getMaxAmount()
+    {
+        if (this.itemGroup != null) return this.itemGroup.maxAmount;
+        return 0;
+    }
+
+    public void raiseKeyItemSignal()
+    {
+        if (this.itemGroup != null) this.itemGroup.raiseKeySignal();
+    }
+
     public bool alreadyThere()
     {
-        if (this.isKeyItem)
+        if (isKeyItem())
         {
             Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
             if (player != null && player.GetComponent<PlayerUtils>().hasKeyItemAlready(this)) return true;
@@ -115,8 +124,7 @@ public class ItemStats : ScriptableObject
 
     public Sprite getSprite()
     {
-        if (this.itemSpriteInventory != null) return this.itemSpriteInventory;
-        else return this.itemSprite;
+        return this.itemGroup.getSprite();
     }
 
     public int getTotalAmount()

@@ -61,7 +61,7 @@ public class CharacterAttributeMenu : MenuControls
     public void updatePoints()
     {
         this.attributePoints = this.player.GetComponent<PlayerUtils>().getItemAmount(this.item);
-        this.attributePointsMax = this.item.maxAmount;
+        this.attributePointsMax = this.item.getMaxAmount();
 
         this.pointsSpent = 0;
 

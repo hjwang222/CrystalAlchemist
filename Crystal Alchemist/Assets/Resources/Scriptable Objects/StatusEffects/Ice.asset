@@ -12,23 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b22a3ebb90863458dba94076083e2b, type: 3}
   m_Name: Ice
   m_EditorClassIdentifier: 
-  statusEffectName: 
-  statusEffectNameEnglish: 
-  statusEffectDescription: 
-  statusEffectDescriptionEnglish: 
-  hasDuration: 0
-  maxDuration: 0
-  canOverride: 0
+  statusEffectName: Eis
+  statusEffectNameEnglish: Ice
+  statusEffectDescription: "Friert ein, sodass keine Aktionen m\xF6glich sind"
+  statusEffectDescriptionEnglish: Stuns and freezes, no actions are possible
+  hasDuration: 1
+  maxDuration: 6
+  canOverride: 1
   canBeModified: 1
   canDeactivateIt: 0
-  canBeDispelled: 0
+  canBeDispelled: 1
   maxStacks: 1
-  stunTarget: 0
+  stunTarget: 1
   statusEffectType: 1
-  statusEffectEvents: []
+  statusEffectEvents:
+  - trigger:
+      triggerType: 0
+      intervall: 0
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 5
+      resources: []
+      amount: 0
+      speed: -100
+      time: 0
+      abilities: []
+      effects: []
   destroyDelay: 0.2
   changeColor: 1
-  statusEffectColor: {r: 0, g: 0, b: 0, a: 1}
-  StatusEffectObject: {fileID: 0}
-  iconSprite: {fileID: 0}
+  statusEffectColor: {r: 0, g: 0.9450981, b: 1, a: 1}
+  StatusEffectObject: {fileID: 5157658974536148423, guid: 49f1ebd00c6ca964c8e6d197f4187346,
+    type: 3}
+  iconSprite: {fileID: 21300002, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
   updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}

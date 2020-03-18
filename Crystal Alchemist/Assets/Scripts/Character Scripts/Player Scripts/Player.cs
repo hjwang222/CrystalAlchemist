@@ -160,7 +160,7 @@ public class Player : Character
         {
             case ResourceType.life: return this.maxLife;
             case ResourceType.mana: return this.maxMana;
-            case ResourceType.item: return item.maxAmount;
+            //case ResourceType.item: return item.maxAmount;
         }
 
         return 0;

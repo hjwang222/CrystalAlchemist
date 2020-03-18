@@ -18,6 +18,6 @@ public class CurrencyInventoryUI : MonoBehaviour
         Player player = this.playerStats.player;
 
         ItemStats item = player.GetComponent<PlayerUtils>().getItem(this.item);
-        if (item != null) this.amountField.text = CustomUtilities.Format.formatString(item.amount, item.maxAmount);        
+        if (item != null) this.amountField.text = CustomUtilities.Format.formatString(item.amount, item.getMaxAmount());        
     }
 }

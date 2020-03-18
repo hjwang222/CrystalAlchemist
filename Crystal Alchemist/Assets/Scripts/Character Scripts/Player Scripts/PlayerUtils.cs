@@ -80,7 +80,7 @@ public class PlayerUtils : MonoBehaviour
 
     public void reduceCurrency(Price price)
     {
-        if ((price.item != null && !price.item.isKeyItem) || price.item == null)
+        if ((price.item != null && !price.item.isKeyItem()) || price.item == null)
             this.player.updateResource(price.resourceType, price.item, -price.amount);
     }
 

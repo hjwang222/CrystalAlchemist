@@ -15,11 +15,6 @@ public class Collectable : MonoBehaviour
     [Required]
     [BoxGroup("Pflichtfeld")]
     [SerializeField]
-    private Animator anim;
-
-    [Required]
-    [BoxGroup("Pflichtfeld")]
-    [SerializeField]
     private ItemStats item;
 
     #region Start Funktionen

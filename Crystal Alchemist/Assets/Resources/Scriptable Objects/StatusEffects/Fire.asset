@@ -12,23 +12,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b22a3ebb90863458dba94076083e2b, type: 3}
   m_Name: Fire
   m_EditorClassIdentifier: 
-  statusEffectName: 
-  statusEffectNameEnglish: 
-  statusEffectDescription: 
-  statusEffectDescriptionEnglish: 
-  hasDuration: 0
-  maxDuration: 0
-  canOverride: 0
+  statusEffectName: Feuer
+  statusEffectNameEnglish: Fire
+  statusEffectDescription: "Schaden \xFCber Zeit, der auf andere \xFCberspringen
+    kann"
+  statusEffectDescriptionEnglish: Damage over time, which can affect others
+  hasDuration: 1
+  maxDuration: 5
+  canOverride: 1
   canBeModified: 1
   canDeactivateIt: 0
-  canBeDispelled: 0
+  canBeDispelled: 1
   maxStacks: 1
   stunTarget: 0
   statusEffectType: 1
-  statusEffectEvents: []
+  statusEffectEvents:
+  - trigger:
+      triggerType: 1
+      intervall: 1
+      life: 0
+      mana: 0
+      hits: 0
+      requireAll: 0
+    actions:
+    - actionType: 0
+      resources:
+      - resourceType: 1
+        item: {fileID: 0}
+        amount: -0.5
+      - resourceType: 2
+        item: {fileID: 0}
+        amount: -0.25
+      amount: 0
+      speed: 0
+      time: 0
+      abilities: []
+      effects: []
   destroyDelay: 0.2
   changeColor: 1
-  statusEffectColor: {r: 0, g: 0, b: 0, a: 1}
-  StatusEffectObject: {fileID: 0}
-  iconSprite: {fileID: 0}
+  statusEffectColor: {r: 0.8000001, g: 0.2509804, b: 0.027450982, a: 1}
+  StatusEffectObject: {fileID: 71630591074221121, guid: e420e9509f9819f4188748abbdda79ee,
+    type: 3}
+  iconSprite: {fileID: 21300004, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
   updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}

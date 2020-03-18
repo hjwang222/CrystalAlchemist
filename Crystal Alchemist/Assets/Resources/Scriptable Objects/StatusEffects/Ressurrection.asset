@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusEffectName: Auferstehung
   statusEffectNameEnglish: Ressurrection
-  statusEffectDescription: 
-  statusEffectDescriptionEnglish: 
+  statusEffectDescription: Wird nach dem Tod aktiv und stellt alles wieder her
+  statusEffectDescriptionEnglish: Active on death
   hasDuration: 1
   maxDuration: 180
   canOverride: 1
@@ -36,11 +36,11 @@ MonoBehaviour:
     actions:
     - actionType: 8
       resources: []
-      amount: 0
       speed: 0
       time: 0
       abilities: []
       effects: []
+      StatusEffectType: 0
   - trigger:
       triggerType: 3
       intervall: 0
@@ -49,26 +49,36 @@ MonoBehaviour:
       hits: 0
       requireAll: 0
     actions:
-    - actionType: 2
+    - actionType: 9
+      resources: []
+      speed: 0
+      time: 0
+      abilities: []
+      effects: []
+      StatusEffectType: 0
+    - actionType: 3
       resources:
       - resourceType: 5
         item: {fileID: 0}
         amount: 1
-      amount: 0
       speed: 0
       time: 0
       abilities: []
-      effects: []
+      effects:
+      - {fileID: 11400000, guid: 1a84acfb291eef145b83f49658dd4e83, type: 2}
+      - {fileID: 11400000, guid: 544bbedee1ac3e943b4e30d0d9aa99ba, type: 2}
+      StatusEffectType: 0
     - actionType: 4
       resources: []
-      amount: 0
       speed: 0
       time: 0
       abilities: []
       effects: []
+      StatusEffectType: 0
   destroyDelay: 0.2
   changeColor: 0
   statusEffectColor: {r: 0, g: 0, b: 0, a: 1}
-  StatusEffectObject: {fileID: 0}
-  iconSprite: {fileID: 0}
+  StatusEffectObject: {fileID: 3621922215859874659, guid: 15ebb46a4acbdbf43a137ddd4957ca02,
+    type: 3}
+  iconSprite: {fileID: 21300028, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
   updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}

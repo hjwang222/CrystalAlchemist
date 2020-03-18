@@ -52,41 +52,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  speed: 0
   positionOffset: 0
-  maxAmounts: 1
   attachToSender: 1
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 0
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 0
-  keepHoldTimer: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 0
-  delay: 0
-  duration: 9999
-  cooldown: 0
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 1
+  maxDuration: 1
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
+  overridePosition: 1
 --- !u!114 &4244255912294953290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +80,7 @@ MonoBehaviour:
     item: {fileID: 0}
     amount: -1
   statusEffects:
-  - {fileID: 71630591074221121, guid: e420e9509f9819f4188748abbdda79ee, type: 3}
+  - {fileID: 11400000, guid: 646b7065db6bd07488bb7379d6e930a2, type: 2}
   thrust: 6
   knockbackTime: 0.2
   affectSelf: 0

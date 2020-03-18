@@ -909,30 +909,6 @@ public class CustomUtilities : MonoBehaviour
 
     ///////////////////////////////////////////////////////////////
 
-    public static class Helper
-    {
-        public static void checkIfHelperDeactivate(PlayerAbilities playerAbilities)
-        {
-            /*
-            if (!checkIfHelperActivated(playerAbilities.AButton)
-                && !checkIfHelperActivated(playerAbilities.BButton)
-                && !checkIfHelperActivated(playerAbilities.XButton)
-                && !checkIfHelperActivated(playerAbilities.YButton)
-                && !checkIfHelperActivated(playerAbilities.RBButton)
-                && !checkIfHelperActivated(playerAbilities.LBButton)) playerAbilities.setTargetHelperActive(false);
-            else playerAbilities.setTargetHelperActive(true);*/
-        }
-
-        private static bool checkIfHelperActivated(Ability ability)
-        {
-            if (ability != null
-                && ability.skill.GetComponent<SkillAimingModule>() != null) return true;
-            else return false;
-        }
-    }
-
-    ///////////////////////////////////////////////////////////////
-
     public static class UI
     {
         public static void ShowMenu(GameObject newActiveMenu, List<GameObject> menues)

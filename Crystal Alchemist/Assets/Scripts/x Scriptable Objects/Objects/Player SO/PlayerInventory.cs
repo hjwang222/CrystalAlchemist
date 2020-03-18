@@ -21,7 +21,7 @@ public class PlayerInventory : ScriptableObject
         }
         else
         {
-            if (!item.isKeyItem)
+            if (!item.isKeyItem())
             {
                 found.amount += amount;
                 if (found.amount <= 0) this.inventory.Remove(found);
@@ -33,14 +33,13 @@ public class PlayerInventory : ScriptableObject
     {
         foreach (ItemStats elem in inventory)
         {
-            if (item.isKeyItem)
+            if (item.isKeyItem())
             {
                 if (item.name == elem.name) return elem;
             }
             else
             {
-                if (item.itemGroup != null 
-                 && item.itemGroup.name == elem.itemGroup.name) return elem;
+                if (item.itemGroup == elem.itemGroup) return elem;
             }
         }
         return null;
@@ -50,8 +49,7 @@ public class PlayerInventory : ScriptableObject
     {
         foreach (ItemStats item in inventory)
         {
-            if (item.isKeyItem == isKeyItem 
-                && item.itemSlot == ID) return item;
+            return item.getInventoryItem(ID, isKeyItem);
         }
 
         return null;
@@ -59,7 +57,7 @@ public class PlayerInventory : ScriptableObject
 
     public bool hasKeyItemAlready(ItemStats item)
     {
-        if (item.isKeyItem)
+        if (item.isKeyItem())
         {
             foreach (ItemStats elem in inventory)
             {

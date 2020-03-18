@@ -32,11 +32,11 @@ public class ItemUI : MonoBehaviour
         {
             this.image.gameObject.SetActive(true);       
 
-            if (!item.isKeyItem && item.amount > 1) this.amount.text = "x" + item.amount;
+            if (!item.isKeyItem() && item.amount > 1) this.amount.text = "x" + item.amount;
             else if (this.amount != null) this.amount.text = "";
 
             if (this.preferInventoryIcon) this.image.sprite = item.getSprite();
-            else this.image.sprite = item.itemSprite;
+            else this.image.sprite = item.getSprite();
 
             this.image.color = new Color(1f, 1f, 1f, 1f);
         }
