@@ -12,22 +12,29 @@ public class Loot
 [System.Serializable]
 public class LootTableEntry
 {
-    public bool hasDropRate = true;
+    public bool hasDropRate = false;
 
     [ShowIf("hasDropRate")]
     public int dropRate = 100;
 
     [SerializeField]
+    [BoxGroup("First")]
     private Loot firstLoot;
 
     [SerializeField]
+    [BoxGroup("Second")]
+    private bool hasAlternative = false;
+
+    [ShowIf("hasAlternative")]
+    [SerializeField]
+    [BoxGroup("Second")]
     private Loot alternativeLoot;
 
     private Loot loot;
 
     public void Initialize()
     {
-        if (this.firstLoot.item.stats.alreadyThere()) this.loot = this.alternativeLoot;
+        if (this.hasAlternative && this.firstLoot.item.stats.alreadyThere()) this.loot = this.alternativeLoot;
         else this.loot = this.firstLoot;
     }
 
