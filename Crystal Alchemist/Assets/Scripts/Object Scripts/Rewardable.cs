@@ -11,7 +11,7 @@ public class Rewardable : Interactable
     private LootTable lootTable;
 
     [HideInInspector]
-    public List<ItemDrop> inventory = new List<ItemDrop>();
+    public ItemDrop itemDrop;
 
     public override void Start()
     {
@@ -21,6 +21,6 @@ public class Rewardable : Interactable
 
     public void setLoot()
     {
-        this.inventory = this.lootTable.SetLoot();
+        this.itemDrop = this.lootTable.SetLoot();
     }
 }

@@ -224,9 +224,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
-  currencyNeeded: 3
-  item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
-  price: 10
+  price:
+    resourceType: 3
+    item: {fileID: 11400000, guid: 008b2735924e65749bc1a37e8d718d0c, type: 2}
+    amount: 1
   soundEffect: {fileID: 0}
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
@@ -235,16 +236,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   context: {fileID: 0}
   currentState: 0
-  lootParentObject: {fileID: 1828073282}
-  lootTable:
-  - item: {fileID: 0}
-    dropRate: 100
-    amount: 1
-    alternativeLoot: {fileID: 0}
-    alternativeAmount: 0
-  multiLoot: 0
-  inventory: []
-  lootTableInternal: []
+  lootTable: {fileID: 0}
+  itemDrop: {fileID: 0}
   childSprite: {fileID: 5713520751605920869}
   priceText: {fileID: 784103811228868705}
   fontColor: {r: 0, g: 1, b: 0.15686275, a: 1}

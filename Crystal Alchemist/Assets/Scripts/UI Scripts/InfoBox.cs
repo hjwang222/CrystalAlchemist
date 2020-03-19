@@ -54,6 +54,16 @@ public class InfoBox : MonoBehaviour
         }
     }
 
+    private void setInfo(ItemGroup item)
+    {
+        this.additionalInfo.SetActive(false);
+
+        this.previewImage.sprite = item.getSprite();
+
+        this.nameField.text = item.getName();
+        this.descriptionField.text = item.getDescription();
+    }
+
 
     private void setInfo(ItemStats item)
     {
@@ -100,6 +110,12 @@ public class InfoBox : MonoBehaviour
     }
 
     public void Show(ItemStats item)
+    {
+        this.gameObject.SetActive(true);
+        setInfo(item);
+    }
+
+    public void Show(ItemGroup item)
     {
         this.gameObject.SetActive(true);
         setInfo(item);

@@ -113,8 +113,6 @@ public class LoadSystem : MonoBehaviour
 
     private static void loadInventory(PlayerData data, Player player)
     {
-        player.inventory.Clear();
-
         foreach (string[] elem in data.inventory)
         {
             ItemStats stats = Resources.Load("Scriptable Objects/Items/" + elem[0], typeof(ItemStats)) as ItemStats;
@@ -122,7 +120,7 @@ public class LoadSystem : MonoBehaviour
             if (stats == null) stats = Resources.Load("Scriptable Objects/Items/Key Items/" + elem[0], typeof(ItemStats)) as ItemStats;
             if (stats == null) stats = Resources.Load("Scriptable Objects/Items/Attribute Points/" + elem[0], typeof(ItemStats)) as ItemStats;
 
-            player.GetComponent<PlayerUtils>().CollectItem(stats);
+            if (stats != null) stats.CollectIt(player);
         }
     }
 

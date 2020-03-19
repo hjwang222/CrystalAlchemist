@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using AssetIcons;
 
 public enum objectState
 {
@@ -41,6 +42,8 @@ public class Interactable : MonoBehaviour
 
     [HideInInspector]
     public objectState currentState = objectState.normal;
+
+
 
     #endregion
 

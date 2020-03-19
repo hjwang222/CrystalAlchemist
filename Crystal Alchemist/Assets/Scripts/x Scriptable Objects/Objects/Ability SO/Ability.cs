@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using AssetIcons;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -85,6 +86,24 @@ public class Ability : ScriptableObject
     public float holdTimer;
     [BoxGroup("Debug")]
     public AbilityState state;
+
+
+    [AssetIcon]
+    private Sprite GetSprite()
+    {
+        return this.info.icon;        
+    }
+
+    /*
+    [AssetIcon(maxSize: 256, layer: -1)]
+    private Color GenerateBackground()
+    {
+        return Color.yellow;
+    }*/
+
+
+
+
 
     #region Update Functions
 

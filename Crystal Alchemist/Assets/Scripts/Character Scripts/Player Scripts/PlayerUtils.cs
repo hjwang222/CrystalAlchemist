@@ -12,35 +12,38 @@ public class PlayerUtils : MonoBehaviour
 
     public List<ItemStats> GetItemStats()
     {
-        return this.inventory.inventory;
+        return this.inventory.keyItems;
     }
 
-    public void CollectItem(ItemStats item)
+    public int GetAmount(ItemGroup group)
     {
-        this.inventory.UpdateInventory(item, item.getTotalAmount());
+        return this.inventory.GetAmount(group);
     }
 
-    public ItemStats getItem(ItemStats item)
+    public void CollectInventoryItem(ItemStats item)
     {
-        return this.inventory.GetItem(item);
+        this.inventory.collectItem(item);
     }
 
-    public ItemStats getItem(int ID, bool keyItem)
+    public string GetAmountString(ItemGroup group)
     {
-        return this.inventory.GetItem(ID, keyItem);
+        return this.inventory.GetAmountString(group);        
     }
 
-    public int getItemAmount(ItemStats item)
+    public ItemGroup getKeyItems(int ID)
     {
-        int result = 0;
-        ItemStats temp = getItem(item);
-        if (temp != null) result = temp.amount;
-        return result;
+        return this.inventory.GetKeyItem(ID);
     }
 
-    public void UpdateInventory(ItemStats item, int amount)
+    public ItemGroup getInventoryItems(int ID)
+    {
+        return this.inventory.GetInventoryItem(ID);
+    }
+
+    public void UpdateInventory(ItemGroup item, int amount)
     {
         this.inventory.UpdateInventory(item, amount);
+        item.raiseCollectSignal();
     }
 
     public bool hasEnoughCurrency(Price price)
@@ -48,7 +51,7 @@ public class PlayerUtils : MonoBehaviour
         bool result = false;
 
         if (price.resourceType == ResourceType.none) result = true;
-        else if (price.resourceType != ResourceType.skill)
+        else 
         {
             if (this.player.getResource(price.resourceType, price.item) - price.amount >= 0) result = true;
             else result = false;
@@ -80,16 +83,9 @@ public class PlayerUtils : MonoBehaviour
 
     public void reduceCurrency(Price price)
     {
-        if ((price.item != null && !price.item.isKeyItem()) || price.item == null)
+        if ((price.item != null && !price.item.isKeyItem) || price.item == null)
             this.player.updateResource(price.resourceType, price.item, -price.amount);
     }
-
-    
-
-
-
-
-
 
 
     public void showDialog(Interactable interactable)

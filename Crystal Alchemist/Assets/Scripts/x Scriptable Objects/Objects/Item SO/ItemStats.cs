@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using AssetIcons;
 
+[HideMonoScript]
 [CreateAssetMenu(menuName = "Game/Items/Item Stats")]
 public class ItemStats : ScriptableObject
 {
@@ -39,15 +41,14 @@ public class ItemStats : ScriptableObject
     private ResourceType resourceType;
 
     [BoxGroup("Attributes")]
-    [ShowIf("resourceType", ResourceType.skill)]
+    [ShowIf("resourceType", ResourceType.none)]
     [SerializeField]
     private Ability ability;
 
     [BoxGroup("Attributes")]
-    [ShowIf("resourceType", ResourceType.statuseffect)]
+    [ShowIf("resourceType", ResourceType.none)]
     [SerializeField]
     public List<StatusEffect> statusEffects = new List<StatusEffect>();
-
 
     [BoxGroup("Inventory")]
     [SerializeField]
@@ -65,23 +66,26 @@ public class ItemStats : ScriptableObject
     [SerializeField]
     private AudioClip collectSoundEffect;
 
-    [BoxGroup("Signals")]
+
+
+    [BoxGroup("Unity Icon")]
+    [InfoBox("To show Icon in Unity Inspector. Not neccessary", InfoMessageType = InfoMessageType.Info)]
+    [AssetIcon]
     [SerializeField]
-    public SimpleSignal signal;
+    private Sprite icon;
 
 
-
-    public ItemStats getInventoryItem(int ID, bool keyItem)
+    public bool isID(int ID)
     {
-        if (this.itemGroup != null
-            && this.itemGroup.inventoryItem
-            && this.itemGroup.isKeyItem == keyItem
-            && this.itemGroup.itemSlot == ID) return this;
-
-        return null;
+        if (this.itemGroup != null && this.itemGroup.itemSlot == ID) return true;
+        return false;
     }
 
-
+    public void CollectIt(Player player)
+    {
+        if (this.resourceType == ResourceType.life || this.resourceType == ResourceType.mana) player.updateResource(this.resourceType, this.amount, true);
+        else if (this.resourceType == ResourceType.item) player.GetComponent<PlayerUtils>().CollectInventoryItem(this);
+    }
 
     public void Initialize(int amount)
     {
@@ -104,11 +108,6 @@ public class ItemStats : ScriptableObject
     {
         if (this.itemGroup != null) return this.itemGroup.maxAmount;
         return 0;
-    }
-
-    public void raiseKeyItemSignal()
-    {
-        if (this.itemGroup != null) this.itemGroup.raiseKeySignal();
     }
 
     public bool alreadyThere()
@@ -147,23 +146,5 @@ public class ItemStats : ScriptableObject
         return CustomUtilities.Format.getLanguageDialogText(this.itemDescription, this.itemDescriptionEnglish);
     }
 
-    public string getItemName(float price)
-    {
-        string result = "";
-
-        switch (this.resourceType)
-        {
-            case ResourceType.item:
-                {
-                    string typ = this.getItemGroup();
-                    if (price == 1 && (typ != "Schlüssel" || GlobalValues.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
-
-                    result = typ;
-                }; break;
-            case ResourceType.life: result = "Leben"; break;
-            case ResourceType.mana: result = "Mana"; break;
-        }
-
-        return result;
-    }
+    
 }

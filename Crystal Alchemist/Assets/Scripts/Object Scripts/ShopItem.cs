@@ -15,25 +15,23 @@ public class ShopItem : Rewardable
     public float outlineWidth = 0.25f;
     public Animator anim;
 
-    private int index = 0;
-
     private new void Start()
     {
         base.Start();
 
         CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
-        this.childSprite.sprite = this.inventory[this.index].stats.getSprite();
-        if (this.inventory.Count == 0) Destroy(this.gameObject);
+        this.childSprite.sprite = this.itemDrop.stats.getSprite();
+        if (this.itemDrop == null) Destroy(this.gameObject);
     }
 
     public override void doSomethingOnSubmit()
     {
         if (this.player.GetComponent<PlayerUtils>().canOpenAndUpdateResource(this.price))
         {
-            ItemStats loot = inventory[this.index].stats;
+            ItemStats loot = itemDrop.stats;
 
             this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success, loot);
-            this.player.GetComponent<PlayerUtils>().CollectItem(loot);
+            if (loot != null) loot.CollectIt(this.player);
         }
         else
         {

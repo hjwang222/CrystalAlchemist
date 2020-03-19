@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using AssetIcons;
 
 public enum StatusEffectType
 {
@@ -91,6 +92,7 @@ public class StatusEffect : ScriptableObject
 
     [FoldoutGroup("Visuals", expanded: false)]
     [Tooltip("Icon des Statuseffekts für das UI")]
+    [AssetIcon]
     public Sprite iconSprite;
 
     [FoldoutGroup("Visuals", expanded: false)]

@@ -50,7 +50,7 @@ public class Treasure : Rewardable
         base.Start();
         CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
-        if (this.inventory.Count == 0 && this.treasureType == TreasureType.normal) changeTreasureState(true);        
+        if (this.itemDrop != null && this.treasureType == TreasureType.normal) changeTreasureState(true);
     }
 
     #endregion
@@ -62,8 +62,8 @@ public class Treasure : Rewardable
     {
         //Close when opened
         if (this.currentState == objectState.opened && this.player != null && this.player.currentState == CharacterState.interact)
-        {          
-            this.inventory.Clear();
+        {
+            Destroy(this.itemDrop);
 
             if (this.treasureType == TreasureType.lootbox)
             {
@@ -72,7 +72,7 @@ public class Treasure : Rewardable
             }
 
             //Verstecke gezeigtes Item wieder
-            for(int i = 0; i < this.showItem.transform.childCount; i++)
+            for (int i = 0; i < this.showItem.transform.childCount; i++)
             {
                 Destroy(this.showItem.transform.GetChild(i).gameObject);
             }
@@ -81,7 +81,7 @@ public class Treasure : Rewardable
     }
 
     public override void doSomethingOnSubmit()
-    {        
+    {
         if (this.currentState != objectState.opened)
         {
             if (this.treasureType == TreasureType.normal)
@@ -92,7 +92,7 @@ public class Treasure : Rewardable
             {
                 canOpenChest();
             }
-        }              
+        }
     }
 
     #endregion
@@ -121,7 +121,7 @@ public class Treasure : Rewardable
         changeTreasureState(true);
         CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffect);
 
-        if (this.soundEffect != null && this.inventory.Count > 0)
+        if (this.soundEffect != null && this.itemDrop != null)
         {
             //Spiele Soundeffekte ab            
             CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffectTreasure, GlobalValues.backgroundMusicVolume);
@@ -129,12 +129,8 @@ public class Treasure : Rewardable
             //Zeige Item
             this.showTreasureItem();
 
-            //Gebe Item dem Spieler
-            foreach (ItemDrop item in this.inventory)
-            {
-                this.player.GetComponent<PlayerUtils>().CollectItem(item.stats);
-                this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success, item.stats);
-            }                
+            this.itemDrop.stats.CollectIt(this.player);
+            this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success, this.itemDrop.stats);
         }
         else
         {
@@ -152,14 +148,11 @@ public class Treasure : Rewardable
 
     public void showTreasureItem()
     {
-        for (int i = 0; i < this.inventory.Count; i++)
-        {
-            //Item instanziieren und der Liste zurück geben und das Item anzeigen            
-            this.showItem.SetActive(true);
+        //Item instanziieren und der Liste zurück geben und das Item anzeigen            
+        this.showItem.SetActive(true);
 
-            Collectable collectable = this.inventory[i].Instantiate(this.showItem.transform.position);
-            collectable.SetAsTreasureItem(this.showItem.transform);
-        }
+        Collectable collectable = this.itemDrop.Instantiate(this.showItem.transform.position);
+        collectable.SetAsTreasureItem(this.showItem.transform);
     }
 
     #endregion

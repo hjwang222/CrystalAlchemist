@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using AssetIcons;
 
 [CreateAssetMenu(menuName = "Game/Ability/Skill Book Info")]
 public class SkillBookInfo : ScriptableObject
@@ -25,5 +26,6 @@ public class SkillBookInfo : ScriptableObject
 
     [BoxGroup("Sound und Icons")]
     [Tooltip("Icon für den Spieler")]
+    [AssetIcon]
     public Sprite icon;
 }

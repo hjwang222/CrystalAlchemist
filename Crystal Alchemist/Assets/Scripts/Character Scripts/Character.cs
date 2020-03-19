@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using AssetIcons;
 
 public class Character : MonoBehaviour
 {
@@ -98,8 +99,7 @@ public class Character : MonoBehaviour
     public float timeDistortion = 1;
     [HideInInspector]
     public bool isPlayer = false;
-
-
+    
     [HideInInspector]
     public List<Character> activePets = new List<Character>();
     [HideInInspector]
@@ -107,9 +107,8 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public bool isOnIce = false;
 
-
     [HideInInspector]
-    public List<ItemDrop> inventory = new List<ItemDrop>();
+    public ItemDrop itemDrop;
 
     #endregion
 
@@ -202,7 +201,7 @@ public class Character : MonoBehaviour
     public void ActivateCharacter()
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
-        if(this.stats.lootTable != null) this.inventory = this.stats.lootTable.SetLoot();
+        if(this.stats.lootTable != null) this.itemDrop = this.stats.lootTable.SetLoot();
     }
     #endregion
 
@@ -285,8 +284,8 @@ public class Character : MonoBehaviour
                 if (this.regenTimeElapsed >= this.stats.regenerationInterval)
                 {
                     this.regenTimeElapsed = 0;
-                    if (this.lifeRegen != 0 && this.life < this.maxLife) updateResource(ResourceType.life, null, this.lifeRegen);
-                    if (this.manaRegen != 0 && this.mana < this.maxMana) updateResource(ResourceType.mana, null, this.manaRegen, false);
+                    if (this.lifeRegen != 0 && this.life < this.maxLife) updateResource(ResourceType.life, this.lifeRegen);
+                    if (this.manaRegen != 0 && this.mana < this.maxMana) updateResource(ResourceType.mana, this.manaRegen, false);
                 }
                 else
                 {
@@ -303,10 +302,7 @@ public class Character : MonoBehaviour
 
     public void dropItem()
     {
-        foreach(ItemDrop item in this.inventory)
-        {
-            item.Instantiate(this.transform.position);
-        }
+        if(this.itemDrop != null) this.itemDrop.Instantiate(this.transform.position);        
     }
 
     #endregion
@@ -437,12 +433,25 @@ public class Character : MonoBehaviour
         CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Respawn");
     }
 
-    public void updateResource(ResourceType type, ItemStats item, float addResource)
+    public void updateResource(ResourceType type, float addResource, bool showingDamageNumber)
     {
+        //Mana Regeneration und Item Collect
+        updateResource(type, null, addResource, showingDamageNumber);
+    }
+
+    public void updateResource(ResourceType type, float addResource)
+    {
+        //Life Regeneration und Player Init
+        updateResource(type, null, addResource);
+    }
+
+    public void updateResource(ResourceType type, ItemGroup item, float addResource)
+    {
+        //Skill Sender, Skill Target, Statuseffect und Price Reduce
         updateResource(type, item, addResource, true);
     }
 
-    public virtual void updateResource(ResourceType type, ItemStats item, float value, bool showingDamageNumber)
+    public virtual void updateResource(ResourceType type, ItemGroup item, float value, bool showingDamageNumber)
     {
         switch (type)
         {
@@ -466,12 +475,13 @@ public class Character : MonoBehaviour
         }
     }
 
+
     public void callSignal(SimpleSignal signal, float addResource)
     {
         if (signal != null && addResource != 0) signal.Raise();
     }
 
-    public virtual float getResource(ResourceType type, ItemStats item)
+    public virtual float getResource(ResourceType type, ItemGroup item)
     {
         switch (type)
         {
@@ -633,7 +643,7 @@ public class Character : MonoBehaviour
                 {
                     float amount = elem.amount * percentage / 100;
 
-                    updateResource(elem.resourceType, null, amount);
+                    updateResource(elem.resourceType, elem.item, amount);
 
                     if (this.life > 0 && elem.resourceType == ResourceType.life && amount < 0)
                     {

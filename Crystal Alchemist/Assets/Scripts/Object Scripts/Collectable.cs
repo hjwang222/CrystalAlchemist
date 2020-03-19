@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
 using UnityEditor;
+using AssetIcons;
 
 public class Collectable : MonoBehaviour
 {
@@ -17,6 +18,12 @@ public class Collectable : MonoBehaviour
     [SerializeField]
     private ItemStats item;
 
+    [AssetIcon]
+    private Sprite GetSprite()
+    {
+        return this.GetComponent<SpriteRenderer>().sprite;
+    }
+
     #region Start Funktionen
 
     public void SetItem(ItemStats item)
@@ -27,7 +34,7 @@ public class Collectable : MonoBehaviour
     private void Start()
     {
         //Check if keyItem already in Inventory
-        if (this.item.alreadyThere()) Destroy(this.gameObject);
+        if (this.item.alreadyThere()) DestroyIt();
     }
 
     #endregion
@@ -46,7 +53,7 @@ public class Collectable : MonoBehaviour
             Player player = character.GetComponent<Player>();
             if (player != null)
             {
-                player.GetComponent<PlayerUtils>().CollectItem(this.item);
+                this.item.CollectIt(player);
                 DestroyIt();
             }
         }

@@ -113,7 +113,7 @@ public class DialogSystem : MonoBehaviour
         return result;
     }
 
-    private string getText(DialogText text, float price, ItemStats item, ItemStats loot, Player player)
+    private string getText(DialogText text, float price, ItemGroup item, ItemStats loot, Player player)
     {
         string result = CustomUtilities.Format.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
 
@@ -123,8 +123,8 @@ public class DialogSystem : MonoBehaviour
 
         if (item != null)
         {
-            result = result.Replace("<item name>", item.getItemName(price));
-            result = result.Replace("<item amount>", item.amount + "");
+            result = result.Replace("<item name>", GetItemName(price));
+            result = result.Replace("<item amount>", item.GetAmount() + "");
         }
 
         if (loot != null)
@@ -144,5 +144,24 @@ public class DialogSystem : MonoBehaviour
         return "";
     }
 
+    private string GetItemName(float price)
+    {
+        string result = "";
 
+        /*
+        switch (this.resourceType)
+        {
+            case ResourceType.item:
+                {
+                    string typ = this.getItemGroup();
+                    if (price == 1 && (typ != "Schlüssel" || GlobalValues.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
+
+                    result = typ;
+                }; break;
+            case ResourceType.life: result = "Leben"; break;
+            case ResourceType.mana: result = "Mana"; break;
+        }*/
+
+        return result;
+    }
 }

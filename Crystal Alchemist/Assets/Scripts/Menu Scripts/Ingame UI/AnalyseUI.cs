@@ -109,10 +109,10 @@ public class AnalyseUI : MonoBehaviour
         this.TMPcharacterName.text = CustomUtilities.Format.getLanguageDialogText(this.character.stats.characterName, this.character.stats.englischCharacterName);
         this.lifeBar.fillAmount = (this.character.life / this.character.maxLife);
 
-        if (this.character.inventory.Count > 0 && this.character.currentState != CharacterState.dead)
+        if (this.character.itemDrop != null && this.character.currentState != CharacterState.dead)
         {
             this.ImageitemPreview.gameObject.SetActive(true);
-            this.ImageitemPreview.sprite = this.character.inventory[0].stats.getSprite(); //TODONEW
+            this.ImageitemPreview.sprite = this.character.itemDrop.stats.getSprite(); //TODONEW
         }
     }
 
@@ -123,10 +123,10 @@ public class AnalyseUI : MonoBehaviour
         if (this.rewardableObject != null)
         {
             //Show Object Information
-            if (rewardableObject.inventory.Count > 0 && this.rewardableObject.currentState != objectState.opened)
+            if (rewardableObject.itemDrop != null && this.rewardableObject.currentState != objectState.opened)
             {
                 this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = rewardableObject.inventory[0].stats.getSprite();
+                this.ImageObjectitemPreview.sprite = rewardableObject.itemDrop.stats.getSprite();
             }
             else
             {
@@ -136,10 +136,10 @@ public class AnalyseUI : MonoBehaviour
         else if (this.character != null)
         {
             //Show Object Information
-            if (this.character.inventory.Count > 0 && this.character.currentState != CharacterState.dead)
+            if (this.character.itemDrop != null && this.character.currentState != CharacterState.dead)
             {
                 this.ImageObjectitemIndicator.gameObject.SetActive(true);
-                this.ImageObjectitemPreview.sprite = this.character.inventory[0].stats.getSprite();
+                this.ImageObjectitemPreview.sprite = this.character.itemDrop.stats.getSprite();
             }            
         }
     }

@@ -83,24 +83,28 @@ public class LootTable : ScriptableObject
     [SerializeField]
     private List<LootTableEntry> entries = new List<LootTableEntry>();
 
-    public List<ItemDrop> SetLoot()
+    public ItemDrop SetLoot()
     {
         int randomNumber = Random.Range(1, 100);
-        List<ItemDrop> loot = new List<ItemDrop>();
+        List<Loot> loot = new List<Loot>();
+        ItemDrop item = null;
 
         foreach (LootTableEntry entry in this.entries)
         {
             entry.Initialize();
             Loot lootItem = entry.getLoot();
 
-            if (entry.dropRate > randomNumber || !entry.hasDropRate)
-            {
-                ItemDrop item = Instantiate(lootItem.item);
-                item.Initialize(lootItem.amount);
-                loot.Add(item);
-            }
+            if (entry.dropRate > randomNumber || !entry.hasDropRate) loot.Add(lootItem);
         }
 
-        return loot;
+        if (loot.Count > 0)
+        {
+            Loot result = loot[Random.Range(0, loot.Count)];
+
+            item = Instantiate(result.item);
+            item.Initialize(result.amount);
+        }
+
+        return item;
     }
 }

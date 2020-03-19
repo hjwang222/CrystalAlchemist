@@ -49,19 +49,55 @@ public class ItemGroup : ScriptableObject
     [ShowIf("inventoryItem")]
     public bool isKeyItem = false;
 
-    [BoxGroup("Inventory")]
+    [BoxGroup("Signals")]
     [ShowIf("isKeyItem")]
     [SerializeField]
     private SimpleSignal keyItemSignal;
+
+    [BoxGroup("Signals")]
+    [SerializeField]
+    private SimpleSignal collectSignal;
+
+    private int amount;
 
     public Sprite getSprite()
     {
         return this.inventorySprite;
     }
 
+    public string getName()
+    {
+        return CustomUtilities.Format.getLanguageDialogText(this.itemGroup, this.itemGroupEnglish);
+    }
+
+    public string getDescription()
+    {
+        return CustomUtilities.Format.getLanguageDialogText(this.description, this.descriptionEnglish);
+    }
+
+    public int GetAmount()
+    {
+        return this.amount;
+    }
+
+    public string GetAmountString()
+    {
+        return CustomUtilities.Format.formatString(this.amount, this.maxAmount);
+    }
+
+    public void UpdateAmount(int amount)
+    {
+        this.amount += amount;
+    }
+
     public void raiseKeySignal()
     {
         if(this.keyItemSignal != null) this.keyItemSignal.Raise();
+    }
+
+    public void raiseCollectSignal()
+    {
+        if (this.collectSignal != null) this.collectSignal.Raise();
     }
 
     public string getItemGroup()

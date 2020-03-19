@@ -51,9 +51,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
     type: 3}
-  currencyNeeded: 3
-  item: {fileID: 3692160304636444062, guid: 0aea2ca1a4e017d4d9f7b1ccd427e54a, type: 3}
-  price: 1
+  price:
+    resourceType: 3
+    item: {fileID: 11400000, guid: 1a86842340d2910428ca17a168e85571, type: 2}
+    amount: 1
   soundEffect: {fileID: 8300000, guid: 4f7be5fca72aed945b5adc95e382a719, type: 3}
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
@@ -62,16 +63,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   context: {fileID: 0}
   currentState: 0
-  lootParentObject: {fileID: 6308135320858048071}
-  lootTable:
-  - item: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1, type: 3}
-    dropRate: 100
-    amount: 1
-    alternativeLoot: {fileID: 0}
-    alternativeAmount: 0
-  multiLoot: 0
-  inventory: []
-  lootTableInternal: []
+  lootTable: {fileID: 0}
+  itemDrop: {fileID: 0}
   anim: {fileID: 3895695428969083601}
   showItem: {fileID: 7029677174918689967}
   soundEffectTreasure: {fileID: 8300000, guid: dea78b2c12b2f0f4286524cf75188749, type: 3}

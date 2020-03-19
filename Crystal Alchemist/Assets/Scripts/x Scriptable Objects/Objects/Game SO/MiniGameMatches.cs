@@ -5,27 +5,26 @@ using System.Collections.Generic;
 [System.Serializable]
 public class MiniGameMatch
 {
-    [Title("$difficulty", "", bold: true)]
-    [BoxGroup("$difficulty", ShowLabel = false)]
+    [FoldoutGroup("$difficulty")]
     [Range(1, 6)]
     public int maxRounds;
 
-    [BoxGroup("$difficulty")]
+    [FoldoutGroup("$difficulty")]
     [Range(1, 6)]
     public int winsNeeded;
 
-    [BoxGroup("$difficulty")]
+    [FoldoutGroup("$difficulty")]
     [Range(1, 5)]
     public int difficulty;
 
-    [BoxGroup("$difficulty")]
+    [FoldoutGroup("$difficulty")]
     [Range(1, 120)]
     public float maxDuration;
 
-    [BoxGroup("Price")]
+    [FoldoutGroup("$difficulty")]
     public Price price;
 
-    [BoxGroup("Loot")]
+    [FoldoutGroup("$difficulty")]
     public Reward reward;
 
     public void Initialize()

@@ -15,9 +15,9 @@ public class InventorySlot : MonoBehaviour
 
     public void openKeyItem(InventoryMenu menu)
     {
-        if (this.itemUI.getItem())
+        if (this.itemUI.getItemGroup())
         {
-            this.itemUI.getItem().raiseKeyItemSignal();
+            this.itemUI.getItemGroup().raiseKeySignal();
             menu.exitMenu();
         }
     }
@@ -27,7 +27,7 @@ public class InventorySlot : MonoBehaviour
         return this.ID;
     }
     
-    public void setItemToSlot(ItemStats item)
+    public void setItemToSlot(ItemGroup item)
     {
         this.itemUI.setItem(item);
     }

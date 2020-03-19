@@ -120,7 +120,7 @@ public class MiniGameUI : MenuControls
 
             if (state == MiniGameState.win)
             {
-                this.player.GetComponent<PlayerUtils>().CollectItem(this.match.reward.getLoot().item.stats);
+                this.match.reward.getLoot().item.stats.CollectIt(this.player);
                 showTexts(this.winText);
             }
             else if (state == MiniGameState.lose)

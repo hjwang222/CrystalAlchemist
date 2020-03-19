@@ -110,9 +110,13 @@ public class myCursor : MonoBehaviour
                 CharacterAttributeStats attributesStat = button.gameObject.GetComponent<CharacterAttributeStats>();
                 MapPagePoint mapPoint = button.gameObject.GetComponent<MapPagePoint>();
 
-                if (itemUI != null && itemUI.getItem() != null)
+                if (itemUI != null && itemUI.getItemGroup() != null)
                 {
-                    this.infoBox.Show(itemUI.getItem());
+                    this.infoBox.Show(itemUI.getItemGroup());
+                }
+                else if (itemUI != null && itemUI.getItemStat() != null)
+                {
+                    this.infoBox.Show(itemUI.getItemStat());
                 }
                 else if (skillSlot != null && skillSlot.ability != null)
                 {

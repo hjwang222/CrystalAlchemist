@@ -102,8 +102,8 @@ public class Player : Character
 
         this.characterLookDown();
 
-        updateResource(ResourceType.life, null, 0);
-        updateResource(ResourceType.mana, null, 0);
+        updateResource(ResourceType.life, 0);
+        updateResource(ResourceType.mana, 0);
     }
 
     public override void prepareSpawnOut()
@@ -146,56 +146,37 @@ public class Player : Character
 
     ///////////////////////////////////////////////////////////////
 
-    public override float getResource(ResourceType type, ItemStats item)
+    public override float getResource(ResourceType type, ItemGroup item)
     {
         float amount = base.getResource(type, item);
         if (type == ResourceType.item && item != null)
-            amount = this.GetComponent<PlayerUtils>().getItemAmount(item);
+            amount = this.GetComponent<PlayerUtils>().GetAmount(item);
         return amount;
     }
 
-    public float getMaxResource(ResourceType type, ItemStats item)
+    public float getMaxResource(ResourceType type, ItemGroup item)
     {
         switch (type)
         {
             case ResourceType.life: return this.maxLife;
             case ResourceType.mana: return this.maxMana;
-            //case ResourceType.item: return item.maxAmount;
+            case ResourceType.item: return item.maxAmount;
         }
 
         return 0;
     }
 
-    public override void updateResource(ResourceType type, ItemStats item, float value, bool showingDamageNumber)
+    public override void updateResource(ResourceType type, ItemGroup item, float value, bool showingDamageNumber)
     {
-        base.updateResource(type, item, value, showingDamageNumber);
+        base.updateResource(type, null, value, showingDamageNumber);
 
         switch (type)
         {
             case ResourceType.life: callSignal(this.healthSignalUI, value); break;
             case ResourceType.mana: callSignal(this.manaSignalUI, value); break;
-            case ResourceType.item:
-                {
-                    this.GetComponent<PlayerUtils>().UpdateInventory(item, Mathf.RoundToInt(value));
-                    this.callSignal(item.signal, value);
-                    break;
-                }
-            case ResourceType.skill:
-                {
-                    break;
-                }
-            case ResourceType.statuseffect:
-                {
-                    foreach (StatusEffect effect in item.statusEffects)
-                    {
-                        CustomUtilities.StatusEffectUtil.AddStatusEffect(effect, this);
-                    }
-
-                    break;
-                }
+            case ResourceType.item: this.GetComponent<PlayerUtils>().UpdateInventory(item, Mathf.RoundToInt(value)); break;
         }
     }
-
 
     #region Menu und DialogBox
 

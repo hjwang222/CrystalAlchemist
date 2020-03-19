@@ -6,69 +6,102 @@ using UnityEngine;
 public class PlayerInventory : ScriptableObject
 {
     [SerializeField]
-    public List<ItemStats> inventory = new List<ItemStats>();       
+    public List<ItemStats> keyItems = new List<ItemStats>();
 
-    public void UpdateInventory(ItemStats item, int amount)
-    {
-        ItemStats found = GetItem(item);
+    [SerializeField]
+    public List<ItemGroup> inventoryItems = new List<ItemGroup>();
 
-        if (found == null)
-        {
-            ItemStats newItem = Instantiate(item);
-            newItem.name = item.name;
-            newItem.amount = amount;
-            this.inventory.Add(newItem);
-        }
-        else
-        {
-            if (!item.isKeyItem())
-            {
-                found.amount += amount;
-                if (found.amount <= 0) this.inventory.Remove(found);
-            }
-        }
-    }
 
-    public ItemStats GetItem(ItemStats item)
-    {
-        foreach (ItemStats elem in inventory)
-        {
-            if (item.isKeyItem())
-            {
-                if (item.name == elem.name) return elem;
-            }
-            else
-            {
-                if (item.itemGroup == elem.itemGroup) return elem;
-            }
-        }
-        return null;
-    }
 
-    public ItemStats GetItem(int ID, bool isKeyItem)
-    {
-        foreach (ItemStats item in inventory)
-        {
-            return item.getInventoryItem(ID, isKeyItem);
-        }
-
-        return null;
-    }
-
-    public bool hasKeyItemAlready(ItemStats item)
+    public void collectItem(ItemStats item)
     {
         if (item.isKeyItem())
         {
-            foreach (ItemStats elem in inventory)
+            this.keyItems.Add(Instantiate(item));
+        }
+        else
+        {
+            ItemGroup group = item.itemGroup;
+            ItemGroup found = getItemGroup(group);
+
+            if (found == null)
             {
-                if (item.name == elem.name) return true;
+                ItemGroup newGroup = Instantiate(group);
+                newGroup.name = group.name;
+                newGroup.UpdateAmount(item.getTotalAmount());
+                this.inventoryItems.Add(newGroup);
+            }
+            else
+            {
+                found.UpdateAmount(item.getTotalAmount());
             }
         }
-        return false;
     }
 
-    private void OnDisable()
+    public void UpdateInventory(ItemGroup itemGroup, int value)
     {
-        this.inventory.Clear();
+        foreach (ItemGroup group in this.inventoryItems)
+        {
+            if (group == itemGroup)
+            {
+                group.UpdateAmount(value);
+                break;
+            }
+        }
+    }
+       
+
+    public ItemGroup getItemGroup(ItemGroup itemGroup)
+    {
+        foreach (ItemGroup group in this.inventoryItems)
+        {
+            if (group == itemGroup) return group;
+        }
+        return null;
+    }
+
+    public ItemGroup GetInventoryItem(int ID)
+    {
+        foreach (ItemGroup item in this.inventoryItems)
+        {
+            if (item.itemSlot == ID) return item;
+        }
+
+        return null;
+    }
+
+    public ItemGroup GetKeyItem(int ID)
+    {
+        foreach (ItemStats item in keyItems)
+        {
+            if (item.isID(ID)) return item.itemGroup;
+        }
+
+        return null;
+    }
+
+    public int GetAmount(ItemGroup itemGroup)
+    {
+        ItemGroup found = this.getItemGroup(itemGroup);
+        if (found != null) return found.GetAmount();
+        else return 0;
+    }
+
+    public string GetAmountString(ItemGroup itemGroup)
+    {
+        ItemGroup found = this.getItemGroup(itemGroup);
+        if (found != null) return found.GetAmountString();
+        else return "";
+    }
+
+
+    public bool hasKeyItemAlready(ItemStats item)
+    {
+        foreach (ItemStats elem in keyItems)
+        {
+            if (item.name == elem.name) return true;
+        }
+
+        return false;
     }
 }

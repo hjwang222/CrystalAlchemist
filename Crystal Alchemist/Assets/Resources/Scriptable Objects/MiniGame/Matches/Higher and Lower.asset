@@ -19,14 +19,77 @@ MonoBehaviour:
     maxDuration: 45
     price:
       resourceType: 3
-      item: {fileID: 11400000, guid: 0f78020234d850f42ab3ad2cd5fa7d25, type: 2}
+      item: {fileID: 11400000, guid: 008b2735924e65749bc1a37e8d718d0c, type: 2}
       amount: 1
     reward:
-      hasDropRate: 0
-      dropRate: 100
       firstLoot:
-        item: {fileID: 11400000, guid: 39421629c1334414a9a76b1ad8b7e235, type: 2}
-        amount: 2
+        item: {fileID: 11400000, guid: 7bce5475bb97f8f4697d00cf937526fc, type: 2}
+        amount: 3
+      hasAlternative: 0
       alternativeLoot:
         item: {fileID: 0}
+        amount: 1
+  - maxRounds: 4
+    winsNeeded: 2
+    difficulty: 2
+    maxDuration: 30
+    price:
+      resourceType: 3
+      item: {fileID: 11400000, guid: 008b2735924e65749bc1a37e8d718d0c, type: 2}
+      amount: 2
+    reward:
+      firstLoot:
+        item: {fileID: 11400000, guid: 6ec232145c3cc68419e5253409e7e294, type: 2}
+        amount: 2
+      hasAlternative: 0
+      alternativeLoot:
+        item: {fileID: 0}
+        amount: 1
+  - maxRounds: 3
+    winsNeeded: 2
+    difficulty: 3
+    maxDuration: 30
+    price:
+      resourceType: 3
+      item: {fileID: 11400000, guid: 008b2735924e65749bc1a37e8d718d0c, type: 2}
+      amount: 5
+    reward:
+      firstLoot:
+        item: {fileID: 11400000, guid: 047bb92f1d813f34dbcc0e7f24f1d8e3, type: 2}
+        amount: 2
+      hasAlternative: 0
+      alternativeLoot:
+        item: {fileID: 0}
+        amount: 1
+  - maxRounds: 2
+    winsNeeded: 1
+    difficulty: 4
+    maxDuration: 20
+    price:
+      resourceType: 3
+      item: {fileID: 11400000, guid: 008b2735924e65749bc1a37e8d718d0c, type: 2}
+      amount: 10
+    reward:
+      firstLoot:
+        item: {fileID: 11400000, guid: 9baa0e94203127d44bf22b1fa5e41be5, type: 2}
+        amount: 3
+      hasAlternative: 0
+      alternativeLoot:
+        item: {fileID: 0}
+        amount: 1
+  - maxRounds: 2
+    winsNeeded: 2
+    difficulty: 5
+    maxDuration: 10
+    price:
+      resourceType: 3
+      item: {fileID: 11400000, guid: 9767790408abeac4cab04522f2a49b03, type: 2}
+      amount: 1
+    reward:
+      firstLoot:
+        item: {fileID: 11400000, guid: 764a446917962ba43a5cef2099f9c8e4, type: 2}
+        amount: 1
+      hasAlternative: 1
+      alternativeLoot:
+        item: {fileID: 11400000, guid: 60bdad00fcd05fd4b923a51c62f37343, type: 2}
         amount: 1
