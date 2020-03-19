@@ -6,25 +6,35 @@ using Sirenix.OdinInspector;
 [System.Serializable]
 public class Loot
 {
-    [HorizontalGroup("Item")]
+    [HorizontalGroup(0.5f, MarginRight = 0.1f)]
+    [HideLabel]
     public ItemDrop item;
 
-    [HorizontalGroup("Item")]
+    [MaxValue(99)]
+    [MinValue(1)]
+    [HorizontalGroup(0.1f)]
+    [LabelWidth(60)]
+    [ShowIf("item")]
     public int amount = 1;
 }
 
 [System.Serializable]
 public class LootTableEntry
 {
-    [HorizontalGroup("Droprate")]
+    [SerializeField]
+    [HideLabel]
+    private Reward reward;
+
+    [HorizontalGroup(0.5f, MarginRight = 0.1f)]
     public bool hasDropRate = false;
 
-    [HorizontalGroup("Droprate")]
     [ShowIf("hasDropRate")]
+    [HorizontalGroup(0.1f)]
+    [LabelWidth(60)]
+    [MaxValue(100)]
+    [MinValue(1)]
     public int dropRate = 100;
 
-    [SerializeField]
-    private Reward reward;
 
     public void Initialize()
     {
@@ -41,13 +51,16 @@ public class LootTableEntry
 public class Reward
 {    
     [SerializeField]
+    [HideLabel]    
     private Loot firstLoot;
 
     [SerializeField]
+    [HorizontalGroup(0.5f, MarginRight = 0.1f)]
     private bool hasAlternative = false;
 
     [ShowIf("hasAlternative")]
     [SerializeField]
+    [HideLabel]
     private Loot alternativeLoot;
 
     private Loot loot;

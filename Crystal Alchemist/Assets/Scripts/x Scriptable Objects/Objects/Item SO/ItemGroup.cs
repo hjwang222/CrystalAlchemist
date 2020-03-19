@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using AssetIcons;
 
 [CreateAssetMenu(menuName = "Game/Items/Item Group")]
 public class ItemGroup : ScriptableObject
@@ -35,6 +36,7 @@ public class ItemGroup : ScriptableObject
     [BoxGroup("Inventory")]
     [SerializeField]
     [ShowIf("inventoryItem")]
+    [AssetIcon]
     private Sprite inventorySprite;
 
     [BoxGroup("Inventory")]

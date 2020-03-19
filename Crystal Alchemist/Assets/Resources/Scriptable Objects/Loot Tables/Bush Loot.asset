@@ -13,33 +13,33 @@ MonoBehaviour:
   m_Name: Bush Loot
   m_EditorClassIdentifier: 
   entries:
-  - hasDropRate: 1
+  - reward:
+      firstLoot:
+        item: {fileID: 11400000, guid: 7bce5475bb97f8f4697d00cf937526fc, type: 2}
+        amount: 1
+      hasAlternative: 0
+      alternativeLoot:
+        item: {fileID: 0}
+        amount: 1
+    hasDropRate: 1
     dropRate: 50
-    reward:
+  - reward:
       firstLoot:
-        item: {fileID: 0}
+        item: {fileID: 11400000, guid: 6ec232145c3cc68419e5253409e7e294, type: 2}
         amount: 1
       hasAlternative: 0
       alternativeLoot:
         item: {fileID: 0}
         amount: 1
-  - hasDropRate: 1
+    hasDropRate: 1
     dropRate: 25
-    reward:
+  - reward:
       firstLoot:
-        item: {fileID: 0}
+        item: {fileID: 11400000, guid: 047bb92f1d813f34dbcc0e7f24f1d8e3, type: 2}
         amount: 1
       hasAlternative: 0
       alternativeLoot:
         item: {fileID: 0}
         amount: 1
-  - hasDropRate: 1
+    hasDropRate: 1
     dropRate: 10
-    reward:
-      firstLoot:
-        item: {fileID: 0}
-        amount: 1
-      hasAlternative: 0
-      alternativeLoot:
-        item: {fileID: 0}
-        amount: 1
