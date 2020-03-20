@@ -132,9 +132,9 @@ public class Skill : MonoBehaviour
         if (this.spriteRenderer != null && this.shadow != null) this.shadow.sprite = this.spriteRenderer.sprite;
 
         if (this.animator != null && this.sender != null && !this.lockDirection)
-            CustomUtilities.UnityUtils.SetAnimDirection(this.sender.direction, this.animator);
+            AnimatorUtil.SetAnimDirection(this.sender.direction, this.animator);
         
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Active", true);
+        AnimatorUtil.SetAnimatorParameter(this.animator, "Active", true);
         SkillIndicatorModule indicatorModule = this.GetComponent<SkillIndicatorModule>();
         if (indicatorModule != null) indicatorModule.hideIndicator();
 
@@ -239,7 +239,7 @@ public class Skill : MonoBehaviour
         {
             if (!keepOriginalRotation)
             {
-                CustomUtilities.Rotation.setDirectionAndRotation(this, out angle, out start, out this.direction, out rotation);
+                RotationUtil.setDirectionAndRotation(this, out angle, out start, out this.direction, out rotation);
             }
 
             //if (this.target != null) this.direction = (Vector2)this.target.transform.position - start;                       
@@ -248,7 +248,7 @@ public class Skill : MonoBehaviour
 
             if (keepOriginalRotation)
             {
-                this.direction = CustomUtilities.Rotation.DegreeToVector2(this.transform.rotation.eulerAngles.z);
+                this.direction = RotationUtil.DegreeToVector2(this.transform.rotation.eulerAngles.z);
             }
 
             if (rotateIt && !keepOriginalRotation) transform.rotation = Quaternion.Euler(rotation);
@@ -261,10 +261,10 @@ public class Skill : MonoBehaviour
             //if (useCustomPosition) positionY = this.sender.skillStartPosition.transform.position.y + (this.sender.direction.y * positionOffset);
             if (useOffSetToBlendTree) this.transform.position = new Vector2(positionX, positionY);
             this.direction = this.sender.direction;
-            CustomUtilities.UnityUtils.SetAnimDirection(this.sender.direction, this.animator);
+            AnimatorUtil.SetAnimDirection(this.sender.direction, this.animator);
         }
 
-        //CustomUtilities.UnityUtils.SetAnimDirection(this.sender.direction, this.animator);    
+        //AnimatorUtil.SetAnimDirection(this.sender.direction, this.animator);    
 
         if (this.shadow != null)
         {
@@ -285,7 +285,7 @@ public class Skill : MonoBehaviour
 
     public void PlaySoundEffect(AudioClip audioClip)
     {
-        CustomUtilities.Audio.playSoundEffect(this.gameObject, audioClip);
+        AudioUtil.playSoundEffect(this.gameObject, audioClip);
     }
 
     public void SetTriggerActive(int value)
@@ -306,9 +306,9 @@ public class Skill : MonoBehaviour
 
     public void DeactivateIt()
     {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Explode", true);
+        AnimatorUtil.SetAnimatorParameter(this.animator, "Explode", true);
 
-        if (this.animator == null || !CustomUtilities.UnityUtils.HasParameter(this.animator, "Explode"))
+        if (this.animator == null || !AnimatorUtil.HasParameter(this.animator, "Explode"))
         {
             //Debug.Log(this.skillName + " hat kein Animator oder Explode-Parameter");
             SetTriggerActive(1);

@@ -32,7 +32,7 @@ public class AIAggroSystem : MonoBehaviour
 
     private void Update()
     {        
-        CustomUtilities.Rotation.rotateCollider(this.enemy, this.gameObject);
+        RotationUtil.rotateCollider(this.enemy, this.gameObject);
         generateAggro();
     }
 
@@ -58,7 +58,7 @@ public class AIAggroSystem : MonoBehaviour
             if (currentAggro > aggro)
             {
                 aggro = currentAggro;
-                target = CustomUtilities.Format.getLanguageDialogText(character.stats.characterName, character.stats.englischCharacterName);
+                target = FormatUtil.getLanguageDialogText(character.stats.characterName, character.stats.englischCharacterName);
             }
         }
     }
@@ -185,7 +185,7 @@ public class AIAggroSystem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (CustomUtilities.Collisions.checkAffections(this.enemy, this.aggroStats.affectOther, this.aggroStats.affectSame, this.aggroStats.affectNeutral, collision))
+        if (CollisionUtil.checkAffections(this.enemy, this.aggroStats.affectOther, this.aggroStats.affectSame, this.aggroStats.affectNeutral, collision))
         {
             increaseAggro(collision.GetComponent<Character>(), this.aggroStats.aggroIncreaseFactor);
         }
@@ -193,7 +193,7 @@ public class AIAggroSystem : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (CustomUtilities.Collisions.checkAffections(this.enemy, this.aggroStats.affectOther, this.aggroStats.affectSame, this.aggroStats.affectNeutral, collision))
+        if (CollisionUtil.checkAffections(this.enemy, this.aggroStats.affectOther, this.aggroStats.affectSame, this.aggroStats.affectNeutral, collision))
         {
             decreaseAggro(collision.GetComponent<Character>(), this.aggroStats.aggroDecreaseFactor);
         }

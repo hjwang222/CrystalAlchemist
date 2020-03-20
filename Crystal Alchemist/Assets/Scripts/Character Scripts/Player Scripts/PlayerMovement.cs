@@ -33,11 +33,11 @@ public class PlayerMovement : MonoBehaviour
                 this.player.updateAnimDirection(this.player.change);
             }
 
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", true);
+            AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", true);
         }
         else
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", false);
+            AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", false);
             if (this.player.currentState == CharacterState.walk) this.player.currentState = CharacterState.idle;
         }
     }

@@ -171,7 +171,6 @@ public class Ability : ScriptableObject
     public bool canUseAbility(Character character)
     {
         bool enoughResource = this.isResourceEnough(character);
-        if (character.GetComponent<AI>()) enoughResource = true;
 
         bool notToMany = true;
         if (this.hasMaxAmount) notToMany = (getAmountOfSameSkills(this.skill, character.activeSkills, character.activePets) <= this.maxAmount);        
@@ -209,13 +208,11 @@ public class Ability : ScriptableObject
     private bool isResourceEnough(Character character)
     {
         SkillSenderModule senderModule = this.skill.GetComponent<SkillSenderModule>();
-
-        if (senderModule == null) return true;
-        else
+        if (senderModule != null)
         {
-            if (character.getResource(senderModule.resourceType, senderModule.item) + senderModule.addResourceSender >= 0) return true;
-            else return false;
+            return character.canUseIt(senderModule.price);
         }
+        else return true;        
     }
 
     #endregion

@@ -37,7 +37,7 @@ public class RespawnSystem : MonoBehaviour
 
     private void setRespawn(Character character)
     {
-        if (character.stats.respawnTime < CustomUtilities.maxFloatInfinite)
+        if (character.stats.hasRespawn)
         {
             StartCoroutine(respawnCo(character));
             character.currentState = CharacterState.respawning;

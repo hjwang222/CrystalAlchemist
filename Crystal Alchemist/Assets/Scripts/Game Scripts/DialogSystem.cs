@@ -99,7 +99,7 @@ public class DialogSystem : MonoBehaviour
 
     private string getText(DialogText text, ItemStats loot, Player player)
     {
-        string result = CustomUtilities.Format.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
+        string result = FormatUtil.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
 
         result = result.Replace("<name>", player.name);
         result = result.Replace("<interactable>", getInteractableType());
@@ -115,7 +115,7 @@ public class DialogSystem : MonoBehaviour
 
     private string getText(DialogText text, float price, ItemGroup item, ItemStats loot, Player player)
     {
-        string result = CustomUtilities.Format.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
+        string result = FormatUtil.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
 
         result = result.Replace("<price>", price + "");
         result = result.Replace("<name>", player.name);
@@ -139,8 +139,8 @@ public class DialogSystem : MonoBehaviour
 
     private string getInteractableType()
     {
-        if (this.GetComponent<Door>() != null) return CustomUtilities.Format.getLanguageDialogText("ie Tür", "door");
-        if (this.GetComponent<Treasure>() != null) return CustomUtilities.Format.getLanguageDialogText("ie Truhe", "chest");
+        if (this.GetComponent<Door>() != null) return FormatUtil.getLanguageDialogText("ie Tür", "door");
+        if (this.GetComponent<Treasure>() != null) return FormatUtil.getLanguageDialogText("ie Truhe", "chest");
         return "";
     }
 

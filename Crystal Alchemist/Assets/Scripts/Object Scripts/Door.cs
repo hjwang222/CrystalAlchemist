@@ -32,7 +32,7 @@ public class Door : Interactable
     {
         base.Start();
 
-        if (this.isOpen) CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", true);
+        if (this.isOpen) AnimatorUtil.SetAnimatorParameter(this.animator, "isOpened", true);
     }
 
     public override void doOnUpdate()
@@ -52,22 +52,23 @@ public class Door : Interactable
             {
                  if (this.doorType == DoorType.normal)
                 {  
-                    if (this.player.GetComponent<PlayerUtils>().canOpenAndUpdateResource(this.price))
+                    if (this.player.canUseIt(this.price))
                     {
                         //Tür offen!
+                        this.player.reduceCurrency(this.price);
                         OpenCloseDoor(true, this.context);
-                        this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success);
+                        this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.success);
                     }
                     else
                     {
                         //Tür kann nicht geöffnet werden
-                        this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.failed);
+                        this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
                     }
                 }
                 else
                 {
                     //Tür verschlossen
-                    this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.failed);
+                    this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
                 }
             }                       
         }
@@ -80,7 +81,7 @@ public class Door : Interactable
             //Wenn Knopf gedrückt wurde, OpenDoor()
         }
 
-        this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.none);
+        this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.none);
     }
 
     private void OpenCloseDoor(bool isOpen)
@@ -91,7 +92,7 @@ public class Door : Interactable
     private void OpenCloseDoor(bool isOpen, GameObject contextClueChild)
     {
         this.isOpen = isOpen;
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", this.isOpen);
+        AnimatorUtil.SetAnimatorParameter(this.animator, "isOpened", this.isOpen);
         this.boxCollider.enabled = !this.isOpen;
 
         if (contextClueChild != null)
@@ -102,6 +103,6 @@ public class Door : Interactable
             else contextClueChild.SetActive(false);
         }
 
-        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffect);
+        AudioUtil.playSoundEffect(this.gameObject, this.soundEffect);
     }
 }

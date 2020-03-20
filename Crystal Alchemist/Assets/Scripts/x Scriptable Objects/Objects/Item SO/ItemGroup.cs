@@ -67,12 +67,12 @@ public class ItemGroup : ScriptableObject
 
     public string getName()
     {
-        return CustomUtilities.Format.getLanguageDialogText(this.itemGroup, this.itemGroupEnglish);
+        return FormatUtil.getLanguageDialogText(this.itemGroup, this.itemGroupEnglish);
     }
 
     public string getDescription()
     {
-        return CustomUtilities.Format.getLanguageDialogText(this.description, this.descriptionEnglish);
+        return FormatUtil.getLanguageDialogText(this.description, this.descriptionEnglish);
     }
 
     public int GetAmount()
@@ -82,7 +82,7 @@ public class ItemGroup : ScriptableObject
 
     public string GetAmountString()
     {
-        return CustomUtilities.Format.formatString(this.amount, this.maxAmount);
+        return FormatUtil.formatString(this.amount, this.maxAmount);
     }
 
     public void UpdateAmount(int amount)
@@ -102,6 +102,6 @@ public class ItemGroup : ScriptableObject
 
     public string getItemGroup()
     {
-        return CustomUtilities.Format.getLanguageDialogText(this.itemGroup, this.itemGroupEnglish);
+        return FormatUtil.getLanguageDialogText(this.itemGroup, this.itemGroupEnglish);
     }
 }

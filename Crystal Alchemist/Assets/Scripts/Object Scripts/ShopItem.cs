@@ -19,23 +19,24 @@ public class ShopItem : Rewardable
     {
         base.Start();
 
-        CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        FormatUtil.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
         this.childSprite.sprite = this.itemDrop.stats.getSprite();
         if (this.itemDrop == null) Destroy(this.gameObject);
     }
 
     public override void doSomethingOnSubmit()
     {
-        if (this.player.GetComponent<PlayerUtils>().canOpenAndUpdateResource(this.price))
+        if (this.player.canUseIt(this.price))
         {
+            this.player.reduceCurrency(this.price);
             ItemStats loot = itemDrop.stats;
 
-            this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success, loot);
+            this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.success, loot);
             if (loot != null) loot.CollectIt(this.player);
         }
         else
         {
-            this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.failed);
+            this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
         }
     }
 }

@@ -75,11 +75,11 @@ public class CombatButtons : MonoBehaviour
 
             SkillSenderModule senderModule = ability.skill.GetComponent<SkillSenderModule>();
 
-            if (senderModule != null && senderModule.item != null)
-                configUI.ammo.text = (int)this.player.getResource(senderModule.resourceType, senderModule.item) + "";
+            if (senderModule != null && senderModule.price.item != null)
+                configUI.ammo.text = (int)this.player.getResource(senderModule.price) + "";
             else configUI.ammo.text = "";
 
-            if (!this.player.GetComponent<PlayerAbilities>().canUseAllAbilities() 
+            if (!this.player.GetComponent<PlayerAbilities>().canUseAbilities() 
                 || !ability.canUseAbility(this.player))
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
@@ -109,7 +109,7 @@ public class CombatButtons : MonoBehaviour
             else if (cooldownLeft > 0 && cooldownValue > 0.5f)
             {
                 //Ist Skill in der Abklingzeit
-                string cooldownText = CustomUtilities.Format.setDurationToString(cooldownLeft);
+                string cooldownText = FormatUtil.setDurationToString(cooldownLeft);
                 configUI.cooldown.text = cooldownText;
                 setFontSize(configUI.cooldown);
 

@@ -57,7 +57,7 @@ public class MenuDialogBoxLauncher : MonoBehaviour
 
     private void raiseDialogBox(string text, string textEnglish, UnityEvent yes)
     {
-        this.dialogText = CustomUtilities.Format.getLanguageDialogText(text, textEnglish);
+        this.dialogText = FormatUtil.getLanguageDialogText(text, textEnglish);
         this.signal.Raise(this.gameObject);
     }
 }

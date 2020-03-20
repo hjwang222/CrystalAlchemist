@@ -10,7 +10,7 @@ public class SkillLaser : SkillExtension
     private Skill impactEffect;
 
     [SerializeField]
-    [Range(0, CustomUtilities.maxFloatSmall)]
+    [MinValue(0)]
     private float distance = 0;
 
     [SerializeField]
@@ -53,13 +53,13 @@ public class SkillLaser : SkillExtension
         Vector2 startpoint;
         Vector3 rotation;
 
-        CustomUtilities.Rotation.setDirectionAndRotation(this.skill, out angle, out startpoint, out this.skill.direction, out rotation);
+        RotationUtil.setDirectionAndRotation(this.skill, out angle, out startpoint, out this.skill.direction, out rotation);
 
         if (this.skill.target != null && updateRotation)
         {
             this.skill.direction = (Vector2)this.skill.target.transform.position - startpoint;
             float temp_angle = Mathf.Atan2(this.skill.direction.y, this.skill.direction.x) * Mathf.Rad2Deg;
-            this.skill.direction = CustomUtilities.Rotation.DegreeToVector2(temp_angle);
+            this.skill.direction = RotationUtil.DegreeToVector2(temp_angle);
         }
 
         renderLine(startpoint, rotation);
@@ -120,7 +120,7 @@ public class SkillLaser : SkillExtension
 
     private void drawLaser(Vector2 startpoint, Vector2 hitpoint, Vector3 rotation, Collider2D collider)
     {
-        if (CustomUtilities.Collisions.checkCollision(collider, this.skill)) this.skill.hitIt(collider);
+        if (CollisionUtil.checkCollision(collider, this.skill)) this.skill.hitIt(collider);
         Vector2 position = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y - startpoint.y) / 2) + startpoint;
 
         this.laserSprite.transform.position = position;

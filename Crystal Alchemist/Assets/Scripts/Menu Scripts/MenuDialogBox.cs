@@ -87,7 +87,7 @@ public class MenuDialogBox : MenuControls
         this.closeDialog();
         if (this.actionYes != null)
         {
-            this.player.GetComponent<PlayerUtils>().reduceCurrency(this.price);
+            this.player.reduceCurrency(this.price);
             this.actionYes.Invoke();
         }
     }

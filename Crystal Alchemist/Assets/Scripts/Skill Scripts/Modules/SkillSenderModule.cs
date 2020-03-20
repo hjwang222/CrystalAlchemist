@@ -6,30 +6,12 @@ using Sirenix.OdinInspector;
 public class SkillSenderModule : SkillModule
 {
     [TabGroup("Sender Attribute")]
-    [EnumToggleButtons]
-    [Tooltip("Art der Resource")]
-    public ResourceType resourceType = ResourceType.mana;
-
-    [TabGroup("Sender Attribute")]
-    [ShowIf("resourceType", ResourceType.item)]
-    [Tooltip("Benötigtes Item")]
-    public ItemGroup item;
+    public Price price;
 
     [TabGroup("Sender Attribute")]
     [HideIf("resourceType", ResourceType.none)]
-    [Tooltip("Komplette Resource?")]
-    public bool allResourceSender = false;
-
-    [TabGroup("Sender Attribute")]
-    [HideIf("resourceType", ResourceType.none)]
-    [HideIf("allResourceSender")]
-    [Tooltip("Höhe der Resource des Senders. Negativ = Schaden, Positiv = Heilung")]
-    public float addResourceSender = 0;
-
-    [TabGroup("Sender Attribute")]
-    [HideIf("resourceType", ResourceType.none)]
-    [Range(0, CustomUtilities.maxFloatInfinite)]
     [Tooltip("Intervall während der Dauer des Skills Leben oder Mana verändert werden.")]
+    [MinValue(0)]
     public float intervallSender = 0;
 
     [TabGroup("Sender Attribute")]
@@ -53,13 +35,13 @@ public class SkillSenderModule : SkillModule
     private bool forward = false;
 
     [TabGroup("Sender Attribute")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
+    [MinValue(0)]
     [Tooltip("Stärke des Knockbacks")]
     [SerializeField]
     private float selfThrust = 0;
 
     [TabGroup("Sender Attribute")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
+    [MinValue(0)]
     [Tooltip("Dauer des Knockbacks")]
     [HideIf("selfThrust", 0f)]
     [SerializeField]
@@ -99,7 +81,7 @@ public class SkillSenderModule : SkillModule
             {
                 if (this.skill.sender != null)
                 {
-                    if (this.skill.sender.getResource(this.resourceType, this.item) + this.addResourceSender < 0) this.skill.DeactivateIt();
+                    if (this.skill.sender.HasEnoughCurrency(this.price)) this.skill.DeactivateIt();
                     else
                     {
                         this.elapsed = this.intervallSender;
@@ -118,7 +100,7 @@ public class SkillSenderModule : SkillModule
 
     private void updateResourceSender()
     {
-        if (this.skill.sender != null) this.skill.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
+        if (this.skill.sender != null) this.skill.sender.updateResource(this.price);
     }
 
     private void setSelfTrust()

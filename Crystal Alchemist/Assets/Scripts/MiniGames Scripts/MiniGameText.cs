@@ -23,7 +23,7 @@ public class MiniGameText : MonoBehaviour
         if (this.audioClip != null && this.audioClip.length > 3) this.maxDuration = this.audioClip.length + 1f;
 
         this.duration = this.maxDuration;
-        CustomUtilities.Audio.playSoundEffect(this.audioClip);
+        AudioUtil.playSoundEffect(this.audioClip);
         StartCoroutine(delayInput());
     }
 

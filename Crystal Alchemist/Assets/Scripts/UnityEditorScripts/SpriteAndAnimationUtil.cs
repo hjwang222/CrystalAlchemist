@@ -51,7 +51,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
     public void UpdateSpritesAndAnimations()
     {
         List<PlayerAnimationPart> childObjects = new List<PlayerAnimationPart>();
-        CustomUtilities.UnityFunctions.GetChildObjects(this.transform, childObjects); //get all children from GameObject
+        UnityUtil.GetChildObjects(this.transform, childObjects); //get all children from GameObject
 
         List<AnimationClip> clips = getAnimationClips(); //get all AnimationClips from Asset Folder
 
@@ -77,7 +77,7 @@ public class SpriteAndAnimationUtil : MonoBehaviour
     public void temp()
     {
         List<CharacterCreatorPart> childObjects = new List<CharacterCreatorPart>();
-        CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorPart>(this.transform, childObjects); //get all children from GameObject
+        UnityUtil.GetChildObjects<CharacterCreatorPart>(this.transform, childObjects); //get all children from GameObject
 
         foreach (CharacterCreatorPart part in childObjects)
         {

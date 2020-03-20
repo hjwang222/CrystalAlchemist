@@ -125,7 +125,7 @@ public class DeathScreen : MonoBehaviour
 
     public void playMusic(AudioClip clip)
     {
-        CustomUtilities.Audio.playSoundEffect(clip, this.audioSource, GlobalValues.backgroundMusicVolume);
+        AudioUtil.playSoundEffect(clip, this.audioSource, GlobalValues.backgroundMusicVolume);
     }
 
     public void ShowText(float delay)

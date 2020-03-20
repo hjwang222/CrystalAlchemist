@@ -21,7 +21,7 @@ public class SpriteRendererExtensionHandler : MonoBehaviour
             List<SpriteRenderer> renderers = new List<SpriteRenderer>();
             renderers.Clear();
 
-            CustomUtilities.UnityFunctions.GetChildObjects<SpriteRenderer>(this.characterSprite.transform, renderers);
+            UnityUtil.GetChildObjects<SpriteRenderer>(this.characterSprite.transform, renderers);
 
             foreach(SpriteRenderer renderer in renderers)
             {
@@ -37,7 +37,7 @@ public class SpriteRendererExtensionHandler : MonoBehaviour
 
     private void Start()
     {
-        CustomUtilities.UnityFunctions.GetChildObjects<SpriteRendererExtension>(this.characterSprite.transform, this.colorpalettes);
+        UnityUtil.GetChildObjects<SpriteRendererExtension>(this.characterSprite.transform, this.colorpalettes);
         init();
     }
 

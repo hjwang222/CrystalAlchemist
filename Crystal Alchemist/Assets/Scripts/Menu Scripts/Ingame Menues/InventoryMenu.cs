@@ -82,8 +82,8 @@ public class InventoryMenu : MenuControls
 
                 int ID = iSlot.getID();
                 ItemGroup item = null;
-                if(showKeyItems) item = this.player.GetComponent<PlayerUtils>().getKeyItems(ID);
-                else item = this.player.GetComponent<PlayerUtils>().getInventoryItems(ID);
+                if(showKeyItems) item = this.player.GetComponent<PlayerItems>().getKeyItems(ID);
+                else item = this.player.GetComponent<PlayerItems>().getInventoryItems(ID);
 
                 slot.GetComponent<InventorySlot>().setItemToSlot(item);
             }

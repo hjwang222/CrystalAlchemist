@@ -31,7 +31,7 @@ public class SkillProjectileHit : SkillHitTrigger
             && !hittedCharacter.CompareTag("Room")
             && !isReflected(hittedCharacter))
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Hit");
+            AnimatorUtil.SetAnimatorParameter(this.skill.animator, "Hit");
             this.skill.GetComponent<SkillProjectile>().stopVelocity();
 
             placeFire();

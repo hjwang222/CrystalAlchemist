@@ -46,12 +46,12 @@ public class CurrencySlot : MonoBehaviour
 
     public void updateCurrency()
     {
-        this.newValue = this.player.GetComponent<PlayerUtils>().GetAmount(this.item);
+        this.newValue = this.player.GetComponent<PlayerItems>().GetAmount(this.item);
 
         if (this.playSound)
         {
             //this.playOnce = true;
-            CustomUtilities.Audio.playSoundEffect(this.raiseSoundEffect);
+            AudioUtil.playSoundEffect(this.raiseSoundEffect);
         }
 
         if(!this.isRunning) StartCoroutine(Countdown());
@@ -77,11 +77,11 @@ public class CurrencySlot : MonoBehaviour
                 this.isRunning = false;
                 this.hideSignal.Raise(this.hideDelay);
                 //this.playOnce = false;
-                this.textField.text = CustomUtilities.Format.formatString(this.currentValue, this.maxValue);
+                this.textField.text = FormatUtil.formatString(this.currentValue, this.maxValue);
                 break;
             }   
 
-            this.textField.text = CustomUtilities.Format.formatString(this.currentValue, this.maxValue);
+            this.textField.text = FormatUtil.formatString(this.currentValue, this.maxValue);
             
             yield return new WaitForSeconds(counterDelay);
         }

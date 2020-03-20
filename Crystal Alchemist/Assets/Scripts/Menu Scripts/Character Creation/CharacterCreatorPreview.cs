@@ -14,7 +14,7 @@ public class CharacterCreatorPreview : MonoBehaviour
     public void UpdatePreview()
     {
         List<CharacterCreatorPart> parts = new List<CharacterCreatorPart>();
-        CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorPart>(this.transform, parts);
+        UnityUtil.GetChildObjects<CharacterCreatorPart>(this.transform, parts);
 
         foreach (CharacterCreatorPart part in parts)
         {

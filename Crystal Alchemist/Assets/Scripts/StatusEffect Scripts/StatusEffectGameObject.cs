@@ -20,7 +20,7 @@ public class StatusEffectGameObject : MonoBehaviour
 
     public void SetEnd()
     {
-        if (this.anim != null) CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "End");
+        if (this.anim != null) AnimatorUtil.SetAnimatorParameter(this.anim, "End");
         else DestroyIt();
     }
 
@@ -31,6 +31,6 @@ public class StatusEffectGameObject : MonoBehaviour
 
     public void PlaySoundEffect(AudioClip audioClip)
     {
-        CustomUtilities.Audio.playSoundEffect(this.gameObject, audioClip);
+        AudioUtil.playSoundEffect(this.gameObject, audioClip);
     }
 }

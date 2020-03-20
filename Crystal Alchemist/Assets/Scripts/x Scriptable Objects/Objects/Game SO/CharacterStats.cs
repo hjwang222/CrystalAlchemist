@@ -52,22 +52,18 @@ public class CharacterStats : ScriptableObject
 
     [TabGroup("Start-Values")]
     [Tooltip("Leben, mit dem der Spieler startet")]
-    [Range(CustomUtilities.minFloat, CustomUtilities.maxFloatInfinite)]
-    public float startLife = CustomUtilities.minFloat;
+    public float startLife = 1;
 
     [TabGroup("Start-Values")]
     [Tooltip("Mana, mit dem der Spieler startet")]
-    [Range(CustomUtilities.minFloat, CustomUtilities.maxFloatInfinite)]
-    public float startMana = CustomUtilities.minFloat;
+    public float startMana = 1;
 
     [TabGroup("Start-Values")]
     [Tooltip("Movement-Speed in %, mit dem der Spieler startet")]
-    [Range(CustomUtilities.minFloatPercent, CustomUtilities.maxFloatPercent)]
     public float startSpeed = 100;
 
     [TabGroup("Start-Values")]
     [Tooltip("Geschwindigkeitsmodifier in % von Cooldown und Castzeit")]
-    [Range(CustomUtilities.minFloatPercent, CustomUtilities.maxFloatPercent)]
     public float startSpellSpeed = 100;
 
     [TabGroup("Start-Values")]
@@ -87,7 +83,11 @@ public class CharacterStats : ScriptableObject
     [Space(10)]
     [TabGroup("Spawn Values")]
     [Tooltip("Respawn-Zeit")]
-    [Range(0, CustomUtilities.maxFloatInfinite)]
+    public bool hasRespawn = true;
+
+    [TabGroup("Spawn Values")]
+    [Tooltip("Respawn-Zeit")]
+    [ShowIf("hasRespawn")]
     public float respawnTime = 30;
 
     [TabGroup("Spawn Values")]
@@ -103,23 +103,19 @@ public class CharacterStats : ScriptableObject
 
     [FoldoutGroup("Upgrades", expanded: false)]
     [Tooltip("Maximales Life")]
-    [Range(CustomUtilities.minFloat, CustomUtilities.maxFloatInfinite)]
-    public float maxLife = CustomUtilities.minFloat;
+    public float maxLife = 1;
 
     [FoldoutGroup("Upgrades", expanded: false)]
     [Tooltip("Maximales Mana")]
-    [Range(CustomUtilities.minFloat, CustomUtilities.maxFloatInfinite)]
-    public float maxMana = CustomUtilities.minFloat;
+    public float maxMana = 1;
 
     [Space(10)]
     [FoldoutGroup("Upgrades", expanded: false)]
     [Tooltip("Höhe der Lebensregeneration")]
-    [Range(-CustomUtilities.maxFloatInfinite, CustomUtilities.maxFloatInfinite)]
     public float lifeRegeneration = 0;
 
     [FoldoutGroup("Upgrades", expanded: false)]
     [Tooltip("Höhe der Manaregeneration")]
-    [Range(-CustomUtilities.maxFloatInfinite, CustomUtilities.maxFloatInfinite)]
     public float manaRegeneration = 0;
 
     [FoldoutGroup("Upgrades", expanded: false)]
@@ -148,7 +144,6 @@ public class CharacterStats : ScriptableObject
     [Space(10)]
     [FoldoutGroup("Schaden", expanded: false)]
     [Tooltip("Wie stark (-) oder schwach (+) kann das Objekt zurück gestoßen werden?")]
-    [Range(-CustomUtilities.maxFloatSmall, CustomUtilities.maxFloatSmall)]
     public float antiKnockback = 0;
 
     [FoldoutGroup("Schaden", expanded: false)]

@@ -19,7 +19,7 @@ public class CharacterPartHandler : MonoBehaviour
     public void UpdateCharacterParts()
     {
         this.parts.Clear();
-        CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorPart>(this.transform, this.parts);
+        UnityUtil.GetChildObjects<CharacterCreatorPart>(this.transform, this.parts);
 
         foreach (CharacterCreatorPart part in this.parts)
         {

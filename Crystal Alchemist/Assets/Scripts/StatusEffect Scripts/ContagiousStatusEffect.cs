@@ -22,7 +22,7 @@ public class ContagiousStatusEffect : MonoBehaviour
         if (!collision.isTrigger)
         {
             Character character = collision.GetComponent<Character>();
-            if (character != null) CustomUtilities.StatusEffectUtil.AddStatusEffect(this.activeEffect, character);
+            if (character != null) StatusEffectUtil.AddStatusEffect(this.activeEffect, character);
         }
     }
 
@@ -31,7 +31,7 @@ public class ContagiousStatusEffect : MonoBehaviour
         if (!collision.isTrigger)
         {
             Character character = collision.GetComponent<Character>();
-            if (character != null) CustomUtilities.StatusEffectUtil.AddStatusEffect(this.activeEffect, character);
+            if (character != null) StatusEffectUtil.AddStatusEffect(this.activeEffect, character);
         }
     }
 }

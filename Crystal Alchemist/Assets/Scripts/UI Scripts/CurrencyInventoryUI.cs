@@ -16,6 +16,6 @@ public class CurrencyInventoryUI : MonoBehaviour
     private void OnEnable()
     {
         Player player = this.playerStats.player;
-        this.amountField.text = player.GetComponent<PlayerUtils>().GetAmountString(this.item);     
+        this.amountField.text = player.GetComponent<PlayerItems>().GetAmountString(this.item);     
     }
 }

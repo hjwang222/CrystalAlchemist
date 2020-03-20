@@ -67,7 +67,7 @@ public class SkillStack : SkillMechanicHit
 
     private void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
-        if (CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
+        if (CollisionUtil.checkCollision(hittedCharacter, this.skill))
         {
             Character character = hittedCharacter.GetComponent<Character>();
             if (character != null && !this.listOfCharacters.Contains(character)) this.listOfCharacters.Add(character);
@@ -76,7 +76,7 @@ public class SkillStack : SkillMechanicHit
 
     private void OnTriggerExit2D(Collider2D hittedCharacter)
     {
-        if (CustomUtilities.Collisions.checkCollision(hittedCharacter, this.skill))
+        if (CollisionUtil.checkCollision(hittedCharacter, this.skill))
         {
             Character character = hittedCharacter.GetComponent<Character>();
             if (character != null && this.listOfCharacters.Contains(character)) this.listOfCharacters.Remove(character);

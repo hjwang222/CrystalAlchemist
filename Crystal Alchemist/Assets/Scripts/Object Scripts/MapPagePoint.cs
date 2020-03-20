@@ -35,7 +35,7 @@ public class MapPagePoint : MonoBehaviour
     private void OnEnable()
     {
         if(this.areaSprite != null) this.image.sprite = this.areaSprite;
-        this.textField.text = CustomUtilities.Format.getLanguageDialogText(this.areaName, this.areaNameEnglish);
+        this.textField.text = FormatUtil.getLanguageDialogText(this.areaName, this.areaNameEnglish);
         this.textField.ForceMeshUpdate(true);
     }
 

@@ -42,20 +42,20 @@ public class SkillImpactHit : SkillMechanicHit
             if (this.type == aoeType.hide)
             {
                 //hide AOE
-                bool isHiding = CustomUtilities.Collisions.checkBehindObstacle(hittedCharacter.GetComponent<Character>(), this.gameObject);
+                bool isHiding = CollisionUtil.checkBehindObstacle(hittedCharacter.GetComponent<Character>(), this.gameObject);
                 if (!isHiding) this.skill.hitIt(hittedCharacter);
             }
             else if (this.type == aoeType.range)
             {
                 //range AOE
-                float percentage = CustomUtilities.Collisions.checkDistanceReduce(hittedCharacter.GetComponent<Character>(),
+                float percentage = CollisionUtil.checkDistanceReduce(hittedCharacter.GetComponent<Character>(),
                                                                             this.gameObject, this.deadDistance, this.saveDistance);
                 this.skill.hitIt(hittedCharacter, percentage);
             }
             else if (this.type == aoeType.look)
             {
                 //look /away AOE
-                bool isLookingAt = CustomUtilities.Collisions.checkIfGameObjectIsViewed(hittedCharacter.GetComponent<Character>(), this.gameObject, this.viewRange);
+                bool isLookingAt = CollisionUtil.checkIfGameObjectIsViewed(hittedCharacter.GetComponent<Character>(), this.gameObject, this.viewRange);
                 if ((this.mustLookAway && isLookingAt) || (!this.mustLookAway && !isLookingAt)) this.skill.hitIt(hittedCharacter);
             }
             else

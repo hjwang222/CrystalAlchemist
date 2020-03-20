@@ -486,14 +486,14 @@ GameObject:
   - component: {fileID: 5074818981556205378}
   - component: {fileID: 8348133576447681433}
   - component: {fileID: 956710362935593805}
+  - component: {fileID: 1605216952823830739}
   - component: {fileID: 6736401842150179436}
-  - component: {fileID: 3574493720463300672}
+  - component: {fileID: 1639545866727324291}
+  - component: {fileID: 7698867005937363429}
+  - component: {fileID: 7374600907851842522}
   - component: {fileID: 7031345861447154720}
   - component: {fileID: 759644400424337060}
   - component: {fileID: 5650224180514046960}
-  - component: {fileID: 7374600907851842522}
-  - component: {fileID: 1605216952823830739}
-  - component: {fileID: 7698867005937363429}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -571,7 +571,7 @@ MonoBehaviour:
   activePets: []
   steps: 0
   isOnIce: 0
-  inventory: []
+  itemDrop: {fileID: 0}
   timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
   secondsPlayed: {fileID: 11400000, guid: 00cd839769dce6446985fb0093bd539f, type: 2}
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
@@ -619,6 +619,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5074818981556205378}
+--- !u!114 &1605216952823830739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759644400424337056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a371caab22b5d654ca17d1f421676f80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSet: {fileID: 11400000, guid: 29dcfc276674c7e42a941d5aee79bc0e, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
+  player: {fileID: 5074818981556205378}
+  castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
+  targetingSystem: {fileID: 6568870739131367059}
+  activeCastbar: {fileID: 0}
 --- !u!114 &6736401842150179436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,7 +652,7 @@ MonoBehaviour:
   player: {fileID: 5074818981556205378}
   nextTeleport: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
   lastTeleport: {fileID: 11400000, guid: 19238642f2af7884a957462e5938d59e, type: 2}
---- !u!114 &3574493720463300672
+--- !u!114 &1639545866727324291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -643,24 +661,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 759644400424337056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3fc66ef9f32f2944bc30facf4600ca9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b59c3b9ce3e7b74fb06fa4b00c4bc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 90ad66b62787f5e4890b6fa4b73a251e, type: 2}
-  signalEventString:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: changeMapLocation
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  player: {fileID: 5074818981556205378}
+--- !u!114 &7698867005937363429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759644400424337056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d513839fa274e48afd9a7bb2f1e9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5074818981556205378}
+  inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
+--- !u!114 &7374600907851842522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759644400424337056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22065c0876f3d5e47b226a71d855722d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 7731012998925150711, guid: b8f5a9b79fac8cd44a2fa4cd54ce3df6, type: 3}
 --- !u!114 &7031345861447154720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,51 +753,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.625, y: 0.575}
   m_EdgeRadius: 0
---- !u!114 &7374600907851842522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759644400424337056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22065c0876f3d5e47b226a71d855722d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  marker: {fileID: 7731012998925150711, guid: b8f5a9b79fac8cd44a2fa4cd54ce3df6, type: 3}
---- !u!114 &1605216952823830739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759644400424337056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a371caab22b5d654ca17d1f421676f80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillSet: {fileID: 11400000, guid: 29dcfc276674c7e42a941d5aee79bc0e, type: 2}
-  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
-  player: {fileID: 5074818981556205378}
-  castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
-  targetingSystem: {fileID: 6568870739131367059}
-  activeCastbar: {fileID: 0}
---- !u!114 &7698867005937363429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759644400424337056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88d513839fa274e48afd9a7bb2f1e9e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 5074818981556205378}
-  inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
 --- !u!1 &1005786831246754604
 GameObject:
   m_ObjectHideFlags: 0

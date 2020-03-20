@@ -29,7 +29,7 @@ public class SkillMechanicHit : SkillHitTrigger
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (this.hitType == hitType.onTrigger 
-            && CustomUtilities.Collisions.checkCollision(collision, this.skill))
+            && CollisionUtil.checkCollision(collision, this.skill))
         {
             hitTargetCollision(collision);
         }
@@ -47,7 +47,7 @@ public class SkillMechanicHit : SkillHitTrigger
 
     public void hitAllCharacters()
     {
-        List<Character> targets = CustomUtilities.Collisions.getAffectedCharacters(this.skill);
+        List<Character> targets = CollisionUtil.getAffectedCharacters(this.skill);
         foreach (Character target in targets)
         {
             if (percentage > 0) this.skill.hitIt(target, percentage);

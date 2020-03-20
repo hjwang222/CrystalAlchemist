@@ -72,21 +72,21 @@ public class StatusEffectAction
     {
         foreach (Ability ability in this.abilities)
         {
-            CustomUtilities.Skills.InstantiateAbility(ability);
+            AbilityUtil.InstantiateAbility(ability);
         }
     }
 
     private void DispellIt(Character character)
     {
-        if (this.StatusEffectType == StatusEffectType.debuff) CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(character.debuffs);
-        else CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(character.buffs);
+        if (this.StatusEffectType == StatusEffectType.debuff) StatusEffectUtil.RemoveAllStatusEffects(character.debuffs);
+        else StatusEffectUtil.RemoveAllStatusEffects(character.buffs);
     }
 
     private void AddStatusEffect(Character character)
     {
         foreach (StatusEffect eff in this.effects)
         {
-            CustomUtilities.StatusEffectUtil.AddStatusEffect(eff, character);
+            StatusEffectUtil.AddStatusEffect(eff, character);
         }
     }
 

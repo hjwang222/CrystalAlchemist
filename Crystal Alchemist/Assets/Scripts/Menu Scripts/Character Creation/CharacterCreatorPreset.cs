@@ -8,7 +8,7 @@ public class CharacterCreatorPreset : CharacterCreatorButton
 
     public override void Click()
     {
-        CustomUtilities.Preset.setPreset(this.preset, this.mainMenu.creatorPreset);
+        GameUtil.setPreset(this.preset, this.mainMenu.creatorPreset);
         base.Click();
     }
 }

@@ -175,7 +175,7 @@ public class AIAction //: ScriptableObject
 
     private void StartSkill()
     {
-        this.tempAbility = CustomUtilities.Skills.InstantiateAbility(this.ability);
+        this.tempAbility = AbilityUtil.InstantiateAbility(this.ability);
         if (this.overrideCastTime) this.tempAbility.castTime = this.castTime;
         if (this.overrideCooldown) this.tempAbility.cooldown = this.cooldown;
         this.tempAbility.Initialize();
@@ -188,7 +188,7 @@ public class AIAction //: ScriptableObject
     {
         this.tempAbility.Update();
 
-        if (CustomUtilities.StatusEffectUtil.isCharacterStunned(npc)) this.tempAbility.ResetCharge();
+        if (StatusEffectUtil.isCharacterStunned(npc)) this.tempAbility.ResetCharge();
 
         if (this.tempAbility.state == AbilityState.notCharged) Charge(npc);
         else if (this.tempAbility.state == AbilityState.targetRequired) LockOn(npc);
@@ -215,7 +215,7 @@ public class AIAction //: ScriptableObject
         if (ability.canUseAbility(npc))
         {
             npc.GetComponent<AIEvents>().HideCastBar();
-            CustomUtilities.Skills.instantiateSkill(this.tempAbility.skill, npc, npc.target);
+            AbilityUtil.instantiateSkill(this.tempAbility.skill, npc, npc.target);
             this.tempAbility.ResetCoolDown();
             this.skillCounter++;
         }
@@ -238,7 +238,7 @@ public class AIAction //: ScriptableObject
     private void UpdateSequence(AI npc)
     {
         //casting here       
-        CustomUtilities.Skills.instantiateSequence(this.sequence, npc, this.sequencePosition, this.sequencePositionType);
+        AbilityUtil.instantiateSequence(this.sequence, npc, this.sequencePosition, this.sequencePositionType);
         Deactivate();
     }
 
@@ -276,7 +276,7 @@ public class AIAction //: ScriptableObject
 
     private void StartAnimation(AI npc)
     {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(npc.animator, this.animations);
+        AnimatorUtil.SetAnimatorParameter(npc.animator, this.animations);
         Deactivate();
     }
 
@@ -309,7 +309,7 @@ public class AIAction //: ScriptableObject
 
     private void StartDialog(AI npc)
     {
-        string text = CustomUtilities.Format.getLanguageDialogText(this.de, this.en);
+        string text = FormatUtil.getLanguageDialogText(this.de, this.en);
         npc.GetComponent<AIEvents>().ShowDialog(text, this.duration);
         this.waitTimer = this.duration;
     }

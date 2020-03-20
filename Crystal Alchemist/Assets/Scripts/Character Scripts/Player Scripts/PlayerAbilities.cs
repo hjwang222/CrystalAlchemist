@@ -33,7 +33,7 @@ public class PlayerAbilities : MonoBehaviour
     {
         this.skillSet.Update();
 
-        if (this.canUseAllAbilities())
+        if (this.canUseAbilities())
         {
             Ability ability;
             string currentButton;
@@ -114,7 +114,7 @@ public class PlayerAbilities : MonoBehaviour
     {
         if (ability.canUseAbility(this.player))
         {
-            CustomUtilities.Skills.instantiateSkill(ability.skill, this.player);
+            AbilityUtil.instantiateSkill(ability.skill, this.player);
             if (!ability.deactivateButtonUp && !ability.remoteActivation) ability.ResetCoolDown();
         }
     }
@@ -141,7 +141,7 @@ public class PlayerAbilities : MonoBehaviour
             if (target.currentState != CharacterState.dead
                 && target.currentState != CharacterState.respawning)
             {
-                CustomUtilities.Skills.instantiateSkill(ability.skill, this.player, target, damageReduce);
+                AbilityUtil.instantiateSkill(ability.skill, this.player, target, damageReduce);
                 yield return new WaitForSeconds(this.targetingSystem.getDelay());
             }
             i++;
@@ -172,14 +172,10 @@ public class PlayerAbilities : MonoBehaviour
         ability.ResetCoolDown();
     }
 
-    public bool canUseAllAbilities()
+    public bool canUseAbilities()
     {
         if (this.player.currentState != CharacterState.interact
-          && this.player.currentState != CharacterState.inDialog
-          && this.player.currentState != CharacterState.respawning
-          && this.player.currentState != CharacterState.inMenu
-          && this.player.currentState != CharacterState.dead
-          && !CustomUtilities.StatusEffectUtil.isCharacterStunned(this.player)) return true;
+         && this.player.ActiveInField()) return true;
         return false;
     }
 }

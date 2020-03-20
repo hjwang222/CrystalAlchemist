@@ -41,7 +41,7 @@ public class CharacterCreatorMenu : MenuControls
 
     private void init()
     {
-        CustomUtilities.Preset.setPreset(this.playerPreset, this.creatorPreset);
+        GameUtil.setPreset(this.playerPreset, this.creatorPreset);
         updateGear();
         updatePreview();
     }
@@ -53,7 +53,7 @@ public class CharacterCreatorMenu : MenuControls
 
     public void Confirm()
     {
-        CustomUtilities.Preset.setPreset(this.creatorPreset, this.playerPreset); //save Preset
+        GameUtil.setPreset(this.creatorPreset, this.playerPreset); //save Preset
         updatePreview();
         exitMenu();
     }
@@ -66,7 +66,7 @@ public class CharacterCreatorMenu : MenuControls
     public void updateGear()
     {
         List<CharacterCreatorGear> gearButtons = new List<CharacterCreatorGear>();
-        CustomUtilities.UnityFunctions.GetChildObjects<CharacterCreatorGear>(this.transform, gearButtons);
+        UnityUtil.GetChildObjects<CharacterCreatorGear>(this.transform, gearButtons);
 
         foreach (CharacterCreatorPartProperty part in this.properties)
         {

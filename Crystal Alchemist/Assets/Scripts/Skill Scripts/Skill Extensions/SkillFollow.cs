@@ -39,7 +39,7 @@ public class SkillFollow : SkillProjectile
         else
         {
             this.startCoroutine = true;
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Moving", false);
+            AnimatorUtil.SetAnimatorParameter(this.skill.animator, "Moving", false);
         }
     }
 
@@ -52,6 +52,6 @@ public class SkillFollow : SkillProjectile
         this.skill.myRigidbody.MovePosition(temp);
         this.stopVelocity();
 
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Moving", true);
+        AnimatorUtil.SetAnimatorParameter(this.skill.animator, "Moving", true);
     }
 }

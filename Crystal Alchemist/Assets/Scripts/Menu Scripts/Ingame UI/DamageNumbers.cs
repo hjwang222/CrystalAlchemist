@@ -27,8 +27,8 @@ public class DamageNumbers : MonoBehaviour
 
         if (number != 0)
         {
-            if(number > 0) text = "+" + CustomUtilities.Format.formatFloatToString(number, 1f);
-            else text = CustomUtilities.Format.formatFloatToString(number, 1f);
+            if(number > 0) text = "+" + FormatUtil.formatFloatToString(number, 1f);
+            else text = FormatUtil.formatFloatToString(number, 1f);
 
             textmeshPro.color = this.color[0];
             textmeshPro.outlineColor = this.color[1];

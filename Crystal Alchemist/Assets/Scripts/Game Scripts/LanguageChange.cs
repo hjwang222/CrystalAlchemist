@@ -37,6 +37,6 @@ public class LanguageChange : MonoBehaviour
 
     public void ChangeLanguageText()
     {
-        this.textMeshField.text = CustomUtilities.Format.getLanguageDialogText(this.originalText, this.alternativeText);
+        this.textMeshField.text = FormatUtil.getLanguageDialogText(this.originalText, this.alternativeText);
     }
 }

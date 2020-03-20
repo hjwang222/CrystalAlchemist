@@ -26,12 +26,12 @@ public class BasicMenu : PreventDeselection
 
     private void setFirstMenu()
     {
-        if(this.menues.Count > 0) CustomUtilities.UI.ShowMenu(this.menues[0], this.menues);
+        if(this.menues.Count > 0) GameUtil.ShowMenu(this.menues[0], this.menues);
     }
 
     public virtual void ShowMenu(GameObject menu)
     {
-        CustomUtilities.UI.ShowMenu(menu, this.menues);
+        GameUtil.ShowMenu(menu, this.menues);
     }
 
     public void saveSettings()

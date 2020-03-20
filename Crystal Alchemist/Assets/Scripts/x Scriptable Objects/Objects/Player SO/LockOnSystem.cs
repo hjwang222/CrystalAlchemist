@@ -16,11 +16,9 @@ public class LockOnSystem : ScriptableObject
     public TargetingMode targetingMode = TargetingMode.manual;
 
     [BoxGroup("Zielerfassung")]
-    [Range(0, CustomUtilities.maxIntSmall)]
     public int maxAmountOfTargets = 1;
 
     [BoxGroup("Zielerfassung")]
-    [Range(0, CustomUtilities.maxFloatInfinite)]
     public float targetingDuration = 6f;
 
     [BoxGroup("Zielerfassung")]

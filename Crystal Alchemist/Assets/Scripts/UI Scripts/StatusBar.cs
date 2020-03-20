@@ -128,7 +128,7 @@ public class StatusBar : MonoBehaviour
             if (elapsed <= 0)
             {
                 elapsed = audioInterval;
-                CustomUtilities.Audio.playSoundEffect(this.lowSoundEffect);
+                AudioUtil.playSoundEffect(this.lowSoundEffect);
             }
             else
             {

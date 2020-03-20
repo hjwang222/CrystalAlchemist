@@ -98,7 +98,7 @@ public class Player : Character
         this.init();
 
         LoadSystem.loadPlayerData(this, this.saveGameSlot.getValue());
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", false);
+        AnimatorUtil.SetAnimatorParameter(this.animator, "Dead", false);
 
         this.characterLookDown();
 
@@ -132,11 +132,11 @@ public class Player : Character
             this.characterLookDown();
 
             //TODO: Kill sofort (Skill noch aktiv)
-            CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
-            CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
+            StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
+            StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
 
             //this.spriteRenderer.color = Color.white;
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", true);
+            AnimatorUtil.SetAnimatorParameter(this.animator, "Dead", true);
 
             this.currentState = CharacterState.dead;
             this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
@@ -146,25 +146,41 @@ public class Player : Character
 
     ///////////////////////////////////////////////////////////////
 
-    public override float getResource(ResourceType type, ItemGroup item)
-    {
-        float amount = base.getResource(type, item);
-        if (type == ResourceType.item && item != null)
-            amount = this.GetComponent<PlayerUtils>().GetAmount(item);
-        return amount;
-    }
 
-    public float getMaxResource(ResourceType type, ItemGroup item)
+    public override bool HasEnoughCurrency(Price price)
     {
-        switch (type)
+        bool result = false;
+
+        if (price.resourceType == ResourceType.none) result = true;
+        else
         {
-            case ResourceType.life: return this.maxLife;
-            case ResourceType.mana: return this.maxMana;
-            case ResourceType.item: return item.maxAmount;
+            if (this.getResource(price) - price.amount >= 0) result = true;
+            else result = false;
         }
 
+        return result;
+    }
+
+    public float getResource(Price price)
+    {
+        //Buttons und hasEnoughCurrency
+        if (price.resourceType == ResourceType.life) return this.life;
+        else if (price.resourceType == ResourceType.mana) return this.mana;
+        else if (price.resourceType == ResourceType.item && price.item != null) return this.GetComponent<PlayerItems>().GetAmount(price.item);
         return 0;
     }
+
+    public void reduceCurrency(Price price)
+    {
+        //Shop, Door, Treasure, MiniGame, ... (not abilities!)
+        if ((price.item != null && !price.item.isKeyItem) || price.item == null)
+            this.updateResource(price.resourceType, price.item, -price.amount);
+    }
+
+
+
+    ///////////////////////////////////////////////////////////////
+       
 
     public override void updateResource(ResourceType type, ItemGroup item, float value, bool showingDamageNumber)
     {
@@ -174,7 +190,7 @@ public class Player : Character
         {
             case ResourceType.life: callSignal(this.healthSignalUI, value); break;
             case ResourceType.mana: callSignal(this.manaSignalUI, value); break;
-            case ResourceType.item: this.GetComponent<PlayerUtils>().UpdateInventory(item, Mathf.RoundToInt(value)); break;
+            case ResourceType.item: this.GetComponent<PlayerItems>().UpdateInventory(item, Mathf.RoundToInt(value)); break;
         }
     }
 

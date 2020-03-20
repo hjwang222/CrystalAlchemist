@@ -48,7 +48,7 @@ public class Treasure : Rewardable
     public override void Start()
     {
         base.Start();
-        CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        FormatUtil.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
         if (this.itemDrop != null && this.treasureType == TreasureType.normal) changeTreasureState(true);
     }
@@ -104,13 +104,13 @@ public class Treasure : Rewardable
     {
         if (openChest)
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", true);
+            AnimatorUtil.SetAnimatorParameter(this.anim, "isOpened", true);
             this.currentState = objectState.opened;
             this.context.SetActive(false);
         }
         else
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.anim, "isOpened", false);
+            AnimatorUtil.SetAnimatorParameter(this.anim, "isOpened", false);
             this.currentState = objectState.normal;
             this.context.SetActive(true);
         }
@@ -118,32 +118,33 @@ public class Treasure : Rewardable
 
     private void OpenChest()
     {
+        this.player.reduceCurrency(this.price);
         changeTreasureState(true);
-        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffect);
+        AudioUtil.playSoundEffect(this.gameObject, this.soundEffect);
 
         if (this.soundEffect != null && this.itemDrop != null)
         {
             //Spiele Soundeffekte ab            
-            CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffectTreasure, GlobalValues.backgroundMusicVolume);
+            AudioUtil.playSoundEffect(this.gameObject, this.soundEffectTreasure, GlobalValues.backgroundMusicVolume);
 
             //Zeige Item
             this.showTreasureItem();
 
             this.itemDrop.stats.CollectIt(this.player);
-            this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.success, this.itemDrop.stats);
+            this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.success, this.itemDrop.stats);
         }
         else
         {
             //Kein Item drin
-            this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.empty);
+            this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.empty);
         }
     }
 
 
     private void canOpenChest()
     {
-        if (this.player.GetComponent<PlayerUtils>().canOpenAndUpdateResource(this.price)) OpenChest();
-        else this.player.GetComponent<PlayerUtils>().showDialog(this, DialogTextTrigger.failed);
+        if (this.player.canUseIt(this.price)) OpenChest();
+        else this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
     }
 
     public void showTreasureItem()

@@ -16,7 +16,7 @@ public class PlayerControls : MonoBehaviour
 
     private bool isButtonPressed(enumButton buttonInput)
     {
-        string button = CustomUtilities.Input.getButton(buttonInput);
+        string button = GameUtil.getButton(buttonInput);
 
         if (Input.GetButton(button)
             || Input.GetButtonUp(button)
@@ -38,7 +38,7 @@ public class PlayerControls : MonoBehaviour
              || this.player.currentState == CharacterState.inMenu 
              || this.player.currentState == CharacterState.respawning)
             {
-                CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", false);
+                AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", false);
                 return;
             }
 
@@ -52,7 +52,7 @@ public class PlayerControls : MonoBehaviour
                 this.player.openPauseSignal.Raise();
             }
 
-            if (!CustomUtilities.StatusEffectUtil.isCharacterStunned(this.player))
+            if (!StatusEffectUtil.isCharacterStunned(this.player))
             {
                 player.change = Vector3.zero;
                 this.player.change.x = Input.GetAxisRaw("Horizontal");

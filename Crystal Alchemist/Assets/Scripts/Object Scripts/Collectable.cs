@@ -41,7 +41,7 @@ public class Collectable : MonoBehaviour
 
     public void playSounds()
     {
-        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.item.getSoundEffect());
+        AudioUtil.playSoundEffect(this.gameObject, this.item.getSoundEffect());
     }
 
     #region Collect Item Funktionen

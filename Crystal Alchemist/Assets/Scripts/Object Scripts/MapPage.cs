@@ -19,7 +19,7 @@ public class MapPage : MonoBehaviour
 
     private void OnEnable()
     {
-        this.titleField.text = CustomUtilities.Format.getLanguageDialogText(this.titleName, this.titleNameEnglish);
+        this.titleField.text = FormatUtil.getLanguageDialogText(this.titleName, this.titleNameEnglish);
         if (this.showMap)
         {
             this.gameObject.SetActive(true);

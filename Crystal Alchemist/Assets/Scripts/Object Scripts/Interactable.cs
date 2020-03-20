@@ -126,7 +126,7 @@ public class Interactable : MonoBehaviour
              || character.currentState == CharacterState.walk))
         {
             if (this.isPlayerInRange
-                && CustomUtilities.Collisions.checkIfGameObjectIsViewed(character, this.gameObject))
+                && CollisionUtil.checkIfGameObjectIsViewed(character, this.gameObject))
             {
                 player.currentState = CharacterState.interact;
                 this.context.SetActive(true);                

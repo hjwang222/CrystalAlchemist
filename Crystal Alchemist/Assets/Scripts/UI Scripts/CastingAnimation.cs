@@ -37,7 +37,7 @@ public class CastingAnimation : MonoBehaviour
 
         if (this.matchAnimationProgress)
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Time", this.progress);
+            AnimatorUtil.SetAnimatorParameter(this.animator, "Time", this.progress);
         }
     }
 }

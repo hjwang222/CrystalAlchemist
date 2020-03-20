@@ -264,6 +264,6 @@ public class myCursor : MonoBehaviour
 
     public void playSoundEffect()
     {
-        CustomUtilities.Audio.playSoundEffect(this.soundEffect);
+        AudioUtil.playSoundEffect(this.soundEffect);
     }
 }

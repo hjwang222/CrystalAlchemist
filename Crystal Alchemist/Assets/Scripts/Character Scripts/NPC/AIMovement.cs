@@ -55,7 +55,7 @@ public class AIMovement : MonoBehaviour
 
     private void Start()
     {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+        AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", false);
     }
 
     #region Update und Movement Funktionen
@@ -81,7 +81,7 @@ public class AIMovement : MonoBehaviour
     private void stopMoving()
     {
         this.targetPosition = Vector2.zero;
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+        AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", false);
     }
 
     private bool movementPriority(bool priotizePartner)
@@ -200,11 +200,11 @@ public class AIMovement : MonoBehaviour
 
     private void updateAnimation(Vector2 direction)
     {
-        if (!CustomUtilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
+        if (!StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
         if (this.npc.flip) this.npc.setFlip();        
 
         this.npc.currentState = CharacterState.walk;
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", true);
+        AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", true);
     }
     /*
     private void moveTorwardsTarget(Vector3 position)

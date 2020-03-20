@@ -49,8 +49,8 @@ public class CharacterAttributeMenu : MenuControls
 
     public void playJuwelSound(bool insert)
     {
-        if (insert) CustomUtilities.Audio.playSoundEffect(this.gameObject, this.juwelInSound);
-        else CustomUtilities.Audio.playSoundEffect(this.gameObject, this.juwelOutSound);
+        if (insert) AudioUtil.playSoundEffect(this.gameObject, this.juwelInSound);
+        else AudioUtil.playSoundEffect(this.gameObject, this.juwelOutSound);
     }
 
     public int getPointsLeft()
@@ -60,7 +60,7 @@ public class CharacterAttributeMenu : MenuControls
 
     public void updatePoints()
     {
-        this.attributePoints = this.player.GetComponent<PlayerUtils>().GetAmount(this.item);
+        this.attributePoints = this.player.GetComponent<PlayerItems>().GetAmount(this.item);
         this.attributePointsMax = this.item.maxAmount;
 
         this.pointsSpent = 0;
@@ -72,7 +72,7 @@ public class CharacterAttributeMenu : MenuControls
 
         this.pointsLeft = this.attributePoints - this.pointsSpent;
 
-        string text = CustomUtilities.Format.formatString(this.pointsLeft, this.attributePointsMax)+" / " + CustomUtilities.Format.formatString(this.attributePointsMax, this.attributePointsMax);
+        string text = FormatUtil.formatString(this.pointsLeft, this.attributePointsMax)+" / " + FormatUtil.formatString(this.attributePointsMax, this.attributePointsMax);
         this.pointsField.text = text;
     }
 }

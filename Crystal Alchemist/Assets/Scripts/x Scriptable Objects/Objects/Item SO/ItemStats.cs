@@ -15,8 +15,6 @@ public class ItemStats : ScriptableObject
     [SerializeField]
     private string itemNameEnglish;
 
-
-
     [Space(10)]
     [BoxGroup("Item Texts")]
     [TextArea]
@@ -28,12 +26,9 @@ public class ItemStats : ScriptableObject
     [SerializeField]
     private string itemDescriptionEnglish;
 
-
-
     [BoxGroup("Attributes")]
     [SerializeField]
     private int value = 1;
-
 
     [BoxGroup("Attributes")]
     [EnumToggleButtons]
@@ -53,11 +48,7 @@ public class ItemStats : ScriptableObject
     [BoxGroup("Inventory")]
     [SerializeField]
     [ShowIf("resourceType", ResourceType.item)]
-    public ItemGroup itemGroup;
-
-
-
-  
+    public ItemGroup itemGroup;           
 
     [HideInInspector]
     public int amount = 1;
@@ -65,8 +56,7 @@ public class ItemStats : ScriptableObject
     [BoxGroup("Signals")]
     [SerializeField]
     private AudioClip collectSoundEffect;
-
-
+    
 
     [BoxGroup("Unity Icon")]
     [InfoBox("To show Icon in Unity Inspector. Not neccessary", InfoMessageType = InfoMessageType.Info)]
@@ -84,7 +74,15 @@ public class ItemStats : ScriptableObject
     public void CollectIt(Player player)
     {
         if (this.resourceType == ResourceType.life || this.resourceType == ResourceType.mana) player.updateResource(this.resourceType, this.amount, true);
-        else if (this.resourceType == ResourceType.item) player.GetComponent<PlayerUtils>().CollectInventoryItem(this);
+        else if (this.resourceType == ResourceType.item) player.GetComponent<PlayerItems>().CollectInventoryItem(this);
+        else if (this.resourceType == ResourceType.none)
+        {
+            //if(this.ability != null)
+            foreach (StatusEffect effect in this.statusEffects)
+            {
+                StatusEffectUtil.AddStatusEffect(effect, player);
+            }
+        }
     }
 
     public void Initialize(int amount)
@@ -115,7 +113,7 @@ public class ItemStats : ScriptableObject
         if (isKeyItem())
         {
             Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-            if (player != null && player.GetComponent<PlayerUtils>().hasKeyItemAlready(this)) return true;
+            if (player != null && player.GetComponent<PlayerItems>().hasKeyItemAlready(this)) return true;
         }
 
         return false;
@@ -138,12 +136,12 @@ public class ItemStats : ScriptableObject
 
     public string getName()
     {
-        return CustomUtilities.Format.getLanguageDialogText(this.itemName, this.itemNameEnglish);        
+        return FormatUtil.getLanguageDialogText(this.itemName, this.itemNameEnglish);        
     }
 
     public string getDescription()
     {
-        return CustomUtilities.Format.getLanguageDialogText(this.itemDescription, this.itemDescriptionEnglish);
+        return FormatUtil.getLanguageDialogText(this.itemDescription, this.itemDescriptionEnglish);
     }
 
     

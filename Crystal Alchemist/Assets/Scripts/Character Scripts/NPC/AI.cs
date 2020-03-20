@@ -35,12 +35,12 @@ public class AI : Character
 
         if(this.target != null && this.isSleeping)
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "WakeUp");
+            AnimatorUtil.SetAnimatorParameter(this.animator, "WakeUp");
             this.isSleeping = false;
         }
         else if(this.target == null && !this.isSleeping)
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Sleep");
+            AnimatorUtil.SetAnimatorParameter(this.animator, "Sleep");
             this.isSleeping = true;
         }
     }

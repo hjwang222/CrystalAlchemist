@@ -29,7 +29,7 @@ public class RespawnAnimation : MonoBehaviour
 
             foreach (Animator animator in this.animators)
             {
-                CustomUtilities.UnityUtils.SetAnimatorParameter(animator, "Reverse");
+                AnimatorUtil.SetAnimatorParameter(animator, "Reverse");
             }
         }
         else this.character.prepareSpawnFromAnimation(reset); //show Character but no Actions!     

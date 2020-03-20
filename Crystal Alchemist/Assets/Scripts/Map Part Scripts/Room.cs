@@ -78,7 +78,7 @@ public class Room : MonoBehaviour
             if (this.audioClipSignalLoop != null) this.audioClipSignalLoop.Raise(this.musicLoop);
             if (this.startMusicSignal != null) this.startMusicSignal.Raise();*/
 
-            string text = CustomUtilities.Format.getLanguageDialogText(this.mapName, this.mapNameEnglish);
+            string text = FormatUtil.getLanguageDialogText(this.mapName, this.mapNameEnglish);
 
             setObjects(true);
             this.virtualCamera.SetActive(true);

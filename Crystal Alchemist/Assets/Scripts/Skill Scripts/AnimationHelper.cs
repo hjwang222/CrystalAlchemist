@@ -9,7 +9,7 @@ public class AnimationHelper : MonoBehaviour
 
     public void PlaySoundEffect(AudioClip audioClip)
     {
-        CustomUtilities.Audio.playSoundEffect(this.mainObject, audioClip);
+        AudioUtil.playSoundEffect(this.mainObject, audioClip);
     }
 
     public void DestroyIt()

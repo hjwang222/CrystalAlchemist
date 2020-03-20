@@ -34,12 +34,12 @@ public class InfoBox : MonoBehaviour
     {
         this.additionalInfo.SetActive(false);
 
-        this.nameField.text = CustomUtilities.Format.getLanguageDialogText(ability.skill.skillName, ability.skill.skillNameEnglish);
+        this.nameField.text = FormatUtil.getLanguageDialogText(ability.skill.skillName, ability.skill.skillNameEnglish);
 
         if (ability.info != null)
         {
             this.previewImage.sprite = ability.info.icon;
-            this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(ability.info.skillDescription, ability.info.skillDescriptionEnglish);
+            this.descriptionField.text = FormatUtil.getLanguageDialogText(ability.info.skillDescription, ability.info.skillDescriptionEnglish);
         }
 
         if (ability.skill.GetComponent<SkillTargetModule>() != null && ability.skill.GetComponent<SkillTargetModule>().statusEffects.Count > 0)
@@ -49,8 +49,8 @@ public class InfoBox : MonoBehaviour
             StatusEffect statusEffect = ability.skill.GetComponent<SkillTargetModule>().statusEffects[0];
 
             this.statusEffectPreviewImage.sprite = statusEffect.iconSprite;
-            this.statusEffectNameField.text = CustomUtilities.Format.getLanguageDialogText(statusEffect.statusEffectName, statusEffect.statusEffectNameEnglish);
-            this.statusEffectDescriptionField.text = CustomUtilities.Format.getLanguageDialogText(statusEffect.statusEffectDescription, statusEffect.statusEffectDescriptionEnglish);
+            this.statusEffectNameField.text = FormatUtil.getLanguageDialogText(statusEffect.statusEffectName, statusEffect.statusEffectNameEnglish);
+            this.statusEffectDescriptionField.text = FormatUtil.getLanguageDialogText(statusEffect.statusEffectDescription, statusEffect.statusEffectDescriptionEnglish);
         }
     }
 
@@ -80,8 +80,8 @@ public class InfoBox : MonoBehaviour
         this.additionalInfo.SetActive(false);
 
         this.previewImage.sprite = stats.icon.sprite;
-        this.nameField.text = CustomUtilities.Format.getLanguageDialogText(stats.attributeName, stats.nameEnglish);
-        this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(stats.description, stats.descriptionEnglish);
+        this.nameField.text = FormatUtil.getLanguageDialogText(stats.attributeName, stats.nameEnglish);
+        this.descriptionField.text = FormatUtil.getLanguageDialogText(stats.description, stats.descriptionEnglish);
     }
 
     private void setInfo(MapPagePoint mapPoint)
@@ -89,8 +89,8 @@ public class InfoBox : MonoBehaviour
         this.additionalInfo.SetActive(false);
 
         this.previewImage.sprite = mapPoint.areaSprite;
-        this.nameField.text = CustomUtilities.Format.getLanguageDialogText(mapPoint.areaName, mapPoint.areaNameEnglish);
-        this.descriptionField.text = CustomUtilities.Format.getLanguageDialogText(mapPoint.areaDescription, mapPoint.areaDescriptionEnglish);
+        this.nameField.text = FormatUtil.getLanguageDialogText(mapPoint.areaName, mapPoint.areaNameEnglish);
+        this.descriptionField.text = FormatUtil.getLanguageDialogText(mapPoint.areaDescription, mapPoint.areaDescriptionEnglish);
     }
 
     #endregion

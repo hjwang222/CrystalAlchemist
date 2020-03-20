@@ -56,7 +56,7 @@ public class SkillHoming : SkillProjectile
             else
             {
                 //Starte End-Animation wenn der Skill sein Ziel erreicht hat
-                CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Explode", true);
+                AnimatorUtil.SetAnimatorParameter(this.skill.animator, "Explode", true);
             }
         }
         else

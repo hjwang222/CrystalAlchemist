@@ -99,7 +99,7 @@ public class Character : MonoBehaviour
     public float timeDistortion = 1;
     [HideInInspector]
     public bool isPlayer = false;
-    
+
     [HideInInspector]
     public List<Character> activePets = new List<Character>();
     [HideInInspector]
@@ -201,7 +201,7 @@ public class Character : MonoBehaviour
     public void ActivateCharacter()
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
-        if(this.stats.lootTable != null) this.itemDrop = this.stats.lootTable.SetLoot();
+        if (this.stats.lootTable != null) this.itemDrop = this.stats.lootTable.SetLoot();
     }
     #endregion
 
@@ -272,7 +272,7 @@ public class Character : MonoBehaviour
     private void updateLifeAnimation()
     {
         float percentage = this.life * 100 / this.maxLife;
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Life", percentage);
+        AnimatorUtil.SetAnimatorParameter(this.animator, "Life", percentage);
     }
 
     private void regeneration()
@@ -302,7 +302,7 @@ public class Character : MonoBehaviour
 
     public void dropItem()
     {
-        if(this.itemDrop != null) this.itemDrop.Instantiate(this.transform.position);        
+        if (this.itemDrop != null) this.itemDrop.Instantiate(this.transform.position);
     }
 
     #endregion
@@ -317,7 +317,7 @@ public class Character : MonoBehaviour
 
     public void updateAnimDirection(Vector2 direction)
     {
-        CustomUtilities.UnityUtils.SetAnimDirection(direction, this.animator);
+        AnimatorUtil.SetAnimDirection(direction, this.animator);
     }
 
     public void changeAnim(Vector2 direction)
@@ -377,8 +377,8 @@ public class Character : MonoBehaviour
             }
 
             //TODO: Kill sofort (Skill noch aktiv)
-            CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
-            CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
+            StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
+            StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
 
             this.setStartColor();
             this.currentState = CharacterState.dead;
@@ -395,14 +395,14 @@ public class Character : MonoBehaviour
             {
                 PlayDeathAnimation();
             }
-            else CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", true);
+            else AnimatorUtil.SetAnimatorParameter(this.animator, "Dead", true);
         }
     }
 
 
     public void PlaySoundEffect(AudioClip clip)
     {
-        CustomUtilities.Audio.playSoundEffect(this.gameObject, clip);
+        AudioUtil.playSoundEffect(this.gameObject, clip);
     }
 
     public void DestroyIt()
@@ -430,7 +430,7 @@ public class Character : MonoBehaviour
     public void PlayRespawnAnimation()
     {
         this.changeColor(Color.white);
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Respawn");
+        AnimatorUtil.SetAnimatorParameter(this.animator, "Respawn");
     }
 
     public void updateResource(ResourceType type, float addResource, bool showingDamageNumber)
@@ -447,8 +447,14 @@ public class Character : MonoBehaviour
 
     public void updateResource(ResourceType type, ItemGroup item, float addResource)
     {
-        //Skill Sender, Skill Target, Statuseffect und Price Reduce
+        //Skill Target, Statuseffect und Price Reduce
         updateResource(type, item, addResource, true);
+    }
+
+    public void updateResource(Price price)
+    {
+        //Skill Sender
+        updateResource(price.resourceType, price.item, price.amount, true);
     }
 
     public virtual void updateResource(ResourceType type, ItemGroup item, float value, bool showingDamageNumber)
@@ -457,7 +463,7 @@ public class Character : MonoBehaviour
         {
             case ResourceType.life:
                 {
-                    this.life = CustomUtilities.Resources.setResource(this.life, this.maxLife, value);
+                    this.life = GameUtil.setResource(this.life, this.maxLife, value);
 
                     Color[] colorArray = GlobalValues.red;
                     if (value > 0) colorArray = GlobalValues.green;
@@ -468,10 +474,10 @@ public class Character : MonoBehaviour
                 }
             case ResourceType.mana:
                 {
-                    this.mana = CustomUtilities.Resources.setResource(this.mana, this.maxMana, value);
+                    this.mana = GameUtil.setResource(this.mana, this.maxMana, value);
                     if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
                     break;
-                }            
+                }
         }
     }
 
@@ -481,15 +487,28 @@ public class Character : MonoBehaviour
         if (signal != null && addResource != 0) signal.Raise();
     }
 
-    public virtual float getResource(ResourceType type, ItemGroup item)
+    public virtual bool HasEnoughCurrency(Price price)
     {
-        switch (type)
-        {
-            case ResourceType.life: return this.life;
-            case ResourceType.mana: return this.mana;            
-        }
+        //Override by Player
+        //Used by Ability
+        return true;
+    }
 
-        return 0;
+    public bool ActiveInField()
+    {
+        if (this.currentState != CharacterState.inDialog
+            && this.currentState != CharacterState.respawning
+            && this.currentState != CharacterState.inMenu
+            && this.currentState != CharacterState.dead
+            && !StatusEffectUtil.isCharacterStunned(this)) return true;
+        return false;
+    }
+
+    public bool canUseIt(Price price)
+    {
+        //Door, Shop, Treasure, Abilities
+        if (ActiveInField() && HasEnoughCurrency(price)) return true;       
+        return false;
     }
 
     public void updateSpeed(float addSpeed)
@@ -552,12 +571,12 @@ public class Character : MonoBehaviour
         if (this.GetComponent<PlayerAbilities>() != null) this.GetComponent<PlayerAbilities>().enabled = value;
         if (this.GetComponent<PlayerControls>() != null) this.GetComponent<PlayerControls>().enabled = value;
         if (this.GetComponent<PlayerMovement>() != null) this.GetComponent<PlayerMovement>().enabled = value;
-        if (this.GetComponent<PlayerUtils>() != null) this.GetComponent<PlayerUtils>().enabled = value;
+        if (this.GetComponent<PlayerItems>() != null) this.GetComponent<PlayerItems>().enabled = value;
     }
 
     public void startAttackAnimation(string parameter)
     {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, parameter);
+        AnimatorUtil.SetAnimatorParameter(this.animator, parameter);
     }
 
     public void resetCast(Skill skill)
@@ -635,7 +654,7 @@ public class Character : MonoBehaviour
                 {
                     foreach (StatusEffect effect in targetModule.statusEffects)
                     {
-                        CustomUtilities.StatusEffectUtil.AddStatusEffect(effect, this);
+                        StatusEffectUtil.AddStatusEffect(effect, this);
                     }
                 }
 
@@ -652,7 +671,7 @@ public class Character : MonoBehaviour
                             this.GetComponent<AI>().aggroGameObject.increaseAggroOnHit(skill.sender, elem.amount);
 
                         //Charakter-Treffer (Schaden) animieren
-                        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.stats.hitSoundEffect);
+                        AudioUtil.playSoundEffect(this.gameObject, this.stats.hitSoundEffect);
                         setInvincible();
                     }
                 }

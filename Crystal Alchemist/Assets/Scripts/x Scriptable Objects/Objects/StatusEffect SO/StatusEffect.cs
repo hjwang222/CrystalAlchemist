@@ -54,7 +54,7 @@ public class StatusEffect : ScriptableObject
 
     [FoldoutGroup("Basis Attribute")]
     [Tooltip("Anzahl der maximalen gleichen Effekte (Stacks)")]
-    [Range(1, CustomUtilities.maxFloatSmall)]
+    [MinValue(1)]
     public float maxStacks = 1;
 
     [FoldoutGroup("Basis Attribute")]

@@ -68,7 +68,7 @@ public class LoadSystem : MonoBehaviour
         }
         else
         {
-            CustomUtilities.Preset.setPreset(player.defaultPreset, player.preset);
+            GameUtil.setPreset(player.defaultPreset, player.preset);
         }
     }
 

@@ -15,7 +15,7 @@ public class StatusEffectBlindModule : StatusEffectModule
     private void OnDestroy()
     {
         Animator animator = this.panel.transform.GetChild(0).GetComponent<Animator>();
-        CustomUtilities.UnityUtils.SetAnimatorParameter(animator, "Explode", true);
+        AnimatorUtil.SetAnimatorParameter(animator, "Explode", true);
         Destroy(this.panel, 2f);
     }
 }

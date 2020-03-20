@@ -122,7 +122,7 @@ public class MenuControls : BasicMenu
     public void enableButtons(bool value)
     {
         List<Selectable> selectables = new List<Selectable>();
-        CustomUtilities.UnityFunctions.GetChildObjects<Selectable>(this.transform, selectables);
+        UnityUtil.GetChildObjects<Selectable>(this.transform, selectables);
 
         foreach (Selectable selectable in selectables)
         {

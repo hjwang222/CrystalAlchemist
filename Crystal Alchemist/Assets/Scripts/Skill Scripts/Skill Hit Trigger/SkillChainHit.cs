@@ -16,7 +16,6 @@ public class SkillChainHit : SkillMechanicHit
     [SerializeField]
     [HideIf("useRange", true)]
     [BoxGroup("Mechanics")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
     private float distanceNeeded = 0f;
 
     [HideIf("useRange", true)]
@@ -73,7 +72,7 @@ public class SkillChainHit : SkillMechanicHit
             if (this.useStartDistance && this.startDistance <= 0)
                 this.startDistance = Vector3.Distance(this.skill.target.transform.position, this.skill.sender.transform.position);
 
-            return CustomUtilities.Collisions.checkDistance(this.skill.target,
+            return CollisionUtil.checkDistance(this.skill.target,
                                                       this.skill.sender.gameObject, rangeNeeded.x, rangeNeeded.y,
                                                       this.startDistance, this.distanceNeeded,
                                                       this.useStartDistance, this.useRange);
