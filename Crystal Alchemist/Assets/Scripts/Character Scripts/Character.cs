@@ -201,7 +201,7 @@ public class Character : MonoBehaviour
     public void ActivateCharacter()
     {
         if (this.boxCollider != null) this.boxCollider.enabled = true;
-        if (this.stats.lootTable != null) this.itemDrop = this.stats.lootTable.SetLoot();
+        if (this.stats.lootTable != null) this.itemDrop = this.stats.lootTable.GetItemDrop();
     }
     #endregion
 
@@ -451,10 +451,9 @@ public class Character : MonoBehaviour
         updateResource(type, item, addResource, true);
     }
 
-    public void updateResource(Price price)
+    public virtual void reduceResource(Costs price)
     {
-        //Skill Sender
-        updateResource(price.resourceType, price.item, price.amount, true);
+        //No Costs for AI
     }
 
     public virtual void updateResource(ResourceType type, ItemGroup item, float value, bool showingDamageNumber)
@@ -487,7 +486,7 @@ public class Character : MonoBehaviour
         if (signal != null && addResource != 0) signal.Raise();
     }
 
-    public virtual bool HasEnoughCurrency(Price price)
+    public virtual bool HasEnoughCurrency(Costs price)
     {
         //Override by Player
         //Used by Ability
@@ -504,7 +503,7 @@ public class Character : MonoBehaviour
         return false;
     }
 
-    public bool canUseIt(Price price)
+    public bool canUseIt(Costs price)
     {
         //Door, Shop, Treasure, Abilities
         if (ActiveInField() && HasEnoughCurrency(price)) return true;       
@@ -658,7 +657,7 @@ public class Character : MonoBehaviour
                     }
                 }
 
-                foreach (Price elem in targetModule.affectedResources)
+                foreach (CharacterResource elem in targetModule.affectedResources)
                 {
                     float amount = elem.amount * percentage / 100;
 

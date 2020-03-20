@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Sentinel
-  skillNameEnglish: Sentinel
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -75,7 +73,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill: {fileID: 1894471306822299025}
   summon: {fileID: 5280788646405828722, guid: d7b9a545cd00f294aa2cd5ca992130b9, type: 3}
-  immortalTimerPet: 0.5
 --- !u!114 &1612117791632409909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,10 +86,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 1894471306822299025}
-  resourceType: 2
-  item: {fileID: 0}
-  allResourceSender: 0
-  addResourceSender: -2
+  costs:
+    resourceType: 2
+    item: {fileID: 0}
+    amount: 2
   intervallSender: 1
   speedDuringCasting: 0
   speedDuringDuration: 0

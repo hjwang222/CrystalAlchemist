@@ -10,7 +10,7 @@ public class MiniGamePrice : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textField;
 
-    public bool updatePrice(Player player, Price price)
+    public bool updatePrice(Player player, Costs price)
     {
         this.image.enabled = false;
 

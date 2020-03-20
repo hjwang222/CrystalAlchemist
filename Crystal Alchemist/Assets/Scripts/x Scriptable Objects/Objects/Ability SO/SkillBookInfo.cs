@@ -8,12 +8,14 @@ public class SkillBookInfo : ScriptableObject
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
     [TextArea]
-    public string skillDescription;
+    [SerializeField]
+    private string skillDescription;
 
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
     [TextArea]
-    public string skillDescriptionEnglish;
+    [SerializeField]
+    private string skillDescriptionEnglish;
 
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
@@ -28,4 +30,9 @@ public class SkillBookInfo : ScriptableObject
     [Tooltip("Icon für den Spieler")]
     [AssetIcon]
     public Sprite icon;
+
+    public string getDescription()
+    {
+        return FormatUtil.getLanguageDialogText(this.skillDescription, this.skillDescriptionEnglish);
+    }
 }

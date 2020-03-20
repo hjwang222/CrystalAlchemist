@@ -23,6 +23,14 @@ public enum AbilityRequirements
 [CreateAssetMenu(menuName = "Game/Ability/Ability")]
 public class Ability : ScriptableObject
 {
+    [BoxGroup("Texts")]
+    [SerializeField]
+    private string abilityName;
+
+    [BoxGroup("Texts")]
+    [SerializeField]
+    private string abilityNameEnglish;
+
     [BoxGroup("Objects")]
     [Required]
     public Skill skill;
@@ -64,8 +72,6 @@ public class Ability : ScriptableObject
     [SerializeField]
     public bool isRapidFire = false;
 
-
-
     [BoxGroup("Booleans")]
     [SerializeField]
     public bool remoteActivation = false;
@@ -101,7 +107,10 @@ public class Ability : ScriptableObject
         return Color.yellow;
     }*/
 
-
+    public string GetName()
+    {
+        return FormatUtil.getLanguageDialogText(this.abilityName, this.abilityNameEnglish);
+    }
 
 
 
@@ -188,7 +197,7 @@ public class Ability : ScriptableObject
             for (int i = 0; i < activeSkills.Count; i++)
             {
                 Skill activeSkill = activeSkills[i];
-                if (activeSkill.skillName == skill.skillName) result++;
+                if (activeSkill.name == skill.name) result++;
             }
         }
         else
@@ -210,7 +219,7 @@ public class Ability : ScriptableObject
         SkillSenderModule senderModule = this.skill.GetComponent<SkillSenderModule>();
         if (senderModule != null)
         {
-            return character.canUseIt(senderModule.price);
+            return character.canUseIt(senderModule.costs);
         }
         else return true;        
     }

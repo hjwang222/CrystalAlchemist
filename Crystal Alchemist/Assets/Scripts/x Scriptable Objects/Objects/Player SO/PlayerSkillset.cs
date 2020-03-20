@@ -28,7 +28,7 @@ public class PlayerSkillset : ScriptableObject
     {
         foreach (Ability ability in this.abilities)
         {
-            if (name == ability.skill.skillName) return ability;
+            if (name == ability.name) return ability;
         }
 
         return null;

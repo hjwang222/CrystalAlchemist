@@ -92,12 +92,12 @@ public class PlayerButtons : ScriptableObject
     {
         List<string[]> result = new List<string[]>();
 
-        if (this.AButton != null) result.Add(new string[] { "A", this.AButton.skill.skillName });
-        if (this.BButton != null) result.Add(new string[] { "B", this.BButton.skill.skillName });
-        if (this.XButton != null) result.Add(new string[] { "X", this.XButton.skill.skillName });
-        if (this.YButton != null) result.Add(new string[] { "Y", this.YButton.skill.skillName });
-        if (this.RBButton != null) result.Add(new string[] { "RB", this.RBButton.skill.skillName });
-        if (this.LBButton != null) result.Add(new string[] { "LB", this.LBButton.skill.skillName });
+        if (this.AButton != null) result.Add(new string[] { "A", this.AButton.name });
+        if (this.BButton != null) result.Add(new string[] { "B", this.BButton.name });
+        if (this.XButton != null) result.Add(new string[] { "X", this.XButton.name });
+        if (this.YButton != null) result.Add(new string[] { "Y", this.YButton.name });
+        if (this.RBButton != null) result.Add(new string[] { "RB", this.RBButton.name });
+        if (this.LBButton != null) result.Add(new string[] { "LB", this.LBButton.name });
 
         return result;
     }

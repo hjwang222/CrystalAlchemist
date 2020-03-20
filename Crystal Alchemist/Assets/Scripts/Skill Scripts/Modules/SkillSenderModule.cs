@@ -1,53 +1,51 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class SkillSenderModule : SkillModule
 {
-    [TabGroup("Sender Attribute")]
-    public Price price;
+    [BoxGroup("Sender Attribute")]
+    [HideLabel]
+    public Costs costs;
 
-    [TabGroup("Sender Attribute")]
-    [HideIf("resourceType", ResourceType.none)]
+    [BoxGroup("Sender Attribute")]
     [Tooltip("Intervall während der Dauer des Skills Leben oder Mana verändert werden.")]
     [MinValue(0)]
     public float intervallSender = 0;
 
-    [TabGroup("Sender Attribute")]
+    [BoxGroup("Sender Attribute")]
     [Tooltip("Bewegungsgeschwindigkeit während eines Casts")]
-    [Range(-100, 100)]
+    [Range(-100, 0)]
     public float speedDuringCasting = 0;
 
-    [TabGroup("Sender Attribute")]
+    [BoxGroup("Sender Attribute")]
     [Tooltip("Bewegungsgeschwindigkeit während des Angriffs")]
-    [Range(-100, 100)]
+    [Range(-100, 0)]
     public float speedDuringDuration = 0;
 
-    [TabGroup("Sender Attribute")]
+    [BoxGroup("Sender Attribute")]
     [Tooltip("Soll die Geschwindigkeit auch die Animation beeinflussen?")]
     public bool affectAnimation = true;
 
     [Space(10)]
-    [TabGroup("Sender Attribute")]
+    [BoxGroup("Sender Attribute")]
     [Tooltip("True = nach vorne, False = Knockback")]
     [SerializeField]
     private bool forward = false;
 
-    [TabGroup("Sender Attribute")]
+    [BoxGroup("Sender Attribute")]
     [MinValue(0)]
     [Tooltip("Stärke des Knockbacks")]
     [SerializeField]
     private float selfThrust = 0;
 
-    [TabGroup("Sender Attribute")]
+    [BoxGroup("Sender Attribute")]
     [MinValue(0)]
     [Tooltip("Dauer des Knockbacks")]
     [HideIf("selfThrust", 0f)]
     [SerializeField]
     private float selfThrustTime = 0;
 
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [BoxGroup("Wirkungsbereich")]
     [Tooltip("Soll der Spieler nur diesen Skill benutzen dürfen?")]
     [EnumToggleButtons]
     public StateType stateType = StateType.none;
@@ -81,7 +79,7 @@ public class SkillSenderModule : SkillModule
             {
                 if (this.skill.sender != null)
                 {
-                    if (this.skill.sender.HasEnoughCurrency(this.price)) this.skill.DeactivateIt();
+                    if (this.skill.sender.HasEnoughCurrency(this.costs)) this.skill.DeactivateIt();
                     else
                     {
                         this.elapsed = this.intervallSender;
@@ -100,7 +98,7 @@ public class SkillSenderModule : SkillModule
 
     private void updateResourceSender()
     {
-        if (this.skill.sender != null) this.skill.sender.updateResource(this.price);
+        if (this.skill.sender != null) this.skill.sender.reduceResource(this.costs);
     }
 
     private void setSelfTrust()

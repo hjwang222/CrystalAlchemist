@@ -1,34 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using TMPro;
 
 public class ShopItem : Rewardable
 {
-    [Header("Shop-Item Attribute")]
-    public SpriteRenderer childSprite;
+    [BoxGroup("Shop-Item Attribute")]
+    [SerializeField]
+    private SpriteRenderer childSprite;
 
-    [Header("Text-Attribute")]
-    public TextMeshPro priceText;
-    public Color fontColor;
-    public Color outlineColor;
-    public float outlineWidth = 0.25f;
-    public Animator anim;
+    [BoxGroup("Loot")]
+    [SerializeField]
+    [HideLabel]
+    private Reward reward;
+
+    [BoxGroup("Text-Attribute")]
+    [SerializeField]
+    private TextMeshPro priceText;
+
+    [BoxGroup("Text-Attribute")]
+    [SerializeField]
+    private Color fontColor;
+
+    [BoxGroup("Text-Attribute")]
+    [SerializeField]
+    private Color outlineColor;
+
+    [BoxGroup("Text-Attribute")]
+    [SerializeField]
+    private float outlineWidth = 0.25f;
+
+    [BoxGroup("Easy Access")]
+    [SerializeField]
+    private Animator anim;
 
     private new void Start()
     {
         base.Start();
-
-        FormatUtil.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        this.setLoot();
+        FormatUtil.set3DText(this.priceText, this.costs + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
         this.childSprite.sprite = this.itemDrop.stats.getSprite();
         if (this.itemDrop == null) Destroy(this.gameObject);
     }
 
+    private void setLoot()
+    {
+        this.itemDrop = this.reward.GetItemDrop();
+    }
+
     public override void doSomethingOnSubmit()
     {
-        if (this.player.canUseIt(this.price))
+        if (this.player.canUseIt(this.costs))
         {
-            this.player.reduceCurrency(this.price);
+            this.player.reduceResource(this.costs);
             ItemStats loot = itemDrop.stats;
 
             this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.success, loot);

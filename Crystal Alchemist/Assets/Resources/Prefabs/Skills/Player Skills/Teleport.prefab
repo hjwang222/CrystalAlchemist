@@ -47,8 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Teleportation
-  skillNameEnglish: Teleport
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -76,10 +74,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  resourceType: 2
-  item: {fileID: 0}
-  allResourceSender: 0
-  addResourceSender: -3
+  costs:
+    resourceType: 2
+    item: {fileID: 0}
+    amount: 3
   intervallSender: 0
   speedDuringCasting: -100
   speedDuringDuration: 0
@@ -133,4 +131,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  immortalTimer: 1
+  invincibleTimer: 0

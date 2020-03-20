@@ -39,7 +39,7 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     public bool setYesButtonFirst = true;
 
     [HideInInspector]
-    public Price price;
+    public Costs price;
 
     [HideInInspector]
     public string dialogText;

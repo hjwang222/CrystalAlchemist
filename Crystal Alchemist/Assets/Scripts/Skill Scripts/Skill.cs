@@ -21,26 +21,17 @@ public class Skill : MonoBehaviour
 {
     #region Attribute
 
-    [Required("Name muss gesetzt sein!")]
-    [BoxGroup("Pflichtfelder")]
-    [Tooltip("Name des Angriffs")]
-    public string skillName;
-
-    [BoxGroup("Pflichtfelder")]
-    [Tooltip("Name des Angriffs")]
-    public string skillNameEnglish;
-
     [Space(10)]
-    [FoldoutGroup("Easy Access", expanded: false)]
+    [BoxGroup("Easy Access")]
     public SpriteRenderer spriteRenderer;
 
-    [FoldoutGroup("Easy Access", expanded: false)]
+    [BoxGroup("Easy Access")]
     public Rigidbody2D myRigidbody;
 
-    [FoldoutGroup("Easy Access", expanded: false)]
+    [BoxGroup("Easy Access")]
     public Animator animator;
 
-    [FoldoutGroup("Easy Access", expanded: false)]
+    [BoxGroup("Easy Access")]
     [Tooltip("Schatten")]
     public SpriteRenderer shadow;
 

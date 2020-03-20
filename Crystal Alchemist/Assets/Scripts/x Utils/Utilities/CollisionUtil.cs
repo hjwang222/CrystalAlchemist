@@ -138,7 +138,7 @@ public class CollisionUtil : MonoBehaviour
             if (skill.GetComponent<SkillTargetModule>() != null
             && skill.GetComponent<SkillTargetModule>().affectSkills
             && tempSkill.CompareTag("Skill")
-            && tempSkill.skillName != skill.skillName)
+            && tempSkill.name != skill.name)
             {
                 return true;
             }

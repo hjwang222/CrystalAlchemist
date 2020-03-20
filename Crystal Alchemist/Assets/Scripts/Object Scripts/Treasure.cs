@@ -14,32 +14,44 @@ public class Treasure : Rewardable
 {
     #region Attribute   
 
-    [FoldoutGroup("Treasure Options", expanded: false)]
+    [BoxGroup("Treasure Options")]
     [Required]
-    public Animator anim;
+    [SerializeField]
+    private Animator anim;
 
     [BoxGroup("Mandatory")]
     [Required]
-    public GameObject showItem;
+    [SerializeField]
+    private GameObject showItem;
 
-    [FoldoutGroup("Treasure Options", expanded: false)]
-    public AudioClip soundEffectTreasure;
+    [BoxGroup("Treasure Options")]
+    [SerializeField]
+    private AudioClip soundEffectTreasure;
 
-    [FoldoutGroup("Treasure Options", expanded: false)]
+    [BoxGroup("Treasure Options")]
     [EnumToggleButtons]
-    public TreasureType treasureType = TreasureType.normal;
+    [SerializeField]
+    private TreasureType treasureType = TreasureType.normal;
 
-    [FoldoutGroup("TextMeshPro Options", expanded: false)]
-    public TextMeshPro priceText;
+    [BoxGroup("Loot")]
+    [SerializeField]
+    private LootTable lootTable;
 
-    [FoldoutGroup("TextMeshPro Options", expanded: false)]
-    public Color fontColor;
+    [BoxGroup("Text-Attribute")]
+    [SerializeField]
+    private TextMeshPro priceText;
 
-    [FoldoutGroup("TextMeshPro Options", expanded: false)]
-    public Color outlineColor;
+    [BoxGroup("Text-Attribute")]
+    [SerializeField]
+    private Color fontColor;
 
-    [FoldoutGroup("TextMeshPro Options", expanded: false)]
-    public float outlineWidth = 0.25f;
+    [BoxGroup("Text-Attribute")]
+    [SerializeField]
+    private Color outlineColor;
+
+    [BoxGroup("Text-Attribute")]
+    [SerializeField]
+    private float outlineWidth = 0.25f;
     #endregion
 
 
@@ -48,10 +60,18 @@ public class Treasure : Rewardable
     public override void Start()
     {
         base.Start();
-        FormatUtil.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        this.setLoot();
+        FormatUtil.set3DText(this.priceText, this.costs + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
         if (this.itemDrop != null && this.treasureType == TreasureType.normal) changeTreasureState(true);
     }
+
+    private void setLoot()
+    {
+        this.itemDrop = this.lootTable.GetItemDrop();
+    }
+
+
 
     #endregion
 
@@ -118,7 +138,7 @@ public class Treasure : Rewardable
 
     private void OpenChest()
     {
-        this.player.reduceCurrency(this.price);
+        this.player.reduceResource(this.costs);
         changeTreasureState(true);
         AudioUtil.playSoundEffect(this.gameObject, this.soundEffect);
 
@@ -143,7 +163,7 @@ public class Treasure : Rewardable
 
     private void canOpenChest()
     {
-        if (this.player.canUseIt(this.price)) OpenChest();
+        if (this.player.canUseIt(this.costs)) OpenChest();
         else this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
     }
 

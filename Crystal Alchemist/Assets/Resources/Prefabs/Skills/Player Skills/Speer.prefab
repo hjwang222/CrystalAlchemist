@@ -52,8 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Speer
-  skillNameEnglish: Spear
   spriteRenderer: {fileID: 5387825760302318934}
   myRigidbody: {fileID: 2211265516280113145}
   animator: {fileID: 936580078306894737}
@@ -184,10 +182,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  resourceType: 0
-  item: {fileID: 0}
-  allResourceSender: 0
-  addResourceSender: 0
+  costs:
+    resourceType: 0
+    item: {fileID: 0}
+    amount: 1
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0

@@ -18,10 +18,11 @@ public class Interactable : MonoBehaviour
     [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]
     public GameObject contextClueChild;
 
-    [FoldoutGroup("Activation Requirements", expanded: false)]
-    public Price price;
+    [BoxGroup("Activation Requirements")]
+    [HideLabel]
+    public Costs costs;
 
-    [FoldoutGroup("Sound", expanded: false)]
+    [BoxGroup("Sound")]
     [Tooltip("Standard-Soundeffekt")]
     public AudioClip soundEffect;
 

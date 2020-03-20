@@ -544,18 +544,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
-  healthBar: {fileID: 0}
-  manaBar: {fileID: 0}
   player: {fileID: 0}
   playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
   child: {fileID: 0}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 2537619730045242350}
   blackScreen: {fileID: 0}
-  exitDialogBox: {fileID: 0}
-  lastState: 0
-  disableMenuControlsScript: 0
+  isIngameMenu: 0
   disableExitButtonPress: 0
+  exitDialogBox: {fileID: 0}
+  cursorTexture: {fileID: 0}
   miniGameRound: {fileID: 0}
   timeField: {fileID: 6312356389716529380}
   timeImage: {fileID: 6278725496696721524}
@@ -1760,7 +1758,7 @@ MonoBehaviour:
   - {fileID: 6893494197519207099}
   - {fileID: 5349906483942292339}
   priceUI: {fileID: 1854818249515644828}
-  startButton: {fileID: 7959306556476636816}
+  startButton: {fileID: 91020429911883787}
   descriptionText: {fileID: 577330786128719807}
 --- !u!1 &1639462395346422541
 GameObject:

@@ -12,7 +12,7 @@ public class AbilityUtil : MonoBehaviour
     public static SkillSequence instantiateSequence(SkillSequence skillSequence, AI npc, Vector2 sequencePosition, modificationType type)
     {
         SkillSequence sequence = Instantiate(skillSequence);
-
+        sequence.name = skillSequence.name;
         sequence.setSender(npc);
         sequence.setTarget(npc.target);
         sequence.setPosition(type, sequencePosition);
@@ -36,6 +36,7 @@ public class AbilityUtil : MonoBehaviour
             && sender.currentState != CharacterState.defend)
         {
             Skill activeSkill = Instantiate(skill, sender.transform.position, Quaternion.identity);
+            activeSkill.name = skill.name;
             SkillTargetModule targetModule = activeSkill.GetComponent<SkillTargetModule>();
             SkillSenderModule sendermodule = activeSkill.GetComponent<SkillSenderModule>();
 
@@ -44,23 +45,23 @@ public class AbilityUtil : MonoBehaviour
             if (target != null) activeSkill.target = target;
             activeSkill.sender = sender;
 
-            List<Price> temp = new List<Price>();
+            List<CharacterResource> temp = new List<CharacterResource>();
 
             if (targetModule != null)
             {
                 for (int i = 0; i < targetModule.affectedResources.Count; i++)
                 {
-                    Price elem = targetModule.affectedResources[i];
+                    CharacterResource elem = targetModule.affectedResources[i];
                     elem.amount /= reduce;
                     temp.Add(elem);
                 }
 
                 targetModule.affectedResources = temp;
-                if (sendermodule != null) sendermodule.price.amount /= reduce;
+                if (sendermodule != null) sendermodule.costs.amount /= reduce;
             }
 
             sender.activeSkills.Add(activeSkill);
-            return activeSkill.GetComponent<Skill>();
+            return activeSkill;
         }
 
         return null;

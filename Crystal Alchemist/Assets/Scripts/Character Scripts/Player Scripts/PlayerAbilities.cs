@@ -162,7 +162,7 @@ public class PlayerAbilities : MonoBehaviour
     {
         foreach (Skill skill in this.player.activeSkills)
         {
-            if (skill.skillName == ability.skill.skillName)
+            if (skill.name == ability.skill.name)
             {
                 skill.DeactivateIt();
                 break;

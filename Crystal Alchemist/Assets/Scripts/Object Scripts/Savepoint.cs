@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sirenix.OdinInspector;
 
 public class Savepoint : Interactable
 {
+    [BoxGroup("SavePoint")]
     [SerializeField]
     private SimpleSignal openSaveMenu;
 

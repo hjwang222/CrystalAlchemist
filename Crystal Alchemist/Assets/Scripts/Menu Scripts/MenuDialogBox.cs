@@ -35,7 +35,7 @@ public class MenuDialogBox : MenuControls
     private UnityEvent actionYes; 
     private MenuControls lastMainMenu;
 
-    private Price price;
+    private Costs price;
 
     [HideInInspector]
     public string dialogText;
@@ -87,7 +87,7 @@ public class MenuDialogBox : MenuControls
         this.closeDialog();
         if (this.actionYes != null)
         {
-            this.player.reduceCurrency(this.price);
+            this.player.reduceResource(this.price);
             this.actionYes.Invoke();
         }
     }

@@ -52,10 +52,10 @@ public class Door : Interactable
             {
                  if (this.doorType == DoorType.normal)
                 {  
-                    if (this.player.canUseIt(this.price))
+                    if (this.player.canUseIt(this.costs))
                     {
                         //Tür offen!
-                        this.player.reduceCurrency(this.price);
+                        this.player.reduceResource(this.costs);
                         OpenCloseDoor(true, this.context);
                         this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.success);
                     }

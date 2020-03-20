@@ -22,14 +22,22 @@ public class MiniGameMatch
     public float maxDuration;
 
     [FoldoutGroup("$difficulty")]
-    public Price price;
+    public Costs price;
 
     [FoldoutGroup("$difficulty")]
-    public Reward reward;
+    [SerializeField]
+    private Reward reward;
 
-    public void Initialize()
+    private ItemDrop item;
+
+    public void SetItem()
     {
-        reward.Initialize();
+        this.item = reward.GetItemDrop();
+    }
+
+    public ItemDrop getItem()
+    {
+        return this.item;
     }
 }
 
@@ -43,7 +51,7 @@ public class MiniGameMatches: ScriptableObject
     {
         foreach(MiniGameMatch match in this.matches)
         {
-            match.Initialize();
+            match.SetItem();
         }
     }
 

@@ -158,30 +158,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Hitzeblitz
-  skillNameEnglish: Heat Lightning
   spriteRenderer: {fileID: 7598260003657270786}
   myRigidbody: {fileID: 1757583206438321652}
   animator: {fileID: 8873797952626383179}
   shadow: {fileID: 0}
   positionOffset: 0
   attachToSender: 0
-  lockMovementonDuration: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 1
   hasDuration: 1
   maxDuration: 180
   sender: {fileID: 0}
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  triggerIsActive: 1
-  setActive: 1
+  overridePosition: 1
 --- !u!114 &5379300759147678762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,9 +185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: -0.5
+  costs:
+    resourceType: 2
+    item: {fileID: 0}
+    amount: 0.5
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0

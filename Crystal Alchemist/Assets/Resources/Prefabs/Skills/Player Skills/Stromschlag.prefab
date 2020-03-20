@@ -139,30 +139,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Stromschlag
-  skillNameEnglish: Electric Shock
   spriteRenderer: {fileID: 6508292816955024436}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
   positionOffset: 0
   attachToSender: 1
-  lockMovementonDuration: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 0
   hasDuration: 0
   maxDuration: 9999
   sender: {fileID: 0}
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  triggerIsActive: 1
-  setActive: 1
+  overridePosition: 1
 --- !u!114 &2029259155831185462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,9 +166,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  resourceType: 2
-  item: {fileID: 0}
-  addResourceSender: -0.25
+  costs:
+    resourceType: 2
+    item: {fileID: 0}
+    amount: 0.25
   intervallSender: 0.5
   speedDuringCasting: 0
   speedDuringDuration: 0

@@ -62,8 +62,9 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     private MenuDialogBoxLauncher dialogBox;
 
-    [SerializeField]
-    private Price price;
+    [BoxGroup("Activation Requirements")]
+    [HideLabel]
+    public Costs costs;
 
     private Player player;
 
@@ -72,7 +73,7 @@ public class SceneTransition : MonoBehaviour
         if(this.fadeSignal != null) this.fadeSignal.Raise(true);
         if(this.dialogBox != null)
         {
-            this.dialogBox.price = price;
+            this.dialogBox.price = costs;
         }
     }
 

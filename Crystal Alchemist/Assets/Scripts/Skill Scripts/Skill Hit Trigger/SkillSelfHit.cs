@@ -7,7 +7,7 @@ public class SkillSelfHit : SkillHitTrigger
 {
     [InfoBox("Wirkt auf den Sender direkt (ohne Collider)")]
     [SerializeField]
-    [Range(0, 10)]
+    [MinValue(0)]
     private float invincibleTimer = 0;
 
     private void Start()

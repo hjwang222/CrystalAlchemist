@@ -73,7 +73,7 @@ public class DialogSystem : MonoBehaviour
     {
         if (this.texts.Count > 0)
         {
-            player.showDialogBox(getText(this.texts[0], interactable.price.amount, interactable.price.item, loot, player));
+            player.showDialogBox(getText(this.texts[0], interactable.costs.amount, interactable.costs.item, loot, player));
         }
     }
 
@@ -91,7 +91,7 @@ public class DialogSystem : MonoBehaviour
         {
             if(text.trigger == trigger)
             {
-                player.showDialogBox(getText(text, interactable.price.amount, interactable.price.item, loot, player));
+                player.showDialogBox(getText(text, interactable.costs.amount, interactable.costs.item, loot, player));
                 break;
             }
         }

@@ -44,8 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Dash
-  skillNameEnglish: Dash
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -73,10 +71,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  resourceType: 2
-  item: {fileID: 0}
-  allResourceSender: 0
-  addResourceSender: -0.5
+  costs:
+    resourceType: 2
+    item: {fileID: 0}
+    amount: 0.5
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0

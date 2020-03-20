@@ -119,8 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Manatrank
-  skillNameEnglish: Mana Potion
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -148,10 +146,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  resourceType: 3
-  item: {fileID: 4837573728731285450, guid: 00971db8ee1ee5f41a174485c94f3d32, type: 3}
-  allResourceSender: 0
-  addResourceSender: -1
+  costs:
+    resourceType: 3
+    item: {fileID: 11400000, guid: b54098306a80a354987558202118c74a, type: 2}
+    amount: 1
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0
@@ -199,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  immortalTimer: 0
+  invincibleTimer: 0
 --- !u!114 &7002096517537438511
 MonoBehaviour:
   m_ObjectHideFlags: 0

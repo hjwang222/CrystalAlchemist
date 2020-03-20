@@ -310,8 +310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Giftpfeil
-  skillNameEnglish: Poison Arrow
   spriteRenderer: {fileID: 5634262924188748619}
   myRigidbody: {fileID: 1942275408024995949}
   animator: {fileID: 2130774073635876181}
@@ -339,10 +337,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  resourceType: 3
-  item: {fileID: 0}
-  allResourceSender: 0
-  addResourceSender: -1
+  costs:
+    resourceType: 3
+    item: {fileID: 11400000, guid: c4c6c59263410ba41a80d318974e1abb, type: 2}
+    amount: 1
   intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0

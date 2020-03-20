@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Eos
-  skillNameEnglish: Eos
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
@@ -75,7 +73,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill: {fileID: 1079946639356011911}
   summon: {fileID: 1938021464261085658, guid: e8f5993f1f977624395b4526c4602aee, type: 3}
-  immortalTimerPet: 0
 --- !u!114 &619979892021673929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,10 +86,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 1079946639356011911}
-  resourceType: 2
-  item: {fileID: 0}
-  allResourceSender: 0
-  addResourceSender: -1
+  costs:
+    resourceType: 2
+    item: {fileID: 0}
+    amount: 1
   intervallSender: 1
   speedDuringCasting: 0
   speedDuringDuration: 0

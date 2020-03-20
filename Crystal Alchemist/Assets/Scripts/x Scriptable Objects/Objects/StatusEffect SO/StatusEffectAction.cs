@@ -22,7 +22,7 @@ public class StatusEffectAction
 
     [ShowIf("actionType", StatusEffectActionType.changeResource)]
     [SerializeField]
-    private List<Price> resources;
+    private List<CharacterResource> resources;
 
     [ShowIf("actionType", StatusEffectActionType.speed)]
     [SerializeField]
@@ -62,7 +62,7 @@ public class StatusEffectAction
 
     private void changeResource(Character character)
     {
-        foreach (Price resource in this.resources)
+        foreach (CharacterResource resource in this.resources)
         {
             character.updateResource(resource.resourceType, resource.item, resource.amount);
         }

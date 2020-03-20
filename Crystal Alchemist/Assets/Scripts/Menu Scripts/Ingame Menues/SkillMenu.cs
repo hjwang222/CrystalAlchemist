@@ -123,12 +123,12 @@ public class SkillMenu : MenuControls
             SkillTargetModule targetModule = ability.skill.GetComponent<SkillTargetModule>();
             SkillSenderModule senderModule = ability.skill.GetComponent<SkillSenderModule>();
 
-            this.skillDetailsName.text = FormatUtil.getLanguageDialogText(ability.skill.skillName, ability.skill.skillNameEnglish);
+            this.skillDetailsName.text = ability.GetName();
             float strength = 0;
 
             if(senderModule != null)
             {
-                this.skillDetailsCost.text = Mathf.Abs(senderModule.price.amount).ToString("N1");
+                this.skillDetailsCost.text = Mathf.Abs(senderModule.costs.amount).ToString("N1");
             }
 
             if (targetModule != null)

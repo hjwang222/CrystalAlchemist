@@ -75,8 +75,8 @@ public class CombatButtons : MonoBehaviour
 
             SkillSenderModule senderModule = ability.skill.GetComponent<SkillSenderModule>();
 
-            if (senderModule != null && senderModule.price.item != null)
-                configUI.ammo.text = (int)this.player.getResource(senderModule.price) + "";
+            if (senderModule != null && senderModule.costs.item != null)
+                configUI.ammo.text = (int)this.player.getResource(senderModule.costs) + "";
             else configUI.ammo.text = "";
 
             if (!this.player.GetComponent<PlayerAbilities>().canUseAbilities() 

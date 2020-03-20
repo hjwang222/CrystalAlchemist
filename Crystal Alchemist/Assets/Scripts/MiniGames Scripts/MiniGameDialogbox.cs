@@ -34,13 +34,13 @@ public class MiniGameDialogbox : MonoBehaviour
     public void UpdateDialogBox()
     {        
         this.miniGameUI.setMatch(this.slider.getValue());
+        MiniGameMatch match = this.miniGameUI.getMatch();
 
         foreach (ItemUI itemUI in this.itemUIs)
         {
-            itemUI.setItem(this.miniGameUI.getMatch().reward.getLoot().item.stats);
+            itemUI.setItem(match.getItem().stats);
         }
 
-        MiniGameMatch match = this.miniGameUI.getMatch();
         bool enableStart = this.priceUI.updatePrice(this.miniGameUI.player, match.price);
         this.startButton.interactable = enableStart;
 

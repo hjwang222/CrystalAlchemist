@@ -34,12 +34,12 @@ public class InfoBox : MonoBehaviour
     {
         this.additionalInfo.SetActive(false);
 
-        this.nameField.text = FormatUtil.getLanguageDialogText(ability.skill.skillName, ability.skill.skillNameEnglish);
+        this.nameField.text = ability.GetName();
 
         if (ability.info != null)
         {
             this.previewImage.sprite = ability.info.icon;
-            this.descriptionField.text = FormatUtil.getLanguageDialogText(ability.info.skillDescription, ability.info.skillDescriptionEnglish);
+            this.descriptionField.text = ability.info.getDescription();
         }
 
         if (ability.skill.GetComponent<SkillTargetModule>() != null && ability.skill.GetComponent<SkillTargetModule>().statusEffects.Count > 0)

@@ -147,7 +147,7 @@ public class Player : Character
     ///////////////////////////////////////////////////////////////
 
 
-    public override bool HasEnoughCurrency(Price price)
+    public override bool HasEnoughCurrency(Costs price)
     {
         bool result = false;
 
@@ -161,7 +161,7 @@ public class Player : Character
         return result;
     }
 
-    public float getResource(Price price)
+    public float getResource(Costs price)
     {
         //Buttons und hasEnoughCurrency
         if (price.resourceType == ResourceType.life) return this.life;
@@ -170,9 +170,11 @@ public class Player : Character
         return 0;
     }
 
-    public void reduceCurrency(Price price)
+
+
+    public override void reduceResource(Costs price)
     {
-        //Shop, Door, Treasure, MiniGame, ... (not abilities!)
+        //Shop, Door, Treasure, MiniGame, Abilities, etc
         if ((price.item != null && !price.item.isKeyItem) || price.item == null)
             this.updateResource(price.resourceType, price.item, -price.amount);
     }
