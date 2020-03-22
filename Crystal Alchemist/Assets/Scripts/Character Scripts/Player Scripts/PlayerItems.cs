@@ -15,6 +15,11 @@ public class PlayerItems : MonoBehaviour
         return this.inventory.keyItems;
     }
 
+    public List<ItemGroup> GetItemGroups()
+    {
+        return this.inventory.inventoryItems;
+    }
+
     public int GetAmount(ItemGroup group)
     {
         return this.inventory.GetAmount(group);
@@ -23,6 +28,11 @@ public class PlayerItems : MonoBehaviour
     public void CollectInventoryItem(ItemStats item)
     {
         this.inventory.collectItem(item);
+    }
+
+    public void AddInventoryItem(ItemGroup group, int amount)
+    {
+        this.inventory.AddItemGroup(group, amount);
     }
 
     public string GetAmountString(ItemGroup group)

@@ -16,7 +16,9 @@ public class Collectable : MonoBehaviour
     [Required]
     [BoxGroup("Pflichtfeld")]
     [SerializeField]
-    private ItemStats item;
+    private ItemDrop itemDrop;
+
+    private ItemStats itemStats;
 
     [AssetIcon]
     private Sprite GetSprite()
@@ -26,22 +28,31 @@ public class Collectable : MonoBehaviour
 
     #region Start Funktionen
 
-    public void SetItem(ItemStats item)
+    public void SetItem(ItemDrop drop)
     {
-        this.item = item;
+        this.itemDrop = drop;
+        setItemStats();
+    }
+
+    private void setItemStats()
+    {
+        ItemStats temp = Instantiate(this.itemDrop.stats);
+        temp.name = this.itemDrop.name;
+        this.itemStats = temp;
     }
 
     private void Start()
     {
         //Check if keyItem already in Inventory
-        if (this.item.alreadyThere()) DestroyIt();
+        setItemStats();
+        if (this.itemStats.alreadyThere()) DestroyIt();
     }
 
     #endregion
 
     public void playSounds()
     {
-        AudioUtil.playSoundEffect(this.gameObject, this.item.getSoundEffect());
+        AudioUtil.playSoundEffect(this.gameObject, this.itemStats.getSoundEffect());
     }
 
     #region Collect Item Funktionen
@@ -53,7 +64,7 @@ public class Collectable : MonoBehaviour
             Player player = character.GetComponent<Player>();
             if (player != null)
             {
-                this.item.CollectIt(player);
+                this.itemStats.CollectIt(player);
                 DestroyIt();
             }
         }

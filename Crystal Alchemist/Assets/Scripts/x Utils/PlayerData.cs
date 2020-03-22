@@ -16,7 +16,9 @@ public class PlayerData
     public int buffplus;
     public int debuffminus;
 
-    public List<string[]> inventory = new List<string[]>();
+    public List<string> keyItems = new List<string>();
+    public List<string[]> inventoryItems = new List<string[]>();
+
     public List<string[]> abilities = new List<string[]>();
 
     public string characterName;
@@ -60,14 +62,21 @@ public class PlayerData
 
     private void setInventory(Player player)
     {
-        this.inventory.Clear();
+        this.keyItems.Clear();
+        this.inventoryItems.Clear();
 
-        foreach (ItemStats item in player.GetComponent<PlayerItems>().GetItemStats())
+        foreach (ItemGroup item in player.GetComponent<PlayerItems>().GetItemGroups())
         {
             string[] temp = new string[2];
             temp[0] = item.name.Replace(" (", "(").Split('(')[0];
-            temp[1] = item.amount + "";
-            this.inventory.Add(temp);
+            temp[1] = item.GetAmount() + "";
+            this.inventoryItems.Add(temp);
+        }
+
+        foreach (ItemStats item in player.GetComponent<PlayerItems>().GetItemStats())
+        {
+            string temp = item.name.Replace(" (", "(").Split('(')[0];
+            this.keyItems.Add(temp);
         }
     }
 

@@ -61,7 +61,7 @@ public class Treasure : Rewardable
     {
         base.Start();
         this.setLoot();
-        FormatUtil.set3DText(this.priceText, this.costs + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        FormatUtil.set3DText(this.priceText, this.costs.amount + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
         if (this.itemDrop != null && this.treasureType == TreasureType.normal) changeTreasureState(true);
     }

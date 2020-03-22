@@ -29,7 +29,7 @@ public class LoadSystem : MonoBehaviour
             player.stats.characterName = data.characterName;
             player.secondsPlayed.setValue(data.timePlayed);            
 
-            if (data.inventory.Count > 0) loadInventory(data, player);
+            if (data.keyItems.Count > 0) loadInventory(data, player);
 
             player.GetComponent<PlayerTeleport>().setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]), true);
             player.GetComponent<PlayerTeleport>().teleportPlayerToLastSavepoint(true); //letzter Savepoint, no Scene Loading
@@ -113,14 +113,16 @@ public class LoadSystem : MonoBehaviour
 
     private static void loadInventory(PlayerData data, Player player)
     {
-        foreach (string[] elem in data.inventory)
+        foreach (string keyItem in data.keyItems)
         {
-            ItemStats stats = Resources.Load("Scriptable Objects/Items/" + elem[0], typeof(ItemStats)) as ItemStats;
-
-            if (stats == null) stats = Resources.Load("Scriptable Objects/Items/Key Items/" + elem[0], typeof(ItemStats)) as ItemStats;
-            if (stats == null) stats = Resources.Load("Scriptable Objects/Items/Attribute Points/" + elem[0], typeof(ItemStats)) as ItemStats;
-
+            ItemStats stats = Resources.Load("Scriptable Objects/Items/Item Stats/Key Items/" + keyItem, typeof(ItemStats)) as ItemStats;            
             if (stats != null) stats.CollectIt(player);
+        }
+
+        foreach (string[] item in data.inventoryItems)
+        {
+            ItemGroup group = Resources.Load("Scriptable Objects/Items/Item Group/Inventory Items/" + item[0], typeof(ItemGroup)) as ItemGroup;
+            player.GetComponent<PlayerItems>().AddInventoryItem(group, Convert.ToInt32(item[1]));
         }
     }
 

@@ -11,30 +11,30 @@ public class PlayerInventory : ScriptableObject
     [SerializeField]
     public List<ItemGroup> inventoryItems = new List<ItemGroup>();
 
+    public void AddItemGroup(ItemGroup group, int amount)
+    {
+        ItemGroup newGroup = Instantiate(group);
+        newGroup.name = group.name;
+        newGroup.UpdateAmount(amount);
+        this.inventoryItems.Add(newGroup);
+    }
 
 
     public void collectItem(ItemStats item)
     {
         if (item.isKeyItem())
         {
-            this.keyItems.Add(Instantiate(item));
+            ItemStats keyItem = Instantiate(item);
+            keyItem.name = item.name;
+            this.keyItems.Add(keyItem);
         }
         else
         {
             ItemGroup group = item.itemGroup;
             ItemGroup found = getItemGroup(group);
 
-            if (found == null)
-            {
-                ItemGroup newGroup = Instantiate(group);
-                newGroup.name = group.name;
-                newGroup.UpdateAmount(item.getTotalAmount());
-                this.inventoryItems.Add(newGroup);
-            }
-            else
-            {
-                found.UpdateAmount(item.getTotalAmount());
-            }
+            if (found == null) AddItemGroup(group, item.getTotalAmount());            
+            else found.UpdateAmount(item.getTotalAmount());            
         }
     }
 
@@ -64,7 +64,7 @@ public class PlayerInventory : ScriptableObject
     {
         foreach (ItemGroup item in this.inventoryItems)
         {
-            if (item.itemSlot == ID) return item;
+            if (item != null && item.itemSlot == ID) return item;
         }
 
         return null;
@@ -74,7 +74,7 @@ public class PlayerInventory : ScriptableObject
     {
         foreach (ItemStats item in keyItems)
         {
-            if (item.isID(ID)) return item.itemGroup;
+            if (item != null && item.isID(ID)) return item.itemGroup;
         }
 
         return null;
@@ -99,7 +99,7 @@ public class PlayerInventory : ScriptableObject
     {
         foreach (ItemStats elem in keyItems)
         {
-            if (item.name == elem.name) return true;
+            if (elem != null && item.name == elem.name) return true;
         }
 
         return false;

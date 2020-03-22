@@ -37,7 +37,7 @@ public class ShopItem : Rewardable
     {
         base.Start();
         this.setLoot();
-        FormatUtil.set3DText(this.priceText, this.costs + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        FormatUtil.set3DText(this.priceText, this.costs.amount + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
         this.childSprite.sprite = this.itemDrop.stats.getSprite();
         if (this.itemDrop == null) Destroy(this.gameObject);
     }

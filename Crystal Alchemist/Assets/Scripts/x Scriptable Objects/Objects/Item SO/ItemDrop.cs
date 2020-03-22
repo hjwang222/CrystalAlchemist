@@ -24,8 +24,9 @@ public class ItemDrop : ScriptableObject
 
     public Collectable Instantiate(Vector2 position)
     {
-        Collectable temp = Instantiate(this.collectable, position, Quaternion.identity);        
-        temp.SetItem(this.stats);
+        Collectable temp = Instantiate(this.collectable, position, Quaternion.identity);
+        temp.name = this.name;
+        temp.SetItem(this);
         return temp;
     }
 }
