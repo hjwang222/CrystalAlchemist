@@ -83,6 +83,11 @@ public class Player : Character
 
     ///////////////////////////////////////////////////////////////
 
+    public override void Update()
+    {
+        base.Update();
+    }
+
     private void Awake()
     {
         initPlayer();

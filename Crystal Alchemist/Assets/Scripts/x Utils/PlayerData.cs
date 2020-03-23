@@ -68,14 +68,14 @@ public class PlayerData
         foreach (ItemGroup item in player.GetComponent<PlayerItems>().GetItemGroups())
         {
             string[] temp = new string[2];
-            temp[0] = item.name.Replace(" (", "(").Split('(')[0];
+            temp[0] = item.name;
             temp[1] = item.GetAmount() + "";
             this.inventoryItems.Add(temp);
         }
 
         foreach (ItemStats item in player.GetComponent<PlayerItems>().GetItemStats())
         {
-            string temp = item.name.Replace(" (", "(").Split('(')[0];
+            string temp = item.name;
             this.keyItems.Add(temp);
         }
     }

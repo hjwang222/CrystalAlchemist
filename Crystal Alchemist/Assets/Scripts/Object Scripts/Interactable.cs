@@ -7,7 +7,8 @@ using AssetIcons;
 public enum objectState
 {
     normal,
-    opened
+    opened,
+    showItem
 }
 
 public class Interactable : MonoBehaviour

@@ -13,11 +13,10 @@ public class TODOLIST : MonoBehaviour
     //TODO: Skills ändern (Bombe, Turm, Schild Knockback)
     //TODO: Sentinel Schuss ändern
 
-    //REWORK: Items (Scriptable Object), Drop Item
+    //TESTING: Items (Scriptable Object), Drop Item
     //TESTING: StatusEffects (Scriptable Object)
-    //REWORK: Inventory (Scriptable Object)
+    //TESTING: Inventory (Scriptable Object)
     //TESTING: AI Events (Bugfixes)
-    //REWORK: Indicators (Scriptable Object?)
 
     //-----------------------------------------------------------------------------
 

@@ -29,7 +29,7 @@ public class LoadSystem : MonoBehaviour
             player.stats.characterName = data.characterName;
             player.secondsPlayed.setValue(data.timePlayed);            
 
-            if (data.keyItems.Count > 0) loadInventory(data, player);
+            loadInventory(data, player);
 
             player.GetComponent<PlayerTeleport>().setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]), true);
             player.GetComponent<PlayerTeleport>().teleportPlayerToLastSavepoint(true); //letzter Savepoint, no Scene Loading
@@ -113,16 +113,25 @@ public class LoadSystem : MonoBehaviour
 
     private static void loadInventory(PlayerData data, Player player)
     {
-        foreach (string keyItem in data.keyItems)
+        if (data.keyItems != null)
         {
-            ItemStats stats = Resources.Load("Scriptable Objects/Items/Item Stats/Key Items/" + keyItem, typeof(ItemStats)) as ItemStats;            
-            if (stats != null) stats.CollectIt(player);
+            foreach (string keyItem in data.keyItems)
+            {
+                ItemDrop drop = Resources.Load("Scriptable Objects/Items/Item Drops/Key Items/" + keyItem, typeof(ItemDrop)) as ItemDrop;
+                ItemStats stats = Instantiate(drop.stats);
+                stats.name = drop.name;
+                stats.CollectIt(player);
+            }
         }
 
-        foreach (string[] item in data.inventoryItems)
+        if (data.inventoryItems != null)
         {
-            ItemGroup group = Resources.Load("Scriptable Objects/Items/Item Group/Inventory Items/" + item[0], typeof(ItemGroup)) as ItemGroup;
-            player.GetComponent<PlayerItems>().AddInventoryItem(group, Convert.ToInt32(item[1]));
+            foreach (string[] item in data.inventoryItems)
+            {
+                ItemGroup group = Resources.Load("Scriptable Objects/Items/Item Groups/Inventory Items/" + item[0], typeof(ItemGroup)) as ItemGroup;
+                if (group == null) group = Resources.Load("Scriptable Objects/Items/Item Groups/Currencies/" + item[0], typeof(ItemGroup)) as ItemGroup;
+                if (group != null) player.GetComponent<PlayerItems>().CollectInventoryItem(group, Convert.ToInt32(item[1]));
+            }
         }
     }
 

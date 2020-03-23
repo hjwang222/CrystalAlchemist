@@ -51,11 +51,11 @@ public class MenuDialogBox : MenuControls
 
         if (launcher != null)
         {
-            this.price = launcher.price;
+            this.price = launcher.GetPrice();
 
             this.child.SetActive(true);
             this.actionYes = launcher.actionOnConfirm;
-            this.textfield.text = launcher.dialogText;
+            this.textfield.text = launcher.GetText();
 
             if(launcher.dialogBoxType == DialogBoxType.ok)
             {
@@ -66,7 +66,7 @@ public class MenuDialogBox : MenuControls
                 this.YesButton.gameObject.SetActive(true);
                 this.NoButton.gameObject.SetActive(true);
 
-                if (launcher.price.resourceType != ResourceType.none)
+                if (this.price.resourceType != ResourceType.none)
                 {
                     this.priceField.gameObject.SetActive(true);
                     bool canActivateYES = this.priceField.updatePrice(this.player, this.price);

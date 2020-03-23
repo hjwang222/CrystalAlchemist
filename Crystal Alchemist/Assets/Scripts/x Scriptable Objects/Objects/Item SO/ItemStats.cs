@@ -73,6 +73,8 @@ public class ItemStats : ScriptableObject
 
     public void CollectIt(Player player)
     {
+        //Collectable, Load, MiniGame, Shop und Treasure
+
         if (this.resourceType == ResourceType.life || this.resourceType == ResourceType.mana) player.updateResource(this.resourceType, this.amount, true);
         else if (this.resourceType == ResourceType.item) player.GetComponent<PlayerItems>().CollectInventoryItem(this);
         else if (this.resourceType == ResourceType.none)
@@ -121,7 +123,7 @@ public class ItemStats : ScriptableObject
 
     public Sprite getSprite()
     {
-        return this.itemGroup.getSprite();
+        return this.icon;
     }
 
     public int getTotalAmount()

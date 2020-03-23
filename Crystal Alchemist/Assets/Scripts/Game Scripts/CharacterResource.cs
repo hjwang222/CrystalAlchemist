@@ -12,7 +12,7 @@ public enum ResourceType
 [System.Serializable]
 public class BaseResource
 {
-    public ResourceType resourceType = ResourceType.mana;
+    public ResourceType resourceType = ResourceType.none;
 
     [ShowIf("resourceType", ResourceType.item)]
     public ItemGroup item;

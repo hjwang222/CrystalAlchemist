@@ -27,12 +27,14 @@ public class PlayerItems : MonoBehaviour
 
     public void CollectInventoryItem(ItemStats item)
     {
+        //Collect
         this.inventory.collectItem(item);
     }
 
-    public void AddInventoryItem(ItemGroup group, int amount)
+    public void CollectInventoryItem(ItemGroup group, int amount)
     {
-        this.inventory.AddItemGroup(group, amount);
+        //Save and Load System
+        this.inventory.collectItem(group, amount);
     }
 
     public string GetAmountString(ItemGroup group)

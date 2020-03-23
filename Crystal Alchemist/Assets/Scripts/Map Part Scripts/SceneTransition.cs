@@ -73,7 +73,7 @@ public class SceneTransition : MonoBehaviour
         if(this.fadeSignal != null) this.fadeSignal.Raise(true);
         if(this.dialogBox != null)
         {
-            this.dialogBox.price = costs;
+            this.dialogBox.SetPrice(costs);
         }
     }
 

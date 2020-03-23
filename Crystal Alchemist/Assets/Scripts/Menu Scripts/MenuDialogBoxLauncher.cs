@@ -38,11 +38,23 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     [BoxGroup("DialogBox")]
     public bool setYesButtonFirst = true;
 
-    [HideInInspector]
-    public Costs price;
+    private Costs price;
+    private string dialogText;
 
-    [HideInInspector]
-    public string dialogText;
+    public void SetPrice(Costs price)
+    {
+        this.price = price;
+    }
+
+    public Costs GetPrice()
+    {
+        return this.price;
+    }
+
+    public string GetText()
+    {
+        return this.dialogText;
+    }
 
     public void raiseDialogBox()
     {

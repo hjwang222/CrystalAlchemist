@@ -11,7 +11,25 @@ public class PlayerInventory : ScriptableObject
     [SerializeField]
     public List<ItemGroup> inventoryItems = new List<ItemGroup>();
 
-    public void AddItemGroup(ItemGroup group, int amount)
+
+    private void OnEnable()
+    {
+        RemoveNulls();
+    }
+
+    private void OnDisable()
+    {
+        RemoveNulls();
+    }
+
+    private void RemoveNulls()
+    {
+        this.keyItems.RemoveAll(item => item == null);
+        this.inventoryItems.RemoveAll(item => item == null);
+    }
+
+
+    private void AddItemGroup(ItemGroup group, int amount)
     {
         ItemGroup newGroup = Instantiate(group);
         newGroup.name = group.name;
@@ -19,22 +37,27 @@ public class PlayerInventory : ScriptableObject
         this.inventoryItems.Add(newGroup);
     }
 
+    public void collectItem(ItemGroup group, int amount)
+    {
+        ItemGroup found = getItemGroup(group);
+
+        if (found == null) AddItemGroup(group, amount); //add new Itemgroup
+        else found.UpdateAmount(amount); //set amount of itemgroup
+    }
 
     public void collectItem(ItemStats item)
     {
-        if (item.isKeyItem())
-        {
+        if (item.isKeyItem() && !this.hasKeyItemAlready(item))
+        {           
+            //add Key Item
             ItemStats keyItem = Instantiate(item);
             keyItem.name = item.name;
             this.keyItems.Add(keyItem);
         }
-        else
+        else if (!item.isKeyItem())
         {
-            ItemGroup group = item.itemGroup;
-            ItemGroup found = getItemGroup(group);
-
-            if (found == null) AddItemGroup(group, item.getTotalAmount());            
-            else found.UpdateAmount(item.getTotalAmount());            
+            //add Inventory Item or change its amount
+            collectItem(item.itemGroup, item.getTotalAmount());      
         }
     }
 
@@ -53,12 +76,16 @@ public class PlayerInventory : ScriptableObject
 
     public ItemGroup getItemGroup(ItemGroup itemGroup)
     {
-        foreach (ItemGroup group in this.inventoryItems)
+        if (itemGroup != null)
         {
-            if (group == itemGroup) return group;
+            foreach (ItemGroup group in this.inventoryItems)
+            {
+                if (group.name == itemGroup.name) return group;
+            }
         }
         return null;
     }
+
 
     public ItemGroup GetInventoryItem(int ID)
     {
@@ -82,9 +109,19 @@ public class PlayerInventory : ScriptableObject
 
     public int GetAmount(ItemGroup itemGroup)
     {
+        int amount = 0;
+
         ItemGroup found = this.getItemGroup(itemGroup);
-        if (found != null) return found.GetAmount();
-        else return 0;
+        if (found != null) amount = found.GetAmount();
+        else
+        {
+            foreach(ItemStats stats in this.keyItems)
+            {
+                if (stats != null && stats.itemGroup == itemGroup) amount++;
+            }
+        }
+
+        return amount;
     }
 
     public string GetAmountString(ItemGroup itemGroup)

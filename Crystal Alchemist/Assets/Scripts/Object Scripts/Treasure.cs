@@ -35,6 +35,17 @@ public class Treasure : Rewardable
 
     [BoxGroup("Loot")]
     [SerializeField]
+    private bool useLootTable = false;
+
+    [BoxGroup("Loot")]
+    [HideIf("useLootTable")]
+    [SerializeField]
+    [HideLabel]
+    private Reward reward;
+
+    [BoxGroup("Loot")]
+    [ShowIf("useLootTable")]
+    [SerializeField]
     private LootTable lootTable;
 
     [BoxGroup("Text-Attribute")]
@@ -63,15 +74,14 @@ public class Treasure : Rewardable
         this.setLoot();
         FormatUtil.set3DText(this.priceText, this.costs.amount + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
-        if (this.itemDrop != null && this.treasureType == TreasureType.normal) changeTreasureState(true);
+        if (this.itemDrop == null && this.treasureType == TreasureType.normal) changeTreasureState(true);
     }
 
     private void setLoot()
     {
-        this.itemDrop = this.lootTable.GetItemDrop();
+        if (this.useLootTable) this.itemDrop = this.lootTable.GetItemDrop();
+        else this.itemDrop = this.reward.GetItemDrop();
     }
-
-
 
     #endregion
 
@@ -80,23 +90,11 @@ public class Treasure : Rewardable
 
     public override void doOnUpdate()
     {
-        //Close when opened
-        if (this.currentState == objectState.opened && this.player != null && this.player.currentState == CharacterState.interact)
+        if (this.currentState == objectState.showItem
+            && this.player != null
+            && this.player.currentState == CharacterState.interact)            
         {
-            Destroy(this.itemDrop);
-
-            if (this.treasureType == TreasureType.lootbox)
-            {
-                changeTreasureState(false);
-                this.setLoot();
-            }
-
-            //Verstecke gezeigtes Item wieder
-            for (int i = 0; i < this.showItem.transform.childCount; i++)
-            {
-                Destroy(this.showItem.transform.GetChild(i).gameObject);
-            }
-            this.showItem.SetActive(false);
+            closeChest(); //close Chest
         }
     }
 
@@ -104,14 +102,8 @@ public class Treasure : Rewardable
     {
         if (this.currentState != objectState.opened)
         {
-            if (this.treasureType == TreasureType.normal)
-            {
-                canOpenChest();
-            }
-            else if (this.treasureType == TreasureType.lootbox)
-            {
-                canOpenChest();
-            }
+            if (this.player.canUseIt(this.costs)) openChest(); //open Chest
+            else this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
         }
     }
 
@@ -120,23 +112,7 @@ public class Treasure : Rewardable
 
     #region Treasure Chest Funktionen (open, show Item)
 
-    private void changeTreasureState(bool openChest)
-    {
-        if (openChest)
-        {
-            AnimatorUtil.SetAnimatorParameter(this.anim, "isOpened", true);
-            this.currentState = objectState.opened;
-            this.context.SetActive(false);
-        }
-        else
-        {
-            AnimatorUtil.SetAnimatorParameter(this.anim, "isOpened", false);
-            this.currentState = objectState.normal;
-            this.context.SetActive(true);
-        }
-    }
-
-    private void OpenChest()
+    private void openChest()
     {
         this.player.reduceResource(this.costs);
         changeTreasureState(true);
@@ -160,12 +136,43 @@ public class Treasure : Rewardable
         }
     }
 
-
-    private void canOpenChest()
+    private void closeChest()
     {
-        if (this.player.canUseIt(this.costs)) OpenChest();
-        else this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
+        //Close when opened
+
+        Destroy(this.itemDrop);
+
+        if (this.treasureType == TreasureType.lootbox)
+        {
+            changeTreasureState(false);
+            this.setLoot();
+        }
+
+        //Verstecke gezeigtes Item wieder
+        for (int i = 0; i < this.showItem.transform.childCount; i++)
+        {
+            Destroy(this.showItem.transform.GetChild(i).gameObject);
+        }
+        this.showItem.SetActive(false);
+
     }
+
+    private void changeTreasureState(bool openChest)
+    {
+        if (openChest)
+        {
+            AnimatorUtil.SetAnimatorParameter(this.anim, "isOpened", true);
+            this.currentState = objectState.opened;
+            this.context.SetActive(false);
+        }
+        else
+        {
+            AnimatorUtil.SetAnimatorParameter(this.anim, "isOpened", false);
+            this.currentState = objectState.normal;
+            this.context.SetActive(true);
+        }
+    }
+
 
     public void showTreasureItem()
     {
@@ -174,6 +181,14 @@ public class Treasure : Rewardable
 
         Collectable collectable = this.itemDrop.Instantiate(this.showItem.transform.position);
         collectable.SetAsTreasureItem(this.showItem.transform);
+        StartCoroutine(delayCo());
+    }
+
+    private IEnumerator delayCo()
+    {
+        //BUG: Item verschwindet zu schnell, daher ein Delay setzen! Siehe DoOnUpdate -> Close Chest
+        yield return new WaitForSeconds(1f);
+        this.currentState = objectState.showItem;
     }
 
     #endregion
