@@ -66,7 +66,7 @@ public class MenuDialogBox : MenuControls
                 this.YesButton.gameObject.SetActive(true);
                 this.NoButton.gameObject.SetActive(true);
 
-                if (this.price.resourceType != ResourceType.none)
+                if (this.price.resourceType != CostType.none)
                 {
                     this.priceField.gameObject.SetActive(true);
                     bool canActivateYES = this.priceField.updatePrice(this.player, this.price);

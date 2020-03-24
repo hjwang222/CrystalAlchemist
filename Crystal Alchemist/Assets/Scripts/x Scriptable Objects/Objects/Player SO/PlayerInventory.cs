@@ -91,17 +91,17 @@ public class PlayerInventory : ScriptableObject
     {
         foreach (ItemGroup item in this.inventoryItems)
         {
-            if (item != null && item.itemSlot == ID) return item;
+            if (item != null && item.isID(ID)) return item;
         }
 
         return null;
     }
 
-    public ItemGroup GetKeyItem(int ID)
+    public ItemStats GetKeyItem(int ID)
     {
         foreach (ItemStats item in keyItems)
         {
-            if (item != null && item.isID(ID)) return item.itemGroup;
+            if (item != null && item.isID(ID)) return item;
         }
 
         return null;

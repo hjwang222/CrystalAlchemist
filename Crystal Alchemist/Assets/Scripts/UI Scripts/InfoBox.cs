@@ -58,10 +58,10 @@ public class InfoBox : MonoBehaviour
     {
         this.additionalInfo.SetActive(false);
 
-        this.previewImage.sprite = item.getSprite();
+        this.previewImage.sprite = item.info.getSprite();
 
         this.nameField.text = item.getName();
-        this.descriptionField.text = item.getDescription();
+        this.descriptionField.text = item.info.getDescription();
     }
 
 

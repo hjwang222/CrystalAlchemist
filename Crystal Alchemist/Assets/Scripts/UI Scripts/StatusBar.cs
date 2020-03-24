@@ -32,7 +32,7 @@ public class StatusBar : MonoBehaviour
     [BoxGroup("UI Typ")]
     [ShowIf("UIType", UIType.resource)]
     [SerializeField]
-    private ResourceType resourceType;
+    private CostType resourceType;
 
     [FoldoutGroup("Leiste für Mana und Leben", expanded: false)]
     [SerializeField]
@@ -139,7 +139,7 @@ public class StatusBar : MonoBehaviour
 
     private void setValues()
     {
-        if(this.resourceType == ResourceType.life)
+        if(this.resourceType == CostType.life)
         {
             this.maxValue = this.player.maxLife;
             this.currentValue = this.player.life;
@@ -181,8 +181,8 @@ public class StatusBar : MonoBehaviour
         this.bar.SetActive(false);
         this.symbol.SetActive(false);
 
-        if (this.resourceType == ResourceType.life) setLayout(GlobalValues.healthBar);
-        else if (this.resourceType == ResourceType.mana) setLayout(GlobalValues.manaBar);
+        if (this.resourceType == CostType.life) setLayout(GlobalValues.healthBar);
+        else if (this.resourceType == CostType.mana) setLayout(GlobalValues.manaBar);
     }
 
     private void setLayout(bool value)

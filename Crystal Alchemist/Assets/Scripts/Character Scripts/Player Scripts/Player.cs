@@ -107,8 +107,8 @@ public class Player : Character
 
         this.characterLookDown();
 
-        updateResource(ResourceType.life, 0);
-        updateResource(ResourceType.mana, 0);
+        updateResource(CostType.life, 0);
+        updateResource(CostType.mana, 0);
     }
 
     public override void prepareSpawnOut()
@@ -156,7 +156,7 @@ public class Player : Character
     {
         bool result = false;
 
-        if (price.resourceType == ResourceType.none) result = true;
+        if (price.resourceType == CostType.none) result = true;
         else
         {
             if (this.getResource(price) - price.amount >= 0) result = true;
@@ -169,9 +169,9 @@ public class Player : Character
     public float getResource(Costs price)
     {
         //Buttons und hasEnoughCurrency
-        if (price.resourceType == ResourceType.life) return this.life;
-        else if (price.resourceType == ResourceType.mana) return this.mana;
-        else if (price.resourceType == ResourceType.item && price.item != null) return this.GetComponent<PlayerItems>().GetAmount(price.item);
+        if (price.resourceType == CostType.life) return this.life;
+        else if (price.resourceType == CostType.mana) return this.mana;
+        else if (price.resourceType == CostType.item && price.item != null) return this.GetComponent<PlayerItems>().GetAmount(price.item);
         return 0;
     }
 
@@ -180,7 +180,7 @@ public class Player : Character
     public override void reduceResource(Costs price)
     {
         //Shop, Door, Treasure, MiniGame, Abilities, etc
-        if ((price.item != null && !price.item.isKeyItem) || price.item == null)
+        if ((price.item != null && !price.item.isKeyItem()) || price.item == null)
             this.updateResource(price.resourceType, price.item, -price.amount);
     }
 
@@ -189,15 +189,15 @@ public class Player : Character
     ///////////////////////////////////////////////////////////////
        
 
-    public override void updateResource(ResourceType type, ItemGroup item, float value, bool showingDamageNumber)
+    public override void updateResource(CostType type, ItemGroup item, float value, bool showingDamageNumber)
     {
         base.updateResource(type, null, value, showingDamageNumber);
 
         switch (type)
         {
-            case ResourceType.life: callSignal(this.healthSignalUI, value); break;
-            case ResourceType.mana: callSignal(this.manaSignalUI, value); break;
-            case ResourceType.item: this.GetComponent<PlayerItems>().UpdateInventory(item, Mathf.RoundToInt(value)); break;
+            case CostType.life: callSignal(this.healthSignalUI, value); break;
+            case CostType.mana: callSignal(this.manaSignalUI, value); break;
+            case CostType.item: this.GetComponent<PlayerItems>().UpdateInventory(item, Mathf.RoundToInt(value)); break;
         }
     }
 

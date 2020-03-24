@@ -14,14 +14,14 @@ public class MiniGamePrice : MonoBehaviour
     {
         this.image.enabled = false;
 
-        if (price.item != null && price.resourceType == ResourceType.item)
+        if (price.item != null && price.resourceType == CostType.item)
         {
             this.image.enabled = true;
             int inventoryAmount = player.GetComponent<PlayerItems>().GetAmount(price.item);
-            this.image.sprite = price.item.getSprite();
+            this.image.sprite = price.item.info.getSprite();
             this.textField.text = price.amount + " / " + inventoryAmount;
         }
-        else if (price.resourceType == ResourceType.none)
+        else if (price.resourceType == CostType.none)
         {
             this.textField.text = FormatUtil.getLanguageDialogText("GRATIS", "FREE");
         }

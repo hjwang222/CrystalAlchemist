@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChangeStatusBarMenu : TitleScreenMenues
 {
     [SerializeField]
-    private ResourceType resourceType;
+    private CostType resourceType;
 
     private void OnEnable()
     {
@@ -14,8 +14,8 @@ public class ChangeStatusBarMenu : TitleScreenMenues
 
     private void getLayout()
     {
-        if(this.resourceType == ResourceType.life) setLayout(GlobalValues.healthBar);
-        else if (this.resourceType == ResourceType.mana) setLayout(GlobalValues.manaBar);
+        if(this.resourceType == CostType.life) setLayout(GlobalValues.healthBar);
+        else if (this.resourceType == CostType.mana) setLayout(GlobalValues.manaBar);
     }
 
     private void setLayout(bool value)
@@ -26,8 +26,8 @@ public class ChangeStatusBarMenu : TitleScreenMenues
 
     public void changeLayout(bool useBar)
     {
-        if (this.resourceType == ResourceType.life) GlobalValues.healthBar = useBar;
-        else if (this.resourceType == ResourceType.mana) GlobalValues.manaBar = useBar;
+        if (this.resourceType == CostType.life) GlobalValues.healthBar = useBar;
+        else if (this.resourceType == CostType.mana) GlobalValues.manaBar = useBar;
 
         getLayout();
 

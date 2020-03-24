@@ -284,8 +284,8 @@ public class Character : MonoBehaviour
                 if (this.regenTimeElapsed >= this.stats.regenerationInterval)
                 {
                     this.regenTimeElapsed = 0;
-                    if (this.lifeRegen != 0 && this.life < this.maxLife) updateResource(ResourceType.life, this.lifeRegen);
-                    if (this.manaRegen != 0 && this.mana < this.maxMana) updateResource(ResourceType.mana, this.manaRegen, false);
+                    if (this.lifeRegen != 0 && this.life < this.maxLife) updateResource(CostType.life, this.lifeRegen);
+                    if (this.manaRegen != 0 && this.mana < this.maxMana) updateResource(CostType.mana, this.manaRegen, false);
                 }
                 else
                 {
@@ -433,19 +433,19 @@ public class Character : MonoBehaviour
         AnimatorUtil.SetAnimatorParameter(this.animator, "Respawn");
     }
 
-    public void updateResource(ResourceType type, float addResource, bool showingDamageNumber)
+    public void updateResource(CostType type, float addResource, bool showingDamageNumber)
     {
         //Mana Regeneration und Item Collect
         updateResource(type, null, addResource, showingDamageNumber);
     }
 
-    public void updateResource(ResourceType type, float addResource)
+    public void updateResource(CostType type, float addResource)
     {
         //Life Regeneration und Player Init
         updateResource(type, null, addResource);
     }
 
-    public void updateResource(ResourceType type, ItemGroup item, float addResource)
+    public void updateResource(CostType type, ItemGroup item, float addResource)
     {
         //Skill Target, Statuseffect und Price Reduce
         updateResource(type, item, addResource, true);
@@ -456,11 +456,11 @@ public class Character : MonoBehaviour
         //No Costs for AI
     }
 
-    public virtual void updateResource(ResourceType type, ItemGroup item, float value, bool showingDamageNumber)
+    public virtual void updateResource(CostType type, ItemGroup item, float value, bool showingDamageNumber)
     {
         switch (type)
         {
-            case ResourceType.life:
+            case CostType.life:
                 {
                     this.life = GameUtil.setResource(this.life, this.maxLife, value);
 
@@ -471,7 +471,7 @@ public class Character : MonoBehaviour
 
                     break;
                 }
-            case ResourceType.mana:
+            case CostType.mana:
                 {
                     this.mana = GameUtil.setResource(this.mana, this.maxMana, value);
                     if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
@@ -663,7 +663,7 @@ public class Character : MonoBehaviour
 
                     updateResource(elem.resourceType, elem.item, amount);
 
-                    if (this.life > 0 && elem.resourceType == ResourceType.life && amount < 0)
+                    if (this.life > 0 && elem.resourceType == CostType.life && amount < 0)
                     {
                         if (this.GetComponent<AI>() != null
                          && this.GetComponent<AI>().aggroGameObject != null)

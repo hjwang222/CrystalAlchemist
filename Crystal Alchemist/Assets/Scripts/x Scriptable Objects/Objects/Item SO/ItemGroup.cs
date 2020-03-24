@@ -5,54 +5,18 @@ using AssetIcons;
 [CreateAssetMenu(menuName = "Game/Items/Item Group")]
 public class ItemGroup : ScriptableObject
 {
-    [BoxGroup("Texts")]
-    [SerializeField]
-    private string itemGroup;
-
-    [BoxGroup("Texts")]
-    [SerializeField]
-    private string itemGroupEnglish;
-
-    [Space(10)]
-    [BoxGroup("Texts")]
-    [TextArea]
-    [SerializeField]
-    [ShowIf("inventoryItem")]
-    private string description;
-
-    [BoxGroup("Texts")]
-    [TextArea]
-    [SerializeField]
-    [ShowIf("inventoryItem")]
-    private string descriptionEnglish;
-
-    [BoxGroup("Inventory")]
-    [SerializeField]
-    public bool inventoryItem = false;
-
     [BoxGroup("Inventory")]
     public int maxAmount;
 
     [BoxGroup("Inventory")]
     [SerializeField]
-    [ShowIf("inventoryItem")]
-    [AssetIcon]
-    private Sprite inventorySprite;
+    [Required]
+    public ItemInfo info;
 
     [BoxGroup("Inventory")]
     [SerializeField]
-    [ShowIf("inventoryItem")]
-    public int itemSlot = -1;
-
-    [BoxGroup("Inventory")]
-    [SerializeField]
-    [ShowIf("inventoryItem")]
-    public bool isKeyItem = false;
-
-    [BoxGroup("Signals")]
-    [ShowIf("isKeyItem")]
-    [SerializeField]
-    private SimpleSignal keyItemSignal;
+    [Required]
+    public ItemSlotInfo inventoryInfo;
 
     [BoxGroup("Signals")]
     [SerializeField]
@@ -60,19 +24,28 @@ public class ItemGroup : ScriptableObject
 
     private int amount;
 
-    public Sprite getSprite()
+    [AssetIcon]
+    public Sprite GetSprite()
     {
-        return this.inventorySprite;
+        if (this.info != null) return this.info.getSprite();
+        return null;
+    }
+
+    public bool isKeyItem()
+    {
+        if (this.inventoryInfo != null) return this.inventoryInfo.isKeyItem();
+        else return false;
+    }
+
+    public bool isID(int ID)
+    {
+        if (this.inventoryInfo != null) return this.inventoryInfo.isID(ID);
+        return false;
     }
 
     public string getName()
     {
-        return FormatUtil.getLanguageDialogText(this.itemGroup, this.itemGroupEnglish);
-    }
-
-    public string getDescription()
-    {
-        return FormatUtil.getLanguageDialogText(this.description, this.descriptionEnglish);
+        return this.info.getName();
     }
 
     public int GetAmount()
@@ -90,18 +63,8 @@ public class ItemGroup : ScriptableObject
         this.amount += amount;
     }
 
-    public void raiseKeySignal()
-    {
-        if(this.keyItemSignal != null) this.keyItemSignal.Raise();
-    }
-
     public void raiseCollectSignal()
     {
         if (this.collectSignal != null) this.collectSignal.Raise();
-    }
-
-    public string getItemGroup()
-    {
-        return FormatUtil.getLanguageDialogText(this.itemGroup, this.itemGroupEnglish);
     }
 }

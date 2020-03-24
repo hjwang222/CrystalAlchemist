@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-public enum ResourceType
+public enum CostType
 {
     none,
     life,
@@ -12,23 +12,23 @@ public enum ResourceType
 [System.Serializable]
 public class BaseResource
 {
-    public ResourceType resourceType = ResourceType.none;
+    public CostType resourceType = CostType.none;
 
-    [ShowIf("resourceType", ResourceType.item)]
+    [ShowIf("resourceType", CostType.item)]
     public ItemGroup item;
 }
 
 [System.Serializable]
 public class CharacterResource : BaseResource
 {
-    [HideIf("resourceType", ResourceType.none)]
+    [HideIf("resourceType", CostType.none)]
     public float amount = 1;
 }
 
 [System.Serializable]
 public class Costs : BaseResource
 {
-    [HideIf("resourceType", ResourceType.none)]
+    [HideIf("resourceType", CostType.none)]
     [MinValue(0)]
     public float amount = 1;
 }

@@ -42,7 +42,7 @@ public class PlayerItems : MonoBehaviour
         return this.inventory.GetAmountString(group);        
     }
 
-    public ItemGroup getKeyItems(int ID)
+    public ItemStats getKeyItems(int ID)
     {
         return this.inventory.GetKeyItem(ID);
     }

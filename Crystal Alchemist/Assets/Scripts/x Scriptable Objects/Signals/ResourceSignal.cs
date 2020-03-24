@@ -7,7 +7,7 @@ public class ResourceSignal : ScriptableObject
 {
     public List<ResourceSignalListener> listeners = new List<ResourceSignalListener>();
 
-    public void Raise(ResourceType type, float amount)
+    public void Raise(CostType type, float amount)
     {
         for (int i = listeners.Count - 1; i >= 0; i--)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public class SingleTwo : UnityEvent<ResourceType, float>
+public class SingleTwo : UnityEvent<CostType, float>
 {
 }
 
@@ -13,7 +13,7 @@ public class ResourceSignalListener : MonoBehaviour
     public ResourceSignal signal;
     public SingleTwo signalEventString;
 
-    public void OnSignalRaised(ResourceType type, float amount)
+    public void OnSignalRaised(CostType type, float amount)
     {
         this.signalEventString.Invoke(type, amount);
     }

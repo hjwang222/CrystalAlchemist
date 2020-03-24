@@ -3,29 +3,11 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using AssetIcons;
 
-[HideMonoScript]
+
+
 [CreateAssetMenu(menuName = "Game/Items/Item Stats")]
 public class ItemStats : ScriptableObject
 {
-    [BoxGroup("Item Texts")]
-    [SerializeField]
-    private string itemName;
-
-    [BoxGroup("Item Texts")]
-    [SerializeField]
-    private string itemNameEnglish;
-
-    [Space(10)]
-    [BoxGroup("Item Texts")]
-    [TextArea]
-    [SerializeField]
-    private string itemDescription;
-
-    [BoxGroup("Item Texts")]
-    [TextArea]
-    [SerializeField]
-    private string itemDescriptionEnglish;
-
     [BoxGroup("Attributes")]
     [SerializeField]
     private int value = 1;
@@ -33,22 +15,39 @@ public class ItemStats : ScriptableObject
     [BoxGroup("Attributes")]
     [EnumToggleButtons]
     [SerializeField]
-    private ResourceType resourceType;
+    private CostType resourceType;
 
     [BoxGroup("Attributes")]
-    [ShowIf("resourceType", ResourceType.none)]
+    [ShowIf("resourceType", CostType.none)]
     [SerializeField]
     private Ability ability;
 
     [BoxGroup("Attributes")]
-    [ShowIf("resourceType", ResourceType.none)]
+    [ShowIf("resourceType", CostType.none)]
     [SerializeField]
     public List<StatusEffect> statusEffects = new List<StatusEffect>();
 
     [BoxGroup("Inventory")]
     [SerializeField]
-    [ShowIf("resourceType", ResourceType.item)]
-    public ItemGroup itemGroup;           
+    [HideIf("inventoryInfo")]
+    [HideIf("resourceType", CostType.life)]
+    [HideIf("resourceType", CostType.mana)]
+    [HideIf("resourceType", CostType.none)]
+    public ItemGroup itemGroup;
+
+    [BoxGroup("Inventory")]
+    [SerializeField]
+    [Required]
+    public ItemInfo info;
+
+    [BoxGroup("Inventory")]
+    [SerializeField]
+    [Required]
+    [HideIf("itemGroup")]
+    [HideIf("resourceType", CostType.life)]
+    [HideIf("resourceType", CostType.mana)]
+    [HideIf("resourceType", CostType.none)]
+    public ItemSlotInfo inventoryInfo;
 
     [HideInInspector]
     public int amount = 1;
@@ -58,16 +57,18 @@ public class ItemStats : ScriptableObject
     private AudioClip collectSoundEffect;
     
 
-    [BoxGroup("Unity Icon")]
-    [InfoBox("To show Icon in Unity Inspector. Not neccessary", InfoMessageType = InfoMessageType.Info)]
-    [AssetIcon]
-    [SerializeField]
-    private Sprite icon;
 
+
+    public ItemInfo getInfo()
+    {
+        //if (this.itemGroup != null) return this.itemGroup.info;
+        return this.info;
+    }
 
     public bool isID(int ID)
     {
-        if (this.itemGroup != null && this.itemGroup.itemSlot == ID) return true;
+        if (this.itemGroup != null) return this.itemGroup.isID(ID);
+        else if (this.inventoryInfo != null) return this.inventoryInfo.isID(ID);
         return false;
     }
 
@@ -75,9 +76,9 @@ public class ItemStats : ScriptableObject
     {
         //Collectable, Load, MiniGame, Shop und Treasure
 
-        if (this.resourceType == ResourceType.life || this.resourceType == ResourceType.mana) player.updateResource(this.resourceType, this.amount, true);
-        else if (this.resourceType == ResourceType.item) player.GetComponent<PlayerItems>().CollectInventoryItem(this);
-        else if (this.resourceType == ResourceType.none)
+        if (this.resourceType == CostType.life || this.resourceType == CostType.mana) player.updateResource(this.resourceType, this.amount, true);
+        else if (this.resourceType == CostType.item) player.GetComponent<PlayerItems>().CollectInventoryItem(this);
+        else if (this.resourceType == CostType.none)
         {
             //if(this.ability != null)
             foreach (StatusEffect effect in this.statusEffects)
@@ -94,13 +95,14 @@ public class ItemStats : ScriptableObject
 
     public string getItemGroup()
     {
-        if (this.itemGroup != null) return this.itemGroup.getItemGroup();
+        if (this.itemGroup != null) return this.itemGroup.getName();
         else return "";
     }
 
     public bool isKeyItem()
     {
-        if (this.itemGroup != null && this.itemGroup.isKeyItem) return true;
+        if (this.itemGroup != null) return this.itemGroup.isKeyItem();
+        else if (this.inventoryInfo != null) return this.inventoryInfo.isKeyItem();
         return false;
     }
 
@@ -121,9 +123,11 @@ public class ItemStats : ScriptableObject
         return false;
     }
 
+    [AssetIcon]
     public Sprite getSprite()
     {
-        return this.icon;
+        if(this.info != null) return this.info.getSprite();
+        return null;
     }
 
     public int getTotalAmount()
@@ -138,13 +142,13 @@ public class ItemStats : ScriptableObject
 
     public string getName()
     {
-        return FormatUtil.getLanguageDialogText(this.itemName, this.itemNameEnglish);        
+        if (this.itemGroup != null) return this.itemGroup.info.getName();
+        else return this.info.getName();
     }
 
     public string getDescription()
     {
-        return FormatUtil.getLanguageDialogText(this.itemDescription, this.itemDescriptionEnglish);
-    }
-
-    
+        if (this.itemGroup != null) return this.itemGroup.info.getDescription();
+        else return this.info.getDescription();
+    }    
 }

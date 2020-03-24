@@ -11,8 +11,10 @@ public class ItemDrop : ScriptableObject
     public Collectable collectable;
 
     [AssetIcon]
-    [SerializeField]
-    private Sprite icon;
+    private Sprite GetSprite()
+    {
+        return stats.getSprite();
+    }
 
     public void Initialize(int amount)
     {

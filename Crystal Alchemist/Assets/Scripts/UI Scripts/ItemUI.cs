@@ -38,11 +38,11 @@ public class ItemUI : MonoBehaviour
         {
             this.image.gameObject.SetActive(true);       
 
-            if (!item.isKeyItem && item.GetAmount() > 1) this.amount.text = "x" + item.GetAmount();
+            if (!item.isKeyItem() && item.GetAmount() > 1) this.amount.text = "x" + item.GetAmount();
             else if (this.amount != null) this.amount.text = "";
 
-            if (this.preferInventoryIcon) this.image.sprite = item.getSprite();
-            else this.image.sprite = item.getSprite();
+            if (this.preferInventoryIcon) this.image.sprite = item.info.getSprite();
+            else this.image.sprite = item.info.getSprite();
 
             this.image.color = new Color(1f, 1f, 1f, 1f);
         }
