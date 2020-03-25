@@ -19,7 +19,6 @@ public class SkillBookInfo : ScriptableObject
 
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
-    [EnumToggleButtons]
     public SkillType category = SkillType.magical;
 
     [BoxGroup("Pflichtfelder")]

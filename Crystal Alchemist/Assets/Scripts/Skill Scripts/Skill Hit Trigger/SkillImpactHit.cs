@@ -11,7 +11,6 @@ public enum aoeType
 public class SkillImpactHit : SkillMechanicHit
 {
     [Space(10)]
-    [EnumToggleButtons]
     [BoxGroup("Mechanics")]
     [SerializeField]
     private aoeType type;

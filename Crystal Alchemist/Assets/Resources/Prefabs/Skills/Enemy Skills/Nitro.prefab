@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8177122645714936817}
   - component: {fileID: 5827068402827264243}
   - component: {fileID: 832887259540420008}
+  - component: {fileID: 3147110848633641529}
   m_Layer: 13
   m_Name: Nitro
   m_TagString: Skill
@@ -51,47 +52,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Nitro
-  skillNameEnglish: Nitro
   spriteRenderer: {fileID: 6809401362660781500}
   myRigidbody: {fileID: 3416433163101705802}
   animator: {fileID: 7380354942667108071}
   shadow: {fileID: 0}
-  speed: 0
   positionOffset: 0
-  maxAmounts: 1
   attachToSender: 0
-  doCastDuringDelay: 0
-  comboAmount: 99
-  cast: 3
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 0
-  keepHoldTimer: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 1
-  delay: 0
-  duration: 1
-  cooldown: 0
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 1
+  maxDuration: 1
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: -0.0073119123
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
+  overridePosition: 1
 --- !u!58 &5378670148574386762
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -256,6 +230,31 @@ MonoBehaviour:
   useCustomColor: 0
   indicatorColor: {r: 0, g: 0, b: 0, a: 0}
   activeIndicator: {fileID: 0}
+--- !u!114 &3147110848633641529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999009161233943469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  costs:
+    resourceType: 0
+    item: {fileID: 0}
+    amount: 1
+  intervallSender: 0
+  speedDuringCasting: -100
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0
 --- !u!1 &3004850705707648969
 GameObject:
   m_ObjectHideFlags: 0

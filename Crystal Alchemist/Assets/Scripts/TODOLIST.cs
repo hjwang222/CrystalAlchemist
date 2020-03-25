@@ -12,11 +12,19 @@ public class TODOLIST : MonoBehaviour
     //TODO: Skill Sequence Instantiate
     //TODO: Skills ändern (Bombe, Turm, Schild Knockback)
     //TODO: Sentinel Schuss ändern
+    //TODO: Control UI updaten (Lockon, no mana, etc)
+    //TODO: Canvas UI ändern (Damage Numbers, etc)
+    //TODO: Indicators
+    //TODO: Antidot Graphics
 
-    //TESTING: Items (Scriptable Object), Drop Item
-    //TESTING: StatusEffects (Scriptable Object)
-    //TESTING: Inventory (Scriptable Object)
-    //TESTING: AI Events (Bugfixes)
+    //TESTING: Items         (Scriptable Object), Drop Item, New Item after Kill, Minigames
+    //TESTING: StatusEffects (Scriptable Object, Analyse überarbeiten)
+    //TESTING: Inventory     (Scriptable Object)
+    //TESTING: AI Events     (Bugfixes, Event und Phase Reset after Kill)
+
+    //BUG: (AI EVENT) To many events
+    //BUG: (AI EVENT) Gifthaut doppelt
+    //BUG: (SKILLS) Zeitsprung kann nicht gedrückt gehalten werden bzw. läuft länger als Mana
 
     //-----------------------------------------------------------------------------
 
@@ -35,6 +43,8 @@ public class TODOLIST : MonoBehaviour
     //MAYBE: Options Rework (Resolution)
     //MAYBE: Wetter Script (Position und Größe)
     //MAYBE: DialogBox
+
+    //-----------------------------------------------------------------------------
 
     //TODO (0.2.6.0)
     //CONTENT: Collectable Skills

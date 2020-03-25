@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public enum enumButton
 {
@@ -12,28 +13,70 @@ public enum enumButton
     LBButton
 }
 
+[System.Serializable]
+public class PlayerButton
+{
+    public enumButton buttonType;
+    public Ability ability;
+}
+
 [CreateAssetMenu(menuName = "Game/Player/Player Buttons")]
 public class PlayerButtons : ScriptableObject
 {
-    public Ability AButton;
-    public Ability BButton;
-    public Ability XButton;
-    public Ability YButton;
-    public Ability LBButton;
-    public Ability RBButton;
-    
-    public void GetAbilityFromButton(out Ability ability, out string button)
+    [SerializeField]
+    private List<PlayerButton> buttons = new List<PlayerButton>();
+
+    [BoxGroup]
+    public Ability currentAbility;
+    [BoxGroup]
+    public string currentButton;
+
+    public void Updating(Player player)
     {
-        ability = null;
-        button = "";
+        bool canFight = canUseAbilities(player);
+        GetAbilityFromButton();
+
+        foreach (PlayerButton playerButton in this.buttons)
+        {
+            if (playerButton.ability != null)
+            {
+                if ((this.currentAbility == null
+                  || this.currentAbility == playerButton.ability)
+                    && canFight) playerButton.ability.enabled = true;
+
+                else if (this.currentAbility != playerButton.ability || !canFight)
+                    playerButton.ability.enabled = false;
+            }
+        }
+    }
+
+    public bool canUseAbilities(Player player)
+    {
+        if (player.currentState != CharacterState.interact
+         && player.ActiveInField()) return true;
+        return false;
+    }
+
+
+    public void GetAbilityFromButton()
+    {
+        bool found = false;
 
         foreach (enumButton item in Enum.GetValues(typeof(enumButton)))
         {
             if (isPressed(item.ToString()))
             {
-                button = item.ToString();
-                ability = GetAbilityFromButton(item);
+                this.currentButton = item.ToString();
+                this.currentAbility = GetAbilityFromButton(item);
+                found = true;
+                break;
             }
+        }
+
+        if (!found)
+        {
+            this.currentAbility = null;
+            this.currentButton = "";
         }
     }
 
@@ -48,43 +91,27 @@ public class PlayerButtons : ScriptableObject
 
     public Ability GetAbilityFromButton(enumButton button)
     {
-        switch (button)
+        foreach (PlayerButton playerButton in this.buttons)
         {
-            case enumButton.AButton: return this.AButton;
-            case enumButton.BButton: return this.BButton;
-            case enumButton.XButton: return this.XButton;
-            case enumButton.YButton: return this.YButton;
-            case enumButton.RBButton: return this.RBButton;
-            case enumButton.LBButton: return this.LBButton;
-            default: return null;
+            if (playerButton.buttonType == button) return playerButton.ability;
         }
+
+        return null;
     }
 
     public void SetAbilityToButton(Ability ability, enumButton button)
     {
-        switch (button)
+        foreach (PlayerButton playerButton in this.buttons)
         {
-            case enumButton.AButton: this.AButton = ability; break;
-            case enumButton.BButton: this.BButton = ability; break;
-            case enumButton.XButton: this.XButton = ability; break;
-            case enumButton.YButton: this.YButton = ability; break;
-            case enumButton.RBButton: this.RBButton = ability; break;
-            case enumButton.LBButton: this.LBButton = ability; break;
-            default: break;
+            if (playerButton.buttonType == button) playerButton.ability = ability;
         }
     }
 
     public void SetAbilityToButton(string button, Ability ability)
     {
-        switch (button)
+        foreach (PlayerButton playerButton in this.buttons)
         {
-            case "A": this.AButton = ability; break;
-            case "B": this.BButton = ability; break;
-            case "X": this.XButton = ability; break;
-            case "Y": this.YButton = ability; break;
-            case "RB": this.RBButton = ability; break;
-            case "LB": this.LBButton = ability; break;
-            default: break;
+            if (playerButton.buttonType.ToString().Replace("Button", "") == button) playerButton.ability = ability;
         }
     }
 
@@ -92,12 +119,11 @@ public class PlayerButtons : ScriptableObject
     {
         List<string[]> result = new List<string[]>();
 
-        if (this.AButton != null) result.Add(new string[] { "A", this.AButton.name });
-        if (this.BButton != null) result.Add(new string[] { "B", this.BButton.name });
-        if (this.XButton != null) result.Add(new string[] { "X", this.XButton.name });
-        if (this.YButton != null) result.Add(new string[] { "Y", this.YButton.name });
-        if (this.RBButton != null) result.Add(new string[] { "RB", this.RBButton.name });
-        if (this.LBButton != null) result.Add(new string[] { "LB", this.LBButton.name });
+        foreach (PlayerButton playerButton in this.buttons)
+        {
+            if (playerButton.ability != null)
+                result.Add(new string[] { playerButton.buttonType.ToString().Replace("Button", ""), playerButton.ability.name });
+        }
 
         return result;
     }

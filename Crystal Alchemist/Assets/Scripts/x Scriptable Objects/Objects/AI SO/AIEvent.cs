@@ -29,7 +29,6 @@ public class AIEvent
     private float eventCooldown = 0;
 
     [SerializeField]
-    [EnumToggleButtons]
     private RequirementType requirementsNeeded = RequirementType.single;
 
     private bool eventActive = true;
@@ -39,6 +38,7 @@ public class AIEvent
     public void Initialize()
     {
         this.eventActive = true;
+        this.timeLeft = 0;
 
         foreach (AITrigger trigger in this.triggers)
         {
@@ -86,7 +86,12 @@ public class AIEvent
         {
             this.eventActive = false;
             if(this.repeatEvent) this.timeLeft = this.eventCooldown;
-            actions.AddRange(this.actions);
+
+            foreach(AIAction eventAction in this.actions)
+            {
+                if (!actions.Contains(eventAction)) actions.Add(eventAction);
+            }
+
             if (this.interruptCurrentAction) phase.ResetActions();
         }
     }

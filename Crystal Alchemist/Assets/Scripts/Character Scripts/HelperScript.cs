@@ -22,7 +22,7 @@ public class HelperScript : MonoBehaviour
         character.PlaySoundEffect(clip);
     }
 
-    public void updateSpeed(float addSpeed)
+    public void updateSpeed(int addSpeed)
     {
         character.updateSpeed(addSpeed,false);
     }

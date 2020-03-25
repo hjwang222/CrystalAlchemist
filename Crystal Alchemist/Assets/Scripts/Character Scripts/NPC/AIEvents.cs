@@ -2,7 +2,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class AIEvents : MonoBehaviour
+public class AIEvents : CharacterCombat
 {
     #region Attributes
 
@@ -14,18 +14,12 @@ public class AIEvents : MonoBehaviour
     [SerializeField]
     [Required]
     [BoxGroup("Required")]
-    private CastBar castbar;
-
-    [SerializeField]
-    [Required]
-    [BoxGroup("Required")]
     private MiniDialogBox box;
 
     [BoxGroup("AI")]
     [SerializeField]
     private AIPhase startPhase;
 
-    private CastBar activeCastBar;
     private MiniDialogBox activeDialog;
     private AIPhase activePhase;
     private bool isActive;
@@ -42,7 +36,8 @@ public class AIEvents : MonoBehaviour
 
     private void Update()
     {
-        if (this.activePhase != null) this.activePhase.Updating(this.npc);
+        if (this.activePhase != null && !StatusEffectUtil.isCharacterStunned(this.npc))
+            this.activePhase.Updating(this.npc);
     }
 
     private void OnDisable()
@@ -84,20 +79,6 @@ public class AIEvents : MonoBehaviour
             this.activeDialog = Instantiate(this.box, this.npc.skillStartPosition.transform);
             this.activeDialog.setDialogBox(text, duration);
         }
-    }
-
-    public void ShowCastBar(Ability ability)
-    {
-        if(this.activeCastBar == null)
-        {
-            this.activeCastBar = Instantiate(this.castbar, this.npc.transform.position, Quaternion.identity);
-            this.activeCastBar.setCastBar(this.npc, ability);
-        }
-    }
-
-    public void HideCastBar()
-    {
-        if (this.activeCastBar != null) this.activeCastBar.destroyIt();
     }
 }
 

@@ -15,12 +15,12 @@ public class SkillSenderModule : SkillModule
     [BoxGroup("Sender Attribute")]
     [Tooltip("Bewegungsgeschwindigkeit während eines Casts")]
     [Range(-100, 0)]
-    public float speedDuringCasting = 0;
+    public int speedDuringCasting = 0;
 
     [BoxGroup("Sender Attribute")]
     [Tooltip("Bewegungsgeschwindigkeit während des Angriffs")]
     [Range(-100, 0)]
-    public float speedDuringDuration = 0;
+    public int speedDuringDuration = 0;
 
     [BoxGroup("Sender Attribute")]
     [Tooltip("Soll die Geschwindigkeit auch die Animation beeinflussen?")]
@@ -47,7 +47,6 @@ public class SkillSenderModule : SkillModule
 
     [BoxGroup("Wirkungsbereich")]
     [Tooltip("Soll der Spieler nur diesen Skill benutzen dürfen?")]
-    [EnumToggleButtons]
     public StateType stateType = StateType.none;
 
     private float elapsed;

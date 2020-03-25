@@ -18,8 +18,7 @@ public class CurrencySlot : MonoBehaviour
     private AudioClip raiseSoundEffect;
     [SerializeField]
     private FloatSignal hideSignal;
-    [SerializeField]
-    private float hideDelay = 3f;
+
 
 
     private Player player;
@@ -35,7 +34,6 @@ public class CurrencySlot : MonoBehaviour
         this.player = this.playerStats.player;
 
         updateCurrency();
-
         playSound = true;
     }
 
@@ -48,11 +46,7 @@ public class CurrencySlot : MonoBehaviour
     {
         this.newValue = this.player.GetComponent<PlayerItems>().GetAmount(this.item);
 
-        if (this.playSound)
-        {
-            //this.playOnce = true;
-            AudioUtil.playSoundEffect(this.raiseSoundEffect);
-        }
+        if (this.playSound) AudioUtil.playSoundEffect(this.raiseSoundEffect);       
 
         if(!this.isRunning) StartCoroutine(Countdown());
     }
@@ -75,8 +69,7 @@ public class CurrencySlot : MonoBehaviour
             {
                 this.currentValue = this.newValue;
                 this.isRunning = false;
-                this.hideSignal.Raise(this.hideDelay);
-                //this.playOnce = false;
+                this.hideSignal.Raise(3f);
                 this.textField.text = FormatUtil.formatString(this.currentValue, this.maxValue);
                 break;
             }   
@@ -87,7 +80,5 @@ public class CurrencySlot : MonoBehaviour
         }
 
         this.isRunning = false;
-        
-        //this.playOnce = false;
     }
 }

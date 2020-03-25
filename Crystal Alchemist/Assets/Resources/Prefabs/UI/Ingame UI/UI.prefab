@@ -3783,8 +3783,7 @@ MonoBehaviour:
   maxValue: 99
   textField: {fileID: 1194851282243096347}
   raiseSoundEffect: {fileID: 0}
-  hideSignal: {fileID: 11400000, guid: a59d6921042d91641b713176ed2a1738, type: 2}
-  hideDelay: 3
+  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
 --- !u!114 &8049893507322324514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18959,11 +18958,6 @@ MonoBehaviour:
     be saved automatically.'
   dialogBoxType: 0
   setYesButtonFirst: 0
-  price:
-    resourceType: 0
-    item: {fileID: 0}
-    amount: 1
-  dialogText: 
 --- !u!1 &2103197694418598728
 GameObject:
   m_ObjectHideFlags: 0
@@ -36764,8 +36758,7 @@ MonoBehaviour:
   maxValue: 99
   textField: {fileID: 2346549277458988979}
   raiseSoundEffect: {fileID: 0}
-  hideSignal: {fileID: 11400000, guid: a59d6921042d91641b713176ed2a1738, type: 2}
-  hideDelay: 3
+  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
 --- !u!114 &1909347046207538038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74514,11 +74507,6 @@ MonoBehaviour:
   menuDialogBoxTextEnglish: Do you want to confirm all changes?
   dialogBoxType: 0
   setYesButtonFirst: 1
-  price:
-    resourceType: 3
-    item: {fileID: 0}
-    amount: 1
-  dialogText: 
 --- !u!1 &5050199507157977063
 GameObject:
   m_ObjectHideFlags: 0
@@ -74868,11 +74856,6 @@ MonoBehaviour:
   menuDialogBoxTextEnglish: Override savegame?
   dialogBoxType: 0
   setYesButtonFirst: 0
-  price:
-    resourceType: 0
-    item: {fileID: 0}
-    amount: 1
-  dialogText: 
 --- !u!1 &5121165077152763489
 GameObject:
   m_ObjectHideFlags: 0
@@ -77127,11 +77110,6 @@ MonoBehaviour:
   menuDialogBoxTextEnglish: Do you want to cancel the character creation?
   dialogBoxType: 0
   setYesButtonFirst: 0
-  price:
-    resourceType: 3
-    item: {fileID: 0}
-    amount: 1
-  dialogText: 
 --- !u!1 &5355269790324410534
 GameObject:
   m_ObjectHideFlags: 0
@@ -78245,11 +78223,6 @@ MonoBehaviour:
   menuDialogBoxTextEnglish: Data saved!
   dialogBoxType: 1
   setYesButtonFirst: 0
-  price:
-    resourceType: 0
-    item: {fileID: 0}
-    amount: 1
-  dialogText: 
 --- !u!1 &5457746338137548603
 GameObject:
   m_ObjectHideFlags: 0
@@ -89551,8 +89524,7 @@ MonoBehaviour:
   maxValue: 99
   textField: {fileID: 7756625259843891251}
   raiseSoundEffect: {fileID: 0}
-  hideSignal: {fileID: 11400000, guid: a59d6921042d91641b713176ed2a1738, type: 2}
-  hideDelay: 3
+  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
 --- !u!114 &7499137143767676932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90511,8 +90483,7 @@ MonoBehaviour:
   maxValue: 9999
   textField: {fileID: 4868855197915416813}
   raiseSoundEffect: {fileID: 8300000, guid: 50429a3af42ed134fadb73aa7a4a18ef, type: 3}
-  hideSignal: {fileID: 11400000, guid: a59d6921042d91641b713176ed2a1738, type: 2}
-  hideDelay: 3
+  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
 --- !u!114 &3162434911341655091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95851,8 +95822,7 @@ MonoBehaviour:
   maxValue: 9999
   textField: {fileID: 7829913112612175366}
   raiseSoundEffect: {fileID: 8300000, guid: 50429a3af42ed134fadb73aa7a4a18ef, type: 3}
-  hideSignal: {fileID: 11400000, guid: a59d6921042d91641b713176ed2a1738, type: 2}
-  hideDelay: 3
+  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
 --- !u!114 &3011227863348404851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115193,8 +115163,8 @@ GameObject:
   - component: {fileID: 255286724957863675}
   - component: {fileID: 8388378796050576166}
   - component: {fileID: 150297078299780627}
+  - component: {fileID: 6201655865687320157}
   - component: {fileID: 2499261327465293058}
-  - component: {fileID: 2280173538765610452}
   m_Layer: 5
   m_Name: Currencies
   m_TagString: Untagged
@@ -115394,15 +115364,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!222 &2499261327465293058
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8837126642412436585}
-  m_CullTransparentMesh: 0
---- !u!114 &2280173538765610452
+--- !u!114 &6201655865687320157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115414,7 +115376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aea8f9eb84f80884bbe19eb01afd4fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: a59d6921042d91641b713176ed2a1738, type: 2}
+  signal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
   signalEventBool:
     m_PersistentCalls:
       m_Calls:
@@ -115429,6 +115391,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!222 &2499261327465293058
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8837126642412436585}
+  m_CullTransparentMesh: 0
 --- !u!1 &8849846453813862007
 GameObject:
   m_ObjectHideFlags: 0
@@ -121308,8 +121278,7 @@ MonoBehaviour:
   maxValue: 99
   textField: {fileID: 5723716325081001753}
   raiseSoundEffect: {fileID: 0}
-  hideSignal: {fileID: 11400000, guid: a59d6921042d91641b713176ed2a1738, type: 2}
-  hideDelay: 3
+  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
 --- !u!114 &1782422095396035719
 MonoBehaviour:
   m_ObjectHideFlags: 0

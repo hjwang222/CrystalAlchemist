@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class PlayerAbilities : MonoBehaviour
+public class PlayerAbilities : CharacterCombat
 {
     public PlayerSkillset skillSet;
 
@@ -14,12 +14,9 @@ public class PlayerAbilities : MonoBehaviour
     private Player player;
            
     [SerializeField]
-    private CastBar castbar;
+    private PlayerTargetingSystem targetingSystem;
 
-    [SerializeField]
-    private TargetingSystem targetingSystem;
 
-    public CastBar activeCastbar;
 
     private void Start()
     {
@@ -33,21 +30,18 @@ public class PlayerAbilities : MonoBehaviour
     {
         this.skillSet.Update();
 
-        if (this.canUseAbilities())
-        {
-            Ability ability;
-            string currentButton;
+        this.buttons.Updating(this.player);
 
-            this.buttons.GetAbilityFromButton(out ability, out currentButton);
-            if(ability != null) useSkill(ability, currentButton);
-        }
+        if (this.buttons.currentAbility != null 
+         && this.buttons.currentAbility.enabled)
+            useSkill(this.buttons.currentAbility, this.buttons.currentButton);        
     }
 
     private void useSkill(Ability ability, string button)
     {
         if (Input.GetButton(button)) //hold Button
         {
-            if (ability.state == AbilityState.notCharged) ChargeAbility(ability);
+            if (ability.state == AbilityState.notCharged) ChargeAbility(ability, this.player);
             else if (ability.isRapidFire)
             {
                 if (ability.state == AbilityState.charged) UseAbility(ability); //use rapidFire when charged
@@ -61,7 +55,7 @@ public class PlayerAbilities : MonoBehaviour
             if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbility(ability); //use Skill when charged
             else if (ability.state == AbilityState.lockOn && ability.isRapidFire) hideTargetingSystem(ability, 1); //hide Targeting System when released
 
-            UnChargeAbility(ability);
+            UnChargeAbility(ability, this.player);
         }
         else if (Input.GetButtonDown(button)) //press Button
         {
@@ -69,33 +63,7 @@ public class PlayerAbilities : MonoBehaviour
             else if (ability.state == AbilityState.targetRequired) showTargetingSystem(ability); //activate Targeting System
             else if (ability.state == AbilityState.lockOn) UseAbilityOnTargets(ability, true);//use Skill on locked Targets and hide Targeting System
         }
-    }
-
-    private void ChargeAbility(Ability ability)
-    {
-        ability.Charge(); //charge Skill when not full
-
-        if (this.activeCastbar == null && ability.castTime > 0)
-        {
-            this.activeCastbar = Instantiate(this.castbar, this.player.transform.position, Quaternion.identity);
-            this.activeCastbar.setCastBar(this.player, ability);
-        }
-
-        //Speed during casting
-        //Indicators
-        //Animations
-    }
-
-    private void UnChargeAbility(Ability ability)
-    {
-        ability.ResetCharge(); //reset charge when not full  
-        if (this.activeCastbar != null) this.activeCastbar.destroyIt();
-        if (ability.deactivateButtonUp) deactivateSkill(ability);
-
-        //Speed during casting
-        //Indicators
-        //Animations
-    }
+    }  
 
     private void showTargetingSystem(Ability ability)
     {
@@ -157,25 +125,7 @@ public class PlayerAbilities : MonoBehaviour
     }
 
     #endregion
+    
 
-    private void deactivateSkill(Ability ability)
-    {
-        foreach (Skill skill in this.player.activeSkills)
-        {
-            if (skill.name == ability.skill.name)
-            {
-                skill.DeactivateIt();
-                break;
-            }
-        }
 
-        ability.ResetCoolDown();
-    }
-
-    public bool canUseAbilities()
-    {
-        if (this.player.currentState != CharacterState.interact
-         && this.player.ActiveInField()) return true;
-        return false;
-    }
 }

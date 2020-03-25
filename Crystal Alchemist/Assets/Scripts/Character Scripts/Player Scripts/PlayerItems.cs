@@ -55,7 +55,6 @@ public class PlayerItems : MonoBehaviour
     public void UpdateInventory(ItemGroup item, int amount)
     {
         this.inventory.UpdateInventory(item, amount);
-        item.raiseCollectSignal();
     }
 
     public bool hasKeyItemAlready(ItemStats item)

@@ -510,15 +510,15 @@ public class Character : MonoBehaviour
         return false;
     }
 
-    public void updateSpeed(float addSpeed)
+    public void updateSpeed(int addSpeed)
     {
         updateSpeed(addSpeed, true);
     }
 
-    public void updateSpeed(float addSpeed, bool affectAnimation)
+    public void updateSpeed(int addSpeed, bool affectAnimation)
     {
         float startSpeedInPercent = this.stats.startSpeed / 100;
-        float addNewSpeed = startSpeedInPercent * (addSpeed / 100);
+        float addNewSpeed = startSpeedInPercent * ((float)addSpeed / 100);
         float changeSpeed = startSpeedInPercent + addNewSpeed;
 
         this.speed = changeSpeed * this.timeDistortion * this.speedMultiply;

@@ -62,11 +62,6 @@ public class Player : Character
 
     [Required]
     [BoxGroup("Pflichtfelder")]
-    [SerializeField]
-    private GameObject targetHelpObject;
-
-    [Required]
-    [BoxGroup("Pflichtfelder")]
     public StringValue saveGameSlot;
 
     [Required]
@@ -180,7 +175,9 @@ public class Player : Character
     public override void reduceResource(Costs price)
     {
         //Shop, Door, Treasure, MiniGame, Abilities, etc
-        if ((price.item != null && !price.item.isKeyItem()) || price.item == null)
+        if (price != null 
+            && ((price.item != null && !price.item.isKeyItem()) 
+              || price.item == null))
             this.updateResource(price.resourceType, price.item, -price.amount);
     }
 

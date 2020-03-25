@@ -92,20 +92,15 @@ public class Ability : ScriptableObject
     public float holdTimer;
     [BoxGroup("Debug")]
     public AbilityState state;
-
+    [BoxGroup("Debug")]
+    public bool enabled = true;
 
     [AssetIcon]
     private Sprite GetSprite()
     {
-        return this.info.icon;        
+        if(this.info != null) return this.info.icon;
+        return null;
     }
-
-    /*
-    [AssetIcon(maxSize: 256, layer: -1)]
-    private Color GenerateBackground()
-    {
-        return Color.yellow;
-    }*/
 
     public string GetName()
     {

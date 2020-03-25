@@ -62,7 +62,6 @@ public class StatusEffect : ScriptableObject
     public bool stunTarget = false;
 
     [FoldoutGroup("Basis Attribute")]
-    [EnumToggleButtons]
     [Tooltip("Handelt es sich um einen positiven oder negativen Effekt?")]
     public StatusEffectType statusEffectType = StatusEffectType.debuff;
 

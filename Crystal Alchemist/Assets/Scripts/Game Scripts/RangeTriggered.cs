@@ -23,7 +23,6 @@ public class RangeTriggered : MonoBehaviour
     [SerializeField]
     private AI npc;
 
-    public bool isTriggered = false;
 
     private void Update()
     {
@@ -32,16 +31,16 @@ public class RangeTriggered : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (CollisionUtil.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.isTriggered = true;
+        if (CollisionUtil.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.npc.rangeTriggered = this;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (CollisionUtil.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.isTriggered = true;
+        if (CollisionUtil.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.npc.rangeTriggered = this;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (CollisionUtil.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.isTriggered = false;
+        if (CollisionUtil.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.npc.rangeTriggered = null;
     }
 }

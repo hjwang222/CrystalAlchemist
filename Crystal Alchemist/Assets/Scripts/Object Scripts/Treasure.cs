@@ -29,7 +29,6 @@ public class Treasure : Rewardable
     private AudioClip soundEffectTreasure;
 
     [BoxGroup("Treasure Options")]
-    [EnumToggleButtons]
     [SerializeField]
     private TreasureType treasureType = TreasureType.normal;
 

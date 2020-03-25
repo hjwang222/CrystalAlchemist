@@ -8,7 +8,7 @@ public class IcedArea : MonoBehaviour
 
     [SerializeField]
     [Range(-100,0)]
-    private float startSpeed = -50f;
+    private int startSpeed = -50;
 
     private void Update()
     {

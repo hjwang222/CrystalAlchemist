@@ -79,8 +79,7 @@ public class CombatButtons : MonoBehaviour
                 configUI.ammo.text = (int)this.player.getResource(senderModule.costs) + "";
             else configUI.ammo.text = "";
 
-            if (!this.player.GetComponent<PlayerAbilities>().canUseAbilities() 
-                || !ability.canUseAbility(this.player))
+            if (!ability.enabled || !ability.canUseAbility(this.player))
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
                 string cooldownText = "X";

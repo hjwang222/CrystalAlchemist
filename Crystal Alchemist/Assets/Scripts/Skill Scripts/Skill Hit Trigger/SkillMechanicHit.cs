@@ -17,7 +17,6 @@ public class SkillMechanicHit : SkillHitTrigger
 
     [BoxGroup("Mechanics")]
     [SerializeField]
-    [EnumToggleButtons]
     private hitType hitType;
 
     private void OnDestroy()

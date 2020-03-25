@@ -59,6 +59,8 @@ public class PlayerInventory : ScriptableObject
             //add Inventory Item or change its amount
             collectItem(item.itemGroup, item.getTotalAmount());      
         }
+
+        if(item.itemGroup != null) item.itemGroup.raiseCollectSignal();
     }
 
     public void UpdateInventory(ItemGroup itemGroup, int value)
@@ -71,6 +73,8 @@ public class PlayerInventory : ScriptableObject
                 break;
             }
         }
+
+        itemGroup.raiseCollectSignal();
     }
        
 

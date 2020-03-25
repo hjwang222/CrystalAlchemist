@@ -186,12 +186,10 @@ public class CharacterStats : ScriptableObject
 
     [FoldoutGroup("RPG Elements", expanded: false)]
     [Tooltip("Geschlecht")]
-    [EnumToggleButtons]
     public Gender characterGender = Gender.none;
 
     [FoldoutGroup("RPG Elements", expanded: false)]
     [Tooltip("Um welchen Typ handelt es sich?")]
-    [EnumToggleButtons]
     public CharacterType characterType = CharacterType.Object;
 
 }

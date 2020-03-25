@@ -13,7 +13,6 @@ public class ItemStats : ScriptableObject
     private int value = 1;
 
     [BoxGroup("Attributes")]
-    [EnumToggleButtons]
     [SerializeField]
     private CostType resourceType;
 

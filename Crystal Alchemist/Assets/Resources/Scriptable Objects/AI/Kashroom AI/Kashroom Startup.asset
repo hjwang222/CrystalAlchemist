@@ -26,7 +26,7 @@ MonoBehaviour:
     overrideCooldown: 0
     cooldown: 0
     repeatSkill: 0
-    repeatAmount: 1
+    amount: 1
     sequence: {fileID: 0}
     sequencePositionType: 0
     sequencePosition: {x: 0, y: 0}
@@ -36,7 +36,6 @@ MonoBehaviour:
     - type: 1
       time: 0
       life: 0
-      rangeTrigger: []
     actions:
     - type: 8
       position: {x: 0, y: 0}
@@ -51,7 +50,33 @@ MonoBehaviour:
       overrideCooldown: 0
       cooldown: 0
       repeatSkill: 0
-      repeatAmount: 1
+      amount: 1
+      sequence: {fileID: 0}
+      sequencePositionType: 0
+      sequencePosition: {x: 0, y: 0}
+    repeatEvent: 0
+    interruptCurrentAction: 0
+    eventCooldown: 0
+    requirementsNeeded: 0
+  - triggers:
+    - type: 2
+      time: 0
+      life: 0
+    actions:
+    - type: 3
+      position: {x: 0, y: 0}
+      de: 
+      en: 
+      duration: 4
+      nextPhase: {fileID: 0}
+      animations: 
+      ability: {fileID: 11400000, guid: 1099329dccba74c4ca3fd0034bcfe4c2, type: 2}
+      overrideCastTime: 0
+      castTime: 3
+      overrideCooldown: 0
+      cooldown: 0
+      repeatSkill: 0
+      amount: 1
       sequence: {fileID: 0}
       sequencePositionType: 0
       sequencePosition: {x: 0, y: 0}

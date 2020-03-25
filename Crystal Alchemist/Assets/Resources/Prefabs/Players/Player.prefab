@@ -587,7 +587,6 @@ MonoBehaviour:
     type: 2}
   openPauseSignal: {fileID: 11400000, guid: fe8d16e1c87adbc46bf6d8de8ceae041, type: 2}
   fadeSignal: {fileID: 11400000, guid: 7d067face1c3f4149b245c6294d12635, type: 2}
-  targetHelpObject: {fileID: 8153952292305783526}
   saveGameSlot: {fileID: 11400000, guid: d3073c05c40c81e439f6ce9706afae30, type: 2}
   playerInventory: {fileID: 0}
   fadingDuration: {fileID: 11400000, guid: a2cc0078d349f9245bd74b3f5813a450, type: 2}
@@ -631,12 +630,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a371caab22b5d654ca17d1f421676f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
+  activeCastBar: {fileID: 0}
   skillSet: {fileID: 11400000, guid: 29dcfc276674c7e42a941d5aee79bc0e, type: 2}
   buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   player: {fileID: 5074818981556205378}
-  castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
   targetingSystem: {fileID: 6568870739131367059}
-  activeCastbar: {fileID: 0}
 --- !u!114 &6736401842150179436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6901,7 +6900,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8248337020994303126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4271168, y: -0.016569424, z: -4.0970006}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 759644400424337062}
@@ -7451,30 +7450,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 759644400424337062}
     m_Modifications:
-    - target: {fileID: 2506546950070176847, guid: 5b2939f613b001c4a9eb3296ae0d2093,
+    - target: {fileID: 4598566184017420169, guid: 5b2939f613b001c4a9eb3296ae0d2093,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2506546950070176847, guid: 5b2939f613b001c4a9eb3296ae0d2093,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2506546950070176847, guid: 5b2939f613b001c4a9eb3296ae0d2093,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2506546950070176847, guid: 5b2939f613b001c4a9eb3296ae0d2093,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2506546950070176847, guid: 5b2939f613b001c4a9eb3296ae0d2093,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6540191019208669738, guid: 5b2939f613b001c4a9eb3296ae0d2093,
         type: 3}

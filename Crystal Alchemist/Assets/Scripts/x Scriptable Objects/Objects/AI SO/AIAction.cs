@@ -196,13 +196,12 @@ public class AIAction //: ScriptableObject
               || this.tempAbility.state == AbilityState.ready
               || this.tempAbility.state == AbilityState.lockOn) UseSkill(npc);
 
-        ResetCharge();
+        ResetCharge(npc);
     }
 
     private void Charge(AI npc)
     {
-        npc.GetComponent<AIEvents>().ShowCastBar(this.tempAbility);
-        this.tempAbility.Charge();
+        npc.GetComponent<AIEvents>().ChargeAbility(this.tempAbility, npc);
     }
 
     private void LockOn(AI npc)
@@ -221,13 +220,13 @@ public class AIAction //: ScriptableObject
         }
     }
 
-    private void ResetCharge()
+    private void ResetCharge(AI npc)
     {
         if (this.skillCounter >= this.amount)
         {
-            this.tempAbility.ResetCharge();
-            Deactivate();
-        }
+            npc.GetComponent<AIEvents>().UnChargeAbility(this.tempAbility, npc);
+            Deactivate();            
+        }        
     }
 
     #endregion

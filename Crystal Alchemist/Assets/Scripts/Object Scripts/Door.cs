@@ -18,7 +18,6 @@ public class Door : Interactable
     public Animator animator;
 
     [FoldoutGroup("Tür-Attribute", expanded: false)]
-    [EnumToggleButtons]
     [SerializeField]
     private DoorType doorType = DoorType.closed;
 

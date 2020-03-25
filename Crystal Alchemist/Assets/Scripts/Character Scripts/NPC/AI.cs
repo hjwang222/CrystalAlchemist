@@ -19,6 +19,10 @@ public class AI : Character
     [HideInInspector]
     public Character partner;
 
+    [HideInInspector]
+    public RangeTriggered rangeTriggered;
+
+
     private bool isSleeping = true;
 
     private void Awake()

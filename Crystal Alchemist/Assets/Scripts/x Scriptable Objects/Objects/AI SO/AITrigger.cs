@@ -26,10 +26,6 @@ public class AITrigger
     [SerializeField]
     private float life;
 
-    [ShowIf("type", AITriggerType.range)]
-    [SerializeField]
-    private List<RangeTriggered> rangeTrigger;
-
     private bool timesUp = false;
     private float elapsed = 0;
 
@@ -52,7 +48,7 @@ public class AITrigger
         if (this.type == AITriggerType.aggro) return checkAggro(npc);
         else if (this.type == AITriggerType.aggroLost) return checkAggroLost(npc);
         else if (this.type == AITriggerType.life) return checkLife(npc);
-        else if (this.type == AITriggerType.range) return checkRange();
+        else if (this.type == AITriggerType.range) return checkRange(npc);
         else if (this.type == AITriggerType.time) return checkTime();
         return false;
     }
@@ -62,15 +58,9 @@ public class AITrigger
         return (npc.life <= (npc.maxLife * this.life / 100));
     }
 
-    private bool checkRange()
+    private bool checkRange(AI npc)
     {
-        if (this.rangeTrigger != null)
-        {
-            foreach (RangeTriggered range in this.rangeTrigger)
-            {
-                if (range.isTriggered) return true;
-            }
-        }
+        if (npc.rangeTriggered != null) return true;
         return false;
     }
 

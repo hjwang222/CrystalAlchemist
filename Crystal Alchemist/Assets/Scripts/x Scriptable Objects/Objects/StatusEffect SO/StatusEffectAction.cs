@@ -26,7 +26,7 @@ public class StatusEffectAction
 
     [ShowIf("actionType", StatusEffectActionType.speed)]
     [SerializeField]
-    private float speed;
+    private int speed;
 
     [ShowIf("actionType", StatusEffectActionType.time)]
     [SerializeField]

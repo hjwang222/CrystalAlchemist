@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
-public class TargetingSystem : MonoBehaviour
+public class PlayerTargetingSystem : MonoBehaviour
 {
     [SerializeField]
     private Player player;
@@ -14,6 +15,15 @@ public class TargetingSystem : MonoBehaviour
     [SerializeField]
     private GameObject rangeIndicator;
 
+    [SerializeField]
+    private CircleCollider2D circleCollider;
+
+    [SerializeField]
+    private PolygonCollider2D viewCollider;
+
+    [SerializeField]
+    private TextMeshPro durationTime;
+
     private List<Character> targets = new List<Character>();
     private List<Character> targetsInRange = new List<Character>();
     private List<GameObject> appliedIndicators = new List<GameObject>();
@@ -23,44 +33,42 @@ public class TargetingSystem : MonoBehaviour
 
     private LockOnSystem properties;
     private Skill skill;
-
+    private float timeLeft = 60f;
 
     #region Unity Functions
 
     private void OnEnable()
     {
+        this.circleCollider.gameObject.SetActive(false);
+        this.viewCollider.gameObject.SetActive(false);
+
+        if (this.properties.rangeType == RangeType.circle) this.circleCollider.gameObject.SetActive(true);
+        else if (this.properties.rangeType == RangeType.view) this.viewCollider.gameObject.SetActive(true);
+
+        this.circleCollider.transform.localScale = new Vector3(this.properties.range, this.properties.range, 1);
+        this.viewCollider.transform.localScale = new Vector3(this.properties.range, this.properties.range, 1);
+
         if (!this.properties.showRange) this.rangeIndicator.SetActive(false);
         else this.rangeIndicator.SetActive(true);
+
+        this.timeLeft = this.properties.maxDuration;
 
         StartCoroutine(delayCo());
     }
 
     private void Update()
     {
+        RotationUtil.rotateCollider(this.player, this.viewCollider.gameObject);
+
         if (this.properties.targetingMode == TargetingMode.auto) selectAllNearestTargets();
         else selectTargetManually();
 
         updateIndicator();
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        addTarget(collision);
-    }
+        if (this.timeLeft > 0) this.timeLeft -= Time.deltaTime;
+        else this.gameObject.SetActive(false);
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        addTarget(collision);
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        Character character = collision.GetComponent<Character>();
-        if (CollisionUtil.checkCollision(collision, this.skill, this.player) && character != null)
-        {
-            if (this.targetsInRange.Contains(character)) this.targetsInRange.Remove(character);
-            if (this.targets.Contains(character)) this.targets.Remove(character);
-        }
+        this.durationTime.text = FormatUtil.setDurationToString(this.timeLeft);        
     }
 
     private void OnDisable()
@@ -150,7 +158,17 @@ public class TargetingSystem : MonoBehaviour
         }
     }
 
-    private void addTarget(Collider2D collision)
+    public void removeTarget(Collider2D collision)
+    {
+        Character character = collision.GetComponent<Character>();
+        if (CollisionUtil.checkCollision(collision, this.skill, this.player) && character != null)
+        {
+            if (this.targetsInRange.Contains(character)) this.targetsInRange.Remove(character);
+            if (this.targets.Contains(character)) this.targets.Remove(character);
+        }
+    }
+
+    public void addTarget(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
         if (CollisionUtil.checkCollision(collision, this.skill, this.player) && character != null)
