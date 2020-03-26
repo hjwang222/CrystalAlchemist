@@ -10,10 +10,7 @@ public class PlayerTargetingSystem : MonoBehaviour
     private Player player;
 
     [SerializeField]
-    private GameObject lockOnIndicator;
-
-    [SerializeField]
-    private GameObject rangeIndicator;
+    private LockOnFrame lockOnIndicator;
 
     [SerializeField]
     private CircleCollider2D circleCollider;
@@ -22,17 +19,17 @@ public class PlayerTargetingSystem : MonoBehaviour
     private PolygonCollider2D viewCollider;
 
     [SerializeField]
-    private TextMeshPro durationTime;
+    private FloatValue timeLeftValue;
 
     private List<Character> targets = new List<Character>();
     private List<Character> targetsInRange = new List<Character>();
-    private List<GameObject> appliedIndicators = new List<GameObject>();
+    private List<LockOnFrame> appliedIndicators = new List<LockOnFrame>();
     private int index;
     private bool selectAll = false;
     private bool inputPossible = true;
 
     private LockOnSystem properties;
-    private Skill skill;
+    private Ability ability;
     private float timeLeft = 60f;
 
     #region Unity Functions
@@ -48,10 +45,8 @@ public class PlayerTargetingSystem : MonoBehaviour
         this.circleCollider.transform.localScale = new Vector3(this.properties.range, this.properties.range, 1);
         this.viewCollider.transform.localScale = new Vector3(this.properties.range, this.properties.range, 1);
 
-        if (!this.properties.showRange) this.rangeIndicator.SetActive(false);
-        else this.rangeIndicator.SetActive(true);
-
         this.timeLeft = this.properties.maxDuration;
+        this.timeLeftValue.setValue(1f);
 
         StartCoroutine(delayCo());
     }
@@ -68,14 +63,16 @@ public class PlayerTargetingSystem : MonoBehaviour
         if (this.timeLeft > 0) this.timeLeft -= Time.deltaTime;
         else this.gameObject.SetActive(false);
 
-        this.durationTime.text = FormatUtil.setDurationToString(this.timeLeft);        
+        this.timeLeftValue.setValue(this.timeLeft/ this.properties.maxDuration);     
     }
 
     private void OnDisable()
     {
-        foreach (GameObject applied in this.appliedIndicators)
+        this.ability.state = AbilityState.targetRequired;
+
+        foreach (LockOnFrame applied in this.appliedIndicators)
         {
-            Destroy(applied);
+            Destroy(applied.gameObject);
         }
         this.appliedIndicators.Clear();
     }
@@ -88,7 +85,12 @@ public class PlayerTargetingSystem : MonoBehaviour
     public void setParameters(Ability ability)
     {
         this.properties = ability.targetingSystem;
-        this.skill = ability.skill;
+        this.ability = ability;
+    }
+
+    public float GetTimeLeft()
+    {
+        return this.timeLeft;
     }
 
     public List<Character> getTargets()
@@ -161,7 +163,7 @@ public class PlayerTargetingSystem : MonoBehaviour
     public void removeTarget(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-        if (CollisionUtil.checkCollision(collision, this.skill, this.player) && character != null)
+        if (CollisionUtil.checkCollision(collision, this.ability.skill, this.player) && character != null)
         {
             if (this.targetsInRange.Contains(character)) this.targetsInRange.Remove(character);
             if (this.targets.Contains(character)) this.targets.Remove(character);
@@ -171,7 +173,7 @@ public class PlayerTargetingSystem : MonoBehaviour
     public void addTarget(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-        if (CollisionUtil.checkCollision(collision, this.skill, this.player) && character != null)
+        if (CollisionUtil.checkCollision(collision, this.ability.skill, this.player) && character != null)
         {
             if (!this.targetsInRange.Contains(character)) this.targetsInRange.Add(character);
         }
@@ -204,8 +206,8 @@ public class PlayerTargetingSystem : MonoBehaviour
         {
             if (UnityUtil.hasChildWithTag(target, this.lockOnIndicator.tag) == null)
             {
-                GameObject indicator = Instantiate(this.lockOnIndicator, target.transform.position, Quaternion.identity, target.transform);
-                indicator.GetComponent<LockOnFrame>().setValues(FormatUtil.getLanguageDialogText(target.stats.characterName, target.stats.englischCharacterName));
+                LockOnFrame indicator = Instantiate(this.lockOnIndicator, target.transform.position, Quaternion.identity, target.transform);
+                indicator.setValues(FormatUtil.getLanguageDialogText(target.stats.characterName, target.stats.englischCharacterName));
                 this.appliedIndicators.Add(indicator);
             }
         }
@@ -213,9 +215,9 @@ public class PlayerTargetingSystem : MonoBehaviour
 
     private void removeIndicator()
     {
-        List<GameObject> tempAppliedList = new List<GameObject>();
+        List<LockOnFrame> tempAppliedList = new List<LockOnFrame>();
 
-        foreach (GameObject applied in this.appliedIndicators)
+        foreach (LockOnFrame applied in this.appliedIndicators)
         {
             Character character = applied.transform.parent.gameObject.GetComponent<Character>();
 

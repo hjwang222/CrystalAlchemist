@@ -10,23 +10,19 @@ public class AnalyseUI : MonoBehaviour
 
     [Header("Easy Access Objects")]
     [SerializeField]
-    private TextMeshProUGUI TMPcharacterName;
+    private TextMeshPro TMPcharacterName;
     [SerializeField]
-    private Image lifeBar;
+    private SpriteFillBar lifeBar;
     [SerializeField]
-    private Image ImageitemPreview;
+    private SpriteRenderer ImageitemPreview;
     [SerializeField]
-    private Image ImageObjectitemIndicator;
-    [SerializeField]
-    private Image ImageObjectitemPreview;
+    private SpriteRenderer ImageObjectitemPreview;
 
     [Header("Gruppen")]
     [SerializeField]
     private GameObject enemyInfo;
     [SerializeField]
     private GameObject objectInfo;
-    //[SerializeField]
-    //private AggroBar aggrobar;
     [SerializeField]
     private StatusEffectBar statusEffectBar;
 
@@ -51,7 +47,7 @@ public class AnalyseUI : MonoBehaviour
     private void init()
     {
         //set type of Analyse
-        this.transform.position = new Vector2(this.target.transform.position.x + 1.5f, this.target.transform.position.y + 1.5f);
+        this.transform.position = new Vector2(this.target.transform.position.x, this.target.transform.position.y);
 
         if (this.target.GetComponent<Interactable>() != null)
         {
@@ -107,7 +103,7 @@ public class AnalyseUI : MonoBehaviour
         this.ImageitemPreview.gameObject.SetActive(false);
 
         this.TMPcharacterName.text = FormatUtil.getLanguageDialogText(this.character.stats.characterName, this.character.stats.englischCharacterName);
-        this.lifeBar.fillAmount = (this.character.life / this.character.maxLife);
+        this.lifeBar.fillAmount((this.character.life / this.character.maxLife));
 
         if (this.character.itemDrop != null && this.character.currentState != CharacterState.dead)
         {
@@ -118,14 +114,11 @@ public class AnalyseUI : MonoBehaviour
 
     private void showItemInfo()
     {
-        this.ImageObjectitemIndicator.gameObject.SetActive(false);
-
         if (this.rewardableObject != null)
         {
             //Show Object Information
             if (rewardableObject.itemDrop != null && this.rewardableObject.currentState != objectState.opened)
             {
-                this.ImageObjectitemIndicator.gameObject.SetActive(true);
                 this.ImageObjectitemPreview.sprite = rewardableObject.itemDrop.stats.getSprite();
             }
             else
@@ -138,7 +131,6 @@ public class AnalyseUI : MonoBehaviour
             //Show Object Information
             if (this.character.itemDrop != null && this.character.currentState != CharacterState.dead)
             {
-                this.ImageObjectitemIndicator.gameObject.SetActive(true);
                 this.ImageObjectitemPreview.sprite = this.character.itemDrop.stats.getSprite();
             }            
         }

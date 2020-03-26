@@ -403,7 +403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootParentObject: {fileID: 190451848395776994}
   stats: {fileID: 11400000, guid: 4296eda28d32ab54491ee3379dc99977, type: 2}
   myRigidbody: {fileID: 2246077131478480996}
   animator: {fileID: 929082027}
@@ -428,7 +427,6 @@ MonoBehaviour:
   debuffMinus: 0
   cantBeHit: 0
   isInvincible: 0
-  cannotDie: 0
   isHit: 0
   buffs: []
   debuffs: []
@@ -437,15 +435,15 @@ MonoBehaviour:
   lockAnimation: 0
   timeDistortion: 1
   isPlayer: 0
-  inventory: []
   activePets: []
   steps: 0
   isOnIce: 0
-  lootTableInternal: []
+  itemDrop: {fileID: 0}
   aggroGameObject: {fileID: 2285685941926595743}
   flip: 1
   target: {fileID: 0}
   partner: {fileID: 0}
+  rangeTriggered: {fileID: 0}
 --- !u!114 &2246077131478481017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,9 +477,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 4482648712296496520}
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
-  box: {fileID: 5104834203016797782, guid: 4828c807745ed894ea715e12180742d8, type: 3}
+  activeCastBar: {fileID: 0}
+  npc: {fileID: 4482648712296496520}
+  box: {fileID: 5059673948545585734, guid: 4828c807745ed894ea715e12180742d8, type: 3}
   startPhase: {fileID: 11400000, guid: c11053e6988188347bc5e3d9a60d4904, type: 2}
 --- !u!61 &1028641328
 BoxCollider2D:

@@ -7,36 +7,36 @@ using TMPro;
 public class CastBar : MonoBehaviour
 {
     [SerializeField]
-    private Image charging;
+    private SpriteFillBar charging;
     [SerializeField]
-    private Image full;
+    private SpriteRenderer full;
     [SerializeField]
-    private TextMeshProUGUI skillName;
+    private TextMeshPro skillName;
     [SerializeField]
-    private TextMeshProUGUI percentage;
+    private TextMeshPro percentage;
 
-    private Ability skill;
+    private Ability ability;
 
 
-    public void setCastBar(Character character, Ability skill)
+    public void setCastBar(Character character, Ability ability)
     {
         this.transform.parent = character.transform;
         this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1f);
-        this.skill = skill;
-        this.skillName.text = this.skill.name;
+        this.ability = ability;
+        this.skillName.text = this.ability.GetName();
     }
 
     private void Update()
     {
-        float percent = skill.holdTimer / this.skill.castTime;
-        this.charging.fillAmount = (percent);
+        float percent = ability.holdTimer / this.ability.castTime;
+        this.charging.fillAmount(percent);
 
         string text = (int)(percent * 100) + "%";
         if (percent * 100 >= 100) text = "BEREIT!";
 
         this.percentage.text = text;
 
-        if (skill.holdTimer >= this.skill.castTime) this.full.enabled = true;
+        if (ability.holdTimer >= this.ability.castTime) this.full.enabled = true;
         else this.full.enabled = false;
     }
 

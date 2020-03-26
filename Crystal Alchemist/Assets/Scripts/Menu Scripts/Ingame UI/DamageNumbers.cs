@@ -1,50 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class DamageNumbers : MonoBehaviour
 {
-    [HideInInspector]
-    public float number;
-
-    private Color[] color;
-
     [SerializeField]
     private float factor = 1;
 
-    public void setcolor(Color[] color)
-    {
-        this.color = color;
-    }
+    [SerializeField]
+    private TextMeshPro textField;
 
-    public void Start()
+    public void Initialize(float value, Color[] color)
     {
+        float number = value * factor;
         string text = "";
-        TextMeshProUGUI textmeshPro = GetComponent<TextMeshProUGUI>();
-
-        number *= factor;
 
         if (number != 0)
         {
-            if(number > 0) text = "+" + FormatUtil.formatFloatToString(number, 1f);
+            
+            if (number > 0) text = "+" + FormatUtil.formatFloatToString(number, 1f);
             else text = FormatUtil.formatFloatToString(number, 1f);
 
-            textmeshPro.color = this.color[0];
-            textmeshPro.outlineColor = this.color[1];
-            textmeshPro.outlineWidth = 0.25f;
+            this.textField.color = color[0];
+            this.textField.outlineColor = color[1];
+            this.textField.outlineWidth = 0.25f;            
         }        
         else
         {
             text = "";
-            textmeshPro.color = new Color32(255, 255, 255, 255);
-            textmeshPro.outlineColor = new Color32(125, 125, 125, 255);
-            textmeshPro.outlineWidth = 0.25f;
+            this.textField.color = new Color32(255, 255, 255, 255);
+            this.textField.outlineColor = new Color32(125, 125, 125, 255);
+            this.textField.outlineWidth = 0.25f;
         }
 
-        textmeshPro.text = text;
+        this.textField.text = text;
+    }
 
-        Destroy(this.gameObject, 2f);
+    public void DestroyIt()
+    {
+        Destroy(this.gameObject);       
     }
 
 }

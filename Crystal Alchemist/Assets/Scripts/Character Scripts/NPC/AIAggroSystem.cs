@@ -145,7 +145,7 @@ public class AIAggroSystem : MonoBehaviour
     {
         if (clue != null && this.activeClue == null)
         {
-            Vector3 position = new Vector3(this.enemy.transform.position.x - 0.5f, this.enemy.transform.position.y + 0.5f);
+            Vector3 position = new Vector3(this.enemy.transform.position.x, this.enemy.transform.position.y);
             this.activeClue = Instantiate(clue, position, Quaternion.identity, this.enemy.transform);
         }
     }

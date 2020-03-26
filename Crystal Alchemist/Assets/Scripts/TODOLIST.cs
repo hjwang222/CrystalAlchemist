@@ -12,11 +12,9 @@ public class TODOLIST : MonoBehaviour
     //TODO: Skill Sequence Instantiate
     //TODO: Skills ändern (Bombe, Turm, Schild Knockback)
     //TODO: Sentinel Schuss ändern
-    //TODO: Button UI updaten (Lockon, no mana, etc)
-    //TODO: Canvas UI ändern (Damage Numbers, etc)
     //TODO: Indicators
     //TODO: Better Chests
-    //TODO: Item und Skill Infos
+    //TODO: Collection of Objects (MiniDialog, Found, etc)
 
     //TESTING: Items         (Scriptable Object), Drop Item, New Item after Kill, Minigames
     //TESTING: StatusEffects (Scriptable Object, Analyse überarbeiten)

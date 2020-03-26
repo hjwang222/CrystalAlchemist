@@ -213,7 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootParentObject: {fileID: 8097646928759536471}
   stats: {fileID: 11400000, guid: eafe20572b3378f4b8231efd676d60f7, type: 2}
   myRigidbody: {fileID: 7268659838857056127}
   animator: {fileID: 8932006801801387440}
@@ -221,7 +220,6 @@ MonoBehaviour:
   shadowRenderer: {fileID: 9101974201244086688}
   activeSkillParent: {fileID: 8932006801567842595}
   activeStatusEffectParent: {fileID: 2840507917755813145}
-  skillSetParent: {fileID: 7821854749448993448}
   skillStartPosition: {fileID: 7914839587969846799}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
@@ -237,9 +235,8 @@ MonoBehaviour:
   manaRegen: 0
   buffPlus: 0
   debuffMinus: 0
+  cantBeHit: 0
   isInvincible: 0
-  isImmortal: 0
-  cannotDie: 0
   isHit: 0
   buffs: []
   debuffs: []
@@ -247,17 +244,16 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   lockAnimation: 0
   timeDistortion: 1
-  activeLockOnTarget: {fileID: 0}
   isPlayer: 0
-  inventory: []
   activePets: []
   steps: 0
   isOnIce: 0
-  lootTableInternal: []
+  itemDrop: {fileID: 0}
   aggroGameObject: {fileID: 3183384280948212101}
   flip: 1
   target: {fileID: 0}
   partner: {fileID: 0}
+  rangeTriggered: {fileID: 0}
 --- !u!114 &7268659838857056098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,60 +287,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 5026383991709977235}
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
-  box: {fileID: 5104834203016797782, guid: 4828c807745ed894ea715e12180742d8, type: 3}
-  startImmediately: 0
-  initialActions:
-  - type: 3
-    position: {x: 0, y: 0}
-    de: 
-    en: 
-    duration: 4
-    dauer: 4
-    canDie: 0
-    nextPhase: 
-    animation: 
-    skill: {fileID: 7648501385148924824, guid: 51f9d7aedc6941b4eb34d1eb4d280123, type: 3}
-    cast: -1
-    cD: -1
-    amount: 0
-    castGroup: 0
-    sequence: {fileID: 0}
-    gcd: 2.5
-    skillinstance: {fileID: 0}
-  phases: []
-  events:
-  - eventName: Startup
-    eventDescription: 
-    trigger:
-    - type: 0
-      time: 0
-      life: 0
-      rangeTrigger: []
-    actions:
-    - type: 1
-      position: {x: 0, y: 0}
-      de: "Besch\xFCtzt den K\xF6nig!"
-      en: Protect the king!
-      duration: 2
-      dauer: 4
-      canDie: 0
-      nextPhase: 
-      animation: 
-      skill: {fileID: 0}
-      cast: -1
-      cD: -1
-      amount: 0
-      castGroup: 0
-      sequence: {fileID: 0}
-      gcd: 2.5
-      skillinstance: {fileID: 0}
-    affectedPhases: []
-    repeatEvent: 0
-    requireAll: 0
-    startTime: 0
-    isActive: 1
+  activeCastBar: {fileID: 0}
+  npc: {fileID: 0}
+  box: {fileID: 5059673948545585734, guid: 4828c807745ed894ea715e12180742d8, type: 3}
+  startPhase: {fileID: 0}
 --- !u!61 &8932006801697793323
 BoxCollider2D:
   m_ObjectHideFlags: 0

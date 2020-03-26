@@ -346,10 +346,8 @@ public class Character : MonoBehaviour
     {
         if (this.stats.damageNumber != null)
         {
-            GameObject damageNumberClone = Instantiate(this.stats.damageNumber, this.transform.position, Quaternion.identity, this.transform);
-            damageNumberClone.GetComponent<DamageNumbers>().number = value;
-            damageNumberClone.GetComponent<DamageNumbers>().setcolor(color);
-            damageNumberClone.hideFlags = HideFlags.HideInHierarchy;
+            DamageNumbers damageNumberClone = Instantiate(this.stats.damageNumber, this.transform.position, Quaternion.identity, this.transform);
+            damageNumberClone.Initialize(value, color);
         }
     }
 

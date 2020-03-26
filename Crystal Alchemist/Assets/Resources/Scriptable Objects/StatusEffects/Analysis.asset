@@ -35,16 +35,16 @@ MonoBehaviour:
       hits: 0
       requireAll: 0
     actions:
-    - actionType: 7
+    - actionType: 6
       resources:
       - resourceType: 3
         item: {fileID: 0}
         amount: 1
-      amount: 0
       speed: 0
       time: 0
       abilities: []
       effects: []
+      StatusEffectType: 0
   - trigger:
       triggerType: 1
       intervall: 1
@@ -58,11 +58,11 @@ MonoBehaviour:
       - resourceType: 2
         item: {fileID: 0}
         amount: -0.25
-      amount: 0
       speed: 0
       time: 0
       abilities: []
       effects: []
+      StatusEffectType: 0
   - trigger:
       triggerType: 4
       intervall: 0
@@ -71,13 +71,13 @@ MonoBehaviour:
       hits: 0
       requireAll: 0
     actions:
-    - actionType: 4
+    - actionType: 3
       resources: []
-      amount: 0
       speed: 0
       time: 0
       abilities: []
       effects: []
+      StatusEffectType: 0
   destroyDelay: 0.2
   changeColor: 0
   statusEffectColor: {r: 0, g: 0, b: 0, a: 1}

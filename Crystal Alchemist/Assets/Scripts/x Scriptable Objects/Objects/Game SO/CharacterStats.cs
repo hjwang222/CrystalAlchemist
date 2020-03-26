@@ -139,7 +139,7 @@ public class CharacterStats : ScriptableObject
     [FoldoutGroup("Schaden", expanded: false)]
     [Required]
     [Tooltip("DamageNumber-Objekt hier rein (nur für zerstörbare Objekte)")]
-    public GameObject damageNumber;
+    public DamageNumbers damageNumber;
 
     [Space(10)]
     [FoldoutGroup("Schaden", expanded: false)]

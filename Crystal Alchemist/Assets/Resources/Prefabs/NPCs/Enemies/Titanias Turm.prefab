@@ -106,7 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootParentObject: {fileID: 4407623360271033116}
   stats: {fileID: 11400000, guid: 2ecf4e93db9bd0a43a3dda9972716fe8, type: 2}
   myRigidbody: {fileID: 2438936824352443031}
   animator: {fileID: 4536096100035205208}
@@ -114,7 +113,6 @@ MonoBehaviour:
   shadowRenderer: {fileID: 4252439317337786063}
   activeSkillParent: {fileID: 4536096100877042891}
   activeStatusEffectParent: {fileID: 7092093423516748017}
-  skillSetParent: {fileID: 2993592967878901568}
   skillStartPosition: {fileID: 1536248267194378282}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
@@ -130,9 +128,8 @@ MonoBehaviour:
   manaRegen: 0
   buffPlus: 0
   debuffMinus: 0
+  cantBeHit: 0
   isInvincible: 0
-  isImmortal: 0
-  cannotDie: 0
   isHit: 0
   buffs: []
   debuffs: []
@@ -140,17 +137,16 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   lockAnimation: 0
   timeDistortion: 1
-  activeLockOnTarget: {fileID: 0}
   isPlayer: 0
-  inventory: []
   activePets: []
   steps: 0
   isOnIce: 0
-  lootTableInternal: []
+  itemDrop: {fileID: 0}
   aggroGameObject: {fileID: 6272208109676738659}
   flip: 0
   target: {fileID: 0}
   partner: {fileID: 0}
+  rangeTriggered: {fileID: 0}
 --- !u!114 &55980665602690937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,34 +159,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 55980665602690939}
   castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
-  box: {fileID: 5104834203016797782, guid: 4828c807745ed894ea715e12180742d8, type: 3}
-  startImmediately: 0
-  initialActions: []
-  phases:
-  - phaseName: Startphase
-    phaseDescription: 
-    actions:
-    - type: 3
-      position: {x: 0, y: 0}
-      de: 
-      en: 
-      duration: 4
-      dauer: 4
-      canDie: 0
-      nextPhase: 
-      animation: 
-      skill: {fileID: 1676703576389572161, guid: ebbcacfde9010dc489df5125a980db67,
-        type: 3}
-      cast: 1
-      cD: -1
-      amount: 6
-      castGroup: 1
-      sequence: {fileID: 0}
-      gcd: 1
-      skillinstance: {fileID: 0}
-  events: []
+  activeCastBar: {fileID: 0}
+  npc: {fileID: 0}
+  box: {fileID: 5059673948545585734, guid: 4828c807745ed894ea715e12180742d8, type: 3}
+  startPhase: {fileID: 0}
 --- !u!61 &4536096100201619651
 BoxCollider2D:
   m_ObjectHideFlags: 0
