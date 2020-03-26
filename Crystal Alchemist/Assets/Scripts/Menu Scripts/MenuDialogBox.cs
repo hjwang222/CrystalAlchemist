@@ -42,6 +42,7 @@ public class MenuDialogBox : MenuControls
 
     public void setActive(GameObject launcherObject)
     {
+        this.price = null;
         this.priceField.gameObject.SetActive(false);
         MenuDialogBoxLauncher launcher = launcherObject.GetComponent<MenuDialogBoxLauncher>();
 

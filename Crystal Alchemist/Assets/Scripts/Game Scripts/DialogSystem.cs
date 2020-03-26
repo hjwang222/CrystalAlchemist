@@ -123,7 +123,7 @@ public class DialogSystem : MonoBehaviour
 
         if (item != null)
         {
-            result = result.Replace("<item name>", GetItemName(price));
+            result = result.Replace("<item name>", item.getName());
             result = result.Replace("<item amount>", item.GetAmount() + "");
         }
 

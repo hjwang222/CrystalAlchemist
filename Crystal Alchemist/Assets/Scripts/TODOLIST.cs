@@ -12,10 +12,11 @@ public class TODOLIST : MonoBehaviour
     //TODO: Skill Sequence Instantiate
     //TODO: Skills ändern (Bombe, Turm, Schild Knockback)
     //TODO: Sentinel Schuss ändern
-    //TODO: Control UI updaten (Lockon, no mana, etc)
+    //TODO: Button UI updaten (Lockon, no mana, etc)
     //TODO: Canvas UI ändern (Damage Numbers, etc)
     //TODO: Indicators
-    //TODO: Antidot Graphics
+    //TODO: Better Chests
+    //TODO: Item und Skill Infos
 
     //TESTING: Items         (Scriptable Object), Drop Item, New Item after Kill, Minigames
     //TESTING: StatusEffects (Scriptable Object, Analyse überarbeiten)
@@ -24,6 +25,8 @@ public class TODOLIST : MonoBehaviour
 
     //BUG: (AI EVENT) To many events
     //BUG: (AI EVENT) Gifthaut doppelt
+    //BUG: (SKILLS) Schild reduziert speed nicht
+    //BUG: (SKILLS) Nitro stoppt
     //BUG: (SKILLS) Zeitsprung kann nicht gedrückt gehalten werden bzw. läuft länger als Mana
 
     //-----------------------------------------------------------------------------

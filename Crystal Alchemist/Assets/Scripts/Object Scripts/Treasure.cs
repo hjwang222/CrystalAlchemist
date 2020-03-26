@@ -90,8 +90,8 @@ public class Treasure : Rewardable
     public override void doOnUpdate()
     {
         if (this.currentState == objectState.showItem
-            && this.player != null
-            && this.player.currentState == CharacterState.interact)            
+            && ((this.player != null && this.player.currentState == CharacterState.interact)
+              || this.player == null))
         {
             closeChest(); //close Chest
         }
@@ -99,7 +99,7 @@ public class Treasure : Rewardable
 
     public override void doSomethingOnSubmit()
     {
-        if (this.currentState != objectState.opened)
+        if (this.currentState == objectState.normal)
         {
             if (this.player.canUseIt(this.costs)) openChest(); //open Chest
             else this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
@@ -133,6 +133,8 @@ public class Treasure : Rewardable
             //Kein Item drin
             this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.empty);
         }
+
+        StartCoroutine(delayCo());
     }
 
     private void closeChest()
@@ -180,7 +182,6 @@ public class Treasure : Rewardable
 
         Collectable collectable = this.itemDrop.Instantiate(this.showItem.transform.position);
         collectable.SetAsTreasureItem(this.showItem.transform);
-        StartCoroutine(delayCo());
     }
 
     private IEnumerator delayCo()

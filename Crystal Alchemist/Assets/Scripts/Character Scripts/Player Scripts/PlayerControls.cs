@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField]
@@ -10,18 +9,8 @@ public class PlayerControls : MonoBehaviour
     private PlayerMovement playerMovement;
 
     private void Update()
-    {
+    { 
         playerInputs();
-    }
-
-    private bool isButtonPressed(enumButton buttonInput)
-    {
-        string button = GameUtil.getButton(buttonInput);
-
-        if (Input.GetButton(button)
-            || Input.GetButtonUp(button)
-            || Input.GetButtonDown(button)) return true;
-        else return false;
     }
 
     private void playerInputs()

@@ -141,13 +141,11 @@ public class ItemStats : ScriptableObject
 
     public string getName()
     {
-        if (this.itemGroup != null) return this.itemGroup.info.getName();
-        else return this.info.getName();
+        return this.info.getName();
     }
 
     public string getDescription()
     {
-        if (this.itemGroup != null) return this.itemGroup.info.getDescription();
-        else return this.info.getDescription();
+        return this.info.getDescription();
     }    
 }

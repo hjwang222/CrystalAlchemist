@@ -67,7 +67,7 @@ public class PlayerInventory : ScriptableObject
     {
         foreach (ItemGroup group in this.inventoryItems)
         {
-            if (group == itemGroup)
+            if (group.name == itemGroup.name)
             {
                 group.UpdateAmount(value);
                 break;

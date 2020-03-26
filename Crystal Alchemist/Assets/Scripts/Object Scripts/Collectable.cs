@@ -65,6 +65,7 @@ public class Collectable : MonoBehaviour
             if (player != null)
             {
                 this.itemStats.CollectIt(player);
+                playSounds();
                 DestroyIt();
             }
         }
