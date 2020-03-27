@@ -12,23 +12,35 @@ public class DialogBox : MenuControls
     private List<string> texts = new List<string>();
     private int index = 0;
     private int maxLength = 28;
+    private float delay = 0.5f;
+    private bool inputPossible = false;
     #endregion
-         
+
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+
+        StartCoroutine(delayCO());
+    }
 
     public void next(int index)
     {
-        this.index += index;
-
-        if (this.index < 0) this.index = 0;
-
-        if (this.index < this.texts.Count)
+        if (this.inputPossible)
         {
-            //Blättere weiter                                       
-            showText();
-        }
-        else
-        {
-            hideDialogBox();
+            this.index += index;
+
+            if (this.index < 0) this.index = 0;
+
+            if (this.index < this.texts.Count)
+            {
+                //Blättere weiter                                       
+                showText();
+            }
+            else
+            {
+                hideDialogBox();
+            }
         }
     }
 
@@ -83,6 +95,14 @@ public class DialogBox : MenuControls
     {
         if (this.index + 1 < this.texts.Count) this.textMesh.text = this.texts[this.index] + "\n" + this.texts[this.index + 1];
         else this.textMesh.text = this.texts[this.index];
+    }
+
+
+    private IEnumerator delayCO()
+    {
+        this.inputPossible = false;
+        yield return new WaitForSeconds(this.delay);
+        this.inputPossible = true;
     }
 
     #endregion

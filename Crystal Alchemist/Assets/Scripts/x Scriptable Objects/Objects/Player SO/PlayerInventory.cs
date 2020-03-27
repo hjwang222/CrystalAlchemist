@@ -11,18 +11,7 @@ public class PlayerInventory : ScriptableObject
     [SerializeField]
     public List<ItemGroup> inventoryItems = new List<ItemGroup>();
 
-
-    private void OnEnable()
-    {
-        RemoveNulls();
-    }
-
-    private void OnDisable()
-    {
-        RemoveNulls();
-    }
-
-    private void RemoveNulls()
+    public void Initialize()
     {
         this.keyItems.RemoveAll(item => item == null);
         this.inventoryItems.RemoveAll(item => item == null);

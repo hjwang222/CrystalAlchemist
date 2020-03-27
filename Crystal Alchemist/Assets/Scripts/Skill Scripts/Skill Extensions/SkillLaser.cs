@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillLaser : SkillExtension
@@ -8,6 +9,10 @@ public class SkillLaser : SkillExtension
     [InfoBox("Kein Hit-Script notwendig, da kein Collider verwendet wird")]
     [SerializeField]
     private Skill impactEffect;
+
+    [ShowIf("impactEffect")]
+    [SerializeField]
+    private float distanceBetweenImpacts = 1f;
 
     [SerializeField]
     [MinValue(0)]
@@ -19,7 +24,7 @@ public class SkillLaser : SkillExtension
     [SerializeField]
     private bool targetRequired = false;
 
-    private Skill hitpointSkill;
+    private List<Skill> hitPoints = new List<Skill>();
 
     #endregion
 
@@ -38,7 +43,7 @@ public class SkillLaser : SkillExtension
 
     private void OnDestroy()
     {
-        this.hitpointSkill = null;
+        this.hitPoints.Clear();
     }
 
     #endregion
@@ -73,7 +78,7 @@ public class SkillLaser : SkillExtension
 
         float offset = 1f;
         Vector2 newPosition = new Vector2(startpoint.x - (this.skill.direction.x * offset), startpoint.y - (this.skill.direction.y * offset));
-               
+
         if (this.targetRequired)
         {
             if (this.skill.target != null) setLaserToTarget(startpoint, rotation, this.skill.target); //laser to target
@@ -148,22 +153,27 @@ public class SkillLaser : SkillExtension
     {
         if (this.impactEffect != null)
         {
-            //Generiere einen Treffer
-            if (this.hitpointSkill == null)
-            {
-                this.hitpointSkill = Instantiate(this.impactEffect, hitpoint, Quaternion.identity);
-                this.hitpointSkill.transform.position = hitpoint;
+            bool impactPossible = true;
+            this.hitPoints.RemoveAll(item => item == null);
 
-                if (this.hitpointSkill != null)
+            foreach (Skill skill in this.hitPoints)
+            {
+                if (Vector2.Distance(skill.transform.position, hitpoint) < this.distanceBetweenImpacts) impactPossible = false;
+            }
+
+            if (impactPossible)
+            {
+                Skill hitPointSkill = Instantiate(this.impactEffect, hitpoint, Quaternion.identity);
+                hitPointSkill.transform.position = hitpoint;
+
+                if (hitPointSkill != null)
                 {
                     //Position nicht überschreiben
-                    this.hitpointSkill.overridePosition = false;
-                    this.hitpointSkill.sender = this.skill.sender;
+                    hitPointSkill.overridePosition = false;
+                    hitPointSkill.sender = this.skill.sender;
                 }
-            }
-            else
-            {
-                this.hitpointSkill.transform.position = hitpoint;
+
+                this.hitPoints.Add(hitPointSkill);
             }
         }
     }

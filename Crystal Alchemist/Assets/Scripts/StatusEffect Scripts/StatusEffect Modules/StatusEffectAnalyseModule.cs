@@ -23,7 +23,7 @@ public class StatusEffectAnalyseModule : StatusEffectModule
                 if (!this.analyseAdded.Contains(gameObject) 
                     && (gameObject.GetComponent<AI>() != null 
                     || (gameObject.GetComponent<Breakable>() != null && gameObject.GetComponent<Breakable>().itemDrop != null)
-                    || (gameObject.GetComponent<Rewardable>() != null && gameObject.GetComponent<Rewardable>().itemDrop != null))) //check if already added
+                    || (gameObject.GetComponent<Treasure>() != null && gameObject.GetComponent<Treasure>().itemDrop != null))) //check if already added
                 {
                     GameObject tmp = Instantiate(this.analyseGameObject, gameObject.transform.position, Quaternion.identity, gameObject.transform);
                     tmp.GetComponent<AnalyseUI>().setTarget(gameObject);

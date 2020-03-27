@@ -55,7 +55,7 @@ public class SkillChainHit : SkillMechanicHit
             if (this.canBreak && !this.useRange)
             {
                 this.indicatorModule.hideIndicator();
-                this.skill.DestroyIt();
+                this.skill.DeactivateIt();
             }
         }
         else

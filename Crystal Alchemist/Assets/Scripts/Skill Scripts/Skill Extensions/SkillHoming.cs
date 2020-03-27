@@ -63,7 +63,7 @@ public class SkillHoming : SkillProjectile
         {
             //Zerstöre Skill, wenn das Ziel nicht mehr vorhanden ist. 
             //TODO: Weiter fliegen lassen?
-            this.skill.DestroyIt();
+            this.skill.DeactivateIt();
         }
     }
 }

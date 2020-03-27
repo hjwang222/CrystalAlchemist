@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
 
@@ -64,6 +62,7 @@ public class Treasure : Rewardable
     private float outlineWidth = 0.25f;
     #endregion
 
+    private bool treasureEnabled = true;
 
     #region Start Funktionen
 
@@ -73,7 +72,8 @@ public class Treasure : Rewardable
         this.setLoot();
         FormatUtil.set3DText(this.priceText, this.costs.amount + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
 
-        if (this.itemDrop == null && this.treasureType == TreasureType.normal) changeTreasureState(true);
+        if (this.itemDrop == null 
+        && this.treasureType == TreasureType.normal) ChangeTreasureState(true);
     }
 
     private void setLoot()
@@ -89,7 +89,7 @@ public class Treasure : Rewardable
 
     public override void doOnUpdate()
     {
-        if (this.currentState == objectState.showItem
+        if (!this.treasureEnabled
             && ((this.player != null && this.player.currentState == CharacterState.interact)
               || this.player == null))
         {
@@ -99,7 +99,7 @@ public class Treasure : Rewardable
 
     public override void doSomethingOnSubmit()
     {
-        if (this.currentState == objectState.normal)
+        if (this.treasureEnabled)
         {
             if (this.player.canUseIt(this.costs)) openChest(); //open Chest
             else this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
@@ -114,18 +114,13 @@ public class Treasure : Rewardable
     private void openChest()
     {
         this.player.reduceResource(this.costs);
-        changeTreasureState(true);
-        AudioUtil.playSoundEffect(this.gameObject, this.soundEffect);
+        ChangeTreasureState(true);
 
         if (this.soundEffect != null && this.itemDrop != null)
         {
-            //Spiele Soundeffekte ab            
-            AudioUtil.playSoundEffect(this.gameObject, this.soundEffectTreasure, GlobalValues.backgroundMusicVolume);
-
             //Zeige Item
             this.showTreasureItem();
-
-            this.itemDrop.stats.CollectIt(this.player);
+   
             this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.success, this.itemDrop.stats);
         }
         else
@@ -133,19 +128,16 @@ public class Treasure : Rewardable
             //Kein Item drin
             this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.empty);
         }
-
-        StartCoroutine(delayCo());
     }
 
     private void closeChest()
     {
         //Close when opened
-
-        Destroy(this.itemDrop);
+        Destroy(this.itemDrop);        
 
         if (this.treasureType == TreasureType.lootbox)
         {
-            changeTreasureState(false);
+            AnimatorUtil.SetAnimatorParameter(this.anim, "isOpened", false);
             this.setLoot();
         }
 
@@ -154,41 +146,33 @@ public class Treasure : Rewardable
         {
             Destroy(this.showItem.transform.GetChild(i).gameObject);
         }
+
         this.showItem.SetActive(false);
-
     }
 
-    private void changeTreasureState(bool openChest)
+    private void ChangeTreasureState(bool openChest)
     {
-        if (openChest)
-        {
-            AnimatorUtil.SetAnimatorParameter(this.anim, "isOpened", true);
-            this.currentState = objectState.opened;
-            this.context.SetActive(false);
-        }
-        else
-        {
-            AnimatorUtil.SetAnimatorParameter(this.anim, "isOpened", false);
-            this.currentState = objectState.normal;
-            this.context.SetActive(true);
-        }
+        AudioUtil.playSoundEffect(this.gameObject, this.soundEffect);
+        AnimatorUtil.SetAnimatorParameter(this.anim, "isOpened", openChest);       
     }
 
+    public void SetEnabled(bool enable)
+    {
+        this.treasureEnabled = enable;
+        this.context.gameObject.SetActive(enable);
+    }
 
     public void showTreasureItem()
     {
+        AudioUtil.playSoundEffect(this.gameObject, this.soundEffectTreasure, GlobalValues.backgroundMusicVolume);
+
         //Item instanziieren und der Liste zurück geben und das Item anzeigen            
         this.showItem.SetActive(true);
 
         Collectable collectable = this.itemDrop.Instantiate(this.showItem.transform.position);
         collectable.SetAsTreasureItem(this.showItem.transform);
-    }
 
-    private IEnumerator delayCo()
-    {
-        //BUG: Item verschwindet zu schnell, daher ein Delay setzen! Siehe DoOnUpdate -> Close Chest
-        yield return new WaitForSeconds(1f);
-        this.currentState = objectState.showItem;
+        this.itemDrop.stats.CollectIt(this.player);
     }
 
     #endregion

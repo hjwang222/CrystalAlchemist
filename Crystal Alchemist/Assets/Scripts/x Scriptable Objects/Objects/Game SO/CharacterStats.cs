@@ -136,27 +136,24 @@ public class CharacterStats : ScriptableObject
 
     ////////////////////////////////////////////////////////////////
 
-    [FoldoutGroup("Schaden", expanded: false)]
-    [Required]
-    [Tooltip("DamageNumber-Objekt hier rein (nur für zerstörbare Objekte)")]
-    public DamageNumbers damageNumber;
+    [BoxGroup("Schaden")]
+    public bool showDamageNumbers = true;
 
-    [Space(10)]
-    [FoldoutGroup("Schaden", expanded: false)]
+    [BoxGroup("Schaden")]
     [Tooltip("Wie stark (-) oder schwach (+) kann das Objekt zurück gestoßen werden?")]
     public float antiKnockback = 0;
 
-    [FoldoutGroup("Schaden", expanded: false)]
+    [BoxGroup("Schaden")]
     [Tooltip("Unverwundbarkeitszeit")]
     [Range(0, 10)]
     public float cannotBeHitTime = 0.3f;
 
     [Space(10)]
-    [FoldoutGroup("Schaden", expanded: false)]
+    [BoxGroup("Schaden")]
     [Tooltip("Farbe, wenn Gegner getroffen wurde")]
     public bool showHitcolor = true;
 
-    [FoldoutGroup("Schaden", expanded: false)]
+    [BoxGroup("Schaden")]
     [ShowIf("showHitcolor")]
     public Color hitColor = Color.white;
 

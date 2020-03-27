@@ -25,15 +25,8 @@ public class AggroStats : ScriptableObject
     [FoldoutGroup("Aggro Attributes", expanded: false)]
     public float targetChangeDelay = 0f;
 
-
-    [FoldoutGroup("Aggro Object Attributes", expanded: false)]
-    public GameObject targetFoundClue;
-
     [FoldoutGroup("Aggro Object Attributes", expanded: false)]
     public float foundClueDuration = 1;
-
-    [FoldoutGroup("Aggro Object Attributes", expanded: false)]
-    public GameObject targetActiveClue;
 
     [FoldoutGroup("Aggro Object Attributes", expanded: false)]
     public float activeClueDuration = 1;

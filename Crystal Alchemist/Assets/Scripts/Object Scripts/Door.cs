@@ -88,7 +88,7 @@ public class Door : Interactable
         OpenCloseDoor(isOpen, null);
     }
 
-    private void OpenCloseDoor(bool isOpen, GameObject contextClueChild)
+    private void OpenCloseDoor(bool isOpen, ContextClue contextClueChild)
     {
         this.isOpen = isOpen;
         AnimatorUtil.SetAnimatorParameter(this.animator, "isOpened", this.isOpen);
@@ -97,9 +97,9 @@ public class Door : Interactable
         if (contextClueChild != null)
         {
             //Wenn Spieler in Reichweite ist und Tür zu ist -> Context Clue anzeigen! Ansonsten nicht.
-            if (this.isOpen) contextClueChild.SetActive(false);
-            else if (!this.isOpen && this.isPlayerInRange) contextClueChild.SetActive(true);
-            else contextClueChild.SetActive(false);
+            if (this.isOpen) contextClueChild.gameObject.SetActive(false);
+            else if (!this.isOpen && this.isPlayerInRange) contextClueChild.gameObject.SetActive(true);
+            else contextClueChild.gameObject.SetActive(false);
         }
 
         AudioUtil.playSoundEffect(this.gameObject, this.soundEffect);

@@ -3,11 +3,6 @@ using UnityEngine;
 
 public class CharacterCombat : MonoBehaviour
 {
-    [SerializeField]
-    [Required]
-    [BoxGroup("Required")]
-    private CastBar castbar;
-
     public CastBar activeCastBar;
 
     public void ChargeAbility(Ability ability, Character character)
@@ -68,7 +63,7 @@ public class CharacterCombat : MonoBehaviour
     {
         if (this.activeCastBar == null && ability.castTime > 0)
         {
-            this.activeCastBar = Instantiate(this.castbar, character.transform.position, Quaternion.identity);
+            this.activeCastBar = Instantiate(GlobalGameObjects.castBar, character.transform.position, Quaternion.identity);
             this.activeCastBar.setCastBar(character, ability);
         }
     }

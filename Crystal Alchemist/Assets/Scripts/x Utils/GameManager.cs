@@ -1,18 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private GlobalGameObjects globalGameObjects;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    private PlayerInventory playerInventory;
+
+    private void Awake()
     {
-        
+        this.globalGameObjects.Initialize(); //set objects to static
+        this.playerInventory.Initialize(); //remove null objects
     }
 }

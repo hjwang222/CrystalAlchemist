@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using AssetIcons;
+
 
 public class Character : MonoBehaviour
 {
@@ -344,9 +344,9 @@ public class Character : MonoBehaviour
 
     private void showDamageNumber(float value, Color[] color)
     {
-        if (this.stats.damageNumber != null)
+        if (this.stats.showDamageNumbers)
         {
-            DamageNumbers damageNumberClone = Instantiate(this.stats.damageNumber, this.transform.position, Quaternion.identity, this.transform);
+            DamageNumbers damageNumberClone = Instantiate(GlobalGameObjects.damageNumber, this.transform.position, Quaternion.identity, this.transform);
             damageNumberClone.Initialize(value, color);
         }
     }
@@ -365,13 +365,11 @@ public class Character : MonoBehaviour
     public virtual void KillIt()
     {
         if (!this.isPlayer)
-        {
-            //TODO:Destroy on Cast            
-
+        {        
             for (int i = 0; i < this.activeSkills.Count; i++)
             {
                 resetCast(this.activeSkills[i]);
-                if (this.activeSkills[i].attachToSender) this.activeSkills[i].DestroyIt();
+                if (this.activeSkills[i].attachToSender) this.activeSkills[i].DeactivateIt();
             }
 
             //TODO: Kill sofort (Skill noch aktiv)

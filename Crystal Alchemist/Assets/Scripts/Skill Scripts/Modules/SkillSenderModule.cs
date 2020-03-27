@@ -65,12 +65,12 @@ public class SkillSenderModule : SkillModule
 
             this.elapsed = this.intervallSender;
         }
+
+        if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(this.speedDuringDuration, this.affectAnimation);
     }
 
     private void Update()
     {
-        if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(this.speedDuringDuration, this.affectAnimation);
-
         if (this.intervallSender > 0)
         {
             if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.skill.getTimeDistortion());
@@ -78,7 +78,7 @@ public class SkillSenderModule : SkillModule
             {
                 if (this.skill.sender != null)
                 {
-                    if (this.skill.sender.HasEnoughCurrency(this.costs)) this.skill.DeactivateIt();
+                    if (!this.skill.sender.HasEnoughCurrency(this.costs)) this.skill.DeactivateIt();
                     else
                     {
                         this.elapsed = this.intervallSender;

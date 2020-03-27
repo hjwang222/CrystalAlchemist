@@ -3,7 +3,7 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-    //NPC: Bosskampf (Titania)    
+    //NPC: Bosskampf (Titania)    https://www.youtube.com/watch?v=AD4JIXQDw0s
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena
     //GRAPHICS: TitleScreen: Background 
@@ -12,9 +12,12 @@ public class TODOLIST : MonoBehaviour
     //TODO: Skill Sequence Instantiate
     //TODO: Skills ändern (Bombe, Turm, Schild Knockback)
     //TODO: Sentinel Schuss ändern
-    //TODO: Indicators
-    //TODO: Better Chests
-    //TODO: Collection of Objects (MiniDialog, Found, etc)
+
+    //REWORK: Indicator Rework
+    //REWORK: Shader Rework https://www.youtube.com/watch?v=5dzGj9k8Qy8
+    //REWORK: Lights
+
+
 
     //TESTING: Items         (Scriptable Object), Drop Item, New Item after Kill, Minigames
     //TESTING: StatusEffects (Scriptable Object, Analyse überarbeiten)
@@ -23,9 +26,6 @@ public class TODOLIST : MonoBehaviour
 
     //BUG: (AI EVENT) To many events
     //BUG: (AI EVENT) Gifthaut doppelt
-    //BUG: (SKILLS) Schild reduziert speed nicht
-    //BUG: (SKILLS) Nitro stoppt
-    //BUG: (SKILLS) Zeitsprung kann nicht gedrückt gehalten werden bzw. läuft länger als Mana
 
     //-----------------------------------------------------------------------------
 

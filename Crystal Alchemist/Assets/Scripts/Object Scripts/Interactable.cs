@@ -1,24 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using AssetIcons;
 
-public enum objectState
-{
-    normal,
-    opened,
-    showItem
-}
 
 public class Interactable : MonoBehaviour
 {
     #region Attribute
-    [Required]
-    [BoxGroup("Mandatory")]
-    [Tooltip("Context-Objekt hier rein (nur für Interagierbare Objekte)")]
-    public GameObject contextClueChild;
-
     [BoxGroup("Activation Requirements")]
     [HideLabel]
     public Costs costs;
@@ -33,17 +19,16 @@ public class Interactable : MonoBehaviour
     public bool isPlayerLookingAtIt = false;
 
     [HideInInspector]
-    public Player player; 
+    public Player player;
 
     [HideInInspector]
     public AudioSource audioSource;
     [HideInInspector]
     public SpriteRenderer spriteRenderer;
     [HideInInspector]
-    public GameObject context;
+    public ContextClue context;
 
-    [HideInInspector]
-    public objectState currentState = objectState.normal;
+
 
 
 
@@ -89,15 +74,12 @@ public class Interactable : MonoBehaviour
         this.audioSource.loop = false;
         this.audioSource.playOnAwake = false;
         setContext();
-       
+
     }
 
     public void setContext()
     {
-        if (this.contextClueChild != null)
-        {
-            this.context = Instantiate(this.contextClueChild, this.transform.position, Quaternion.identity, this.transform);
-        }
+        this.context = Instantiate(GlobalGameObjects.contextClue, this.transform.position, Quaternion.identity, this.transform);
     }
 
     #endregion
@@ -112,7 +94,7 @@ public class Interactable : MonoBehaviour
 
             if (player != null)
             {
-                if(this.player != player) this.player = player;
+                if (this.player != player) this.player = player;
                 this.isPlayerInRange = true;
 
                 checkifLooking(this.player);
@@ -123,7 +105,7 @@ public class Interactable : MonoBehaviour
     private void checkifLooking(Character character)
     {
         if (character != null
-            && (character.currentState == CharacterState.interact 
+            && (character.currentState == CharacterState.interact
              || character.currentState == CharacterState.idle
              || character.currentState == CharacterState.walk))
         {
@@ -131,13 +113,13 @@ public class Interactable : MonoBehaviour
                 && CollisionUtil.checkIfGameObjectIsViewed(character, this.gameObject))
             {
                 player.currentState = CharacterState.interact;
-                this.context.SetActive(true);                
+                this.context.gameObject.SetActive(true);
                 this.isPlayerLookingAtIt = true;
             }
             else
             {
                 player.currentState = CharacterState.idle;
-                this.context.SetActive(false);                
+                this.context.gameObject.SetActive(false);
                 this.isPlayerLookingAtIt = false;
             }
         }
@@ -167,7 +149,7 @@ public class Interactable : MonoBehaviour
 
             this.isPlayerInRange = false;
             this.isPlayerLookingAtIt = false;
-            this.context.SetActive(false);
+            this.context.gameObject.SetActive(false);
         }
     }
     #endregion

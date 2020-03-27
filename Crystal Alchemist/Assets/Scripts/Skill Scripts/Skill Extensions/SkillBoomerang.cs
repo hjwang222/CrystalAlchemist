@@ -74,7 +74,7 @@ public class SkillBoomerang : SkillProjectile
             }
             else
             {
-                this.skill.DestroyIt();
+                this.skill.DeactivateIt();
             }
         }
     }

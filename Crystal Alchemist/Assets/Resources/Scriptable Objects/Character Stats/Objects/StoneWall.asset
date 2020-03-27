@@ -21,6 +21,7 @@ MonoBehaviour:
   isMassive: 1
   isImmuneToAllDebuffs: 1
   immunityToStatusEffects: []
+  hasRespawn: 1
   respawnTime: 9999
   respawnAnimation: {fileID: 0}
   deathAnimation: {fileID: 0}
@@ -31,16 +32,12 @@ MonoBehaviour:
   regenerationInterval: 0
   buffPlus: 0
   debuffMinus: 0
-  damageNumber: {fileID: 3372165855826798505, guid: 6ec11495eb946cd4abeb8e0e970c6846,
-    type: 3}
+  showDamageNumbers: 0
   antiKnockback: 0
   cannotBeHitTime: 0.3
   showHitcolor: 1
   hitColor: {r: 0.509434, g: 0.270839, b: 0.0744927, a: 1}
-  lootTable: []
-  multiLoot: 0
-  canCollectAll: 0
-  canCollect: []
+  lootTable: {fileID: 0}
   hitSoundEffect: {fileID: 0}
   characterSpecies: Fels
   characterGender: 2

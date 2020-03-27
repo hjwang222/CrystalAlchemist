@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class AbilityUtil : MonoBehaviour
 {
     public static Ability InstantiateAbility(Ability ability)

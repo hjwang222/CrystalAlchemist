@@ -5,10 +5,7 @@ using UnityEngine;
 public class RespawnAnimation : MonoBehaviour
 {
     [SerializeField]
-    private List<Animator> animators;    
-
-    [SerializeField]
-    private AudioSource audioSource;
+    private Animator animator;    
 
     private Character character;
     private bool reverse;
@@ -26,18 +23,14 @@ public class RespawnAnimation : MonoBehaviour
         if (this.reverse)
         {
             this.character.prepareSpawnOut();
-
-            foreach (Animator animator in this.animators)
-            {
-                AnimatorUtil.SetAnimatorParameter(animator, "Reverse");
-            }
+            AnimatorUtil.SetAnimatorParameter(animator, "Reverse");            
         }
         else this.character.prepareSpawnFromAnimation(reset); //show Character but no Actions!     
     }
 
     public float getAnimationLength()
     {
-        AnimationClip[] clips = this.animators[0].runtimeAnimatorController.animationClips;
+        AnimationClip[] clips = this.animator.runtimeAnimatorController.animationClips;
         return clips[0].length;
     }
 

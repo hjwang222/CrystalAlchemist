@@ -11,11 +11,6 @@ public class AIEvents : CharacterCombat
     [BoxGroup("Required")]
     private AI npc;
 
-    [SerializeField]
-    [Required]
-    [BoxGroup("Required")]
-    private MiniDialogBox box;
-
     [BoxGroup("AI")]
     [SerializeField]
     private AIPhase startPhase;
@@ -76,7 +71,7 @@ public class AIEvents : CharacterCombat
     {
         if (this.activeDialog == null)
         {
-            this.activeDialog = Instantiate(this.box, this.npc.skillStartPosition.transform);
+            this.activeDialog = Instantiate(GlobalGameObjects.miniDialogBox, this.npc.skillStartPosition.transform);
             this.activeDialog.setDialogBox(text, duration);
         }
     }
