@@ -1,6 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class SkillLaser : SkillExtension
 {
@@ -13,6 +14,9 @@ public class SkillLaser : SkillExtension
     [ShowIf("impactEffect")]
     [SerializeField]
     private float distanceBetweenImpacts = 1f;
+
+    [SerializeField]
+    private Light2D lights;
 
     [SerializeField]
     [MinValue(0)]
@@ -128,25 +132,29 @@ public class SkillLaser : SkillExtension
         if (CollisionUtil.checkCollision(collider, this.skill)) this.skill.hitIt(collider);
         Vector2 position = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y - startpoint.y) / 2) + startpoint;
 
-        this.laserSprite.transform.position = position;
-        this.laserSprite.size = new Vector2(Vector3.Distance(hitpoint, startpoint), this.laserSprite.size.y);
-        this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
-
+        setLaser(position, Vector3.Distance(hitpoint, startpoint), rotation);
         setImpactEffect(hitpoint);
     }
 
     private void drawLaser(Vector2 startpoint, Vector3 rotation)
     {
         Vector2 position = new Vector2(this.skill.direction.x * (this.distance / 2), this.skill.direction.y * (this.distance / 2)) + startpoint;
+        setLaser(position, this.distance, rotation);
+    }
 
+    private void setLaser(Vector2 position, float distance, Vector3 rotation)
+    {
         this.laserSprite.transform.position = position;
-        this.laserSprite.size = new Vector2(this.distance, this.laserSprite.size.y);
+        this.laserSprite.size = new Vector2(distance, this.laserSprite.size.y);
         this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
+
+        if (this.lights != null) this.lights.transform.localScale = new Vector2(distance, lights.transform.localScale.y);
     }
 
     private void drawLaser()
     {
         this.laserSprite.size = new Vector2(0, 0);
+        if (this.lights != null) this.lights.transform.localScale = new Vector2(0, 0);
     }
 
     private void setImpactEffect(Vector2 hitpoint)
