@@ -15,19 +15,17 @@ public class TODOLIST : MonoBehaviour
 
     //REWORK: Indicator Rework
     //REWORK: Shader Rework https://www.youtube.com/watch?v=5dzGj9k8Qy8
-    //REWORK: Lights
+    //REWORK: Lights (Intensity)
 
     //TESTING: Items         (Scriptable Object), Drop Item, New Item after Kill, Minigames
     //TESTING: StatusEffects (Scriptable Object, Analyse überarbeiten)
     //TESTING: Inventory     (Scriptable Object)
     //TESTING: AI Events     (Bugfixes, Event und Phase Reset after Kill)
-    //SHADER:  Lights, Outline, Color Swap, Bloom, Blend OP Max
+    //SHADER:  Lights (Sprite Lit Master), Outline, Color Swap (Replace), Bloom (HDR), Blend OP Max
 
     //BUG: (AI EVENT) To many events
     //BUG: (AI EVENT) Gifthaut doppelt
     //BUG: (MENU) Menu DialogBox (Preis falsch, SetFirst, etc)
-    //BUG: (UI) Context Clue Spiegel
-    //BUG: 
 
     //-----------------------------------------------------------------------------
 

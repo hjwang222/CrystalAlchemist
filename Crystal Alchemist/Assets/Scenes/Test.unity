@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6167,17 +6167,17 @@ PrefabInstance:
     - target: {fileID: 3742429446308780575, guid: 0d34afa3d86f33d408760320879efe9c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.703628
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3742429446308780575, guid: 0d34afa3d86f33d408760320879efe9c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.0213776
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3742429446308780575, guid: 0d34afa3d86f33d408760320879efe9c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -167.41425
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3742429446308780575, guid: 0d34afa3d86f33d408760320879efe9c,
         type: 3}
@@ -6605,9 +6605,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeCastBar: {fileID: 0}
   npc: {fileID: 4482648710634036694}
-  castbar: {fileID: 1206129005517862683, guid: 002fbdd592a180148901fad7e241d939, type: 3}
-  box: {fileID: 5104834203016797782, guid: 4828c807745ed894ea715e12180742d8, type: 3}
   startPhase: {fileID: 11400000, guid: cb13a087f2d8b3a4dbf86c75af062824, type: 2}
 --- !u!114 &4482648710634036694
 MonoBehaviour:
@@ -6661,6 +6660,7 @@ MonoBehaviour:
   flip: 1
   target: {fileID: 0}
   partner: {fileID: 0}
+  rangeTriggered: {fileID: 0}
 --- !u!4 &6384556301801824302
 Transform:
   m_ObjectHideFlags: 0

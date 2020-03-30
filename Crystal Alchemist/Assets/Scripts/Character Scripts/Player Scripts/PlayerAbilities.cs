@@ -21,9 +21,6 @@ public class PlayerAbilities : CharacterCombat
     private void Start()
     {
         this.targetingSystem.gameObject.SetActive(false);
-
-        //Instantiate to make a copy
-        this.skillSet.Start();
     }
 
     private void Update()

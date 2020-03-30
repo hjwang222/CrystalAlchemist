@@ -107,6 +107,14 @@ public class PlayerButtons : ScriptableObject
         }
     }
 
+    public void ClearAbilities()
+    {
+        foreach (PlayerButton playerButton in this.buttons)
+        {
+            playerButton.ability = null;
+        }
+    }
+
     public void SetAbilityToButton(string button, Ability ability)
     {
         foreach (PlayerButton playerButton in this.buttons)

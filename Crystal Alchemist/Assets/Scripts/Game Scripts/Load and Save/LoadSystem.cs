@@ -7,7 +7,12 @@ public class LoadSystem : MonoBehaviour
     public static void loadPlayerData(Player player, string saveGameSlot)
     {
         PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
+        PlayerAbilities playerAbilities = player.GetComponent<PlayerAbilities>();
+        PlayerTeleport playerTeleport = player.GetComponent<PlayerTeleport>();
 
+        playerAbilities.skillSet.Start();
+
+        playerAbilities.buttons.ClearAbilities();
         loadPreset(player, saveGameSlot);
         player.presetSignal.Raise();
 
@@ -30,14 +35,15 @@ public class LoadSystem : MonoBehaviour
             player.secondsPlayed.setValue(data.timePlayed);            
 
             loadInventory(data, player);
+            loadPlayerSkills(playerAbilities, saveGameSlot);
 
-            player.GetComponent<PlayerTeleport>().setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]), true);
-            player.GetComponent<PlayerTeleport>().teleportPlayerToLastSavepoint(true); //letzter Savepoint, no Scene Loading
+            playerTeleport.setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]), true);
+            playerTeleport.teleportPlayerToLastSavepoint(true); //letzter Savepoint, no Scene Loading
         }
         else
         {
-            player.GetComponent<PlayerTeleport>().setLastTeleport("", Vector2.zero, false);
-            player.GetComponent<PlayerTeleport>().teleportPlayerToScene(true); //Starpunkt, no Scene Loading
+            playerTeleport.setLastTeleport("", Vector2.zero, false);
+            playerTeleport.teleportPlayerToScene(true); //Starpunkt, no Scene Loading
         }
     }
 

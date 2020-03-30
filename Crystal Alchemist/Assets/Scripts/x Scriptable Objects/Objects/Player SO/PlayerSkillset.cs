@@ -5,14 +5,17 @@ using UnityEngine;
 public class PlayerSkillset : ScriptableObject
 {
     [SerializeField]
+    private List<Ability> skillSet = new List<Ability>();
+
     private List<Ability> abilities = new List<Ability>();
 
     public void Start()
     {
-        foreach (Ability ability in this.abilities)
+        this.abilities.Clear();
+
+        foreach (Ability ability in this.skillSet)
         {
-            ability.Initialize();
-            //this.AButton = Instantiate(this.AButton);
+            AddAbility(ability);
         }
     }
 
@@ -50,6 +53,9 @@ public class PlayerSkillset : ScriptableObject
 
     public void AddAbility(Ability ability)
     {
-        this.abilities.Add(ability);
+        Ability newAbility = Instantiate(ability);
+        newAbility.Initialize();
+        newAbility.name = ability.name;
+        this.abilities.Add(newAbility);
     }
 }

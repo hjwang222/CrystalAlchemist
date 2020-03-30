@@ -34,10 +34,6 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     [BoxGroup("DialogBox")]
     public DialogBoxType dialogBoxType = DialogBoxType.yesNo;
 
-    [ShowIf("dialogBoxType", DialogBoxType.yesNo)]
-    [BoxGroup("DialogBox")]
-    public bool setYesButtonFirst = true;
-
     private Costs price;
     private string dialogText;
 

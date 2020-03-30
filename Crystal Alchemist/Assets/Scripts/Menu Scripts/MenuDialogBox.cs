@@ -44,6 +44,8 @@ public class MenuDialogBox : MenuControls
     {
         this.price = null;
         this.priceField.gameObject.SetActive(false);
+        this.YesButton.GetComponent<Selectable>().interactable = true;
+
         MenuDialogBoxLauncher launcher = launcherObject.GetComponent<MenuDialogBoxLauncher>();
 
         this.YesButton.gameObject.SetActive(false);
@@ -52,8 +54,6 @@ public class MenuDialogBox : MenuControls
 
         if (launcher != null)
         {
-            this.price = launcher.GetPrice();
-
             this.child.SetActive(true);
             this.actionYes = launcher.actionOnConfirm;
             this.textfield.text = launcher.GetText();
@@ -67,15 +67,13 @@ public class MenuDialogBox : MenuControls
                 this.YesButton.gameObject.SetActive(true);
                 this.NoButton.gameObject.SetActive(true);
 
+                this.price = launcher.GetPrice();
+
                 if (this.price != null && this.price.resourceType != CostType.none)
                 {
                     this.priceField.gameObject.SetActive(true);
-                    bool canActivateYES = this.priceField.updatePrice(this.player, this.price);
-                    this.YesButton.GetComponent<Selectable>().interactable = canActivateYES;
+                    this.YesButton.GetComponent<Selectable>().interactable = this.priceField.updatePrice(this.player, this.price);
                 }
-
-                if (launcher.setYesButtonFirst) this.YesButton.setFirst();
-                else this.NoButton.setFirst();
             }
 
             this.lastMainMenu = launcher.parentMenu;
