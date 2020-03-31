@@ -40,17 +40,21 @@ public class MenuDialogBox : MenuControls
     [HideInInspector]
     public string dialogText;
 
-    public void setActive(GameObject launcherObject)
+    private void init()
     {
-        this.price = null;
-        this.priceField.gameObject.SetActive(false);
-        this.YesButton.GetComponent<Selectable>().interactable = true;
-
-        MenuDialogBoxLauncher launcher = launcherObject.GetComponent<MenuDialogBoxLauncher>();
-
         this.YesButton.gameObject.SetActive(false);
         this.NoButton.gameObject.SetActive(false);
         this.OKButton.gameObject.SetActive(false);
+        this.price = null;
+        this.priceField.gameObject.SetActive(false);
+        this.YesButton.GetComponent<Selectable>().interactable = true;
+    }
+
+    public void setActive(GameObject launcherObject)
+    {
+        MenuDialogBoxLauncher launcher = launcherObject.GetComponent<MenuDialogBoxLauncher>();
+
+        init();
 
         if (launcher != null)
         {
@@ -67,17 +71,22 @@ public class MenuDialogBox : MenuControls
                 this.YesButton.gameObject.SetActive(true);
                 this.NoButton.gameObject.SetActive(true);
 
-                this.price = launcher.GetPrice();
-
-                if (this.price != null && this.price.resourceType != CostType.none)
-                {
-                    this.priceField.gameObject.SetActive(true);
-                    this.YesButton.GetComponent<Selectable>().interactable = this.priceField.updatePrice(this.player, this.price);
-                }
+                setPrice(launcher);
             }
 
             this.lastMainMenu = launcher.parentMenu;
             if (this.lastMainMenu != null) this.lastMainMenu.enableButtons(false);
+        }
+    }
+
+    private void setPrice(MenuDialogBoxLauncher launcher)
+    {
+        this.price = launcher.GetPrice();
+
+        if (this.price != null && this.price.resourceType != CostType.none)
+        {
+            this.priceField.gameObject.SetActive(true);
+            this.YesButton.GetComponent<Selectable>().interactable = this.priceField.updatePrice(this.player, this.price);
         }
     }
 

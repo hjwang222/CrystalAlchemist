@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
 
-public class AI : Character
+public class AI : NonPlayer
 {
     [Required]
     [BoxGroup("Easy Access")]
@@ -25,9 +25,9 @@ public class AI : Character
 
     private bool isSleeping = true;
 
-    private void Awake()
+    public override void Awake()
     {
-        init();
+        base.Awake();
         this.target = null;
     }
     #region Animation, StateMachine

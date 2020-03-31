@@ -7160,3 +7160,23 @@ Player.Awake () (at Assets/Scripts/Character Scripts/Player Scripts/Player.cs:88
 UnityEngine.Object:Instantiate(GameObject)
 DontDestroyHandler:Awake() (at Assets/Scripts/x Utils/DontDestroyHandler.cs:22)
 
+Exception 31.03.2020 18:00:32: NullReferenceException: Object reference not set to an instance of an object
+AnalyseInfo.SetAnalyseUI (System.Boolean value) (at Assets/Scripts/Character Scripts/NPC/AnalyseInfo.cs:39)
+AnalyseInfo.Awake () (at Assets/Scripts/Character Scripts/NPC/AnalyseInfo.cs:18)
+UnityEngine.Object:Instantiate(AnalyseInfo, Vector3, Quaternion, Transform)
+Treasure:Start() (at Assets/Scripts/Object Scripts/Treasure.cs:78)
+
+Exception 31.03.2020 18:00:44: NullReferenceException: Object reference not set to an instance of an object
+AnalyseInfo.SetAnalyseUI (System.Boolean value) (at Assets/Scripts/Character Scripts/NPC/AnalyseInfo.cs:39)
+AnalyseInfo.Awake () (at Assets/Scripts/Character Scripts/NPC/AnalyseInfo.cs:18)
+UnityEngine.Object:Instantiate(AnalyseInfo, Vector3, Quaternion, Transform)
+Treasure:Start() (at Assets/Scripts/Object Scripts/Treasure.cs:78)
+
+Exception 31.03.2020 18:02:20: InvalidOperationException: Collection was modified; enumeration operation may not execute.
+System.ThrowHelper.ThrowInvalidOperationException (System.ExceptionResource resource) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.Collections.Generic.List`1+Enumerator[T].MoveNext () (at <437ba245d8404784b9fbab9b439ac908>:0)
+Character.updateStatusEffects () (at Assets/Scripts/Character Scripts/Character.cs:261)
+Character.Update () (at Assets/Scripts/Character Scripts/Character.cs:250)
+Player.Update () (at Assets/Scripts/Character Scripts/Player Scripts/Player.cs:83)
+

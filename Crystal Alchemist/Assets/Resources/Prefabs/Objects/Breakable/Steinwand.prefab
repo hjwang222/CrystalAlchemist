@@ -242,36 +242,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &8516883355185421893
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3684888368513667819}
-  m_Layer: 11
-  m_Name: lootParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3684888368513667819
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8516883355185421893}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8793839158660886954}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8793839158660886956
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +276,6 @@ Transform:
   - {fileID: 7862998019677050407}
   - {fileID: 1569157161001979791}
   - {fileID: 1710541479646891176}
-  - {fileID: 3684888368513667819}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -322,7 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50edb187effa6214081b297a24971a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lootParentObject: {fileID: 8516883355185421893}
   stats: {fileID: 11400000, guid: 0b7cb418ef38be240a9bf72bb575785f, type: 2}
   myRigidbody: {fileID: 0}
   animator: {fileID: 5540190085609823372}
@@ -345,9 +313,8 @@ MonoBehaviour:
   manaRegen: 0
   buffPlus: 0
   debuffMinus: 0
+  cantBeHit: 0
   isInvincible: 0
-  isImmortal: 0
-  cannotDie: 0
   isHit: 0
   buffs: []
   debuffs: []
@@ -356,11 +323,10 @@ MonoBehaviour:
   lockAnimation: 0
   timeDistortion: 1
   isPlayer: 0
-  inventory: []
   activePets: []
   steps: 0
   isOnIce: 0
-  lootTableInternal: []
+  itemDrop: {fileID: 0}
 --- !u!210 &2433579770756760863
 SortingGroup:
   m_ObjectHideFlags: 0

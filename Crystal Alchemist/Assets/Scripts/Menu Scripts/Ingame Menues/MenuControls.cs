@@ -127,11 +127,15 @@ public class MenuControls : BasicMenu
         foreach (Selectable selectable in selectables)
         {
             selectable.interactable = value;
-            ButtonExtension buttonExtension = selectable.GetComponent<ButtonExtension>();
-            if (buttonExtension != null)
+
+            if (value)
             {
-                buttonExtension.enabled = value;
-                buttonExtension.setFirst();
+                ButtonExtension buttonExtension = selectable.GetComponent<ButtonExtension>();
+                if (buttonExtension != null)
+                {
+                    buttonExtension.enabled = value;
+                    buttonExtension.setFirst();
+                }
             }
         }
     }

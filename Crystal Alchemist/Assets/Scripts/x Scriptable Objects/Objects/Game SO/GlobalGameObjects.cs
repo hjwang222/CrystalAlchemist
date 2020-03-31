@@ -10,10 +10,14 @@ public class GlobalGameObjects : ScriptableObject
     public static GameObject markTarget;
     public static MiniDialogBox miniDialogBox;
     public static CastBar castBar;
+    public static AnalyseInfo analyseInfo;
 
     [BoxGroup("Interaction")]
     [SerializeField]
     private ContextClue context;
+    [BoxGroup("Interaction")]
+    [SerializeField]
+    private AnalyseInfo analyse;
 
     [BoxGroup("Combat")]
     [SerializeField]
@@ -41,5 +45,6 @@ public class GlobalGameObjects : ScriptableObject
         markAttack = this.attacking;
         markTarget = this.targeting;
         castBar = this.cast;
+        analyseInfo = this.analyse;
     }
 }

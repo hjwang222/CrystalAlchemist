@@ -13,6 +13,7 @@ public class TODOLIST : MonoBehaviour
     //TODO: Skills ändern (Bombe, Turm, Schild Knockback)
     //TODO: Sentinel Schuss ändern
 
+    //REWORK: Analyse
     //REWORK: Indicator Rework
     //REWORK: Shader Rework https://www.youtube.com/watch?v=5dzGj9k8Qy8
     //REWORK: Lights (Intensity)
@@ -25,7 +26,6 @@ public class TODOLIST : MonoBehaviour
 
     //BUG: (AI EVENT) To many events
     //BUG: (AI EVENT) Gifthaut doppelt
-    //BUG: (MENU) Menu DialogBox (Preis falsch, SetFirst, etc)
 
     //-----------------------------------------------------------------------------
 

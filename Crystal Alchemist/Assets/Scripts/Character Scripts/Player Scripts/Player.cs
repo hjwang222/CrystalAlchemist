@@ -83,7 +83,7 @@ public class Player : Character
         base.Update();
     }
 
-    private void Awake()
+    public override void Awake()
     {
         initPlayer();
     }

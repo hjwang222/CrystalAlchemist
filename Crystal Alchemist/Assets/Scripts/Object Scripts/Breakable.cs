@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Breakable : Character
+public class Breakable : NonPlayer
 {
 
 }

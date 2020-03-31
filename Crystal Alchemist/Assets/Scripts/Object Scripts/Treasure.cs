@@ -74,6 +74,9 @@ public class Treasure : Rewardable
 
         if (this.itemDrop == null 
         && this.treasureType == TreasureType.normal) ChangeTreasureState(true);
+
+        AnalyseInfo analyse = Instantiate(GlobalGameObjects.analyseInfo, this.transform.position, Quaternion.identity, this.transform);
+        analyse.SetTarget(this.gameObject);
     }
 
     private void setLoot()

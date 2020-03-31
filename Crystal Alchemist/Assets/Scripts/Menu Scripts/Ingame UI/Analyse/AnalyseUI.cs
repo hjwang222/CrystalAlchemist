@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class AnalyseUI : MonoBehaviour
 {
@@ -31,7 +29,7 @@ public class AnalyseUI : MonoBehaviour
     private List<StatusEffectUI> activeStatusEffectUIs = new List<StatusEffectUI>();
     private List<StatusEffectGameObject> activeStatusEffects = new List<StatusEffectGameObject>();
 
-    private void Start()
+    private void OnEnable()
     {
         init();
     }
@@ -40,7 +38,6 @@ public class AnalyseUI : MonoBehaviour
     {
         this.enemyInfo.SetActive(false);
         this.objectInfo.SetActive(false);
-        //this.aggrobar.gameObject.SetActive(false);
         this.target = target;
     }
 
@@ -69,11 +66,6 @@ public class AnalyseUI : MonoBehaviour
             else this.objectInfo.SetActive(true);
 
             AI enemy = this.character.GetComponent<AI>();
-            /*if (enemy != null)
-            {
-                this.aggrobar.gameObject.SetActive(true);
-                this.aggrobar.setEnemy(enemy);
-            }*/
         }
     }
 
@@ -123,7 +115,7 @@ public class AnalyseUI : MonoBehaviour
             }
             else
             {
-                Destroy(this.gameObject);
+                Deactivate();
             }           
         }
         else if (this.character != null)
@@ -136,9 +128,9 @@ public class AnalyseUI : MonoBehaviour
         }
     }
 
-    private void destroyIt()
+    private void Deactivate()
     {
         //Wenn Truhe geöffnet wurde oder Gegner tot ist
-        Destroy(this);
+        this.gameObject.SetActive(false);
     }
 }

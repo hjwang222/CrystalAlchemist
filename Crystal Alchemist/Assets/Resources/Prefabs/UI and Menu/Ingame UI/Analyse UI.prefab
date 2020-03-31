@@ -961,6 +961,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1195055812776284272}
+  - component: {fileID: 2258705177969540742}
   m_Layer: 0
   m_Name: Object Data
   m_TagString: Untagged
@@ -984,6 +985,17 @@ Transform:
   m_Father: {fileID: 6756654905171487782}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &2258705177969540742
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2313645701663756575}
+  m_Enabled: 1
+  m_SortingLayerID: 1043506489
+  m_SortingLayer: 6
+  m_SortingOrder: 0
 --- !u!1 &3500821857701331977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,7 +1055,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6756654905171487782}
   - component: {fileID: 3650451762900528880}
-  - component: {fileID: 6599578716604127704}
   m_Layer: 0
   m_Name: Analyse UI
   m_TagString: Untagged
@@ -1059,7 +1070,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3650451762900528883}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1188522620477448627}
@@ -1086,17 +1097,6 @@ MonoBehaviour:
   enemyInfo: {fileID: 5941063046160743155}
   objectInfo: {fileID: 2313645701663756575}
   statusEffectBar: {fileID: 6380320323208417741}
---- !u!210 &6599578716604127704
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3650451762900528883}
-  m_Enabled: 1
-  m_SortingLayerID: 1043506489
-  m_SortingLayer: 6
-  m_SortingOrder: 0
 --- !u!1 &5941063046160743155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,6 +1106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1188522620477448627}
+  - component: {fileID: 3343806645633393214}
   m_Layer: 0
   m_Name: Enemy Data
   m_TagString: Untagged
@@ -1131,6 +1132,17 @@ Transform:
   m_Father: {fileID: 6756654905171487782}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &3343806645633393214
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5941063046160743155}
+  m_Enabled: 1
+  m_SortingLayerID: 1043506489
+  m_SortingLayer: 6
+  m_SortingOrder: 0
 --- !u!1 &8279257712154851577
 GameObject:
   m_ObjectHideFlags: 0

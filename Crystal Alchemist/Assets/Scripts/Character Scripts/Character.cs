@@ -114,7 +114,7 @@ public class Character : MonoBehaviour
 
 
     #region Start Functions (Spawn, Init)
-    private void Awake()
+    public virtual void Awake()
     {
         init();
     }
