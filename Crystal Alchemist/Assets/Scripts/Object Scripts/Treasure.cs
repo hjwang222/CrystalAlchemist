@@ -45,21 +45,11 @@ public class Treasure : Rewardable
     [SerializeField]
     private LootTable lootTable;
 
-    [BoxGroup("Text-Attribute")]
     [SerializeField]
-    private TextMeshPro priceText;
+    [BoxGroup("Mandatory")]
+    [Required]
+    private ShopPrice shopPrice;
 
-    [BoxGroup("Text-Attribute")]
-    [SerializeField]
-    private Color fontColor;
-
-    [BoxGroup("Text-Attribute")]
-    [SerializeField]
-    private Color outlineColor;
-
-    [BoxGroup("Text-Attribute")]
-    [SerializeField]
-    private float outlineWidth = 0.25f;
     #endregion
 
     private bool treasureEnabled = true;
@@ -70,13 +60,13 @@ public class Treasure : Rewardable
     {
         base.Start();
         this.setLoot();
-        FormatUtil.set3DText(this.priceText, this.costs.amount + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        this.shopPrice.Initialize(this.costs);
 
         if (this.itemDrop == null 
         && this.treasureType == TreasureType.normal) ChangeTreasureState(true);
 
         AnalyseInfo analyse = Instantiate(GlobalGameObjects.analyseInfo, this.transform.position, Quaternion.identity, this.transform);
-        analyse.SetTarget(this.gameObject);
+        analyse.SetTarget(this.gameObject);       
     }
 
     private void setLoot()
@@ -161,13 +151,14 @@ public class Treasure : Rewardable
 
     public void SetEnabled(bool enable)
     {
+        //Animator Events
         this.treasureEnabled = enable;
         this.context.gameObject.SetActive(enable);
     }
 
     public void showTreasureItem()
     {
-        AudioUtil.playSoundEffect(this.gameObject, this.soundEffectTreasure, GlobalValues.backgroundMusicVolume);
+        AudioUtil.playSoundEffect(this.gameObject, this.soundEffectTreasure, GlobalGameObjects.settings.backgroundMusicVolume);
 
         //Item instanziieren und der Liste zurück geben und das Item anzeigen            
         this.showItem.SetActive(true);

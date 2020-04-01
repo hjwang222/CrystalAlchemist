@@ -154,7 +154,7 @@ public class DialogSystem : MonoBehaviour
             case ResourceType.item:
                 {
                     string typ = this.getItemGroup();
-                    if (price == 1 && (typ != "Schlüssel" || GlobalValues.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
+                    if (price == 1 && (typ != "Schlüssel" || GlobalGameObjects.settings.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
 
                     result = typ;
                 }; break;

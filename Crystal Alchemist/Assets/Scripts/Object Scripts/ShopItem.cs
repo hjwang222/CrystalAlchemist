@@ -13,21 +13,10 @@ public class ShopItem : Rewardable
     [HideLabel]
     private Reward reward;
 
-    [BoxGroup("Text-Attribute")]
     [SerializeField]
-    private TextMeshPro priceText;
-
-    [BoxGroup("Text-Attribute")]
-    [SerializeField]
-    private Color fontColor;
-
-    [BoxGroup("Text-Attribute")]
-    [SerializeField]
-    private Color outlineColor;
-
-    [BoxGroup("Text-Attribute")]
-    [SerializeField]
-    private float outlineWidth = 0.25f;
+    [BoxGroup("Mandatory")]
+    [Required]
+    private ShopPrice shopPrice;
 
     [BoxGroup("Easy Access")]
     [SerializeField]
@@ -37,7 +26,8 @@ public class ShopItem : Rewardable
     {
         base.Start();
         this.setLoot();
-        FormatUtil.set3DText(this.priceText, this.costs.amount + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
+        this.shopPrice.Initialize(this.costs);
+
         this.childSprite.sprite = this.itemDrop.stats.getSprite();
         if (this.itemDrop == null) Destroy(this.gameObject);
     }

@@ -1,18 +1,42 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 
 public class AnalyseEnemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private TextMeshPro TMPcharacterName;
+    [SerializeField]
+    private SpriteFillBar lifeBar;
+    [SerializeField]
+    private SpriteRenderer ImageitemPreview;
+    [SerializeField]
+    private StatusEffectBar statusEffectBar;
+
+    private AI npc;
+
+    public void Initialize(AI enemy)
     {
-        
+        //set type of Analyse
+        this.npc = enemy;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
-        
+        showEnemyInfo();
+    }
+
+    private void showEnemyInfo()
+    {
+        this.ImageitemPreview.gameObject.SetActive(false);
+
+        this.TMPcharacterName.text = FormatUtil.getLanguageDialogText(this.npc.stats.characterName, this.npc.stats.englischCharacterName);
+        this.lifeBar.fillAmount((this.npc.life / this.npc.maxLife));
+        this.statusEffectBar.setCharacter(this.npc);
+
+        if (this.npc.itemDrop != null && this.npc.currentState != CharacterState.dead)
+        {
+            this.ImageitemPreview.gameObject.SetActive(true);
+            this.ImageitemPreview.sprite = this.npc.itemDrop.stats.getSprite(); //TODONEW
+        }
     }
 }

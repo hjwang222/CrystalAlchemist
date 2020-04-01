@@ -1,20 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StatusEffectAnalyseModule : StatusEffectModule
 {
     [SerializeField]
-    private BoolSignal signal;
+    private BoolValue isActive;
 
     public override void doAction()
     {
-        this.signal.Raise(false);
+        this.isActive.setValue(true);
     }
 
     private void OnDestroy()
     {
-        this.signal.Raise(false);
+        this.isActive.setValue(false);
     }
 }

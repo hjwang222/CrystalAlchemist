@@ -1,0 +1,106 @@
+
+Assets:
+Odin Inspector
+Asset Icons
+
+Packages:
+Coffee
+2D Tile Extras
+Universal Render Pipeline
+Progrids
+Cinemachine
+TextmeshPro
+
+
+
+Physics2D Layers und Queries Hit Trigger
+Edit > Project Settings > Graphics > Camera Settings > Transparency Sort Mode > Custom Axis ... > Transparency Sort Axis > (0, 1, 0)
+
+
+1. Assets and Packages
+
+2. Set your Physics2D
+
+3. Sort by Y-Axis
+
+4. Signals, Scriptable Objects, Singletons, Scenes
+
+5. Modular Scripting, Scructs
+
+6. All in Resources
+
+7. Exception-Log and Static SOs
+
+8. Prefabs
+
+9. Debugging right
+
+10. Links (Brackeys, Mister Taft Creates)
+
+
+
+
+
+Assets and Packages
+Technically, I would recommend NOT to use code from other people. 
+If something doesnt work or you have to modify it, you re in trouble. 
+BUT there a few exceptions which makes your life in Unity much easier, faster, better.
+Here are some of my personal recommendations:
+
+Odin Inspector (from the Asset Store) - If you want to add some nice features to your Inspector/Unity Editor
+AssetIcons (from the Asset Store) - Replaces some of Unitys icons with your own sprites in your script
+
+2D Tile Extras (Github) - If you want to add special tiles on your Tilemap (for example: animated tiles)
+UI Particles (Github) - If you want to use particles in your UI
+
+2D Pixel Perfect (Package Manager) 
+Cinemachine (Package Manager)
+ProGrids (Package Manager)
+TextMeshPro (Package Manager)
+Universal RP (Package Manager)
+
+
+Set your Physics2D
+One of the most usefull things to do with Physics2D is to work with Layers. 
+When using Collider2D (as triggers) and OnTriggerEnter/Exit/Stay2D, you propably using CompareTag("someTag") to check, if you re hitting the enemy or not.
+But as your game grow, it will not only affect your performance, it also makes things more complicated. The question is: Do you really want to check if your Sword is hitting a sign? Or a treasure chest?
+A better way is, to restrict your physics (which are responsible for each OnTrigger-method to be fired). Just make different layers and set which layers are affecting other layers. 
+For example, your player can interact with signs, treasures, items, but your enemys can not. 
+
+Another usefull setting is "Queries Hit Trigger", when it comes to Raycast2D. 
+Raycasts technically firing some invinvisible laser, which returns the first (or all) hitpoints in a set direction. Players of shooters will know this under the name "Hit Scan".
+But you want your Raycast only hit collisions (enemies, walls, etc) and not their triggers. Disabling Queries Hit Trigger is the key!
+
+
+Sort Sprites properly
+The first thing you gonna do is to set some Sorting Layers. A layer for your ground, a layer for your roofs and a layer for your objects. 
+In this way, you determine the drawing order of your objects, because you want to put your pot on ABOVE your ground, not under it. 
+I m using Ground > Collision > Objects > Effects > Roofs > UI.
+
+Another really nice comes within the Graphics. For a Zelda-like game, you want to draw your objects based on their Y-position.
+Without any line of code, you can achieve this by make the following setting: Camera Settings > Transparency Sort Mode > Custom Axis ... > Transparency Sort Axis > (0, 1, 0)
+This makes sure your sprites within the same sorting layer AND sorting order will drawn based on their Y-axis.
+
+And there is more! If you have several sprites of an object, but you want to sort them as a whole sprite, just use Sorting Group!
+
+
+
+Prefabs
+
+
+
+
+
+Organize your project
+Within your Assets folder, for the sake of god, please, please, please make folders. 
+Your game will grow and to keep it nice and clean, put your prefabs, scripts, art and all other stuff in folders. Trust me, its worth it.
+
+Another usefull thing is to put your animations, art, sound files, prefabs and all other stuff you maybe want to load during runtime in folder named "Resources".
+You can put as many subfolders as you like.
+
+
+
+
+
+Scripting
+Dont make the same mistake like me and write monster-classes. 

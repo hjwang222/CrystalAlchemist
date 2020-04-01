@@ -22,6 +22,18 @@ public class ItemGroup : ScriptableObject
     [SerializeField]
     private SimpleSignal collectSignal;
 
+    [BoxGroup("Shop Price")]
+    [SerializeField]
+    public Color color;
+
+    [BoxGroup("Shop Price")]
+    [SerializeField]
+    public Color outline;
+
+    [BoxGroup("Shop Price")]
+    [SerializeField]
+    public Sprite shopIcon;
+
     private int amount;
 
     [AssetIcon]

@@ -33,7 +33,7 @@ public class PlayerButtons : ScriptableObject
 
     public void Updating(Player player)
     {
-        bool canFight = canUseAbilities(player);
+        bool canFight = player.canUseAbilities();
         GetAbilityFromButton();
 
         foreach (PlayerButton playerButton in this.buttons)
@@ -49,14 +49,6 @@ public class PlayerButtons : ScriptableObject
             }
         }
     }
-
-    public bool canUseAbilities(Player player)
-    {
-        if (player.currentState != CharacterState.interact
-         && player.ActiveInField()) return true;
-        return false;
-    }
-
 
     public void GetAbilityFromButton()
     {

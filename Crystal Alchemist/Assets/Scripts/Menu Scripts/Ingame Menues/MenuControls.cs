@@ -67,7 +67,7 @@ public class MenuControls : BasicMenu
                 IngameMenuHandler.lastState = this.player.currentState;
                 this.player.setStateAfterMenuClose(CharacterState.inMenu);
 
-                if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalValues.getMusicInMenu());
+                if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalGameObjects.settings.getMusicInMenu());
             }
         }
 
@@ -86,7 +86,7 @@ public class MenuControls : BasicMenu
 
             if (this.cursor != null) this.cursor.gameObject.SetActive(false);
             if (this.blackScreen != null) this.blackScreen.SetActive(false);
-            if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalValues.backgroundMusicVolume);
+            if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalGameObjects.settings.backgroundMusicVolume);
         }
 
         if (this.cursor.infoBox != null) this.cursor.infoBox.Hide();

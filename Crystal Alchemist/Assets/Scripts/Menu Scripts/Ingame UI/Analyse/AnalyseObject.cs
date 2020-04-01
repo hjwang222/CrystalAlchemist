@@ -1,18 +1,57 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AnalyseObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private SpriteRenderer ImageObjectitemPreview;
+
+    [SerializeField]
+    private GameObject parent;
+
+    private Treasure treasureChest;
+    private Breakable breakable;
+
+    public void Initialize(Breakable breakable)
     {
-        
+        this.breakable = breakable;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize(Treasure treasure)
     {
-        
+        this.treasureChest = treasure;
+    }
+
+    private void LateUpdate()
+    {
+        showObjectInfo();
+    }
+
+    private void showObjectInfo()
+    {
+        if (this.treasureChest != null)
+        {
+            //Show Object Information
+            if (treasureChest.itemDrop != null) Activate(treasureChest.itemDrop.stats);
+            else Deactivate();            
+        }
+        else if (this.breakable != null)
+        {
+            //Show Object Information
+            if (this.breakable.itemDrop != null
+             && this.breakable.currentState != CharacterState.dead) Activate(this.breakable.itemDrop.stats);
+            else Deactivate();
+        }
+    }
+
+    private void Activate(ItemStats stats)
+    {
+        this.parent.SetActive(true);
+        this.ImageObjectitemPreview.sprite = stats.getSprite();
+    }
+
+    private void Deactivate()
+    {
+        //Wenn Truhe geöffnet wurde oder Gegner tot ist
+        this.parent.SetActive(false);
     }
 }

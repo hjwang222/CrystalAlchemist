@@ -103,7 +103,9 @@ public class CombatButtonUI : MonoBehaviour
                 this.ammo.text = (int)this.player.getResource(senderModule.costs) + "";
             else this.ammo.text = "";
 
-            if (!ability.enabled || !ability.canUseAbility(this.player))
+            if (!this.player.canUseAbilities()
+                || !ability.enabled 
+                || !ability.canUseAbility(this.player))
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
                 this.disabled.SetActive(true);

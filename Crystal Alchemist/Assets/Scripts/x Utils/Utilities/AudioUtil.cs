@@ -28,7 +28,7 @@ public class AudioUtil : MonoBehaviour
 
     public static void playSoundEffect(GameObject gameObject, AudioClip soundeffect)
     {
-        playSoundEffect(gameObject, soundeffect, GlobalValues.soundEffectVolume);
+        playSoundEffect(gameObject, soundeffect, GlobalGameObjects.settings.soundEffectVolume);
     }
 
     public static void playSoundEffect(GameObject gameObject, AudioClip soundeffect, float volume)
@@ -43,7 +43,7 @@ public class AudioUtil : MonoBehaviour
                 if (parent != null) temp.transform.SetParent(parent.transform);
 
                 AudioSource source = temp.AddComponent<AudioSource>();
-                source.pitch = GlobalValues.soundEffectPitch;
+                source.pitch = GlobalGameObjects.settings.soundEffectPitch;
                 source.volume = volume;
                 source.clip = soundeffect;
 

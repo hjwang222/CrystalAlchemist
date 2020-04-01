@@ -10,7 +10,7 @@ public class ShowControlMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        if (GlobalValues.layoutType == LayoutType.keyboard) showControlType(false);
+        if (GlobalGameObjects.settings.layoutType == LayoutType.keyboard) showControlType(false);
         else showControlType(true);
     }
 

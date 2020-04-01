@@ -190,16 +190,6 @@ public class StatusEffect : ScriptableObject
             if (this.changeColor) this.target.removeColor(this.statusEffectColor);
 
             this.resetValues();
-
-            //Statuseffekt von der Liste entfernen
-            if (this.statusEffectType == StatusEffectType.debuff)
-            {
-                this.target.GetComponent<Character>().debuffs.Remove(this);
-            }
-            else if (this.statusEffectType == StatusEffectType.buff)
-            {
-                this.target.GetComponent<Character>().buffs.Remove(this);
-            }
         }
 
         //GUI updaten und Objekt kurz danach zerstören

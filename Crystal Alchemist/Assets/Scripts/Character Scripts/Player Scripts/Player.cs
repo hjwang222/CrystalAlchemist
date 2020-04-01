@@ -113,7 +113,13 @@ public class Player : Character
         this.fadeSignal.Raise(false);
     }
 
-    
+    public bool canUseAbilities()
+    {
+        if (this.currentState != CharacterState.interact
+         && this.ActiveInField()) return true;
+        return false;
+    }
+
 
     private void deactivateAllSkills()
     {
@@ -202,13 +208,13 @@ public class Player : Character
 
     public void setStateMenuOpened(CharacterState newState)
     {
-        StopCoroutine(delayInputPlayerCO(GlobalValues.playerDelay, newState));
+        StopCoroutine(delayInputPlayerCO(GlobalGameObjects.staticValues.playerDelay, newState));
         this.currentState = newState;
     }
 
     public void setStateAfterMenuClose(CharacterState newState)
     {
-        StartCoroutine(delayInputPlayerCO(GlobalValues.playerDelay, newState));
+        StartCoroutine(delayInputPlayerCO(GlobalGameObjects.staticValues.playerDelay, newState));
     }
 
     public void showDialogBox(string text)

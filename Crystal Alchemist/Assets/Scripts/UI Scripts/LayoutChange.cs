@@ -30,7 +30,7 @@ public class LayoutChange : MonoBehaviour
 
     public void updateLayout()
     {
-        if(GlobalValues.layoutType == LayoutType.keyboard)
+        if(GlobalGameObjects.settings.layoutType == LayoutType.keyboard)
         {
             setActive(false, this.gamepadUI);
             setActive(true, this.keyboardUI);

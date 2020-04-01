@@ -121,12 +121,12 @@ public class GameOptions
 
     public GameOptions()
     {
-        this.musicVolume = GlobalValues.backgroundMusicVolume;
-        this.soundVolume = GlobalValues.soundEffectVolume;
-        this.layout = GlobalValues.layoutType.ToString().ToLower();
-        this.useAlternativeLanguage = GlobalValues.useAlternativeLanguage;
+        this.musicVolume = GlobalGameObjects.settings.backgroundMusicVolume;
+        this.soundVolume = GlobalGameObjects.settings.soundEffectVolume;
+        this.layout = GlobalGameObjects.settings.layoutType.ToString().ToLower();
+        this.useAlternativeLanguage = GlobalGameObjects.settings.useAlternativeLanguage;
 
-        this.useHealthBar = GlobalValues.healthBar;
-        this.useManaBar = GlobalValues.manaBar;
+        this.useHealthBar = GlobalGameObjects.settings.healthBar;
+        this.useManaBar = GlobalGameObjects.settings.manaBar;
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-[CreateAssetMenu(menuName = "Game/Global Game Objects")]
+[CreateAssetMenu(menuName = "Game/Settings/Global Game Objects")]
 public class GlobalGameObjects : ScriptableObject
 {
     public static DamageNumbers damageNumber;
@@ -11,6 +11,8 @@ public class GlobalGameObjects : ScriptableObject
     public static MiniDialogBox miniDialogBox;
     public static CastBar castBar;
     public static AnalyseInfo analyseInfo;
+    public static GameSettings settings;
+    public static GlobalValues staticValues;
 
     [BoxGroup("Interaction")]
     [SerializeField]
@@ -36,6 +38,13 @@ public class GlobalGameObjects : ScriptableObject
     [SerializeField]
     private GameObject targeting;
 
+    [BoxGroup("Settings")]
+    [SerializeField]
+    private GameSettings gameSettings;
+    [BoxGroup("Settings")]
+    [SerializeField]
+    private GlobalValues globalValues;
+
 
     public void Initialize()
     {
@@ -46,5 +55,7 @@ public class GlobalGameObjects : ScriptableObject
         markTarget = this.targeting;
         castBar = this.cast;
         analyseInfo = this.analyse;
+        settings = this.gameSettings;
+        staticValues = this.globalValues;
     }
 }

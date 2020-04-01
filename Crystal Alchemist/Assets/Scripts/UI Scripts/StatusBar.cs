@@ -181,8 +181,8 @@ public class StatusBar : MonoBehaviour
         this.bar.SetActive(false);
         this.symbol.SetActive(false);
 
-        if (this.resourceType == CostType.life) setLayout(GlobalValues.healthBar);
-        else if (this.resourceType == CostType.mana) setLayout(GlobalValues.manaBar);
+        if (this.resourceType == CostType.life) setLayout(GlobalGameObjects.settings.healthBar);
+        else if (this.resourceType == CostType.mana) setLayout(GlobalGameObjects.settings.manaBar);
     }
 
     private void setLayout(bool value)

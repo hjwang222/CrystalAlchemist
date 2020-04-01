@@ -9,14 +9,14 @@ public class ChangeLayoutMenu : TitleScreenMenues
 
     private void getLayout()
     {
-        if (GlobalValues.layoutType == LayoutType.keyboard) this.switchButtons(this.secondButton, this.firstButton);
+        if (GlobalGameObjects.settings.layoutType == LayoutType.keyboard) this.switchButtons(this.secondButton, this.firstButton);
         else this.switchButtons(this.firstButton, this.secondButton);
     }
 
     public void changeLayout(GameObject gameObject)
     {
-        if (gameObject.name.ToLower() == "keyboard") GlobalValues.layoutType = LayoutType.keyboard;
-        else GlobalValues.layoutType = LayoutType.gamepad;
+        if (gameObject.name.ToLower() == "keyboard") GlobalGameObjects.settings.layoutType = LayoutType.keyboard;
+        else GlobalGameObjects.settings.layoutType = LayoutType.gamepad;
         
         getLayout();
 

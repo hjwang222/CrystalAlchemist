@@ -6,36 +6,22 @@ public class AnalyseInfo : MonoBehaviour
     private AnalyseUI analyseUILoot;
 
     [SerializeField]
-    private GameObject analyseUISecret;
+    private BoolValue isActive;
 
-    public GameObject activeAnalyse;
-    public GameObject target;
+    private GameObject target;
 
     private void Start()
     {
-        this.analyseUILoot.gameObject.SetActive(false);
-        this.analyseUISecret.gameObject.SetActive(false);
-        this.SetAnalyseUI(false);
+        this.analyseUILoot.setTarget(this.target);
+    }
+
+    private void Update()
+    {
+        this.analyseUILoot.gameObject.SetActive(this.isActive.getValue());
     }
 
     public void SetTarget(GameObject target)
     {
         this.target = target;
-
-        if (this.target != null)
-        {
-            this.analyseUILoot.setTarget(this.target);
-            this.activeAnalyse = this.analyseUILoot.gameObject;
-        }
-        else
-        {
-            this.activeAnalyse = this.analyseUISecret;
-        }
-    }
-
-    public void SetAnalyseUI(bool value)
-    {
-        //Signal
-        this.activeAnalyse.SetActive(value);
     }
 }

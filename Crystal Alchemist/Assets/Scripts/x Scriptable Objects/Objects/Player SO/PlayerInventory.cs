@@ -118,10 +118,10 @@ public class PlayerInventory : ScriptableObject
     }
 
     public string GetAmountString(ItemGroup itemGroup)
-    {
+    {        
         ItemGroup found = this.getItemGroup(itemGroup);
         if (found != null) return found.GetAmountString();
-        else return "";
+        else return FormatUtil.formatString(0, itemGroup.maxAmount);
     }
 
 

@@ -258,12 +258,15 @@ public class Character : MonoBehaviour
 
     private void updateStatusEffects()
     {
-        foreach (StatusEffect effect in this.buffs)
-        {
-            effect.Updating();
-        }
+        updateStatusEffectGroup(this.buffs);
+        updateStatusEffectGroup(this.debuffs);
+    }
 
-        foreach (StatusEffect effect in this.debuffs)
+    private void updateStatusEffectGroup(List<StatusEffect> effects)
+    {
+        effects.RemoveAll(item => item == null);
+
+        foreach (StatusEffect effect in effects)
         {
             effect.Updating();
         }
@@ -460,8 +463,8 @@ public class Character : MonoBehaviour
                 {
                     this.life = GameUtil.setResource(this.life, this.maxLife, value);
 
-                    Color[] colorArray = GlobalValues.red;
-                    if (value > 0) colorArray = GlobalValues.green;
+                    Color[] colorArray = GlobalGameObjects.staticValues.red;
+                    if (value > 0) colorArray = GlobalGameObjects.staticValues.green;
 
                     if (this.life > 0 && this.currentState != CharacterState.dead && showingDamageNumber) showDamageNumber(value, colorArray);
 
@@ -470,7 +473,7 @@ public class Character : MonoBehaviour
             case CostType.mana:
                 {
                     this.mana = GameUtil.setResource(this.mana, this.maxMana, value);
-                    if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalValues.blue);
+                    if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalGameObjects.staticValues.blue);
                     break;
                 }
         }

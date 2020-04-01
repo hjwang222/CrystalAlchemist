@@ -13,7 +13,6 @@ public class TODOLIST : MonoBehaviour
     //TODO: Skills ändern (Bombe, Turm, Schild Knockback)
     //TODO: Sentinel Schuss ändern
 
-    //REWORK: Analyse
     //REWORK: Indicator Rework
     //REWORK: Shader Rework https://www.youtube.com/watch?v=5dzGj9k8Qy8
     //REWORK: Lights (Intensity)
@@ -22,6 +21,8 @@ public class TODOLIST : MonoBehaviour
     //TESTING: StatusEffects (Scriptable Object, Analyse überarbeiten)
     //TESTING: Inventory     (Scriptable Object)
     //TESTING: AI Events     (Bugfixes, Event und Phase Reset after Kill)
+    //TESTING: Settings
+
     //SHADER:  Lights (Sprite Lit Master), Outline, Color Swap (Replace), Bloom (HDR), Blend OP Max
 
     //BUG: (AI EVENT) To many events
