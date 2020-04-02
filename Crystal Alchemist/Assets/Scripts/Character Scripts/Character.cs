@@ -768,4 +768,24 @@ public class Character : MonoBehaviour
     }
 
     #endregion
+
+
+
+    private void StartCountDown()
+    {
+        //start a 10 second countdown
+        StartCoroutine(CountDown(10));
+    }
+
+    private IEnumerator CountDown(float seconds)
+    {
+        //do something before timer starts
+
+        yield return new WaitForSeconds(seconds);
+
+        //do something when timer is over
+    }
+
+
+
 }

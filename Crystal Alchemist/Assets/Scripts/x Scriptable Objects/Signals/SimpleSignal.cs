@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Signals/SimpleSignal")]
@@ -29,5 +28,4 @@ public class SimpleSignal : ScriptableObject
     {
         this.listeners.Remove(listener);
     }
-
 }

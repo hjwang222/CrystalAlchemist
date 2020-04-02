@@ -20,7 +20,7 @@ public class DontDestroyHandler : MonoBehaviour
             foreach (GameObject gameObject in this.dontDestroy)
             {
                 GameObject temp = Instantiate(gameObject);
-                temp.name = temp.name.Replace("(Clone)", "");
+                temp.name = gameObject.name;
                 DontDestroyOnLoad(temp);
                 this.activeObjects.Add(temp);
             }
