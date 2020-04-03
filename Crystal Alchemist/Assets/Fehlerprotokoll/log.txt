@@ -36081,3 +36081,64 @@ Character.updateSpeed (System.Int32 addSpeed, System.Boolean affectAnimation) (a
 Character.updateSpeed (System.Int32 addSpeed) (at Assets/Scripts/Character Scripts/Character.cs:514)
 SkillSenderModule.OnDestroy () (at Assets/Scripts/Skill Scripts/Modules/SkillSenderModule.cs:95)
 
+Exception 03.04.2020 00:35:07: NullReferenceException: Object reference not set to an instance of an object
+UnityEngine.Experimental.Rendering.Universal.PixelPerfectCameraInternal.CorrectCinemachineOrthoSize (System.Single targetOrthoSize) (at Library/PackageCache/com.unity.render-pipelines.universal@7.1.8/Runtime/2D/PixelPerfectCameraInternal.cs:215)
+UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera.CorrectCinemachineOrthoSize (System.Single targetOrthoSize) (at Library/PackageCache/com.unity.render-pipelines.universal@7.1.8/Runtime/2D/PixelPerfectCamera.cs:112)
+Cinemachine.CinemachinePixelPerfect.PostPipelineStageCallback (Cinemachine.CinemachineVirtualCameraBase vcam, Cinemachine.CinemachineCore+Stage stage, Cinemachine.CameraState& state, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachinePixelPerfect.cs:46)
+Cinemachine.CinemachineExtension.InvokePostPipelineStageCallback (Cinemachine.CinemachineVirtualCameraBase vcam, Cinemachine.CinemachineCore+Stage stage, Cinemachine.CameraState& state, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Core/CinemachineExtension.cs:79)
+Cinemachine.CinemachineVirtualCameraBase.InvokePostPipelineStageCallback (Cinemachine.CinemachineVirtualCameraBase vcam, Cinemachine.CinemachineCore+Stage stage, Cinemachine.CameraState& newState, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Core/CinemachineVirtualCameraBase.cs:130)
+Cinemachine.CinemachineVirtualCamera.AdvancePipelineStage (Cinemachine.CameraState& state, System.Single deltaTime, Cinemachine.CinemachineCore+Stage curStage, System.Int32 maxStage, System.Boolean hasAim) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachineVirtualCamera.cs:483)
+Cinemachine.CinemachineVirtualCamera.CalculateNewState (UnityEngine.Vector3 worldUp, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachineVirtualCamera.cs:469)
+Cinemachine.CinemachineVirtualCamera.InternalUpdateCameraState (UnityEngine.Vector3 worldUp, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachineVirtualCamera.cs:136)
+Cinemachine.CinemachineCore.UpdateVirtualCamera (Cinemachine.CinemachineVirtualCameraBase vcam, UnityEngine.Vector3 worldUp, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Core/CinemachineCore.cs:312)
+Cinemachine.CinemachineCore.UpdateAllActiveVirtualCameras (System.Int32 layerMask, UnityEngine.Vector3 worldUp, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Core/CinemachineCore.cs:237)
+Cinemachine.CinemachineBrain.UpdateVirtualCameras (Cinemachine.CinemachineCore+UpdateFilter updateFilter, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachineBrain.cs:359)
+Cinemachine.CinemachineBrain.LateUpdate () (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachineBrain.cs:309)
+
+Exception 03.04.2020 00:37:16: MissingComponentException: There is no 'Camera' attached to the "CM vcam1" game object, but a script is trying to access it.
+You probably need to add a Camera to the game object "CM vcam1". Or your script needs to check if the component is attached before using it.
+UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera.Awake () (at Library/PackageCache/com.unity.render-pipelines.universal@7.1.8/Runtime/2D/PixelPerfectCamera.cs:179)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:OnTriggerEnter2D(Collider2D) (at Assets/Scripts/Map Part Scripts/Room.cs:84)
+
+Exception 03.04.2020 00:37:16: MissingComponentException: There is no 'Camera' attached to the "CM vcam1" game object, but a script is trying to access it.
+You probably need to add a Camera to the game object "CM vcam1". Or your script needs to check if the component is attached before using it.
+UnityEngine.Camera.set_rect (UnityEngine.Rect value) (at <cd36d1610edb49099a63e42167ecf462>:0)
+UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera.OnDisable () (at Library/PackageCache/com.unity.render-pipelines.universal@7.1.8/Runtime/2D/PixelPerfectCamera.cs:247)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:OnTriggerEnter2D(Collider2D) (at Assets/Scripts/Map Part Scripts/Room.cs:84)
+
+Exception 03.04.2020 00:49:52: NullReferenceException: Object reference not set to an instance of an object
+UnityEngine.Experimental.Rendering.Universal.PixelPerfectCameraInternal.CorrectCinemachineOrthoSize (System.Single targetOrthoSize) (at Library/PackageCache/com.unity.render-pipelines.universal@7.1.8/Runtime/2D/PixelPerfectCameraInternal.cs:215)
+UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera.CorrectCinemachineOrthoSize (System.Single targetOrthoSize) (at Library/PackageCache/com.unity.render-pipelines.universal@7.1.8/Runtime/2D/PixelPerfectCamera.cs:112)
+Cinemachine.CinemachinePixelPerfect.PostPipelineStageCallback (Cinemachine.CinemachineVirtualCameraBase vcam, Cinemachine.CinemachineCore+Stage stage, Cinemachine.CameraState& state, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachinePixelPerfect.cs:46)
+Cinemachine.CinemachineExtension.InvokePostPipelineStageCallback (Cinemachine.CinemachineVirtualCameraBase vcam, Cinemachine.CinemachineCore+Stage stage, Cinemachine.CameraState& state, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Core/CinemachineExtension.cs:79)
+Cinemachine.CinemachineVirtualCameraBase.InvokePostPipelineStageCallback (Cinemachine.CinemachineVirtualCameraBase vcam, Cinemachine.CinemachineCore+Stage stage, Cinemachine.CameraState& newState, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Core/CinemachineVirtualCameraBase.cs:130)
+Cinemachine.CinemachineVirtualCamera.AdvancePipelineStage (Cinemachine.CameraState& state, System.Single deltaTime, Cinemachine.CinemachineCore+Stage curStage, System.Int32 maxStage, System.Boolean hasAim) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachineVirtualCamera.cs:483)
+Cinemachine.CinemachineVirtualCamera.CalculateNewState (UnityEngine.Vector3 worldUp, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachineVirtualCamera.cs:469)
+Cinemachine.CinemachineVirtualCamera.InternalUpdateCameraState (UnityEngine.Vector3 worldUp, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachineVirtualCamera.cs:136)
+Cinemachine.CinemachineCore.UpdateVirtualCamera (Cinemachine.CinemachineVirtualCameraBase vcam, UnityEngine.Vector3 worldUp, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Core/CinemachineCore.cs:312)
+Cinemachine.CinemachineCore.UpdateAllActiveVirtualCameras (System.Int32 layerMask, UnityEngine.Vector3 worldUp, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Core/CinemachineCore.cs:237)
+Cinemachine.CinemachineBrain.UpdateVirtualCameras (Cinemachine.CinemachineCore+UpdateFilter updateFilter, System.Single deltaTime) (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachineBrain.cs:359)
+Cinemachine.CinemachineBrain.LateUpdate () (at Library/PackageCache/com.unity.cinemachine@2.5.0/Runtime/Behaviours/CinemachineBrain.cs:309)
+
+Exception 03.04.2020 01:03:01: UnassignedReferenceException: The variable virtualCamera of Room has not been assigned.
+You probably need to assign the virtualCamera variable of the Room script in the inspector.
+Room.Awake () (at Assets/Scripts/Map Part Scripts/Room.cs:64)
+
+Exception 03.04.2020 01:03:02: UnassignedReferenceException: The variable virtualCamera of Room has not been assigned.
+You probably need to assign the virtualCamera variable of the Room script in the inspector.
+Room.OnTriggerEnter2D (UnityEngine.Collider2D other) (at Assets/Scripts/Map Part Scripts/Room.cs:84)
+
+Exception 03.04.2020 02:00:02: NullReferenceException: Object reference not set to an instance of an object
+LayoutChange.updateLayout () (at Assets/Scripts/UI Scripts/LayoutChange.cs:33)
+LayoutChange.OnEnable () (at Assets/Scripts/UI Scripts/LayoutChange.cs:28)
+
+Exception 03.04.2020 02:12:39: NullReferenceException: Object reference not set to an instance of an object
+LayoutChange.updateLayout () (at Assets/Scripts/UI Scripts/LayoutChange.cs:33)
+LayoutChange.OnEnable () (at Assets/Scripts/UI Scripts/LayoutChange.cs:28)
+
+Exception 03.04.2020 02:12:39: NullReferenceException: Object reference not set to an instance of an object
+LayoutChange.updateLayout () (at Assets/Scripts/UI Scripts/LayoutChange.cs:33)
+LayoutChange.OnEnable () (at Assets/Scripts/UI Scripts/LayoutChange.cs:28)
+
