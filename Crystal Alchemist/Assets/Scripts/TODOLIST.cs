@@ -17,7 +17,12 @@ public class TODOLIST : MonoBehaviour
     //REWORK: Shader Rework https://www.youtube.com/watch?v=5dzGj9k8Qy8
     //REWORK: Lights (Intensity)
 
+    //TODO: Stairs, Ice, Wall
     //TODO: Rule Tiles
+    //TODO: Pathfinding
+    //TODO: new Enemies, objects, etc 
+
+    //BUG: StatusEffekt funktioniert nicht
 
     //TESTING: Items         (Scriptable Object), Drop Item, New Item after Kill, Minigames
     //TESTING: StatusEffects (Scriptable Object, Analyse überarbeiten)
@@ -26,10 +31,6 @@ public class TODOLIST : MonoBehaviour
     //TESTING: Settings
 
     //SHADER:  Lights (Sprite Lit Master), Outline, Color Swap (Replace), Bloom (HDR), Blend OP Max
-
-    //BUG: (AI EVENT) To many events
-    //BUG: (AI EVENT) Gifthaut doppelt
-
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)

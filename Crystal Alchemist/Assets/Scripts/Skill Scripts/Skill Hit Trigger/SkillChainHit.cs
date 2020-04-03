@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class SkillChainHit : SkillMechanicHit
@@ -40,28 +38,17 @@ public class SkillChainHit : SkillMechanicHit
 
     private float startDistance = 0;
 
-    [BoxGroup("Mechanics")]
-    [SerializeField]
-    [Required]
-    private SkillIndicatorModule indicatorModule;
-
-    public void doOnCast()
+    private void Update()
     {
         if (this.hasRightDistance())
         {
             this.percentage = 0;
-            if (this.changeColor) this.indicatorModule.activeIndicator.indicatorRenderer.color = this.rightColor;  
 
-            if (this.canBreak && !this.useRange)
-            {
-                this.indicatorModule.hideIndicator();
-                this.skill.DeactivateIt();
-            }
+            if (this.canBreak && !this.useRange) this.skill.DeactivateIt();            
         }
         else
         {
-            this.percentage = 100;
-            if (this.changeColor) this.indicatorModule.activeIndicator.indicatorRenderer.color = this.wrongColor;            
+            this.percentage = 100;          
         }
     }
 

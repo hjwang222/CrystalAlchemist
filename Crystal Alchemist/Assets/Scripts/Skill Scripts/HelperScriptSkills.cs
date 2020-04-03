@@ -28,16 +28,6 @@ public class HelperScriptSkills : MonoBehaviour
         this.skill.DestroyIt(delay);
     }
 
-    public void showIndicator()
-    {
-        if(this.skill.GetComponent<SkillIndicatorModule>() != null) this.skill.GetComponent<SkillIndicatorModule>().showIndicator();
-    }
-
-    public void hideIndicator()
-    {
-        if (this.skill.GetComponent<SkillIndicatorModule>() != null) this.skill.GetComponent<SkillIndicatorModule>().hideIndicator();
-    }
-
     public void showCastingAnimation()
     {
         if (this.skill.GetComponent<SkillAnimationModule>() != null) this.skill.GetComponent<SkillAnimationModule>().showCastingAnimation();

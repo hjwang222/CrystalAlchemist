@@ -9,6 +9,7 @@ public class CircleIndicator : Indicator
     {
         base.Start();
 
+        /*
         if (this.skill.gameObject.activeInHierarchy)
         {
             this.transform.parent = this.skill.transform;
@@ -18,7 +19,7 @@ public class CircleIndicator : Indicator
         {
             //this.transform.parent = this.skill.sender.transform;
             this.transform.position = this.skill.sender.shadowRenderer.transform.position;
-        }
+        }*/
     }    
     
 }

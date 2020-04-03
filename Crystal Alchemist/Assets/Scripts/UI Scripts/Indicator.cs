@@ -1,44 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEngine.Experimental.Rendering.LWRP;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Indicator : MonoBehaviour
 {
-    [HideInInspector]
-    public Skill skill;
+    private Character sender;
+    private Character target;
 
-    [Required]
-    public SpriteRenderer indicatorRenderer;
 
-    public UnityEngine.Experimental.Rendering.Universal.Light2D light;
+    public void Initialize(Character sender, Character target)
+    {
+        this.sender = sender;
+        this.target = target;
+    }
+
+    public Character GetSender()
+    {
+        return this.sender;
+    }
+
+    public Character GetTarget()
+    {
+        return this.target;
+    }
+
+
 
     public virtual void Start()
     {
         
     }
 
-    public void setSkill(Skill skill)
-    {
-        this.skill = skill;
-        if (skill != null && skill.GetComponent<SkillIndicatorModule>() != null)
-        {
-            if (skill.GetComponent<SkillIndicatorModule>().useCustomColor)
-            {
-                this.indicatorRenderer.color = skill.GetComponent<SkillIndicatorModule>().indicatorColor;
-                if(this.light != null) this.light.color = skill.GetComponent<SkillIndicatorModule>().indicatorColor;
-            }
-            this.transform.position = this.skill.transform.position;
-        }
-    }
-
     public virtual void Update()
     {
-        if(this.skill == null || this.skill != null && this.skill.sender.currentState == CharacterState.dead)
-        {
-            DestroyIt();
-        }
+        
     }
 
     public void DestroyIt()

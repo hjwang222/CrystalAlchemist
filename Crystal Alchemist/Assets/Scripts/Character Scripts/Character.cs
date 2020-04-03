@@ -594,7 +594,6 @@ public class Character : MonoBehaviour
             this.activeCastbar.destroyIt();
         }
 
-        if (skill.GetComponent<SkillIndicatorModule>() != null) skill.GetComponent<SkillIndicatorModule>().hideIndicator();
         if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().hideCastingAnimation();
     }
 

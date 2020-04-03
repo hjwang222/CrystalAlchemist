@@ -34,8 +34,10 @@ public class MarkIndicator : Indicator
 
     private GameObject getTarget()
     {
+        return null;
+        /*
         if (this.markTarget == markTargetType.target) return this.skill.target.gameObject;
         else if (this.markTarget == markTargetType.sender) return this.skill.sender.gameObject;
-        else return this.skill.gameObject;
+        else return this.skill.gameObject;*/
     }
 }

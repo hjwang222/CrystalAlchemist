@@ -16,10 +16,16 @@ public class AIPathfinding : MonoBehaviour
 
     [FoldoutGroup("Pathfinding", expanded: false)]
     [SerializeField]
+    private bool usePathfinding = false;
+
+    [FoldoutGroup("Pathfinding", expanded: false)]
+    [SerializeField]
+    [ShowIf("usePathfinding")]
     private float nextWaypointdistance = 0.3f;
 
     [FoldoutGroup("Pathfinding", expanded: false)]
     [SerializeField]
+    [ShowIf("usePathfinding")]
     private float updatePathIntervall = 0.5f;
 
     [FoldoutGroup("Movement Attributes", expanded: false)]
@@ -76,7 +82,7 @@ public class AIPathfinding : MonoBehaviour
     {
         AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", false);
         
-        this.seeker = this.GetComponent<Seeker>();
+        if (this.usePathfinding) this.seeker = this.GetComponent<Seeker>();
         if (this.seeker != null) InvokeRepeating("UpdatePath", 0f, this.updatePathIntervall);
     }
 

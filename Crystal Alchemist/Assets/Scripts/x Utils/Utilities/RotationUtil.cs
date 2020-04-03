@@ -69,14 +69,14 @@ public class RotationUtil : MonoBehaviour
 
 
         float temp_angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        direction = RotationUtil.DegreeToVector2(temp_angle);
+        direction = DegreeToVector2(temp_angle);
 
         angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) + rotationModifier;
 
         if (snapRotationInDegrees > 0)
         {
             angle = Mathf.Round(angle / snapRotationInDegrees) * snapRotationInDegrees;
-            direction = RotationUtil.DegreeToVector2(angle);
+            direction = DegreeToVector2(angle);
         }
 
         rotation = new Vector3(0, 0, angle);

@@ -128,8 +128,6 @@ public enum StateType
                 AnimatorUtil.SetAnimDirection(this.sender.direction, this.animator);
 
             AnimatorUtil.SetAnimatorParameter(this.animator, "Active", true);
-            SkillIndicatorModule indicatorModule = this.GetComponent<SkillIndicatorModule>();
-            if (indicatorModule != null) indicatorModule.hideIndicator();
 
             SkillAnimationModule animationModule = this.GetComponent<SkillAnimationModule>();
             if (animationModule != null) animationModule.hideCastingAnimation();
@@ -150,11 +148,6 @@ public enum StateType
         public float getDurationLeft()
         {
             return this.durationTimeLeft;
-        }
-
-        public void doOnCast()
-        {
-            if (this.GetComponent<SkillChainHit>() != null) this.GetComponent<SkillChainHit>().doOnCast();
         }
 
         public void hitIt(Collider2D hittedObject)
