@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CharacterCombat : MonoBehaviour
 {
-    public CastBar activeCastBar;
+    private CastBar activeCastBar;
 
     public void ChargeAbility(Ability ability, Character character)
     {

@@ -17,8 +17,7 @@ public class TODOLIST : MonoBehaviour
     //REWORK: Shader Rework https://www.youtube.com/watch?v=5dzGj9k8Qy8
     //REWORK: Lights (Intensity)
 
-    //TODO: float move x = Vector2.Dot(rb.velocity, Vector3.right) and normalize
-    //TODO: Load Scriptable Objects instead of Resource.Load()
+    //TODO: Rule Tiles
 
     //TESTING: Items         (Scriptable Object), Drop Item, New Item after Kill, Minigames
     //TESTING: StatusEffects (Scriptable Object, Analyse überarbeiten)

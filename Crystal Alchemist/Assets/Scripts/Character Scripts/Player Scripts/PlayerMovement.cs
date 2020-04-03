@@ -48,9 +48,6 @@ public class PlayerMovement : MonoBehaviour
             if (this.player.currentState != CharacterState.interact) this.player.currentState = CharacterState.walk;
             this.player.change.Normalize(); //Diagonal-Laufen fixen
 
-            //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
-            //this.myRigidbody.velocity = Vector2.zero;
-
             Vector3 movement = new Vector3(this.player.change.x, this.player.change.y + (this.player.steps * this.player.change.x), 0.0f);
             if (!this.player.isOnIce) this.player.myRigidbody.velocity = (movement * this.player.speed * this.player.timeDistortion);
         }

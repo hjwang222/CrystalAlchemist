@@ -4,16 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game/Player/Player Skillset")]
 public class PlayerSkillset : ScriptableObject
 {
-    [SerializeField]
-    private List<Ability> skillSet = new List<Ability>();
-
     private List<Ability> abilities = new List<Ability>();
 
     public void Start()
     {
         this.abilities.Clear();
 
-        foreach (Ability ability in this.skillSet)
+        foreach (Ability ability in GlobalGameObjects.abilities)
         {
             AddAbility(ability);
         }

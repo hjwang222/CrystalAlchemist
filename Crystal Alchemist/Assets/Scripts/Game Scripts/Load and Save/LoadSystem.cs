@@ -10,14 +10,13 @@ public class LoadSystem : MonoBehaviour
         PlayerAbilities playerAbilities = player.GetComponent<PlayerAbilities>();
         PlayerTeleport playerTeleport = player.GetComponent<PlayerTeleport>();
 
-        playerAbilities.skillSet.Start();
-
         playerAbilities.buttons.ClearAbilities();
-        loadPreset(player, saveGameSlot);
-        player.presetSignal.Raise();
 
         if (data != null)
         {
+            loadPreset(data, player);
+            player.presetSignal.Raise();
+
             player.life = data.health;
             player.mana = data.mana;
 
@@ -35,7 +34,7 @@ public class LoadSystem : MonoBehaviour
             player.secondsPlayed.setValue(data.timePlayed);            
 
             loadInventory(data, player);
-            loadPlayerSkills(playerAbilities, saveGameSlot);
+            loadPlayerSkills(data, playerAbilities);
 
             playerTeleport.setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]), true);
             playerTeleport.teleportPlayerToLastSavepoint(true); //letzter Savepoint, no Scene Loading
@@ -47,9 +46,9 @@ public class LoadSystem : MonoBehaviour
         }
     }
 
-    public static void loadPlayerSkills(PlayerAbilities playerAbilities, string saveGameSlot)
+    public static void loadPlayerSkills(PlayerData data, PlayerAbilities playerAbilities)
     {
-        PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
+        playerAbilities.skillSet.Start();
 
         if (data != null && data.abilities.Count > 0)
         {
@@ -64,10 +63,8 @@ public class LoadSystem : MonoBehaviour
         }
     }
 
-    private static void loadPreset(Player player, string saveGameSlot)
-    {
-        PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
-
+    private static void loadPreset(PlayerData data, Player player)
+    { 
         if (data != null && data.characterParts != null && data.characterParts.Count > 0)
         {
             loadPresetData(data, player);
@@ -123,10 +120,8 @@ public class LoadSystem : MonoBehaviour
         {
             foreach (string keyItem in data.keyItems)
             {
-                ItemDrop drop = Resources.Load("Scriptable Objects/Items/Item Drops/Key Items/" + keyItem, typeof(ItemDrop)) as ItemDrop;
-                ItemStats stats = Instantiate(drop.stats);
-                stats.name = drop.name;
-                stats.CollectIt(player);
+                ItemDrop drop = GlobalGameObjects.getItemDrop(keyItem);
+                if (drop != null) drop.stats.CollectIt(player);                
             }
         }
 
@@ -134,12 +129,9 @@ public class LoadSystem : MonoBehaviour
         {
             foreach (string[] item in data.inventoryItems)
             {
-                ItemGroup group = Resources.Load("Scriptable Objects/Items/Item Groups/Inventory Items/" + item[0], typeof(ItemGroup)) as ItemGroup;
-                if (group == null) group = Resources.Load("Scriptable Objects/Items/Item Groups/Currencies/" + item[0], typeof(ItemGroup)) as ItemGroup;
+                ItemGroup group = GlobalGameObjects.getItemGroup(item[0]);
                 if (group != null) player.GetComponent<PlayerItems>().CollectInventoryItem(group, Convert.ToInt32(item[1]));
             }
         }
-    }
-
-    
+    }    
 }

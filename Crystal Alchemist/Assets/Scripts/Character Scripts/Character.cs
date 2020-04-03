@@ -320,6 +320,7 @@ public class Character : MonoBehaviour
 
     public void updateAnimDirection(Vector2 direction)
     {
+        //float move = Vector2.Dot(this.myRigidbody.velocity, this.direction);
         AnimatorUtil.SetAnimDirection(direction, this.animator);
     }
 
