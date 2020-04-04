@@ -23,6 +23,7 @@ public class TODOLIST : MonoBehaviour
     //TODO: new Enemies, objects, etc 
 
     //BUG: StatusEffekt funktioniert nicht
+    //BUG: Camera Jittering
 
     //TESTING: Items         (Scriptable Object), Drop Item, New Item after Kill, Minigames
     //TESTING: StatusEffects (Scriptable Object, Analyse überarbeiten)
