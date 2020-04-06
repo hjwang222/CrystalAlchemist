@@ -3,27 +3,18 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-    //NPC: Bosskampf (Titania)    https://www.youtube.com/watch?v=AD4JIXQDw0s
+    //REWORK: Indicator Rework
+    //BUG: StatusEffekt funktioniert nicht
+    //BUG: Camera Jittering
+
+    //SKILL: Rundumschlag (wind)
+    //TODO: Skill Sequence Instantiate (scriptable object?)
+    //TODO: Sentinel Schuss ändern (Legacy)
+
+    //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena
     //GRAPHICS: TitleScreen: Background 
-
-    //SKILL: Rundumschlag (wind)
-    //TODO: Skill Sequence Instantiate
-    //TODO: Skills ändern (Bombe, Turm, Schild Knockback)
-    //TODO: Sentinel Schuss ändern
-
-    //REWORK: Indicator Rework
-    //REWORK: Shader Rework https://www.youtube.com/watch?v=5dzGj9k8Qy8
-    //REWORK: Lights (Intensity)
-
-    //TODO: Stairs, Ice, Wall
-    //TODO: Rule Tiles
-    //TODO: Pathfinding
-    //TODO: new Enemies, objects, etc 
-
-    //BUG: StatusEffekt funktioniert nicht
-    //BUG: Camera Jittering
 
     //TESTING: Items         (Scriptable Object), Drop Item, New Item after Kill, Minigames
     //TESTING: StatusEffects (Scriptable Object, Analyse überarbeiten)
@@ -31,13 +22,19 @@ public class TODOLIST : MonoBehaviour
     //TESTING: AI Events     (Bugfixes, Event und Phase Reset after Kill)
     //TESTING: Settings
 
-    //SHADER:  Lights (Sprite Lit Master), Outline, Color Swap (Replace), Bloom (HDR), Blend OP Max
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
     //OBJECT: Bett (Tag/Nacht)
     //ITEM: Brille (Bool Value)
     //INPUT: Virtuelle Tastatur
+    //REWORK: Flammenerfer Skill
+    //TODO: Stairs, Ice, Wall
+    //TODO: Rule Tiles
+    //TODO: Pathfinding
+    //REWORK: Shader Rework https://www.youtube.com/watch?v=5dzGj9k8Qy8
+    //SHADER:  Lights (Sprite Lit Master), Outline, Color Swap (Replace), Bloom (HDR), Blend OP Max
+    //REWORK: Lights (Intensity)
 
     //GRAPHICS: Player: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
     //GRAPHICS: Player: Schlafen, Zaubern, Pfeil, Speer Sprites

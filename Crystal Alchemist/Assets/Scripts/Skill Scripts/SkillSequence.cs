@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -10,9 +9,9 @@ public enum modificationType
     none,
     target,
     sender,
+    point,
     randomArea,
-    random,
-    fix,
+    randomPoints,
     normalized
 }
 
@@ -22,19 +21,19 @@ public class customSequence
     public GameObject gameObject;
 
     public modificationType position = modificationType.none;
-    public bool initActive = false;
     public float spawnDelay = 0f;
 
+    [ShowIf("position", modificationType.point)]
+    public GameObject spawnPoint;
     [ShowIf("position", modificationType.randomArea)]
     public GameObject min;
     [ShowIf("position", modificationType.randomArea)]
     public GameObject max;
-
-    [ShowIf("position", modificationType.random)]
+    [ShowIf("position", modificationType.randomPoints)]
     public List<GameObject> spawnPoints = new List<GameObject>();
 
     public modificationType rotation = modificationType.none;
-    [ShowIf("rotation", modificationType.random)]
+    [ShowIf("rotation", modificationType.randomPoints)]
     [Range(1, 8)]
     public int randomRotations;
 }
@@ -90,19 +89,7 @@ public class SkillSequence : MonoBehaviour
         {
             if (mod.gameObject != null && this.timeElapsed >= mod.spawnDelay)
             {
-                if (!mod.gameObject.activeInHierarchy)
-                {
-                    Skill skill = mod.gameObject.GetComponent<Skill>();
-
-                    if (skill != null)
-                    {
-                        if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().showCastingAnimation();
-                    }
-                    else
-                    {
-                        mod.gameObject.SetActive(true);
-                    }
-                }
+                //Instantiate Skill
             }
         }
     }
@@ -115,7 +102,6 @@ public class SkillSequence : MonoBehaviour
     {
         foreach (customSequence modification in this.modifcations)
         {
-            if(!modification.initActive) modification.gameObject.SetActive(false);
             setPosition(modification);
             setRotation(modification);
         }
@@ -123,32 +109,25 @@ public class SkillSequence : MonoBehaviour
 
     private void setPosition(customSequence modification)
     {
-        if (modification.position == modificationType.randomArea)
+        switch (modification.position)
         {
-            //set Position in Area
-            modification.gameObject.transform.position = getRandomPosition(modification.min.transform.position, modification.max.transform.position);
+            case modificationType.point: modification.gameObject.transform.position = modification.spawnPoint.transform.position; break;
+            case modificationType.sender: setPositionAtCharacter(modification, this.sender); break;
+            case modificationType.target: setPositionAtCharacter(modification, this.target); break;
+            case modificationType.randomArea: modification.gameObject.transform.position = getRandomPosition(modification.min.transform.position, modification.max.transform.position); break;
+            case modificationType.randomPoints: modification.gameObject.transform.position = getRandomPosition(modification.spawnPoints); break;
         }
-        else if (modification.position == modificationType.random)
-        {
-            //set Position of a set of Spawn-Points
-            modification.gameObject.transform.position = getRandomPosition(modification.spawnPoints);
-        }
-        else if (modification.position == modificationType.target)
-        {
-            //set Position on Target
-            modification.gameObject.transform.position = this.target.transform.position;
-            if (this.target.shadowRenderer != null) modification.gameObject.transform.position = this.target.shadowRenderer.transform.position;
-        }
-        else if (modification.position == modificationType.sender)
-        {
-            //set Position on Sender
-            modification.gameObject.transform.position = this.sender.transform.position;
-        }
+    }
+
+    private void setPositionAtCharacter(customSequence modification, Character character)
+    {
+        modification.gameObject.transform.position = character.transform.position;
+        if (character.shadowRenderer != null) modification.gameObject.transform.position = character.shadowRenderer.transform.position;
     }
 
     private void setRotation(customSequence modification)
     {
-        if (modification.rotation == modificationType.random)
+        if (modification.rotation == modificationType.randomPoints)
         {
             modification.gameObject.transform.rotation = Quaternion.Euler(0, 0, getRandomRotation(modification.randomRotations));
         }
@@ -207,16 +186,6 @@ public class SkillSequence : MonoBehaviour
     public void setTarget(Character target)
     {
         this.target = target;
-    }
-
-    public void setPosition(modificationType positionType, Vector2 fixPosition)
-    {
-        switch (positionType)
-        {
-            case modificationType.fix: this.transform.position = fixPosition; break;
-            case modificationType.sender: this.transform.position = this.sender.transform.position; break;
-            case modificationType.target: this.transform.position = this.target.transform.position; break;
-        }
     }
 
     private int getRandomRotation(int randomRotations)

@@ -10,13 +10,12 @@ public class AbilityUtil : MonoBehaviour
         return Instantiate(ability);
     }
 
-    public static SkillSequence instantiateSequence(SkillSequence skillSequence, AI npc, Vector2 sequencePosition, modificationType type)
+    public static SkillSequence instantiateSequence(SkillSequence skillSequence, AI npc)
     {
         SkillSequence sequence = Instantiate(skillSequence);
         sequence.name = skillSequence.name;
         sequence.setSender(npc);
         sequence.setTarget(npc.target);
-        sequence.setPosition(type, sequencePosition);
         return sequence;
     }
 

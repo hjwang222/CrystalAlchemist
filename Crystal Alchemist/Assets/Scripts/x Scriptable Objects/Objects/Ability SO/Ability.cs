@@ -44,6 +44,10 @@ public class Ability : ScriptableObject
     [SerializeField]
     public SkillBookInfo info;
 
+    [BoxGroup("Objects")]
+    [SerializeField]
+    public SkillIndicator indicator;
+
     [BoxGroup("Restrictions")]
     [SerializeField]
     public float cooldown;

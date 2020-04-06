@@ -107,17 +107,6 @@ public class AIAction //: ScriptableObject
     [SerializeField]
     private SkillSequence sequence;
 
-    [ShowIf("type", AIActionType.sequence)]
-    [BoxGroup("Properties")]
-    [SerializeField]
-    private modificationType sequencePositionType;
-
-    [ShowIf("type", AIActionType.sequence)]
-    [ShowIf("sequencePositionType", modificationType.fix)]
-    [BoxGroup("Properties")]
-    [SerializeField]
-    private Vector2 sequencePosition;
-
     #endregion
 
     private float waitTimer = 0;
@@ -237,7 +226,7 @@ public class AIAction //: ScriptableObject
     private void UpdateSequence(AI npc)
     {
         //casting here       
-        AbilityUtil.instantiateSequence(this.sequence, npc, this.sequencePosition, this.sequencePositionType);
+        AbilityUtil.instantiateSequence(this.sequence, npc);
         Deactivate();
     }
 

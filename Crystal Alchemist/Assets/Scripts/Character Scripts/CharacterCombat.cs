@@ -1,9 +1,11 @@
 ﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterCombat : MonoBehaviour
 {
     private CastBar activeCastBar;
+    private List<Indicator> indicators = new List<Indicator>();
 
     public void ChargeAbility(Ability ability, Character character)
     {
@@ -58,6 +60,7 @@ public class CharacterCombat : MonoBehaviour
 
         ability.ResetCoolDown();
     }
+
 
     public void ShowCastBar(Ability ability, Character character)
     {
