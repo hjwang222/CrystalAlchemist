@@ -105,7 +105,7 @@ public class AIAction //: ScriptableObject
     [ShowIf("type", AIActionType.sequence)]
     [BoxGroup("Properties")]
     [SerializeField]
-    private SkillSequence sequence;
+    private BossSequence sequence;
 
     #endregion
 

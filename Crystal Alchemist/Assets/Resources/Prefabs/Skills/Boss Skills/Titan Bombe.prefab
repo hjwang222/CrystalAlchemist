@@ -341,47 +341,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Bombe
-  skillNameEnglish: Bomb
   spriteRenderer: {fileID: 7601957053818680531}
   myRigidbody: {fileID: 8196513688587313968}
   animator: {fileID: 1990091396040281955}
   shadow: {fileID: 0}
-  speed: 0
   positionOffset: 1
-  maxAmounts: 3
   attachToSender: 0
-  doCastDuringDelay: 0
-  comboAmount: 99
-  cast: 0
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 0
-  keepHoldTimer: 0
+  lockDirection: 0
   canAffectedBytimeDistortion: 1
-  delay: 5
-  duration: 0.75
-  cooldown: 0.5
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
+  hasDuration: 1
+  maxDuration: 4
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: -0.0073119123
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
+  overridePosition: 1
 --- !u!114 &6155189671623006043
 MonoBehaviour:
   m_ObjectHideFlags: 0

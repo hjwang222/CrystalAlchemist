@@ -10,13 +10,11 @@ public class AbilityUtil : MonoBehaviour
         return Instantiate(ability);
     }
 
-    public static SkillSequence instantiateSequence(SkillSequence skillSequence, AI npc)
+    public static void instantiateSequence(BossSequence sequence, AI npc)
     {
-        SkillSequence sequence = Instantiate(skillSequence);
-        sequence.name = skillSequence.name;
-        sequence.setSender(npc);
-        sequence.setTarget(npc.target);
-        return sequence;
+        BossSequence newSequence = Instantiate(sequence);
+        newSequence.name = sequence.name;
+        newSequence.Initialize(npc, npc.target);
     }
 
     public static Skill instantiateSkill(Skill skill, Character sender)
