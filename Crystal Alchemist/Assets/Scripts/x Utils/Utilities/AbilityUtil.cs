@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -17,52 +16,52 @@ public class AbilityUtil : MonoBehaviour
         newSequence.Initialize(npc, npc.target);
     }
 
-    public static Skill instantiateSkill(Skill skill, Character sender)
+    public static void instantiateSkill(Skill skill, Character sender)
     {
-        return instantiateSkill(skill, sender, null, 1);
+        //Player Call
+        instantiateSkill(skill, sender, null, 1);
     }
 
-    public static Skill instantiateSkill(Skill skill, Character sender, Character target)
+    public static void instantiateSkill(Skill skill, Character sender, Character target)
     {
-        return instantiateSkill(skill, sender, target, 1);
+        //AI Call
+        instantiateSkill(skill, sender, target, 1);
     }
 
-    public static Skill instantiateSkill(Skill skill, Character sender, Character target, float reduce)
+    public static void instantiateSkill(Skill skill, Character sender, Character target, float reduce)
     {
-        if (skill != null
-            && sender.currentState != CharacterState.attack
-            && sender.currentState != CharacterState.defend)
+        if (skill != null)
         {
             Skill activeSkill = Instantiate(skill, sender.transform.position, Quaternion.identity);
             activeSkill.name = skill.name;
-            SkillTargetModule targetModule = activeSkill.GetComponent<SkillTargetModule>();
-            SkillSenderModule sendermodule = activeSkill.GetComponent<SkillSenderModule>();
-
             if (skill.attachToSender) activeSkill.transform.parent = sender.activeSkillParent.transform;
-
             if (target != null) activeSkill.target = target;
             activeSkill.sender = sender;
 
-            List<CharacterResource> temp = new List<CharacterResource>();
-
-            if (targetModule != null)
-            {
-                for (int i = 0; i < targetModule.affectedResources.Count; i++)
-                {
-                    CharacterResource elem = targetModule.affectedResources[i];
-                    elem.amount /= reduce;
-                    temp.Add(elem);
-                }
-
-                targetModule.affectedResources = temp;
-                if (sendermodule != null) sendermodule.costs.amount /= reduce;
-            }
+            ReduceCostAndDamage(activeSkill, reduce);
 
             sender.activeSkills.Add(activeSkill);
-            return activeSkill;
         }
+    }
 
-        return null;
+    private static void ReduceCostAndDamage(Skill activeSkill, float reduce)
+    {
+        SkillTargetModule targetModule = activeSkill.GetComponent<SkillTargetModule>();
+        SkillSenderModule sendermodule = activeSkill.GetComponent<SkillSenderModule>();
+        List<CharacterResource> temp = new List<CharacterResource>();
+
+        if (targetModule != null)
+        {
+            for (int i = 0; i < targetModule.affectedResources.Count; i++)
+            {
+                CharacterResource elem = targetModule.affectedResources[i];
+                elem.amount /= reduce;
+                temp.Add(elem);
+            }
+
+            targetModule.affectedResources = temp;
+            if (sendermodule != null) sendermodule.costs.amount /= reduce;
+        }
     }
 
     public static Skill getSkillByCollision(GameObject collision)

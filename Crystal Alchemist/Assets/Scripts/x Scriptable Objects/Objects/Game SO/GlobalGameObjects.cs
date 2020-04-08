@@ -17,6 +17,7 @@ public class GlobalGameObjects : ScriptableObject
     public static List<ItemDrop> itemDrops = new List<ItemDrop>();
     public static List<ItemGroup> itemGroups = new List<ItemGroup>();
     public static List<Ability> abilities = new List<Ability>();
+    public static TargetingSystem targetingSystem;
 
     [BoxGroup("Interaction")]
     [SerializeField]
@@ -31,6 +32,9 @@ public class GlobalGameObjects : ScriptableObject
     [BoxGroup("Combat")]
     [SerializeField]
     private CastBar cast;
+    [BoxGroup("Combat")]
+    [SerializeField]
+    private TargetingSystem targetSystem;
 
     [BoxGroup("Bubbles")]
     [SerializeField]
@@ -74,6 +78,7 @@ public class GlobalGameObjects : ScriptableObject
         itemDrops = this.drops;
         itemGroups = this.groups;
         abilities = this.skills;
+        targetingSystem = this.targetSystem;
     }
 
     [Button]

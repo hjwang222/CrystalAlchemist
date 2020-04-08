@@ -6,12 +6,22 @@ public class Indicator : MonoBehaviour
 {
     private Character sender;
     private Character target;
+    private Color color;
 
+    [SerializeField]
+    [Required]
+    private SpriteRenderer spriteRenderer;
 
-    public void Initialize(Character sender, Character target)
+    public virtual void Initialize(Character sender, Character target)
     {
         this.sender = sender;
         this.target = target;
+    }
+
+    public void SetColor(Color color)
+    {
+        this.color = color;
+        this.spriteRenderer.color = this.color;
     }
 
     public Character GetSender()
@@ -24,11 +34,14 @@ public class Indicator : MonoBehaviour
         return this.target;
     }
 
-
+    public Color GetColor()
+    {
+        return this.color;
+    }
 
     public virtual void Start()
     {
-        
+        //this.tag = "Indicator";
     }
 
     public virtual void Update()

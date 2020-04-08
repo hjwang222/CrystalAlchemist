@@ -54,7 +54,7 @@ public class PlayerData
         this.abilities = player.GetComponent<PlayerAbilities>().buttons.saveButtonConfig();
 
         setPreset(player.preset);
-        player.stats.characterName = this.characterName;
+        player.stats.SetCharacterName(this.characterName);
 
         this.scene = scene;
         this.timePlayed = player.secondsPlayed.getValue();

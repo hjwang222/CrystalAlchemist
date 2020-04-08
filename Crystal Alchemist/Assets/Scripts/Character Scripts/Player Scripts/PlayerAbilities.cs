@@ -6,21 +6,20 @@ using Sirenix.OdinInspector;
 public class PlayerAbilities : CharacterCombat
 {
     public PlayerSkillset skillSet;
-
     public PlayerButtons buttons;
 
     [SerializeField]
     [Required]
     private Player player;
-           
+
     [SerializeField]
-    private PlayerTargetingSystem targetingSystem;
-
-
+    [Required]
+    private FloatValue timeLeftValue;
 
     private void Start()
     {
-        this.targetingSystem.gameObject.SetActive(false);
+        InitializeTargeting(this.player);
+        this.SetTimeValue(this.timeLeftValue);
     }
 
     private void Update()
@@ -62,15 +61,7 @@ public class PlayerAbilities : CharacterCombat
         }
     }  
 
-    private void showTargetingSystem(Ability ability)
-    {
-        if (!this.targetingSystem.gameObject.activeInHierarchy)
-        {
-            ability.state = AbilityState.lockOn;
-            this.targetingSystem.setParameters(ability);
-            this.targetingSystem.gameObject.SetActive(true);
-        }
-    }
+
 
 
     #region useAbility
@@ -87,7 +78,7 @@ public class PlayerAbilities : CharacterCombat
     private void UseAbilityOnTargets(Ability ability, bool hideTargetingSystem)
     {
         List<Character> targets = new List<Character>();
-        targets.AddRange(this.targetingSystem.getTargets());
+        targets.AddRange(this.GetTargetsFromTargeting());
         if (hideTargetingSystem) this.hideTargetingSystem(ability, targets.Count);
 
         if (ability.canUseAbility(this.player))
@@ -107,19 +98,13 @@ public class PlayerAbilities : CharacterCombat
                 && target.currentState != CharacterState.respawning)
             {
                 AbilityUtil.instantiateSkill(ability.skill, this.player, target, damageReduce);
-                yield return new WaitForSeconds(this.targetingSystem.getDelay());
+                yield return new WaitForSeconds(this.GetTargetingDelay());
             }
             i++;
         }
     }
 
-    private void hideTargetingSystem(Ability ability, int count)
-    {
-        this.targetingSystem.gameObject.SetActive(false);
 
-        if (count > 0) ability.ResetCoolDown(); //reset cooldown only when targets attacked
-        else ability.state = AbilityState.targetRequired;
-    }
 
     #endregion
     

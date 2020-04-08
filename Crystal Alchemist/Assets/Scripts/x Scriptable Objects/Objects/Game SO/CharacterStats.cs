@@ -43,10 +43,12 @@ public class CharacterStats : ScriptableObject
 {
     [Required]
     [BoxGroup("Pflichtfelder")]
-    public string characterName;
+    [SerializeField]
+    private string characterName;
 
     [BoxGroup("Pflichtfelder")]
-    public string englischCharacterName;
+    [SerializeField]
+    private string englischCharacterName;
 
     ////////////////////////////////////////////////////////////////
 
@@ -188,5 +190,17 @@ public class CharacterStats : ScriptableObject
     [FoldoutGroup("RPG Elements", expanded: false)]
     [Tooltip("Um welchen Typ handelt es sich?")]
     public CharacterType characterType = CharacterType.Object;
+
+
+    public string GetCharacterName()
+    {
+        return FormatUtil.getLanguageDialogText(this.characterName, this.englischCharacterName);
+    }
+
+    public void SetCharacterName(string characterName)
+    {
+        this.characterName = characterName;
+        this.englischCharacterName = characterName;
+    }
 
 }

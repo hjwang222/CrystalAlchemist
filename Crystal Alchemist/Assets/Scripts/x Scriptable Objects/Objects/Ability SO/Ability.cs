@@ -3,7 +3,6 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum AbilityState
 {
     disabled,
@@ -38,15 +37,11 @@ public class Ability : ScriptableObject
 
     [BoxGroup("Objects")]
     [SerializeField]
-    public LockOnSystem targetingSystem;
+    public TargetingProperty targetingProperty;
 
     [BoxGroup("Objects")]
     [SerializeField]
     public SkillBookInfo info;
-
-    [BoxGroup("Objects")]
-    [SerializeField]
-    public SkillIndicator indicator;
 
     [BoxGroup("Restrictions")]
     [SerializeField]
@@ -58,7 +53,16 @@ public class Ability : ScriptableObject
     private float rapidFireDelay = 1;
 
     [BoxGroup("Restrictions")]
+    [SerializeField]
+    public bool hasCastTime = false;
+
+    [BoxGroup("Restrictions")]
+    [ShowIf("hasCastTime")]
     public float castTime;
+
+    [BoxGroup("Restrictions")]
+    [ShowIf("hasCastTime")]
+    public bool showCastbar = true;
 
     [BoxGroup("Restrictions")]
     [SerializeField]
@@ -112,8 +116,6 @@ public class Ability : ScriptableObject
         return FormatUtil.getLanguageDialogText(this.abilityName, this.abilityNameEnglish);
     }
 
-
-
     #region Update Functions
 
     public void Initialize()
@@ -137,12 +139,13 @@ public class Ability : ScriptableObject
 
     private void setStartParameters()
     {
+        if (!this.hasCastTime) this.castTime = 0;
         if (this.isRapidFire && this.deactivateButtonUp) this.deactivateButtonUp = false;
 
         this.cooldownLeft = 0;
         
-        if (this.castTime > 0 && this.holdTimer < this.castTime) this.state = AbilityState.notCharged;
-        else if (this.targetingSystem != null) this.state = AbilityState.targetRequired;
+        if (this.hasCastTime && this.holdTimer < this.castTime) this.state = AbilityState.notCharged;
+        else if (this.targetingProperty != null) this.state = AbilityState.targetRequired;
         else this.state = AbilityState.ready;
     }
 
@@ -160,7 +163,7 @@ public class Ability : ScriptableObject
         }
         else
         {
-            if (this.targetingSystem != null) this.state = AbilityState.targetRequired; //aufgeladen, aber Ziel benötigt!
+            if (this.targetingProperty != null) this.state = AbilityState.targetRequired; //aufgeladen, aber Ziel benötigt!
             else this.state = AbilityState.charged; //aufgeladen!
         }
     }
@@ -204,7 +207,7 @@ public class Ability : ScriptableObject
         {
             for (int i = 0; i < activePets.Count; i++)
             {
-                if (activePets[i] != null && activePets[i].stats.characterName == summonSkill.getPetName())
+                if (activePets[i] != null && activePets[i].stats.name == summonSkill.name)
                 {
                     result++;
                 }

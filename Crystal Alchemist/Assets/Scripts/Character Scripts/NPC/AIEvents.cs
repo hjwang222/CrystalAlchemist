@@ -23,6 +23,10 @@ public class AIEvents : CharacterCombat
     //TODO: Indicators
     //BUG: To many events
     //BUG: Gifthaut doppelt
+    private void Start()
+    {
+        InitializeTargeting(this.npc);
+    }
 
     private void OnEnable()
     {

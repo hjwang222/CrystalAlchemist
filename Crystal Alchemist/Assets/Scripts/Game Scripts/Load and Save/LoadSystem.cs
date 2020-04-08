@@ -30,7 +30,7 @@ public class LoadSystem : MonoBehaviour
             player.healthSignalUI.Raise();
             player.manaSignalUI.Raise();
 
-            player.stats.characterName = data.characterName;
+            player.stats.SetCharacterName(data.characterName);
             player.secondsPlayed.setValue(data.timePlayed);            
 
             loadInventory(data, player);
@@ -77,7 +77,7 @@ public class LoadSystem : MonoBehaviour
 
     private static void loadPresetData(PlayerData data, Player player)
     {
-        player.stats.characterName = data.characterName;
+        player.stats.SetCharacterName(data.characterName);
 
         CharacterPreset preset = player.preset;
         preset.characterName = data.characterName;

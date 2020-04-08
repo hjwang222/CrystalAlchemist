@@ -72,7 +72,17 @@ public class AIAction //: ScriptableObject
     [ShowIf("type", AIActionType.ability)]
     [BoxGroup("Properties")]
     [SerializeField]
-    private bool overrideCastTime;
+    private bool overrideCastTime = false;
+
+    [ShowIf("type", AIActionType.ability)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private bool overrideShowCastBar = false;
+
+    [ShowIf("type", AIActionType.ability)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private bool showCastBar = false;
 
     [ShowIf("type", AIActionType.ability)]
     [ShowIf("overrideCastTime")]
@@ -166,6 +176,7 @@ public class AIAction //: ScriptableObject
     {
         this.tempAbility = AbilityUtil.InstantiateAbility(this.ability);
         if (this.overrideCastTime) this.tempAbility.castTime = this.castTime;
+        if (this.overrideShowCastBar) this.tempAbility.showCastbar = this.showCastBar;
         if (this.overrideCooldown) this.tempAbility.cooldown = this.cooldown;
         this.tempAbility.Initialize();
 

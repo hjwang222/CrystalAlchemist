@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerTargetingCollider : MonoBehaviour
+public class TargetingCollider : MonoBehaviour
 {
     [SerializeField]
-    private PlayerTargetingSystem system;
+    private TargetingSystem system;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

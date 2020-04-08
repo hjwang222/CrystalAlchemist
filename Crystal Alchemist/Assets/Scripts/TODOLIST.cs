@@ -3,7 +3,14 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-    //REWORK: Indicator Rework
+
+    //TODO: OnValueChanged (Ability)
+    //TODO: Bombs (change from Skill -> Character)
+    //TODO: Standalone Laser Skill (no target or sender needed)
+    //TODO: Impact, Look away, Look, Hide, Stack, Chain, Thornes, Landslide
+    //TODO: Laser Indicator (show during cast, hide after cast)
+    //TODO: Multitarget Hit AI
+
     //BUG: StatusEffekt funktioniert nicht
     //BUG: Camera Jittering
 

@@ -15,7 +15,7 @@ public class SkillSummon : SkillExtension
 
     public string getPetName()
     {
-        return this.summon.stats.characterName;
+        return this.summon.stats.GetCharacterName();
     }
 
     private void summoning()
@@ -26,6 +26,7 @@ public class SkillSummon : SkillExtension
         if (ai != null)
         {
             AI pet = Instantiate(ai, this.transform.position, Quaternion.Euler(0, 0, 0));
+            pet.name = ai.name;
             pet.direction = this.skill.direction;
             pet.partner = this.skill.sender;
 

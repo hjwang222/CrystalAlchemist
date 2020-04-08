@@ -2,58 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using TMPro;
 
-public class PlayerTargetingSystem : MonoBehaviour
+public class TargetingSystem : MonoBehaviour
 {
-    [SerializeField]
-    private Player player;
-
-    [SerializeField]
-    private LockOnFrame lockOnIndicator;
-
     [SerializeField]
     private CircleCollider2D circleCollider;
 
     [SerializeField]
     private PolygonCollider2D viewCollider;
 
-    [SerializeField]
-    private FloatValue timeLeftValue;
-
+    private Character sender;
     private List<Character> targets = new List<Character>();
     private List<Character> targetsInRange = new List<Character>();
-    private List<LockOnFrame> appliedIndicators = new List<LockOnFrame>();
+    private List<Indicator> appliedIndicators = new List<Indicator>();
     private int index;
     private bool selectAll = false;
     private bool inputPossible = true;
-
-    private LockOnSystem properties;
+    private FloatValue timeLeftValue;
+    private TargetingProperty properties;
     private Ability ability;
     private float timeLeft = 60f;
 
     #region Unity Functions
 
+    public void Initialize(Character sender)
+    {
+        this.sender = sender;
+    }
+
+    public void SetTimeValue(FloatValue timeValue)
+    {
+        this.timeLeftValue = timeValue;
+    }
+
     private void OnEnable()
     {
-        this.circleCollider.gameObject.SetActive(false);
-        this.viewCollider.gameObject.SetActive(false);
-
-        if (this.properties.rangeType == RangeType.circle) this.circleCollider.gameObject.SetActive(true);
-        else if (this.properties.rangeType == RangeType.view) this.viewCollider.gameObject.SetActive(true);
-
-        this.circleCollider.transform.localScale = new Vector3(this.properties.range, this.properties.range, 1);
-        this.viewCollider.transform.localScale = new Vector3(this.properties.range, this.properties.range, 1);
+        SetColliders();
 
         this.timeLeft = this.properties.maxDuration;
-        this.timeLeftValue.setValue(1f);
+        if(this.timeLeftValue != null) this.timeLeftValue.setValue(1f);
 
         StartCoroutine(delayCo());
     }
 
     private void Update()
     {
-        RotationUtil.rotateCollider(this.player, this.viewCollider.gameObject);
+        RotationUtil.rotateCollider(this.sender, this.viewCollider.gameObject);
 
         if (this.properties.targetingMode == TargetingMode.auto) selectAllNearestTargets();
         else selectTargetManually();
@@ -63,14 +57,14 @@ public class PlayerTargetingSystem : MonoBehaviour
         if (this.timeLeft > 0) this.timeLeft -= Time.deltaTime;
         else this.gameObject.SetActive(false);
 
-        this.timeLeftValue.setValue(this.timeLeft/ this.properties.maxDuration);     
+        if (this.timeLeftValue != null) this.timeLeftValue.setValue(this.timeLeft/ this.properties.maxDuration);     
     }
 
     private void OnDisable()
     {
         this.ability.state = AbilityState.targetRequired;
 
-        foreach (LockOnFrame applied in this.appliedIndicators)
+        foreach (Indicator applied in this.appliedIndicators)
         {
             Destroy(applied.gameObject);
         }
@@ -82,9 +76,21 @@ public class PlayerTargetingSystem : MonoBehaviour
 
     #region get set
 
+    private void SetColliders()
+    {
+        this.circleCollider.gameObject.SetActive(false);
+        this.viewCollider.gameObject.SetActive(false);
+
+        if (this.properties.rangeType == RangeType.circle) this.circleCollider.gameObject.SetActive(true);
+        else if (this.properties.rangeType == RangeType.view) this.viewCollider.gameObject.SetActive(true);
+
+        this.circleCollider.transform.localScale = new Vector3(this.properties.range, this.properties.range, 1);
+        this.viewCollider.transform.localScale = new Vector3(this.properties.range, this.properties.range, 1);
+    }
+
     public void setParameters(Ability ability)
     {
-        this.properties = ability.targetingSystem;
+        this.properties = ability.targetingProperty;
         this.ability = ability;
     }
 
@@ -111,7 +117,7 @@ public class PlayerTargetingSystem : MonoBehaviour
     private void selectNextTarget(int value)
     {
         this.targets.Clear();
-        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.player.transform.position))).ToList<Character>();
+        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
 
         if (this.targetsInRange.Count > 0)
         {
@@ -152,7 +158,7 @@ public class PlayerTargetingSystem : MonoBehaviour
     private void selectAllNearestTargets()
     {
         this.targets.Clear();
-        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.player.transform.position))).ToList<Character>();
+        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
 
         for (int i = 0; i < this.properties.maxAmountOfTargets && i < sorted.Count; i++)
         {
@@ -163,7 +169,7 @@ public class PlayerTargetingSystem : MonoBehaviour
     public void removeTarget(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-        if (CollisionUtil.checkCollision(collision, this.ability.skill, this.player) && character != null)
+        if (CollisionUtil.checkCollision(collision, this.ability.skill, this.sender) && character != null)
         {
             if (this.targetsInRange.Contains(character)) this.targetsInRange.Remove(character);
             if (this.targets.Contains(character)) this.targets.Remove(character);
@@ -173,12 +179,12 @@ public class PlayerTargetingSystem : MonoBehaviour
     public void addTarget(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-        if (CollisionUtil.checkCollision(collision, this.ability.skill, this.player) && character != null)
+        if (CollisionUtil.checkCollision(collision, this.ability.skill, this.sender) && character != null)
         {
             if (!this.targetsInRange.Contains(character)) this.targetsInRange.Add(character);
         }
 
-        this.targetsInRange = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.player.transform.position))).ToList<Character>();
+        this.targetsInRange = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
     }
 
     private void addTarget(Character character)
@@ -204,28 +210,22 @@ public class PlayerTargetingSystem : MonoBehaviour
     {
         foreach (Character target in this.targets)
         {
-            if (UnityUtil.hasChildWithTag(target, this.lockOnIndicator.tag) == null)
-            {
-                LockOnFrame indicator = Instantiate(this.lockOnIndicator, target.transform.position, Quaternion.identity, target.transform);
-                indicator.setValues(FormatUtil.getLanguageDialogText(target.stats.characterName, target.stats.englischCharacterName));
-                this.appliedIndicators.Add(indicator);
-            }
+            this.properties.Instantiate(this.sender, target, this.appliedIndicators);            
         }
     }
 
     private void removeIndicator()
     {
-        List<LockOnFrame> tempAppliedList = new List<LockOnFrame>();
+        List<Indicator> tempAppliedList = new List<Indicator>();
 
-        foreach (LockOnFrame applied in this.appliedIndicators)
+        foreach (Indicator applied in this.appliedIndicators)
         {
-            Character character = applied.transform.parent.gameObject.GetComponent<Character>();
-
-            if (applied != null && character != null && !this.targets.Contains(character)) Destroy(applied);
+            if (applied != null && !this.targets.Contains(applied.GetTarget())) Destroy(applied.gameObject);
             else tempAppliedList.Add(applied);
         }
 
         this.appliedIndicators = tempAppliedList;
+        this.appliedIndicators.RemoveAll(item => item == null);
     }
 
     #endregion

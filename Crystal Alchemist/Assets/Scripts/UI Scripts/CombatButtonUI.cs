@@ -113,7 +113,7 @@ public class CombatButtonUI : MonoBehaviour
                 this.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
                 this.iconButton.color = new Color(1f, 1f, 1f, 0.2f);
             }
-            else if (ability.targetingSystem != null && ability.state == AbilityState.lockOn)
+            else if (ability.targetingProperty != null && ability.state == AbilityState.lockOn)
             {
                 //ist Skill in Zielerfassung
                 this.targeting.SetActive(true);

@@ -1,11 +1,23 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterCombat : MonoBehaviour
 {
     private CastBar activeCastBar;
-    private List<Indicator> indicators = new List<Indicator>();
+    private TargetingSystem targetingSystem;
+
+    public void InitializeTargeting(Character sender)
+    {
+        this.targetingSystem = Instantiate(GlobalGameObjects.targetingSystem, sender.transform.position, Quaternion.identity, sender.transform);
+        this.targetingSystem.Initialize(sender);
+        this.targetingSystem.name = GlobalGameObjects.targetingSystem.name;
+        this.targetingSystem.gameObject.SetActive(false);
+    }
+
+    public void SetTimeValue(FloatValue timeValue)
+    {
+        this.targetingSystem.SetTimeValue(timeValue);
+    }
 
     public void ChargeAbility(Ability ability, Character character)
     {
@@ -13,7 +25,6 @@ public class CharacterCombat : MonoBehaviour
         ShowCastBar(ability, character); //Show Castbar
         setSpeedDuringCasting(ability, character); //Set Speed during casting
 
-        //Indicators
         //Animations
     }
 
@@ -24,7 +35,6 @@ public class CharacterCombat : MonoBehaviour
         deactivatePlayerButtonUp(ability, character); //deactivate Skill when button up, Player only
         resetSpeedAfterCasting(character); //set Speed to normal
 
-        //Indicators
         //Animations
     }
 
@@ -64,7 +74,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void ShowCastBar(Ability ability, Character character)
     {
-        if (this.activeCastBar == null && ability.castTime > 0)
+        if (this.activeCastBar == null && ability.showCastbar && ability.hasCastTime)
         {
             this.activeCastBar = Instantiate(GlobalGameObjects.castBar, character.transform.position, Quaternion.identity);
             this.activeCastBar.setCastBar(character, ability);
@@ -74,5 +84,34 @@ public class CharacterCombat : MonoBehaviour
     public void HideCastBar()
     {
         if (this.activeCastBar != null) this.activeCastBar.destroyIt();
+    }
+
+
+    public void showTargetingSystem(Ability ability)
+    {
+        if (!this.targetingSystem.gameObject.activeInHierarchy)
+        {
+            ability.state = AbilityState.lockOn;
+            this.targetingSystem.setParameters(ability);
+            this.targetingSystem.gameObject.SetActive(true);
+        }
+    }
+
+    public void hideTargetingSystem(Ability ability, int count)
+    {
+        this.targetingSystem.gameObject.SetActive(false);
+
+        if (count > 0) ability.ResetCoolDown(); //reset cooldown only when targets attacked
+        else ability.state = AbilityState.targetRequired;
+    }
+
+    public float GetTargetingDelay()
+    {
+        return this.targetingSystem.getDelay();
+    }
+
+    public List<Character> GetTargetsFromTargeting()
+    {
+        return this.targetingSystem.getTargets();
     }
 }
