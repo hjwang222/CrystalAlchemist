@@ -28,11 +28,10 @@ public class RotationUtil : MonoBehaviour
         gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    public static void setDirectionAndRotation(Skill skill, out float angle, out Vector2 start, out Vector2 direction, out Vector3 rotation)
+    public static void setDirectionAndRotation(Skill skill, out Vector2 start, out Vector2 direction, out Vector3 rotation)
     {
         float snapRotationInDegrees = 0;
-        float rotationModifier = 0;
-        float positionOffset = skill.positionOffset;
+        float positionOffset = skill.GetOffset();
         float positionHeight = 0;
 
         SkillRotationModule rotationModule = skill.GetComponent<SkillRotationModule>();
@@ -41,7 +40,6 @@ public class RotationUtil : MonoBehaviour
         if (rotationModule != null)
         {
             snapRotationInDegrees = rotationModule.snapRotationInDegrees;
-            rotationModifier = rotationModule.rotationModifier;
         }
 
         if (positionModule != null)
@@ -49,36 +47,52 @@ public class RotationUtil : MonoBehaviour
             positionHeight = positionModule.positionHeight;
         }
 
-        start = (Vector2)skill.sender.transform.position;
+        start = SetStartPosition(skill);
+        direction = SetStartDirection(skill, start);
+        start = SetOffSet(direction, start, positionOffset, positionHeight);
 
-        if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null)
-            direction = ((Vector2)skill.sender.GetComponent<AI>().target.transform.position - start).normalized;
+        float angle = SetAngle(direction, snapRotationInDegrees);
+        direction = DegreeToVector2(angle);
+        rotation = new Vector3(0, 0, angle);
+    }
+
+    private static Vector2 SetStartPosition(Skill skill)
+    {
+        if (skill.sender != null && skill.sender.skillStartPosition != null) return skill.sender.skillStartPosition.transform.position;
+        else if (skill.sender != null) return skill.sender.transform.position;        
+        return skill.transform.position;
+    }
+
+    private static Vector2 SetStartDirection(Skill skill, Vector2 start)
+    {
+        if (skill.sender == null) return skill.direction;
+        else if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null)
+            return ((Vector2)skill.sender.GetComponent<AI>().target.transform.position - start).normalized;
         else if (skill.target != null)
-            direction = ((Vector2)skill.target.transform.position - start).normalized;
-        else
-            direction = skill.sender.direction.normalized;
+            return ((Vector2)skill.target.transform.position - start).normalized;
+        else if (skill.sender != null)
+            return skill.sender.direction.normalized;
 
-        float positionX = skill.sender.skillStartPosition.transform.position.x + (direction.x * positionOffset);
-        float positionY = skill.sender.skillStartPosition.transform.position.y + (direction.y * positionOffset) + positionHeight;
+        return skill.direction;
+    }
 
-        //if (useCustomPosition) positionY = skill.sender.shootingPosition.transform.position.y + (direction.y * positionOffset);
+    private static Vector2 SetOffSet(Vector2 direction, Vector2 start, float offset, float positionHeight)
+    {
+        float positionX = start.x + (direction.x * offset);
+        float positionY = start.y + (direction.y * offset) + positionHeight;
 
-        start = new Vector2(positionX, positionY);
-        if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null) direction = (Vector2)skill.sender.GetComponent<AI>().target.transform.position - start;
-        else if (skill.target != null) direction = (Vector2)skill.target.transform.position - start;
+        return new Vector2(positionX, positionY);
+    }
 
-
-        float temp_angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        direction = DegreeToVector2(temp_angle);
-
-        angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) + rotationModifier;
+    private static float SetAngle(Vector2 direction, float snapRotationInDegrees)
+    {
+        float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
 
         if (snapRotationInDegrees > 0)
         {
-            angle = Mathf.Round(angle / snapRotationInDegrees) * snapRotationInDegrees;
-            direction = DegreeToVector2(angle);
+            angle = Mathf.Round(angle / snapRotationInDegrees) * snapRotationInDegrees;            
         }
 
-        rotation = new Vector3(0, 0, angle);
+        return angle;
     }
 }

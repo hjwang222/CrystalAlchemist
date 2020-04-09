@@ -75,21 +75,40 @@ public class CollisionUtil : MonoBehaviour
         return true;
     }
 
-    public static bool checkAffections(Character character, bool affectOther, bool affectSame, bool affectNeutral, Collider2D hittedCharacter)
+    public static bool checkAffections(Character sender, bool affectOther, bool affectSame, bool affectNeutral, Collider2D hittedCharacter)
     {
         Character target = hittedCharacter.GetComponent<Character>();
 
         if (!hittedCharacter.isTrigger
             && target != null
             && target.currentState != CharacterState.dead
-            && target.currentState != CharacterState.respawning
-       && (
-           (affectOther && (character.CompareTag("Player") || character.CompareTag("NPC")) && target.CompareTag("Enemy"))
-        || (affectOther && (character.CompareTag("Enemy") && (target.CompareTag("Player") || target.CompareTag("NPC"))))
-        || (affectSame && (character.CompareTag("Player") == target.CompareTag("Player") || character.CompareTag("Player") == target.CompareTag("NPC")))
-        || (affectSame && (character.CompareTag("NPC") == target.CompareTag("NPC") || character.CompareTag("NPC") == target.CompareTag("Player")))
-        || (affectSame && (character.CompareTag("Enemy") == target.CompareTag("Enemy")))
-        || (affectNeutral && target.CompareTag("Object")))) return true;
+            && target.currentState != CharacterState.respawning)
+        {
+            return checkMatrix(sender, target, affectOther, affectSame, affectNeutral);
+        }
+
+        return false;
+    }
+
+    private static bool checkMatrix(Character sender, Character target, bool other, bool same, bool neutral)
+    {
+        if (other)
+        {
+            if (sender == null) return true;
+            if (sender.stats.characterType == CharacterType.Friend && target.stats.characterType == CharacterType.Enemy) return true;
+            if (sender.stats.characterType == CharacterType.Enemy && target.stats.characterType == CharacterType.Friend) return true;
+        }
+
+        if (same)
+        {
+            if (sender == null) return true;
+            if (sender.stats.characterType == target.stats.characterType) return true;
+        }
+
+        if (neutral)
+        {
+            if (target.stats.characterType == CharacterType.Object) return true;
+        }
 
         return false;
     }

@@ -79,5 +79,6 @@ public class AIEvents : CharacterCombat
             this.activeDialog.setDialogBox(text, duration);
         }
     }
+
 }
 

@@ -15,11 +15,17 @@ MonoBehaviour:
   abilityName: Teleport
   abilityNameEnglish: Teleport
   skill: {fileID: 2383572904453914523, guid: 28d171700ce5ac84fb3390e7c6068744, type: 3}
-  targetingSystem: {fileID: 0}
+  useTargetSystem: 0
+  targetingProperty: {fileID: 0}
+  hasSkillBookInfo: 1
   info: {fileID: 11400000, guid: 3467596e28763334490ee64d3ea26275, type: 2}
   cooldown: 30
+  hasMaxDuration: 0
+  maxDuration: 1
   rapidFireDelay: 1
+  hasCastTime: 1
   castTime: 4
+  showCastbar: 1
   hasMaxAmount: 1
   maxAmount: 1
   requirements: 0
@@ -27,6 +33,11 @@ MonoBehaviour:
   remoteActivation: 0
   deactivateButtonUp: 0
   keepCast: 0
+  shareDamage: 0
+  positionOffset: 0
+  attachToSender: 1
+  lockDirection: 0
+  timeDistortion: 0
   cooldownLeft: 0
   holdTimer: 0
   state: 2

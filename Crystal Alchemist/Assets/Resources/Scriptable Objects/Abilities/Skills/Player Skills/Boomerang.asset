@@ -15,11 +15,17 @@ MonoBehaviour:
   abilityName: Boomerang
   abilityNameEnglish: Boomerang
   skill: {fileID: 980826649107003252, guid: 2f0554ae42ef20e4e976d37f34aad3e3, type: 3}
-  targetingSystem: {fileID: 0}
+  useTargetSystem: 0
+  targetingProperty: {fileID: 0}
+  hasSkillBookInfo: 1
   info: {fileID: 11400000, guid: 8f6bc80270f53a547a0ca5e058a5ee6d, type: 2}
   cooldown: 0
+  hasMaxDuration: 0
+  maxDuration: 1
   rapidFireDelay: 1
+  hasCastTime: 0
   castTime: 0
+  showCastbar: 1
   hasMaxAmount: 1
   maxAmount: 1
   requirements: 0
@@ -27,6 +33,11 @@ MonoBehaviour:
   remoteActivation: 0
   deactivateButtonUp: 0
   keepCast: 0
+  shareDamage: 0
+  positionOffset: 0.75
+  attachToSender: 0
+  lockDirection: 0
+  timeDistortion: 1
   cooldownLeft: 0
   holdTimer: 0
   state: 6

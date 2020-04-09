@@ -37,7 +37,7 @@ public class TargetingSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        SetColliders();
+        if(this.properties.targetingMode != TargetingMode.none) SetColliders();
 
         this.timeLeft = this.properties.maxDuration;
         if(this.timeLeftValue != null) this.timeLeftValue.setValue(1f);
@@ -50,7 +50,7 @@ public class TargetingSystem : MonoBehaviour
         RotationUtil.rotateCollider(this.sender, this.viewCollider.gameObject);
 
         if (this.properties.targetingMode == TargetingMode.auto) selectAllNearestTargets();
-        else selectTargetManually();
+        else if (this.properties.targetingMode == TargetingMode.manual) selectTargetManually();
 
         updateIndicator();
 
@@ -201,8 +201,15 @@ public class TargetingSystem : MonoBehaviour
     {
         if (this.properties.showIndicator)
         {
-            addIndicator();
-            removeIndicator();
+            if (this.properties.targetingMode != TargetingMode.none)
+            {
+                addIndicator();
+                removeIndicator();
+            }
+            else
+            {
+                this.properties.Instantiate(this.sender, null, this.appliedIndicators);
+            }
         }
     }
 

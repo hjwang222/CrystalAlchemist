@@ -15,11 +15,17 @@ MonoBehaviour:
   abilityName: Speer
   abilityNameEnglish: Spear
   skill: {fileID: 2626038527925349230, guid: 8191971a062876046ab19f93a98c3268, type: 3}
-  targetingSystem: {fileID: 0}
+  useTargetSystem: 0
+  targetingProperty: {fileID: 0}
+  hasSkillBookInfo: 1
   info: {fileID: 11400000, guid: 445801383735e624da548a7a19b73b2c, type: 2}
   cooldown: 0
+  hasMaxDuration: 0
+  maxDuration: 1
   rapidFireDelay: 1
+  hasCastTime: 0
   castTime: 0
+  showCastbar: 1
   hasMaxAmount: 1
   maxAmount: 1
   requirements: 0
@@ -27,6 +33,11 @@ MonoBehaviour:
   remoteActivation: 0
   deactivateButtonUp: 0
   keepCast: 0
+  shareDamage: 0
+  positionOffset: 0
+  attachToSender: 1
+  lockDirection: 1
+  timeDistortion: 0
   cooldownLeft: 0
   holdTimer: 0
   state: 6

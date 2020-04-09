@@ -15,11 +15,17 @@ MonoBehaviour:
   abilityName: Feuerhaut
   abilityNameEnglish: Fire Skin
   skill: {fileID: 7648501385148924824, guid: 51f9d7aedc6941b4eb34d1eb4d280123, type: 3}
-  targetingSystem: {fileID: 0}
+  useTargetSystem: 0
+  targetingProperty: {fileID: 0}
+  hasSkillBookInfo: 0
   info: {fileID: 0}
   cooldown: 0
+  hasMaxDuration: 1
+  maxDuration: 1
   rapidFireDelay: 1
+  hasCastTime: 0
   castTime: 0
+  showCastbar: 1
   hasMaxAmount: 1
   maxAmount: 1
   requirements: 0
@@ -27,6 +33,12 @@ MonoBehaviour:
   remoteActivation: 0
   deactivateButtonUp: 0
   keepCast: 0
+  shareDamage: 0
+  positionOffset: 0
+  attachToSender: 1
+  lockDirection: 0
+  timeDistortion: 0
   cooldownLeft: 0
   holdTimer: 0
   state: 0
+  enabled: 1

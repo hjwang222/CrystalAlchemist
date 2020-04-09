@@ -15,11 +15,17 @@ MonoBehaviour:
   abilityName: Pfeil
   abilityNameEnglish: Arrow
   skill: {fileID: 8182664675407730783, guid: 478564dcd28512a4a88aeeac6dcd1b25, type: 3}
-  targetingSystem: {fileID: 0}
+  useTargetSystem: 0
+  targetingProperty: {fileID: 0}
+  hasSkillBookInfo: 1
   info: {fileID: 11400000, guid: 84d2a0a4afa62b9409dd6fb7f882e522, type: 2}
   cooldown: 0.25
+  hasMaxDuration: 0
+  maxDuration: 1
   rapidFireDelay: 1
+  hasCastTime: 0
   castTime: 0
+  showCastbar: 1
   hasMaxAmount: 0
   maxAmount: 1
   requirements: 0
@@ -27,6 +33,11 @@ MonoBehaviour:
   remoteActivation: 0
   deactivateButtonUp: 0
   keepCast: 0
+  shareDamage: 0
+  positionOffset: 0.25
+  attachToSender: 0
+  lockDirection: 0
+  timeDistortion: 1
   cooldownLeft: 0
   holdTimer: 0
   state: 6

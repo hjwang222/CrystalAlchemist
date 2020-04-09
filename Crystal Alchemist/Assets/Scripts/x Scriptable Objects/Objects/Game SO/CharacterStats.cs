@@ -23,9 +23,8 @@ public enum CharacterState
 
 public enum CharacterType
 {
-    Player,
+    Friend,
     Enemy,
-    NPC,
     Object
 }
 
@@ -49,6 +48,9 @@ public class CharacterStats : ScriptableObject
     [BoxGroup("Pflichtfelder")]
     [SerializeField]
     private string englischCharacterName;
+
+    [BoxGroup("Pflichtfelder")]
+    public CharacterType characterType = CharacterType.Object;
 
     ////////////////////////////////////////////////////////////////
 
@@ -186,10 +188,6 @@ public class CharacterStats : ScriptableObject
     [FoldoutGroup("RPG Elements", expanded: false)]
     [Tooltip("Geschlecht")]
     public Gender characterGender = Gender.none;
-
-    [FoldoutGroup("RPG Elements", expanded: false)]
-    [Tooltip("Um welchen Typ handelt es sich?")]
-    public CharacterType characterType = CharacterType.Object;
 
 
     public string GetCharacterName()

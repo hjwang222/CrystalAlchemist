@@ -20,9 +20,10 @@ public enum AbilityRequirements
     teleport
 }
 
+
 [CreateAssetMenu(menuName = "Game/Ability/Ability")]
 public class Ability : ScriptableObject
-{
+{    
     [BoxGroup("Texts")]
     [SerializeField]
     private string abilityName;
@@ -37,15 +38,34 @@ public class Ability : ScriptableObject
 
     [BoxGroup("Objects")]
     [SerializeField]
+    public bool useTargetSystem = false;
+
+    [BoxGroup("Objects")]
+    [ShowIf("useTargetSystem")]
+    [SerializeField]
     public TargetingProperty targetingProperty;
 
     [BoxGroup("Objects")]
+    [SerializeField]
+    public bool hasSkillBookInfo = false;
+
+    [BoxGroup("Objects")]
+    [ShowIf("hasSkillBookInfo")]
     [SerializeField]
     public SkillBookInfo info;
 
     [BoxGroup("Restrictions")]
     [SerializeField]
     public float cooldown;
+
+    [BoxGroup("Restrictions")]
+    [SerializeField]
+    public bool hasMaxDuration;
+
+    [BoxGroup("Restrictions")]
+    [SerializeField]
+    [ShowIf("hasMaxDuration")]
+    public float maxDuration = 1;
 
     [BoxGroup("Restrictions")]
     [ShowIf("isRapidFire")]
@@ -95,19 +115,40 @@ public class Ability : ScriptableObject
     [HideIf("castTime", 0f)]
     public bool keepCast = false;
 
-    [BoxGroup("Debug")]
+    [BoxGroup("Behaviors")]
+    [SerializeField]
+    public bool shareDamage = false;
+
+    [BoxGroup("Behaviors")]
+    [Tooltip("Positions-Offset, damit es nicht im Character anfängt")]
+    public float positionOffset = 1f;
+
+    [BoxGroup("Behaviors")]
+    [Tooltip("Folgt der Skill dem Charakter")]
+    public bool attachToSender = false;
+
+    [BoxGroup("Behaviors")]
+    [Tooltip("Während des Skills schaut der Charakter in die gleiche Richtung")]
+    public bool lockDirection = false;
+
+    [BoxGroup("Behaviors")]
+    [Tooltip("Soll der Skill einer Zeitstörung beeinträchtigt werden?")]
+    public bool timeDistortion = true;
+
+
+    [HideInInspector]
     public float cooldownLeft;
-    [BoxGroup("Debug")]
+    [HideInInspector]
     public float holdTimer;
-    [BoxGroup("Debug")]
+    [HideInInspector]
     public AbilityState state;
-    [BoxGroup("Debug")]
+    [HideInInspector]
     public bool enabled = true;
 
     [AssetIcon]
     private Sprite GetSprite()
     {
-        if(this.info != null) return this.info.icon;
+        if(this.hasSkillBookInfo && this.info != null) return this.info.icon;
         return null;
     }
 
@@ -145,7 +186,7 @@ public class Ability : ScriptableObject
         this.cooldownLeft = 0;
         
         if (this.hasCastTime && this.holdTimer < this.castTime) this.state = AbilityState.notCharged;
-        else if (this.targetingProperty != null) this.state = AbilityState.targetRequired;
+        else if (this.IsTargetRequired()) this.state = AbilityState.targetRequired;
         else this.state = AbilityState.ready;
     }
 
@@ -163,7 +204,7 @@ public class Ability : ScriptableObject
         }
         else
         {
-            if (this.targetingProperty != null) this.state = AbilityState.targetRequired; //aufgeladen, aber Ziel benötigt!
+            if (this.IsTargetRequired()) this.state = AbilityState.targetRequired; //aufgeladen, aber Ziel benötigt!
             else this.state = AbilityState.charged; //aufgeladen!
         }
     }
@@ -180,7 +221,7 @@ public class Ability : ScriptableObject
         this.state = AbilityState.onCooldown;
     }
 
-    public bool canUseAbility(Character character)
+    public bool CheckResourceAndAmount(Character character)
     {
         bool enoughResource = this.isResourceEnough(character);
 
@@ -215,6 +256,12 @@ public class Ability : ScriptableObject
         }
 
         return result;
+    }
+
+    public bool IsTargetRequired()
+    {
+        if (this.targetingProperty != null && this.targetingProperty.targetingMode != TargetingMode.none) return true;
+        return false;
     }
 
     private bool isResourceEnough(Character character)

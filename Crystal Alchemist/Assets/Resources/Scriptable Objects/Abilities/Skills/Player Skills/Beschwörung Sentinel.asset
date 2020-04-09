@@ -15,11 +15,17 @@ MonoBehaviour:
   abilityName: "W\xE4chter"
   abilityNameEnglish: Sentinel
   skill: {fileID: 1894471306822299025, guid: af79dc6e8669ea341b020d34b9391b34, type: 3}
-  targetingSystem: {fileID: 0}
+  useTargetSystem: 0
+  targetingProperty: {fileID: 0}
+  hasSkillBookInfo: 1
   info: {fileID: 11400000, guid: fbafcb68aebba554295b7b41511fc1c1, type: 2}
   cooldown: 1
+  hasMaxDuration: 1
+  maxDuration: 30
   rapidFireDelay: 1
+  hasCastTime: 1
   castTime: 2
+  showCastbar: 1
   hasMaxAmount: 1
   maxAmount: 3
   requirements: 0
@@ -27,6 +33,11 @@ MonoBehaviour:
   remoteActivation: 0
   deactivateButtonUp: 0
   keepCast: 0
+  shareDamage: 0
+  positionOffset: 0
+  attachToSender: 1
+  lockDirection: 0
+  timeDistortion: 0
   cooldownLeft: 0
   holdTimer: 0
   state: 2

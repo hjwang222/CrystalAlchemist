@@ -15,11 +15,17 @@ MonoBehaviour:
   abilityName: Schild
   abilityNameEnglish: Shield
   skill: {fileID: 975855144787553018, guid: 42f53cb1b0e3a1e4c98ecc587d8dd07e, type: 3}
-  targetingSystem: {fileID: 0}
+  useTargetSystem: 0
+  targetingProperty: {fileID: 0}
+  hasSkillBookInfo: 1
   info: {fileID: 11400000, guid: 4b32a0c93eb66a949b10938fa261e483, type: 2}
   cooldown: 0.3
+  hasMaxDuration: 0
+  maxDuration: 1
   rapidFireDelay: 1
+  hasCastTime: 0
   castTime: 0
+  showCastbar: 1
   hasMaxAmount: 1
   maxAmount: 1
   requirements: 0
@@ -27,6 +33,11 @@ MonoBehaviour:
   remoteActivation: 0
   deactivateButtonUp: 1
   keepCast: 0
+  shareDamage: 0
+  positionOffset: 0.125
+  attachToSender: 1
+  lockDirection: 1
+  timeDistortion: 0
   cooldownLeft: 0
   holdTimer: 0
   state: 6

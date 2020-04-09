@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterCombat : MonoBehaviour
@@ -25,6 +26,7 @@ public class CharacterCombat : MonoBehaviour
         ShowCastBar(ability, character); //Show Castbar
         setSpeedDuringCasting(ability, character); //Set Speed during casting
 
+        //if (!ability.IsTargetRequired()) showTargetingSystem(ability);        //Show Targeting System when needed
         //Animations
     }
 
@@ -35,6 +37,7 @@ public class CharacterCombat : MonoBehaviour
         deactivatePlayerButtonUp(ability, character); //deactivate Skill when button up, Player only
         resetSpeedAfterCasting(character); //set Speed to normal
 
+        //if (!ability.IsTargetRequired()) hideTargetingSystem(ability,1);
         //Animations
     }
 
@@ -114,4 +117,49 @@ public class CharacterCombat : MonoBehaviour
     {
         return this.targetingSystem.getTargets();
     }
+
+
+    #region useAbility
+
+    public virtual void UseAbilityOnTarget(Ability ability, Character sender, Character target)
+    {
+        if (ability.CheckResourceAndAmount(sender))
+        {
+            AbilityUtil.instantiateSkill(ability, sender, target);
+            if (!ability.deactivateButtonUp && !ability.remoteActivation) ability.ResetCoolDown();
+        }
+    }
+
+    public virtual void UseAbilityOnTargets(Ability ability, bool hideTargetingSystem, Character sender)
+    {
+        List<Character> targets = new List<Character>();
+        targets.AddRange(this.GetTargetsFromTargeting());
+        if (hideTargetingSystem) this.hideTargetingSystem(ability, targets.Count);
+
+        if (ability.CheckResourceAndAmount(sender))
+        {
+            StartCoroutine(useSkill(ability, targets, sender));
+        }
+    }
+
+    private IEnumerator useSkill(Ability ability, List<Character> targets, Character character)
+    {
+        float damageReduce = targets.Count;
+
+        foreach (Character target in targets)
+        {
+            if (target.currentState != CharacterState.dead
+                && target.currentState != CharacterState.respawning)
+            {
+                AbilityUtil.instantiateSkill(ability, character, target, damageReduce);
+                yield return new WaitForSeconds(this.GetTargetingDelay());
+            }
+        }
+    }
+
+    #endregion
+
+
+
+
 }

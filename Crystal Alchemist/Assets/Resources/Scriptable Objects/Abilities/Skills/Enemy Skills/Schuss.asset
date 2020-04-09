@@ -15,11 +15,17 @@ MonoBehaviour:
   abilityName: Schuss
   abilityNameEnglish: Shot
   skill: {fileID: 1676703576389572161, guid: ebbcacfde9010dc489df5125a980db67, type: 3}
-  targetingSystem: {fileID: 0}
+  useTargetSystem: 0
+  targetingProperty: {fileID: 0}
+  hasSkillBookInfo: 0
   info: {fileID: 0}
   cooldown: 0.025
+  hasMaxDuration: 1
+  maxDuration: 20
   rapidFireDelay: 1
+  hasCastTime: 0
   castTime: 0
+  showCastbar: 1
   hasMaxAmount: 0
   maxAmount: 1
   requirements: 0
@@ -27,6 +33,11 @@ MonoBehaviour:
   remoteActivation: 0
   deactivateButtonUp: 0
   keepCast: 0
+  shareDamage: 0
+  positionOffset: 0.25
+  attachToSender: 0
+  lockDirection: 0
+  timeDistortion: 1
   cooldownLeft: 0
   holdTimer: 0
   state: 0

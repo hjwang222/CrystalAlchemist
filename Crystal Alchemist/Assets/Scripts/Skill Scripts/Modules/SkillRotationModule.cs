@@ -19,10 +19,6 @@ public class SkillRotationModule : SkillModule
     public bool keepOriginalRotation = false;
 
     [BoxGroup("Rotations")]
-    [Range(-360, 360)]
-    public float rotationModifier = 0;
-
-    [BoxGroup("Rotations")]
     [Tooltip("Welche Winkel sollen fest gestellt werden. 0 = frei. 45 = 45° Winkel")]
     [Range(0, 90)]
     public float snapRotationInDegrees = 0f;

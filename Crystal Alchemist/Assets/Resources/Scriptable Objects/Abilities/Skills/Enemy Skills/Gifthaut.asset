@@ -15,11 +15,17 @@ MonoBehaviour:
   abilityName: Gifthaut
   abilityNameEnglish: Poison Skin
   skill: {fileID: 8448882386689954494, guid: 65b268bfda2fa0e4bb41978a974d71d5, type: 3}
-  targetingSystem: {fileID: 0}
+  useTargetSystem: 0
+  targetingProperty: {fileID: 0}
+  hasSkillBookInfo: 0
   info: {fileID: 0}
   cooldown: 0
+  hasMaxDuration: 0
+  maxDuration: 1
   rapidFireDelay: 1
+  hasCastTime: 0
   castTime: 0
+  showCastbar: 1
   hasMaxAmount: 1
   maxAmount: 1
   requirements: 0
@@ -27,6 +33,12 @@ MonoBehaviour:
   remoteActivation: 0
   deactivateButtonUp: 0
   keepCast: 0
+  shareDamage: 0
+  positionOffset: 0
+  attachToSender: 1
+  lockDirection: 0
+  timeDistortion: 0
   cooldownLeft: 0
   holdTimer: 0
   state: 0
+  enabled: 1

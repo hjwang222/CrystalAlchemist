@@ -54,19 +54,22 @@ public class SkillSenderModule : SkillModule
 
     private void Start()
     {
-        if (this.skill.sender.currentState != CharacterState.dead
-        && this.skill.sender.currentState != CharacterState.respawning)
+        if (this.skill.sender != null)
         {
-            if (this.stateType == StateType.attack) this.skill.sender.currentState = CharacterState.attack;
-            else if (this.stateType == StateType.defend) this.skill.sender.currentState = CharacterState.defend;
+            if (this.skill.sender.currentState != CharacterState.dead
+            && this.skill.sender.currentState != CharacterState.respawning)
+            {
+                if (this.stateType == StateType.attack) this.skill.sender.currentState = CharacterState.attack;
+                else if (this.stateType == StateType.defend) this.skill.sender.currentState = CharacterState.defend;
 
-            updateResourceSender();
-            setSelfTrust();
+                updateResourceSender();
+                setSelfTrust();
 
-            this.elapsed = this.intervallSender;
+                this.elapsed = this.intervallSender;
+            }
+
+            if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(this.speedDuringDuration, this.affectAnimation);
         }
-
-        if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(this.speedDuringDuration, this.affectAnimation);
     }
 
     private void Update()
@@ -91,8 +94,11 @@ public class SkillSenderModule : SkillModule
 
     private void OnDestroy()
     {
-        if (this.stateType != StateType.none) this.skill.sender.currentState = CharacterState.idle;
-        if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(0);
+        if (this.skill.sender != null)
+        {
+            if (this.stateType != StateType.none) this.skill.sender.currentState = CharacterState.idle;
+            if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(0);
+        }
     }
 
     private void updateResourceSender()
@@ -104,11 +110,10 @@ public class SkillSenderModule : SkillModule
     {
         if (this.selfThrust > 0)
         {
-            this.skill.maxDuration = this.selfThrustTime;
             int trustdirection = -1; //knockback
             if (forward) trustdirection = 1; //dash
 
-            this.skill.sender.knockBack(selfThrustTime, selfThrust, (this.skill.sender.direction * trustdirection));
+            this.skill.sender.knockBack(selfThrustTime, selfThrust, (this.skill.direction * trustdirection));
         }
     }
 }

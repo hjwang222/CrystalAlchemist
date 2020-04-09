@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 
 public enum AIActionType
 {
@@ -128,6 +129,8 @@ public class AIAction //: ScriptableObject
 
     #region Main Functions
 
+
+
     public void Initialize(AI npc)
     {
         this.isActive = true;
@@ -191,42 +194,47 @@ public class AIAction //: ScriptableObject
         if (StatusEffectUtil.isCharacterStunned(npc)) this.tempAbility.ResetCharge();
 
         if (this.tempAbility.state == AbilityState.notCharged) Charge(npc);
-        else if (this.tempAbility.state == AbilityState.targetRequired) LockOn(npc);
+        else if (this.tempAbility.state == AbilityState.targetRequired) CheckTargets(npc);
         else if (this.tempAbility.state == AbilityState.charged
-              || this.tempAbility.state == AbilityState.ready
-              || this.tempAbility.state == AbilityState.lockOn) UseSkill(npc);
+              || this.tempAbility.state == AbilityState.ready) UseSkill(npc);
 
-        ResetCharge(npc);
+        ResetAfterSkillCounter(npc);
     }
 
     private void Charge(AI npc)
     {
         npc.GetComponent<AIEvents>().ChargeAbility(this.tempAbility, npc);
+
+        if (this.tempAbility.IsTargetRequired())
+            npc.GetComponent<AIEvents>().showTargetingSystem(this.tempAbility);        //Show Targeting System when needed
     }
 
-    private void LockOn(AI npc)
+    private void CheckTargets(AI npc)
     {
-        if(npc.target != null) this.tempAbility.state = AbilityState.lockOn;
+        if (!this.tempAbility.IsTargetRequired() && npc.target != null)
+            this.tempAbility.state = AbilityState.ready; //SingleTarget
+        else if (this.tempAbility.IsTargetRequired())
+            this.tempAbility.state = AbilityState.ready; //Target from TargetingSystem
     }
 
     private void UseSkill(AI npc)
     {
-        if (ability.canUseAbility(npc))
-        {
-            npc.GetComponent<AIEvents>().HideCastBar();
-            AbilityUtil.instantiateSkill(this.tempAbility.skill, npc, npc.target);
-            this.tempAbility.ResetCoolDown();
-            this.skillCounter++;
-        }
+        npc.GetComponent<AIEvents>().HideCastBar();
+
+        if (this.tempAbility.IsTargetRequired()) npc.GetComponent<AIEvents>().UseAbilityOnTargets(this.tempAbility, false, npc);
+        else npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.tempAbility, npc, npc.target);
+
+        this.skillCounter++;
     }
 
-    private void ResetCharge(AI npc)
+    private void ResetAfterSkillCounter(AI npc)
     {
         if (this.skillCounter >= this.amount)
         {
-            npc.GetComponent<AIEvents>().UnChargeAbility(this.tempAbility, npc);
-            Deactivate();            
-        }        
+            npc.GetComponent<AIEvents>().hideTargetingSystem(this.tempAbility, 1); //reset Cooldown
+            npc.GetComponent<AIEvents>().UnChargeAbility(this.tempAbility, npc); //reset Charge
+            Deactivate();
+        }
     }
 
     #endregion

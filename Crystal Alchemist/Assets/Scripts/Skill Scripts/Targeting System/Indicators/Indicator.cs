@@ -24,6 +24,11 @@ public class Indicator : MonoBehaviour
         this.spriteRenderer.color = this.color;
     }
 
+    public SpriteRenderer GetSpriteRenderer()
+    {
+        return this.spriteRenderer;
+    }
+
     public Character GetSender()
     {
         return this.sender;

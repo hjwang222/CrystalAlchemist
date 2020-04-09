@@ -16,42 +16,39 @@ public class AbilityUtil : MonoBehaviour
         newSequence.Initialize(npc, npc.target);
     }
 
-    public static void instantiateSkill(Skill skill, Character sender)
+    public static void instantiateSkill(Ability ability, Character sender, Character target)
     {
-        //Player Call
-        instantiateSkill(skill, sender, null, 1);
+        //Single Target
+        instantiateSkill(ability, sender, target, 1);
     }
 
-    public static void instantiateSkill(Skill skill, Character sender, Character target)
+    public static void instantiateSkill(Ability ability, Character sender, Character target, float reduce)
     {
-        //AI Call
-        instantiateSkill(skill, sender, target, 1);
-    }
-
-    public static void instantiateSkill(Skill skill, Character sender, Character target, float reduce)
-    {
-        if (skill != null)
+        if (ability.skill != null && sender != null)
         {
-            Skill activeSkill = Instantiate(skill, sender.transform.position, Quaternion.identity);
-            activeSkill.name = skill.name;
-            if (skill.attachToSender) activeSkill.transform.parent = sender.activeSkillParent.transform;
+            Skill activeSkill = Instantiate(ability.skill, sender.transform.position, Quaternion.identity);
+            activeSkill.name = ability.skill.name;
+            activeSkill.Initialize(ability.positionOffset, ability.lockDirection, ability.timeDistortion, ability.attachToSender);
+            activeSkill.SetMaxDuration(ability.hasMaxDuration, ability.maxDuration);
+
+            if (ability.attachToSender) activeSkill.transform.parent = sender.activeSkillParent.transform;
             if (target != null) activeSkill.target = target;
             activeSkill.sender = sender;
 
-            ReduceCostAndDamage(activeSkill, reduce);
-
+            ReduceCostAndDamage(activeSkill, reduce, ability.shareDamage);
             sender.activeSkills.Add(activeSkill);
         }
     }
 
-    private static void ReduceCostAndDamage(Skill activeSkill, float reduce)
+    private static void ReduceCostAndDamage(Skill activeSkill, float reduce, bool shareDamage)
     {
         SkillTargetModule targetModule = activeSkill.GetComponent<SkillTargetModule>();
-        SkillSenderModule sendermodule = activeSkill.GetComponent<SkillSenderModule>();
-        List<CharacterResource> temp = new List<CharacterResource>();
+        SkillSenderModule sendermodule = activeSkill.GetComponent<SkillSenderModule>();        
 
-        if (targetModule != null)
+        if (targetModule != null && shareDamage)
         {
+            List<CharacterResource> temp = new List<CharacterResource>();
+
             for (int i = 0; i < targetModule.affectedResources.Count; i++)
             {
                 CharacterResource elem = targetModule.affectedResources[i];
@@ -59,9 +56,10 @@ public class AbilityUtil : MonoBehaviour
                 temp.Add(elem);
             }
 
-            targetModule.affectedResources = temp;
-            if (sendermodule != null) sendermodule.costs.amount /= reduce;
+            targetModule.affectedResources = temp;            
         }
+
+        if (sendermodule != null) sendermodule.costs.amount /= reduce;
     }
 
     public static Skill getSkillByCollision(GameObject collision)

@@ -17,7 +17,7 @@ public class SkillSlot : MonoBehaviour
 
     public void setSkill(Ability ability)
     {
-        if (ability == null || ability.info == null) this.image.enabled = false;
+        if (ability == null || !ability.hasSkillBookInfo || ability.info == null) this.image.enabled = false;
         else
         {
             this.ability = ability;

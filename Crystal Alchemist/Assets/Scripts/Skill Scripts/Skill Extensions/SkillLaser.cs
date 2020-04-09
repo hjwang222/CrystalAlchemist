@@ -35,14 +35,9 @@ public class SkillLaser : SkillExtension
 
     #region Unity Functions
 
-    private void Start()
-    {
-        drawLine(true);
-    }
-
     private void Update()
     {
-        drawLine(this.skill.rotateIt());
+        drawLine();
     }
 
     private void OnDestroy()
@@ -54,107 +49,19 @@ public class SkillLaser : SkillExtension
 
 
     #region Functions (private)
-
-    private void drawLine(bool updateRotation)
+    private void drawLine()
     {
-        //Bestimme Winkel und Position
-        float angle;
-        Vector2 startpoint;
-        Vector3 rotation;
+        Collider2D hitted = null;
+        Vector2 hitPoint = Vector2.zero;
 
-        RotationUtil.setDirectionAndRotation(this.skill, out angle, out startpoint, out this.skill.direction, out rotation);
+        if (targetRequired && this.skill.target == null) LineRenderUtil.Renderempty(this.laserSprite, this.lights);
+        else LineRenderUtil.RenderLine(this.skill.sender, this.skill.target, this.distance, this.laserSprite, this.lights, out hitted, out hitPoint);
 
-        if (this.skill.target != null && updateRotation)
+        if (hitted != null)
         {
-            this.skill.direction = (Vector2)this.skill.target.transform.position - startpoint;
-            float temp_angle = Mathf.Atan2(this.skill.direction.y, this.skill.direction.x) * Mathf.Rad2Deg;
-            this.skill.direction = RotationUtil.DegreeToVector2(temp_angle);
+            if(CollisionUtil.checkCollision(hitted, this.skill)) this.skill.hitIt(hitted);
+            setImpactEffect(hitPoint);
         }
-
-        renderLine(startpoint, rotation);
-    }
-
-    private void renderLine(Vector2 startpoint, Vector3 rotation)
-    {
-        //No hit on itself
-        int layerMask = 1 << this.skill.sender.gameObject.layer;
-        layerMask = ~layerMask;
-
-        float offset = 1f;
-        Vector2 newPosition = new Vector2(startpoint.x - (this.skill.direction.x * offset), startpoint.y - (this.skill.direction.y * offset));
-
-        if (this.targetRequired)
-        {
-            if (this.skill.target != null) setLaserToTarget(startpoint, rotation, this.skill.target); //laser to target
-            else drawLaser(); //no Laser
-        }
-        else
-        {
-            RaycastHit2D hitInfo = Physics2D.CircleCast(newPosition, this.laserSprite.size.y / 5, this.skill.direction, distance, layerMask);
-
-            Collider2D hitted = hitInfo.collider;
-            Vector2 hitpoint = hitInfo.point;
-
-            if (hitInfo && !hitInfo.collider.isTrigger) drawLaser(startpoint, hitpoint, rotation, hitted); //Laser         
-            else drawLaser(startpoint, rotation); //Laser max Length
-        }
-    }
-
-    private Collider2D getCollider(Character character)
-    {
-        //Übernehme Position, wenn ein Ziel vorhanden ist
-        foreach (Collider2D collider in character.GetComponentsInChildren<Collider2D>(false))
-        {
-            if (!collider.isTrigger) return collider;
-        }
-
-        return null;
-    }
-
-    private void setLaserToTarget(Vector2 startpoint, Vector3 rotation, Character character)
-    {
-        Collider2D collider = getCollider(character);
-
-        if (collider != null)
-        {
-            Vector2 hitpoint = character.transform.position;
-            drawLaser(startpoint, hitpoint, rotation, collider);
-        }
-    }
-
-    #endregion
-
-
-    #region Laser und Impact
-
-    private void drawLaser(Vector2 startpoint, Vector2 hitpoint, Vector3 rotation, Collider2D collider)
-    {
-        if (CollisionUtil.checkCollision(collider, this.skill)) this.skill.hitIt(collider);
-        Vector2 position = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y - startpoint.y) / 2) + startpoint;
-
-        setLaser(position, Vector3.Distance(hitpoint, startpoint), rotation);
-        setImpactEffect(hitpoint);
-    }
-
-    private void drawLaser(Vector2 startpoint, Vector3 rotation)
-    {
-        Vector2 position = new Vector2(this.skill.direction.x * (this.distance / 2), this.skill.direction.y * (this.distance / 2)) + startpoint;
-        setLaser(position, this.distance, rotation);
-    }
-
-    private void setLaser(Vector2 position, float distance, Vector3 rotation)
-    {
-        this.laserSprite.transform.position = position;
-        this.laserSprite.size = new Vector2(distance, this.laserSprite.size.y);
-        this.laserSprite.transform.rotation = Quaternion.Euler(rotation);
-
-        if (this.lights != null) this.lights.transform.localScale = new Vector2(distance, lights.transform.localScale.y);
-    }
-
-    private void drawLaser()
-    {
-        this.laserSprite.size = new Vector2(0, 0);
-        if (this.lights != null) this.lights.transform.localScale = new Vector2(0, 0);
     }
 
     private void setImpactEffect(Vector2 hitpoint)
@@ -185,7 +92,5 @@ public class SkillLaser : SkillExtension
             }
         }
     }
-
-
     #endregion
 }

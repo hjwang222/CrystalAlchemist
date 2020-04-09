@@ -105,7 +105,7 @@ public class CombatButtonUI : MonoBehaviour
 
             if (!this.player.canUseAbilities()
                 || !ability.enabled 
-                || !ability.canUseAbility(this.player))
+                || !ability.CheckResourceAndAmount(this.player))
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
                 this.disabled.SetActive(true);
@@ -113,7 +113,7 @@ public class CombatButtonUI : MonoBehaviour
                 this.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
                 this.iconButton.color = new Color(1f, 1f, 1f, 0.2f);
             }
-            else if (ability.targetingProperty != null && ability.state == AbilityState.lockOn)
+            else if (ability.IsTargetRequired() && ability.state == AbilityState.lockOn)
             {
                 //ist Skill in Zielerfassung
                 this.targeting.SetActive(true);
@@ -163,7 +163,7 @@ public class CombatButtonUI : MonoBehaviour
         else
         {
             skillUI.gameObject.SetActive(true);
-            if (ability.info != null) skillUI.sprite = ability.info.icon;
+            if (ability.hasSkillBookInfo && ability.info != null) skillUI.sprite = ability.info.icon;
             buttonUI.color = new Color(1f, 1f, 1f, 1f);
             buttonUI.fillAmount = 1;
         }

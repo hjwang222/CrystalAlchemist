@@ -37,7 +37,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
         if (this.ability != null)
         {
             this.skillImage.gameObject.SetActive(true);
-            if(this.ability.info != null) this.skillImage.sprite = this.ability.info.icon;
+            if(ability.hasSkillBookInfo && this.ability.info != null) this.skillImage.sprite = this.ability.info.icon;
         }
         else
         {

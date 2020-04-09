@@ -15,11 +15,17 @@ MonoBehaviour:
   abilityName: Dash
   abilityNameEnglish: Dash
   skill: {fileID: 6162400572210519683, guid: 689f7820c63a03148aa81b962ee64ad6, type: 3}
-  targetingSystem: {fileID: 0}
+  useTargetSystem: 0
+  targetingProperty: {fileID: 0}
+  hasSkillBookInfo: 1
   info: {fileID: 11400000, guid: 5c0c03559299d9745a383313c356fbab, type: 2}
   cooldown: 1
+  hasMaxDuration: 0
+  maxDuration: 1
   rapidFireDelay: 1
+  hasCastTime: 0
   castTime: 0
+  showCastbar: 1
   hasMaxAmount: 1
   maxAmount: 1
   requirements: 0
@@ -27,6 +33,11 @@ MonoBehaviour:
   remoteActivation: 0
   deactivateButtonUp: 0
   keepCast: 0
+  shareDamage: 0
+  positionOffset: 0
+  attachToSender: 1
+  lockDirection: 0
+  timeDistortion: 0
   cooldownLeft: 0
   holdTimer: 0
   state: 6

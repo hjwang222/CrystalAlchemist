@@ -36,7 +36,7 @@ public class InfoBox : MonoBehaviour
 
         this.nameField.text = ability.GetName();
 
-        if (ability.info != null)
+        if (ability.hasSkillBookInfo && ability.info != null)
         {
             this.previewImage.sprite = ability.info.icon;
             this.descriptionField.text = ability.info.getDescription();

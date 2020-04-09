@@ -15,9 +15,13 @@ MonoBehaviour:
   abilityName: Hitzeblitz
   abilityNameEnglish: Heat Lightning
   skill: {fileID: 4276017439626974549, guid: d9d5c19e4e61ad142865732f1f61048b, type: 3}
-  targetingProperty: {fileID: 11400000, guid: 7b165e0666106aa4e8bc6bc0ca05a9ec, type: 2}
+  useTargetSystem: 1
+  targetingProperty: {fileID: 11400000, guid: 7084b5c689024624481c7a91798a664a, type: 2}
+  hasSkillBookInfo: 1
   info: {fileID: 11400000, guid: c5dbae62dc5891b4886ca2b080b4ebf8, type: 2}
   cooldown: 1
+  hasMaxDuration: 1
+  maxDuration: 180
   rapidFireDelay: 1
   hasCastTime: 0
   castTime: 0
@@ -29,6 +33,11 @@ MonoBehaviour:
   remoteActivation: 0
   deactivateButtonUp: 0
   keepCast: 0
+  shareDamage: 1
+  positionOffset: 0
+  attachToSender: 0
+  lockDirection: 0
+  timeDistortion: 1
   cooldownLeft: 0
   holdTimer: 0
   state: 4

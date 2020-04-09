@@ -131,17 +131,11 @@ public class Character : MonoBehaviour
     private void setComponents()
     {
         if (this.myRigidbody == null) this.myRigidbody = this.GetComponent<Rigidbody2D>();
-
         if (this.skillStartPosition == null) this.skillStartPosition = this.gameObject;
-        //if (this.spriteRenderer == null) this.spriteRenderer = this.GetComponent<SpriteRenderer>();
-
         if (this.animator == null) this.animator = this.GetComponent<Animator>();
         if (this.boxCollider == null) this.boxCollider = GetComponent<Collider2D>();
-
-        if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().init();
-
-        this.transform.gameObject.tag = this.stats.characterType.ToString();
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
+        if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().init();
     }
 
 
@@ -373,7 +367,7 @@ public class Character : MonoBehaviour
             for (int i = 0; i < this.activeSkills.Count; i++)
             {
                 resetCast(this.activeSkills[i]);
-                if (this.activeSkills[i].attachToSender) this.activeSkills[i].DeactivateIt();
+                if (this.activeSkills[i].isAttachedToSender()) this.activeSkills[i].DeactivateIt();
             }
 
             //TODO: Kill sofort (Skill noch aktiv)
@@ -534,14 +528,7 @@ public class Character : MonoBehaviour
     {
         this.timeDistortion = 1 + (distortion / 100);
 
-        /*if (this.CompareTag("Player"))
-        {
-            this.GetComponent<Player>().music.GetComponent<AudioSource>().pitch = this.timeDistortion;
-        }*/
-
         updateAnimatorSpeed(this.timeDistortion);
-
-        //if (this.audioSource != null) this.audioSource.pitch = this.timeDistortion;
 
         foreach (StatusEffect effect in this.buffs)
         {
