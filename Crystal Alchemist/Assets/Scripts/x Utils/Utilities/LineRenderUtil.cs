@@ -14,7 +14,7 @@ public class LineRenderUtil
             //draw Laser to target
             Vector2 startpoint = sender.transform.position;
             hitPoint = target.transform.position;
-
+            hitted = getCollider(target);
             drawLaserToTarget(startpoint, hitPoint, spriteRenderer, lights);
         }
         else

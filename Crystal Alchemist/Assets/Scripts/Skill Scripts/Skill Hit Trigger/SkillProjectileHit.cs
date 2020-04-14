@@ -28,7 +28,6 @@ public class SkillProjectileHit : SkillHitTrigger
         if (this.skill.sender != null
             && hittedCharacter.tag != this.skill.sender.tag
             && !hittedCharacter.isTrigger
-            && !hittedCharacter.CompareTag("Room")
             && !isReflected(hittedCharacter))
         {
             AnimatorUtil.SetAnimatorParameter(this.skill.animator, "Hit");

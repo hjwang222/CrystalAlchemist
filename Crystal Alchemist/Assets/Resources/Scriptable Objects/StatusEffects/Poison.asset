@@ -17,7 +17,7 @@ MonoBehaviour:
   statusEffectDescription: "Schaden \xFCber Zeit"
   statusEffectDescriptionEnglish: Damage over Time
   hasDuration: 1
-  maxDuration: 0
+  maxDuration: 18
   canOverride: 0
   canBeModified: 1
   canDeactivateIt: 0
@@ -39,11 +39,11 @@ MonoBehaviour:
       - resourceType: 1
         item: {fileID: 0}
         amount: -0.5
-      amount: 0
       speed: 0
       time: 0
       abilities: []
       effects: []
+      StatusEffectType: 0
   destroyDelay: 0.2
   changeColor: 1
   statusEffectColor: {r: 0.65882355, g: 0.12941177, b: 0.7725491, a: 1}

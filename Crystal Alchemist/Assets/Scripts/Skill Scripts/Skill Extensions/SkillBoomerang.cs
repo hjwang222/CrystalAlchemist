@@ -50,10 +50,11 @@ public class SkillBoomerang : SkillProjectile
     public void checkHit(Collider2D hittedCharacter)
     {
         if (this.skill.sender != null
-            && hittedCharacter.tag != this.skill.sender.tag
-            && ((!hittedCharacter.isTrigger
-                 && !hittedCharacter.CompareTag("Object"))
-               || hittedCharacter.CompareTag("Item")))
+       && hittedCharacter.tag != this.skill.sender.tag
+       && (
+            (!hittedCharacter.isTrigger && hittedCharacter.GetComponent<Breakable>() == null) //no breakable stop
+         || (hittedCharacter.GetComponent<Collectable>() != null)) //item stop
+          )
         {
             if (this.GetComponent<SkillBoomerang>() != null) this.GetComponent<SkillBoomerang>().durationThenBackToSender = 0;
         }

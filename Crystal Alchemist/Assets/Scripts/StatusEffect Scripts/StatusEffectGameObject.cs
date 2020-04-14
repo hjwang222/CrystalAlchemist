@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
+using Sirenix.OdinInspector;
 
 
 public class StatusEffectGameObject : MonoBehaviour
 {
     [SerializeField]
+    private bool endFromAnimator = false;
+
+    [SerializeField]
+    [ShowIf("endFromAnimator")]
     private Animator anim;
 
     private StatusEffect activeEffect;
@@ -20,7 +25,7 @@ public class StatusEffectGameObject : MonoBehaviour
 
     public void SetEnd()
     {
-        if (this.anim != null) AnimatorUtil.SetAnimatorParameter(this.anim, "End");
+        if (this.anim != null && this.endFromAnimator) AnimatorUtil.SetAnimatorParameter(this.anim, "End");
         else DestroyIt();
     }
 

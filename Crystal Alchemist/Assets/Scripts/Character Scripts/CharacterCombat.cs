@@ -25,7 +25,7 @@ public class CharacterCombat : MonoBehaviour
         ability.Charge(); //charge Skill when not full
         ShowCastBar(ability, character); //Show Castbar
         setSpeedDuringCasting(ability, character); //Set Speed during casting
-
+        if (ability.HasHelper()) ShowTargetingSystem(ability);
         //if (!ability.IsTargetRequired()) showTargetingSystem(ability);        //Show Targeting System when needed
         //Animations
     }
@@ -36,7 +36,7 @@ public class CharacterCombat : MonoBehaviour
         HideCastBar(); //Hide Castbar
         deactivatePlayerButtonUp(ability, character); //deactivate Skill when button up, Player only
         resetSpeedAfterCasting(character); //set Speed to normal
-
+        if (ability.HasHelper()) HideTargetingSystem(ability);
         //if (!ability.IsTargetRequired()) hideTargetingSystem(ability,1);
         //Animations
     }
@@ -90,22 +90,21 @@ public class CharacterCombat : MonoBehaviour
     }
 
 
-    public void showTargetingSystem(Ability ability)
+    public void ShowTargetingSystem(Ability ability)
     {
         if (!this.targetingSystem.gameObject.activeInHierarchy)
         {
-            ability.state = AbilityState.lockOn;
             this.targetingSystem.setParameters(ability);
             this.targetingSystem.gameObject.SetActive(true);
         }
     }
 
-    public void hideTargetingSystem(Ability ability, int count)
+    public void HideTargetingSystem(Ability ability)
     {
-        this.targetingSystem.gameObject.SetActive(false);
-
-        if (count > 0) ability.ResetCoolDown(); //reset cooldown only when targets attacked
-        else ability.state = AbilityState.targetRequired;
+        if (this.targetingSystem.gameObject.activeInHierarchy)
+        {
+            this.targetingSystem.Deactivate();
+        }
     }
 
     public float GetTargetingDelay()
@@ -130,11 +129,12 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
-    public virtual void UseAbilityOnTargets(Ability ability, bool hideTargetingSystem, Character sender)
+    public virtual void UseAbilityOnTargets(Ability ability, Character sender)
     {
         List<Character> targets = new List<Character>();
         targets.AddRange(this.GetTargetsFromTargeting());
-        if (hideTargetingSystem) this.hideTargetingSystem(ability, targets.Count);
+
+        if(targets.Count > 0) ability.ResetCoolDown();
 
         if (ability.CheckResourceAndAmount(sender))
         {
@@ -155,6 +155,8 @@ public class CharacterCombat : MonoBehaviour
                 yield return new WaitForSeconds(this.GetTargetingDelay());
             }
         }
+
+
     }
 
     #endregion

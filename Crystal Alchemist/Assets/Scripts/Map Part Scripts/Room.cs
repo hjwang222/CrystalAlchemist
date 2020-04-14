@@ -32,10 +32,6 @@ public class Room : MonoBehaviour
     [SerializeField]
     private StringSignal locationSignal;
 
-    [BoxGroup("Map")]
-    [SerializeField]
-    private StringSignal mapLocationSignal;
-
 
 #if UNITY_EDITOR
     [Button]
@@ -43,18 +39,8 @@ public class Room : MonoBehaviour
     {
         this.mapID = "Overworld";
         this.areaID = "???";
-        this.locationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Resources/Scriptable Objects/Signals/locationSignal.asset", typeof(StringSignal));
-        this.mapLocationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Resources/Scriptable Objects/Signals/mapLocationSignal.asset", typeof(StringSignal));
+        this.locationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Resources/Scriptable Objects/Signals/Game Signals/locationSignal.asset", typeof(StringSignal));
     }
-
-    /*
-    [Button]
-    public void setAudio()
-    {        
-        this.audioClipSignalStart = (AudioClipSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/BGMClipStartSignal.asset", typeof(AudioClipSignal));
-        this.audioClipSignalLoop = (AudioClipSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/BGMClipLoopSignal.asset", typeof(AudioClipSignal));
-        this.startMusicSignal = (SimpleSignal)AssetDatabase.LoadAssetAtPath("Assets/Scriptable Objects/Signals/startBackgroundMusic.asset", typeof(SimpleSignal));
-    }*/
 #endif
 
 
@@ -72,38 +58,27 @@ public class Room : MonoBehaviour
     // OnTriggerEnter2D is a built in Unity function
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.isTrigger)
         {
-            /*if (this.audioClipSignalStart != null) this.audioClipSignalStart.Raise(this.musicStart);
-            if (this.audioClipSignalLoop != null) this.audioClipSignalLoop.Raise(this.musicLoop);
-            if (this.startMusicSignal != null) this.startMusicSignal.Raise();*/
-
             string text = FormatUtil.getLanguageDialogText(this.mapName, this.mapNameEnglish);
 
             setObjects(true);
             this.virtualCamera.SetActive(true);
 
             this.locationSignal.Raise(text);
-            this.mapLocationSignal.Raise(this.mapID + "|" + this.areaID);
-
             CinemachineVirtualCamera vcam = this.virtualCamera.GetComponent<CinemachineVirtualCamera>();
-            if(vcam.Follow == null) vcam.Follow = other.transform;
+            if (vcam.Follow == null) vcam.Follow = other.transform;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.isTrigger)
         {
             setObjects(false);
             this.virtualCamera.SetActive(false);
         }
     }
-
-    /*public void setFollowAtNull()
-    {
-        this.virtualCamera.GetComponent<CinemachineVirtualCamera>().Follow = null;
-    }    */
 
     public void setCameraPosition(bool setNull)
     {

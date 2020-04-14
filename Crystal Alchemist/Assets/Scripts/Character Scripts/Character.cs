@@ -85,10 +85,12 @@ public class Character : MonoBehaviour
     public bool isInvincible = false;
     [HideInInspector]
     public bool isHit;
-    [HideInInspector]
+
+    [BoxGroup("Debug")]
     public List<StatusEffect> buffs = new List<StatusEffect>();
-    [HideInInspector]
+    [BoxGroup("Debug")]
     public List<StatusEffect> debuffs = new List<StatusEffect>();
+
     [HideInInspector]
     public List<Skill> activeSkills = new List<Skill>();
     [HideInInspector]

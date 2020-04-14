@@ -35,27 +35,36 @@ public class PlayerAbilities : CharacterCombat
     {
         if (Input.GetButton(button)) //hold Button
         {
-            if (ability.state == AbilityState.notCharged) ChargeAbility(ability, this.player);
+            if (ability.state == AbilityState.notCharged)
+            {
+                ChargeAbility(ability, this.player);
+            }
             else if (ability.isRapidFire)
             {
-                if (ability.state == AbilityState.charged) UseAbilityOnTarget(ability,this.player, null); //use rapidFire when charged
+                if (ability.state == AbilityState.charged) UseAbilityOnTarget(ability, this.player, null); //use rapidFire when charged
                 else if (ability.state == AbilityState.ready) UseAbilityOnTarget(ability, this.player, null); //use rapidFire
-                else if (ability.state == AbilityState.targetRequired) showTargetingSystem(ability); //show TargetingSystem
-                else if (ability.state == AbilityState.lockOn) UseAbilityOnTargets(ability, false, this.player); //use TargetingSystem rapidfire
+                else if (ability.state == AbilityState.targetRequired) ShowTargetingSystem(ability); //show TargetingSystem
+                else if (ability.state == AbilityState.lockOn) UseAbilityOnTargets(ability, this.player); //use TargetingSystem rapidfire  
             }
         }
+
         if (Input.GetButtonUp(button)) //release Button
         {
-            if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbilityOnTarget(ability, this.player, null); //use Skill when charged
-            else if (ability.state == AbilityState.lockOn && ability.isRapidFire) hideTargetingSystem(ability, 1); //hide Targeting System when released
+                 if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbilityOnTarget(ability, this.player, null); //use Skill when charged
+            else if (ability.state == AbilityState.lockOn  &&  ability.isRapidFire) HideTargetingSystem(ability); //hide Targeting System when released
 
             UnChargeAbility(ability, this.player);
         }
-        else if (Input.GetButtonDown(button)) //press Button
+
+        if (Input.GetButtonDown(button)) //press Button
         {
             if (ability.state == AbilityState.ready) UseAbilityOnTarget(ability, this.player, null); //use Skill
-            else if (ability.state == AbilityState.targetRequired) showTargetingSystem(ability); //activate Targeting System
-            else if (ability.state == AbilityState.lockOn) UseAbilityOnTargets(ability, true, this.player);//use Skill on locked Targets and hide Targeting System
+            else if (ability.state == AbilityState.targetRequired) ShowTargetingSystem(ability); //activate Targeting System
+            else if (ability.state == AbilityState.lockOn)
+            {                
+                UseAbilityOnTargets(ability, this.player);//use Skill on locked Targets and hide Targeting System 
+                HideTargetingSystem(ability);
+            }
         }
     }
 }

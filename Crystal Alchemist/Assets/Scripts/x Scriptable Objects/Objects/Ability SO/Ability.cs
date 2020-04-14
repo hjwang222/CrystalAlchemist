@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public enum AbilityState
 {
@@ -73,6 +74,7 @@ public class Ability : ScriptableObject
     private float rapidFireDelay = 1;
 
     [BoxGroup("Restrictions")]
+    [OnValueChanged("OnCastTimeChange")]
     [SerializeField]
     public bool hasCastTime = false;
 
@@ -135,22 +137,32 @@ public class Ability : ScriptableObject
     [Tooltip("Soll der Skill einer Zeitstörung beeinträchtigt werden?")]
     public bool timeDistortion = true;
 
-
-    [HideInInspector]
+    [BoxGroup("Debug")]
     public float cooldownLeft;
-    [HideInInspector]
+    [BoxGroup("Debug")]
     public float holdTimer;
-    [HideInInspector]
+    [BoxGroup("Debug")]
     public AbilityState state;
-    [HideInInspector]
+    [BoxGroup("Debug")]
     public bool enabled = true;
 
+
+#if UNITY_EDITOR
     [AssetIcon]
     private Sprite GetSprite()
     {
-        if(this.hasSkillBookInfo && this.info != null) return this.info.icon;
+        if (this.hasSkillBookInfo && this.info != null) return this.info.icon;
         return null;
     }
+
+    private void OnCastTimeChange()
+    {
+        if(this.hasCastTime) this.deactivateButtonUp = false;
+    }
+#endif
+
+
+
 
     public string GetName()
     {
@@ -178,14 +190,14 @@ public class Ability : ScriptableObject
         }
     }
 
-    private void setStartParameters()
+    public void setStartParameters()
     {
         if (!this.hasCastTime) this.castTime = 0;
         if (this.isRapidFire && this.deactivateButtonUp) this.deactivateButtonUp = false;
 
         this.cooldownLeft = 0;
-        
-        if (this.hasCastTime && this.holdTimer < this.castTime) this.state = AbilityState.notCharged;
+
+        if (this.hasCastTime && this.holdTimer < this.castTime) this.state = AbilityState.notCharged;        
         else if (this.IsTargetRequired()) this.state = AbilityState.targetRequired;
         else this.state = AbilityState.ready;
     }
@@ -209,6 +221,16 @@ public class Ability : ScriptableObject
         }
     }
 
+    public void SetLockOnState()
+    {
+        if (!this.HasHelper()) this.state = AbilityState.lockOn;
+    }
+
+    public void ResetLockOn()
+    {
+        if (!this.HasHelper()) this.state = AbilityState.onCooldown;
+    }
+
     public void ResetCharge()
     {
         if (!this.keepCast) this.holdTimer = 0;
@@ -226,7 +248,7 @@ public class Ability : ScriptableObject
         bool enoughResource = this.isResourceEnough(character);
 
         bool notToMany = true;
-        if (this.hasMaxAmount) notToMany = (getAmountOfSameSkills(this.skill, character.activeSkills, character.activePets) <= this.maxAmount);        
+        if (this.hasMaxAmount) notToMany = (getAmountOfSameSkills(this.skill, character.activeSkills, character.activePets) < this.maxAmount);        
 
         return (notToMany && enoughResource);
     }
@@ -260,7 +282,13 @@ public class Ability : ScriptableObject
 
     public bool IsTargetRequired()
     {
-        if (this.targetingProperty != null && this.targetingProperty.targetingMode != TargetingMode.none) return true;
+        if (this.targetingProperty != null && this.targetingProperty.targetingMode != TargetingMode.helper) return true;
+        return false;
+    }
+
+    public bool HasHelper()
+    {
+        if (this.targetingProperty != null && this.targetingProperty.targetingMode == TargetingMode.helper) return true;
         return false;
     }
 

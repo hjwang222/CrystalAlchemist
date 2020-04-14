@@ -17,6 +17,11 @@ public class CrossHairIndicator : Indicator
         this.transform.SetParent(target.transform);
 
         this.textField.text = target.stats.GetCharacterName();
-        this.textField.color = GetColor();
+    }
+
+    public override void SetColor(Color color)
+    {
+        base.SetColor(color);
+        this.textField.color = color;
     }
 }

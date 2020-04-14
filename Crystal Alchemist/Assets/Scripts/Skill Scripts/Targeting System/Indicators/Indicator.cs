@@ -6,7 +6,6 @@ public class Indicator : MonoBehaviour
 {
     private Character sender;
     private Character target;
-    private Color color;
 
     [SerializeField]
     [Required]
@@ -18,10 +17,9 @@ public class Indicator : MonoBehaviour
         this.target = target;
     }
 
-    public void SetColor(Color color)
+    public virtual void SetColor(Color color)
     {
-        this.color = color;
-        this.spriteRenderer.color = this.color;
+        this.spriteRenderer.color = color;
     }
 
     public SpriteRenderer GetSpriteRenderer()
@@ -37,11 +35,6 @@ public class Indicator : MonoBehaviour
     public Character GetTarget()
     {
         return this.target;
-    }
-
-    public Color GetColor()
-    {
-        return this.color;
     }
 
     public virtual void Start()

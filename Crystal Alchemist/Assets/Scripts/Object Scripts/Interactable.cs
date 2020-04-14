@@ -27,11 +27,7 @@ public class Interactable : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     [HideInInspector]
     public ContextClue context;
-
-
-
-
-
+    
     #endregion
 
 
@@ -88,7 +84,7 @@ public class Interactable : MonoBehaviour
 
     private void interact(Collider2D characterCollisionBox)
     {
-        if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
+        if (!characterCollisionBox.isTrigger)
         {
             Player player = characterCollisionBox.GetComponent<Player>();
 
@@ -137,7 +133,7 @@ public class Interactable : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D characterCollisionBox)
     {
-        if (characterCollisionBox.CompareTag("Player") && !characterCollisionBox.isTrigger)
+        if (!characterCollisionBox.isTrigger)
         {
             Player player = characterCollisionBox.GetComponent<Player>();
 

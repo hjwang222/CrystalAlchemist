@@ -38,7 +38,8 @@ public class StatusEffect : ScriptableObject
 
     [FoldoutGroup("Basis Attribute")]
     [ShowIf("hasDuration")]
-    public float maxDuration = 0;
+    [MinValue(1)]
+    public float maxDuration = 1;
 
     [FoldoutGroup("Basis Attribute")]
     public bool canOverride = false;
@@ -137,8 +138,6 @@ public class StatusEffect : ScriptableObject
 
             this.statusEffectTimeLeft *= ((100f + (float)percentage) / 100f);
         }
-
-        if (!this.hasDuration) this.statusEffectTimeLeft = 1;
     }
 
     #endregion

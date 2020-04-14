@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public enum TargetingMode
 {
-    none,
+    helper,
     manual,
     auto
 }
@@ -24,29 +24,33 @@ public class TargetingProperty : ScriptableObject
     public TargetingMode targetingMode = TargetingMode.manual;
     
     [BoxGroup("Zielerfassung")]
-    [HideIf("targetingMode", TargetingMode.none)]
+    [HideIf("targetingMode", TargetingMode.helper)]
     public int maxAmountOfTargets = 1;
 
+    [BoxGroup("Zielerfassung")]
+    public bool hasMaxDuration = true;
+
+    [ShowIf("hasMaxDuration")]
     [BoxGroup("Zielerfassung")]
     public float maxDuration = 20f;
 
     [BoxGroup("Zielerfassung")]
     [Tooltip("In welchen Intervallen die Ziele getroffen werden sollen")]
-    [HideIf("targetingMode", TargetingMode.none)]
+    [HideIf("targetingMode", TargetingMode.helper)]
     [Range(0, 10)]
     public float multiHitDelay = 0;
 
     [BoxGroup("Zielerfassung")]
     [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
-    [HideIf("targetingMode", TargetingMode.none)]
+    [HideIf("targetingMode", TargetingMode.helper)]
     public bool showRange = false;
 
     [BoxGroup("Zielerfassung")]
-    [HideIf("targetingMode", TargetingMode.none)]
+    [HideIf("targetingMode", TargetingMode.helper)]
     public RangeType rangeType = RangeType.circle;
 
     [BoxGroup("Zielerfassung")]
-    [HideIf("targetingMode", TargetingMode.none)]
+    [HideIf("targetingMode", TargetingMode.helper)]
     [HideIf("rangeType", RangeType.none)]
     public float range = 6f;
 

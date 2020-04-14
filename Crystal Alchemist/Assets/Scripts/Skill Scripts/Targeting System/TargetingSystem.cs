@@ -12,8 +12,8 @@ public class TargetingSystem : MonoBehaviour
     private PolygonCollider2D viewCollider;
 
     private Character sender;
-    private List<Character> targets = new List<Character>();
-    private List<Character> targetsInRange = new List<Character>();
+    public List<Character> selectedTargets = new List<Character>();
+    public List<Character> allTargetsInRange = new List<Character>();
     private List<Indicator> appliedIndicators = new List<Indicator>();
     private int index;
     private bool selectAll = false;
@@ -37,9 +37,10 @@ public class TargetingSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        if(this.properties.targetingMode != TargetingMode.none) SetColliders();
+        ability.SetLockOnState();
+        if (this.properties.targetingMode != TargetingMode.helper) SetColliders();
 
-        this.timeLeft = this.properties.maxDuration;
+        if(this.properties.hasMaxDuration) this.timeLeft = this.properties.maxDuration;
         if(this.timeLeftValue != null) this.timeLeftValue.setValue(1f);
 
         StartCoroutine(delayCo());
@@ -47,23 +48,19 @@ public class TargetingSystem : MonoBehaviour
 
     private void Update()
     {
+        this.ability.SetLockOnState();
+        this.allTargetsInRange.RemoveAll(item => item.gameObject.activeInHierarchy == false);
         RotationUtil.rotateCollider(this.sender, this.viewCollider.gameObject);
 
         if (this.properties.targetingMode == TargetingMode.auto) selectAllNearestTargets();
         else if (this.properties.targetingMode == TargetingMode.manual) selectTargetManually();
 
         updateIndicator();
-
-        if (this.timeLeft > 0) this.timeLeft -= Time.deltaTime;
-        else this.gameObject.SetActive(false);
-
-        if (this.timeLeftValue != null) this.timeLeftValue.setValue(this.timeLeft/ this.properties.maxDuration);     
+        updateTimer();  
     }
 
     private void OnDisable()
-    {
-        this.ability.state = AbilityState.targetRequired;
-
+    {       
         foreach (Indicator applied in this.appliedIndicators)
         {
             Destroy(applied.gameObject);
@@ -101,7 +98,13 @@ public class TargetingSystem : MonoBehaviour
 
     public List<Character> getTargets()
     {
-        return this.targets;
+        List<Character> targets = new List<Character>();
+
+        foreach(Character target in this.selectedTargets)
+        {
+            if (target.gameObject.activeInHierarchy) targets.Add(target);
+        }
+        return targets;
     }
 
     public float getDelay()
@@ -114,12 +117,19 @@ public class TargetingSystem : MonoBehaviour
 
     #region Target Functions
 
+    private List<Character> sortTargets()
+    {
+        List<Character> result = this.allTargetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
+        result.RemoveAll(item => item.gameObject.activeInHierarchy == false);
+        return result;
+    }
+
     private void selectNextTarget(int value)
     {
-        this.targets.Clear();
-        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
+        this.selectedTargets.Clear();
+        List<Character> sorted = sortTargets();
 
-        if (this.targetsInRange.Count > 0)
+        if (this.allTargetsInRange.Count > 0)
         {
             this.index += value;
             if (this.index >= sorted.Count) this.index = 0;
@@ -157,8 +167,8 @@ public class TargetingSystem : MonoBehaviour
 
     private void selectAllNearestTargets()
     {
-        this.targets.Clear();
-        List<Character> sorted = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
+        this.selectedTargets.Clear();
+        List<Character> sorted = sortTargets();
 
         for (int i = 0; i < this.properties.maxAmountOfTargets && i < sorted.Count; i++)
         {
@@ -171,8 +181,8 @@ public class TargetingSystem : MonoBehaviour
         Character character = collision.GetComponent<Character>();
         if (CollisionUtil.checkCollision(collision, this.ability.skill, this.sender) && character != null)
         {
-            if (this.targetsInRange.Contains(character)) this.targetsInRange.Remove(character);
-            if (this.targets.Contains(character)) this.targets.Remove(character);
+            if (this.allTargetsInRange.Contains(character)) this.allTargetsInRange.Remove(character);
+            if (this.selectedTargets.Contains(character)) this.selectedTargets.Remove(character);
         }
     }
 
@@ -181,15 +191,15 @@ public class TargetingSystem : MonoBehaviour
         Character character = collision.GetComponent<Character>();
         if (CollisionUtil.checkCollision(collision, this.ability.skill, this.sender) && character != null)
         {
-            if (!this.targetsInRange.Contains(character)) this.targetsInRange.Add(character);
+            if (!this.allTargetsInRange.Contains(character)) this.allTargetsInRange.Add(character);
         }
 
-        this.targetsInRange = this.targetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
+        this.allTargetsInRange = this.allTargetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
     }
 
     private void addTarget(Character character)
     {
-        if (!this.targets.Contains(character)) this.targets.Add(character);
+        if (!this.selectedTargets.Contains(character)) this.selectedTargets.Add(character);
     }
 
     #endregion
@@ -197,11 +207,22 @@ public class TargetingSystem : MonoBehaviour
 
     #region Indicator Functions
 
+    private void updateTimer()
+    {
+        if (this.properties.hasMaxDuration)
+        {
+            if (this.timeLeft > 0) this.timeLeft -= Time.deltaTime;
+            else Deactivate();
+
+            if (this.timeLeftValue != null) this.timeLeftValue.setValue(this.timeLeft / this.properties.maxDuration);
+        }
+    }
+
     private void updateIndicator()
     {
         if (this.properties.showIndicator)
         {
-            if (this.properties.targetingMode != TargetingMode.none)
+            if (this.properties.targetingMode != TargetingMode.helper)
             {
                 addIndicator();
                 removeIndicator();
@@ -215,7 +236,7 @@ public class TargetingSystem : MonoBehaviour
 
     private void addIndicator()
     {
-        foreach (Character target in this.targets)
+        foreach (Character target in this.selectedTargets)
         {
             this.properties.Instantiate(this.sender, target, this.appliedIndicators);            
         }
@@ -227,7 +248,7 @@ public class TargetingSystem : MonoBehaviour
 
         foreach (Indicator applied in this.appliedIndicators)
         {
-            if (applied != null && !this.targets.Contains(applied.GetTarget())) Destroy(applied.gameObject);
+            if (applied != null && !this.selectedTargets.Contains(applied.GetTarget())) Destroy(applied.gameObject);
             else tempAppliedList.Add(applied);
         }
 
@@ -236,6 +257,13 @@ public class TargetingSystem : MonoBehaviour
     }
 
     #endregion
+
+    public void Deactivate()
+    {
+        this.ability.ResetLockOn();
+        this.ability.state = AbilityState.onCooldown;
+        this.gameObject.SetActive(false);
+    }
 
 
     private IEnumerator delayCo()

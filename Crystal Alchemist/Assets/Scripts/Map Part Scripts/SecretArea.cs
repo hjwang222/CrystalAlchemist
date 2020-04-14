@@ -18,7 +18,7 @@ public class SecretArea : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !collision.isTrigger)
+        if (!collision.isTrigger)
         {
             AudioUtil.playSoundEffect(this.secretSoundEffect, GlobalGameObjects.settings.backgroundMusicVolume);
             StartCoroutine(FadeOut());
@@ -36,7 +36,7 @@ public class SecretArea : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !collision.isTrigger)
+        if (!collision.isTrigger)
         {
             StartCoroutine(FadeIn());
         }

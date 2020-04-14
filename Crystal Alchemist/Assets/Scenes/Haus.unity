@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1654,6 +1654,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 857105bf9e86080429fabf97d54c34d6, type: 3}
+--- !u!4 &545389347 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 545389346}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &549442768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3993,7 +3998,7 @@ Transform:
   - {fileID: 1899729861}
   - {fileID: 1435433133}
   - {fileID: 285562540}
-  - {fileID: 1541372664}
+  - {fileID: 545389347}
   - {fileID: 1490285568}
   - {fileID: 1844295054}
   - {fileID: 737721476}
@@ -4319,12 +4324,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d34afa3d86f33d408760320879efe9c, type: 3}
---- !u!4 &1541372664 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5533910144408278658, guid: 857105bf9e86080429fabf97d54c34d6,
-    type: 3}
-  m_PrefabInstance: {fileID: 545389346}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1660622037 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8223605061174129131, guid: 7b4700bb73bc60043b0a1df1b611e915,
@@ -18411,7 +18410,6 @@ GameObject:
   - component: {fileID: 7281069460179008108}
   - component: {fileID: 7281069460179008109}
   - component: {fileID: 7281069460179008110}
-  - component: {fileID: 7281069460179008084}
   m_Layer: 15
   m_Name: Area Bounds
   m_TagString: Room
@@ -18419,33 +18417,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &7281069460179008084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7281069460179008083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: a33ae82561921e840bfadec36a9feb04, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7281069460179008110}
-        m_MethodName: setFollowAtNull
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &7281069460179008108
 Transform:
   m_ObjectHideFlags: 0

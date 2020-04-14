@@ -206,7 +206,7 @@ public class AIAction //: ScriptableObject
         npc.GetComponent<AIEvents>().ChargeAbility(this.tempAbility, npc);
 
         if (this.tempAbility.IsTargetRequired())
-            npc.GetComponent<AIEvents>().showTargetingSystem(this.tempAbility);        //Show Targeting System when needed
+            npc.GetComponent<AIEvents>().ShowTargetingSystem(this.tempAbility);        //Show Targeting System when needed
     }
 
     private void CheckTargets(AI npc)
@@ -221,7 +221,7 @@ public class AIAction //: ScriptableObject
     {
         npc.GetComponent<AIEvents>().HideCastBar();
 
-        if (this.tempAbility.IsTargetRequired()) npc.GetComponent<AIEvents>().UseAbilityOnTargets(this.tempAbility, false, npc);
+        if (this.tempAbility.IsTargetRequired()) npc.GetComponent<AIEvents>().UseAbilityOnTargets(this.tempAbility, npc);
         else npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.tempAbility, npc, npc.target);
 
         this.skillCounter++;
@@ -231,7 +231,7 @@ public class AIAction //: ScriptableObject
     {
         if (this.skillCounter >= this.amount)
         {
-            npc.GetComponent<AIEvents>().hideTargetingSystem(this.tempAbility, 1); //reset Cooldown
+            npc.GetComponent<AIEvents>().HideTargetingSystem(this.tempAbility); //reset Cooldown
             npc.GetComponent<AIEvents>().UnChargeAbility(this.tempAbility, npc); //reset Charge
             Deactivate();
         }
