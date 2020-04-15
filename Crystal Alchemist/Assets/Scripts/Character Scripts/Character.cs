@@ -86,9 +86,9 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public bool isHit;
 
-    [BoxGroup("Debug")]
+    [HideInInspector]
     public List<StatusEffect> buffs = new List<StatusEffect>();
-    [BoxGroup("Debug")]
+    [HideInInspector]
     public List<StatusEffect> debuffs = new List<StatusEffect>();
 
     [HideInInspector]

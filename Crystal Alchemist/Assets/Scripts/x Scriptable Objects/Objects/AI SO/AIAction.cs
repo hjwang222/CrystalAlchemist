@@ -76,20 +76,25 @@ public class AIAction //: ScriptableObject
     private bool overrideCastTime = false;
 
     [ShowIf("type", AIActionType.ability)]
+    [ShowIf("overrideCastTime")]
+    [Indent(1)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private float castTime = 0;
+
+    [ShowIf("type", AIActionType.ability)]
     [BoxGroup("Properties")]
     [SerializeField]
     private bool overrideShowCastBar = false;
 
     [ShowIf("type", AIActionType.ability)]
+    [ShowIf("overrideShowCastBar")]
+    [Indent(1)]
     [BoxGroup("Properties")]
     [SerializeField]
     private bool showCastBar = false;
 
-    [ShowIf("type", AIActionType.ability)]
-    [ShowIf("overrideCastTime")]
-    [BoxGroup("Properties")]
-    [SerializeField]
-    private float castTime = 0;
+
 
     [ShowIf("type", AIActionType.ability)]
     [BoxGroup("Properties")]
@@ -98,6 +103,7 @@ public class AIAction //: ScriptableObject
 
     [ShowIf("type", AIActionType.ability)]
     [ShowIf("overrideCooldown")]
+    [Indent(1)]
     [BoxGroup("Properties")]
     [SerializeField]
     private float cooldown = 0;
@@ -116,7 +122,7 @@ public class AIAction //: ScriptableObject
     [ShowIf("type", AIActionType.sequence)]
     [BoxGroup("Properties")]
     [SerializeField]
-    private BossSequence sequence;
+    private BossMechanic mechanic;
 
     #endregion
 
@@ -245,7 +251,7 @@ public class AIAction //: ScriptableObject
     private void UpdateSequence(AI npc)
     {
         //casting here       
-        AbilityUtil.instantiateSequence(this.sequence, npc);
+        AbilityUtil.instantiateSequence(this.mechanic, npc);
         Deactivate();
     }
 

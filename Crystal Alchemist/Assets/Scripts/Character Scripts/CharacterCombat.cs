@@ -26,7 +26,6 @@ public class CharacterCombat : MonoBehaviour
         ShowCastBar(ability, character); //Show Castbar
         setSpeedDuringCasting(ability, character); //Set Speed during casting
         if (ability.HasHelper()) ShowTargetingSystem(ability);
-        //if (!ability.IsTargetRequired()) showTargetingSystem(ability);        //Show Targeting System when needed
         //Animations
     }
 
@@ -37,14 +36,13 @@ public class CharacterCombat : MonoBehaviour
         deactivatePlayerButtonUp(ability, character); //deactivate Skill when button up, Player only
         resetSpeedAfterCasting(character); //set Speed to normal
         if (ability.HasHelper()) HideTargetingSystem(ability);
-        //if (!ability.IsTargetRequired()) hideTargetingSystem(ability,1);
         //Animations
     }
 
     private void setSpeedDuringCasting(Ability ability, Character character)
     {
         SkillSenderModule senderModule = ability.skill.GetComponent<SkillSenderModule>();
-        if (senderModule != null) character.updateSpeed(senderModule.speedDuringCasting);
+        if (senderModule != null) character.updateSpeed(senderModule.speedDuringCasting, senderModule.affectAnimation);
     }
 
     private void resetSpeedAfterCasting(Character character)

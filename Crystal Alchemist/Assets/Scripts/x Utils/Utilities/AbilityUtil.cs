@@ -9,9 +9,9 @@ public class AbilityUtil : MonoBehaviour
         return Instantiate(ability);
     }
 
-    public static void instantiateSequence(BossSequence sequence, AI npc)
+    public static void instantiateSequence(BossMechanic sequence, AI npc)
     {
-        BossSequence newSequence = Instantiate(sequence);
+        BossMechanic newSequence = Instantiate(sequence);
         newSequence.name = sequence.name;
         newSequence.Initialize(npc, npc.target);
     }

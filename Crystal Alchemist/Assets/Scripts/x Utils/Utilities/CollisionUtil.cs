@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 
 public class CollisionUtil : MonoBehaviour
 {
@@ -115,37 +115,52 @@ public class CollisionUtil : MonoBehaviour
 
     public static List<Character> getAffectedCharacters(Skill skill)
     {
-        List<GameObject> result = new List<GameObject>();
         List<Character> targets = new List<Character>();
         SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
 
         if (targetModule != null)
         {
-            if ((skill.sender.CompareTag("Player") || skill.sender.CompareTag("NPC")) && targetModule.affectOther)
+            List<Character> found = FindObjectsOfType<Character>().ToList();
+
+            if (targetModule.affectOther)
             {
-                result.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-            }
-            if (skill.sender.CompareTag("Enemy") && targetModule.affectOther)
-            {
-                result.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-                result.AddRange(GameObject.FindGameObjectsWithTag("NPC"));
+                if (skill.sender.stats.characterType == CharacterType.Enemy)
+                {
+                    targets.AddRange(GetAffectedCharacters(found, CharacterType.Friend));
+                }
+                else if (skill.sender.stats.characterType == CharacterType.Friend)
+                {
+                    targets.AddRange(GetAffectedCharacters(found, CharacterType.Enemy));
+                }
+                else if (skill.sender.stats.characterType == CharacterType.Object)
+                {
+                    targets.AddRange(GetAffectedCharacters(found, CharacterType.Friend));
+                    targets.AddRange(GetAffectedCharacters(found, CharacterType.Enemy));
+                }
             }
             if (targetModule.affectSame)
             {
-                result.AddRange(GameObject.FindGameObjectsWithTag(skill.sender.tag));
+                targets.AddRange(GetAffectedCharacters(found, skill.sender.stats.characterType));
             }
             if (targetModule.affectNeutral)
             {
-                result.AddRange(GameObject.FindGameObjectsWithTag("Other"));
+                targets.AddRange(GetAffectedCharacters(found, CharacterType.Object));
             }
         }
 
-        foreach (GameObject res in result)
+        return targets;
+    }
+
+    private static List<Character> GetAffectedCharacters(List<Character> list, CharacterType characterType)
+    {
+        List<Character> result = new List<Character>();
+
+        foreach(Character character in list)
         {
-            if (res.GetComponent<Character>() != null) targets.Add(res.GetComponent<Character>());
+            if (character.stats.characterType == characterType) result.Add(character);
         }
 
-        return targets;
+        return result;
     }
 
     private static bool skillAffected(Collider2D hittedCharacter, Skill skill)
@@ -156,7 +171,6 @@ public class CollisionUtil : MonoBehaviour
         {
             if (skill.GetComponent<SkillTargetModule>() != null
             && skill.GetComponent<SkillTargetModule>().affectSkills
-            && tempSkill.CompareTag("Skill")
             && tempSkill.name != skill.name)
             {
                 return true;

@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 3416433163101705802}
   - component: {fileID: 8177122645714936817}
   - component: {fileID: 5827068402827264243}
-  - component: {fileID: 832887259540420008}
   - component: {fileID: 3147110848633641529}
   m_Layer: 13
   m_Name: Nitro
@@ -56,12 +55,6 @@ MonoBehaviour:
   myRigidbody: {fileID: 3416433163101705802}
   animator: {fileID: 7380354942667108071}
   shadow: {fileID: 0}
-  positionOffset: 0
-  attachToSender: 0
-  lockDirection: 0
-  canAffectedBytimeDistortion: 1
-  hasDuration: 1
-  maxDuration: 1
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
@@ -212,24 +205,6 @@ MonoBehaviour:
   affectNeutral: 1
   affectSkills: 0
   ignoreInvincibility: 0
---- !u!114 &832887259540420008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999009161233943469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f85dd021f4e88a4469511d8988fcc048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  indicator: {fileID: 0}
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  activeIndicator: {fileID: 0}
 --- !u!114 &3147110848633641529
 MonoBehaviour:
   m_ObjectHideFlags: 0

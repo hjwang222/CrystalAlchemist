@@ -181,15 +181,6 @@ public class CharacterStats : ScriptableObject
     ////////////////////////////////////////////////////////////////
 
 
-    [FoldoutGroup("RPG Elements", expanded: false)]
-    [Tooltip("Rasse")]
-    public string characterSpecies;
-
-    [FoldoutGroup("RPG Elements", expanded: false)]
-    [Tooltip("Geschlecht")]
-    public Gender characterGender = Gender.none;
-
-
     public string GetCharacterName()
     {
         return FormatUtil.getLanguageDialogText(this.characterName, this.englischCharacterName);

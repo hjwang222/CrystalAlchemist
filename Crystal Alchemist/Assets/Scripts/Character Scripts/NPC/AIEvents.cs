@@ -15,6 +15,10 @@ public class AIEvents : CharacterCombat
     [SerializeField]
     private AIPhase startPhase;
 
+    [BoxGroup("AI")]
+    [SerializeField]
+    private bool startImmediately = true;
+
     private MiniDialogBox activeDialog;
     private AIPhase activePhase;
     private bool isActive;
@@ -30,7 +34,12 @@ public class AIEvents : CharacterCombat
 
     private void OnEnable()
     {
-        if (this.startPhase != null) StartPhase(this.startPhase);
+        if (this.startPhase != null && this.startImmediately) StartPhase();
+    }
+
+    public void StartPhase()
+    {
+        StartPhase(this.startPhase);
     }
 
     private void Update()
