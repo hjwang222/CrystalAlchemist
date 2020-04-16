@@ -4,7 +4,6 @@ public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
 
-    //TODO: Bombs (change from Skill -> Character)
     //SKILL: Rundumschlag (wind)
     //TODO: Sentinel Schuss ändern (Legacy)
 
