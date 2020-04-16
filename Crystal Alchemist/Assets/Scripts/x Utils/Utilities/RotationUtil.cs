@@ -58,8 +58,7 @@ public class RotationUtil : MonoBehaviour
 
     private static Vector2 SetStartPosition(Skill skill)
     {
-        if (skill.sender != null && skill.sender.skillStartPosition != null) return skill.sender.skillStartPosition.transform.position;
-        else if (skill.sender != null) return skill.sender.transform.position;        
+        if (skill.sender != null) return skill.sender.GetShootingPosition();  
         return skill.transform.position;
     }
 

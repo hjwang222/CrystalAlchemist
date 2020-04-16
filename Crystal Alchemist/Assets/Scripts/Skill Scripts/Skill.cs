@@ -208,10 +208,10 @@ public class Skill : MonoBehaviour
 
         if (!blendTree)
         {
-            if (this.overridePosition) this.transform.position = start;
-
             if (!keepOriginalRotation) RotationUtil.setDirectionAndRotation(this, out start, out this.direction, out rotation);
             else this.direction = RotationUtil.DegreeToVector2(this.transform.rotation.eulerAngles.z);
+
+            if (this.overridePosition) this.transform.position = start;
 
             if (rotateIt && !keepOriginalRotation) transform.rotation = Quaternion.Euler(rotation);
         }

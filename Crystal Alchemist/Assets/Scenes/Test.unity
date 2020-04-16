@@ -11761,6 +11761,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 4482648710634036694}
   aggroStats: {fileID: 11400000, guid: 74151ff649b937b418adb75846e519d1, type: 2}
+  indicator:
+    showIndicator: 0
+    indicatorProperty: {fileID: 0}
 --- !u!4 &2579544901631304699
 Transform:
   m_ObjectHideFlags: 0
@@ -11849,9 +11852,9 @@ MonoBehaviour:
   animator: {fileID: 1344244469}
   boxCollider: {fileID: 1513157230}
   shadowRenderer: {fileID: 8018850768876528281}
+  skillStartPosition: {fileID: 7201104447853790704}
   activeSkillParent: {fileID: 577902182}
   activeStatusEffectParent: {fileID: 6674156777382353500}
-  skillStartPosition: {fileID: 7201104447853790704}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}

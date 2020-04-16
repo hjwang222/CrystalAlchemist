@@ -11,15 +11,12 @@ GameObject:
   - component: {fileID: 7592582800934557975}
   - component: {fileID: 4947426794910056175}
   - component: {fileID: 3912877756296141094}
-  - component: {fileID: 1223680476245283199}
   - component: {fileID: 1676703576389572161}
   - component: {fileID: 1807107929826497410}
   - component: {fileID: 9157380196124073839}
   - component: {fileID: 8902859412272811735}
   - component: {fileID: 4641515620175098231}
   - component: {fileID: 6451897881035893118}
-  - component: {fileID: 2499700239833832555}
-  - component: {fileID: 7983595114080166242}
   m_Layer: 13
   m_Name: Shot
   m_TagString: Skill
@@ -75,25 +72,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!95 &1223680476245283199
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511520353593083073}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1676703576389572161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,18 +84,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Schuss
-  skillNameEnglish: Shot
   spriteRenderer: {fileID: 189122765788227639}
   myRigidbody: {fileID: 3912877756296141094}
   animator: {fileID: 5853850326603271721}
   shadow: {fileID: 4459175407930688011}
-  positionOffset: 0.25
-  attachToSender: 0
-  lockDirection: 0
-  canAffectedBytimeDistortion: 1
-  hasDuration: 1
-  maxDuration: 20
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
@@ -206,42 +176,7 @@ MonoBehaviour:
   rotateIt: 1
   rotateOnUpdate: 0
   keepOriginalRotation: 0
-  rotationModifier: 0
   snapRotationInDegrees: 0
---- !u!114 &2499700239833832555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511520353593083073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f85781c900207fc428972075be537857, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  positionHeight: 0.5
-  colliderHeightOffset: 0
---- !u!114 &7983595114080166242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1511520353593083073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f85dd021f4e88a4469511d8988fcc048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  indicator: {fileID: 5604874298435353384, guid: 4c2b4b217381faf4485e28928382b866,
-    type: 3}
-  showCastBarForEnemies: 1
-  useCustomColor: 1
-  indicatorColor: {r: 1, g: 0, b: 0, a: 1}
-  activeIndicator: {fileID: 0}
 --- !u!1 &5124404407448343764
 GameObject:
   m_ObjectHideFlags: 0

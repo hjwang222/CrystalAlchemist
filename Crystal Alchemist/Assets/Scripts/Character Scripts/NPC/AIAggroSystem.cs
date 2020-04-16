@@ -17,7 +17,12 @@ public class AIAggroSystem : MonoBehaviour
     [BoxGroup("Required")]
     private AggroStats aggroStats;
 
+    [SerializeField]
+    [HideLabel]
+    private IndicatorObject indicator;
+
     private GameObject activeClue;
+
     private Dictionary<Character, float[]> aggroList = new Dictionary<Character, float[]>();
 
     #endregion
@@ -32,14 +37,15 @@ public class AIAggroSystem : MonoBehaviour
 
     private void Update()
     {        
-        RotationUtil.rotateCollider(this.enemy, this.gameObject);
-        generateAggro();
+        if(this.GetComponent<CircleCollider2D>() == null) RotationUtil.rotateCollider(this.enemy, this.gameObject);
+        updateIndicator();
+        generateAggro();        
     }
 
     #endregion
 
 
-    #region Aggro-System
+    #region Aggro-System    
 
     public void addAggro(Character newTarget, float aggro)
     {
@@ -68,6 +74,11 @@ public class AIAggroSystem : MonoBehaviour
         this.enemy.target = null;
         this.hideClue();
         this.aggroList.Clear();
+    }
+
+    public void updateIndicator()
+    {
+        this.indicator.UpdateIndicator(this.enemy, this.enemy.target);
     }
 
     public void generateAggro()

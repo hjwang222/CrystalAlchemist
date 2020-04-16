@@ -42,15 +42,8 @@ public class CollisionUtil : MonoBehaviour
     public static bool checkBehindObstacle(Character character, GameObject gameObject)
     {
         float offset = 0.1f;
-        Vector2 targetPosition = new Vector2(character.transform.position.x - (character.direction.x * offset),
-                                                 character.transform.position.y - (character.direction.y * offset));
-
-
-        if (character.shadowRenderer != null)
-        {
-            targetPosition = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset),
-                                         character.shadowRenderer.transform.position.y - (character.direction.y * offset));
-        }
+        Vector2 targetPosition = new Vector2(character.GetGroundPosition().x - (character.direction.x * offset),
+                                             character.GetGroundPosition().y - (character.direction.y * offset));
 
         Vector2 start = gameObject.transform.position;
         Vector2 direction = (targetPosition - start).normalized;
@@ -186,6 +179,8 @@ public class CollisionUtil : MonoBehaviour
 
     public static bool checkCollision(Collider2D hittedCharacter, Skill skill, Character sender)
     {
+        //Rework: Skill or Character
+
         if (skill != null && skill.GetTriggerActive())
         {
             if (sender != null && hittedCharacter.gameObject == sender.gameObject)
@@ -241,17 +236,11 @@ public class CollisionUtil : MonoBehaviour
 
     public static bool checkIfGameObjectIsViewed(Character character, GameObject gameObject, float distance)
     {
-        if (character != null && character.shadowRenderer == null)
-        {
-            Debug.Log("Schatten-Objekt ist leer!");
-            return false;
-        }
-
         float width = 0.2f;
         float offset = 0.1f;
 
-        Vector2 position = new Vector2(character.shadowRenderer.transform.position.x - (character.direction.x * offset),
-                                       character.shadowRenderer.transform.position.y - (character.direction.y * offset));
+        Vector2 position = new Vector2(character.GetGroundPosition().x - (character.direction.x * offset),
+                                       character.GetGroundPosition().y - (character.direction.y * offset));
 
         RaycastHit2D[] hit = Physics2D.CircleCastAll(position, width, character.direction, distance);
 

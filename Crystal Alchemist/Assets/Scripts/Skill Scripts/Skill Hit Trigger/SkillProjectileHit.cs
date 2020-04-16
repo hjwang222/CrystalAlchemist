@@ -24,16 +24,18 @@ public class SkillProjectileHit : SkillHitTrigger
 
     private void stopProjectile(Collider2D hittedCharacter)
     {
+        //REWORK!
         //Stop Arrow on Hit
-        if (this.skill.sender != null
-            && hittedCharacter.tag != this.skill.sender.tag
-            && !hittedCharacter.isTrigger
+        if (
+            !hittedCharacter.isTrigger //Wall or Character
+            && hittedCharacter.gameObject != this.skill.sender.gameObject
+            && hittedCharacter.GetComponent<Character>().stats.characterType != this.skill.sender.stats.characterType
             && !isReflected(hittedCharacter))
         {
-            AnimatorUtil.SetAnimatorParameter(this.skill.animator, "Hit");
-            this.skill.GetComponent<SkillProjectile>().stopVelocity();
+            placeImpactSkill();
 
-            placeFire();
+            AnimatorUtil.SetAnimatorParameter(this.skill.animator, "Hit");
+            this.skill.GetComponent<SkillProjectile>().stopVelocity();            
         }
     }
 
@@ -46,7 +48,7 @@ public class SkillProjectileHit : SkillHitTrigger
         return false;
     }
 
-    private void placeFire()
+    private void placeImpactSkill()
     {
         if (this.skillOnImpact != null)
         {

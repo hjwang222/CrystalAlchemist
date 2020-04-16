@@ -14,7 +14,7 @@ public class TargetingSystem : MonoBehaviour
     private Character sender;
     public List<Character> selectedTargets = new List<Character>();
     public List<Character> allTargetsInRange = new List<Character>();
-    private List<Indicator> appliedIndicators = new List<Indicator>();
+
     private int index;
     private bool selectAll = false;
     private bool inputPossible = true;
@@ -60,12 +60,8 @@ public class TargetingSystem : MonoBehaviour
     }
 
     private void OnDisable()
-    {       
-        foreach (Indicator applied in this.appliedIndicators)
-        {
-            Destroy(applied.gameObject);
-        }
-        this.appliedIndicators.Clear();
+    {
+        this.properties.ClearIndicator();
     }
 
     #endregion
@@ -87,7 +83,7 @@ public class TargetingSystem : MonoBehaviour
 
     public void setParameters(Ability ability)
     {
-        this.properties = ability.targetingProperty;
+        this.properties = Instantiate(ability.targetingProperty);
         this.ability = ability;
     }
 
@@ -220,41 +216,9 @@ public class TargetingSystem : MonoBehaviour
 
     private void updateIndicator()
     {
-        if (this.properties.showIndicator)
-        {
-            if (this.properties.targetingMode != TargetingMode.helper)
-            {
-                addIndicator();
-                removeIndicator();
-            }
-            else
-            {
-                this.properties.Instantiate(this.sender, null, this.appliedIndicators);
-            }
-        }
+        this.properties.UpdateIndicator(this.sender, this.selectedTargets);
     }
 
-    private void addIndicator()
-    {
-        foreach (Character target in this.selectedTargets)
-        {
-            this.properties.Instantiate(this.sender, target, this.appliedIndicators);            
-        }
-    }
-
-    private void removeIndicator()
-    {
-        List<Indicator> tempAppliedList = new List<Indicator>();
-
-        foreach (Indicator applied in this.appliedIndicators)
-        {
-            if (applied != null && !this.selectedTargets.Contains(applied.GetTarget())) Destroy(applied.gameObject);
-            else tempAppliedList.Add(applied);
-        }
-
-        this.appliedIndicators = tempAppliedList;
-        this.appliedIndicators.RemoveAll(item => item == null);
-    }
 
     #endregion
 

@@ -103,8 +103,7 @@ public class BossMechanicProperty : MonoBehaviour
 
     private Vector2 GetPositionFromCharacter(Character character)
     {
-        if (character.shadowRenderer != null) return character.shadowRenderer.transform.position;
-        return character.transform.position;
+        return character.GetGroundPosition();
     }
 
     private Vector2 GetPositionFromSpawnPoint(List<GameObject> spawnPoints)

@@ -6,21 +6,21 @@ public class LineRenderUtil
     public static void RenderLine(Character sender, Character target, float distance, SpriteRenderer spriteRenderer, Light2D lights,
                              out Collider2D hitted, out Vector2 hitPoint)
     {
+        spriteRenderer.enabled = true;
         hitted = null;
         hitPoint = Vector2.zero;
+        Vector2 startpoint = sender.GetShootingPosition();
 
-        if(target != null)
+        if (target != null)
         {
             //draw Laser to target
-            Vector2 startpoint = sender.transform.position;
-            hitPoint = target.transform.position;
+            hitPoint = target.GetShootingPosition();
             hitted = getCollider(target);
             drawLaserToTarget(startpoint, hitPoint, spriteRenderer, lights);
         }
         else
         {
             //draw normal Laser
-            Vector2 startpoint = sender.transform.position;
             Vector2 direction = sender.direction;
             RaycastHit2D hitInfo = new RaycastHit2D();
 

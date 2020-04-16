@@ -56,42 +56,18 @@ public class TargetingProperty : ScriptableObject
 
     [BoxGroup("Indikator")]
     [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
-    public bool showIndicator = false;
-
-    [BoxGroup("Indikator")]
-    [ShowIf("showIndicator")]
+    [HideLabel]
     [SerializeField]
-    private Indicator indicator;
+    private IndicatorObject indicator;
 
-    [BoxGroup("Indikator")]
-    [ShowIf("showIndicator")]
-    [SerializeField]
-    private bool overrideColor = false;
 
-    [BoxGroup("Indikator")]
-    [ShowIf("overrideColor")]
-    [SerializeField]
-    private Color color = Color.white;
-
-    public void Instantiate(Character sender, Character target, List<Indicator> appliedIndicators)
+    public void UpdateIndicator(Character sender, List<Character> selectedTargets)
     {
-        if (this.showIndicator && !alreadyApplied(sender, target, appliedIndicators)) //check if already applied
-        {
-            Indicator indicator = Instantiate(this.indicator);
-            indicator.Initialize(sender, target);
-            indicator.name = this.indicator.name;
-            if (this.overrideColor) indicator.SetColor(this.color);
-            appliedIndicators.Add(indicator);
-        }
+        this.indicator.UpdateIndicator(sender, selectedTargets, this.targetingMode);
     }
 
-    private bool alreadyApplied(Character sender, Character target, List<Indicator> appliedIndicators)
+    public void ClearIndicator()
     {
-        foreach(Indicator applied in appliedIndicators)
-        {
-            if (applied.GetSender() == sender && applied.GetTarget() == target) return true;
-        }
-
-        return false;
+        this.indicator.ClearIndicator();
     }
 }

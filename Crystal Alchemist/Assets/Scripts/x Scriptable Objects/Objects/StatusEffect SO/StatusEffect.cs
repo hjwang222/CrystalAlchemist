@@ -130,7 +130,7 @@ public class StatusEffect : ScriptableObject
     {
         this.statusEffectTimeLeft = this.maxDuration;
 
-        if (this.canBeModified)
+        if (this.canBeModified && this.target.stats.canChangeBuffs)
         {
             float percentage = 0;
             if (this.statusEffectType == StatusEffectType.buff) percentage = (float)this.target.buffPlus;

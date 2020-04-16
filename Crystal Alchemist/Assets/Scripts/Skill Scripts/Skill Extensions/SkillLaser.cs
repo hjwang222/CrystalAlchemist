@@ -35,6 +35,11 @@ public class SkillLaser : SkillExtension
 
     #region Unity Functions
 
+    private void Start()
+    {
+        this.laserSprite.enabled = false;
+    }
+
     private void Update()
     {
         drawLine();

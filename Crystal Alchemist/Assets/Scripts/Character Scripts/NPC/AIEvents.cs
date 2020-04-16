@@ -17,6 +17,7 @@ public class AIEvents : CharacterCombat
 
     [BoxGroup("AI")]
     [SerializeField]
+    [Tooltip("False, wenn Animator Event verwendet wird")]
     private bool startImmediately = true;
 
     private MiniDialogBox activeDialog;
@@ -24,7 +25,6 @@ public class AIEvents : CharacterCombat
     private bool isActive;
     #endregion
 
-    //TODO: Indicators
     //BUG: To many events
     //BUG: Gifthaut doppelt
     private void Start()
@@ -84,7 +84,7 @@ public class AIEvents : CharacterCombat
     {
         if (this.activeDialog == null)
         {
-            this.activeDialog = Instantiate(GlobalGameObjects.miniDialogBox, this.npc.skillStartPosition.transform);
+            this.activeDialog = Instantiate(GlobalGameObjects.miniDialogBox, this.npc.transform);
             this.activeDialog.setDialogBox(text, duration);
         }
     }

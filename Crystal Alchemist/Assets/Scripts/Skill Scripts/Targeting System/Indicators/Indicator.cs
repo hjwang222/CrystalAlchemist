@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
+
 [RequireComponent(typeof(SpriteRenderer))]
 public class Indicator : MonoBehaviour
 {
@@ -39,12 +40,12 @@ public class Indicator : MonoBehaviour
 
     public virtual void Start()
     {
-        //this.tag = "Indicator";
+        
     }
 
     public virtual void Update()
     {
-        
+
     }
 
     public void DestroyIt()

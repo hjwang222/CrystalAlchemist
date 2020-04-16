@@ -5,12 +5,14 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.0):
 
     //SKILL: Rundumschlag (wind)
-    //TODO: Sentinel Schuss ändern (Legacy)
+    //TODO: Sentinel Movement Rework
+    //TODO: Projectile Hit Rework
 
     //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena
-    //TODO: Impact, Look away, Look, Hide, Stack, Chain, Thornes, Landslide
+    //Mechanics: Impact, Look away, Look, Hide, Stack, Chain, Thornes, Landslide
+    //Mechanics: Bombs (Ring, Row, Cross, All)
 
     //GRAPHICS: TitleScreen: Background 
     //TESTS!

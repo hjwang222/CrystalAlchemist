@@ -20,8 +20,7 @@ public class CastingAnimation : MonoBehaviour
         this.skill = skill;
         this.character = character;
 
-        if(this.character.shadowRenderer != null) this.transform.position = this.character.shadowRenderer.transform.position;
-        else this.transform.position = this.character.transform.position;
+        this.transform.position = character.GetGroundPosition();
     }
 
     // Start is called before the first frame update

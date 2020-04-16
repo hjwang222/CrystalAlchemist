@@ -184,6 +184,8 @@ public class AIAction //: ScriptableObject
     private void StartSkill()
     {
         this.tempAbility = AbilityUtil.InstantiateAbility(this.ability);
+        this.tempAbility.name = this.ability.name;
+
         if (this.overrideCastTime) this.tempAbility.castTime = this.castTime;
         if (this.overrideShowCastBar) this.tempAbility.showCastbar = this.showCastBar;
         if (this.overrideCooldown) this.tempAbility.cooldown = this.cooldown;
@@ -227,8 +229,9 @@ public class AIAction //: ScriptableObject
     {
         npc.GetComponent<AIEvents>().HideCastBar();
 
+
         if (this.tempAbility.IsTargetRequired()) npc.GetComponent<AIEvents>().UseAbilityOnTargets(this.tempAbility, npc);
-        else npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.tempAbility, npc, npc.target);
+        else if(npc.target != null) npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.tempAbility, npc, npc.target);
 
         this.skillCounter++;
     }
@@ -237,7 +240,7 @@ public class AIAction //: ScriptableObject
     {
         if (this.skillCounter >= this.amount)
         {
-            npc.GetComponent<AIEvents>().HideTargetingSystem(this.tempAbility); //reset Cooldown
+            npc.GetComponent<AIEvents>().HideTargetingSystem(this.tempAbility); 
             npc.GetComponent<AIEvents>().UnChargeAbility(this.tempAbility, npc); //reset Charge
             Deactivate();
         }

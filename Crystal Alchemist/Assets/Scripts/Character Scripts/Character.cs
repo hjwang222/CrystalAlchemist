@@ -26,7 +26,15 @@ public class Character : MonoBehaviour
 
     [BoxGroup("Easy Access")]
     [Required]
-    public SpriteRenderer shadowRenderer;
+    [SerializeField]
+    [Tooltip("Zur Erkennung wo der Charakter steht")]
+    private SpriteRenderer shadowRenderer;
+
+    [BoxGroup("Easy Access")]
+    [Required]
+    [SerializeField]
+    [Tooltip("Position des Skills")]
+    private GameObject skillStartPosition;
 
     [BoxGroup("Easy Access")]
     [Required]
@@ -35,10 +43,6 @@ public class Character : MonoBehaviour
     [BoxGroup("Easy Access")]
     [Required]
     public GameObject activeStatusEffectParent;
-
-    [BoxGroup("Easy Access")]
-    [Required]
-    public GameObject skillStartPosition;
 
     #endregion
 
@@ -113,6 +117,21 @@ public class Character : MonoBehaviour
     public ItemDrop itemDrop;
 
     #endregion
+
+
+    public Vector2 GetShootingPosition()
+    {
+        if (this.skillStartPosition != null) return this.skillStartPosition.transform.position;
+        return this.transform.position;
+    }
+
+    public Vector2 GetGroundPosition()
+    {
+        if (this.shadowRenderer != null) return this.shadowRenderer.transform.position;
+        return this.transform.position;
+    }
+
+
 
 
     #region Start Functions (Spawn, Init)
@@ -276,20 +295,19 @@ public class Character : MonoBehaviour
 
     private void regeneration()
     {
-        if (this.currentState != CharacterState.dead && this.currentState != CharacterState.respawning)
+        if (this.currentState != CharacterState.dead
+            && this.currentState != CharacterState.respawning
+            && this.stats.canRegenerate)
         {
-            if (this.stats.regenerationInterval != 0)
+            if (this.regenTimeElapsed >= this.stats.regenerationInterval)
             {
-                if (this.regenTimeElapsed >= this.stats.regenerationInterval)
-                {
-                    this.regenTimeElapsed = 0;
-                    if (this.lifeRegen != 0 && this.life < this.maxLife) updateResource(CostType.life, this.lifeRegen);
-                    if (this.manaRegen != 0 && this.mana < this.maxMana) updateResource(CostType.mana, this.manaRegen, false);
-                }
-                else
-                {
-                    this.regenTimeElapsed += (Time.deltaTime * this.timeDistortion);
-                }
+                this.regenTimeElapsed = 0;
+                if (this.lifeRegen != 0 && this.life < this.maxLife) updateResource(CostType.life, this.lifeRegen);
+                if (this.manaRegen != 0 && this.mana < this.maxMana) updateResource(CostType.mana, this.manaRegen, false);
+            }
+            else
+            {
+                this.regenTimeElapsed += (Time.deltaTime * this.timeDistortion);
             }
         }
     }
@@ -365,7 +383,7 @@ public class Character : MonoBehaviour
     public virtual void KillIt()
     {
         if (!this.isPlayer)
-        {        
+        {
             for (int i = 0; i < this.activeSkills.Count; i++)
             {
                 resetCast(this.activeSkills[i]);
@@ -502,7 +520,7 @@ public class Character : MonoBehaviour
     public bool canUseIt(Costs price)
     {
         //Door, Shop, Treasure, Abilities
-        if (ActiveInField() && HasEnoughCurrency(price)) return true;       
+        if (ActiveInField() && HasEnoughCurrency(price)) return true;
         return false;
     }
 
