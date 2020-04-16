@@ -5,8 +5,8 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.0):
 
     //SKILL: Rundumschlag (wind)
-    //TODO: Sentinel Movement Rework
     //TODO: Projectile Hit Rework
+    //TODO: Pathfinder
 
     //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena

@@ -10836,6 +10836,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1252476306, guid: 1d6332d8d9d7c9c438540f3999e42183, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1252476307, guid: 1d6332d8d9d7c9c438540f3999e42183, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2246077131478480992, guid: 1d6332d8d9d7c9c438540f3999e42183,
         type: 3}
       propertyPath: m_Name
@@ -10898,6 +10906,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d6332d8d9d7c9c438540f3999e42183, type: 3}
+--- !u!1 &1198186387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2246077131478480992, guid: 1d6332d8d9d7c9c438540f3999e42183,
+    type: 3}
+  m_PrefabInstance: {fileID: 1065670441}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1198186388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198186387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac635517652981a448863c38811bc524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npc: {fileID: 1198186396}
+  movementPriority: 0
+  targetRadius: 0.1
+  partnerRadius: 0.1
+  delay: 1
+  backToStart: 0
+  returnDelay: 3
+  isPatrol: 0
+  patrolDelay: 3
+  patrolPath: []
+  followPathPrecision: 0.01
+  followPathInCircle: 1
+--- !u!114 &1198186396 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4482648712296496520, guid: 1d6332d8d9d7c9c438540f3999e42183,
+    type: 3}
+  m_PrefabInstance: {fileID: 1065670441}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198186387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1306860034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11675,12 +11725,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 4482648710634036694}
-  prioritizePartner: 0
-  movementRadius: 0.1
-  movementRadiusPartner: 0.1
-  movementDelay: 0
+  movementPriority: 0
+  targetRadius: 0.1
+  partnerRadius: 0.1
+  delay: 0
   backToStart: 1
-  path: []
+  returnDelay: 3
+  isPatrol: 0
+  patrolDelay: 3
+  patrolPath: []
   followPathPrecision: 0.01
   followPathInCircle: 0
 --- !u!4 &2246077131892725816

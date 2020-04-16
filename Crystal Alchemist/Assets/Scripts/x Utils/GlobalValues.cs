@@ -9,5 +9,6 @@ public class GlobalValues : ScriptableObject
 
     public float playerDelay = 0.1f;
     public float transitionDuration = 1f;
-    public string saveGameFiletype = "dat";   
+    public string saveGameFiletype = "dat";
+    public Vector3 nullVector = new Vector3(0, 0, 999);
 }
