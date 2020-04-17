@@ -118,6 +118,11 @@ public class Character : MonoBehaviour
 
     #endregion
 
+    public void DoDamage(float damage)
+    {
+
+    }
+
 
     public Vector2 GetShootingPosition()
     {

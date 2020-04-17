@@ -51,4 +51,6 @@ public class SkillMechanicHit : SkillHitTrigger
             if (percentage > 0) this.skill.hitIt(target, percentage);
         }
     }
+
+
 }

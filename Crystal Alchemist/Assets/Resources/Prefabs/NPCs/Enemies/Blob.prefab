@@ -251,6 +251,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 4482648712296496520}
   aggroStats: {fileID: 11400000, guid: 1203e243ade06754eb7ea15f7b5138d0, type: 2}
+  indicator:
+    showIndicator: 0
+    indicatorProperty: {fileID: 0}
 --- !u!58 &699278166353142346
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -282,9 +285,7 @@ GameObject:
   - component: {fileID: 1028641328}
   - component: {fileID: 1769147606524362081}
   - component: {fileID: 971109533881019453}
-  - component: {fileID: 1252476306}
-  - component: {fileID: 1252476307}
-  - component: {fileID: 1252476315}
+  - component: {fileID: 1198186388}
   m_Layer: 11
   m_Name: Blob
   m_TagString: Untagged
@@ -348,9 +349,9 @@ MonoBehaviour:
   animator: {fileID: 929082027}
   boxCollider: {fileID: 1028641328}
   shadowRenderer: {fileID: 8018850767349727943}
+  skillStartPosition: {fileID: 7201104449445602734}
   activeSkillParent: {fileID: 1158493752}
   activeStatusEffectParent: {fileID: 6674156776865872386}
-  skillStartPosition: {fileID: 7201104449445602734}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -379,7 +380,6 @@ MonoBehaviour:
   steps: 0
   isOnIce: 0
   itemDrop: {fileID: 0}
-  addAnalyse: 1
   aggroGameObject: {fileID: 2285685941926595743}
   flip: 1
   target: {fileID: 0}
@@ -397,9 +397,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeCastBar: {fileID: 0}
   npc: {fileID: 4482648712296496520}
   startPhase: {fileID: 11400000, guid: c11053e6988188347bc5e3d9a60d4904, type: 2}
+  startImmediately: 1
 --- !u!61 &1028641328
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   marker: {fileID: 683472866742487509, guid: 9676f77d535802944ac0b0aef93ed606, type: 3}
---- !u!114 &1252476306
+--- !u!114 &1198186388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -462,65 +462,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2246077131478480992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a42c86d6af650b941bdaee811b90bd18, type: 3}
+  m_Script: {fileID: 11500000, guid: ac635517652981a448863c38811bc524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 4482648712296496520}
-  nextWaypointdistance: 0.3
-  updatePathIntervall: 0.5
-  prioritizePartner: 0
-  movementRadius: 0.1
-  movementRadiusPartner: 0.1
-  movementDelay: 0
+  movementPriority: 0
+  targetRadius: 0.1
+  partnerRadius: 0.1
+  delay: 0
   backToStart: 1
+  returnDelay: 0
   isPatrol: 0
-  path: []
+  patrolDelay: 3
+  patrolPath: []
   followPathPrecision: 0.01
-  followPathInCircle: 0
---- !u!114 &1252476307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2246077131478480992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183748dd497aa473a98ff0cd8cb67fc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  uniqueID: 2419031328259426682
-  updateError: 1
-  checkTime: 0.2
---- !u!114 &1252476315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2246077131478480992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: 1
+  followPathInCircle: 1
 --- !u!1 &6674156776865872386
 GameObject:
   m_ObjectHideFlags: 0
