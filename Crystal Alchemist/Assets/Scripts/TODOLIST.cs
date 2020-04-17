@@ -6,6 +6,7 @@ public class TODOLIST : MonoBehaviour
 
     //SKILL: Rundumschlag (wind)
     //TODO: Pathfinder
+    //TODO: AI Movement Scriptable Object
 
     //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena
