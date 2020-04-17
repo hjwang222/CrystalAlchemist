@@ -8,8 +8,6 @@ public class CollisionUtil : MonoBehaviour
     {
         float distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
 
-        //Debug.Log(startDistance + " : " + distanceNeeded + " : "+distance);
-
         if (useStartDistance && distanceNeeded > 0)
         {
             if (distance > (startDistance + distanceNeeded)) return true;
@@ -106,7 +104,7 @@ public class CollisionUtil : MonoBehaviour
         return false;
     }
 
-    public static List<Character> getAffectedCharacters(Skill skill)
+    public static List<Character> getAllAffectedCharacters(Skill skill)
     {
         List<Character> targets = new List<Character>();
         SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
@@ -115,61 +113,15 @@ public class CollisionUtil : MonoBehaviour
         {
             List<Character> found = FindObjectsOfType<Character>().ToList();
 
-            if (targetModule.affectOther)
+            foreach(Character character in found)
             {
-                if (skill.sender.stats.characterType == CharacterType.Enemy)
-                {
-                    targets.AddRange(GetAffectedCharacters(found, CharacterType.Friend));
-                }
-                else if (skill.sender.stats.characterType == CharacterType.Friend)
-                {
-                    targets.AddRange(GetAffectedCharacters(found, CharacterType.Enemy));
-                }
-                else if (skill.sender.stats.characterType == CharacterType.Object)
-                {
-                    targets.AddRange(GetAffectedCharacters(found, CharacterType.Friend));
-                    targets.AddRange(GetAffectedCharacters(found, CharacterType.Enemy));
-                }
+                if (checkMatrix(skill.sender, character, targetModule.affectOther, targetModule.affectSame, targetModule.affectNeutral))
+                    targets.Add(character);
             }
-            if (targetModule.affectSame)
-            {
-                targets.AddRange(GetAffectedCharacters(found, skill.sender.stats.characterType));
-            }
-            if (targetModule.affectNeutral)
-            {
-                targets.AddRange(GetAffectedCharacters(found, CharacterType.Object));
-            }
+            
         }
 
         return targets;
-    }
-
-    private static List<Character> GetAffectedCharacters(List<Character> list, CharacterType characterType)
-    {
-        List<Character> result = new List<Character>();
-
-        foreach(Character character in list)
-        {
-            if (character.stats.characterType == characterType) result.Add(character);
-        }
-
-        return result;
-    }
-
-    private static bool skillAffected(Collider2D hittedCharacter, Skill skill)
-    {
-        Skill tempSkill = AbilityUtil.getSkillByCollision(hittedCharacter.gameObject);
-
-        if (tempSkill != null)
-        {
-            if (skill.GetComponent<SkillTargetModule>() != null
-            && skill.GetComponent<SkillTargetModule>().affectSkills
-            && tempSkill.name != skill.name)
-            {
-                return true;
-            }
-        }
-        return false;
     }
 
     public static bool checkCollision(Collider2D hittedCharacter, Skill skill)
@@ -177,32 +129,28 @@ public class CollisionUtil : MonoBehaviour
         return checkCollision(hittedCharacter, skill, skill.sender);
     }
 
-    public static bool checkCollision(Collider2D hittedCharacter, Skill skill, Character sender)
+    public static bool checkCollision(Collider2D other, Skill skill, Character sender)
     {
-        //Rework: Skill or Character
-
         if (skill != null && skill.GetTriggerActive())
         {
-            if (sender != null && hittedCharacter.gameObject == sender.gameObject)
+            SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
+
+            if (targetModule != null)
             {
-                if (skill.GetComponent<SkillTargetModule>() != null
-                    && skill.GetComponent<SkillTargetModule>().affectSelf) return true;
-                else return false;
-            }
-            else
-            {
-                if (skillAffected(hittedCharacter, skill))
+                Character hittedCharacter = null;
+                if (!other.isTrigger) hittedCharacter = other.GetComponent<Character>();
+
+                if (hittedCharacter != null)
                 {
-                    return true;
+                    if (targetModule.affectSelf && hittedCharacter == sender) return true;
+                    if (checkAffections(sender, targetModule.affectOther, targetModule.affectSame, targetModule.affectNeutral, other)) return true;
                 }
-                else if (!hittedCharacter.isTrigger)
+
+                Skill hittedSkill = AbilityUtil.getSkillByCollision(other.gameObject);
+
+                if (hittedSkill != null)
                 {
-                    SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
-                    if (targetModule != null
-                        && checkAffections(sender, targetModule.affectOther, targetModule.affectSame, targetModule.affectNeutral, hittedCharacter))
-                    {
-                        return true;
-                    }
+                    if (targetModule.affectSkills && hittedSkill != skill) return true;
                 }
             }
         }

@@ -27,9 +27,9 @@ public class SkillProjectileHit : SkillHitTrigger
         //REWORK!
         //Stop Arrow on Hit
         if (
-            !hittedCharacter.isTrigger //Wall or Character
-            && hittedCharacter.gameObject != this.skill.sender.gameObject
-            && hittedCharacter.GetComponent<Character>().stats.characterType != this.skill.sender.stats.characterType
+            hittedCharacter.gameObject != this.skill.sender.gameObject //not self
+            && (CollisionUtil.checkCollision(hittedCharacter, this.skill) //Character
+            || (hittedCharacter.GetComponent<Character>() == null && !hittedCharacter.isTrigger)) //Wall
             && !isReflected(hittedCharacter))
         {
             placeImpactSkill();

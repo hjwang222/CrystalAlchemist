@@ -524,14 +524,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 5280788646405828722}
-  movementPriority: 0
-  targetMinRadius: 0.1
-  targetMaxRadius: 0.1
-  partnerMinRadius: 0.1
-  partnerMaxRadius: 0.1
-  movementDelay: 0.5
+  movementPriority: 1
+  targetRadius: 7
+  partnerRadius: 2
+  delay: 0.5
   backToStart: 0
+  returnDelay: 3
   isPatrol: 0
+  patrolDelay: 3
   patrolPath: []
   followPathPrecision: 0.01
   followPathInCircle: 0

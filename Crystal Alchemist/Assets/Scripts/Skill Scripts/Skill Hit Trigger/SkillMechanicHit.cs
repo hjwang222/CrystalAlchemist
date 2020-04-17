@@ -45,7 +45,7 @@ public class SkillMechanicHit : SkillHitTrigger
 
     public void hitAllCharacters()
     {
-        List<Character> targets = CollisionUtil.getAffectedCharacters(this.skill);
+        List<Character> targets = CollisionUtil.getAllAffectedCharacters(this.skill);
         foreach (Character target in targets)
         {
             if (percentage > 0) this.skill.hitIt(target, percentage);

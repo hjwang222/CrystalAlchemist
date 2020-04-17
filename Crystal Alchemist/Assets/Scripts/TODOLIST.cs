@@ -5,7 +5,6 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.0):
 
     //SKILL: Rundumschlag (wind)
-    //TODO: Projectile Hit Rework
     //TODO: Pathfinder
 
     //NPC: Bosskampf (Titania)
