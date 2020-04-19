@@ -1,15 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class DontDestroyHandler : MonoBehaviour
 {
-    public List<GameObject> dontDestroy = new List<GameObject>();
+    [SerializeField]
+    private List<GameObject> dontDestroy = new List<GameObject>();
     private List<GameObject> activeObjects = new List<GameObject>();
 
     public static DontDestroyHandler Instance;
 
-    // Start is called before the first frame update
     void Awake()
     {
         if (Instance == null)
@@ -33,6 +32,7 @@ public class DontDestroyHandler : MonoBehaviour
 
     public void DestroyAll()
     {
+        //called from Signal
         foreach(GameObject temp in this.activeObjects)
         {
             Destroy(temp);
@@ -41,6 +41,5 @@ public class DontDestroyHandler : MonoBehaviour
         Instance = null;
 
         Destroy(this.gameObject);
-    }
-    
+    }    
 }

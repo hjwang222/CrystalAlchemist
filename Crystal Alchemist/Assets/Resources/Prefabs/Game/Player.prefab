@@ -307,36 +307,6 @@ MonoBehaviour:
   isPreview: 0
   restrictedRaces: 
   previewDirection: Down
---- !u!1 &242878290860008501
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5007069744063628954}
-  m_Layer: 0
-  m_Name: skillset
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5007069744063628954
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 242878290860008501}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 759644400424337062}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &471883463282746764
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,10 +485,8 @@ Transform:
   - {fileID: 4531212770177679800}
   - {fileID: 1490945895739742448}
   - {fileID: 5664017428727299626}
-  - {fileID: 5007069744063628954}
-  - {fileID: 1359776168893412036}
   - {fileID: 1608567932204615848}
-  - {fileID: 6599523314254448234}
+  - {fileID: 1359776168893412036}
   - {fileID: 8509168373122620148}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -540,9 +508,9 @@ MonoBehaviour:
   animator: {fileID: 7603080202167088895}
   boxCollider: {fileID: 5650224180514046960}
   shadowRenderer: {fileID: 4196475930209643464}
+  skillStartPosition: {fileID: 9116587063939130167}
   activeSkillParent: {fileID: 8638893490402070047}
   activeStatusEffectParent: {fileID: 1487360461578692118}
-  skillStartPosition: {fileID: 9116587063939130167}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -1690,36 +1658,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 759644400424337062}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1633981480254796401
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6599523314254448234}
-  m_Layer: 10
-  m_Name: lootParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6599523314254448234
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1633981480254796401}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 759644400424337062}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1704079413251968938
 GameObject:
@@ -6882,7 +6820,7 @@ GameObject:
   - component: {fileID: 583921940122448248}
   - component: {fileID: 4217922236335603694}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: Minimap Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6900,7 +6838,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 759644400424337062}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &583921940122448248
 Camera:
@@ -7437,5 +7375,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 759644400424337062}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

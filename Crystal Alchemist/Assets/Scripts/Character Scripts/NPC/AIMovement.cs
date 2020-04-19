@@ -214,7 +214,7 @@ public class AIMovement : MonoBehaviour
         {
             Vector2 direction = ((Vector2)position - this.npc.GetGroundPosition()).normalized;
 
-            Vector2 movement = new Vector2(this.npc.direction.x, this.npc.direction.y + (this.npc.steps * this.npc.direction.x));
+            Vector2 movement = new Vector2(direction.x, direction.y + (this.npc.steps * direction.x));
             if (!this.npc.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.speed * this.npc.timeDistortion);
 
             updateAnimation(direction);
