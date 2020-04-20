@@ -1,16 +1,24 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class PathSeeker : MonoBehaviour
 {
+    [SerializeField]
+    [InfoBox("Determine on which layer it moves")]
+    private GraphType graphType = GraphType.ground;
+
     private List<PathNode> openList = new List<PathNode>();
     private List<PathNode> closeList = new List<PathNode>();
     private PathfindingGrid grid;
 
+    private void Start()
+    {
+        this.grid = Pathfinding.Instance.GetGrid(this.graphType);
+    }
+
     public List<Vector2> FindPath(Vector2 startPosition, Vector2 endPosition)
     {
-        this.grid = Pathfinding.Instance.grid; 
-
         if (this.grid != null)
         {
             List<PathNode> path = FindPath(grid.GetNode(startPosition), grid.GetNode(endPosition));
@@ -38,7 +46,7 @@ public class PathSeeker : MonoBehaviour
         this.openList.Clear();
 
         this.openList.Add(startNode);
-        Pathfinding.Instance.InitializeNodes();
+        this.grid.InitializeNodes();
 
         //Set Startnode
         startNode.SetStartNode(endNode);
@@ -58,8 +66,9 @@ public class PathSeeker : MonoBehaviour
             foreach (PathNode neighbor in GetNeighborNodes(currentNode))
             {
                 if (closeList.Contains(neighbor)) continue;
-                if (neighbor != endNode && !neighbor.isWalkable)
+                if (neighbor != endNode && !neighbor.getWalkable(this.gameObject))
                 {
+                    //cannot walk there
                     this.closeList.Add(neighbor);
                     continue;
                 }

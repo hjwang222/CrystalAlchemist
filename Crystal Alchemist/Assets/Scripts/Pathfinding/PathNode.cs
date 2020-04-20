@@ -6,7 +6,9 @@ public class PathNode
     public int x;
     public int y;
     private Vector2 position;
-    public bool isWalkable;
+    private bool isWalkable;
+    private bool canModifyWalkable = true;
+    private GameObject owner = null;
 
     public int gCost;
     private int hCost;
@@ -39,15 +41,43 @@ public class PathNode
         SetWalkable(layerMask);
     }
 
-    private void SetWalkable(LayerMask layerMask)
+    public void SetWalkable(LayerMask layerMask)
     {
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.layerMask = layerMask;
-        filter.useLayerMask = true;
-        filter.useTriggers = false;
+        SetWalkable(layerMask, null, null);
+    }
 
-        int result = Physics2D.OverlapCircle(this.GetVector(), GetRadius(), filter, new List<Collider2D>());
-        if (result > 0) this.isWalkable = false;
+    public void SetWalkable(LayerMask layerMask, Collider2D collider, GameObject gameObject)
+    {
+        if (this.canModifyWalkable)
+        {
+            ContactFilter2D filter = new ContactFilter2D();
+            filter.layerMask = layerMask;
+            filter.useLayerMask = true;
+            filter.useTriggers = false;
+
+            List<Collider2D> colls = new List<Collider2D>();
+            int result = Physics2D.OverlapCircle(this.GetVector(), GetRadius(), filter, colls);
+
+            if (result > 0)
+            {
+                if (collider == null) SetObstacle(); //static collision, cannot be modified
+                else if (colls.Contains(collider) && this.owner == null) SetDynamicObstacle(gameObject); //dynamic collision, can be modified    
+            }
+            else if (this.owner == gameObject) SetDynamicObstacle(null);    
+        }
+    }
+
+    private void SetObstacle()
+    {
+        this.isWalkable = false;
+        this.canModifyWalkable = false;
+    }
+
+    private void SetDynamicObstacle(GameObject gameObject)
+    {
+        if(gameObject == null) this.isWalkable = true;
+        else this.isWalkable = false;
+        this.owner = gameObject;
     }
 
     public void SetStartNode(PathNode endNode)
@@ -101,6 +131,17 @@ public class PathNode
 
     public float GetRadius()
     {
-        return (this.cellSize * this.radius *0.5f);
+        return (this.cellSize * this.radius * 0.5f);
+    }
+
+    public bool getWalkable()
+    {
+        return this.isWalkable;
+    }
+
+    public bool getWalkable(GameObject gameObject)
+    {
+        if(this.owner == gameObject) return true; //walk trough its own unwalkable node
+        else return this.isWalkable; //normal behaviour
     }
 }

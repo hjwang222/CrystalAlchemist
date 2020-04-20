@@ -1,22 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class DynamicObstacle : MonoBehaviour
 {
     [SerializeField]
-    private Collider2D coll;
+    [InfoBox("Determine on which layer it shows as obstacle")]
+    private GraphType graphType = GraphType.ground;
 
     [SerializeField]
-    private float updateInterval;
+    [MinValue(0.1f)]
+    [MaxValue(10f)]
+    [Tooltip("How often the grid will be updated")]
+    private float updateInterval = 0.2f;
+
+    private PathfindingGrid grid;
 
     private void Start()
     {
-        //invoke repeat (brackeys)
+        this.grid = Pathfinding.Instance.GetGrid(this.graphType);
+        InvokeRepeating("SetNode", 0.5f, this.updateInterval);
     }
 
     private void SetNode()
     {
-                
+        if(this.grid != null) this.grid.UpdateGrid(this.gameObject, this.GetComponent<Collider2D>());
     }
 }

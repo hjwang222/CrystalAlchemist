@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class GizmoUtil : MonoBehaviour
 {
-    public static void PathfinderGizmo(PathfindingGrid grid, Color gridColor, Color collisionColor)
+    public static void PathfinderGizmo(PathfindingGrid grid, Color gridColor, Color collisionColor, bool showSphere)
     {
         Gizmos.color = gridColor;
 
@@ -16,11 +17,22 @@ public class GizmoUtil : MonoBehaviour
                     if (node != null)
                     {
                         Gizmos.DrawWireCube(node.GetVector(), node.GetSize());
-                        Gizmos.DrawWireSphere(node.GetVector(), node.GetRadius());
-                        if (!node.isWalkable)
+                        if (showSphere) Gizmos.DrawWireSphere(node.GetVector(), node.GetRadius());
+                        if (!node.getWalkable())
                             Gizmos.DrawIcon(node.GetVector(), "Pathfinding/NotWalkable", false, collisionColor);
                     }
                 }
+            }
+        }
+    }
+
+    public static void ShowWalkingLines(List<Vector2> path)
+    {
+        if (path != null)
+        {
+            for (int i = 0; i < path.Count - 1; i++)
+            {
+                Debug.DrawLine(path[i], path[i + 1], Color.green);
             }
         }
     }

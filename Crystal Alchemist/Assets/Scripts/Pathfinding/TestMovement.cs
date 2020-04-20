@@ -4,89 +4,54 @@ using UnityEngine;
 public class TestMovement : MonoBehaviour
 {
     [SerializeField]
-    private AI npc;
+    private GameObject follow;
 
     [SerializeField]
-    private float maxDistance;
+    private float speed = 2f;
+
+    [SerializeField]
+    private float maxDistance = 0.1f;
 
     [SerializeField]
     private PathSeeker seeker;
 
-    private List<Vector2> path;
-    private int index;
+    [SerializeField]
+    private float seekerAccuracy = 0.25f;
+
+    private List<Vector2> path; //Required
+    private int index; //Required
+    private Rigidbody2D myRigidbody2D; //Required
+
+    private void Start()
+    {
+        this.myRigidbody2D = this.GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
-        moveCharacter();  
+        this.myRigidbody2D.velocity = Vector2.zero; 
+        if (this.follow != null && this.seeker != null)
+            MoveTroughPaths(this.transform.position, follow.transform.position);
     }
 
-    private void moveCharacter()
+    private void MoveTroughPaths(Vector2 currentPos, Vector2 targetPos)
     {
-        if (this.npc.currentState != CharacterState.knockedback && !this.npc.isOnIce)
-        {
-            if (this.npc.myRigidbody.bodyType != RigidbodyType2D.Static) this.npc.myRigidbody.velocity = Vector2.zero;
-        }
-
-        Vector3 targetPosition = CheckDistance();
-
-        if (targetPosition != GlobalGameObjects.staticValues.nullVector)
-        {
-            movePath(this.npc.GetGroundPosition(), targetPosition);
-        }        
-    }
-
-    public void ShowLines(List<Vector2> path)
-    {
-        if (path != null)
-        {
-            for (int i = 0; i < path.Count - 1; i++)
-            {
-                Debug.DrawLine(path[i], path[i+1], Color.green);
-            }
-        }
-    }
-
-
-    private void movePath(Vector2 currentPos, Vector2 targetpos)
-    {
-        this.path = this.seeker.FindPath(currentPos, targetpos);
-        if (this.path != null && this.index >= this.path.Count) this.path = null;        
+        this.path = this.seeker.FindPath(currentPos, targetPos); //get path from pathfinder
+        if (this.path != null && this.index >= this.path.Count) this.path = null; //reached last pathnode
 
         if (path != null)
         {
-            if (Pathfinding.Instance.showDebug) ShowLines(path);
             Vector2 pos = this.path[this.index];
+            GizmoUtil.ShowWalkingLines(this.path); //for Debugging purpose
 
-            if (Vector2.Distance(currentPos, pos) > 0.25f) MoveToPosition(pos);            
-            else this.index++;             
+            if (Vector2.Distance(currentPos, pos) > this.seekerAccuracy) MoveToPosition(pos); //move to pathnode
+            else this.index++; //set next pathnode
         }
     }
 
-    private Vector3 CheckDistance()
+    private void MoveToPosition(Vector2 position)
     {
-        if (this.npc.target != null)
-        {
-            float distance = Vector2.Distance(this.npc.GetGroundPosition(), this.npc.target.GetGroundPosition());
-            if (distance > maxDistance)
-            {
-                return this.npc.target.GetGroundPosition();
-            }
-        }
-
-        return GlobalGameObjects.staticValues.nullVector;
-    }
-
-    private void MoveToPosition(Vector3 position)
-    {
-        if (this.npc.currentState != CharacterState.knockedback
-            && this.npc.currentState != CharacterState.attack
-            && this.npc.currentState != CharacterState.dead
-            && position != GlobalGameObjects.staticValues.nullVector)
-        {
-            this.npc.direction = ((Vector2)position - this.npc.GetGroundPosition()).normalized;
-
-            Vector2 movement = new Vector2(this.npc.direction.x, this.npc.direction.y + (this.npc.steps * this.npc.direction.x));
-            if (!this.npc.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.speed * this.npc.timeDistortion);
-        }
+        Vector2 direction = (position - (Vector2)this.transform.position).normalized;
+        this.myRigidbody2D.velocity = (direction * this.speed);
     }
 }

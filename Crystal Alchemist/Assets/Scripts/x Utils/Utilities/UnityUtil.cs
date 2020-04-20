@@ -48,4 +48,16 @@ public class UnityUtil : MonoBehaviour
         }
         return dst as T;
     }
+
+    public static int ConvertLayerMask(LayerMask layerMask)
+    {
+        int layerNumber = 0;
+        int layer = layerMask.value;
+        while (layer > 0)
+        {
+            layer = layer >> 1;
+            layerNumber++;
+        }
+        return layerNumber - 1;
+    }
 }

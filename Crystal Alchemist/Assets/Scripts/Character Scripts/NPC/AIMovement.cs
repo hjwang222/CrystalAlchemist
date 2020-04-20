@@ -72,12 +72,21 @@ public class AIMovement : MonoBehaviour
     private bool followPathInCircle = true;
 
 
+    [BoxGroup("Pathfinding")]
+    [SerializeField]
+    private PathSeeker seeker;
+
+    [BoxGroup("Pathfinding")]
+    [SerializeField]
+    [ShowIf("seeker")]
+    private float accuracy = 0.25f;
+
+    private List<Vector2> path;
+    private int index;
     private bool wait = false;
     private bool enableCoroutine = true;
-
     private int factor = 1;
     private int currentPoint = 0;
-
     private Vector3 targetPosition;
 
     #endregion
@@ -99,7 +108,8 @@ public class AIMovement : MonoBehaviour
         if (!this.wait)
         {
             UpdateTargetPosition();
-            MoveToPosition(this.targetPosition);
+            if (this.seeker != null) MoveTroughPaths(this.targetPosition); //Pathfinding
+            else MoveToPosition(this.targetPosition); //No Pathfinding
         }
     }
 
@@ -203,6 +213,22 @@ public class AIMovement : MonoBehaviour
         this.wait = true;
         yield return new WaitForSeconds(delay);
         this.wait = false;
+    }
+
+    private void MoveTroughPaths(Vector2 targetPos)
+    {
+        Vector2 currentPos = this.npc.GetGroundPosition();
+
+        this.path = this.seeker.FindPath(currentPos, targetPos);
+        if (this.path != null && this.index >= this.path.Count) this.path = null;
+
+        if (path != null)
+        {
+            Vector2 pos = this.path[this.index];
+
+            if (Vector2.Distance(currentPos, pos) > this.accuracy) MoveToPosition(pos);
+            else this.index++;
+        }
     }
 
     private void MoveToPosition(Vector3 position)

@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class PathfindingGrid
@@ -10,14 +9,11 @@ public class PathfindingGrid
 
     public PathNode[,] gridArray;
 
-    private Vector2 position;    
+    private Vector2 position;
+    private LayerMask filter;
+    private float diameter;
 
-    public PathfindingGrid(Tilemap tilemap, float cellSize)
-    {
-        SetValues(tilemap, cellSize);
-    }    
-
-    public void SetValues(Tilemap tilemap, float cellSize)
+    public PathfindingGrid(Tilemap tilemap, float cellSize, LayerMask filter, float diameter)
     {
         if (cellSize > 0)
         {
@@ -25,19 +21,49 @@ public class PathfindingGrid
             this.height = (int)(tilemap.size.y / cellSize);
             this.position = tilemap.localBounds.min;
             this.cellSize = cellSize;
+            this.filter = filter;
+            this.diameter = diameter;
 
-            this.gridArray = new PathNode[width, height];
-            Initialize();
+            InitializeGrid();
+            InitializeNodes();
         }
     }
 
-    private void Initialize()
+    private void InitializeGrid()
     {
+        this.gridArray = new PathNode[width, height];
+
         for (int x = 0; x < this.gridArray.GetLength(0); x++)
         {
             for (int y = 0; y < this.gridArray.GetLength(1); y++)
             {
                 this.gridArray[x, y] = new PathNode(x, y, this.cellSize, this.position);
+            }
+        }
+    }
+
+    public void InitializeNodes()
+    {
+        //Initialize all nodes
+        for (int x = 0; x < this.gridArray.GetLength(0); x++)
+        {
+            for (int y = 0; y < this.gridArray.GetLength(1); y++)
+            {
+                PathNode node = this.GetNode(x, y);
+                node.Initialize(this.filter, this.diameter);
+            }
+        }
+    }    
+
+    public void UpdateGrid(GameObject gameObject, Collider2D collider)
+    {
+        for (int x = 0; x < this.gridArray.GetLength(0); x++)
+        {
+            for (int y = 0; y < this.gridArray.GetLength(1); y++)
+            {
+                LayerMask mask = (1 << gameObject.layer);
+                PathNode node = this.GetNode(x, y);
+                node.SetWalkable(mask, collider, gameObject);
             }
         }
     }

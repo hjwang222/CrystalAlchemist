@@ -5,7 +5,6 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.0):
 
     //SKILL: Rundumschlag (wind)
-    //TODO: Pathfinder (Rework)
     //TODO: Multiscene instead of DontDestroy
     //TODO: AI Movement Scriptable Object
 
