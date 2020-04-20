@@ -7,10 +7,10 @@ public class TestMovement : MonoBehaviour
     private AI npc;
 
     [SerializeField]
-    private Pathfinding pathfinding;
+    private float maxDistance;
 
     [SerializeField]
-    private float maxDistance;
+    private PathSeeker seeker;
 
     private List<Vector2> path;
     private int index;
@@ -49,12 +49,12 @@ public class TestMovement : MonoBehaviour
 
     private void movePath(Vector2 currentPos, Vector2 targetpos)
     {
-        this.path = this.pathfinding.FindPath(currentPos, targetpos);
+        this.path = this.seeker.FindPath(currentPos, targetpos);
         if (this.path != null && this.index >= this.path.Count) this.path = null;        
 
         if (path != null)
         {
-            if (this.pathfinding.showDebug) ShowLines(path);
+            if (Pathfinding.Instance.showDebug) ShowLines(path);
             Vector2 pos = this.path[this.index];
 
             if (Vector2.Distance(currentPos, pos) > 0.25f) MoveToPosition(pos);            
