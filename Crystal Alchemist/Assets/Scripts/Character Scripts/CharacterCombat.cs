@@ -9,15 +9,22 @@ public class CharacterCombat : MonoBehaviour
 
     public void InitializeTargeting(Character sender)
     {
-        this.targetingSystem = Instantiate(GlobalGameObjects.targetingSystem, sender.transform.position, Quaternion.identity, sender.transform);
-        this.targetingSystem.Initialize(sender);
-        this.targetingSystem.name = GlobalGameObjects.targetingSystem.name;
-        this.targetingSystem.gameObject.SetActive(false);
+        if (sender != null)
+        {
+            this.targetingSystem = Instantiate(GlobalGameObjects.targetingSystem, sender.transform.position, Quaternion.identity, sender.transform);
+            this.targetingSystem.Initialize(sender);
+            this.targetingSystem.name = GlobalGameObjects.targetingSystem.name;
+            this.targetingSystem.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Character Combat missing Sender: " + this.gameObject);
+        }
     }
 
     public void SetTimeValue(FloatValue timeValue)
     {
-        this.targetingSystem.SetTimeValue(timeValue);
+        if(this.targetingSystem != null) this.targetingSystem.SetTimeValue(timeValue);
     }
 
     public void ChargeAbility(Ability ability, Character character)
@@ -90,7 +97,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void ShowTargetingSystem(Ability ability)
     {
-        if (!this.targetingSystem.gameObject.activeInHierarchy)
+        if (this.targetingSystem != null &&  !this.targetingSystem.gameObject.activeInHierarchy)
         {
             this.targetingSystem.setParameters(ability);
             this.targetingSystem.gameObject.SetActive(true);
@@ -99,7 +106,7 @@ public class CharacterCombat : MonoBehaviour
 
     public void HideTargetingSystem(Ability ability)
     {
-        if (this.targetingSystem.gameObject.activeInHierarchy)
+        if (this.targetingSystem != null && this.targetingSystem.gameObject.activeInHierarchy)
         {
             this.targetingSystem.Deactivate();
         }
@@ -107,12 +114,14 @@ public class CharacterCombat : MonoBehaviour
 
     public float GetTargetingDelay()
     {
-        return this.targetingSystem.getDelay();
+        if (this.targetingSystem != null) return this.targetingSystem.getDelay();
+        return 0f;
     }
 
     public List<Character> GetTargetsFromTargeting()
     {
-        return this.targetingSystem.getTargets();
+        if (this.targetingSystem != null) return this.targetingSystem.getTargets();
+        return null;
     }
 
 

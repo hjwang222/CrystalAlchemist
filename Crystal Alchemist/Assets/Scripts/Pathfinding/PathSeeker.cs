@@ -14,7 +14,7 @@ public class PathSeeker : MonoBehaviour
 
     private void Start()
     {
-        this.grid = Pathfinding.Instance.GetGrid(this.graphType);
+        if(Pathfinding.Instance != null) this.grid = Pathfinding.Instance.GetGrid(this.graphType);
     }
 
     public List<Vector2> FindPath(Vector2 startPosition, Vector2 endPosition)

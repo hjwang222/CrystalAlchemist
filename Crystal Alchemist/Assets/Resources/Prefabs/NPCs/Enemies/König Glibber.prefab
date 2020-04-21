@@ -239,6 +239,8 @@ GameObject:
   - component: {fileID: 3020177091971815233}
   - component: {fileID: -2033235849666499790}
   - component: {fileID: 1770962052738937737}
+  - component: {fileID: 4308959334589917793}
+  - component: {fileID: 4885153958641905025}
   m_Layer: 11
   m_Name: "K\xF6nig Glibber"
   m_TagString: Untagged
@@ -253,7 +255,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3945848509854940433}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -303,9 +305,9 @@ MonoBehaviour:
   animator: {fileID: 3020177092142690266}
   boxCollider: {fileID: 3020177091971815233}
   shadowRenderer: {fileID: 5485388855570139274}
+  skillStartPosition: {fileID: 3338578078561740491}
   activeSkillParent: {fileID: 3020177091833525065}
   activeStatusEffectParent: {fileID: 8464107762506563443}
-  skillStartPosition: {fileID: 3338578078561740491}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -352,14 +354,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 1719322071491950841}
-  prioritizePartner: 0
-  movementRadius: 0.1
-  movementRadiusPartner: 0.1
-  movementDelay: 0
+  movementPriority: 0
+  targetRadius: 0.1
+  partnerRadius: 0.1
+  delay: 0
   backToStart: 1
-  path: []
+  returnDelay: 0
+  isPatrol: 0
+  patrolDelay: 3
+  patrolPath: []
   followPathPrecision: 0.01
-  followPathInCircle: 0
+  followPathInCircle: 1
+  accuracy: 0.25
 --- !u!114 &1719322071491950843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,9 +378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeCastBar: {fileID: 0}
   npc: {fileID: 1719322071491950841}
   startPhase: {fileID: 11400000, guid: cb13a087f2d8b3a4dbf86c75af062824, type: 2}
+  startImmediately: 1
 --- !u!61 &3020177091971815233
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -428,6 +434,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   marker: {fileID: 683472866742487509, guid: fcab8f75e8a217e42b8193cb4efdbfb3, type: 3}
+--- !u!114 &4308959334589917793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945848509854940433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbfdb26056989d4498fe91a93c82e41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphType: 0
+--- !u!114 &4885153958641905025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945848509854940433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b7eba3b76cc8940aa3e8ab12be831a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphType: 0
+  updateInterval: 0.2
 --- !u!1 &6158303603163541246
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,6 +507,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1719322071491950841}
   aggroStats: {fileID: 11400000, guid: 74151ff649b937b418adb75846e519d1, type: 2}
+  indicator:
+    showIndicator: 0
+    indicatorProperty: {fileID: 0}
 --- !u!58 &5650306304912438039
 CircleCollider2D:
   m_ObjectHideFlags: 0

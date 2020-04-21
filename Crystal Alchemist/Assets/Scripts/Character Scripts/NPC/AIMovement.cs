@@ -49,6 +49,7 @@ public class AIMovement : MonoBehaviour
 
     [BoxGroup("Patrol")]
     [SerializeField]
+    [OnValueChanged("SetReturn")]
     private bool isPatrol = false;
 
     [ShowIf("isPatrol")]
@@ -71,16 +72,11 @@ public class AIMovement : MonoBehaviour
     [SerializeField]
     private bool followPathInCircle = true;
 
-
     [BoxGroup("Pathfinding")]
     [SerializeField]
-    private PathSeeker seeker;
-
-    [BoxGroup("Pathfinding")]
-    [SerializeField]
-    [ShowIf("seeker")]
     private float accuracy = 0.25f;
 
+    private PathSeeker seeker = null;
     private List<Vector2> path;
     private int index;
     private bool wait = false;
@@ -94,6 +90,7 @@ public class AIMovement : MonoBehaviour
     private void Start()
     {
         AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+        if (Pathfinding.Instance != null) this.seeker = this.GetComponent<PathSeeker>();
         this.targetPosition = GlobalGameObjects.staticValues.nullVector;
     }
 
@@ -111,6 +108,11 @@ public class AIMovement : MonoBehaviour
             if (this.seeker != null) MoveTroughPaths(this.targetPosition); //Pathfinding
             else MoveToPosition(this.targetPosition); //No Pathfinding
         }
+    }
+
+    private void SetReturn()
+    {
+        if (this.isPatrol) this.backToStart = false;
     }
 
     private void UpdateTargetPosition()

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8439165300750171510}
   - component: {fileID: 6021830739019893530}
-  m_Layer: 13
+  m_Layer: 14
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,11 +106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a116d261d2820141849459fec4b1def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contextClueChild: {fileID: 2832447863331737287, guid: 28dfba12a4d770e4781f0b9b6cf40800,
-    type: 3}
-  currencyNeeded: 0
-  item: {fileID: 0}
-  price: 0
+  costs:
+    resourceType: 0
+    item: {fileID: 0}
+    amount: 1
   soundEffect: {fileID: 8300000, guid: cb444edc073c6ed4196283631e0919d4, type: 3}
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
@@ -118,7 +117,6 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   spriteRenderer: {fileID: 0}
   context: {fileID: 0}
-  currentState: 0
   animator: {fileID: 6914875820510485346}
   doorType: 0
   boxCollider: {fileID: 6021830739019893530}

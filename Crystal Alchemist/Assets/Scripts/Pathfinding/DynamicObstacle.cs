@@ -17,8 +17,11 @@ public class DynamicObstacle : MonoBehaviour
 
     private void Start()
     {
-        this.grid = Pathfinding.Instance.GetGrid(this.graphType);
-        InvokeRepeating("SetNode", 0.5f, this.updateInterval);
+        if (Pathfinding.Instance != null)
+        {
+            this.grid = Pathfinding.Instance.GetGrid(this.graphType);
+            InvokeRepeating("SetNode", 0.5f, this.updateInterval);
+        }
     }
 
     private void SetNode()

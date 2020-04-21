@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 2433579770756760863}
   - component: {fileID: -7635502744899308147}
   - component: {fileID: 6331669602110681485}
+  - component: {fileID: 4448067343143676642}
   m_Layer: 11
   m_Name: Steinwand
   m_TagString: Untagged
@@ -296,9 +297,9 @@ MonoBehaviour:
   animator: {fileID: 5540190085609823372}
   boxCollider: {fileID: 30635547035960434}
   shadowRenderer: {fileID: 4870180117773829343}
+  skillStartPosition: {fileID: 7247743900210993475}
   activeSkillParent: {fileID: 9215530842851801714}
   activeStatusEffectParent: {fileID: 422663672048093189}
-  skillStartPosition: {fileID: 7247743900210993475}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -373,6 +374,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4448067343143676642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8793839158660886956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b7eba3b76cc8940aa3e8ab12be831a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphType: 0
+  updateInterval: 0.2
 --- !u!1 &9215530842851801714
 GameObject:
   m_ObjectHideFlags: 0

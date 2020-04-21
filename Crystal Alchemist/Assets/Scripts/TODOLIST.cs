@@ -2,11 +2,13 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //TODO (0.2.5.0):
+    //ISSUES: PATHFINDING: too Performance heavy on bigger grids (see PathfindingGrid.cs)
+    //ISSUES: ONLINE: Switching Scenes and Network Instantiating
+    //ISSUES: 2D PIXEL: Stuttering Camera
 
-    //SKILL: Rundumschlag (wind)
+    //TODO (0.2.5.0):
     //TODO: Multiscene instead of DontDestroy
-    //TODO: AI Movement Scriptable Object
+    //TODO: ONLINE!
 
     //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena
@@ -14,7 +16,9 @@ public class TODOLIST : MonoBehaviour
     //Mechanics: Impact, Look away, Look, Hide, Stack, Chain, Thornes, Landslide
     //Mechanics: Bombs (Ring, Row, Cross, All)
 
+    //SKILL: Rundumschlag (wind)
     //GRAPHICS: TitleScreen: Background 
+    //GITHUB: ASSET STORE
     //TESTS!
 
     //-----------------------------------------------------------------------------
@@ -64,7 +68,6 @@ public class TODOLIST : MonoBehaviour
 
     //TODO (1.5)
     //- Multiplayer!
-    //- Pathfinding
 
     //-----------------------------------------------------------------------------
 

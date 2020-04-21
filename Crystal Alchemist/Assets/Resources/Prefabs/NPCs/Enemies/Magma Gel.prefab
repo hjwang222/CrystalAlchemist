@@ -120,6 +120,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 5026383991709977235}
   aggroStats: {fileID: 11400000, guid: 74151ff649b937b418adb75846e519d1, type: 2}
+  indicator:
+    showIndicator: 0
+    indicatorProperty: {fileID: 0}
 --- !u!58 &2711615262647934176
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -152,6 +155,8 @@ GameObject:
   - component: {fileID: 8932006801697793323}
   - component: {fileID: -8954306522490569902}
   - component: {fileID: 1379375270786425069}
+  - component: {fileID: 7784471432208139405}
+  - component: {fileID: 3086287688330738372}
   m_Layer: 11
   m_Name: Magma Gel
   m_TagString: Untagged
@@ -166,7 +171,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7268659838857056123}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 21.5, y: 38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -216,9 +221,9 @@ MonoBehaviour:
   animator: {fileID: 8932006801801387440}
   boxCollider: {fileID: 8932006801697793323}
   shadowRenderer: {fileID: 9101974201244086688}
+  skillStartPosition: {fileID: 7914839587969846799}
   activeSkillParent: {fileID: 8932006801567842595}
   activeStatusEffectParent: {fileID: 2840507917755813145}
-  skillStartPosition: {fileID: 7914839587969846799}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -265,14 +270,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 5026383991709977235}
-  prioritizePartner: 0
-  movementRadius: 0.1
-  movementRadiusPartner: 0.1
-  movementDelay: 0
-  backToStart: 0
-  path: []
-  followPathPrecision: 0.1
+  movementPriority: 0
+  targetRadius: 0.1
+  partnerRadius: 0.1
+  delay: 0
+  backToStart: 1
+  returnDelay: 0
+  isPatrol: 0
+  patrolDelay: 3
+  patrolPath: []
+  followPathPrecision: 0.01
   followPathInCircle: 1
+  accuracy: 0.25
 --- !u!114 &5026383991709977233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,9 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeCastBar: {fileID: 0}
-  npc: {fileID: 0}
+  npc: {fileID: 5026383991709977235}
   startPhase: {fileID: 0}
+  startImmediately: 1
 --- !u!61 &8932006801697793323
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -341,6 +350,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   marker: {fileID: 683472866742487509, guid: 9676f77d535802944ac0b0aef93ed606, type: 3}
+--- !u!114 &7784471432208139405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7268659838857056123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b7eba3b76cc8940aa3e8ab12be831a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphType: 0
+  updateInterval: 0.2
+--- !u!114 &3086287688330738372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7268659838857056123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbfdb26056989d4498fe91a93c82e41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphType: 0
 --- !u!1 &7914839587969846799
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,11 +15,11 @@ public class PathfindingGrid
 
     public PathfindingGrid(Tilemap tilemap, float cellSize, LayerMask filter, float diameter)
     {
-        if (cellSize > 0)
+        if (cellSize > 0 && tilemap != null)
         {
             this.width = (int)(tilemap.size.x / cellSize);
             this.height = (int)(tilemap.size.y / cellSize);
-            this.position = tilemap.localBounds.min;
+            this.position = tilemap.localBounds.min+tilemap.transform.position;
             this.cellSize = cellSize;
             this.filter = filter;
             this.diameter = diameter;
@@ -33,6 +33,7 @@ public class PathfindingGrid
     {
         this.gridArray = new PathNode[width, height];
 
+        //HEAVY
         for (int x = 0; x < this.gridArray.GetLength(0); x++)
         {
             for (int y = 0; y < this.gridArray.GetLength(1); y++)
@@ -45,6 +46,7 @@ public class PathfindingGrid
     public void InitializeNodes()
     {
         //Initialize all nodes
+        //HEAVY
         for (int x = 0; x < this.gridArray.GetLength(0); x++)
         {
             for (int y = 0; y < this.gridArray.GetLength(1); y++)
@@ -57,6 +59,7 @@ public class PathfindingGrid
 
     public void UpdateGrid(GameObject gameObject, Collider2D collider)
     {
+        //HEAVY
         for (int x = 0; x < this.gridArray.GetLength(0); x++)
         {
             for (int y = 0; y < this.gridArray.GetLength(1); y++)

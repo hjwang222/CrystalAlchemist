@@ -19,6 +19,7 @@ public class PathfindingGraph
     [Required]
     [BoxGroup("Grid")]
     [Tooltip("Required to get the size of the grid")]
+    [InfoBox("Tilemap Composite Collider2D works best as polygons")]
     private Tilemap tileMap;
 
     [SerializeField]
@@ -73,7 +74,7 @@ public class PathfindingGraph
 
     public void ShowDebug()
     {
-        GizmoUtil.PathfinderGizmo(this.grid, this.gridColor, this.notWalkable, this.showDiameter);
+        if(this.showDebug) GizmoUtil.PathfinderGizmo(this.grid, this.gridColor, this.notWalkable, this.showDiameter);
     }    
 }
 
