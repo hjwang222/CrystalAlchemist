@@ -14,8 +14,8 @@ public class ChangeStatusBarMenu : TitleScreenMenues
 
     private void getLayout()
     {
-        if(this.resourceType == CostType.life) setLayout(GlobalGameObjects.settings.healthBar);
-        else if (this.resourceType == CostType.mana) setLayout(GlobalGameObjects.settings.manaBar);
+        if(this.resourceType == CostType.life) setLayout(MasterManager.settings.healthBar);
+        else if (this.resourceType == CostType.mana) setLayout(MasterManager.settings.manaBar);
     }
 
     private void setLayout(bool value)
@@ -26,8 +26,8 @@ public class ChangeStatusBarMenu : TitleScreenMenues
 
     public void changeLayout(bool useBar)
     {
-        if (this.resourceType == CostType.life) GlobalGameObjects.settings.healthBar = useBar;
-        else if (this.resourceType == CostType.mana) GlobalGameObjects.settings.manaBar = useBar;
+        if (this.resourceType == CostType.life) MasterManager.settings.healthBar = useBar;
+        else if (this.resourceType == CostType.mana) MasterManager.settings.manaBar = useBar;
 
         getLayout();
 

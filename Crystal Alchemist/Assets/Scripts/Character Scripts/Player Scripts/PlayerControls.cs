@@ -1,59 +1,61 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
+    [Required]
     [SerializeField]
+    [BoxGroup("Player Signals")]
+    private SimpleSignal openInventorySignal;
+
+    [Required]
+    [SerializeField]
+    [BoxGroup("Player Signals")]
+    private SimpleSignal openPauseSignal;
+
     private Player player;
 
-    [SerializeField]
-    private PlayerMovement playerMovement;
-
-    private void Update()
-    { 
-        playerInputs();
+    private void Awake()
+    {
+        this.player = this.GetComponent<Player>();
     }
 
-    private void playerInputs()
+    public void Inventory(InputAction.CallbackContext context)
     {
-        if (this.player.currentState != CharacterState.knockedback && !this.player.isOnIce)
+        if (context.performed)
         {
-            if (this.player.myRigidbody.bodyType != RigidbodyType2D.Static) this.player.myRigidbody.velocity = Vector2.zero;
+            if (this.player.CanOpenMenu()) this.openInventorySignal.Raise();
+            else GameEvents.current.DoInventory();
         }
+    }
 
-        if (this.player.currentState != CharacterState.dead 
-         && this.player.currentState != CharacterState.respawning)
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
         {
-            if (this.player.currentState == CharacterState.inDialog 
-             || this.player.currentState == CharacterState.inMenu 
-             || this.player.currentState == CharacterState.respawning)
-            {
-                AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", false);
-                return;
-            }
-
-            if (Input.GetButtonDown("Inventory"))
-            {
-                this.player.openInventorySignal.Raise();
-            }
-
-            if (Input.GetButtonDown("Pause"))
-            {
-                this.player.openPauseSignal.Raise();
-            }
-
-            if (!StatusEffectUtil.isCharacterStunned(this.player))
-            {
-                player.change = Vector3.zero;
-                this.player.change.x = Input.GetAxisRaw("Horizontal");
-                this.player.change.y = Input.GetAxisRaw("Vertical");
-
-                if (this.player.currentState != CharacterState.dead
-                    && this.player.currentState != CharacterState.inDialog
-                    && this.player.currentState != CharacterState.inMenu)
-                {
-                    this.playerMovement.UpdateAnimationAndMove();
-                }
-            }            
+            if (this.player.CanOpenMenu()) this.openPauseSignal.Raise();
+            else GameEvents.current.DoPause();
         }
+    }
+
+    public void Submit(InputAction.CallbackContext context)
+    {
+        if (context.performed) GameEvents.current.DoSubmit();
+    }
+
+    public void Cancel(InputAction.CallbackContext context)
+    {
+        if (context.performed) GameEvents.current.DoCancel();
+    }
+
+    public void NextPage(InputAction.CallbackContext context)
+    {
+        if (context.performed) GameEvents.current.DoPage(1);
+    }
+
+    public void PreviousPage(InputAction.CallbackContext context)
+    {
+        if (context.performed) GameEvents.current.DoPage(-1);
     }
 }

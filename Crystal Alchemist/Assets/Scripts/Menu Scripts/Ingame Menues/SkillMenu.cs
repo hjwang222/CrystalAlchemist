@@ -66,6 +66,8 @@ public class SkillMenu : MenuControls
 
     public override void Start()
     {
+        GameEvents.current.OnPage += SetPage;
+
         base.Start();
 
         setSkillsToSlots(SkillType.physical);
@@ -75,17 +77,16 @@ public class SkillMenu : MenuControls
         showCategory(1);
     }
 
-    public override void Update()
+    private void OnDestroy()
     {
-        if (Input.GetButtonDown("Cancel"))
-        {
-            if (this.selectedAbility != null) selectSkillFromSkillSet(null);
-            else if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
-            else exitMenu();
-        }
-        else if (Input.GetButtonDown("Inventory")) exitMenu();
-        else if (Input.GetButtonDown("RBButton")) setPage(1);
-        else if (Input.GetButtonDown("LBButton")) setPage(-1);
+        GameEvents.current.OnPage -= SetPage;
+    }
+
+    public override void OnCancel()
+    {
+        if (this.selectedAbility != null) selectSkillFromSkillSet(null);
+        else if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
+        else exitMenu();
     }
 
     public override void OnEnable()
@@ -175,7 +176,7 @@ public class SkillMenu : MenuControls
             default: this.itemSkills.SetActive(true); this.categoryItems.gameObject.SetActive(true); break;
         }
 
-        setPage(0);
+        SetPage(0);
     }
 
     public void selectSkillFromSkillSet(SkillSlot skillSlot)
@@ -192,7 +193,7 @@ public class SkillMenu : MenuControls
         }
     }
 
-    public void setPage(int value)
+    public void SetPage(int value)
     {
         selectSkillFromSkillSet(null);
         GameObject activeCategory = null;

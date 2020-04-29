@@ -20,7 +20,7 @@ public class SecretArea : MonoBehaviour
     {
         if (!collision.isTrigger)
         {
-            AudioUtil.playSoundEffect(this.secretSoundEffect, GlobalGameObjects.settings.backgroundMusicVolume);
+            AudioUtil.playSoundEffect(this.secretSoundEffect, MasterManager.settings.backgroundMusicVolume);
             StartCoroutine(FadeOut());
         }
     }

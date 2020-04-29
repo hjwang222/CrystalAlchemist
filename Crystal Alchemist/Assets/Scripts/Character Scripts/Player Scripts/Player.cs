@@ -50,14 +50,6 @@ public class Player : Character
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal openInventorySignal;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal openPauseSignal;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
     public BoolSignal fadeSignal;
 
     [Required]
@@ -67,10 +59,6 @@ public class Player : Character
     [Required]
     [BoxGroup("Pflichtfelder")]
     public FloatValue fadingDuration;
-
-    [HideInInspector]
-    public Vector3 change;
-
 
     ///////////////////////////////////////////////////////////////
 
@@ -130,7 +118,6 @@ public class Player : Character
     {
         if (this.currentState != CharacterState.dead)
         {
-            this.change = Vector2.zero;
             this.characterLookDown();
 
             //TODO: Kill sofort (Skill noch aktiv)
@@ -177,8 +164,8 @@ public class Player : Character
     public override void reduceResource(Costs price)
     {
         //Shop, Door, Treasure, MiniGame, Abilities, etc
-        if (price != null 
-            && ((price.item != null && !price.item.isKeyItem()) 
+        if (price != null
+            && ((price.item != null && !price.item.isKeyItem())
               || price.item == null))
             this.updateResource(price.resourceType, price.item, -price.amount);
     }
@@ -186,7 +173,7 @@ public class Player : Character
 
 
     ///////////////////////////////////////////////////////////////
-       
+
 
     public override void updateResource(CostType type, ItemGroup item, float value, bool showingDamageNumber)
     {
@@ -204,13 +191,13 @@ public class Player : Character
 
     public void setStateMenuOpened(CharacterState newState)
     {
-        StopCoroutine(delayInputPlayerCO(GlobalGameObjects.staticValues.playerDelay, newState));
+        StopCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
         this.currentState = newState;
     }
 
     public void setStateAfterMenuClose(CharacterState newState)
     {
-        StartCoroutine(delayInputPlayerCO(GlobalGameObjects.staticValues.playerDelay, newState));
+        StartCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
     }
 
     public void showDialogBox(string text)
@@ -226,4 +213,22 @@ public class Player : Character
     }
 
     #endregion
+
+
+    public bool CanMove()
+    {
+        return (CanOpenMenu() && !StatusEffectUtil.isCharacterStunned(this));
+    }
+
+    public bool CanOpenMenu()
+    {
+        return (this.currentState != CharacterState.inDialog
+             && this.currentState != CharacterState.inMenu
+             && this.currentState != CharacterState.respawning
+             && this.currentState != CharacterState.dead);
+    }
+
 }
+
+
+

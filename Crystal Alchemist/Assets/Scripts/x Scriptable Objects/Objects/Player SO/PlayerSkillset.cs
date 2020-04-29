@@ -10,7 +10,7 @@ public class PlayerSkillset : ScriptableObject
     {
         this.abilities.Clear();
 
-        foreach (Ability ability in GlobalGameObjects.abilities)
+        foreach (Ability ability in MasterManager.abilities)
         {
             AddAbility(ability);
         }

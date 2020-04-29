@@ -88,6 +88,13 @@ public class DrawPrimitive : MonoBehaviour
         this.line.useWorldSpace = false;
     }
 
+    private void OnValidate()
+    {
+        this.line = this.GetComponent<LineRenderer>();
+        this.line.useWorldSpace = false;
+        Render();
+    }
+
     private void FixedUpdate()
     {
         Render();

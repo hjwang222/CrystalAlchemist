@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
@@ -40,8 +38,9 @@ public class CharacterCreatorName : CharacterCreatorButton
         this.inputField.ActivateInputField();
     }
 
+    /*
     public void Update()
     {
         if (Input.GetAxisRaw("Vertical") < 0) this.inputField.DeactivateInputField();
-    }
+    }*/
 }

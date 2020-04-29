@@ -140,7 +140,7 @@ public class AIAggroSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         this.enemy.target = character;
-        StartCoroutine(showClueCo(GlobalGameObjects.markAttack, this.aggroStats.activeClueDuration));
+        StartCoroutine(showClueCo(MasterManager.markAttack, this.aggroStats.activeClueDuration));
     }
 
 
@@ -220,7 +220,7 @@ public class AIAggroSystem : MonoBehaviour
             if (this.aggroList.Count == 1 && this.aggroStats.firstHitMaxAggro) addAggro(newTarget, (this.aggroStats.aggroNeededToTarget + (this.aggroStats.aggroDecreaseFactor * (-1))));
 
             if (this.aggroList[newTarget][1] == 0) setParameterOfAggrolist(newTarget, this.aggroStats.aggroDecreaseFactor);
-            if (this.enemy.target == null) StartCoroutine(showClueCo(GlobalGameObjects.markTarget, this.aggroStats.foundClueDuration));
+            if (this.enemy.target == null) StartCoroutine(showClueCo(MasterManager.markTarget, this.aggroStats.foundClueDuration));
         }
     }
 
@@ -231,7 +231,7 @@ public class AIAggroSystem : MonoBehaviour
         {
             addToAggroList(newTarget);
             setParameterOfAggrolist(newTarget, aggroIncrease);
-            if (this.enemy.target == null) StartCoroutine(showClueCo(GlobalGameObjects.markTarget, this.aggroStats.foundClueDuration));
+            if (this.enemy.target == null) StartCoroutine(showClueCo(MasterManager.markTarget, this.aggroStats.foundClueDuration));
         }
     }
 

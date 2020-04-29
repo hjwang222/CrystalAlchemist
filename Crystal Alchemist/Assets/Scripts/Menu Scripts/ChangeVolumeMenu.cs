@@ -30,8 +30,8 @@ public class ChangeVolumeMenu : MonoBehaviour
     {
         switch (this.volumeType)
         {
-            case VolumeType.effects: return GlobalGameObjects.settings.soundEffectVolume;
-            case VolumeType.music: return GlobalGameObjects.settings.backgroundMusicVolume;
+            case VolumeType.effects: return MasterManager.settings.soundEffectVolume;
+            case VolumeType.music: return MasterManager.settings.backgroundMusicVolume;
         }
 
         return 0;
@@ -41,14 +41,14 @@ public class ChangeVolumeMenu : MonoBehaviour
     {
         if (this.volumeType == VolumeType.music)
         {
-            GlobalGameObjects.settings.backgroundMusicVolume = (this.slider.value / 100f);                     
+            MasterManager.settings.backgroundMusicVolume = (this.slider.value / 100f);                     
 
-            if(!this.isTitleScreen) this.musicVolumeSignal.Raise(GlobalGameObjects.settings.getMusicInMenu());
-            else this.musicVolumeSignal.Raise(GlobalGameObjects.settings.backgroundMusicVolume);
+            if(!this.isTitleScreen) this.musicVolumeSignal.Raise(MasterManager.settings.getMusicInMenu());
+            else this.musicVolumeSignal.Raise(MasterManager.settings.backgroundMusicVolume);
         }
         else if (this.volumeType == VolumeType.effects)
         {
-            GlobalGameObjects.settings.soundEffectVolume = (this.slider.value / 100f);            
+            MasterManager.settings.soundEffectVolume = (this.slider.value / 100f);            
         }
 
         setVolumeText(this.slider.value);

@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BackgroundImageHandler : MonoBehaviour
 {
+    [SerializeField]
     private GameObject background;
 
-    public void setGameObject(GameObject gameObject)
+    private void Awake()
     {
-        if (this.background != null) Destroy(this.background);
-        if (gameObject != null) this.background = Instantiate(gameObject, this.transform.parent);
-    }
+        if(background != null) background.transform.SetParent(this.transform);
+    }    
 }

@@ -52,12 +52,6 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 3924551678506968720}
   shadow: {fileID: 0}
-  positionOffset: 0.25
-  attachToSender: 0
-  lockDirection: 0
-  canAffectedBytimeDistortion: 1
-  hasDuration: 1
-  maxDuration: 3
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
@@ -149,7 +143,6 @@ MonoBehaviour:
   rotateIt: 1
   rotateOnUpdate: 0
   keepOriginalRotation: 0
-  rotationModifier: 0
   snapRotationInDegrees: 0
 --- !u!1 &3924551678506968723
 GameObject:
@@ -311,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LightType: 1
-  m_BlendStyleIndex: 0
+  m_BlendStyleIndex: 1
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 0.88037235, b: 0, a: 1}
   m_Intensity: 0.5
@@ -321,7 +314,7 @@ MonoBehaviour:
     type: 3}
   m_UseNormalMap: 0
   m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
+  m_AlphaBlendOnOverlap: 1
   m_ShadowIntensity: 0
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360

@@ -84,7 +84,7 @@ public class AIEvents : CharacterCombat
     {
         if (this.activeDialog == null)
         {
-            this.activeDialog = Instantiate(GlobalGameObjects.miniDialogBox, this.npc.transform);
+            this.activeDialog = Instantiate(MasterManager.miniDialogBox, this.npc.transform);
             this.activeDialog.setDialogBox(text, duration);
         }
     }

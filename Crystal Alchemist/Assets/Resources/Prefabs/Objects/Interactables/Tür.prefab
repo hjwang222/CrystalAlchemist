@@ -199,18 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f660a5e6a71b040a0929e2af13c4a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texts:
-  - trigger: 1
-    dialogBoxText: Du hast <loot amount> <loot name> erhalten!
-    dialogBoxTextEnglish: You obtained <loot amount> <loot name>!
-  - trigger: 2
-    dialogBoxText: "Du kannst d<interactable> nicht \xF6ffnen. Du ben\xF6tigst <price>
-      <item name>."
-    dialogBoxTextEnglish: You cant open the <interactable>. You need <price> <item
-      name>.
-  - trigger: 3
-    dialogBoxText: D<interactable> ist leer... .
-    dialogBoxTextEnglish: The <interactable> is empty... .
+  texts: []
 --- !u!1 &6914875820510485348
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6914875820679529535
 Transform:
   m_ObjectHideFlags: 0
@@ -357,16 +346,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LightType: 1
-  m_BlendStyleIndex: 0
+  m_BlendStyleIndex: 1
   m_FalloffIntensity: 1
   m_Color: {r: 1, g: 0.9490197, b: 0.6156863, a: 1}
-  m_Intensity: 0.5
-  m_LightVolumeOpacity: 0.22
+  m_Intensity: 1
+  m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 000000007f83324619b8859a9b211b54
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
+  m_AlphaBlendOnOverlap: 1
   m_ShadowIntensity: 0
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360

@@ -65,7 +65,7 @@ public class Treasure : Rewardable
         if (this.itemDrop == null 
         && this.treasureType == TreasureType.normal) ChangeTreasureState(true);
 
-        AnalyseInfo analyse = Instantiate(GlobalGameObjects.analyseInfo, this.transform.position, Quaternion.identity, this.transform);
+        AnalyseInfo analyse = Instantiate(MasterManager.analyseInfo, this.transform.position, Quaternion.identity, this.transform);
         analyse.SetTarget(this.gameObject);       
     }
 
@@ -158,7 +158,7 @@ public class Treasure : Rewardable
 
     public void showTreasureItem()
     {
-        AudioUtil.playSoundEffect(this.gameObject, this.soundEffectTreasure, GlobalGameObjects.settings.backgroundMusicVolume);
+        AudioUtil.playSoundEffect(this.gameObject, this.soundEffectTreasure, MasterManager.settings.backgroundMusicVolume);
 
         //Item instanziieren und der Liste zurück geben und das Item anzeigen            
         this.showItem.SetActive(true);

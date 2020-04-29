@@ -1,35 +1,39 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Player))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
+    private Vector2 change;
     private Player player;
 
     #region Movement
 
-    public void UpdateAnimationAndMove()
+    private void Awake()
     {
-        if (this.player.change != Vector3.zero)
+        this.player = this.GetComponent<Player>();
+    }
+
+    public void MovePlayer(InputAction.CallbackContext ctx)
+    {
+        this.change = ctx.ReadValue<Vector2>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (this.player.currentState != CharacterState.knockedback
+            && !this.player.isOnIce
+            && this.player.myRigidbody.bodyType != RigidbodyType2D.Static) this.player.myRigidbody.velocity = Vector2.zero;
+
+        if(this.player.CanMove()) UpdateAnimationAndMove(this.change);  //check if is menu
+    }
+
+    private void UpdateAnimationAndMove(Vector2 direction)
+    {
+        if (direction != Vector2.zero)
         {
-            MoveCharacter();
-
-            bool lockAnimation = false;
-
-            foreach (Skill skill in this.player.activeSkills)
-            {
-                if (skill.isDirectionLocked())
-                {
-                    lockAnimation = true;
-                    break;
-                }
-            }
-
-            if (!lockAnimation)
-            {
-                this.player.direction = this.player.change;
-                this.player.updateAnimDirection(this.player.change);
-            }
-
+            MoveCharacter(direction);
+            SetDirection(direction);
             AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", true);
         }
         else
@@ -39,18 +43,35 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void MoveCharacter()
+    private void MoveCharacter(Vector2 direction)
     {
         if (this.player.currentState != CharacterState.knockedback
             && this.player.currentState != CharacterState.attack
             && this.player.currentState != CharacterState.dead)
         {
             if (this.player.currentState != CharacterState.interact) this.player.currentState = CharacterState.walk;
-            this.player.change.Normalize(); //Diagonal-Laufen fixen
 
-            Vector3 movement = new Vector3(this.player.change.x, this.player.change.y + (this.player.steps * this.player.change.x), 0.0f);
+            Vector3 movement = new Vector3(direction.x, direction.y + (this.player.steps * direction.x), 0.0f);
             if (!this.player.isOnIce) this.player.myRigidbody.velocity = (movement * this.player.speed * this.player.timeDistortion);
         }
+    }
+
+    private void SetDirection(Vector2 direction)
+    {
+        if (!IsDirectionLocked())
+        {
+            this.player.direction = direction;
+            this.player.updateAnimDirection(direction);
+        }
+    }
+
+    private bool IsDirectionLocked()
+    {
+        foreach (Skill skill in this.player.activeSkills)
+        {
+            if (skill.isDirectionLocked()) return true;            
+        }
+        return false;
     }
 
     #endregion

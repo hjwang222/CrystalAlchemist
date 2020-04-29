@@ -8,7 +8,7 @@ public class SaveSystem
     public static void Save(Player player, string scene, string name)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/" + name + "." + GlobalGameObjects.staticValues.saveGameFiletype;
+        string path = Application.persistentDataPath + "/" + name + "." + MasterManager.staticValues.saveGameFiletype;
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerData data = new PlayerData(player, scene);
@@ -21,7 +21,7 @@ public class SaveSystem
     public static void SaveOptions()
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/options."+GlobalGameObjects.staticValues.saveGameFiletype;
+        string path = Application.persistentDataPath + "/options."+MasterManager.staticValues.saveGameFiletype;
         FileStream stream = new FileStream(path, FileMode.Create);
 
         GameOptions data = new GameOptions();
@@ -35,7 +35,7 @@ public class SaveSystem
     {
         if (name != null)
         {
-            string path = Application.persistentDataPath + "/" + name + "." + GlobalGameObjects.staticValues.saveGameFiletype;
+            string path = Application.persistentDataPath + "/" + name + "." + MasterManager.staticValues.saveGameFiletype;
 
             if (File.Exists(path))
             {
@@ -58,7 +58,7 @@ public class SaveSystem
 
     public static void loadOptions()
     {
-        string path = Application.persistentDataPath + "/options." + GlobalGameObjects.staticValues.saveGameFiletype;
+        string path = Application.persistentDataPath + "/options." + MasterManager.staticValues.saveGameFiletype;
 
         if (File.Exists(path))
         {
@@ -70,15 +70,15 @@ public class SaveSystem
             stream.Close();
             stream.Dispose();
 
-            GlobalGameObjects.settings.backgroundMusicVolume = data.musicVolume;
-            GlobalGameObjects.settings.soundEffectVolume = data.soundVolume;
-            GlobalGameObjects.settings.useAlternativeLanguage = data.useAlternativeLanguage;
+            MasterManager.settings.backgroundMusicVolume = data.musicVolume;
+            MasterManager.settings.soundEffectVolume = data.soundVolume;
+            MasterManager.settings.useAlternativeLanguage = data.useAlternativeLanguage;
 
-            GlobalGameObjects.settings.healthBar = data.useHealthBar;
-            GlobalGameObjects.settings.manaBar = data.useManaBar;
+            MasterManager.settings.healthBar = data.useHealthBar;
+            MasterManager.settings.manaBar = data.useManaBar;
 
-            if (data.layout == "keyboard") GlobalGameObjects.settings.layoutType = LayoutType.keyboard;
-            else GlobalGameObjects.settings.layoutType = LayoutType.gamepad;
+            if (data.layout == "keyboard") MasterManager.settings.layoutType = LayoutType.keyboard;
+            else MasterManager.settings.layoutType = LayoutType.gamepad;
         }
     }
 }

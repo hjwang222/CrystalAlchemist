@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LightType: 3
-  m_BlendStyleIndex: 0
+  m_BlendStyleIndex: 1
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 0.96222955, b: 0.6650944, a: 1}
   m_Intensity: 1
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
+  m_AlphaBlendOnOverlap: 1
   m_ShadowIntensity: 0
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
@@ -326,9 +326,9 @@ MonoBehaviour:
   animator: {fileID: 2652810396879462137}
   boxCollider: {fileID: 0}
   shadowRenderer: {fileID: 3588978413753434420}
+  skillStartPosition: {fileID: 6261774556482826731}
   activeSkillParent: {fileID: 2652810397108339306}
   activeStatusEffectParent: {fileID: 8669415238972280400}
-  skillStartPosition: {fileID: 6261774556482826731}
   speedMultiply: 5
   spawnPosition: {x: 0, y: 0, z: 0}
   activeCastbar: {fileID: 0}
@@ -375,14 +375,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 1938021464261085658}
-  prioritizePartner: 1
-  movementRadius: 0.5
-  movementRadiusPartner: 0.5
-  movementDelay: 0.3
+  movementPriority: 0
+  targetRadius: 0.1
+  partnerRadius: 0.1
+  delay: 0
   backToStart: 0
-  path: []
+  returnDelay: 3
+  isPatrol: 0
+  patrolDelay: 3
+  patrolPath: []
   followPathPrecision: 0.01
   followPathInCircle: 0
+  accuracy: 0.25
 --- !u!114 &1938021464261085656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,9 +399,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeCastBar: {fileID: 0}
   npc: {fileID: 1938021464261085658}
   startPhase: {fileID: 0}
+  startImmediately: 1
 --- !u!114 &7016091898417923367
 MonoBehaviour:
   m_ObjectHideFlags: 0

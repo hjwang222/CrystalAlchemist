@@ -2,12 +2,10 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //ISSUES: PATHFINDING: too Performance heavy on bigger grids (see PathfindingGrid.cs)
-    //ISSUES: ONLINE: Switching Scenes and Network Instantiating
-    //ISSUES: 2D PIXEL: Stuttering Camera
-
     //TODO (0.2.5.0):
     //TODO: Multiscene instead of DontDestroy
+    //BUG: Szenenwechsel Eventsystem kaputt
+
     //TODO: ONLINE!
 
     //NPC: Bosskampf (Titania)
@@ -18,7 +16,6 @@ public class TODOLIST : MonoBehaviour
 
     //SKILL: Rundumschlag (wind)
     //GRAPHICS: TitleScreen: Background 
-    //GITHUB: ASSET STORE
     //TESTS!
 
     //-----------------------------------------------------------------------------

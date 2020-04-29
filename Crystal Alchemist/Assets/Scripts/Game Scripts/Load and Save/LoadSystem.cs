@@ -120,7 +120,7 @@ public class LoadSystem : MonoBehaviour
         {
             foreach (string keyItem in data.keyItems)
             {
-                ItemDrop drop = GlobalGameObjects.getItemDrop(keyItem);
+                ItemDrop drop = MasterManager.getItemDrop(keyItem);
                 if (drop != null) drop.stats.CollectIt(player);                
             }
         }
@@ -129,7 +129,7 @@ public class LoadSystem : MonoBehaviour
         {
             foreach (string[] item in data.inventoryItems)
             {
-                ItemGroup group = GlobalGameObjects.getItemGroup(item[0]);
+                ItemGroup group = MasterManager.getItemGroup(item[0]);
                 if (group != null) player.GetComponent<PlayerItems>().CollectInventoryItem(group, Convert.ToInt32(item[1]));
             }
         }

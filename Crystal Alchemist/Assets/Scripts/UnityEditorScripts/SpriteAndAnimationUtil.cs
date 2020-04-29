@@ -46,6 +46,10 @@ public class SpriteAndAnimationUtil : MonoBehaviour
     [SerializeField]
     private List<string> rows = new List<string>();
 
+    [BoxGroup]
+    [SerializeField]
+    private Material material;
+
 #if UNITY_EDITOR
     [Button]
     public void UpdateSpritesAndAnimations()
@@ -69,6 +73,18 @@ public class SpriteAndAnimationUtil : MonoBehaviour
             }
 
             Debug.Log("<color=blue>Set Animation of: " + clip.name + " for " + childObjects.Count + " GameObjects.</color>");
+        }
+    }
+
+    [Button]
+    public void ChangeMaterial()
+    {
+        List<PlayerAnimationPart> childObjects = new List<PlayerAnimationPart>();
+        UnityUtil.GetChildObjects(this.transform, childObjects); //get all children from GameObject        
+
+        foreach (PlayerAnimationPart part in childObjects)
+        {
+            if (part.GetComponent<SpriteRenderer>() != null) part.GetComponent<SpriteRenderer>().material = this.material;
         }
     }
 

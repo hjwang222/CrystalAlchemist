@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MiniGameText : MonoBehaviour
 {
@@ -18,6 +16,16 @@ public class MiniGameText : MonoBehaviour
     private bool inputPossible = false;
     private float maxDuration = 3f;
 
+    private void Start()
+    {
+        GameEvents.current.OnSubmit += Disable;
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.current.OnSubmit -= Disable;
+    }
+
     private void OnEnable()
     {
         if (this.audioClip != null && this.audioClip.length > 3) this.maxDuration = this.audioClip.length + 1f;
@@ -25,20 +33,17 @@ public class MiniGameText : MonoBehaviour
         this.duration = this.maxDuration;
         AudioUtil.playSoundEffect(this.audioClip);
         StartCoroutine(delayInput());
-    }
-
-    private void Update()
-    {        
-        if (this.duration > 0) this.duration -= Time.deltaTime;
-        else if ((this.duration <= 0 && this.maxDuration > 0)
-             || (this.inputPossible && Input.GetButtonDown("Submit"))) Disable();
+        StartCoroutine(DisableCo());
     }
 
     public void Disable()
     {
-        if (this.showDialogBox) showDialog(); //WIN or LOSE
-        else this.miniGameUI.startRound();
-        this.gameObject.SetActive(false);
+        if (this.inputPossible)
+        {
+            if (this.showDialogBox) this.miniGameUI.showDialog(); //WIN or LOSE
+            else this.miniGameUI.startRound();
+            this.gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator delayInput()
@@ -48,9 +53,9 @@ public class MiniGameText : MonoBehaviour
         this.inputPossible = true;
     }
 
-   public void showDialog()
+    private IEnumerator DisableCo()
     {
-        this.miniGameUI.showDialog();
+        yield return new WaitForSeconds(this.maxDuration);
+        Disable();
     }
-
 }

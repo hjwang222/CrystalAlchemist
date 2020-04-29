@@ -13,23 +13,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2020-04-24T10:30:53.954+02:00
-  initializedAtString: 2020-04-24T10:30:53.943+02:00
+  lastUpdatedAtString: 2020-04-29T01:44:30.500+02:00
+  initializedAtString: 2020-04-29T01:38:41.820+02:00
   localBranches:
   - name: Feature
     tracking: origin/Feature
-  - name: master
-    tracking: origin/master
   remoteBranches:
-  - name: origin/Development
-    tracking: '[None]'
   - name: origin/Feature
     tracking: '[None]'
   - name: origin/HEAD
-    tracking: '[None]'
-  - name: origin/master
-    tracking: '[None]'
-  - name: origin/revert-11-Feature
     tracking: '[None]'
   remotes:
   - name: origin
@@ -42,51 +34,27 @@ MonoBehaviour:
   localConfigBranches:
     keys:
     - Feature
-    - master
     values:
     - name: Feature
       remote:
         name: origin
         url: https://github.com/Species125/CrystalAlchemist.git
       trackingBranch: Feature
-    - name: master
-      remote:
-        name: origin
-        url: https://github.com/Species125/CrystalAlchemist.git
-      trackingBranch: master
   remoteConfigBranches:
     keys:
     - origin
     subKeys:
     - Values:
-      - Development
       - Feature
       - HEAD
-      - master
-      - revert-11-Feature
     subKeyValues:
     - Values:
-      - name: Development
-        remote:
-          name: origin
-          url: https://github.com/Species125/CrystalAlchemist.git
-        trackingBranch: 
       - name: Feature
         remote:
           name: origin
           url: https://github.com/Species125/CrystalAlchemist.git
         trackingBranch: 
       - name: HEAD
-        remote:
-          name: origin
-          url: https://github.com/Species125/CrystalAlchemist.git
-        trackingBranch: 
-      - name: master
-        remote:
-          name: origin
-          url: https://github.com/Species125/CrystalAlchemist.git
-        trackingBranch: 
-      - name: revert-11-Feature
         remote:
           name: origin
           url: https://github.com/Species125/CrystalAlchemist.git

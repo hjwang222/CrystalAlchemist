@@ -9,7 +9,7 @@ public class ChangeLanguageMenu : TitleScreenMenues
 
     private void getFlag()
     {
-        if (GlobalGameObjects.settings.useAlternativeLanguage) this.switchButtons(this.secondButton, this.firstButton);
+        if (MasterManager.settings.useAlternativeLanguage) this.switchButtons(this.secondButton, this.firstButton);
         else this.switchButtons(this.firstButton, this.secondButton);
     }
 
@@ -21,8 +21,8 @@ public class ChangeLanguageMenu : TitleScreenMenues
 
     public void changeLanguageWithoutSave(GameObject gameObject)
     {
-        if(gameObject.name.ToUpper() == "GER") GlobalGameObjects.settings.useAlternativeLanguage = false;
-        else GlobalGameObjects.settings.useAlternativeLanguage = true;
+        if(gameObject.name.ToUpper() == "GER") MasterManager.settings.useAlternativeLanguage = false;
+        else MasterManager.settings.useAlternativeLanguage = true;
 
         getFlag();
 

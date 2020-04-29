@@ -1,16 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using System;
-using UnityEngine.UI;
 
 public class GameUtil : MonoBehaviour
 {
-    public static string getButton(enumButton button)
-    {
-        return button.ToString();
-    }
-
     public static void setPreset(CharacterPreset source, CharacterPreset target)
     {
         target.setRace(source.getRace());

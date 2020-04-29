@@ -14,7 +14,7 @@ public class FormatUtil : MonoBehaviour
 
     public static string getLanguageDialogText(string originalText, string alternativeText)
     {
-        if (GlobalGameObjects.settings.useAlternativeLanguage && alternativeText.Replace(" ", "").Length > 1) return alternativeText;
+        if (MasterManager.settings.useAlternativeLanguage && alternativeText.Replace(" ", "").Length > 1) return alternativeText;
         else return originalText;
     }
 

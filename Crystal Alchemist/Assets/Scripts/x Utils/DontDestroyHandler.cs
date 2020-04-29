@@ -10,7 +10,7 @@ public class DontDestroyHandler : MonoBehaviour
     public static DontDestroyHandler Instance;
 
     void Awake()
-    {
+    {/*
         if (Instance == null)
         {
             Instance = this;
@@ -27,11 +27,18 @@ public class DontDestroyHandler : MonoBehaviour
         else if (Instance != this)
         {
             Destroy(this.gameObject);
-        }        
+        }  */
+
+        foreach (GameObject gameObject in this.dontDestroy)
+        {
+            GameObject temp = Instantiate(gameObject);
+            temp.name = gameObject.name;
+        }
     }    
 
     public void DestroyAll()
     {
+        /*
         //called from Signal
         foreach(GameObject temp in this.activeObjects)
         {
@@ -40,6 +47,6 @@ public class DontDestroyHandler : MonoBehaviour
         this.activeObjects.Clear();
         Instance = null;
 
-        Destroy(this.gameObject);
+        Destroy(this.gameObject);*/
     }    
 }

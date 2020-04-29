@@ -11,15 +11,20 @@ public class CharacterCombat : MonoBehaviour
     {
         if (sender != null)
         {
-            this.targetingSystem = Instantiate(GlobalGameObjects.targetingSystem, sender.transform.position, Quaternion.identity, sender.transform);
+            this.targetingSystem = Instantiate(MasterManager.targetingSystem, sender.transform.position, Quaternion.identity, sender.transform);
             this.targetingSystem.Initialize(sender);
-            this.targetingSystem.name = GlobalGameObjects.targetingSystem.name;
+            this.targetingSystem.name = MasterManager.targetingSystem.name;
             this.targetingSystem.gameObject.SetActive(false);
         }
         else
         {
             Debug.Log("Character Combat missing Sender: " + this.gameObject);
         }
+    }
+
+    public TargetingSystem GetTargetingSystem()
+    {
+        return this.targetingSystem;
     }
 
     public void SetTimeValue(FloatValue timeValue)
@@ -84,7 +89,7 @@ public class CharacterCombat : MonoBehaviour
     {
         if (this.activeCastBar == null && ability.showCastbar && ability.hasCastTime)
         {
-            this.activeCastBar = Instantiate(GlobalGameObjects.castBar, character.transform.position, Quaternion.identity);
+            this.activeCastBar = Instantiate(MasterManager.castBar, character.transform.position, Quaternion.identity);
             this.activeCastBar.setCastBar(character, ability);
         }
     }

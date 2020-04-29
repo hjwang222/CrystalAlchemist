@@ -26,7 +26,7 @@ public class SnakeTail : MonoBehaviour
        if(this.startPosition != Vector2.zero) this.transform.position = this.startPosition;
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         if (this.player != null && this.player.myRigidbody != null)
         {

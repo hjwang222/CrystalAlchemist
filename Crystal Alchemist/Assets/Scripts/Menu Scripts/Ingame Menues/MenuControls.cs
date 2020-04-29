@@ -46,8 +46,20 @@ public class MenuControls : BasicMenu
     public override void Start()
     {
         base.Start();
+
+        GameEvents.current.OnCancel += OnCancel;
+        GameEvents.current.OnInventory += showExitDialogBox;
+        GameEvents.current.OnPause += showExitDialogBox;
+
         Cursor.SetCursor(cursorTexture, new Vector2(0, 0), CursorMode.ForceSoftware);
         Cursor.visible = true;
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.current.OnCancel -= OnCancel;
+        GameEvents.current.OnInventory -= showExitDialogBox;
+        GameEvents.current.OnPause -= showExitDialogBox;
     }
 
     public override void OnEnable()
@@ -67,7 +79,7 @@ public class MenuControls : BasicMenu
                 IngameMenuHandler.lastState = this.player.currentState;
                 this.player.setStateAfterMenuClose(CharacterState.inMenu);
 
-                if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalGameObjects.settings.getMusicInMenu());
+                if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.getMusicInMenu());
             }
         }
 
@@ -86,7 +98,7 @@ public class MenuControls : BasicMenu
 
             if (this.cursor != null) this.cursor.gameObject.SetActive(false);
             if (this.blackScreen != null) this.blackScreen.SetActive(false);
-            if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(GlobalGameObjects.settings.backgroundMusicVolume);
+            if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.backgroundMusicVolume);
         }
 
         if (this.cursor.infoBox != null) this.cursor.infoBox.Hide();
@@ -95,17 +107,21 @@ public class MenuControls : BasicMenu
 
     public override void Update()
     {
-        base.Update();
+        base.Update();        
+    }
 
+    public virtual void OnCancel()
+    {
         if (!disableExitButtonPress)
         {
-            if (Input.GetButtonDown("Cancel"))
-            {
-                if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
-                else showExitDialogBox();
-            }
-            else if (Input.GetButtonDown("Inventory") || Input.GetButtonDown("Pause")) showExitDialogBox();
+            if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
+            else showExitDialogBox();
         }
+    }
+
+    public virtual void OnClose()
+    {
+        if (!disableExitButtonPress) showExitDialogBox();        
     }
 
     public void showExitDialogBox()

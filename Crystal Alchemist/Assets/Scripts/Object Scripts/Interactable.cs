@@ -17,17 +17,11 @@ public class Interactable : MonoBehaviour
     public bool isPlayerInRange = false;
     [HideInInspector]
     public bool isPlayerLookingAtIt = false;
-
     [HideInInspector]
     public Player player;
-
-    [HideInInspector]
-    public AudioSource audioSource;
-    [HideInInspector]
-    public SpriteRenderer spriteRenderer;
     [HideInInspector]
     public ContextClue context;
-    
+
     #endregion
 
 
@@ -35,22 +29,12 @@ public class Interactable : MonoBehaviour
 
     public virtual void Start()
     {
-        init();
+        GameEvents.current.OnSubmit += OnSubmit;
+        this.context = Instantiate(MasterManager.contextClue, this.transform.position, Quaternion.identity, this.transform);
     }
 
     private void Update()
     {
-        if (this.player != null
-            && this.isPlayerInRange
-            && this.isPlayerLookingAtIt
-            && this.player.currentState == CharacterState.interact)
-        {
-            if (Input.GetButtonDown("Submit"))
-            {
-                doSomethingOnSubmit();
-            }
-        }
-
         doOnUpdate();
     }
 
@@ -59,24 +43,27 @@ public class Interactable : MonoBehaviour
 
     }
 
+    private void OnSubmit()
+    {
+        if (this.player != null
+            && this.isPlayerInRange
+            && this.isPlayerLookingAtIt
+            && this.player.currentState == CharacterState.interact)
+        {
+            doSomethingOnSubmit();            
+        }
+    }
+
     public virtual void doSomethingOnSubmit()
     {
 
     }
 
-    private void init()
+    private void OnDestroy()
     {
-        this.audioSource = this.transform.gameObject.AddComponent<AudioSource>();
-        this.audioSource.loop = false;
-        this.audioSource.playOnAwake = false;
-        setContext();
-
+        GameEvents.current.OnSubmit -= OnSubmit;
     }
 
-    public void setContext()
-    {
-        this.context = Instantiate(GlobalGameObjects.contextClue, this.transform.position, Quaternion.identity, this.transform);
-    }
 
     #endregion
 

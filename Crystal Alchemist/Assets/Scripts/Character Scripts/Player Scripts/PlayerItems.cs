@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerItems : MonoBehaviour
@@ -9,6 +8,8 @@ public class PlayerItems : MonoBehaviour
 
     [SerializeField]
     private PlayerInventory inventory;
+
+    private void Awake() => this.inventory.Initialize(); //remove null objects    
 
     public List<ItemStats> GetItemStats()
     {

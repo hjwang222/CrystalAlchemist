@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -28,13 +27,11 @@ public class PlayerButtons : ScriptableObject
 
     [BoxGroup]
     public Ability currentAbility;
-    [BoxGroup]
-    public string currentButton;
+
 
     public void Updating(Player player)
-    {
+    {        
         bool canFight = player.canUseAbilities();
-        GetAbilityFromButton();
 
         foreach (PlayerButton playerButton in this.buttons)
         {
@@ -48,37 +45,6 @@ public class PlayerButtons : ScriptableObject
                     playerButton.ability.enabled = false;
             }
         }
-    }
-
-    public void GetAbilityFromButton()
-    {
-        bool found = false;
-
-        foreach (enumButton item in Enum.GetValues(typeof(enumButton)))
-        {
-            if (isPressed(item.ToString()))
-            {
-                this.currentButton = item.ToString();
-                this.currentAbility = GetAbilityFromButton(item);
-                found = true;
-                break;
-            }
-        }
-
-        if (!found)
-        {
-            this.currentAbility = null;
-            this.currentButton = "";
-        }
-    }
-
-    private bool isPressed(string button)
-    {
-        if (Input.GetButton(button)
-            || Input.GetButtonUp(button)
-            || Input.GetButtonDown(button)) return true;
-
-        return false;
     }
 
     public Ability GetAbilityFromButton(enumButton button)

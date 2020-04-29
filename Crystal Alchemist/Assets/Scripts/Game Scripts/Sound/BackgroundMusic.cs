@@ -18,7 +18,7 @@ public class BackgroundMusic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.volume = GlobalGameObjects.settings.backgroundMusicVolume;
+        this.volume = MasterManager.settings.backgroundMusicVolume;
         this.audioSource = this.GetComponent<AudioSource>();
         this.audioSource.volume = this.volume;
 
@@ -27,7 +27,7 @@ public class BackgroundMusic : MonoBehaviour
 
     public void changePitch()
     {
-        this.audioSource.pitch = GlobalGameObjects.settings.backgroundMusicPitch;        
+        this.audioSource.pitch = MasterManager.settings.backgroundMusicPitch;        
     }
 
     public void changeVolume(float volume)

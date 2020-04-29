@@ -369,7 +369,7 @@ public class Character : MonoBehaviour
     {
         if (this.stats.showDamageNumbers)
         {
-            DamageNumbers damageNumberClone = Instantiate(GlobalGameObjects.damageNumber, this.transform.position, Quaternion.identity, this.transform);
+            DamageNumbers damageNumberClone = Instantiate(MasterManager.damageNumber, this.transform.position, Quaternion.identity, this.transform);
             damageNumberClone.Initialize(value, color);
         }
     }
@@ -483,8 +483,8 @@ public class Character : MonoBehaviour
                 {
                     this.life = GameUtil.setResource(this.life, this.maxLife, value);
 
-                    Color[] colorArray = GlobalGameObjects.staticValues.red;
-                    if (value > 0) colorArray = GlobalGameObjects.staticValues.green;
+                    Color[] colorArray = MasterManager.staticValues.red;
+                    if (value > 0) colorArray = MasterManager.staticValues.green;
 
                     if (this.life > 0 && this.currentState != CharacterState.dead && showingDamageNumber) showDamageNumber(value, colorArray);
 
@@ -493,7 +493,7 @@ public class Character : MonoBehaviour
             case CostType.mana:
                 {
                     this.mana = GameUtil.setResource(this.mana, this.maxMana, value);
-                    if (showingDamageNumber && value > 0) showDamageNumber(value, GlobalGameObjects.staticValues.blue);
+                    if (showingDamageNumber && value > 0) showDamageNumber(value, MasterManager.staticValues.blue);
                     break;
                 }
         }

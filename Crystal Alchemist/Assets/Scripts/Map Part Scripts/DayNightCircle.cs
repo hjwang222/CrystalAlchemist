@@ -11,11 +11,14 @@ public class DayNightCircle : MonoBehaviour
     [SerializeField]
     private TimeValue timeValue;
 
+    [SerializeField]
+    private bool isActive = true;
+
     private bool isRunning = false;
 
     private void Start()
     {
-        StartCoroutine(startCo());  
+        if(this.isActive) StartCoroutine(startCo());  
     }
 
     IEnumerator startCo()
@@ -26,9 +29,12 @@ public class DayNightCircle : MonoBehaviour
 
     public void changeColor()
     {
-        Color newColor = this.timeValue.GetColor();
-        float duration = this.timeValue.factor * (this.timeValue.update-1);
-        if (newColor != light.color && !this.isRunning) StartCoroutine(lerpColor(light, light.color, newColor, duration));
+        if (this.isActive)
+        {
+            Color newColor = this.timeValue.GetColor();
+            float duration = this.timeValue.factor * (this.timeValue.update - 1);
+            if (newColor != light.color && !this.isRunning) StartCoroutine(lerpColor(light, light.color, newColor, duration));
+        }
     }
 
     IEnumerator lerpColor(UnityEngine.Experimental.Rendering.Universal.Light2D light, Color fromColor, Color toColor, float duration)

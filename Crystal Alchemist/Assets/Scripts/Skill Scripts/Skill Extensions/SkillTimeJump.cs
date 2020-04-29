@@ -23,7 +23,7 @@ public class SkillTimeJump : SkillExtension
 
     private void Start()
     {
-        GlobalGameObjects.settings.backgroundMusicPitch = this.musicPitch;
+        MasterManager.settings.backgroundMusicPitch = this.musicPitch;
         this.musicPitchSignal.Raise();
     }
 
@@ -40,7 +40,7 @@ public class SkillTimeJump : SkillExtension
     private void OnDestroy()
     {        
         this.timeValue.factor = this.timeValue.normalFactor;
-        GlobalGameObjects.settings.backgroundMusicPitch = 1f;
+        MasterManager.settings.backgroundMusicPitch = 1f;
         this.musicPitchSignal.Raise();
         this.skill.sender.removeColor(this.targetColor);
     }

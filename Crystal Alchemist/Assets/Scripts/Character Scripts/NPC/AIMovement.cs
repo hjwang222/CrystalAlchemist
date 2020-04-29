@@ -91,7 +91,7 @@ public class AIMovement : MonoBehaviour
     {
         AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", false);
         if (Pathfinding.Instance != null) this.seeker = this.GetComponent<PathSeeker>();
-        this.targetPosition = GlobalGameObjects.staticValues.nullVector;
+        this.targetPosition = MasterManager.staticValues.nullVector;
     }
 
     #region Update und Movement Funktionen
@@ -128,9 +128,9 @@ public class AIMovement : MonoBehaviour
 
     private void SetNextPoint()
     {
-        Vector3 patrolVector = GlobalGameObjects.staticValues.nullVector;
-        Vector3 spawnVector = GlobalGameObjects.staticValues.nullVector;
-        Vector3 chaseVector = GlobalGameObjects.staticValues.nullVector;
+        Vector3 patrolVector = MasterManager.staticValues.nullVector;
+        Vector3 spawnVector = MasterManager.staticValues.nullVector;
+        Vector3 chaseVector = MasterManager.staticValues.nullVector;
 
         if (this.isPatrol) patrolVector = GetNextPoint(patrolPath[currentPoint].position, this.followPathPrecision, SetNextWayPoint);
         if (this.backToStart) spawnVector = GetNextPoint(this.npc.spawnPosition, 0.25f);
@@ -149,7 +149,7 @@ public class AIMovement : MonoBehaviour
 
     private void SetVector(Vector3 patrolVector, Vector3 spawnVector, Vector3 chaseVector)
     {
-        Vector3 newVector = GlobalGameObjects.staticValues.nullVector;
+        Vector3 newVector = MasterManager.staticValues.nullVector;
         float delay = 0f;
 
         SetVector(patrolVector, this.patrolDelay, newVector, delay, out newVector, out delay);
@@ -168,7 +168,7 @@ public class AIMovement : MonoBehaviour
         newDelay = _delay;
         newVector = _newVector;
 
-        if (vector != GlobalGameObjects.staticValues.nullVector)
+        if (vector != MasterManager.staticValues.nullVector)
         {
             newVector = vector;
             newDelay = delay;
@@ -184,7 +184,7 @@ public class AIMovement : MonoBehaviour
         else
         {
             this.enableCoroutine = true;
-            return GlobalGameObjects.staticValues.nullVector;
+            return MasterManager.staticValues.nullVector;
         }
     }
 
@@ -203,7 +203,7 @@ public class AIMovement : MonoBehaviour
         }
         else
         {
-            return GlobalGameObjects.staticValues.nullVector;
+            return MasterManager.staticValues.nullVector;
         }
     }
 
@@ -238,7 +238,7 @@ public class AIMovement : MonoBehaviour
         if (this.npc.currentState != CharacterState.knockedback
             && this.npc.currentState != CharacterState.attack
             && this.npc.currentState != CharacterState.dead
-            && position != GlobalGameObjects.staticValues.nullVector)
+            && position != MasterManager.staticValues.nullVector)
         {
             Vector2 direction = ((Vector2)position - this.npc.GetGroundPosition()).normalized;
 

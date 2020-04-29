@@ -22,6 +22,7 @@ public class TargetingSystem : MonoBehaviour
     private TargetingProperty properties;
     private Ability ability;
     private float timeLeft = 60f;
+    private Vector2 change;
 
     #region Unity Functions
 
@@ -34,6 +35,12 @@ public class TargetingSystem : MonoBehaviour
     {
         this.timeLeftValue = timeValue;
     }
+
+    public void SetTargetChange(Vector2 change)
+    {
+        this.change = change;
+    }
+
 
     private void OnEnable()
     {
@@ -140,12 +147,9 @@ public class TargetingSystem : MonoBehaviour
         if (this.selectAll) selectAllNearestTargets();
         else selectNextTarget(0);
 
-        if (this.inputPossible)
+        if (this.inputPossible && this.change != Vector2.zero)
         {
-            float valueX = Input.GetAxisRaw("Cursor Horizontal");
-            float valueY = Input.GetAxisRaw("Cursor Vertical");
-
-            if (valueY != 0) //switch modes
+            if (this.change.y != 0) //switch modes
             {
                 StartCoroutine(delayCo());
 
@@ -153,10 +157,10 @@ public class TargetingSystem : MonoBehaviour
                 else this.selectAll = true;
             }
 
-            if (valueX != 0) //switch targets
+            if (this.change.x != 0) //switch targets
             {
                 StartCoroutine(delayCo());
-                selectNextTarget((int)valueX);
+                selectNextTarget((int)this.change.x);
             }
         }
     }
@@ -233,7 +237,7 @@ public class TargetingSystem : MonoBehaviour
     private IEnumerator delayCo()
     {
         this.inputPossible = false;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         this.inputPossible = true;
     }
 

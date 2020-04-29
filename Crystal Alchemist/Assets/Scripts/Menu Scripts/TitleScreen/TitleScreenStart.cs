@@ -33,7 +33,7 @@ public class TitleScreenStart : MonoBehaviour
         SaveSystem.loadOptions();
 
         if (this.musicVolumeSignal != null)
-            this.musicVolumeSignal.Raise(GlobalGameObjects.settings.backgroundMusicVolume);
+            this.musicVolumeSignal.Raise(MasterManager.settings.backgroundMusicVolume);
     }
 
     private void Update()
