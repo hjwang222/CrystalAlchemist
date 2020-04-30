@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IcedArea : MonoBehaviour
+public class IcedArea : Terrain
 {
     private List<Character> characters = new List<Character>();
 
@@ -14,9 +14,9 @@ public class IcedArea : MonoBehaviour
     {
         foreach (Character character in this.characters)
         {
-            if (character.currentState == CharacterState.walk && character.speed < character.stats.startSpeed)
+            if (character.values.currentState == CharacterState.walk && character.values.speed < character.stats.startSpeed)
             {
-                character.myRigidbody.AddForce(character.direction.normalized * character.speed * character.timeDistortion, ForceMode2D.Force);
+                character.myRigidbody.AddForce(character.values.direction.normalized * character.values.speed * character.values.timeDistortion, ForceMode2D.Force);
             }                       
         }
     }
@@ -26,7 +26,7 @@ public class IcedArea : MonoBehaviour
         Character character = collision.GetComponent<Character>();
         if (character != null)
         {
-            character.isOnIce = true;
+            character.values.isOnIce = true;
             character.myRigidbody.velocity = Vector2.zero;
             character.updateSpeed(this.startSpeed, false);
 
@@ -39,7 +39,7 @@ public class IcedArea : MonoBehaviour
         Character character = collision.GetComponent<Character>();
         if (character != null)
         {
-            character.isOnIce = false;
+            character.values.isOnIce = false;
             character.myRigidbody.velocity = Vector2.zero;
             character.updateSpeed(0, false);
 

@@ -6,7 +6,7 @@ public class StatusEffectUtil : MonoBehaviour
 {
     public static bool isCharacterStunned(Character character)
     {
-        foreach (StatusEffect debuff in character.debuffs)
+        foreach (StatusEffect debuff in character.values.debuffs)
         {
             if (debuff.stunTarget) return true;
         }
@@ -37,8 +37,8 @@ public class StatusEffectUtil : MonoBehaviour
         List<StatusEffect> statusEffects = null;
         List<StatusEffect> dispellStatusEffects = new List<StatusEffect>();
 
-        if (statusEffect.statusEffectType == StatusEffectType.debuff) statusEffects = character.debuffs;
-        else if (statusEffect.statusEffectType == StatusEffectType.buff) statusEffects = character.buffs;
+        if (statusEffect.statusEffectType == StatusEffectType.debuff) statusEffects = character.values.debuffs;
+        else if (statusEffect.statusEffectType == StatusEffectType.buff) statusEffects = character.values.buffs;
 
         //Store in temp List to avoid Enumeration Exception
         foreach (StatusEffect effect in statusEffects)
@@ -85,8 +85,8 @@ public class StatusEffectUtil : MonoBehaviour
                 List<StatusEffect> result = new List<StatusEffect>();
 
                 //add to list for better reference
-                if (statusEffect.statusEffectType == StatusEffectType.debuff) statusEffects = character.debuffs;
-                else if (statusEffect.statusEffectType == StatusEffectType.buff) statusEffects = character.buffs;
+                if (statusEffect.statusEffectType == StatusEffectType.debuff) statusEffects = character.values.debuffs;
+                else if (statusEffect.statusEffectType == StatusEffectType.buff) statusEffects = character.values.buffs;
 
                 for (int i = 0; i < statusEffects.Count; i++)
                 {

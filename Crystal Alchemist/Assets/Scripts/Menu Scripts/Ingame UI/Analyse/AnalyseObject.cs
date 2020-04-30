@@ -37,8 +37,8 @@ public class AnalyseObject : MonoBehaviour
         else if (this.breakable != null)
         {
             //Show Object Information
-            if (this.breakable.itemDrop != null
-             && this.breakable.currentState != CharacterState.dead) Activate(this.breakable.itemDrop.stats);
+            if (this.breakable.values.itemDrop != null
+             && this.breakable.values.currentState != CharacterState.dead) Activate(this.breakable.values.itemDrop.stats);
             else Deactivate();
         }
     }

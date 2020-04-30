@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (this.player.currentState != CharacterState.knockedback
-            && !this.player.isOnIce
+        if (this.player.values.currentState != CharacterState.knockedback
+            && !this.player.values.isOnIce
             && this.player.myRigidbody.bodyType != RigidbodyType2D.Static) this.player.myRigidbody.velocity = Vector2.zero;
 
         if(this.player.CanMove()) UpdateAnimationAndMove(this.change);  //check if is menu
@@ -39,20 +39,20 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", false);
-            if (this.player.currentState == CharacterState.walk) this.player.currentState = CharacterState.idle;
+            if (this.player.values.currentState == CharacterState.walk) this.player.values.currentState = CharacterState.idle;
         }
     }
 
     private void MoveCharacter(Vector2 direction)
     {
-        if (this.player.currentState != CharacterState.knockedback
-            && this.player.currentState != CharacterState.attack
-            && this.player.currentState != CharacterState.dead)
+        if (this.player.values.currentState != CharacterState.knockedback
+            && this.player.values.currentState != CharacterState.attack
+            && this.player.values.currentState != CharacterState.dead)
         {
-            if (this.player.currentState != CharacterState.interact) this.player.currentState = CharacterState.walk;
+            if (this.player.values.currentState != CharacterState.interact) this.player.values.currentState = CharacterState.walk;
 
-            Vector3 movement = new Vector3(direction.x, direction.y + (this.player.steps * direction.x), 0.0f);
-            if (!this.player.isOnIce) this.player.myRigidbody.velocity = (movement * this.player.speed * this.player.timeDistortion);
+            Vector3 movement = new Vector3(direction.x, direction.y + (this.player.values.steps * direction.x), 0.0f);
+            if (!this.player.values.isOnIce) this.player.myRigidbody.velocity = (movement * this.player.values.speed * this.player.values.timeDistortion);
         }
     }
 
@@ -60,14 +60,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!IsDirectionLocked())
         {
-            this.player.direction = direction;
-            this.player.updateAnimDirection(direction);
+            this.player.values.direction = direction;
+            this.player.UpdateAnimator(direction);
         }
     }
 
     private bool IsDirectionLocked()
     {
-        foreach (Skill skill in this.player.activeSkills)
+        foreach (Skill skill in this.player.values.activeSkills)
         {
             if (skill.isDirectionLocked()) return true;            
         }

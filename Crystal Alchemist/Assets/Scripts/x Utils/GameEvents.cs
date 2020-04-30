@@ -5,12 +5,12 @@ public class GameEvents : MonoBehaviour
 {
     [SerializeField]
     private MasterManager _globalGameObjects;
-
     public static GameEvents current;
 
     private void Awake()
     {
         current = this;
+        SaveSystem.loadOptions();
     }
 
     public Action OnSubmit;

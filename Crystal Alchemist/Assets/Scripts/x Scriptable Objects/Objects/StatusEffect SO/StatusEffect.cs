@@ -111,8 +111,8 @@ public class StatusEffect : ScriptableObject
     public void Initialize(Character character)
     {
         this.target = character;
-        if (this.statusEffectType == StatusEffectType.debuff) this.target.debuffs.Add(this);
-        else this.target.buffs.Add(this);
+        if (this.statusEffectType == StatusEffectType.debuff) this.target.values.debuffs.Add(this);
+        else this.target.values.buffs.Add(this);
 
         if (this.target != null && this.changeColor) this.target.changeColor(this.statusEffectColor);
         this.activeObject = Instantiate(this.StatusEffectObject, this.target.activeStatusEffectParent.transform.position, Quaternion.identity, this.target.transform);
@@ -133,8 +133,8 @@ public class StatusEffect : ScriptableObject
         if (this.canBeModified && this.target.stats.canChangeBuffs)
         {
             float percentage = 0;
-            if (this.statusEffectType == StatusEffectType.buff) percentage = (float)this.target.buffPlus;
-            else percentage = (float)this.target.debuffMinus;
+            if (this.statusEffectType == StatusEffectType.buff) percentage = (float)this.target.values.buffPlus;
+            else percentage = (float)this.target.values.debuffMinus;
 
             this.statusEffectTimeLeft *= ((100f + (float)percentage) / 100f);
         }

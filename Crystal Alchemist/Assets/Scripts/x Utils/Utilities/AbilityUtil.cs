@@ -36,7 +36,7 @@ public class AbilityUtil : MonoBehaviour
             activeSkill.sender = sender;
 
             ReduceCostAndDamage(activeSkill, reduce, ability.shareDamage);
-            sender.activeSkills.Add(activeSkill);
+            sender.values.activeSkills.Add(activeSkill);
         }
     }
 

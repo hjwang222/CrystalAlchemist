@@ -30,13 +30,13 @@ public class AnalyseEnemy : MonoBehaviour
         this.ImageitemPreview.gameObject.SetActive(false);
 
         this.TMPcharacterName.text = this.npc.stats.GetCharacterName();
-        this.lifeBar.fillAmount((this.npc.life / this.npc.maxLife));
+        this.lifeBar.fillAmount((this.npc.values.life / this.npc.values.maxLife));
         this.statusEffectBar.setCharacter(this.npc);
 
-        if (this.npc.itemDrop != null && this.npc.currentState != CharacterState.dead)
+        if (this.npc.values.itemDrop != null && this.npc.values.currentState != CharacterState.dead)
         {
             this.ImageitemPreview.gameObject.SetActive(true);
-            this.ImageitemPreview.sprite = this.npc.itemDrop.stats.getSprite(); //TODONEW
+            this.ImageitemPreview.sprite = this.npc.values.itemDrop.stats.getSprite(); //TODONEW
         }
     }
 }

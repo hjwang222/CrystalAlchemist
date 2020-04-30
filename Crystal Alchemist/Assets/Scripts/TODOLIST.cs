@@ -5,6 +5,11 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.0):
     //TODO: Multiscene instead of DontDestroy
     //BUG: Szenenwechsel Eventsystem kaputt
+    //TODO: Loading Rework
+    //TODO: Teleport Rework
+    //TODO: DeathScreen Rework
+    //TODO: Player/Character Update/Start
+    //TODO: Event Signals
 
     //TODO: ONLINE!
 

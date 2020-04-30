@@ -55,7 +55,7 @@ public class AITrigger
 
     private bool checkLife(AI npc)
     {
-        return (npc.life <= (npc.maxLife * this.life / 100));
+        return (npc.values.life <= (npc.values.maxLife * this.life / 100));
     }
 
     private bool checkRange(AI npc)

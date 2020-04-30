@@ -23,7 +23,7 @@ public class RotationUtil : MonoBehaviour
 
     public static void rotateCollider(Character character, GameObject gameObject)
     {
-        float angle = (Mathf.Atan2(character.direction.y, character.direction.x) * Mathf.Rad2Deg) + 90;
+        float angle = (Mathf.Atan2(character.values.direction.y, character.values.direction.x) * Mathf.Rad2Deg) + 90;
 
         gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
@@ -70,7 +70,7 @@ public class RotationUtil : MonoBehaviour
         else if (skill.target != null)
             return ((Vector2)skill.target.transform.position - start).normalized;
         else if (skill.sender != null)
-            return skill.sender.direction.normalized;
+            return skill.sender.values.direction.normalized;
 
         return skill.direction;
     }

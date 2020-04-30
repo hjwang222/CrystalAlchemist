@@ -23,7 +23,7 @@ public class RespawnSystem : MonoBehaviour
             if (character != null)
             {
                 if (!character.gameObject.activeInHierarchy
-                 && character.currentState == CharacterState.dead
+                 && character.values.currentState == CharacterState.dead
                  && !this.respawnObjects.Contains(character))
                 {
                     setRespawn(character);
@@ -41,7 +41,7 @@ public class RespawnSystem : MonoBehaviour
         if (character.stats.hasRespawn)
         {
             StartCoroutine(respawnCo(character));
-            character.currentState = CharacterState.respawning;
+            character.values.currentState = CharacterState.respawning;
         }
     }
 
@@ -56,14 +56,14 @@ public class RespawnSystem : MonoBehaviour
         if (character.stats.respawnAnimation != null)
         {
             //spawn character after animation
-            RespawnAnimation respawnObject = Instantiate(character.stats.respawnAnimation, character.spawnPosition, Quaternion.identity);
+            RespawnAnimation respawnObject = Instantiate(character.stats.respawnAnimation, character.GetSpawnPosition(), Quaternion.identity);
             respawnObject.resetCharacter(character);
         }
         else
         {
             //spawn character immediately
             character.gameObject.SetActive(true);
-            character.spawnASAP();
+            character.SpawnInWithoutAnimation();
         }
     }
 }

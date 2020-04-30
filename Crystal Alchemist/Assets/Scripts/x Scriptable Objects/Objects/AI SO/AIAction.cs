@@ -281,7 +281,7 @@ public class AIAction //: ScriptableObject
 
     private void StartKill(AI npc)
     {
-        npc.KillIt();
+        npc.Dead();
         Deactivate();
     }
 

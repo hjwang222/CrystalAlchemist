@@ -78,8 +78,8 @@ public class StatusEffectAction
 
     private void DispellIt(Character character)
     {
-        if (this.StatusEffectType == StatusEffectType.debuff) StatusEffectUtil.RemoveAllStatusEffects(character.debuffs);
-        else StatusEffectUtil.RemoveAllStatusEffects(character.buffs);
+        if (this.StatusEffectType == StatusEffectType.debuff) StatusEffectUtil.RemoveAllStatusEffects(character.values.debuffs);
+        else StatusEffectUtil.RemoveAllStatusEffects(character.values.buffs);
     }
 
     private void AddStatusEffect(Character character)

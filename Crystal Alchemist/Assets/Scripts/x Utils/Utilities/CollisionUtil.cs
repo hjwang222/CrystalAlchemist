@@ -40,8 +40,8 @@ public class CollisionUtil : MonoBehaviour
     public static bool checkBehindObstacle(Character character, GameObject gameObject)
     {
         float offset = 0.1f;
-        Vector2 targetPosition = new Vector2(character.GetGroundPosition().x - (character.direction.x * offset),
-                                             character.GetGroundPosition().y - (character.direction.y * offset));
+        Vector2 targetPosition = new Vector2(character.GetGroundPosition().x - (character.values.direction.x * offset),
+                                             character.GetGroundPosition().y - (character.values.direction.y * offset));
 
         Vector2 start = gameObject.transform.position;
         Vector2 direction = (targetPosition - start).normalized;
@@ -72,8 +72,8 @@ public class CollisionUtil : MonoBehaviour
 
         if (!hittedCharacter.isTrigger
             && target != null
-            && target.currentState != CharacterState.dead
-            && target.currentState != CharacterState.respawning)
+            && target.values.currentState != CharacterState.dead
+            && target.values.currentState != CharacterState.respawning)
         {
             return checkMatrix(sender, target, affectOther, affectSame, affectNeutral);
         }
@@ -160,7 +160,7 @@ public class CollisionUtil : MonoBehaviour
 
     public static bool checkIfGameObjectIsViewed(Character character, GameObject target, int range)
     {
-        Vector2 direction = character.direction;
+        Vector2 direction = character.values.direction;
         Vector2 temp = (character.transform.position - target.transform.position).normalized;
 
         float direction_angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
@@ -187,10 +187,10 @@ public class CollisionUtil : MonoBehaviour
         float width = 0.2f;
         float offset = 0.1f;
 
-        Vector2 position = new Vector2(character.GetGroundPosition().x - (character.direction.x * offset),
-                                       character.GetGroundPosition().y - (character.direction.y * offset));
+        Vector2 position = new Vector2(character.GetGroundPosition().x - (character.values.direction.x * offset),
+                                       character.GetGroundPosition().y - (character.values.direction.y * offset));
 
-        RaycastHit2D[] hit = Physics2D.CircleCastAll(position, width, character.direction, distance);
+        RaycastHit2D[] hit = Physics2D.CircleCastAll(position, width, character.values.direction, distance);
 
         foreach (RaycastHit2D hitted in hit)
         {

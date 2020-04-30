@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Cliff : Terrain
@@ -25,7 +24,7 @@ public class Cliff : Terrain
         {
             if (character.myRigidbody != null)
             {
-                character.myRigidbody.AddForce(this.direction.normalized * this.speed * character.speedMultiply * character.timeDistortion, ForceMode2D.Force);
+                character.myRigidbody.AddForce(this.direction.normalized * this.speed * character.GetSpeedFactor() * character.values.timeDistortion, ForceMode2D.Force);
             }
         }
     }

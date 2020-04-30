@@ -87,8 +87,8 @@ public class AIAggroSystem : MonoBehaviour
 
         if(this.enemy.target != null 
             && (!this.enemy.target.gameObject.activeInHierarchy 
-            || this.enemy.target.currentState == CharacterState.dead
-            || this.enemy.target.currentState == CharacterState.respawning))
+            || this.enemy.target.values.currentState == CharacterState.dead
+            || this.enemy.target.values.currentState == CharacterState.respawning))
         {
             this.aggroList.Remove(this.enemy.target);
             this.enemy.target = null;
@@ -97,7 +97,7 @@ public class AIAggroSystem : MonoBehaviour
         foreach (Character character in this.aggroList.Keys)
         {
             //                       amount                         factor
-            addAggro(character, this.aggroList[character][1] * (Time.deltaTime * this.enemy.timeDistortion));
+            addAggro(character, this.aggroList[character][1] * (Time.deltaTime * this.enemy.values.timeDistortion));
 
             //if (this.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.aggroList[character][0] + " Aggro auf" + character.characterName);
 

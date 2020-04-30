@@ -76,7 +76,7 @@ public class MenuControls : BasicMenu
             {
                 Cursor.visible = true;
 
-                IngameMenuHandler.lastState = this.player.currentState;
+                IngameMenuHandler.lastState = this.player.values.currentState;
                 this.player.setStateAfterMenuClose(CharacterState.inMenu);
 
                 if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.getMusicInMenu());

@@ -21,7 +21,7 @@ public class LineRenderUtil
         else
         {
             //draw normal Laser
-            Vector2 direction = sender.direction;
+            Vector2 direction = sender.values.direction;
             RaycastHit2D hitInfo = new RaycastHit2D();
 
             if (sender != null)

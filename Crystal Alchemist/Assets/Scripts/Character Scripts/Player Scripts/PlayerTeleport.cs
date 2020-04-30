@@ -4,80 +4,86 @@ using UnityEngine.SceneManagement;
 
 public class PlayerTeleport : MonoBehaviour
 {
-    [SerializeField]
     private Player player;
 
     [SerializeField]
     private TeleportStats nextTeleport;
 
-    public TeleportStats lastTeleport;
+    [SerializeField]
+    private PlayerTeleportList teleportList;
 
-    public void setLastTeleport(string targetScene, Vector2 position, bool last)
+    public void Initialize(Player player)
     {
-        this.lastTeleport.position = position;
-        this.lastTeleport.location = targetScene;
-        this.lastTeleport.lastTeleportSet = last;
+        this.player = player;
+        this.player.SpawnOut(); //Disable Player
+
+        if (this.nextTeleport.showAnimationIn) StartCoroutine(materializePlayer()); //Start Animation       
+        else
+        {
+            this.player.SpawnWithAnimationCompleted();
+            SetPosition(this.nextTeleport.position);
+        }
     }
 
-    public bool lastTeleportEnabled()
+    public void SwitchScene()
     {
-        return this.lastTeleport.lastTeleportSet;
+        this.player.SpawnOut(); //Disable Player
+        if (this.nextTeleport.showAnimationOut) StartCoroutine(DematerializePlayer());       
+        else LoadScene();
     }
 
-    public void teleportPlayerToScene(bool showAnimationIn) //LoadConfig with no Data
+    public bool TeleportAbilityEnabled()
     {
-        teleportPlayer(showAnimationIn, false, false, this.nextTeleport);
+        return this.teleportList.TeleportEnabled();
     }
 
-    public void teleportPlayerToLastSavepoint(bool showAnimationIn) //LoadConfig with Data
+    public void AddTeleport(string scene, Vector2 position)
     {
-        teleportPlayer(false, showAnimationIn, false, this.lastTeleport);
+        this.teleportList.AddTeleport(scene, position);
     }
 
-    public void teleportPlayerToLastSavepoint() //Skill Teleport
+    private void LoadScene()
     {
-        teleportPlayerToLastSavepoint(true, true);
+        //AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.nextTeleport.scene);
+        //asyncOperation.allowSceneActivation = true;
+        StartCoroutine(loadSceneCo(this.nextTeleport.scene));
     }
 
-    public void teleportPlayerToLastSavepoint(bool showAnimationOut, bool showAnimationIn) //Death Screen
+    private void SetPosition(Vector2 position)
     {
-        teleportPlayer(this.player.fadingDuration.getValue(), showAnimationIn, showAnimationOut, true, this.lastTeleport);
+        this.player.transform.position = position;
+        this.player.UpdateAnimator(this.player.values.direction);
     }
 
-    public void teleportPlayer(bool showAnimationOut, bool showAnimationIn, bool loadScene, TeleportStats stat) 
+    private IEnumerator DematerializePlayer()
     {
-        teleportPlayer(this.player.fadingDuration.getValue(), showAnimationIn, showAnimationOut, loadScene, stat);
-    }
-
-    public void teleportPlayerToNextScene(float duration, bool showAnimationOut, bool showAnimationIn) //Scene Transition
-    {
-        teleportPlayer(duration, showAnimationIn, showAnimationOut, true, this.nextTeleport);
-    }
-
-    public void teleportPlayer(float duration, bool showAnimationIn, bool showAnimationOut, bool loadScene, TeleportStats stat)
-    {
-        StartCoroutine(DematerializePlayer(duration, showAnimationIn, showAnimationOut, loadScene, stat));
-    }
-
-    private IEnumerator DematerializePlayer(float duration, bool showAnimationIn, bool showAnimationOut, bool loadScene, TeleportStats stat)
-    {
-        string targetScene = stat.location;
-        Vector2 position = stat.position;
-
-        this.player.prepareSpawnOut(); //Player disable
-
-        if (showAnimationOut && this.player.stats.respawnAnimation != null) //Show Animation for DEspawn
+        if (this.player.stats.respawnAnimation != null) //Show Animation for DEspawn
         {
             RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, this.transform.position, Quaternion.identity);
             respawnObject.setCharacter(this.player, true, false);  //reverse
             yield return new WaitForSeconds(respawnObject.getAnimationLength());
         }
 
-        if (loadScene) StartCoroutine(loadSceneCo(position, targetScene, duration, showAnimationIn)); //load new scene    
-        else StartCoroutine(materializePlayer(position, showAnimationIn)); //Play Spawn  
+        LoadScene();
     }
 
-    private IEnumerator loadSceneCo(Vector2 position, string targetScene, float duration, bool showAnimationIn)
+    private IEnumerator materializePlayer()
+    {
+        Vector2 position = this.nextTeleport.position;
+        SetPosition(position);
+
+        if (this.player.stats.respawnAnimation != null)
+        {
+            yield return new WaitForSeconds(2f);
+
+            RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, position, Quaternion.identity);
+            respawnObject.setCharacter(this.player, false, false);
+            yield return new WaitForSeconds((respawnObject.getAnimationLength() + 1f));
+        }
+        else this.player.SpawnWithAnimationCompleted();        
+    }
+
+    private IEnumerator loadSceneCo(string targetScene)
     {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(targetScene);
         asyncOperation.allowSceneActivation = false;
@@ -86,32 +92,10 @@ public class PlayerTeleport : MonoBehaviour
         {
             if (asyncOperation.progress >= 0.9f)
             {
-                yield return new WaitForSeconds(duration);
-
+                yield return new WaitForSeconds(this.player.fadingDuration.getValue());
                 asyncOperation.allowSceneActivation = true;
-                StartCoroutine(materializePlayer(position, showAnimationIn)); //Play Spawn
             }
             yield return null;
         }
-    }
-
-    private IEnumerator materializePlayer(Vector2 position, bool showAnimationIn)
-    {
-        this.player.transform.position = position;
-
-        if (showAnimationIn && this.player.stats.respawnAnimation != null)
-        {
-            yield return new WaitForSeconds(2f);
-
-            RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, position, Quaternion.identity);
-            respawnObject.setCharacter(this.player, false, false);
-            yield return new WaitForSeconds((respawnObject.getAnimationLength() + 1f));
-        }
-        else
-        {
-            this.player.completeSpawnFromAnimation();
-        }
-
-        this.player.updateAnimDirection(this.player.direction);
     }
 }

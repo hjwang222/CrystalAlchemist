@@ -32,7 +32,7 @@ public class GhostEffect : MonoBehaviour
             float distortion = 1;
 
             if (this.mainObject.GetComponent<Skill>() != null) distortion = this.mainObject.GetComponent<Skill>().getTimeDistortion();
-            else if (this.mainObject.GetComponent<Character>() != null) distortion = this.mainObject.GetComponent<Character>().timeDistortion;
+            else if (this.mainObject.GetComponent<Character>() != null) distortion = this.mainObject.GetComponent<Character>().values.timeDistortion;
 
             if (ghostDelay > 0)
             {

@@ -54,11 +54,6 @@ public class SceneTransition : MonoBehaviour
     private TeleportStats nextTeleport;
 
     [BoxGroup("Required")]
-    [Required]
-    [SerializeField]
-    private GameObjectSignal cleanUp;
-
-    [BoxGroup("Required")]
     [SerializeField]
     private MenuDialogBoxLauncher dialogBox;
 
@@ -71,10 +66,7 @@ public class SceneTransition : MonoBehaviour
     public void Awake()
     {
         if(this.fadeSignal != null) this.fadeSignal.Raise(true);
-        if(this.dialogBox != null)
-        {
-            this.dialogBox.SetPrice(costs);
-        }
+        if(this.dialogBox != null) this.dialogBox.SetPrice(costs);        
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -89,16 +81,12 @@ public class SceneTransition : MonoBehaviour
 
     public void transferToScene()
     {
-        if (this.player != null && this.player.currentState != CharacterState.respawning)
+        if (this.player != null && this.player.values.currentState != CharacterState.respawning)
         {
             if (this.vcamSignal != null) this.vcamSignal.Raise();
 
-            this.nextTeleport.location = this.targetScene;
-            this.nextTeleport.position = this.playerPositionInNewScene;
-
-            if (this.cleanUp != null) this.cleanUp.Raise(null);
-
-            this.player.GetComponent<PlayerTeleport>().teleportPlayerToNextScene(this.transitionDuration.getValue(), this.showAnimationOut, this.showAnimationIn);
+            this.nextTeleport.SetValue(this.targetScene, this.playerPositionInNewScene, this.showAnimationIn, this.showAnimationOut);
+            this.player.GetComponent<PlayerTeleport>().SwitchScene();
         }
     }
 }

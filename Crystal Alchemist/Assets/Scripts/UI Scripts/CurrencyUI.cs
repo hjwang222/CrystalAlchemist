@@ -32,7 +32,7 @@ public class CurrencyUI : MonoBehaviour
 
     public void HideUI(float delay)
     {
-        if(!isRunning() && this.playerStats.player.currentState != CharacterState.interact)
+        if(!isRunning() && this.playerStats.player.values.currentState != CharacterState.interact)
             StartCoroutine(hideCo(delay));
     }
 

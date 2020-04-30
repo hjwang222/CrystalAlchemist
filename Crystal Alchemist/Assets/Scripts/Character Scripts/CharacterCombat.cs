@@ -72,7 +72,7 @@ public class CharacterCombat : MonoBehaviour
 
     private void deactivateSkill(Ability ability, Character character)
     {
-        foreach (Skill skill in character.activeSkills)
+        foreach (Skill skill in character.values.activeSkills)
         {
             if (skill.name == ability.skill.name)
             {
@@ -160,8 +160,8 @@ public class CharacterCombat : MonoBehaviour
 
         foreach (Character target in targets)
         {
-            if (target.currentState != CharacterState.dead
-                && target.currentState != CharacterState.respawning)
+            if (target.values.currentState != CharacterState.dead
+                && target.values.currentState != CharacterState.respawning)
             {
                 AbilityUtil.instantiateSkill(ability, character, target, damageReduce);
                 yield return new WaitForSeconds(this.GetTargetingDelay());

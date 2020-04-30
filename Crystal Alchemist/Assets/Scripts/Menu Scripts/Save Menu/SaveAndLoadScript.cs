@@ -62,7 +62,7 @@ public class SaveAndLoadScript : MonoBehaviour
     public void loadGame()
     {
         this.saveGameSlot.setValue("");
-        this.teleportStat.location = this.firstScene;
+        this.teleportStat.scene = this.firstScene;
         this.teleportStat.position = this.playerPositionInNewScene;
 
         SceneManager.LoadSceneAsync(this.firstScene);

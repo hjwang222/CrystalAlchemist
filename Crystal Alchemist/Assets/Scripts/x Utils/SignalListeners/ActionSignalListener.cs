@@ -1,21 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 [System.Serializable]
-public class ActionEvent : UnityEvent<UnityEvent>
+public class ActionEvent : UnityEvent<Action>
 {
 }
 
 public class ActionSignalListener : MonoBehaviour
 {
     public ActionSignal signal;
-    public ActionEvent signalEventString;
+    public ActionEvent signalEventAction;
 
-    public void OnSignalRaised(UnityEvent action)
+    public void OnSignalRaised(Action action)
     {
-        this.signalEventString.Invoke(action);
+        this.signalEventAction.Invoke(action);
     }
 
     private void OnEnable()

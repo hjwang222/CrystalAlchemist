@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8337240375904359643}
   - component: {fileID: 4156442255476463085}
+  - component: {fileID: 7195782342473171028}
+  - component: {fileID: 1281780859555012763}
   m_Layer: 0
   m_Name: Post Processing
   m_TagString: Untagged
@@ -48,3 +50,44 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: d0fbd764b0a1c1a47a43a1466ed523b3, type: 2}
+--- !u!114 &7195782342473171028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703318380824880426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a00795edb0b4e42902b71c94ccb059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 4156442255476463085}
+  fadingSteps: 0.025
+--- !u!114 &1281780859555012763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703318380824880426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c60cf450b078d41bf426003edd2661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: a76b91dd47bc63046b35dc05f9b79d12, type: 2}
+  signalEventAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7195782342473171028}
+        m_MethodName: StartFading
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

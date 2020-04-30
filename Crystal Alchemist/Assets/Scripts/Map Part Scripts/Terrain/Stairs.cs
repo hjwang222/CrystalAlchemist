@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Stairs : MonoBehaviour
+public class Stairs : Terrain
 {
     [SerializeField]
     private bool leftToRight = false;
@@ -23,7 +21,7 @@ public class Stairs : MonoBehaviour
         Character character = collision.GetComponent<Character>();
         if (character != null)
         {
-            character.steps = this.stepValue;
+            character.values.steps = this.stepValue;
         }
     }
 
@@ -32,7 +30,7 @@ public class Stairs : MonoBehaviour
         Character character = collision.GetComponent<Character>();
         if (character != null)
         {
-            character.steps = 0;
+            character.values.steps = 0;
         }
     }
 }

@@ -48,7 +48,7 @@ public class Interactable : MonoBehaviour
         if (this.player != null
             && this.isPlayerInRange
             && this.isPlayerLookingAtIt
-            && this.player.currentState == CharacterState.interact)
+            && this.player.values.currentState == CharacterState.interact)
         {
             doSomethingOnSubmit();            
         }
@@ -88,20 +88,20 @@ public class Interactable : MonoBehaviour
     private void checkifLooking(Character character)
     {
         if (character != null
-            && (character.currentState == CharacterState.interact
-             || character.currentState == CharacterState.idle
-             || character.currentState == CharacterState.walk))
+            && (character.values.currentState == CharacterState.interact
+             || character.values.currentState == CharacterState.idle
+             || character.values.currentState == CharacterState.walk))
         {
             if (this.isPlayerInRange
                 && CollisionUtil.checkIfGameObjectIsViewed(character, this.gameObject))
             {
-                player.currentState = CharacterState.interact;
+                player.values.currentState = CharacterState.interact;
                 this.context.gameObject.SetActive(true);
                 this.isPlayerLookingAtIt = true;
             }
             else
             {
-                player.currentState = CharacterState.idle;
+                player.values.currentState = CharacterState.idle;
                 this.context.gameObject.SetActive(false);
                 this.isPlayerLookingAtIt = false;
             }
@@ -124,9 +124,9 @@ public class Interactable : MonoBehaviour
         {
             Player player = characterCollisionBox.GetComponent<Player>();
 
-            if (player != null && player.currentState == CharacterState.interact)
+            if (player != null && player.values.currentState == CharacterState.interact)
             {
-                player.currentState = CharacterState.idle;
+                player.values.currentState = CharacterState.idle;
                 if (this.player == player) this.player = null;
             }
 

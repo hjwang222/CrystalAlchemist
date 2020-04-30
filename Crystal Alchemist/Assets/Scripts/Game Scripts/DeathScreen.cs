@@ -1,14 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.Rendering;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
 public class DeathScreen : MonoBehaviour
 {
+    [BoxGroup("Mandatory")]
+    [Required]
+    [SerializeField]
+    private PlayerTeleportList playerTeleportList;
+
     [SerializeField]
     [BoxGroup("Mandatory")]
     private PlayerStats playerStats;
@@ -28,10 +30,6 @@ public class DeathScreen : MonoBehaviour
     [BoxGroup("Mandatory")]
     [SerializeField]
     private AudioSource audioSource;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    private Volume volume;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
@@ -63,10 +61,6 @@ public class DeathScreen : MonoBehaviour
 
     [BoxGroup("Time")]
     [SerializeField]
-    private float fadingDelay = 0.025f;
-
-    [BoxGroup("Time")]
-    [SerializeField]
     private float textDelay = 0.1f;
 
     [BoxGroup("Time")]
@@ -77,9 +71,12 @@ public class DeathScreen : MonoBehaviour
     [SerializeField]
     private float inputDelay = 3f;
 
+    [BoxGroup("Signals")]
+    [SerializeField]
+    private ActionSignal fadeSignal;
+
     private string currentText;
     private string fullText;
-    private ColorAdjustments colorGrading;
     private Player player;
     private bool skip = false;
     private bool inputPossible = false; 
@@ -113,7 +110,7 @@ public class DeathScreen : MonoBehaviour
         this.player = this.playerStats.player;
         init();
         this.stopMusic.Raise();
-        if (this.volume.profile.TryGet(out this.colorGrading)) StartCoroutine(FadeOut(this.fadingDelay));
+        this.fadeSignal.Raise(showText);
     }
 
     private void showText()
@@ -138,7 +135,7 @@ public class DeathScreen : MonoBehaviour
     {
         this.cursor.gameObject.SetActive(true);
         this.returnTitleScreen.SetActive(true);
-        if (this.player.GetComponent<PlayerTeleport>().lastTeleportEnabled()) this.returnSavePoint.SetActive(true);
+        if (this.playerTeleportList.TeleportEnabled()) this.returnSavePoint.SetActive(true);
 
         this.countDown.gameObject.SetActive(true);
         StartCoroutine(this.countDownCo());
@@ -153,17 +150,13 @@ public class DeathScreen : MonoBehaviour
     public void returnSaveGame()
     {
         this.audioSource.Stop();
-        PlayerTeleport playerTeleport = this.player.GetComponent<PlayerTeleport>();
-
-        if (playerTeleport.lastTeleportEnabled())
+                
+        if (this.playerTeleportList.TeleportEnabled())
         {
-            this.colorGrading.saturation.value = 0;
-            this.colorGrading.colorFilter.value = Color.white;
-
+            //Reset Fading
             this.gameObject.SetActive(false);
             this.UI.SetActive(true);
-            SceneManager.LoadSceneAsync(playerTeleport.lastTeleport.location);
-            this.player.initPlayer();
+            SceneManager.LoadSceneAsync(this.playerTeleportList.GetStats()[0].scene); 
         }
     }
 
@@ -207,26 +200,6 @@ public class DeathScreen : MonoBehaviour
             }
             this.countDown.text = "" + (this.timer-i) + "s";
             yield return new WaitForSeconds(1);
-        }
-    }
-
-    private IEnumerator FadeOut(float delay)
-    {
-        while (this.colorGrading.saturation.value > -100)
-        {
-            this.colorGrading.saturation.value -= 1f;
-
-           /* this.colorGrading.colorFilter.value.g -= 2.4f;
-            this.colorGrading.colorFilter.value.b -= 2.4f;
-            this.colorGrading.colorFilter.value.r -= 2.4f;*/
-
-            if (this.colorGrading.saturation.value <= -100)
-            {
-                showText();
-                break;
-            }
-            
-            yield return new WaitForSeconds(delay);
         }
     }
 }

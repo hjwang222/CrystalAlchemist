@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 public class SkillAffectStatusEffects : SkillExtension
 {
@@ -28,14 +26,8 @@ public class SkillAffectStatusEffects : SkillExtension
         List<StatusEffect> changeEffects = new List<StatusEffect>();
 
         //all effects of a kind
-        if (this.affectAllOfKind == StatusEffectType.buff)
-        {
-            changeEffects.AddRange(character.buffs);
-        }
-        else
-        {
-            changeEffects.AddRange(character.debuffs);
-        }
+        if (this.affectAllOfKind == StatusEffectType.buff) changeEffects.AddRange(character.values.buffs);        
+        else changeEffects.AddRange(character.values.debuffs);        
 
         if (changeEffects.Count > 0)
         {

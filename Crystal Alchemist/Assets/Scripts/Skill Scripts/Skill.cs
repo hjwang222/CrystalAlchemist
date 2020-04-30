@@ -217,7 +217,7 @@ public class Skill : MonoBehaviour
         }
         else
         {
-            if(this.sender != null) this.direction = this.sender.direction.normalized;
+            if(this.sender != null) this.direction = this.sender.values.direction.normalized;
 
             float positionX = this.sender.transform.position.x + (this.direction.x * positionOffset);
             float positionY = this.sender.transform.position.y + (this.direction.y * positionOffset) + positionHeight;
@@ -297,7 +297,7 @@ public class Skill : MonoBehaviour
 
     public void DestroyIt(float delay)
     {
-        if(this.sender != null) this.sender.activeSkills.Remove(this);
+        if(this.sender != null) this.sender.values.activeSkills.Remove(this);
         Destroy(this.gameObject, delay);
     }
 

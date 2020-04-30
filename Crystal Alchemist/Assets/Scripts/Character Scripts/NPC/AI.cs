@@ -47,7 +47,7 @@ public class AI : NonPlayer
 
     public void changeState(CharacterState newState)
     {
-        if (this.currentState != newState) this.currentState = newState;        
+        if (this.values.currentState != newState) this.values.currentState = newState;        
     }
 
     #endregion

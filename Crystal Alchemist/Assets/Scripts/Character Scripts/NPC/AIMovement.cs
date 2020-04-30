@@ -97,7 +97,7 @@ public class AIMovement : MonoBehaviour
     #region Update und Movement Funktionen
     private void Update()
     {
-        if (this.npc.currentState != CharacterState.knockedback && !this.npc.isOnIce)
+        if (this.npc.values.currentState != CharacterState.knockedback && !this.npc.values.isOnIce)
         {
             if (this.npc.myRigidbody.bodyType != RigidbodyType2D.Static) this.npc.myRigidbody.velocity = Vector2.zero;
         }
@@ -117,12 +117,12 @@ public class AIMovement : MonoBehaviour
 
     private void UpdateTargetPosition()
     {
-        if (this.npc.currentState != CharacterState.dead
-        && this.npc.currentState != CharacterState.knockedback
-        && this.npc.currentState != CharacterState.manually)
+        if (this.npc.values.currentState != CharacterState.dead
+        && this.npc.values.currentState != CharacterState.knockedback
+        && this.npc.values.currentState != CharacterState.manually)
         {
             SetNextPoint();
-            this.npc.currentState = CharacterState.idle;
+            this.npc.values.currentState = CharacterState.idle;
         }
     }
 
@@ -133,7 +133,7 @@ public class AIMovement : MonoBehaviour
         Vector3 chaseVector = MasterManager.staticValues.nullVector;
 
         if (this.isPatrol) patrolVector = GetNextPoint(patrolPath[currentPoint].position, this.followPathPrecision, SetNextWayPoint);
-        if (this.backToStart) spawnVector = GetNextPoint(this.npc.spawnPosition, 0.25f);
+        if (this.backToStart) spawnVector = GetNextPoint(this.npc.GetSpawnPosition(), 0.25f);
 
         if (this.movementPriority == MovementPriority.partner)
         {
@@ -235,15 +235,15 @@ public class AIMovement : MonoBehaviour
 
     private void MoveToPosition(Vector3 position)
     {
-        if (this.npc.currentState != CharacterState.knockedback
-            && this.npc.currentState != CharacterState.attack
-            && this.npc.currentState != CharacterState.dead
+        if (this.npc.values.currentState != CharacterState.knockedback
+            && this.npc.values.currentState != CharacterState.attack
+            && this.npc.values.currentState != CharacterState.dead
             && position != MasterManager.staticValues.nullVector)
         {
             Vector2 direction = ((Vector2)position - this.npc.GetGroundPosition()).normalized;
 
-            Vector2 movement = new Vector2(direction.x, direction.y + (this.npc.steps * direction.x));
-            if (!this.npc.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.speed * this.npc.timeDistortion);
+            Vector2 movement = new Vector2(direction.x, direction.y + (this.npc.values.steps * direction.x));
+            if (!this.npc.values.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.values.speed * this.npc.values.timeDistortion);
 
             updateAnimation(direction);
         }
@@ -251,10 +251,10 @@ public class AIMovement : MonoBehaviour
 
     private void updateAnimation(Vector2 direction)
     {
-        if (!StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
+        if (!StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.ChangeDirection(direction.normalized);
         if (this.npc.flip) this.npc.setFlip();
 
-        this.npc.currentState = CharacterState.walk;
+        this.npc.values.currentState = CharacterState.walk;
         AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", true);
     }
 

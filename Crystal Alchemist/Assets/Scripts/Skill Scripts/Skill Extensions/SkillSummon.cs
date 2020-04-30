@@ -27,16 +27,16 @@ public class SkillSummon : SkillExtension
         {
             AI pet = Instantiate(ai, this.transform.position, Quaternion.Euler(0, 0, 0));
             pet.name = ai.name;
-            pet.direction = this.skill.direction;
+            pet.values.direction = this.skill.direction;
             pet.partner = this.skill.sender;
 
-            this.skill.sender.activePets.Add(pet);
+            this.skill.sender.values.activePets.Add(pet);
         }
         else if (breakable != null)
         {
             Breakable objectPet = Instantiate(breakable, this.transform.position, Quaternion.Euler(0, 0, 0));
-            objectPet.direction = this.skill.direction;
-            objectPet.changeAnim(objectPet.direction);
+            objectPet.values.direction = this.skill.direction;
+            objectPet.ChangeDirection(objectPet.values.direction);
         }        
     }
 }

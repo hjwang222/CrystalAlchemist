@@ -62,44 +62,38 @@ public class Player : Character
 
     ///////////////////////////////////////////////////////////////
 
+    public override void Awake()
+    {
+        this.playerStats.player = this;
+        this.Initialize();
+        if (this.playerStats.loadPlayer) LoadSystem.loadPlayerData(this, this.saveGameSlot.getValue());
+
+        this.GetComponent<PlayerTeleport>().Initialize(this); //start methods here
+    }
+
     public override void Update()
     {
         base.Update();
+
+        //Update methods here
     }
 
-    public override void Awake()
+
+
+
+
+
+
+    public override void SpawnOut()
     {
-        initPlayer();
-    }
-
-    public void initPlayer()
-    {
-        this.playerStats.player = this;
-
-        SaveSystem.loadOptions();
-
-        this.isPlayer = true;
-        this.init();
-
-        LoadSystem.loadPlayerData(this, this.saveGameSlot.getValue());
-        AnimatorUtil.SetAnimatorParameter(this.animator, "Dead", false);
-
-        this.characterLookDown();
-
-        updateResource(CostType.life, 0);
-        updateResource(CostType.mana, 0);
-    }
-
-    public override void prepareSpawnOut()
-    {
-        base.prepareSpawnOut();
+        base.SpawnOut();
         this.deactivateAllSkills();
         this.fadeSignal.Raise(false);
     }
 
     public bool canUseAbilities()
     {
-        if (this.currentState != CharacterState.interact
+        if (this.values.currentState != CharacterState.interact
          && this.ActiveInField()) return true;
         return false;
     }
@@ -107,27 +101,24 @@ public class Player : Character
 
     private void deactivateAllSkills()
     {
-        for (int i = 0; i < this.activeSkills.Count; i++)
+        for (int i = 0; i < this.values.activeSkills.Count; i++)
         {
-            Skill activeSkill = this.activeSkills[i];
+            Skill activeSkill = this.values.activeSkills[i];
             activeSkill.DeactivateIt();
         }
     }
 
-    public override void KillIt()
+    public override void Dead()
     {
-        if (this.currentState != CharacterState.dead)
+        if (this.values.currentState != CharacterState.dead)
         {
-            this.characterLookDown();
+            this.SetDefaultDirection();
 
-            //TODO: Kill sofort (Skill noch aktiv)
-            StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
-            StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
-
-            //this.spriteRenderer.color = Color.white;
+            StatusEffectUtil.RemoveAllStatusEffects(this.values.debuffs);
+            StatusEffectUtil.RemoveAllStatusEffects(this.values.buffs);
             AnimatorUtil.SetAnimatorParameter(this.animator, "Dead", true);
 
-            this.currentState = CharacterState.dead;
+            this.values.currentState = CharacterState.dead;
             this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
             this.deathSignal.Raise();
         }
@@ -153,8 +144,8 @@ public class Player : Character
     public float getResource(Costs price)
     {
         //Buttons und hasEnoughCurrency
-        if (price.resourceType == CostType.life) return this.life;
-        else if (price.resourceType == CostType.mana) return this.mana;
+        if (price.resourceType == CostType.life) return this.values.life;
+        else if (price.resourceType == CostType.mana) return this.values.mana;
         else if (price.resourceType == CostType.item && price.item != null) return this.GetComponent<PlayerItems>().GetAmount(price.item);
         return 0;
     }
@@ -192,7 +183,7 @@ public class Player : Character
     public void setStateMenuOpened(CharacterState newState)
     {
         StopCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
-        this.currentState = newState;
+        this.values.currentState = newState;
     }
 
     public void setStateAfterMenuClose(CharacterState newState)
@@ -202,14 +193,14 @@ public class Player : Character
 
     public void showDialogBox(string text)
     {
-        if (this.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
+        if (this.values.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
     }
 
     public IEnumerator delayInputPlayerCO(float delay, CharacterState newState)
     {
         //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
         yield return new WaitForSeconds(delay);
-        this.currentState = newState;
+        this.values.currentState = newState;
     }
 
     #endregion
@@ -222,10 +213,10 @@ public class Player : Character
 
     public bool CanOpenMenu()
     {
-        return (this.currentState != CharacterState.inDialog
-             && this.currentState != CharacterState.inMenu
-             && this.currentState != CharacterState.respawning
-             && this.currentState != CharacterState.dead);
+        return (this.values.currentState != CharacterState.inDialog
+             && this.values.currentState != CharacterState.inMenu
+             && this.values.currentState != CharacterState.respawning
+             && this.values.currentState != CharacterState.dead);
     }
 
 }

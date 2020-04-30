@@ -22,10 +22,10 @@ public class RespawnAnimation : MonoBehaviour
 
         if (this.reverse)
         {
-            this.character.prepareSpawnOut();
+            this.character.SpawnOut();
             AnimatorUtil.SetAnimatorParameter(animator, "Reverse");            
         }
-        else this.character.prepareSpawnFromAnimation(reset); //show Character but no Actions!     
+        else this.character.SpawnInWithAnimation(reset); //show Character but no Actions!     
     }
 
     public float getAnimationLength()
@@ -36,7 +36,7 @@ public class RespawnAnimation : MonoBehaviour
 
     public void DestroyIt()
     {
-        if (!this.reverse) this.character.completeSpawnFromAnimation(); //spawn complete, now ACTION!
+        if (!this.reverse) this.character.SpawnWithAnimationCompleted(); //spawn complete, now ACTION!
         Destroy(this.gameObject, 0.1f);
     }
 }

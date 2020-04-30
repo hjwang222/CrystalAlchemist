@@ -33,15 +33,15 @@ public class PlayerData
 
     public PlayerData(Player player, string scene)
     {
-        this.health = player.life;
-        this.mana = player.mana;
+        this.health = player.values.life;
+        this.mana = player.values.mana;
 
-        this.maxHealth = player.maxLife;
-        this.maxMana = player.maxMana;
-        this.healthRegen = player.lifeRegen;
-        this.manaRegen = player.manaRegen;
-        this.buffplus = player.buffPlus;
-        this.debuffminus = player.debuffMinus;
+        this.maxHealth = player.values.maxLife;
+        this.maxMana = player.values.maxMana;
+        this.healthRegen = player.values.lifeRegen;
+        this.manaRegen = player.values.manaRegen;
+        this.buffplus = player.values.buffPlus;
+        this.debuffminus = player.values.debuffMinus;
 
         this.position = new float[3];
 

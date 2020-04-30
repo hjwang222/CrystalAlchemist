@@ -123,7 +123,7 @@ public class StatusBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (this.playLow && this.player.currentState != CharacterState.dead)
+        if (this.playLow && this.player.values.currentState != CharacterState.dead)
         {
             if (elapsed <= 0)
             {
@@ -141,13 +141,13 @@ public class StatusBar : MonoBehaviour
     {
         if(this.resourceType == CostType.life)
         {
-            this.maxValue = this.player.maxLife;
-            this.currentValue = this.player.life;
+            this.maxValue = this.player.values.maxLife;
+            this.currentValue = this.player.values.life;
         }
         else
         {
-            this.maxValue = this.player.maxMana;
-            this.currentValue = this.player.mana;
+            this.maxValue = this.player.values.maxMana;
+            this.currentValue = this.player.values.mana;
         }
     }
 
@@ -236,7 +236,7 @@ public class StatusBar : MonoBehaviour
             }
         }
 
-        if (this.currentValue <= this.schwelle && this.player.currentState != CharacterState.dead)
+        if (this.currentValue <= this.schwelle && this.player.values.currentState != CharacterState.dead)
         {
             this.playLow = true;
             if (this.warning != null) this.warning.SetActive(true);

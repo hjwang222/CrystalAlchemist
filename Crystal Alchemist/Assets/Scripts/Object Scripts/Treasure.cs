@@ -83,7 +83,7 @@ public class Treasure : Rewardable
     public override void doOnUpdate()
     {
         if (!this.treasureEnabled
-            && ((this.player != null && this.player.currentState == CharacterState.interact)
+            && ((this.player != null && this.player.values.currentState == CharacterState.interact)
               || this.player == null))
         {
             closeChest(); //close Chest

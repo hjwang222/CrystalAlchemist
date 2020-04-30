@@ -44,8 +44,8 @@ public class StatusEffectEvent
         switch (this.trigger.triggerType)
             {
                 case StatusEffectTriggerType.intervall: if (this.elapsed >= trigger.intervall) { isTriggered = true; this.elapsed = 0; } break;
-                case StatusEffectTriggerType.life: if (character != null && character.life <= trigger.life) isTriggered = true; break;
-                case StatusEffectTriggerType.mana: if (character != null && character.mana <= trigger.mana) isTriggered = true; break;
+                case StatusEffectTriggerType.life: if (character != null && character.values.life <= trigger.life) isTriggered = true; break;
+                case StatusEffectTriggerType.mana: if (character != null && character.values.mana <= trigger.mana) isTriggered = true; break;
             }        
 
         return isTriggered;

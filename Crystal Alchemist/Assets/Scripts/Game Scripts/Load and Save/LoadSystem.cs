@@ -17,15 +17,15 @@ public class LoadSystem : MonoBehaviour
             loadPreset(data, player);
             player.presetSignal.Raise();
 
-            player.life = data.health;
-            player.mana = data.mana;
+            player.values.life = data.health;
+            player.values.mana = data.mana;
 
-            player.maxLife = data.maxHealth;
-            player.maxMana = data.maxMana;
-            player.lifeRegen = data.healthRegen;
-            player.manaRegen = data.manaRegen;
-            player.buffPlus = data.buffplus;
-            player.debuffMinus = data.debuffminus;
+            player.values.maxLife = data.maxHealth;
+            player.values.maxMana = data.maxMana;
+            player.values.lifeRegen = data.healthRegen;
+            player.values.manaRegen = data.manaRegen;
+            player.values.buffPlus = data.buffplus;
+            player.values.debuffMinus = data.debuffminus;
 
             player.healthSignalUI.Raise();
             player.manaSignalUI.Raise();
@@ -36,13 +36,13 @@ public class LoadSystem : MonoBehaviour
             loadInventory(data, player);
             loadPlayerSkills(data, playerAbilities);
 
-            playerTeleport.setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]), true);
-            playerTeleport.teleportPlayerToLastSavepoint(true); //letzter Savepoint, no Scene Loading
+            //playerTeleport.setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]), true);
+            //playerTeleport.teleportPlayerToLastSavepoint(true); //letzter Savepoint, no Scene Loading            
         }
         else
         {
-            playerTeleport.setLastTeleport("", Vector2.zero, false);
-            playerTeleport.teleportPlayerToScene(true); //Starpunkt, no Scene Loading
+            //playerTeleport.setLastTeleport("", Vector2.zero, false);
+            //playerTeleport.teleportPlayerToScene(true); //Starpunkt, no Scene Loading
         }
     }
 

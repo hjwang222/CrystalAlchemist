@@ -56,11 +56,11 @@ public class SkillSenderModule : SkillModule
     {
         if (this.skill.sender != null)
         {
-            if (this.skill.sender.currentState != CharacterState.dead
-            && this.skill.sender.currentState != CharacterState.respawning)
+            if (this.skill.sender.values.currentState != CharacterState.dead
+            && this.skill.sender.values.currentState != CharacterState.respawning)
             {
-                if (this.stateType == StateType.attack) this.skill.sender.currentState = CharacterState.attack;
-                else if (this.stateType == StateType.defend) this.skill.sender.currentState = CharacterState.defend;
+                if (this.stateType == StateType.attack) this.skill.sender.values.currentState = CharacterState.attack;
+                else if (this.stateType == StateType.defend) this.skill.sender.values.currentState = CharacterState.defend;
 
                 updateResourceSender();
                 setSelfTrust();
@@ -96,7 +96,7 @@ public class SkillSenderModule : SkillModule
     {
         if (this.skill.sender != null)
         {
-            if (this.stateType != StateType.none) this.skill.sender.currentState = CharacterState.idle;
+            if (this.stateType != StateType.none) this.skill.sender.values.currentState = CharacterState.idle;
             if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(0);
         }
     }

@@ -94,8 +94,8 @@ public class CombatButtonUI : MonoBehaviour
         if (ability != null)
         {
             this.iconButton.enabled = true;
-            float cooldownLeft = ability.cooldownLeft / (this.player.timeDistortion * this.player.spellspeed);
-            float cooldownValue = ability.cooldown / (this.player.timeDistortion * this.player.spellspeed);
+            float cooldownLeft = ability.cooldownLeft / (this.player.values.timeDistortion * this.player.values.spellspeed);
+            float cooldownValue = ability.cooldown / (this.player.values.timeDistortion * this.player.values.spellspeed);
 
             SkillSenderModule senderModule = ability.skill.GetComponent<SkillSenderModule>();
 

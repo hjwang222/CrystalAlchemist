@@ -29,7 +29,7 @@ public class ControlsUI : MonoBehaviour
     private void showButtons()
     {        
         if (this.player != null 
-            && this.player.currentState == CharacterState.inMenu)
+            && this.player.values.currentState == CharacterState.inMenu)
         {
             if (!this.menu.activeInHierarchy)
             {
@@ -39,14 +39,14 @@ public class ControlsUI : MonoBehaviour
             }
         }
         else if (this.player != null 
-            && this.player.currentState == CharacterState.inDialog)
+            && this.player.values.currentState == CharacterState.inDialog)
         {
             this.combat.SetActive(false);
             this.interaction.SetActive(false);
             this.menu.SetActive(false);
         }
         else if (this.player != null 
-            && this.player.currentState == CharacterState.interact)
+            && this.player.values.currentState == CharacterState.interact)
         {
             if (!this.interaction.activeInHierarchy)
             {

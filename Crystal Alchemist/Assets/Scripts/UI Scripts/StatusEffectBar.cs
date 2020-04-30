@@ -34,8 +34,8 @@ public class StatusEffectBar : MonoBehaviour
             //füge ggf. beide Listen hinzu oder selektiere nur eine
             List<StatusEffect> activeStatusEffects = new List<StatusEffect>();
 
-            activeStatusEffects.AddRange(this.character.buffs);
-            activeStatusEffects.AddRange(this.character.debuffs);
+            activeStatusEffects.AddRange(this.character.values.buffs);
+            activeStatusEffects.AddRange(this.character.values.debuffs);
 
             foreach (StatusEffect statusEffect in activeStatusEffects)
             {
