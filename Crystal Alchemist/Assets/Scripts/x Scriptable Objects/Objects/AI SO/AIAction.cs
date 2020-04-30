@@ -229,9 +229,8 @@ public class AIAction //: ScriptableObject
     {
         npc.GetComponent<AIEvents>().HideCastBar();
 
-
         if (this.tempAbility.IsTargetRequired()) npc.GetComponent<AIEvents>().UseAbilityOnTargets(this.tempAbility, npc);
-        else if(npc.target != null) npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.tempAbility, npc, npc.target);
+        else npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.tempAbility, npc, npc.target);
 
         this.skillCounter++;
     }

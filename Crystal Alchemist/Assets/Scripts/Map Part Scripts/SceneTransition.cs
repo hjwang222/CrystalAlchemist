@@ -28,18 +28,6 @@ public class SceneTransition : MonoBehaviour
 
     [ShowIf("showTransition", true)]
     [BoxGroup("Transition")]
-    [Required]
-    [SerializeField]
-    private BoolSignal fadeSignal;
-
-    [ShowIf("showTransition", true)]
-    [BoxGroup("Transition")]
-    [Required]
-    [SerializeField]
-    private FloatValue transitionDuration;
-
-    [ShowIf("showTransition", true)]
-    [BoxGroup("Transition")]
     [SerializeField]
     private bool showAnimationIn = false;
 
@@ -65,7 +53,6 @@ public class SceneTransition : MonoBehaviour
 
     public void Awake()
     {
-        if(this.fadeSignal != null) this.fadeSignal.Raise(true);
         if(this.dialogBox != null) this.dialogBox.SetPrice(costs);        
     }
 

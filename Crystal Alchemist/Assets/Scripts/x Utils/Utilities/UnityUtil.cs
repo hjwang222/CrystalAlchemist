@@ -13,6 +13,18 @@ public class UnityUtil : MonoBehaviour
         }
     }
 
+    public static Vector2 PixelPerfectClamp(Vector2 moveVector)
+    {
+        float pixelsPerUnit = 16;
+
+        Vector2 vectorInPixels = new Vector2(Mathf.RoundToInt(moveVector.x * pixelsPerUnit),
+            Mathf.RoundToInt(moveVector.y * pixelsPerUnit));
+
+        Vector2 result = vectorInPixels / pixelsPerUnit;
+        if(result != moveVector) Debug.Log(moveVector + " -> " + result);
+        return result;
+    }
+
     public static GameObject hasChildWithTag(Character character, string searchTag)
     {
         GameObject result = null;

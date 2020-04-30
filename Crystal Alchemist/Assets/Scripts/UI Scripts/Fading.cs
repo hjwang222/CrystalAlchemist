@@ -17,21 +17,15 @@ public class Fading : MonoBehaviour
     [SerializeField]
     private Color colorFadeOut = Color.white;
 
-    private void Start()
-    {
-        fade(true);
-    }
+    private void Start() => StartCoroutine(delayCo());    
 
-    public void fade(bool fadeIn)
-    {
-        if (fadeIn)
-        {            
-            this.image.CrossFadeAlpha(0, this.transitionDuration.getValue(), true);
-        }
-        else
-        {            
-            this.image.CrossFadeAlpha(1, this.transitionDuration.getValue(), true);
-        }        
-    }
+    private void FadeIn() => this.image.CrossFadeAlpha(0, this.transitionDuration.getValue(), true);
 
+    public void FadeOut() => this.image.CrossFadeAlpha(1, this.transitionDuration.getValue(), true);
+
+    private IEnumerator delayCo()
+    {
+        yield return new WaitForSeconds(0.1f);
+        FadeIn();
+    }
 }

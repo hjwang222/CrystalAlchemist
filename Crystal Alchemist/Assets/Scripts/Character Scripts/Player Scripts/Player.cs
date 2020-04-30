@@ -49,16 +49,8 @@ public class Player : Character
     public SimpleSignal presetSignal;
 
     [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public BoolSignal fadeSignal;
-
-    [Required]
     [BoxGroup("Pflichtfelder")]
     public StringValue saveGameSlot;
-
-    [Required]
-    [BoxGroup("Pflichtfelder")]
-    public FloatValue fadingDuration;
 
     ///////////////////////////////////////////////////////////////
 
@@ -88,7 +80,6 @@ public class Player : Character
     {
         base.SpawnOut();
         this.deactivateAllSkills();
-        this.fadeSignal.Raise(false);
     }
 
     public bool canUseAbilities()

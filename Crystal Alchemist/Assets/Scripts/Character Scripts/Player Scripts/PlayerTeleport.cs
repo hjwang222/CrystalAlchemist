@@ -12,6 +12,12 @@ public class PlayerTeleport : MonoBehaviour
     [SerializeField]
     private PlayerTeleportList teleportList;
 
+    [SerializeField]
+    private FloatValue fadeDuration;
+
+    [SerializeField]
+    private SimpleSignal fadeSignal;
+
     public void Initialize(Player player)
     {
         this.player = player;
@@ -47,6 +53,7 @@ public class PlayerTeleport : MonoBehaviour
         //AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.nextTeleport.scene);
         //asyncOperation.allowSceneActivation = true;
         StartCoroutine(loadSceneCo(this.nextTeleport.scene));
+        //SceneLoader.Load(this.nextTeleport.scene);
     }
 
     private void SetPosition(Vector2 position)
@@ -85,16 +92,15 @@ public class PlayerTeleport : MonoBehaviour
 
     private IEnumerator loadSceneCo(string targetScene)
     {
+        this.fadeSignal.Raise();
+        yield return new WaitForSeconds(this.fadeDuration.getValue());
+
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(targetScene);
         asyncOperation.allowSceneActivation = false;
 
         while (!asyncOperation.isDone)
         {
-            if (asyncOperation.progress >= 0.9f)
-            {
-                yield return new WaitForSeconds(this.player.fadingDuration.getValue());
-                asyncOperation.allowSceneActivation = true;
-            }
+            if (asyncOperation.progress >= 0.9f) asyncOperation.allowSceneActivation = true;            
             yield return null;
         }
     }

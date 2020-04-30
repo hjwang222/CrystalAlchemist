@@ -17,9 +17,15 @@ public class PostProcessingHandler : MonoBehaviour
 
     private ColorAdjustments colorGrading;
 
+    private void Start()
+    {
+        this.volume.profile.TryGet(out this.colorGrading);
+        ResetFading();
+    }
+
     public void StartFading(Action action)
     {
-        if (this.volume.profile.TryGet(out this.colorGrading)) StartCoroutine(FadeOut(this.fadingSteps, action));
+        StartCoroutine(FadeOut(this.fadingSteps, action));
     }
 
     private IEnumerator FadeOut(float delay, Action action)

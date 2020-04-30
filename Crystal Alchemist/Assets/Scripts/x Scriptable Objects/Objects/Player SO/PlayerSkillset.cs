@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game/Player/Player Skillset")]
 public class PlayerSkillset : ScriptableObject
 {
+    [SerializeField]
     private List<Ability> abilities = new List<Ability>();
 
     public void Start()

@@ -15,7 +15,9 @@ public class PlayerTeleportList : ScriptableObject
 
     public bool Contains(TeleportStats stat)
     {
-        for(int i = 0; i < this.list.Count; i++)
+        this.list.RemoveAll(item => item == null);
+
+        for (int i = 0; i < this.list.Count; i++)
         {
             if (list[i].scene == stat.scene 
              && list[i].teleportName == stat.teleportName) return true;
@@ -26,6 +28,7 @@ public class PlayerTeleportList : ScriptableObject
 
     public bool TeleportEnabled()
     {
+        this.list.RemoveAll(item => item == null);
         return this.list.Count > 0;
     }
 

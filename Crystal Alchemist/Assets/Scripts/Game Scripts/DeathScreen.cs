@@ -89,7 +89,7 @@ public class DeathScreen : MonoBehaviour
         this.returnTitleScreen.SetActive(false);
         this.countDown.gameObject.SetActive(false);
         this.textField.gameObject.SetActive(false);
-        this.UI.SetActive(false);
+        SceneManager.UnloadSceneAsync("UI");
         StartCoroutine(delayCo(this.inputDelay));
     }
 
@@ -143,21 +143,12 @@ public class DeathScreen : MonoBehaviour
 
     public void returnToTitleScreen()
     {
-        this.audioSource.Stop();
         SceneManager.LoadSceneAsync(0);
     }
 
     public void returnSaveGame()
-    {
-        this.audioSource.Stop();
-                
-        if (this.playerTeleportList.TeleportEnabled())
-        {
-            //Reset Fading
-            this.gameObject.SetActive(false);
-            this.UI.SetActive(true);
-            SceneManager.LoadSceneAsync(this.playerTeleportList.GetStats()[0].scene); 
-        }
+    {                
+        if (this.playerTeleportList.TeleportEnabled()) SceneManager.LoadSceneAsync(this.playerTeleportList.GetStats()[0].scene);         
     }
 
     private IEnumerator ShowTextCo(float delay)

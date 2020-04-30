@@ -23,7 +23,10 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
         this.showAnimationIn = showOut;
     }
 
-    public void OnAfterDeserialize() { }
+    public void OnAfterDeserialize()
+    {
+        position = Vector2.zero;
+    }
 
     public void OnBeforeSerialize() { }
 }
