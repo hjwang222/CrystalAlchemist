@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using System.Reflection;
 using Sirenix.OdinInspector;
 
 #region Enums
@@ -21,9 +19,10 @@ public enum UIType
 public class StatusBar : MonoBehaviour
 {
     #region Attribute
+    [BoxGroup]
+    [Required]
     [SerializeField]
-    [BoxGroup("Mandatory")]
-    private PlayerStats playerStats;
+    private CharacterValues values;
 
     [BoxGroup("UI Typ")]
     [SerializeField]
@@ -97,8 +96,6 @@ public class StatusBar : MonoBehaviour
     private AudioSource audioSource;
     private bool playLow;
     private float elapsed;
-    private Player player;
-
     private float maxValue;
     private float currentValue;
     #endregion
@@ -113,7 +110,6 @@ public class StatusBar : MonoBehaviour
 
     private void init()
     {
-        this.player = this.playerStats.player;
         this.audioSource = GetComponent<AudioSource>();
         setStatusBar();
 
@@ -123,7 +119,7 @@ public class StatusBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (this.playLow && this.player.values.currentState != CharacterState.dead)
+        if (this.playLow && this.values.currentState != CharacterState.dead)
         {
             if (elapsed <= 0)
             {
@@ -141,13 +137,13 @@ public class StatusBar : MonoBehaviour
     {
         if(this.resourceType == CostType.life)
         {
-            this.maxValue = this.player.values.maxLife;
-            this.currentValue = this.player.values.life;
+            this.maxValue = this.values.maxLife;
+            this.currentValue = this.values.life;
         }
         else
         {
-            this.maxValue = this.player.values.maxMana;
-            this.currentValue = this.player.values.mana;
+            this.maxValue = this.values.maxMana;
+            this.currentValue = this.values.mana;
         }
     }
 
@@ -236,7 +232,7 @@ public class StatusBar : MonoBehaviour
             }
         }
 
-        if (this.currentValue <= this.schwelle && this.player.values.currentState != CharacterState.dead)
+        if (this.currentValue <= this.schwelle && this.values.currentState != CharacterState.dead)
         {
             this.playLow = true;
             if (this.warning != null) this.warning.SetActive(true);

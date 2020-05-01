@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillMenuActiveSlots : MonoBehaviour
 {
-    private PlayerAbilities playerAbilities;
-
     [SerializeField]
-    private PlayerStats playerStats;
+    private PlayerButtons buttons;
     [SerializeField]
     private Image skillImage;
     [SerializeField]
@@ -18,21 +14,13 @@ public class SkillMenuActiveSlots : MonoBehaviour
 
     public Ability ability;
 
-    void Start()
-    {
-        setImage();
-    }
-
-    private void OnEnable()
-    {        
-        setImage();
-    }
+    void Start() => setImage();
+    
+    private void OnEnable() => setImage();    
 
     private void setImage()
     {
-        if(this.playerAbilities == null) this.playerAbilities = this.playerStats.player.GetComponent<PlayerAbilities>();
-
-        this.ability = this.playerAbilities.buttons.GetAbilityFromButton(this.button);
+        this.ability = this.buttons.GetAbilityFromButton(this.button);
         
         if (this.ability != null)
         {
@@ -47,13 +35,11 @@ public class SkillMenuActiveSlots : MonoBehaviour
 
     public void assignSkillToButton(SkillMenu skillMenu)
     {
-        this.playerAbilities.buttons.SetAbilityToButton(skillMenu.selectedAbility, this.button);
+        this.buttons.SetAbilityToButton(skillMenu.selectedAbility, this.button);
         skillMenu.selectSkillFromSkillSet(null);
         //CustomUtilities.Helper.checkIfHelperDeactivate(this.playerAbilities);
 
         setImage();
         this.newAssignedSkillSignal.Raise();
     }
-
-
 }

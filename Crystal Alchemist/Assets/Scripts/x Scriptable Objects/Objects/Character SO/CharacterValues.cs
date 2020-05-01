@@ -86,4 +86,29 @@ public class CharacterValues : ScriptableObject
         foreach (Skill skill in this.activeSkills) skill.DeactivateIt();   
         this.activeSkills.Clear();
     }
+
+    #region Menu und DialogBox
+
+    public void setStateMenuOpened(CharacterState newState)
+    {
+        //StopCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
+        this.currentState = newState;
+    }
+
+    public void setStateAfterMenuClose(CharacterState newState)
+    {
+        //StartCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
+        this.currentState = newState;
+    }
+
+
+    /*
+    public IEnumerator delayInputPlayerCO(float delay, CharacterState newState)
+    {
+        //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
+        yield return new WaitForSeconds(delay);
+        this.currentState = newState;
+    }*/
+
+    #endregion
 }

@@ -1,12 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class CurrencySlot : MonoBehaviour
 {
     [SerializeField]
-    private PlayerStats playerStats;
+    private PlayerInventory playerItems;
 
     [SerializeField]
     private ItemGroup item;
@@ -19,10 +18,6 @@ public class CurrencySlot : MonoBehaviour
     [SerializeField]
     private FloatSignal hideSignal;
 
-
-
-    private Player player;
-
     //private bool playOnce = false;
     private int currentValue;
     private bool isRunning = false;
@@ -31,8 +26,6 @@ public class CurrencySlot : MonoBehaviour
 
     private void Start()
     {
-        this.player = this.playerStats.player;
-
         updateCurrency();
         playSound = true;
     }
@@ -44,7 +37,7 @@ public class CurrencySlot : MonoBehaviour
 
     public void updateCurrency()
     {
-        this.newValue = this.player.GetComponent<PlayerItems>().GetAmount(this.item);
+        this.newValue = this.playerItems.GetAmount(this.item);
 
         if (this.playSound) AudioUtil.playSoundEffect(this.raiseSoundEffect);       
 

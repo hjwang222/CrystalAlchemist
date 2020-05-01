@@ -16,7 +16,6 @@ public class PlayerInventory : ScriptableObject
         this.inventoryItems.RemoveAll(item => item == null);
     }
 
-
     private void AddItemGroup(ItemGroup group, int amount)
     {
         ItemGroup newGroup = Instantiate(group);
@@ -63,8 +62,7 @@ public class PlayerInventory : ScriptableObject
         }
 
         itemGroup.raiseCollectSignal();
-    }
-       
+    }       
 
     public ItemGroup getItemGroup(ItemGroup itemGroup)
     {
@@ -77,7 +75,6 @@ public class PlayerInventory : ScriptableObject
         }
         return null;
     }
-
 
     public ItemGroup GetInventoryItem(int ID)
     {
@@ -131,6 +128,14 @@ public class PlayerInventory : ScriptableObject
             if (elem != null && item.name == elem.name) return true;
         }
 
+        return false;
+    }
+
+
+    public bool HasEnoughCurrency(Costs price)
+    {
+        if (price.resourceType == CostType.none) return true;
+        else if (this.GetAmount(price.item) - price.amount >= 0) return true;
         return false;
     }
 }

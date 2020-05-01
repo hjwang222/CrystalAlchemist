@@ -5,13 +5,8 @@ using System.Collections.Generic;
 
 public class MenuControls : BasicMenu
 {
-    [HideInInspector]
-    public Player player;
-
-    [SerializeField]
-    [BoxGroup("Mandatory")]
     [Required]
-    private PlayerStats playerStats;
+    public CharacterValues playerValues;
 
     [BoxGroup("Mandatory")]
     public GameObject child;
@@ -69,15 +64,14 @@ public class MenuControls : BasicMenu
 
         if (this.isIngameMenu)
         {
-            this.player = this.playerStats.player;
             IngameMenuHandler.openedMenues.Add(this);
 
             if (IngameMenuHandler.openedMenues.Count <= 1)
             {
                 Cursor.visible = true;
 
-                IngameMenuHandler.lastState = this.player.values.currentState;
-                this.player.setStateAfterMenuClose(CharacterState.inMenu);
+                IngameMenuHandler.lastState = this.playerValues.currentState;
+                this.playerValues.setStateAfterMenuClose(CharacterState.inMenu);
 
                 if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.getMusicInMenu());
             }
@@ -94,7 +88,7 @@ public class MenuControls : BasicMenu
         {
             Cursor.visible = false;
 
-            if (this.player != null) this.player.setStateAfterMenuClose(IngameMenuHandler.lastState); //avoid reclick!
+            this.playerValues.setStateAfterMenuClose(IngameMenuHandler.lastState); //avoid reclick!
 
             if (this.cursor != null) this.cursor.gameObject.SetActive(false);
             if (this.blackScreen != null) this.blackScreen.SetActive(false);

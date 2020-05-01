@@ -3,13 +3,16 @@ using UnityEngine;
 
 public class PlayerItems : MonoBehaviour
 {
-    [SerializeField]
     private Player player;
 
     [SerializeField]
     private PlayerInventory inventory;
 
-    private void Awake() => this.inventory.Initialize(); //remove null objects    
+    private void Start()
+    {
+        this.inventory.Initialize(); //remove null objects  
+        this.player = this.GetComponent<Player>();
+    }
 
     public List<ItemStats> GetItemStats()
     {
@@ -41,16 +44,6 @@ public class PlayerItems : MonoBehaviour
     public string GetAmountString(ItemGroup group)
     {
         return this.inventory.GetAmountString(group);        
-    }
-
-    public ItemStats getKeyItems(int ID)
-    {
-        return this.inventory.GetKeyItem(ID);
-    }
-
-    public ItemGroup getInventoryItems(int ID)
-    {
-        return this.inventory.GetInventoryItem(ID);
     }
 
     public void UpdateInventory(ItemGroup item, int amount)

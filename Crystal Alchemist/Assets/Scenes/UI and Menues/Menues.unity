@@ -4150,7 +4150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 955863272}
   button: 2
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,
@@ -10744,7 +10744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e725b81c24fcde40b3a75a29ace7a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   amountField: {fileID: 1210429799}
   item: {fileID: 11400000, guid: 008b2735924e65749bc1a37e8d718d0c, type: 2}
 --- !u!114 &194821913
@@ -12665,7 +12665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 1324639989}
   button: 4
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,
@@ -14491,7 +14491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e725b81c24fcde40b3a75a29ace7a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   amountField: {fileID: 1248541999}
   item: {fileID: 11400000, guid: 9767790408abeac4cab04522f2a49b03, type: 2}
 --- !u!114 &278501580
@@ -18893,8 +18893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
-  player: {fileID: 0}
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 90871085}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 175733141}
@@ -26232,8 +26231,7 @@ MonoBehaviour:
   - {fileID: 1000336658}
   - {fileID: 1491983202}
   - {fileID: 1832421001}
-  player: {fileID: 0}
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 1629144409}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 175733141}
@@ -27931,8 +27929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
-  player: {fileID: 0}
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 1621017513}
   musicVolumeSignal: {fileID: 0}
   cursor: {fileID: 175733141}
@@ -28152,8 +28149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
-  player: {fileID: 0}
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 885962260}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 175733141}
@@ -28162,6 +28158,7 @@ MonoBehaviour:
   disableExitButtonPress: 1
   exitDialogBox: {fileID: 0}
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   miniGameRound: {fileID: 0}
   timeField: {fileID: 758651019}
   timeImage: {fileID: 653501502}
@@ -35892,7 +35889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 571693000}
   button: 2
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,
@@ -40336,7 +40333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 1505755669}
   button: 1
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,
@@ -40778,7 +40775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 671900168}
   button: 0
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,
@@ -45486,7 +45483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 1057443239}
   button: 0
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,
@@ -48318,7 +48315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 1901318477}
   button: 5
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,
@@ -50159,7 +50156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bdd3f626386844ca6628e4746ceef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 1592169379}
+  cursor: {fileID: 0}
   setFirstSelected: 1
   overrideNavigation: 0
   up: []
@@ -53333,7 +53330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 924773530}
   button: 3
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,
@@ -61822,8 +61819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
-  player: {fileID: 0}
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 1846428327}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 175733141}
@@ -61832,6 +61828,9 @@ MonoBehaviour:
   disableExitButtonPress: 0
   exitDialogBox: {fileID: 0}
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
+  healtSignal: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
+  manaSignal: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}
   percentageValues: 0000000019000000320000004b00000064000000
   expanderValues: 0100000003000000050000000700000009000000
   item: {fileID: 11400000, guid: 6363684c89ad31449ad64519f1d1023a, type: 2}
@@ -66852,8 +66851,7 @@ MonoBehaviour:
   - {fileID: 1161521252}
   - {fileID: 694220216}
   - {fileID: 2018883275}
-  player: {fileID: 0}
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 763306162}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 175733141}
@@ -84922,8 +84920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
-  player: {fileID: 0}
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 1074652379}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 175733141}
@@ -84932,6 +84929,7 @@ MonoBehaviour:
   disableExitButtonPress: 0
   exitDialogBox: {fileID: 0}
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   regularItemsLabel: {fileID: 2139312114}
   keyItemsLabel: {fileID: 2102513378}
   regularItems: {fileID: 673816371}
@@ -85424,143 +85422,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590984239}
   m_CullTransparentMesh: 0
---- !u!1001 &1592169377
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1815097232}
-    m_Modifications:
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -114.756714
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -75.74332
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9001193634930676107, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-        type: 3}
-      propertyPath: m_Name
-      value: Cursor
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cbc98f741df6b884f91b4cccb1cfc8bc, type: 3}
---- !u!224 &1592169378 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5299115600626286525, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1592169377}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1592169379 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8941540331474922181, guid: cbc98f741df6b884f91b4cccb1cfc8bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 1592169377}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a5ecf20075c8924085dd35c450d797b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1592774687
 GameObject:
   m_ObjectHideFlags: 0
@@ -89532,7 +89393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85bdd3f626386844ca6628e4746ceef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 1592169379}
+  cursor: {fileID: 0}
   setFirstSelected: 0
   overrideNavigation: 0
   up: []
@@ -93118,7 +92979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e725b81c24fcde40b3a75a29ace7a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   amountField: {fileID: 770586221}
   item: {fileID: 11400000, guid: 1a86842340d2910428ca17a168e85571, type: 2}
 --- !u!114 &1753124521
@@ -93980,7 +93841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 1963881232}
   button: 4
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,
@@ -94154,8 +94015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
-  player: {fileID: 0}
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 1432587497}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 175733141}
@@ -94169,6 +94029,7 @@ MonoBehaviour:
   NoButton: {fileID: 782639193}
   OKButton: {fileID: 813803995}
   priceField: {fileID: 104577694}
+  inventory: {fileID: 0}
   dialogText: 
 --- !u!1 &1776977697
 GameObject:
@@ -94929,7 +94790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 316557457}
   button: 3
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,
@@ -96462,7 +96323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 1607452673}
   button: 1
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,
@@ -97170,7 +97031,6 @@ RectTransform:
   - {fileID: 1675895490}
   - {fileID: 644244296}
   - {fileID: 628399356}
-  - {fileID: 1592169378}
   m_Father: {fileID: 303792611}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -97197,7 +97057,7 @@ MonoBehaviour:
   loadGame: {fileID: 0}
   deathMusic: {fileID: 8300000, guid: fbf3c3fc3b9ea0f49be22b5d3e7d997d, type: 3}
   audioSource: {fileID: 1815097234}
-  cursor: {fileID: 1592169379}
+  cursor: {fileID: 175733141}
   textField: {fileID: 644244300}
   countDown: {fileID: 628399358}
   UI: {fileID: 0}
@@ -98115,8 +97975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
-  player: {fileID: 0}
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 2048317577}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   cursor: {fileID: 175733141}
@@ -98125,6 +97984,7 @@ MonoBehaviour:
   disableExitButtonPress: 0
   exitDialogBox: {fileID: 0}
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  skillSet: {fileID: 11400000, guid: 29dcfc276674c7e42a941d5aee79bc0e, type: 2}
   categoryWeapons: {fileID: 1310177679}
   categoryMagic: {fileID: 1000220920}
   categoryItems: {fileID: 502467039}
@@ -110551,7 +110411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c240deead2b1a1438b561d8154251f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  buttons: {fileID: 11400000, guid: 8e326ca90dbcc2844aed877b2e54779d, type: 2}
   skillImage: {fileID: 842641768}
   button: 5
   newAssignedSkillSignal: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684,

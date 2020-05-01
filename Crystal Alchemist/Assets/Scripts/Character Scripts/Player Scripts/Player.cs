@@ -6,23 +6,10 @@ public class Player : Character
 {
     [BoxGroup("Pflichtfelder")]
     [Required]
-    public TimeValue timeValue;
-
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    public FloatValue secondsPlayed;
-
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    public PlayerStats playerStats;
-
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    public CharacterPreset preset;
-
-    [BoxGroup("Pflichtfelder")]
-    [Required]
     public CharacterPreset defaultPreset;
+
+    [HideInInspector]
+    public CharacterPreset preset;
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
@@ -48,32 +35,25 @@ public class Player : Character
     [FoldoutGroup("Player Signals", expanded: false)]
     public SimpleSignal presetSignal;
 
-    [Required]
-    [BoxGroup("Pflichtfelder")]
-    public StringValue saveGameSlot;
-
     ///////////////////////////////////////////////////////////////
 
-    public override void Awake()
+    public override void Awake() => this.Initialize();
+    
+    private void Start()
     {
-        this.playerStats.player = this;
-        this.Initialize();
-        if (this.playerStats.loadPlayer) LoadSystem.loadPlayerData(this, this.saveGameSlot.getValue());
+        //LoadSystem.loadPlayerData(this, this.saveGameSlot.getValue()); //load data from savegame once
 
-        this.GetComponent<PlayerTeleport>().Initialize(this); //start methods here
+        this.GetComponent<PlayerAbilities>().Initialize(this);
+        this.GetComponent<PlayerTeleport>().Initialize(this);
+        //this.playerStats.player = this;
     }
+
 
     public override void Update()
     {
         base.Update();
-
-        //Update methods here
+        this.GetComponent<PlayerAbilities>().Updating();
     }
-
-
-
-
-
 
 
     public override void SpawnOut()
@@ -120,16 +100,9 @@ public class Player : Character
 
     public override bool HasEnoughCurrency(Costs price)
     {
-        bool result = false;
-
-        if (price.resourceType == CostType.none) result = true;
-        else
-        {
-            if (this.getResource(price) - price.amount >= 0) result = true;
-            else result = false;
-        }
-
-        return result;
+        if (price.resourceType == CostType.none) return true;
+        else if (this.getResource(price) - price.amount >= 0) return true;  
+        return false;
     }
 
     public float getResource(Costs price)
@@ -140,8 +113,6 @@ public class Player : Character
         else if (price.resourceType == CostType.item && price.item != null) return this.GetComponent<PlayerItems>().GetAmount(price.item);
         return 0;
     }
-
-
 
     public override void reduceResource(Costs price)
     {
@@ -169,32 +140,10 @@ public class Player : Character
         }
     }
 
-    #region Menu und DialogBox
-
-    public void setStateMenuOpened(CharacterState newState)
+    public void callSignal(SimpleSignal signal, float addResource)
     {
-        StopCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
-        this.values.currentState = newState;
+        if (signal != null && addResource != 0) signal.Raise();
     }
-
-    public void setStateAfterMenuClose(CharacterState newState)
-    {
-        StartCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
-    }
-
-    public void showDialogBox(string text)
-    {
-        if (this.values.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
-    }
-
-    public IEnumerator delayInputPlayerCO(float delay, CharacterState newState)
-    {
-        //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
-        yield return new WaitForSeconds(delay);
-        this.values.currentState = newState;
-    }
-
-    #endregion
 
 
     public bool CanMove()
@@ -208,6 +157,11 @@ public class Player : Character
              && this.values.currentState != CharacterState.inMenu
              && this.values.currentState != CharacterState.respawning
              && this.values.currentState != CharacterState.dead);
+    }
+
+    public void showDialogBox(string text)
+    {
+        if (this.values.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
     }
 
 }

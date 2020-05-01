@@ -67,7 +67,7 @@ public class PlayerTeleport : MonoBehaviour
         if (this.player.stats.respawnAnimation != null) //Show Animation for DEspawn
         {
             RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, this.transform.position, Quaternion.identity);
-            respawnObject.setCharacter(this.player, true, false);  //reverse
+            respawnObject.SpawnOut(this.player);  //reverse
             yield return new WaitForSeconds(respawnObject.getAnimationLength());
         }
 
@@ -84,7 +84,7 @@ public class PlayerTeleport : MonoBehaviour
             yield return new WaitForSeconds(2f);
 
             RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, position, Quaternion.identity);
-            respawnObject.setCharacter(this.player, false, false);
+            respawnObject.SpawnIn(this.player);
             yield return new WaitForSeconds((respawnObject.getAnimationLength() + 1f));
         }
         else this.player.SpawnWithAnimationCompleted();        

@@ -16,7 +16,7 @@ public class PlayerControls : MonoBehaviour
 
     private Player player;
 
-    private void Awake()
+    private void Start()
     {
         this.player = this.GetComponent<Player>();
     }

@@ -88,26 +88,26 @@ public class CharacterAttributeStats : MonoBehaviour
         switch (this.type)
         {
             case attributeType.lifeExpander:
-                this.mainMenu.player.values.maxLife = this.mainMenu.expanderValues[value];
-                if (this.mainMenu.player.values.life > this.mainMenu.player.values.maxLife) this.mainMenu.player.values.life = this.mainMenu.player.values.maxLife;
-                this.mainMenu.player.callSignal(this.mainMenu.player.healthSignalUI, 1);
+                this.mainMenu.playerValues.maxLife = this.mainMenu.expanderValues[value];
+                if (this.mainMenu.playerValues.life > this.mainMenu.playerValues.maxLife) this.mainMenu.playerValues.life = this.mainMenu.playerValues.maxLife;
+                this.mainMenu.healtSignal.Raise();
                 break;
             case attributeType.manaExpander:
-                this.mainMenu.player.values.maxMana = this.mainMenu.expanderValues[value];
-                if (this.mainMenu.player.values.mana > this.mainMenu.player.values.maxMana) this.mainMenu.player.values.mana = this.mainMenu.player.values.maxMana;
-                this.mainMenu.player.callSignal(this.mainMenu.player.manaSignalUI, 1);
+                this.mainMenu.playerValues.maxMana = this.mainMenu.expanderValues[value];
+                if (this.mainMenu.playerValues.mana > this.mainMenu.playerValues.maxMana) this.mainMenu.playerValues.mana = this.mainMenu.playerValues.maxMana;
+                this.mainMenu.manaSignal.Raise();
                 break;
             case attributeType.lifeRegen:
-                this.mainMenu.player.values.lifeRegen = (float)this.mainMenu.percentageValues[value] / 100f;
+                this.mainMenu.playerValues.lifeRegen = (float)this.mainMenu.percentageValues[value] / 100f;
                 break;
             case attributeType.manaRegen:
-                this.mainMenu.player.values.manaRegen = (float)this.mainMenu.percentageValues[value] / 100f;
+                this.mainMenu.playerValues.manaRegen = (float)this.mainMenu.percentageValues[value] / 100f;
                 break;
             case attributeType.buffPlus:
-                this.mainMenu.player.values.buffPlus = this.mainMenu.percentageValues[value];
+                this.mainMenu.playerValues.buffPlus = this.mainMenu.percentageValues[value];
                 break;
             case attributeType.debuffMinus:
-                this.mainMenu.player.values.debuffMinus = -this.mainMenu.percentageValues[value];
+                this.mainMenu.playerValues.debuffMinus = -this.mainMenu.percentageValues[value];
                 break;
         }
     }
@@ -119,12 +119,12 @@ public class CharacterAttributeStats : MonoBehaviour
 
         switch (this.type)
         {
-            case attributeType.lifeExpander: value = this.mainMenu.player.values.maxLife; break;
-            case attributeType.manaExpander: value = this.mainMenu.player.values.maxMana; break;
-            case attributeType.lifeRegen: value = this.mainMenu.player.values.lifeRegen; break;
-            case attributeType.manaRegen: value = this.mainMenu.player.values.manaRegen; break;
-            case attributeType.buffPlus: value = this.mainMenu.player.values.buffPlus; break;
-            case attributeType.debuffMinus: value = this.mainMenu.player.values.debuffMinus; break;
+            case attributeType.lifeExpander: value = this.mainMenu.playerValues.maxLife; break;
+            case attributeType.manaExpander: value = this.mainMenu.playerValues.maxMana; break;
+            case attributeType.lifeRegen: value = this.mainMenu.playerValues.lifeRegen; break;
+            case attributeType.manaRegen: value = this.mainMenu.playerValues.manaRegen; break;
+            case attributeType.buffPlus: value = this.mainMenu.playerValues.buffPlus; break;
+            case attributeType.debuffMinus: value = this.mainMenu.playerValues.debuffMinus; break;
         }
 
         if (this.type == attributeType.lifeExpander || this.type == attributeType.manaExpander) result = indexOf(this.mainMenu.expanderValues, value);

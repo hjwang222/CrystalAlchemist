@@ -41,7 +41,7 @@ public class MiniGameDialogbox : MonoBehaviour
             itemUI.setItem(match.getItem().stats);
         }
 
-        bool enableStart = this.priceUI.updatePrice(this.miniGameUI.player, match.price);
+        bool enableStart = this.priceUI.updatePrice(this.miniGameUI.inventory, match.price);
         this.startButton.interactable = enableStart;
 
         string text = this.miniGameUI.miniGameRound.getDifficulty(this.miniGameUI.mainDescription, match.difficulty);

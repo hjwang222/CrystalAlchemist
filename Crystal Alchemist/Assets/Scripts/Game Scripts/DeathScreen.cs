@@ -77,7 +77,6 @@ public class DeathScreen : MonoBehaviour
 
     private string currentText;
     private string fullText;
-    private Player player;
     private bool skip = false;
     private bool inputPossible = false; 
 
@@ -107,7 +106,6 @@ public class DeathScreen : MonoBehaviour
 
     private void OnEnable()
     {
-        this.player = this.playerStats.player;
         init();
         this.stopMusic.Raise();
         this.fadeSignal.Raise(showText);

@@ -31,41 +31,32 @@ public class PlayerData
     public float timePlayed;
 
 
-    public PlayerData(Player player, string scene)
+    public PlayerData(PlayerSaveGame saveGame, CharacterValues playerValue, PlayerInventory inventory, PlayerButtons buttons, CharacterPreset preset)
     {
-        this.health = player.values.life;
-        this.mana = player.values.mana;
+        this.health = playerValue.life;
+        this.mana = playerValue.mana;
 
-        this.maxHealth = player.values.maxLife;
-        this.maxMana = player.values.maxMana;
-        this.healthRegen = player.values.lifeRegen;
-        this.manaRegen = player.values.manaRegen;
-        this.buffplus = player.values.buffPlus;
-        this.debuffminus = player.values.debuffMinus;
+        this.maxHealth = playerValue.maxLife;
+        this.maxMana = playerValue.maxMana;
+        this.healthRegen = playerValue.lifeRegen;
+        this.manaRegen = playerValue.manaRegen;
+        this.buffplus = playerValue.buffPlus;
+        this.debuffminus = playerValue.debuffMinus;
 
-        this.position = new float[3];
+        setInventory(inventory);
+        setPreset(preset);
 
-        this.position[0] = player.transform.position.x;
-        this.position[1] = player.transform.position.y;
-        this.position[2] = player.transform.position.z;
-
-        setInventory(player);
-
-        this.abilities = player.GetComponent<PlayerAbilities>().buttons.saveButtonConfig();
-
-        setPreset(player.preset);
-        player.stats.SetCharacterName(this.characterName);
-
-        this.scene = scene;
-        this.timePlayed = player.secondsPlayed.getValue();
+        this.abilities = buttons.saveButtonConfig();
+        this.scene = saveGame.currentScene;
+        this.timePlayed = saveGame.timePlayed;
     }
 
-    private void setInventory(Player player)
+    private void setInventory(PlayerInventory inventory)
     {
         this.keyItems.Clear();
         this.inventoryItems.Clear();
 
-        foreach (ItemGroup item in player.GetComponent<PlayerItems>().GetItemGroups())
+        foreach (ItemGroup item in inventory.inventoryItems)
         {
             string[] temp = new string[2];
             temp[0] = item.name;
@@ -73,7 +64,7 @@ public class PlayerData
             this.inventoryItems.Add(temp);
         }
 
-        foreach (ItemStats item in player.GetComponent<PlayerItems>().GetItemStats())
+        foreach (ItemStats item in inventory.keyItems)
         {
             string temp = item.name;
             this.keyItems.Add(temp);

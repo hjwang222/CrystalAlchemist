@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine.UI;
 
 public class MiniGameUI : MenuControls
 {
+    public PlayerInventory inventory;
+
     [HideInInspector]
     public MiniGameRound miniGameRound;
 
@@ -49,7 +50,6 @@ public class MiniGameUI : MenuControls
     [Required]
     private MiniGameDialogbox dialogBox;
 
-
     [BoxGroup("Texts")]
     [SerializeField]
     [Required]
@@ -73,7 +73,7 @@ public class MiniGameUI : MenuControls
     private MiniGame miniGameObject;
     private MiniGameRound activeRound;
     private MiniGameMatch match;
-    private int matchIndex = 0;
+    private int matchIndex = 0;    
 
     [HideInInspector]
     public string mainDescription = "";
@@ -120,7 +120,7 @@ public class MiniGameUI : MenuControls
 
             if (state == MiniGameState.win)
             {
-                this.match.getItem().stats.CollectIt(this.player);
+                //this.match.getItem().stats.CollectIt(this.player); REWORK!
                 showTexts(this.winText);
             }
             else if (state == MiniGameState.lose)
@@ -154,7 +154,7 @@ public class MiniGameUI : MenuControls
 
     public void startMatch()
     {
-        this.player.reduceResource(match.price);
+        //this.player.reduceResource(match.price); REWORK!
         startRound();
     }
 

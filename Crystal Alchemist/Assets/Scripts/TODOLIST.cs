@@ -7,7 +7,9 @@ public class TODOLIST : MonoBehaviour
     //BUG: Szenenwechsel Eventsystem kaputt
     //BUG: Save Game multi click
 
-    //TODO: Player/Character Update/Start
+    //REWORK: MenuDialogBox (reduce), MiniGameUI (collect), MinigameDialogbox (reduce), ControlsUI (hasEnoughResource)
+    //REWORK: AnyButton Press
+
     //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
     //TODO: Player keep information between scenes (Statuseffects, Pets, Values)
 
@@ -18,6 +20,7 @@ public class TODOLIST : MonoBehaviour
     //TODO: TMPro Exceptions Fix
     //TODO: Screen Resolutions Options (1920x1080, 640x480, 1024x768)
     //TODO: Scene Manager (UI an und aus, Scene Manager DontDestroy?)
+    //TODO: Game Manager Black Screen better solution
 
     //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena

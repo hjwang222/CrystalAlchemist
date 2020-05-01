@@ -1,31 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RespawnAnimation : MonoBehaviour
 {
     [SerializeField]
-    private Animator animator;    
+    private Animator animator;
 
     private Character character;
-    private bool reverse;
 
-    public void resetCharacter(Character character)
+    public void SpawnIn(Character character)
     {
-        this.setCharacter(character, false, true);
+        this.character = character;
+        character.SpawnInWithAnimation(); //show Animation, but no actions possible
     }
 
-    public void setCharacter(Character character, bool reverse, bool reset)
+    public void SpawnOut(Character character)
     {
-        this.reverse = reverse;
-        this.character = character;
-
-        if (this.reverse)
-        {
-            this.character.SpawnOut();
-            AnimatorUtil.SetAnimatorParameter(animator, "Reverse");            
-        }
-        else this.character.SpawnInWithAnimation(reset); //show Character but no Actions!     
+        character.SpawnOut(); //no actions possible now
+        AnimatorUtil.SetAnimatorParameter(animator, "Reverse");        
     }
 
     public float getAnimationLength()
@@ -36,7 +27,7 @@ public class RespawnAnimation : MonoBehaviour
 
     public void DestroyIt()
     {
-        if (!this.reverse) this.character.SpawnWithAnimationCompleted(); //spawn complete, now ACTION!
+        if(this.character != null) this.character.SpawnWithAnimationCompleted(); //spawn complete, actions possible!
         Destroy(this.gameObject, 0.1f);
     }
 }

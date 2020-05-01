@@ -16,15 +16,19 @@ public class PlayerAbilities : CharacterCombat
     private bool isPressed;
     private float timer;
 
-    private void Awake()  
+    public void Initialize(Player player)
     {
-        this.player = this.GetComponent<Player>();
-    }
-
-    private void Start()
-    {
+        this.player = player;
         InitializeTargeting(this.player);
         this.SetTimeValue(this.timeLeftValue);
+    }
+
+    public void Updating()
+    {
+        this.skillSet.Update();
+        this.buttons.Updating(this.player);
+
+        if (this.isPressed) ButtonHold(this.buttons.currentAbility);
     }
 
     public void SelectTargetInput(InputAction.CallbackContext ctx)
@@ -46,14 +50,6 @@ public class PlayerAbilities : CharacterCombat
             ButtonUp(this.buttons.currentAbility);
             this.buttons.currentAbility = null;
         }
-    }
-       
-    private void Update()
-    {
-        this.skillSet.Update();
-        this.buttons.Updating(this.player);
-        
-        if (this.isPressed) ButtonHold(this.buttons.currentAbility);        
     }
        
     private Ability GetAbility(InputAction.CallbackContext context)

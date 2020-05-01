@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     #region Movement
 
-    private void Awake()
+    private void Start()
     {
         this.player = this.GetComponent<Player>();
     }

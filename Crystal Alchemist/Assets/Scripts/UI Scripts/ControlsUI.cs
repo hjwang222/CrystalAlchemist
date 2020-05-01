@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ControlsUI : MonoBehaviour
 {
-    private Player player;
-
     [SerializeField]
-    private PlayerStats playerStats;
+    private CharacterValues values;
     [SerializeField]
     private GameObject combat;
     [SerializeField]
@@ -15,21 +11,11 @@ public class ControlsUI : MonoBehaviour
     [SerializeField]
     private GameObject interaction;
 
-    private void Awake()
-    {
-        this.player = this.playerStats.player;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        showButtons();
-    }
+    void Update() => showButtons();    
 
     private void showButtons()
     {        
-        if (this.player != null 
-            && this.player.values.currentState == CharacterState.inMenu)
+        if (this.values.currentState == CharacterState.inMenu)
         {
             if (!this.menu.activeInHierarchy)
             {
@@ -38,15 +24,13 @@ public class ControlsUI : MonoBehaviour
                 this.menu.SetActive(true);
             }
         }
-        else if (this.player != null 
-            && this.player.values.currentState == CharacterState.inDialog)
+        else if (this.values.currentState == CharacterState.inDialog)
         {
             this.combat.SetActive(false);
             this.interaction.SetActive(false);
             this.menu.SetActive(false);
         }
-        else if (this.player != null 
-            && this.player.values.currentState == CharacterState.interact)
+        else if (this.values.currentState == CharacterState.interact)
         {
             if (!this.interaction.activeInHierarchy)
             {

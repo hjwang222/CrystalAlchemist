@@ -1,24 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
 public class SaveAndLoadScript : MonoBehaviour
 {
     [BoxGroup("Save Menu")]
-    [Required]
-    [SerializeField]
-    private StringValue saveGameSlot;
-
-    [BoxGroup("Save Menu")]
     [SerializeField]
     private MenuDialogBoxLauncher launcher;
-
-    [SerializeField]
-    [BoxGroup("Save Menu")]
-    [Required]
-    private PlayerStats playerStats;
 
     [SerializeField]
     [BoxGroup("Load Menu")]
@@ -34,39 +22,60 @@ public class SaveAndLoadScript : MonoBehaviour
     [SerializeField]
     private TeleportStats teleportStat;
 
-    private Player player;
+    [BoxGroup("Required")]
+    [Required]
+    [SerializeField]
+    private PlayerSaveGame saveGame;
 
-    private void OnEnable()
-    {
-        this.player = this.playerStats.player;
-    }
+    [BoxGroup("Required")]
+    [Required]
+    [SerializeField]
+    private CharacterValues playerValue;
 
-    public void saveGame(SaveSlot slot)
+    [BoxGroup("Required")]
+    [Required]
+    [SerializeField]
+    private PlayerInventory inventory;
+
+    [BoxGroup("Required")]
+    [Required]
+    [SerializeField]
+    private PlayerButtons buttons;
+
+    [BoxGroup("Required")]
+    [Required]
+    [SerializeField]
+    private CharacterPreset preset;
+
+
+
+    public void SaveGame(SaveSlot slot)
     {
         Scene scene = SceneManager.GetActiveScene();
-        SaveSystem.Save(this.player, scene.name, slot.name);
+
+        // SaveSystem.Save(this.player, scene.name, slot.name);
+        SaveSystem.Save(this.saveGame, this.playerValue, this.inventory, this.buttons, this.preset);
 
         if (this.launcher != null) this.launcher.raiseDialogBox();
     }
 
-    public void loadGame(SaveSlot slot)
+    public void LoadGame(SaveSlot slot)
     {
         if (slot != null && slot.data != null)
         {
-            this.saveGameSlot.setValue(slot.gameObject.name);
+           // this.saveGameSlot.setValue(slot.gameObject.name);
             SceneManager.LoadSceneAsync(slot.data.scene);
             Cursor.visible = false;
         }
     }
 
-    public void loadGame()
+    public void LoadGame()
     {
-        this.saveGameSlot.setValue("");
+       // this.saveGameSlot.setValue("");
         this.teleportStat.scene = this.firstScene;
         this.teleportStat.position = this.playerPositionInNewScene;
 
         SceneManager.LoadSceneAsync(this.firstScene);
-        //this.player.spawnPosition = this.playerPositionInNewScene; TODO
         Cursor.visible = false;
     }
 }

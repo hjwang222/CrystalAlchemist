@@ -57,7 +57,7 @@ public class RespawnSystem : MonoBehaviour
         {
             //spawn character after animation
             RespawnAnimation respawnObject = Instantiate(character.stats.respawnAnimation, character.GetSpawnPosition(), Quaternion.identity);
-            respawnObject.resetCharacter(character);
+            respawnObject.SpawnIn(character);
         }
         else
         {

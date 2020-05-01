@@ -11,6 +11,11 @@ public class SkillMenu : MenuControls
     [BoxGroup("Mandatory")]
     [SerializeField]
     [Required]
+    private PlayerSkillset skillSet;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    [Required]
     private TextMeshProUGUI categoryWeapons;
 
     [BoxGroup("Mandatory")]
@@ -269,7 +274,7 @@ public class SkillMenu : MenuControls
                 for (int ID = 0; ID < skills.transform.childCount; ID++)
                 {
                     GameObject slot = skills.transform.GetChild(ID).gameObject;
-                    Ability ability = this.player.GetComponent<PlayerAbilities>().skillSet.getSkillByID(slot.GetComponent<SkillSlot>().ID, category);                    
+                    Ability ability = this.skillSet.getSkillByID(slot.GetComponent<SkillSlot>().ID, category);                    
                     slot.GetComponent<SkillSlot>().setSkill(ability);
                 }
 

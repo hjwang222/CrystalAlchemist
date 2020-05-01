@@ -32,6 +32,10 @@ public class MenuDialogBox : MenuControls
     [SerializeField]
     private MiniGamePrice priceField;
 
+    [BoxGroup("DialogBox")]
+    [SerializeField]
+    private PlayerInventory inventory;
+
     private UnityEvent actionYes; 
     private MenuControls lastMainMenu;
 
@@ -86,7 +90,7 @@ public class MenuDialogBox : MenuControls
         if (this.price != null && this.price.resourceType != CostType.none)
         {
             this.priceField.gameObject.SetActive(true);
-            this.YesButton.GetComponent<Selectable>().interactable = this.priceField.updatePrice(this.player, this.price);
+            this.YesButton.GetComponent<Selectable>().interactable = this.priceField.updatePrice(this.inventory, this.price);
         }
     }
 
@@ -95,7 +99,7 @@ public class MenuDialogBox : MenuControls
         this.closeDialog();
         if (this.actionYes != null)
         {
-            this.player.reduceResource(this.price);
+            //this.player.reduceResource(this.price); REWORK!
             this.actionYes.Invoke();
         }
     }

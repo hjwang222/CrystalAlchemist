@@ -8,14 +8,27 @@ public class CombatButtonUI : MonoBehaviour
     [BoxGroup("Pflicht")]
     [SerializeField]
     [Required]
-    private PlayerStats playerStats;
+    private PlayerButtons buttons;
+
+    [BoxGroup("Pflicht")]
+    [SerializeField]
+    [Required]
+    private PlayerInventory inventory;
+
+    [BoxGroup("Pflicht")]
+    [SerializeField]
+    [Required]
+    private CharacterValues values;
+
     [BoxGroup("Pflicht")]
     [SerializeField]
     private enumButton buttonType;
+
     [BoxGroup("Pflicht")]
     [SerializeField]
     [Required]
     private Sprite buttonIcon;
+
     [BoxGroup("Pflicht")]
     [SerializeField]
     [Required]
@@ -24,6 +37,7 @@ public class CombatButtonUI : MonoBehaviour
     [BoxGroup("Buttons")]
     [SerializeField]
     private Image iconButton;
+
     [BoxGroup("Buttons")]
     [SerializeField]
     private Image iconButtonTrans;
@@ -31,6 +45,7 @@ public class CombatButtonUI : MonoBehaviour
     [BoxGroup("Texts")]
     [SerializeField]
     private TextMeshProUGUI cooldown;
+
     [BoxGroup("Texts")]
     [SerializeField]
     private TextMeshProUGUI ammo;
@@ -50,13 +65,6 @@ public class CombatButtonUI : MonoBehaviour
     [BoxGroup("State")]
     [SerializeField]
     private GameObject disabled;
-
-    private Player player;
-
-    private void Awake()
-    {
-        this.player = this.playerStats.player;
-    }
 
     private void OnValidate()
     {
@@ -85,7 +93,7 @@ public class CombatButtonUI : MonoBehaviour
 
     private void updateButton()
     {
-        Ability ability = this.player.GetComponent<PlayerAbilities>().buttons.GetAbilityFromButton(this.buttonType);
+        Ability ability = this.buttons.GetAbilityFromButton(this.buttonType);
 
         this.disabled.SetActive(false);
         this.targeting.SetActive(false);
@@ -94,18 +102,19 @@ public class CombatButtonUI : MonoBehaviour
         if (ability != null)
         {
             this.iconButton.enabled = true;
-            float cooldownLeft = ability.cooldownLeft / (this.player.values.timeDistortion * this.player.values.spellspeed);
-            float cooldownValue = ability.cooldown / (this.player.values.timeDistortion * this.player.values.spellspeed);
+            float cooldownLeft = ability.cooldownLeft / (this.values.timeDistortion * this.values.spellspeed);
+            float cooldownValue = ability.cooldown / (this.values.timeDistortion * this.values.spellspeed);
 
             SkillSenderModule senderModule = ability.skill.GetComponent<SkillSenderModule>();
 
             if (senderModule != null && senderModule.costs.item != null)
-                this.ammo.text = (int)this.player.getResource(senderModule.costs) + "";
+                 this.ammo.text = this.inventory.GetAmount(senderModule.costs.item) + "";
             else this.ammo.text = "";
 
-            if (!this.player.canUseAbilities()
-                || !ability.enabled 
-                || !ability.CheckResourceAndAmount(this.player))
+            if ( !ability.enabled
+                //|| !this.player.canUseAbilities() REWORK!                
+                //|| !ability.CheckResourceAndAmount(this.player)REWORK!
+                )
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
                 this.disabled.SetActive(true);
@@ -153,7 +162,7 @@ public class CombatButtonUI : MonoBehaviour
 
     private void setButton(enumButton buttonInput, Image skillUI, Image buttonUI)
     {
-        Ability ability = this.player.GetComponent<PlayerAbilities>().buttons.GetAbilityFromButton(buttonInput);
+        Ability ability = this.buttons.GetAbilityFromButton(buttonInput);
 
         if (ability == null || ability.skill == null)
         {

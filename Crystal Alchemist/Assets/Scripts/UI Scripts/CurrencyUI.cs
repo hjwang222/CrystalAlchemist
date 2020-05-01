@@ -11,7 +11,7 @@ public class CurrencyUI : MonoBehaviour
     List<CurrencySlot> slots = new List<CurrencySlot>();
 
     [SerializeField]
-    private PlayerStats playerStats;
+    private CharacterValues values;
 
     private bool isRunning()
     {
@@ -32,7 +32,7 @@ public class CurrencyUI : MonoBehaviour
 
     public void HideUI(float delay)
     {
-        if(!isRunning() && this.playerStats.player.values.currentState != CharacterState.interact)
+        if(!isRunning() && this.values.currentState != CharacterState.interact)
             StartCoroutine(hideCo(delay));
     }
 

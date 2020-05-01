@@ -31,7 +31,7 @@ public class LoadSystem : MonoBehaviour
             player.manaSignalUI.Raise();
 
             player.stats.SetCharacterName(data.characterName);
-            player.secondsPlayed.setValue(data.timePlayed);            
+            //player.secondsPlayed.setValue(data.timePlayed);            
 
             loadInventory(data, player);
             loadPlayerSkills(data, playerAbilities);
@@ -67,7 +67,7 @@ public class LoadSystem : MonoBehaviour
     { 
         if (data != null && data.characterParts != null && data.characterParts.Count > 0)
         {
-            loadPresetData(data, player);
+            loadPresetData(data, player.preset);
         }
         else
         {
@@ -75,11 +75,11 @@ public class LoadSystem : MonoBehaviour
         }
     }
 
-    private static void loadPresetData(PlayerData data, Player player)
+    private static void loadPresetData(PlayerData data, CharacterPreset newPreset)
     {
-        player.stats.SetCharacterName(data.characterName);
+        //player.stats.SetCharacterName(data.characterName);
 
-        CharacterPreset preset = player.preset;
+        CharacterPreset preset = newPreset;
         preset.characterName = data.characterName;
 
         if (Enum.TryParse(data.race, out Race race)) preset.setRace(race);

@@ -11,31 +11,29 @@ public class StatusEffectBar : MonoBehaviour
     private GameObject statusEffectHolder;
     [SerializeField]
     private StatusEffectUI statusEffectGameObject;
-    [SerializeField]
-    private PlayerStats playerStats;
 
-    private Character character;
+    [SerializeField]
+    private CharacterValues values;
 
     private void Start()
     {
         this.statusEffectGameObject.gameObject.SetActive(false);
-        if(this.playerStats != null) setCharacter(this.playerStats.player);
     }
 
-    public void setCharacter(Character character)
+    public void setCharacter(CharacterValues characterValues)
     {
-        this.character = character;
+        if(this.values == null) this.values = characterValues;
     }
 
     public void updateStatusEffect()
     {
-        if (character != null)
+        if (this.values != null)
         {
             //füge ggf. beide Listen hinzu oder selektiere nur eine
             List<StatusEffect> activeStatusEffects = new List<StatusEffect>();
 
-            activeStatusEffects.AddRange(this.character.values.buffs);
-            activeStatusEffects.AddRange(this.character.values.debuffs);
+            activeStatusEffects.AddRange(this.values.buffs);
+            activeStatusEffects.AddRange(this.values.debuffs);
 
             foreach (StatusEffect statusEffect in activeStatusEffects)
             {

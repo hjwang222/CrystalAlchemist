@@ -7,6 +7,11 @@ public class InventoryMenu : MenuControls
     [BoxGroup("Mandatory")]
     [SerializeField]
     [Required]
+    private PlayerInventory inventory;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    [Required]
     private TextMeshProUGUI regularItemsLabel;
 
     [BoxGroup("Mandatory")]
@@ -44,7 +49,7 @@ public class InventoryMenu : MenuControls
     }
 
     private void loadInventory()
-    {      
+    {
         setItemsToSlots(this.regularItems, false);
         setItemsToSlots(this.keyItems, true);
         setItemsToSlots(this.quickmenu, true);
@@ -73,25 +78,22 @@ public class InventoryMenu : MenuControls
 
     private void setItemsToSlots(GameObject categoryGameobject, bool showKeyItems)
     {
-        if (this.player != null)
+        for (int i = 0; i < categoryGameobject.transform.childCount; i++)
         {
-            for (int i = 0; i < categoryGameobject.transform.childCount; i++)
+            GameObject slot = categoryGameobject.transform.GetChild(i).gameObject;
+            InventorySlot iSlot = slot.GetComponent<InventorySlot>();
+
+            int ID = iSlot.getID();
+
+            if (showKeyItems)
             {
-                GameObject slot = categoryGameobject.transform.GetChild(i).gameObject;
-                InventorySlot iSlot = slot.GetComponent<InventorySlot>();
-
-                int ID = iSlot.getID();
-
-                if (showKeyItems)
-                {
-                    ItemStats item = this.player.GetComponent<PlayerItems>().getKeyItems(ID);
-                    slot.GetComponent<InventorySlot>().setItemToSlot(item);
-                }
-                else
-                {
-                    ItemGroup item = this.player.GetComponent<PlayerItems>().getInventoryItems(ID);
-                    slot.GetComponent<InventorySlot>().setItemToSlot(item);
-                }                
+                ItemStats item = this.inventory.GetKeyItem(ID);
+                slot.GetComponent<InventorySlot>().setItemToSlot(item);
+            }
+            else
+            {
+                ItemGroup item = this.inventory.GetInventoryItem(ID);
+                slot.GetComponent<InventorySlot>().setItemToSlot(item);
             }
         }
     }

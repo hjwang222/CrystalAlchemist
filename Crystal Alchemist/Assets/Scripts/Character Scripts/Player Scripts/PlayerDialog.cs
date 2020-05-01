@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 class PlayerDialog : MonoBehaviour
 {
-    [SerializeField]
     private Player player;
+
+    private void Start()
+    {
+        this.player = this.GetComponent<Player>();
+    }
 
     public void showDialog(Interactable interactable)
     {

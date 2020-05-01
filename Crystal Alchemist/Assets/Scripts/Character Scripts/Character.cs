@@ -45,7 +45,7 @@ public class Character : MonoBehaviour
     public GameObject activeStatusEffectParent;
 
     #endregion
-    
+
     #region Attributes
 
     private float regenTimeElapsed;
@@ -71,12 +71,12 @@ public class Character : MonoBehaviour
 
     public void Initialize()
     {
-        if (this.values == null) this.values = new CharacterValues();
-        this.values.SetAttributes(this.stats);
+        if (this.values == null) this.values = new CharacterValues(); //create new Values when not already assigned (NPC)
+        this.values.SetAttributes(this.stats); //set base stats
         if (!this.values.isPlayer) this.spawnPosition = this.transform.position;
 
-        setComponents();
-        ResetValues(true);
+        setComponents(); //set internal references from components
+        ResetValues();
     }
 
     private void setComponents()
@@ -90,19 +90,16 @@ public class Character : MonoBehaviour
     }
 
 
-    public void ResetValues(bool reset)
+    public void ResetValues()
     {
         this.values.ClearValues(this.stats);
         this.SetDefaultDirection();
         this.setStartColor();
 
-        if (reset)
-        {
-            this.values.ResetValues(this.stats, this.speedFactor);
-            this.animator.speed = 1;
-            this.updateTimeDistortion(0);
-            this.updateSpellSpeed(0);
-        }
+        this.values.ResetValues(this.stats, this.speedFactor);
+        this.animator.speed = 1;
+        this.updateTimeDistortion(0);
+        this.updateSpellSpeed(0);
 
         this.animator.enabled = true;
         this.enableSpriteRenderer(true);
@@ -195,9 +192,9 @@ public class Character : MonoBehaviour
 
     #region Animation and Direction
 
-    public void SetDefaultDirection() => ChangeDirection(new Vector2(0, -1));    
+    public void SetDefaultDirection() => ChangeDirection(new Vector2(0, -1));
 
-    public void UpdateAnimator(Vector2 direction) => AnimatorUtil.SetAnimDirection(direction, this.animator);   
+    public void UpdateAnimator(Vector2 direction) => AnimatorUtil.SetAnimDirection(direction, this.animator);
 
     public void ChangeDirection(Vector2 direction)
     {
@@ -455,7 +452,7 @@ public class Character : MonoBehaviour
 
     #region Knockback and Invincibility   
 
-    public void setInvincible() => setInvincible(this.stats.cannotBeHitTime, true);    
+    public void setInvincible() => setInvincible(this.stats.cannotBeHitTime, true);
 
     public void setInvincible(float delay, bool showHitcolor)
     {
@@ -463,7 +460,7 @@ public class Character : MonoBehaviour
         StartCoroutine(hitCo(delay, showHitcolor));
     }
 
-    public void setCannotDie(bool value) => this.cannotDie = value;    
+    public void setCannotDie(bool value) => this.cannotDie = value;
 
     public void knockBack(float knockTime, float thrust, Vector2 direction)
     {
@@ -519,7 +516,7 @@ public class Character : MonoBehaviour
 
     #region Play
 
-    public void PlaySoundEffect(AudioClip clip) => AudioUtil.playSoundEffect(this.gameObject, clip);    
+    public void PlaySoundEffect(AudioClip clip) => AudioUtil.playSoundEffect(this.gameObject, clip);
 
     public void PlayDeathAnimation()
     {
@@ -566,11 +563,6 @@ public class Character : MonoBehaviour
     #endregion
 
     #region misc
-
-    public void callSignal(SimpleSignal signal, float addResource)
-    {
-        if (signal != null && addResource != 0) signal.Raise();
-    }
 
     public virtual bool HasEnoughCurrency(Costs price)
     {
@@ -638,15 +630,15 @@ public class Character : MonoBehaviour
     {
         this.gameObject.SetActive(true);
         this.PlayRespawnAnimation();
-        this.ResetValues(true);
+        this.ResetValues();
     }
 
-    public void SpawnInWithAnimation(bool reset)
+    public void SpawnInWithAnimation()
     {
         this.gameObject.SetActive(true);
         this.enableSpriteRenderer(true);
         this.enableScripts(false); //wait until full Respawn
-        this.ResetValues(reset);
+        this.ResetValues();
         this.PlayRespawnAnimation();
     }
 
