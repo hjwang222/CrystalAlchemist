@@ -24,7 +24,6 @@ public class SkillProjectileHit : SkillHitTrigger
 
     private void stopProjectile(Collider2D hittedCharacter)
     {
-        //REWORK!
         //Stop Arrow on Hit
         if (
             hittedCharacter.gameObject != this.skill.sender.gameObject //not self

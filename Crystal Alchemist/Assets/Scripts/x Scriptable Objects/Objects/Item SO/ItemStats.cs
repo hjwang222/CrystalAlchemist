@@ -13,8 +13,7 @@ public class ItemStats : ScriptableObject
     private int value = 1;
 
     [BoxGroup("Attributes")]
-    [SerializeField]
-    private CostType resourceType;
+    public CostType resourceType;
 
     [BoxGroup("Attributes")]
     [ShowIf("resourceType", CostType.none)]
@@ -71,21 +70,7 @@ public class ItemStats : ScriptableObject
         return false;
     }
 
-    public void CollectIt(Player player)
-    {
-        //Collectable, Load, MiniGame, Shop und Treasure
-
-        if (this.resourceType == CostType.life || this.resourceType == CostType.mana) player.updateResource(this.resourceType, this.amount, true);
-        else if (this.resourceType == CostType.item) player.GetComponent<PlayerItems>().CollectInventoryItem(this);
-        else if (this.resourceType == CostType.none)
-        {
-            //if(this.ability != null)
-            foreach (StatusEffect effect in this.statusEffects)
-            {
-                StatusEffectUtil.AddStatusEffect(effect, player);
-            }
-        }
-    }
+    
 
     public void Initialize(int amount)
     {

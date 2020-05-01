@@ -42,9 +42,12 @@ public class MenuControls : BasicMenu
     {
         base.Start();
 
-        GameEvents.current.OnCancel += OnCancel;
-        GameEvents.current.OnInventory += showExitDialogBox;
-        GameEvents.current.OnPause += showExitDialogBox;
+        if (GameEvents.current != null)
+        {
+            GameEvents.current.OnCancel += OnCancel;
+            GameEvents.current.OnInventory += showExitDialogBox;
+            GameEvents.current.OnPause += showExitDialogBox;
+        }
 
         Cursor.SetCursor(cursorTexture, new Vector2(0, 0), CursorMode.ForceSoftware);
         Cursor.visible = true;
@@ -52,9 +55,12 @@ public class MenuControls : BasicMenu
 
     private void OnDestroy()
     {
-        GameEvents.current.OnCancel -= OnCancel;
-        GameEvents.current.OnInventory -= showExitDialogBox;
-        GameEvents.current.OnPause -= showExitDialogBox;
+        if (GameEvents.current != null)
+        {
+            GameEvents.current.OnCancel -= OnCancel;
+            GameEvents.current.OnInventory -= showExitDialogBox;
+            GameEvents.current.OnPause -= showExitDialogBox;
+        }
     }
 
     public override void OnEnable()

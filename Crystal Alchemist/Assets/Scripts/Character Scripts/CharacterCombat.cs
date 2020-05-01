@@ -132,29 +132,29 @@ public class CharacterCombat : MonoBehaviour
 
     #region useAbility
 
-    public virtual void UseAbilityOnTarget(Ability ability, Character sender, Character target)
+    public virtual void UseAbilityOnTarget(Ability ability, Character target)
     {
-        if (ability.CheckResourceAndAmount(sender))
+        if (ability.CheckResourceAndAmount())
         {
-            AbilityUtil.instantiateSkill(ability, sender, target);
+            ability.InstantiateSkill(target);
             if (!ability.deactivateButtonUp && !ability.remoteActivation) ability.ResetCoolDown();
         }
     }
 
-    public virtual void UseAbilityOnTargets(Ability ability, Character sender)
+    public virtual void UseAbilityOnTargets(Ability ability)
     {
         List<Character> targets = new List<Character>();
         targets.AddRange(this.GetTargetsFromTargeting());
 
         if(targets.Count > 0) ability.ResetCoolDown();
 
-        if (ability.CheckResourceAndAmount(sender))
+        if (ability.CheckResourceAndAmount())
         {
-            StartCoroutine(useSkill(ability, targets, sender));
+            StartCoroutine(useSkill(ability, targets));
         }
     }
 
-    private IEnumerator useSkill(Ability ability, List<Character> targets, Character character)
+    private IEnumerator useSkill(Ability ability, List<Character> targets)
     {
         float damageReduce = targets.Count;
 
@@ -163,12 +163,10 @@ public class CharacterCombat : MonoBehaviour
             if (target.values.currentState != CharacterState.dead
                 && target.values.currentState != CharacterState.respawning)
             {
-                AbilityUtil.instantiateSkill(ability, character, target, damageReduce);
+                ability.InstantiateSkill(target, damageReduce);
                 yield return new WaitForSeconds(this.GetTargetingDelay());
             }
         }
-
-
     }
 
     #endregion

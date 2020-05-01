@@ -143,7 +143,7 @@ public class AIAction //: ScriptableObject
 
         switch (this.type)
         {
-            case AIActionType.ability: StartSkill(); break;
+            case AIActionType.ability: StartSkill(npc); break;
             case AIActionType.kill: StartKill(npc); break;
             case AIActionType.animation: StartAnimation(npc); break;
             case AIActionType.cannotDie: StartCannotDie(npc); break;
@@ -181,15 +181,14 @@ public class AIAction //: ScriptableObject
 
     #region Ability
 
-    private void StartSkill()
+    private void StartSkill(AI npc)
     {
         this.tempAbility = AbilityUtil.InstantiateAbility(this.ability);
-        this.tempAbility.name = this.ability.name;
+        this.tempAbility.SetSender(npc);
 
         if (this.overrideCastTime) this.tempAbility.castTime = this.castTime;
         if (this.overrideShowCastBar) this.tempAbility.showCastbar = this.showCastBar;
         if (this.overrideCooldown) this.tempAbility.cooldown = this.cooldown;
-        this.tempAbility.Initialize();
 
         if (!this.repeatSkill) this.amount = 1;
         this.skillCounter = 0;
@@ -199,7 +198,7 @@ public class AIAction //: ScriptableObject
     {
         this.tempAbility.Update();
 
-        if (StatusEffectUtil.isCharacterStunned(npc)) this.tempAbility.ResetCharge();
+        if (npc.values.isCharacterStunned()) this.tempAbility.ResetCharge();
 
         if (this.tempAbility.state == AbilityState.notCharged) Charge(npc);
         else if (this.tempAbility.state == AbilityState.targetRequired) CheckTargets(npc);
@@ -229,8 +228,8 @@ public class AIAction //: ScriptableObject
     {
         npc.GetComponent<AIEvents>().HideCastBar();
 
-        if (this.tempAbility.IsTargetRequired()) npc.GetComponent<AIEvents>().UseAbilityOnTargets(this.tempAbility, npc);
-        else npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.tempAbility, npc, npc.target);
+        if (this.tempAbility.IsTargetRequired()) npc.GetComponent<AIEvents>().UseAbilityOnTargets(this.tempAbility);
+        else npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.tempAbility, npc.target);
 
         this.skillCounter++;
     }

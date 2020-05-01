@@ -3,17 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StatusEffectUtil : MonoBehaviour
-{
-    public static bool isCharacterStunned(Character character)
-    {
-        foreach (StatusEffect debuff in character.values.debuffs)
-        {
-            if (debuff.stunTarget) return true;
-        }
-
-        return false;
-    }
-
+{    
     public static void RemoveAllStatusEffects(List<StatusEffect> statusEffects)
     {
         List<StatusEffect> dispellStatusEffects = new List<StatusEffect>();

@@ -5,7 +5,6 @@ using Sirenix.OdinInspector;
 public enum StatusEffectActionType
 {
     changeResource,
-    ability,
     effect,
     destroy,
     speed,
@@ -32,10 +31,6 @@ public class StatusEffectAction
     [SerializeField]
     private float time;
 
-    [ShowIf("actionType", StatusEffectActionType.ability)]
-    [SerializeField]
-    private List<Ability> abilities;
-
     [ShowIf("actionType", StatusEffectActionType.effect)]
     [SerializeField]
     private List<StatusEffect> effects;
@@ -52,7 +47,6 @@ public class StatusEffectAction
             case StatusEffectActionType.speed: character.updateSpeed(this.speed); break;
             case StatusEffectActionType.time: character.updateTimeDistortion(this.time); break;
             case StatusEffectActionType.module: effect.doModule(); break;
-            case StatusEffectActionType.ability: useAbility(character); break;
             case StatusEffectActionType.immortal: if (character != null) character.setCannotDie(true); break;
             case StatusEffectActionType.destroy: effect.DestroyIt(); break;
             case StatusEffectActionType.dispell: DispellIt(character); break;
@@ -65,14 +59,6 @@ public class StatusEffectAction
         foreach (CharacterResource resource in this.resources)
         {
             character.updateResource(resource.resourceType, resource.item, resource.amount);
-        }
-    }
-
-    private void useAbility(Character character)
-    {
-        foreach (Ability ability in this.abilities)
-        {
-            AbilityUtil.InstantiateAbility(ability);
         }
     }
 

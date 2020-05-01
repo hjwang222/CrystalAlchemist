@@ -7,6 +7,7 @@ public class MiniGameRound : MonoBehaviour
 
     [HideInInspector]
     public myCursor cursor;
+
     private int roundNumber = 1;
     private float maxDuration;
     private float elapsed;

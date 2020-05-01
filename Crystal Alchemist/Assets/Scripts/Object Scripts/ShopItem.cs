@@ -45,7 +45,7 @@ public class ShopItem : Rewardable
             ItemStats loot = itemDrop.stats;
 
             this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.success, loot);
-            if (loot != null) loot.CollectIt(this.player);
+            if (loot != null) GameEvents.current.DoCollect(loot);
         }
         else
         {

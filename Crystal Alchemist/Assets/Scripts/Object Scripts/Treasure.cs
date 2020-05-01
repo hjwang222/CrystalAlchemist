@@ -166,7 +166,7 @@ public class Treasure : Rewardable
         Collectable collectable = this.itemDrop.Instantiate(this.showItem.transform.position);
         collectable.SetAsTreasureItem(this.showItem.transform);
 
-        this.itemDrop.stats.CollectIt(this.player);
+        GameEvents.current.DoCollect(this.itemDrop.stats);
     }
 
     #endregion

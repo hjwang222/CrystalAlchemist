@@ -41,7 +41,7 @@ public class SpriteRendererExtensionHandler : MonoBehaviour
         init();
     }
 
-    public void init() //TODO: REWORK!
+    public void init() 
     {
         foreach (SpriteRendererExtension colorsprite in this.colorpalettes)
         {

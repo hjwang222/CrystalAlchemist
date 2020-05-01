@@ -1,16 +1,8 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using System.Collections;
 
 public class Player : Character
 {
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    public CharacterPreset defaultPreset;
-
-    [HideInInspector]
-    public CharacterPreset preset;
-
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
     public StringSignal dialogBoxSignal;
@@ -21,31 +13,39 @@ public class Player : Character
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal healthSignalUI;
+    [SerializeField]
+    private SimpleSignal healthSignalUI;
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal manaSignalUI;
+    [SerializeField]
+    private SimpleSignal manaSignalUI;
 
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal buttonSignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal presetSignal;
+    [SerializeField]
+    private SimpleSignal presetSignal;
 
     ///////////////////////////////////////////////////////////////
 
-    public override void Awake() => this.Initialize();
+    public override void Awake()
+    {
+        SetComponents();
+        this.values.Initialize();
+    }
     
     private void Start()
     {
-        //LoadSystem.loadPlayerData(this, this.saveGameSlot.getValue()); //load data from savegame once
+        GameEvents.current.OnCollect += this.CollectIt;
+        GameEvents.current.OnReduce += this.reduceResource;
+        //2. load Statuseffects
 
         this.GetComponent<PlayerAbilities>().Initialize(this);
         this.GetComponent<PlayerTeleport>().Initialize(this);
-        //this.playerStats.player = this;
+
+        this.healthSignalUI.Raise();
+        this.manaSignalUI.Raise();
+        this.presetSignal.Raise();
     }
 
 
@@ -55,6 +55,12 @@ public class Player : Character
         this.GetComponent<PlayerAbilities>().Updating();
     }
 
+    private void OnDestroy()
+    {
+        GameEvents.current.OnCollect -= this.CollectIt;
+        GameEvents.current.OnReduce -= this.reduceResource;
+    }
+
 
     public override void SpawnOut()
     {
@@ -62,12 +68,20 @@ public class Player : Character
         this.deactivateAllSkills();
     }
 
-    public bool canUseAbilities()
+    public override void SpawnInWithoutAnimation()
     {
-        if (this.values.currentState != CharacterState.interact
-         && this.ActiveInField()) return true;
-        return false;
+        this.gameObject.SetActive(true);
+        this.PlayRespawnAnimation();
     }
+
+    public override void SpawnInWithAnimation()
+    {
+        this.gameObject.SetActive(true);
+        this.enableSpriteRenderer(true);
+        this.enableScripts(false); //wait until full Respawn
+        this.PlayRespawnAnimation();
+    }
+
 
 
     private void deactivateAllSkills()
@@ -148,7 +162,7 @@ public class Player : Character
 
     public bool CanMove()
     {
-        return (CanOpenMenu() && !StatusEffectUtil.isCharacterStunned(this));
+        return (CanOpenMenu() && !this.values.isCharacterStunned());
     }
 
     public bool CanOpenMenu()
@@ -162,6 +176,24 @@ public class Player : Character
     public void showDialogBox(string text)
     {
         if (this.values.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
+    }
+
+
+
+    public void CollectIt(ItemStats stats)
+    {
+        //Collectable, Load, MiniGame, Shop und Treasure
+
+        if (stats.resourceType == CostType.life || stats.resourceType == CostType.mana) updateResource(stats.resourceType, stats.amount, true);
+        else if (stats.resourceType == CostType.item) GetComponent<PlayerItems>().CollectInventoryItem(stats);
+        else if (stats.resourceType == CostType.none)
+        {
+            //if(this.ability != null)
+            foreach (StatusEffect effect in stats.statusEffects)
+            {
+                StatusEffectUtil.AddStatusEffect(effect, this);
+            }
+        }
     }
 
 }

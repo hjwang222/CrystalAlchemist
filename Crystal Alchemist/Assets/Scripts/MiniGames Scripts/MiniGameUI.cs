@@ -120,7 +120,7 @@ public class MiniGameUI : MenuControls
 
             if (state == MiniGameState.win)
             {
-                //this.match.getItem().stats.CollectIt(this.player); REWORK!
+                GameEvents.current.DoCollect(this.match.getItem().stats);
                 showTexts(this.winText);
             }
             else if (state == MiniGameState.lose)
@@ -154,7 +154,7 @@ public class MiniGameUI : MenuControls
 
     public void startMatch()
     {
-        //this.player.reduceResource(match.price); REWORK!
+        GameEvents.current.DoReduce(match.price);
         startRound();
     }
 

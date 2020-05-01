@@ -31,24 +31,25 @@ public class PlayerData
     public float timePlayed;
 
 
-    public PlayerData(PlayerSaveGame saveGame, CharacterValues playerValue, PlayerInventory inventory, PlayerButtons buttons, CharacterPreset preset)
+    public PlayerData(PlayerSaveGame saveGame)
     {
-        this.health = playerValue.life;
-        this.mana = playerValue.mana;
+        this.health = saveGame.playerValue.life;
+        this.mana = saveGame.playerValue.mana;
 
-        this.maxHealth = playerValue.maxLife;
-        this.maxMana = playerValue.maxMana;
-        this.healthRegen = playerValue.lifeRegen;
-        this.manaRegen = playerValue.manaRegen;
-        this.buffplus = playerValue.buffPlus;
-        this.debuffminus = playerValue.debuffMinus;
+        this.maxHealth = saveGame.playerValue.maxLife;
+        this.maxMana = saveGame.playerValue.maxMana;
+        this.healthRegen = saveGame.playerValue.lifeRegen;
+        this.manaRegen = saveGame.playerValue.manaRegen;
+        this.buffplus = saveGame.playerValue.buffPlus;
+        this.debuffminus = saveGame.playerValue.debuffMinus;
 
-        setInventory(inventory);
-        setPreset(preset);
+        setInventory(saveGame.inventory);
+        setPreset(saveGame.playerPreset);
 
-        this.abilities = buttons.saveButtonConfig();
+        this.abilities = saveGame.buttons.saveButtonConfig();
         this.scene = saveGame.currentScene;
         this.timePlayed = saveGame.timePlayed;
+        this.characterName = saveGame.characterName;
     }
 
     private void setInventory(PlayerInventory inventory)

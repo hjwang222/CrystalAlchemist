@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerItems : MonoBehaviour
 {
@@ -14,16 +13,6 @@ public class PlayerItems : MonoBehaviour
         this.player = this.GetComponent<Player>();
     }
 
-    public List<ItemStats> GetItemStats()
-    {
-        return this.inventory.keyItems;
-    }
-
-    public List<ItemGroup> GetItemGroups()
-    {
-        return this.inventory.inventoryItems;
-    }
-
     public int GetAmount(ItemGroup group)
     {
         return this.inventory.GetAmount(group);
@@ -33,17 +22,6 @@ public class PlayerItems : MonoBehaviour
     {
         //Collect
         this.inventory.collectItem(item);
-    }
-
-    public void CollectInventoryItem(ItemGroup group, int amount)
-    {
-        //Save and Load System
-        this.inventory.collectItem(group, amount);
-    }
-
-    public string GetAmountString(ItemGroup group)
-    {
-        return this.inventory.GetAmountString(group);        
     }
 
     public void UpdateInventory(ItemGroup item, int amount)

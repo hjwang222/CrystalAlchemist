@@ -28,10 +28,16 @@ public class PlayerButtons : ScriptableObject
     [BoxGroup]
     public Ability currentAbility;
 
+    public void Clear()
+    {
+        foreach(PlayerButton button in this.buttons) button.ability = null;        
+        this.currentAbility = null;
+    }
+
 
     public void Updating(Player player)
     {        
-        bool canFight = player.canUseAbilities();
+        bool canFight = player.values.CanUseAbilities();
 
         foreach (PlayerButton playerButton in this.buttons)
         {
@@ -62,14 +68,6 @@ public class PlayerButtons : ScriptableObject
         foreach (PlayerButton playerButton in this.buttons)
         {
             if (playerButton.buttonType == button) playerButton.ability = ability;
-        }
-    }
-
-    public void ClearAbilities()
-    {
-        foreach (PlayerButton playerButton in this.buttons)
-        {
-            playerButton.ability = null;
         }
     }
 

@@ -7,22 +7,25 @@ public class PlayerSkillset : ScriptableObject
     [SerializeField]
     private List<Ability> abilities = new List<Ability>();
 
-    public void Start()
+    public void Clear()
     {
         this.abilities.Clear();
-
-        foreach (Ability ability in MasterManager.abilities)
-        {
-            AddAbility(ability);
-        }
     }
 
-    public void Update()
+    public void Initialize()
     {
-        foreach(Ability ability in this.abilities)
-        {
-            ability.Update();
-        }
+        this.abilities.Clear();
+        foreach (Ability ability in MasterManager.abilities) AddAbility(ability);        
+    }
+
+    public void SetSender(Character sender)
+    {
+        foreach (Ability ability in this.abilities) ability.SetSender(sender); 
+    }
+
+    public void Updating()
+    {
+        foreach(Ability ability in this.abilities) ability.Update();        
     }
 
     public Ability getAbilityByName(string name)
@@ -51,9 +54,7 @@ public class PlayerSkillset : ScriptableObject
 
     public void AddAbility(Ability ability)
     {
-        Ability newAbility = Instantiate(ability);
-        newAbility.Initialize();
-        newAbility.name = ability.name;
+        Ability newAbility = AbilityUtil.InstantiateAbility(ability);
         this.abilities.Add(newAbility);
     }
 }

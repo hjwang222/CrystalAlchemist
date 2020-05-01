@@ -58,8 +58,10 @@ public class CharacterValues : ScriptableObject
     public List<Skill> activeSkills = new List<Skill>();
     [BoxGroup("Debug")]
     public ItemDrop itemDrop;
+    [BoxGroup("Debug")]
+    public float speedFactor = 5;
 
-    public void SetAttributes(CharacterStats stats)
+    public void Clear(CharacterStats stats)
     {
         this.maxLife = stats.maxLife;
         this.maxMana = stats.maxMana;
@@ -67,23 +69,22 @@ public class CharacterValues : ScriptableObject
         this.manaRegen = stats.manaRegeneration;
         this.buffPlus = stats.buffPlus;
         this.debuffMinus = stats.debuffMinus;
-    }
 
-    public void ResetValues(CharacterStats stats, float speedFactor)
-    {
         this.life = stats.startLife;
         this.mana = stats.startMana;
         this.buffs.Clear();
         this.debuffs.Clear();
-        this.speed = (stats.startSpeed / 100) * speedFactor;
-    }
-
-    public void ClearValues(CharacterStats stats)
-    {
-        this.currentState = CharacterState.idle;
+        this.speed = (stats.startSpeed / 100) * this.speedFactor;
+        
         if (stats.lootTable != null) this.itemDrop = stats.lootTable.GetItemDrop();
 
-        foreach (Skill skill in this.activeSkills) skill.DeactivateIt();   
+        this.Initialize();
+    }
+
+    public void Initialize()
+    {
+        this.currentState = CharacterState.idle;
+        foreach (Skill skill in this.activeSkills) skill.DeactivateIt();
         this.activeSkills.Clear();
     }
 
@@ -109,6 +110,33 @@ public class CharacterValues : ScriptableObject
         yield return new WaitForSeconds(delay);
         this.currentState = newState;
     }*/
+
+    public bool CanUseAbilities()
+    {
+        if (this.currentState != CharacterState.interact
+         && this.ActiveInField()) return true;
+        return false;
+    }
+
+    public bool ActiveInField()
+    {
+        if (this.currentState != CharacterState.inDialog
+            && this.currentState != CharacterState.respawning
+            && this.currentState != CharacterState.inMenu
+            && this.currentState != CharacterState.dead
+            && !this.isCharacterStunned()) return true;
+        return false;
+    }
+
+    public bool isCharacterStunned()
+    {
+        foreach (StatusEffect debuff in this.debuffs)
+        {
+            if (debuff.stunTarget) return true;
+        }
+
+        return false;
+    }
 
     #endregion
 }

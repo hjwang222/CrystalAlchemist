@@ -10,6 +10,13 @@ public class PlayerInventory : ScriptableObject
     [SerializeField]
     public List<ItemGroup> inventoryItems = new List<ItemGroup>();
 
+    public void Clear()
+    {
+        this.keyItems.Clear();
+        this.inventoryItems.Clear();
+        Initialize();
+    }
+
     public void Initialize()
     {
         this.keyItems.RemoveAll(item => item == null);
@@ -54,7 +61,7 @@ public class PlayerInventory : ScriptableObject
     {
         foreach (ItemGroup group in this.inventoryItems)
         {
-            if (group.name == itemGroup.name)
+            if (group != null && group.name == itemGroup.name)
             {
                 group.UpdateAmount(value);
                 break;
@@ -70,7 +77,7 @@ public class PlayerInventory : ScriptableObject
         {
             foreach (ItemGroup group in this.inventoryItems)
             {
-                if (group.name == itemGroup.name) return group;
+                if (group != null && group.name == itemGroup.name) return group;
             }
         }
         return null;

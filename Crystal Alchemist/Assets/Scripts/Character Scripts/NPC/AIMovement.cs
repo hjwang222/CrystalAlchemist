@@ -251,7 +251,7 @@ public class AIMovement : MonoBehaviour
 
     private void updateAnimation(Vector2 direction)
     {
-        if (!StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.ChangeDirection(direction.normalized);
+        if (!this.npc.values.isCharacterStunned()) this.npc.ChangeDirection(direction.normalized);
         if (this.npc.flip) this.npc.setFlip();
 
         this.npc.values.currentState = CharacterState.walk;

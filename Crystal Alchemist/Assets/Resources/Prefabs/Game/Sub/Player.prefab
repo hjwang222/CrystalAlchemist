@@ -516,18 +516,13 @@ MonoBehaviour:
   activeSkillParent: {fileID: 8638893490402070047}
   activeStatusEffectParent: {fileID: 1487360461578692118}
   values: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
-  timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
-  secondsPlayed: {fileID: 11400000, guid: 00cd839769dce6446985fb0093bd539f, type: 2}
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
-  preset: {fileID: 11400000, guid: 5dc2fa268205b3e49ad9b4b984467965, type: 2}
+  saveGame: {fileID: 11400000, guid: a62b63cfcbd3129468ad1e261a3f5279, type: 2}
   defaultPreset: {fileID: 11400000, guid: f85bfbd28a416dd43b2f759b5b3a0d35, type: 2}
   dialogBoxSignal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
   deathSignal: {fileID: 11400000, guid: dda75ee433c9b274f8925d7dc56f9851, type: 2}
   healthSignalUI: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
   manaSignalUI: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}
-  buttonSignalUI: {fileID: 11400000, guid: c68cff08d6f8c0e4a9d5ecc98ed10684, type: 2}
   presetSignal: {fileID: 11400000, guid: 1794675380e483345a378de158326f5f, type: 2}
-  saveGameSlot: {fileID: 11400000, guid: d3073c05c40c81e439f6ce9706afae30, type: 2}
 --- !u!114 &8348133576447681433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,7 +848,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b59c3b9ce3e7b74fb06fa4b00c4bc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5074818981556205378}
 --- !u!114 &7698867005937363429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -866,7 +860,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d513839fa274e48afd9a7bb2f1e9e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5074818981556205378}
   inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
 --- !u!114 &7374600907851842522
 MonoBehaviour:
@@ -3676,7 +3669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b357db719dfa44c863201ae23de277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5074818981556205378}
+  preset: {fileID: 11400000, guid: 5dc2fa268205b3e49ad9b4b984467965, type: 2}
   handler: {fileID: 7031345861447154720}
 --- !u!114 &8519545106706981483
 MonoBehaviour:

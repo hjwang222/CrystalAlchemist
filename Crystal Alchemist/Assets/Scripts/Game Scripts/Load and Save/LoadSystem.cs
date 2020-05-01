@@ -2,53 +2,41 @@
 using UnityEngine;
 using System;
 
-public class LoadSystem : MonoBehaviour
+public class LoadSystem
 {
-    public static void loadPlayerData(Player player, string saveGameSlot)
+    public static void loadPlayerData(PlayerSaveGame saveGame, string slot)
     {
-        PlayerData data = SaveSystem.loadPlayer(saveGameSlot);
-        PlayerAbilities playerAbilities = player.GetComponent<PlayerAbilities>();
-        PlayerTeleport playerTeleport = player.GetComponent<PlayerTeleport>();
-
-        playerAbilities.buttons.ClearAbilities();
+        PlayerData data = SaveSystem.loadPlayer(slot);
 
         if (data != null)
         {
-            loadPreset(data, player);
-            player.presetSignal.Raise();
+            LoadPreset(data, saveGame.playerPreset);
+            LoadBasicValues(data, saveGame.playerValue);
 
-            player.values.life = data.health;
-            player.values.mana = data.mana;
+            saveGame.timePlayed = data.timePlayed;
+            saveGame.characterName = data.characterName;
 
-            player.values.maxLife = data.maxHealth;
-            player.values.maxMana = data.maxMana;
-            player.values.lifeRegen = data.healthRegen;
-            player.values.manaRegen = data.manaRegen;
-            player.values.buffPlus = data.buffplus;
-            player.values.debuffMinus = data.debuffminus;
-
-            player.healthSignalUI.Raise();
-            player.manaSignalUI.Raise();
-
-            player.stats.SetCharacterName(data.characterName);
-            //player.secondsPlayed.setValue(data.timePlayed);            
-
-            loadInventory(data, player);
-            loadPlayerSkills(data, playerAbilities);
-
-            //playerTeleport.setLastTeleport(data.scene, new Vector3(data.position[0], data.position[1], data.position[2]), true);
-            //playerTeleport.teleportPlayerToLastSavepoint(true); //letzter Savepoint, no Scene Loading            
-        }
-        else
-        {
-            //playerTeleport.setLastTeleport("", Vector2.zero, false);
-            //playerTeleport.teleportPlayerToScene(true); //Starpunkt, no Scene Loading
+            loadInventory(data, saveGame.inventory);
+            loadPlayerSkills(data, saveGame.buttons, saveGame.skillSet);       
         }
     }
 
-    public static void loadPlayerSkills(PlayerData data, PlayerAbilities playerAbilities)
+    private static void LoadBasicValues(PlayerData data, CharacterValues playerValue)
     {
-        playerAbilities.skillSet.Start();
+        playerValue.life = data.health;
+        playerValue.mana = data.mana;
+
+        playerValue.maxLife = data.maxHealth;
+        playerValue.maxMana = data.maxMana;
+        playerValue.lifeRegen = data.healthRegen;
+        playerValue.manaRegen = data.manaRegen;
+        playerValue.buffPlus = data.buffplus;
+        playerValue.debuffMinus = data.debuffminus;
+    }
+
+    public static void loadPlayerSkills(PlayerData data, PlayerButtons buttons, PlayerSkillset skillSet)
+    {
+        skillSet.Initialize();
 
         if (data != null && data.abilities.Count > 0)
         {
@@ -57,28 +45,22 @@ public class LoadSystem : MonoBehaviour
                 string name = elem[1];
                 string button = elem[0];
 
-                Ability ability = playerAbilities.skillSet.getAbilityByName(name);
-                playerAbilities.buttons.SetAbilityToButton(button, ability);
+                Ability ability = skillSet.getAbilityByName(name);
+                buttons.SetAbilityToButton(button, ability);
             }
         }
     }
 
-    private static void loadPreset(PlayerData data, Player player)
+    private static void LoadPreset(PlayerData data, CharacterPreset savedPreset)
     { 
         if (data != null && data.characterParts != null && data.characterParts.Count > 0)
         {
-            loadPresetData(data, player.preset);
-        }
-        else
-        {
-            GameUtil.setPreset(player.defaultPreset, player.preset);
+            loadPresetData(data, savedPreset); //set Preset
         }
     }
 
     private static void loadPresetData(PlayerData data, CharacterPreset newPreset)
     {
-        //player.stats.SetCharacterName(data.characterName);
-
         CharacterPreset preset = newPreset;
         preset.characterName = data.characterName;
 
@@ -114,14 +96,14 @@ public class LoadSystem : MonoBehaviour
     }
 
 
-    private static void loadInventory(PlayerData data, Player player)
+    private static void loadInventory(PlayerData data, PlayerInventory inventory)
     {
         if (data.keyItems != null)
         {
             foreach (string keyItem in data.keyItems)
             {
                 ItemDrop drop = MasterManager.getItemDrop(keyItem);
-                if (drop != null) drop.stats.CollectIt(player);                
+                if (drop != null) inventory.collectItem(drop.stats);
             }
         }
 
@@ -130,7 +112,7 @@ public class LoadSystem : MonoBehaviour
             foreach (string[] item in data.inventoryItems)
             {
                 ItemGroup group = MasterManager.getItemGroup(item[0]);
-                if (group != null) player.GetComponent<PlayerItems>().CollectInventoryItem(group, Convert.ToInt32(item[1]));
+                if (group != null) inventory.collectItem(group, Convert.ToInt32(item[1]));
             }
         }
     }    

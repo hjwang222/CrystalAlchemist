@@ -54,7 +54,6 @@ public class Character : MonoBehaviour
     private DeathAnimation activeDeathAnimation;
     private bool cannotDie = false;
 
-    private float speedFactor = 5;
     private Vector3 spawnPosition;
     private CastBar activeCastbar;
 
@@ -66,20 +65,14 @@ public class Character : MonoBehaviour
     #region Start Functions (Spawn, Init)
     public virtual void Awake()
     {
-        Initialize();
-    }
+        this.values = new CharacterValues(); //create new Values when not already assigned (NPC)
+        this.spawnPosition = this.transform.position;
 
-    public void Initialize()
-    {
-        if (this.values == null) this.values = new CharacterValues(); //create new Values when not already assigned (NPC)
-        this.values.SetAttributes(this.stats); //set base stats
-        if (!this.values.isPlayer) this.spawnPosition = this.transform.position;
-
-        setComponents(); //set internal references from components
+        SetComponents();
         ResetValues();
     }
 
-    private void setComponents()
+    public void SetComponents()
     {
         if (this.myRigidbody == null) this.myRigidbody = this.GetComponent<Rigidbody2D>();
         if (this.skillStartPosition == null) this.skillStartPosition = this.gameObject;
@@ -88,23 +81,19 @@ public class Character : MonoBehaviour
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
         if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().init();
     }
-
-
+    
     public void ResetValues()
     {
-        this.values.ClearValues(this.stats);
+        this.values.Clear(this.stats);        
+
         this.SetDefaultDirection();
         this.setStartColor();
-
-        this.values.ResetValues(this.stats, this.speedFactor);
         this.animator.speed = 1;
         this.updateTimeDistortion(0);
         this.updateSpellSpeed(0);
 
         this.animator.enabled = true;
         this.enableSpriteRenderer(true);
-        if (!this.values.isPlayer) this.transform.position = this.spawnPosition;
-
         this.activeDeathAnimation = null;
 
         if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
@@ -262,8 +251,8 @@ public class Character : MonoBehaviour
         float addNewSpeed = startSpeedInPercent * ((float)addSpeed / 100);
         float changeSpeed = startSpeedInPercent + addNewSpeed;
 
-        this.values.speed = changeSpeed * this.values.timeDistortion * this.speedFactor;
-        if (affectAnimation) this.animator.speed = this.values.speed / (this.stats.startSpeed * this.speedFactor / 100);
+        this.values.speed = changeSpeed * this.values.timeDistortion * this.values.speedFactor;
+        if (affectAnimation) this.animator.speed = this.values.speed / (this.stats.startSpeed * this.values.speedFactor / 100);
     }
 
     public void updateSpellSpeed(float addSpellSpeed)
@@ -557,7 +546,7 @@ public class Character : MonoBehaviour
 
     public float GetSpeedFactor()
     {
-        return this.speedFactor;
+        return this.values.speedFactor;
     }
 
     #endregion
@@ -569,20 +558,10 @@ public class Character : MonoBehaviour
         return true; //Override by Player and used by Ability
     }
 
-    public bool ActiveInField()
-    {
-        if (this.values.currentState != CharacterState.inDialog
-            && this.values.currentState != CharacterState.respawning
-            && this.values.currentState != CharacterState.inMenu
-            && this.values.currentState != CharacterState.dead
-            && !StatusEffectUtil.isCharacterStunned(this)) return true;
-        return false;
-    }
-
     public bool canUseIt(Costs price)
     {
         //Door, Shop, Treasure, Abilities
-        if (ActiveInField() && HasEnoughCurrency(price)) return true;
+        if (this.values.ActiveInField() && HasEnoughCurrency(price)) return true;
         return false;
     }
 
@@ -626,14 +605,14 @@ public class Character : MonoBehaviour
         this.enableScripts(false); //wait until full Respawn
     }
 
-    public void SpawnInWithoutAnimation()
+    public virtual void SpawnInWithoutAnimation()
     {
         this.gameObject.SetActive(true);
         this.PlayRespawnAnimation();
         this.ResetValues();
     }
 
-    public void SpawnInWithAnimation()
+    public virtual void SpawnInWithAnimation()
     {
         this.gameObject.SetActive(true);
         this.enableSpriteRenderer(true);

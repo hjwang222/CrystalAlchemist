@@ -44,7 +44,7 @@ public class AIEvents : CharacterCombat
 
     private void Update()
     {
-        if (this.activePhase != null && !StatusEffectUtil.isCharacterStunned(this.npc))
+        if (this.activePhase != null && !this.npc.values.isCharacterStunned())
             this.activePhase.Updating(this.npc);
     }
 

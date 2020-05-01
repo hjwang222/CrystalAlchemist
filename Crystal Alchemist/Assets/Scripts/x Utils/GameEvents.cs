@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class GameEvents : MonoBehaviour
 {
-    [SerializeField]
-    private MasterManager _globalGameObjects;
     public static GameEvents current;
 
     private void Awake()
@@ -17,7 +15,22 @@ public class GameEvents : MonoBehaviour
     public Action OnInventory;
     public Action OnPause;
     public Action OnCancel;
+    public Action<ItemStats> OnCollect;
+    public Action<Costs> OnReduce;
+
     public Action<int> OnPage;
+
+
+    public void DoCollect(ItemStats stats)
+    {
+        if (this.OnCollect != null) OnCollect(stats);
+    }
+
+    public void DoReduce(Costs costs)
+    {
+        if (this.OnReduce != null) OnReduce(costs);
+    }
+
 
     public void DoSubmit()
     {

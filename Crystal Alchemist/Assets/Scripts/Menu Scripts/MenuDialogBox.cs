@@ -99,7 +99,7 @@ public class MenuDialogBox : MenuControls
         this.closeDialog();
         if (this.actionYes != null)
         {
-            //this.player.reduceResource(this.price); REWORK!
+            GameEvents.current.DoReduce(this.price);
             this.actionYes.Invoke();
         }
     }

@@ -21,11 +21,12 @@ public class PlayerAbilities : CharacterCombat
         this.player = player;
         InitializeTargeting(this.player);
         this.SetTimeValue(this.timeLeftValue);
+        this.skillSet.SetSender(player);
     }
 
     public void Updating()
     {
-        this.skillSet.Update();
+        this.skillSet.Updating();
         this.buttons.Updating(this.player);
 
         if (this.isPressed) ButtonHold(this.buttons.currentAbility);
@@ -72,17 +73,17 @@ public class PlayerAbilities : CharacterCombat
         }
         else if (ability.isRapidFire)
         {
-            if (ability.state == AbilityState.charged) UseAbilityOnTarget(ability, this.player, null); //use rapidFire when charged
-            else if (ability.state == AbilityState.ready) UseAbilityOnTarget(ability, this.player, null); //use rapidFire
+            if (ability.state == AbilityState.charged) UseAbilityOnTarget(ability, null); //use rapidFire when charged
+            else if (ability.state == AbilityState.ready) UseAbilityOnTarget(ability, null); //use rapidFire
             else if (ability.state == AbilityState.targetRequired) ShowTargetingSystem(ability); //show TargetingSystem
-            else if (ability.state == AbilityState.lockOn) UseAbilityOnTargets(ability, this.player); //use TargetingSystem rapidfire  
+            else if (ability.state == AbilityState.lockOn) UseAbilityOnTargets(ability); //use TargetingSystem rapidfire  
         }
     }
 
     private void ButtonUp(Ability ability)
     {
         if (ability == null || !ability.enabled) return;
-        if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbilityOnTarget(ability, this.player, null); //use Skill when charged
+        if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbilityOnTarget(ability, null); //use Skill when charged
         else if (ability.state == AbilityState.lockOn && ability.isRapidFire) HideTargetingSystem(ability); //hide Targeting System when released
 
         UnChargeAbility(ability, this.player);
@@ -91,11 +92,11 @@ public class PlayerAbilities : CharacterCombat
     private void ButtonDown(Ability ability)
     {
         if (ability == null || !ability.enabled) return;
-        if (ability.state == AbilityState.ready) UseAbilityOnTarget(ability, this.player, null); //use Skill
+        if (ability.state == AbilityState.ready) UseAbilityOnTarget(ability, null); //use Skill
         else if (ability.state == AbilityState.targetRequired) ShowTargetingSystem(ability); //activate Targeting System
         else if (ability.state == AbilityState.lockOn)
         {
-            UseAbilityOnTargets(ability, this.player);//use Skill on locked Targets and hide Targeting System 
+            UseAbilityOnTargets(ability);//use Skill on locked Targets and hide Targeting System 
             HideTargetingSystem(ability);
         }
     }

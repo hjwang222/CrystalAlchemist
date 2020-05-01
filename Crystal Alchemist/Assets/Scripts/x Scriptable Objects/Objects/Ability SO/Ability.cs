@@ -146,6 +146,8 @@ public class Ability : ScriptableObject
     [BoxGroup("Debug")]
     public bool enabled = true;
 
+    private Character sender;
+
 
 #if UNITY_EDITOR
     [AssetIcon]
@@ -161,7 +163,15 @@ public class Ability : ScriptableObject
     }
 #endif
 
+    public void SetSender(Character sender)
+    {
+        this.sender = sender;
+    }
 
+    public Character GetSender()
+    {
+        return this.sender;
+    }
 
 
     public string GetName()
@@ -243,12 +253,12 @@ public class Ability : ScriptableObject
         this.state = AbilityState.onCooldown;
     }
 
-    public bool CheckResourceAndAmount(Character character)
+    public bool CheckResourceAndAmount()
     {
-        bool enoughResource = this.isResourceEnough(character);
+        bool enoughResource = this.isResourceEnough();
 
         bool notToMany = true;
-        if (this.hasMaxAmount) notToMany = (getAmountOfSameSkills(this.skill, character.values.activeSkills, character.values.activePets) < this.maxAmount);        
+        if (this.hasMaxAmount) notToMany = (getAmountOfSameSkills(this.skill, sender.values.activeSkills, sender.values.activePets) < this.maxAmount);        
 
         return (notToMany && enoughResource);
     }
@@ -292,14 +302,61 @@ public class Ability : ScriptableObject
         return false;
     }
 
-    private bool isResourceEnough(Character character)
+    private bool isResourceEnough()
     {
         SkillSenderModule senderModule = this.skill.GetComponent<SkillSenderModule>();
         if (senderModule != null)
         {
-            return character.canUseIt(senderModule.costs);
+            return this.sender.canUseIt(senderModule.costs);
         }
         else return true;        
+    }
+
+    public void InstantiateSkill(Character target)
+    {
+        //Single Target
+        InstantiateSkill(target, 1);
+    }
+
+    public void InstantiateSkill(Character target, float reduce)
+    {
+        if (this.skill != null)
+        {
+            Character sender = this.GetSender();
+            Skill activeSkill = Instantiate(this.skill, sender.transform.position, Quaternion.identity);
+            activeSkill.name = this.skill.name;
+            activeSkill.Initialize(this.positionOffset, this.lockDirection, this.timeDistortion, this.attachToSender);
+            activeSkill.SetMaxDuration(this.hasMaxDuration, this.maxDuration);
+
+            if (this.attachToSender) activeSkill.transform.parent = sender.activeSkillParent.transform;
+            if (target != null) activeSkill.target = target;
+            activeSkill.sender = sender;
+
+            ReduceCostAndDamage(activeSkill, reduce, this.shareDamage);
+            sender.values.activeSkills.Add(activeSkill);
+        }
+    }
+
+    private void ReduceCostAndDamage(Skill activeSkill, float reduce, bool shareDamage)
+    {
+        SkillTargetModule targetModule = activeSkill.GetComponent<SkillTargetModule>();
+        SkillSenderModule sendermodule = activeSkill.GetComponent<SkillSenderModule>();
+
+        if (targetModule != null && shareDamage)
+        {
+            List<CharacterResource> temp = new List<CharacterResource>();
+
+            for (int i = 0; i < targetModule.affectedResources.Count; i++)
+            {
+                CharacterResource elem = targetModule.affectedResources[i];
+                elem.amount /= reduce;
+                temp.Add(elem);
+            }
+
+            targetModule.affectedResources = temp;
+        }
+
+        if (sendermodule != null) sendermodule.costs.amount /= reduce;
     }
 
     #endregion

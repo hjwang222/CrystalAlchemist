@@ -64,7 +64,7 @@ public class Collectable : MonoBehaviour
             Player player = character.GetComponent<Player>();
             if (player != null)
             {
-                this.itemStats.CollectIt(player);
+                GameEvents.current.DoCollect(this.itemStats);
                 playSounds();
                 DestroyIt();
             }

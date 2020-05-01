@@ -6,12 +6,12 @@ public class TODOLIST : MonoBehaviour
 
     //BUG: Szenenwechsel Eventsystem kaputt
     //BUG: Save Game multi click
+    //BUG: Keep Appearance after teleport from void
 
-    //REWORK: MenuDialogBox (reduce), MiniGameUI (collect), MinigameDialogbox (reduce), ControlsUI (hasEnoughResource)
     //REWORK: AnyButton Press
 
     //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
-    //TODO: Player keep information between scenes (Statuseffects, Pets, Values)
+    //TODO: Player keep information between scenes (Statuseffects)
 
     //TODO: Characterparts: Shader statt Spriterenderer
     //TODO: Teleport Rework (Quick Travel, Teleport list)
