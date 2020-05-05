@@ -102,7 +102,7 @@ public class Character : MonoBehaviour
         this.updateSpellSpeed(0);
 
         this.animator.enabled = true;
-        this.enableSpriteRenderer(true);
+        this.SetCharacterSprites(true);
         this.activeDeathAnimation = null;
 
         if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
@@ -207,14 +207,6 @@ public class Character : MonoBehaviour
     #endregion
 
     #region Color Changes
-
-    public void enableSpriteRenderer(bool value)
-    {
-        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
-            this.GetComponent<SpriteRendererExtensionHandler>().enableSpriteRenderer(value);
-
-        if (this.shadowRenderer != null) this.shadowRenderer.enabled = value;
-    }
 
     public void setStartColor()
     {
@@ -520,11 +512,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void PlayRespawnAnimation()
-    {
-        this.ChangeColor(Color.white);
-        AnimatorUtil.SetAnimatorParameter(this.animator, "Respawn");
-    }
+
 
     #endregion
 
@@ -568,7 +556,7 @@ public class Character : MonoBehaviour
         return false;
     }
 
-    public void enableScripts(bool value)
+    public void EnableScripts(bool value)
     {
         if (this.GetComponent<AIAggroSystem>() != null) this.GetComponent<AIAggroSystem>().enabled = value;
         if (this.GetComponent<AIEvents>() != null) this.GetComponent<AIEvents>().enabled = value;
@@ -600,42 +588,35 @@ public class Character : MonoBehaviour
 
     #region Respawn
 
-    public virtual void SpawnOut() => SetSpawnOut();
-
-    public virtual void SpawnIn(bool wait)
+    public void SetCharacterSprites(bool value)
     {
-        SetSpawnIn(wait);
-        this.ResetValues(); //NPC only
+        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
+            this.GetComponent<SpriteRendererExtensionHandler>().enableSpriteRenderer(value);
+
+        if (this.shadowRenderer != null) this.shadowRenderer.enabled = value;
     }
 
-    private void SetSpawnOut()
+    public virtual void SpawnOut()
     {
-        this.myRigidbody.velocity = Vector2.zero;
-        this.values.currentState = CharacterState.respawning;
-        this.enableSpriteRenderer(false);
-        this.enableScripts(false); //wait until full Respawn
+        this.myRigidbody.velocity = Vector2.zero;        
+        this.EnableScripts(false);
+        this.values.currentState = CharacterState.respawning;       
     }
 
-    public void SetSpawnIn(bool wait)
+    public virtual void SpawnIn()
     {
-        this.gameObject.SetActive(true);
-
-        if (wait)
-        {
-            this.enableScripts(false);
-            this.PlayRespawnAnimation();
-        }
-        else SpawnCompleted();
-
-        this.enableSpriteRenderer(true);
+        this.ResetValues(); //NPC only        
         this.removeColor(Color.white);
+        this.values.currentState = CharacterState.idle;
+        this.EnableScripts(true);        
     }
 
-    public void SpawnCompleted()
+    public void PlayRespawnAnimation()
     {
-        this.enableScripts(true);
-        this.values.currentState = CharacterState.idle;
+        this.ChangeColor(Color.white);
+        AnimatorUtil.SetAnimatorParameter(this.animator, "Respawn");
     }
+
 
     #endregion
 

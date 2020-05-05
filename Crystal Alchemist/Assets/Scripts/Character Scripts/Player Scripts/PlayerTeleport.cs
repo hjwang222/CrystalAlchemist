@@ -20,34 +20,19 @@ public class PlayerTeleport : MonoBehaviour
 
     public void Initialize(Player player)
     {
-        this.player = player;
-        this.player.SpawnOut(); //Disable Player
-
-        if (this.nextTeleport.showAnimationIn) StartCoroutine(materializePlayer()); //Start Animation       
-        else
-        {
-            SetPosition(this.nextTeleport.position);
-            this.player.SpawnIn(false);
-        }
+        this.player = player;  
+        StartCoroutine(MaterializePlayer());
     }
 
-    public void SwitchScene()
-    {
-        this.player.SpawnOut(); //Disable Player
-        if (this.nextTeleport.showAnimationOut) StartCoroutine(DematerializePlayer());       
-        else LoadScene();
-    }
+    public void SwitchScene() => StartCoroutine(DematerializePlayer());    
 
     public bool TeleportAbilityEnabled()
     {
         return this.teleportList.TeleportEnabled();
     }
 
-    public void AddTeleport(string scene, Vector2 position)
-    {
-        this.teleportList.AddTeleport(scene, position);
-    }
-
+    public void AddTeleport(string scene, Vector2 position) => this.teleportList.AddTeleport(scene, position);
+    
     private void LoadScene()
     {
         //AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.nextTeleport.scene);
@@ -64,31 +49,45 @@ public class PlayerTeleport : MonoBehaviour
 
     private IEnumerator DematerializePlayer()
     {
-        if (this.player.stats.respawnAnimation != null) //Show Animation for DEspawn
+        this.player.SpawnOut(); //Disable Player        
+        bool animation = this.nextTeleport.showAnimationOut;
+
+        if (this.player.stats.respawnAnimation != null && animation) //Show Animation for DEspawn
         {
             RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, this.transform.position, Quaternion.identity);
-            respawnObject.SpawnOut(this.player);  //reverse
+            respawnObject.Reverse(this.player);  //reverse
             yield return new WaitForSeconds(respawnObject.getAnimationLength());
+        }
+        else
+        {
+            this.player.SetCharacterSprites(false);            
         }
 
         LoadScene();
     }
 
-    private IEnumerator materializePlayer()
+    private IEnumerator MaterializePlayer()
     {
+        this.player.SetCharacterSprites(false);
+        this.player.SpawnOut(); //Disable Player
+        
         Vector2 position = this.nextTeleport.position;
-        SetPosition(position);
-        this.player.SpawnIn(true);
+        bool animation = this.nextTeleport.showAnimationIn;
 
-        if (this.player.stats.respawnAnimation != null)
+        SetPosition(position);
+
+        if (this.player.stats.respawnAnimation != null && animation)
         {
             yield return new WaitForSeconds(2f);
-
             RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, position, Quaternion.identity);
-            respawnObject.SpawnIn(this.player);
-            yield return new WaitForSeconds((respawnObject.getAnimationLength() + 1f));
+            respawnObject.Initialize(this.player);
+            yield return new WaitForSeconds((respawnObject.getAnimationLength() + 1f));            
         }
-        else this.player.SpawnCompleted();        
+        else
+        {
+            this.player.SetCharacterSprites(true);
+            this.player.SpawnIn();            
+        }                
     }
 
     private IEnumerator loadSceneCo(string targetScene)

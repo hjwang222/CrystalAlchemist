@@ -4,13 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Signals/SimpleSignal")]
 public class SimpleSignal : ScriptableObject
 {
-    public List<SignalListener> listeners = new List<SignalListener>();
+    public List<SimpleSignalListener> listeners = new List<SimpleSignalListener>();
 
     public void Raise()
     {
-        List<SignalListener> activelisteners = new List<SignalListener>();
+        List<SimpleSignalListener> activelisteners = new List<SimpleSignalListener>();
 
-        for (int i = listeners.Count-1; i >= 0; i--)
+        for (int i = listeners.Count - 1; i >= 0; i--)
         {
             if (this.listeners[i] != null)
             {
@@ -19,12 +19,12 @@ public class SimpleSignal : ScriptableObject
         }
     }
 
-    public void RegisterListener (SignalListener listener)
+    public void RegisterListener(SimpleSignalListener listener)
     {
         this.listeners.Add(listener);
     }
 
-    public void DeRegisterListener (SignalListener listener)
+    public void DeRegisterListener(SimpleSignalListener listener)
     {
         this.listeners.Remove(listener);
     }

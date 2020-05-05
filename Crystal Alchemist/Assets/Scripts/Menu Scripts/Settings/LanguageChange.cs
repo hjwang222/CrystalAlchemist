@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using TMPro;
-using Sirenix.OdinInspector;
-using UnityEditor;
 
 public class LanguageChange : MonoBehaviour
 {

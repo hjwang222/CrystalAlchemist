@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
 public class SceneTransition : MonoBehaviour

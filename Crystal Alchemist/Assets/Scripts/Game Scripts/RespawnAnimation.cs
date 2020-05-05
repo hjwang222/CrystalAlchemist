@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class RespawnAnimation : MonoBehaviour
 {
-    [SerializeField]
+    private Character character;
     private Animator animator;
 
-    private Character character;
+    private void Awake() => this.animator = this.GetComponent<Animator>();    
 
-    public void SpawnIn(Character character)
+    public void Initialize(Character character)
     {
-        this.character = character;
-        character.SpawnIn(true); //show Animation, but no actions possible
+        this.character = character;        
     }
 
-    public void SpawnOut(Character character)
+    public void Reverse(Character character)
     {
-        character.SpawnOut(); //no actions possible now
+        this.character = character;
         AnimatorUtil.SetAnimatorParameter(animator, "Reverse");        
     }
 
@@ -25,9 +25,24 @@ public class RespawnAnimation : MonoBehaviour
         return clips[0].length;
     }
 
+    public void HideCharacter()
+    {
+        if (this.character != null) this.character.SetCharacterSprites(false);
+    }
+
+    public void ShowCharacter()
+    {
+        if (this.character != null) this.character.SetCharacterSprites(true);
+    }
+
+    public void PlayAnimation()
+    {
+        if (this.character != null) this.character.PlayRespawnAnimation();
+    }
+
     public void DestroyIt()
     {
-        if(this.character != null) this.character.SpawnCompleted(); //spawn complete, actions possible!
+        if (this.character != null) this.character.SpawnIn();
         Destroy(this.gameObject, 0.1f);
     }
 }

@@ -10,7 +10,7 @@ public enum DialogBoxType
     ok
 }
 
-public class MenuDialogBox : MenuControls
+public class MenuDialogBox : MonoBehaviour
 {
     [BoxGroup("DialogBox")]
     [SerializeField]
@@ -36,34 +36,35 @@ public class MenuDialogBox : MenuControls
     [SerializeField]
     private PlayerInventory inventory;
 
+    [SerializeField]
+    private GameObject child;
+
+    [SerializeField]
+    private MenuControls controls;
+
     private UnityEvent OnConfirm; 
     private MenuControls lastMainMenu;
     private Costs price;
 
-    [HideInInspector]
-    public string dialogText;
-
-    public override void Start()
+    public void Start()
     {
-        base.Start();
         GameEvents.current.OnMenuDialogBox += Initialize;
     }
 
-    public override void OnDestroy()
+    public void OnDestroy()
     {
-        base.OnDestroy();
         GameEvents.current.OnMenuDialogBox -= Initialize;
     }
 
     private void init()
     {
+        this.child.SetActive(true);
         this.YesButton.gameObject.SetActive(false);
         this.NoButton.gameObject.SetActive(false);
         this.OKButton.gameObject.SetActive(false);
         this.price = null;
         this.priceField.gameObject.SetActive(false);
-        this.YesButton.GetComponent<Selectable>().interactable = true;
-        this.child.SetActive(true);
+        this.YesButton.GetComponent<Selectable>().interactable = true;        
     }
 
     private void Initialize(UnityEvent OnConfirm, Costs cost, string text, DialogBoxType type, MenuControls parent)
@@ -109,6 +110,6 @@ public class MenuDialogBox : MenuControls
     private void closeDialog()
     {
         if (this.lastMainMenu != null) this.lastMainMenu.enableButtons(true);   
-        this.ExitMenu();
+        this.controls.ExitMenu();
     }
 }

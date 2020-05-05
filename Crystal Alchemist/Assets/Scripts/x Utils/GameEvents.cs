@@ -23,6 +23,7 @@ public class GameEvents : MonoBehaviour
     public Action<int> OnPage;
     public Action<CharacterState> OnMenuOpen;
     public Action<CharacterState> OnMenuClose;
+    public Action<bool> OnMenuOverlay;
     public Action<StatusEffect> OnEffectAdded;
     public Action<UnityEvent, Costs,string,DialogBoxType,MenuControls> OnMenuDialogBox;
 
@@ -31,6 +32,7 @@ public class GameEvents : MonoBehaviour
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
     public void DoMenuOpen(CharacterState state) => this.OnMenuOpen?.Invoke(state);  
     public void DoMenuClose(CharacterState state) => this.OnMenuClose?.Invoke(state);
+    public void DoMenuOverlay(bool value) => this.OnMenuOverlay?.Invoke(value);
     public void DoCollect(ItemStats stats) => this.OnCollect?.Invoke(stats);    
     public void DoReduce(Costs costs) => this.OnReduce?.Invoke(costs);    
     public void DoSubmit() => this.OnSubmit?.Invoke();  

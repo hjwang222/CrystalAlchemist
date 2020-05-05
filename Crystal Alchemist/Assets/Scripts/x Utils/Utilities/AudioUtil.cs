@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioUtil : MonoBehaviour
+public class AudioUtil
 {
     private static Dictionary<AudioClip, float> soundsAlreadyPlayed = new Dictionary<AudioClip, float>();
     private static AudioSource blub;
@@ -56,7 +55,7 @@ public class AudioUtil : MonoBehaviour
                     source.dopplerLevel = 0f;
                 }
                 source.Play();
-                Destroy(temp, soundeffect.length);
+                MonoBehaviour.Destroy(temp, soundeffect.length);
             }
         }
     }
@@ -81,7 +80,6 @@ public class AudioUtil : MonoBehaviour
         {
             soundsAlreadyPlayed.Add(clip, Time.time);
             return true;
-
         }
     }
 }

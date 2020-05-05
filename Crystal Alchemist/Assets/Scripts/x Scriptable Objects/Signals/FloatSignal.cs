@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Signals/FloatSignal")]
@@ -15,13 +14,7 @@ public class FloatSignal : ScriptableObject
         }
     }
 
-    public void RegisterListener(FloatSignalListener listener)
-    {
-        this.listeners.Add(listener);
-    }
+    public void RegisterListener(FloatSignalListener listener) => this.listeners.Add(listener);    
 
-    public void DeRegisterListener(FloatSignalListener listener)
-    {
-        this.listeners.Remove(listener);
-    }
+    public void DeRegisterListener(FloatSignalListener listener) => this.listeners.Remove(listener);    
 }

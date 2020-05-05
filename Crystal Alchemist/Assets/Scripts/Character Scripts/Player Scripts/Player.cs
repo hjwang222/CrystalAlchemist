@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections;
-using System.Collections.Generic;
 
 public class Player : Character
 {
@@ -39,6 +38,7 @@ public class Player : Character
     public override void Start()
     {
         base.Start();
+        this.presetSignal.Raise();
 
         GameEvents.current.OnCollect += this.CollectIt;
         GameEvents.current.OnReduce += this.reduceResource;
@@ -49,8 +49,8 @@ public class Player : Character
         this.GetComponent<PlayerTeleport>().Initialize(this);
 
         this.healthSignalUI.Raise();
-        this.manaSignalUI.Raise();
-        this.presetSignal.Raise();
+        this.manaSignalUI.Raise();    
+        this.UpdateAnimator(this.values.direction);
     }       
 
     public override void Update()
@@ -68,14 +68,21 @@ public class Player : Character
         GameEvents.current.OnMenuClose -= this.setStateAfterMenuClose;
     }
 
-
     public override void SpawnOut()
     {
-        base.SpawnOut();
+        base.SpawnOut();        
         this.deactivateAllSkills();
     }
 
-    public override void SpawnIn(bool wait) => this.SetSpawnIn(wait);
+    public override void SpawnIn()
+    {     
+        this.removeColor(Color.white);
+        this.values.currentState = CharacterState.idle;
+        this.EnableScripts(true);
+    }
+
+
+
 
     private void deactivateAllSkills()
     {

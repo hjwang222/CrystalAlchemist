@@ -6,18 +6,15 @@ public class TODOLIST : MonoBehaviour
 
     //BUG: Szenenwechsel Eventsystem kaputt
     //BUG: Save Game multi click (Dialogbox Launcher buggy)
-    //BUG: Keep Appearance after teleport from void
     //BUG: Player is null
+    //BUG: Player looks right
 
     //REWORK: AnyButton Press
-
-    //TODO: Player Teleport (Spawn In and Spawn Out Animation)
 
     //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
     //TODO: Characterparts: Shader statt Spriterenderer
     //TODO: Teleport Rework (Quick Travel, Teleport list)
 
-    //TODO: Event Signals
     //TODO: TMPro Exceptions Fix
     //TODO: Screen Resolutions Options (1920x1080, 640x480, 1024x768)
     //TODO: Scene Manager (UI an und aus, Scene Manager DontDestroy?)

@@ -14,7 +14,9 @@ public class LayoutChange : MonoBehaviour
         foreach (GameObject obje in gameObjects) obje.SetActive(value);        
     }
 
-    private void Start() => SettingsEvents.current.OnLayoutChanged += UpdateLayout;    
+    private void Start() => SettingsEvents.current.OnLayoutChanged += UpdateLayout;
+
+    private void OnEnable() => UpdateLayout();
 
     private void OnDestroy() => SettingsEvents.current.OnLayoutChanged -= UpdateLayout;  
 

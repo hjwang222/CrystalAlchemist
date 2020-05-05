@@ -19,10 +19,6 @@ public class MenuControls : BasicMenu
     [Required]
     public myCursor cursor;
 
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    private GameObject blackScreen;
-
     [BoxGroup("Menu Controls")]
     public bool isIngameMenu = false;
 
@@ -62,7 +58,6 @@ public class MenuControls : BasicMenu
     public override void OnEnable()
     {      
         if (this.cursor != null) this.cursor.gameObject.SetActive(true);
-        if (this.blackScreen != null) this.blackScreen.SetActive(true);
 
         if (this.isIngameMenu)
         {
@@ -74,6 +69,7 @@ public class MenuControls : BasicMenu
 
                 IngameMenuHandler.lastState = this.playerValues.currentState;
                 GameEvents.current.DoMenuOpen(CharacterState.inMenu);
+                GameEvents.current.DoMenuOverlay(true);
 
                 if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.getMusicInMenu());
             }
@@ -90,9 +86,9 @@ public class MenuControls : BasicMenu
         {
             Cursor.visible = false;
             GameEvents.current.DoMenuClose(IngameMenuHandler.lastState);//avoid reclick!
+            GameEvents.current.DoMenuOverlay(false);
 
             if (this.cursor != null) this.cursor.gameObject.SetActive(false);
-            if (this.blackScreen != null) this.blackScreen.SetActive(false);
             if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.backgroundMusicVolume);
         }
 
