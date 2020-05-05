@@ -85,9 +85,8 @@ namespace TMPro
             CanvasRenderer canvasRenderer = GetComponent<CanvasRenderer>();
             if (canvasRenderer != null)
             {
-                //Debug.Log("Removing unnecessary CanvasRenderer component from text object.", this);
-                //DestroyImmediate(canvasRenderer);
-                UnityEditor.EditorApplication.delayCall += () => DestroyImmediate(canvasRenderer);
+                Debug.Log("Removing unnecessary CanvasRenderer component from text object.", this);
+                DestroyImmediate(canvasRenderer);
             }
 
             // Cache Reference to RectTransform

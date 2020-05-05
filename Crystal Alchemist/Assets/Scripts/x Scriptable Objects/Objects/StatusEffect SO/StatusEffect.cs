@@ -88,7 +88,7 @@ public class StatusEffect : ScriptableObject
     [FoldoutGroup("Visuals", expanded: false)]
     [SerializeField]
     [Required]
-    private StatusEffectGameObject StatusEffectObject;
+    private StatusEffectGameObject statusEffectObject;
 
     [FoldoutGroup("Visuals", expanded: false)]
     [Tooltip("Icon des Statuseffekts für das UI")]
@@ -111,20 +111,35 @@ public class StatusEffect : ScriptableObject
     public void Initialize(Character character)
     {
         this.target = character;
-        if (this.statusEffectType == StatusEffectType.debuff) this.target.values.debuffs.Add(this);
-        else this.target.values.buffs.Add(this);
-
-        if (this.target != null && this.changeColor) this.target.changeColor(this.statusEffectColor);
-        this.activeObject = Instantiate(this.StatusEffectObject, this.target.activeStatusEffectParent.transform.position, Quaternion.identity, this.target.transform);
-
         setTime();
         initActions();
     }
 
-    public void updateTimeDistortion(float distortion)
+    public StatusEffectGameObject GetVisuals()
     {
-        this.timeDistortion = 1 + (distortion / 100);
+        return this.statusEffectObject;
     }
+
+    public Color GetColor()
+    {
+        return this.statusEffectColor;
+    }
+
+    public bool CanChangeColor()
+    {
+        return this.changeColor;
+    }
+
+    public StatusEffectGameObject Instantiate(GameObject parent)
+    {
+        StatusEffectGameObject effect = Instantiate(this.statusEffectObject, parent.transform.position, Quaternion.identity, parent.transform);
+        effect.name = this.statusEffectObject.name;
+        effect.Initialize(this);
+        this.activeObject = effect;
+        return effect;
+    }
+
+    public void updateTimeDistortion(float distortion) => this.timeDistortion = 1 + (distortion / 100);    
 
     private void setTime()
     {
@@ -145,8 +160,9 @@ public class StatusEffect : ScriptableObject
 
     #region Update
 
-    public void Updating()
+    public void Updating(Character character)
     {
+        if (this.target != character) this.target = character;
         doOnUpdate();
     }  
 
@@ -174,22 +190,19 @@ public class StatusEffect : ScriptableObject
 
     private void initActions()
     {
-        foreach (StatusEffectEvent effectEvent in this.statusEffectEvents)
-        {
-            effectEvent.Initialize(this.target, this);
-        }
+        foreach (StatusEffectEvent effectEvent in this.statusEffectEvents) effectEvent.Initialize(this.target, this);        
     }
 
     public void DestroyIt()
     {
-        if (this.activeObject != null) this.activeObject.SetEnd();
         if (this.target != null)
         {
             //Charakter-Farbe zurücksetzen
             if (this.changeColor) this.target.removeColor(this.statusEffectColor);
-
             this.resetValues();
         }
+
+        if (this.activeObject != null) this.activeObject.Deactivate();
 
         //GUI updaten und Objekt kurz danach zerstören
         this.updateUI.Raise();
@@ -198,10 +211,7 @@ public class StatusEffect : ScriptableObject
 
     private void resetValues()
     {
-        foreach (StatusEffectEvent buffEvent in this.statusEffectEvents)
-        {
-            buffEvent.ResetEvent(this.target, this);
-        }
+        foreach (StatusEffectEvent buffEvent in this.statusEffectEvents) buffEvent.ResetEvent(this.target, this);        
     }
 
     public void changeTime(float extendTimePercentage)
@@ -221,7 +231,7 @@ public class StatusEffect : ScriptableObject
 
     public void doModule()
     {
-        if (this.activeObject.GetComponent<StatusEffectModule>() != null) this.activeObject.GetComponent<StatusEffectModule>().doAction();
+        if (this.statusEffectObject.GetComponent<StatusEffectModule>() != null) this.statusEffectObject.GetComponent<StatusEffectModule>().doAction();
     }
 
     #endregion

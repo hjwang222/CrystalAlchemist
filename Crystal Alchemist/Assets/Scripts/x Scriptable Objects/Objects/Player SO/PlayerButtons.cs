@@ -34,7 +34,6 @@ public class PlayerButtons : ScriptableObject
         this.currentAbility = null;
     }
 
-
     public void Updating(Player player)
     {        
         bool canFight = player.values.CanUseAbilities();

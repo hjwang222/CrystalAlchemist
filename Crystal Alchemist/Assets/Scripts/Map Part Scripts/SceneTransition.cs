@@ -45,16 +45,7 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     private MenuDialogBoxLauncher dialogBox;
 
-    [BoxGroup("Activation Requirements")]
-    [HideLabel]
-    public Costs costs;
-
     private Player player;
-
-    public void Awake()
-    {
-        if(this.dialogBox != null) this.dialogBox.SetPrice(costs);        
-    }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -62,7 +53,7 @@ public class SceneTransition : MonoBehaviour
         {
             this.player = other.GetComponent<Player>();
             if (this.dialogBox == null) transferToScene();
-            else this.dialogBox.raiseDialogBox();
+            else this.dialogBox.ShowDialogBox();
         }
     }
 

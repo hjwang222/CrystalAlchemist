@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Player : Character
 {
@@ -34,11 +36,14 @@ public class Player : Character
         this.values.Initialize();
     }
     
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+
         GameEvents.current.OnCollect += this.CollectIt;
         GameEvents.current.OnReduce += this.reduceResource;
-        //2. load Statuseffects
+        GameEvents.current.OnMenuOpen += this.setStateMenuOpened;
+        GameEvents.current.OnMenuClose += this.setStateAfterMenuClose;
 
         this.GetComponent<PlayerAbilities>().Initialize(this);
         this.GetComponent<PlayerTeleport>().Initialize(this);
@@ -46,8 +51,7 @@ public class Player : Character
         this.healthSignalUI.Raise();
         this.manaSignalUI.Raise();
         this.presetSignal.Raise();
-    }
-
+    }       
 
     public override void Update()
     {
@@ -55,10 +59,13 @@ public class Player : Character
         this.GetComponent<PlayerAbilities>().Updating();
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
+        base.OnDestroy();
         GameEvents.current.OnCollect -= this.CollectIt;
         GameEvents.current.OnReduce -= this.reduceResource;
+        GameEvents.current.OnMenuOpen -= this.setStateMenuOpened;
+        GameEvents.current.OnMenuClose -= this.setStateAfterMenuClose;
     }
 
 
@@ -68,21 +75,7 @@ public class Player : Character
         this.deactivateAllSkills();
     }
 
-    public override void SpawnInWithoutAnimation()
-    {
-        this.gameObject.SetActive(true);
-        this.PlayRespawnAnimation();
-    }
-
-    public override void SpawnInWithAnimation()
-    {
-        this.gameObject.SetActive(true);
-        this.enableSpriteRenderer(true);
-        this.enableScripts(false); //wait until full Respawn
-        this.PlayRespawnAnimation();
-    }
-
-
+    public override void SpawnIn(bool wait) => this.SetSpawnIn(wait);
 
     private void deactivateAllSkills()
     {
@@ -178,9 +171,26 @@ public class Player : Character
         if (this.values.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
     }
 
+    private void setStateMenuOpened(CharacterState newState)
+    {
+        StopCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
+        this.values.currentState = newState;
+    }
 
+    private void setStateAfterMenuClose(CharacterState newState)
+    {
+        StartCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
+        this.values.currentState = newState;
+    }
 
-    public void CollectIt(ItemStats stats)
+    private IEnumerator delayInputPlayerCO(float delay, CharacterState newState)
+    {
+        //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
+        yield return new WaitForSeconds(delay);
+        this.values.currentState = newState;
+    }
+
+    private void CollectIt(ItemStats stats)
     {
         //Collectable, Load, MiniGame, Shop und Treasure
 

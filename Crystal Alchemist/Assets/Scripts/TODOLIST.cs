@@ -5,14 +5,15 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.0):
 
     //BUG: Szenenwechsel Eventsystem kaputt
-    //BUG: Save Game multi click
+    //BUG: Save Game multi click (Dialogbox Launcher buggy)
     //BUG: Keep Appearance after teleport from void
+    //BUG: Player is null
 
     //REWORK: AnyButton Press
 
-    //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
-    //TODO: Player keep information between scenes (Statuseffects)
+    //TODO: Player Teleport (Spawn In and Spawn Out Animation)
 
+    //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
     //TODO: Characterparts: Shader statt Spriterenderer
     //TODO: Teleport Rework (Quick Travel, Teleport list)
 

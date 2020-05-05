@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
-using TMPro;
 
 public enum VolumeType
 {
@@ -16,7 +15,6 @@ public class TitleScreenMenues : MonoBehaviour
     [BoxGroup("Switch Buttons")]
     public Image secondButton;
     [BoxGroup("Switch Buttons")]
-    public SimpleSignal switchSignal;
 
     public void switchButtons(Image active, Image notActive)
     {

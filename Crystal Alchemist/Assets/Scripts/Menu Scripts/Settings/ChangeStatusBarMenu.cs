@@ -1,16 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ChangeStatusBarMenu : TitleScreenMenues
 {
     [SerializeField]
     private CostType resourceType;
 
-    private void OnEnable()
-    {
-        getLayout();
-    }
+    private void OnEnable() => getLayout();    
 
     private void getLayout()
     {
@@ -30,7 +25,6 @@ public class ChangeStatusBarMenu : TitleScreenMenues
         else if (this.resourceType == CostType.mana) MasterManager.settings.manaBar = useBar;
 
         getLayout();
-
-        this.switchSignal.Raise();
+        SettingsEvents.current.DoHUDChange();
     }
 }

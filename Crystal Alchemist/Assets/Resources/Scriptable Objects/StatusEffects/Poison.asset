@@ -18,7 +18,7 @@ MonoBehaviour:
   statusEffectDescriptionEnglish: Damage over Time
   hasDuration: 1
   maxDuration: 18
-  canOverride: 0
+  canOverride: 1
   canBeModified: 1
   canDeactivateIt: 0
   canBeDispelled: 1
@@ -41,13 +41,12 @@ MonoBehaviour:
         amount: -0.5
       speed: 0
       time: 0
-      abilities: []
       effects: []
       StatusEffectType: 0
   destroyDelay: 0.2
   changeColor: 1
   statusEffectColor: {r: 0.65882355, g: 0.12941177, b: 0.7725491, a: 1}
-  StatusEffectObject: {fileID: 840438363010689007, guid: 12a1cb7dbe7ad25478c6b067a17a4884,
+  statusEffectObject: {fileID: 840438363010689007, guid: 12a1cb7dbe7ad25478c6b067a17a4884,
     type: 3}
   iconSprite: {fileID: 21300000, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}
   updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}

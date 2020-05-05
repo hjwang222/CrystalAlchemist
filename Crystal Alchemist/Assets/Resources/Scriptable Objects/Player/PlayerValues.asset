@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: PlayerValues
   m_EditorClassIdentifier: 
   isPlayer: 1
-  life: 1
+  life: 95
+  mana: 99
   spellspeed: 1
-  mana: 1
   speed: 5
-  maxLife: 1
-  maxMana: 1
-  lifeRegen: 0
-  manaRegen: 0
+  maxLife: 99
+  maxMana: 99
+  lifeRegen: 5
+  manaRegen: 5
   buffPlus: 0
   debuffMinus: 0
   currentState: 7
@@ -32,7 +32,9 @@ MonoBehaviour:
   steps: 0
   isOnIce: 0
   buffs: []
-  debuffs: []
+  debuffs:
+  - {fileID: 0}
   activePets: []
   activeSkills: []
   itemDrop: {fileID: 0}
+  speedFactor: 5

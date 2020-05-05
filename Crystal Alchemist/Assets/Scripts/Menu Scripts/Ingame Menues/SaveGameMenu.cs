@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
 public class SaveGameMenu : MenuControls
@@ -11,13 +10,9 @@ public class SaveGameMenu : MenuControls
     private List<SaveSlot> slots = new List<SaveSlot>();
 
     //Called from Dialogbox
-    public void updateSaves()
+    public void UpdateSaves()
     {
-        foreach(SaveSlot slot in this.slots)
-        {
-            slot.getData();
-        }
-
+        foreach(SaveSlot slot in this.slots) slot.getData();       
         this.slots[0].GetComponent<ButtonExtension>().setFirst();
     }
 }

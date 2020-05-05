@@ -186,7 +186,7 @@ public class MiniGameUI : MenuControls
 
     public void endMiniGame()
     {
-        this.showExitDialogBox();
+        this.ExitMenu();
     }
 
     public void showDialog()

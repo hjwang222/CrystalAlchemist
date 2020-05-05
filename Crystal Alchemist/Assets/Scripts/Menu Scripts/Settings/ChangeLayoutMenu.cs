@@ -2,10 +2,7 @@
 
 public class ChangeLayoutMenu : TitleScreenMenues
 {
-    private void OnEnable()
-    {
-        getLayout();
-    }
+    private void OnEnable() => getLayout();    
 
     private void getLayout()
     {
@@ -19,7 +16,6 @@ public class ChangeLayoutMenu : TitleScreenMenues
         else MasterManager.settings.layoutType = LayoutType.gamepad;
         
         getLayout();
-
-        this.switchSignal.Raise();
+        SettingsEvents.current.DoLayoutChange();
     }
 }

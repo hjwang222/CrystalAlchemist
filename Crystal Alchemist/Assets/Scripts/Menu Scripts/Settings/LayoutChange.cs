@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class LayoutChange : MonoBehaviour
@@ -12,23 +11,14 @@ public class LayoutChange : MonoBehaviour
 
     private void setActive(bool value, List<GameObject> gameObjects)
     {
-        foreach (GameObject obje in gameObjects)
-        {
-            obje.SetActive(value);
-        }
+        foreach (GameObject obje in gameObjects) obje.SetActive(value);        
     }
 
-    private void Start()
-    {
-        updateLayout();
-    }
+    private void Start() => SettingsEvents.current.OnLayoutChanged += UpdateLayout;    
 
-    private void OnEnable()
-    {
-        updateLayout();
-    }
+    private void OnDestroy() => SettingsEvents.current.OnLayoutChanged -= UpdateLayout;  
 
-    public void updateLayout()
+    private void UpdateLayout()
     {
         if(MasterManager.settings.layoutType == LayoutType.keyboard)
         {

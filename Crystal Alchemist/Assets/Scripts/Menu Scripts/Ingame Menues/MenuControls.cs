@@ -32,10 +32,6 @@ public class MenuControls : BasicMenu
 
     [BoxGroup("Menu Controls")]
     [SerializeField]
-    private MenuDialogBoxLauncher exitDialogBox;
-
-    [BoxGroup("Menu Controls")]
-    [SerializeField]
     private Texture2D cursorTexture;
 
     public override void Start()
@@ -45,21 +41,21 @@ public class MenuControls : BasicMenu
         if (GameEvents.current != null)
         {
             GameEvents.current.OnCancel += OnCancel;
-            GameEvents.current.OnInventory += showExitDialogBox;
-            GameEvents.current.OnPause += showExitDialogBox;
+            GameEvents.current.OnInventory += ExitMenu;
+            GameEvents.current.OnPause += ExitMenu;
         }
 
         Cursor.SetCursor(cursorTexture, new Vector2(0, 0), CursorMode.ForceSoftware);
         Cursor.visible = true;
     }
 
-    private void OnDestroy()
+    public virtual void OnDestroy()
     {
         if (GameEvents.current != null)
         {
             GameEvents.current.OnCancel -= OnCancel;
-            GameEvents.current.OnInventory -= showExitDialogBox;
-            GameEvents.current.OnPause -= showExitDialogBox;
+            GameEvents.current.OnInventory -= ExitMenu;
+            GameEvents.current.OnPause -= ExitMenu;
         }
     }
 
@@ -77,7 +73,7 @@ public class MenuControls : BasicMenu
                 Cursor.visible = true;
 
                 IngameMenuHandler.lastState = this.playerValues.currentState;
-                this.playerValues.setStateAfterMenuClose(CharacterState.inMenu);
+                GameEvents.current.DoMenuOpen(CharacterState.inMenu);
 
                 if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.getMusicInMenu());
             }
@@ -93,8 +89,7 @@ public class MenuControls : BasicMenu
         if (this.isIngameMenu && IngameMenuHandler.openedMenues.Count <= 0)
         {
             Cursor.visible = false;
-
-            this.playerValues.setStateAfterMenuClose(IngameMenuHandler.lastState); //avoid reclick!
+            GameEvents.current.DoMenuClose(IngameMenuHandler.lastState);//avoid reclick!
 
             if (this.cursor != null) this.cursor.gameObject.SetActive(false);
             if (this.blackScreen != null) this.blackScreen.SetActive(false);
@@ -115,22 +110,16 @@ public class MenuControls : BasicMenu
         if (!disableExitButtonPress)
         {
             if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
-            else showExitDialogBox();
+            else ExitMenu();
         }
     }
 
     public virtual void OnClose()
     {
-        if (!disableExitButtonPress) showExitDialogBox();        
+        if (!disableExitButtonPress) ExitMenu();        
     }
 
-    public void showExitDialogBox()
-    {
-        if (this.exitDialogBox != null) this.exitDialogBox.raiseDialogBox();        
-        else exitMenu();
-    }
-
-    public virtual void exitMenu()
+    public virtual void ExitMenu()
     {
         if (this.child != null) this.child.SetActive(false);
     }

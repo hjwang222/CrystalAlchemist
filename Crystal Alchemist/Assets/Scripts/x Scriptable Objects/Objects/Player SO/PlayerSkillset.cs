@@ -20,12 +20,14 @@ public class PlayerSkillset : ScriptableObject
 
     public void SetSender(Character sender)
     {
+        this.abilities.RemoveAll(item => item == null);
         foreach (Ability ability in this.abilities) ability.SetSender(sender); 
     }
 
     public void Updating()
     {
-        foreach(Ability ability in this.abilities) ability.Update();        
+        this.abilities.RemoveAll(item => item == null);
+        foreach (Ability ability in this.abilities) ability.Update();        
     }
 
     public Ability getAbilityByName(string name)

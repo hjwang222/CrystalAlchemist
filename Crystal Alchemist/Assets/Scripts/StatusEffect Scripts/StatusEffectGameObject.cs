@@ -23,7 +23,7 @@ public class StatusEffectGameObject : MonoBehaviour
         return this.activeEffect;
     }
 
-    public void SetEnd()
+    public void Deactivate()
     {
         if (this.anim != null && this.endFromAnimator) AnimatorUtil.SetAnimatorParameter(this.anim, "End");
         else DestroyIt();

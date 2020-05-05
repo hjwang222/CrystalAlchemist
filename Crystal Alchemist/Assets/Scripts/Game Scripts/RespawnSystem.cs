@@ -63,7 +63,7 @@ public class RespawnSystem : MonoBehaviour
         {
             //spawn character immediately
             character.gameObject.SetActive(true);
-            character.SpawnInWithoutAnimation();
+            character.SpawnIn(false);
         }
     }
 }

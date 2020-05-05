@@ -91,7 +91,7 @@ public class SkillMenu : MenuControls
     {
         if (this.selectedAbility != null) selectSkillFromSkillSet(null);
         else if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
-        else exitMenu();
+        else ExitMenu();
     }
 
     public override void OnEnable()

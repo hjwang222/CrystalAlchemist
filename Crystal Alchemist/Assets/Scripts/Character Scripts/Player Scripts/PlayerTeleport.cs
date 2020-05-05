@@ -26,8 +26,8 @@ public class PlayerTeleport : MonoBehaviour
         if (this.nextTeleport.showAnimationIn) StartCoroutine(materializePlayer()); //Start Animation       
         else
         {
-            this.player.SpawnWithAnimationCompleted();
             SetPosition(this.nextTeleport.position);
+            this.player.SpawnIn(false);
         }
     }
 
@@ -78,6 +78,7 @@ public class PlayerTeleport : MonoBehaviour
     {
         Vector2 position = this.nextTeleport.position;
         SetPosition(position);
+        this.player.SpawnIn(true);
 
         if (this.player.stats.respawnAnimation != null)
         {
@@ -87,7 +88,7 @@ public class PlayerTeleport : MonoBehaviour
             respawnObject.SpawnIn(this.player);
             yield return new WaitForSeconds((respawnObject.getAnimationLength() + 1f));
         }
-        else this.player.SpawnWithAnimationCompleted();        
+        else this.player.SpawnCompleted();        
     }
 
     private IEnumerator loadSceneCo(string targetScene)

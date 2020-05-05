@@ -11,9 +11,10 @@ public class CharacterValues : ScriptableObject
     [BoxGroup("Base Stats")]
     public float life;
     [BoxGroup("Base Stats")]
-    public float spellspeed;
-    [BoxGroup("Base Stats")]
     public float mana;
+    [Space(10)]
+    [BoxGroup("Base Stats")]
+    public float spellspeed;
     [BoxGroup("Base Stats")]
     public float speed;
 
@@ -21,10 +22,12 @@ public class CharacterValues : ScriptableObject
     public float maxLife;
     [BoxGroup("Base Attributes")]
     public float maxMana;
+    [Space(10)]
     [BoxGroup("Base Attributes")]
     public float lifeRegen;
     [BoxGroup("Base Attributes")]
     public float manaRegen;
+    [Space(10)]
     [BoxGroup("Base Attributes")]
     public int buffPlus;
     [BoxGroup("Base Attributes")]
@@ -90,27 +93,6 @@ public class CharacterValues : ScriptableObject
 
     #region Menu und DialogBox
 
-    public void setStateMenuOpened(CharacterState newState)
-    {
-        //StopCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
-        this.currentState = newState;
-    }
-
-    public void setStateAfterMenuClose(CharacterState newState)
-    {
-        //StartCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
-        this.currentState = newState;
-    }
-
-
-    /*
-    public IEnumerator delayInputPlayerCO(float delay, CharacterState newState)
-    {
-        //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
-        yield return new WaitForSeconds(delay);
-        this.currentState = newState;
-    }*/
-
     public bool CanUseAbilities()
     {
         if (this.currentState != CharacterState.interact
@@ -136,6 +118,12 @@ public class CharacterValues : ScriptableObject
         }
 
         return false;
+    }
+
+    public void AddStatusEffect(StatusEffect effect)
+    {
+        if (effect.statusEffectType == StatusEffectType.debuff) this.debuffs.Add(effect);
+        else this.buffs.Add(effect);
     }
 
     #endregion

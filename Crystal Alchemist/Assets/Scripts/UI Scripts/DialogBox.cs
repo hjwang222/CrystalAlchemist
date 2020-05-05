@@ -57,7 +57,7 @@ public class DialogBox : MenuControls
     private void hideDialogBox()
     {
         this.index = 0;
-        this.exitMenu();
+        this.ExitMenu();
     }
 
     private List<string> formatText(string text)

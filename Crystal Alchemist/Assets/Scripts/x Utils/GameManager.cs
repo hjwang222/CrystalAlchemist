@@ -12,6 +12,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject blackScreen;
 
+    private void OnEnable()
+    {
+        this.blackScreen.SetActive(true);
+    }
+
     private void Awake()
     {
         SceneManager.LoadScene(UI, LoadSceneMode.Additive);

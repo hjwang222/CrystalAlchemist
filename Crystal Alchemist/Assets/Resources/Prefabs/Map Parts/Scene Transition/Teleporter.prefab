@@ -27,7 +27,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 672018873882936319}
   - {fileID: 6673192008266365950}
   - {fileID: 462480945629862920}
   - {fileID: 1901528911729491064}
@@ -63,7 +62,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 462480945279146113}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &462480945629862921
 SpriteRenderer:
@@ -80,6 +79,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -162,6 +162,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -269,73 +270,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!1 &1194964162479810118
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 672018873882936319}
-  - component: {fileID: 8485219314684638392}
-  m_Layer: 17
-  m_Name: DialogBoxLauncher
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &672018873882936319
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194964162479810118}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.03000021, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 462480945279146113}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8485219314684638392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194964162479810118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c77986e177388f34594c39f9c358dd6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: a5b92c3aee4a70f4781aa8ddae1adae7, type: 2}
-  useActionOnConfirm: 1
-  actionOnConfirm:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7808392554565731848}
-        m_MethodName: transferToScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  menuDialogBoxText: "M\xF6chtest du zur Orbitalen Alchemie gebracht werden?"
-  menuDialogBoxTextEnglish: Do you want to travel to the Orbital Alchemy?
-  dialogBoxType: 0
-  isAdditionalDialog: 0
-  setYesButtonFirst: 0
-  itemNeeded: {fileID: 0}
-  price: 0
-  dialogText: 
 --- !u!1 &8644135824530647080
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,8 +300,43 @@ Transform:
   - {fileID: 462480946290258147}
   - {fileID: 462480945792992914}
   m_Father: {fileID: 462480945279146113}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6739621124900970281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8730417105107985888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77986e177388f34594c39f9c358dd6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentMenu: {fileID: 0}
+  dialogBoxType: 0
+  price:
+    resourceType: 0
+    item: {fileID: 0}
+    amount: 1
+  actionOnConfirm:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7808392554565731848}
+        m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
+        m_MethodName: transferToScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  menuDialogBoxText: "M\xF6chtest du die Orbitale Alchemie verlassen?"
+  menuDialogBoxTextEnglish: Do you want to leave the Orbital Alchemy?
 --- !u!1001 &462480945538140996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -423,7 +392,7 @@ PrefabInstance:
     - target: {fileID: 6553018102672601274, guid: 3013b6f476dac0b46b653b76149a0fb6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6553018102672601274, guid: 3013b6f476dac0b46b653b76149a0fb6,
         type: 3}
@@ -464,7 +433,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogBox
       value: 
-      objectReference: {fileID: 8485219314684638392}
+      objectReference: {fileID: 6739621124900970281}
     - target: {fileID: 9170353456387763876, guid: 3013b6f476dac0b46b653b76149a0fb6,
         type: 3}
       propertyPath: m_Name
@@ -478,6 +447,12 @@ PrefabInstance:
         type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3013b6f476dac0b46b653b76149a0fb6, type: 3}
+--- !u!1 &8730417105107985888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9170353456387763876, guid: 3013b6f476dac0b46b653b76149a0fb6,
+    type: 3}
+  m_PrefabInstance: {fileID: 462480945538140996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6673192008266365950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6553018102672601274, guid: 3013b6f476dac0b46b653b76149a0fb6,
@@ -490,7 +465,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 462480945538140996}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8730417105107985888}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 984c8cd5ec6ccb644b586222917fbfad, type: 3}

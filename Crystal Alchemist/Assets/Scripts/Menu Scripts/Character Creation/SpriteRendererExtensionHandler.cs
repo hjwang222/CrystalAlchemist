@@ -38,64 +38,38 @@ public class SpriteRendererExtensionHandler : MonoBehaviour
     private void Start()
     {
         UnityUtil.GetChildObjects<SpriteRendererExtension>(this.characterSprite.transform, this.colorpalettes);
-        init();
+        Initialize();
     }
 
-    public void init() 
+    public void Initialize() 
     {
-        foreach (SpriteRendererExtension colorsprite in this.colorpalettes)
-        {
-            colorsprite.init();
-        }
+        foreach (SpriteRendererExtension colorsprite in this.colorpalettes) colorsprite.Initialize();        
     }
 
     public void setStartColor()
     {
-        foreach (SpriteRendererExtension colorsprite in this.colorpalettes)
-        {
-            colorsprite.setStartColor();
-        }
+        foreach (SpriteRendererExtension colorsprite in this.colorpalettes) colorsprite.setStartColor();
     }
 
     public void resetColors()
     {
-        foreach (SpriteRendererExtension colorPalette in this.colorpalettes)
-        {
-            colorPalette.resetColors();
-        }
+        foreach (SpriteRendererExtension colorPalette in this.colorpalettes) colorPalette.resetColors();        
     }
 
     public void removeColor(Color color)
     {
-        foreach (SpriteRendererExtension colorPalette in this.colorpalettes)
-        {
-            colorPalette.removeColor(color);
-        }
+        foreach (SpriteRendererExtension colorPalette in this.colorpalettes) colorPalette.removeColor(color);        
     }
 
-    public void enableSpriteRenderer(bool value)
-    {
-        this.characterSprite.SetActive(value);
-        /*
-        foreach (SpriteRendererExtension colorPalette in this.colorpalettes)
-        {
-            colorPalette.enableSpriteRenderer(value);
-        }*/
-    }
+    public void enableSpriteRenderer(bool value) => this.characterSprite.SetActive(value);    
 
     public void changeColor(Color color)
     {
-        foreach (SpriteRendererExtension colorPalette in this.colorpalettes)
-        {
-            colorPalette.changeColor(color);
-        }
+        foreach (SpriteRendererExtension colorPalette in this.colorpalettes) colorPalette.changeColor(color);        
     }
 
     public void flipSprite(Vector2 direction)
     {
-        foreach (SpriteRendererExtension colorPalette in this.colorpalettes)
-        {
-            colorPalette.flipSprite(direction);
-        }
+        foreach (SpriteRendererExtension colorPalette in this.colorpalettes) colorPalette.flipSprite(direction);        
     }
 }

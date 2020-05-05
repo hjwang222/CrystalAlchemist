@@ -27,6 +27,6 @@ public class CharacterPartHandler : MonoBehaviour
             if (part.gameObject.activeInHierarchy) part.GetComponent<SpriteRenderer>().color = color;            
         }
 
-        this.handler.init();
+        this.handler.Initialize();
     }
 }

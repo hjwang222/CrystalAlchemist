@@ -10,7 +10,7 @@ public class RespawnAnimation : MonoBehaviour
     public void SpawnIn(Character character)
     {
         this.character = character;
-        character.SpawnInWithAnimation(); //show Animation, but no actions possible
+        character.SpawnIn(true); //show Animation, but no actions possible
     }
 
     public void SpawnOut(Character character)
@@ -27,7 +27,7 @@ public class RespawnAnimation : MonoBehaviour
 
     public void DestroyIt()
     {
-        if(this.character != null) this.character.SpawnWithAnimationCompleted(); //spawn complete, actions possible!
+        if(this.character != null) this.character.SpawnCompleted(); //spawn complete, actions possible!
         Destroy(this.gameObject, 0.1f);
     }
 }

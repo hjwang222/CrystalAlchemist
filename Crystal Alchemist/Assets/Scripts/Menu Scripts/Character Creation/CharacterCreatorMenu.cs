@@ -25,7 +25,11 @@ public class CharacterCreatorMenu : MenuControls
 
     [BoxGroup("Character Creator")]
     [SerializeField]
-    private MenuDialogBoxLauncher dialogBoxLauncherConfirm;
+    private MenuDialogBoxLauncher confirmLauncher;
+
+    [BoxGroup("Menu Controls")]
+    [SerializeField]
+    private MenuDialogBoxLauncher exitLauncher;
 
     public override void Start()
     {
@@ -46,16 +50,17 @@ public class CharacterCreatorMenu : MenuControls
         updatePreview();
     }
 
-    public void showConfirmDialog()
-    {
-        if (this.dialogBoxLauncherConfirm != null) this.dialogBoxLauncherConfirm.raiseDialogBox();
-    }
-
     public void Confirm()
     {
         GameUtil.setPreset(this.creatorPreset, this.playerPreset); //save Preset
         updatePreview();
-        exitMenu();
+        ExitMenu();
+    }
+
+    public override void ExitMenu()
+    {
+        if (this.exitLauncher != null) this.exitLauncher.ShowDialogBox();
+        else base.ExitMenu();
     }
 
     public void updatePreview()

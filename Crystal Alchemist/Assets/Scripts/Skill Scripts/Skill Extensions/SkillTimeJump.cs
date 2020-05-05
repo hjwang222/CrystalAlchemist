@@ -33,7 +33,7 @@ public class SkillTimeJump : SkillExtension
 
         if (this.targetColor != null)
         {
-            this.skill.sender.changeColor(this.targetColor);
+            this.skill.sender.ChangeColor(this.targetColor);
         }
     }
     

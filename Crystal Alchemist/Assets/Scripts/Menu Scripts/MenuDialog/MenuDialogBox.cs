@@ -36,13 +36,24 @@ public class MenuDialogBox : MenuControls
     [SerializeField]
     private PlayerInventory inventory;
 
-    private UnityEvent actionYes; 
+    private UnityEvent OnConfirm; 
     private MenuControls lastMainMenu;
-
     private Costs price;
 
     [HideInInspector]
     public string dialogText;
+
+    public override void Start()
+    {
+        base.Start();
+        GameEvents.current.OnMenuDialogBox += Initialize;
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        GameEvents.current.OnMenuDialogBox -= Initialize;
+    }
 
     private void init()
     {
@@ -52,41 +63,30 @@ public class MenuDialogBox : MenuControls
         this.price = null;
         this.priceField.gameObject.SetActive(false);
         this.YesButton.GetComponent<Selectable>().interactable = true;
+        this.child.SetActive(true);
     }
 
-    public void setActive(GameObject launcherObject)
+    private void Initialize(UnityEvent OnConfirm, Costs cost, string text, DialogBoxType type, MenuControls parent)
     {
-        MenuDialogBoxLauncher launcher = launcherObject.GetComponent<MenuDialogBoxLauncher>();
-
         init();
+        this.OnConfirm = OnConfirm;
+        this.lastMainMenu = parent;
+        this.textfield.text = text;
 
-        if (launcher != null)
+        if (type == DialogBoxType.ok) this.OKButton.gameObject.SetActive(true);        
+        else
         {
-            this.child.SetActive(true);
-            this.actionYes = launcher.actionOnConfirm;
-            this.textfield.text = launcher.GetText();
-
-            if(launcher.dialogBoxType == DialogBoxType.ok)
-            {
-                this.OKButton.gameObject.SetActive(true);
-            }
-            else
-            {
-                this.YesButton.gameObject.SetActive(true);
-                this.NoButton.gameObject.SetActive(true);
-
-                setPrice(launcher);
-            }
-
-            this.lastMainMenu = launcher.parentMenu;
-            if (this.lastMainMenu != null) this.lastMainMenu.enableButtons(false);
+            this.YesButton.gameObject.SetActive(true);
+            this.NoButton.gameObject.SetActive(true);
+            setPrice(cost);
         }
+        
+        if (this.lastMainMenu != null) this.lastMainMenu.enableButtons(false);
     }
 
-    private void setPrice(MenuDialogBoxLauncher launcher)
+    private void setPrice(Costs cost)
     {
-        this.price = launcher.GetPrice();
-
+        this.price = cost;
         if (this.price != null && this.price.resourceType != CostType.none)
         {
             this.priceField.gameObject.SetActive(true);
@@ -97,31 +97,18 @@ public class MenuDialogBox : MenuControls
     public void Yes()
     {        
         this.closeDialog();
-        if (this.actionYes != null)
+        if (this.OnConfirm != null)
         {
             GameEvents.current.DoReduce(this.price);
-            this.actionYes.Invoke();
+            this.OnConfirm.Invoke();
         }
     }
 
-    public void No()
-    {
-        this.closeDialog();
-    }
+    public void No() => this.closeDialog();    
 
     private void closeDialog()
     {
         if (this.lastMainMenu != null) this.lastMainMenu.enableButtons(true);   
-        this.exitMenu();
-    }
-
-    public void SetText(string text)
-    {
-        this.textfield.text = text;
-    }
-
-    public void setYes(UnityEvent action)
-    {
-        this.actionYes = action;
+        this.ExitMenu();
     }
 }

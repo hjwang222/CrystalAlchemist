@@ -258,6 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 67703987}
   - component: {fileID: 592733662847864682}
+  - component: {fileID: 67703988}
   m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
@@ -290,6 +291,18 @@ Transform:
   m_Father: {fileID: 1251275148}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &67703988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67703986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef28f3706ecab0047b4754c69a6e0619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &89452372
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +315,6 @@ GameObject:
   - component: {fileID: 89452377}
   - component: {fileID: 89452376}
   - component: {fileID: 89452375}
-  - component: {fileID: 89452374}
   m_Layer: 5
   m_Name: Thanks to
   m_TagString: Untagged
@@ -329,34 +341,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -96.8}
   m_SizeDelta: {x: 475, y: 193.6}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &89452374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89452372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 89452375}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &89452375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -810,7 +794,6 @@ GameObject:
   - component: {fileID: 231977218}
   - component: {fileID: 231977217}
   - component: {fileID: 231977216}
-  - component: {fileID: 231977215}
   m_Layer: 5
   m_Name: 0.2.4.5
   m_TagString: Untagged
@@ -837,34 +820,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -66.855}
   m_SizeDelta: {x: 475, y: 133.71}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &231977215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 231977213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 231977216}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &231977216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1439,7 +1394,6 @@ GameObject:
   - component: {fileID: 387908954}
   - component: {fileID: 387908953}
   - component: {fileID: 387908952}
-  - component: {fileID: 387908951}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -1466,34 +1420,6 @@ RectTransform:
   m_AnchoredPosition: {x: 149.99997, y: 22}
   m_SizeDelta: {x: 500, y: 53.33}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &387908951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387908949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 387908952}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &387908952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1657,7 +1583,6 @@ GameObject:
   - component: {fileID: 413371608}
   - component: {fileID: 413371607}
   - component: {fileID: 413371606}
-  - component: {fileID: 413371605}
   m_Layer: 5
   m_Name: 0.2.2.5
   m_TagString: Untagged
@@ -1684,34 +1609,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -854.31}
   m_SizeDelta: {x: 475, y: 154}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &413371605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413371603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 413371606}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &413371606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1975,7 +1872,6 @@ GameObject:
   - component: {fileID: 611812482}
   - component: {fileID: 611812481}
   - component: {fileID: 611812480}
-  - component: {fileID: 611812479}
   m_Layer: 5
   m_Name: 0.2.0.5
   m_TagString: Untagged
@@ -2002,34 +1898,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -1497.01}
   m_SizeDelta: {x: 475, y: 126.4}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &611812479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611812477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 611812480}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &611812480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2162,7 +2030,6 @@ GameObject:
   - component: {fileID: 637940045}
   - component: {fileID: 637940044}
   - component: {fileID: 637940043}
-  - component: {fileID: 637940042}
   m_Layer: 5
   m_Name: 0.2.4.0
   m_TagString: Untagged
@@ -2189,34 +2056,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -227.56}
   m_SizeDelta: {x: 475, y: 163.7}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &637940042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637940040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 637940043}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &637940043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2351,7 +2190,6 @@ GameObject:
   - component: {fileID: 726963441}
   - component: {fileID: 726963440}
   - component: {fileID: 726963439}
-  - component: {fileID: 726963438}
   m_Layer: 5
   m_Name: 0.2.3.5
   m_TagString: Untagged
@@ -2378,34 +2216,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -428.96002}
   m_SizeDelta: {x: 475, y: 215.1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &726963438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 726963436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 726963439}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &726963439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3175,7 +2985,6 @@ GameObject:
   - component: {fileID: 810978244}
   - component: {fileID: 810978243}
   - component: {fileID: 810978242}
-  - component: {fileID: 810978241}
   m_Layer: 5
   m_Name: 0.2.0
   m_TagString: Untagged
@@ -3202,34 +3011,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -1620.2601}
   m_SizeDelta: {x: 475, y: 96.1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &810978241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810978239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 810978242}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &810978242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3535,7 +3316,6 @@ GameObject:
   - component: {fileID: 1020983911}
   - component: {fileID: 1020983910}
   - component: {fileID: 1020983909}
-  - component: {fileID: 1020983908}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3562,34 +3342,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000030518, y: -0.0000081062}
   m_SizeDelta: {x: 512, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1020983908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020983906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1020983909}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1020983909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3931,7 +3683,6 @@ GameObject:
   - component: {fileID: 1112164097}
   - component: {fileID: 1112164096}
   - component: {fileID: 1112164095}
-  - component: {fileID: 1112164094}
   - component: {fileID: 1112164099}
   m_Layer: 0
   m_Name: PressAnyKey
@@ -3959,34 +3710,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -42}
   m_SizeDelta: {x: 496.26, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1112164094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1112164092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1112164097}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1112164095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4262,7 +3985,6 @@ GameObject:
   - component: {fileID: 1170488424}
   - component: {fileID: 1170488423}
   - component: {fileID: 1170488422}
-  - component: {fileID: 1170488421}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -4289,34 +4011,6 @@ RectTransform:
   m_AnchoredPosition: {x: 149.99997, y: 22}
   m_SizeDelta: {x: 500, y: 53.33}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1170488421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1170488419}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1170488422}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1170488422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4447,7 +4141,6 @@ GameObject:
   - component: {fileID: 1240970913}
   - component: {fileID: 1240970912}
   - component: {fileID: 1240970911}
-  - component: {fileID: 1240970910}
   m_Layer: 5
   m_Name: 0.2.1
   m_TagString: Untagged
@@ -4474,34 +4167,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -1370.16}
   m_SizeDelta: {x: 475, y: 103.3}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1240970910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1240970908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1240970911}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1240970911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4632,7 +4297,6 @@ GameObject:
   - component: {fileID: 1251275147}
   - component: {fileID: 1251275146}
   - component: {fileID: 1251275145}
-  - component: {fileID: 1251275149}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -4724,18 +4388,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1251275149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1251275143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdff6ea9bf488cf4faa9b5fd88df3583, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1263364194
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4769,7 +4421,6 @@ GameObject:
   - component: {fileID: 1280666454}
   - component: {fileID: 1280666453}
   - component: {fileID: 1280666452}
-  - component: {fileID: 1280666451}
   m_Layer: 5
   m_Name: Source
   m_TagString: Untagged
@@ -4796,34 +4447,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.49998, y: -405.90002}
   m_SizeDelta: {x: 475, y: 400.6}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1280666451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280666449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1280666452}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1280666452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5087,7 +4710,6 @@ GameObject:
   - component: {fileID: 1415833007}
   - component: {fileID: 1415833006}
   - component: {fileID: 1415833005}
-  - component: {fileID: 1415833004}
   m_Layer: 5
   m_Name: 0.2.3
   m_TagString: Untagged
@@ -5114,34 +4736,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -656.91003}
   m_SizeDelta: {x: 475, y: 216.8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1415833004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415833002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1415833005}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1415833005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5616,7 +5210,6 @@ GameObject:
   - component: {fileID: 1509721895}
   - component: {fileID: 1509721894}
   - component: {fileID: 1509721893}
-  - component: {fileID: 1509721892}
   m_Layer: 5
   m_Name: 0.2.1.5
   m_TagString: Untagged
@@ -5643,34 +5236,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -1211.51}
   m_SizeDelta: {x: 475, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1509721892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1509721890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1509721893}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1509721893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6044,7 +5609,6 @@ GameObject:
   - component: {fileID: 1628918122}
   - component: {fileID: 1628918121}
   - component: {fileID: 1628918120}
-  - component: {fileID: 1628918119}
   m_Layer: 5
   m_Name: 0.2.2
   m_TagString: Untagged
@@ -6071,34 +5635,6 @@ RectTransform:
   m_AnchoredPosition: {x: 247.5, y: -1023.91}
   m_SizeDelta: {x: 475, y: 161.2}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1628918119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628918117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1628918120}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1628918120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6928,34 +6464,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8783085389903818206}
   m_CullTransparentMesh: 0
---- !u!114 &540371477399578403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1674994642230770553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 848762143884924940}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &592733662847864682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6979,34 +6487,6 @@ MonoBehaviour:
   - {fileID: 1584285664}
   mainFrame: {fileID: 1588455287}
   darkFrame: {fileID: 1300247785}
---- !u!114 &614963581401797004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6265403412193093280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2539126919783964806}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &623751371981228681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7605,7 +7085,6 @@ GameObject:
   - component: {fileID: 2487977477026103285}
   - component: {fileID: 1326993879429025261}
   - component: {fileID: 848762143884924940}
-  - component: {fileID: 540371477399578403}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -8178,7 +7657,6 @@ GameObject:
   - component: {fileID: 4240354559474721313}
   - component: {fileID: 3928846673553407570}
   - component: {fileID: 3247333078401158633}
-  - component: {fileID: 5244189245811160587}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -8524,7 +8002,6 @@ GameObject:
   - component: {fileID: 5531555050374280489}
   - component: {fileID: 7413150470681010637}
   - component: {fileID: 8658847411998635699}
-  - component: {fileID: 6854800359895209793}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -8613,34 +8090,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alternativeText: Return
   textMeshField: {fileID: 1986983661759261669}
---- !u!114 &3892959179865602147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7498908689661401885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3879864836697062262}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &3928846673553407570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11142,6 +10591,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9128686344211944662, guid: a0fea906fabfcfe429926638f98f0ac0, type: 3}
+    - {fileID: 4718566816965952401, guid: a0fea906fabfcfe429926638f98f0ac0, type: 3}
+    - {fileID: 5458686698548614604, guid: a0fea906fabfcfe429926638f98f0ac0, type: 3}
+    - {fileID: 1135705853688280939, guid: a0fea906fabfcfe429926638f98f0ac0, type: 3}
+    - {fileID: 4381171460439264470, guid: a0fea906fabfcfe429926638f98f0ac0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a0fea906fabfcfe429926638f98f0ac0, type: 3}
 --- !u!114 &4381171460345480109 stripped
 MonoBehaviour:
@@ -11197,34 +10650,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &4486345085167656137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8339652613909487350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4255827614225401405}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &4705542424853284457
 GameObject:
   m_ObjectHideFlags: 0
@@ -11440,34 +10865,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5733603537860754341}
   m_CullTransparentMesh: 0
---- !u!114 &5244189245811160587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2574036566849425015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3247333078401158633}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &5364991786236451699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12252,34 +11649,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6126138843121927848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7186456168129993095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7107310921028623651}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &6153484039026374911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12323,7 +11692,6 @@ GameObject:
   - component: {fileID: 5123457279055495375}
   - component: {fileID: 7186531948099703986}
   - component: {fileID: 623751371981228681}
-  - component: {fileID: 6209929354101772561}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -12331,34 +11699,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6209929354101772561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6176355136091340147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 623751371981228681}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!224 &6220880329551851629
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12408,7 +11748,6 @@ GameObject:
   - component: {fileID: 6517620242612647526}
   - component: {fileID: 8268199699485300841}
   - component: {fileID: 2539126919783964806}
-  - component: {fileID: 614963581401797004}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -12544,34 +11883,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6854800359895209793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3657441754581937759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8658847411998635699}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!224 &6856331739863967938
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12650,7 +11961,6 @@ GameObject:
   - component: {fileID: 5193083788450773679}
   - component: {fileID: 231429389195322304}
   - component: {fileID: 7107310921028623651}
-  - component: {fileID: 6126138843121927848}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -12868,7 +12178,6 @@ GameObject:
   - component: {fileID: 9197905235935846452}
   - component: {fileID: 1986983661759261669}
   - component: {fileID: 3879864836697062262}
-  - component: {fileID: 3892959179865602147}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -12916,7 +12225,6 @@ GameObject:
   - component: {fileID: 7563283701810129086}
   - component: {fileID: 5975510611351427977}
   - component: {fileID: 1712776572468442067}
-  - component: {fileID: 8561088985062206571}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13235,7 +12543,6 @@ GameObject:
   - component: {fileID: 5707974388967354098}
   - component: {fileID: 968387756945786227}
   - component: {fileID: 4255827614225401405}
-  - component: {fileID: 4486345085167656137}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13424,34 +12731,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40a2df96fb1149d4ea4b7f14d1d431c1, type: 3}
---- !u!114 &8561088985062206571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7651309870311701506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 0143aab20924a8d4da112e96dc69915e, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1712776572468442067}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ChangeLanguageText
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8658847411998635699
 MonoBehaviour:
   m_ObjectHideFlags: 0

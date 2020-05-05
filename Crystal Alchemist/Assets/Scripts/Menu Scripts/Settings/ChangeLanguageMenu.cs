@@ -2,10 +2,7 @@
 
 public class ChangeLanguageMenu : TitleScreenMenues
 {
-    private void OnEnable()
-    {
-        getFlag();
-    }
+    private void OnEnable() => getFlag();    
 
     private void getFlag()
     {
@@ -25,7 +22,6 @@ public class ChangeLanguageMenu : TitleScreenMenues
         else MasterManager.settings.useAlternativeLanguage = true;
 
         getFlag();
-
-        this.switchSignal.Raise();
+        SettingsEvents.current.DoLanguageChange();
     }
 }

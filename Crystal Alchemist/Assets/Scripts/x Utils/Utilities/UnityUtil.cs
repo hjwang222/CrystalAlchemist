@@ -13,6 +13,15 @@ public class UnityUtil : MonoBehaviour
         }
     }
 
+    public static void GetChildren(Transform transform, List<GameObject> childObjects)
+    {
+        foreach (Transform child in transform)
+        {
+            childObjects.Add(child.gameObject);
+            GetChildren(child, childObjects);
+        }
+    }
+
     public static Vector2 PixelPerfectClamp(Vector2 moveVector)
     {
         float pixelsPerUnit = 16;

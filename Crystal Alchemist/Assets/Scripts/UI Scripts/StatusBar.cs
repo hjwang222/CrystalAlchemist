@@ -103,13 +103,14 @@ public class StatusBar : MonoBehaviour
 
     #region Start Funktionen (Awake, Init, SetValues)
 
-    void Start()
-    {
-        init();
-    }
+    private void Start() => init();    
+
+    private void OnDestroy() => SettingsEvents.current.OnHUDChanged -= setBarOrSymbol;
 
     private void init()
     {
+        SettingsEvents.current.OnHUDChanged += setBarOrSymbol;
+
         this.audioSource = GetComponent<AudioSource>();
         setStatusBar();
 

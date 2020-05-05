@@ -17,7 +17,7 @@ public class SpriteRendererExtension : MonoBehaviour
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
     }
 
-    public void init()
+    public void Initialize()
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
         this.colors.Clear();

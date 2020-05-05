@@ -56,6 +56,7 @@ public class Character : MonoBehaviour
 
     private Vector3 spawnPosition;
     private CastBar activeCastbar;
+    private List<StatusEffectGameObject> statusEffectVisuals = new List<StatusEffectGameObject>();
 
     [BoxGroup("Player")]
     public CharacterValues values;
@@ -72,6 +73,14 @@ public class Character : MonoBehaviour
         ResetValues();
     }
 
+    public virtual void Start()
+    {
+        AddStatusEffectVisuals(this.values.buffs);
+        AddStatusEffectVisuals(this.values.debuffs);
+
+        GameEvents.current.OnEffectAdded += AddStatusEffectVisuals;
+    }
+
     public void SetComponents()
     {
         if (this.myRigidbody == null) this.myRigidbody = this.GetComponent<Rigidbody2D>();
@@ -79,12 +88,12 @@ public class Character : MonoBehaviour
         if (this.animator == null) this.animator = this.GetComponent<Animator>();
         if (this.boxCollider == null) this.boxCollider = GetComponent<Collider2D>();
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
-        if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().init();
+        if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().Initialize();
     }
-    
+
     public void ResetValues()
     {
-        this.values.Clear(this.stats);        
+        this.values.Clear(this.stats);
 
         this.SetDefaultDirection();
         this.setStartColor();
@@ -101,6 +110,11 @@ public class Character : MonoBehaviour
 
         if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().resetColors();
         if (this.boxCollider != null) this.boxCollider.enabled = true;
+    }
+
+    public virtual void OnDestroy()
+    {
+        GameEvents.current.OnEffectAdded -= AddStatusEffectVisuals;
     }
 
     #endregion
@@ -131,16 +145,6 @@ public class Character : MonoBehaviour
     {
         UpdateStatusEffectGroup(this.values.buffs);
         UpdateStatusEffectGroup(this.values.debuffs);
-    }
-
-    private void UpdateStatusEffectGroup(List<StatusEffect> effects)
-    {
-        effects.RemoveAll(item => item == null);
-
-        foreach (StatusEffect effect in effects)
-        {
-            effect.Updating();
-        }
     }
 
     private void UpdateLifeAnimation()
@@ -224,7 +228,7 @@ public class Character : MonoBehaviour
             this.GetComponent<SpriteRendererExtensionHandler>().removeColor(color);
     }
 
-    public void changeColor(Color color)
+    public void ChangeColor(Color color)
     {
         if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
             this.GetComponent<SpriteRendererExtensionHandler>().changeColor(color);
@@ -329,7 +333,6 @@ public class Character : MonoBehaviour
     }
 
     #endregion
-
 
     #region Damage Functions
 
@@ -482,7 +485,7 @@ public class Character : MonoBehaviour
     private IEnumerator hitCo(float duration, bool showColor)
     {
         this.values.cantBeHit = true;
-        if (this.stats.showHitcolor && showColor) this.changeColor(this.stats.hitColor);
+        if (this.stats.showHitcolor && showColor) this.ChangeColor(this.stats.hitColor);
         yield return new WaitForSeconds(duration);
         if (showColor) this.removeColor(this.stats.hitColor);
         this.values.cantBeHit = false;
@@ -519,7 +522,7 @@ public class Character : MonoBehaviour
 
     public void PlayRespawnAnimation()
     {
-        this.changeColor(Color.white);
+        this.ChangeColor(Color.white);
         AnimatorUtil.SetAnimatorParameter(this.animator, "Respawn");
     }
 
@@ -597,7 +600,15 @@ public class Character : MonoBehaviour
 
     #region Respawn
 
-    public virtual void SpawnOut()
+    public virtual void SpawnOut() => SetSpawnOut();
+
+    public virtual void SpawnIn(bool wait)
+    {
+        SetSpawnIn(wait);
+        this.ResetValues(); //NPC only
+    }
+
+    private void SetSpawnOut()
     {
         this.myRigidbody.velocity = Vector2.zero;
         this.values.currentState = CharacterState.respawning;
@@ -605,28 +616,56 @@ public class Character : MonoBehaviour
         this.enableScripts(false); //wait until full Respawn
     }
 
-    public virtual void SpawnInWithoutAnimation()
+    public void SetSpawnIn(bool wait)
     {
         this.gameObject.SetActive(true);
-        this.PlayRespawnAnimation();
-        this.ResetValues();
-    }
 
-    public virtual void SpawnInWithAnimation()
-    {
-        this.gameObject.SetActive(true);
-        this.enableSpriteRenderer(true);
-        this.enableScripts(false); //wait until full Respawn
-        this.ResetValues();
-        this.PlayRespawnAnimation();
-    }
+        if (wait)
+        {
+            this.enableScripts(false);
+            this.PlayRespawnAnimation();
+        }
+        else SpawnCompleted();
 
-    public void SpawnWithAnimationCompleted()
-    {
-        this.values.currentState = CharacterState.idle;
-        this.enableScripts(true);
         this.enableSpriteRenderer(true);
         this.removeColor(Color.white);
+    }
+
+    public void SpawnCompleted()
+    {
+        this.enableScripts(true);
+        this.values.currentState = CharacterState.idle;
+    }
+
+    #endregion
+
+    #region StatusEffect
+
+    private void UpdateStatusEffectGroup(List<StatusEffect> effects)
+    {
+        effects.RemoveAll(item => item == null);
+        foreach (StatusEffect effect in effects) effect.Updating(this);
+    }
+
+    private void AddStatusEffectVisuals(List<StatusEffect> effects)
+    {
+        foreach (StatusEffect effect in effects) AddStatusEffectVisuals(effect);
+    }
+
+    private void AddStatusEffectVisuals(StatusEffect effect)
+    {
+        if (effect.CanChangeColor()) ChangeColor(effect.GetColor());
+        if (!ContainsEffect(effect)) this.statusEffectVisuals.Add(effect.Instantiate(this.activeStatusEffectParent));
+    }
+
+    private bool ContainsEffect(StatusEffect effect)
+    {
+        for (int i = 0; i < this.statusEffectVisuals.Count; i++)
+        {
+            if (this.statusEffectVisuals[i] != null && this.statusEffectVisuals[i].name == effect.GetVisuals().name) return true;
+        }
+
+        return false;
     }
 
     #endregion
