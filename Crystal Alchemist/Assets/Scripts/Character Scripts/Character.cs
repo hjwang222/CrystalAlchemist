@@ -630,11 +630,13 @@ public class Character : MonoBehaviour
 
     private void AddStatusEffectVisuals(List<StatusEffect> effects)
     {
+        effects.RemoveAll(item => item == null);
         foreach (StatusEffect effect in effects) AddStatusEffectVisuals(effect);
     }
 
     private void AddStatusEffectVisuals(StatusEffect effect)
     {
+        if (effect == null) return;
         if (effect.CanChangeColor()) ChangeColor(effect.GetColor());
         if (!ContainsEffect(effect)) this.statusEffectVisuals.Add(effect.Instantiate(this.activeStatusEffectParent));
     }

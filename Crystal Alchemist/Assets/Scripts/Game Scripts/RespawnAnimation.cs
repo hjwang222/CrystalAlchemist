@@ -40,6 +40,8 @@ public class RespawnAnimation : MonoBehaviour
         if (this.character != null) this.character.PlayRespawnAnimation();
     }
 
+    public void PlaySoundEffect(AudioClip clip) => AudioUtil.playSoundEffect(clip);
+
     public void DestroyIt()
     {
         if (this.character != null) this.character.SpawnIn();

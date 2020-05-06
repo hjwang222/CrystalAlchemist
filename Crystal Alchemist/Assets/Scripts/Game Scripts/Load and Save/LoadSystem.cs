@@ -14,10 +14,12 @@ public class LoadSystem
             LoadBasicValues(data, saveGame.playerValue);
 
             saveGame.timePlayed = data.timePlayed;
-            saveGame.characterName = data.characterName;
+            saveGame.SetCharacterName(data.characterName);
 
             loadInventory(data, saveGame.inventory);
-            loadPlayerSkills(data, saveGame.buttons, saveGame.skillSet);       
+            loadPlayerSkills(data, saveGame.buttons, saveGame.skillSet);
+
+            saveGame.nextTeleport.SetValue(data.scene, new Vector2(data.position[0], data.position[1]));
         }
     }
 

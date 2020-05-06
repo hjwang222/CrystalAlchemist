@@ -41,6 +41,7 @@ public class MenuDialogBoxLauncher : MonoBehaviour
 
     private void RaiseDialogBox(UnityEvent action)
     {
+        if (!this.inputPossible) return;
         string text = FormatUtil.getLanguageDialogText(this.menuDialogBoxText, this.menuDialogBoxTextEnglish);
         GameEvents.current.DoMenuDialogBox(action, this.price, text, this.dialogBoxType, this.parentMenu);
     }

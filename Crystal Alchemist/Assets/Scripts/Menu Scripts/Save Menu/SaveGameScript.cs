@@ -10,14 +10,14 @@ public class SaveGameScript : MonoBehaviour
     private PlayerSaveGame saveGame;
 
     [SerializeField]
-    private SaveGameMenu menu;
+    private SimpleSignal updateSaveSignal;
 
     public void SaveGame(SaveSlot slot)
     {
-        this.saveGame.currentScene = SceneManager.GetActiveScene().name;
+        this.saveGame.nextTeleport.SetValue(SceneManager.GetActiveScene().name, Vector2.zero);
         SaveSystem.Save(this.saveGame, slot.gameObject.name); //saves savegame to data
         
-        this.menu.UpdateSaves();
+        this.updateSaveSignal.Raise();
         if (this.launcher != null) this.launcher.ShowDialogBox();
     }
 }

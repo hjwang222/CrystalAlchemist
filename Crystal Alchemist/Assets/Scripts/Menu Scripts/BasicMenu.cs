@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEngine.SceneManagement;
-
+using System.Collections;
 
 public class BasicMenu : PreventDeselection
 {
     [BoxGroup("Basic")]
     public List<GameObject> menues = new List<GameObject>();
+
+    [HideInInspector]
+    public bool inputPossible;
 
     public virtual void Start()
     {
@@ -16,6 +18,7 @@ public class BasicMenu : PreventDeselection
 
     public virtual void OnEnable()
     {
+        StartCoroutine(this.delayCo());
         this.setFirstMenu();
     }
 
@@ -31,11 +34,18 @@ public class BasicMenu : PreventDeselection
 
     public virtual void ShowMenu(GameObject menu)
     {
-        GameUtil.ShowMenu(menu, this.menues);
+        if(this.inputPossible) GameUtil.ShowMenu(menu, this.menues);
     }
 
     public void saveSettings()
     {
         SaveSystem.SaveOptions();
+    }
+
+    private IEnumerator delayCo()
+    {
+        this.inputPossible = false;
+        yield return new WaitForSeconds(0.1f);
+        this.inputPossible = true;
     }
 }

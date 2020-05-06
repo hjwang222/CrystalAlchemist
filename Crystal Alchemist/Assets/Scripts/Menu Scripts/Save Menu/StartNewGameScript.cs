@@ -9,10 +9,18 @@ public class StartNewGameScript : MonoBehaviour
     [SerializeField]
     private string firstScene = "Void";
 
+    [SerializeField]
+    private Vector2 position = Vector2.zero;
+
+    [SerializeField]
+    private TeleportStats nextTeleport;
+
     public void StartNewGame()
     {
         Cursor.visible = false;
         this.saveGame.Clear();
-        SceneManager.LoadSceneAsync(this.firstScene);
+        this.nextTeleport.SetValue(this.firstScene, this.position);
+
+        SceneManager.LoadSceneAsync(this.nextTeleport.scene);
     }
 }

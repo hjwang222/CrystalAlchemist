@@ -8,7 +8,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 {   
     [SerializeField]
     [Required]
-    private myCursor cursor;
+    private CustomCursor cursor;
 
     private Vector2 scale;
     private Vector2 size;
@@ -71,7 +71,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     {
         try
         {
-            if (this.cursor == null) this.cursor = GameObject.FindWithTag("Cursor").GetComponent<myCursor>();
+            if (this.cursor == null) this.cursor = GameObject.FindWithTag("Cursor").GetComponent<CustomCursor>();
             if (this.button == null) this.button = this.gameObject.GetComponent<Selectable>();
         }
         catch
@@ -114,7 +114,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         if(this.setFirstSelected) setFirst();
     }
 
-    public void setCursor(myCursor cursor)
+    public void setCursor(CustomCursor cursor)
     {
         this.cursor = cursor;
     }

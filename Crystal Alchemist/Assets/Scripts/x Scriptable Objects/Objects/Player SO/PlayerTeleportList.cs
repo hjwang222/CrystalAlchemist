@@ -7,8 +7,10 @@ public class PlayerTeleportList : ScriptableObject
     [SerializeField]
     private List<TeleportStats> list = new List<TeleportStats>();
 
+    public void Initialize() => this.list.RemoveAll(item => item == null);
+
     public void AddTeleport(string targetScene, Vector2 position)
-    {
+    {        
         TeleportStats stat = new TeleportStats(targetScene, position);
         if (!Contains(stat)) this.list.Add(stat);
     }
@@ -35,5 +37,10 @@ public class PlayerTeleportList : ScriptableObject
     public List<TeleportStats> GetStats()
     {
         return this.list;
+    }
+
+    public TeleportStats GetStats(int index)
+    {
+        return this.list[index];
     }
 }

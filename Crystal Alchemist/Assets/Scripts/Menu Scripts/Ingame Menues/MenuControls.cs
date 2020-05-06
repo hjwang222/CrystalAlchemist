@@ -17,7 +17,7 @@ public class MenuControls : BasicMenu
 
     [BoxGroup("Mandatory")]
     [Required]
-    public myCursor cursor;
+    public CustomCursor cursor;
 
     [BoxGroup("Menu Controls")]
     public bool isIngameMenu = false;
@@ -29,7 +29,7 @@ public class MenuControls : BasicMenu
     [BoxGroup("Menu Controls")]
     [SerializeField]
     private Texture2D cursorTexture;
-
+    
     public override void Start()
     {
         base.Start();
@@ -56,7 +56,7 @@ public class MenuControls : BasicMenu
     }
 
     public override void OnEnable()
-    {      
+    {        
         if (this.cursor != null) this.cursor.gameObject.SetActive(true);
 
         if (this.isIngameMenu)
@@ -117,7 +117,7 @@ public class MenuControls : BasicMenu
 
     public virtual void ExitMenu()
     {
-        if (this.child != null) this.child.SetActive(false);
+        if (this.child != null && this.inputPossible) this.child.SetActive(false);
     }
 
     public void enableButtons(bool value)

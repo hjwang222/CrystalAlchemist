@@ -112,9 +112,11 @@ public class CharacterValues : ScriptableObject
 
     public bool isCharacterStunned()
     {
+        this.debuffs.RemoveAll(item => item == null);
+
         foreach (StatusEffect debuff in this.debuffs)
         {
-            if (debuff.stunTarget) return true;
+            if (debuff != null && debuff.stunTarget) return true;
         }
 
         return false;

@@ -11,7 +11,7 @@ public class CharacterCreatorMenu : MenuControls
     [BoxGroup("Character Creator")]
     [Required]
     [SerializeField]
-    private CharacterPreset playerPreset;
+    private PlayerSaveGame saveGame;
 
     [BoxGroup("Character Creator")]
     [Required]
@@ -45,14 +45,15 @@ public class CharacterCreatorMenu : MenuControls
 
     private void init()
     {
-        GameUtil.setPreset(this.playerPreset, this.creatorPreset);
+        GameUtil.setPreset(this.saveGame.playerPreset, this.creatorPreset);
         updateGear();
         updatePreview();
     }
 
     public void Confirm()
     {
-        GameUtil.setPreset(this.creatorPreset, this.playerPreset); //save Preset
+        GameUtil.setPreset(this.creatorPreset, this.saveGame.playerPreset); //save Preset 
+        this.saveGame.SetCharacterName(this.creatorPreset.characterName);
         updatePreview();
         ExitMenu();
     }

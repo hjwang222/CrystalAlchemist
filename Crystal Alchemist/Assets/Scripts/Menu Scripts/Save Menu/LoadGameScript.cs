@@ -11,7 +11,7 @@ public class LoadGameScript : MonoBehaviour
         if (slot != null && slot.data != null)
         {
             Cursor.visible = false;
-            LoadSystem.loadPlayerData(this.saveGame, slot.gameObject.name); //load from data into savegame
+            LoadSystem.loadPlayerData(this.saveGame, slot.gameObject.name); //load from data into savegame            
             SceneManager.LoadSceneAsync(slot.data.scene);
         }
     }

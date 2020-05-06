@@ -6,7 +6,7 @@ public class MiniGameRound : MonoBehaviour
     public List<GameObject> buttons = new List<GameObject>();
 
     [HideInInspector]
-    public myCursor cursor;
+    public CustomCursor cursor;
 
     private int roundNumber = 1;
     private float maxDuration;
@@ -16,7 +16,7 @@ public class MiniGameRound : MonoBehaviour
     private MiniGameUI ui;
     private bool isTimerStopped = true;
 
-    public void setParameters(float time, int round, int difficulty, myCursor cursor, MiniGameUI ui)
+    public void setParameters(float time, int round, int difficulty, CustomCursor cursor, MiniGameUI ui)
     {
         this.maxDuration = time;
         this.roundNumber = round;

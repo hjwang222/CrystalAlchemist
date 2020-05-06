@@ -3,20 +3,18 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
+    //BUG: Player Color not correct
 
-    //BUG: Szenenwechsel Eventsystem kaputt
-    //BUG: Save Game multi click (Dialogbox Launcher buggy)
-    //BUG: Player is null
-    //BUG: Player looks right
-
-    //REWORK: AnyButton Press
-
-    //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
-    //TODO: Characterparts: Shader statt Spriterenderer
+    //TODO: Dialogtext und Damagenumber as UI?
+    //TODO: Sound Effekte ersetzen!
+    //TODO: CharacterCreatorParts und Handler: Shader statt Spriterenderer
     //TODO: Teleport Rework (Quick Travel, Teleport list)
+    //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
+    //TODO: Screen Resolutions Options (1920x1080, 640x480, 1024x768)
 
     //TODO: TMPro Exceptions Fix
-    //TODO: Screen Resolutions Options (1920x1080, 640x480, 1024x768)
+    //REWORK: AnyButton Press
+
     //TODO: Scene Manager (UI an und aus, Scene Manager DontDestroy?)
     //TODO: Game Manager Black Screen better solution
 

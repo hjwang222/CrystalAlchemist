@@ -20,7 +20,8 @@ public class PlayerTeleport : MonoBehaviour
 
     public void Initialize(Player player)
     {
-        this.player = player;  
+        this.player = player;
+        this.teleportList.Initialize();
         StartCoroutine(MaterializePlayer());
     }
 

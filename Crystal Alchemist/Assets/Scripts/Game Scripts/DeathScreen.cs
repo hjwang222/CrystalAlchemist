@@ -11,6 +11,11 @@ public class DeathScreen : MonoBehaviour
     [SerializeField]
     private PlayerTeleportList playerTeleportList;
 
+    [BoxGroup("Mandatory")]
+    [Required]
+    [SerializeField]
+    private TeleportStats nextTeleport;
+
     [SerializeField]
     [BoxGroup("Mandatory")]
     private PlayerStats playerStats;
@@ -33,7 +38,7 @@ public class DeathScreen : MonoBehaviour
 
     [BoxGroup("Mandatory")]
     [SerializeField]
-    private myCursor cursor;
+    private CustomCursor cursor;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
@@ -145,8 +150,12 @@ public class DeathScreen : MonoBehaviour
     }
 
     public void returnSaveGame()
-    {                
-        if (this.playerTeleportList.TeleportEnabled()) SceneManager.LoadSceneAsync(this.playerTeleportList.GetStats()[0].scene);         
+    {
+        if (this.playerTeleportList.TeleportEnabled())
+        {
+            this.nextTeleport.SetValue(this.playerTeleportList.GetStats(0));
+            SceneManager.LoadScene(this.nextTeleport.scene);
+        }
     }
 
     private IEnumerator ShowTextCo(float delay)

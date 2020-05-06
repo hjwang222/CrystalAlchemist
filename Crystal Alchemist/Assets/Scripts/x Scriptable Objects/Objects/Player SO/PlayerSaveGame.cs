@@ -5,13 +5,7 @@ using Sirenix.OdinInspector;
 public class PlayerSaveGame : ScriptableObject
 {
     [BoxGroup("Base")]
-    public string currentScene;
-    [BoxGroup("Base")]
     public float timePlayed;
-    [BoxGroup("Base")]
-    public string characterName;
-    [BoxGroup("Base")]
-    public Vector2 position;
 
     [BoxGroup("Player")]
     public CharacterPreset playerPreset;
@@ -23,6 +17,8 @@ public class PlayerSaveGame : ScriptableObject
     public PlayerButtons buttons;
     [BoxGroup("Player")]
     public PlayerSkillset skillSet;
+    [BoxGroup("Player")]
+    public TeleportStats nextTeleport;
 
     [BoxGroup("Stats")]
     [SerializeField]
@@ -34,17 +30,20 @@ public class PlayerSaveGame : ScriptableObject
 
     [Button]
     public void Clear()
-    {
-        this.currentScene = "";
+    {        
         this.timePlayed = 0f;
-        this.characterName = "";
-        this.position = Vector2.zero;
 
+        this.stats.SetCharacterName("Hero");
         this.playerValue.Clear(this.stats);
         this.inventory.Clear();
         this.buttons.Clear();
         this.skillSet.Clear();
+        this.nextTeleport.Clear();
 
         GameUtil.setPreset(this.defaultPreset, this.playerPreset);
     }
+
+    public void SetCharacterName(string characterName) => this.stats.SetCharacterName(characterName);
+
+    public string GetCharacterName() { return this.stats.GetCharacterName(); }
 }

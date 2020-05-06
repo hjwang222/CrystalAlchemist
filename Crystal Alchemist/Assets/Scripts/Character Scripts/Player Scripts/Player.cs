@@ -33,6 +33,7 @@ public class Player : Character
     {
         SetComponents();
         this.values.Initialize();
+        if (this.values.life <= 0) ResetValues();
     }
     
     public override void Start()

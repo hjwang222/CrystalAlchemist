@@ -47,9 +47,9 @@ public class PlayerData
         setPreset(saveGame.playerPreset);
 
         this.abilities = saveGame.buttons.saveButtonConfig();
-        this.scene = saveGame.currentScene;
+        setTeleport(saveGame.nextTeleport);
         this.timePlayed = saveGame.timePlayed;
-        this.characterName = saveGame.characterName;
+        this.characterName = saveGame.GetCharacterName();
     }
 
     private void setInventory(PlayerInventory inventory)
@@ -98,6 +98,12 @@ public class PlayerData
             temp[1] = data.name;
             this.characterParts.Add(temp);
         }
+    }
+
+    private void setTeleport(TeleportStats stats)
+    {
+        this.scene = stats.scene;
+        this.position = new float[] { stats.position.x, stats.position.y };
     }
 }
 
