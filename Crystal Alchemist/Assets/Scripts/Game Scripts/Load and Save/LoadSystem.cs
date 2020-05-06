@@ -19,7 +19,7 @@ public class LoadSystem
             loadInventory(data, saveGame.inventory);
             loadPlayerSkills(data, saveGame.buttons, saveGame.skillSet);
 
-            saveGame.nextTeleport.SetValue(data.scene, new Vector2(data.position[0], data.position[1]));
+            saveGame.nextTeleport.SetValue(data.scene, data.position);
         }
     }
 

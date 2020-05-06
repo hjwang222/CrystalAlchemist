@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676ce4f48e7d0d849ba6dd5142a883b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light: {fileID: 8788576382395638707}
+  lightGameObject: {fileID: 8788576382395638707}
   timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
 --- !u!114 &283470633772421935
 MonoBehaviour:
@@ -64,6 +64,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 409011619760327584}
+        m_TargetAssemblyTypeName: 
         m_MethodName: switchInteriorLights
         m_Mode: 1
         m_Arguments:
@@ -193,6 +194,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

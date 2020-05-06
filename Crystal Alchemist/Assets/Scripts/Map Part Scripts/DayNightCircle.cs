@@ -1,30 +1,27 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.LWRP;
+using UnityEngine.Experimental.Rendering.Universal;
 
+[RequireComponent(typeof(Light2D))]
 public class DayNightCircle : MonoBehaviour
 {
-    [SerializeField]
-    private UnityEngine.Experimental.Rendering.Universal.Light2D light;
-
-    [SerializeField]
-    private TimeValue timeValue;
-
-    [SerializeField]
-    private bool isActive = true;
-
+    private Light2D Lighting;
     private bool isRunning = false;
+    private bool isActive = true;
+    private TimeValue timeValue;
 
     private void Start()
     {
-        if(this.isActive) StartCoroutine(startCo());  
+        this.Lighting = this.GetComponent<Light2D>();
+        this.isActive = MasterManager.debugSettings.activateLight;
+        this.timeValue = MasterManager.time;
+        if (this.isActive) StartCoroutine(startCo());  
     }
 
     IEnumerator startCo()
     {
         yield return null;
-        this.light.color = this.timeValue.GetColor();
+        this.Lighting.color = this.timeValue.GetColor();
     }
 
     public void changeColor()
@@ -33,7 +30,7 @@ public class DayNightCircle : MonoBehaviour
         {
             Color newColor = this.timeValue.GetColor();
             float duration = this.timeValue.factor * (this.timeValue.update - 1);
-            if (newColor != light.color && !this.isRunning) StartCoroutine(lerpColor(light, light.color, newColor, duration));
+            if (newColor != Lighting.color && !this.isRunning) StartCoroutine(lerpColor(Lighting, Lighting.color, newColor, duration));
         }
     }
 

@@ -73,13 +73,7 @@ public class Character : MonoBehaviour
         ResetValues();
     }
 
-    public virtual void Start()
-    {
-        AddStatusEffectVisuals(this.values.buffs);
-        AddStatusEffectVisuals(this.values.debuffs);
-
-        GameEvents.current.OnEffectAdded += AddStatusEffectVisuals;
-    }
+    public virtual void Start() => GameEvents.current.OnEffectAdded += AddStatusEffectVisuals;    
 
     public void SetComponents()
     {
@@ -649,6 +643,12 @@ public class Character : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void AddStatusEffectVisuals()
+    {
+        AddStatusEffectVisuals(this.values.buffs);
+        AddStatusEffectVisuals(this.values.debuffs);
     }
 
     #endregion

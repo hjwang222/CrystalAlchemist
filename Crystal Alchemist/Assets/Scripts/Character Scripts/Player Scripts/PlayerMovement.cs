@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
         if(this.player.CanMove()) UpdateAnimationAndMove(this.change);  //check if is menu
         else AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", false);
+
+        //this.player.myRigidbody.position = UnityUtil.PixelPerfectClamp(this.player.myRigidbody.position);
     }
 
     private void UpdateAnimationAndMove(Vector2 direction)
@@ -52,8 +54,9 @@ public class PlayerMovement : MonoBehaviour
         {
             if (this.player.values.currentState != CharacterState.interact) this.player.values.currentState = CharacterState.walk;
 
-            Vector3 movement = new Vector3(direction.x, direction.y + (this.player.values.steps * direction.x), 0.0f);
-            if (!this.player.values.isOnIce) this.player.myRigidbody.velocity = (movement * this.player.values.speed * this.player.values.timeDistortion);
+            Vector2 movement = new Vector2(direction.x, direction.y + (this.player.values.steps * direction.x));
+            Vector2 velocity = (movement * this.player.values.speed * this.player.values.timeDistortion);
+            if (!this.player.values.isOnIce) this.player.myRigidbody.velocity = velocity;
         }
     }
 

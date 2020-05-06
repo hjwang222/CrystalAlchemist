@@ -1,23 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DayNightInterior : MonoBehaviour
 {
     [SerializeField]
-    private GameObject light;
+    private GameObject lightGameObject;
 
-    [SerializeField]
-    private TimeValue timeValue;
-
-    private void Start()
-    {
-        switchInteriorLights();
-    }
-
+    private void Start() => switchInteriorLights();
+    
     public void switchInteriorLights()
     {        
-        if (this.timeValue.night) light.SetActive(true);
-        else if (!this.timeValue.night) light.SetActive(false);
+        if (MasterManager.time.night) lightGameObject.SetActive(true);
+        else lightGameObject.SetActive(false);
     }
 }

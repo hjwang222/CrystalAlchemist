@@ -3,14 +3,16 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-    //BUG: Player Color not correct
+    //BUG: Buttons too big
+    //BUG: Currency doesnt disappear
+    //BUG: Player looks right
+    //BUG: Amount visible
+    //BUG: Cursor offset after resolution    
 
-    //TODO: Dialogtext und Damagenumber as UI?
     //TODO: Sound Effekte ersetzen!
     //TODO: CharacterCreatorParts und Handler: Shader statt Spriterenderer
     //TODO: Teleport Rework (Quick Travel, Teleport list)
     //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
-    //TODO: Screen Resolutions Options (1920x1080, 640x480, 1024x768)
 
     //TODO: TMPro Exceptions Fix
     //REWORK: AnyButton Press

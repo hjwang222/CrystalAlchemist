@@ -13,11 +13,13 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
     public static CastBar castBar { get { return Instance.cast; } }
     public static AnalyseInfo analyseInfo { get { return Instance.analyse; } }
     public static GameSettings settings { get { return Instance.gameSettings; } }
+    public static DebugSettings debugSettings { get { return Instance.debugging; } }
     public static GlobalValues staticValues { get { return Instance.globalValues; } }
     public static List<ItemDrop> itemDrops { get { return Instance.drops; } }
     public static List<ItemGroup> itemGroups { get { return Instance.groups; } }
     public static List<Ability> abilities { get { return Instance.skills; } }
     public static TargetingSystem targetingSystem { get { return Instance.targetSystem; } }
+    public static TimeValue time { get { return Instance.timeValue; } }
 
     [BoxGroup("Interaction")]
     [SerializeField]
@@ -36,6 +38,10 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
     [SerializeField]
     private TargetingSystem targetSystem;
 
+    [BoxGroup("Time")]
+    [SerializeField]
+    private TimeValue timeValue;
+
     [BoxGroup("Bubbles")]
     [SerializeField]
     private MiniDialogBox dialog;
@@ -52,6 +58,9 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
     [BoxGroup("Settings")]
     [SerializeField]
     private GlobalValues globalValues;
+    [BoxGroup("Settings")]
+    [SerializeField]
+    private DebugSettings debugging;
 
     [BoxGroup("Loading")]
     [SerializeField]

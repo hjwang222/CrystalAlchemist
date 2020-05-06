@@ -22,6 +22,11 @@ public class UnityUtil : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Change Movement to Pixel Perfect (16 PPU)
+    /// </summary>
+    /// <param name="moveVector">old position (raw)</param>
+    /// <returns>new position pixel perfect</returns>
     public static Vector2 PixelPerfectClamp(Vector2 moveVector)
     {
         float pixelsPerUnit = 16;
@@ -30,7 +35,6 @@ public class UnityUtil : MonoBehaviour
             Mathf.RoundToInt(moveVector.y * pixelsPerUnit));
 
         Vector2 result = vectorInPixels / pixelsPerUnit;
-        if(result != moveVector) Debug.Log(moveVector + " -> " + result);
         return result;
     }
 

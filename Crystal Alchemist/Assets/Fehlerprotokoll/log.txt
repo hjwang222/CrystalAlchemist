@@ -50770,3 +50770,8 @@ UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISubmit
 UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
 UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
 
+Exception 06.05.2020 10:30:08: UnassignedReferenceException: The variable lightGameObject of DayNightInterior has not been assigned.
+You probably need to assign the lightGameObject variable of the DayNightInterior script in the inspector.
+DayNightInterior.switchInteriorLights () (at Assets/Scripts/Map Part Scripts/DayNightInterior.cs:12)
+DayNightInterior.Start () (at Assets/Scripts/Map Part Scripts/DayNightInterior.cs:8)
+

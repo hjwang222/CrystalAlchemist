@@ -52,6 +52,8 @@ public class Player : Character
         this.healthSignalUI.Raise();
         this.manaSignalUI.Raise();    
         this.UpdateAnimator(this.values.direction);
+
+        this.AddStatusEffectVisuals();
     }       
 
     public override void Update()

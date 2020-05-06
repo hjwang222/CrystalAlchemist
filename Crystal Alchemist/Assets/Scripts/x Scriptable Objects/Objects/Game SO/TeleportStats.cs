@@ -25,10 +25,21 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
 
     public void SetValue(string targetScene, Vector2 position, bool showIn, bool showOut)
     {
-        this.scene = targetScene;
-        this.position = position;
-        this.showAnimationIn = showIn;
-        this.showAnimationOut = showOut;
+        if (targetScene != null && targetScene != "")
+        {
+            this.scene = targetScene;
+            this.position = position;
+            this.showAnimationIn = showIn;
+            this.showAnimationOut = showOut;
+        }
+        else Clear();
+    }
+
+    public void SetValue(string targetScene, float[] array)
+    {
+        Vector2 position = Vector2.zero;
+        if (array != null && array.Length >= 2) position = new Vector2(array[0], array[1]);
+        SetValue(targetScene, position, true, false);
     }
 
     public void SetValue(string targetScene, Vector2 position)
