@@ -21,8 +21,6 @@ public class PlayerMovement : MonoBehaviour
 
         if(this.player.CanMove()) UpdateAnimationAndMove(this.change);  //check if is menu
         else AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", false);
-        
-        this.player.myRigidbody.position = UnityUtil.PixelPerfectClamp(this.player.myRigidbody.position);
     }
 
     private void UpdateAnimationAndMove(Vector2 direction)

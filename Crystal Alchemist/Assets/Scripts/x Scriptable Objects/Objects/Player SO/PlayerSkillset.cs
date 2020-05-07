@@ -9,7 +9,7 @@ public class PlayerSkillset : ScriptableObject
 
     public void Clear()
     {
-        this.abilities.Clear();
+        Initialize();
     }
 
     public void Initialize()

@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject blackScreen;
 
+    [SerializeField]
+    private FloatValue timePlayed;
+
     private void OnEnable()
     {
         this.blackScreen.SetActive(true);
@@ -23,4 +26,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(Menues, LoadSceneMode.Additive);
         Destroy(this.blackScreen, 0.1f);
     }
+
+    private void OnDestroy()
+    {
+        this.timePlayed.setValue(this.timePlayed.getValue()+Time.timeSinceLevelLoad);
+    }    
 }

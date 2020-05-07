@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Terrain : MonoBehaviour
 {
@@ -9,6 +7,6 @@ public class Terrain : MonoBehaviour
 
     private void Awake()
     {
-        this.unityIndicator.SetActive(false);
+        if(this.unityIndicator != null) this.unityIndicator.SetActive(false);
     }
 }

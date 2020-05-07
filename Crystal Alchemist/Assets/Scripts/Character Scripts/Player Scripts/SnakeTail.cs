@@ -39,12 +39,7 @@ public class SnakeTail : MonoBehaviour
                 Vector2 direction = ((Vector2)this.parent.transform.position - (Vector2)this.transform.position).normalized;
                 this.myRigidbody.velocity = (direction * this.player.myRigidbody.velocity.magnitude);
             }
-            else
-            {
-                this.myRigidbody.velocity = Vector2.zero;
-            }
-
-            this.myRigidbody.position = UnityUtil.PixelPerfectClamp(this.myRigidbody.position);
+            else this.myRigidbody.velocity = Vector2.zero;            
 
             int modify = 0;
 

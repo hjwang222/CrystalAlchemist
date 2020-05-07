@@ -103,7 +103,7 @@ public class SaveSlot : MonoBehaviour
 
             this.characterLocation.text = ort;
 
-            TimeSpan span = TimeSpan.FromMilliseconds(timePlayed);
+            TimeSpan span = TimeSpan.FromSeconds(timePlayed);
             this.timePlayed.text = span.ToString(@"hh\:mm\:ss");
         }
         else

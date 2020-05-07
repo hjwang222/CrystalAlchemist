@@ -17,13 +17,13 @@ public class RespawnSystem : MonoBehaviour
         for (int i = 0; i < parent.transform.childCount; i++)
         {
             GameObject child = parent.transform.GetChild(i).gameObject;
-
             Character character = child.gameObject.GetComponent<Character>();
 
             if (character != null)
             {
                 if (!character.gameObject.activeInHierarchy
-                 && character.values.currentState == CharacterState.dead
+                    && (character.values == null || (character.values != null
+                 && character.values.currentState == CharacterState.dead))
                  && !this.respawnObjects.Contains(character))
                 {
                     setRespawn(character);
@@ -41,7 +41,7 @@ public class RespawnSystem : MonoBehaviour
         if (character.stats.hasRespawn)
         {
             StartCoroutine(respawnCo(character));
-            character.values.currentState = CharacterState.respawning;
+            if(character.values != null) character.values.currentState = CharacterState.respawning;
         }
     }
 

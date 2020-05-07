@@ -132,7 +132,7 @@ public class MenuControls : BasicMenu
 
         foreach (Selectable selectable in selectables)
         {
-            selectable.interactable = value;
+            UnityUtil.SetInteractable(selectable, value);
 
             if (value)
             {

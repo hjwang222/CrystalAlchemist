@@ -3,11 +3,7 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-
-    //BUG: Player looks right (Player Movement Script?)
-    //BUG: Movement nicht richtig / ruckelt (snake tail auch)
-    //BUG: Analyse nicht richtig
-    //BUG: Any Button Title Screen nicht richtig
+    //BUG: Schild ruckelt (FixedUpdate?)
     //BUG: Menu wonky (ESC)
 
     //TODO: Sound Effekte ersetzen!

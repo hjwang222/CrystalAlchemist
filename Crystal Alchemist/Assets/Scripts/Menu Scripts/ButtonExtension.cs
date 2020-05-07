@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Collections;
 
 public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 {   
@@ -36,8 +37,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     [ShowIf("overrideNavigation", true)]
     [SerializeField]
     private List<Selectable> right = new List<Selectable>();
-
-
+       
 
 #if UNITY_EDITOR
     [Button]
@@ -51,8 +51,6 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     {
         if (this.overrideNavigation)
         {
-            if (this.button == null) this.button = this.gameObject.GetComponent<Selectable>();
-
             if (this.button != null)
             {
                 Navigation nav = this.button.navigation;
@@ -65,10 +63,12 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                 this.button.navigation = nav;
             }
         }
+
+        UnityUtil.SetColors(this.button, Color.white);
     }
 
     private void init()
-    {
+    {      
         try
         {
             if (this.cursor == null) this.cursor = GameObject.FindWithTag("Cursor").GetComponent<CustomCursor>();
@@ -77,9 +77,10 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         catch
         {
             Debug.Log(this.gameObject.name);
-        }
+        }        
 
         this.setButtonNavigation();
+        StartCoroutine(delayCo());
 
         RectTransform rt = (RectTransform)this.transform;
         this.size = new Vector2(rt.rect.width, rt.rect.height);
@@ -158,4 +159,12 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     {
         if(this.cursor != null) this.cursor.setCursorPosition(true, true, this.button, this.size, this.scale);       
     }
+
+    private IEnumerator delayCo()
+    {
+        this.button.interactable = false;
+        yield return new WaitForSeconds(0.1f);
+        this.button.interactable = true;
+    }
 }
+

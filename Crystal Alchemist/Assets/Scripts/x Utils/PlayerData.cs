@@ -48,7 +48,7 @@ public class PlayerData
 
         this.abilities = saveGame.buttons.saveButtonConfig();
         setTeleport(saveGame.nextTeleport);
-        this.timePlayed = saveGame.timePlayed;
+        this.timePlayed = saveGame.timePlayed.getValue();
         this.characterName = saveGame.GetCharacterName();
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class UnityUtil
 {
@@ -36,6 +37,25 @@ public static class UnityUtil
 
         Vector2 result = vectorInPixels / pixelsPerUnit;
         return result;
+    }
+
+    public static void SetInteractable(Selectable selectable, bool active)
+    {
+        selectable.interactable = active;
+        if (active) SetColors(selectable, Color.white);
+        else SetColors(selectable, MasterManager.staticValues.buttonNotActive);
+    }
+
+    public static void SetColors(Selectable selectable, Color disabledColor)
+    {
+        if (selectable != null)
+        {
+            ColorBlock colors = selectable.colors;
+            colors.disabledColor = disabledColor;
+            colors.highlightedColor = Color.white;
+            colors.selectedColor = MasterManager.staticValues.buttonSelect;
+            selectable.colors = colors;
+        }
     }
 
     public static GameObject hasChildWithTag(Character character, string searchTag)

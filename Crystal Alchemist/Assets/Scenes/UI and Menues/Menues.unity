@@ -18950,6 +18950,9 @@ MonoBehaviour:
   isIngameMenu: 1
   disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  action:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &383020334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21922,8 +21925,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1843649515}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: setPage
+        m_TargetAssemblyTypeName: SkillMenu, Assembly-CSharp
+        m_MethodName: SetPage
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26182,6 +26185,9 @@ MonoBehaviour:
   isIngameMenu: 1
   disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  action:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &586124213
 GameObject:
   m_ObjectHideFlags: 0
@@ -26380,8 +26386,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1843649515}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: setPage
+        m_TargetAssemblyTypeName: SkillMenu, Assembly-CSharp
+        m_MethodName: SetPage
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27855,6 +27861,9 @@ MonoBehaviour:
   isIngameMenu: 1
   disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  action:
+    m_PersistentCalls:
+      m_Calls: []
   textMesh: {fileID: 1962163267}
 --- !u!1 &621514378
 GameObject:
@@ -28074,6 +28083,9 @@ MonoBehaviour:
   isIngameMenu: 1
   disableExitButtonPress: 1
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  action:
+    m_PersistentCalls:
+      m_Calls: []
   inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   miniGameRound: {fileID: 0}
   timeField: {fileID: 758651019}
@@ -61308,6 +61320,9 @@ MonoBehaviour:
   isIngameMenu: 1
   disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  action:
+    m_PersistentCalls:
+      m_Calls: []
   inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   healtSignal: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
   manaSignal: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}
@@ -66326,6 +66341,9 @@ MonoBehaviour:
   isIngameMenu: 1
   disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  action:
+    m_PersistentCalls:
+      m_Calls: []
   creatorPreset: {fileID: 11400000, guid: 28724241a4af8294d943178e82305982, type: 2}
   saveGame: {fileID: 11400000, guid: a62b63cfcbd3129468ad1e261a3f5279, type: 2}
   presetSignal: {fileID: 11400000, guid: 1794675380e483345a378de158326f5f, type: 2}
@@ -84326,6 +84344,9 @@ MonoBehaviour:
   isIngameMenu: 1
   disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  action:
+    m_PersistentCalls:
+      m_Calls: []
   inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   regularItemsLabel: {fileID: 2139312114}
   keyItemsLabel: {fileID: 2102513378}
@@ -93257,6 +93278,9 @@ MonoBehaviour:
   isIngameMenu: 1
   disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  action:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1776977697
 GameObject:
   m_ObjectHideFlags: 0
@@ -96231,7 +96255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTeleportList: {fileID: 11400000, guid: a5383e9eb1591254eadebe1d4ca868c7, type: 2}
   nextTeleport: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
-  playerStats: {fileID: 11400000, guid: 3d0923ed88c529b4d8204920ef9771ef, type: 2}
+  playerStats: {fileID: 0}
   stopMusic: {fileID: 11400000, guid: f5827a4a41af5d649bad860597077916, type: 2}
   loadGame: {fileID: 0}
   deathMusic: {fileID: 8300000, guid: fbf3c3fc3b9ea0f49be22b5d3e7d997d, type: 3}
@@ -97162,6 +97186,9 @@ MonoBehaviour:
   isIngameMenu: 1
   disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
+  action:
+    m_PersistentCalls:
+      m_Calls: []
   skillSet: {fileID: 11400000, guid: 29dcfc276674c7e42a941d5aee79bc0e, type: 2}
   categoryWeapons: {fileID: 1310177679}
   categoryMagic: {fileID: 1000220920}

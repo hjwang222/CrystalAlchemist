@@ -64,7 +64,7 @@ public class MenuDialogBox : MonoBehaviour
         this.OKButton.gameObject.SetActive(false);
         this.price = null;
         this.priceField.gameObject.SetActive(false);
-        this.YesButton.GetComponent<Selectable>().interactable = true;        
+        UnityUtil.SetInteractable(this.YesButton.GetComponent<Selectable>(), true);
     }
 
     private void Initialize(UnityEvent OnConfirm, Costs cost, string text, DialogBoxType type, MenuControls parent)
@@ -91,7 +91,8 @@ public class MenuDialogBox : MonoBehaviour
         if (this.price != null && this.price.resourceType != CostType.none)
         {
             this.priceField.gameObject.SetActive(true);
-            this.YesButton.GetComponent<Selectable>().interactable = this.priceField.updatePrice(this.inventory, this.price);
+            bool enabled = this.priceField.updatePrice(this.inventory, this.price);
+            UnityUtil.SetInteractable(this.YesButton.GetComponent<Selectable>(), enabled);
         }
     }
 

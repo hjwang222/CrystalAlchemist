@@ -13,7 +13,8 @@ public class ItemDrop : ScriptableObject
     [AssetIcon]
     private Sprite GetSprite()
     {
-        return stats.getSprite();
+        if(this.stats != null) return stats.getSprite();
+        return null;
     }
 
     public void Initialize(int amount)

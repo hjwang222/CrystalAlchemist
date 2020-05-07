@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 public class PlayerSaveGame : ScriptableObject
 {
     [BoxGroup("Base")]
-    public float timePlayed;
+    public FloatValue timePlayed;
 
     [BoxGroup("Player")]
     public CharacterPreset playerPreset;
@@ -30,9 +30,8 @@ public class PlayerSaveGame : ScriptableObject
 
     [Button]
     public void Clear()
-    {        
-        this.timePlayed = 0f;
-
+    {
+        this.timePlayed.setValue(0f);
         this.stats.SetCharacterName("Hero");
         this.playerValue.Clear(this.stats);
         this.inventory.Clear();

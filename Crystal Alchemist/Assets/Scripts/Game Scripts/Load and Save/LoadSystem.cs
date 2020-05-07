@@ -13,7 +13,7 @@ public class LoadSystem
             LoadPreset(data, saveGame.playerPreset);
             LoadBasicValues(data, saveGame.playerValue);
 
-            saveGame.timePlayed = data.timePlayed;
+            saveGame.timePlayed.setValue(data.timePlayed);
             saveGame.SetCharacterName(data.characterName);
 
             loadInventory(data, saveGame.inventory);
@@ -104,9 +104,14 @@ public class LoadSystem
         {
             foreach (string keyItem in data.keyItems)
             {
-                ItemDrop drop = MasterManager.getItemDrop(keyItem);
-                drop.Initialize(1); //Set correct stats name for unique items
-                if (drop != null) inventory.collectItem(drop.stats);
+                ItemDrop master = MasterManager.getItemDrop(keyItem);
+                if (master != null)
+                {
+                    ItemDrop drop = MonoBehaviour.Instantiate(master);
+                    drop.Initialize(1); //Set correct stats name for unique items
+                    inventory.collectItem(drop.stats);
+                    MonoBehaviour.Destroy(drop);
+                }
             }
         }
 
@@ -114,8 +119,8 @@ public class LoadSystem
         {
             foreach (string[] item in data.inventoryItems)
             {
-                ItemGroup group = MasterManager.getItemGroup(item[0]);
-                if (group != null) inventory.collectItem(group, Convert.ToInt32(item[1]));
+                ItemGroup master = MasterManager.getItemGroup(item[0]);
+                if (master != null) inventory.collectItem(master, Convert.ToInt32(item[1]));                
             }
         }
     }    

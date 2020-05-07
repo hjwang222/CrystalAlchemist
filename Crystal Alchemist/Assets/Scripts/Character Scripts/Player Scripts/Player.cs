@@ -58,7 +58,7 @@ public class Player : Character
 
     public override void Update()
     {
-        base.Update();
+        base.Update();        
         this.GetComponent<PlayerAbilities>().Updating();
     }
 
