@@ -14,9 +14,11 @@ public class SnakeTail : MonoBehaviour
 
     private float maxDistance = 0f;
     private Vector2 startPosition;
+    private Rigidbody2D myRigidbody;
 
     private void Start()
     {
+        this.myRigidbody = this.GetComponent<Rigidbody2D>();
         this.maxDistance = Vector2.Distance(this.parent.transform.position, this.transform.position);
         this.startPosition = this.transform.position;
     }
@@ -35,12 +37,14 @@ public class SnakeTail : MonoBehaviour
             if (distance > this.maxDistance)
             {
                 Vector2 direction = ((Vector2)this.parent.transform.position - (Vector2)this.transform.position).normalized;
-                this.GetComponent<Rigidbody2D>().velocity = (direction * this.player.myRigidbody.velocity.magnitude);
+                this.myRigidbody.velocity = (direction * this.player.myRigidbody.velocity.magnitude);
             }
             else
             {
-                this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                this.myRigidbody.velocity = Vector2.zero;
             }
+
+            this.myRigidbody.position = UnityUtil.PixelPerfectClamp(this.myRigidbody.position);
 
             int modify = 0;
 

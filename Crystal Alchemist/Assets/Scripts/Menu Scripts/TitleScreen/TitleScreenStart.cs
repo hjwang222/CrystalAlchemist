@@ -8,9 +8,6 @@ public class TitleScreenStart : MonoBehaviour
     private GameObject mainMenu;
 
     [SerializeField]
-    private SimpleSignal destroySignal;
-
-    [SerializeField]
     private float delay = 0.3f;
 
     [SerializeField]
@@ -23,7 +20,6 @@ public class TitleScreenStart : MonoBehaviour
 
     private void Awake()
     {
-        if (this.destroySignal != null) destroySignal.Raise();
         this.mainMenu.SetActive(false);
         StartCoroutine(this.delayInput());
     }

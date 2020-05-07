@@ -105,6 +105,7 @@ public class LoadSystem
             foreach (string keyItem in data.keyItems)
             {
                 ItemDrop drop = MasterManager.getItemDrop(keyItem);
+                drop.Initialize(1); //Set correct stats name for unique items
                 if (drop != null) inventory.collectItem(drop.stats);
             }
         }

@@ -9,15 +9,9 @@ public class PlayerMovement : MonoBehaviour
 
     #region Movement
 
-    private void Start()
-    {
-        this.player = this.GetComponent<Player>();
-    }
-
-    public void MovePlayer(InputAction.CallbackContext ctx)
-    {
-        this.change = ctx.ReadValue<Vector2>();
-    }
+    private void Start() => this.player = this.GetComponent<Player>();
+    
+    public void MovePlayer(InputAction.CallbackContext ctx) => this.change = ctx.ReadValue<Vector2>();    
 
     private void FixedUpdate()
     {
@@ -27,8 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
         if(this.player.CanMove()) UpdateAnimationAndMove(this.change);  //check if is menu
         else AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", false);
-
-        //this.player.myRigidbody.position = UnityUtil.PixelPerfectClamp(this.player.myRigidbody.position);
+        
+        this.player.myRigidbody.position = UnityUtil.PixelPerfectClamp(this.player.myRigidbody.position);
     }
 
     private void UpdateAnimationAndMove(Vector2 direction)
@@ -62,11 +56,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetDirection(Vector2 direction)
     {
-        if (!IsDirectionLocked())
-        {
-            this.player.values.direction = direction;
-            this.player.UpdateAnimator(direction);
-        }
+        if (!IsDirectionLocked()) this.player.ChangeDirection(direction);        
     }
 
     private bool IsDirectionLocked()

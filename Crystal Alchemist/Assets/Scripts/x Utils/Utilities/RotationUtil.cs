@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotationUtil : MonoBehaviour
+public static class RotationUtil
 {
     public static Quaternion getRotation(Vector2 direction)
     {

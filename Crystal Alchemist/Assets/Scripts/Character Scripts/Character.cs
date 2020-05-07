@@ -181,22 +181,10 @@ public class Character : MonoBehaviour
 
     public void SetDefaultDirection() => ChangeDirection(new Vector2(0, -1));
 
-    public void UpdateAnimator(Vector2 direction) => AnimatorUtil.SetAnimDirection(direction, this.animator);
-
     public void ChangeDirection(Vector2 direction)
     {
         this.values.direction = direction;
-
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-        {
-            if (direction.x > 0) UpdateAnimator(Vector2.right);
-            else if (direction.x < 0) UpdateAnimator(Vector2.left);
-        }
-        else if (Mathf.Abs(direction.x) < Mathf.Abs(direction.y))
-        {
-            if (direction.y > 0) UpdateAnimator(Vector2.up);
-            else if (direction.y < 0) UpdateAnimator(Vector2.down);
-        }
+        AnimatorUtil.SetAnimDirection(direction, this.animator);
     }
     #endregion
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class StatusEffectUtil : MonoBehaviour
+public static class StatusEffectUtil
 {    
     public static void RemoveAllStatusEffects(List<StatusEffect> statusEffects)
     {  
@@ -83,7 +83,7 @@ public class StatusEffectUtil : MonoBehaviour
 
     private static void Instantiate(StatusEffect statusEffect, Character character)
     {
-        StatusEffect effect = Instantiate(statusEffect);
+        StatusEffect effect = MonoBehaviour.Instantiate(statusEffect);
 
         effect.name = statusEffect.name;
         character.values.AddStatusEffect(effect);

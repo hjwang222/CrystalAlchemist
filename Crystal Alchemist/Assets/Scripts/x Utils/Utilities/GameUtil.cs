@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class GameUtil : MonoBehaviour
+public static class GameUtil
 {
     public static void setPreset(CharacterPreset source, CharacterPreset target)
     {

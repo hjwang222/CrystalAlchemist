@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnityUtil : MonoBehaviour
+public static class UnityUtil
 {
     public static void GetChildObjects<T>(Transform transform, List<T> childObjects)
     {

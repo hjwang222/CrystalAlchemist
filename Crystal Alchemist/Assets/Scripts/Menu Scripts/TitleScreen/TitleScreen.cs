@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class TitleScreen : BasicMenu
 {        

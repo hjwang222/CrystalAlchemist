@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatorUtil
+public static class AnimatorUtil
 {
     public static void SetAnimDirection(Vector2 direction, Animator animator)
     {

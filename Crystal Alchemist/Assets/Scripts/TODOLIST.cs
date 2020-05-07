@@ -3,11 +3,12 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-    //BUG: Buttons too big
-    //BUG: Currency doesnt disappear
-    //BUG: Player looks right
-    //BUG: Amount visible
-    //BUG: Cursor offset after resolution    
+
+    //BUG: Player looks right (Player Movement Script?)
+    //BUG: Movement nicht richtig / ruckelt (snake tail auch)
+    //BUG: Analyse nicht richtig
+    //BUG: Any Button Title Screen nicht richtig
+    //BUG: Menu wonky (ESC)
 
     //TODO: Sound Effekte ersetzen!
     //TODO: CharacterCreatorParts und Handler: Shader statt Spriterenderer
@@ -28,7 +29,6 @@ public class TODOLIST : MonoBehaviour
 
     //SKILL: Rundumschlag (wind)
     //GRAPHICS: TitleScreen: Background 
-    //TESTS!
 
     //-----------------------------------------------------------------------------
 

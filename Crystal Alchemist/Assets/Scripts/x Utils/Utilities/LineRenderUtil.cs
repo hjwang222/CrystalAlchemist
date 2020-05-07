@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-public class LineRenderUtil
+public static class LineRenderUtil
 {
     public static void RenderLine(Character sender, Character target, float distance, SpriteRenderer spriteRenderer, Light2D lights,
                              out Collider2D hitted, out Vector2 hitPoint)

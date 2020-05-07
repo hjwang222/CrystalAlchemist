@@ -146,17 +146,16 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        setCursor();
+        SetCursor();
     }
 
     public void OnSelect(BaseEventData eventData)
     {        
-        setCursor();
+        SetCursor();
     } 
 
-    private void setCursor()
+    public void SetCursor()
     {
-        this.cursor.setCursorPosition(true, true, this.button, this.size, this.scale);       
+        if(this.cursor != null) this.cursor.setCursorPosition(true, true, this.button, this.size, this.scale);       
     }
-
 }

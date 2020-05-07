@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class AbilityUtil : MonoBehaviour
+public static class AbilityUtil
 {
     public static Ability InstantiateAbility(Ability ability)
     {
-        Ability newAbility = Instantiate(ability);
+        Ability newAbility = MonoBehaviour.Instantiate(ability);
         newAbility.Initialize();
         newAbility.name = ability.name;
         return newAbility;
@@ -12,7 +12,7 @@ public class AbilityUtil : MonoBehaviour
 
     public static void instantiateSequence(BossMechanic sequence, AI npc)
     {
-        BossMechanic newSequence = Instantiate(sequence);
+        BossMechanic newSequence = MonoBehaviour.Instantiate(sequence);
         newSequence.name = sequence.name;
         newSequence.Initialize(npc, npc.target);
     }    

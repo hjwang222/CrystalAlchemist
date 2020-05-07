@@ -17,8 +17,9 @@ public class CurrencySlot : MonoBehaviour
     private AudioClip raiseSoundEffect;
     [SerializeField]
     private FloatSignal hideSignal;
-
-    //private bool playOnce = false;
+    [SerializeField]
+    private float delay = 5f;
+    
     private int currentValue;
     private bool isRunning = false;
     private bool playSound = false;
@@ -38,9 +39,7 @@ public class CurrencySlot : MonoBehaviour
     public void updateCurrency()
     {
         this.newValue = this.playerItems.GetAmount(this.item);
-
-        if (this.playSound) AudioUtil.playSoundEffect(this.raiseSoundEffect);       
-
+        if (this.playSound) AudioUtil.playSoundEffect(this.raiseSoundEffect);  
         if(!this.isRunning) StartCoroutine(Countdown());
     }
 
@@ -58,20 +57,15 @@ public class CurrencySlot : MonoBehaviour
 
             this.currentValue += rate;
             if (((rate > 0 && this.currentValue >= this.newValue)
-                || (rate < 0 && this.currentValue <= 0)))
-            {
-                this.currentValue = this.newValue;
-                this.isRunning = false;
-                this.hideSignal.Raise(3f);
-                this.textField.text = FormatUtil.formatString(this.currentValue, this.maxValue);
-                break;
-            }   
+                || (rate < 0 && this.currentValue <= 0))) break;           
 
-            this.textField.text = FormatUtil.formatString(this.currentValue, this.maxValue);
-            
+            this.textField.text = FormatUtil.formatString(this.currentValue, this.maxValue);            
             yield return new WaitForSeconds(counterDelay);
         }
 
+        this.currentValue = this.newValue;
+        this.textField.text = FormatUtil.formatString(this.currentValue, this.maxValue);
         this.isRunning = false;
+        this.hideSignal.Raise(this.delay);
     }
 }

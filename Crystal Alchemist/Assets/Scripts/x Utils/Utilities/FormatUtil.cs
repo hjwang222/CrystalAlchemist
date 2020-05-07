@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using System;
 
-public class FormatUtil : MonoBehaviour
+public static class FormatUtil
 {
     public static void SetButtonColor(Button button, Color newColor)
     {

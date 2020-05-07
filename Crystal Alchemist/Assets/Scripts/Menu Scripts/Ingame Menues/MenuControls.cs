@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class MenuControls : BasicMenu
 {
@@ -29,7 +30,11 @@ public class MenuControls : BasicMenu
     [BoxGroup("Menu Controls")]
     [SerializeField]
     private Texture2D cursorTexture;
-    
+
+    [BoxGroup("Menu Controls")]
+    [SerializeField]
+    private UnityEvent action;
+
     public override void Start()
     {
         base.Start();

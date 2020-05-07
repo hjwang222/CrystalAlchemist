@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Linq;
 
-public class CollisionUtil : MonoBehaviour
+public static class CollisionUtil
 {
     public static bool checkDistance(Character character, GameObject gameObject, float min, float max, float startDistance, float distanceNeeded, bool useStartDistance, bool useRange)
     {
@@ -111,7 +111,7 @@ public class CollisionUtil : MonoBehaviour
 
         if (targetModule != null)
         {
-            List<Character> found = FindObjectsOfType<Character>().ToList();
+            List<Character> found = MonoBehaviour.FindObjectsOfType<Character>().ToList();
 
             foreach(Character character in found)
             {

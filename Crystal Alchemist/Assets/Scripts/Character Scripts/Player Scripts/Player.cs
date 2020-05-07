@@ -51,7 +51,7 @@ public class Player : Character
 
         this.healthSignalUI.Raise();
         this.manaSignalUI.Raise();    
-        this.UpdateAnimator(this.values.direction);
+        this.ChangeDirection(this.values.direction);
 
         this.AddStatusEffectVisuals();
     }       
@@ -84,9 +84,6 @@ public class Player : Character
         this.EnableScripts(true);
     }
 
-
-
-
     private void deactivateAllSkills()
     {
         for (int i = 0; i < this.values.activeSkills.Count; i++)
@@ -114,7 +111,6 @@ public class Player : Character
 
     ///////////////////////////////////////////////////////////////
 
-
     public override bool HasEnoughCurrency(Costs price)
     {
         if (price.resourceType == CostType.none) return true;
@@ -139,8 +135,6 @@ public class Player : Character
               || price.item == null))
             this.updateResource(price.resourceType, price.item, -price.amount);
     }
-
-
 
     ///////////////////////////////////////////////////////////////
 

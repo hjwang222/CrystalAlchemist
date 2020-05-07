@@ -9,8 +9,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee33934765d8e0344aa3533eab161c71, type: 3}
+  m_Script: {fileID: 11500000, guid: bed50160a1f51fb4b89bf02e00ece70d, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  loadPlayer: 0
+  characterName: Paladin
+  englischCharacterName: Paladin
+  characterType: 0
+  startLife: 1
+  startMana: 1
+  startSpeed: 100
+  startSpellSpeed: 100
+  isMassive: 0
+  isImmuneToAllDebuffs: 0
+  immunityToStatusEffects: []
+  hasRespawn: 1
+  respawnTime: 0
+  respawnAnimation: {fileID: 1140035694535706356, guid: 815950c2030167244ab889505e154cc8,
+    type: 3}
+  deathAnimation: {fileID: 0}
+  maxLife: 1
+  maxMana: 1
+  canRegenerate: 1
+  lifeRegeneration: 0
+  manaRegeneration: 0
+  regenerationInterval: 3
+  canChangeBuffs: 1
+  buffPlus: 0
+  debuffMinus: 0
+  showDamageNumbers: 1
+  antiKnockback: 0
+  cannotBeHitTime: 0.5
+  showHitcolor: 1
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  lootTable: {fileID: 0}
+  hitSoundEffect: {fileID: 8300000, guid: 27ac131e0a552ec4e80c1947b53d31a9, type: 3}
