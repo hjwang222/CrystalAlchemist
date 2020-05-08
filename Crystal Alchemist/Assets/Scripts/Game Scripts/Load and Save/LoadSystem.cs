@@ -24,6 +24,15 @@ public class LoadSystem
         }
     }
 
+    private static void LoadTeleportList(PlayerData data, PlayerTeleportList list)
+    {
+        foreach(object[] teleportData in data.teleportPoints)
+        {
+            TeleportStats stats = new TeleportStats((string)teleportData[0], (string)teleportData[1], 
+                                         new Vector2((float)teleportData[2], (float)teleportData[3]));
+        }
+    }
+
     private static void LoadBasicValues(PlayerData data, CharacterValues playerValue)
     {
         playerValue.life = data.health;

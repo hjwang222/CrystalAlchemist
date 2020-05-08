@@ -2767,17 +2767,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50965623}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.50000006, y: 0.50000006, z: 1}
   m_Children: []
   m_Father: {fileID: 104577695}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42, y: 0}
-  m_SizeDelta: {x: 400, y: 90}
+  m_AnchoredPosition: {x: 37.50001, y: 0}
+  m_SizeDelta: {x: 640, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &50965625
 MonoBehaviour:
@@ -3146,6 +3146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 55479549}
+  - component: {fileID: 55479550}
   m_Layer: 5
   m_Name: Main
   m_TagString: Untagged
@@ -3177,6 +3178,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 77.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &55479550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55479548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 583296532}
+        m_TargetAssemblyTypeName: MenuControls, Assembly-CSharp
+        m_MethodName: ExitMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &57671418
 GameObject:
   m_ObjectHideFlags: 0
@@ -7797,6 +7825,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &127887855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127887841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 127887838}
+        m_TargetAssemblyTypeName: MenuControls, Assembly-CSharp
+        m_MethodName: Cancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &132438334
 GameObject:
   m_ObjectHideFlags: 0
@@ -10640,6 +10695,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 193826746}
+  - component: {fileID: 193826747}
   m_Layer: 0
   m_Name: Select Preset
   m_TagString: Untagged
@@ -10665,6 +10721,33 @@ Transform:
   m_Father: {fileID: 2132757823}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &193826747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193826745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1303994798}
+        m_TargetAssemblyTypeName: BasicMenu, Assembly-CSharp
+        m_MethodName: ShowMenu
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 929957969}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &193998774
 GameObject:
   m_ObjectHideFlags: 0
@@ -11388,7 +11471,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -11403,9 +11486,9 @@ MonoBehaviour:
   m_fontSizeMin: 40
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -11415,7 +11498,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
@@ -11438,15 +11521,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: -0.12703884, y: 31.58944, z: 2.591937, w: 26.4306}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 215029732}
+    characterCount: 8
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -13547,7 +13630,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: 2}
+  m_AnchoredPosition: {x: 90, y: 0}
   m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &260391692
@@ -18899,6 +18982,7 @@ GameObject:
   - component: {fileID: 383020335}
   - component: {fileID: 383020334}
   - component: {fileID: 383020333}
+  - component: {fileID: 383020336}
   m_Layer: 5
   m_Name: Map
   m_TagString: Untagged
@@ -18942,17 +19026,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
+  cursor: {fileID: 175733141}
   inputPossible: 0
   playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 90871085}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
-  cursor: {fileID: 175733141}
   isIngameMenu: 1
-  disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
-  action:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &383020334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18992,6 +19072,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383020331}
   m_CullTransparentMesh: 0
+--- !u!114 &383020336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383020331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 383020333}
+        m_TargetAssemblyTypeName: MenuControls, Assembly-CSharp
+        m_MethodName: Cancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &384976477
 GameObject:
   m_ObjectHideFlags: 0
@@ -26177,17 +26284,13 @@ MonoBehaviour:
   - {fileID: 1491983202}
   - {fileID: 4463823221423701153}
   - {fileID: 1832421001}
+  cursor: {fileID: 175733141}
   inputPossible: 0
   playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 1629144409}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
-  cursor: {fileID: 175733141}
   isIngameMenu: 1
-  disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
-  action:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &586124213
 GameObject:
   m_ObjectHideFlags: 0
@@ -27812,6 +27915,7 @@ GameObject:
   m_Component:
   - component: {fileID: 618662075}
   - component: {fileID: 618662076}
+  - component: {fileID: 618662077}
   m_Layer: 5
   m_Name: GameObject
   m_TagString: Untagged
@@ -27853,18 +27957,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
+  cursor: {fileID: 175733141}
   inputPossible: 0
   playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 1621017513}
   musicVolumeSignal: {fileID: 0}
-  cursor: {fileID: 175733141}
   isIngameMenu: 1
-  disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
-  action:
-    m_PersistentCalls:
-      m_Calls: []
   textMesh: {fileID: 1962163267}
+--- !u!114 &618662077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618662074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 618662076}
+        m_TargetAssemblyTypeName: MenuControls, Assembly-CSharp
+        m_MethodName: Cancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &621514378
 GameObject:
   m_ObjectHideFlags: 0
@@ -28075,17 +28202,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
+  cursor: {fileID: 175733141}
   inputPossible: 0
   playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 885962260}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
-  cursor: {fileID: 175733141}
   isIngameMenu: 1
-  disableExitButtonPress: 1
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
-  action:
-    m_PersistentCalls:
-      m_Calls: []
   inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   miniGameRound: {fileID: 0}
   timeField: {fileID: 758651019}
@@ -28959,7 +29082,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -28974,9 +29097,9 @@ MonoBehaviour:
   m_fontSizeMin: 40
   m_fontSizeMax: 72
   m_fontStyle: 16
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -28986,7 +29109,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
@@ -29009,15 +29132,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: -0.12703884, y: 31.58944, z: 2.591937, w: 26.4306}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 629313045}
+    characterCount: 6
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -29042,6 +29165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 629457007}
   - component: {fileID: 629457008}
+  - component: {fileID: 629457009}
   m_Layer: 0
   m_Name: Select Race
   m_TagString: Untagged
@@ -29082,7 +29206,35 @@ MonoBehaviour:
   menues:
   - {fileID: 1867819585}
   - {fileID: 1370725423}
+  cursor: {fileID: 175733141}
   inputPossible: 0
+--- !u!114 &629457009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629457006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1303994798}
+        m_TargetAssemblyTypeName: BasicMenu, Assembly-CSharp
+        m_MethodName: ShowMenu
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 929957969}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &634541631
 GameObject:
   m_ObjectHideFlags: 0
@@ -30532,6 +30684,7 @@ GameObject:
   m_Component:
   - component: {fileID: 694220218}
   - component: {fileID: 694220217}
+  - component: {fileID: 694220219}
   m_Layer: 0
   m_Name: Select Upper Gear
   m_TagString: Untagged
@@ -30554,6 +30707,7 @@ MonoBehaviour:
   menues:
   - {fileID: 934558126}
   - {fileID: 1011553789}
+  cursor: {fileID: 175733141}
   inputPossible: 0
 --- !u!4 &694220218
 Transform:
@@ -30573,6 +30727,33 @@ Transform:
   m_Father: {fileID: 2132757823}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &694220219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694220216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1303994798}
+        m_TargetAssemblyTypeName: BasicMenu, Assembly-CSharp
+        m_MethodName: ShowMenu
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 929957969}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &696820245
 GameObject:
   m_ObjectHideFlags: 0
@@ -31472,7 +31653,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0/1
+  m_text: 9999/9999
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3f1660bebbaef6b4987ec9111be1f411, type: 2}
   m_sharedMaterial: {fileID: 21836469378663696, guid: 3f1660bebbaef6b4987ec9111be1f411,
@@ -31543,17 +31724,17 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.50057673, y: 0.25905102, z: 0.3570799, w: -0.3402723}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 712056383}
+    characterCount: 9
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 2
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -31584,8 +31765,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 0}
-  m_SizeDelta: {x: 69.905, y: 48}
+  m_AnchoredPosition: {x: 177.77, y: 0}
+  m_SizeDelta: {x: 127.541916, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &713168191
 GameObject:
@@ -43570,6 +43751,7 @@ GameObject:
   - component: {fileID: 918454847}
   - component: {fileID: 918454846}
   - component: {fileID: 918454845}
+  - component: {fileID: 918454849}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -43660,7 +43842,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1303994799}
+      - m_Target: {fileID: 918454849}
         m_TargetAssemblyTypeName: MenuDialogBoxLauncher, Assembly-CSharp
         m_MethodName: ShowDialogBox
         m_Mode: 1
@@ -43711,6 +43893,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918454843}
   m_CullTransparentMesh: 0
+--- !u!114 &918454849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918454843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77986e177388f34594c39f9c358dd6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentMenu: {fileID: 1303994798}
+  dialogBoxType: 0
+  price:
+    resourceType: 0
+    item: {fileID: 0}
+    amount: 1
+  actionOnConfirm:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1303994798}
+        m_TargetAssemblyTypeName: CharacterCreatorMenu, Assembly-CSharp
+        m_MethodName: ExitMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  menuDialogBoxText: "M\xF6chten Sie die Charaktererstellung abbrechen?"
+  menuDialogBoxTextEnglish: Do you want to cancel the character creation?
 --- !u!1 &919052614
 GameObject:
   m_ObjectHideFlags: 0
@@ -44272,6 +44489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 929957971}
   - component: {fileID: 929957970}
+  - component: {fileID: 929957972}
   m_Layer: 0
   m_Name: Main Menu
   m_TagString: Untagged
@@ -44318,6 +44536,33 @@ Transform:
   m_Father: {fileID: 2132757823}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &929957972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929957969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 918454849}
+        m_TargetAssemblyTypeName: MenuDialogBoxLauncher, Assembly-CSharp
+        m_MethodName: ShowDialogBox
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &933237456
 GameObject:
   m_ObjectHideFlags: 0
@@ -44791,15 +45036,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 942213656}
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -47437,6 +47682,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 583296531}
     m_Modifications:
+    - target: {fileID: 245589631263066762, guid: 38b4cd754ca79ab49afbecc08036defb,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 245589631263066762, guid: 38b4cd754ca79ab49afbecc08036defb,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 583296532}
+    - target: {fileID: 245589631263066762, guid: 38b4cd754ca79ab49afbecc08036defb,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BasicMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 245589631263066762, guid: 38b4cd754ca79ab49afbecc08036defb,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 245589631263066762, guid: 38b4cd754ca79ab49afbecc08036defb,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 245589631263066762, guid: 38b4cd754ca79ab49afbecc08036defb,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1582832579}
+    - target: {fileID: 245589631263066762, guid: 38b4cd754ca79ab49afbecc08036defb,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 245589631263066762, guid: 38b4cd754ca79ab49afbecc08036defb,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7776911414209698174, guid: 38b4cd754ca79ab49afbecc08036defb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -52504,7 +52789,7 @@ RectTransform:
   m_GameObject: {fileID: 1095918055}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7500001, y: 0.7500001, z: 1}
+  m_LocalScale: {x: 0.75000024, y: 0.75000024, z: 1}
   m_Children: []
   m_Father: {fileID: 2123479157}
   m_RootOrder: 0
@@ -59471,6 +59756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1161521254}
   - component: {fileID: 1161521253}
+  - component: {fileID: 1161521255}
   m_Layer: 0
   m_Name: Select Accessoirs
   m_TagString: Untagged
@@ -59493,6 +59779,7 @@ MonoBehaviour:
   menues:
   - {fileID: 600963864}
   - {fileID: 2058576187}
+  cursor: {fileID: 175733141}
   inputPossible: 0
 --- !u!4 &1161521254
 Transform:
@@ -59512,6 +59799,33 @@ Transform:
   m_Father: {fileID: 2132757823}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1161521255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161521252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1303994798}
+        m_TargetAssemblyTypeName: BasicMenu, Assembly-CSharp
+        m_MethodName: ShowMenu
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 929957969}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1161668875
 GameObject:
   m_ObjectHideFlags: 0
@@ -60020,15 +60334,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 82.47062, y: -2.8742383, z: -1.9160825, w: -0.000023403714}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 1172488319}
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -60453,6 +60767,7 @@ MonoBehaviour:
   - {fileID: 101614938}
   - {fileID: 2055888315}
   - {fileID: 1033573076}
+  cursor: {fileID: 0}
   inputPossible: 0
 --- !u!1 &1183490869
 GameObject:
@@ -60901,8 +61216,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: 0}
-  m_SizeDelta: {x: 83.65, y: 24}
+  m_AnchoredPosition: {x: -41.807, y: -0}
+  m_SizeDelta: {x: 109.76459, y: 38.670074}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1193090070
 MonoBehaviour:
@@ -60979,7 +61294,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -61014,15 +61329,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 1193090071}
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 1
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -61292,6 +61607,7 @@ GameObject:
   - component: {fileID: 1203346716}
   - component: {fileID: 1203346715}
   - component: {fileID: 1203346714}
+  - component: {fileID: 1203346718}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -61312,17 +61628,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
+  cursor: {fileID: 175733141}
   inputPossible: 0
   playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 1846428327}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
-  cursor: {fileID: 175733141}
   isIngameMenu: 1
-  disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
-  action:
-    m_PersistentCalls:
-      m_Calls: []
   inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   healtSignal: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
   manaSignal: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}
@@ -61398,6 +61710,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -2}
   m_SizeDelta: {x: 1200, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1203346718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203346713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1203346714}
+        m_TargetAssemblyTypeName: MenuControls, Assembly-CSharp
+        m_MethodName: Cancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1203938104
 GameObject:
   m_ObjectHideFlags: 0
@@ -66284,7 +66623,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1303994797}
   - component: {fileID: 1303994798}
-  - component: {fileID: 1303994799}
   m_Layer: 0
   m_Name: Character Creation
   m_TagString: Untagged
@@ -66333,17 +66671,13 @@ MonoBehaviour:
   - {fileID: 1161521252}
   - {fileID: 694220216}
   - {fileID: 2018883275}
+  cursor: {fileID: 175733141}
   inputPossible: 0
   playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 763306162}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
-  cursor: {fileID: 175733141}
   isIngameMenu: 1
-  disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
-  action:
-    m_PersistentCalls:
-      m_Calls: []
   creatorPreset: {fileID: 11400000, guid: 28724241a4af8294d943178e82305982, type: 2}
   saveGame: {fileID: 11400000, guid: a62b63cfcbd3129468ad1e261a3f5279, type: 2}
   presetSignal: {fileID: 11400000, guid: 1794675380e483345a378de158326f5f, type: 2}
@@ -66372,42 +66706,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 557786c54ad65ab459fe94cde7234414, type: 2}
   - {fileID: 11400000, guid: 827f7ee5a9d4a8541b3eca6ecb7ba50b, type: 2}
   - {fileID: 11400000, guid: 589c282cd0298cd4c8cad92878692f7e, type: 2}
-  exitLauncher: {fileID: 1303994799}
---- !u!114 &1303994799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303994796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c77986e177388f34594c39f9c358dd6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentMenu: {fileID: 1303994798}
-  dialogBoxType: 0
-  price:
-    resourceType: 0
-    item: {fileID: 0}
-    amount: 1
-  actionOnConfirm:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1303994798}
-        m_TargetAssemblyTypeName: CharacterCreatorMenu, Assembly-CSharp
-        m_MethodName: ExitMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  menuDialogBoxText: "M\xF6chten Sie die Charaktererstellung abbrechen?"
-  menuDialogBoxTextEnglish: Do you want to cancel the character creation?
 --- !u!1 &1305799242
 GameObject:
   m_ObjectHideFlags: 0
@@ -74947,7 +75245,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -74962,9 +75260,9 @@ MonoBehaviour:
   m_fontSizeMin: 20
   m_fontSizeMax: 58
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -74997,15 +75295,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 82.47062, y: -2.8742383, z: -1.9160825, w: -0.000023403714}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 1356895315}
+    characterCount: 15
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -75831,7 +76129,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -75846,9 +76144,9 @@ MonoBehaviour:
   m_fontSizeMin: 20
   m_fontSizeMax: 58
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -75881,15 +76179,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 82.47062, y: -2.8742383, z: -1.9160825, w: -0.000023403714}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 1384082953}
+    characterCount: 15
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -80103,6 +80401,46 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4045892892464436216, guid: 9cb390b6904761e47b2f34f4c934db42,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045892892464436216, guid: 9cb390b6904761e47b2f34f4c934db42,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 583296532}
+    - target: {fileID: 4045892892464436216, guid: 9cb390b6904761e47b2f34f4c934db42,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BasicMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045892892464436216, guid: 9cb390b6904761e47b2f34f4c934db42,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045892892464436216, guid: 9cb390b6904761e47b2f34f4c934db42,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045892892464436216, guid: 9cb390b6904761e47b2f34f4c934db42,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1582832579}
+    - target: {fileID: 4045892892464436216, guid: 9cb390b6904761e47b2f34f4c934db42,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4045892892464436216, guid: 9cb390b6904761e47b2f34f4c934db42,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4056204268077462571, guid: 9cb390b6904761e47b2f34f4c934db42,
         type: 3}
       propertyPath: m_IsActive
@@ -81670,12 +82008,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 752193238}
-  m_Father: {fileID: 2123479157}
-  m_RootOrder: 4
+  m_Father: {fileID: 2132757823}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 170.99994, y: 245}
+  m_AnchoredPosition: {x: 351, y: 245}
   m_SizeDelta: {x: 300, y: 42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1509759243
@@ -81791,19 +82129,7 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1509759243}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: activeOnSelect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnDeselect:
     m_PersistentCalls:
       m_Calls:
@@ -84265,6 +84591,51 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 4463823221423701153}
+    - target: {fileID: 8414721237051303763, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414721237051303763, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: exitButton
+      value: 
+      objectReference: {fileID: 1582832581}
+    - target: {fileID: 8414721237051303763, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414721237051303763, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414721237051303763, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 583296532}
+    - target: {fileID: 8414721237051303763, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BasicMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414721237051303763, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414721237051303763, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414721237051303763, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 55479548}
     - target: {fileID: 8774237116901805599, guid: 3d3a1b109c2fd654bafbba8cb0174383,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
@@ -84304,6 +84675,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1582832578}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1582832581 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8774237116901805599, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+    type: 3}
+  m_PrefabInstance: {fileID: 1582832578}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1585193661
 GameObject:
   m_ObjectHideFlags: 0
@@ -84316,6 +84699,7 @@ GameObject:
   - component: {fileID: 1585193664}
   - component: {fileID: 1585193663}
   - component: {fileID: 1585193662}
+  - component: {fileID: 1585193666}
   m_Layer: 5
   m_Name: Inventory Background
   m_TagString: Untagged
@@ -84336,17 +84720,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
+  cursor: {fileID: 175733141}
   inputPossible: 0
   playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 1074652379}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
-  cursor: {fileID: 175733141}
   isIngameMenu: 1
-  disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
-  action:
-    m_PersistentCalls:
-      m_Calls: []
   inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   regularItemsLabel: {fileID: 2139312114}
   keyItemsLabel: {fileID: 2102513378}
@@ -84418,6 +84798,33 @@ RectTransform:
   m_AnchoredPosition: {x: -0.71, y: -3.86}
   m_SizeDelta: {x: 645, y: 470}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1585193666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585193661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1585193662}
+        m_TargetAssemblyTypeName: MenuControls, Assembly-CSharp
+        m_MethodName: Cancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1589497425
 GameObject:
   m_ObjectHideFlags: 0
@@ -93225,6 +93632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1771908354}
   - component: {fileID: 1771908355}
+  - component: {fileID: 1771908356}
   m_Layer: 0
   m_Name: Dialog
   m_TagString: Untagged
@@ -93270,17 +93678,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
+  cursor: {fileID: 175733141}
   inputPossible: 0
   playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 1432587497}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
-  cursor: {fileID: 175733141}
   isIngameMenu: 1
-  disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
-  action:
+--- !u!114 &1771908356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771908353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1771908355}
+        m_TargetAssemblyTypeName: MenuControls, Assembly-CSharp
+        m_MethodName: Cancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1776977697
 GameObject:
   m_ObjectHideFlags: 0
@@ -96749,6 +97180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1832421003}
   - component: {fileID: 1832421002}
+  - component: {fileID: 1832421004}
   m_Layer: 0
   m_Name: Controlscheme
   m_TagString: Untagged
@@ -96787,6 +97219,33 @@ Transform:
   m_Father: {fileID: 583296531}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1832421004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832421001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 583296532}
+        m_TargetAssemblyTypeName: BasicMenu, Assembly-CSharp
+        m_MethodName: ShowMenu
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 55479548}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1834188020
 GameObject:
   m_ObjectHideFlags: 0
@@ -97158,6 +97617,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1843649516}
   - component: {fileID: 1843649515}
+  - component: {fileID: 1843649517}
   m_Layer: 0
   m_Name: Skillset
   m_TagString: Untagged
@@ -97178,17 +97638,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menues: []
+  cursor: {fileID: 175733141}
   inputPossible: 0
   playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   child: {fileID: 2048317577}
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
-  cursor: {fileID: 175733141}
   isIngameMenu: 1
-  disableExitButtonPress: 0
   cursorTexture: {fileID: 2800000, guid: d1d65ecf8d4294445b4188024a1eb7ef, type: 3}
-  action:
-    m_PersistentCalls:
-      m_Calls: []
   skillSet: {fileID: 11400000, guid: 29dcfc276674c7e42a941d5aee79bc0e, type: 2}
   categoryWeapons: {fileID: 1310177679}
   categoryMagic: {fileID: 1000220920}
@@ -97226,6 +97682,33 @@ RectTransform:
   m_AnchoredPosition: {x: 6, y: -48}
   m_SizeDelta: {x: 457.21, y: 281.21}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1843649517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843649514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1843649515}
+        m_TargetAssemblyTypeName: SkillMenu, Assembly-CSharp
+        m_MethodName: Cancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1844094305
 GameObject:
   m_ObjectHideFlags: 0
@@ -97595,6 +98078,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1851441057}
   - component: {fileID: 1851441056}
+  - component: {fileID: 1851441058}
   m_Layer: 0
   m_Name: Select Face
   m_TagString: Untagged
@@ -97617,6 +98101,7 @@ MonoBehaviour:
   menues:
   - {fileID: 417955799}
   - {fileID: 1067934952}
+  cursor: {fileID: 175733141}
   inputPossible: 0
 --- !u!4 &1851441057
 Transform:
@@ -97636,6 +98121,33 @@ Transform:
   m_Father: {fileID: 2132757823}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1851441058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851441055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1303994798}
+        m_TargetAssemblyTypeName: BasicMenu, Assembly-CSharp
+        m_MethodName: ShowMenu
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 929957969}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1853647677
 GameObject:
   m_ObjectHideFlags: 0
@@ -98979,7 +99491,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -98994,9 +99506,9 @@ MonoBehaviour:
   m_fontSizeMin: 20
   m_fontSizeMax: 58
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -99029,15 +99541,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 82.47062, y: -2.8742383, z: -1.9160825, w: -0.000023403714}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 1867938885}
+    characterCount: 15
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -99752,7 +100264,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -99767,9 +100279,9 @@ MonoBehaviour:
   m_fontSizeMin: 40
   m_fontSizeMax: 72
   m_fontStyle: 16
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -99779,7 +100291,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
@@ -99802,15 +100314,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: -0.12703884, y: 31.58944, z: 2.591937, w: 26.4306}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 1875322400}
+    characterCount: 6
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -103126,7 +103638,7 @@ Transform:
   - {fileID: 717808482}
   - {fileID: 1274072858}
   m_Father: {fileID: 2123479157}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1969739157
 GameObject:
@@ -103375,7 +103887,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -103390,9 +103902,9 @@ MonoBehaviour:
   m_fontSizeMin: 40
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -103402,7 +103914,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_isTextTruncated: 0
@@ -103425,15 +103937,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: -0.12703884, y: 31.58944, z: 2.591937, w: 26.4306}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 1978651803}
+    characterCount: 13
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -105115,6 +105627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2018883277}
   - component: {fileID: 2018883276}
+  - component: {fileID: 2018883278}
   m_Layer: 0
   m_Name: Select Lower Gear
   m_TagString: Untagged
@@ -105137,6 +105650,7 @@ MonoBehaviour:
   menues:
   - {fileID: 549748547}
   - {fileID: 757680001}
+  cursor: {fileID: 175733141}
   inputPossible: 0
 --- !u!4 &2018883277
 Transform:
@@ -105156,6 +105670,33 @@ Transform:
   m_Father: {fileID: 2132757823}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2018883278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018883275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1303994798}
+        m_TargetAssemblyTypeName: BasicMenu, Assembly-CSharp
+        m_MethodName: ShowMenu
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 929957969}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2025623288
 GameObject:
   m_ObjectHideFlags: 0
@@ -106879,15 +107420,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 85.997856, y: -2.8742383, z: -1.9160825, w: -0.000023403714}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 2049674065}
+    characterCount: 2
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -110137,7 +110678,6 @@ RectTransform:
   - {fileID: 1394128917}
   - {fileID: 1327612373}
   - {fileID: 704282394}
-  - {fileID: 1509759242}
   - {fileID: 1967777101}
   m_Father: {fileID: 1303994797}
   m_RootOrder: 0
@@ -110597,6 +111137,7 @@ Transform:
   - {fileID: 1161521254}
   - {fileID: 694220218}
   - {fileID: 2018883277}
+  - {fileID: 1509759242}
   m_Father: {fileID: 1303994797}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -111604,6 +112145,46 @@ PrefabInstance:
       propertyPath: cursor
       value: 
       objectReference: {fileID: 175733141}
+    - target: {fileID: 5059487540467185982, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059487540467185982, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 583296532}
+    - target: {fileID: 5059487540467185982, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BasicMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059487540467185982, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059487540467185982, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059487540467185982, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1582832579}
+    - target: {fileID: 5059487540467185982, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059487540467185982, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: onCancel.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5513353140265681939, guid: e0b9e8d7ceadbef489d057accb1fa058,
         type: 3}
       propertyPath: cursor

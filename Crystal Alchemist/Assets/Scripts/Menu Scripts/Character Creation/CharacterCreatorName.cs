@@ -11,19 +11,19 @@ public class CharacterCreatorName : CharacterCreatorButton
     private Selectable confirmButton;
 
     private void Start()
-    {        
-        setNameFromPreset();
-    }
-
-    private void setNameFromPreset()
-    {
-        this.inputField.text = this.mainMenu.creatorPreset.characterName;
-    }
-
-    private void OnEnable()
     {
         setNameFromPreset();
+        if(GameEvents.current != null) GameEvents.current.OnCancel += Deactivate;
     }
+
+    private void OnDestroy()
+    {
+        if (GameEvents.current != null) GameEvents.current.OnCancel -= Deactivate;
+    }
+
+    private void setNameFromPreset() => this.inputField.text = this.mainMenu.creatorPreset.characterName;    
+
+    private void OnEnable() => setNameFromPreset();    
 
     public void Confirm()
     {
@@ -35,13 +35,7 @@ public class CharacterCreatorName : CharacterCreatorButton
         Deactivate();
     }
 
-    public void activeOnSelect()
-    {
-        this.inputField.ActivateInputField();
-    }    
-
-    private void Deactivate()
-    {
-        this.inputField.DeactivateInputField();
-    }
+    public void activeOnSelect() => this.inputField.ActivateInputField();
+    
+    private void Deactivate() => this.inputField.DeactivateInputField();    
 }

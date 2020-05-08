@@ -18,15 +18,24 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
         this.showAnimationOut = false;
     }
 
-    public TeleportStats(string targetScene, Vector2 position)
+    public TeleportStats(string teleportName, string targetScene, Vector2 position)
     {
-        SetValue(targetScene, position, true, true);
+        //Called from Loadsystem
+        SetValue(teleportName, targetScene, position, true, true);
     }
 
-    public void SetValue(string targetScene, Vector2 position, bool showIn, bool showOut)
+    public TeleportStats(TeleportStats stat)
+    {
+        //Called from TeleportList and Savepoint
+        this.name = stat.name;
+        SetValue(stat);
+    }
+
+    public void SetValue(string teleportName, string targetScene, Vector2 position, bool showIn, bool showOut)
     {
         if (targetScene != null && targetScene != "")
         {
+            this.teleportName = teleportName;
             this.scene = targetScene;
             this.position = position;
             this.showAnimationIn = showIn;
@@ -37,30 +46,31 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
 
     public void SetValue(string targetScene, float[] array)
     {
+        //Start Point (Load)
         Vector2 position = Vector2.zero;
         if (array != null && array.Length >= 2) position = new Vector2(array[0], array[1]);
-        SetValue(targetScene, position, true, false);
+        SetValue("",targetScene, position, true, false);
     }
 
     public void SetValue(string targetScene, Vector2 position)
     {
-        SetValue(targetScene, position, true, false);
+        //Start new Game
+        SetValue("",targetScene, position, true, false);
     }
 
     public void SetValue(TeleportStats stats)
     {
-        SetValue(stats.scene, stats.position, true, false);
+        //Death Screen and Constructor
+        SetValue(stats.teleportName, stats.scene, stats.position, true, true);
     }
 
-    public void SetValue(TeleportStats stats, bool showIn, bool showOut)
+    public void SetValue(string targetScene, Vector2 position, bool showIn, bool showOut)
     {
-        SetValue(stats.scene, stats.position, showIn, showOut);
+        //Scene Transition
+        SetValue("", targetScene, position, showIn, showOut);
     }
 
-    public void OnAfterDeserialize()
-    {
-        position = Vector2.zero;
-    }
+    public void OnAfterDeserialize() { }
 
     public void OnBeforeSerialize() { }
 }

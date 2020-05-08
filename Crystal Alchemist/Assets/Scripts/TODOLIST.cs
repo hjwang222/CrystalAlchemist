@@ -4,10 +4,8 @@ public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
     //BUG: Schild ruckelt (FixedUpdate?)
-    //BUG: Menu wonky (ESC)
-    //BUG: Character Creator
-    //BUG: Last Teleport save
 
+    //TODO: ESC = Pause
     //TODO: More Enemies on night, despawn on night
     //TODO: Walk in an area (AI Movement)
     //TODO: Sound Effekte ersetzen!
@@ -39,7 +37,7 @@ public class TODOLIST : MonoBehaviour
     //TODO: Stairs, Ice, Wall
     //TODO: Rule Tiles
     //TODO: Pathfinding
-    //TODO: 2D Pixel Perfect
+    //TODO: Checkpoints
     //REWORK: Shader Rework https://www.youtube.com/watch?v=5dzGj9k8Qy8
     //SHADER:  Lights (Sprite Lit Master), Outline, Color Swap (Replace), Bloom (HDR), Blend OP Max
     //REWORK: Lights (Intensity)

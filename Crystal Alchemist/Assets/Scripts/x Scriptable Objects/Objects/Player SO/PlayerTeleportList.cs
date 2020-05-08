@@ -9,10 +9,9 @@ public class PlayerTeleportList : ScriptableObject
 
     public void Initialize() => this.list.RemoveAll(item => item == null);
 
-    public void AddTeleport(string targetScene, Vector2 position)
-    {        
-        TeleportStats stat = new TeleportStats(targetScene, position);
-        if (!Contains(stat)) this.list.Add(stat);
+    public void AddTeleport(TeleportStats stat)
+    {
+        if (!Contains(stat)) this.list.Add(new TeleportStats(stat));
     }
 
     public bool Contains(TeleportStats stat)

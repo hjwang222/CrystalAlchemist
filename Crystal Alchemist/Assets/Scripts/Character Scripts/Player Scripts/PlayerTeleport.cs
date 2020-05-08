@@ -31,8 +31,6 @@ public class PlayerTeleport : MonoBehaviour
     {
         return this.teleportList.TeleportEnabled();
     }
-
-    public void AddTeleport(string scene, Vector2 position) => this.teleportList.AddTeleport(scene, position);
     
     private void LoadScene()
     {

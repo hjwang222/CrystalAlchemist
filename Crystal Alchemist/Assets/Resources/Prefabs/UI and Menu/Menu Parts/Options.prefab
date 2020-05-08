@@ -469,6 +469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2548872815663514230}
+  - component: {fileID: 8414721237051303763}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -500,6 +501,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 77.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8414721237051303763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2548872815663514121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4331378164616365752
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,7 +913,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternativeText: Ingame Layout
-  textMeshField: {fileID: 933830499076304714}
 --- !u!1 &6009255249165984243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,7 +1080,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternativeText: Return
-  textMeshField: {fileID: 7560094549958979694}
 --- !u!1 &6090170661924813513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,7 +1247,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternativeText: Audio
-  textMeshField: {fileID: 5299806974798104723}
 --- !u!1 &6918100608949704705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,7 +1490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alternativeText: Resolution
-  textMeshField: {fileID: 8129945856626252412}
 --- !u!1 &9037798146485131657
 GameObject:
   m_ObjectHideFlags: 0

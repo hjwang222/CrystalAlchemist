@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using System.Collections.Generic;
 
 [System.Serializable]
 public class PlayerData
@@ -18,7 +15,7 @@ public class PlayerData
 
     public List<string> keyItems = new List<string>();
     public List<string[]> inventoryItems = new List<string[]>();
-
+    public List<object[]> teleportPoints = new List<object[]>();
     public List<string[]> abilities = new List<string[]>();
 
     public string characterName;
@@ -29,7 +26,6 @@ public class PlayerData
     public float[] position;
     public string scene;
     public float timePlayed;
-
 
     public PlayerData(PlayerSaveGame saveGame)
     {
@@ -47,9 +43,10 @@ public class PlayerData
         setPreset(saveGame.playerPreset);
 
         this.abilities = saveGame.buttons.saveButtonConfig();
-        setTeleport(saveGame.startSpawnPoint);
         this.timePlayed = saveGame.timePlayed.getValue();
         this.characterName = saveGame.GetCharacterName();
+
+        SetStartTeleport(saveGame.startSpawnPoint);
     }
 
     private void setInventory(PlayerInventory inventory)
@@ -100,7 +97,21 @@ public class PlayerData
         }
     }
 
-    private void setTeleport(TeleportStats stats)
+    private void SetTeleportList(PlayerTeleportList list)
+    {
+        this.teleportPoints.Clear();
+
+        foreach(TeleportStats stat in list.GetStats())
+        {
+            object[] teleportLine = new object[4];
+            teleportLine[0] = stat.teleportName;
+            teleportLine[1] = stat.scene;
+            teleportLine[2] = stat.position.x;
+            teleportLine[3] = stat.position.y;
+        }
+    }
+
+    private void SetStartTeleport(TeleportStats stats)
     {
         this.scene = stats.scene;
         this.position = new float[] { stats.position.x, stats.position.y };

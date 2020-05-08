@@ -82,16 +82,16 @@ public class SkillMenu : MenuControls
         showCategory(1);
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
         GameEvents.current.OnPage -= SetPage;
+        base.OnDestroy();        
     }
 
-    public override void OnCancel()
+    public override void Cancel()
     {
         if (this.selectedAbility != null) selectSkillFromSkillSet(null);
-        else if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
-        else ExitMenu();
+        else base.Cancel();
     }
 
     public override void OnEnable()

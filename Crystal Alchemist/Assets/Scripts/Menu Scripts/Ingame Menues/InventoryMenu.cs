@@ -48,6 +48,12 @@ public class InventoryMenu : MenuControls
         loadInventory();
     }
 
+    public override void Cancel()
+    {
+        if (this.keyItems.activeInHierarchy) this.showCategory(0);
+        else base.Cancel();
+    }
+
     private void loadInventory()
     {
         setItemsToSlots(this.regularItems, false);

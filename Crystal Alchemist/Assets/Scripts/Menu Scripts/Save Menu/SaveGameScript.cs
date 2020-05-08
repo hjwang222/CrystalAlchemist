@@ -1,5 +1,4 @@
-﻿using UnityEngine.SceneManagement;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SaveGameScript : MonoBehaviour
 {
@@ -13,8 +12,7 @@ public class SaveGameScript : MonoBehaviour
     private SimpleSignal updateSaveSignal;
 
     public void SaveGame(SaveSlot slot)
-    {
-        this.saveGame.startSpawnPoint.SetValue(SceneManager.GetActiveScene().name, Vector2.zero);
+    {        
         SaveSystem.Save(this.saveGame, slot.gameObject.name); //saves savegame to data
         
         this.updateSaveSignal.Raise();

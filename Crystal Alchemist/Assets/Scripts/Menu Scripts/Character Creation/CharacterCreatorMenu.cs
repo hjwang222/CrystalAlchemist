@@ -23,10 +23,6 @@ public class CharacterCreatorMenu : MenuControls
     [SerializeField]
     private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
 
-    [BoxGroup("Menu Controls")]
-    [SerializeField]
-    private MenuDialogBoxLauncher exitLauncher;
-
     public override void Start()
     {
         base.Start();
@@ -52,12 +48,6 @@ public class CharacterCreatorMenu : MenuControls
         this.saveGame.SetCharacterName(this.creatorPreset.characterName);
         updatePreview();
         base.ExitMenu();
-    }
-
-    public override void ExitMenu()
-    {
-        if (this.exitLauncher != null) this.exitLauncher.ShowDialogBox();
-        else base.ExitMenu();
     }
 
     public void updatePreview()

@@ -12,8 +12,11 @@ public class SaveGameMenu : MenuControls
     //Called from Dialogbox
     public void UpdateSaves()
     {
-        foreach(SaveSlot slot in this.slots) slot.getData();       
-        this.slots[0].GetComponent<ButtonExtension>().setFirst();
+        foreach (SaveSlot slot in this.slots)
+        {
+            slot.getData();
+            slot.GetComponent<ButtonExtension>().SetFirst();
+        }
     }
 }
 

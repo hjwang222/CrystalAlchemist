@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class MenuControls : BasicMenu
 {
     [Required]
+    [BoxGroup("Mandatory")]
     public CharacterValues playerValues;
 
     [BoxGroup("Mandatory")]
@@ -16,48 +17,23 @@ public class MenuControls : BasicMenu
     [SerializeField]
     private FloatSignal musicVolumeSignal;
 
-    [BoxGroup("Mandatory")]
-    [Required]
-    public CustomCursor cursor;
-
     [BoxGroup("Menu Controls")]
     public bool isIngameMenu = false;
 
     [BoxGroup("Menu Controls")]
     [SerializeField]
-    private bool disableExitButtonPress = false;
-
-    [BoxGroup("Menu Controls")]
-    [SerializeField]
     private Texture2D cursorTexture;
-
-    [BoxGroup("Menu Controls")]
-    [SerializeField]
-    private UnityEvent action;
 
     public override void Start()
     {
         base.Start();
-
-        if (GameEvents.current != null)
-        {
-            GameEvents.current.OnCancel += OnCancel;
-            GameEvents.current.OnInventory += ExitMenu;
-            GameEvents.current.OnPause += ExitMenu;
-        }
-
         Cursor.SetCursor(cursorTexture, new Vector2(0, 0), CursorMode.ForceSoftware);
         Cursor.visible = true;
     }
 
-    public virtual void OnDestroy()
+    public override void OnDestroy()
     {
-        if (GameEvents.current != null)
-        {
-            GameEvents.current.OnCancel -= OnCancel;
-            GameEvents.current.OnInventory -= ExitMenu;
-            GameEvents.current.OnPause -= ExitMenu;
-        }
+        base.OnDestroy();
     }
 
     public override void OnEnable()
@@ -106,18 +82,15 @@ public class MenuControls : BasicMenu
         base.Update();        
     }
 
-    public virtual void OnCancel()
+    public virtual void Cancel()
     {
-        if (!disableExitButtonPress)
-        {
-            if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
-            else ExitMenu();
-        }
+        if (this.cursor.infoBox.gameObject.activeInHierarchy) this.cursor.infoBox.Hide();
+            else ExitMenu();        
     }
 
-    public virtual void OnClose()
+    public virtual void Close()
     {
-        if (!disableExitButtonPress) ExitMenu();        
+        ExitMenu();        
     }
 
     public virtual void ExitMenu()
@@ -140,7 +113,7 @@ public class MenuControls : BasicMenu
                 if (buttonExtension != null)
                 {
                     buttonExtension.enabled = value;
-                    buttonExtension.setFirst();
+                    buttonExtension.SetFirst();
                 }
             }
         }

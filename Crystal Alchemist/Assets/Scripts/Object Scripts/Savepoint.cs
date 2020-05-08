@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
 public class Savepoint : Interactable
@@ -8,10 +7,23 @@ public class Savepoint : Interactable
     [SerializeField]
     private SimpleSignal openSaveMenu;
 
+    [BoxGroup("SavePoint")]
+    [SerializeField]
+    private TeleportStats teleportPoint;
+
+    [BoxGroup("Player")]
+    [SerializeField]
+    private PlayerTeleportList teleportList;
+
+    [BoxGroup("Player")]
+    [SerializeField]
+    private TeleportStats playerTeleport;
+
     public override void doSomethingOnSubmit()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        this.player.GetComponent<PlayerTeleport>().AddTeleport(scene.name, this.player.transform.position);
+        this.teleportList.AddTeleport(this.teleportPoint);
+        this.playerTeleport.SetValue(this.teleportPoint);
+
         openSaveMenu.Raise();        
     }
 }
