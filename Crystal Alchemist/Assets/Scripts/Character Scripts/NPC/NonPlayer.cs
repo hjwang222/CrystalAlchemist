@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using Sirenix.OdinInspector;
 
 public class NonPlayer : Character
 {
-    private void Start()
+    public override void Start()
     {
         //TODO: Analyse Protection
         AnalyseInfo analyse = Instantiate(MasterManager.analyseInfo, this.transform.position, Quaternion.identity, this.transform);

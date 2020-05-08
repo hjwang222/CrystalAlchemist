@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +26,24 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
     [SerializeField]
     private SimpleSignal signal;
 
+    public void Clear() => SetStartTime();
+
+    private void SetStartTime()
+    {
+        DateTime origin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0);
+        TimeSpan diff = DateTime.Now - origin;
+        double difference = Math.Floor(diff.TotalSeconds);
+        float minutes = (float)(difference / (double)factor); //elapsed ingame minutes
+        float fhour = ((minutes / 60f) % 24f);
+        float fminute = (minutes % 60f);
+
+        if (fhour >= 24) fhour = 0;
+        if (fminute >= 60) fminute = 0;
+
+        this.hour = Mathf.RoundToInt(fhour);
+        this.minute = Mathf.RoundToInt(fminute);
+    }
+
     public Color GetColor()
     {
         float temp = (float)(100f / 24f / 60f);
@@ -32,7 +51,6 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
         float percentage = (temp * value) / 100;
         return this.colorGradient.Evaluate(percentage);
     }
-
 
     public int getMinute()
     {

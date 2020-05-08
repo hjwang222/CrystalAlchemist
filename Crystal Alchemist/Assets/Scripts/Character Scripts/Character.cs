@@ -67,9 +67,15 @@ public class Character : MonoBehaviour
     public virtual void Awake()
     {
         this.values = new CharacterValues(); //create new Values when not already assigned (NPC)
-        this.spawnPosition = this.transform.position;
+        this.values.Initialize();
 
-        SetComponents();
+        this.spawnPosition = this.transform.position;        
+        SetComponents();        
+    }
+
+    public virtual void OnEnable()
+    {
+        this.transform.position = this.spawnPosition;
         ResetValues();
     }
 
@@ -106,18 +112,16 @@ public class Character : MonoBehaviour
         if (this.boxCollider != null) this.boxCollider.enabled = true;
     }
 
-    public virtual void OnDestroy()
-    {
-        GameEvents.current.OnEffectAdded -= AddStatusEffectVisuals;
-    }
-
+    public virtual void OnDestroy() =>  GameEvents.current.OnEffectAdded -= AddStatusEffectVisuals;
+    
     #endregion
 
     #region Updates
 
     public virtual void Update()
     {
-        if (this.values.currentState == CharacterState.dead) return;
+        if (this.values.currentState == CharacterState.dead
+         || this.values.currentState == CharacterState.respawning) return;
 
         Regenerate();
         UpdateLifeAnimation();
@@ -293,7 +297,10 @@ public class Character : MonoBehaviour
                     Color[] colorArray = MasterManager.staticValues.red;
                     if (value > 0) colorArray = MasterManager.staticValues.green;
 
-                    if (this.values.life > 0 && this.values.currentState != CharacterState.dead && showingDamageNumber) showDamageNumber(value, colorArray);
+                    if (this.values.life > 0 
+                        && this.values.life + value > 0
+                        && this.values.currentState != CharacterState.dead
+                        && showingDamageNumber) showDamageNumber(value, colorArray);
 
                     break;
                 }
@@ -323,8 +330,7 @@ public class Character : MonoBehaviour
     {
         SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
 
-        if (this.values.currentState != CharacterState.respawning
-         && this.values.currentState != CharacterState.dead
+        if (this.values.currentState != CharacterState.dead
          && targetModule != null)
         {
             if ((!this.values.cantBeHit && !this.values.isInvincible) || targetModule.ignoreInvincibility)
@@ -585,12 +591,11 @@ public class Character : MonoBehaviour
         this.values.currentState = CharacterState.respawning;       
     }
 
-    public virtual void SpawnIn()
-    {
-        this.ResetValues(); //NPC only        
+    public void SpawnIn()
+    {               
         this.removeColor(Color.white);
         this.values.currentState = CharacterState.idle;
-        this.EnableScripts(true);        
+        this.EnableScripts(true);   
     }
 
     public void PlayRespawnAnimation()
@@ -598,7 +603,6 @@ public class Character : MonoBehaviour
         this.ChangeColor(Color.white);
         AnimatorUtil.SetAnimatorParameter(this.animator, "Respawn");
     }
-
 
     #endregion
 

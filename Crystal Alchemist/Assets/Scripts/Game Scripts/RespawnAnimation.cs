@@ -8,10 +8,7 @@ public class RespawnAnimation : MonoBehaviour
 
     private void Awake() => this.animator = this.GetComponent<Animator>();    
 
-    public void Initialize(Character character)
-    {
-        this.character = character;        
-    }
+    public void Initialize(Character character) => this.character = character;      
 
     public void Reverse(Character character)
     {
@@ -27,12 +24,15 @@ public class RespawnAnimation : MonoBehaviour
 
     public void HideCharacter()
     {
-        if (this.character != null) this.character.SetCharacterSprites(false);
+        if (this.character != null) this.character.SetCharacterSprites(false);        
     }
 
     public void ShowCharacter()
     {
-        if (this.character != null) this.character.SetCharacterSprites(true);
+        if (this.character != null)
+        {            
+            this.character.SetCharacterSprites(true);
+        }
     }
 
     public void PlayAnimation()
@@ -44,7 +44,7 @@ public class RespawnAnimation : MonoBehaviour
 
     public void DestroyIt()
     {
-        if (this.character != null) this.character.SpawnIn();
+        if (this.character != null) this.character.SpawnIn();        
         Destroy(this.gameObject, 0.1f);
     }
 }

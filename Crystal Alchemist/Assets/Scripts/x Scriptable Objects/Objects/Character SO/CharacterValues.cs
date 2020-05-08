@@ -80,14 +80,12 @@ public class CharacterValues : ScriptableObject
         this.speed = (stats.startSpeed / 100) * this.speedFactor;
         
         if (stats.lootTable != null) this.itemDrop = stats.lootTable.GetItemDrop();
-
-        this.Initialize();
     }
 
     public void Initialize()
     {
         this.currentState = CharacterState.idle;
-        foreach (Skill skill in this.activeSkills) skill.DeactivateIt();
+        for (int i = 0; i < this.activeSkills.Count; i++) this.activeSkills[i].DeactivateIt();
         this.activeSkills.Clear();
     }
 

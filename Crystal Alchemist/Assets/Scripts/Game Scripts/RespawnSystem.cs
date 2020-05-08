@@ -53,16 +53,19 @@ public class RespawnSystem : MonoBehaviour
 
     private void respawnCharacter(Character character)
     {
+        character.gameObject.SetActive(true);
+        character.values.currentState = CharacterState.respawning;
+
         if (character.stats.respawnAnimation != null)
         {
             //spawn character after animation
             RespawnAnimation respawnObject = Instantiate(character.stats.respawnAnimation, character.GetSpawnPosition(), Quaternion.identity);
             respawnObject.Initialize(character);
+            character.SetCharacterSprites(false);
         }
         else
         {
             //spawn character immediately
-            character.gameObject.SetActive(true);
             character.SetCharacterSprites(true);
             character.SpawnIn();
         }

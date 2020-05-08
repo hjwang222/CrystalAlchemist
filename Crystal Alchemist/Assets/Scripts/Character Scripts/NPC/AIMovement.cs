@@ -119,7 +119,8 @@ public class AIMovement : MonoBehaviour
     {
         if (this.npc.values.currentState != CharacterState.dead
         && this.npc.values.currentState != CharacterState.knockedback
-        && this.npc.values.currentState != CharacterState.manually)
+        && this.npc.values.currentState != CharacterState.manually
+        && this.npc.values.currentState != CharacterState.respawning)
         {
             SetNextPoint();
             this.npc.values.currentState = CharacterState.idle;
@@ -136,13 +137,9 @@ public class AIMovement : MonoBehaviour
         if (this.backToStart) spawnVector = GetNextPoint(this.npc.GetSpawnPosition(), 0.25f);
 
         if (this.movementPriority == MovementPriority.partner)
-        {
             chaseVector = CheckTargets(this.npc.partner, this.partnerRadius, this.npc.target, this.targetRadius);
-        }
         else
-        {
             chaseVector = CheckTargets(this.npc.target, this.targetRadius, this.npc.partner, this.partnerRadius);
-        }
 
         SetVector(patrolVector, spawnVector, chaseVector);
     }
@@ -158,7 +155,7 @@ public class AIMovement : MonoBehaviour
 
         if (newVector != this.targetPosition)
         {
-            targetPosition = newVector;
+            this.targetPosition = newVector;
             if (this.enableCoroutine) StartCoroutine(delayMovementCo(delay));
         }
     }
@@ -180,7 +177,7 @@ public class AIMovement : MonoBehaviour
     private Vector3 CheckTargets(Character first, float firstRadius, Character second, float secondRadius)
     {
         if (first != null) return GetNextPoint(first.GetGroundPosition(), firstRadius);
-        else if(second != null) return GetNextPoint(second.GetGroundPosition(), secondRadius);        
+        else if (second != null) return GetNextPoint(second.GetGroundPosition(), secondRadius);
         else
         {
             this.enableCoroutine = true;
@@ -196,13 +193,10 @@ public class AIMovement : MonoBehaviour
     private Vector3 GetNextPoint(Vector2 nextPosition, float maxDistance, Action action)
     {
         float distance = Vector2.Distance(this.npc.GetGroundPosition(), nextPosition);
-        if (distance > maxDistance)
-        {
-            if (action != null) action.Invoke();
-            return nextPosition;
-        }
+        if (distance > maxDistance) return nextPosition;        
         else
         {
+            if(action != null) action.Invoke();
             return MasterManager.staticValues.nullVector;
         }
     }
@@ -238,6 +232,7 @@ public class AIMovement : MonoBehaviour
         if (this.npc.values.currentState != CharacterState.knockedback
             && this.npc.values.currentState != CharacterState.attack
             && this.npc.values.currentState != CharacterState.dead
+            && this.npc.values.currentState != CharacterState.respawning
             && position != MasterManager.staticValues.nullVector)
         {
             Vector2 direction = ((Vector2)position - this.npc.GetGroundPosition()).normalized;

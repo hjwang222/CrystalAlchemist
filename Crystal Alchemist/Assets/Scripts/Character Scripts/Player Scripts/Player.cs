@@ -30,12 +30,16 @@ public class Player : Character
     ///////////////////////////////////////////////////////////////
 
     public override void Awake()
-    {
+    {        
+        this.values.Initialize();    
         SetComponents();
-        this.values.Initialize();
+    }
+
+    public override void OnEnable()
+    {
         if (this.values.life <= 0) ResetValues();
     }
-    
+
     public override void Start()
     {
         base.Start();
@@ -75,13 +79,6 @@ public class Player : Character
     {
         base.SpawnOut();        
         this.deactivateAllSkills();
-    }
-
-    public override void SpawnIn()
-    {     
-        this.removeColor(Color.white);
-        this.values.currentState = CharacterState.idle;
-        this.EnableScripts(true);
     }
 
     private void deactivateAllSkills()

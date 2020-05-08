@@ -13,13 +13,14 @@ public class LoadSystem
             LoadPreset(data, saveGame.playerPreset);
             LoadBasicValues(data, saveGame.playerValue);
 
+            saveGame.time.Clear();
             saveGame.timePlayed.setValue(data.timePlayed);
             saveGame.SetCharacterName(data.characterName);
 
             loadInventory(data, saveGame.inventory);
             loadPlayerSkills(data, saveGame.buttons, saveGame.skillSet);
 
-            saveGame.nextTeleport.SetValue(data.scene, data.position);
+            saveGame.startSpawnPoint.SetValue(data.scene, data.position);
         }
     }
 

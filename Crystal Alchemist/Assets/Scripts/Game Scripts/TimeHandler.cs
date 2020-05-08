@@ -7,19 +7,5 @@ public class TimeHandler : MonoBehaviour
     [SerializeField]
     private TimeValue timeValue;
 
-    private void Start()
-    {
-        int minute = 0;
-        int hour = 0;
-
-        FormatUtil.getStartTime(this.timeValue.factor, out hour, out minute);
-        this.timeValue.setTime(minute, hour);
-        this.timeValue.factor = this.timeValue.normalFactor;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        this.timeValue.setTime(Time.deltaTime);
-    }
+    private void FixedUpdate() => this.timeValue.setTime(Time.fixedDeltaTime);
 }

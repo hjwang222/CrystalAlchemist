@@ -42,7 +42,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (this.player.values.currentState != CharacterState.knockedback
             && this.player.values.currentState != CharacterState.attack
-            && this.player.values.currentState != CharacterState.dead)
+            && this.player.values.currentState != CharacterState.dead
+            && this.player.values.currentState != CharacterState.respawning)
         {
             if (this.player.values.currentState != CharacterState.interact) this.player.values.currentState = CharacterState.walk;
 

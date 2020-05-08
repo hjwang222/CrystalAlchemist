@@ -14,7 +14,7 @@ public class SaveGameScript : MonoBehaviour
 
     public void SaveGame(SaveSlot slot)
     {
-        this.saveGame.nextTeleport.SetValue(SceneManager.GetActiveScene().name, Vector2.zero);
+        this.saveGame.startSpawnPoint.SetValue(SceneManager.GetActiveScene().name, Vector2.zero);
         SaveSystem.Save(this.saveGame, slot.gameObject.name); //saves savegame to data
         
         this.updateSaveSignal.Raise();

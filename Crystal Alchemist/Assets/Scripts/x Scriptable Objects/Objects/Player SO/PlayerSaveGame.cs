@@ -4,8 +4,10 @@ using Sirenix.OdinInspector;
 [CreateAssetMenu(menuName = "Game/Player/Save Game")]
 public class PlayerSaveGame : ScriptableObject
 {
-    [BoxGroup("Base")]
+    [BoxGroup("Time")]
     public FloatValue timePlayed;
+    [BoxGroup("Time")]
+    public TimeValue time;
 
     [BoxGroup("Player")]
     public CharacterPreset playerPreset;
@@ -18,7 +20,7 @@ public class PlayerSaveGame : ScriptableObject
     [BoxGroup("Player")]
     public PlayerSkillset skillSet;
     [BoxGroup("Player")]
-    public TeleportStats nextTeleport;
+    public TeleportStats startSpawnPoint;
 
     [BoxGroup("Stats")]
     [SerializeField]
@@ -31,13 +33,14 @@ public class PlayerSaveGame : ScriptableObject
     [Button]
     public void Clear()
     {
+        this.time.Clear();
         this.timePlayed.setValue(0f);
         this.stats.SetCharacterName("Hero");
         this.playerValue.Clear(this.stats);
         this.inventory.Clear();
         this.buttons.Clear();
         this.skillSet.Clear();
-        this.nextTeleport.Clear();
+        this.startSpawnPoint.Clear();
 
         GameUtil.setPreset(this.defaultPreset, this.playerPreset);
     }

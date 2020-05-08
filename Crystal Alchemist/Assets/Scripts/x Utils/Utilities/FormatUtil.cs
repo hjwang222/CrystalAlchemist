@@ -1,7 +1,6 @@
 ﻿using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
-using System;
 
 public static class FormatUtil
 {
@@ -69,21 +68,5 @@ public static class FormatUtil
             if (fontColor != null) tmp.color = fontColor;
             if (outlineWidth > 0) tmp.outlineWidth = outlineWidth;
         }
-    }
-
-    public static void getStartTime(float factor, out int hour, out int minute)
-    {
-        DateTime origin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0);
-        TimeSpan diff = DateTime.Now - origin;
-        double difference = Math.Floor(diff.TotalSeconds);
-        float minutes = (float)(difference / (double)factor); //elapsed ingame minutes
-        float fhour = ((minutes / 60f) % 24f);
-        float fminute = (minutes % 60f);
-
-        if (fhour >= 24) fhour = 0;
-        if (fminute >= 60) fminute = 0;
-
-        hour = Mathf.RoundToInt(fhour);
-        minute = Mathf.RoundToInt(fminute);
     }
 }

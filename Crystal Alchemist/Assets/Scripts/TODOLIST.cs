@@ -5,17 +5,18 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.0):
     //BUG: Schild ruckelt (FixedUpdate?)
     //BUG: Menu wonky (ESC)
+    //BUG: Character Creator
+    //BUG: Last Teleport save
 
+    //TODO: More Enemies on night, despawn on night
+    //TODO: Walk in an area (AI Movement)
     //TODO: Sound Effekte ersetzen!
     //TODO: CharacterCreatorParts und Handler: Shader statt Spriterenderer
     //TODO: Teleport Rework (Quick Travel, Teleport list)
     //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
 
-    //TODO: TMPro Exceptions Fix
     //REWORK: AnyButton Press
-
     //TODO: Scene Manager (UI an und aus, Scene Manager DontDestroy?)
-    //TODO: Game Manager Black Screen better solution
 
     //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena
@@ -34,7 +35,7 @@ public class TODOLIST : MonoBehaviour
     //INPUT: Virtuelle Tastatur
     //REWORK: Flammenerfer Skill
     //TODO: Ghosts
-    //TODO: New Enemies (Bat, Bee, Flower, Crystal, etc)
+    //TODO: New Enemies (Bat, Bee, Flower, Crystal, Zombie, etc)
     //TODO: Stairs, Ice, Wall
     //TODO: Rule Tiles
     //TODO: Pathfinding
