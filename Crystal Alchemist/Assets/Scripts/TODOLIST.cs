@@ -4,18 +4,14 @@ public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
     //BUG: Schild ruckelt (FixedUpdate?)
-
     //TODO: ESC = Pause
-    //TODO: More Enemies on night, despawn on night
-    //TODO: Walk in an area (AI Movement)
+
     //TODO: Sound Effekte ersetzen!
     //TODO: CharacterCreatorParts und Handler: Shader statt Spriterenderer
+
     //TODO: Teleport Rework (Quick Travel, Teleport list)
     //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
-
-    //REWORK: AnyButton Press
-    //TODO: Scene Manager (UI an und aus, Scene Manager DontDestroy?)
-
+         
     //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena
@@ -28,10 +24,11 @@ public class TODOLIST : MonoBehaviour
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
-    //OBJECT: Bett (Tag/Nacht)
+    //OBJECT: Bett (Tag/Nacht) und Sanduhr weg
     //ITEM: Brille (Bool Value)
     //INPUT: Virtuelle Tastatur
     //REWORK: Flammenerfer Skill
+    //REWORK: AnyButton Press
     //TODO: Ghosts
     //TODO: New Enemies (Bat, Bee, Flower, Crystal, Zombie, etc)
     //TODO: Stairs, Ice, Wall
@@ -52,6 +49,7 @@ public class TODOLIST : MonoBehaviour
     //MAYBE: Options Rework (Resolution)
     //MAYBE: Wetter Script (Position und Größe)
     //MAYBE: DialogBox
+    //MAYBE: Scene Manager (UI an und aus, Scene Manager DontDestroy?)
 
     //-----------------------------------------------------------------------------
 

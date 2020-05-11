@@ -77,6 +77,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -194,6 +195,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -362,34 +364,7 @@ MonoBehaviour:
   skillStartPosition: {fileID: 643234597281888973}
   activeSkillParent: {fileID: 9010662488490252655}
   activeStatusEffectParent: {fileID: 6899571501455701071}
-  speedMultiply: 5
-  spawnPosition: {x: 0, y: 0, z: 0}
-  activeCastbar: {fileID: 0}
-  currentState: 0
-  life: 0
-  spellspeed: 0
-  mana: 0
-  speed: 0
-  maxLife: 0
-  maxMana: 0
-  lifeRegen: 0
-  manaRegen: 0
-  buffPlus: 0
-  debuffMinus: 0
-  cantBeHit: 0
-  isInvincible: 0
-  isHit: 0
-  buffs: []
-  debuffs: []
-  activeSkills: []
-  direction: {x: 0, y: 0}
-  lockAnimation: 0
-  timeDistortion: 1
-  isPlayer: 0
-  activePets: []
-  steps: 0
-  isOnIce: 0
-  itemDrop: {fileID: 0}
+  values: {fileID: 0}
 --- !u!50 &546327852
 Rigidbody2D:
   serializedVersion: 4
@@ -443,7 +418,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4378207659174940328}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07b7eba3b76cc8940aa3e8ab12be831a, type: 3}
   m_Name: 

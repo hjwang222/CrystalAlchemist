@@ -143,6 +143,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -311,34 +312,7 @@ MonoBehaviour:
   skillStartPosition: {fileID: 3892359947461909517}
   activeSkillParent: {fileID: 1107838212211391823}
   activeStatusEffectParent: {fileID: 6034976085599367541}
-  speedMultiply: 5
-  spawnPosition: {x: 0, y: 0, z: 0}
-  activeCastbar: {fileID: 0}
-  currentState: 0
-  life: 0
-  spellspeed: 0
-  mana: 0
-  speed: 0
-  maxLife: 0
-  maxMana: 0
-  lifeRegen: 0
-  manaRegen: 0
-  buffPlus: 0
-  debuffMinus: 0
-  cantBeHit: 0
-  isInvincible: 0
-  isHit: 0
-  buffs: []
-  debuffs: []
-  activeSkills: []
-  direction: {x: 0, y: 0}
-  lockAnimation: 0
-  timeDistortion: 1
-  isPlayer: 0
-  activePets: []
-  steps: 0
-  isOnIce: 0
-  itemDrop: {fileID: 0}
+  values: {fileID: 0}
   aggroGameObject: {fileID: 3572286459575025453}
   flip: 0
   target: {fileID: 0}
@@ -364,8 +338,12 @@ MonoBehaviour:
   backToStart: 1
   returnDelay: 3
   isPatrol: 0
+  patrolType: 0
   patrolDelay: 3
   patrolPath: []
+  patrolArea: {fileID: 0}
+  hasMaxTime: 0
+  maxPatrolTime: 5
   followPathPrecision: 0.01
   followPathInCircle: 0
   accuracy: 0.25
@@ -444,7 +422,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185713049241957143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07b7eba3b76cc8940aa3e8ab12be831a, type: 3}
   m_Name: 
@@ -458,7 +436,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185713049241957143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbfdb26056989d4498fe91a93c82e41c, type: 3}
   m_Name: 

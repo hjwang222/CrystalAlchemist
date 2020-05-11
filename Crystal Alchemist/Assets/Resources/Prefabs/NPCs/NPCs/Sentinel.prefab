@@ -271,6 +271,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -480,34 +481,7 @@ MonoBehaviour:
   skillStartPosition: {fileID: 996979834625392541}
   activeSkillParent: {fileID: 8609950149900843970}
   activeStatusEffectParent: {fileID: 3162633258840045560}
-  speedMultiply: 5
-  spawnPosition: {x: 0, y: 0, z: 0}
-  activeCastbar: {fileID: 0}
-  currentState: 0
-  life: 0
-  spellspeed: 0
-  mana: 0
-  speed: 0
-  maxLife: 0
-  maxMana: 0
-  lifeRegen: 0
-  manaRegen: 0
-  buffPlus: 0
-  debuffMinus: 0
-  cantBeHit: 0
-  isInvincible: 0
-  isHit: 0
-  buffs: []
-  debuffs: []
-  activeSkills: []
-  direction: {x: 0, y: 0}
-  lockAnimation: 0
-  timeDistortion: 1
-  isPlayer: 0
-  activePets: []
-  steps: 0
-  isOnIce: 0
-  itemDrop: {fileID: 0}
+  values: {fileID: 0}
   aggroGameObject: {fileID: 4937573517194286390}
   flip: 1
   target: {fileID: 0}
@@ -533,11 +507,14 @@ MonoBehaviour:
   backToStart: 0
   returnDelay: 3
   isPatrol: 0
+  patrolType: 0
   patrolDelay: 3
   patrolPath: []
+  patrolArea: {fileID: 0}
+  hasMaxTime: 0
+  maxPatrolTime: 5
   followPathPrecision: 0.01
   followPathInCircle: 0
-  seeker: {fileID: -5025062449260567259}
   accuracy: 0.25
 --- !u!114 &5280788646405828720
 MonoBehaviour:
@@ -591,7 +568,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7518508113067193754}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07b7eba3b76cc8940aa3e8ab12be831a, type: 3}
   m_Name: 
@@ -605,7 +582,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7518508113067193754}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbfdb26056989d4498fe91a93c82e41c, type: 3}
   m_Name: 
@@ -690,6 +667,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

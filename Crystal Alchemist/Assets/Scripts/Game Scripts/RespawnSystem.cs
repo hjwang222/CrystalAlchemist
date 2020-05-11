@@ -5,50 +5,117 @@ using Sirenix.OdinInspector;
 
 public class RespawnSystem : MonoBehaviour
 {
-    private List<Character> respawnObjects = new List<Character>();
-
-    void FixedUpdate()
+    private enum SpawnType
     {
-        setRespawnObjects(this.transform.gameObject);
+        none,
+        day,
+        night
     }
 
-    private void setRespawnObjects(GameObject parent)
+    [System.Serializable]
+    private class RespawnTimer
     {
-        for (int i = 0; i < parent.transform.childCount; i++)
+        public float timeElapsed;
+        public Character character;
+        public bool spawnIt;
+
+        public RespawnTimer(Character character)
         {
-            GameObject child = parent.transform.GetChild(i).gameObject;
+            this.character = character;
+            if (this.character.values == null) this.character.values = new CharacterValues();
+            this.character.values.currentState = CharacterState.respawning;
+
+            this.timeElapsed = character.stats.respawnTime;
+        }
+
+        public void Updating(float time)
+        {
+            if (this.timeElapsed > 0) this.timeElapsed -= time;
+            else this.spawnIt = true;
+        }
+    }
+
+    [SerializeField]
+    private TimeValue time;
+
+    [SerializeField]
+    private float updateTime = 1f;
+
+    [SerializeField]
+    private SpawnType spawnType = SpawnType.none;
+
+    [BoxGroup("Debug")]
+    [SerializeField]
+    private List<RespawnTimer> respawnObjects = new List<RespawnTimer>();
+
+    private void Start() => InvokeRepeating("Updating", 0f, this.updateTime);    
+
+    private bool NotActive()
+    {
+        return (this.spawnType == SpawnType.day && time.night)
+         || (this.spawnType == SpawnType.night && !time.night);
+    }
+
+    private void DisableGameObjects()
+    {
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            GameObject child = this.transform.GetChild(i).gameObject;
+            Character character = child.gameObject.GetComponent<Character>();
+            if (character != null) child.SetActive(false);            
+        }          
+    }
+
+    private void Updating()
+    {
+        if (NotActive()) DisableGameObjects(); //set characters inactive
+        SetRespawnObjects(); //Add inactive characters to list
+        UpdateRespawnObjects(); //update timer of listed characters
+        if (!NotActive()) SpawnObjects(); //spawn characters      
+    }
+
+    private void SetRespawnObjects()
+    {
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            GameObject child = this.transform.GetChild(i).gameObject;
             Character character = child.gameObject.GetComponent<Character>();
 
-            if (character != null)
-            {
-                if (!character.gameObject.activeInHierarchy
-                    && (character.values == null || (character.values != null
-                 && character.values.currentState == CharacterState.dead))
-                 && !this.respawnObjects.Contains(character))
-                {
-                    setRespawn(character);
-                }
-            }
-            else
-            {
-                setRespawnObjects(child);
-            }
+            if (character != null 
+                && !character.gameObject.activeInHierarchy
+                && !this.Contains(character)
+                && character.stats.hasRespawn) this.respawnObjects.Add(new RespawnTimer(character));
         }
     }
 
-    private void setRespawn(Character character)
+    private void UpdateRespawnObjects()
     {
-        if (character.stats.hasRespawn)
+        for (int i = 0; i < this.respawnObjects.Count; i++)
         {
-            StartCoroutine(respawnCo(character));
-            if(character.values != null) character.values.currentState = CharacterState.respawning;
+            if (!this.respawnObjects[i].spawnIt) respawnObjects[i].Updating(this.updateTime);
         }
     }
 
-    private IEnumerator respawnCo(Character character)
+    private void SpawnObjects()
     {
-        yield return new WaitForSeconds(character.stats.respawnTime);
-        respawnCharacter(character);
+        for (int i = 0; i < this.respawnObjects.Count; i++)
+        {
+            if (this.respawnObjects[i].spawnIt)
+            {
+                respawnCharacter(this.respawnObjects[i].character);
+                this.respawnObjects[i] = null;
+            }
+        }
+        this.respawnObjects.RemoveAll(x => x == null);
+    }
+
+    private bool Contains(Character character)
+    {
+        for(int i = 0; i < this.respawnObjects.Count; i++)
+        {
+            if(this.respawnObjects[i].character == character) return true;            
+        }
+        return false;
     }
 
     private void respawnCharacter(Character character)
@@ -67,6 +134,7 @@ public class RespawnSystem : MonoBehaviour
         {
             //spawn character immediately
             character.SetCharacterSprites(true);
+            character.PlayRespawnAnimation();
             character.SpawnIn();
         }
     }

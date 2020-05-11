@@ -10,6 +10,12 @@ public enum MovementPriority
     partner
 }
 
+public enum PatrolType
+{
+    path,
+    area
+}
+
 public class AIMovement : MonoBehaviour
 {
     [SerializeField]
@@ -55,12 +61,37 @@ public class AIMovement : MonoBehaviour
     [ShowIf("isPatrol")]
     [BoxGroup("Patrol")]
     [SerializeField]
-    private float patrolDelay = 3f;
+    private PatrolType patrolType = PatrolType.path;
 
     [ShowIf("isPatrol")]
     [BoxGroup("Patrol")]
     [SerializeField]
+    private float patrolDelay = 3f;
+
+    [ShowIf("isPatrol")]
+    [HideIf("patrolType", PatrolType.area)]
+    [BoxGroup("Patrol")]
+    [SerializeField]
     private List<Transform> patrolPath = new List<Transform>();
+
+    [ShowIf("isPatrol")]
+    [HideIf("patrolType", PatrolType.path)]
+    [BoxGroup("Patrol")]
+    [SerializeField]
+    private Collider2D patrolArea;
+
+    [ShowIf("isPatrol")]
+    [HideIf("patrolType", PatrolType.path)]
+    [BoxGroup("Patrol")]
+    [SerializeField]
+    private bool hasMaxTime = false;
+
+    [ShowIf("isPatrol")]
+    [HideIf("patrolType", PatrolType.path)]
+    [ShowIf("hasMaxTime", true)]
+    [BoxGroup("Patrol")]
+    [SerializeField]
+    private float maxPatrolTime = 5f;
 
     [ShowIf("isPatrol")]
     [BoxGroup("Patrol")]
@@ -69,6 +100,7 @@ public class AIMovement : MonoBehaviour
 
     [ShowIf("isPatrol")]
     [BoxGroup("Patrol")]
+    [HideIf("patrolType", PatrolType.area)]
     [SerializeField]
     private bool followPathInCircle = true;
 
@@ -79,11 +111,20 @@ public class AIMovement : MonoBehaviour
     private PathSeeker seeker = null;
     private List<Vector2> path;
     private int index;
+
     private bool wait = false;
     private bool enableCoroutine = true;
+
     private int factor = 1;
     private int currentPoint = 0;
+    [BoxGroup("Debug")]
+    [SerializeField]
     private Vector3 targetPosition;
+    private Vector3 randomColliderPoint;
+
+    [BoxGroup("Debug")]
+    [SerializeField]
+    private float areaCountdown = 0f;
 
     #endregion
 
@@ -92,10 +133,12 @@ public class AIMovement : MonoBehaviour
         AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", false);
         if (Pathfinding.Instance != null) this.seeker = this.GetComponent<PathSeeker>();
         this.targetPosition = MasterManager.staticValues.nullVector;
+
+        if (this.isPatrol && this.patrolType == PatrolType.area) SetRandomPoint();
     }
 
     #region Update und Movement Funktionen
-    private void Update()
+    private void FixedUpdate()
     {
         if (this.npc.values.currentState != CharacterState.knockedback && !this.npc.values.isOnIce)
         {
@@ -104,10 +147,17 @@ public class AIMovement : MonoBehaviour
 
         if (!this.wait)
         {
+            if (this.hasMaxTime && this.areaCountdown > 0) this.areaCountdown -= Time.fixedDeltaTime;
+
             UpdateTargetPosition();
+
             if (this.seeker != null) MoveTroughPaths(this.targetPosition); //Pathfinding
             else MoveToPosition(this.targetPosition); //No Pathfinding
         }
+
+        if (MasterManager.debugSettings.showTargetPosition
+            && this.targetPosition != MasterManager.staticValues.nullVector)
+            Debug.DrawLine(this.npc.GetGroundPosition(), this.targetPosition, Color.blue);
     }
 
     private void SetReturn()
@@ -133,7 +183,16 @@ public class AIMovement : MonoBehaviour
         Vector3 spawnVector = MasterManager.staticValues.nullVector;
         Vector3 chaseVector = MasterManager.staticValues.nullVector;
 
-        if (this.isPatrol) patrolVector = GetNextPoint(patrolPath[currentPoint].position, this.followPathPrecision, SetNextWayPoint);
+        if (this.isPatrol)
+        {
+            if (this.patrolType == PatrolType.path && this.patrolPath.Count > 0)
+                patrolVector = GetNextPoint(this.patrolPath[currentPoint].position, this.followPathPrecision, SetNextWayPoint);
+            else if (this.patrolType == PatrolType.area)
+            {
+                SetNewRandomPointAfterTime();
+                patrolVector = GetNextPoint(this.randomColliderPoint, this.followPathPrecision, SetRandomPoint);
+            }
+        }
         if (this.backToStart) spawnVector = GetNextPoint(this.npc.GetSpawnPosition(), 0.25f);
 
         if (this.movementPriority == MovementPriority.partner)
@@ -142,6 +201,11 @@ public class AIMovement : MonoBehaviour
             chaseVector = CheckTargets(this.npc.target, this.targetRadius, this.npc.partner, this.partnerRadius);
 
         SetVector(patrolVector, spawnVector, chaseVector);
+    }
+
+    private void SetNewRandomPointAfterTime()
+    {
+        if (this.hasMaxTime && this.areaCountdown <= 0) SetRandomPoint(); 
     }
 
     private void SetVector(Vector3 patrolVector, Vector3 spawnVector, Vector3 chaseVector)
@@ -193,6 +257,7 @@ public class AIMovement : MonoBehaviour
     private Vector3 GetNextPoint(Vector2 nextPosition, float maxDistance, Action action)
     {
         float distance = Vector2.Distance(this.npc.GetGroundPosition(), nextPosition);
+
         if (distance > maxDistance) return nextPosition;        
         else
         {
@@ -279,6 +344,36 @@ public class AIMovement : MonoBehaviour
         {
             currentPoint += this.factor;
         }
+    }
+
+    private void SetRandomPoint()
+    {
+        if(this.patrolArea == null)
+        {
+            this.randomColliderPoint = MasterManager.staticValues.nullVector;
+            return;
+        }
+
+        Bounds bounds = this.patrolArea.bounds;
+        Vector2 center = bounds.center;
+        bool found = false;
+        int attempts = 0;
+
+        do
+        {
+            float x = UnityEngine.Random.Range(center.x - bounds.extents.x, center.x + bounds.extents.x);
+            float y = UnityEngine.Random.Range(center.y - bounds.extents.y, center.y + bounds.extents.y);
+            Vector2 result = new Vector2(x, y);
+            attempts++;
+
+            if (this.patrolArea.OverlapPoint(result))
+            {
+                this.randomColliderPoint = result;
+                this.areaCountdown = this.maxPatrolTime;
+                found = true;                
+            }
+        }
+        while (!found && attempts < 50);        
     }
 
     #endregion
