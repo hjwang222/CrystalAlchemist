@@ -27,7 +27,7 @@ public class PlayerSkillset : ScriptableObject
     public void Updating()
     {
         this.abilities.RemoveAll(item => item == null);
-        foreach (Ability ability in this.abilities) ability.Update();        
+        foreach (Ability ability in this.abilities) ability.Updating();        
     }
 
     public Ability getAbilityByName(string name)

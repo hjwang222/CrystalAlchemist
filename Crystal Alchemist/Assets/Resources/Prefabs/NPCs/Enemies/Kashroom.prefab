@@ -347,6 +347,8 @@ MonoBehaviour:
   followPathPrecision: 0.01
   followPathInCircle: 0
   accuracy: 0.25
+  targetPosition: {x: 0, y: 0, z: 0}
+  areaCountdown: 0
 --- !u!114 &3560735132152297213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,7 +643,7 @@ PrefabInstance:
     - target: {fileID: 8537469436013784418, guid: 6a16bd4179f071649b716a3d0358d43a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.45
+      value: -0.125
       objectReference: {fileID: 0}
     - target: {fileID: 8537469436013784418, guid: 6a16bd4179f071649b716a3d0358d43a,
         type: 3}

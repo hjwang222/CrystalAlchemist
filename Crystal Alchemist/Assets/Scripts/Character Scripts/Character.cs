@@ -30,6 +30,9 @@ public class Character : MonoBehaviour
     [Tooltip("Zur Erkennung wo der Charakter steht")]
     private SpriteRenderer shadowRenderer;
 
+    [BoxGroup("Easy Access")]    
+    public RespawnAnimation respawnAnimation;
+
     [BoxGroup("Easy Access")]
     [Required]
     [SerializeField]
@@ -596,6 +599,12 @@ public class Character : MonoBehaviour
         this.removeColor(Color.white);
         this.values.currentState = CharacterState.idle;
         this.EnableScripts(true);   
+    }
+
+    public void PlayDespawnAnimation()
+    {
+        this.ChangeColor(Color.white);
+        AnimatorUtil.SetAnimatorParameter(this.animator, "Despawn");
     }
 
     public void PlayRespawnAnimation()

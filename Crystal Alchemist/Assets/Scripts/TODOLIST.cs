@@ -4,15 +4,17 @@ public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
     //BUG: Schild ruckelt (FixedUpdate?)
-    //TODO: ESC = Pause
     //TODO: Sound Effekte ersetzen!
-    //TODO: Spawn Animationen (Feinde)
+
+    //BUG: Interrupt funktioniert nicht
+    //BUG: Despawn Line funktioniert nicht
+    //BUG: Laser Line akualisiert nicht
 
     //TODO (0.2.5.2):
     //TODO: Teleport Rework (Quick Travel, Teleport list)
     //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
     //OBJECT: Bett (Tag/Nacht) und Sanduhr weg
-    //TODO: New Enemies (Bat, Bee, Flower, Crystal, Zombie, etc)
+    //TODO: New Enemies (Bat, Bee, Flower, Crystal, Zombie, Kashroom new, etc)
     //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena

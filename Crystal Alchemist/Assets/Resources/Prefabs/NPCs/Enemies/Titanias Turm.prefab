@@ -112,34 +112,7 @@ MonoBehaviour:
   skillStartPosition: {fileID: 1536248267194378282}
   activeSkillParent: {fileID: 4536096100877042891}
   activeStatusEffectParent: {fileID: 7092093423516748017}
-  speedMultiply: 5
-  spawnPosition: {x: 0, y: 0, z: 0}
-  activeCastbar: {fileID: 0}
-  currentState: 0
-  life: 0
-  spellspeed: 0
-  mana: 0
-  speed: 0
-  maxLife: 0
-  maxMana: 0
-  lifeRegen: 0
-  manaRegen: 0
-  buffPlus: 0
-  debuffMinus: 0
-  cantBeHit: 0
-  isInvincible: 0
-  isHit: 0
-  buffs: []
-  debuffs: []
-  activeSkills: []
-  direction: {x: 0, y: 0}
-  lockAnimation: 0
-  timeDistortion: 1
-  isPlayer: 0
-  activePets: []
-  steps: 0
-  isOnIce: 0
-  itemDrop: {fileID: 0}
+  values: {fileID: 0}
   aggroGameObject: {fileID: 6272208109676738659}
   flip: 0
   target: {fileID: 0}
@@ -158,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npc: {fileID: 55980665602690939}
-  startPhase: {fileID: 0}
+  startPhase: {fileID: 11400000, guid: 78faa3a529e2a7d48ae42755421cd4da, type: 2}
   startImmediately: 1
 --- !u!61 &4536096100201619651
 BoxCollider2D:
@@ -355,6 +328,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -442,6 +416,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

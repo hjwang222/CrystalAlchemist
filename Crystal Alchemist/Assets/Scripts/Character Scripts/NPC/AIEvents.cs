@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class AIEvents : CharacterCombat
@@ -25,22 +24,14 @@ public class AIEvents : CharacterCombat
     private bool isActive;
     #endregion
 
-    //BUG: To many events
-    //BUG: Gifthaut doppelt
-    private void Start()
-    {
-        InitializeTargeting(this.npc);
-    }
+    private void Start() => InitializeTargeting(this.npc);    
 
     private void OnEnable()
     {
         if (this.startPhase != null && this.startImmediately) StartPhase();
     }
 
-    public void StartPhase()
-    {
-        StartPhase(this.startPhase);
-    }
+    public void StartPhase() => StartPhase(this.startPhase);    
 
     private void Update()
     {
@@ -48,15 +39,9 @@ public class AIEvents : CharacterCombat
             this.activePhase.Updating(this.npc);
     }
 
-    private void OnDisable()
-    {
-        EndPhase();
-    }
+    private void OnDisable() => EndPhase();    
 
-    private void OnDestroy()
-    {
-        EndPhase();
-    }
+    private void OnDestroy() => EndPhase();    
 
     public void EndPhase()
     {
@@ -88,6 +73,5 @@ public class AIEvents : CharacterCombat
             this.activeDialog.setDialogBox(text, duration);
         }
     }
-
 }
 

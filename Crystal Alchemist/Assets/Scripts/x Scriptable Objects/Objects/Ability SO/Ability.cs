@@ -48,6 +48,16 @@ public class Ability : ScriptableObject
 
     [BoxGroup("Objects")]
     [SerializeField]
+    public bool useIndicator = false;
+
+    [BoxGroup("Objects")]
+    [ShowIf("useIndicator")]
+    [HideLabel]
+    [SerializeField]
+    private IndicatorObject indicator;
+
+    [BoxGroup("Objects")]
+    [SerializeField]
     public bool hasSkillBookInfo = false;
 
     [BoxGroup("Objects")]
@@ -68,10 +78,10 @@ public class Ability : ScriptableObject
     [ShowIf("hasMaxDuration")]
     public float maxDuration = 1;
 
-    [BoxGroup("Restrictions")]
-    [ShowIf("isRapidFire")]
-    [SerializeField]
-    private float rapidFireDelay = 1;
+    //[BoxGroup("Restrictions")]
+    //[ShowIf("isRapidFire")]
+    //[SerializeField]
+    //private float rapidFireDelay = 1;
 
     [BoxGroup("Restrictions")]
     [OnValueChanged("OnCastTimeChange")]
@@ -148,7 +158,6 @@ public class Ability : ScriptableObject
 
     private Character sender;
 
-
 #if UNITY_EDITOR
     [AssetIcon]
     private Sprite GetSprite()
@@ -173,7 +182,6 @@ public class Ability : ScriptableObject
         return this.sender;
     }
 
-
     public string GetName()
     {
         return FormatUtil.getLanguageDialogText(this.abilityName, this.abilityNameEnglish);
@@ -186,9 +194,9 @@ public class Ability : ScriptableObject
         setStartParameters();
     }
 
-    public void Update()
+    public void Updating()
     {
-        updateCooldown();
+        updateCooldown();        
     }
 
     private void updateCooldown()
@@ -244,7 +252,17 @@ public class Ability : ScriptableObject
     public void ResetCharge()
     {
         if (!this.keepCast) this.holdTimer = 0;
-        else if (this.keepCast && this.holdTimer > this.castTime) this.holdTimer = 0;
+        else if (this.keepCast && this.holdTimer > this.castTime) this.holdTimer = 0;        
+    }
+
+    public void HideIndicator()
+    {
+        if (this.useIndicator && this.indicator != null) this.indicator.ClearIndicator();
+    }
+
+    public void ShowIndicator(Character target)
+    {
+        if (this.useIndicator && this.indicator != null) this.indicator.UpdateIndicator(this.sender, target);        
     }
 
     public void ResetCoolDown()
@@ -292,13 +310,13 @@ public class Ability : ScriptableObject
 
     public bool IsTargetRequired()
     {
-        if (this.targetingProperty != null && this.targetingProperty.targetingMode != TargetingMode.helper) return true;
+        if (this.useTargetSystem && this.targetingProperty != null) return true;
         return false;
     }
 
     public bool HasHelper()
     {
-        if (this.targetingProperty != null && this.targetingProperty.targetingMode == TargetingMode.helper) return true;
+        if (this.useIndicator && this.indicator != null) return true;
         return false;
     }
 
@@ -358,6 +376,8 @@ public class Ability : ScriptableObject
 
         if (sendermodule != null) sendermodule.costs.amount /= reduce;
     }
+
+
 
     #endregion
 

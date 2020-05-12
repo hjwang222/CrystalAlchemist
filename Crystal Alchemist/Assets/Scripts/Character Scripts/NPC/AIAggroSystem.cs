@@ -17,9 +17,9 @@ public class AIAggroSystem : MonoBehaviour
     [BoxGroup("Required")]
     private AggroStats aggroStats;
 
-    [SerializeField]
-    [HideLabel]
-    private IndicatorObject indicator;
+    //[SerializeField]
+    //[HideLabel]
+    //private IndicatorObject indicator;
 
     private GameObject activeClue;
 
@@ -38,7 +38,7 @@ public class AIAggroSystem : MonoBehaviour
     private void Update()
     {        
         if(this.GetComponent<CircleCollider2D>() == null) RotationUtil.rotateCollider(this.enemy, this.gameObject);
-        updateIndicator();
+        //updateIndicator();
         generateAggro();        
     }
 
@@ -74,11 +74,6 @@ public class AIAggroSystem : MonoBehaviour
         this.enemy.target = null;
         this.hideClue();
         this.aggroList.Clear();
-    }
-
-    public void updateIndicator()
-    {
-        this.indicator.UpdateIndicator(this.enemy, this.enemy.target);
     }
 
     public void generateAggro()

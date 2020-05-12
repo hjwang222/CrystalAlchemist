@@ -66,9 +66,9 @@ public static class RotationUtil
     {
         if (skill.sender == null) return skill.direction;
         else if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null)
-            return ((Vector2)skill.sender.GetComponent<AI>().target.transform.position - start).normalized;
+            return (skill.sender.GetComponent<AI>().target.GetGroundPosition() - start).normalized;
         else if (skill.target != null)
-            return ((Vector2)skill.target.transform.position - start).normalized;
+            return (skill.target.GetGroundPosition() - start).normalized;
         else if (skill.sender != null)
             return skill.sender.values.direction.normalized;
 

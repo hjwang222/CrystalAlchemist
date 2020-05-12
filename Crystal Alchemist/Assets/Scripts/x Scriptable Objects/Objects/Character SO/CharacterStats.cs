@@ -99,10 +99,6 @@ public class CharacterStats : ScriptableObject
 
     [TabGroup("Spawn Values")]
     [Tooltip("Respawn-Animation")]
-    public RespawnAnimation respawnAnimation;
-
-    [TabGroup("Spawn Values")]
-    [Tooltip("Respawn-Animation")]
     public DeathAnimation deathAnimation;
 
 

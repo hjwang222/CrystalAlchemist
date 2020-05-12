@@ -62,7 +62,7 @@ public class RespawnSystem : MonoBehaviour
         {
             GameObject child = this.transform.GetChild(i).gameObject;
             Character character = child.gameObject.GetComponent<Character>();
-            if (character != null) child.SetActive(false);            
+            if (character != null) DespawnCharacter(character);         
         }          
     }
 
@@ -118,15 +118,37 @@ public class RespawnSystem : MonoBehaviour
         return false;
     }
 
+    private void DespawnCharacter(Character character)
+    {
+        if (character.respawnAnimation != null)
+        {            
+            RespawnAnimation respawnObject = Instantiate(character.respawnAnimation, character.GetSpawnPosition(), Quaternion.identity);
+            respawnObject.Reverse(character);
+            character.SetCharacterSprites(true);
+        }
+        else
+        {
+            character.PlayDespawnAnimation();
+            character.SpawnOut();
+            StartCoroutine(InactiveCo(1f, character));
+        }
+    }
+
+    private IEnumerator InactiveCo(float seconds, Character character)
+    {
+        yield return new WaitForSeconds(seconds);
+        character.gameObject.SetActive(false);
+    }
+
     private void respawnCharacter(Character character)
     {
         character.gameObject.SetActive(true);
         character.values.currentState = CharacterState.respawning;
 
-        if (character.stats.respawnAnimation != null)
+        if (character.respawnAnimation != null)
         {
             //spawn character after animation
-            RespawnAnimation respawnObject = Instantiate(character.stats.respawnAnimation, character.GetSpawnPosition(), Quaternion.identity);
+            RespawnAnimation respawnObject = Instantiate(character.respawnAnimation, character.GetSpawnPosition(), Quaternion.identity);
             respawnObject.Initialize(character);
             character.SetCharacterSprites(false);
         }

@@ -51,10 +51,10 @@ public class PlayerTeleport : MonoBehaviour
         this.player.SpawnOut(); //Disable Player        
         bool animation = this.nextTeleport.showAnimationOut;
 
-        if (this.player.stats.respawnAnimation != null && animation) //Show Animation for DEspawn
+        if (this.player.respawnAnimation != null && animation) //Show Animation for DEspawn
         {
             this.player.SetDefaultDirection();
-            RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, this.transform.position, Quaternion.identity);
+            RespawnAnimation respawnObject = Instantiate(this.player.respawnAnimation, this.transform.position, Quaternion.identity);
             respawnObject.Reverse(this.player);  //reverse
             yield return new WaitForSeconds(respawnObject.getAnimationLength());
         }
@@ -76,13 +76,12 @@ public class PlayerTeleport : MonoBehaviour
 
         SetPosition(position);
 
-        if (this.player.stats.respawnAnimation != null && animation)
+        if (this.player.respawnAnimation != null && animation)
         {
             this.player.SetDefaultDirection();
             yield return new WaitForSeconds(2f);
-            RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, position, Quaternion.identity);
-            respawnObject.Initialize(this.player);
-            yield return new WaitForSeconds((respawnObject.getAnimationLength() + 1f));            
+            RespawnAnimation respawnObject = Instantiate(this.player.respawnAnimation, position, Quaternion.identity);
+            respawnObject.Initialize(this.player);          
         }
         else
         {

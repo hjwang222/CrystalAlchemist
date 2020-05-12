@@ -45,7 +45,7 @@ public class TargetingSystem : MonoBehaviour
     private void OnEnable()
     {
         ability.SetLockOnState();
-        if (this.properties.targetingMode != TargetingMode.helper) SetColliders();
+        SetColliders();
 
         if(this.properties.hasMaxDuration) this.timeLeft = this.properties.maxDuration;
         if(this.timeLeftValue != null) this.timeLeftValue.setValue(1f);

@@ -1,16 +1,9 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class IndicatorObject
 {
-    [BoxGroup("Indikator")]
-    [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
-    public bool showIndicator = false;
-
-    [BoxGroup("Indikator")]
-    [ShowIf("showIndicator")]
     [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
     public IndicatorProperty indicatorProperty;
 
@@ -18,32 +11,22 @@ public class IndicatorObject
 
     private void Instantiate(Character sender, Character target)
     {
-        if (this.showIndicator && this.indicatorProperty != null) this.indicatorProperty.Instantiate(sender, target, this.appliedIndicators);
+        if (this.indicatorProperty != null) this.indicatorProperty.Instantiate(sender, target, this.appliedIndicators);
     }
 
     public void UpdateIndicator(Character sender, Character target)
     {
-        if (this.showIndicator)
-        {
-            if (target != null) Instantiate(sender, target);
-            else ClearIndicator();
-        }
+        if (appliedIndicators.Count > 0 
+         && appliedIndicators[0].GetTarget() == target) return;
+
+        ClearIndicator();
+        Instantiate(sender, target);
     }
 
-    public void UpdateIndicator(Character sender, List<Character> selectedTargets, TargetingMode mode)
+    public void UpdateIndicator(Character sender, List<Character> selectedTargets)
     {
-        if (this.showIndicator)
-        {
-            if (mode != TargetingMode.helper)
-            {
-                this.RemoveIndicator(selectedTargets);
-                AddIndicator(sender, selectedTargets);                
-            }
-            else
-            {
-                this.Instantiate(sender, null);
-            }
-        }
+        RemoveIndicator(selectedTargets);
+        AddIndicator(sender, selectedTargets);
     }
 
     private void AddIndicator(Character sender, List<Character> selectedTargets)
@@ -70,9 +53,9 @@ public class IndicatorObject
 
     public void ClearIndicator()
     {
-        foreach (Indicator applied in this.appliedIndicators)
+        for(int i = 0; i < this.appliedIndicators.Count; i++)
         {
-            Object.Destroy(applied.gameObject);
+            Object.Destroy(this.appliedIndicators[i].gameObject);
         }
         this.appliedIndicators.Clear();
     }

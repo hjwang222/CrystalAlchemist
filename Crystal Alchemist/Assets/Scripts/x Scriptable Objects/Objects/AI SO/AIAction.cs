@@ -135,8 +135,6 @@ public class AIAction //: ScriptableObject
 
     #region Main Functions
 
-
-
     public void Initialize(AI npc)
     {
         this.isActive = true;
@@ -196,7 +194,7 @@ public class AIAction //: ScriptableObject
 
     private void UpdateSkill(AI npc)
     {
-        this.tempAbility.Update();
+        this.tempAbility.Updating();
 
         if (npc.values.isCharacterStunned()) this.tempAbility.ResetCharge();
 
@@ -210,7 +208,7 @@ public class AIAction //: ScriptableObject
 
     private void Charge(AI npc)
     {
-        npc.GetComponent<AIEvents>().ChargeAbility(this.tempAbility, npc);
+        npc.GetComponent<AIEvents>().ChargeAbility(this.tempAbility, npc, npc.target);
 
         if (this.tempAbility.IsTargetRequired())
             npc.GetComponent<AIEvents>().ShowTargetingSystem(this.tempAbility);        //Show Targeting System when needed
@@ -229,7 +227,11 @@ public class AIAction //: ScriptableObject
         npc.GetComponent<AIEvents>().HideCastBar();
 
         if (this.tempAbility.IsTargetRequired()) npc.GetComponent<AIEvents>().UseAbilityOnTargets(this.tempAbility);
-        else npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.tempAbility, npc.target);
+        else
+        {
+            npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.tempAbility, npc.target);
+            npc.GetComponent<AIEvents>().HideTargetingSystem(this.tempAbility);
+        }
 
         this.skillCounter++;
     }

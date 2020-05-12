@@ -46,7 +46,7 @@ TextureImporter:
     second: Kashroom down 2
   - first:
       213: 3721042759678610764
-    second: Kashroom up 1
+    second: Kashroom down 2
   - first:
       213: 359947872131615156
     second: Kashroom up 2
@@ -107,8 +107,35 @@ TextureImporter:
   - first:
       213: 5875395181630150645
     second: Fire Blob Spawn 4
+  - first:
+      213: 2192450021786810173
+    second: Kashroom down 3
+  - first:
+      213: -7537196482120660328
+    second: Kashroom right 2
+  - first:
+      213: -860468679390908754
+    second: Kashroom right 1
+  - first:
+      213: -7945901444079236628
+    second: Kashroom left 1
+  - first:
+      213: 5023289697677887148
+    second: Kashroom left 2
+  - first:
+      213: 1511843784806208459
+    second: Kashroom Spawn 1
+  - first:
+      213: 9008768272413781845
+    second: Kashroom Spawn 2
+  - first:
+      213: 615673380907259118
+    second: Kashroom Spawn 3
+  - first:
+      213: -1010674888820381983
+    second: Kashroom Spawn 4
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -128,6 +155,7 @@ TextureImporter:
   isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -162,6 +190,8 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -447,9 +477,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 422
-        width: 18
-        height: 26
+        y: 432
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -467,31 +497,10 @@ TextureImporter:
       name: Kashroom down 2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 395
-        width: 18
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b37a2cff0db15344f95aea4255d281f5
-      internalID: -6298022558754931311
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kashroom up 1
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 422
-        width: 18
-        height: 26
+        x: 16
+        y: 432
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -501,195 +510,6 @@ TextureImporter:
       bones: []
       spriteID: 96fda5f70060c2844b56c04b99bfa993
       internalID: 3721042759678610764
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kashroom up 2
-      rect:
-        serializedVersion: 2
-        x: 18
-        y: 395
-        width: 18
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8561f82e2744acd4c82b8513d5c19b93
-      internalID: 359947872131615156
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kashroom left 1
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 422
-        width: 18
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 01de5b3dbf0378443a1e1d4a17475256
-      internalID: 6837681288682471807
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kashroom right 1
-      rect:
-        serializedVersion: 2
-        x: 54
-        y: 422
-        width: 18
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c2a4987b4631f14cb9e2fb6bce8021e
-      internalID: 3605205960470106283
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kashroom left 2
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 395
-        width: 18
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f02cbe0c3c7c36d4c822fd36a55a2fb1
-      internalID: 873909872207125934
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kashroom right 2
-      rect:
-        serializedVersion: 2
-        x: 54
-        y: 395
-        width: 18
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d63f25a279087f74aa08c9b4dbf9d940
-      internalID: 2667924107913099357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kashroom Spawn 1
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 422
-        width: 18
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d377660cda52d6e10800000000000000
-      internalID: 2192450021786810173
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kashroom Spawn 2
-      rect:
-        serializedVersion: 2
-        x: 90
-        y: 422
-        width: 18
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89acfd8bbbf766790800000000000000
-      internalID: -7537196482120660328
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kashroom Spawn 3
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 396
-        width: 18
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eae2e888b400f04f0800000000000000
-      internalID: -860468679390908754
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Kashroom Spawn 4
-      rect:
-        serializedVersion: 2
-        x: 90
-        y: 396
-        width: 18
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce9c46d5cbc7ab190800000000000000
-      internalID: -7945901444079236628
       vertices: []
       indices: 
       edges: []
@@ -900,6 +720,195 @@ TextureImporter:
       bones: []
       spriteID: 5f75b1cd9c8998150800000000000000
       internalID: 5875395181630150645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kashroom down 3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 432
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d377660cda52d6e10800000000000000
+      internalID: 2192450021786810173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kashroom right 2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 416
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89acfd8bbbf766790800000000000000
+      internalID: -7537196482120660328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kashroom right 1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 416
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eae2e888b400f04f0800000000000000
+      internalID: -860468679390908754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kashroom left 1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 416
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce9c46d5cbc7ab190800000000000000
+      internalID: -7945901444079236628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kashroom left 2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 416
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca648f19d5f46b540800000000000000
+      internalID: 5023289697677887148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kashroom Spawn 1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 432
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc3914589e52bf410800000000000000
+      internalID: 1511843784806208459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kashroom Spawn 2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 432
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55f68056303950d70800000000000000
+      internalID: 9008768272413781845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kashroom Spawn 3
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 432
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee414ae8daf4b8800800000000000000
+      internalID: 615673380907259118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kashroom Spawn 4
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 432
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e6247c1b8c59f1f0800000000000000
+      internalID: -1010674888820381983
       vertices: []
       indices: 
       edges: []
