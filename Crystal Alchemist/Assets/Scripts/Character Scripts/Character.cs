@@ -237,7 +237,8 @@ public class Character : MonoBehaviour
         float changeSpeed = startSpeedInPercent + addNewSpeed;
 
         this.values.speed = changeSpeed * this.values.timeDistortion * this.values.speedFactor;
-        if (affectAnimation) this.animator.speed = this.values.speed / (this.stats.startSpeed * this.values.speedFactor / 100);
+        if (affectAnimation && this.stats.startSpeed > 0)
+            this.animator.speed = this.values.speed / (this.stats.startSpeed * this.values.speedFactor / 100);
     }
 
     public void updateSpellSpeed(float addSpellSpeed)
@@ -605,6 +606,11 @@ public class Character : MonoBehaviour
     {
         this.ChangeColor(Color.white);
         AnimatorUtil.SetAnimatorParameter(this.animator, "Despawn");
+    }
+
+    public float GetDespawnLength()
+    {
+        return AnimatorUtil.GetAnimationLength(this.animator, "Respawn");
     }
 
     public void PlayRespawnAnimation()

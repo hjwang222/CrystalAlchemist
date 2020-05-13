@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using System.Collections.Generic;
 
 public enum AIActionType
 {
@@ -17,9 +16,8 @@ public enum AIActionType
     animation
 }
 
-//[CreateAssetMenu(menuName = "AI/AI Action")]
 [System.Serializable]
-public class AIAction //: ScriptableObject
+public class AIAction
 {
     #region Attributes
 
@@ -164,6 +162,15 @@ public class AIAction //: ScriptableObject
         }
     }
 
+    public void Disable(AI npc)
+    {
+        switch (this.type)
+        {
+            case AIActionType.ability: DisableSkill(npc); break;
+            case AIActionType.dialog: DisableDialog(); break;
+        }
+    }
+
     public bool isDialog()
     {
         return (this.type == AIActionType.dialog);
@@ -238,12 +245,14 @@ public class AIAction //: ScriptableObject
 
     private void ResetAfterSkillCounter(AI npc)
     {
-        if (this.skillCounter >= this.amount)
-        {
-            npc.GetComponent<AIEvents>().HideTargetingSystem(this.tempAbility); 
-            npc.GetComponent<AIEvents>().UnChargeAbility(this.tempAbility, npc); //reset Charge
-            Deactivate();
-        }
+        if (this.skillCounter >= this.amount) DisableSkill(npc);
+    }
+
+    private void DisableSkill(AI npc)
+    {
+        npc.GetComponent<AIEvents>().HideTargetingSystem(this.tempAbility);
+        npc.GetComponent<AIEvents>().UnChargeAbility(this.tempAbility, npc); //reset Charge
+        Deactivate();
     }
 
     #endregion
@@ -334,6 +343,11 @@ public class AIAction //: ScriptableObject
     {
         if (this.waitTimer > 0) this.waitTimer -= Time.deltaTime;
         else Deactivate();
+    }
+
+    private void DisableDialog()
+    {
+        this.waitTimer = 0;
     }
 
     #endregion

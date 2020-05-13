@@ -6,10 +6,6 @@ public class TODOLIST : MonoBehaviour
     //BUG: Schild ruckelt (FixedUpdate?)
     //TODO: Sound Effekte ersetzen!
 
-    //BUG: Interrupt funktioniert nicht
-    //BUG: Despawn Line funktioniert nicht
-    //BUG: Laser Line akualisiert nicht
-
     //TODO (0.2.5.2):
     //TODO: Teleport Rework (Quick Travel, Teleport list)
     //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)

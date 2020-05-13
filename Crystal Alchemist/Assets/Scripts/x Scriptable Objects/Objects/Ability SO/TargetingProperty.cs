@@ -48,20 +48,4 @@ public class TargetingProperty : ScriptableObject
     [HideIf("rangeType", RangeType.none)]
     public float range = 6f;
 
-    [BoxGroup("Indikator")]
-    [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
-    [HideLabel]
-    [SerializeField]
-    private IndicatorObject indicator;
-
-
-    public void UpdateIndicator(Character sender, List<Character> selectedTargets)
-    {
-        this.indicator.UpdateIndicator(sender, selectedTargets);
-    }
-
-    public void ClearIndicator()
-    {
-        this.indicator.ClearIndicator();
-    }
 }

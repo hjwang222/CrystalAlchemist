@@ -57,11 +57,11 @@ public class AIEvents : CharacterCombat
 
             if (this.activePhase != null)
             {
-                this.activePhase.ResetActions();
+                this.activePhase.ResetActions(this.npc);
                 Destroy(this.activePhase);
             }
             this.activePhase = Instantiate(phase);
-            this.activePhase.Initialize();
+            this.activePhase.Initialize(this.npc);
         }
     }
 

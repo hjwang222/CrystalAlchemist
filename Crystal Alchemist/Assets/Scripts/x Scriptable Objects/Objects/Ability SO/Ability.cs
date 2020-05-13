@@ -24,7 +24,15 @@ public enum AbilityRequirements
 
 [CreateAssetMenu(menuName = "Game/Ability/Ability")]
 public class Ability : ScriptableObject
-{    
+{
+    public enum IndicatorType
+    {
+        None,
+        OnCast,
+        OnTargeting
+    }
+
+
     [BoxGroup("Texts")]
     [SerializeField]
     private string abilityName;
@@ -48,13 +56,20 @@ public class Ability : ScriptableObject
 
     [BoxGroup("Objects")]
     [SerializeField]
-    public bool useIndicator = false;
+    public IndicatorType useIndicator = IndicatorType.None;
 
     [BoxGroup("Objects")]
-    [ShowIf("useIndicator")]
+    [HideIf("useIndicator", IndicatorType.None)]
     [HideLabel]
     [SerializeField]
     private IndicatorObject indicator;
+
+    /*
+    [BoxGroup("Objects")]
+    [ShowIf("useIndicator", IndicatorType.OnCast)]
+    [SerializeField]
+    private bool showOnTarget = false;
+    */
 
     [BoxGroup("Objects")]
     [SerializeField]
@@ -239,15 +254,9 @@ public class Ability : ScriptableObject
         }
     }
 
-    public void SetLockOnState()
-    {
-        if (!this.HasHelper()) this.state = AbilityState.lockOn;
-    }
+    public void SetLockOnState() => this.state = AbilityState.lockOn;    
 
-    public void ResetLockOn()
-    {
-        if (!this.HasHelper()) this.state = AbilityState.onCooldown;
-    }
+    public void ResetLockOn() => this.state = AbilityState.onCooldown;    
 
     public void ResetCharge()
     {
@@ -257,12 +266,17 @@ public class Ability : ScriptableObject
 
     public void HideIndicator()
     {
-        if (this.useIndicator && this.indicator != null) this.indicator.ClearIndicator();
+        if (this.useIndicator != IndicatorType.None && this.indicator != null) this.indicator.ClearIndicator();
     }
 
-    public void ShowIndicator(Character target)
+    public void ShowTargetingIndicator(Character sender, List<Character> selectedTargets)
     {
-        if (this.useIndicator && this.indicator != null) this.indicator.UpdateIndicator(this.sender, target);        
+        if (this.useIndicator == IndicatorType.OnTargeting && this.indicator != null) this.indicator.UpdateIndicators(sender, selectedTargets);
+    }
+
+    public void ShowCastingIndicator(Character target)
+    {
+        if (this.useIndicator == IndicatorType.OnCast && this.indicator != null) this.indicator.UpdateIndicator(this.sender, target);        
     }
 
     public void ResetCoolDown()
@@ -311,12 +325,6 @@ public class Ability : ScriptableObject
     public bool IsTargetRequired()
     {
         if (this.useTargetSystem && this.targetingProperty != null) return true;
-        return false;
-    }
-
-    public bool HasHelper()
-    {
-        if (this.useIndicator && this.indicator != null) return true;
         return false;
     }
 

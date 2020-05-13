@@ -92,7 +92,7 @@ public class AIEvent
                 if (!actions.Contains(eventAction)) actions.Add(eventAction);
             }
 
-            if (this.interruptCurrentAction) phase.ResetActions();
+            if (this.interruptCurrentAction) phase.ResetActions(npc);
         }
     }
 }

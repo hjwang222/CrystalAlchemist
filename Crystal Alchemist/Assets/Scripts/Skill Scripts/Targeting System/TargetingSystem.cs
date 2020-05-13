@@ -66,10 +66,7 @@ public class TargetingSystem : MonoBehaviour
         updateTimer();  
     }
 
-    private void OnDisable()
-    {
-        this.properties.ClearIndicator();
-    }
+    private void OnDisable() => this.ability.HideIndicator();    
 
     #endregion
 
@@ -220,7 +217,7 @@ public class TargetingSystem : MonoBehaviour
 
     private void updateIndicator()
     {
-        this.properties.UpdateIndicator(this.sender, this.selectedTargets);
+        this.ability.ShowTargetingIndicator(this.sender, this.selectedTargets);
     }
 
 

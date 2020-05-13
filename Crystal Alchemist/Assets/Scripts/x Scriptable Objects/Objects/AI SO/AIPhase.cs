@@ -25,14 +25,10 @@ public class AIPhase : ScriptableObject
     private int eventIndex;
 
 
-    public void Initialize()
+    public void Initialize(AI npc)
     {
-        foreach (AIEvent aiEvent in this.events)
-        {
-            aiEvent.Initialize();
-        }
-
-        ResetActions();
+        foreach (AIEvent aiEvent in this.events) aiEvent.Initialize();   
+        ResetActions(npc);
     }
 
     public void Updating(AI npc)
@@ -102,21 +98,18 @@ public class AIPhase : ScriptableObject
         }
     }
 
-
-
-
     private void UpdatingAction(AI npc)
     {
         if (this.currentAction != null) this.currentAction.Updating(npc);
         if (this.currentDialog != null) this.currentDialog.Updating(npc);
     }
 
-    public void ResetActions()
+    public void ResetActions(AI npc)
     {
+        if (this.currentAction != null) this.currentAction.Disable(npc);
+        if (this.currentDialog != null) this.currentDialog.Disable(npc);
+
         this.currentAction = null;
         this.currentDialog = null;
-
-        //Destroy(this.currentAction);
-        //Destroy(this.currentDialog);
     }
 }

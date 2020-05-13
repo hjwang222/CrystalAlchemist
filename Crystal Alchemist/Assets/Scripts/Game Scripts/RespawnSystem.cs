@@ -56,13 +56,19 @@ public class RespawnSystem : MonoBehaviour
          || (this.spawnType == SpawnType.night && !time.night);
     }
 
+    private bool MustDespawn(Character child)
+    {
+        return (child != null
+                && child.gameObject.activeInHierarchy
+                && child.values.currentState != CharacterState.respawning);
+    }
+
     private void DisableGameObjects()
     {
         for (int i = 0; i < this.transform.childCount; i++)
         {
-            GameObject child = this.transform.GetChild(i).gameObject;
-            Character character = child.gameObject.GetComponent<Character>();
-            if (character != null) DespawnCharacter(character);         
+            Character character = this.transform.GetChild(i).gameObject.GetComponent<Character>();
+            if (MustDespawn(character)) DespawnCharacter(character);            
         }          
     }
 
@@ -125,19 +131,24 @@ public class RespawnSystem : MonoBehaviour
             RespawnAnimation respawnObject = Instantiate(character.respawnAnimation, character.GetSpawnPosition(), Quaternion.identity);
             respawnObject.Reverse(character);
             character.SetCharacterSprites(true);
+
+            StartCoroutine(InactiveCo(respawnObject.getAnimationLength(), character.gameObject));
+            StartCoroutine(InactiveCo(respawnObject.getAnimationLength(), respawnObject.gameObject));
         }
         else
         {
             character.PlayDespawnAnimation();
             character.SpawnOut();
-            StartCoroutine(InactiveCo(1f, character));
+            StartCoroutine(InactiveCo(character.GetDespawnLength(), character.gameObject));
         }
+
+        character.values.currentState = CharacterState.respawning;        
     }
 
-    private IEnumerator InactiveCo(float seconds, Character character)
+    private IEnumerator InactiveCo(float seconds, GameObject character)
     {
         yield return new WaitForSeconds(seconds);
-        character.gameObject.SetActive(false);
+        character.SetActive(false);
     }
 
     private void respawnCharacter(Character character)

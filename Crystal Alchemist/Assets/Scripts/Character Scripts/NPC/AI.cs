@@ -29,7 +29,7 @@ public class AI : NonPlayer
     #region Animation, StateMachine
 
 
-    private new void Update()
+    public override void Update()
     {
         base.Update();
 

@@ -23,7 +23,7 @@ public class IndicatorObject
         Instantiate(sender, target);
     }
 
-    public void UpdateIndicator(Character sender, List<Character> selectedTargets)
+    public void UpdateIndicators(Character sender, List<Character> selectedTargets)
     {
         RemoveIndicator(selectedTargets);
         AddIndicator(sender, selectedTargets);

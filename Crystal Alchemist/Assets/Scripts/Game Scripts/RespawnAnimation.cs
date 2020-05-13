@@ -18,8 +18,7 @@ public class RespawnAnimation : MonoBehaviour
 
     public float getAnimationLength()
     {
-        AnimationClip[] clips = this.animator.runtimeAnimatorController.animationClips;
-        return clips[0].length;
+        return AnimatorUtil.GetAnimationLength(this.animator);
     }
 
     public void HideCharacter()

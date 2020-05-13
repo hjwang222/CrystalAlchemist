@@ -42,7 +42,7 @@ public class CharacterCombat : MonoBehaviour
         ability.Charge(); //charge Skill when not full        
         ShowCastBar(ability, character); //Show Castbar
         setSpeedDuringCasting(ability, character); //Set Speed during casting
-        if (ability.HasHelper()) ability.ShowIndicator(target);
+        ability.ShowCastingIndicator(target);
         //Animations
     }
 
@@ -52,7 +52,7 @@ public class CharacterCombat : MonoBehaviour
         HideCastBar(); //Hide Castbar
         deactivatePlayerButtonUp(ability, character); //deactivate Skill when button up, Player only
         resetSpeedAfterCasting(character); //set Speed to normal
-        if (ability.HasHelper()) ability.HideIndicator();
+        ability.HideIndicator();
         //Animations
     }
 
