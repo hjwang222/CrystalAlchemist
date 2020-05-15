@@ -9,13 +9,15 @@ public class MenuDialogBoxInfo : ScriptableObject
     public string text;
     public DialogBoxType type;
     public GameObject parent;
+    public CustomCursor cursor;
 
-    public void SetValue(UnityEvent OnConfirm, Costs costs, string text, DialogBoxType type, GameObject parent)
+    public void SetValue(UnityEvent OnConfirm, CustomCursor cursor, Costs costs, string text, DialogBoxType type, GameObject parent)
     {
         this.OnConfirm = OnConfirm;
         this.costs = costs;
         this.text = text;
         this.type = type;
         this.parent = parent;
+        this.cursor = cursor;
     }
 }

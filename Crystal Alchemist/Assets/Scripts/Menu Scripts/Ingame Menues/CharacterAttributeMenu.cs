@@ -51,8 +51,9 @@ public class CharacterAttributeMenu : MenuManager
     private int pointsSpent;
     private int pointsLeft;
 
-    private void Start()
-    {        
+    public override void Start()
+    {
+        base.Start();
         foreach (CharacterAttributeStats statObject in this.statObjects) statObject.init();        
         updatePoints();
     }

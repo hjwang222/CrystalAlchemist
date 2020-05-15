@@ -32,27 +32,6 @@ public class MenuManager : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(sel);
     }
 
-    public void SetInteractable(bool value)
-    {
-        List<Selectable> selectables = new List<Selectable>();
-        UnityUtil.GetChildObjects<Selectable>(this.transform, selectables);
-
-        foreach (Selectable selectable in selectables)
-        {
-            UnityUtil.SetInteractable(selectable, value);
-
-            if (value)
-            {
-                ButtonExtension buttonExtension = selectable.GetComponent<ButtonExtension>();
-                if (buttonExtension != null)
-                {
-                    buttonExtension.enabled = value;
-                    buttonExtension.SetFirst();
-                }
-            }
-        }
-    }
-
     public virtual void Start()
     {
         IngameMenuHandler.openedMenues.Add(this.gameObject);

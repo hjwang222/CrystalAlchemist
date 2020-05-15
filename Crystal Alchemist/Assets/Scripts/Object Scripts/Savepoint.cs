@@ -20,8 +20,8 @@ public class Savepoint : Interactable
 
     public override void doSomethingOnSubmit()
     {
-        this.player.updateResource(CostType.life, this.player.stats.maxLife);
-        this.player.updateResource(CostType.mana, this.player.stats.maxMana);
+        this.player.updateResource(CostType.life, this.player.values.maxLife);
+        this.player.updateResource(CostType.mana, this.player.values.maxMana);
 
         this.teleportList.AddTeleport(this.teleportPoint); //add to teleport list    
         this.savePointInfo.SetValue(this.teleportPoint); //set for UI (Respawn)

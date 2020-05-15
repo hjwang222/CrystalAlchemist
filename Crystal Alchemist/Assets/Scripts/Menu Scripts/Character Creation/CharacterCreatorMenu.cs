@@ -23,8 +23,9 @@ public class CharacterCreatorMenu : MenuManager
     [SerializeField]
     private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
 
-    public void Start()
+    public override void Start()
     {
+        base.Start();
         GameUtil.setPreset(this.saveGame.playerPreset, this.creatorPreset);
         updateGear();
         updatePreview();

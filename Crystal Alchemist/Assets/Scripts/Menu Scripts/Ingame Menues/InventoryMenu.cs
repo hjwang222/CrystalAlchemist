@@ -20,6 +20,13 @@ public class InventoryMenu : MenuManager
         base.Start();
         foreach (InventoryPage page in this.pages) page.LoadPage();
         ShowTopPage(true);
+        MenuEvents.current.OnInventory += ExitMenu;
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        MenuEvents.current.OnInventory -= ExitMenu;
     }
 
     public override void Cancel()

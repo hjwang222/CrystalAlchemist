@@ -27,7 +27,7 @@ public class MiniGameRound : MonoBehaviour
         foreach(GameObject button in this.buttons)
         {
             if (button.GetComponent<ButtonExtension>() != null)
-                button.GetComponent<ButtonExtension>().setCursor(this.cursor);
+                button.GetComponent<ButtonExtension>().SetCursor(this.cursor);
         }
     }
 

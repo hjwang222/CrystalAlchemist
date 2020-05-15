@@ -552,3 +552,115 @@ UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISubmit
 UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
 UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
 
+Exception 15.05.2020 09:49:09: ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ThrowHelper.ThrowArgumentOutOfRangeException (System.ExceptionArgument argument, System.ExceptionResource resource) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.ThrowHelper.ThrowArgumentOutOfRangeException () (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <437ba245d8404784b9fbab9b439ac908>:0)
+SkillPageSelect.SetNextPage (System.Int32 value) (at Assets/SkillPageSelect.cs:51)
+GameEvents.DoPage (System.Int32 page) (at Assets/Scripts/x Utils/GameEvents.cs:35)
+PlayerControls.NextPage (UnityEngine.InputSystem.InputAction+CallbackContext context) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerControls.cs:36)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.InputSystem.Utilities.DelegateHelpers.InvokeCallbacksSafe[TValue] (UnityEngine.InputSystem.Utilities.InlinedArray`1[System.Action`1[TValue]]& callbacks, TValue argument, System.String callbackName, System.Object context) (at Library/PackageCache/com.unity.inputsystem@1.0.0/InputSystem/Utilities/DelegateHelpers.cs:51)
+UnityEngine.InputSystem.LowLevel.<>c__DisplayClass7_0:<set_onUpdate>b__0(NativeInputUpdateType, NativeInputEventBuffer*)
+UnityEngineInternal.Input.NativeInputSystem:NotifyUpdate(NativeInputUpdateType, IntPtr)
+
+Exception 15.05.2020 09:49:10: ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ThrowHelper.ThrowArgumentOutOfRangeException (System.ExceptionArgument argument, System.ExceptionResource resource) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.ThrowHelper.ThrowArgumentOutOfRangeException () (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <437ba245d8404784b9fbab9b439ac908>:0)
+SkillPageSelect.SetNextPage (System.Int32 value) (at Assets/SkillPageSelect.cs:49)
+GameEvents.DoPage (System.Int32 page) (at Assets/Scripts/x Utils/GameEvents.cs:35)
+PlayerControls.PreviousPage (UnityEngine.InputSystem.InputAction+CallbackContext context) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerControls.cs:41)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.InputSystem.Utilities.DelegateHelpers.InvokeCallbacksSafe[TValue] (UnityEngine.InputSystem.Utilities.InlinedArray`1[System.Action`1[TValue]]& callbacks, TValue argument, System.String callbackName, System.Object context) (at Library/PackageCache/com.unity.inputsystem@1.0.0/InputSystem/Utilities/DelegateHelpers.cs:51)
+UnityEngine.InputSystem.LowLevel.<>c__DisplayClass7_0:<set_onUpdate>b__0(NativeInputUpdateType, NativeInputEventBuffer*)
+UnityEngineInternal.Input.NativeInputSystem:NotifyUpdate(NativeInputUpdateType, IntPtr)
+
+Exception 15.05.2020 09:49:10: ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ThrowHelper.ThrowArgumentOutOfRangeException (System.ExceptionArgument argument, System.ExceptionResource resource) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.ThrowHelper.ThrowArgumentOutOfRangeException () (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <437ba245d8404784b9fbab9b439ac908>:0)
+SkillPageSelect.SetNextPage (System.Int32 value) (at Assets/SkillPageSelect.cs:49)
+GameEvents.DoPage (System.Int32 page) (at Assets/Scripts/x Utils/GameEvents.cs:35)
+PlayerControls.PreviousPage (UnityEngine.InputSystem.InputAction+CallbackContext context) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerControls.cs:41)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.InputSystem.Utilities.DelegateHelpers.InvokeCallbacksSafe[TValue] (UnityEngine.InputSystem.Utilities.InlinedArray`1[System.Action`1[TValue]]& callbacks, TValue argument, System.String callbackName, System.Object context) (at Library/PackageCache/com.unity.inputsystem@1.0.0/InputSystem/Utilities/DelegateHelpers.cs:51)
+UnityEngine.InputSystem.LowLevel.<>c__DisplayClass7_0:<set_onUpdate>b__0(NativeInputUpdateType, NativeInputEventBuffer*)
+UnityEngineInternal.Input.NativeInputSystem:NotifyUpdate(NativeInputUpdateType, IntPtr)
+
+Exception 15.05.2020 09:49:10: ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ThrowHelper.ThrowArgumentOutOfRangeException (System.ExceptionArgument argument, System.ExceptionResource resource) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.ThrowHelper.ThrowArgumentOutOfRangeException () (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <437ba245d8404784b9fbab9b439ac908>:0)
+SkillPageSelect.SetNextPage (System.Int32 value) (at Assets/SkillPageSelect.cs:49)
+GameEvents.DoPage (System.Int32 page) (at Assets/Scripts/x Utils/GameEvents.cs:35)
+PlayerControls.NextPage (UnityEngine.InputSystem.InputAction+CallbackContext context) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerControls.cs:36)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.InputSystem.Utilities.DelegateHelpers.InvokeCallbacksSafe[TValue] (UnityEngine.InputSystem.Utilities.InlinedArray`1[System.Action`1[TValue]]& callbacks, TValue argument, System.String callbackName, System.Object context) (at Library/PackageCache/com.unity.inputsystem@1.0.0/InputSystem/Utilities/DelegateHelpers.cs:51)
+UnityEngine.InputSystem.LowLevel.<>c__DisplayClass7_0:<set_onUpdate>b__0(NativeInputUpdateType, NativeInputEventBuffer*)
+UnityEngineInternal.Input.NativeInputSystem:NotifyUpdate(NativeInputUpdateType, IntPtr)
+
+Exception 15.05.2020 09:49:12: ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ThrowHelper.ThrowArgumentOutOfRangeException (System.ExceptionArgument argument, System.ExceptionResource resource) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.ThrowHelper.ThrowArgumentOutOfRangeException () (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <437ba245d8404784b9fbab9b439ac908>:0)
+SkillPageSelect.SetNextPage (System.Int32 value) (at Assets/SkillPageSelect.cs:49)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.CachedInvokableCall`1[T].Invoke (System.Object[] args) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent.Invoke () (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.UI.Button.Press () (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:68)
+UnityEngine.UI.Button.OnPointerClick (UnityEngine.EventSystems.PointerEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:110)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointerClickHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:50)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 15.05.2020 09:49:12: ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ThrowHelper.ThrowArgumentOutOfRangeException (System.ExceptionArgument argument, System.ExceptionResource resource) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.ThrowHelper.ThrowArgumentOutOfRangeException () (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <437ba245d8404784b9fbab9b439ac908>:0)
+SkillPageSelect.SetNextPage (System.Int32 value) (at Assets/SkillPageSelect.cs:49)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.CachedInvokableCall`1[T].Invoke (System.Object[] args) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent.Invoke () (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.UI.Button.Press () (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:68)
+UnityEngine.UI.Button.OnPointerClick (UnityEngine.EventSystems.PointerEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:110)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointerClickHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:50)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 15.05.2020 09:49:12: ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+System.ThrowHelper.ThrowArgumentOutOfRangeException (System.ExceptionArgument argument, System.ExceptionResource resource) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.ThrowHelper.ThrowArgumentOutOfRangeException () (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <437ba245d8404784b9fbab9b439ac908>:0)
+SkillPageSelect.SetNextPage (System.Int32 value) (at Assets/SkillPageSelect.cs:49)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.CachedInvokableCall`1[T].Invoke (System.Object[] args) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent.Invoke () (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.UI.Button.Press () (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:68)
+UnityEngine.UI.Button.OnPointerClick (UnityEngine.EventSystems.PointerEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:110)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointerClickHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:50)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 15.05.2020 11:10:59: NullReferenceException: Object reference not set to an instance of an object
+SignalInteractable.doSomethingOnSubmit () (at Assets/Scripts/Object Scripts/SignalInteractable.cs:13)
+Interactable.OnSubmit () (at Assets/Scripts/Object Scripts/Interactable.cs:53)
+GameEvents.DoSubmit () (at Assets/Scripts/x Utils/GameEvents.cs:33)
+PlayerControls.Submit (UnityEngine.InputSystem.InputAction+CallbackContext context) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerControls.cs:26)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.InputSystem.Utilities.DelegateHelpers.InvokeCallbacksSafe[TValue] (UnityEngine.InputSystem.Utilities.InlinedArray`1[System.Action`1[TValue]]& callbacks, TValue argument, System.String callbackName, System.Object context) (at Library/PackageCache/com.unity.inputsystem@1.0.0/InputSystem/Utilities/DelegateHelpers.cs:51)
+UnityEngine.InputSystem.LowLevel.<>c__DisplayClass7_0:<set_onUpdate>b__0(NativeInputUpdateType, NativeInputEventBuffer*)
+UnityEngineInternal.Input.NativeInputSystem:NotifyUpdate(NativeInputUpdateType, IntPtr)
+

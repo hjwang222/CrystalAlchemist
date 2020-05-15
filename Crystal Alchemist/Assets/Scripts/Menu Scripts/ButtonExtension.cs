@@ -115,9 +115,14 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         SetFirst();
     }
 
-    public void setCursor(CustomCursor cursor)
+    public void SetCursor(CustomCursor cursor)
     {
         this.cursor = cursor;
+    }
+
+    public CustomCursor GetCursor()
+    {
+        return this.cursor;
     }
 
     private void OnEnable()

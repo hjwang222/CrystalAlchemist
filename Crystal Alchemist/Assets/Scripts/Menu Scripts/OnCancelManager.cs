@@ -24,7 +24,7 @@ public class OnCancelManager : MonoBehaviour
         else if (TitleScreenControls.current != null) TitleScreenControls.current.OnCancel -= OnCancel;
     }
 
-    private void OnCancel()
+    public void OnCancel()
     {
         if (this.onCancel != null && this.inputPossible) this.onCancel.Invoke();
     }

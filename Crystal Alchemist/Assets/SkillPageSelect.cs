@@ -47,7 +47,12 @@ public class SkillPageSelect : MonoBehaviour
         }
 
         pages[this.index].SetActive(false);
-        pages[this.index + value].SetActive(true);
+
+        this.index += value;
+        if (this.index < 0) this.index = 0;
+        else if (this.index >= this.pages.Count) this.index = this.pages.Count - 1;
+
+        pages[this.index].SetActive(true);
 
         UpdateButtons();
     }

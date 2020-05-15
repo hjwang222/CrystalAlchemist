@@ -44,13 +44,13 @@ public class MenuDialogBox : MenuManager
     private UnityEvent OnConfirm; 
     private GameObject lastMainMenu;
     private Costs price;
+    private CustomCursor lastCursor;
 
     public override void Start()
     {
         base.Start();
         Initialize();
     }
-
 
     public override void OnDestroy()
     {
@@ -62,6 +62,7 @@ public class MenuDialogBox : MenuManager
         init();
         this.OnConfirm = this.info.OnConfirm;
         this.lastMainMenu = this.info.parent;
+        this.lastCursor = this.info.cursor;
         this.textfield.text = this.info.text;
 
         if (this.info.type == DialogBoxType.ok) this.OKButton.gameObject.SetActive(true);        
@@ -72,7 +73,7 @@ public class MenuDialogBox : MenuManager
             setPrice(this.info.costs);
         }
         
-        if (this.lastMainMenu != null) this.EnableButtons(false, this.lastMainMenu);
+        this.EnableButtons(false);
     }
 
     private void init()
@@ -98,7 +99,7 @@ public class MenuDialogBox : MenuManager
 
     public void Yes()
     {        
-        this.closeDialog();
+        this.CloseDialog();
         if (this.OnConfirm != null)
         {
             GameEvents.current.DoReduce(this.price);
@@ -106,18 +107,26 @@ public class MenuDialogBox : MenuManager
         }
     }
 
-    public void No() => this.closeDialog();    
+    public void No() => this.CloseDialog();    
 
-    private void closeDialog()
+    private void CloseDialog()
     {
-        if (this.lastMainMenu != null) this.EnableButtons(true, this.lastMainMenu);
+        this.EnableButtons(true);
         this.ExitMenu();
     }
 
-    private void EnableButtons(bool value, GameObject parent)
+    public override void Cancel()
     {
+        CloseDialog();
+    }
+
+    private void EnableButtons(bool value)
+    {
+        if(this.lastCursor != null) this.lastCursor.gameObject.SetActive(value);
+        if (this.lastMainMenu == null) return;
+
         List<Selectable> selectables = new List<Selectable>();
-        UnityUtil.GetChildObjects<Selectable>(parent.transform, selectables);
+        UnityUtil.GetChildObjects<Selectable>(this.lastMainMenu.transform, selectables);
 
         foreach (Selectable selectable in selectables)
         {

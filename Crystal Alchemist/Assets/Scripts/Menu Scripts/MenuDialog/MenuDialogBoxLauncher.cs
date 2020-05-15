@@ -13,6 +13,11 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     [BoxGroup("Main")]
     [Required]
     [SerializeField]
+    private CustomCursor cursor;
+
+    [BoxGroup("Main")]
+    [Required]
+    [SerializeField]
     private MenuDialogBoxInfo info;
 
     [BoxGroup("Main")]
@@ -49,7 +54,7 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     {
         if (!this.inputPossible) return;
         string text = FormatUtil.getLanguageDialogText(this.menuDialogBoxText, this.menuDialogBoxTextEnglish);
-        this.info.SetValue(this.actionOnConfirm, this.price, text, this.dialogBoxType, this.parentMenu);
+        this.info.SetValue(action, this.cursor, this.price, text, this.dialogBoxType, this.parentMenu);
         MenuEvents.current.OpenMenuDialogBox();
     }
 

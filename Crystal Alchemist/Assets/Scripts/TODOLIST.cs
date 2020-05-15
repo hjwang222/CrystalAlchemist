@@ -5,11 +5,9 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.0):
     //BUG: Schild ruckelt (FixedUpdate?)
     //TODO: Sound Effekte ersetzen!
+    //BUG: I und ESC schließen nicht direkt (Inventory und Pause)
 
     //TODO (0.2.5.2):
-    //BUG: Attribute
-    //BUG: Skill Menü
-
     //TODO: Savegame Loading Rework (shader, etc)
     //TODO: Title Screen Rework
     //TODO: Language Rework
