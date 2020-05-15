@@ -2,11 +2,14 @@
 using UnityEngine;
 using TMPro;
 
-public class DialogBox : MenuControls
+public class DialogBox : MenuManager
 {
     #region Attribute
     [SerializeField]
     private TextMeshProUGUI textMesh;
+
+    [SerializeField]
+    private StringValue dialogText;
 
     private List<string> texts = new List<string>();
     private int index = 0;
@@ -14,16 +17,19 @@ public class DialogBox : MenuControls
     private float delay = 0.5f;
     #endregion
 
+    public override void Start()
+    {
+        base.Start();
+        showDialogBox(this.dialogText.getValue());
+    }
+
     public void next(int index)
     {
-        if (this.inputPossible)
-        {
-            this.index += index;
-            if (this.index < 0) this.index = 0;
+        this.index += index;
+        if (this.index < 0) this.index = 0;
 
-            if (this.index < this.texts.Count) showText();            
-            else hideDialogBox();            
-        }
+        if (this.index < this.texts.Count) showText();
+        else hideDialogBox();
     }
 
     #region Funktionen (Show, Hide, Text)

@@ -19,8 +19,13 @@ public class PlayerSaveGame : ScriptableObject
     public PlayerButtons buttons;
     [BoxGroup("Player")]
     public PlayerSkillset skillSet;
-    [BoxGroup("Player")]
+
+    [BoxGroup("Teleport")]
     public TeleportStats startSpawnPoint;
+    [BoxGroup("Teleport")]
+    public TeleportStats lastTeleport;
+    [BoxGroup("Teleport")]
+    public PlayerTeleportList teleportList;
 
     [BoxGroup("Stats")]
     [SerializeField]
@@ -41,6 +46,7 @@ public class PlayerSaveGame : ScriptableObject
         this.buttons.Clear();
         this.skillSet.Clear();
         this.startSpawnPoint.Clear();
+        this.lastTeleport.Clear();
 
         GameUtil.setPreset(this.defaultPreset, this.playerPreset);
     }

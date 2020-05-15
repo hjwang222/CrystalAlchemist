@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using TMPro;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public enum DialogBoxType
 {
@@ -10,7 +11,7 @@ public enum DialogBoxType
     ok
 }
 
-public class MenuDialogBox : MonoBehaviour
+public class MenuDialogBox : MenuManager
 {
     [BoxGroup("DialogBox")]
     [SerializeField]
@@ -36,53 +37,52 @@ public class MenuDialogBox : MonoBehaviour
     [SerializeField]
     private PlayerInventory inventory;
 
+    [BoxGroup("DialogBox")]
     [SerializeField]
-    private GameObject child;
-
-    [SerializeField]
-    private MenuControls controls;
+    private MenuDialogBoxInfo info;
 
     private UnityEvent OnConfirm; 
-    private MenuControls lastMainMenu;
+    private GameObject lastMainMenu;
     private Costs price;
 
-    public void Start()
+    public override void Start()
     {
-        GameEvents.current.OnMenuDialogBox += Initialize;
+        base.Start();
+        Initialize();
     }
 
-    public void OnDestroy()
+
+    public override void OnDestroy()
     {
-        GameEvents.current.OnMenuDialogBox -= Initialize;
+        base.OnDestroy();
+    }
+
+    private void Initialize()
+    {
+        init();
+        this.OnConfirm = this.info.OnConfirm;
+        this.lastMainMenu = this.info.parent;
+        this.textfield.text = this.info.text;
+
+        if (this.info.type == DialogBoxType.ok) this.OKButton.gameObject.SetActive(true);        
+        else
+        {
+            this.YesButton.gameObject.SetActive(true);
+            this.NoButton.gameObject.SetActive(true);
+            setPrice(this.info.costs);
+        }
+        
+        if (this.lastMainMenu != null) this.EnableButtons(false, this.lastMainMenu);
     }
 
     private void init()
     {
-        this.child.SetActive(true);
         this.YesButton.gameObject.SetActive(false);
         this.NoButton.gameObject.SetActive(false);
         this.OKButton.gameObject.SetActive(false);
         this.price = null;
         this.priceField.gameObject.SetActive(false);
         UnityUtil.SetInteractable(this.YesButton.GetComponent<Selectable>(), true);
-    }
-
-    private void Initialize(UnityEvent OnConfirm, Costs cost, string text, DialogBoxType type, MenuControls parent)
-    {
-        init();
-        this.OnConfirm = OnConfirm;
-        this.lastMainMenu = parent;
-        this.textfield.text = text;
-
-        if (type == DialogBoxType.ok) this.OKButton.gameObject.SetActive(true);        
-        else
-        {
-            this.YesButton.gameObject.SetActive(true);
-            this.NoButton.gameObject.SetActive(true);
-            setPrice(cost);
-        }
-        
-        if (this.lastMainMenu != null) this.lastMainMenu.enableButtons(false);
     }
 
     private void setPrice(Costs cost)
@@ -110,7 +110,28 @@ public class MenuDialogBox : MonoBehaviour
 
     private void closeDialog()
     {
-        if (this.lastMainMenu != null) this.lastMainMenu.enableButtons(true);   
-        this.controls.ExitMenu();
+        if (this.lastMainMenu != null) this.EnableButtons(true, this.lastMainMenu);
+        this.ExitMenu();
+    }
+
+    private void EnableButtons(bool value, GameObject parent)
+    {
+        List<Selectable> selectables = new List<Selectable>();
+        UnityUtil.GetChildObjects<Selectable>(parent.transform, selectables);
+
+        foreach (Selectable selectable in selectables)
+        {
+            UnityUtil.SetInteractable(selectable, value);
+
+            if (value)
+            {
+                ButtonExtension buttonExtension = selectable.GetComponent<ButtonExtension>();
+                if (buttonExtension != null)
+                {
+                    buttonExtension.enabled = value;
+                    buttonExtension.SetFirst();
+                }
+            }
+        }
     }
 }

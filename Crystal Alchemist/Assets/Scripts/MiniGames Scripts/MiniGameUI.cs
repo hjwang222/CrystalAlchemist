@@ -3,9 +3,14 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine.UI;
 
-public class MiniGameUI : MenuControls
+public class MiniGameUI : MenuManager
 {
     public PlayerInventory inventory;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    [Required]
+    private CustomCursor cursor;
 
     [HideInInspector]
     public MiniGameRound miniGameRound;
@@ -78,6 +83,12 @@ public class MiniGameUI : MenuControls
     [HideInInspector]
     public string mainDescription = "";
 
+    public override void Start()
+    {
+        base.Start();
+        MenuEvents.current.OnMiniGame += SetMiniGame;
+    }
+
     public override void Update()
     {
         base.Update();
@@ -88,9 +99,8 @@ public class MiniGameUI : MenuControls
         }
     }
 
-    public void setMiniGame(GameObject miniGameObject)
+    public void SetMiniGame(MiniGame miniGame)
     {
-        MiniGame miniGame = miniGameObject.GetComponent<MiniGame>();
         if (miniGame != null)
         {
             this.miniGameObject = miniGame;
@@ -198,9 +208,10 @@ public class MiniGameUI : MenuControls
         this.dialogBox.gameObject.SetActive(true);
     }
 
-    public override void OnDisable()
+    public override void OnDestroy()
     {
-        base.OnDisable();
+        base.OnDestroy();
         this.miniGameObject.DestroyIt();
+        MenuEvents.current.OnMiniGame -= SetMiniGame;
     }
 }

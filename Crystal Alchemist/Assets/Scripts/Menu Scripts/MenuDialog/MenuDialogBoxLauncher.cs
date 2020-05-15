@@ -7,7 +7,13 @@ public class MenuDialogBoxLauncher : MonoBehaviour
 {
     [BoxGroup("Main")]
     [Required]
-    public MenuControls parentMenu;
+    [SerializeField]
+    private GameObject parentMenu;
+
+    [BoxGroup("Main")]
+    [Required]
+    [SerializeField]
+    private MenuDialogBoxInfo info;
 
     [BoxGroup("Main")]
     [SerializeField]
@@ -43,7 +49,8 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     {
         if (!this.inputPossible) return;
         string text = FormatUtil.getLanguageDialogText(this.menuDialogBoxText, this.menuDialogBoxTextEnglish);
-        GameEvents.current.DoMenuDialogBox(action, this.price, text, this.dialogBoxType, this.parentMenu);
+        this.info.SetValue(this.actionOnConfirm, this.price, text, this.dialogBoxType, this.parentMenu);
+        MenuEvents.current.OpenMenuDialogBox();
     }
 
     private IEnumerator delayCo()

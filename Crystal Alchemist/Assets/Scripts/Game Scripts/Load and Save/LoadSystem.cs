@@ -20,12 +20,16 @@ public class LoadSystem
             loadInventory(data, saveGame.inventory);
             loadPlayerSkills(data, saveGame.buttons, saveGame.skillSet);
 
-            saveGame.startSpawnPoint.SetValue(data.scene, data.position);
+            saveGame.startSpawnPoint.SetValue(data.startScene, data.startPosition);
+            saveGame.lastTeleport.SetValue(data.lastScene, data.lastPosition);
+
+            LoadTeleportList(data, saveGame.teleportList);
         }
     }
 
     private static void LoadTeleportList(PlayerData data, PlayerTeleportList list)
     {
+        if (data.teleportPoints == null) return;
         foreach(object[] teleportData in data.teleportPoints)
         {
             TeleportStats stats = new TeleportStats((string)teleportData[0], (string)teleportData[1], 

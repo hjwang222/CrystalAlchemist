@@ -8,20 +8,16 @@ public class InventorySlot : MonoBehaviour
     [SerializeField]
     private int ID = 0;
 
-    private void Awake()
+    public int Initialize()
     {
         if (this.ID <= 0) this.ID = this.gameObject.transform.GetSiblingIndex() + 1;
+        return this.ID;
     }
 
     public void openKeyItem(InventoryMenu menu)
     {
         this.itemUI.getItemStat().inventoryInfo.raiseKeySignal();
         menu.ExitMenu();
-    }
-
-    public int getID()
-    {
-        return this.ID;
     }
 
     public void setItemToSlot(ItemGroup item)

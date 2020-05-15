@@ -2,7 +2,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEngine.Events;
 
 public class MenuControls : BasicMenu
 {
@@ -42,7 +41,7 @@ public class MenuControls : BasicMenu
 
         if (this.isIngameMenu)
         {
-            IngameMenuHandler.openedMenues.Add(this);
+            IngameMenuHandler.openedMenues.Add(this.gameObject);
 
             if (IngameMenuHandler.openedMenues.Count <= 1)
             {
@@ -61,7 +60,7 @@ public class MenuControls : BasicMenu
 
     public override void OnDisable()
     {
-        IngameMenuHandler.openedMenues.Remove(this);
+        IngameMenuHandler.openedMenues.Remove(this.gameObject);
 
         if (this.isIngameMenu && IngameMenuHandler.openedMenues.Count <= 0)
         {
@@ -100,22 +99,6 @@ public class MenuControls : BasicMenu
 
     public void enableButtons(bool value)
     {
-        List<Selectable> selectables = new List<Selectable>();
-        UnityUtil.GetChildObjects<Selectable>(this.transform, selectables);
-
-        foreach (Selectable selectable in selectables)
-        {
-            UnityUtil.SetInteractable(selectable, value);
-
-            if (value)
-            {
-                ButtonExtension buttonExtension = selectable.GetComponent<ButtonExtension>();
-                if (buttonExtension != null)
-                {
-                    buttonExtension.enabled = value;
-                    buttonExtension.SetFirst();
-                }
-            }
-        }
+        
     }
 }

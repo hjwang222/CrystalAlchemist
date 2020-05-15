@@ -243,9 +243,9 @@ public class CustomCursor : MonoBehaviour
 
     */
 
-    public void setSelectedGameObject(Image image)
+    public void setSelectedGameObject(Sprite sprite)
     {
-        if (image == null)
+        if (sprite == null)
         {
             this.image.sprite = null;
             this.cursorSelected.SetActive(false);
@@ -253,7 +253,7 @@ public class CustomCursor : MonoBehaviour
         }
         else
         {
-            this.image.sprite = image.sprite;
+            this.image.sprite = sprite;
             this.cursorSelected.SetActive(true);
             this.cursor.SetActive(false);
         }

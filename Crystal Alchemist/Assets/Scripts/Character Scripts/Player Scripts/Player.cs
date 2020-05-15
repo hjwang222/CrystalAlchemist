@@ -6,14 +6,6 @@ public class Player : Character
 {
     [Required]
     [FoldoutGroup("Player Signals", expanded: false)]
-    public StringSignal dialogBoxSignal;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal deathSignal;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
     [SerializeField]
     private SimpleSignal healthSignalUI;
 
@@ -26,6 +18,11 @@ public class Player : Character
     [FoldoutGroup("Player Signals", expanded: false)]
     [SerializeField]
     private SimpleSignal presetSignal;
+
+    [Required]
+    [FoldoutGroup("Player Signals", expanded: false)]
+    [SerializeField]
+    private StringValue dialogText;
 
     ///////////////////////////////////////////////////////////////
 
@@ -102,7 +99,7 @@ public class Player : Character
 
             this.values.currentState = CharacterState.dead;
             this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
-            this.deathSignal.Raise();
+            MenuEvents.current.OpenDeath();
         }
     }
 
@@ -169,7 +166,11 @@ public class Player : Character
 
     public void showDialogBox(string text)
     {
-        if (this.values.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
+        if (this.values.currentState != CharacterState.inDialog)
+        {
+            this.dialogText.setValue(text);
+            MenuEvents.current.OpenDialogBox();
+        }
     }
 
     private void setStateMenuOpened(CharacterState newState)
@@ -206,8 +207,4 @@ public class Player : Character
             }
         }
     }
-
 }
-
-
-

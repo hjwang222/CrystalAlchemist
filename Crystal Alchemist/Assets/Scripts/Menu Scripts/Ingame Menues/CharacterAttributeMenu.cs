@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
 
-public class CharacterAttributeMenu : MenuControls
+public class CharacterAttributeMenu : MenuManager
 {
     [BoxGroup("Required")]
     [Required]
@@ -50,21 +50,11 @@ public class CharacterAttributeMenu : MenuControls
     private int attributePointsMax;
     private int pointsSpent;
     private int pointsLeft;
-    private bool initLoad = true;
 
-    public override void Start()
-    {
-        base.Start();
-        foreach (CharacterAttributeStats statObject in this.statObjects) statObject.init();
-        
+    private void Start()
+    {        
+        foreach (CharacterAttributeStats statObject in this.statObjects) statObject.init();        
         updatePoints();
-        this.initLoad = false;
-    }
-
-    public override void OnEnable()
-    {
-        base.OnEnable();
-        if(!this.initLoad) updatePoints();        
     }
 
     public void playJuwelSound(bool insert)

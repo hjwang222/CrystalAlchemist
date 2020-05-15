@@ -27,12 +27,6 @@ public class PlayerTeleportList : ScriptableObject
         return false;
     }
 
-    public bool TeleportEnabled()
-    {
-        this.list.RemoveAll(item => item == null);
-        return this.list.Count > 0;
-    }
-
     public List<TeleportStats> GetStats()
     {
         return this.list;

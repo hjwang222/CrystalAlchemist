@@ -3,30 +3,20 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 
-public class SkillMenu : MenuControls
+public class SkillMenu : MenuManager
 {
     #region Attributes
 
     [BoxGroup("Mandatory")]
     [SerializeField]
     [Required]
-    private PlayerSkillset skillSet;
-
+    private CustomCursor cursor;
     [BoxGroup("Mandatory")]
     [SerializeField]
     [Required]
-    private TextMeshProUGUI categoryWeapons;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private TextMeshProUGUI categoryMagic;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private TextMeshProUGUI categoryItems;
+    private SkillPageSelect pageSelect;
 
     [BoxGroup("Tabs")]
     [SerializeField]
@@ -51,18 +41,7 @@ public class SkillMenu : MenuControls
     [SerializeField]
     private Image StatusEffects;       
 
-    [BoxGroup("Buttons")]
-    [SerializeField]
-    private GameObject previousPage;
-    [BoxGroup("Buttons")]
-    [SerializeField]
-    private TextMeshProUGUI pageText;
-    [BoxGroup("Buttons")]
-    [SerializeField]
-    private GameObject nextPage;
-
-    [HideInInspector]
-    public Ability selectedAbility;
+    private Ability selectedAbility;
 
     #endregion
 
@@ -71,40 +50,43 @@ public class SkillMenu : MenuControls
 
     public override void Start()
     {
-        GameEvents.current.OnPage += SetPage;
-
         base.Start();
+        MenuEvents.current.OnAbilitySelected += SelectSkill;
+        MenuEvents.current.OnAbilitySet += GetAbility;
 
-        setSkillsToSlots(SkillType.physical);
-        setSkillsToSlots(SkillType.magical);
-        setSkillsToSlots(SkillType.item);
+        InitializePages(this.physicalSkills);
+        InitializePages(this.magicalSkills);
+        InitializePages(this.itemSkills);
 
-        showCategory(1);
+        this.pageSelect.Initialize();
+        ShowCategory("physical");
+    }
+
+    private Ability GetAbility()
+    {
+        return this.selectedAbility;
+    }
+
+    private void InitializePages(GameObject parent)
+    {
+        for(int i = 0; i < parent.transform.childCount; i++)
+        {
+            SkillPage page = parent.transform.GetChild(i).GetComponent<SkillPage>();
+            if (page != null) page.Initialize();
+        }
     }
 
     public override void OnDestroy()
     {
-        GameEvents.current.OnPage -= SetPage;
-        base.OnDestroy();        
+        MenuEvents.current.OnAbilitySelected -= SelectSkill;
+        MenuEvents.current.OnAbilitySet -= GetAbility;
+        base.OnDestroy();            
     }
 
     public override void Cancel()
     {
-        if (this.selectedAbility != null) selectSkillFromSkillSet(null);
+        if (this.selectedAbility != null) SelectSkill(null);
         else base.Cancel();
-    }
-
-    public override void OnEnable()
-    {
-        base.OnEnable();
-
-        selectSkillFromSkillSet(null);
-    }
-
-    public override void OnDisable()
-    {
-        selectSkillFromSkillSet(null);
-        base.OnDisable();
     }
 
     #endregion
@@ -112,12 +94,12 @@ public class SkillMenu : MenuControls
 
     #region OnClickTrigger
 
-    public void showSkillDetails(SkillSlot slot)
+    public void ShowSkillDetails(SkillSlot slot)
     {
         showSkillDetails(slot.ability);
     }
 
-    public void showSkillDetails(SkillMenuActiveSlots slot)
+    public void ShowSkillDetails(SkillMenuActiveSlots slot)
     {
         showSkillDetails(slot.ability);
     }
@@ -152,11 +134,11 @@ public class SkillMenu : MenuControls
         }
         else
         {
-            hideSkillDetails();
+            HideSkillDetails();
         }
     }
 
-    public void hideSkillDetails()
+    public void HideSkillDetails()
     {        
         this.skillDetailsName.text = "";
         this.skillDetailsStrength.text = "";
@@ -165,121 +147,26 @@ public class SkillMenu : MenuControls
         this.StatusEffects.enabled = false;
     }
 
-    public void showCategory(int category)
+    public void ShowCategory(string category)
     {        
         this.physicalSkills.SetActive(false);
-        this.categoryWeapons.gameObject.SetActive(false);
         this.magicalSkills.SetActive(false);
-        this.categoryMagic.gameObject.SetActive(false);
         this.itemSkills.SetActive(false);
-        this.categoryItems.gameObject.SetActive(false);
 
         switch (category)
         {
-            case 1: this.physicalSkills.SetActive(true); this.categoryWeapons.gameObject.SetActive(true); break;
-            case 2: this.magicalSkills.SetActive(true); this.categoryMagic.gameObject.SetActive(true); break;
-            default: this.itemSkills.SetActive(true); this.categoryItems.gameObject.SetActive(true); break;
+            case "physical": this.physicalSkills.SetActive(true); break;
+            case "magical": this.magicalSkills.SetActive(true); break;
+            default: this.itemSkills.SetActive(true); break;
         }
-
-        SetPage(0);
     }
 
-    public void selectSkillFromSkillSet(SkillSlot skillSlot)
+    public void SelectSkill(Ability ability)
     {
-        if (skillSlot != null && skillSlot.ability != null)
-        {
-            this.selectedAbility = skillSlot.ability;
-            this.cursor.setSelectedGameObject(skillSlot.image);
-        }
-        else
-        {
-            this.selectedAbility = null;
-            this.cursor.setSelectedGameObject(null);
-        }
-    }
-
-    public void SetPage(int value)
-    {
-        selectSkillFromSkillSet(null);
-        GameObject activeCategory = null;
-
-        if (this.physicalSkills.activeInHierarchy) activeCategory = this.physicalSkills;
-        else if (this.magicalSkills.activeInHierarchy) activeCategory = this.magicalSkills;
-        else if (this.itemSkills.activeInHierarchy) activeCategory = this.itemSkills;
-
-        if (activeCategory != null)
-        {
-            int activeIndex = 0;
-            int pagesCount = activeCategory.transform.childCount-1;
-
-            for (int i = 0; i <= pagesCount; i++)
-            {
-                GameObject page = activeCategory.transform.GetChild(i).gameObject;
-                if (page.activeInHierarchy) activeIndex = page.transform.GetSiblingIndex();
-            }
-
-            if (activeIndex + value < activeCategory.transform.childCount && activeIndex + value >= 0)
-            {
-                activeIndex += value;
-            
-                for (int i = 0; i < activeCategory.transform.childCount; i++)
-                {
-                    GameObject page = activeCategory.transform.GetChild(i).gameObject;
-                    page.SetActive(false);
-                    if (activeIndex == page.transform.GetSiblingIndex()) page.SetActive(true);
-                }
-
-                this.nextPage.SetActive(true);
-                this.previousPage.SetActive(true);
-
-                if (activeIndex == 0)
-                {
-                    this.previousPage.SetActive(false);
-                    EventSystem.current.SetSelectedGameObject(this.nextPage);
-                }
-                if (activeIndex == pagesCount)
-                {
-                    this.nextPage.SetActive(false);
-                    EventSystem.current.SetSelectedGameObject(this.previousPage);
-                }
-
-                if(!this.nextPage.activeInHierarchy && !this.previousPage.activeInHierarchy)
-                {
-                    EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);                    
-                }
-
-                if (pagesCount > 0) this.pageText.text = (activeIndex + 1) + "/" + (pagesCount + 1);
-                else this.pageText.text = "";
-            } 
-        }
-    }
+        this.selectedAbility = ability;
+        if (ability != null) this.cursor.setSelectedGameObject(ability.info.icon);  
+        else this.cursor.setSelectedGameObject(null);
+    }    
 
     #endregion
-
-
-    private void setSkillsToSlots(SkillType category)
-    {
-        GameObject categoryGameobject = this.itemSkills;
-        if (category == SkillType.physical) categoryGameobject = this.physicalSkills;
-        else if (category == SkillType.magical) categoryGameobject = this.magicalSkills;
-
-        for(int i = 0; i < categoryGameobject.transform.childCount; i++)
-        {
-            GameObject page = categoryGameobject.transform.GetChild(i).gameObject;
-
-            if (page.activeInHierarchy)
-            {
-                GameObject skills = page.transform.GetChild(page.transform.childCount-1).gameObject;
-
-                for (int ID = 0; ID < skills.transform.childCount; ID++)
-                {
-                    GameObject slot = skills.transform.GetChild(ID).gameObject;
-                    Ability ability = this.skillSet.getSkillByID(slot.GetComponent<SkillSlot>().ID, category);                    
-                    slot.GetComponent<SkillSlot>().setSkill(ability);
-                }
-
-                if (page.transform.GetSiblingIndex() > 0) page.SetActive(false);
-            }
-        }
-    }        
 }

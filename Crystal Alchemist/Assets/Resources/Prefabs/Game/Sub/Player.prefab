@@ -518,11 +518,10 @@ MonoBehaviour:
   activeSkillParent: {fileID: 8638893490402070047}
   activeStatusEffectParent: {fileID: 1487360461578692118}
   values: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
-  dialogBoxSignal: {fileID: 11400000, guid: e0385931ccdba9a4c8abeb91cff8369a, type: 2}
-  deathSignal: {fileID: 11400000, guid: dda75ee433c9b274f8925d7dc56f9851, type: 2}
   healthSignalUI: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
   manaSignalUI: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}
   presetSignal: {fileID: 11400000, guid: 1794675380e483345a378de158326f5f, type: 2}
+  dialogText: {fileID: 11400000, guid: 0dee858a55e55d64ba1bcbf52a9b3e33, type: 2}
 --- !u!114 &8348133576447681433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,9 +534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5da007512d757a42ae69959804f2f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openInventorySignal: {fileID: 11400000, guid: 2d989f4dd631a3d4f9286a7be6c33d95,
-    type: 2}
-  openPauseSignal: {fileID: 11400000, guid: fe8d16e1c87adbc46bf6d8de8ceae041, type: 2}
 --- !u!114 &956710362935593805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,6 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextTeleport: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
+  lastTeleport: {fileID: 0}
   teleportList: {fileID: 11400000, guid: a5383e9eb1591254eadebe1d4ca868c7, type: 2}
   fadeDuration: {fileID: 11400000, guid: a2cc0078d349f9245bd74b3f5813a450, type: 2}
   fadeSignal: {fileID: 11400000, guid: edc5213c769d50b4397e7a6210db76a7, type: 2}

@@ -12,7 +12,7 @@ public class LoadGameScript : MonoBehaviour
         {
             Cursor.visible = false;
             LoadSystem.loadPlayerData(this.saveGame, slot.gameObject.name); //load from data into savegame            
-            SceneManager.LoadSceneAsync(slot.data.scene);
+            SceneManager.LoadSceneAsync(slot.data.startScene);
         }
     }
 }

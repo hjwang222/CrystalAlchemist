@@ -9,7 +9,7 @@ public class DeathScreen : MonoBehaviour
     [BoxGroup("Mandatory")]
     [Required]
     [SerializeField]
-    private PlayerTeleportList playerTeleportList;
+    private TeleportStats lastTeleport;
 
     [BoxGroup("Mandatory")]
     [Required]
@@ -18,15 +18,7 @@ public class DeathScreen : MonoBehaviour
 
     [SerializeField]
     [BoxGroup("Mandatory")]
-    private PlayerStats playerStats;
-
-    [SerializeField]
-    [BoxGroup("Mandatory")]
     private SimpleSignal stopMusic;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    private StringValue loadGame;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
@@ -47,10 +39,6 @@ public class DeathScreen : MonoBehaviour
     [BoxGroup("Mandatory")]
     [SerializeField]
     private TextMeshProUGUI countDown;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    private GameObject UI;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
@@ -83,7 +71,7 @@ public class DeathScreen : MonoBehaviour
     private string currentText;
     private string fullText;
     private bool skip = false;
-    private bool inputPossible = false; 
+    private bool inputPossible = false;
 
     private void init()
     {
@@ -138,7 +126,7 @@ public class DeathScreen : MonoBehaviour
     {
         this.cursor.gameObject.SetActive(true);
         this.returnTitleScreen.SetActive(true);
-        if (this.playerTeleportList.TeleportEnabled()) this.returnSavePoint.SetActive(true);
+        this.returnSavePoint.SetActive(true);
 
         this.countDown.gameObject.SetActive(true);
         StartCoroutine(this.countDownCo());
@@ -151,17 +139,14 @@ public class DeathScreen : MonoBehaviour
 
     public void returnSaveGame()
     {
-        if (this.playerTeleportList.TeleportEnabled())
-        {
-            this.nextTeleport.SetValue(this.playerTeleportList.GetStats(0));
-            SceneManager.LoadScene(this.nextTeleport.scene);
-        }
+        this.nextTeleport.SetValue(this.lastTeleport);
+        SceneManager.LoadScene(this.nextTeleport.scene);
     }
 
     private IEnumerator ShowTextCo(float delay)
     {
-        for(int i = 0; i <= this.fullText.Length; i++)
-        {           
+        for (int i = 0; i <= this.fullText.Length; i++)
+        {
             this.currentText = this.fullText.Substring(0, i);
 
             if (skip)
@@ -196,7 +181,7 @@ public class DeathScreen : MonoBehaviour
             {
                 returnToTitleScreen();
             }
-            this.countDown.text = "" + (this.timer-i) + "s";
+            this.countDown.text = "" + (this.timer - i) + "s";
             yield return new WaitForSeconds(1);
         }
     }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -10,12 +8,13 @@ public class SkillSlot : MonoBehaviour
     public Ability ability;
     public int ID;
 
-    private void Awake()
+    public int Initialize(int page)
     {
-        this.ID = (this.gameObject.transform.parent.transform.parent.transform.GetSiblingIndex() * 10) + (this.gameObject.transform.GetSiblingIndex() + 1);
+        this.ID = (page * 10) + (this.gameObject.transform.GetSiblingIndex() + 1);
+        return this.ID;
     }
 
-    public void setSkill(Ability ability)
+    public void SetSkill(Ability ability)
     {
         if (ability == null || !ability.hasSkillBookInfo || ability.info == null) this.image.enabled = false;
         else
@@ -26,4 +25,9 @@ public class SkillSlot : MonoBehaviour
             this.image.color = new Color(1f, 1f, 1f, 1f);
         }
     }    
+
+    public void SelectAbility()
+    {
+        MenuEvents.current.SelectAbility(this.ability);
+    }
 }

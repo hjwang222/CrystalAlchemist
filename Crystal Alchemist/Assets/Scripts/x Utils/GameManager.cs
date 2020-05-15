@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using Sirenix.OdinInspector;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,19 +8,17 @@ public class GameManager : MonoBehaviour
     private string UI;
 
     [SerializeField]
-    private string Menues;
-
-    [SerializeField]
     private FloatValue timePlayed;
+
+    //Event System here
 
     private void Awake()
     {
-        SceneManager.LoadScene(UI, LoadSceneMode.Additive);
-        SceneManager.LoadScene(Menues, LoadSceneMode.Additive);        
+        SceneManager.LoadScene(UI, LoadSceneMode.Additive);            
     }
 
     private void OnDestroy()
     {
         this.timePlayed.setValue(this.timePlayed.getValue()+Time.timeSinceLevelLoad);
-    }    
+    }
 }

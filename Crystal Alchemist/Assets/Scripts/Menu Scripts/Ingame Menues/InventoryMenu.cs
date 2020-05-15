@@ -1,106 +1,63 @@
 ﻿using Sirenix.OdinInspector;
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryMenu : MenuControls
+public class InventoryMenu : MenuManager
 {
-    [BoxGroup("Mandatory")]
+    [BoxGroup("Tabs")]
     [SerializeField]
-    [Required]
-    private PlayerInventory inventory;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private TextMeshProUGUI regularItemsLabel;
-
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private TextMeshProUGUI keyItemsLabel;
+    private GameObject top;
 
     [BoxGroup("Tabs")]
     [SerializeField]
-    private GameObject regularItems;
+    private GameObject bottom;
 
-    [BoxGroup("Tabs")]
     [SerializeField]
-    private GameObject currencyItems;
-
-    [BoxGroup("Tabs")]
-    [SerializeField]
-    private GameObject keyItems;
-
-    [BoxGroup("Tabs")]
-    [SerializeField]
-    private GameObject quickmenu;
+    private List<InventoryPage> pages = new List<InventoryPage>();
 
     public override void Start()
     {
         base.Start();
-        showCategory(0);
-        loadInventory();
-    }
-
-    public override void OnEnable()
-    {
-        base.OnEnable();
-        loadInventory();
+        foreach (InventoryPage page in this.pages) page.LoadPage();
+        ShowTopPage(true);
     }
 
     public override void Cancel()
     {
-        if (this.keyItems.activeInHierarchy) this.showCategory(0);
+        if (!this.top.activeInHierarchy) ShowTopPage(true);
         else base.Cancel();
-    }
-
-    private void loadInventory()
-    {
-        setItemsToSlots(this.regularItems, false);
-        setItemsToSlots(this.keyItems, true);
-        setItemsToSlots(this.quickmenu, true);
     }
 
     public void switchCategory()
     {
-        if (this.regularItems.activeInHierarchy) showCategory(1);
-        else showCategory(0);
+        if (!this.top.activeInHierarchy) ShowTopPage(true);
+        else ShowTopPage(false);
     }
 
-    public void showCategory(int category)
+    private void ShowTopPage(bool top)
     {
-        this.regularItems.SetActive(false);
-        this.regularItemsLabel.gameObject.SetActive(false);
-        this.currencyItems.SetActive(false);
-        this.keyItems.SetActive(false);
-        this.keyItemsLabel.gameObject.SetActive(false);
+        this.top.SetActive(false);
+        this.bottom.SetActive(false);
 
-        switch (category)
-        {
-            case 1: this.keyItems.SetActive(true); this.keyItemsLabel.gameObject.SetActive(true); this.currencyItems.SetActive(true); break;
-            default: this.regularItems.SetActive(true); this.regularItemsLabel.gameObject.SetActive(true); break;
-        }
+        if (top) this.top.SetActive(true);
+        else this.top.SetActive(false);
     }
 
-    private void setItemsToSlots(GameObject categoryGameobject, bool showKeyItems)
+    public void OpenMap()
     {
-        for (int i = 0; i < categoryGameobject.transform.childCount; i++)
-        {
-            GameObject slot = categoryGameobject.transform.GetChild(i).gameObject;
-            InventorySlot iSlot = slot.GetComponent<InventorySlot>();
+        MenuEvents.current.OpenMap();
+        ExitMenu();
+    }
 
-            int ID = iSlot.getID();
+    public void OpenSkills()
+    {
+        MenuEvents.current.OpenSkillBook();
+        ExitMenu();
+    }
 
-            if (showKeyItems)
-            {
-                ItemStats item = this.inventory.GetKeyItem(ID);
-                slot.GetComponent<InventorySlot>().setItemToSlot(item);
-            }
-            else
-            {
-                ItemGroup item = this.inventory.GetInventoryItem(ID);
-                slot.GetComponent<InventorySlot>().setItemToSlot(item);
-            }
-        }
+    public void OpenAttributes()
+    {
+        MenuEvents.current.OpenAttributes();
+        ExitMenu();
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class CharacterCreatorMenu : MenuControls
+public class CharacterCreatorMenu : MenuManager
 {
     [BoxGroup("Character Creator")]
     [Required]
@@ -23,19 +23,7 @@ public class CharacterCreatorMenu : MenuControls
     [SerializeField]
     private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
 
-    public override void Start()
-    {
-        base.Start();
-        init();
-    }
-
-    public override void OnEnable()
-    {
-        base.OnEnable();
-        init();
-    }
-
-    private void init()
+    public void Start()
     {
         GameUtil.setPreset(this.saveGame.playerPreset, this.creatorPreset);
         updateGear();

@@ -14,9 +14,7 @@ public class SkillMenuActiveSlots : MonoBehaviour
 
     public Ability ability;
 
-    void Start() => setImage();
-    
-    private void OnEnable() => setImage();    
+    private void Start() => setImage();    
 
     private void setImage()
     {
@@ -33,11 +31,11 @@ public class SkillMenuActiveSlots : MonoBehaviour
         }
     }
 
-    public void assignSkillToButton(SkillMenu skillMenu)
+    public void AssignSkill()
     {
-        this.buttons.SetAbilityToButton(skillMenu.selectedAbility, this.button);
-        skillMenu.selectSkillFromSkillSet(null);
-        //CustomUtilities.Helper.checkIfHelperDeactivate(this.playerAbilities);
+        Ability ability = MenuEvents.current.SetAbility();
+        this.buttons.SetAbilityToButton(ability, this.button);
+        MenuEvents.current.SelectAbility(null);
 
         setImage();
         this.newAssignedSkillSignal.Raise();

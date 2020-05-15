@@ -10,6 +10,9 @@ public class PlayerTeleport : MonoBehaviour
     private TeleportStats nextTeleport;
 
     [SerializeField]
+    private TeleportStats lastTeleport;
+
+    [SerializeField]
     private PlayerTeleportList teleportList;
 
     [SerializeField]
@@ -26,11 +29,6 @@ public class PlayerTeleport : MonoBehaviour
     }
 
     public void SwitchScene() => StartCoroutine(DematerializePlayer());    
-
-    public bool TeleportAbilityEnabled()
-    {
-        return this.teleportList.TeleportEnabled();
-    }
     
     private void LoadScene()
     {

@@ -1,8 +1,8 @@
 ﻿using UnityEngine.SceneManagement;
 
-public class PauseMenu : MenuControls
+public class PauseMenu : MenuManager
 { 
-    public void exitGame()
+    public void ExitGame()
     {
         SceneManager.LoadSceneAsync(0);
     }

@@ -7,8 +7,13 @@ public class TODOLIST : MonoBehaviour
     //TODO: Sound Effekte ersetzen!
 
     //TODO (0.2.5.2):
-    //TODO: Teleport Rework (Quick Travel, Teleport list)
-    //TODO: Savegame Loading Rework (Quicktravel list, shader, etc)
+    //BUG: Attribute
+    //BUG: Skill Menü
+
+    //TODO: Savegame Loading Rework (shader, etc)
+    //TODO: Title Screen Rework
+    //TODO: Language Rework
+
     //OBJECT: Bett (Tag/Nacht) und Sanduhr weg
     //TODO: New Enemies (Bat, Bee, Flower, Crystal, Zombie, Kashroom new, etc)
     //NPC: Bosskampf (Titania)

@@ -23,8 +23,14 @@ public class PlayerData
     public List<string[]> colorGroups = new List<string[]>();
     public List<string[]> characterParts = new List<string[]>();
 
-    public float[] position;
-    public string scene;
+    public float[] startPosition;
+    public string startScene;
+    public string startName;
+
+    public float[] lastPosition;
+    public string lastScene;
+    public string lastName;
+
     public float timePlayed;
 
     public PlayerData(PlayerSaveGame saveGame)
@@ -47,6 +53,8 @@ public class PlayerData
         this.characterName = saveGame.GetCharacterName();
 
         SetStartTeleport(saveGame.startSpawnPoint);
+        SetLastTeleport(saveGame.lastTeleport);
+        SetTeleportList(saveGame.teleportList);
     }
 
     private void setInventory(PlayerInventory inventory)
@@ -113,8 +121,16 @@ public class PlayerData
 
     private void SetStartTeleport(TeleportStats stats)
     {
-        this.scene = stats.scene;
-        this.position = new float[] { stats.position.x, stats.position.y };
+        this.startScene = stats.scene;
+        this.startName = stats.teleportName;
+        this.startPosition = new float[] { stats.position.x, stats.position.y };
+    }
+
+    private void SetLastTeleport(TeleportStats stats)
+    {
+        this.lastScene = stats.scene;
+        this.lastName = stats.teleportName;
+        this.lastPosition = new float[] { stats.position.x, stats.position.y };
     }
 }
 

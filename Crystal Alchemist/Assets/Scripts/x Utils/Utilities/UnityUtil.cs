@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public static class UnityUtil
@@ -21,6 +22,15 @@ public static class UnityUtil
             childObjects.Add(child.gameObject);
             GetChildren(child, childObjects);
         }
+    }
+
+    public static bool SceneExists(string scene)
+    {   
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            if(SceneManager.GetSceneAt(i).name == scene) return true;
+        }
+        return false;
     }
 
     /// <summary>

@@ -4,16 +4,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
-    [Required]
-    [SerializeField]
-    [BoxGroup("Player Signals")]
-    private SimpleSignal openInventorySignal;
-
-    [Required]
-    [SerializeField]
-    [BoxGroup("Player Signals")]
-    private SimpleSignal openPauseSignal;
-
     private Player player;
 
     private void Start()
@@ -23,20 +13,12 @@ public class PlayerControls : MonoBehaviour
 
     public void Inventory(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            if (this.player.CanOpenMenu()) this.openInventorySignal.Raise();
-            else GameEvents.current.DoInventory();
-        }
+        if (context.performed && player.CanOpenMenu()) MenuEvents.current.OpenInventory();        
     }
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            if (this.player.CanOpenMenu()) this.openPauseSignal.Raise();
-            else GameEvents.current.DoPause();
-        }
+        if (context.performed && player.CanOpenMenu()) MenuEvents.current.OpenPause();     
     }
 
     public void Submit(InputAction.CallbackContext context)
