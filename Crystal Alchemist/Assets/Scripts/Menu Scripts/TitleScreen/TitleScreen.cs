@@ -1,26 +1,20 @@
 ﻿using UnityEngine;
 
-public class TitleScreen : BasicMenu
+public class TitleScreen : PreventDeselection
 {        
     [SerializeField]
     private GameObject mainFrame;
     [SerializeField]
     private GameObject darkFrame;
 
-    public override void Start()
+    private void Start()
     {
         this.mainFrame.SetActive(true);
         if (this.darkFrame != null) this.darkFrame.SetActive(false);
 
         Cursor.visible = true;
-        base.Start();
     }
 
-    private void LateUpdate()
-    {
-        if (!Cursor.visible) Cursor.visible = true;
-    }
-       
     public void exitGame()
     {
         #if UNITY_EDITOR
@@ -30,12 +24,6 @@ public class TitleScreen : BasicMenu
         Application.Quit();
     }    
 
-    public override void OnDisable()
-    {
-        base.Start();
-        this.mainFrame.SetActive(true);
-    }
-
     public void showBackground(bool dark)
     {
         this.mainFrame.SetActive(false);
@@ -43,5 +31,10 @@ public class TitleScreen : BasicMenu
 
         if (dark && this.darkFrame != null) this.darkFrame.SetActive(true);
         else if(!dark) this.mainFrame.SetActive(true);
+    }
+
+    public void SaveSettings()
+    {
+        SaveSystem.SaveOptions();
     }
 }

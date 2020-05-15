@@ -8,7 +8,6 @@ public class TODOLIST : MonoBehaviour
     //BUG: I und ESC schließen nicht direkt (Inventory und Pause)
 
     //TODO (0.2.5.2):
-    //TODO: Savegame Loading Rework (shader, etc)
     //TODO: Title Screen Rework
     //TODO: Language Rework
 
@@ -21,7 +20,7 @@ public class TODOLIST : MonoBehaviour
     //Mechanics: Bombs (Ring, Row, Cross, All)
 
     //TODO (0.2.5.4):
-    //TODO: CharacterCreatorParts und Handler: Shader statt Spriterenderer
+    //TODO: CharacterCreatorParts, LoadingSystem und Handler: Shader statt Spriterenderer 
     //SKILL: Rundumschlag (wind)
     //GRAPHICS: TitleScreen: Background 
 
