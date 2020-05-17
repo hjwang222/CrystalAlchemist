@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5492247958083937818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5492247958083937820}
+  - component: {fileID: 5492247958083937821}
+  m_Layer: 0
+  m_Name: Pathfinding
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5492247958083937820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5492247958083937818}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5492247958083937821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5492247958083937818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83386338b723f034b8adc236a4cba36e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphs:
+  - graphType: 0
+    tileMap: {fileID: 0}
+    cellsize: 1
+    diameter: 1
+    filter:
+      serializedVersion: 2
+      m_Bits: 81920
+    showDebug: 1
+    showDiameter: 0
+    gridColor: {r: 1, g: 1, b: 1, a: 0.2627451}
+    notWalkable: {r: 1, g: 0.82961303, b: 0.015686274, a: 1}
+  - graphType: 1
+    tileMap: {fileID: 0}
+    cellsize: 1
+    diameter: 1
+    filter:
+      serializedVersion: 2
+      m_Bits: 16384
+    showDebug: 1
+    showDiameter: 0
+    gridColor: {r: 1, g: 1, b: 1, a: 0.19215687}
+    notWalkable: {r: 0, g: 0.5069103, b: 1, a: 1}

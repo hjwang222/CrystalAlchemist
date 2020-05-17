@@ -14,7 +14,7 @@ public class PathNode
     private int hCost;
     public int fCost;
 
-    private PathNode previousNode;
+    public PathNode previousNode;
     private float cellSize;
     private float radius;
 

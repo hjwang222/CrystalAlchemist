@@ -8,7 +8,7 @@ public class PathSeeker : MonoBehaviour
     [InfoBox("Determine on which layer it moves")]
     private GraphType graphType = GraphType.ground;
 
-    private List<PathNode> openList = new List<PathNode>();
+    public List<PathNode> openList = new List<PathNode>();
     private List<PathNode> closeList = new List<PathNode>();
     private PathfindingGrid grid;
 
@@ -46,6 +46,19 @@ public class PathSeeker : MonoBehaviour
         this.openList.Clear();
 
         this.openList.Add(startNode);
+
+        /*
+        for(int x = 0; x < grid.GetWidth(); x++)
+        {
+            for(int y = 0; y < grid.GetHeight(); y++)
+            {
+                PathNode pathNode = this.grid.GetNode(x, y);
+                pathNode.gCost = int.MaxValue;
+                pathNode.CalculateFCost();
+                pathNode.previousNode = null;
+            }
+        }           */   
+
         this.grid.InitializeNodes();
 
         //Set Startnode

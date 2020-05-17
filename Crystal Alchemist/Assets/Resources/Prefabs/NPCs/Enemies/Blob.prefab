@@ -252,9 +252,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 4482648712296496520}
   aggroStats: {fileID: 11400000, guid: 1203e243ade06754eb7ea15f7b5138d0, type: 2}
-  indicator:
-    showIndicator: 0
-    indicatorProperty: {fileID: 0}
 --- !u!58 &699278166353142346
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -352,6 +349,7 @@ MonoBehaviour:
   animator: {fileID: 929082027}
   boxCollider: {fileID: 1028641328}
   shadowRenderer: {fileID: 8018850767349727943}
+  respawnAnimation: {fileID: 0}
   skillStartPosition: {fileID: 7201104449445602734}
   activeSkillParent: {fileID: 1158493752}
   activeStatusEffectParent: {fileID: 6674156776865872386}
@@ -457,7 +455,9 @@ MonoBehaviour:
   maxPatrolTime: 5
   followPathPrecision: 0.01
   followPathInCircle: 1
+  usePathfinding: 0
   accuracy: 0.25
+  updateDelay: 0.5
   targetPosition: {x: 0, y: 0, z: 0}
   areaCountdown: 0
 --- !u!114 &8261187841884981235

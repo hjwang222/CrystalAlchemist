@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
+using Unity.Mathematics;
+using Unity.Jobs;
 
 public enum MovementPriority
 {
@@ -106,7 +108,17 @@ public class AIMovement : MonoBehaviour
 
     [BoxGroup("Pathfinding")]
     [SerializeField]
+    private bool usePathfinding = true;
+
+    [BoxGroup("Pathfinding")]
+    [ShowIf("usePathfinding")]
+    [SerializeField]
     private float accuracy = 0.25f;
+
+    [BoxGroup("Pathfinding")]
+    [ShowIf("usePathfinding")]
+    [SerializeField]
+    private float updateDelay = 0.5f;
 
     private PathSeeker seeker = null;
     private List<Vector2> path;
@@ -132,6 +144,9 @@ public class AIMovement : MonoBehaviour
     {
         AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", false);
         if (Pathfinding.Instance != null) this.seeker = this.GetComponent<PathSeeker>();
+
+        if (this.usePathfinding && this.seeker != null) InvokeRepeating("UpdatePath",0,this.updateDelay);
+
         this.targetPosition = MasterManager.staticValues.nullVector;
 
         if (this.isPatrol && this.patrolType == PatrolType.area) SetRandomPoint();
@@ -151,7 +166,7 @@ public class AIMovement : MonoBehaviour
 
             UpdateTargetPosition();
 
-            if (this.seeker != null) MoveTroughPaths(this.targetPosition); //Pathfinding
+            if (this.usePathfinding && this.seeker != null) MoveTroughPaths(); //Pathfinding
             else MoveToPosition(this.targetPosition); //No Pathfinding
         }
 
@@ -213,9 +228,9 @@ public class AIMovement : MonoBehaviour
         Vector3 newVector = MasterManager.staticValues.nullVector;
         float delay = 0f;
 
-        SetVector(patrolVector, this.patrolDelay, newVector, delay, out newVector, out delay);
-        SetVector(spawnVector, this.returnDelay, newVector, delay, out newVector, out delay);
-        SetVector(chaseVector, this.delay, newVector, delay, out newVector, out delay);
+        SetVector(patrolVector, this.patrolDelay, ref newVector, ref delay);
+        SetVector(spawnVector, this.returnDelay, ref newVector, ref delay);
+        SetVector(chaseVector, this.delay, ref newVector, ref delay);
 
         if (newVector != this.targetPosition)
         {
@@ -224,11 +239,8 @@ public class AIMovement : MonoBehaviour
         }
     }
 
-    private void SetVector(Vector3 vector, float delay, Vector3 _newVector, float _delay, out Vector3 newVector, out float newDelay)
+    private void SetVector(Vector3 vector, float delay, ref Vector3 newVector, ref float newDelay)
     {
-        newDelay = _delay;
-        newVector = _newVector;
-
         if (vector != MasterManager.staticValues.nullVector)
         {
             newVector = vector;
@@ -276,16 +288,20 @@ public class AIMovement : MonoBehaviour
         this.wait = false;
     }
 
-    private void MoveTroughPaths(Vector2 targetPos)
+    private void UpdatePath()
     {
         Vector2 currentPos = this.npc.GetGroundPosition();
+        this.path = this.seeker.FindPath(currentPos, this.targetPosition);
+    }
 
-        this.path = this.seeker.FindPath(currentPos, targetPos);
+    private void MoveTroughPaths()
+    {
         if (this.path != null && this.index >= this.path.Count) this.path = null;
 
         if (path != null)
         {
             Vector2 pos = this.path[this.index];
+            Vector2 currentPos = this.npc.GetGroundPosition();
 
             if (Vector2.Distance(currentPos, pos) > this.accuracy) MoveToPosition(pos);
             else this.index++;
