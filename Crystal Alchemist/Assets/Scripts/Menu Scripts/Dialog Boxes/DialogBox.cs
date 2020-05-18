@@ -2,7 +2,7 @@
 using UnityEngine;
 using TMPro;
 
-public class DialogBox : MenuManager
+public class DialogBox : MenuBehaviour
 {
     #region Attribute
     [SerializeField]

@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
 
-public class CharacterAttributeMenu : MenuManager
+public class CharacterAttributeMenu : MenuBehaviour
 {
     [BoxGroup("Required")]
     [Required]

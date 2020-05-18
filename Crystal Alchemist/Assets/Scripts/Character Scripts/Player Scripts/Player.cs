@@ -98,7 +98,7 @@ public class Player : Character
             AnimatorUtil.SetAnimatorParameter(this.animator, "Dead", true);
 
             this.values.currentState = CharacterState.dead;
-            this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
+            this.myRigidbody.bodyType = RigidbodyType2D.Static;
             MenuEvents.current.OpenDeath();
         }
     }

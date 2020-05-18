@@ -1,62 +1,63 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using Sirenix.OdinInspector;
 
-public class MenuManager : PreventDeselection
+public class MenuManager : MonoBehaviour
 {
-    [BoxGroup("Menu")]
-    [SerializeField]
-    private string sceneName;
-
-    [BoxGroup("Menu")]
-    [SerializeField]
-    private FloatSignal musicVolumeSignal;
-
-    [Required]
-    [BoxGroup("Menu")]
-    public CharacterValues playerValues;
-
-    [BoxGroup("Menu")]
-    public InfoBox infoBox;
-
-    public virtual void Start()
+    private void Start()
     {
-        IngameMenuHandler.openedMenues.Add(this.gameObject);
-
-        if (IngameMenuHandler.openedMenues.Count <= 1)
-        {
-            Cursor.visible = true;
-
-            IngameMenuHandler.lastState = this.playerValues.currentState;
-            GameEvents.current.DoMenuOpen(CharacterState.inMenu);
-            GameEvents.current.DoMenuOverlay(true);
-
-            if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.getMusicInMenu());
-        }
+        MenuEvents.current.OnInventory += OpenInventory;
+        MenuEvents.current.OnPause += OpenPause;
+        MenuEvents.current.OnMap += OpenMap;
+        MenuEvents.current.OnSkills += OpenSkillBook;
+        MenuEvents.current.OnAttributes += OpenAttributes;
+        MenuEvents.current.OnDeath += OpenDeath;
+        MenuEvents.current.OnMiniGame += OpenMiniGame;
+        MenuEvents.current.OnEditor += OpenCharacterEditor;
+        MenuEvents.current.OnSave += OpenSavePoint;
+        MenuEvents.current.OnDialogBox += OpenDialogBox;
+        MenuEvents.current.OnMenuDialogBox += OpenMenuDialogBox;
     }
 
-    public virtual void OnDestroy()
+    private void OnDestroy()
     {
-        IngameMenuHandler.openedMenues.Remove(this.gameObject);
-
-        if (IngameMenuHandler.openedMenues.Count <= 0)
-        {
-            Cursor.visible = false;
-            GameEvents.current.DoMenuClose(IngameMenuHandler.lastState);//avoid reclick!
-            GameEvents.current.DoMenuOverlay(false);
-
-            if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.backgroundMusicVolume);
-        }
+        MenuEvents.current.OnInventory -= OpenInventory;
+        MenuEvents.current.OnPause -= OpenPause;
+        MenuEvents.current.OnMap -= OpenMap;
+        MenuEvents.current.OnSkills -= OpenSkillBook;
+        MenuEvents.current.OnAttributes -= OpenAttributes;
+        MenuEvents.current.OnDeath -= OpenDeath;
+        MenuEvents.current.OnMiniGame -= OpenMiniGame;
+        MenuEvents.current.OnEditor -= OpenCharacterEditor;
+        MenuEvents.current.OnSave -= OpenSavePoint;
+        MenuEvents.current.OnDialogBox -= OpenDialogBox;
+        MenuEvents.current.OnMenuDialogBox -= OpenMenuDialogBox;
     }
 
-    public virtual void Cancel()
-    {
-        if (this.infoBox != null && this.infoBox.gameObject.activeInHierarchy) this.infoBox.Hide();
-        else ExitMenu();
-    }
+    public void OpenInventory() => OpenScene("InventoryMenu");
 
-    public virtual void ExitMenu()
+    public void OpenPause() => OpenScene("Pause");
+
+    public void OpenMap() => OpenScene("Map");
+
+    public void OpenSkillBook() => OpenScene("Skillbook");
+
+    public void OpenAttributes() => OpenScene("Attributes");
+
+    public void OpenCharacterEditor() => OpenScene("Character Creation");
+
+    public void OpenSavePoint() => OpenScene("Savepoint");
+
+    public void OpenDeath() => OpenScene("Death Screen");
+
+    public void OpenMiniGame(MiniGame miniGame) => OpenScene("Minigame");
+
+    public void OpenDialogBox() => OpenScene("DialogBox");
+
+    public void OpenMenuDialogBox() => OpenScene("MenuDialogBox");
+
+    private void OpenScene(string scene)
     {
-        SceneManager.UnloadSceneAsync(this.sceneName);
+        if (UnityUtil.SceneExists(scene)) SceneManager.UnloadSceneAsync(scene);
+        else SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
     }
 }

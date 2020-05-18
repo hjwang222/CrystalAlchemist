@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 
-public class SkillMenu : MenuManager
+public class SkillMenu : MenuBehaviour
 {
     #region Attributes
 

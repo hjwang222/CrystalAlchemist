@@ -56,12 +56,6 @@ MonoBehaviour:
   myRigidbody: {fileID: 2211265516280113145}
   animator: {fileID: 6939719257136123582}
   shadow: {fileID: 0}
-  positionOffset: 0
-  attachToSender: 1
-  lockDirection: 1
-  canAffectedBytimeDistortion: 0
-  hasDuration: 0
-  maxDuration: 1
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
@@ -81,6 +75,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -212,7 +207,7 @@ MonoBehaviour:
     item: {fileID: 0}
     amount: -1
   statusEffects: []
-  thrust: 4
+  thrust: 2
   knockbackTime: 0.2
   affectSelf: 0
   affectOther: 1

@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-public class CrystalOrbMenu : MenuManager
+public class CrystalOrbMenu : MenuBehaviour
 {
     [BoxGroup("Crystal Orb Menu")]
     [Required]

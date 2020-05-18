@@ -5,4 +5,5 @@ public class DebugSettings : ScriptableObject
 {
     public bool activateLight = true;
     public bool showTargetPosition = true;
+    public bool showDebbuging = true;
 }

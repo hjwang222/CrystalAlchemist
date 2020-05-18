@@ -2,7 +2,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class CharacterCreatorMenu : MenuManager
+public class CharacterCreatorMenu : MenuBehaviour
 {
     [BoxGroup("Character Creator")]
     [Required]

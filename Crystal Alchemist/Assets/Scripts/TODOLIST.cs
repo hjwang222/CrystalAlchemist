@@ -3,34 +3,40 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.0):
-    //BUG: Schild ruckelt (FixedUpdate?)
-    //TODO: Sound Effekte ersetzen!
-    //BUG: I und ESC schließen nicht direkt (Inventory und Pause)
+    //BUG: Respawn after Area Enable?
+    //BUG: Death Screen all Disabled
+    //BUG: Teleport not right?
 
     //TODO (0.2.5.2):
+    //--REWORKS--
     //TODO: Language Rework
-    //TODO: Knockback Rework (DoTween)
+    //TODO: Knockback Rework
+    //TODO: Sound Effekte ersetzen!
+    //TODO: CharacterCreatorParts (Schuppen zusammen führen, da shader), LoadingSystem und Handler: Shader statt Spriterenderer 
 
+    //--Content--
     //OBJECT: Bett (Tag/Nacht) und Sanduhr weg
-    //TODO: New Enemies (Bat, Bee, Flower, Crystal, Zombie, Kashroom new, etc)
+    //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
+    //TODO: Schwimmen (Sprite Mask)
+    //SKILL: Rundumschlag (wind)
+    //TODO: Random Mob Spawn
+
+    //GRAPHICS: TitleScreen: Background 
+
+    //--Boss Fight--
     //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena
     //Mechanics: Impact, Look away, Look, Hide, Stack, Chain, Thornes, Landslide
     //Mechanics: Bombs (Ring, Row, Cross, All)
 
-    //TODO (0.2.5.4):
-    //TODO: CharacterCreatorParts, LoadingSystem und Handler: Shader statt Spriterenderer 
-    //SKILL: Rundumschlag (wind)
-    //GRAPHICS: TitleScreen: Background 
-
     //Visual Graph (Particles)
-    //Jobs Pathfinding (Performance, Jobs, Entity Component System)
-    //Localisation
-    //Multiplayer
+    //Jobs Pathfinding (Jobs!)
+    //Localisation (IDs!)
+    //Multiplayer (Mirror?)
     //Struct vs Class (int? ref)
 
-    //Documentation Update (How did I... )
+    //Documentation Update (How did I... , usefull links)
 
     //-----------------------------------------------------------------------------
 

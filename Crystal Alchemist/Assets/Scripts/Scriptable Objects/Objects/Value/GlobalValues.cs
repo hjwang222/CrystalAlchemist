@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 
 [CreateAssetMenu(menuName = "Game/Settings/Game Static Values")]
 public class GlobalValues : ScriptableObject
@@ -23,6 +24,11 @@ public class GlobalValues : ScriptableObject
     [BoxGroup("Misc")]
     public Vector3 nullVector = new Vector3(0, 0, 999);
     [BoxGroup("Misc")]
-    public string saveGameFiletype = "dat";
-    
+    public string saveGameFiletype = "dat";    
+}
+
+public static class IngameMenuHandler
+{
+    public static CharacterState lastState;
+    public static List<GameObject> openedMenues = new List<GameObject>();
 }

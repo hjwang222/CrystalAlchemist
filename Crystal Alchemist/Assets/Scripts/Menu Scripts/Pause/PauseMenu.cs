@@ -1,6 +1,6 @@
 ﻿using UnityEngine.SceneManagement;
 
-public class PauseMenu : MenuManager
+public class PauseMenu : MenuBehaviour
 {
     public override void Start()
     {

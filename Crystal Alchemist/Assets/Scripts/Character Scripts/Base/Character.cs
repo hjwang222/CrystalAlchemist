@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-
+using DG.Tweening;
 
 public class Character : MonoBehaviour
 {
@@ -108,7 +108,7 @@ public class Character : MonoBehaviour
         this.SetCharacterSprites(true);
         this.activeDeathAnimation = null;
 
-        if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
+        if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Static;
         else this.myRigidbody.bodyType = RigidbodyType2D.Dynamic;
 
         if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().resetColors();
@@ -438,21 +438,24 @@ public class Character : MonoBehaviour
 
     public void setCannotDie(bool value) => this.cannotDie = value;
 
-    public void knockBack(float knockTime, float thrust, Vector2 direction)
+    public void KnockBack(float knockTime, float thrust, Vector2 direction)
     {
-        this.myRigidbody.velocity = Vector2.zero;
-        Vector2 diffference = direction.normalized * thrust;
-        this.myRigidbody.AddForce(diffference, ForceMode2D.Impulse);
-
-        StartCoroutine(knockCo(knockTime));
+        if (this.myRigidbody != null && this.myRigidbody.bodyType != RigidbodyType2D.Static)
+        {            
+            Vector2 difference = direction.normalized * thrust;
+            //this.myRigidbody.velocity = Vector2.zero;
+            //this.myRigidbody.AddForce(difference, ForceMode2D.Impulse);
+            this.myRigidbody.DOMove(this.myRigidbody.position + difference, knockTime);
+            StartCoroutine(knockCo(knockTime));
+        }
     }
 
     public void knockBack(float knockTime, float thrust, Skill attack)
     {
         if (this.myRigidbody != null)
         {
-            Vector2 diffference = this.myRigidbody.transform.position - attack.transform.position;
-            knockBack(knockTime, thrust, diffference);
+            Vector2 direction = this.myRigidbody.transform.position - attack.transform.position;
+            KnockBack(knockTime, thrust, direction);
         }
     }
 
@@ -476,16 +479,13 @@ public class Character : MonoBehaviour
     }
 
     private IEnumerator knockCo(float knockTime)
-    {
-        if (this.myRigidbody != null)
-        {
+    {        
             this.values.currentState = CharacterState.knockedback;
             yield return new WaitForSeconds(knockTime);
 
             //Rückstoß zurück setzten
             this.values.currentState = CharacterState.idle;
-            this.myRigidbody.velocity = Vector2.zero;
-        }
+            this.myRigidbody.velocity = Vector2.zero;        
     }
 
     #endregion

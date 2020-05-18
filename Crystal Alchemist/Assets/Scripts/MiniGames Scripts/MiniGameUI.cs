@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine.UI;
 
-public class MiniGameUI : MenuManager
+public class MiniGameUI : MenuBehaviour
 {
     public PlayerInventory inventory;
 

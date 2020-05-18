@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryMenu : MenuManager
+public class InventoryMenu : MenuBehaviour
 {
     [BoxGroup("Tabs")]
     [SerializeField]

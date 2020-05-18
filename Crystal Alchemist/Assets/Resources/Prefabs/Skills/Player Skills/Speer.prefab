@@ -56,12 +56,6 @@ MonoBehaviour:
   myRigidbody: {fileID: 2211265516280113145}
   animator: {fileID: 936580078306894737}
   shadow: {fileID: 5387825760302318934}
-  positionOffset: 0
-  attachToSender: 1
-  lockDirection: 1
-  canAffectedBytimeDistortion: 0
-  hasDuration: 0
-  maxDuration: 1
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
@@ -81,6 +75,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -105,15 +100,16 @@ SpriteRenderer:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -87151631139470528, guid: f3e0ea032db470442af7fcac9d83f1cb, type: 3}
+  m_Sprite: {fileID: -7658524575285534907, guid: 88d2f6f261002f7488d0af6d670329e1,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2211265516280113145
@@ -191,7 +187,7 @@ MonoBehaviour:
   speedDuringDuration: 0
   affectAnimation: 0
   forward: 1
-  selfThrust: 10
+  selfThrust: 4
   selfThrustTime: 0.2
   stateType: 1
 --- !u!114 &2676114091999809723
@@ -212,7 +208,7 @@ MonoBehaviour:
     item: {fileID: 0}
     amount: -1.5
   statusEffects: []
-  thrust: 16
+  thrust: 6
   knockbackTime: 0.2
   affectSelf: 0
   affectOther: 1
@@ -261,7 +257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5590416017817286310}
-  - component: {fileID: 2406852143654892692}
+  - component: {fileID: 7777828746582963760}
   m_Layer: 13
   m_Name: collider
   m_TagString: Attack
@@ -283,8 +279,8 @@ Transform:
   m_Father: {fileID: 6024384182685389377}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2406852143654892692
-BoxCollider2D:
+--- !u!60 &7777828746582963760
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -296,7 +292,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.012906417, y: -0.75394523}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -306,6 +302,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5218257, y: 1.2586253}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.75, y: 0}
+      - {x: 0, y: 0.5}
+      - {x: -0.75, y: 0}
+      - {x: 0, y: -2}

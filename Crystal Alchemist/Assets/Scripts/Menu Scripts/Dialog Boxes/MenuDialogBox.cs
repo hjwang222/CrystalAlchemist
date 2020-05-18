@@ -11,7 +11,7 @@ public enum DialogBoxType
     ok
 }
 
-public class MenuDialogBox : MenuManager
+public class MenuDialogBox : MenuBehaviour
 {
     [BoxGroup("DialogBox")]
     [SerializeField]
