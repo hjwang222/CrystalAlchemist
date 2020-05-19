@@ -42,6 +42,12 @@ public class AIAction
     [SerializeField]
     private string en;
 
+    [ShowIf("type", AIActionType.dialog)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    [HideLabel]
+    private string translationID;
+
     [HideIf("type", AIActionType.movement)]
     [HideIf("type", AIActionType.startPhase)]
     [HideIf("type", AIActionType.animation)]
@@ -334,7 +340,7 @@ public class AIAction
 
     private void StartDialog(AI npc)
     {
-        string text = FormatUtil.getLanguageDialogText(this.de, this.en);
+        string text = FormatUtil.GetLocalisedText(this.translationID, LocalisationFileType.dialogs);
         npc.GetComponent<AIEvents>().ShowDialog(text, this.duration);
         this.waitTimer = this.duration;
     }

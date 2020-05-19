@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,12 +20,6 @@ public class CharacterAttributeStats : MonoBehaviour
 
     public Image icon;
 
-    public string attributeName;
-    public string nameEnglish;
-
-    public string description;
-    public string descriptionEnglish;
-
     [SerializeField]
     private CharacterAttributeMenu mainMenu;
 
@@ -42,6 +37,16 @@ public class CharacterAttributeStats : MonoBehaviour
     public int getPointsSpent()
     {
         return this.points;
+    }
+
+    public string GetName()
+    {
+        return FormatUtil.GetLocalisedText(this.gameObject.name+"_Name", LocalisationFileType.menues);
+    }
+
+    public string GetDescription()
+    {
+        return FormatUtil.GetLocalisedText(this.gameObject.name + "_Description", LocalisationFileType.menues);
     }
 
     public void setAttributes(int value)
@@ -62,13 +67,6 @@ public class CharacterAttributeStats : MonoBehaviour
         this.mainMenu.updatePoints();
         updateUI();
         updateAttributes(this.points);
-    }
-
-    public string getDescription()
-    {
-        string text = FormatUtil.getLanguageDialogText(this.description, this.descriptionEnglish);
-        text += "\n Aktuell " + getValue(this.points) + " von " + getValue(4);
-        return text;
     }
 
     public string getValue(int index)

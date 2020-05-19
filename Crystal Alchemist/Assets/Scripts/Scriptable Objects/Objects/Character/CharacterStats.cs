@@ -39,15 +39,6 @@ public enum Gender
 [CreateAssetMenu(menuName = "Game/Characters/Character Stats")]
 public class CharacterStats : ScriptableObject
 {
-    [Required]
-    [BoxGroup("Pflichtfelder")]
-    [SerializeField]
-    private string characterName;
-
-    [BoxGroup("Pflichtfelder")]
-    [SerializeField]
-    private string englischCharacterName;
-
     [BoxGroup("Pflichtfelder")]
     public CharacterType characterType = CharacterType.Object;
 
@@ -197,13 +188,12 @@ public class CharacterStats : ScriptableObject
 
     public string GetCharacterName()
     {
-        return FormatUtil.getLanguageDialogText(this.characterName, this.englischCharacterName);
+        return FormatUtil.GetLocalisedText(this.name+"_Name", LocalisationFileType.characters);
     }
 
     public void SetCharacterName(string characterName)
     {
-        this.characterName = characterName;
-        this.englischCharacterName = characterName;
+        
     }
 
     private void UpdateStats()

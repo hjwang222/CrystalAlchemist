@@ -13,26 +13,6 @@ public enum StatusEffectType
 public class StatusEffect : ScriptableObject
 {
     #region Attribute
-    [BoxGroup("Statuseffekt Pflichtfelder")]
-    [Required]
-    [Tooltip("Name des Statuseffekts")]
-    public string statusEffectName;
-
-    [BoxGroup("Statuseffekt Pflichtfelder")]
-    [Required]
-    [Tooltip("Name des Statuseffekts")]
-    public string statusEffectNameEnglish;
-
-    [FoldoutGroup("RPG Elemente")]
-    [TextArea]
-    [Tooltip("Beschreibung des Statuseffekts")]
-    public string statusEffectDescription;
-
-    [FoldoutGroup("RPG Elemente")]
-    [TextArea]
-    [Tooltip("Beschreibung des Statuseffekts")]
-    public string statusEffectDescriptionEnglish;
-
     [FoldoutGroup("Basis Attribute")]
     public bool hasDuration = true;
 
@@ -227,6 +207,16 @@ public class StatusEffect : ScriptableObject
     public Character getTarget()
     {
         return this.target;
+    }
+
+    public string GetName()
+    {
+        return FormatUtil.GetLocalisedText(this.name+"_Name", LocalisationFileType.statuseffects);
+    }
+
+    public string GetDescription()
+    {
+        return FormatUtil.GetLocalisedText(this.name + "_Description", LocalisationFileType.statuseffects);
     }
 
     public void doModule()

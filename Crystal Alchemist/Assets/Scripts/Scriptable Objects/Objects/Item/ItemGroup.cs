@@ -15,7 +15,6 @@ public class ItemGroup : ScriptableObject
 
     [BoxGroup("Inventory")]
     [SerializeField]
-    [Required]
     public ItemSlotInfo inventoryInfo;
 
     [BoxGroup("Signals")]

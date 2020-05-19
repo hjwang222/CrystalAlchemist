@@ -23,7 +23,7 @@ public class MiniGamePrice : MonoBehaviour
         }
         else if (price.resourceType == CostType.none)
         {
-            this.textField.text = FormatUtil.getLanguageDialogText("GRATIS", "FREE");
+            this.textField.text = "";
         }
 
         bool canStart = inventory.HasEnoughCurrency(price);

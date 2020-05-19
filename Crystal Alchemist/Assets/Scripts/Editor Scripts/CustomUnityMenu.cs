@@ -2,7 +2,6 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using System.IO;
 
 public class CustomUnityMenu : MonoBehaviour
 {
@@ -10,8 +9,8 @@ public class CustomUnityMenu : MonoBehaviour
     [MenuItem("Alchemist Menu/Set Cursor To Empty Buttons")]
     public static void SetCursor()
     {
-        ButtonExtension[] buttons = Object.FindObjectsOfType<ButtonExtension>(true);
-        CustomCursor cursor = Object.FindObjectOfType<CustomCursor>();
+        ButtonExtension[] buttons = FindObjectsOfType<ButtonExtension>(true);
+        CustomCursor cursor = FindObjectOfType<CustomCursor>();
 
         foreach(ButtonExtension button in buttons)
         {
@@ -19,33 +18,34 @@ public class CustomUnityMenu : MonoBehaviour
         }
     }
 
+    private static void SetLocalisation()
+    {
+        List<StatusEffect> temp = new List<StatusEffect>();
+        temp.AddRange(Resources.LoadAll<StatusEffect>("Scriptable Objects/StatusEffects"));
 
+        foreach (StatusEffect effect in temp)
+        {
+            //UpdateLocalisation(effect.nameValue, effect.name + "_Name", effect.statusEffectName, effect.statusEffectNameEnglish, LocalisationFileType.statuseffects);
+            //UpdateLocalisation(effect.nameValue, effect.name + "_Description", effect.statusEffectDescription, effect.statusEffectDescriptionEnglish, LocalisationFileType.statuseffects);
 
+        }
 
+        AssetDatabase.Refresh();
+        Debug.Log("Done");
+    }
 
     /*
-    [MenuItem("Alchemist Menu/Load Into Localisation")]
-    public static void SetLocal()
+    private static void UpdateLocalisation(LocalisationValue value, string key, string german, string english, LocalisationFileType type)
     {
-        UITextTranslation[] translation = Object.FindObjectsOfType<UITextTranslation>(true);
-        int count = 0;
+        List<string> temp = LocalisationSystem.GetLines(type);
+        List<string> result = new List<string>();
 
-        for(int i = 0; i < translation.Length; i++)
-        {
-            UITextTranslation trans = translation[i];
-            string englishText = trans.alternativeText;
-            string germanText = trans.GetComponent<TextMeshProUGUI>().text;
+        string line = string.Format("\"{0}\",\"{1}\",\"{2}\",", key, german, english);
+        value.key = key;
+        value.type = type;
 
-            string gameObject = trans.gameObject.name;
-            string parent = "";
-            if (trans.transform.parent != null) parent = trans.transform.parent.gameObject.name;
-
-            string key = parent + "_" + gameObject + "_" + i;
-            string line = string.Format("\n\"{0}\",\"{1}\",\"{2}\"", key, germanText, englishText);
-            File.AppendAllText("Assets/Resources/Data/Localisation/Menues.csv", line, System.Text.Encoding.UTF8);
-            count = i;
-        }
-        Debug.Log("Done " + count);
+        if (!temp.Contains(line)) LocalisationSystem.AddLine(type, line);
     }*/
+    
 #endif
 }

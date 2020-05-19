@@ -275,10 +275,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 2
   icon: {fileID: 47731167}
-  attributeName: Lebensregeneration
-  nameEnglish: Life Regeneration
-  description: "Erh\xF6ht die Regeneration von Leben"
-  descriptionEnglish: Increase the life regeneration
   mainMenu: {fileID: 919052620}
   pointsList:
   - {fileID: 148318884}
@@ -987,10 +983,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   icon: {fileID: 152231356}
-  attributeName: Mana Erweiterung
-  nameEnglish: Mana Expander
-  description: "Erh\xF6ht die maximale Anzahl an Mana"
-  descriptionEnglish: Increase the total amount of mana
   mainMenu: {fileID: 919052620}
   pointsList:
   - {fileID: 1969739157}
@@ -2048,7 +2040,7 @@ GameObject:
   - component: {fileID: 279834996}
   - component: {fileID: 279834994}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Verteidigung
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2103,7 +2095,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: DEFENSE
 --- !u!114 &279834997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2234,7 +2225,7 @@ GameObject:
   - component: {fileID: 291859566}
   - component: {fileID: 291859564}
   m_Layer: 5
-  m_Name: Title (1)
+  m_Name: BuffPlus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2289,7 +2280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: BUFF+
 --- !u!114 &291859567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2554,10 +2544,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 4
   icon: {fileID: 344628982}
-  attributeName: "Buff Verl\xE4ngerung"
-  nameEnglish: Buff Extention
-  description: "Verl\xE4ngert die Dauer von positiven Effekten"
-  descriptionEnglish: Increases duration of positive effects
   mainMenu: {fileID: 919052620}
   pointsList:
   - {fileID: 1607322562}
@@ -4009,7 +3995,7 @@ GameObject:
   - component: {fileID: 752770143}
   - component: {fileID: 752770141}
   m_Layer: 5
-  m_Name: Title (1)
+  m_Name: LifeRegen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4064,7 +4050,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: REGEN+
 --- !u!114 &752770144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6242,10 +6227,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 5
   icon: {fileID: 1492567302}
-  attributeName: "Debuff Verk\xFCrzung"
-  nameEnglish: Debuff Reduction
-  description: "Verk\xFCrzt die Dauer von negativen Effekten"
-  descriptionEnglish: Reduces duration of negative effects
   mainMenu: {fileID: 919052620}
   pointsList:
   - {fileID: 306966586}
@@ -6551,7 +6532,7 @@ GameObject:
   - component: {fileID: 1513776037}
   - component: {fileID: 1513776035}
   m_Layer: 5
-  m_Name: Title (1)
+  m_Name: ManaPlus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6606,7 +6587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: MANA+
 --- !u!114 &1513776038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6776,7 +6756,7 @@ GameObject:
   - component: {fileID: 1590984243}
   - component: {fileID: 1590984241}
   m_Layer: 5
-  m_Name: Title (1)
+  m_Name: DebuffMinus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6831,7 +6811,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: DEBUFF-
 --- !u!114 &1590984244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7136,10 +7115,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 3
   icon: {fileID: 1599818061}
-  attributeName: Mana Regeneration
-  nameEnglish: Mana Regeneration
-  description: "Erh\xF6ht die Regeneration von Mana"
-  descriptionEnglish: Increase the mana regeneration
   mainMenu: {fileID: 919052620}
   pointsList:
   - {fileID: 1280534375}
@@ -7368,7 +7343,7 @@ GameObject:
   - component: {fileID: 1626052731}
   - component: {fileID: 1626052729}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Angriff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7423,7 +7398,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: ATTACK
 --- !u!114 &1626052732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7920,10 +7894,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   icon: {fileID: 1756920951}
-  attributeName: Lebenserweiterung
-  nameEnglish: Life Expander
-  description: "Erh\xF6ht die maximale Anzahl an Leben"
-  descriptionEnglish: Increase the total amount of life
   mainMenu: {fileID: 919052620}
   pointsList:
   - {fileID: 997603218}
@@ -8346,7 +8316,7 @@ GameObject:
   - component: {fileID: 1865652603}
   - component: {fileID: 1865652601}
   m_Layer: 5
-  m_Name: Title (1)
+  m_Name: ManaRegen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8401,7 +8371,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: REGEN+
 --- !u!114 &1865652604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9336,7 +9305,7 @@ GameObject:
   - component: {fileID: 2130533946}
   - component: {fileID: 2130533944}
   m_Layer: 5
-  m_Name: Title (1)
+  m_Name: LifePlus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9391,7 +9360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: LIFE+
 --- !u!114 &2130533947
 MonoBehaviour:
   m_ObjectHideFlags: 0

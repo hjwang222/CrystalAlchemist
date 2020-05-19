@@ -105,7 +105,6 @@ public class CustomCursor : MonoBehaviour
                 SkillSlot skillSlot = button.gameObject.GetComponent<SkillSlot>();
                 SkillMenuActiveSlots activeSlot = button.gameObject.GetComponent<SkillMenuActiveSlots>();
                 CharacterAttributeStats attributesStat = button.gameObject.GetComponent<CharacterAttributeStats>();
-                MapPagePoint mapPoint = button.gameObject.GetComponent<MapPagePoint>();
 
                 if (itemUI != null && itemUI.getItemGroup() != null)
                 {
@@ -126,10 +125,6 @@ public class CustomCursor : MonoBehaviour
                 else if (attributesStat != null)
                 {
                     this.infoBox.Show(attributesStat);
-                }
-                else if (mapPoint != null)
-                {
-                    this.infoBox.Show(mapPoint);
                 }
                 else
                 {

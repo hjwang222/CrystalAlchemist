@@ -397,11 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Special Thanks To:
-
-    - Mister Taft Creates and all members
-    of his Discord. Thanks for your help and finding bugs ^_^. I would never get
-    this far without you guys. You re awesome!'
 --- !u!114 &89452376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -893,14 +888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Version 0.2.4.5 [21.02.2020]
-
-    - Character Creator implemented
-
-    -
-    Changed graphics and music
-
-    - Cleanup and bugfixes'
 --- !u!114 &231977217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1966,7 +1953,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'CREDITS:'
 --- !u!114 &387908953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2212,16 +2198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Patch 0.2.2.5 [08.07.2019]
-
-    - Hate-System
-
-    - Statuseffect
-    Visuals added
-
-    - New enemies added
-
-    - New skills added'
 --- !u!114 &413371607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2518,14 +2494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Patch 0.2.0.5 [12.03.2019]
-
-    - Skill Rework
-
-    - Statuseffect
-    Rework
-
-    - Enemy Rework'
 --- !u!114 &611812481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2693,16 +2661,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Version 0.2.4.0 [16.01.2020]
-
-    - Attribute-System added
-
-    -
-    Map added
-
-    - Minigame added
-
-    - Code rework, fixes and cleanup'
 --- !u!114 &637940044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2820,6 +2778,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637940040}
   m_CullTransparentMesh: 0
+--- !u!114 &720347048 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3053134389197908795}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &726963436
 GameObject:
   m_ObjectHideFlags: 0
@@ -2870,21 +2840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Patch 0.2.3.5 [15.10.2019]
-
-    - Inventory added
-
-    - Keyitems
-    added
-
-    - New skills added
-
-    - New graphics and animations added
-
-    -
-    Code Cleanup
-
-    - Performance increased'
 --- !u!114 &726963440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3499,6 +3454,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Header
       objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858182, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_Name
+      value: "\xDCber das Spiel"
+      objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -3532,7 +3492,17 @@ PrefabInstance:
     - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
       propertyPath: alternativeText
-      value: ABOUT THE GAME
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: menuValue.key
+      value: "\xDCber das Spiel"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: menuValue.type
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a468478cc126554dbed689fa02b4eb0, type: 3}
@@ -3682,12 +3652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Patch 0.2.0 [19.02.2019]
-
-    - Switching Engine from XNA to
-    Unity
-
-    - Changed collision, movement and map'
 --- !u!114 &810978243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4045,7 +4009,7 @@ GameObject:
   - component: {fileID: 1020983910}
   - component: {fileID: 1020983909}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Neues Spiel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4082,7 +4046,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: New Game
 --- !u!114 &1020983910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4174,7 +4137,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 85.997856, y: -2.8742383, z: -1.9160825, w: -0.000023403714}
+  m_margin: {x: 85.997856, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1020983910}
     characterCount: 11
@@ -4430,7 +4393,7 @@ GameObject:
   - component: {fileID: 1112164099}
   - component: {fileID: 1112164094}
   m_Layer: 0
-  m_Name: PressAnyKey
+  m_Name: AnyKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4467,7 +4430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Press any key to start...
 --- !u!114 &1112164095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4784,7 +4746,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'PATCH NOTES:'
 --- !u!114 &1170488423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4957,12 +4918,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Patch 0.2.1 [14.03.2019]
-
-    - New Skill types added
-
-    -
-    Targeting System added'
 --- !u!114 &1240970912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5254,10 +5209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: "Sources:\r\n\r\n- Engine by Unity\r\n- Code, ideas and work by
-    me\r\n\r\nSound and music by \r\n- Matthew Pablo (http://www.matthewpablo.com)\r\n-
-    Cleyton R. Xavier\r\n- David Vitas\r\n- OpenGameArt.org\r\n\r\nGraphics by\r\n-
-    me\r\n- OpenGameArt.org"
 --- !u!114 &1280666453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5560,21 +5511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Patch 0.2.3 [05.08.2019]
-
-    - Language Options added
-
-    -
-    Layout Options added
-
-    - New skills
-
-    - New animations
-
-    - Day-Night-Circle
-    added
-
-    - Lighting'
 --- !u!114 &1415833006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6131,19 +6067,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Patch 0.2.1.5 [04.05.2019]
-
-    - Savegame-Feature added
-
-    -
-    Title-Screen added
-
-    - Respawn-System added
-
-    - Dialogbox-Rework
-
-    -
-    Shop-Items and Lootboxes added'
 --- !u!114 &1509721894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6604,16 +6527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Patch 0.2.2 [01.07.2019]
-
-    - Secret Room added
-
-    - Skill
-    Menu added
-
-    - Pause Menu added
-
-    - Items added'
 --- !u!114 &1628918121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7494,7 +7407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Continue game
 --- !u!114 &678231174957656997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7601,7 +7513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Return
 --- !u!114 &968387756945786227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8139,7 +8050,7 @@ GameObject:
   - component: {fileID: 1326993879429025261}
   - component: {fileID: 848762143884924940}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: "Zur\xFCck"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8157,7 +8068,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Quit game
 --- !u!114 &1739717838162916032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8513,7 +8423,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Credits
 --- !u!222 &2546852523044823940
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8603,6 +8512,91 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 38.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_text
+      value: Einstellungen
+      objectReference: {fileID: 0}
+    - target: {fileID: 933830499076304714, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.x
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 933830499076304714, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 933830499076304714, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 933830499076304714, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 933830499076304714, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 933830499076304714, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 933830499076304714, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 933830499076304714, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 933830499076304714, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 977250816489667810, guid: 3d3a1b109c2fd654bafbba8cb0174383,
         type: 3}
@@ -8698,6 +8692,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Options
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548872815663514121, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2548872815663514230, guid: 3d3a1b109c2fd654bafbba8cb0174383,
         type: 3}
@@ -8809,6 +8808,46 @@ PrefabInstance:
       propertyPath: cursor
       value: 
       objectReference: {fileID: 470188382}
+    - target: {fileID: 5299806974798104723, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299806974798104723, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299806974798104723, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299806974798104723, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299806974798104723, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299806974798104723, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299806974798104723, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5299806974798104723, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.x
+      value: 85
+      objectReference: {fileID: 0}
     - target: {fileID: 5654206380466344753, guid: 3d3a1b109c2fd654bafbba8cb0174383,
         type: 3}
       propertyPath: mainGameObject
@@ -8888,6 +8927,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129945856626252412, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.x
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129945856626252412, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129945856626252412, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129945856626252412, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129945856626252412, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129945856626252412, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129945856626252412, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129945856626252412, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129945856626252412, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129945856626252412, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.w
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8414721237051303763, guid: 3d3a1b109c2fd654bafbba8cb0174383,
         type: 3}
@@ -9039,7 +9128,7 @@ GameObject:
   - component: {fileID: 3928846673553407570}
   - component: {fileID: 3247333078401158633}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: "Zur\xFCck"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9237,6 +9326,106 @@ PrefabInstance:
       propertyPath: m_Name
       value: Header
       objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858182, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_Name
+      value: "Hauptmen\xFC"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_margin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_textInfo.textComponent
+      value: 
+      objectReference: {fileID: 720347048}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_textInfo.materialCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_margin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_margin.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 38.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_text
+      value: "Hauptmen\xFC"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: alternativeText
+      value: Main Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: menuValue.key
+      value: Titlescreen_MainMenu_Label
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: menuValue.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: menuValue.german
+      value: "Hauptmen\xFC"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: menuValue.english
+      value: Main Menu
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a468478cc126554dbed689fa02b4eb0, type: 3}
 --- !u!224 &3053134389197908796 stripped
@@ -9265,7 +9454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Return
 --- !u!114 &3355734092777851033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9395,7 +9583,7 @@ GameObject:
   - component: {fileID: 7413150470681010637}
   - component: {fileID: 8658847411998635699}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Versionen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9492,7 +9680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Return
 --- !u!114 &3928846673553407570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9671,7 +9858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: About the game
 --- !u!224 &4273620527259493300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10641,22 +10827,37 @@ PrefabInstance:
     - target: {fileID: 4381171460439264464, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4381171460439264464, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4381171460439264464, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4381171460439264464, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
       propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381171460439264464, guid: a0fea906fabfcfe429926638f98f0ac0,
+        type: 3}
+      propertyPath: m_margin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381171460439264464, guid: a0fea906fabfcfe429926638f98f0ac0,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381171460439264464, guid: a0fea906fabfcfe429926638f98f0ac0,
+        type: 3}
+      propertyPath: m_margin.w
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4381171460826994640, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
@@ -10936,27 +11137,42 @@ PrefabInstance:
     - target: {fileID: 5599967713187252476, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5599967713187252476, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5599967713187252476, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5599967713187252476, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5599967713187252476, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599967713187252476, guid: a0fea906fabfcfe429926638f98f0ac0,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 38.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599967713187252476, guid: a0fea906fabfcfe429926638f98f0ac0,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599967713187252476, guid: a0fea906fabfcfe429926638f98f0ac0,
+        type: 3}
+      propertyPath: m_text
+      value: Spiel laden
       objectReference: {fileID: 0}
     - target: {fileID: 5871963697063907342, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
@@ -13291,7 +13507,7 @@ GameObject:
   - component: {fileID: 7186531948099703986}
   - component: {fileID: 623751371981228681}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Spiel fortsetzen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13347,7 +13563,7 @@ GameObject:
   - component: {fileID: 8268199699485300841}
   - component: {fileID: 2539126919783964806}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13545,7 +13761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Settings
 --- !u!1 &7186456168129993095
 GameObject:
   m_ObjectHideFlags: 0
@@ -13559,7 +13774,7 @@ GameObject:
   - component: {fileID: 231429389195322304}
   - component: {fileID: 7107310921028623651}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Einstellungen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13656,7 +13871,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 85.997856, y: -2.8742383, z: -1.9160825, w: -0.000023403714}
+  m_margin: {x: 85.997856, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 7186531948099703986}
     characterCount: 16
@@ -13812,7 +14027,7 @@ GameObject:
   - component: {fileID: 1986983661759261669}
   - component: {fileID: 3879864836697062262}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: "Zur\xFCck"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13859,7 +14074,7 @@ GameObject:
   - component: {fileID: 5975510611351427977}
   - component: {fileID: 1712776572468442067}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Spiel beenden
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14195,7 +14410,7 @@ GameObject:
   - component: {fileID: 968387756945786227}
   - component: {fileID: 4255827614225401405}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: "\xDCber das Spiel"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14394,7 +14609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Patch-Notes
 --- !u!1001 &8701098030116588831
 PrefabInstance:
   m_ObjectHideFlags: 0

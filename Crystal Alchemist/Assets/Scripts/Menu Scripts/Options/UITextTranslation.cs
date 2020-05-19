@@ -1,21 +1,14 @@
 ﻿using UnityEngine;
 using TMPro;
+using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class UITextTranslation : MonoBehaviour
 {
-    [SerializeField]
-    [TextArea]
-    public string alternativeText;
-
+    [InfoBox("GameObject Name muss der gleiche sein wie in csv", InfoMessageType.Info)]
     private TextMeshProUGUI textMeshField;
-    private string originalText;
 
-    private void Awake()
-    {
-        this.textMeshField = this.GetComponent<TextMeshProUGUI>();
-        this.originalText = this.textMeshField.text;
-    }
+    private void Awake() => this.textMeshField = this.GetComponent<TextMeshProUGUI>();    
 
     private void Start() => SettingsEvents.current.OnLanguangeChanged += ChangeLanguageText;
 
@@ -23,7 +16,7 @@ public class UITextTranslation : MonoBehaviour
 
     private void OnEnable() => ChangeLanguageText();   
 
-    public void ChangeLanguageText() => this.textMeshField.text = FormatUtil.getLanguageDialogText(this.originalText, this.alternativeText);
+    public void ChangeLanguageText() => this.textMeshField.text = FormatUtil.GetLocalisedText(this.gameObject.name, LocalisationFileType.menues);
 
 }
 

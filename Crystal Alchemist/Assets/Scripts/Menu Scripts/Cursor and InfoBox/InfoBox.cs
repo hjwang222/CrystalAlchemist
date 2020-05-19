@@ -49,8 +49,8 @@ public class InfoBox : MonoBehaviour
             StatusEffect statusEffect = ability.skill.GetComponent<SkillTargetModule>().statusEffects[0];
 
             this.statusEffectPreviewImage.sprite = statusEffect.iconSprite;
-            this.statusEffectNameField.text = FormatUtil.getLanguageDialogText(statusEffect.statusEffectName, statusEffect.statusEffectNameEnglish);
-            this.statusEffectDescriptionField.text = FormatUtil.getLanguageDialogText(statusEffect.statusEffectDescription, statusEffect.statusEffectDescriptionEnglish);
+            this.statusEffectNameField.text = statusEffect.GetName();
+            this.statusEffectDescriptionField.text = statusEffect.GetDescription();
         }
     }
 
@@ -80,18 +80,10 @@ public class InfoBox : MonoBehaviour
         this.additionalInfo.SetActive(false);
 
         this.previewImage.sprite = stats.icon.sprite;
-        this.nameField.text = FormatUtil.getLanguageDialogText(stats.attributeName, stats.nameEnglish);
-        this.descriptionField.text = FormatUtil.getLanguageDialogText(stats.description, stats.descriptionEnglish);
+        this.nameField.text = stats.GetName();
+        this.descriptionField.text = stats.GetDescription();
     }
 
-    private void setInfo(MapPagePoint mapPoint)
-    {
-        this.additionalInfo.SetActive(false);
-
-        this.previewImage.sprite = mapPoint.areaSprite;
-        this.nameField.text = FormatUtil.getLanguageDialogText(mapPoint.areaName, mapPoint.areaNameEnglish);
-        this.descriptionField.text = FormatUtil.getLanguageDialogText(mapPoint.areaDescription, mapPoint.areaDescriptionEnglish);
-    }
 
     #endregion
 
@@ -125,12 +117,6 @@ public class InfoBox : MonoBehaviour
     {
         this.gameObject.SetActive(true);
         setInfo(stats);
-    }
-
-    public void Show(MapPagePoint mapPoint)
-    {
-        this.gameObject.SetActive(true);
-        setInfo(mapPoint);
     }
     #endregion
 }

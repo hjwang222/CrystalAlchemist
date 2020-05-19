@@ -32,15 +32,6 @@ public class Ability : ScriptableObject
         OnTargeting
     }
 
-
-    [BoxGroup("Texts")]
-    [SerializeField]
-    private string abilityName;
-
-    [BoxGroup("Texts")]
-    [SerializeField]
-    private string abilityNameEnglish;
-
     [BoxGroup("Objects")]
     [Required]
     public Skill skill;
@@ -199,7 +190,7 @@ public class Ability : ScriptableObject
 
     public string GetName()
     {
-        return FormatUtil.getLanguageDialogText(this.abilityName, this.abilityNameEnglish);
+        return FormatUtil.GetLocalisedText(this.name + "_Name", LocalisationFileType.skills);
     }
 
     #region Update Functions

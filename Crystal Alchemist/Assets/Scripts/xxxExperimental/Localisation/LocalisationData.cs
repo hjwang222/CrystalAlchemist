@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public enum Language
 {
@@ -16,13 +17,10 @@ public enum LocalisationFileType
     characters,
     dialogs,
     menues,
+    statuseffects,
+    objects,
+    minigames,
     maps
-}
-
-public struct LocalisationValue
-{
-    public string key;
-    public LocalisationFileType type;
 }
 
 public class LocalisationData
@@ -33,6 +31,9 @@ public class LocalisationData
     public Dictionary<string, string> dialogs;
     public Dictionary<string, string> menues;
     public Dictionary<string, string> maps;
+    public Dictionary<string, string> statuseffects;
+    public Dictionary<string, string> objects;
+    public Dictionary<string, string> minigames;
 
     private char lineSeperator = '\n';
     private char surround = '"';
@@ -41,7 +42,7 @@ public class LocalisationData
 
     public LocalisationData(Language language, TextAsset skillTexts, TextAsset itemTexts,   
                      TextAsset characterTexts, TextAsset dialogTexts, TextAsset menuTexts,
-                     TextAsset mapTexts)
+                     TextAsset mapTexts, TextAsset statusEffects, TextAsset objectTexts, TextAsset miniGameTexts)
     {
         this.language = language;
         string attributeID = GetLanguageID();
@@ -51,6 +52,7 @@ public class LocalisationData
         dialogs = GetDictionaryValues(attributeID, dialogTexts);
         menues = GetDictionaryValues(attributeID, menuTexts);
         maps = GetDictionaryValues(attributeID, mapTexts);
+        statuseffects = GetDictionaryValues(attributeID, statusEffects);
     }
 
     public string GetLocalisedValue(string key, LocalisationFileType type)
@@ -64,6 +66,9 @@ public class LocalisationData
             case LocalisationFileType.dialogs: this.dialogs.TryGetValue(key, out value); break;
             case LocalisationFileType.characters: this.characters.TryGetValue(key, out value); break;
             case LocalisationFileType.menues: this.menues.TryGetValue(key, out value); break;
+            case LocalisationFileType.statuseffects: this.statuseffects.TryGetValue(key, out value); break;
+            case LocalisationFileType.objects: this.objects.TryGetValue(key, out value); break;
+            case LocalisationFileType.minigames: this.minigames.TryGetValue(key, out value); break;
         }
 
         return value;

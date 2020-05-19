@@ -11,9 +11,9 @@ public static class FormatUtil
         button.colors = cb;
     }
 
-    public static string getLanguageDialogText(LocalisationValue value)
+    public static string GetLocalisedText(string key, LocalisationFileType type)
     {
-        return LocalisationSystem.GetLocalisedValue(value.key, value.type);
+        return LocalisationSystem.GetLocalisedValue(key, type);
     }
 
     public static string formatFloatToString(float value, float schwelle)

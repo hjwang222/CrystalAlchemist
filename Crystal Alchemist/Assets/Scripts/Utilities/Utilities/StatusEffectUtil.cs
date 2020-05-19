@@ -19,7 +19,7 @@ public static class StatusEffectUtil
         //Store in temp List to avoid Enumeration Exception
         foreach (StatusEffect effect in statusEffects)
         {
-            if (effect.statusEffectName == statusEffect.statusEffectName)
+            if (effect.name == statusEffect.name)
             {
                 effect.DestroyIt();
                 if (!allTheSame) break;
@@ -36,7 +36,7 @@ public static class StatusEffectUtil
             for (int i = 0; i < character.stats.immunityToStatusEffects.Count; i++)
             {
                 StatusEffect immunityEffect = character.stats.immunityToStatusEffects[i];
-                if (statusEffect.statusEffectName == immunityEffect.statusEffectName) return true;
+                if (statusEffect.name == immunityEffect.name) return true;
             }
         }
 

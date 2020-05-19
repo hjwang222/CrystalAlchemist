@@ -671,3 +671,41 @@ Exception 18.05.2020 13:20:49: NullReferenceException: Object reference not set 
 Skill.setPostionAndDirection () (at Assets/Scripts/Skill Scripts/Skill.cs:222)
 Skill.Start () (at Assets/Scripts/Skill Scripts/Skill.cs:85)
 
+Exception 19.05.2020 14:20:42: ArgumentNullException: Value cannot be null.
+Parameter name: key
+System.Collections.Generic.Dictionary`2[TKey,TValue].FindEntry (TKey key) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.Collections.Generic.Dictionary`2[TKey,TValue].TryGetValue (TKey key, TValue& value) (at <437ba245d8404784b9fbab9b439ac908>:0)
+LocalisationData.GetLocalisedValue (System.String key, LocalisationFileType type) (at Assets/Scripts/xxxExperimental/Localisation/LocalisationData.cs:68)
+LocalisationSystem.GetLocalisedValue (System.String key, LocalisationFileType type) (at Assets/Scripts/xxxExperimental/Localisation/LocalisationSystem.cs:26)
+FormatUtil.GetLocalisedText (System.String key, LocalisationFileType type) (at Assets/Scripts/Utilities/Utilities/FormatUtil.cs:16)
+CharacterAttributeStats.GetName () (at Assets/Scripts/Menu Scripts/Attributes/CharacterAttributeStats.cs:58)
+InfoBox.setInfo (CharacterAttributeStats stats) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/InfoBox.cs:83)
+InfoBox.Show (CharacterAttributeStats stats) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/InfoBox.cs:119)
+CustomCursor.setInfoBox (UnityEngine.UI.Selectable button) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/CustomCursor.cs:127)
+CustomCursor.setCursorPosition (System.Boolean showCursor, System.Boolean playEffect, UnityEngine.UI.Selectable button, UnityEngine.Vector2 size, UnityEngine.Vector2 scale) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/CustomCursor.cs:68)
+ButtonExtension.SetCursor () (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:168)
+ButtonExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:163)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:SetSelectedGameObject(GameObject)
+ButtonExtension:SetFirst() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:148)
+ButtonExtension:OnEnable() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:131)
+
+Exception 19.05.2020 14:20:47: ArgumentNullException: Value cannot be null.
+Parameter name: key
+System.Collections.Generic.Dictionary`2[TKey,TValue].FindEntry (TKey key) (at <437ba245d8404784b9fbab9b439ac908>:0)
+System.Collections.Generic.Dictionary`2[TKey,TValue].TryGetValue (TKey key, TValue& value) (at <437ba245d8404784b9fbab9b439ac908>:0)
+LocalisationData.GetLocalisedValue (System.String key, LocalisationFileType type) (at Assets/Scripts/xxxExperimental/Localisation/LocalisationData.cs:68)
+LocalisationSystem.GetLocalisedValue (System.String key, LocalisationFileType type) (at Assets/Scripts/xxxExperimental/Localisation/LocalisationSystem.cs:26)
+FormatUtil.GetLocalisedText (System.String key, LocalisationFileType type) (at Assets/Scripts/Utilities/Utilities/FormatUtil.cs:16)
+CharacterAttributeStats.GetName () (at Assets/Scripts/Menu Scripts/Attributes/CharacterAttributeStats.cs:58)
+InfoBox.setInfo (CharacterAttributeStats stats) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/InfoBox.cs:83)
+InfoBox.Show (CharacterAttributeStats stats) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/InfoBox.cs:119)
+CustomCursor.setInfoBox (UnityEngine.UI.Selectable button) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/CustomCursor.cs:127)
+CustomCursor.setCursorPosition (System.Boolean showCursor, System.Boolean playEffect, UnityEngine.UI.Selectable button, UnityEngine.Vector2 size, UnityEngine.Vector2 scale) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/CustomCursor.cs:68)
+ButtonExtension.SetCursor () (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:168)
+ButtonExtension.OnPointerEnter (UnityEngine.EventSystems.PointerEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:158)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointerEnterHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:22)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+

@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4249636863803185593}
   - component: {fileID: 676995031112157380}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: "Zur\xFCck"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216,13 +216,13 @@ MonoBehaviour:
   m_margin: {x: 82.47062, y: -2.8742383, z: -1.9160825, w: -0.000023403714}
   m_textInfo:
     textComponent: {fileID: 4249636863803185593}
-    characterCount: 0
+    characterCount: 20
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 1
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -242,7 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Save and return
 --- !u!1 &8452879994581336142
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,13 +535,13 @@ MonoBehaviour:
   m_margin: {x: 1.7328123, y: 0, z: -0.6507416, w: 0.86132574}
   m_textInfo:
     textComponent: {fileID: 8701098028670170268}
-    characterCount: 0
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 1
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -928,7 +927,7 @@ RectTransform:
   - {fileID: 8701098029770392345}
   - {fileID: 8701098030377966168}
   m_Father: {fileID: 8701098030470741442}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -965,180 +964,13 @@ RectTransform:
   - {fileID: 8701098029767149059}
   - {fileID: 8701098030324380448}
   m_Father: {fileID: 8701098030470741442}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 25, y: -10}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &8701098029352225194
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8701098029352225193}
-  - component: {fileID: 8701098029352225189}
-  - component: {fileID: 8701098029352225190}
-  - component: {fileID: 8701098029352225191}
-  m_Layer: 5
-  m_Name: Title (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &8701098029352225193
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8701098029352225194}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8701098030470741442}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 274.99997, y: -34.909977}
-  m_SizeDelta: {x: 500, y: 53.33}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8701098029352225189
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8701098029352225194}
-  m_CullTransparentMesh: 0
---- !u!114 &8701098029352225190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8701098029352225194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: "LAUTST\xC4RKE:"
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3f1660bebbaef6b4987ec9111be1f411, type: 2}
-  m_sharedMaterial: {fileID: 21836469378663696, guid: 3f1660bebbaef6b4987ec9111be1f411,
-    type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4279920518
-  m_fontColor: {r: 0.5254902, g: 0.4039216, b: 0.10196079, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_outlineColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  m_fontSize: 46
-  m_fontSizeBase: 46
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 257
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: -56
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_isTextTruncated: 0
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_ignoreCulling: 1
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 1
-  m_firstVisibleCharacter: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.6130188, w: 0.8416189}
-  m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
-    spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
-    linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_spriteAnimator: {fileID: 0}
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8701098029352225191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8701098029352225194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alternativeText: 'SOUND:'
 --- !u!1 &8701098029377370272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1504,7 +1336,7 @@ GameObject:
   - component: {fileID: 8701098029767149064}
   - component: {fileID: 8701098029767149066}
   m_Layer: 5
-  m_Name: Title
+  m_Name: "Musik-Lautst\xE4rke"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1631,13 +1463,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 14.509506, w: -1.179346}
   m_textInfo:
     textComponent: {fileID: 8701098029767149061}
-    characterCount: 0
+    characterCount: 17
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 1
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -1657,7 +1489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Music Volume:'
 --- !u!114 &8701098029767149066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1689,7 +1520,7 @@ GameObject:
   - component: {fileID: 8701098029770392350}
   - component: {fileID: 8701098029770391776}
   m_Layer: 5
-  m_Name: Title
+  m_Name: "Effekt-Lautst\xE4rke"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1816,13 +1647,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 14.509506, w: -1.179346}
   m_textInfo:
     textComponent: {fileID: 8701098029770392347}
-    characterCount: 0
+    characterCount: 18
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 1
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -1842,7 +1673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: 'Effect Volume:'
 --- !u!114 &8701098029770391776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2232,7 +2062,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8701098030012267433}
-  - {fileID: 8701098029352225193}
   - {fileID: 8701098029153153812}
   - {fileID: 8701098028988467063}
   m_Father: {fileID: 8701098029568021673}
@@ -2390,13 +2219,13 @@ MonoBehaviour:
   m_margin: {x: 1.7328123, y: 0, z: -0.6507416, w: 0.86132574}
   m_textInfo:
     textComponent: {fileID: 8701098030542016786}
-    characterCount: 0
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 1
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -2521,30 +2350,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Header
       objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858182, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_Name
+      value: Audio
+      objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
       propertyPath: m_text
-      value: AUDIO
+      value: Audio
       objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
@@ -2564,7 +2398,7 @@ PrefabInstance:
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
       propertyPath: m_firstOverflowCharacterIndex
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
@@ -2596,14 +2430,40 @@ PrefabInstance:
       propertyPath: m_margin.w
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 38.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_fontStyle
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
       propertyPath: alternativeText
       value: AUDIO
       objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: menuValue.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: menuValue.key
+      value: Audio
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3053134388343858180, guid: 1a468478cc126554dbed689fa02b4eb0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1a468478cc126554dbed689fa02b4eb0, type: 3}
+--- !u!224 &6628697660883423887 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 107859458151503509, guid: 1a468478cc126554dbed689fa02b4eb0,
+    type: 3}
+  m_PrefabInstance: {fileID: 6522035785659712538}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8132381010624110688 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
@@ -2616,9 +2476,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &6628697660883423887 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 107859458151503509, guid: 1a468478cc126554dbed689fa02b4eb0,
-    type: 3}
-  m_PrefabInstance: {fileID: 6522035785659712538}
-  m_PrefabAsset: {fileID: 0}

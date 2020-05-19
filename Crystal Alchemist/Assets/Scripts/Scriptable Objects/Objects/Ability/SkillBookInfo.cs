@@ -7,18 +7,6 @@ public class SkillBookInfo : ScriptableObject
 {
     [BoxGroup("Pflichtfelder")]
     [Tooltip("Beschreibung des Skills")]
-    [TextArea]
-    [SerializeField]
-    private string skillDescription;
-
-    [BoxGroup("Pflichtfelder")]
-    [Tooltip("Beschreibung des Skills")]
-    [TextArea]
-    [SerializeField]
-    private string skillDescriptionEnglish;
-
-    [BoxGroup("Pflichtfelder")]
-    [Tooltip("Beschreibung des Skills")]
     public SkillType category = SkillType.magical;
 
     [BoxGroup("Pflichtfelder")]
@@ -32,6 +20,6 @@ public class SkillBookInfo : ScriptableObject
 
     public string getDescription()
     {
-        return FormatUtil.getLanguageDialogText(this.skillDescription, this.skillDescriptionEnglish);
+        return FormatUtil.GetLocalisedText(this.name+"_Description", LocalisationFileType.skills);
     }
 }

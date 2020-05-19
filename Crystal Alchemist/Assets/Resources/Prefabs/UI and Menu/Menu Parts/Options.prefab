@@ -759,7 +759,7 @@ GameObject:
   - component: {fileID: 933830499076304714}
   - component: {fileID: 7238246675893708835}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Anzeige
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -912,7 +912,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Ingame Layout
 --- !u!1 &6009255249165984243
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +925,7 @@ GameObject:
   - component: {fileID: 7560094549958979694}
   - component: {fileID: 6385128632928172241}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: "Zur\xFCck"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1079,7 +1078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Return
 --- !u!1 &6090170661924813513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,7 +1091,7 @@ GameObject:
   - component: {fileID: 5299806974798104723}
   - component: {fileID: 3198197335795334944}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1246,7 +1244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Audio
 --- !u!1 &6918100608949704705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,7 +1333,7 @@ GameObject:
   - component: {fileID: 8129945856626252412}
   - component: {fileID: 402969872714184503}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: "Aufl\xF6sung"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1489,7 +1486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alternativeText: Resolution
 --- !u!1 &9037798146485131657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1761,6 +1757,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Header
       objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858182, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: m_Name
+      value: Einstellungen
+      objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1825,6 +1826,16 @@ PrefabInstance:
         type: 3}
       propertyPath: alternativeText
       value: SETTINGS
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: menuValue.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,
+        type: 3}
+      propertyPath: menuValue.key
+      value: Einstellungen
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3053134388343858180, guid: 1a468478cc126554dbed689fa02b4eb0, type: 3}

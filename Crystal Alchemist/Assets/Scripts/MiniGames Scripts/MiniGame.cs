@@ -8,23 +8,17 @@ public class MiniGame : MonoBehaviour
     [Required]
     public MiniGameRound miniGameRound;
 
-    [Space(10)]
-    [BoxGroup("MiniGame Related")]
-    public string miniGameTitle;
-
-    [BoxGroup("MiniGame Related")]
-    public string miniGameTitleEnglish;
-
-    [Space(10)]
-    [BoxGroup("MiniGame Related")]
-    [TextArea]
-    public string miniGameDescription;
-
-    [BoxGroup("MiniGame Related")]
-    [TextArea]
-    public string miniGameDescriptionEnglish;
-
     private MiniGameMatches matches;
+
+    public string GetName()
+    {
+        return FormatUtil.GetLocalisedText(this.gameObject.name+"_Name", LocalisationFileType.minigames);
+    }
+
+    public string GetDescription()
+    {
+        return FormatUtil.GetLocalisedText(this.gameObject.name + "_Description", LocalisationFileType.minigames);
+    }
 
     public void setMiniGame(MiniGameMatches matches)
     {

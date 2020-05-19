@@ -105,8 +105,8 @@ public class MiniGameUI : MenuBehaviour
         {
             this.miniGameObject = miniGame;
             this.miniGameRound = miniGame.miniGameRound;
-            this.titleField.text = FormatUtil.getLanguageDialogText(miniGame.miniGameTitle, miniGame.miniGameTitleEnglish); ;
-            this.mainDescription = FormatUtil.getLanguageDialogText(miniGame.miniGameDescription, miniGame.miniGameDescriptionEnglish);
+            this.titleField.text = miniGame.GetName();
+            this.mainDescription = miniGame.GetDescription();
         }
 
         showDialog();

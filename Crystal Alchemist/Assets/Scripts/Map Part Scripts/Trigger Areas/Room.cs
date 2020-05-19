@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Cinemachine;
 using Sirenix.OdinInspector;
-using UnityEditor;
 
 public class Room : MonoBehaviour
 {
@@ -13,11 +12,7 @@ public class Room : MonoBehaviour
     private GameObject objectsInArea;
 
     [BoxGroup("Map")]
-    [SerializeField]
-    [HideLabel]
-    private LocalisationValue localisation; 
-
-    [BoxGroup("Map")]
+    [InfoBox("GameObject Name = csv ID!")]
     [SerializeField]
     private StringSignal locationSignal;
 
@@ -36,7 +31,7 @@ public class Room : MonoBehaviour
     {
         if (!other.isTrigger)
         {
-            string text = FormatUtil.getLanguageDialogText(this.localisation);
+            string text = FormatUtil.GetLocalisedText(this.gameObject.name, LocalisationFileType.maps);
 
             setObjects(true);
             this.virtualCamera.gameObject.SetActive(true);
