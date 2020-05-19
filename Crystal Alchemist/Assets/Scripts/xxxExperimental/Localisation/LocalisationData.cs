@@ -53,6 +53,8 @@ public class LocalisationData
         menues = GetDictionaryValues(attributeID, menuTexts);
         maps = GetDictionaryValues(attributeID, mapTexts);
         statuseffects = GetDictionaryValues(attributeID, statusEffects);
+        objects = GetDictionaryValues(attributeID, objectTexts);
+        minigames = GetDictionaryValues(attributeID, miniGameTexts);
     }
 
     public string GetLocalisedValue(string key, LocalisationFileType type)
@@ -66,6 +68,7 @@ public class LocalisationData
             case LocalisationFileType.dialogs: this.dialogs.TryGetValue(key, out value); break;
             case LocalisationFileType.characters: this.characters.TryGetValue(key, out value); break;
             case LocalisationFileType.menues: this.menues.TryGetValue(key, out value); break;
+            case LocalisationFileType.maps: this.maps.TryGetValue(key, out value); break;
             case LocalisationFileType.statuseffects: this.statuseffects.TryGetValue(key, out value); break;
             case LocalisationFileType.objects: this.objects.TryGetValue(key, out value); break;
             case LocalisationFileType.minigames: this.minigames.TryGetValue(key, out value); break;

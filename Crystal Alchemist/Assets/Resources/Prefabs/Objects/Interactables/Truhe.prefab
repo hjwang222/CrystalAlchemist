@@ -347,18 +347,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texts:
   - trigger: 1
-    dialogBoxText: "Du hast <loot amount> <loot name> f\xFCr <price> <item name>
-      gekauft!"
-    dialogBoxTextEnglish: You bought <loot amount> <loot name> for <price> <item
-      name>!
+    ID: Obtained
   - trigger: 2
-    dialogBoxText: "Du kannst das nicht kaufen.\nDu ben\xF6tigst <price> <item name>."
-    dialogBoxTextEnglish: 'You cant buy that.
-
-      You need <price> <item name>.'
+    ID: Cannot_Open
   - trigger: 3
-    dialogBoxText: Niete... .
-    dialogBoxTextEnglish: Nothing there... .
+    ID: Empty
 --- !u!114 &4009619424976468428
 MonoBehaviour:
   m_ObjectHideFlags: 0

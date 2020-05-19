@@ -14,8 +14,7 @@ public class PauseMenu : MenuBehaviour
         MenuEvents.current.OnPause -= ExitMenu;
     }
 
-    public void ExitGame()
-    {
-        SceneManager.LoadSceneAsync(0);
-    }
+    public void ExitGame() => SceneManager.LoadSceneAsync(0);    
+
+    public void SaveSettings() => SaveSystem.SaveOptions();    
 }

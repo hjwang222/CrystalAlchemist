@@ -15,63 +15,59 @@ MonoBehaviour:
   actions:
   - type: 3
     position: {x: 0, y: 0}
-    de: 
-    en: 
+    translationID: 
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
     ability: {fileID: 11400000, guid: 4cf3d39de93d5554daa422389bb4bb3c, type: 2}
     overrideCastTime: 1
     castTime: 2
+    overrideShowCastBar: 0
+    showCastBar: 0
     overrideCooldown: 1
     cooldown: 1
     repeatSkill: 1
     amount: 5
-    sequence: {fileID: 0}
-    sequencePositionType: 0
-    sequencePosition: {x: 0, y: 0}
+    mechanic: {fileID: 0}
   loopActions: 1
   events:
   - triggers:
     - type: 1
       time: 0
       life: 50
-      rangeTrigger: []
     actions:
     - type: 1
       position: {x: 0, y: 0}
-      de: Nimm DAS!
-      en: Take THAT!
+      translationID: KingBlob_Event
       duration: 4
       nextPhase: {fileID: 0}
       animations: 
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0
+      overrideShowCastBar: 0
+      showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
       repeatSkill: 0
       amount: 1
-      sequence: {fileID: 0}
-      sequencePositionType: 0
-      sequencePosition: {x: 0, y: 0}
+      mechanic: {fileID: 0}
     - type: 3
       position: {x: 0, y: 0}
-      de: 
-      en: 
+      translationID: 
       duration: 4
       nextPhase: {fileID: 0}
       animations: 
       ability: {fileID: 11400000, guid: a4406c673eead9844809ea002e9c6ba3, type: 2}
       overrideCastTime: 1
       castTime: 5
+      overrideShowCastBar: 0
+      showCastBar: 0
       overrideCooldown: 0
       cooldown: 10
       repeatSkill: 0
       amount: 1
-      sequence: {fileID: 0}
-      sequencePositionType: 0
-      sequencePosition: {x: 0, y: 0}
+      mechanic: {fileID: 0}
     repeatEvent: 1
     interruptCurrentAction: 0
     eventCooldown: 5

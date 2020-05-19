@@ -9,7 +9,6 @@ public class TODOLIST : MonoBehaviour
 
     //TODO (0.2.5.2):
     //--REWORKS--
-    //TODO: Dialoge (Treasure/Teleport/Signs/Enemies) anpassen
     //TODO: Knockback Rework
     //TODO: Sound Effekte ersetzen!
     //TODO: CharacterCreatorParts (Schuppen zusammen führen, da shader), LoadingSystem und Handler: Shader statt Spriterenderer 

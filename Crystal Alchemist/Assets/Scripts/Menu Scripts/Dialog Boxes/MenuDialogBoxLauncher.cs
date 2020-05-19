@@ -36,9 +36,9 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     [SerializeField]
     private string translationID;
 
-    [BoxGroup("Text")]
+    [BoxGroup("Texts")]
     [SerializeField]
-    private string menuDialogBoxTextEnglish;
+    private LocalisationFileType type = LocalisationFileType.menues;
 
     private bool inputPossible;
 
@@ -51,7 +51,7 @@ public class MenuDialogBoxLauncher : MonoBehaviour
     private void RaiseDialogBox(UnityEvent action)
     {
         if (!this.inputPossible) return;
-        string text = FormatUtil.GetLocalisedText(this.translationID, LocalisationFileType.menues);
+        string text = FormatUtil.GetLocalisedText(this.translationID, this.type);
         this.info.SetValue(action, this.cursor, this.price, text, this.dialogBoxType, this.parentMenu);
         MenuEvents.current.OpenMenuDialogBox();
     }

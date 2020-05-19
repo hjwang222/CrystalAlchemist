@@ -34071,6 +34071,7 @@ MonoBehaviour:
   virtualCamera: {fileID: 1010957377}
   objectsInArea: {fileID: 1878532988}
   locationSignal: {fileID: 11400000, guid: 607a9253355ca954388700e0704f8968, type: 2}
+  localisationID: Dorf
 --- !u!4 &306181084 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8040636200504665835, guid: c84c09cfa51ad7f4db440989403a6012,
@@ -34249,6 +34250,16 @@ PrefabInstance:
         type: 3}
       propertyPath: texts.Array.data[0].dialogBoxTextEnglish
       value: "This way leads to the dangerous Forest of Blobs. \nYou have been warned..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].ID
+      value: Schild_Dorf
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].type
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3927818717087631785, guid: b38228c375f915f44932624529e24a1f, type: 3}
@@ -52412,6 +52423,16 @@ PrefabInstance:
         Its impact
         created this lake... .'
       objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].ID
+      value: Schild_Teich
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].type
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3927818717087631785, guid: b38228c375f915f44932624529e24a1f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b38228c375f915f44932624529e24a1f, type: 3}
@@ -66003,6 +66024,7 @@ MonoBehaviour:
   virtualCamera: {fileID: 306181087}
   objectsInArea: {fileID: 893964617}
   locationSignal: {fileID: 11400000, guid: 607a9253355ca954388700e0704f8968, type: 2}
+  localisationID: Teich
 --- !u!1 &1445023961
 GameObject:
   m_ObjectHideFlags: 0
@@ -71761,6 +71783,16 @@ PrefabInstance:
 
 
         signed King Goo'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].ID
+      value: Schild_King_Blob
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].type
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3927818717087631785, guid: b38228c375f915f44932624529e24a1f, type: 3}

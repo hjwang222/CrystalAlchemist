@@ -15,66 +15,59 @@ MonoBehaviour:
   actions:
   - type: 3
     position: {x: 0, y: 0}
-    de: 
-    en: 
+    translationID: 
     duration: 4
-    canDie: 0
     nextPhase: {fileID: 0}
     animations: 
     ability: {fileID: 11400000, guid: 1878fb9defd1fe546821b1e74a62233c, type: 2}
     overrideCastTime: 0
     castTime: 0
+    overrideShowCastBar: 0
+    showCastBar: 0
     overrideCooldown: 0
     cooldown: 0
     repeatSkill: 0
-    repeatAmount: 1
-    sequence: {fileID: 0}
-    sequencePositionType: 0
-    sequencePosition: {x: 0, y: 0}
-  repeatActions: 0
+    amount: 1
+    mechanic: {fileID: 0}
+  loopActions: 0
   events:
   - triggers:
     - type: 3
       time: 0
       life: 0
-      rangeTrigger: []
     actions:
     - type: 1
       position: {x: 0, y: 0}
-      de: Hmmm... Lecker
-      en: Yummy!
+      translationID: Blob_Start
       duration: 4
-      canDie: 0
       nextPhase: {fileID: 0}
       animations: 
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0
+      overrideShowCastBar: 0
+      showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
       repeatSkill: 0
-      repeatAmount: 1
-      sequence: {fileID: 0}
-      sequencePositionType: 0
-      sequencePosition: {x: 0, y: 0}
+      amount: 1
+      mechanic: {fileID: 0}
     - type: 5
       position: {x: 0, y: 0}
-      de: 
-      en: 
+      translationID: 
       duration: 4
-      canDie: 0
       nextPhase: {fileID: 11400000, guid: 38b0bc9f07ba3a5489bbb7817d157113, type: 2}
       animations: 
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0
+      overrideShowCastBar: 0
+      showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
       repeatSkill: 0
-      repeatAmount: 1
-      sequence: {fileID: 0}
-      sequencePositionType: 0
-      sequencePosition: {x: 0, y: 0}
+      amount: 1
+      mechanic: {fileID: 0}
     repeatEvent: 0
     interruptCurrentAction: 0
     eventCooldown: 0

@@ -12,14 +12,33 @@ public class Room : MonoBehaviour
     private GameObject objectsInArea;
 
     [BoxGroup("Map")]
-    [InfoBox("GameObject Name = csv ID!")]
     [SerializeField]
     private StringSignal locationSignal;
+
+    [BoxGroup("Map")]
+    [SerializeField]
+    private string localisationID;
+
+    private string text;
 
     private void Awake()
     {
         setObjects(false);
         this.virtualCamera.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {        
+        this.text = FormatUtil.GetLocalisedText(this.localisationID, LocalisationFileType.maps);
+        SettingsEvents.current.OnLanguangeChanged += UpdateText;
+    }
+
+    private void OnDestroy() => SettingsEvents.current.OnLanguangeChanged -= UpdateText;    
+
+    private void UpdateText()
+    {
+        this.text = FormatUtil.GetLocalisedText(this.localisationID, LocalisationFileType.maps);
+        this.locationSignal.Raise(this.text);
     }
 
     private void setObjects(bool value)
@@ -31,12 +50,10 @@ public class Room : MonoBehaviour
     {
         if (!other.isTrigger)
         {
-            string text = FormatUtil.GetLocalisedText(this.gameObject.name, LocalisationFileType.maps);
-
             setObjects(true);
             this.virtualCamera.gameObject.SetActive(true);
 
-            this.locationSignal.Raise(text);
+            this.locationSignal.Raise(this.text);
             if (this.virtualCamera.Follow == null) this.virtualCamera.Follow = other.transform;
         }
     }

@@ -35,17 +35,6 @@ public class AIAction
     [ShowIf("type", AIActionType.dialog)]
     [BoxGroup("Properties")]
     [SerializeField]
-    private string de;
-
-    [ShowIf("type", AIActionType.dialog)]
-    [BoxGroup("Properties")]
-    [SerializeField]
-    private string en;
-
-    [ShowIf("type", AIActionType.dialog)]
-    [BoxGroup("Properties")]
-    [SerializeField]
-    [HideLabel]
     private string translationID;
 
     [HideIf("type", AIActionType.movement)]

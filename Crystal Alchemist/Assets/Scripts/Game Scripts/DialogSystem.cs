@@ -16,16 +16,11 @@ public class DialogText
 {
     public DialogTextTrigger trigger;
 
-    [Tooltip("Anzeige-Text für die Dialog-Box")]
-    [TextArea]
-    public string dialogBoxText;
-
-    [Tooltip("Englischer Anzeige-Text für die Dialog-Box")]
-    [TextArea]
-    public string dialogBoxTextEnglish;
-
     [SerializeField]
     public string ID;
+
+    [SerializeField]
+    public LocalisationFileType type = LocalisationFileType.objects;
 }
 
 
@@ -35,14 +30,12 @@ public class DialogSystem : MonoBehaviour
     private void AddShopText()
     {
         DialogText text = new DialogText();
-        text.dialogBoxText = "Du hast <loot amount> <loot name> für <price> <item name> gekauft!";
-        text.dialogBoxTextEnglish = "You bought <loot amount> <loot name> for <price> <item name>!";
+        text.ID = "Bought";
         text.trigger = DialogTextTrigger.success;
         texts.Add(text);
 
         text = new DialogText();
-        text.dialogBoxText = "Du kannst das nicht kaufen.\nDu benötigst <price> <item name>.";
-        text.dialogBoxTextEnglish = "You cant buy that.\nYou need <price> <item name>.";
+        text.ID = "Cannot_Buy";
         text.trigger = DialogTextTrigger.failed;
         texts.Add(text);
     }
@@ -51,20 +44,17 @@ public class DialogSystem : MonoBehaviour
     private void AddTreasureText()
     {
         DialogText text = new DialogText();
-        text.dialogBoxText = "Du hast <loot amount> <loot name> erhalten!";
-        text.dialogBoxTextEnglish = "You obtained <loot amount> <loot name>!";
+        text.ID = "Obtained";
         text.trigger = DialogTextTrigger.success;
         texts.Add(text);
 
         text = new DialogText();
-        text.dialogBoxText = "Du kannst d<interactable> nicht öffnen. Du benötigst <price> <item name>.";
-        text.dialogBoxTextEnglish = "You cant open the <interactable>. You need <price> <item name>.";
+        text.ID = "Cannot_Open";
         text.trigger = DialogTextTrigger.failed;
         texts.Add(text);
 
         text = new DialogText();
-        text.dialogBoxText = "D<interactable> ist leer... .";
-        text.dialogBoxTextEnglish = "The <interactable> is empty... .";
+        text.ID = "Empty";
         text.trigger = DialogTextTrigger.empty;
         texts.Add(text);
     }
@@ -102,7 +92,7 @@ public class DialogSystem : MonoBehaviour
 
     private string getText(DialogText text, ItemStats loot, Player player)
     {
-        string result = FormatUtil.GetLocalisedText(text.ID, LocalisationFileType.dialogs);
+        string result = FormatUtil.GetLocalisedText(text.ID, text.type);
 
         result = result.Replace("<name>", player.name);
         result = result.Replace("<interactable>", getInteractableType());
@@ -118,7 +108,7 @@ public class DialogSystem : MonoBehaviour
 
     private string getText(DialogText text, float price, ItemGroup item, ItemStats loot, Player player)
     {
-        string result = FormatUtil.GetLocalisedText(text.ID, LocalisationFileType.dialogs);
+        string result = FormatUtil.GetLocalisedText(text.ID, text.type);
 
         result = result.Replace("<price>", price + "");
         result = result.Replace("<name>", player.name);
@@ -142,8 +132,8 @@ public class DialogSystem : MonoBehaviour
 
     private string getInteractableType()
     {
-        //if (this.GetComponent<Door>() != null) return FormatUtil.getLanguageDialogText("ie Tür", "door");
-       // if (this.GetComponent<Treasure>() != null) return FormatUtil.getLanguageDialogText("ie Truhe", "chest");
+        if (this.GetComponent<Door>() != null) return FormatUtil.GetLocalisedText("Door", LocalisationFileType.objects);
+        if (this.GetComponent<Treasure>() != null) return FormatUtil.GetLocalisedText("Treasure", LocalisationFileType.objects);
         return "";
     }
 
