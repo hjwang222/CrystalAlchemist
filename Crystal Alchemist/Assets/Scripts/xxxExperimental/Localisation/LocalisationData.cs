@@ -15,7 +15,14 @@ public enum LocalisationFileType
     items,
     characters,
     dialogs,
-    menues
+    menues,
+    maps
+}
+
+public struct LocalisationValue
+{
+    public string key;
+    public LocalisationFileType type;
 }
 
 public class LocalisationData
@@ -25,6 +32,7 @@ public class LocalisationData
     public Dictionary<string, string> characters;
     public Dictionary<string, string> dialogs;
     public Dictionary<string, string> menues;
+    public Dictionary<string, string> maps;
 
     private char lineSeperator = '\n';
     private char surround = '"';
@@ -32,7 +40,8 @@ public class LocalisationData
     public Language language;
 
     public LocalisationData(Language language, TextAsset skillTexts, TextAsset itemTexts,   
-                     TextAsset characterTexts, TextAsset dialogTexts, TextAsset menuTexts)
+                     TextAsset characterTexts, TextAsset dialogTexts, TextAsset menuTexts,
+                     TextAsset mapTexts)
     {
         this.language = language;
         string attributeID = GetLanguageID();
@@ -41,6 +50,7 @@ public class LocalisationData
         characters = GetDictionaryValues(attributeID, characterTexts);
         dialogs = GetDictionaryValues(attributeID, dialogTexts);
         menues = GetDictionaryValues(attributeID, menuTexts);
+        maps = GetDictionaryValues(attributeID, mapTexts);
     }
 
     public string GetLocalisedValue(string key, LocalisationFileType type)

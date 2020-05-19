@@ -7,47 +7,24 @@ public class Room : MonoBehaviour
 {
     [Required]
     [SerializeField]
-    private GameObject virtualCamera;
+    private CinemachineVirtualCamera virtualCamera;
 
     [SerializeField]
     private GameObject objectsInArea;
 
     [BoxGroup("Map")]
     [SerializeField]
-    private string mapID;
-
-    [BoxGroup("Map")]
-    [SerializeField]
-    private string areaID;
-
-    [BoxGroup("Map")]
-    [SerializeField]
-    private string mapName;
-
-    [BoxGroup("Map")]
-    [SerializeField]
-    private string mapNameEnglish;
+    [HideLabel]
+    private LocalisationValue localisation; 
 
     [BoxGroup("Map")]
     [SerializeField]
     private StringSignal locationSignal;
 
-
-#if UNITY_EDITOR
-    [Button]
-    public void setComponent()
-    {
-        this.mapID = "Overworld";
-        this.areaID = "???";
-        this.locationSignal = (StringSignal)AssetDatabase.LoadAssetAtPath("Assets/Resources/Scriptable Objects/Signals/Game Signals/locationSignal.asset", typeof(StringSignal));
-    }
-#endif
-
-
     private void Awake()
     {
         setObjects(false);
-        this.virtualCamera.SetActive(false);
+        this.virtualCamera.gameObject.SetActive(false);
     }
 
     private void setObjects(bool value)
@@ -55,19 +32,17 @@ public class Room : MonoBehaviour
         if (this.objectsInArea != null) this.objectsInArea.SetActive(value);
     }
 
-    // OnTriggerEnter2D is a built in Unity function
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.isTrigger)
         {
-            string text = FormatUtil.getLanguageDialogText(this.mapName, this.mapNameEnglish);
+            string text = FormatUtil.getLanguageDialogText(this.localisation);
 
             setObjects(true);
-            this.virtualCamera.SetActive(true);
+            this.virtualCamera.gameObject.SetActive(true);
 
             this.locationSignal.Raise(text);
-            CinemachineVirtualCamera vcam = this.virtualCamera.GetComponent<CinemachineVirtualCamera>();
-            if (vcam.Follow == null) vcam.Follow = other.transform;
+            if (this.virtualCamera.Follow == null) this.virtualCamera.Follow = other.transform;
         }
     }
 
@@ -76,15 +51,7 @@ public class Room : MonoBehaviour
         if (!other.isTrigger)
         {
             setObjects(false);
-            this.virtualCamera.SetActive(false);
-        }
-    }
-
-    public void setCameraPosition(bool setNull)
-    {
-        if (setNull)
-        {
-            this.virtualCamera.GetComponent<CinemachineVirtualCamera>().Follow = null;
+            this.virtualCamera.gameObject.SetActive(false);
         }
     }
 }

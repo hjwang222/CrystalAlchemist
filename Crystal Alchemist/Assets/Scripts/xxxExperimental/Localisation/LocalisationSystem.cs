@@ -36,8 +36,9 @@ public static class LocalisationSystem
         TextAsset characterTexts = Resources.Load<TextAsset>("Data/Localisation/Characters");
         TextAsset dialogTexts = Resources.Load<TextAsset>("Data/Localisation/Dialogs");
         TextAsset menuTexts = Resources.Load<TextAsset>("Data/Localisation/Menues");
+        TextAsset mapTexts = Resources.Load<TextAsset>("Data/Localisation/Maps");
 
-        german = new LocalisationData(Language.German, skillTexts, itemTexts, characterTexts, dialogTexts, menuTexts);
-        english = new LocalisationData(Language.English, skillTexts, itemTexts, characterTexts, dialogTexts, menuTexts);
+        german = new LocalisationData(Language.German, skillTexts, itemTexts, characterTexts, dialogTexts, menuTexts, mapTexts);
+        english = new LocalisationData(Language.English, skillTexts, itemTexts, characterTexts, dialogTexts, menuTexts, mapTexts);
     }
 }

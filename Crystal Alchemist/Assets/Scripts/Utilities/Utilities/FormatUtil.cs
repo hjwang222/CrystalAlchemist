@@ -11,10 +11,9 @@ public static class FormatUtil
         button.colors = cb;
     }
 
-    public static string getLanguageDialogText(string originalText, string alternativeText)
+    public static string getLanguageDialogText(LocalisationValue value)
     {
-        if (MasterManager.settings.language == Language.English && alternativeText.Replace(" ", "").Length > 1) return alternativeText;
-        else return originalText;
+        return LocalisationSystem.GetLocalisedValue(value.key, value.type);
     }
 
     public static string formatFloatToString(float value, float schwelle)
