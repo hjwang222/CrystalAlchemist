@@ -3,7 +3,8 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class CharacterCreatorPart : MonoBehaviour
-{    
+{
+    [InfoBox("Neccessary to set for Character Creation", InfoMessageType.Info)]
     public CharacterCreatorPartProperty property;
 
     [SerializeField]
@@ -14,6 +15,4 @@ public class CharacterCreatorPart : MonoBehaviour
 
     [ShowIf("isPreview", true)]
     public string previewDirection = "Down";
-
-
 }

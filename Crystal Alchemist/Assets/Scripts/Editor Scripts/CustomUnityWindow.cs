@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
+
+
 
 public class CustomUnityWindow : EditorWindow
 {
@@ -15,7 +15,13 @@ public class CustomUnityWindow : EditorWindow
     {
         if (GUILayout.Button("Update Player Animation"))
         {
-            if (EditorUtility.DisplayDialog("Update Animation", "Do you want to update all animations?\nThis could take a while... .", "Do it", "Nope")) Debug.Log("Hallo");
+            if (EditorUtility.DisplayDialog("Update Animation", "Do you want to update all animations?\nThis could take a while... .", "Do it", "Nope")) UpdateAnimations();
         }
+    }
+
+    private void UpdateAnimations()
+    {
+        PlayerSpriteSheet sheet = Resources.Load<PlayerSpriteSheet>("Scriptable Objects/Editor/Player Sprite Sheet");
+        if(sheet != null) sheet.UpdateSpritesAndAnimations();
     }
 }

@@ -1,82 +1,82 @@
 ﻿using Sirenix.OdinInspector;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class CharacterCreatorShader : MonoBehaviour
 {
-    [BoxGroup("From")]
-    [SerializeField]
-    private bool swapColors = true;
+    [System.Serializable]
+    public struct ColorSwap
+    {
+        public ColorPaletteBase from;
+        public ColorPaletteOverride to;
+    }
 
-    [BoxGroup("From")]
+    [BoxGroup("Required")]
+    [Required]
     [SerializeField]
-    private bool glow = true;
-
-    [BoxGroup("From")]
-    [ShowIf("swapColors")]
-    [SerializeField]
-    private Color baseColor = Color.green;
-
-    [BoxGroup("From")]
-    [ShowIf("swapColors")]
-    [SerializeField]
-    private Color lightColor = Color.green;
-
-    [BoxGroup("From")]
-    [ShowIf("swapColors")]
-    [SerializeField]
-    private Color shadeColor = Color.green;
-
-    [BoxGroup("From")]
-    [ShowIf("swapColors")]
-    [SerializeField]
-    private Color lineColor = Color.green;
-
-    [BoxGroup("From")]
-    [ShowIf("glow")]
-    [SerializeField]
-    private Color highlight = Color.green;
-
-    [BoxGroup("To")]
-    [ShowIf("swapColors")]
-    [SerializeField]
-    private Color toColor = Color.red;
-
-    [BoxGroup("To")]
-    [ShowIf("glow")]
-    [SerializeField]
-    [ColorUsageAttribute(true, true)]
-    private Color toHighlight = Color.red;
-
-    [BoxGroup("To")]
-    [SerializeField]
-    private bool invertColors = false;
-
     private SpriteRenderer spriteRenderer;
-    private Material material;
+
+    [BoxGroup("Buttons")]
+    [SerializeField]
+    private bool invert;
+
+    [SerializeField]
+    private List<ColorSwap> colorPalettes = new List<ColorSwap>();
+
+    private int maxColorCount = 7;
 
     private void Awake()
     {
-        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
-        this.material = this.spriteRenderer.material;
+        Temp();
     }
 
-    [Button]
     private void Temp()
+    {        
+        this.spriteRenderer.material.SetInt("_Invert", Convert.ToInt32(this.invert));
+
+        SwapColors();
+
+    }
+
+    public void SwapColors()
     {
-        this.material.SetInt("_Swap", Convert.ToInt32(this.swapColors));
-        this.material.SetInt("_Invert", Convert.ToInt32(this.invertColors));
-        this.material.SetInt("_Glow", Convert.ToInt32(this.glow));
+        int count = 1;
 
-        this.material.SetColor("_FromColor1", this.baseColor);
-        this.material.SetColor("_FromColor2", this.shadeColor);
-        this.material.SetColor("_FromColor3", this.lightColor);
-        this.material.SetColor("_FromColor4", this.lineColor);
-        this.material.SetColor("_FromHighlight", this.highlight);
+        for(int i = 1; i <= this.maxColorCount; i++)
+        {
+            this.spriteRenderer.material.SetColor("_Color_" + i, Color.black);
+            this.spriteRenderer.material.SetColor("_New_Color_" + i, Color.black);
+        }
 
-        this.material.SetColor("_ToColor", this.toColor);
-        this.material.SetColor("_ToHighlight", this.toHighlight);
+        this.spriteRenderer.material.SetColor("_Color_Highlight", Color.black);
+        this.spriteRenderer.material.SetColor("_New_Highlight", Color.black);
+
+        foreach (ColorSwap swap in this.colorPalettes)
+        {
+            if (swap.from == null || swap.to == null) break;
+
+            for(int i = 0; i < swap.from.colors.Count; i++)
+            {
+                Color from = swap.from.colors[i];
+                if (i >= swap.to.colors.Count) break;
+
+                Color to = swap.to.colors[i];
+
+                this.spriteRenderer.material.SetColor("_Color_"+count, from);
+                this.spriteRenderer.material.SetColor("_New_Color_" + count, to);
+                count++;
+            }
+
+            if (swap.to.addGlow)
+            {
+                this.spriteRenderer.material.SetColor("_Color_Highlight", swap.from.selectHighlight);
+                this.spriteRenderer.material.SetColor("_New_Highlight", swap.to.highlight);
+            }
+            
+            if (count > this.maxColorCount) break;
+        }
     }
 
 }

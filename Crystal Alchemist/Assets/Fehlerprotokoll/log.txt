@@ -768,3 +768,32 @@ UnityEngine.InputSystem.Utilities.DelegateHelpers.InvokeCallbacksSafe[TValue] (U
 UnityEngine.InputSystem.LowLevel.<>c__DisplayClass7_0:<set_onUpdate>b__0(NativeInputUpdateType, NativeInputEventBuffer*)
 UnityEngineInternal.Input.NativeInputSystem:NotifyUpdate(NativeInputUpdateType, IntPtr)
 
+Exception 21.05.2020 02:02:46: NullReferenceException: Object reference not set to an instance of an object
+CharacterCreatorMenu.updateGear () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorMenu.cs:55)
+CharacterCreatorMenu.Start () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorMenu.cs:30)
+
+Exception 21.05.2020 02:02:53: NullReferenceException: Object reference not set to an instance of an object
+CharacterCreatorPreview.UpdatePreview () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorPreview.cs:26)
+UnityEngine.Events.InvokableCall.Invoke () (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent.Invoke () (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+SimpleSignalListener.OnSignalRaised () (at Assets/Scripts/Utilities/SignalListeners/SimpleSignalListener.cs:12)
+SimpleSignal.Raise () (at Assets/Scripts/Scriptable Objects/Signals/SimpleSignal.cs:17)
+CharacterCreatorMenu.updatePreview () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorMenu.cs:44)
+CharacterCreatorButton.Click () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorButton.cs:14)
+CharacterCreatorPreset.Click () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorPreset.cs:12)
+UnityEngine.Events.InvokableCall.Invoke () (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent.Invoke () (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.UI.Button.Press () (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:68)
+UnityEngine.UI.Button.OnSubmit (UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:146)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISubmitHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:127)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 21.05.2020 02:12:38: NullReferenceException: Object reference not set to an instance of an object
+CharacterCreatorMenu.updateGear () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorMenu.cs:55)
+CharacterCreatorMenu.Start () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorMenu.cs:30)
+
+Exception 21.05.2020 02:14:20: NullReferenceException: Object reference not set to an instance of an object
+CharacterCreatorMenu.updateGear () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorMenu.cs:55)
+CharacterCreatorMenu.Start () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorMenu.cs:30)
+

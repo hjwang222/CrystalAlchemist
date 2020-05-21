@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 929082027}
   - component: {fileID: 929082028}
   - component: {fileID: 8293357237318993219}
+  - component: {fileID: 708318435842330769}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -53,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: a992ab17a4e18d64f93d2e70c1372908, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -132,6 +133,23 @@ MonoBehaviour:
   canChangeColor: 1
   spriteRenderer: {fileID: 0}
   colors: []
+--- !u!114 &708318435842330769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929082023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34fd9eb50509f5b4a90658d0e62ebc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 929082024}
+  invert: 0
+  colorPalettes:
+  - from: {fileID: 11400000, guid: 1bb2aff0d9ac48844abf0f3ae6fbc9c8, type: 2}
+    to: {fileID: 11400000, guid: 89f6da74224b2994cb25b7bf1020c01b, type: 2}
 --- !u!1 &1158493752
 GameObject:
   m_ObjectHideFlags: 0

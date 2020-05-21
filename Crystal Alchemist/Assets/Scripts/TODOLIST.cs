@@ -22,6 +22,11 @@ public class TODOLIST : MonoBehaviour
 
     //GRAPHICS: TitleScreen: Background 
 
+    //Haarfarbe: 3 Farben + 1 Highlightfarbe
+    //Hautfarbe: 3 Farben + 3 Schuppenfarbe
+    //Augenfarbe: 2 Farben
+    //Gearfarben: 4 Farben
+
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena
@@ -31,7 +36,6 @@ public class TODOLIST : MonoBehaviour
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)
-    //Localisation (IDs!)
     //Multiplayer (Mirror?)
     //Struct vs Class (int? ref)
 
