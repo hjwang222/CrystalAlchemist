@@ -15,8 +15,17 @@ MonoBehaviour:
   neverDisable: 1
   enableMode: 0
   restrictedRaces: 
-  colorGroup: 2
-  isDyeable: 1
+  colorTables:
+  - colorGroup: 2
+    highlight: {r: 0, g: 0, b: 0, a: 0}
+    main: {r: 1, g: 0.8235295, b: 0.65882355, a: 0}
+    shadows: {r: 0.8745099, g: 0.6666667, b: 0.47058827, a: 0}
+    lines: {r: 0.6901961, g: 0.45882356, b: 0.34117648, a: 0}
+  - colorGroup: 3
+    highlight: {r: 1, g: 0.8980393, b: 0.65882355, a: 0}
+    main: {r: 0.9960785, g: 0.69411767, b: 0, a: 0}
+    shadows: {r: 0.9960785, g: 0.69411767, b: 0, a: 0}
+    lines: {r: 0.6, g: 0.40000004, b: 0, a: 0}
   category: 
   parentName: 
   partName: 

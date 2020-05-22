@@ -26,12 +26,8 @@ public class CharacterCreatorPartProperty : ScriptableObject
     [SerializeField]
     private List<Race> restrictedRaces = new List<Race>();
 
-    [ShowIf("isDyeable", true)]
     [BoxGroup("Color Info")]
-    public ColorGroup colorGroup;
-
-    [BoxGroup("Color Info")]
-    public bool isDyeable = true;
+    public List<ColorTablePlayer> colorTables = new List<ColorTablePlayer>();
 
     [BoxGroup("Part Info")]
     public string category = "Head";

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
+using UnityEngine.UI;
 
 public class CharacterCreatorPart : MonoBehaviour
 {
@@ -15,4 +17,69 @@ public class CharacterCreatorPart : MonoBehaviour
 
     [ShowIf("isPreview", true)]
     public string previewDirection = "Down";
+
+    private int maxAmount = 8;
+
+    [SerializeField]
+    private SpriteRenderer sprite;
+
+    [SerializeField]
+    private Image image;
+
+    private Material mat;
+
+    private void Awake()
+    {
+        if (sprite != null) this.mat = sprite.material;
+        if (image != null) this.mat = image.material;
+    }
+
+    public void SetColors(List<Color> colors)
+    {
+        if (mat != null)
+        {
+            mat.SetInt("_UseColorGroup", 1);
+            mat.SetInt("_Swap", 1);
+
+            Clear(mat);
+
+            int i = 0;
+
+            while (i < this.property.colorTables.Count && i < colors.Count)
+            {
+                ChangeColorGroup(i, colors[i], mat);
+                i++;
+            }
+        }
+
+        
+        
+    }
+
+    private void ChangeColorGroup(int index, Color color, Material mat)
+    {
+        ColorTablePlayer colorTable = this.property.colorTables[index];
+
+        mat.SetColor("_Color_" + ((index * 4) + 1), colorTable.highlight);
+        mat.SetColor("_Color_" + ((index * 4) + 2), colorTable.main);
+        mat.SetColor("_Color_" + ((index * 4) + 3), colorTable.shadows);
+        mat.SetColor("_Color_" + ((index * 4) + 4), colorTable.lines);
+
+        mat.SetColor("_New_ColorGroup_" + (index + 1), color);
+    }
+
+    private void Clear(Material mat)
+    {
+        for (int i = 1; i <= this.maxAmount; i++)
+        {
+            mat.SetColor("_Color_" + i, Color.black);
+            mat.SetColor("_New_Color_" + i, Color.black);
+        }
+
+        mat.SetColor("_New_ColorGroup_1", Color.black);
+        mat.SetColor("_New_ColorGroup_2", Color.black);
+
+        mat.SetColor("_Color_Highlight", Color.black);
+        mat.SetColor("_New_Highlight", Color.black);
+    }
 }

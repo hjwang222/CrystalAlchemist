@@ -16,6 +16,11 @@ public class CharacterCreatorPreview : MonoBehaviour
         List<CharacterCreatorPart> parts = new List<CharacterCreatorPart>();
         UnityUtil.GetChildObjects<CharacterCreatorPart>(this.transform, parts);
 
+        StartCoroutine(testCo(parts));
+    }
+
+    IEnumerator testCo(List<CharacterCreatorPart> parts)
+    {
         foreach (CharacterCreatorPart part in parts)
         {
             if (part != null)
@@ -24,7 +29,6 @@ public class CharacterCreatorPreview : MonoBehaviour
 
                 Image image = part.GetComponent<Image>();
                 CharacterPartData data = this.mainMenu.creatorPreset.GetCharacterPartData(part.property.parentName);
-                Color color = this.mainMenu.creatorPreset.getColor(part.property.colorGroup);
 
                 if ((data != null
                     && (part.restrictedRaces.Count == 0 || part.restrictedRaces.Contains(this.mainMenu.creatorPreset.getRace())))
@@ -32,18 +36,23 @@ public class CharacterCreatorPreview : MonoBehaviour
 
                 if (part.gameObject.activeInHierarchy && image != null) //set Image and Color when active
                 {
-                    image.color = color;
-
                     if (data != null)
                     {
                         Sprite sprite = getSprite(data, part.property.category, part.previewDirection);
                         if (sprite != null) image.sprite = sprite;
                         else part.gameObject.SetActive(false);
                     }
+
+                    List<Color> colors = this.mainMenu.creatorPreset.getColors(part.property.colorTables);
+                    part.SetColors(colors);
+
+                    yield return new WaitForSeconds(1f);
                 }
             }
-
         }
+
+        
+
     }
 
     private Sprite getSprite(CharacterPartData data, string directory, string direction)

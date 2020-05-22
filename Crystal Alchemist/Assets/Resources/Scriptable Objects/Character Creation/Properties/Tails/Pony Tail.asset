@@ -15,8 +15,12 @@ MonoBehaviour:
   neverDisable: 0
   enableMode: 1
   restrictedRaces: 01000000
-  colorGroup: 0
-  isDyeable: 1
+  colorTables:
+  - colorGroup: 0
+    highlight: {r: 1, g: 1, b: 1, a: 0}
+    main: {r: 0.9725491, g: 0.6862745, b: 1, a: 0}
+    shadows: {r: 0.86666673, g: 0.48235297, b: 0.9058824, a: 0}
+    lines: {r: 0.6627451, g: 0.20000002, b: 0.7137255, a: 0}
   category: Body
   parentName: Tail
   partName: Pony Tail

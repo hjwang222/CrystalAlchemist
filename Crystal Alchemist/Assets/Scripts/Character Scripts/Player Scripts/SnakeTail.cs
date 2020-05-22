@@ -46,8 +46,8 @@ public class SnakeTail : MonoBehaviour
             if (this.parent.transform.position.y > this.transform.position.y) modify = 1;
             else modify = -1;
 
-            if (this.parent != null && this.parent.GetComponent<SortingGroup>() != null)
-                this.GetComponent<SortingGroup>().sortingOrder = this.parent.GetComponent<SortingGroup>().sortingOrder + modify;
+            if (this.parent != null && this.parent.GetComponent<SpriteRenderer>() != null)
+                this.GetComponent<SpriteRenderer>().sortingOrder = this.parent.GetComponent<SpriteRenderer>().sortingOrder + modify;
 
             if (this.isHead && this.parent.GetComponent<SortingGroup>() != null)
                 this.parent.GetComponent<SortingGroup>().sortingOrder = modify;

@@ -21,10 +21,13 @@ public class CharacterCreatorPartHandler : MonoBehaviour
             part.gameObject.SetActive(false);
 
             CharacterPartData data = this.preset.GetCharacterPartData(part.property.parentName, part.property.partName);
-            Color color = this.preset.getColor(part.property.colorGroup);
-
             if (data != null || part.property.neverDisable) part.gameObject.SetActive(true); 
-            if (part.gameObject.activeInHierarchy) part.GetComponent<SpriteRenderer>().color = color;            
+
+            if (part.gameObject.activeInHierarchy)
+            {
+                List<Color> colors = this.preset.getColors(part.property.colorTables);
+                part.SetColors(colors);
+            }
         }
 
         this.handler.Initialize();

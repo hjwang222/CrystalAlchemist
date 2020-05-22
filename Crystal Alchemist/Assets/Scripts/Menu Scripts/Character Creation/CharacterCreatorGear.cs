@@ -25,7 +25,7 @@ public class CharacterCreatorGear : CharacterCreatorButton
         if(!this.removeIt) this.mainMenu.creatorPreset.AddCharacterPartData(this.property.parentName, this.property.partName);
         else this.mainMenu.creatorPreset.RemoveCharacterPartData(this.property.parentName);
                
-        if (!property.isDyeable) this.mainMenu.creatorPreset.RemoveColorGroup(property.colorGroup);
+        //if (!property.isDyeable) this.mainMenu.creatorPreset.RemoveColorGroup(property.colorGroup);
         this.enableColorButton();
 
         base.Click();
@@ -34,7 +34,7 @@ public class CharacterCreatorGear : CharacterCreatorButton
     private void enableColorButton()
     {
         CharacterPartData data = this.mainMenu.creatorPreset.GetCharacterPartData(this.property);
-        if (data != null && this.colorButton != null) this.colorButton.SetActive(this.property.isDyeable);
+        //if (data != null && this.colorButton != null) this.colorButton.SetActive(this.property.isDyeable);
     }
     
 }

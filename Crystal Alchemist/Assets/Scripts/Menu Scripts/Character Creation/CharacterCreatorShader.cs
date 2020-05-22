@@ -10,7 +10,7 @@ public class CharacterCreatorShader : MonoBehaviour
     public struct ColorSwap
     {
         public ColorPaletteBase from;
-        public ColorPaletteOverride to;
+        public ColorPaletteNew to;
     }
 
     [BoxGroup("Required")]
@@ -36,8 +36,7 @@ public class CharacterCreatorShader : MonoBehaviour
     {        
         this.spriteRenderer.material.SetInt("_Invert", Convert.ToInt32(this.invert));
 
-        SwapColors();
-
+        //SwapColors();
     }
 
     public void SwapColors()
@@ -71,8 +70,8 @@ public class CharacterCreatorShader : MonoBehaviour
 
             if (swap.to.addGlow)
             {
-                this.spriteRenderer.material.SetColor("_Color_Highlight", swap.from.selectHighlight);
-                this.spriteRenderer.material.SetColor("_New_Highlight", swap.to.highlight);
+                this.spriteRenderer.material.SetColor("_Color_Highlight", swap.from.glowColor);
+                this.spriteRenderer.material.SetColor("_New_Highlight", swap.to.glow);
             }
             
             if (count > this.maxColorCount) break;
