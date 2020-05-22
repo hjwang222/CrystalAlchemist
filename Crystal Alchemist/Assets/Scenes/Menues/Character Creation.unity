@@ -423,7 +423,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 5a433d81dd8d67b428cbc0742668e02f, type: 2}
-  colorButton: {fileID: 1228604926}
   removeIt: 0
 --- !u!114 &20859311
 MonoBehaviour:
@@ -609,7 +608,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 1d383dbb03493c147afa34b301aa8227, type: 2}
-  colorButton: {fileID: 559763477}
   removeIt: 0
 --- !u!114 &31364785
 MonoBehaviour:
@@ -1081,9 +1079,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 589c282cd0298cd4c8cad92878692f7e, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 48380864}
 --- !u!114 &48380864
@@ -1342,9 +1340,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 3b766aeafc3b3994c9be8e6c46dc56e8, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 78923849}
 --- !u!114 &78923849
@@ -1905,7 +1903,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: c6993dbbbf654c14e84c4b9465a31534, type: 2}
-  colorButton: {fileID: 2038722528}
   removeIt: 0
 --- !u!114 &121357184
 MonoBehaviour:
@@ -2277,7 +2274,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: eeabad9b156735b47a5cb61f377dbd9a, type: 2}
-  colorButton: {fileID: 0}
   removeIt: 1
 --- !u!114 &132438337
 MonoBehaviour:
@@ -2671,7 +2667,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 4b1c40ab34c87bf44b2d09af7be52bb7, type: 2}
-  colorButton: {fileID: 805883805}
   removeIt: 1
 --- !u!114 &153097244
 MonoBehaviour:
@@ -3003,9 +2998,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 14e58966e8224b040a2c5d62285f0b50, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Up
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 169104571}
 --- !u!114 &169104571
@@ -4821,9 +4816,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 3b766aeafc3b3994c9be8e6c46dc56e8, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 251202190}
 --- !u!114 &251202190
@@ -5280,7 +5275,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 55e0e38861f0bbe4ebbd743b961dc285, type: 2}
-  colorButton: {fileID: 0}
   removeIt: 0
 --- !u!114 &280255613
 MonoBehaviour:
@@ -5506,11 +5500,11 @@ RectTransform:
   m_Children:
   - {fileID: 578938033}
   m_Father: {fileID: 1471000978}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -98, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &292915179
@@ -5815,9 +5809,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 3b766aeafc3b3994c9be8e6c46dc56e8, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 312357093}
 --- !u!114 &312357093
@@ -5951,7 +5945,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 6d01d103d0cafbf4e9ebb19ca4340ab5, type: 2}
-  colorButton: {fileID: 0}
   removeIt: 0
 --- !u!114 &314290732
 MonoBehaviour:
@@ -6551,7 +6544,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 5a433d81dd8d67b428cbc0742668e02f, type: 2}
-  colorButton: {fileID: 1228604926}
   removeIt: 1
 --- !u!114 &344035699
 MonoBehaviour:
@@ -7654,9 +7646,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: bb7434b4a4e5e7e478b961ca22374e14, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 0000000001000000
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 419761316}
 --- !u!114 &419761316
@@ -8238,9 +8230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 3b766aeafc3b3994c9be8e6c46dc56e8, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 447927860}
 --- !u!114 &447927860
@@ -8333,9 +8325,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: eeabad9b156735b47a5cb61f377dbd9a, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Up
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 448176669}
 --- !u!114 &448176669
@@ -8600,7 +8592,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 55e0e38861f0bbe4ebbd743b961dc285, type: 2}
-  colorButton: {fileID: 0}
   removeIt: 1
 --- !u!114 &451305474
 MonoBehaviour:
@@ -8847,9 +8838,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 827f7ee5a9d4a8541b3eca6ecb7ba50b, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 0}
 --- !u!1 &475937806
@@ -9069,9 +9060,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 5a433d81dd8d67b428cbc0742668e02f, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 477679947}
 --- !u!114 &477679947
@@ -10112,9 +10103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 3b766aeafc3b3994c9be8e6c46dc56e8, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 623982864}
 --- !u!114 &623982864
@@ -11669,9 +11660,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 557786c54ad65ab459fe94cde7234414, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Up
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 728722789}
 --- !u!114 &728722789
@@ -12327,7 +12318,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: c022ef83f5fe50c4eb9b6bb4cb155b2d, type: 2}
-  colorButton: {fileID: 2038722528}
   removeIt: 0
 --- !u!114 &752917318
 MonoBehaviour:
@@ -12565,6 +12555,189 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 761983442}
   m_CullTransparentMesh: 0
+--- !u!1 &773173247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 773173248}
+  - component: {fileID: 773173254}
+  - component: {fileID: 773173253}
+  - component: {fileID: 773173252}
+  - component: {fileID: 773173251}
+  - component: {fileID: 773173250}
+  - component: {fileID: 773173249}
+  m_Layer: 5
+  m_Name: Hero
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &773173248
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773173247}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.75000864, y: 0.75000864, z: 1}
+  m_Children:
+  - {fileID: 1562256995}
+  m_Father: {fileID: 1471000978}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -98, y: 0}
+  m_SizeDelta: {x: 120, y: 120}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &773173249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773173247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
+--- !u!114 &773173250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773173247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85bdd3f626386844ca6628e4746ceef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 175733141}
+  setFirstSelected: 1
+  overrideNavigation: 0
+  up: []
+  down: []
+  left: []
+  right: []
+--- !u!114 &773173251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773173247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc913d553581670489f37b9dc3d2ff1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenu: {fileID: 1303994798}
+  buttonNavigationSignal: {fileID: 0}
+  preset: {fileID: 11400000, guid: f85bfbd28a416dd43b2f759b5b3a0d35, type: 2}
+--- !u!114 &773173252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773173247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 1, g: 0.8705883, b: 0, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 773173253}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 773173251}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &773173253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773173247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 8340406974430208230, guid: ecfa44f3b97014343ac7726b7e4b73ef,
+    type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &773173254
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773173247}
+  m_CullTransparentMesh: 0
 --- !u!1 &789521213
 GameObject:
   m_ObjectHideFlags: 0
@@ -12616,9 +12789,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 32aec7aad5d1a894b840c74f2d680c50, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Up
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 789521216}
 --- !u!114 &789521216
@@ -13183,9 +13356,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 4593746cb7f53574b93548666a74eb88, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Up
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 811089013}
 --- !u!114 &811089013
@@ -14417,9 +14590,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 32aec7aad5d1a894b840c74f2d680c50, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 872742602}
 --- !u!114 &872742602
@@ -14662,11 +14835,11 @@ RectTransform:
   m_Children:
   - {fileID: 229667764}
   m_Father: {fileID: 1471000978}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -98}
+  m_AnchoredPosition: {x: 98, y: -98}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &909180094
@@ -14861,9 +15034,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 3b766aeafc3b3994c9be8e6c46dc56e8, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 917544520}
 --- !u!114 &917544520
@@ -16161,7 +16334,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: ed6b28ae89327024fbc3b3f49f480d27, type: 2}
-  colorButton: {fileID: 0}
   removeIt: 0
 --- !u!114 &995792014
 MonoBehaviour:
@@ -16399,7 +16571,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 69ebe7ec6ea8a314882650df85ef0f4b, type: 2}
-  colorButton: {fileID: 805883805}
   removeIt: 0
 --- !u!114 &1009146137
 MonoBehaviour:
@@ -17114,11 +17285,11 @@ RectTransform:
   m_Children:
   - {fileID: 1542766519}
   m_Father: {fileID: 1471000978}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 98, y: 0}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1034497166
@@ -17391,9 +17562,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 827f7ee5a9d4a8541b3eca6ecb7ba50b, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 0}
 --- !u!1 &1067934952
@@ -18070,9 +18241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 81debca7501c722488a8cd1d5f072d56, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 0000000001000000
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 1088213296}
 --- !u!114 &1088213296
@@ -18468,9 +18639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 55e0e38861f0bbe4ebbd743b961dc285, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Up
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 1143139964}
 --- !u!114 &1143139964
@@ -20168,7 +20339,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 4dc51bcdae4282946a69df8b61a4f03a, type: 2}
-  colorButton: {fileID: 559763477}
   removeIt: 0
 --- !u!114 &1237121099
 MonoBehaviour:
@@ -20334,9 +20504,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 6d01d103d0cafbf4e9ebb19ca4340ab5, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 1254177418}
 --- !u!114 &1254177418
@@ -20559,7 +20729,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: bb7434b4a4e5e7e478b961ca22374e14, type: 2}
-  colorButton: {fileID: 0}
   removeIt: 0
 --- !u!114 &1276436162
 MonoBehaviour:
@@ -21024,7 +21193,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 5cd5a467930fbc44eb7d99fb63e969bc, type: 2}
-  colorButton: {fileID: 0}
   removeIt: 0
 --- !u!114 &1298828051
 MonoBehaviour:
@@ -21190,9 +21358,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 3b766aeafc3b3994c9be8e6c46dc56e8, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 1299233262}
 --- !u!114 &1299233262
@@ -21372,7 +21540,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: bb7434b4a4e5e7e478b961ca22374e14, type: 2}
-  colorButton: {fileID: 0}
   removeIt: 1
 --- !u!114 &1311149963
 MonoBehaviour:
@@ -21538,9 +21705,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 6d01d103d0cafbf4e9ebb19ca4340ab5, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Up
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 1311724888}
 --- !u!114 &1311724888
@@ -22139,7 +22306,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 4b1c40ab34c87bf44b2d09af7be52bb7, type: 2}
-  colorButton: {fileID: 805883805}
   removeIt: 0
 --- !u!114 &1336364941
 MonoBehaviour:
@@ -22645,7 +22811,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: d7e9162f7e8b7a9418b1b8092f454b5e, type: 2}
-  colorButton: {fileID: 2038722528}
   removeIt: 0
 --- !u!114 &1347529307
 MonoBehaviour:
@@ -23087,9 +23252,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 3b766aeafc3b3994c9be8e6c46dc56e8, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 1362113348}
 --- !u!114 &1362113348
@@ -23321,9 +23486,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 3b766aeafc3b3994c9be8e6c46dc56e8, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 1376059541}
 --- !u!114 &1376059541
@@ -23950,7 +24115,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: eeabad9b156735b47a5cb61f377dbd9a, type: 2}
-  colorButton: {fileID: 0}
   removeIt: 0
 --- !u!114 &1426829264
 MonoBehaviour:
@@ -24364,6 +24528,7 @@ Transform:
   m_LocalPosition: {x: 20, y: 165, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 773173248}
   - {fileID: 292915178}
   - {fileID: 1034497165}
   - {fileID: 1624059002}
@@ -25129,9 +25294,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 14e58966e8224b040a2c5d62285f0b50, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 1511879647}
 --- !u!114 &1511879647
@@ -25807,9 +25972,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 4593746cb7f53574b93548666a74eb88, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 1545168664}
 --- !u!114 &1545168664
@@ -25850,6 +26015,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545168661}
+  m_CullTransparentMesh: 0
+--- !u!1 &1562256994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1562256995}
+  - component: {fileID: 1562256997}
+  - component: {fileID: 1562256996}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1562256995
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562256994}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 773173248}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1562256996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562256994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -7851576356166553682, guid: ecfa44f3b97014343ac7726b7e4b73ef,
+    type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1562256997
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562256994}
   m_CullTransparentMesh: 0
 --- !u!1 &1574836428
 GameObject:
@@ -26068,9 +26309,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 81debca7501c722488a8cd1d5f072d56, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 0000000001000000
-  previewDirection: Up
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 1599010294}
 --- !u!114 &1599010294
@@ -26259,7 +26500,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: c1af3e06c91be3447b30fb5d8752398d, type: 2}
-  colorButton: {fileID: 1228604926}
   removeIt: 0
 --- !u!114 &1612413408
 MonoBehaviour:
@@ -26764,7 +27004,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 4593746cb7f53574b93548666a74eb88, type: 2}
-  colorButton: {fileID: 2038722528}
   removeIt: 0
 --- !u!114 &1622687193
 MonoBehaviour:
@@ -26914,11 +27153,11 @@ RectTransform:
   m_Children:
   - {fileID: 1998969502}
   m_Father: {fileID: 1471000978}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 98, y: 0}
+  m_AnchoredPosition: {x: -98, y: -98}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1624059003
@@ -27785,7 +28024,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: afbfba43959e960488db8c58840cd089, type: 2}
-  colorButton: {fileID: 805883805}
   removeIt: 0
 --- !u!114 &1690673343
 MonoBehaviour:
@@ -28501,7 +28739,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: d1b7c2fb36e18354c870d12487607843, type: 2}
-  colorButton: {fileID: 2038722528}
   removeIt: 0
 --- !u!114 &1723662072
 MonoBehaviour:
@@ -28727,11 +28964,11 @@ RectTransform:
   m_Children:
   - {fileID: 242756403}
   m_Father: {fileID: 1471000978}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -98, y: -98}
+  m_AnchoredPosition: {x: 0, y: -98}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1730449007
@@ -29092,9 +29329,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: bb7434b4a4e5e7e478b961ca22374e14, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 0000000001000000
-  previewDirection: Up
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 1741173808}
 --- !u!114 &1741173808
@@ -29525,7 +29762,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 81debca7501c722488a8cd1d5f072d56, type: 2}
-  colorButton: {fileID: 805883805}
   removeIt: 0
 --- !u!114 &1747754234
 MonoBehaviour:
@@ -30195,9 +30431,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: eeabad9b156735b47a5cb61f377dbd9a, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 1789995332}
 --- !u!114 &1789995332
@@ -31912,9 +32148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 55e0e38861f0bbe4ebbd743b961dc285, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 1875948620}
 --- !u!114 &1875948620
@@ -32083,9 +32319,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 1d383dbb03493c147afa34b301aa8227, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 1884413367}
 --- !u!114 &1884413367
@@ -32178,9 +32414,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 589c282cd0298cd4c8cad92878692f7e, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Up
+  isFront: 0
   sprite: {fileID: 0}
   image: {fileID: 1893495551}
 --- !u!114 &1893495551
@@ -32314,7 +32550,6 @@ MonoBehaviour:
   mainMenu: {fileID: 1303994798}
   buttonNavigationSignal: {fileID: 0}
   property: {fileID: 11400000, guid: 1d383dbb03493c147afa34b301aa8227, type: 2}
-  colorButton: {fileID: 559763477}
   removeIt: 1
 --- !u!114 &1896047354
 MonoBehaviour:
@@ -33180,9 +33415,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 3b766aeafc3b3994c9be8e6c46dc56e8, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 02000000
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 1980645686}
 --- !u!114 &1980645686
@@ -34039,9 +34274,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   property: {fileID: 11400000, guid: 557786c54ad65ab459fe94cde7234414, type: 2}
-  isPreview: 0
+  isPreview: 1
   restrictedRaces: 
-  previewDirection: Down
+  isFront: 1
   sprite: {fileID: 0}
   image: {fileID: 2058008818}
 --- !u!114 &2058008818

@@ -11,7 +11,6 @@ public class TODOLIST : MonoBehaviour
     //--REWORKS--
     //TODO: Knockback Rework
     //TODO: Sound Effekte ersetzen!
-    //TODO: CharacterCreatorParts (Schuppen zusammen führen, da shader), LoadingSystem und Handler: Shader statt Spriterenderer 
 
     //--Content--
     //OBJECT: Bett (Tag/Nacht) und Sanduhr weg

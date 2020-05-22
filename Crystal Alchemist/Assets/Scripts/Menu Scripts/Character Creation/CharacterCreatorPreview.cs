@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
-using TMPro;
 
 public class CharacterCreatorPreview : MonoBehaviour
 {
@@ -16,11 +14,6 @@ public class CharacterCreatorPreview : MonoBehaviour
         List<CharacterCreatorPart> parts = new List<CharacterCreatorPart>();
         UnityUtil.GetChildObjects<CharacterCreatorPart>(this.transform, parts);
 
-        StartCoroutine(testCo(parts));
-    }
-
-    IEnumerator testCo(List<CharacterCreatorPart> parts)
-    {
         foreach (CharacterCreatorPart part in parts)
         {
             if (part != null)
@@ -38,33 +31,21 @@ public class CharacterCreatorPreview : MonoBehaviour
                 {
                     if (data != null)
                     {
-                        Sprite sprite = getSprite(data, part.property.category, part.previewDirection);
+                        CharacterCreatorPartProperty property = this.mainMenu.GetProperty(data.name, data.parentName);
+                        if (property != null) part.property = property;
+
+                        Sprite sprite = part.property.GetSprite(part.isFront);
+
                         if (sprite != null) image.sprite = sprite;
                         else part.gameObject.SetActive(false);
                     }
 
                     List<Color> colors = this.mainMenu.creatorPreset.getColors(part.property.colorTables);
                     part.SetColors(colors);
-
-                    yield return new WaitForSeconds(1f);
                 }
             }
         }
+    }     
 
-        
 
-    }
-
-    private Sprite getSprite(CharacterPartData data, string directory, string direction)
-    {
-        string path = "Art/Characters/Player Sprites/" + directory + "/" + data.parentName + "/" + data.name;
-        Sprite[] sprites = Resources.LoadAll<Sprite>(path);
-
-        foreach (Sprite sprite in sprites)
-        {
-            if (sprite.name.Contains(("Idle " + direction))) return sprite;
-        }
-
-        return null;
-    }
 }

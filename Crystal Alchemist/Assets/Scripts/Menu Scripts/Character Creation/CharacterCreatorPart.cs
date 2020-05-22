@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using System;
 using UnityEngine.UI;
 
 public class CharacterCreatorPart : MonoBehaviour
@@ -16,7 +15,7 @@ public class CharacterCreatorPart : MonoBehaviour
     public List<Race> restrictedRaces = new List<Race>();
 
     [ShowIf("isPreview", true)]
-    public string previewDirection = "Down";
+    public bool isFront = true;
 
     private int maxAmount = 8;
 
@@ -26,12 +25,23 @@ public class CharacterCreatorPart : MonoBehaviour
     [SerializeField]
     private Image image;
 
+    [SerializeField]
+    private bool addGlow = false;
+
+    [SerializeField]
+    [ColorUsage(true, true)]
+    private Color highlightColor;
+
     private Material mat;
 
     private void Awake()
-    {
+    {       
         if (sprite != null) this.mat = sprite.material;
-        if (image != null) this.mat = image.material;
+        if (image != null)
+        {
+            this.image.material = Instantiate<Material>(this.image.material);
+            this.mat = image.material;
+        }
     }
 
     public void SetColors(List<Color> colors)
@@ -51,21 +61,30 @@ public class CharacterCreatorPart : MonoBehaviour
                 i++;
             }
         }
-
-        
-        
     }
 
     private void ChangeColorGroup(int index, Color color, Material mat)
     {
-        ColorTablePlayer colorTable = this.property.colorTables[index];
+        ColorTable colorTable = this.property.colorTables[index];
 
         mat.SetColor("_Color_" + ((index * 4) + 1), colorTable.highlight);
         mat.SetColor("_Color_" + ((index * 4) + 2), colorTable.main);
         mat.SetColor("_Color_" + ((index * 4) + 3), colorTable.shadows);
         mat.SetColor("_Color_" + ((index * 4) + 4), colorTable.lines);
 
-        mat.SetColor("_New_ColorGroup_" + (index + 1), color);
+        mat.SetColor("_New_ColorGroup_" + (index + 1), color);        
+    }
+
+    private void AddGlow()
+    {
+        /*mat.SetInt("_AddGlow", Convert.ToInt32(this.addGlow));
+        mat.SetColor("_Color_Highlight", colorTable.glow);
+
+        this.highlightColor.r = color.r;
+        this.highlightColor.g = color.g;
+        this.highlightColor.b = color.b;
+
+        mat.SetColor("_New_Highlight", this.highlightColor);*/
     }
 
     private void Clear(Material mat)

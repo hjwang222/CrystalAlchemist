@@ -59,4 +59,13 @@ public class CharacterCreatorMenu : MenuBehaviour
             else this.creatorPreset.RemoveCharacterPartData(part.parentName, part.partName);
         }
     }
+
+    public CharacterCreatorPartProperty GetProperty(string name, string parent)
+    {
+        foreach (CharacterCreatorPartProperty part in this.properties)
+        {
+            if (part.partName == name && part.parentName == parent) return part;
+        }
+        return null;
+    }
 }

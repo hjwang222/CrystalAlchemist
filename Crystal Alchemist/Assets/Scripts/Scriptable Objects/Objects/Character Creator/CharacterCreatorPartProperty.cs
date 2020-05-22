@@ -1,12 +1,24 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using AssetIcons;
 
 public enum EnableMode
 {
     name,
     race,
     nameAndRace
+}
+
+[System.Serializable]
+public struct ColorTable
+{
+    public ColorGroup colorGroup;
+    public Color highlight;
+    public Color main;
+    public Color shadows;
+    public Color lines;
+    public Color glow;
 }
 
 [CreateAssetMenu(menuName = "Game/CharacterCreation/Property")]
@@ -26,8 +38,20 @@ public class CharacterCreatorPartProperty : ScriptableObject
     [SerializeField]
     private List<Race> restrictedRaces = new List<Race>();
 
+    [AssetIcon]
+    [PreviewField]
+    [HorizontalGroup("Preview")]
+    [VerticalGroup("Preview/Left")]
+    [SerializeField]
+    private Sprite front;
+
+    [PreviewField]
+    [VerticalGroup("Preview/Right")]
+    [SerializeField]
+    private Sprite back;
+
     [BoxGroup("Color Info")]
-    public List<ColorTablePlayer> colorTables = new List<ColorTablePlayer>();
+    public List<ColorTable> colorTables = new List<ColorTable>();
 
     [BoxGroup("Part Info")]
     public string category = "Head";
@@ -38,6 +62,12 @@ public class CharacterCreatorPartProperty : ScriptableObject
     [BoxGroup("Part Info")]
     public string partName = "Elf Ears";
 
+
+    public Sprite GetSprite(bool isFront)
+    {
+        if (isFront) return this.front;
+        else return this.back;
+    }
 
     public string getFullPath()
     {

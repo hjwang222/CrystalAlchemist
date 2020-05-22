@@ -219,11 +219,11 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
         }
     }
 
-    public List<Color> getColors(List<ColorTablePlayer> tables)
+    public List<Color> getColors(List<ColorTable> tables)
     {
         List<Color> colors = new List<Color>();
 
-        foreach (ColorTablePlayer table in tables)
+        foreach (ColorTable table in tables)
         {
             foreach (ColorGroupData data in this.colorGroups)
             {
