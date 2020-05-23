@@ -1745,6 +1745,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: cdbfaed376ed41046a1d2fef3f80055d,
         type: 2}
+    - target: {fileID: 8241799351507521353, guid: a0fea906fabfcfe429926638f98f0ac0,
+        type: 3}
+      propertyPath: savePointInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 6d043763fe32e164fadec2b584564b99,
+        type: 2}
     - target: {fileID: 8308682099614339938, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2347,7 +2353,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   translationID: SavepointSuccess
-  menuDialogBoxTextEnglish: Data saved!
+  type: 4
 --- !u!114 &127887853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2372,7 +2378,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   translationID: SavepointOverride
-  menuDialogBoxTextEnglish: Override savegame?
+  type: 4
 --- !u!114 &127887855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3018,7 +3024,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   translationID: 
-  menuDialogBoxTextEnglish: Quicktravel?
+  type: 4
 --- !u!1 &462525395
 GameObject:
   m_ObjectHideFlags: 0

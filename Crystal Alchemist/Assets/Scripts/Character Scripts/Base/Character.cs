@@ -516,6 +516,11 @@ public class Character : MonoBehaviour
         return this.transform.position;
     }
 
+    public virtual string GetCharacterName()
+    {
+        return this.stats.GetCharacterName();
+    }
+
     public Vector2 GetGroundPosition()
     {
         if (this.shadowRenderer != null) return this.shadowRenderer.transform.position;

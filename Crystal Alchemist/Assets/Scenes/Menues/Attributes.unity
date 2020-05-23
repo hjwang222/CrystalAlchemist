@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 47731168}
   - component: {fileID: 47731165}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: LifeRegen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -963,7 +963,7 @@ GameObject:
   - component: {fileID: 152231357}
   - component: {fileID: 152231354}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: ManaPlus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2222,10 +2222,9 @@ GameObject:
   - component: {fileID: 291859563}
   - component: {fileID: 291859568}
   - component: {fileID: 291859567}
-  - component: {fileID: 291859566}
   - component: {fileID: 291859564}
   m_Layer: 5
-  m_Name: BuffPlus
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2268,18 +2267,6 @@ MonoBehaviour:
   outlineColor: {r: 0.7176471, g: 0.6509804, b: 0.54509807, a: 1}
   outlineWidth: 0.2
   bold: 1
---- !u!114 &291859566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291859562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &291859567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2524,7 +2511,7 @@ GameObject:
   - component: {fileID: 344628983}
   - component: {fileID: 344628980}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: BuffPlus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3992,10 +3979,9 @@ GameObject:
   - component: {fileID: 752770140}
   - component: {fileID: 752770145}
   - component: {fileID: 752770144}
-  - component: {fileID: 752770143}
   - component: {fileID: 752770141}
   m_Layer: 5
-  m_Name: LifeRegen
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4038,18 +4024,6 @@ MonoBehaviour:
   outlineColor: {r: 0.7176471, g: 0.6509804, b: 0.54509807, a: 1}
   outlineWidth: 0.2
   bold: 1
---- !u!114 &752770143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752770139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &752770144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6207,7 +6181,7 @@ GameObject:
   - component: {fileID: 1492567303}
   - component: {fileID: 1492567300}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: DebuffMinus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6529,10 +6503,9 @@ GameObject:
   - component: {fileID: 1513776034}
   - component: {fileID: 1513776039}
   - component: {fileID: 1513776038}
-  - component: {fileID: 1513776037}
   - component: {fileID: 1513776035}
   m_Layer: 5
-  m_Name: ManaPlus
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6575,18 +6548,6 @@ MonoBehaviour:
   outlineColor: {r: 0.7176471, g: 0.6509804, b: 0.54509807, a: 1}
   outlineWidth: 0.2
   bold: 1
---- !u!114 &1513776037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513776033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1513776038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6753,10 +6714,9 @@ GameObject:
   - component: {fileID: 1590984240}
   - component: {fileID: 1590984245}
   - component: {fileID: 1590984244}
-  - component: {fileID: 1590984243}
   - component: {fileID: 1590984241}
   m_Layer: 5
-  m_Name: DebuffMinus
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6799,18 +6759,6 @@ MonoBehaviour:
   outlineColor: {r: 0.7176471, g: 0.6509804, b: 0.54509807, a: 1}
   outlineWidth: 0.2
   bold: 1
---- !u!114 &1590984243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1590984239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1590984244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7095,7 +7043,7 @@ GameObject:
   - component: {fileID: 1599818062}
   - component: {fileID: 1599818059}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: ManaRegen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7874,7 +7822,7 @@ GameObject:
   - component: {fileID: 1756920952}
   - component: {fileID: 1756920949}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: LifePlus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8313,10 +8261,9 @@ GameObject:
   - component: {fileID: 1865652600}
   - component: {fileID: 1865652605}
   - component: {fileID: 1865652604}
-  - component: {fileID: 1865652603}
   - component: {fileID: 1865652601}
   m_Layer: 5
-  m_Name: ManaRegen
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8359,18 +8306,6 @@ MonoBehaviour:
   outlineColor: {r: 0.7176471, g: 0.6509804, b: 0.54509807, a: 1}
   outlineWidth: 0.2
   bold: 1
---- !u!114 &1865652603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865652599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1865652604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9302,10 +9237,9 @@ GameObject:
   - component: {fileID: 2130533943}
   - component: {fileID: 2130533948}
   - component: {fileID: 2130533947}
-  - component: {fileID: 2130533946}
   - component: {fileID: 2130533944}
   m_Layer: 5
-  m_Name: LifePlus
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9348,18 +9282,6 @@ MonoBehaviour:
   outlineColor: {r: 0.7176471, g: 0.6509804, b: 0.54509807, a: 1}
   outlineWidth: 0.2
   bold: 1
---- !u!114 &2130533946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130533942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2130533947
 MonoBehaviour:
   m_ObjectHideFlags: 0

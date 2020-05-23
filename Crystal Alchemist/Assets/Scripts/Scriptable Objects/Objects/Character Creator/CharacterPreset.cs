@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 public enum Race
 {
@@ -58,8 +56,6 @@ public class CharacterPreset : ScriptableObject, ISerializationCallbackReceiver
 
     [SerializeField]
     private Race race;
-
-    public string characterName;
 
     [SerializeField]
     private List<ColorGroupData> colorGroups = new List<ColorGroupData>();

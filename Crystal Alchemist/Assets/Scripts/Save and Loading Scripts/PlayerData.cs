@@ -78,8 +78,7 @@ public class PlayerData
     }
 
     private void setPreset(CharacterPreset preset)
-    {
-        this.characterName = preset.characterName;        
+    {     
         this.race = preset.getRace().ToString();
 
         this.colorGroups.Clear();

@@ -9,9 +9,16 @@ public class SaveGameMenu : MonoBehaviour
     [SerializeField]
     private List<SaveSlot> slots = new List<SaveSlot>();
 
+    [BoxGroup("Save Menu")]
+    [Required]
+    [SerializeField]
+    private TeleportStats savePointInfo;
+
+    [BoxGroup("Save Menu")]
     [SerializeField]
     private MenuDialogBoxLauncher launcher;
 
+    [BoxGroup("Save Menu")]
     [SerializeField]
     private PlayerSaveGame saveGame;
 
@@ -27,6 +34,7 @@ public class SaveGameMenu : MonoBehaviour
 
     public void SaveGame(SaveSlot slot)
     {
+        this.saveGame.startSpawnPoint.SetValue(this.savePointInfo); //set as new Spawnpoint
         SaveSystem.Save(this.saveGame, slot.gameObject.name); //saves savegame to data
 
         UpdateSaves();

@@ -16,7 +16,7 @@ public class CrossHairIndicator : Indicator
         this.transform.rotation = Quaternion.identity;
         this.transform.SetParent(target.transform);
 
-        this.textField.text = target.stats.GetCharacterName();
+        this.textField.text = target.GetCharacterName();
     }
 
     public override void SetColor(Color color)

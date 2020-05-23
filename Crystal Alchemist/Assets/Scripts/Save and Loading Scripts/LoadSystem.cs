@@ -78,7 +78,6 @@ public class LoadSystem
     private static void loadPresetData(PlayerData data, CharacterPreset newPreset)
     {
         CharacterPreset preset = newPreset;
-        preset.characterName = data.characterName;
 
         if (Enum.TryParse(data.race, out Race race)) preset.setRace(race);
 

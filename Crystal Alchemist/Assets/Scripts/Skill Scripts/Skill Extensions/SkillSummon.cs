@@ -15,7 +15,7 @@ public class SkillSummon : SkillExtension
 
     public string getPetName()
     {
-        return this.summon.stats.GetCharacterName();
+        return this.summon.GetCharacterName();
     }
 
     private void summoning()

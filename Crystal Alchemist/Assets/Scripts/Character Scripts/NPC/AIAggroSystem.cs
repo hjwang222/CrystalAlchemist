@@ -64,7 +64,7 @@ public class AIAggroSystem : MonoBehaviour
             if (currentAggro > aggro)
             {
                 aggro = currentAggro;
-                target = character.stats.GetCharacterName();
+                target = character.GetCharacterName();
             }
         }
     }

@@ -10,6 +10,8 @@ public class PlayerSaveGame : ScriptableObject
     public TimeValue time;
 
     [BoxGroup("Player")]
+    public StringValue characterName;
+    [BoxGroup("Player")]
     public CharacterPreset playerPreset;
     [BoxGroup("Player")]
     public CharacterValues playerValue;
@@ -40,7 +42,7 @@ public class PlayerSaveGame : ScriptableObject
     {
         this.time.Clear();
         this.timePlayed.setValue(0f);
-        this.stats.SetCharacterName("Hero");
+        this.characterName.SetValue("Hero");
         this.playerValue.Clear(this.stats);
         this.inventory.Clear();
         this.buttons.Clear();
@@ -51,7 +53,7 @@ public class PlayerSaveGame : ScriptableObject
         GameUtil.setPreset(this.defaultPreset, this.playerPreset);
     }
 
-    public void SetCharacterName(string characterName) => this.stats.SetCharacterName(characterName);
+    public void SetCharacterName(string characterName) => this.characterName.SetValue(characterName);
 
-    public string GetCharacterName() { return this.stats.GetCharacterName(); }
+    public string GetCharacterName() { return this.characterName.getValue(); }
 }

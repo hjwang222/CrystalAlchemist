@@ -29,7 +29,7 @@ public class AnalyseEnemy : MonoBehaviour
     {
         this.ImageitemPreview.gameObject.SetActive(false);
 
-        this.TMPcharacterName.text = this.npc.stats.GetCharacterName();
+        this.TMPcharacterName.text = this.npc.GetCharacterName();
         this.lifeBar.fillAmount((this.npc.values.life / this.npc.values.maxLife));
         this.statusEffectBar.setCharacter(this.npc.values);
 

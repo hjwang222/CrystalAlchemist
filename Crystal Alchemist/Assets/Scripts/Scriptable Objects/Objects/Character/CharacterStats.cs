@@ -191,11 +191,6 @@ public class CharacterStats : ScriptableObject
         return FormatUtil.GetLocalisedText(this.name+"_Name", LocalisationFileType.characters);
     }
 
-    public void SetCharacterName(string characterName)
-    {
-        
-    }
-
     private void UpdateStats()
     {
         if (this.maxLife < this.startLife) this.maxLife = this.startLife;

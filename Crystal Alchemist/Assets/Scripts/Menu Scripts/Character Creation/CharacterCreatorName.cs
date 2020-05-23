@@ -10,24 +10,22 @@ public class CharacterCreatorName : CharacterCreatorButton
     [SerializeField]
     private Selectable confirmButton;
 
+    [SerializeField]
+    private StringValue playerName;
+
     private void Start()
     {
-        setNameFromPreset();
         if(GameEvents.current != null) GameEvents.current.OnCancel += Deactivate;
     }
 
     private void OnDestroy()
     {
         if (GameEvents.current != null) GameEvents.current.OnCancel -= Deactivate;
-    }
-
-    private void setNameFromPreset() => this.inputField.text = this.mainMenu.creatorPreset.characterName;    
-
-    private void OnEnable() => setNameFromPreset();    
+    }  
 
     public void Confirm()
     {
-        this.mainMenu.creatorPreset.characterName = this.inputField.text;
+        this.playerName.SetValue(this.inputField.text);
 
         if (this.inputField.text.Length > 1) UnityUtil.SetInteractable(this.confirmButton, true);
         else UnityUtil.SetInteractable(this.confirmButton, false);

@@ -5,24 +5,29 @@ using System.Collections;
 public class Player : Character
 {
     [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
+    [BoxGroup("Player Objects")]
     [SerializeField]
     private SimpleSignal healthSignalUI;
 
     [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
+    [BoxGroup("Player Objects")]
     [SerializeField]
     private SimpleSignal manaSignalUI;
 
     [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
+    [BoxGroup("Player Objects")]
     [SerializeField]
     private SimpleSignal presetSignal;
 
     [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
+    [BoxGroup("Player Objects")]
     [SerializeField]
     private StringValue dialogText;
+
+    [Required]
+    [BoxGroup("Player Objects")]
+    [SerializeField]
+    private StringValue characterName;
 
     ///////////////////////////////////////////////////////////////
 
@@ -98,7 +103,7 @@ public class Player : Character
             AnimatorUtil.SetAnimatorParameter(this.animator, "Dead", true);
 
             this.values.currentState = CharacterState.dead;
-            this.myRigidbody.bodyType = RigidbodyType2D.Static;
+            this.myRigidbody.bodyType = RigidbodyType2D.Kinematic; //Static causes Room to empty
             MenuEvents.current.OpenDeath();
         }
     }
@@ -168,7 +173,7 @@ public class Player : Character
     {
         if (this.values.currentState != CharacterState.inDialog)
         {
-            this.dialogText.setValue(text);
+            this.dialogText.SetValue(text);
             MenuEvents.current.OpenDialogBox();
         }
     }
@@ -206,5 +211,10 @@ public class Player : Character
                 StatusEffectUtil.AddStatusEffect(effect, this);
             }
         }
+    }
+
+    public override string GetCharacterName()
+    {
+        return this.characterName.getValue();
     }
 }

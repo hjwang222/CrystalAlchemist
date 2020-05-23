@@ -11,7 +11,7 @@ public class StringValue : ScriptableObject, ISerializationCallbackReceiver
         return this.value;
     }
 
-    public void setValue(string value)
+    public void SetValue(string value)
     {
         this.value = value;
     }

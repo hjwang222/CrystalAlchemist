@@ -74,10 +74,13 @@ public class RespawnSystem : MonoBehaviour
 
     private void Updating()
     {
-        if (NotActive()) DisableGameObjects(); //set characters inactive
-        SetRespawnObjects(); //Add inactive characters to list
-        UpdateRespawnObjects(); //update timer of listed characters
-        if (!NotActive()) SpawnObjects(); //spawn characters      
+        if (this.gameObject.activeInHierarchy) //stops system when not active
+        {
+            if (NotActive()) DisableGameObjects(); //set characters inactive
+            SetRespawnObjects(); //Add inactive characters to list
+            UpdateRespawnObjects(); //update timer of listed characters
+            if (!NotActive()) SpawnObjects(); //spawn characters    
+        }
     }
 
     private void SetRespawnObjects()

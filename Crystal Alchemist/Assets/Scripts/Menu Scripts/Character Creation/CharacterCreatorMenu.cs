@@ -34,7 +34,6 @@ public class CharacterCreatorMenu : MenuBehaviour
     public void Confirm()
     {
         GameUtil.setPreset(this.creatorPreset, this.saveGame.playerPreset); //save Preset 
-        this.saveGame.SetCharacterName(this.creatorPreset.characterName);
         updatePreview();
         base.ExitMenu();
     }

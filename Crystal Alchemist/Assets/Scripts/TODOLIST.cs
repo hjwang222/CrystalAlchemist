@@ -2,13 +2,9 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //TODO (0.2.5.0):
-    //BUG: Respawn after Area Enable?
-    //BUG: Death Screen all Disabled
-    //BUG: Teleport not right?
-
     //TODO (0.2.5.2):
     //--REWORKS--
+    //BUG: Elder Stones not correctly loaded
     //TODO: Knockback Rework
     //TODO: Sound Effekte ersetzen!
 
@@ -18,6 +14,7 @@ public class TODOLIST : MonoBehaviour
     //TODO: Schwimmen (Sprite Mask)
     //SKILL: Rundumschlag (wind)
     //TODO: Random Mob Spawn
+    //TODO: Enemy shader?
 
     //GRAPHICS: TitleScreen: Background 
     //--Boss Fight--
