@@ -4,7 +4,7 @@ public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.2):
     //--REWORKS--
-    //BUG: Elder Stones not correctly loaded
+    //TODO: Minigames
     //TODO: Knockback Rework
     //TODO: Sound Effekte ersetzen!
 

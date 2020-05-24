@@ -46,6 +46,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -140,15 +141,11 @@ MonoBehaviour:
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
-  audioSource: {fileID: 0}
-  spriteRenderer: {fileID: 0}
   context: {fileID: 0}
-  miniGame: {fileID: 2175749950124388385, guid: eabd3c0f4c166ba40b83f590a01393da,
-    type: 3}
-  openMiniGameMenuSignal: {fileID: 11400000, guid: 89aaa7b72e0d77f4aade4bacacb134a7,
-    type: 2}
-  miniGameSignal: {fileID: 11400000, guid: daf7c46dd8efc4e4cac43cc104163fdc, type: 2}
   matches: {fileID: 11400000, guid: 3885813eea5e85c49b6b4768be6f962c, type: 2}
+  miniGameRound: {fileID: 5532593878105003460, guid: 95451f4f668f99e47b6608907ec80d4b,
+    type: 3}
+  UIInfo: {fileID: 11400000, guid: cb1768cc048714644a955f6e46d2a296, type: 2}
 --- !u!61 &5031225405888053163
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -221,15 +218,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texts:
   - trigger: 1
-    dialogBoxText: "Du hast <loot amount> <loot name> f\xFCr <price> <item name>
-      gekauft!"
-    dialogBoxTextEnglish: You bought <loot amount> <loot name> for <price> <item
-      name>!
+    ID: 
+    type: 6
   - trigger: 2
-    dialogBoxText: "Du kannst das nicht kaufen.\nDu ben\xF6tigst <price> <item name>."
-    dialogBoxTextEnglish: 'You cant buy that.
-
-      You need <price> <item name>.'
+    ID: 
+    type: 6
 --- !u!1 &5264114047713367490
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +269,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

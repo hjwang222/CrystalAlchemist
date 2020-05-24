@@ -12,6 +12,11 @@ public class MiniGameUI : MenuBehaviour
     [Required]
     private CustomCursor cursor;
 
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    [Required]
+    private MiniGameInfo UIInfo;
+
     [HideInInspector]
     public MiniGameRound miniGameRound;
 
@@ -75,7 +80,7 @@ public class MiniGameUI : MenuBehaviour
     [Required]
     private MiniGameText loseText;
 
-    private MiniGame miniGameObject;
+    private MiniGameInfo info;
     private MiniGameRound activeRound;
     private MiniGameMatch match;
     private int matchIndex = 0;    
@@ -86,7 +91,7 @@ public class MiniGameUI : MenuBehaviour
     public override void Start()
     {
         base.Start();
-        MenuEvents.current.OnMiniGame += SetMiniGame;
+        SetMiniGame();
     }
 
     public override void Update()
@@ -99,18 +104,16 @@ public class MiniGameUI : MenuBehaviour
         }
     }
 
-    public void SetMiniGame(MiniGame miniGame)
+    public void SetMiniGame()
     {
-        if (miniGame != null)
-        {
-            this.miniGameObject = miniGame;
-            this.miniGameRound = miniGame.miniGameRound;
-            this.titleField.text = miniGame.GetName();
-            this.mainDescription = miniGame.GetDescription();
-        }
+        this.info = this.UIInfo;
+
+        this.miniGameRound = this.info.miniGameUI;
+        this.titleField.text = this.info.GetName();
+        this.mainDescription = this.info.GetDescription();        
 
         showDialog();
-        this.dialogBox.setValues(this.miniGameObject.getMatches().Count);
+        this.dialogBox.setValues(this.info.matches.GetMatches().Count);
     }
 
     public void startRound()
@@ -148,12 +151,13 @@ public class MiniGameUI : MenuBehaviour
     public void setMatch(int difficulty)
     {
         this.matchIndex = difficulty - 1;
-
-        if (this.miniGameObject.getMatches().Count > 0)
+        
+        if (this.info.matches.GetMatches().Count > 0)
         {
-            this.match = this.miniGameObject.getMatches()[this.matchIndex];
+            this.match = this.info.matches.GetMatches()[this.matchIndex];
             this.trySlots.setValues(this.match.winsNeeded, this.match.maxRounds);
         }
+
         resetTrys();
     }
 
@@ -203,15 +207,7 @@ public class MiniGameUI : MenuBehaviour
     {
         endRound();
 
-        this.miniGameObject.updateInternalMatches();
         this.dialogBox.UpdateDialogBox();
         this.dialogBox.gameObject.SetActive(true);
-    }
-
-    public override void OnDestroy()
-    {
-        base.OnDestroy();
-        this.miniGameObject.DestroyIt();
-        MenuEvents.current.OnMiniGame -= SetMiniGame;
     }
 }

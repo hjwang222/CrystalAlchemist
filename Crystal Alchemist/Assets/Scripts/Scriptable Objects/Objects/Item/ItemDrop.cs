@@ -17,10 +17,18 @@ public class ItemDrop : ScriptableObject
         return null;
     }
 
+    public ItemDrop Instantiate(int amount)
+    {
+        ItemDrop clone = Instantiate(this);
+        clone.name = this.name;
+        clone.Initialize(amount); //Set correct stats name for unique items
+        return clone;
+    }
+
     public void Initialize(int amount)
     {
         ItemStats temp = Instantiate(this.stats);
-        temp.name = this.stats.name;
+        temp.name = this.name;
         temp.Initialize(amount);
         this.stats = temp;
     }

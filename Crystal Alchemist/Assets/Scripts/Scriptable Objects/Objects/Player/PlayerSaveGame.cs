@@ -55,5 +55,5 @@ public class PlayerSaveGame : ScriptableObject
 
     public void SetCharacterName(string characterName) => this.characterName.SetValue(characterName);
 
-    public string GetCharacterName() { return this.characterName.getValue(); }
+    public string GetCharacterName() { return this.characterName.GetValue(); }
 }

@@ -2,7 +2,6 @@
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 public enum Language
 {
@@ -20,7 +19,9 @@ public enum LocalisationFileType
     statuseffects,
     objects,
     minigames,
-    maps
+    maps, 
+    tutorials,
+    patchnotes
 }
 
 public class LocalisationData
@@ -34,27 +35,30 @@ public class LocalisationData
     public Dictionary<string, string> statuseffects;
     public Dictionary<string, string> objects;
     public Dictionary<string, string> minigames;
+    public Dictionary<string, string> tutorials;
+    public Dictionary<string, string> patchNotes;
 
     private char lineSeperator = '\n';
     private char surround = '"';
     private string[] fieldSeperator = { "\",\"" };
     public Language language;
 
-    public LocalisationData(Language language, TextAsset skillTexts, TextAsset itemTexts,   
-                     TextAsset characterTexts, TextAsset dialogTexts, TextAsset menuTexts,
-                     TextAsset mapTexts, TextAsset statusEffects, TextAsset objectTexts, TextAsset miniGameTexts)
+    public LocalisationData(Language language)
     {
         this.language = language;
         string attributeID = GetLanguageID();
-        skills = GetDictionaryValues(attributeID, skillTexts);
-        items = GetDictionaryValues(attributeID, itemTexts);
-        characters = GetDictionaryValues(attributeID, characterTexts);
-        dialogs = GetDictionaryValues(attributeID, dialogTexts);
-        menues = GetDictionaryValues(attributeID, menuTexts);
-        maps = GetDictionaryValues(attributeID, mapTexts);
-        statuseffects = GetDictionaryValues(attributeID, statusEffects);
-        objects = GetDictionaryValues(attributeID, objectTexts);
-        minigames = GetDictionaryValues(attributeID, miniGameTexts);
+
+        skills = GetDictionaryValues(attributeID, LocalisationFileType.skills);
+        items = GetDictionaryValues(attributeID, LocalisationFileType.items);
+        characters = GetDictionaryValues(attributeID, LocalisationFileType.characters);
+        dialogs = GetDictionaryValues(attributeID, LocalisationFileType.dialogs);
+        menues = GetDictionaryValues(attributeID, LocalisationFileType.menues);
+        maps = GetDictionaryValues(attributeID, LocalisationFileType.maps);
+        statuseffects = GetDictionaryValues(attributeID, LocalisationFileType.statuseffects);
+        objects = GetDictionaryValues(attributeID, LocalisationFileType.objects);
+        minigames = GetDictionaryValues(attributeID, LocalisationFileType.minigames);
+        tutorials = GetDictionaryValues(attributeID, LocalisationFileType.tutorials);
+        patchNotes = GetDictionaryValues(attributeID, LocalisationFileType.patchnotes);
     }
 
     public string GetLocalisedValue(string key, LocalisationFileType type)
@@ -72,6 +76,8 @@ public class LocalisationData
             case LocalisationFileType.statuseffects: this.statuseffects.TryGetValue(key, out value); break;
             case LocalisationFileType.objects: this.objects.TryGetValue(key, out value); break;
             case LocalisationFileType.minigames: this.minigames.TryGetValue(key, out value); break;
+            case LocalisationFileType.tutorials: this.tutorials.TryGetValue(key, out value); break;
+            case LocalisationFileType.patchnotes: this.patchNotes.TryGetValue(key, out value); break;
         }
 
         return value;
@@ -83,8 +89,9 @@ public class LocalisationData
         return "de";
     }
 
-    private Dictionary<string, string> GetDictionaryValues(string attributeID, TextAsset file)
+    private Dictionary<string, string> GetDictionaryValues(string attributeID, LocalisationFileType type)
     {
+        TextAsset file = Resources.Load<TextAsset>("Data/Localisation/"+type.ToString());
         Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
         string[] lines = file.text.Split(lineSeperator);

@@ -16,6 +16,7 @@ public class MenuManager : MonoBehaviour
         MenuEvents.current.OnSave += OpenSavePoint;
         MenuEvents.current.OnDialogBox += OpenDialogBox;
         MenuEvents.current.OnMenuDialogBox += OpenMenuDialogBox;
+        MenuEvents.current.OnTutorial += OpenTutorial;
     }
 
     private void OnDestroy()
@@ -31,6 +32,7 @@ public class MenuManager : MonoBehaviour
         MenuEvents.current.OnSave -= OpenSavePoint;
         MenuEvents.current.OnDialogBox -= OpenDialogBox;
         MenuEvents.current.OnMenuDialogBox -= OpenMenuDialogBox;
+        MenuEvents.current.OnTutorial -= OpenTutorial;
     }
 
     public void OpenInventory() => OpenScene("InventoryMenu");
@@ -49,11 +51,13 @@ public class MenuManager : MonoBehaviour
 
     public void OpenDeath() => OpenScene("Death Screen");
 
-    public void OpenMiniGame(MiniGame miniGame) => OpenScene("Minigame");
+    public void OpenMiniGame() => OpenScene("Minigame");
 
     public void OpenDialogBox() => OpenScene("DialogBox");
 
     public void OpenMenuDialogBox() => OpenScene("MenuDialogBox");
+
+    public void OpenTutorial() => OpenScene("Tutorial");
 
     private void OpenScene(string scene)
     {

@@ -6,7 +6,7 @@ public class StringValue : ScriptableObject, ISerializationCallbackReceiver
     [SerializeField]
     private string value;
 
-    public string getValue()
+    public string GetValue()
     {
         return this.value;
     }

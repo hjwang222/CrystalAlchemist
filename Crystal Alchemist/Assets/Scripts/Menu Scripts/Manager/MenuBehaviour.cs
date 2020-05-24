@@ -17,6 +17,10 @@ public class MenuBehaviour : PreventDeselection
     public CharacterValues playerValues;
 
     [BoxGroup("Menu")]
+    [SerializeField]
+    private bool showBlackBackground = true;
+
+    [BoxGroup("Menu")]
     public InfoBox infoBox;
 
     public virtual void Start()
@@ -29,7 +33,7 @@ public class MenuBehaviour : PreventDeselection
 
             IngameMenuHandler.lastState = this.playerValues.currentState;
             GameEvents.current.DoMenuOpen(CharacterState.inMenu);
-            GameEvents.current.DoMenuOverlay(true);
+            if(this.showBlackBackground) GameEvents.current.DoMenuOverlay(true);
 
             if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.getMusicInMenu());
         }

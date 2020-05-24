@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class MiniGameMatch
+public struct MiniGameMatch
 {
     [FoldoutGroup("$difficulty")]
     [Range(1, 6)]
@@ -41,7 +41,7 @@ public class MiniGameMatch
     }
 }
 
-[CreateAssetMenu(menuName = "Game/Mini Game Matches")]
+[CreateAssetMenu(menuName = "Game/Menu/Mini Game Matches")]
 public class MiniGameMatches: ScriptableObject
 {
     [SerializeField]

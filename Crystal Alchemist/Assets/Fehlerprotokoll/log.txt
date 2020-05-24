@@ -13059,3 +13059,116 @@ SimpleSignal.Raise () (at Assets/Scripts/Scriptable Objects/Signals/SimpleSignal
 CharacterCreatorMenu.updatePreview () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorMenu.cs:44)
 CharacterCreatorMenu.Start () (at Assets/Scripts/Menu Scripts/Character Creation/CharacterCreatorMenu.cs:31)
 
+Exception 24.05.2020 14:08:11: NullReferenceException: Object reference not set to an instance of an object
+MiniGameUI.setMatch (System.Int32 difficulty) (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:152)
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:36)
+MiniGameSlider.setDifficulty (System.Int32 value) (at Assets/Scripts/MiniGames Scripts/MiniGameSlider.cs:46)
+MiniGameDialogbox.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:30)
+
+Exception 24.05.2020 14:08:17: NullReferenceException: Object reference not set to an instance of an object
+MiniGameUI.setMatch (System.Int32 difficulty) (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:152)
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:36)
+MiniGameSlider.setDifficulty (System.Int32 value) (at Assets/Scripts/MiniGames Scripts/MiniGameSlider.cs:46)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.CachedInvokableCall`1[T].Invoke (System.Object[] args) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent.Invoke () (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.UI.Button.Press () (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:68)
+UnityEngine.UI.Button.OnPointerClick (UnityEngine.EventSystems.PointerEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:110)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointerClickHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:50)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 24.05.2020 14:08:18: NullReferenceException: Object reference not set to an instance of an object
+MiniGameUI.OnDestroy () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:214)
+
+Exception 24.05.2020 14:10:48: NullReferenceException: Object reference not set to an instance of an object
+MiniGameUI.setMatch (System.Int32 difficulty) (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:152)
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:36)
+MiniGameSlider.setDifficulty (System.Int32 value) (at Assets/Scripts/MiniGames Scripts/MiniGameSlider.cs:46)
+MiniGameDialogbox.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:30)
+
+Exception 24.05.2020 14:26:19: NullReferenceException: Object reference not set to an instance of an object
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:41)
+MiniGameUI.showDialog () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:213)
+MiniGameUI.SetMiniGame () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:118)
+MiniGameUI.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:94)
+
+Exception 24.05.2020 14:26:19: NullReferenceException: Object reference not set to an instance of an object
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:41)
+MiniGameSlider.setDifficulty (System.Int32 value) (at Assets/Scripts/MiniGames Scripts/MiniGameSlider.cs:46)
+MiniGameDialogbox.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:30)
+
+Exception 24.05.2020 14:28:22: NullReferenceException: Object reference not set to an instance of an object
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:41)
+MiniGameUI.showDialog () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:213)
+MiniGameUI.SetMiniGame () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:118)
+MiniGameUI.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:94)
+
+Exception 24.05.2020 14:28:22: NullReferenceException: Object reference not set to an instance of an object
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:41)
+MiniGameSlider.setDifficulty (System.Int32 value) (at Assets/Scripts/MiniGames Scripts/MiniGameSlider.cs:46)
+MiniGameDialogbox.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:30)
+
+Exception 24.05.2020 14:28:24: MissingReferenceException: The object of type 'MiniGame' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+MiniGame.DestroyIt () (at Assets/Scripts/MiniGames Scripts/MiniGame.cs:41)
+MiniGameUI.OnDestroy () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:220)
+
+Exception 24.05.2020 14:29:49: NullReferenceException: Object reference not set to an instance of an object
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:38)
+MiniGameUI.showDialog () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:213)
+MiniGameUI.SetMiniGame () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:118)
+MiniGameUI.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:94)
+
+Exception 24.05.2020 14:29:49: NullReferenceException: Object reference not set to an instance of an object
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:38)
+MiniGameSlider.setDifficulty (System.Int32 value) (at Assets/Scripts/MiniGames Scripts/MiniGameSlider.cs:46)
+MiniGameDialogbox.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:28)
+
+Exception 24.05.2020 14:33:12: NullReferenceException: Object reference not set to an instance of an object
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:38)
+MiniGameUI.showDialog () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:213)
+MiniGameUI.SetMiniGame () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:118)
+MiniGameUI.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:94)
+
+Exception 24.05.2020 14:33:12: NullReferenceException: Object reference not set to an instance of an object
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:38)
+MiniGameSlider.setDifficulty (System.Int32 value) (at Assets/Scripts/MiniGames Scripts/MiniGameSlider.cs:46)
+MiniGameDialogbox.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:28)
+
+Exception 24.05.2020 14:37:05: NullReferenceException: Object reference not set to an instance of an object
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:38)
+MiniGameUI.showDialog () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:213)
+MiniGameUI.SetMiniGame () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:118)
+MiniGameUI.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:94)
+
+Exception 24.05.2020 14:37:06: NullReferenceException: Object reference not set to an instance of an object
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:38)
+MiniGameSlider.setDifficulty (System.Int32 value) (at Assets/Scripts/MiniGames Scripts/MiniGameSlider.cs:46)
+MiniGameDialogbox.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:28)
+
+Exception 24.05.2020 15:01:01: NullReferenceException: Object reference not set to an instance of an object
+MiniGameUI.setMatch (System.Int32 difficulty) (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:155)
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:33)
+MiniGameUI.showDialog () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:210)
+MiniGameUI.SetMiniGame () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:115)
+MiniGameUI.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:94)
+
+Exception 24.05.2020 15:01:01: NullReferenceException: Object reference not set to an instance of an object
+MiniGameUI.setMatch (System.Int32 difficulty) (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:155)
+MiniGameDialogbox.UpdateDialogBox () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:33)
+MiniGameSlider.setDifficulty (System.Int32 value) (at Assets/Scripts/MiniGames Scripts/MiniGameSlider.cs:46)
+MiniGameDialogbox.Start () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:28)
+
+Exception 24.05.2020 15:01:07: NullReferenceException: Object reference not set to an instance of an object
+MiniGameUI.startRound () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:132)
+MiniGameUI.startMatch () (at Assets/Scripts/MiniGames Scripts/MiniGameUI.cs:172)
+MiniGameDialogbox.startMatch () (at Assets/Scripts/MiniGames Scripts/MiniGameDialogbox.cs:60)
+UnityEngine.Events.InvokableCall.Invoke () (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent.Invoke () (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.UI.Button.Press () (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:68)
+UnityEngine.UI.Button.OnPointerClick (UnityEngine.EventSystems.PointerEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:110)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointerClickHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:50)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b7/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+

@@ -215,6 +215,6 @@ public class Player : Character
 
     public override string GetCharacterName()
     {
-        return this.characterName.getValue();
+        return this.characterName.GetValue();
     }
 }

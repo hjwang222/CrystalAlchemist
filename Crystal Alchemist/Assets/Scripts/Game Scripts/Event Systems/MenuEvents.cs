@@ -16,11 +16,12 @@ public class MenuEvents : MonoBehaviour
     public Action OnDeath;
     public Action OnEditor;
     public Action OnSave;
-    public Action<MiniGame> OnMiniGame;
+    public Action OnMiniGame;
     public Action<Ability> OnAbilitySelected;
     public Func<Ability> OnAbilitySet;
     public Action OnDialogBox;
     public Action OnMenuDialogBox;
+    public Action OnTutorial;
 
     public void OpenMenuDialogBox() => this.OnMenuDialogBox?.Invoke();
     public void OpenDialogBox() => this.OnDialogBox?.Invoke();
@@ -32,7 +33,8 @@ public class MenuEvents : MonoBehaviour
     public void OpenDeath() => this.OnDeath?.Invoke();
     public void OpenCharacterCreation() => this.OnEditor?.Invoke();
     public void OpenSavepoint() => this.OnSave?.Invoke();
-    public void OpenMiniGame(MiniGame minigame) => this.OnMiniGame?.Invoke(minigame);
+    public void OpenMiniGame() => this.OnMiniGame?.Invoke();
+    public void OpenTutorial() => this.OnTutorial?.Invoke();
     public void SelectAbility(Ability ability) => this.OnAbilitySelected?.Invoke(ability);
     public Ability SetAbility() => this.OnAbilitySet?.Invoke();
 }

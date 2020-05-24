@@ -59,8 +59,7 @@ public class Reward
         if (this.hasAlternative && this.firstLoot.item.stats.alreadyThere()) this.loot = this.alternativeLoot;
         else this.loot = this.firstLoot;
 
-        ItemDrop result = MonoBehaviour.Instantiate(this.loot.item);
-        result.Initialize(this.loot.amount);
+        ItemDrop result = this.loot.item.Instantiate(this.loot.amount);
         return result;
     }
 }

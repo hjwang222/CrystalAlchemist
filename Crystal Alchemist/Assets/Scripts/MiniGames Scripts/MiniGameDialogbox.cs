@@ -23,12 +23,9 @@ public class MiniGameDialogbox : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI descriptionText;
 
-    private bool isLoaded = false;
-
     private void Start()
     {
         this.slider.setDifficulty(1);
-        this.isLoaded = true;
     }
 
     public void UpdateDialogBox()
@@ -47,11 +44,6 @@ public class MiniGameDialogbox : MonoBehaviour
         string text = this.miniGameUI.miniGameRound.getDifficulty(this.miniGameUI.mainDescription, match.difficulty);
         this.descriptionText.text = text;
     }    
-
-    private void OnEnable()
-    {
-        if(this.isLoaded) UpdateDialogBox();
-    }
 
     public void resetTry()
     {

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using Sirenix.OdinInspector;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,8 +8,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private FloatValue timePlayed;
-
-    //Event System here
 
     private void Awake()
     {

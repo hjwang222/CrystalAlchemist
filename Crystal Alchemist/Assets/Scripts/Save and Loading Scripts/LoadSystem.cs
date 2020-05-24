@@ -120,8 +120,7 @@ public class LoadSystem
                 ItemDrop master = MasterManager.getItemDrop(keyItem);
                 if (master != null)
                 {
-                    ItemDrop drop = MonoBehaviour.Instantiate(master);
-                    drop.Initialize(1); //Set correct stats name for unique items
+                    ItemDrop drop = master.Instantiate(1);
                     inventory.collectItem(drop.stats);
                     MonoBehaviour.Destroy(drop);
                 }
