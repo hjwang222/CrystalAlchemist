@@ -27,6 +27,6 @@ public class InventorySlot : MonoBehaviour
 
     public void setItemToSlot(ItemStats item)
     {
-        this.itemUI.setItem(item);
+        this.itemUI.SetItem(item);
     }
 }

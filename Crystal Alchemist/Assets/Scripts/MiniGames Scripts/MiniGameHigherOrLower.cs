@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class MiniGameHigherOrLower : MiniGameRound
 {
@@ -11,19 +10,21 @@ public class MiniGameHigherOrLower : MiniGameRound
     [SerializeField]
     private List<MiniGameCard> cards = new List<MiniGameCard>();
 
+    [SerializeField]
+    private GameObject controls;
+
     private List<int> randomNumbers = new List<int>();
-    private int index = 0;
     private int value;
 
     public override void Start()
     {
         base.Start();
+        StartCoroutine(delayCo());
         setRandomNumbers();
-        this.cards[this.index].show();
-        this.index++;
+        this.cards[0].show();        
     }
 
-    public override string getDifficulty(string text, int difficulty)
+    public override string GetDescription(string text, int difficulty)
     {
         string result = text;
         result = result.Replace("<min>", "1");
@@ -33,7 +34,7 @@ public class MiniGameHigherOrLower : MiniGameRound
 
     private void setRandomNumbers()
     {
-        int max = (this.maxRandomNumbers[this.difficulty - 1] + 1);
+        int max = (this.maxRandomNumbers[this.GetDifficulty() - 1] + 1);
         int start = 0;
 
         if (max == 4)
@@ -56,25 +57,29 @@ public class MiniGameHigherOrLower : MiniGameRound
         }
     }
 
-    public void input(int value) //ON CLICK
+    public void OnClick(int value)
     {
-        this.cards[this.index].show();
-        enableInputs(false);
+        this.cards[1].show();
         this.value = value;
+        this.StopTimer();
+        this.controls.SetActive(false);
     }
 
-    public override void checkIfWon()
+    public override void Check()
     {
         if (this.value != 0)
         {
-            if ((this.randomNumbers[this.index - 1] < this.randomNumbers[this.index] && this.value == 1)
-             || (this.randomNumbers[this.index - 1] > this.randomNumbers[this.index] && this.value == -1)) this.setMarkAndEndRound(true);
-            else this.setMarkAndEndRound(false);
-        }
-        else
-        {
-            enableInputs(true);
+            if ((this.randomNumbers[0] < this.randomNumbers[1] && this.value == 1)
+             || (this.randomNumbers[0] > this.randomNumbers[1] && this.value == -1)) this.EndRound(true);
+            else this.EndRound(false);
         }
     }
 
+    private IEnumerator delayCo()
+    {
+        this.controls.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        this.controls.SetActive(true);
+        StartTimer();
+    }
 }

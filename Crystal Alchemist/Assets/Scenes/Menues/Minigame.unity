@@ -176,9 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960440bf8b356e746be20e8a2d3bfb35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGameUI: {fileID: 919052620}
-  showDialogBox: 1
   audioClip: {fileID: 8300000, guid: dea78b2c12b2f0f4286524cf75188749, type: 3}
+  signal: {fileID: 11400000, guid: 97cbd62b653ec7146bc1eb60b3316adc, type: 2}
 --- !u!1 &6587300
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,10 +249,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 543533557}
     m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 2141332010}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
@@ -280,9 +279,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1423671513}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: endMiniGame
+      - m_Target: {fileID: 919052619}
+        m_TargetAssemblyTypeName: OnCancelManager, Assembly-CSharp
+        m_MethodName: OnCancel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -691,10 +690,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnDown: {fileID: 2141332010}
+    m_SelectOnLeft: {fileID: 889928341}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 0
   m_Colors:
@@ -779,6 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &172263133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1426,6 +1426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 7
 --- !u!114 &308566534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1729,7 +1730,6 @@ MonoBehaviour:
   - {fileID: 2143440069}
   - {fileID: 1755489953}
   - {fileID: 889928337}
-  dialogBox: {fileID: 1423671513}
 --- !u!224 &445908997
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1997,11 +1997,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 2141332010}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 587825675}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2028,8 +2028,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 445908996}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: setDifficulty
+        m_TargetAssemblyTypeName: MiniGameSlider, Assembly-CSharp
+        m_MethodName: SetDifficulty
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2381,11 +2381,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnDown: {fileID: 2141332010}
+    m_SelectOnLeft: {fileID: 543533557}
+    m_SelectOnRight: {fileID: 2143440073}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2412,8 +2412,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 445908996}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: setDifficulty
+        m_TargetAssemblyTypeName: MiniGameSlider, Assembly-CSharp
+        m_MethodName: SetDifficulty
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2625,7 +2625,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1804823002}
   - {fileID: 1332212895}
   - {fileID: 1983996050}
   - {fileID: 663814956}
@@ -2690,6 +2689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 7
 --- !u!114 &626135951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2967,6 +2967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 663814956}
+  - component: {fileID: 663814957}
   m_Layer: 5
   m_Name: Time Bar
   m_TagString: Untagged
@@ -2989,13 +2990,29 @@ RectTransform:
   - {fileID: 653501504}
   - {fileID: 10669540}
   m_Father: {fileID: 623327666}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 10}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &663814957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663814955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1c306cfaed3194f88c5e4a6e3ef23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeField: {fileID: 758651019}
+  timeImage: {fileID: 653501502}
+  time: {fileID: 11400000, guid: 6f815bd117b754d42a0774cee240d61e, type: 2}
+  maxTime: {fileID: 11400000, guid: 7eff15fde223a244ebe25d51f7f19377, type: 2}
 --- !u!1 &758651018
 GameObject:
   m_ObjectHideFlags: 0
@@ -3550,11 +3567,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnDown: {fileID: 2141332010}
+    m_SelectOnLeft: {fileID: 1755489957}
+    m_SelectOnRight: {fileID: 165825238}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3581,8 +3598,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 445908996}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: setDifficulty
+        m_TargetAssemblyTypeName: MiniGameSlider, Assembly-CSharp
+        m_MethodName: SetDifficulty
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3756,6 +3773,9 @@ GameObject:
   - component: {fileID: 919052617}
   - component: {fileID: 919052616}
   - component: {fileID: 919052620}
+  - component: {fileID: 919052619}
+  - component: {fileID: 919052622}
+  - component: {fileID: 919052621}
   m_Layer: 5
   m_Name: Minigame
   m_TagString: Untagged
@@ -3845,6 +3865,33 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!114 &919052619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919052614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61aa4d8ea6da4234a85b181b52596baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCancel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 919052620}
+        m_TargetAssemblyTypeName: MenuBehaviour, Assembly-CSharp
+        m_MethodName: ExitMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &919052620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3860,24 +3907,73 @@ MonoBehaviour:
   sceneName: Minigame
   musicVolumeSignal: {fileID: 11400000, guid: 27a0bdfa80a1231439f7c33ba26ceb9b, type: 2}
   playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
+  showBlackBackground: 1
   infoBox: {fileID: 1085417539}
-  inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
-  cursor: {fileID: 175733141}
-  UIInfo: {fileID: 11400000, guid: cb1768cc048714644a955f6e46d2a296, type: 2}
-  miniGameRound: {fileID: 0}
-  timeField: {fileID: 758651019}
-  timeImage: {fileID: 653501502}
-  titleField: {fileID: 556015314}
-  descriptionField: {fileID: 764989237}
-  mainBoard: {fileID: 1332212892}
-  textGameObject: {fileID: 1305799242}
-  trySlots: {fileID: 1835925511}
+  info: {fileID: 11400000, guid: cb1768cc048714644a955f6e46d2a296, type: 2}
   dialogBox: {fileID: 1423671513}
+  titleField: {fileID: 556015314}
+  parent: {fileID: 1332212892}
+  trySlots: {fileID: 1835925511}
   successText: {fileID: 1089330933}
   failText: {fileID: 1964056375}
   winText: {fileID: 2756655}
   loseText: {fileID: 1262792344}
-  mainDescription: 
+--- !u!114 &919052621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919052614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 97cbd62b653ec7146bc1eb60b3316adc, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 919052620}
+        m_TargetAssemblyTypeName: MiniGameUI, Assembly-CSharp
+        m_MethodName: ShowDialogBox
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &919052622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919052614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 6b416e7c8cf2ad047b63c8ec61d54367, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 919052620}
+        m_TargetAssemblyTypeName: MiniGameUI, Assembly-CSharp
+        m_MethodName: StartRound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &922471417
 GameObject:
   m_ObjectHideFlags: 0
@@ -4657,9 +4753,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960440bf8b356e746be20e8a2d3bfb35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGameUI: {fileID: 919052620}
-  showDialogBox: 0
   audioClip: {fileID: 8300000, guid: 5eaa78700693d6b4391aa83e3e27ba62, type: 3}
+  signal: {fileID: 11400000, guid: 6b416e7c8cf2ad047b63c8ec61d54367, type: 2}
 --- !u!224 &1089330934
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10319,9 +10414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960440bf8b356e746be20e8a2d3bfb35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGameUI: {fileID: 919052620}
-  showDialogBox: 1
   audioClip: {fileID: 0}
+  signal: {fileID: 11400000, guid: 97cbd62b653ec7146bc1eb60b3316adc, type: 2}
 --- !u!224 &1262792345
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10451,7 +10545,7 @@ Transform:
   - {fileID: 2756654}
   - {fileID: 1262792345}
   m_Father: {fileID: 623327666}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1313763893
 GameObject:
@@ -10503,6 +10597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &1313763897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10764,7 +10859,7 @@ RectTransform:
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 623327666}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10784,7 +10879,7 @@ GameObject:
   - component: {fileID: 1337893119}
   - component: {fileID: 1337893118}
   m_Layer: 5
-  m_Name: Hinweis Header (2)
+  m_Name: Kosten
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10821,6 +10916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &1337893119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10880,7 +10976,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -10952,7 +11048,7 @@ GameObject:
   - component: {fileID: 1343075431}
   - component: {fileID: 1343075430}
   m_Layer: 5
-  m_Name: Texts
+  m_Name: Gewonnen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10989,6 +11085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 7
 --- !u!114 &1343075431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16286,7 +16383,7 @@ RectTransform:
   - {fileID: 6587301}
   - {fileID: 1108698793}
   m_Father: {fileID: 623327666}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16305,14 +16402,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdf8c42829d99df4290f631602abc6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGameUI: {fileID: 919052620}
+  inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   slider: {fileID: 445908996}
-  itemUIs:
-  - {fileID: 165825235}
-  - {fileID: 2006465510}
   priceUI: {fileID: 1108698794}
+  itemUI: {fileID: 165825235}
+  winUI: {fileID: 2006465510}
   startButton: {fileID: 2141332010}
   descriptionText: {fileID: 764989237}
+  trySlots: {fileID: 1835925511}
+  cursor: {fileID: 175733141}
 --- !u!1 &1452129437
 GameObject:
   m_ObjectHideFlags: 0
@@ -16402,7 +16500,7 @@ GameObject:
   - component: {fileID: 1481200833}
   - component: {fileID: 1481200832}
   m_Layer: 5
-  m_Name: Hinweis Header
+  m_Name: Hinweis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16439,6 +16537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &1481200833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16496,7 +16595,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -16868,7 +16967,7 @@ RectTransform:
   - {fileID: 1835925512}
   - {fileID: 1884574430}
   m_Father: {fileID: 623327666}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17042,11 +17141,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnDown: {fileID: 2141332010}
+    m_SelectOnLeft: {fileID: 2143440073}
+    m_SelectOnRight: {fileID: 889928341}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -17073,8 +17172,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 445908996}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: setDifficulty
+        m_TargetAssemblyTypeName: MiniGameSlider, Assembly-CSharp
+        m_MethodName: SetDifficulty
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17192,7 +17291,7 @@ GameObject:
   - component: {fileID: 1791314475}
   - component: {fileID: 1791314474}
   m_Layer: 5
-  m_Name: Gewonnen
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17331,81 +17430,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797490599}
-  m_CullTransparentMesh: 0
---- !u!1 &1804823001
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1804823002}
-  - component: {fileID: 1804823004}
-  - component: {fileID: 1804823003}
-  m_Layer: 5
-  m_Name: Black Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1804823002
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804823001}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0526316, y: 1.0526316, z: 1.0526316}
-  m_Children: []
-  m_Father: {fileID: 623327666}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -69.57898, y: -30}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1804823003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804823001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.33962262, g: 0.2744749, b: 0.04645782, a: 0.69803923}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1804823004
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804823001}
   m_CullTransparentMesh: 0
 --- !u!1 &1835925510
 GameObject:
@@ -17720,6 +17744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &1884574433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18017,9 +18042,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960440bf8b356e746be20e8a2d3bfb35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGameUI: {fileID: 919052620}
-  showDialogBox: 0
   audioClip: {fileID: 8300000, guid: df13bcbd53fddcb43a31f144a3319aa1, type: 3}
+  signal: {fileID: 11400000, guid: 6b416e7c8cf2ad047b63c8ec61d54367, type: 2}
 --- !u!224 &1964056376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18073,7 +18097,7 @@ RectTransform:
   m_Children:
   - {fileID: 556015316}
   m_Father: {fileID: 623327666}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18673,6 +18697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 7
 --- !u!114 &2116020466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18802,7 +18827,7 @@ GameObject:
   - component: {fileID: 2121830116}
   - component: {fileID: 2121830115}
   m_Layer: 5
-  m_Name: Hinweis Header (1)
+  m_Name: Schwierigkeit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18839,6 +18864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &2121830116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18896,7 +18922,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -18987,11 +19013,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
+    m_Mode: 4
+    m_SelectOnUp: {fileID: 543533557}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 6587303}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -19012,14 +19038,14 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 597214712}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1423671513}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: startMatch
+        m_TargetAssemblyTypeName: MiniGameDialogbox, Assembly-CSharp
+        m_MethodName: StartMiniGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19042,7 +19068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 175733141}
-  setFirstSelected: 0
+  setFirstSelected: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -19167,11 +19193,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnDown: {fileID: 2141332010}
+    m_SelectOnLeft: {fileID: 587825675}
+    m_SelectOnRight: {fileID: 1755489957}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -19198,8 +19224,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 445908996}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: setDifficulty
+        m_TargetAssemblyTypeName: MiniGameSlider, Assembly-CSharp
+        m_MethodName: SetDifficulty
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

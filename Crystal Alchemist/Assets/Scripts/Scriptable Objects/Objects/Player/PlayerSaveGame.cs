@@ -41,7 +41,7 @@ public class PlayerSaveGame : ScriptableObject
     public void Clear()
     {
         this.time.Clear();
-        this.timePlayed.setValue(0f);
+        this.timePlayed.SetValue(0f);
         this.characterName.SetValue("Hero");
         this.playerValue.Clear(this.stats);
         this.inventory.Clear();

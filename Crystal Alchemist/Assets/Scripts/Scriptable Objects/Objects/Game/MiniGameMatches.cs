@@ -3,39 +3,36 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 
 [System.Serializable]
-public struct MiniGameMatch
+public class MiniGameMatch
 {
-    [FoldoutGroup("$difficulty")]
+    [BoxGroup("$difficulty")]
     [Range(1, 6)]
     public int maxRounds;
 
-    [FoldoutGroup("$difficulty")]
+    [BoxGroup("$difficulty")]
     [Range(1, 6)]
     public int winsNeeded;
 
-    [FoldoutGroup("$difficulty")]
+    [BoxGroup("$difficulty")]
     [Range(1, 5)]
     public int difficulty;
 
-    [FoldoutGroup("$difficulty")]
+    [BoxGroup("$difficulty")]
     [Range(1, 120)]
     public float maxDuration;
 
-    [FoldoutGroup("$difficulty")]
+    [BoxGroup("$difficulty")]
     public Costs price;
 
-    [FoldoutGroup("$difficulty")]
+    [BoxGroup("$difficulty")]
     [SerializeField]
     private Reward reward;
 
     private ItemDrop item;
 
-    public void SetItem()
-    {
-        this.item = reward.GetItemDrop();
-    }
+    public void SetItem() => this.item = reward.GetItemDrop();    
 
-    public ItemDrop getItem()
+    public ItemDrop GetItem()
     {
         return this.item;
     }
@@ -49,14 +46,21 @@ public class MiniGameMatches: ScriptableObject
 
     public void Initialize()
     {
-        foreach(MiniGameMatch match in this.matches)
-        {
-            match.SetItem();
-        }
+        foreach(MiniGameMatch match in this.matches) match.SetItem();        
     }
 
     public List<MiniGameMatch> GetMatches()
     {
         return this.matches;
+    }
+
+    public MiniGameMatch GetMatch(int difficulty)
+    {
+        return this.matches[difficulty-1];
+    }
+
+    public int GetCount()
+    {
+        return this.matches.Count;
     }
 }

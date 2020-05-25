@@ -91,7 +91,7 @@ public class PlayerTeleport : MonoBehaviour
     private IEnumerator loadSceneCo(string targetScene)
     {
         this.fadeSignal.Raise();
-        yield return new WaitForSeconds(this.fadeDuration.getValue());
+        yield return new WaitForSeconds(this.fadeDuration.GetValue());
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(targetScene);
         asyncOperation.allowSceneActivation = false;

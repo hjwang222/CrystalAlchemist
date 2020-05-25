@@ -14,7 +14,7 @@ public class LoadSystem
             LoadBasicValues(data, saveGame.playerValue);
 
             saveGame.time.Clear();
-            saveGame.timePlayed.setValue(data.timePlayed);
+            saveGame.timePlayed.SetValue(data.timePlayed);
             saveGame.SetCharacterName(data.characterName);
 
             loadInventory(data, saveGame.inventory);

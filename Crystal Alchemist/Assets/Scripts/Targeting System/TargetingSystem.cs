@@ -48,7 +48,7 @@ public class TargetingSystem : MonoBehaviour
         SetColliders();
 
         if(this.properties.hasMaxDuration) this.timeLeft = this.properties.maxDuration;
-        if(this.timeLeftValue != null) this.timeLeftValue.setValue(1f);
+        if(this.timeLeftValue != null) this.timeLeftValue.SetValue(1f);
 
         StartCoroutine(delayCo());
     }
@@ -211,7 +211,7 @@ public class TargetingSystem : MonoBehaviour
             if (this.timeLeft > 0) this.timeLeft -= Time.deltaTime;
             else Deactivate();
 
-            if (this.timeLeftValue != null) this.timeLeftValue.setValue(this.timeLeft / this.properties.maxDuration);
+            if (this.timeLeftValue != null) this.timeLeftValue.SetValue(this.timeLeft / this.properties.maxDuration);
         }
     }
 

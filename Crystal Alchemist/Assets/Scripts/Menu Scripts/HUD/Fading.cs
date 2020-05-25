@@ -19,9 +19,9 @@ public class Fading : MonoBehaviour
 
     private void Start() => StartCoroutine(delayCo());    
 
-    private void FadeIn() => this.image.CrossFadeAlpha(0, this.transitionDuration.getValue(), true);
+    private void FadeIn() => this.image.CrossFadeAlpha(0, this.transitionDuration.GetValue(), true);
 
-    public void FadeOut() => this.image.CrossFadeAlpha(1, this.transitionDuration.getValue(), true);
+    public void FadeOut() => this.image.CrossFadeAlpha(1, this.transitionDuration.GetValue(), true);
 
     private IEnumerator delayCo()
     {

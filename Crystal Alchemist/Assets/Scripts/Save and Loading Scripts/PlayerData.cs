@@ -49,7 +49,7 @@ public class PlayerData
         setPreset(saveGame.playerPreset);
 
         this.abilities = saveGame.buttons.saveButtonConfig();
-        this.timePlayed = saveGame.timePlayed.getValue();
+        this.timePlayed = saveGame.timePlayed.GetValue();
         this.characterName = saveGame.GetCharacterName();
 
         SetStartTeleport(saveGame.startSpawnPoint);

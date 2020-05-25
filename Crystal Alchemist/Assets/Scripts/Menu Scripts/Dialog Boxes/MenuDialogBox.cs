@@ -92,7 +92,7 @@ public class MenuDialogBox : MenuBehaviour
         if (this.price != null && this.price.resourceType != CostType.none)
         {
             this.priceField.gameObject.SetActive(true);
-            bool enabled = this.priceField.updatePrice(this.inventory, this.price);
+            bool enabled = this.priceField.CheckPrice(this.inventory, this.price);
             UnityUtil.SetInteractable(this.YesButton.GetComponent<Selectable>(), enabled);
         }
     }

@@ -8,12 +8,12 @@ public class FloatValue : ScriptableObject, ISerializationCallbackReceiver
     [SerializeField]
     private float value;
 
-    public float getValue()
+    public float GetValue()
     {
         return this.value;
     }
 
-    public void setValue(float value)
+    public void SetValue(float value)
     {
         this.value = value;
     }

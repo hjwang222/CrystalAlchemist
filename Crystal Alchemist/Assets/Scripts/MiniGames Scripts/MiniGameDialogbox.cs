@@ -6,16 +6,19 @@ using UnityEngine.UI;
 public class MiniGameDialogbox : MonoBehaviour
 {
     [SerializeField]
-    private MiniGameUI miniGameUI;
+    private PlayerInventory inventory;
 
     [SerializeField]
     private MiniGameSlider slider;
 
     [SerializeField]
-    private List<ItemUI> itemUIs = new List<ItemUI>();
+    private MiniGamePrice priceUI;
 
     [SerializeField]
-    private MiniGamePrice priceUI;
+    private ItemUI itemUI;
+
+    [SerializeField]
+    private ItemUI winUI;
 
     [SerializeField]
     private Selectable startButton;
@@ -23,51 +26,61 @@ public class MiniGameDialogbox : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI descriptionText;
 
+    [SerializeField]
+    private MiniGameTrys trySlots;
+
+    [SerializeField]
+    private CustomCursor cursor;
+
+    private MiniGameInfo info;
+    private string text;
+
     private void Start()
     {
-        this.slider.setDifficulty(1);
+        MiniGameEvents.current.OnDifficultyChanged += UpdateDialogBox;        
+    }
+
+    private void OnEnable()
+    {
+        this.cursor.gameObject.SetActive(true);
+    }
+
+    private void OnDisable() => this.cursor.gameObject.SetActive(false);
+
+    private void OnDestroy() =>  MiniGameEvents.current.OnDifficultyChanged -= UpdateDialogBox;    
+    
+    public void Show(MiniGameInfo info)
+    {
+        this.info = info;
+        this.info.matches.Initialize(); //Set Items
+
+        this.text = this.info.GetDescription();
+        this.slider.SetStars(this.info.matches.GetCount());
+        this.slider.SetDifficulty(1);
+
+        UpdateDialogBox();
     }
 
     public void UpdateDialogBox()
-    {        
-        this.miniGameUI.setMatch(this.slider.getValue());
-        MiniGameMatch match = this.miniGameUI.getMatch();
-
-        foreach (ItemUI itemUI in this.itemUIs)
-        {
-            itemUI.setItem(match.getItem().stats);
-        }
-
-        bool enableStart = this.priceUI.updatePrice(this.miniGameUI.inventory, match.price);
-        UnityUtil.SetInteractable(this.startButton, enableStart);
-
-        string text = this.miniGameUI.miniGameRound.getDifficulty(this.miniGameUI.mainDescription, match.difficulty);
-        this.descriptionText.text = text;
-    }    
-
-    public void resetTry()
     {
-        this.miniGameUI.resetTrys();
+        int difficulty = this.slider.GetValue();
+        MiniGameMatch match = this.info.matches.GetMatch(difficulty);
+
+        this.itemUI.SetItem(match.GetItem().stats);
+        this.winUI.SetItem(match.GetItem().stats);
+
+        bool canStart = this.priceUI.CheckPrice(this.inventory, match.price);
+        UnityUtil.SetInteractable(this.startButton, canStart);
+
+        this.trySlots.SetValues(match.winsNeeded, match.maxRounds);
+        this.descriptionText.text = this.info.miniGameUI.GetDescription(this.text, difficulty);
     }
 
-    public void setValues(int matches)
+    public void StartMiniGame()
     {
-        this.slider.setValues(matches);
-    }
-
-    public void startMatch()
-    {
-        this.miniGameUI.startMatch();
-        this.hideIt();
-    }
-
-    public void endMiniGame()
-    {
-        this.miniGameUI.endMiniGame();
-    }
-
-    private void hideIt()
-    {
+        int difficulty = this.slider.GetValue();
+        MiniGameMatch match = this.info.matches.GetMatch(difficulty);
+        MiniGameEvents.current.StartMiniGameRound(match);
         this.gameObject.SetActive(false);
     }
 }

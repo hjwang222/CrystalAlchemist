@@ -16,6 +16,6 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        this.timePlayed.setValue(this.timePlayed.getValue()+Time.timeSinceLevelLoad);
+        this.timePlayed.SetValue(this.timePlayed.GetValue()+Time.timeSinceLevelLoad);
     }
 }

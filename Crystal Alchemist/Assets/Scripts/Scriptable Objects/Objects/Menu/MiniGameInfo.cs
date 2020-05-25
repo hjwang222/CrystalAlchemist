@@ -5,14 +5,15 @@ public class MiniGameInfo : ScriptableObject
 {
     public MiniGameMatches matches;
     public MiniGameRound miniGameUI;
+    public string miniGameName;
 
     public string GetName()
     {
-        return FormatUtil.GetLocalisedText(this.name + "_Name", LocalisationFileType.minigames);
+        return FormatUtil.GetLocalisedText(this.miniGameName + "_Name", LocalisationFileType.minigames);
     }
 
     public string GetDescription()
     {
-        return FormatUtil.GetLocalisedText(this.name + "_Description", LocalisationFileType.minigames);
+        return FormatUtil.GetLocalisedText(this.miniGameName + "_Description", LocalisationFileType.minigames);
     }
 }

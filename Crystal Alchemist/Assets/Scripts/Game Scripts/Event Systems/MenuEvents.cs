@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class MenuEvents : MonoBehaviour
 {
@@ -22,7 +21,7 @@ public class MenuEvents : MonoBehaviour
     public Action OnDialogBox;
     public Action OnMenuDialogBox;
     public Action OnTutorial;
-
+    
     public void OpenMenuDialogBox() => this.OnMenuDialogBox?.Invoke();
     public void OpenDialogBox() => this.OnDialogBox?.Invoke();
     public void OpenInventory() => this.OnInventory?.Invoke();

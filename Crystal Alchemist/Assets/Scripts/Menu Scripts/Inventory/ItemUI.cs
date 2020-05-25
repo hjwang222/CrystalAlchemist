@@ -48,7 +48,7 @@ public class ItemUI : MonoBehaviour
         }
     }
 
-    public void setItem(ItemStats item)
+    public void SetItem(ItemStats item)
     {
         this.itemStat = item;
 

@@ -6,6 +6,9 @@ using Sirenix.OdinInspector;
 public class UITextTranslation : MonoBehaviour
 {
     [InfoBox("GameObject Name muss der gleiche sein wie in csv", InfoMessageType.Info)]
+    [SerializeField]
+    private LocalisationFileType type = LocalisationFileType.menues;
+
     private TextMeshProUGUI textMeshField;
 
     private void Awake() => this.textMeshField = this.GetComponent<TextMeshProUGUI>();
@@ -18,7 +21,7 @@ public class UITextTranslation : MonoBehaviour
 
     public void ChangeLanguageText()
     {
-        string text = FormatUtil.GetLocalisedText(this.gameObject.name, LocalisationFileType.menues);
+        string text = FormatUtil.GetLocalisedText(this.gameObject.name, this.type);
         if (text != string.Empty) this.textMeshField.text = text;
     }
 }

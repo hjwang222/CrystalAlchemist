@@ -81,7 +81,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
         this.setButtonNavigation();
         StartCoroutine(delayCo());
-
+        
         RectTransform rt = (RectTransform)this.transform;
         this.size = new Vector2(rt.rect.width, rt.rect.height);
         this.scale = rt.lossyScale;

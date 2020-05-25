@@ -126,7 +126,7 @@ public class CombatButtonUI : MonoBehaviour
             {
                 //ist Skill in Zielerfassung
                 this.targeting.SetActive(true);
-                this.filled.fillAmount = this.targetingTimeLeft.getValue();
+                this.filled.fillAmount = this.targetingTimeLeft.GetValue();
 
                 this.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
                 this.iconButton.color = new Color(1f, 1f, 1f, 0.2f);

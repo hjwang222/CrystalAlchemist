@@ -4,13 +4,10 @@ using UnityEngine;
 public class MiniGameText : MonoBehaviour
 {
     [SerializeField]
-    private MiniGameUI miniGameUI;
-
-    [SerializeField]
-    private bool showDialogBox = false;
-
-    [SerializeField]
     private AudioClip audioClip;
+
+    [SerializeField]
+    private SimpleSignal signal;
 
     private float duration;
     private bool inputPossible = false;
@@ -18,12 +15,12 @@ public class MiniGameText : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.current.OnSubmit += Disable;
+        //GameEvents.current.OnSubmit += Disable;
     }
 
     private void OnDestroy()
     {
-        GameEvents.current.OnSubmit -= Disable;
+        //GameEvents.current.OnSubmit -= Disable;
     }
 
     private void OnEnable()
@@ -40,8 +37,7 @@ public class MiniGameText : MonoBehaviour
     {
         if (this.inputPossible)
         {
-            if (this.showDialogBox) this.miniGameUI.showDialog(); //WIN or LOSE
-            else this.miniGameUI.startRound();
+            this.signal.Raise();
             this.gameObject.SetActive(false);
         }
     }

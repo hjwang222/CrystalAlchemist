@@ -52,6 +52,7 @@ public static class UnityUtil
     public static void SetInteractable(Selectable selectable, bool active)
     {
         selectable.interactable = active;
+
         if (active) SetColors(selectable, Color.white);
         else SetColors(selectable, MasterManager.staticValues.buttonNotActive);
     }
