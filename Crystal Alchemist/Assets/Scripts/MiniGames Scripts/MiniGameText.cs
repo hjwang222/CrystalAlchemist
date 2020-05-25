@@ -13,15 +13,6 @@ public class MiniGameText : MonoBehaviour
     private bool inputPossible = false;
     private float maxDuration = 3f;
 
-    private void Start()
-    {
-        //GameEvents.current.OnSubmit += Disable;
-    }
-
-    private void OnDestroy()
-    {
-        //GameEvents.current.OnSubmit -= Disable;
-    }
 
     private void OnEnable()
     {

@@ -20,6 +20,9 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     private Selectable button;
 
     [SerializeField]
+    private bool isInteractable = true;
+
+    [SerializeField]
     private bool overrideNavigation = false;
 
     [ShowIf("overrideNavigation", true)]
@@ -37,7 +40,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     [ShowIf("overrideNavigation", true)]
     [SerializeField]
     private List<Selectable> right = new List<Selectable>();
-       
+
 
 #if UNITY_EDITOR
     [Button]
@@ -45,8 +48,8 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     {
         setButtonNavigation();
     }
-
 #endif
+
     public void setButtonNavigation()
     {
         if (this.overrideNavigation)
@@ -67,7 +70,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         UnityUtil.SetColors(this.button, Color.white);
     }
 
-    private void init()
+    private void Initialize()
     {      
         try
         {
@@ -80,7 +83,8 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         }        
 
         this.setButtonNavigation();
-        StartCoroutine(delayCo());
+        if (this.isInteractable) StartCoroutine(delayCo());
+        else UnityUtil.SetInteractable(this.button, false);
         
         RectTransform rt = (RectTransform)this.transform;
         this.size = new Vector2(rt.rect.width, rt.rect.height);
@@ -98,8 +102,6 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     
     private void Start()
     {
-        init();
-
         if(this.cursor == null)
         {
             Debug.Log("<color=red>Cursor not found in: "+this.gameObject.name+"</color>");
@@ -111,8 +113,6 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                     + this.transform.parent.parent.localScale + " - "
                     + this.transform.parent.parent.parent.localScale + " - "
                     + WordToScenePoint(this.transform.localPosition));*/
-
-        SetFirst();
     }
 
     public void SetCursor(CustomCursor cursor)
@@ -127,7 +127,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     private void OnEnable()
     {
-        init();
+        Initialize();
         SetFirst();
     }
 

@@ -72,7 +72,7 @@ public class MiniGameUI : MenuBehaviour
 
     public void ShowDialogBox()
     {
-        this.trySlots.Reset();        
+        this.trySlots.Reset();
         this.dialogBox.gameObject.SetActive(true);
         this.dialogBox.Show(this.info);
     }

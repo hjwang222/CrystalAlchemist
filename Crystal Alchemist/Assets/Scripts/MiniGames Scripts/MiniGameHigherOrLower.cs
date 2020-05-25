@@ -78,7 +78,7 @@ public class MiniGameHigherOrLower : MiniGameRound
     private IEnumerator delayCo()
     {
         this.controls.SetActive(false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         this.controls.SetActive(true);
         StartTimer();
     }
