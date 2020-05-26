@@ -89,6 +89,13 @@ public class CharacterStats : ScriptableObject
     public float respawnTime = 30;
 
     [TabGroup("Spawn Values")]
+    [Tooltip("Respawn-Zeit")]
+    [ShowIf("hasRespawn")]
+    [MaxValue(100)]
+    [MinValue(1)]
+    public int respawnChance = 100;
+
+    [TabGroup("Spawn Values")]
     [Tooltip("Respawn-Animation")]
     public DeathAnimation deathAnimation;
 

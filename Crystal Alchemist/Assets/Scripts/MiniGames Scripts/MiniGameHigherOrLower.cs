@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MiniGameHigherOrLower : MiniGameRound
@@ -19,7 +18,7 @@ public class MiniGameHigherOrLower : MiniGameRound
     public override void Start()
     {
         base.Start();
-        StartCoroutine(delayCo());
+        this.controls.SetActive(false);
         setRandomNumbers();
         this.cards[0].show();        
     }
@@ -73,13 +72,10 @@ public class MiniGameHigherOrLower : MiniGameRound
              || (this.randomNumbers[0] > this.randomNumbers[1] && this.value == -1)) this.EndRound(true);
             else this.EndRound(false);
         }
-    }
-
-    private IEnumerator delayCo()
-    {
-        this.controls.SetActive(false);
-        yield return new WaitForSeconds(1f);
-        this.controls.SetActive(true);
-        StartTimer();
+        else
+        {
+            this.controls.SetActive(true);
+            StartTimer();
+        }
     }
 }

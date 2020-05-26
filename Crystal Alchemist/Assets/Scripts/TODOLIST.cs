@@ -13,7 +13,6 @@ public class TODOLIST : MonoBehaviour
     //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
     //TODO: Schwimmen (Sprite Mask)
     //SKILL: Rundumschlag (wind)
-    //TODO: Random Mob Spawn
     //TODO: Enemy shader?
 
     //GRAPHICS: TitleScreen: Background 

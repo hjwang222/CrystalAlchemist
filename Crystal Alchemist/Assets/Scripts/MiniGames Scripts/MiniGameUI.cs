@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using TMPro;
-using UnityEngine.UI;
 
 public class MiniGameUI : MenuBehaviour
 {

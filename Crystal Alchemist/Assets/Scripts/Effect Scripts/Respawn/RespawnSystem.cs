@@ -9,7 +9,8 @@ public class RespawnSystem : MonoBehaviour
     {
         none,
         day,
-        night
+        night,
+        time
     }
 
     [System.Serializable]
@@ -17,21 +18,27 @@ public class RespawnSystem : MonoBehaviour
     {
         public float timeElapsed;
         public Character character;
-        public bool spawnIt;
+        public bool spawnIt = false;        
 
         public RespawnTimer(Character character)
         {
             this.character = character;
             if (this.character.values == null) this.character.values = new CharacterValues();
             this.character.values.currentState = CharacterState.respawning;
-
             this.timeElapsed = character.stats.respawnTime;
         }
 
         public void Updating(float time)
         {
-            if (this.timeElapsed > 0) this.timeElapsed -= time;
-            else this.spawnIt = true;
+            if (!this.spawnIt)
+            {
+                if (this.timeElapsed > 0) this.timeElapsed -= time;
+                else
+                {
+                    if (Random.Range(1, 100) <= character.stats.respawnChance) this.spawnIt = true;
+                    else this.timeElapsed = character.stats.respawnTime;
+                }
+            }
         }
     }
 
@@ -44,16 +51,25 @@ public class RespawnSystem : MonoBehaviour
     [SerializeField]
     private SpawnType spawnType = SpawnType.none;
 
+    [SerializeField]
+    [ShowIf("spawnType", SpawnType.time)]
+    private int from;
+
+    [SerializeField]
+    [ShowIf("spawnType", SpawnType.time)]
+    private int to;
+
     [BoxGroup("Debug")]
     [SerializeField]
     private List<RespawnTimer> respawnObjects = new List<RespawnTimer>();
 
-    private void Start() => InvokeRepeating("Updating", 0f, this.updateTime);    
-
+    private void Start() => InvokeRepeating("Updating", 0f, this.updateTime);
+    
     private bool NotActive()
     {
         return (this.spawnType == SpawnType.day && time.night)
-         || (this.spawnType == SpawnType.night && !time.night);
+            || (this.spawnType == SpawnType.night && !time.night)
+            || (this.spawnType == SpawnType.time && this.from >= time.getHour() && this.to <= time.getHour());
     }
 
     private bool MustDespawn(Character child)
