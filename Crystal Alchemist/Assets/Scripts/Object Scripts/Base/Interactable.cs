@@ -35,10 +35,10 @@ public class Interactable : MonoBehaviour
 
     private void Update()
     {
-        doOnUpdate();
+        DoOnUpdate();
     }
 
-    public virtual void doOnUpdate()
+    public virtual void DoOnUpdate()
     {
 
     }
@@ -50,11 +50,11 @@ public class Interactable : MonoBehaviour
             && this.isPlayerLookingAtIt
             && this.player.values.currentState == CharacterState.interact)
         {
-            doSomethingOnSubmit();            
+            DoOnSubmit();            
         }
     }
 
-    public virtual void doSomethingOnSubmit()
+    public virtual void DoOnSubmit()
     {
 
     }
@@ -87,10 +87,7 @@ public class Interactable : MonoBehaviour
 
     private void checkifLooking(Character character)
     {
-        if (character != null
-            && (character.values.currentState == CharacterState.interact
-             || character.values.currentState == CharacterState.idle
-             || character.values.currentState == CharacterState.walk))
+        if (character != null && character.values.CanInteract())
         {
             if (this.isPlayerInRange
                 && CollisionUtil.checkIfGameObjectIsViewed(character, this.gameObject))

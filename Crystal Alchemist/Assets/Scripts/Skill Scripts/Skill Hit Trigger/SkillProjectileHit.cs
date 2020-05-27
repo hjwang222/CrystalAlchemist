@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class SkillProjectileHit : SkillHitTrigger
@@ -10,7 +8,7 @@ public class SkillProjectileHit : SkillHitTrigger
     [Space(10)]
     [InfoBox("Projektile stoppen beim Aufprall und triggern die \"Hit\"-Animation. Kein Schaden!", InfoMessageType.None)]
     [SerializeField]
-    private Skill skillOnImpact;
+    private Ability skillOnImpact;
        
     private void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
@@ -50,9 +48,8 @@ public class SkillProjectileHit : SkillHitTrigger
     private void placeImpactSkill()
     {
         if (this.skillOnImpact != null)
-        {
-            GameObject fire = Instantiate(this.skillOnImpact.gameObject, this.skill.transform.position, Quaternion.identity);
-            Skill fireSkill = fire.GetComponent<Skill>();
+        {            
+            Skill fireSkill = this.skillOnImpact.InstantiateSkill(this.skill.transform.position);
 
             if (fireSkill != null)
             {

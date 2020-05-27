@@ -1,21 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class StatusEffectBlindModule : StatusEffectModule
+public class StatusEffectBlindModule : MonoBehaviour, StatusEffectModule
 {
     public GameObject instantiatNewGameObject;
     private GameObject panel;
 
-    public override void doAction()
-    {
-        this.panel = Instantiate(this.instantiatNewGameObject);
-    }
+    public void DoAction() =>  this.panel = Instantiate(this.instantiatNewGameObject);    
 
-    private void OnDestroy()
-    {
-        Animator animator = this.panel.transform.GetChild(0).GetComponent<Animator>();
-        AnimatorUtil.SetAnimatorParameter(animator, "Explode", true);
-        Destroy(this.panel, 2f);
-    }
+    public void DoDestroy() => Destroy(this.panel, 2f);
 }

@@ -540,7 +540,7 @@ public class Character : MonoBehaviour
     public bool canUseIt(Costs price)
     {
         //Door, Shop, Treasure, Abilities
-        if (this.values.ActiveInField() && HasEnoughCurrency(price)) return true;
+        if (this.values.CanMove() && HasEnoughCurrency(price)) return true;
         return false;
     }
 
@@ -630,7 +630,7 @@ public class Character : MonoBehaviour
 
     private void AddStatusEffectVisuals(StatusEffect effect)
     {
-        if (effect == null) return;
+        if (effect == null || effect.GetTarget() != this) return;
         if (effect.CanChangeColor()) ChangeColor(effect.GetColor());
         if (!ContainsEffect(effect)) this.statusEffectVisuals.Add(effect.Instantiate(this.activeStatusEffectParent));
     }

@@ -9,11 +9,14 @@ public class SkillLaser : SkillExtension
 
     [InfoBox("Kein Hit-Script notwendig, da kein Collider verwendet wird")]
     [SerializeField]
-    private Skill impactEffect;
+    private Ability impactEffect;
 
     [ShowIf("impactEffect")]
     [SerializeField]
     private float distanceBetweenImpacts = 1f;
+
+    [SerializeField]
+    private bool useCustomPosition;
 
     [SerializeField]
     private Light2D lights;
@@ -59,8 +62,11 @@ public class SkillLaser : SkillExtension
         Collider2D hitted = null;
         Vector2 hitPoint = Vector2.zero;
 
-        if (targetRequired && this.skill.target == null) LineRenderUtil.Renderempty(this.laserSprite, this.lights);
-        else LineRenderUtil.RenderLine(this.skill.sender, this.skill.target, this.distance, this.laserSprite, this.lights, out hitted, out hitPoint);
+        Vector2 startposition = this.skill.sender.GetShootingPosition();
+        if (useCustomPosition) startposition = this.transform.position;
+
+        if (targetRequired && this.skill.target == null) LineRenderUtil.Renderempty(this.laserSprite);
+        else LineRenderUtil.RenderLine(this.skill.sender, this.skill.target, this.distance, this.laserSprite, startposition, out hitted, out hitPoint);
 
         if (hitted != null)
         {
@@ -83,7 +89,7 @@ public class SkillLaser : SkillExtension
 
             if (impactPossible)
             {
-                Skill hitPointSkill = Instantiate(this.impactEffect, hitpoint, Quaternion.identity);
+                Skill hitPointSkill = this.impactEffect.InstantiateSkill(hitpoint);
                 hitPointSkill.transform.position = hitpoint;
 
                 if (hitPointSkill != null)

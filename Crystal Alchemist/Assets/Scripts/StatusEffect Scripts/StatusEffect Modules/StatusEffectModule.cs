@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 
-public class StatusEffectModule : MonoBehaviour
+public interface StatusEffectModule
 {
-    public virtual void doAction()
-    {
+    void DoAction();
 
-    }
+    void DoDestroy();
 }

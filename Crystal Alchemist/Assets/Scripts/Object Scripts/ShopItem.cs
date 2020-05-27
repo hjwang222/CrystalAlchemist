@@ -37,7 +37,7 @@ public class ShopItem : Rewardable
         this.itemDrop = this.reward.GetItemDrop();
     }
 
-    public override void doSomethingOnSubmit()
+    public override void DoOnSubmit()
     {
         if (this.player.canUseIt(this.costs))
         {

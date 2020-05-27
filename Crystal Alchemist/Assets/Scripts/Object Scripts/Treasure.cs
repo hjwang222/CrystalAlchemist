@@ -80,7 +80,7 @@ public class Treasure : Rewardable
 
     #region Update Funktion
 
-    public override void doOnUpdate()
+    public override void DoOnUpdate()
     {
         if (!this.treasureEnabled
             && ((this.player != null && this.player.values.currentState == CharacterState.interact)
@@ -90,7 +90,7 @@ public class Treasure : Rewardable
         }
     }
 
-    public override void doSomethingOnSubmit()
+    public override void DoOnSubmit()
     {
         if (this.treasureEnabled)
         {

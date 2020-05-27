@@ -1,5 +1,5 @@
 ﻿
 public class Mirror : Interactable
 {
-    public override void doSomethingOnSubmit() => MenuEvents.current.OpenCharacterCreation();    
+    public override void DoOnSubmit() => MenuEvents.current.OpenCharacterCreation();    
 }

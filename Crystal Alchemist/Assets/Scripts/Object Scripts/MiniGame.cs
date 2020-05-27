@@ -21,7 +21,7 @@ public class MiniGame : Interactable
         this.UIInfo.miniGameName = this.miniGame.miniGameName;
     }
 
-    public override void doSomethingOnSubmit()
+    public override void DoOnSubmit()
     {        
         MenuEvents.current.OpenMiniGame();
     }

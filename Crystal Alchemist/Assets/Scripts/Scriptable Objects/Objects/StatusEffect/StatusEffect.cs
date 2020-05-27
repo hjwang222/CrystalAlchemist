@@ -183,6 +183,7 @@ public class StatusEffect : ScriptableObject
             this.resetValues();
         }
 
+        DoModuleDestroy();
         if (this.activeObject != null) this.activeObject.Deactivate();
 
         //GUI updaten und Objekt kurz danach zerstören
@@ -205,7 +206,7 @@ public class StatusEffect : ScriptableObject
         return this.statusEffectTimeLeft;
     }
 
-    public Character getTarget()
+    public Character GetTarget()
     {
         return this.target;
     }
@@ -222,7 +223,12 @@ public class StatusEffect : ScriptableObject
 
     public void doModule()
     {
-        if (this.statusEffectObject.GetComponent<StatusEffectModule>() != null) this.statusEffectObject.GetComponent<StatusEffectModule>().doAction();
+        if (this.statusEffectObject.GetComponent<StatusEffectModule>() != null) this.statusEffectObject.GetComponent<StatusEffectModule>().DoAction();
+    }
+
+    public void DoModuleDestroy()
+    {
+        if (this.statusEffectObject.GetComponent<StatusEffectModule>() != null) this.statusEffectObject.GetComponent<StatusEffectModule>().DoDestroy();
     }
 
     #endregion

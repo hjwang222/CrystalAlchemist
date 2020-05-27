@@ -5,7 +5,7 @@ using TMPro;
 
 public class Sign : Interactable
 {
-    public override void doSomethingOnSubmit()
+    public override void DoOnSubmit()
     {
         this.player.GetComponent<PlayerDialog>().showDialog(this);
     }

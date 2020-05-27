@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -41,7 +40,7 @@ public class CustomRenderer : MonoBehaviour
 
     private void AddGlow()
     {
-        this.material.SetInt("_Use_Glow", 1);
+        this.material.SetFloat("_Use_Glow", this.useGlow ? 1f : 0f);
         this.material.SetFloat("_Precision", this.precision);
         this.material.SetColor("_SelectGlow", this.selectColor);
         this.material.SetColor("_GlowColor", this.glowColor);

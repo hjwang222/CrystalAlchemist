@@ -174,7 +174,7 @@ public class Ability : ScriptableObject
 
     private void OnCastTimeChange()
     {
-        if(this.hasCastTime) this.deactivateButtonUp = false;
+        if (this.hasCastTime) this.deactivateButtonUp = false;
     }
 #endif
 
@@ -202,7 +202,7 @@ public class Ability : ScriptableObject
 
     public void Updating()
     {
-        updateCooldown();        
+        updateCooldown();
     }
 
     private void updateCooldown()
@@ -210,7 +210,7 @@ public class Ability : ScriptableObject
         if (this.state == AbilityState.onCooldown)
         {
             if (this.cooldownLeft > 0) this.cooldownLeft -= Time.deltaTime;
-            else setStartParameters();            
+            else setStartParameters();
         }
     }
 
@@ -221,7 +221,7 @@ public class Ability : ScriptableObject
 
         this.cooldownLeft = 0;
 
-        if (this.hasCastTime && this.holdTimer < this.castTime) this.state = AbilityState.notCharged;        
+        if (this.hasCastTime && this.holdTimer < this.castTime) this.state = AbilityState.notCharged;
         else if (this.IsTargetRequired()) this.state = AbilityState.targetRequired;
         else this.state = AbilityState.ready;
     }
@@ -245,14 +245,14 @@ public class Ability : ScriptableObject
         }
     }
 
-    public void SetLockOnState() => this.state = AbilityState.lockOn;    
+    public void SetLockOnState() => this.state = AbilityState.lockOn;
 
-    public void ResetLockOn() => this.state = AbilityState.onCooldown;    
+    public void ResetLockOn() => this.state = AbilityState.onCooldown;
 
     public void ResetCharge()
     {
         if (!this.keepCast) this.holdTimer = 0;
-        else if (this.keepCast && this.holdTimer > this.castTime) this.holdTimer = 0;        
+        else if (this.keepCast && this.holdTimer > this.castTime) this.holdTimer = 0;
     }
 
     public void HideIndicator()
@@ -267,7 +267,7 @@ public class Ability : ScriptableObject
 
     public void ShowCastingIndicator(Character target)
     {
-        if (this.useIndicator == IndicatorType.OnCast && this.indicator != null) this.indicator.UpdateIndicator(this.sender, target);        
+        if (this.useIndicator == IndicatorType.OnCast && this.indicator != null) this.indicator.UpdateIndicator(this.sender, target);
     }
 
     public void ResetCoolDown()
@@ -281,7 +281,7 @@ public class Ability : ScriptableObject
         bool enoughResource = this.isResourceEnough();
 
         bool notToMany = true;
-        if (this.hasMaxAmount) notToMany = (getAmountOfSameSkills(this.skill, sender.values.activeSkills, sender.values.activePets) < this.maxAmount);        
+        if (this.hasMaxAmount) notToMany = (getAmountOfSameSkills(this.skill, sender.values.activeSkills, sender.values.activePets) < this.maxAmount);
 
         return (notToMany && enoughResource);
     }
@@ -326,32 +326,49 @@ public class Ability : ScriptableObject
         {
             return this.sender.canUseIt(senderModule.costs);
         }
-        else return true;        
+        else return true;
     }
 
-    public void InstantiateSkill(Character target)
+    public Skill InstantiateSkill(Character target)
     {
         //Single Target
-        InstantiateSkill(target, 1);
+        return InstantiateSkill(target, 1);
     }
 
-    public void InstantiateSkill(Character target, float reduce)
+    public Skill InstantiateSkill(Character target, float reduce)
     {
-        if (this.skill != null)
+        //Single Target
+        return InstantiateSkill(target, this.GetSender().transform.position, reduce);
+    }
+
+    public Skill InstantiateSkill(Vector2 position)
+    {
+        //Single Target
+        return InstantiateSkill(null, position, 1);
+    }
+
+    public Skill InstantiateSkill(Character target, Vector2 position, float reduce)
+    {
+        if (this.skill == null) return null;
+
+        Character sender = this.GetSender();
+        Skill activeSkill = Instantiate(this.skill, position, Quaternion.identity);
+        activeSkill.name = this.skill.name;
+        activeSkill.Initialize(this.positionOffset, this.lockDirection, this.timeDistortion, this.attachToSender);
+        activeSkill.SetMaxDuration(this.hasMaxDuration, this.maxDuration);
+
+        if (target != null) activeSkill.target = target;        
+
+        ReduceCostAndDamage(activeSkill, reduce, this.shareDamage);
+
+        if (sender != null)
         {
-            Character sender = this.GetSender();
-            Skill activeSkill = Instantiate(this.skill, sender.transform.position, Quaternion.identity);
-            activeSkill.name = this.skill.name;
-            activeSkill.Initialize(this.positionOffset, this.lockDirection, this.timeDistortion, this.attachToSender);
-            activeSkill.SetMaxDuration(this.hasMaxDuration, this.maxDuration);
-
             if (this.attachToSender) activeSkill.transform.parent = sender.activeSkillParent.transform;
-            if (target != null) activeSkill.target = target;
             activeSkill.sender = sender;
-
-            ReduceCostAndDamage(activeSkill, reduce, this.shareDamage);
             sender.values.activeSkills.Add(activeSkill);
         }
+
+        return activeSkill;
     }
 
     private void ReduceCostAndDamage(Skill activeSkill, float reduce, bool shareDamage)

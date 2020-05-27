@@ -2,6 +2,23 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+public enum CharacterState
+{
+    walk,
+    attack,
+    defend,
+    interact, //in Reichweite eines interagierbaren Objektes
+    inDialog, //Dialog-Box ist offen
+    inMenu, //Pause oder Inventar ist offen
+    knockedback, //im Knockback
+    idle,
+    silent, //kann nicht angreifen
+    dead,
+    manually,
+    sleeping,
+    respawning
+}
+
 [CreateAssetMenu(menuName = "Game/Characters/Character Values")]
 public class CharacterValues : ScriptableObject
 {
@@ -89,28 +106,41 @@ public class CharacterValues : ScriptableObject
     public void Initialize()
     {
         this.currentState = CharacterState.idle;
+        this.activeSkills.RemoveAll(x => x = null);
         for (int i = 0; i < this.activeSkills.Count; i++) this.activeSkills[i].DeactivateIt();
         this.activeSkills.Clear();
     }
 
     #region Menu und DialogBox
 
+    public bool CanOpenMenu()
+    {
+        return (this.currentState != CharacterState.inDialog
+             && this.currentState != CharacterState.inMenu
+             && this.currentState != CharacterState.respawning
+             && this.currentState != CharacterState.dead
+             && this.currentState != CharacterState.sleeping);
+    }
+
+    public bool CanInteract()
+    {
+        return (this.currentState == CharacterState.interact
+             || this.currentState == CharacterState.idle
+             || this.currentState == CharacterState.walk);
+    }
+
+    public bool CanMove()
+    {
+        return (CanOpenMenu() && !this.isCharacterStunned());
+    }
+
     public bool CanUseAbilities()
     {
         if (this.currentState != CharacterState.interact
-         && this.ActiveInField()) return true;
+         && this.CanMove()) return true;
         return false;
     }
 
-    public bool ActiveInField()
-    {
-        if (this.currentState != CharacterState.inDialog
-            && this.currentState != CharacterState.respawning
-            && this.currentState != CharacterState.inMenu
-            && this.currentState != CharacterState.dead
-            && !this.isCharacterStunned()) return true;
-        return false;
-    }
 
     public bool isCharacterStunned()
     {

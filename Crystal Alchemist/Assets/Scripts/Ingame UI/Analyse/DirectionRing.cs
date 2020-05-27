@@ -8,7 +8,7 @@ public class DirectionRing : MonoBehaviour
     private Character character;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float angle = (Mathf.Atan2(this.character.values.direction.y, this.character.values.direction.x) * Mathf.Rad2Deg)+90;
         Vector3 rotation = new Vector3(0, 0, angle);

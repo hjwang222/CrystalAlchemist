@@ -13,8 +13,8 @@ public class ContagiousStatusEffect : MonoBehaviour
     private void Start()
     {
         this.activeEffect = this.GetComponent<StatusEffectGameObject>().getEffect();
-        this.effectCollider.size = this.activeEffect.getTarget().GetComponent<BoxCollider2D>().size;
-        this.effectCollider.offset = this.activeEffect.getTarget().GetComponent<BoxCollider2D>().offset;
+        this.effectCollider.size = this.activeEffect.GetTarget().GetComponent<BoxCollider2D>().size;
+        this.effectCollider.offset = this.activeEffect.GetTarget().GetComponent<BoxCollider2D>().offset;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

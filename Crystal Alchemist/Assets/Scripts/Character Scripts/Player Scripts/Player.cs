@@ -155,20 +155,6 @@ public class Player : Character
         if (signal != null && addResource != 0) signal.Raise();
     }
 
-
-    public bool CanMove()
-    {
-        return (CanOpenMenu() && !this.values.isCharacterStunned());
-    }
-
-    public bool CanOpenMenu()
-    {
-        return (this.values.currentState != CharacterState.inDialog
-             && this.values.currentState != CharacterState.inMenu
-             && this.values.currentState != CharacterState.respawning
-             && this.values.currentState != CharacterState.dead);
-    }
-
     public void showDialogBox(string text)
     {
         if (this.values.currentState != CharacterState.inDialog)

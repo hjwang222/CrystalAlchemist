@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterRenderer : CustomRenderer
@@ -21,13 +20,13 @@ public class CharacterRenderer : CustomRenderer
 
     private void ChangeTint(Color color, bool useTint)
     {
-        this.material.SetInt("_Use_Tint", Convert.ToInt32(useTint));
+        this.material.SetFloat("_Use_Tint", useTint ? 1f : 0f);
         this.material.SetColor("_Tint", color);        
     }
 
     public void InvertColors(bool invert)
     {
-        this.material.SetInt("_Invert", Convert.ToInt32(invert));
+        this.material.SetFloat("_Invert", invert ? 1f : 0f);
     }
 
     public void ChangeTint(Color color)

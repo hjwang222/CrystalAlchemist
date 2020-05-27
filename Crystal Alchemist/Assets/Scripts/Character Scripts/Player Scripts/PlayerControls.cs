@@ -13,12 +13,12 @@ public class PlayerControls : MonoBehaviour
 
     public void Inventory(InputAction.CallbackContext context)
     {
-        if (context.performed && player.CanOpenMenu()) MenuEvents.current.OpenInventory();        
+        if (context.performed && player.values.CanOpenMenu()) MenuEvents.current.OpenInventory();        
     }
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (context.performed && player.CanOpenMenu()) MenuEvents.current.OpenPause();     
+        if (context.performed && player.values.CanOpenMenu()) MenuEvents.current.OpenPause();     
     }
 
     public void Submit(InputAction.CallbackContext context)

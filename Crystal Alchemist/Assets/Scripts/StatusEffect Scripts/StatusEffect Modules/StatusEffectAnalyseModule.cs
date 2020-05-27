@@ -1,17 +1,27 @@
 ﻿using UnityEngine;
 
-public class StatusEffectAnalyseModule : StatusEffectModule
+public class StatusEffectAnalyseModule : MonoBehaviour, StatusEffectModule 
 {
     [SerializeField]
     private BoolValue isActive;
 
-    public override void doAction()
+    private StatusEffect activeEffect;
+
+    private void Start()
     {
-        this.isActive.setValue(true);
+        this.activeEffect = this.GetComponent<StatusEffectGameObject>().getEffect();
+        this.transform.position = this.activeEffect.GetTarget().GetGroundPosition();
     }
 
-    private void OnDestroy()
+    public void DoAction() => this.isActive.setValue(true);    
+
+    public void DoDestroy() => this.isActive.setValue(false);
+
+    void FixedUpdate()
     {
-        this.isActive.setValue(false);
+        float angle = (Mathf.Atan2(this.activeEffect.GetTarget().values.direction.y, this.activeEffect.GetTarget().values.direction.x) * Mathf.Rad2Deg) + 90;
+        Vector3 rotation = new Vector3(0, 0, angle);
+
+        this.transform.rotation = Quaternion.Euler(rotation);
     }
 }

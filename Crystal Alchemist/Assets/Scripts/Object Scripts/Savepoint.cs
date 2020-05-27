@@ -18,7 +18,7 @@ public class Savepoint : Interactable
     [SerializeField]
     private TeleportStats savePointInfo;
 
-    public override void doSomethingOnSubmit()
+    public override void DoOnSubmit()
     {
         this.player.updateResource(CostType.life, this.player.values.maxLife);
         this.player.updateResource(CostType.mana, this.player.values.maxMana);

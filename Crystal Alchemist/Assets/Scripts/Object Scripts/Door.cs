@@ -32,7 +32,7 @@ public class Door : Interactable
         if (this.isOpen) AnimatorUtil.SetAnimatorParameter(this.animator, "isOpened", true);
     }
 
-    public override void doOnUpdate()
+    public override void DoOnUpdate()
     {
         if (!this.isPlayerInRange && this.isOpen && this.doorType == DoorType.normal)
         {
@@ -41,7 +41,7 @@ public class Door : Interactable
         }
     }
 
-    public override void doSomethingOnSubmit()
+    public override void DoOnSubmit()
     {
         if (this.doorType != DoorType.enemy && this.doorType != DoorType.button)
         {

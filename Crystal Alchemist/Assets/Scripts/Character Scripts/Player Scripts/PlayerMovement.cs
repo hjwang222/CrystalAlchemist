@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
             && !this.player.values.isOnIce
             && this.player.myRigidbody.bodyType != RigidbodyType2D.Static) this.player.myRigidbody.velocity = Vector2.zero;
 
-        if(this.player.CanMove()) UpdateAnimationAndMove(this.change);  //check if is menu
+        if(this.player.values.CanMove()) UpdateAnimationAndMove(this.change);  //check if is menu
         else AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", false);
     }
 

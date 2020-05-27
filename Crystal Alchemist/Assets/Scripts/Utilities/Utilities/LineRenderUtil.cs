@@ -1,22 +1,20 @@
 ﻿using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
 
 public static class LineRenderUtil
 {
-    public static void RenderLine(Character sender, Character target, float distance, SpriteRenderer spriteRenderer, Light2D lights,
+    public static void RenderLine(Character sender, Character target, float distance, SpriteRenderer spriteRenderer, Vector2 startpoint,
                              out Collider2D hitted, out Vector2 hitPoint)
     {
         spriteRenderer.enabled = true;
         hitted = null;
         hitPoint = Vector2.zero;
-        Vector2 startpoint = sender.GetShootingPosition();
 
         if (target != null)
         {
             //draw Laser to target
             hitPoint = target.GetShootingPosition();
             hitted = getCollider(target);
-            drawLaserToTarget(startpoint, hitPoint, spriteRenderer, lights);
+            drawLaserToTarget(startpoint, hitPoint, spriteRenderer);
         }
         else
         {
@@ -40,11 +38,11 @@ public static class LineRenderUtil
 
             if (hitInfo && !hitInfo.collider.isTrigger)
             {
-                drawLaserToTarget(startpoint, hitPoint, spriteRenderer, lights);
+                drawLaserToTarget(startpoint, hitPoint, spriteRenderer);
             }
             else
             {
-                drawLongLaser(startpoint, direction, distance, spriteRenderer, lights);
+                drawLongLaser(startpoint, direction, distance, spriteRenderer);
             }
         }
     }
@@ -60,34 +58,31 @@ public static class LineRenderUtil
         return null;
     }
 
-    private static void drawLaserToTarget(Vector2 startpoint, Vector2 hitpoint, SpriteRenderer spriteRenderer, Light2D lights)
+    private static void drawLaserToTarget(Vector2 startpoint, Vector2 hitpoint, SpriteRenderer spriteRenderer)
     {
         Vector2 direction = (hitpoint - startpoint).normalized;
         Vector2 position = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y - startpoint.y) / 2) + startpoint;
 
-        setLaserSprite(position, Vector3.Distance(hitpoint, startpoint), GetRotation(direction), spriteRenderer, lights);
+        setLaserSprite(position, Vector3.Distance(hitpoint, startpoint), GetRotation(direction), spriteRenderer);
     }
 
-    private static void drawLongLaser(Vector2 startpoint, Vector2 direction, float distance, SpriteRenderer spriteRenderer, Light2D lights)
+    private static void drawLongLaser(Vector2 startpoint, Vector2 direction, float distance, SpriteRenderer spriteRenderer)
     {
         Vector2 position = new Vector2(direction.x * (distance / 2), direction.y * (distance / 2)) + startpoint;
 
-        setLaserSprite(position, distance, GetRotation(direction), spriteRenderer, lights);
+        setLaserSprite(position, distance, GetRotation(direction), spriteRenderer);
     }
 
-    private static void setLaserSprite(Vector2 position, float distance, Vector3 rotation, SpriteRenderer spriteRenderer, Light2D lights)
+    private static void setLaserSprite(Vector2 position, float distance, Vector3 rotation, SpriteRenderer spriteRenderer)
     {
         spriteRenderer.transform.position = position;
         spriteRenderer.size = new Vector2(distance, spriteRenderer.size.y);
         spriteRenderer.transform.rotation = Quaternion.Euler(rotation);
-
-        if (lights != null) lights.transform.localScale = new Vector2(distance, lights.transform.localScale.y);
     }
 
-    public static void Renderempty(SpriteRenderer spriteRenderer, Light2D lights)
+    public static void Renderempty(SpriteRenderer spriteRenderer)
     {
         spriteRenderer.size = new Vector2(0, 0);
-        if (lights != null) lights.transform.localScale = new Vector2(0, 0);
     }
 
     private static Vector3 GetRotation(Vector2 direction)
