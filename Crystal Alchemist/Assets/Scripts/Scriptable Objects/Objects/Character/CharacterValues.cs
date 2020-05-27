@@ -64,6 +64,7 @@ public class CharacterValues : ScriptableObject
     [BoxGroup("Debug")]
     public float speedFactor = 5;
 
+    [Button]
     public void Clear(CharacterStats stats)
     {
         this.maxLife = stats.maxLife;
@@ -78,6 +79,9 @@ public class CharacterValues : ScriptableObject
         this.buffs.Clear();
         this.debuffs.Clear();
         this.speed = (stats.startSpeed / 100) * this.speedFactor;
+
+        this.cantBeHit = false;
+        this.isOnIce = false;
         
         if (stats.lootTable != null) this.itemDrop = stats.lootTable.GetItemDrop();
     }

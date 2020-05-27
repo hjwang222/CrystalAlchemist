@@ -15,6 +15,15 @@ public static class UnityUtil
         }
     }
 
+    public static void GetActiveChildObjects<T>(Transform transform, List<T> childObjects)
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.GetComponent<T>() != null && child.gameObject.activeInHierarchy) childObjects.Add(child.GetComponent<T>());
+            GetActiveChildObjects(child, childObjects);
+        }
+    }
+
     public static void GetChildren(Transform transform, List<GameObject> childObjects)
     {
         foreach (Transform child in transform)

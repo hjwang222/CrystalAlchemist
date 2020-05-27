@@ -186,10 +186,7 @@ MonoBehaviour:
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
-  audioSource: {fileID: 0}
-  spriteRenderer: {fileID: 0}
   context: {fileID: 0}
-  openMenuSignal: {fileID: 11400000, guid: c5b720e48058d0646822eb1041690ae5, type: 2}
 --- !u!61 &7558227325428697102
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -259,6 +256,7 @@ GameObject:
   - component: {fileID: 4191204237184487337}
   - component: {fileID: 8778043509089608004}
   - component: {fileID: 5149172828932141842}
+  - component: {fileID: 598882793263533495}
   m_Layer: 15
   m_Name: Sprite
   m_TagString: Untagged
@@ -295,10 +293,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 913c5b8c80375084d837afa00e46dfbf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -350,3 +349,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &598882793263533495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8396913473854708589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6a96ce65e495a4690ef5aa491ec319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 913c5b8c80375084d837afa00e46dfbf, type: 2}
+  spriteRenderer: {fileID: 0}
+  useGlow: 1
+  selectColor: {r: 0.8431373, g: 1, b: 0.9686275, a: 1}
+  precision: 0.084
+  glowColor: {r: 1.099252, g: 2.837799, b: 4.2371163, a: 1}

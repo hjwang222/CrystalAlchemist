@@ -56,7 +56,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   impactEffect: {fileID: 0}
   distanceBetweenImpacts: 1
-  lights: {fileID: 2986583049354558462}
+  lights: {fileID: 0}
   distance: 50
   laserSprite: {fileID: 6508292816955024436}
   targetRequired: 1
@@ -75,6 +75,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -145,12 +146,6 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  positionOffset: 0
-  attachToSender: 1
-  lockDirection: 0
-  canAffectedBytimeDistortion: 0
-  hasDuration: 0
-  maxDuration: 9999
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
@@ -222,7 +217,6 @@ MonoBehaviour:
   rotateIt: 1
   rotateOnUpdate: 0
   keepOriginalRotation: 0
-  rotationModifier: 0
   snapRotationInDegrees: 0
 --- !u!114 &6063059781987790246
 MonoBehaviour:
@@ -239,79 +233,6 @@ MonoBehaviour:
   skill: {fileID: 0}
   positionHeight: 1
   colliderHeightOffset: 0
---- !u!1 &3808911717292565494
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5398230312529079291}
-  - component: {fileID: 2986583049354558462}
-  m_Layer: 13
-  m_Name: Light 2D
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &5398230312529079291
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3808911717292565494}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6508292816955024443}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2986583049354558462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3808911717292565494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_LightType: 1
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.6
-  m_Color: {r: 0.2784314, g: 0.8980393, b: 1, a: 1}
-  m_Intensity: 0.5
-  m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 7f83324619b8859a9b211b54
-  m_LightCookieSprite: {fileID: -2885109794949164627, guid: 6518bd2f95ec4f54bb78f4b46c491f7d,
-    type: 3}
-  m_UseNormalMap: 0
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0
-  m_ShadowVolumeIntensity: 0
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
-  m_PointLightDistance: 3
-  m_PointLightQuality: 1
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 1
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -1, y: -0.5, z: 0}
-  - {x: 1, y: -0.5, z: 0}
-  - {x: 1, y: 0.5, z: 0}
-  - {x: -1, y: 0.5, z: 0}
 --- !u!1 &6508292816955024442
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +244,7 @@ GameObject:
   - component: {fileID: 6508292816955024443}
   - component: {fileID: 6508292816955024436}
   - component: {fileID: 6508292816955024440}
+  - component: {fileID: 2890384803391581827}
   m_Layer: 13
   m_Name: New Sprite
   m_TagString: Skill
@@ -340,8 +262,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 5398230312529079291}
+  m_Children: []
   m_Father: {fileID: 680506914304237523}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -360,10 +281,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -414,6 +336,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2890384803391581827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6508292816955024442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6a96ce65e495a4690ef5aa491ec319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
+  spriteRenderer: {fileID: 0}
+  useGlow: 1
+  selectColor: {r: 1, g: 1, b: 1, a: 1}
+  precision: 0.2
+  glowColor: {r: 1.6502099, g: 5.0454345, b: 7.1396832, a: 1}
 --- !u!1 &7606972994670469862
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,6 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7606972994670469863}
   - component: {fileID: 7606972994670469864}
+  - component: {fileID: 4566497283956205580}
   m_Layer: 13
   m_Name: New Sprite
   m_TagString: Untagged
@@ -460,10 +401,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -495,6 +437,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4566497283956205580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606972994670469862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6a96ce65e495a4690ef5aa491ec319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
+  spriteRenderer: {fileID: 0}
+  useGlow: 1
+  selectColor: {r: 1, g: 1, b: 1, a: 1}
+  precision: 0.2
+  glowColor: {r: 1.6502099, g: 5.0454345, b: 7.1396832, a: 1}
 --- !u!1001 &1840304094138339854
 PrefabInstance:
   m_ObjectHideFlags: 0

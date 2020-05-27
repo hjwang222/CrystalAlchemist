@@ -91,7 +91,6 @@ public class Character : MonoBehaviour
         if (this.animator == null) this.animator = this.GetComponent<Animator>();
         if (this.boxCollider == null) this.boxCollider = GetComponent<Collider2D>();
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
-        if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().Initialize();
     }
 
     public void ResetValues()
@@ -99,7 +98,6 @@ public class Character : MonoBehaviour
         this.values.Clear(this.stats);
 
         this.SetDefaultDirection();
-        this.setStartColor();
         this.animator.speed = 1;
         this.updateTimeDistortion(0);
         this.updateSpellSpeed(0);
@@ -111,7 +109,7 @@ public class Character : MonoBehaviour
         if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Static;
         else this.myRigidbody.bodyType = RigidbodyType2D.Dynamic;
 
-        if (this.GetComponent<SpriteRendererExtensionHandler>() != null) this.GetComponent<SpriteRendererExtensionHandler>().resetColors();
+        if (this.GetComponent<CharacterRenderingHandler>() != null) this.GetComponent<CharacterRenderingHandler>().Reset();
         if (this.boxCollider != null) this.boxCollider.enabled = true;
     }
 
@@ -197,28 +195,22 @@ public class Character : MonoBehaviour
 
     #region Color Changes
 
-    public void setStartColor()
-    {
-        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
-            this.GetComponent<SpriteRendererExtensionHandler>().setStartColor();
-    }
-
     public void removeColor(Color color)
     {
-        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
-            this.GetComponent<SpriteRendererExtensionHandler>().removeColor(color);
+        if (this.GetComponent<CharacterRenderingHandler>() != null)
+            this.GetComponent<CharacterRenderingHandler>().RemoveTint(color);
     }
 
     public void ChangeColor(Color color)
     {
-        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
-            this.GetComponent<SpriteRendererExtensionHandler>().changeColor(color);
+        if (this.GetComponent<CharacterRenderingHandler>() != null)
+            this.GetComponent<CharacterRenderingHandler>().ChangeTint(color);
     }
 
     public void setFlip()
     {
-        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
-            this.GetComponent<SpriteRendererExtensionHandler>().flipSprite(this.values.direction);
+        if (this.GetComponent<CharacterRenderingHandler>() != null)
+            this.GetComponent<CharacterRenderingHandler>().flipSprite(this.values.direction);
     }
 
     #endregion
@@ -398,7 +390,6 @@ public class Character : MonoBehaviour
         StatusEffectUtil.RemoveAllStatusEffects(this.values.debuffs);
         StatusEffectUtil.RemoveAllStatusEffects(this.values.buffs);
 
-        this.setStartColor();
         this.values.currentState = CharacterState.dead;
 
         if (this.myRigidbody != null && this.myRigidbody.bodyType != RigidbodyType2D.Static) this.myRigidbody.velocity = Vector2.zero;
@@ -587,8 +578,8 @@ public class Character : MonoBehaviour
 
     public void SetCharacterSprites(bool value)
     {
-        if (this.GetComponent<SpriteRendererExtensionHandler>() != null)
-            this.GetComponent<SpriteRendererExtensionHandler>().enableSpriteRenderer(value);
+        if (this.GetComponent<CharacterRenderingHandler>() != null)
+            this.GetComponent<CharacterRenderingHandler>().enableSpriteRenderer(value);
 
         if (this.shadowRenderer != null) this.shadowRenderer.enabled = value;
     }
@@ -602,14 +593,12 @@ public class Character : MonoBehaviour
 
     public void SpawnIn()
     {               
-        this.removeColor(Color.white);
         this.values.currentState = CharacterState.idle;
         this.EnableScripts(true);   
     }
 
     public void PlayDespawnAnimation()
     {
-        this.ChangeColor(Color.white);
         AnimatorUtil.SetAnimatorParameter(this.animator, "Despawn");
     }
 
@@ -620,7 +609,6 @@ public class Character : MonoBehaviour
 
     public void PlayRespawnAnimation()
     {
-        this.ChangeColor(Color.white);
         AnimatorUtil.SetAnimatorParameter(this.animator, "Respawn");
     }
 

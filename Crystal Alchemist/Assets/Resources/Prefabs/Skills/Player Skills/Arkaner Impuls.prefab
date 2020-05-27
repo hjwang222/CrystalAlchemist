@@ -47,6 +47,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -120,6 +121,7 @@ GameObject:
   - component: {fileID: 5257727404935883419}
   - component: {fileID: 1969718782558145669}
   - component: {fileID: 2642437566886130826}
+  - component: {fileID: 1780088220921892667}
   m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
@@ -157,10 +159,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -224,6 +227,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 3816868808247662347}
+--- !u!114 &1780088220921892667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969718782558145674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6a96ce65e495a4690ef5aa491ec319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
+  spriteRenderer: {fileID: 0}
+  useGlow: 1
+  selectColor: {r: 1, g: 1, b: 1, a: 1}
+  precision: 0.287
+  glowColor: {r: 1.7471088, g: 6.498019, b: 2.2597973, a: 1}
 --- !u!1 &6814274785137477229
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,12 +356,6 @@ MonoBehaviour:
   myRigidbody: {fileID: 8945697548278569866}
   animator: {fileID: 1969718782558145669}
   shadow: {fileID: 8613971535191392423}
-  positionOffset: 0.75
-  attachToSender: 0
-  lockDirection: 1
-  canAffectedBytimeDistortion: 1
-  hasDuration: 1
-  maxDuration: 1
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
@@ -390,7 +405,6 @@ MonoBehaviour:
   rotateIt: 1
   rotateOnUpdate: 0
   keepOriginalRotation: 0
-  rotationModifier: 0
   snapRotationInDegrees: 0
 --- !u!114 &69357154066809696
 MonoBehaviour:

@@ -7,13 +7,15 @@ public class TODOLIST : MonoBehaviour
     //TODO: Minigames
     //TODO: Knockback Rework
     //TODO: Sound Effekte ersetzen!
+    //BUG: Feuer geht nicht weg
+    //BUG: Eis friert selbst ein
+    //BUG: Stromschlag nicht bei Orb
 
     //--Content--
     //OBJECT: Bett (Tag/Nacht) und Sanduhr weg
     //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
     //TODO: Schwimmen (Sprite Mask)
     //SKILL: Rundumschlag (wind)
-    //TODO: Enemy shader?
 
     //GRAPHICS: TitleScreen: Background 
     //--Boss Fight--

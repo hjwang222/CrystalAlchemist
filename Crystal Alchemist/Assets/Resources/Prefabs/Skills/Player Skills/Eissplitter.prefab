@@ -90,12 +90,6 @@ MonoBehaviour:
   myRigidbody: {fileID: 8003971335365348661}
   animator: {fileID: 1781594353715446578}
   shadow: {fileID: 157402643467407502}
-  positionOffset: 0.75
-  attachToSender: 0
-  lockDirection: 0
-  canAffectedBytimeDistortion: 1
-  hasDuration: 1
-  maxDuration: 20
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
@@ -183,7 +177,6 @@ MonoBehaviour:
   rotateIt: 1
   rotateOnUpdate: 0
   keepOriginalRotation: 0
-  rotationModifier: 0
   snapRotationInDegrees: 45
 --- !u!114 &2106465046035776382
 MonoBehaviour:
@@ -256,6 +249,7 @@ GameObject:
   - component: {fileID: 597466489169404831}
   - component: {fileID: 1781594353715446578}
   - component: {fileID: 1156435307969178262}
+  - component: {fileID: 8361710583052979313}
   m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
@@ -294,10 +288,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -362,6 +357,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 9012234495704110565}
+--- !u!114 &8361710583052979313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6622626158085490062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6a96ce65e495a4690ef5aa491ec319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
+  spriteRenderer: {fileID: 0}
+  useGlow: 1
+  selectColor: {r: 0.8196079, g: 0.9725491, b: 1, a: 1}
+  precision: 0.168
+  glowColor: {r: 1.7568529, g: 3.5471697, b: 3.2536216, a: 1}
 --- !u!1 &8507274686393064075
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +423,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

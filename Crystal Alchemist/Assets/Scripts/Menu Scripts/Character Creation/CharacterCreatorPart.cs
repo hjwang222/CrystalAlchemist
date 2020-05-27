@@ -25,17 +25,10 @@ public class CharacterCreatorPart : MonoBehaviour
     [SerializeField]
     private Image image;
 
-    [SerializeField]
-    private bool addGlow = false;
-
-    [SerializeField]
-    [ColorUsage(true, true)]
-    private Color highlightColor;
-
     private Material mat;
 
     private void Awake()
-    {       
+    {
         if (sprite != null) this.mat = sprite.material;
         if (image != null)
         {
@@ -53,7 +46,7 @@ public class CharacterCreatorPart : MonoBehaviour
 
             Clear(mat);
 
-            int i = 0;
+            int i = 0;            
 
             while (i < this.property.colorTables.Count && i < colors.Count)
             {
@@ -72,7 +65,7 @@ public class CharacterCreatorPart : MonoBehaviour
         mat.SetColor("_Color_" + ((index * 4) + 3), colorTable.shadows);
         mat.SetColor("_Color_" + ((index * 4) + 4), colorTable.lines);
 
-        mat.SetColor("_New_ColorGroup_" + (index + 1), color);        
+        mat.SetColor("_New_ColorGroup_" + (index + 1), color);
     }
 
     private void AddGlow()

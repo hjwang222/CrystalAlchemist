@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed50160a1f51fb4b89bf02e00ece70d, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  characterName: Paladin
-  englischCharacterName: Paladin
   characterType: 0
   startLife: 1
   startMana: 1
@@ -24,8 +22,7 @@ MonoBehaviour:
   immunityToStatusEffects: []
   hasRespawn: 1
   respawnTime: 0
-  respawnAnimation: {fileID: 1140035694535706356, guid: 815950c2030167244ab889505e154cc8,
-    type: 3}
+  respawnChance: 100
   deathAnimation: {fileID: 0}
   maxLife: 1
   maxMana: 1
@@ -40,6 +37,6 @@ MonoBehaviour:
   antiKnockback: 0
   cannotBeHitTime: 0.5
   showHitcolor: 1
-  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  hitColor: {r: 2, g: 0.27358496, b: 0.27358496, a: 1}
   lootTable: {fileID: 0}
   hitSoundEffect: {fileID: 8300000, guid: 27ac131e0a552ec4e80c1947b53d31a9, type: 3}

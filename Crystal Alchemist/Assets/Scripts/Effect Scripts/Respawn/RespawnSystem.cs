@@ -69,7 +69,7 @@ public class RespawnSystem : MonoBehaviour
     {
         return (this.spawnType == SpawnType.day && time.night)
             || (this.spawnType == SpawnType.night && !time.night)
-            || (this.spawnType == SpawnType.time && this.from >= time.getHour() && this.to <= time.getHour());
+            || (this.spawnType == SpawnType.time && this.from < time.getHour() && this.to > time.getHour());
     }
 
     private bool MustDespawn(Character child)

@@ -1,0 +1,49 @@
+﻿using System;
+using UnityEngine;
+using Sirenix.OdinInspector;
+
+[RequireComponent(typeof(SpriteRenderer))]
+public class CustomRenderer : MonoBehaviour
+{
+    public Material material;
+    public SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private bool useGlow = false;
+
+    [SerializeField]
+    [ShowIf("useGlow")]
+    private Color selectColor = Color.white;
+
+    [ShowIf("useGlow")]
+    [SerializeField]
+    [Range(0,1)]
+    private float precision = 0f;
+
+    [ShowIf("useGlow")]
+    [SerializeField]
+    [ColorUsage(true, true)]
+    private Color glowColor = Color.white;
+
+    private void Start()
+    {
+        this.spriteRenderer = this.GetComponent<SpriteRenderer>();
+        this.material = this.GetComponent<SpriteRenderer>().material;
+        AddGlow();
+    }
+
+    [Button]
+    private void Check()
+    {
+        this.material = this.GetComponent<SpriteRenderer>().sharedMaterial;
+        AddGlow();
+    }
+
+    private void AddGlow()
+    {
+        this.material.SetInt("_Use_Glow", 1);
+        this.material.SetFloat("_Precision", this.precision);
+        this.material.SetColor("_SelectGlow", this.selectColor);
+        this.material.SetColor("_GlowColor", this.glowColor);
+    }
+}

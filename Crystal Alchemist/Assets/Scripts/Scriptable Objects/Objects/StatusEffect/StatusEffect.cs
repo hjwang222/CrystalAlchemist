@@ -63,6 +63,7 @@ public class StatusEffect : ScriptableObject
     [Tooltip("Farbe während der Dauer des Statuseffekts")]
     [SerializeField]
     [ShowIf("changeColor")]
+    [ColorUsage(true, true)]
     private Color statusEffectColor;
 
     [FoldoutGroup("Visuals", expanded: false)]

@@ -315,7 +315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterSprite: {fileID: 7914839587969846799}
-  colorpalettes: []
 --- !u!114 &1379375270786425069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,7 +541,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 355432992060eda49abb91f4a41cf0b7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -619,9 +618,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canChangeColor: 1
+  material: {fileID: 2100000, guid: 355432992060eda49abb91f4a41cf0b7, type: 2}
   spriteRenderer: {fileID: 0}
-  colors: []
+  useGlow: 1
+  selectColor: {r: 1, g: 0.9333334, b: 0.6431373, a: 1}
+  precision: 0.5
+  glowColor: {r: 2.9960785, g: 1.3490196, b: 0, a: 1}
 --- !u!1001 &4949269460512988576
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -171,6 +171,7 @@ public class CharacterStats : ScriptableObject
 
     [BoxGroup("Schaden")]
     [ShowIf("showHitcolor")]
+    [ColorUsage(true,true)]
     public Color hitColor = Color.white;
 
 

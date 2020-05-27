@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 2652810396879462138}
   - component: {fileID: 2652810396879462137}
   - component: {fileID: 2652810396879462142}
+  - component: {fileID: 5155928442104411160}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -121,10 +122,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -189,6 +191,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1938021464261085658}
+--- !u!114 &5155928442104411160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2652810396879462133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6a96ce65e495a4690ef5aa491ec319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
+  spriteRenderer: {fileID: 0}
+  useGlow: 1
+  selectColor: {r: 1, g: 1, b: 1, a: 1}
+  precision: 0.126
+  glowColor: {r: 2.0862746, g: 2.9960785, b: 2.792157, a: 1}
 --- !u!1 &2652810397108339306
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,37 +346,11 @@ MonoBehaviour:
   animator: {fileID: 2652810396879462137}
   boxCollider: {fileID: 0}
   shadowRenderer: {fileID: 3588978413753434420}
+  respawnAnimation: {fileID: 0}
   skillStartPosition: {fileID: 6261774556482826731}
   activeSkillParent: {fileID: 2652810397108339306}
   activeStatusEffectParent: {fileID: 8669415238972280400}
-  speedMultiply: 5
-  spawnPosition: {x: 0, y: 0, z: 0}
-  activeCastbar: {fileID: 0}
-  currentState: 0
-  life: 0
-  spellspeed: 0
-  mana: 0
-  speed: 0
-  maxLife: 0
-  maxMana: 0
-  lifeRegen: 0
-  manaRegen: 0
-  buffPlus: 0
-  debuffMinus: 0
-  cantBeHit: 0
-  isInvincible: 0
-  isHit: 0
-  buffs: []
-  debuffs: []
-  activeSkills: []
-  direction: {x: 0, y: 0}
-  lockAnimation: 0
-  timeDistortion: 1
-  isPlayer: 0
-  activePets: []
-  steps: 0
-  isOnIce: 0
-  itemDrop: {fileID: 0}
+  values: {fileID: 0}
   aggroGameObject: {fileID: 0}
   flip: 1
   target: {fileID: 0}
@@ -382,11 +376,19 @@ MonoBehaviour:
   backToStart: 0
   returnDelay: 3
   isPatrol: 0
+  patrolType: 0
   patrolDelay: 3
   patrolPath: []
+  patrolArea: {fileID: 0}
+  hasMaxTime: 0
+  maxPatrolTime: 5
   followPathPrecision: 0.01
   followPathInCircle: 0
+  usePathfinding: 1
   accuracy: 0.25
+  updateDelay: 0.5
+  targetPosition: {x: 0, y: 0, z: 0}
+  areaCountdown: 0
 --- !u!114 &1938021464261085656
 MonoBehaviour:
   m_ObjectHideFlags: 0

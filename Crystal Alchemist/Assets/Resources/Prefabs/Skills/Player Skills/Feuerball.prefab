@@ -341,6 +341,7 @@ GameObject:
   - component: {fileID: 712452891642831029}
   - component: {fileID: 1421051230670556681}
   - component: {fileID: 8103579987424890013}
+  - component: {fileID: 6952176598635262387}
   m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
@@ -383,7 +384,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -448,6 +449,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 4944835584636789073}
+--- !u!114 &6952176598635262387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6503707887029913252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6a96ce65e495a4690ef5aa491ec319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
+  spriteRenderer: {fileID: 0}
+  useGlow: 1
+  selectColor: {r: 1, g: 0.9058824, b: 0.039215688, a: 1}
+  precision: 0.25
+  glowColor: {r: 5.03257, g: 1.6673802, b: 0, a: 1}
 --- !u!1001 &1464900554044714639
 PrefabInstance:
   m_ObjectHideFlags: 0

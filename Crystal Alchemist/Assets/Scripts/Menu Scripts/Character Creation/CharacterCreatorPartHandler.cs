@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterCreatorPartHandler : MonoBehaviour
@@ -7,10 +8,11 @@ public class CharacterCreatorPartHandler : MonoBehaviour
     private CharacterPreset preset;
 
     [SerializeField]
-    private SpriteRendererExtensionHandler handler;
+    private CharacterRenderingHandler handler;
 
     private List<CharacterCreatorPart> parts = new List<CharacterCreatorPart>();
 
+    [Button]
     public void UpdateCharacterParts()
     {
         this.parts.Clear();
@@ -30,6 +32,6 @@ public class CharacterCreatorPartHandler : MonoBehaviour
             }
         }
 
-        this.handler.Initialize();
+        handler.Start();
     }
 }
