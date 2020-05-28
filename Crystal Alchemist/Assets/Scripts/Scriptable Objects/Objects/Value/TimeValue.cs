@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game/Player/Time")]
@@ -14,10 +13,12 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
     [SerializeField]
     private int hour = 12;
 
-    public float normalFactor = 1;
+    [SerializeField]
+    private float normalFactor = 1;
 
     public int update = 30;
     public bool night;
+
     public float factor = 1;    
 
     [SerializeField]
@@ -27,6 +28,11 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
     private SimpleSignal signal;
 
     public void Clear() => SetStartTime();
+
+    [Button]
+    public void Reset() => this.factor = this.normalFactor;    
+
+    public void SetFactor(float value) => this.factor = value;   
 
     private void SetStartTime()
     {

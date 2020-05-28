@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections;
+using DG.Tweening;
+using System;
+using UnityEngine.InputSystem;
 
 public class Player : Character
 {
@@ -29,6 +32,10 @@ public class Player : Character
     [SerializeField]
     private StringValue characterName;
 
+    [BoxGroup("Player Objects")]
+    [SerializeField]
+    private float goToBedDuration = 1f;
+
     ///////////////////////////////////////////////////////////////
 
     public override void Awake()
@@ -51,6 +58,8 @@ public class Player : Character
         GameEvents.current.OnReduce += this.reduceResource;
         GameEvents.current.OnMenuOpen += this.setStateMenuOpened;
         GameEvents.current.OnMenuClose += this.setStateAfterMenuClose;
+        GameEvents.current.OnSleep += this.GoToSleep;
+        GameEvents.current.OnWakeUp += this.WakeUp;
 
         this.GetComponent<PlayerAbilities>().Initialize(this);
         this.GetComponent<PlayerTeleport>().Initialize(this);
@@ -65,7 +74,7 @@ public class Player : Character
     public override void Update()
     {
         base.Update();        
-        this.GetComponent<PlayerAbilities>().Updating();
+        this.GetComponent<PlayerAbilities>().Updating();       
     }
 
     public override void OnDestroy()
@@ -75,12 +84,24 @@ public class Player : Character
         GameEvents.current.OnReduce -= this.reduceResource;
         GameEvents.current.OnMenuOpen -= this.setStateMenuOpened;
         GameEvents.current.OnMenuClose -= this.setStateAfterMenuClose;
+        GameEvents.current.OnSleep -= this.GoToSleep;
+        GameEvents.current.OnWakeUp -= this.WakeUp;
     }
 
     public override void SpawnOut()
     {
         base.SpawnOut();        
         this.deactivateAllSkills();
+    }
+
+    public override void EnableScripts(bool value)
+    {
+        if (this.GetComponent<PlayerAbilities>() != null) this.GetComponent<PlayerAbilities>().enabled = value;
+        if (this.GetComponent<PlayerControls>() != null) this.GetComponent<PlayerControls>().enabled = value;
+        if (this.GetComponent<PlayerMovement>() != null) this.GetComponent<PlayerMovement>().enabled = value;
+        if (this.GetComponent<PlayerInput>() != null) this.GetComponent<PlayerInput>().enabled = value;
+
+        this.boxCollider.enabled = value;
     }
 
     private void deactivateAllSkills()
@@ -202,5 +223,51 @@ public class Player : Character
     public override string GetCharacterName()
     {
         return this.characterName.GetValue();
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    
+
+    public void GoToSleep(Vector2 position, Action before, Action after)
+    {
+        StartCoroutine(GoToBed(goToBedDuration, position, before, after));
+    }
+
+    public void WakeUp(Vector2 position, Action before, Action after)
+    {
+        StartCoroutine(GetUp(goToBedDuration, position, before, after));
+    }
+
+    private IEnumerator GoToBed(float duration, Vector2 position, Action before, Action after)
+    {
+        this.EnableScripts(false);
+        AnimatorUtil.SetAnimatorParameter(this.animator, "isWalking", false);
+        AnimatorUtil.SetAnimDirection(Vector2.zero, this.animator);
+
+        before?.Invoke();        
+        this.transform.DOMove(position, duration);
+        yield return new WaitForSeconds(duration);
+
+        AnimatorUtil.SetAnimatorParameter(this.animator, "GoSleep");
+        float animDuration = AnimatorUtil.GetAnimationLength(this.animator, "GoSleep");
+        yield return new WaitForSeconds(animDuration);
+        
+        after?.Invoke();
+    }
+
+    private IEnumerator GetUp(float duration, Vector2 position, Action before, Action after)
+    {
+        before?.Invoke();        
+
+        AnimatorUtil.SetAnimatorParameter(this.animator, "WakeUp");
+        float animDuration = AnimatorUtil.GetAnimationLength(this.animator, "WakeUp");
+        yield return new WaitForSeconds(animDuration);
+
+        this.transform.DOMove(position, duration);
+        yield return new WaitForSeconds(duration);
+
+        after?.Invoke();
+
+        this.EnableScripts(true);
     }
 }

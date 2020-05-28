@@ -25,6 +25,10 @@ public class Door : Interactable
     [SerializeField]
     private BoxCollider2D boxCollider;
 
+    [BoxGroup("Sound")]
+    [Tooltip("Standard-Soundeffekt")]
+    public AudioClip soundEffect;
+
     private new void Start()
     {
         base.Start();

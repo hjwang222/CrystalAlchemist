@@ -15,7 +15,6 @@ public enum CharacterState
     silent, //kann nicht angreifen
     dead,
     manually,
-    sleeping,
     respawning
 }
 
@@ -118,15 +117,7 @@ public class CharacterValues : ScriptableObject
         return (this.currentState != CharacterState.inDialog
              && this.currentState != CharacterState.inMenu
              && this.currentState != CharacterState.respawning
-             && this.currentState != CharacterState.dead
-             && this.currentState != CharacterState.sleeping);
-    }
-
-    public bool CanInteract()
-    {
-        return (this.currentState == CharacterState.interact
-             || this.currentState == CharacterState.idle
-             || this.currentState == CharacterState.walk);
+             && this.currentState != CharacterState.dead);
     }
 
     public bool CanMove()
@@ -139,6 +130,13 @@ public class CharacterValues : ScriptableObject
         if (this.currentState != CharacterState.interact
          && this.CanMove()) return true;
         return false;
+    }
+
+    public bool CanInteract()
+    {
+        return (this.currentState == CharacterState.interact
+             || this.currentState == CharacterState.idle
+             || this.currentState == CharacterState.walk);
     }
 
 

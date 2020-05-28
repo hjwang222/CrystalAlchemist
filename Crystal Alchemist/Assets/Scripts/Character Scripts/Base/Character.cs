@@ -454,12 +454,6 @@ public class Character : MonoBehaviour
 
     #region Coroutines (Hit, Kill, Respawn, Knockback)
 
-    private IEnumerator colliderDisable()
-    {
-        yield return null;
-        if (this.boxCollider != null) this.boxCollider.enabled = false;
-    }
-
     private IEnumerator hitCo(float duration, bool showColor)
     {
         this.values.cantBeHit = true;
@@ -544,16 +538,13 @@ public class Character : MonoBehaviour
         return false;
     }
 
-    public void EnableScripts(bool value)
+    public virtual void EnableScripts(bool value)
     {
         if (this.GetComponent<AIAggroSystem>() != null) this.GetComponent<AIAggroSystem>().enabled = value;
         if (this.GetComponent<AIEvents>() != null) this.GetComponent<AIEvents>().enabled = value;
         if (this.GetComponent<AIMovement>() != null) this.GetComponent<AIMovement>().enabled = value;
 
-        if (this.GetComponent<PlayerAbilities>() != null) this.GetComponent<PlayerAbilities>().enabled = value;
-        if (this.GetComponent<PlayerControls>() != null) this.GetComponent<PlayerControls>().enabled = value;
-        if (this.GetComponent<PlayerMovement>() != null) this.GetComponent<PlayerMovement>().enabled = value;
-        if (this.GetComponent<PlayerItems>() != null) this.GetComponent<PlayerItems>().enabled = value;
+        this.boxCollider.enabled = value;
     }
 
     public void startAttackAnimation(string parameter)

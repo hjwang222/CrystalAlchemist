@@ -39,7 +39,7 @@ public class SkillTimeJump : SkillExtension
     
     private void OnDestroy()
     {        
-        this.timeValue.factor = this.timeValue.normalFactor;
+        //this.timeValue.factor = this.timeValue.normalFactor;
         MasterManager.settings.backgroundMusicPitch = 1f;
         this.musicPitchSignal.Raise();
         this.skill.sender.removeColor(this.targetColor);

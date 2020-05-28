@@ -24,7 +24,7 @@ public class Treasure : Rewardable
 
     [BoxGroup("Treasure Options")]
     [SerializeField]
-    private AudioClip soundEffectTreasure;
+    private AudioClip treasureMusic;
 
     [BoxGroup("Treasure Options")]
     [SerializeField]
@@ -49,6 +49,10 @@ public class Treasure : Rewardable
     [BoxGroup("Mandatory")]
     [Required]
     private ShopPrice shopPrice;
+
+    [BoxGroup("Sound")]
+    [Tooltip("Standard-Soundeffekt")]
+    public AudioClip soundEffect;
 
     #endregion
 
@@ -158,7 +162,7 @@ public class Treasure : Rewardable
 
     public void showTreasureItem()
     {
-        AudioUtil.playSoundEffect(this.gameObject, this.soundEffectTreasure, MasterManager.settings.backgroundMusicVolume);
+        AudioUtil.playSoundEffect(this.gameObject, this.treasureMusic, MasterManager.settings.backgroundMusicVolume);
 
         //Item instanziieren und der Liste zurück geben und das Item anzeigen            
         this.showItem.SetActive(true);

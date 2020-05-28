@@ -17,18 +17,9 @@ public class ContextClue : MonoBehaviour
     [FoldoutGroup("Signals", expanded: true)]
     private float hideDelay = 0f;
 
-    private void OnEnable()
-    {
-        this.showCurrencyUI.Raise();
-    }
-
-    private void OnDisable()
-    {
-        this.hideCurrencyUI.Raise(this.hideDelay);
-    }
-
-    private void OnDestroy()
-    {
-        this.hideCurrencyUI.Raise(this.hideDelay);
-    }
+    private void OnEnable() => this.showCurrencyUI.Raise();
+    
+    private void OnDisable() => this.hideCurrencyUI.Raise(this.hideDelay);
+   
+    private void OnDestroy() => this.hideCurrencyUI.Raise(this.hideDelay);    
 }

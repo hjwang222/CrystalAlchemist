@@ -12,6 +12,7 @@ public class TODOLIST : MonoBehaviour
     //TODO: Timeline! (Bett animation)
     //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
     //TODO: Schwimmen (Sprite Mask)
+    //TODO: Kisten und Items Random Spawn...
     //SKILL: Rundumschlag (wind)
 
     //GRAPHICS: TitleScreen: Background 

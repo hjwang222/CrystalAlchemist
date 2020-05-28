@@ -23,6 +23,8 @@ public class GameEvents : MonoBehaviour
     public Action<CharacterState> OnMenuClose;
     public Action<bool> OnMenuOverlay;
     public Action<StatusEffect> OnEffectAdded;
+    public Action<Vector2, Action, Action> OnSleep;
+    public Action<Vector2, Action, Action> OnWakeUp;
 
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
     public void DoMenuOpen(CharacterState state) => this.OnMenuOpen?.Invoke(state);  
@@ -32,5 +34,8 @@ public class GameEvents : MonoBehaviour
     public void DoReduce(Costs costs) => this.OnReduce?.Invoke(costs);    
     public void DoSubmit() => this.OnSubmit?.Invoke();  
     public void DoCancel() => this.OnCancel?.Invoke();
-    public void DoPage(int page) => this.OnPage?.Invoke(page);    
+    public void DoPage(int page) => this.OnPage?.Invoke(page);
+
+    public void DoSleep(Vector2 position, Action before, Action after) => this.OnSleep?.Invoke(position, before, after);
+    public void DoWakeUp(Vector2 position, Action before, Action after) => this.OnWakeUp?.Invoke(position, before, after);
 }

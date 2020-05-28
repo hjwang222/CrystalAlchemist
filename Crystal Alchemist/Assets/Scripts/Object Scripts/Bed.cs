@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using DG.Tweening;
-using System.Collections;
 
 public class Bed : Interactable
 {
@@ -16,11 +14,8 @@ public class Bed : Interactable
     [SerializeField]
     private GameObject decke;
 
-    [SerializeField]
-    private Collider2D coll;
-
-    private bool isRunning = false;
     private Vector2 position;
+    private bool isSleeping;
 
     public override void Start()
     {
@@ -28,36 +23,24 @@ public class Bed : Interactable
         this.decke.SetActive(false);
     }
 
+    //Stop music, Play other music
+
     public override void DoOnSubmit()
     {
-        if (!this.isRunning)
-        {           
-            this.position = this.player.transform.position;
-            Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y+offset);
-            StartCoroutine(MoveCo(position, 1f));
-
-            this.player.updateSpeed(-100, true);
-            this.time.factor = this.newValue;
-            this.isRunning = true;            
-        }
-        else
+        if (!this.isSleeping)
         {
-            this.player.updateSpeed(0, true);
-            this.time.factor = this.time.normalFactor;
-            this.isRunning = false;
-            StartCoroutine(MoveCo(this.position, 1f));
-        }
+            this.position = this.player.transform.position;
+            Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y + offset);
 
-        this.decke.SetActive(isRunning);
+            GameEvents.current.DoSleep(position, () => this.decke.SetActive(true), () => { this.time.SetFactor(this.newValue); this.isSleeping = true; });
+        }
     }
 
-    private IEnumerator MoveCo(Vector2 position, float delay)
+    public override void DoOnUpdate()
     {
-        this.coll.enabled = false;
-        this.player.values.currentState = CharacterState.respawning;
-        this.player.transform.DOMove(position, delay);
-        yield return new WaitForSeconds(delay);
-        this.player.values.currentState = CharacterState.interact;
-        this.coll.enabled = true;
+        if (Input.anyKeyDown && this.isSleeping)
+        {
+            GameEvents.current.DoWakeUp(this.position, () => this.time.Reset(), () => { this.decke.SetActive(false); this.isSleeping = false; });            
+        }
     }
 }
