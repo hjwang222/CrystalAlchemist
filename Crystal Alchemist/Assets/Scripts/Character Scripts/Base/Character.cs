@@ -106,7 +106,7 @@ public class Character : MonoBehaviour
         this.SetCharacterSprites(true);
         this.activeDeathAnimation = null;
 
-        if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Static;
+        if (this.stats.isMassive) this.myRigidbody.bodyType = RigidbodyType2D.Kinematic;
         else this.myRigidbody.bodyType = RigidbodyType2D.Dynamic;
 
         if (this.GetComponent<CharacterRenderingHandler>() != null) this.GetComponent<CharacterRenderingHandler>().Reset();
@@ -294,7 +294,6 @@ public class Character : MonoBehaviour
                     if (value > 0) colorArray = MasterManager.staticValues.green;
 
                     if (this.values.life > 0 
-                        && this.values.life + value > 0
                         && this.values.currentState != CharacterState.dead
                         && showingDamageNumber) showDamageNumber(value, colorArray);
 
@@ -431,7 +430,7 @@ public class Character : MonoBehaviour
 
     public void KnockBack(float knockTime, float thrust, Vector2 direction)
     {
-        if (this.myRigidbody != null && this.myRigidbody.bodyType != RigidbodyType2D.Static)
+        if (this.myRigidbody != null && this.myRigidbody.bodyType != RigidbodyType2D.Kinematic)
         {            
             Vector2 difference = direction.normalized * thrust;
             //this.myRigidbody.velocity = Vector2.zero;

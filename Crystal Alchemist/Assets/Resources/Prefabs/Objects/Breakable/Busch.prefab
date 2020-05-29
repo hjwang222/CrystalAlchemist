@@ -80,7 +80,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301488769302884362}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -132,7 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterSprite: {fileID: 5790654499668884513}
-  colorpalettes: []
 --- !u!114 &821985218481349553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,9 +420,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a02d4e4cf096d34087cdd27590698a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canChangeColor: 1
+  material: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  colors: []
+  useGlow: 0
+  selectColor: {r: 1, g: 1, b: 1, a: 1}
+  precision: 0
+  glowColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &7731839015675234653
 GameObject:
   m_ObjectHideFlags: 0

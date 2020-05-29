@@ -299,6 +299,7 @@ MonoBehaviour:
   animator: {fileID: 5540190085609823372}
   boxCollider: {fileID: 30635547035960434}
   shadowRenderer: {fileID: 4870180117773829343}
+  respawnAnimation: {fileID: 0}
   skillStartPosition: {fileID: 7247743900210993475}
   activeSkillParent: {fileID: 9215530842851801714}
   activeStatusEffectParent: {fileID: 422663672048093189}
@@ -327,7 +328,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterSprite: {fileID: 7247743900210993475}
-  colorpalettes: []
 --- !u!50 &6331669602110681485
 Rigidbody2D:
   serializedVersion: 4
@@ -336,7 +336,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8793839158660886956}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

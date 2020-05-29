@@ -4,21 +4,15 @@ public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.2):
     //--REWORKS--
-    //TODO: Knockback Rework
     //TODO: Sound Effekte ersetzen!
-    //BUG: Laser still there after death
-    //BUG: No damage numbers
 
-    //--Content--
-    //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
-
-    //GRAPHICS: TitleScreen: Background 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
     //SCENE: Titania Arena
     //GRAPHICS: Titania, Titanias Arena
     //Mechanics: Impact, Look away, Look, Hide, Stack, Chain, Thornes, Landslide
     //Mechanics: Bombs (Ring, Row, Cross, All)
+
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)
@@ -30,20 +24,19 @@ public class TODOLIST : MonoBehaviour
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
-
+    //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
+    //GRAPHICS: TitleScreen: Background 
     //ITEM: Brille (Bool Value)
     //INPUT: Virtuelle Tastatur
     //REWORK: Flammenerfer Skill
-    //REWORK: AnyButton Press
-    //TODO: Ghosts
 
     //TODO: Stairs, Ice, Wall
     //TODO: Rule Tiles
     //TODO: Pathfinding
     //TODO: Checkpoints
 
-    //GRAPHICS: Player: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Rotes Kleid, Blaue Stoffrüstung, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
-    //GRAPHICS: Player: Schlafen, Zaubern, Pfeil, Speer Sprites
+    //GRAPHICS: Player: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
+    //GRAPHICS: Player: Zaubern, Pfeil, Speer Sprites
     //GRAPHICS: Skills: New Nitro Sprite
 
     //MAYBE: Empty Map Prefab Update

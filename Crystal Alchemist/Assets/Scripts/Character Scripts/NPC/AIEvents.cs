@@ -46,7 +46,16 @@ public class AIEvents : CharacterCombat
     public void EndPhase()
     {
         this.isActive = false;
-        if(this.activePhase != null) Destroy(this.activePhase);
+        DestroyActivePhase();        
+    }
+
+    private void DestroyActivePhase()
+    {
+        if (this.activePhase != null)
+        {
+            this.activePhase.ResetActions(this.npc);
+            Destroy(this.activePhase);
+        }
     }
 
     public void StartPhase(AIPhase phase)
@@ -55,11 +64,7 @@ public class AIEvents : CharacterCombat
         {
             this.isActive = true;
 
-            if (this.activePhase != null)
-            {
-                this.activePhase.ResetActions(this.npc);
-                Destroy(this.activePhase);
-            }
+            DestroyActivePhase();
             this.activePhase = Instantiate(phase);
             this.activePhase.Initialize(this.npc);
         }
