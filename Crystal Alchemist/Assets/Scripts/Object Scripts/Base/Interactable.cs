@@ -86,25 +86,26 @@ public class Interactable : MonoBehaviour
             }
             else
             {
-                this.context.gameObject.SetActive(false);
-                this.player.values.currentState = CharacterState.idle;
+                if (this.player.values.currentState == CharacterState.interact)
+                {
+                    this.context.gameObject.SetActive(false);
+                    this.player.values.currentState = CharacterState.idle;
+                }
             }
         }
     }
 
     private bool PlayerCanInteract()
     {
-        return (this.player != null
+        return (this.player != null            
             && this.isPlayerInRange
-            && this.isPlayerLookingAtIt);
+            && this.isPlayerLookingAtIt
+            && this.player.values.CanInteract());
     }
 
     private bool PlayerIsLooking()
     {
-        if (this.isPlayerInRange
-            && this.player.values.CanInteract()
-            && CollisionUtil.checkIfGameObjectIsViewed(this.player, this.gameObject)) return true;
-
+        if (this.isPlayerInRange && CollisionUtil.checkIfGameObjectIsViewed(this.player, this.gameObject)) return true;
         return false;
     }
 

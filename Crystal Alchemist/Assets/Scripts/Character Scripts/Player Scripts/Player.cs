@@ -239,13 +239,9 @@ public class Player : Character
     private IEnumerator GoToBed(float duration, Vector2 position, Action before, Action after)
     {
         this.transform.position = position;
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame(); //Wait for Camera
 
-        this.EnableScripts(false); //prevent movement        
-        this.boxCollider.enabled = false; //prevent input
-        
-        AnimatorUtil.SetAnimatorParameter(this.animator, "isWalking", false);
-        AnimatorUtil.SetAnimDirection(Vector2.down, this.animator);
+        EnablePlayer(false); //Disable Movement and Collision
 
         before?.Invoke(); //Decke
 
@@ -257,10 +253,18 @@ public class Player : Character
         this.boxCollider.enabled = true;
     }
 
+    private void EnablePlayer(bool value)
+    {
+        this.EnableScripts(value); //prevent movement        
+        this.boxCollider.enabled = value; //prevent input
+
+        AnimatorUtil.SetAnimDirection(Vector2.down, this.animator);
+    }
+
     private IEnumerator GetUp(float duration, Vector2 position, Action before, Action after)
     {
         this.boxCollider.enabled = false;
-        before?.Invoke();    //Zeit    
+        before?.Invoke(); //Zeit    
 
         AnimatorUtil.SetAnimatorParameter(this.animator, "WakeUp");
         float animDuration = AnimatorUtil.GetAnimationLength(this.animator, "WakeUp");
@@ -268,11 +272,8 @@ public class Player : Character
 
         after?.Invoke(); //Decke
 
-        this.EnableScripts(true);
-        this.boxCollider.enabled = true;
-        
-        AnimatorUtil.SetAnimDirection(Vector2.down, this.animator);
-        
+        EnablePlayer(true);
+
         this.transform.position = position;
     }
 }

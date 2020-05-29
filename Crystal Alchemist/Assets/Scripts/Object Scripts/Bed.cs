@@ -52,7 +52,7 @@ public class Bed : Interactable
             this.position = this.player.transform.position;
             Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y + offset);
 
-            GameEvents.current.DoSleep(position, () => this.blanket.SetActive(true), () => { this.time.SetFactor(this.newValue); this.isSleeping = true; });
+            GameEvents.current.DoSleep(position, () => this.blanket.SetActive(true), () => StartSleeping()); 
             this.translationID = this.wakeUpActionID;
 
             MusicEvents.current.StopMusic();
@@ -60,8 +60,21 @@ public class Bed : Interactable
         }
         else
         {
-            GameEvents.current.DoWakeUp(this.position, () => this.time.Reset(), () => { this.blanket.SetActive(false); this.isSleeping = false; MusicEvents.current.RestartMusic(); });
+            GameEvents.current.DoWakeUp(this.position, () => this.time.Reset(), () => PlayerAwake());
             this.translationID = this.oldID;
         }
+    }
+
+    private void StartSleeping()
+    {
+        this.time.SetFactor(this.newValue);
+        this.isSleeping = true;
+    }
+
+    private void PlayerAwake()
+    {
+        this.blanket.SetActive(false);
+        this.isSleeping = false;
+        MusicEvents.current.RestartMusic();
     }
 }

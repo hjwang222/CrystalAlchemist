@@ -6,13 +6,11 @@ public class TODOLIST : MonoBehaviour
     //--REWORKS--
     //TODO: Knockback Rework
     //TODO: Sound Effekte ersetzen!
-    //Bug: Wake Up Visuals wrong
+    //BUG: Laser still there after death
+    //BUG: No damage numbers
 
     //--Content--
     //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
-    //TODO: Schwimmen (Sprite Mask)
-    //TODO: Kisten und Items Random Spawn...
-    //SKILL: Rundumschlag (wind)
 
     //GRAPHICS: TitleScreen: Background 
     //--Boss Fight--

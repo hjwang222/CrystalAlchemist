@@ -95,6 +95,7 @@ public class MenuDialogBox : MenuBehaviour
             bool enabled = this.priceField.CheckPrice(this.inventory, this.price);
             UnityUtil.SetInteractable(this.YesButton.GetComponent<Selectable>(), enabled);
         }
+        else UnityUtil.SetInteractable(this.YesButton.GetComponent<Selectable>(), true);        
     }
 
     public void Yes()

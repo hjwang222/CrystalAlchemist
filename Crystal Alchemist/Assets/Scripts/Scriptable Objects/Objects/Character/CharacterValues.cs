@@ -105,8 +105,8 @@ public class CharacterValues : ScriptableObject
     public void Initialize()
     {
         this.currentState = CharacterState.idle;
-        this.activeSkills.RemoveAll(x => x = null);
-        for (int i = 0; i < this.activeSkills.Count; i++) this.activeSkills[i].DeactivateIt();
+        //this.activeSkills.RemoveAll(x => x = null);
+        //for (int i = 0; i < this.activeSkills.Count; i++) this.activeSkills[i].DeactivateIt();
         this.activeSkills.Clear();
     }
 

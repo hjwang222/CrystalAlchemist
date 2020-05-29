@@ -15,19 +15,19 @@ public class PlayerSkillset : ScriptableObject
     public void Initialize()
     {
         this.abilities.Clear();
-        foreach (Ability ability in MasterManager.abilities) AddAbility(ability);        
+        foreach (Ability ability in MasterManager.abilities) AddAbility(ability);
     }
 
     public void SetSender(Character sender)
     {
         this.abilities.RemoveAll(item => item == null);
-        foreach (Ability ability in this.abilities) ability.SetSender(sender); 
+        foreach (Ability ability in this.abilities) ability.SetSender(sender);
     }
 
     public void Updating()
     {
         this.abilities.RemoveAll(item => item == null);
-        foreach (Ability ability in this.abilities) ability.Updating();        
+        foreach (Ability ability in this.abilities) ability.Updating();
     }
 
     public Ability getAbilityByName(string name)
