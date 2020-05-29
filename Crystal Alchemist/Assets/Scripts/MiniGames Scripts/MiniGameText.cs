@@ -13,13 +13,12 @@ public class MiniGameText : MonoBehaviour
     private bool inputPossible = false;
     private float maxDuration = 3f;
 
-
     private void OnEnable()
     {
         if (this.audioClip != null && this.audioClip.length > 3) this.maxDuration = this.audioClip.length + 1f;
 
         this.duration = this.maxDuration;
-        AudioUtil.playSoundEffect(this.audioClip);
+        MusicEvents.current.PlayMusic(audioClip);
         StartCoroutine(delayInput());
         StartCoroutine(DisableCo());
     }

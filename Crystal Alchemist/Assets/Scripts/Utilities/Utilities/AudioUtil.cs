@@ -16,15 +16,6 @@ public static class AudioUtil
         playSoundEffect(null, soundeffect, volume);
     }
 
-    public static void playSoundEffect(AudioClip music, AudioSource source, float volume)
-    {
-        source.volume = volume;
-        source.clip = music;
-        source.playOnAwake = false;
-        source.loop = false;
-        source.Play();
-    }
-
     public static void playSoundEffect(GameObject gameObject, AudioClip soundeffect)
     {
         playSoundEffect(gameObject, soundeffect, MasterManager.settings.soundEffectVolume);

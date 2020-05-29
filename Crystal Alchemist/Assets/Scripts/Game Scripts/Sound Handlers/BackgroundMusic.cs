@@ -1,80 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class BackgroundMusic : MonoBehaviour
 {
-    [SerializeField]
-    private AudioSource audioSource;
-
     [SerializeField]
     private AudioClip startMusic;
 
     [SerializeField]
     private AudioClip loopMusic;
 
-    private float volume;
+    private void Start() => StartCoroutine(musicCo());
 
-    // Start is called before the first frame update
-    void Start()
+    private IEnumerator musicCo()
     {
-        this.volume = MasterManager.settings.backgroundMusicVolume;
-        this.audioSource = this.GetComponent<AudioSource>();
-        this.audioSource.volume = this.volume;
-
-        startPlaying();
+        yield return new WaitForEndOfFrame();
+        MusicEvents.current.PlayMusic(this.startMusic, this.loopMusic);
     }
-
-    public void changePitch()
-    {
-        this.audioSource.pitch = MasterManager.settings.backgroundMusicPitch;        
-    }
-
-    public void changeVolume(float volume)
-    {
-        this.audioSource.volume = volume;
-        this.volume = volume;
-    }
-
-    public void startPlaying()
-    {
-            stopMusic();
-
-            if (this.startMusic != null)
-            {                
-                this.audioSource.loop = false;
-                this.audioSource.PlayOneShot(this.startMusic);
-
-                StartCoroutine(playLoopMusic());
-            }
-            else 
-            {                                
-                playLoop();
-            }
-        
-    }
-
-    public void stopMusic()
-    {
-        this.audioSource.Stop();
-    }
-
-    private IEnumerator playLoopMusic()
-    {
-        yield return new WaitForSecondsRealtime(this.startMusic.length);
-        playLoop();
-    }
-
-    private void playLoop()
-    {
-        if (this.loopMusic != null)
-        {
-            this.audioSource.volume = this.volume;
-            this.audioSource.clip = this.loopMusic;
-            this.audioSource.loop = true;
-            this.audioSource.Play();
-        }
-    }
-
-    
 }

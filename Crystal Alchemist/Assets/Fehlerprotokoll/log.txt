@@ -19129,3 +19129,115 @@ Exception 28.05.2020 16:12:38: NullReferenceException: Object reference not set 
 Bed.DoOnUpdate () (at Assets/Scripts/Object Scripts/Bed.cs:44)
 Interactable.Update () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:31)
 
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+OverlayFrameHandler.OnDestroy () (at Assets/Scripts/Menu Scripts/HUD/OverlayFrameHandler.cs:10)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+UIButtonLayout.OnDestroy () (at Assets/Scripts/Menu Scripts/Options/UIButtonLayout.cs:21)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+StatusBar.OnDestroy () (at Assets/Scripts/Menu Scripts/HUD/StatusBar.cs:108)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+StatusBar.OnDestroy () (at Assets/Scripts/Menu Scripts/HUD/StatusBar.cs:108)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:42)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+UIButtonLayout.OnDestroy () (at Assets/Scripts/Menu Scripts/Options/UIButtonLayout.cs:21)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+UIButtonLayout.OnDestroy () (at Assets/Scripts/Menu Scripts/Options/UIButtonLayout.cs:21)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+UITextTranslation.OnDestroy () (at Assets/Scripts/Menu Scripts/Options/UITextTranslation.cs:18)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+Room.OnDestroy () (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:36)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:42)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:42)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:42)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:42)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:42)
+
+Exception 28.05.2020 18:09:20: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:42)
+
+Exception 29.05.2020 01:32:56: MissingComponentException: There is no 'AudioSource' attached to the "Main Music" game object, but a script is trying to access it.
+You probably need to add a AudioSource to the game object "Main Music". Or your script needs to check if the component is attached before using it.
+MusicObject.Start () (at Assets/Scripts/Game Scripts/Sound Handlers/MusicHandler.cs:99)
+
+Exception 29.05.2020 01:47:57: UnassignedReferenceException: The variable treasureMusic of Treasure has not been assigned.
+You probably need to assign the treasureMusic variable of the Treasure script in the inspector.
+MusicObject.Instantiate (UnityEngine.AudioClip music) (at Assets/Scripts/Game Scripts/Sound Handlers/MusicHandler.cs:91)
+MusicHandler.PlayMusic (UnityEngine.AudioClip music) (at Assets/Scripts/Game Scripts/Sound Handlers/MusicHandler.cs:45)
+GameEvents.PlayMusic (UnityEngine.AudioClip music) (at Assets/Scripts/Game Scripts/Event Systems/GameEvents.cs:49)
+Treasure.showTreasureItem () (at Assets/Scripts/Object Scripts/Treasure.cs:165)
+Treasure.openChest () (at Assets/Scripts/Object Scripts/Treasure.cs:119)
+Treasure.DoOnSubmit () (at Assets/Scripts/Object Scripts/Treasure.cs:101)
+Interactable.OnSubmit () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:52)
+GameEvents.DoSubmit () (at Assets/Scripts/Game Scripts/Event Systems/GameEvents.cs:40)
+PlayerControls.Submit (UnityEngine.InputSystem.InputAction+CallbackContext context) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerControls.cs:25)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.InputSystem.Utilities.DelegateHelpers.InvokeCallbacksSafe[TValue] (UnityEngine.InputSystem.Utilities.InlinedArray`1[System.Action`1[TValue]]& callbacks, TValue argument, System.String callbackName, System.Object context) (at Library/PackageCache/com.unity.inputsystem@1.0.0/InputSystem/Utilities/DelegateHelpers.cs:51)
+UnityEngine.InputSystem.LowLevel.<>c__DisplayClass7_0:<set_onUpdate>b__0(NativeInputUpdateType, NativeInputEventBuffer*)
+UnityEngineInternal.Input.NativeInputSystem:NotifyUpdate(NativeInputUpdateType, IntPtr)
+
+Exception 29.05.2020 02:11:23: NullReferenceException: Object reference not set to an instance of an object
+MusicHandler.Start () (at Assets/Scripts/Game Scripts/Sound Handlers/MusicHandler.cs:11)
+
+Exception 29.05.2020 02:11:24: NullReferenceException: Object reference not set to an instance of an object
+BackgroundMusic+<musicCo>d__3.MoveNext () (at Assets/Scripts/Game Scripts/Sound Handlers/BackgroundMusic.cs:17)
+UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.GUIUtility:ProcessEvent(Int32, IntPtr, Boolean&)
+
+Exception 29.05.2020 02:11:46: NullReferenceException: Object reference not set to an instance of an object
+MusicHandler.Start () (at Assets/Scripts/Game Scripts/Sound Handlers/MusicHandler.cs:11)
+
+Exception 29.05.2020 02:11:46: NullReferenceException: Object reference not set to an instance of an object
+BackgroundMusic+<musicCo>d__3.MoveNext () (at Assets/Scripts/Game Scripts/Sound Handlers/BackgroundMusic.cs:17)
+UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <23e371e9422742b6a92a9f9bfb37a189>:0)
+UnityEngine.GUIUtility:ProcessEvent(Int32, IntPtr, Boolean&)
+
+Exception 29.05.2020 02:41:59: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:57)
+
+Exception 29.05.2020 02:41:59: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:57)
+
+Exception 29.05.2020 02:41:59: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:57)
+
+Exception 29.05.2020 02:41:59: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:57)
+
+Exception 29.05.2020 02:41:59: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:57)
+
+Exception 29.05.2020 02:41:59: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:57)
+
+Exception 29.05.2020 02:41:59: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDestroy () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:57)
+
+Exception 29.05.2020 02:41:59: NullReferenceException: Object reference not set to an instance of an object
+UIButtonLayout.OnDestroy () (at Assets/Scripts/Menu Scripts/Options/UIButtonLayout.cs:21)
+
+Exception 29.05.2020 02:41:59: NullReferenceException: Object reference not set to an instance of an object
+UIButtonLayout.OnDestroy () (at Assets/Scripts/Menu Scripts/Options/UIButtonLayout.cs:21)
+
+Exception 29.05.2020 02:41:59: NullReferenceException: Object reference not set to an instance of an object
+UITextTranslation.OnDestroy () (at Assets/Scripts/Menu Scripts/Options/UITextTranslation.cs:26)
+

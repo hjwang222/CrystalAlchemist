@@ -21,7 +21,7 @@ public class GameSettings : ScriptableObject
     public bool healthBar = false;
     public bool manaBar = false;
 
-    public float getMusicInMenu()
+    public float GetMenuVolume()
     {
         return backgroundMusicVolume * backgroundMusicVolumeMenu;
     }

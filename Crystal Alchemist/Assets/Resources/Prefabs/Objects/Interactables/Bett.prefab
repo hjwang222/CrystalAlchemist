@@ -45,13 +45,13 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.25
   m_Points:
-  - {x: 1, y: 1}
-  - {x: 1, y: -1.3}
-  - {x: -1, y: -1.3}
-  - {x: -1, y: 1}
-  - {x: 1, y: 1}
+  - {x: 0.75, y: 0.75}
+  - {x: 0.75, y: -1}
+  - {x: -0.75, y: -1}
+  - {x: -0.75, y: 0.75}
+  - {x: 0.75, y: 0.75}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 5873029744290735161}
   - component: {fileID: 5873029744290735142}
   m_Layer: 17
-  m_Name: Decke
+  m_Name: Blanket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +208,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7130084020165139479}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6, y: 2.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -281,7 +281,8 @@ MonoBehaviour:
     resourceType: 0
     item: {fileID: 0}
     amount: 1
-  soundEffect: {fileID: 0}
+  customActionButton: 1
+  ID: Schlafen
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
@@ -289,8 +290,8 @@ MonoBehaviour:
   time: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
   newValue: 0.001
   offset: 0.45
-  decke: {fileID: 5873029744290735160}
-  coll: {fileID: 5100609834003909649}
+  blanket: {fileID: 5873029744290735160}
+  wakeUpActionID: Aufstehen
 --- !u!1 &7938797964226999932
 GameObject:
   m_ObjectHideFlags: 0

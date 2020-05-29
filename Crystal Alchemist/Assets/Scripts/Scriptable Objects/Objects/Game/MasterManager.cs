@@ -20,6 +20,7 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
     public static List<Ability> abilities { get { return Instance.skills; } }
     public static TargetingSystem targetingSystem { get { return Instance.targetSystem; } }
     public static TimeValue time { get { return Instance.timeValue; } }
+    public static StringValue actionButtonText { get { return Instance.actionButton; } }
 
     [BoxGroup("Interaction")]
     [SerializeField]
@@ -38,9 +39,12 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
     [SerializeField]
     private TargetingSystem targetSystem;
 
-    [BoxGroup("Time")]
+    [BoxGroup("Values")]
     [SerializeField]
     private TimeValue timeValue;
+    [BoxGroup("Values")]
+    [SerializeField]
+    private StringValue actionButton;
 
     [BoxGroup("Bubbles")]
     [SerializeField]

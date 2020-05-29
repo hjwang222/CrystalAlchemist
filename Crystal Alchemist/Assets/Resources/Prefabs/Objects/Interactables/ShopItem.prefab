@@ -193,7 +193,8 @@ MonoBehaviour:
     resourceType: 3
     item: {fileID: 11400000, guid: 008b2735924e65749bc1a37e8d718d0c, type: 2}
     amount: 10
-  soundEffect: {fileID: 0}
+  customActionButton: 1
+  ID: Kaufen
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
@@ -262,8 +263,10 @@ MonoBehaviour:
   texts:
   - trigger: 1
     ID: Bought
+    type: 6
   - trigger: 2
     ID: Cannot_Buy
+    type: 6
 --- !u!1 &5713520751605920870
 GameObject:
   m_ObjectHideFlags: 0

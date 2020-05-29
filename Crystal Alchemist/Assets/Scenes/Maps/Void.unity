@@ -291,7 +291,7 @@ PrefabInstance:
         type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 178954941}
+      objectReference: {fileID: 0}
     - target: {fileID: 2759664207142220857, guid: 8d5ff37e69f760540910aa15f07fcb07,
         type: 3}
       propertyPath: startMusic
@@ -309,12 +309,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d5ff37e69f760540910aa15f07fcb07, type: 3}
---- !u!82 &178954941 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2759664207142220862, guid: 8d5ff37e69f760540910aa15f07fcb07,
-    type: 3}
-  m_PrefabInstance: {fileID: 130287017}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &206896736
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,6 +720,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Minimap Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4008910293643553077, guid: b2ec9722d9e8d20478342cdc11da1689,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ec9722d9e8d20478342cdc11da1689, type: 3}

@@ -4,12 +4,11 @@ public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.2):
     //--REWORKS--
-    //TODO: Minigames
     //TODO: Knockback Rework
     //TODO: Sound Effekte ersetzen!
+    //Bug: Wake Up Visuals wrong
 
     //--Content--
-    //TODO: Timeline! (Bett animation)
     //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
     //TODO: Schwimmen (Sprite Mask)
     //TODO: Kisten und Items Random Spawn...

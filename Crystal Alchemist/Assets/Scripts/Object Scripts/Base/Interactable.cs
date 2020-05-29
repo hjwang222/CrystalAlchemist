@@ -8,6 +8,15 @@ public class Interactable : MonoBehaviour
     [HideLabel]
     public Costs costs;
 
+    [BoxGroup("ContextMenu")]
+    [SerializeField]
+    private bool customActionButton = false;
+
+    [BoxGroup("ContextMenu")]
+    [ShowIf("customActionButton")]
+    [SerializeField]
+    private string ID;
+
     [HideInInspector]
     public bool isPlayerInRange = false;
     [HideInInspector]
@@ -28,18 +37,24 @@ public class Interactable : MonoBehaviour
         this.context = Instantiate(MasterManager.contextClue, this.transform.position, Quaternion.identity, this.transform);
     }
 
-    private void Update() => DoOnUpdate();    
+    private void Update() => DoOnUpdate();
+
+    public string translationID
+    {
+        get { return this.ID; }
+        set { this.ID = value; }
+    }
 
     public virtual void DoOnUpdate() { }
 
     private void OnSubmit()
     {
-        if (PlayerCanInteract()) DoOnSubmit();        
+        if (PlayerCanInteract()) DoOnSubmit();
     }
 
     public virtual void DoOnSubmit() { }
 
-    private void OnDestroy() => GameEvents.current.OnSubmit -= OnSubmit;    
+    private void OnDestroy() => GameEvents.current.OnSubmit -= OnSubmit;
 
     #endregion
 
@@ -60,8 +75,14 @@ public class Interactable : MonoBehaviour
 
             if (PlayerCanInteract())
             {
-                this.context.gameObject.SetActive(true);
-                this.player.values.currentState = CharacterState.interact;
+                if (this.player.values.currentState != CharacterState.interact)
+                {
+                    if (this.customActionButton) MasterManager.actionButtonText.SetValue(this.ID);
+                    else MasterManager.actionButtonText.SetValue(string.Empty);
+
+                    this.context.gameObject.SetActive(true);
+                    this.player.values.currentState = CharacterState.interact;
+                }
             }
             else
             {
@@ -83,25 +104,25 @@ public class Interactable : MonoBehaviour
         if (this.isPlayerInRange
             && this.player.values.CanInteract()
             && CollisionUtil.checkIfGameObjectIsViewed(this.player, this.gameObject)) return true;
-                 
-        return false;        
+
+        return false;
     }
 
     private void OnTriggerStay2D(Collider2D characterCollisionBox) => interact(characterCollisionBox);
-    
-    private void OnTriggerEnter2D(Collider2D characterCollisionBox) => interact(characterCollisionBox);    
+
+    private void OnTriggerEnter2D(Collider2D characterCollisionBox) => interact(characterCollisionBox);
 
     private void OnTriggerExit2D(Collider2D characterCollisionBox)
     {
         if (!characterCollisionBox.isTrigger)
         {
-            if(this.player != null)
+            if (this.player != null)
             {
                 this.context.gameObject.SetActive(false);
                 this.player.values.currentState = CharacterState.idle;
                 this.player = null;
             }
-            
+
             this.isPlayerInRange = false;
             this.isPlayerLookingAtIt = false;
             this.context.gameObject.SetActive(false);

@@ -97,11 +97,9 @@ public class Player : Character
     public override void EnableScripts(bool value)
     {
         if (this.GetComponent<PlayerAbilities>() != null) this.GetComponent<PlayerAbilities>().enabled = value;
-        if (this.GetComponent<PlayerControls>() != null) this.GetComponent<PlayerControls>().enabled = value;
+        //if (this.GetComponent<PlayerControls>() != null) this.GetComponent<PlayerControls>().enabled = value;
         if (this.GetComponent<PlayerMovement>() != null) this.GetComponent<PlayerMovement>().enabled = value;
-        if (this.GetComponent<PlayerInput>() != null) this.GetComponent<PlayerInput>().enabled = value;
-
-        this.boxCollider.enabled = value;
+        //if (this.GetComponent<PlayerInput>() != null) this.GetComponent<PlayerInput>().enabled = value;        
     }
 
     private void deactivateAllSkills()
@@ -240,34 +238,41 @@ public class Player : Character
 
     private IEnumerator GoToBed(float duration, Vector2 position, Action before, Action after)
     {
-        this.EnableScripts(false);
-        AnimatorUtil.SetAnimatorParameter(this.animator, "isWalking", false);
-        AnimatorUtil.SetAnimDirection(Vector2.zero, this.animator);
+        this.transform.position = position;
+        yield return new WaitForEndOfFrame();
 
-        before?.Invoke();        
-        this.transform.DOMove(position, duration);
-        yield return new WaitForSeconds(duration);
+        this.EnableScripts(false); //prevent movement        
+        this.boxCollider.enabled = false; //prevent input
+        
+        AnimatorUtil.SetAnimatorParameter(this.animator, "isWalking", false);
+        AnimatorUtil.SetAnimDirection(Vector2.down, this.animator);
+
+        before?.Invoke(); //Decke
 
         AnimatorUtil.SetAnimatorParameter(this.animator, "GoSleep");
         float animDuration = AnimatorUtil.GetAnimationLength(this.animator, "GoSleep");
         yield return new WaitForSeconds(animDuration);
         
-        after?.Invoke();
+        after?.Invoke(); //Zeit    
+        this.boxCollider.enabled = true;
     }
 
     private IEnumerator GetUp(float duration, Vector2 position, Action before, Action after)
     {
-        before?.Invoke();        
+        this.boxCollider.enabled = false;
+        before?.Invoke();    //Zeit    
 
         AnimatorUtil.SetAnimatorParameter(this.animator, "WakeUp");
         float animDuration = AnimatorUtil.GetAnimationLength(this.animator, "WakeUp");
         yield return new WaitForSeconds(animDuration);
 
-        this.transform.DOMove(position, duration);
-        yield return new WaitForSeconds(duration);
-
-        after?.Invoke();
+        after?.Invoke(); //Decke
 
         this.EnableScripts(true);
+        this.boxCollider.enabled = true;
+        
+        AnimatorUtil.SetAnimDirection(Vector2.down, this.animator);
+        
+        this.transform.position = position;
     }
 }

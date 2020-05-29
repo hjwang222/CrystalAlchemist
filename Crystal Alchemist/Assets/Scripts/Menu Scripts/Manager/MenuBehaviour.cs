@@ -10,7 +10,7 @@ public class MenuBehaviour : PreventDeselection
 
     [BoxGroup("Menu")]
     [SerializeField]
-    private FloatSignal musicVolumeSignal;
+    private bool changeVolume;
 
     [Required]
     [BoxGroup("Menu")]
@@ -35,7 +35,7 @@ public class MenuBehaviour : PreventDeselection
             GameEvents.current.DoMenuOpen(CharacterState.inMenu);
             if(this.showBlackBackground) GameEvents.current.DoMenuOverlay(true);
 
-            if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.getMusicInMenu());
+            if(this.changeVolume) MusicEvents.current.ChangeVolume(MasterManager.settings.GetMenuVolume());
         }
     }
 
@@ -49,7 +49,7 @@ public class MenuBehaviour : PreventDeselection
             GameEvents.current.DoMenuClose(IngameMenuHandler.lastState);//avoid reclick!
             GameEvents.current.DoMenuOverlay(false);
 
-            if (this.musicVolumeSignal != null) this.musicVolumeSignal.Raise(MasterManager.settings.backgroundMusicVolume);
+            if (this.changeVolume) MusicEvents.current.ChangeVolume(MasterManager.settings.backgroundMusicVolume);
         }
     }
 

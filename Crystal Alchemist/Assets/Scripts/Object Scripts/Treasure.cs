@@ -162,7 +162,7 @@ public class Treasure : Rewardable
 
     public void showTreasureItem()
     {
-        AudioUtil.playSoundEffect(this.gameObject, this.treasureMusic, MasterManager.settings.backgroundMusicVolume);
+        if(this.treasureMusic != null) MusicEvents.current.PlayMusic(this.treasureMusic);
 
         //Item instanziieren und der Liste zurück geben und das Item anzeigen            
         this.showItem.SetActive(true);

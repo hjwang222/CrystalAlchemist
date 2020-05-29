@@ -542,6 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &644244299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,6 +728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &672751656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,7 +858,6 @@ GameObject:
   - component: {fileID: 919052617}
   - component: {fileID: 919052616}
   - component: {fileID: 919052619}
-  - component: {fileID: 919052620}
   m_Layer: 5
   m_Name: Death Screen
   m_TagString: Untagged
@@ -959,9 +960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastTeleport: {fileID: 11400000, guid: 861c2af2cd801d4459e257b6f0edbc52, type: 2}
   nextTeleport: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
-  stopMusic: {fileID: 11400000, guid: f5827a4a41af5d649bad860597077916, type: 2}
   deathMusic: {fileID: 8300000, guid: fbf3c3fc3b9ea0f49be22b5d3e7d997d, type: 3}
-  audioSource: {fileID: 919052620}
   cursor: {fileID: 175733141}
   textField: {fileID: 644244300}
   countDown: {fileID: 628399358}
@@ -972,102 +971,6 @@ MonoBehaviour:
   cursorDelay: 2
   inputDelay: 3
   fadeSignal: {fileID: 11400000, guid: a76b91dd47bc63046b35dc05f9b79d12, type: 2}
---- !u!82 &919052620
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919052614}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1057502418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,6 +1005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 175733141}
   setFirstSelected: 1
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -1428,6 +1332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursor: {fileID: 175733141}
   setFirstSelected: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -1577,6 +1482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &1946718726
 MonoBehaviour:
   m_ObjectHideFlags: 0

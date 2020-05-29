@@ -1,15 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
 
 public class ChangeVolumeMenu : MonoBehaviour
 {
-    [SerializeField]
-    private FloatSignal musicVolumeSignal;
-
     [SerializeField]
     private bool isTitleScreen = false;
 
@@ -41,10 +36,10 @@ public class ChangeVolumeMenu : MonoBehaviour
     {
         if (this.volumeType == VolumeType.music)
         {
-            MasterManager.settings.backgroundMusicVolume = (this.slider.value / 100f);                     
+            MasterManager.settings.backgroundMusicVolume = (this.slider.value / 100f);
 
-            if(!this.isTitleScreen) this.musicVolumeSignal.Raise(MasterManager.settings.getMusicInMenu());
-            else this.musicVolumeSignal.Raise(MasterManager.settings.backgroundMusicVolume);
+            if (!this.isTitleScreen) MusicEvents.current.ChangeVolume(MasterManager.settings.GetMenuVolume());
+            else MusicEvents.current.ChangeVolume(MasterManager.settings.backgroundMusicVolume);
         }
         else if (this.volumeType == VolumeType.effects)
         {

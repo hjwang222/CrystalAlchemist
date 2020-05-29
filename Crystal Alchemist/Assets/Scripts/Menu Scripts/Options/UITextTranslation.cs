@@ -11,17 +11,25 @@ public class UITextTranslation : MonoBehaviour
 
     private TextMeshProUGUI textMeshField;
 
-    private void Awake() => this.textMeshField = this.GetComponent<TextMeshProUGUI>();
+    private string _id;
+
+    private void Awake()
+    {
+        this.textMeshField = this.GetComponent<TextMeshProUGUI>();
+        Id = this.gameObject.name;
+    }
+
+    public string Id { set { _id = value; }}
 
     private void Start() => SettingsEvents.current.OnLanguangeChanged += ChangeLanguageText;
 
     private void OnDestroy() => SettingsEvents.current.OnLanguangeChanged -= ChangeLanguageText;
 
-    private void OnEnable() => ChangeLanguageText();
+    public virtual void OnEnable() => ChangeLanguageText();
 
-    public void ChangeLanguageText()
+    private void ChangeLanguageText()
     {
-        string text = FormatUtil.GetLocalisedText(this.gameObject.name, this.type);
+        string text = FormatUtil.GetLocalisedText(this._id, this.type);
         if (text != string.Empty) this.textMeshField.text = text;
     }
 }

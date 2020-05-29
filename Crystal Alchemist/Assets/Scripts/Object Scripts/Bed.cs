@@ -1,29 +1,49 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 public class Bed : Interactable
 {
+    public enum BedState
+    {
+        awake,
+        sleeping,
+        wakingup
+    }
+
+    [BoxGroup("Bett")]
     [SerializeField]
     private TimeValue time;
 
+    [BoxGroup("Bett")]
     [SerializeField]
     private float newValue;
 
+    [BoxGroup("Bett")]
     [SerializeField]
     private float offset = 0.35f;
 
+    [BoxGroup("Bett")]
     [SerializeField]
-    private GameObject decke;
+    private GameObject blanket;
+
+    [BoxGroup("Bett")]
+    [SerializeField]
+    private string wakeUpActionID;
+
+    [BoxGroup("Bett")]
+    [SerializeField]
+    private AudioClip music;
 
     private Vector2 position;
     private bool isSleeping;
+    private string oldID;
 
     public override void Start()
     {
         base.Start();
-        this.decke.SetActive(false);
+        this.blanket.SetActive(false);
+        this.oldID = this.translationID;
     }
-
-    //Stop music, Play other music
 
     public override void DoOnSubmit()
     {
@@ -32,15 +52,16 @@ public class Bed : Interactable
             this.position = this.player.transform.position;
             Vector2 position = new Vector2(this.transform.position.x, this.transform.position.y + offset);
 
-            GameEvents.current.DoSleep(position, () => this.decke.SetActive(true), () => { this.time.SetFactor(this.newValue); this.isSleeping = true; });
-        }
-    }
+            GameEvents.current.DoSleep(position, () => this.blanket.SetActive(true), () => { this.time.SetFactor(this.newValue); this.isSleeping = true; });
+            this.translationID = this.wakeUpActionID;
 
-    public override void DoOnUpdate()
-    {
-        if (Input.anyKeyDown && this.isSleeping)
+            MusicEvents.current.StopMusic();
+            MusicEvents.current.PlayMusic(this.music, false);
+        }
+        else
         {
-            GameEvents.current.DoWakeUp(this.position, () => this.time.Reset(), () => { this.decke.SetActive(false); this.isSleeping = false; });            
+            GameEvents.current.DoWakeUp(this.position, () => this.time.Reset(), () => { this.blanket.SetActive(false); this.isSleeping = false; MusicEvents.current.RestartMusic(); });
+            this.translationID = this.oldID;
         }
     }
 }
