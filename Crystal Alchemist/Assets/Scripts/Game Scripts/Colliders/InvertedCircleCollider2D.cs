@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
+[RequireComponent(typeof(EdgeCollider2D))]
 public class InvertedCircleCollider2D : MonoBehaviour
 {
     [SerializeField]
@@ -7,7 +9,7 @@ public class InvertedCircleCollider2D : MonoBehaviour
     [SerializeField]
     private float Radius;
 
-    // Use this for initialization
+    [Button]
     void Start()
     {
         EdgeCollider2D edgeCollider = GetComponent<EdgeCollider2D>();

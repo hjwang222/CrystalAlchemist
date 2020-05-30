@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using TMPro;
+using UnityEngine.UI;
 
 public class CharacterCreatorMenu : MenuBehaviour
 {
@@ -23,12 +25,25 @@ public class CharacterCreatorMenu : MenuBehaviour
     [SerializeField]
     private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
 
+    [BoxGroup("Easy Access")]
+    [Required]
+    [SerializeField]
+    private TMP_InputField inputField;
+
+    [BoxGroup("Easy Access")]
+    [Required]
+    [SerializeField]
+    private Selectable confirmButton;
+
     public override void Start()
     {
         base.Start();
         GameUtil.setPreset(this.saveGame.playerPreset, this.creatorPreset);
         updateGear();
         updatePreview();
+
+        if (this.inputField.text.Length > 1) UnityUtil.SetInteractable(this.confirmButton, true);
+        else UnityUtil.SetInteractable(this.confirmButton, false);
     }
 
     public void Confirm()

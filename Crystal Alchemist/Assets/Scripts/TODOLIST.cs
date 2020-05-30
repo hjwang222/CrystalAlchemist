@@ -5,6 +5,7 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.2):
     //--REWORKS--
     //TODO: Sound Effekte ersetzen!
+    //BUG: Cast Buggy when knockback.
 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
@@ -12,7 +13,6 @@ public class TODOLIST : MonoBehaviour
     //GRAPHICS: Titania, Titanias Arena
     //Mechanics: Impact, Look away, Look, Hide, Stack, Chain, Thornes, Landslide
     //Mechanics: Bombs (Ring, Row, Cross, All)
-
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)
@@ -29,6 +29,7 @@ public class TODOLIST : MonoBehaviour
     //ITEM: Brille (Bool Value)
     //INPUT: Virtuelle Tastatur
     //REWORK: Flammenerfer Skill
+    //TODO: Sin Eater Race (glowing eyes, halo, wings, etc)
 
     //TODO: Stairs, Ice, Wall
     //TODO: Rule Tiles
