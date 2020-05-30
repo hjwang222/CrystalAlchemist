@@ -17,9 +17,9 @@ public class AIAggroSystem : MonoBehaviour
     [BoxGroup("Required")]
     private AggroStats aggroStats;
 
-    //[SerializeField]
-    //[HideLabel]
-    //private IndicatorObject indicator;
+    [SerializeField]
+    [BoxGroup("Required")]
+    private GameObject cluePosition;
 
     private GameObject activeClue;
 
@@ -151,7 +151,9 @@ public class AIAggroSystem : MonoBehaviour
     {
         if (clue != null && this.activeClue == null)
         {
-            Vector3 position = new Vector3(this.enemy.transform.position.x, this.enemy.transform.position.y);
+            Vector2 position = this.enemy.transform.position;
+            if (this.cluePosition != null) position = cluePosition.transform.position;
+
             this.activeClue = Instantiate(clue, position, Quaternion.identity, this.enemy.transform);
         }
     }

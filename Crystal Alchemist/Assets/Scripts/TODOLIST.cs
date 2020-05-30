@@ -9,10 +9,7 @@ public class TODOLIST : MonoBehaviour
 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
-    //SCENE: Titania Arena
-    //GRAPHICS: Titania, Titanias Arena
     //Mechanics: Impact, Look away, Look, Hide, Stack, Chain, Thornes, Landslide
-    //Mechanics: Bombs (Ring, Row, Cross, All)
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)
@@ -24,6 +21,7 @@ public class TODOLIST : MonoBehaviour
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
+    //TODO: Titania better graphics
     //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
     //GRAPHICS: TitleScreen: Background 
     //ITEM: Brille (Bool Value)

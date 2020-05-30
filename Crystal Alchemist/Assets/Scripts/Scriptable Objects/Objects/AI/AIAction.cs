@@ -13,7 +13,8 @@ public enum AIActionType
     invincible,
     kill,
     cannotDie,
-    animation
+    animation,
+    signal
 }
 
 [System.Serializable]
@@ -44,6 +45,7 @@ public class AIAction
     [HideIf("type", AIActionType.ability)]
     [HideIf("type", AIActionType.sequence)]
     [HideIf("type", AIActionType.kill)]
+    [HideIf("type", AIActionType.signal)]
     [BoxGroup("Properties")]
     [SerializeField]
     private float duration = 4f;
@@ -117,6 +119,11 @@ public class AIAction
     [SerializeField]
     private BossMechanic mechanic;
 
+    [ShowIf("type", AIActionType.signal)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private SimpleSignal signal;
+
     #endregion
 
     private float waitTimer = 0;
@@ -143,6 +150,7 @@ public class AIAction
             case AIActionType.dialog: StartDialog(npc); break;
             case AIActionType.startPhase: StartPhase(npc); break;
             case AIActionType.endPhase: EndPhase(npc); break;
+            case AIActionType.signal: StartSignal(); break;
         }
     }
 
@@ -362,10 +370,15 @@ public class AIAction
 
     #endregion
 
-    private void Deactivate()
+    #region Signal
+
+    private void StartSignal()
     {
-        //Destroy(this);
-        this.isActive = false;
+        if (this.signal != null) this.signal.Raise();
+        Deactivate();
     }
 
+    #endregion
+
+    private void Deactivate() =>  this.isActive = false;    
 }
