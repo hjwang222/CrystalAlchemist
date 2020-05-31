@@ -11,7 +11,7 @@ public enum aoeShareType
     more
 }
 
-public class SkillStack : SkillMechanicHit
+public class SkillStack : SkillHitTrigger
 {
     [BoxGroup("Mechanics")]
     [SerializeField]
@@ -31,8 +31,8 @@ public class SkillStack : SkillMechanicHit
 
     private void OnDestroy()
     {
-        this.percentage = percentageByAmount();
-        this.hitAllCharacters();
+        //this.percentage = percentageByAmount();
+        //this.hitAllCharacters();
     }
 
     private float calculatePercentage()

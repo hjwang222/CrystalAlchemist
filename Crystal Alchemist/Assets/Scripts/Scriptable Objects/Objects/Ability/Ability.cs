@@ -52,8 +52,7 @@ public class Ability : ScriptableObject
     [BoxGroup("Objects")]
     [HideIf("useIndicator", IndicatorType.None)]
     [HideLabel]
-    [SerializeField]
-    private IndicatorObject indicator;
+    public IndicatorObject indicator;
 
     /*
     [BoxGroup("Objects")]
@@ -237,6 +236,7 @@ public class Ability : ScriptableObject
         {
             this.holdTimer += Time.deltaTime;
             this.state = AbilityState.notCharged; //?
+            //if (this.skill.GetComponent<SkillDoOnCast>() != null) this.skill.GetComponent<SkillDoOnCast>().OnCast(this);
         }
         else
         {
@@ -392,8 +392,6 @@ public class Ability : ScriptableObject
 
         if (sendermodule != null) sendermodule.costs.amount /= reduce;
     }
-
-
 
     #endregion
 

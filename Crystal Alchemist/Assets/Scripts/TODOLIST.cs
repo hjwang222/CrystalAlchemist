@@ -9,7 +9,7 @@ public class TODOLIST : MonoBehaviour
 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
-    //Mechanics: Impact, Look away, Look, Hide, Stack, Chain, Thornes, Landslide
+    //Mechanics: Stack (NPC), Chain (Skill), Thornes (Skill), Landslide (Skill), Plume (Skill)
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

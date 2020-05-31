@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillChainHit : SkillMechanicHit
+public class SkillChainHit : SkillHitTrigger
 {
     [BoxGroup("Mechanics")]
     public bool useRange = false;
@@ -38,18 +38,20 @@ public class SkillChainHit : SkillMechanicHit
 
     private float startDistance = 0;
 
-    private void Update()
-    {
-        if (this.hasRightDistance())
-        {
-            this.percentage = 0;
 
-            if (this.canBreak && !this.useRange) this.skill.DeactivateIt();            
-        }
-        else
+    public void Update(Ability ability)
+    {
+        if (this.canBreak && this.useRange && this.hasRightDistance()) ability.enabled = false;    
+        if (this.changeColor)
         {
-            this.percentage = 100;          
+            if (this.hasRightDistance()) ability.indicator.ChangeColor(this.rightColor);
+            else ability.indicator.ChangeColor(this.wrongColor);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!this.hasRightDistance()) this.skill.hitIt(collision); 
     }
 
     public bool hasRightDistance()

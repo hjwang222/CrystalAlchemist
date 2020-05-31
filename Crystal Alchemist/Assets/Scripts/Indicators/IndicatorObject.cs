@@ -59,4 +59,9 @@ public class IndicatorObject
         }
         this.appliedIndicators.Clear();
     }
+
+    public void ChangeColor(Color color)
+    {
+        for (int i = 0; i < this.appliedIndicators.Count; i++) this.appliedIndicators[i].SetColor(color);
+    }
 }

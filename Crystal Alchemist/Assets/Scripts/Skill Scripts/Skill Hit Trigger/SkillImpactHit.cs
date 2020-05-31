@@ -1,66 +1,168 @@
-﻿using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.Events;
 
-public enum aoeType
+[RequireComponent(typeof(CircleCollider2D))]
+public class SkillImpactHit : SkillHitTrigger
 {
-    hide,
-    range,
-    look
-}
+    public enum aoeType
+    {
+        hide,
+        range,
+        view
+    }
 
-public class SkillImpactHit : SkillMechanicHit
-{
-    [Space(10)]
+    public enum lookType
+    {
+        lookAway,
+        lookAtIt
+    }
+
     [BoxGroup("Mechanics")]
     [SerializeField]
     private aoeType type;
 
     [BoxGroup("Mechanics")]
-    [ShowIf("type", aoeType.look)]
+    [ShowIf("type", aoeType.view)]
     [SerializeField]
-    private bool mustLookAway = false;
+    private lookType look;
 
     [BoxGroup("Mechanics")]
-    [ShowIf("type", aoeType.look)]
+    [ShowIf("type", aoeType.view)]
     [SerializeField]
-    private int viewRange = 100;
-
-    [BoxGroup("Mechanics")]
-    [ShowIf("type", aoeType.range)]
-    [SerializeField]
-    private float deadDistance;
+    [Range(1,180)]
+    [Tooltip("Sichtfeld in Grad. 90 = 45 in jede Richtung")]
+    private int sightAngle = 90;
 
     [BoxGroup("Mechanics")]
     [ShowIf("type", aoeType.range)]
     [SerializeField]
-    private float saveDistance;
-       
+    [Range(0,20)]
+    private float deadZone;
 
-    public override void hitTargetCollision(Collider2D hittedCharacter)
+    [BoxGroup("Mechanics")]
+    [ShowIf("type", aoeType.range)]
+    [SerializeField]
+    [Range(0, 20)]
+    private float hitZone;
+
+    [BoxGroup("Mechanics")]
+    [SerializeField]
+    [Range(0, 20)]
+    private float radius;
+
+    [BoxGroup("Action")]
+    [SerializeField]
+    private UnityEvent AfterDelay;
+
+    [BoxGroup("Action")]
+    [SerializeField]
+    [Range(0, 20)]
+    private float delay = 3f;
+
+    private void OnValidate()
+    {
+        if (this.type == aoeType.range)
+        {
+            if (hitZone < deadZone) hitZone = deadZone;
+            if (radius < hitZone) radius = hitZone;
+        }
+
+        this.GetComponent<CircleCollider2D>().radius = this.radius;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (this.type == aoeType.range) DrawRange();
+        else if (this.type == aoeType.view) DrawView();
+        else if (this.type == aoeType.hide) DrawHide();
+    }
+
+    private void Start() => StartCoroutine(delayCo());    
+
+    private IEnumerator delayCo()
     {        
-            if (this.type == aoeType.hide)
-            {
-                //hide AOE
-                bool isHiding = CollisionUtil.checkBehindObstacle(hittedCharacter.GetComponent<Character>(), this.gameObject);
-                if (!isHiding) this.skill.hitIt(hittedCharacter);
-            }
-            else if (this.type == aoeType.range)
-            {
-                //range AOE
-                float percentage = CollisionUtil.checkDistanceReduce(hittedCharacter.GetComponent<Character>(),
-                                                                            this.gameObject, this.deadDistance, this.saveDistance);
-                this.skill.hitIt(hittedCharacter, percentage);
-            }
-            else if (this.type == aoeType.look)
-            {
-                //look /away AOE
-                bool isLookingAt = CollisionUtil.checkIfGameObjectIsViewed(hittedCharacter.GetComponent<Character>(), this.gameObject, this.viewRange);
-                if ((this.mustLookAway && isLookingAt) || (!this.mustLookAway && !isLookingAt)) this.skill.hitIt(hittedCharacter);
-            }
-            else
-            {
-                //normal AOE
-                this.skill.hitIt(hittedCharacter);
-            }        
+        yield return new WaitForSeconds(this.delay);
+        this.AfterDelay?.Invoke();
+    }
+
+    public void PlayAnimation(string trigger)
+    {
+        AnimatorUtil.SetAnimatorParameter(this.GetComponent<Animator>(), trigger);
+    }
+
+    private void DrawHide()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(this.transform.position, this.radius);
+    }
+
+    private void DrawView()
+    {
+        if (this.look == lookType.lookAway)
+        {
+            Gizmos.color = new Color(1f, 0.25f, 1);
+            Gizmos.DrawWireSphere(this.transform.position, this.radius);
+            Gizmos.DrawIcon(this.transform.position, "Skills/Look Away", false, Color.white);
+        }
+        else
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(this.transform.position, this.radius);
+            Gizmos.DrawIcon(this.transform.position, "Skills/Look At It", false, Color.white);
+        }
+    }
+
+    private void DrawRange()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(this.transform.position, this.radius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(this.transform.position, this.hitZone);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.transform.position, this.deadZone);
+
+        GUI.contentColor = Color.red;
+        Handles.Label(this.transform.position + new Vector3(this.deadZone + 0.25f,3), "DEAD (100%)");
+
+        GUI.contentColor = Color.yellow;
+        Handles.Label(this.transform.position + new Vector3(this.hitZone + 0.25f, 2), "HIT (50%)");
+
+        GUI.contentColor = Color.green;
+        Handles.Label(this.transform.position + new Vector3(this.radius + 0.25f, 1), "SAFE (0%)");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        hitTargetCollision(collision);
+    }
+
+    private void hitTargetCollision(Collider2D hittedCharacter)
+    {
+        if (this.type == aoeType.hide)
+        {
+            //hide AOE
+            bool isHiding = CollisionUtil.checkBehindObstacle(hittedCharacter.GetComponent<Character>(), this.gameObject);
+            if (!isHiding) this.skill.hitIt(hittedCharacter);
+        }
+        else if (this.type == aoeType.range)
+        {
+            //range AOE
+            float percentage = CollisionUtil.checkDistanceReduce(hittedCharacter.GetComponent<Character>(), this.gameObject, this.deadZone, this.hitZone);
+            this.skill.hitIt(hittedCharacter, percentage);
+        }
+        else if (this.type == aoeType.view)
+        {
+            //look /away AOE
+            bool isLookingAt = CollisionUtil.checkIfGameObjectIsViewed(hittedCharacter.GetComponent<Character>(), this.gameObject, this.sightAngle);
+            if ((this.look == lookType.lookAway && isLookingAt) || (this.look == lookType.lookAtIt && !isLookingAt)) this.skill.hitIt(hittedCharacter);
+        }
+        else
+        {
+            //normal AOE
+            this.skill.hitIt(hittedCharacter);
+        }
     }
 }

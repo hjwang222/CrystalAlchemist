@@ -204,6 +204,7 @@ public class AIAction
 
     private void UpdateSkill(AI npc)
     {
+        if (!this.tempAbility.enabled) DisableSkill(npc);
         this.tempAbility.Updating();
 
         if (npc.values.isCharacterStunned()) this.tempAbility.ResetCharge();

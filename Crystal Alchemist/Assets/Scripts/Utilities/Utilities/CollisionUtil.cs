@@ -24,15 +24,19 @@ public static class CollisionUtil
         return false;
     }
 
-    public static float checkDistanceReduce(Character character, GameObject gameObject, float deadDistance, float saveDistance)
+    public static float checkDistanceReduce(Character character, GameObject gameObject, float dead, float hit)
     {
-        float distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
-        float percentage = 100 - (100 / (saveDistance - deadDistance) * (distance - deadDistance));
+        float distance = Vector3.Distance(character.GetGroundPosition(), gameObject.transform.position);
 
-        percentage = Mathf.Round(percentage / 25) * 25;
+        float percentage = 100;
+        if (distance > hit) percentage = 0;
+        else if (distance > dead) percentage = 50;
 
-        if (percentage > 100) percentage = 100;
-        else if (percentage < 0) percentage = 0;
+
+        //float percentage = 100 - (100 / (saveDistance - deadDistance) * (distance - deadDistance));
+        //percentage = Mathf.Round(percentage / 25) * 25;
+        //if (percentage > 100) percentage = 100;
+        //else if (percentage < 0) percentage = 0;
 
         return percentage;
     }
@@ -165,13 +169,10 @@ public static class CollisionUtil
 
         float direction_angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
         float temp_angle = Mathf.Atan2(temp.x, temp.y) * Mathf.Rad2Deg;
-
         float angle = Mathf.Abs(direction_angle - temp_angle);
 
         float min = 180 - range;
         float max = 180 + range;
-
-        //Debug.Log(angle + ">>" + min + ":" + max);
 
         if (angle >= min && angle <= max) return true;
         return false;
