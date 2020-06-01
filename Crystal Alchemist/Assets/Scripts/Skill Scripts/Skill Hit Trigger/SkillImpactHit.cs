@@ -1,11 +1,9 @@
 ﻿using Sirenix.OdinInspector;
-using System.Collections;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(CircleCollider2D))]
-public class SkillImpactHit : SkillHitTrigger
+public class SkillImpactHit : SkillMechanicHit
 {
     public enum aoeType
     {
@@ -53,15 +51,7 @@ public class SkillImpactHit : SkillHitTrigger
     [Range(0, 20)]
     private float radius;
 
-    [BoxGroup("Action")]
-    [SerializeField]
-    private UnityEvent AfterDelay;
-
-    [BoxGroup("Action")]
-    [SerializeField]
-    [Range(0, 20)]
-    private float delay = 3f;
-
+    
     private void OnValidate()
     {
         if (this.type == aoeType.range)
@@ -78,19 +68,6 @@ public class SkillImpactHit : SkillHitTrigger
         if (this.type == aoeType.range) DrawRange();
         else if (this.type == aoeType.view) DrawView();
         else if (this.type == aoeType.hide) DrawHide();
-    }
-
-    private void Start() => StartCoroutine(delayCo());    
-
-    private IEnumerator delayCo()
-    {        
-        yield return new WaitForSeconds(this.delay);
-        this.AfterDelay?.Invoke();
-    }
-
-    public void PlayAnimation(string trigger)
-    {
-        AnimatorUtil.SetAnimatorParameter(this.GetComponent<Animator>(), trigger);
     }
 
     private void DrawHide()

@@ -51,6 +51,15 @@ public class IndicatorObject
         this.appliedIndicators.RemoveAll(item => item == null);
     }
 
+    public Indicator GetIndicator(Character target)
+    {
+        for (int i = 0; i < this.appliedIndicators.Count; i++)
+        {
+            if (this.appliedIndicators[i].GetTarget() == target) return this.appliedIndicators[i];
+        }
+        return null;
+    }
+
     public void ClearIndicator()
     {
         for(int i = 0; i < this.appliedIndicators.Count; i++)
@@ -60,8 +69,9 @@ public class IndicatorObject
         this.appliedIndicators.Clear();
     }
 
-    public void ChangeColor(Color color)
+    public void ChangeIndicator(Character target, Color color)
     {
-        for (int i = 0; i < this.appliedIndicators.Count; i++) this.appliedIndicators[i].SetColor(color);
+        Indicator result = GetIndicator(target);
+        if (result != null) result.SetColor(color);
     }
 }

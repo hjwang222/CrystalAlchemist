@@ -92,12 +92,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  type: 0
-  look: 0
-  sightAngle: 90
-  deadZone: 2.5
-  hitZone: 4.5
-  radius: 8
   AfterDelay:
     m_PersistentCalls:
       m_Calls:
@@ -114,6 +108,12 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   delay: 3
+  type: 0
+  look: 0
+  sightAngle: 90
+  deadZone: 2.5
+  hitZone: 4.5
+  radius: 8
 --- !u!58 &941691078570465822
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -12,6 +12,9 @@ public class Indicator : MonoBehaviour
     [Required]
     private SpriteRenderer spriteRenderer;
 
+    [SerializeField]
+    private CustomRenderer customRenderer;
+
     public virtual void Initialize(Character sender, Character target)
     {
         this.sender = sender;
@@ -20,7 +23,13 @@ public class Indicator : MonoBehaviour
 
     public virtual void SetColor(Color color)
     {
-        this.spriteRenderer.color = color;
+        if (this.customRenderer != null) this.customRenderer.SetGlowColor(color);
+        else if (this.spriteRenderer != null) this.spriteRenderer.color = color;
+    }
+
+    public virtual void SetSprite(Sprite sprite)
+    {
+        if (this.spriteRenderer != null) this.spriteRenderer.sprite = sprite;
     }
 
     public SpriteRenderer GetSpriteRenderer()

@@ -38,6 +38,12 @@ public class CustomRenderer : MonoBehaviour
         AddGlow();
     }
 
+    public void SetGlowColor(Color color)
+    {
+        this.glowColor = color;
+        AddGlow();
+    }
+
     private void AddGlow()
     {
         this.material.SetFloat("_Use_Glow", this.useGlow ? 1f : 0f);

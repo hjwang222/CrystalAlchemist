@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using AssetIcons;
 
 public enum SkillType
 {
@@ -35,17 +33,14 @@ public class Skill : MonoBehaviour
     [Tooltip("Schatten")]
     public SpriteRenderer shadow;
 
-
-
+    [BoxGroup("Debug")]
+    public Character sender;
+    [BoxGroup("Debug")]
+    public Character target;
+    [BoxGroup("Debug")]
+    public Vector2 direction;
 
     ////////////////////////////////////////////////////////////////
-
-    [HideInInspector]
-    public Character sender;
-    [HideInInspector]
-    public Character target;
-    [HideInInspector]
-    public Vector2 direction;
 
     private float durationTimeLeft;
     private float timeDistortion = 1;

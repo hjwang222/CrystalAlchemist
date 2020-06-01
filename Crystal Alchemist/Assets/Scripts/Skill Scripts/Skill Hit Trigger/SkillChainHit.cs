@@ -1,70 +1,119 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillChainHit : SkillHitTrigger
+public class SkillChainHit : SkillMechanicHit
 {
+    public enum ChainType
+    {
+        min,
+        between
+    }
+
     [BoxGroup("Mechanics")]
-    public bool useRange = false;
+    [SerializeField]
+    private ChainType type;
 
     [SerializeField]
-    [ShowIf("useRange", true)]
+    [ShowIf("type", ChainType.between)]
     [BoxGroup("Mechanics")]
     private Vector2 rangeNeeded;
 
     [SerializeField]
-    [HideIf("useRange", true)]
+    [ShowIf("type", ChainType.min)]
     [BoxGroup("Mechanics")]
     private float distanceNeeded = 0f;
 
-    [HideIf("useRange", true)]
+    [ShowIf("type", ChainType.min)]
     [BoxGroup("Mechanics")]
-    public bool canBreak = false;
+    [SerializeField]
+    private bool canBreak = false;
 
-    [HideIf("useRange", true)]
+    [ShowIf("type", ChainType.min)]
     [BoxGroup("Mechanics")]
     [SerializeField]
     private bool useStartDistance = false;
 
     [BoxGroup("Mechanics")]
-    public bool changeColor = false;
+    [SerializeField]
+    private bool changeColor = false;
 
     [BoxGroup("Mechanics")]
     [ShowIf("changeColor", true)]
-    public Color rightColor;
+    [SerializeField]
+    [ColorUsage(true,true)]
+    private Color rightColor;
 
     [BoxGroup("Mechanics")]
     [ShowIf("changeColor", true)]
-    public Color wrongColor;
+    [SerializeField]
+    [ColorUsage(true, true)]
+    private Color wrongColor;
 
-    private float startDistance = 0;
+    [BoxGroup("Objects")]
+    [HideLabel]
+    [SerializeField]
+    private IndicatorObject indicator;
 
+    private float startDistance;
 
-    public void Update(Ability ability)
+    private void OnDrawGizmos()
     {
-        if (this.canBreak && this.useRange && this.hasRightDistance()) ability.enabled = false;    
-        if (this.changeColor)
+        if (this.type == ChainType.min) DrawMin();
+        else if (this.type == ChainType.between) DrawBetween();
+    }
+
+    private void DrawMin()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(this.transform.position, this.distanceNeeded);
+    }
+
+    private void DrawBetween()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(this.transform.position, this.rangeNeeded.y);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.transform.position, this.rangeNeeded.x);
+    }
+
+    public override void Start()
+    {
+        base.Start();
+        if (this.useStartDistance) this.startDistance = Vector2.Distance(this.skill.target.GetGroundPosition(), this.skill.sender.GetGroundPosition());
+    }
+
+    private void FixedUpdate()
+    {
+        if(this.indicator != null) this.indicator.UpdateIndicator(this.skill.sender, this.skill.target);
+
+        if (this.canBreak && this.type == ChainType.min && this.hasRightDistance()) DeactivateIt();
+
+        if (this.changeColor && this.indicator != null)
         {
-            if (this.hasRightDistance()) ability.indicator.ChangeColor(this.rightColor);
-            else ability.indicator.ChangeColor(this.wrongColor);
+            if (this.hasRightDistance()) this.indicator.ChangeIndicator(this.skill.target, this.rightColor);
+            else this.indicator.ChangeIndicator(this.skill.target, this.wrongColor);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void HitIt()
     {
-        if (!this.hasRightDistance()) this.skill.hitIt(collision); 
+        if(!hasRightDistance()) this.skill.hitIt(this.skill.target);
     }
 
-    public bool hasRightDistance()
+    public void DeactivateIt()
+    {
+        if (this.indicator != null) this.indicator.ClearIndicator();
+        this.skill.DeactivateIt();
+    }
+
+    private bool hasRightDistance()
     {
         if (this.skill.target != null)
-        {
-            if (this.useStartDistance && this.startDistance <= 0)
-                this.startDistance = Vector3.Distance(this.skill.target.transform.position, this.skill.sender.transform.position);
-
-            return CollisionUtil.checkDistance(this.skill.target,
-                                                      this.skill.sender.gameObject, rangeNeeded.x, rangeNeeded.y,
-                                                      this.startDistance, this.distanceNeeded,
-                                                      this.useStartDistance, this.useRange);
+        {              
+            if (this.type == ChainType.min)
+                return CollisionUtil.checkDistanceTo(this.skill.target.GetGroundPosition(), this.skill.sender.GetGroundPosition(), startDistance, this.distanceNeeded);
+            else if (this.type == ChainType.between)
+                return CollisionUtil.checkDistanceBetween(this.skill.target.GetGroundPosition(), this.skill.sender.GetGroundPosition(), this.rangeNeeded.x, this.rangeNeeded.y);
         }
 
         return false;

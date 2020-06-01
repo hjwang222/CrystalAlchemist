@@ -4,22 +4,18 @@ using System.Linq;
 
 public static class CollisionUtil
 {
-    public static bool checkDistance(Character character, GameObject gameObject, float min, float max, float startDistance, float distanceNeeded, bool useStartDistance, bool useRange)
+    public static bool checkDistanceTo(Vector2 from, Vector2 to, float startDistance, float distanceNeeded)
     {
-        float distance = Vector3.Distance(character.transform.position, gameObject.transform.position);
+        float distance = Vector3.Distance(from, to);
+        if (distance > (startDistance + distanceNeeded)) return true;      
+        return false;
+    }
 
-        if (useStartDistance && distanceNeeded > 0)
-        {
-            if (distance > (startDistance + distanceNeeded)) return true;
-        }
-        else if (!useStartDistance && distanceNeeded > 0)
-        {
-            if (distance > distanceNeeded) return true;
-        }
-        else if (useRange)
-        {
-            if (distance >= min && distance <= max) return true;
-        }
+    public static bool checkDistanceBetween(Vector2 from, Vector2 to, float min, float max)
+    {
+        float distance = Vector3.Distance(from, to);
+
+        if (distance >= min && distance <= max) return true;        
 
         return false;
     }

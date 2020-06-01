@@ -7,16 +7,26 @@ public class IndicatorProperty : ScriptableObject
 {
     [BoxGroup("Indikator")]
     [SerializeField]
-    public Indicator indicator;
+    private Indicator indicator;
 
     [BoxGroup("Indikator")]
     [SerializeField]
-    public bool overrideColor = false;
+    private bool overrideColor = false;
 
     [BoxGroup("Indikator")]
     [ShowIf("overrideColor")]
     [SerializeField]
-    public Color color = Color.white;
+    [ColorUsage(true,true)]
+    private Color color = Color.white;
+
+    [BoxGroup("Indikator")]
+    [SerializeField]
+    private bool overrideSprite = false;
+
+    [BoxGroup("Indikator")]
+    [SerializeField]
+    [ShowIf("overrideSprite")]
+    private Sprite sprite;
 
     public void Instantiate(Character sender, Character target, List<Indicator> appliedIndicators)
     {
@@ -26,6 +36,7 @@ public class IndicatorProperty : ScriptableObject
             indicator.Initialize(sender, target);
             indicator.name = this.indicator.name;
             if (this.overrideColor) indicator.SetColor(this.color);
+            if (this.overrideSprite) indicator.SetSprite(this.sprite);
             appliedIndicators.Add(indicator);
         }
     }

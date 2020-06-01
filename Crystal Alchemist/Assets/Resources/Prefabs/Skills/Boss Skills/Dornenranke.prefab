@@ -13,10 +13,8 @@ GameObject:
   - component: {fileID: 5107232112540213192}
   - component: {fileID: 8081549351537926092}
   - component: {fileID: 12526804840230140}
-  - component: {fileID: 4189875613208039928}
-  - component: {fileID: 2943654699838023418}
-  m_Layer: 12
-  m_Name: Schicksalskette
+  m_Layer: 13
+  m_Name: Dornenranke
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,47 +67,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Schicksalskette
-  skillNameEnglish: Chain of Fate
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 1305676713030356591}
   animator: {fileID: 0}
   shadow: {fileID: 0}
-  speed: 0
-  positionOffset: 0
-  maxAmounts: 9999
-  attachToSender: 0
-  doCastDuringDelay: 0
-  comboAmount: 100
-  cast: 0
-  lockMovementonDuration: 0
-  deactivateByButtonUp: 0
-  deactivateByButtonDown: 0
-  isRapidFire: 0
-  keepHoldTimer: 0
-  canAffectedBytimeDistortion: 1
-  delay: 0
-  duration: 9999
-  cooldown: 1
-  cooldownAfterCombo: 0
-  durationCombo: 0
-  elapsed: 0
   sender: {fileID: 0}
-  delayTimeLeft: 0
-  durationTimeLeft: 0
-  cooldownTimeLeft: 0
-  overridePosition: 1
-  movementLocked: 0
   target: {fileID: 0}
-  audioSource: {fileID: 0}
-  dontPlayAudio: 0
-  basicRequirementsExists: 1
-  timeDistortion: 1
   direction: {x: 0, y: 0}
-  isActive: 1
-  holdTimer: 0
-  triggerIsActive: 1
-  setActive: 1
+  overridePosition: 1
 --- !u!114 &8081549351537926092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,17 +88,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  percentage: 100
-  hitType: 1
-  useRange: 1
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8081549351537926092}
+        m_TargetAssemblyTypeName: SkillChainHit, Assembly-CSharp
+        m_MethodName: HitIt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8081549351537926092}
+        m_TargetAssemblyTypeName: SkillChainHit, Assembly-CSharp
+        m_MethodName: DeactivateIt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  delay: 3
+  type: 0
   rangeNeeded: {x: 3, y: 4}
-  distanceNeeded: 0
-  canBreak: 0
-  useStartDistance: 0
-  changeColor: 1
+  distanceNeeded: 2.5
+  canBreak: 1
+  useStartDistance: 1
+  changeColor: 0
   rightColor: {r: 0, g: 1, b: 0.021962404, a: 1}
   wrongColor: {r: 1, g: 0, b: 0, a: 1}
-  indicatorModule: {fileID: 2943654699838023418}
+  indicator:
+    indicatorProperty: {fileID: 11400000, guid: c0761ae0664956241bfbb5118fbcc1d0,
+      type: 2}
 --- !u!114 &12526804840230140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,38 +153,3 @@ MonoBehaviour:
   affectNeutral: 0
   affectSkills: 0
   ignoreInvincibility: 0
---- !u!58 &4189875613208039928
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3506642039596110728}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 20
---- !u!114 &2943654699838023418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3506642039596110728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f85dd021f4e88a4469511d8988fcc048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  indicator: {fileID: 5604874298435353384, guid: 752cef5852c03ea4cb869a4479f36c2a,
-    type: 3}
-  showCastBarForEnemies: 1
-  useCustomColor: 0
-  indicatorColor: {r: 0, g: 0, b: 0, a: 0}
-  activeIndicator: {fileID: 0}
