@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6303950438319133966}
   - component: {fileID: 9035295312565223651}
   - component: {fileID: 862621948294645814}
-  - component: {fileID: 1969711209088018432}
   - component: {fileID: 965314693086916177}
+  - component: {fileID: 1969711209088018432}
   m_Layer: 13
   m_Name: Laser
   m_TagString: Skill
@@ -55,7 +55,7 @@ MonoBehaviour:
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!114 &9035295312565223651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +107,22 @@ MonoBehaviour:
   affectNeutral: 1
   affectSkills: 0
   ignoreInvincibility: 0
+--- !u!114 &965314693086916177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969711209088018434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b951f28716f63414da5d74b247c0af8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  rotateIt: 1
+  updateDirection: 1
+  snapRotationInDegrees: 0
 --- !u!114 &1969711209088018432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,29 +138,10 @@ MonoBehaviour:
   skill: {fileID: 0}
   impactEffect: {fileID: 11400000, guid: 2c75b34599ffd2b419ab695b65005cdb, type: 2}
   distanceBetweenImpacts: 0.1
-  useCustomPosition: 0
-  customPosition: {fileID: 0}
   lights: {fileID: 0}
   distance: 99
   laserSprite: {fileID: 3924551678506968721}
   targetRequired: 0
---- !u!114 &965314693086916177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1969711209088018434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b951f28716f63414da5d74b247c0af8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 0}
-  rotateIt: 1
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  snapRotationInDegrees: 0
 --- !u!1 &3924551678506968723
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,6 @@ public class LineIndicator : Indicator
 
     public override void Update()
     {
-        LineRenderUtil.RenderLine(this.GetSender(), this.GetTarget(), this.distance, this.GetSpriteRenderer(), this.GetSender().GetShootingPosition(), out Collider2D hitted, out Vector2 hitPoint);            
+        LineRenderUtil.RenderLine(this.GetSender(), this.GetTarget(), this.GetSender().values.direction, this.distance, this.GetSpriteRenderer(), this.GetSender().GetShootingPosition(), out Collider2D hitted, out Vector2 hitPoint);            
     }
 }

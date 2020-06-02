@@ -343,11 +343,15 @@ public class Ability : ScriptableObject
 
     public Skill InstantiateSkill(Vector2 position)
     {
-        //Single Target
-        return InstantiateSkill(null, position, 1);
+        //Laser and Projectile Impact
+        return InstantiateSkill(null, position, 1, true);
     }
-
     public Skill InstantiateSkill(Character target, Vector2 position, float reduce)
+    {
+        return InstantiateSkill(target, position, reduce, false);
+    }    
+
+    public Skill InstantiateSkill(Character target, Vector2 position, float reduce, bool standAlone)
     {
         if (this.skill == null) return null;
 
@@ -356,6 +360,7 @@ public class Ability : ScriptableObject
         activeSkill.name = this.skill.name;
         activeSkill.Initialize(this.positionOffset, this.lockDirection, this.timeDistortion, this.attachToSender);
         activeSkill.SetMaxDuration(this.hasMaxDuration, this.maxDuration);
+        activeSkill.SetStandAlone(standAlone);
 
         if (target != null) activeSkill.target = target;        
 

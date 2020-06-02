@@ -2,7 +2,7 @@
 
 public static class LineRenderUtil
 {
-    public static void RenderLine(Character sender, Character target, float distance, SpriteRenderer spriteRenderer, Vector2 startpoint,
+    public static void RenderLine(Character sender, Character target, Vector2 direction, float distance, SpriteRenderer spriteRenderer, Vector2 startpoint,
                              out Collider2D hitted, out Vector2 hitPoint)
     {
         spriteRenderer.enabled = true;
@@ -18,8 +18,7 @@ public static class LineRenderUtil
         }
         else
         {
-            //draw normal Laser
-            Vector2 direction = sender.values.direction;
+            //draw normal Laser            
             RaycastHit2D hitInfo = new RaycastHit2D();
 
             if (sender != null)

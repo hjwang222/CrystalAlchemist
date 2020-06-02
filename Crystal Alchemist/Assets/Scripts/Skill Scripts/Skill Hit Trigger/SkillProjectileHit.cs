@@ -51,12 +51,7 @@ public class SkillProjectileHit : SkillHitTrigger
         {            
             Skill fireSkill = this.skillOnImpact.InstantiateSkill(this.skill.transform.position);
 
-            if (fireSkill != null)
-            {
-                //Position nicht überschreiben
-                fireSkill.overridePosition = false;
-                fireSkill.sender = this.skill.sender;
-            }
+            if (fireSkill != null) fireSkill.sender = this.skill.sender;            
         }
     }
 }

@@ -1,45 +1,40 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class SkillRotationModule : SkillModule
 {
     [BoxGroup("Rotations")]
     [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
-    public bool rotateIt = false;
-
-    [BoxGroup("Rotations")]
-    [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
-    public bool rotateOnUpdate = false;
-
-    [BoxGroup("Rotations")]
-    [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]
-    [HideIf("rotateIt")]
-    public bool keepOriginalRotation = false;
+    [SerializeField]
+    private bool rotateIt = false;
 
     [BoxGroup("Rotations")]
     [Tooltip("Welche Winkel sollen fest gestellt werden. 0 = frei. 45 = 45° Winkel")]
     [Range(0, 90)]
-    public float snapRotationInDegrees = 0f;
-    
-    private Quaternion fixedRotation = Quaternion.Euler(0, 0, 0);
-          
+    [SerializeField]
+    private float snapRotationInDegrees = 0f;
 
-    private void Update()
+    public void Initialize()
     {
-        if (this.rotateOnUpdate) this.skill.setPostionAndDirection();
+        float angle = SetAngle(this.skill.direction, snapRotationInDegrees);
+        this.skill.direction = RotationUtil.DegreeToVector2(angle);
+        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
 
-        if (this.skill.spriteRenderer != null && this.skill.shadow != null)
+    private float SetAngle(Vector2 direction, float snapRotationInDegrees)
+    {
+        float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+
+        if (snapRotationInDegrees > 0)
         {
-            if (!this.keepOriginalRotation) this.skill.shadow.transform.rotation = this.skill.spriteRenderer.transform.rotation;
+            angle = Mathf.Round(angle / snapRotationInDegrees) * snapRotationInDegrees;
         }
+
+        return angle;
     }
 
-    public void LateUpdate()
-    {
-        if (!this.rotateIt && !this.keepOriginalRotation) this.transform.rotation = this.fixedRotation;
+    private void FixedUpdate()
+    {    
+        if (this.skill.spriteRenderer != null && this.skill.shadow != null) this.skill.shadow.transform.rotation = this.skill.spriteRenderer.transform.rotation;   
     }
-
-    
 }

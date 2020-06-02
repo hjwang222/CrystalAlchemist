@@ -85,8 +85,7 @@ public class BossMechanicProperty : MonoBehaviour
         if (skill != null)
         {
             skill.sender = this.sender;
-            skill.target = this.target;
-            skill.overridePosition = false;
+            skill.target = this.target;            
         }
     }
 

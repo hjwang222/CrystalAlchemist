@@ -16,9 +16,6 @@ public class SkillLaser : SkillExtension
     private float distanceBetweenImpacts = 1f;
 
     [SerializeField]
-    private bool useCustomPosition;
-
-    [SerializeField]
     private Light2D lights;
 
     [SerializeField]
@@ -63,10 +60,18 @@ public class SkillLaser : SkillExtension
         Vector2 hitPoint = Vector2.zero;
 
         Vector2 startposition = this.skill.sender.GetShootingPosition();
-        if (useCustomPosition) startposition = this.transform.position;
+
+        if (this.skill.standAlone)
+        {
+            startposition = this.transform.position;
+        }
+        else
+        {
+            this.skill.direction = this.skill.sender.values.direction;
+        }
 
         if (targetRequired && this.skill.target == null) LineRenderUtil.Renderempty(this.laserSprite);
-        else LineRenderUtil.RenderLine(this.skill.sender, this.skill.target, this.distance, this.laserSprite, startposition, out hitted, out hitPoint);
+        else LineRenderUtil.RenderLine(this.skill.sender, this.skill.target, this.skill.direction, this.distance, this.laserSprite, startposition, out hitted, out hitPoint);
 
         if (hitted != null)
         {
@@ -92,12 +97,7 @@ public class SkillLaser : SkillExtension
                 Skill hitPointSkill = this.impactEffect.InstantiateSkill(hitpoint);
                 hitPointSkill.transform.position = hitpoint;
 
-                if (hitPointSkill != null)
-                {
-                    //Position nicht überschreiben
-                    hitPointSkill.overridePosition = false;
-                    hitPointSkill.sender = this.skill.sender;
-                }
+                if (hitPointSkill != null) hitPointSkill.sender = this.skill.sender;                
 
                 this.hitPoints.Add(hitPointSkill);
             }

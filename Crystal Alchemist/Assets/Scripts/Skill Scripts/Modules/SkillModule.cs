@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
+[RequireComponent(typeof(Skill))]
 public class SkillModule : MonoBehaviour
 {
     [HideInInspector]

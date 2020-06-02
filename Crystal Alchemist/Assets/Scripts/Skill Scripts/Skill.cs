@@ -38,23 +38,22 @@ public class Skill : MonoBehaviour
     [BoxGroup("Debug")]
     public Character target;
     [BoxGroup("Debug")]
-    public Vector2 direction;
+    public Vector2 direction = Vector2.right;
+    [BoxGroup("Debug")]
+    public bool standAlone = true;
 
     ////////////////////////////////////////////////////////////////
 
     private float durationTimeLeft;
     private float timeDistortion = 1;
     private bool triggerIsActive = true;
-
-    [HideInInspector]
-    public bool overridePosition = true;
-
-    private float positionOffset;
+    public float positionOffset;
     private bool lockDirection;
     private bool canAffectedBytimeDistortion;
     private bool hasDuration;
     private float maxDuration;
     private bool attached;
+    
     #endregion
 
 
@@ -74,13 +73,24 @@ public class Skill : MonoBehaviour
         this.maxDuration = maxDuration;
     }
 
-    public void Start()
+    public void SetStandAlone(bool value) => this.standAlone = value;
+
+    private void Start()
     {
-        setBasicAttributes();
-        setPostionAndDirection();
+        SetComponents();
+
+        if (!this.standAlone)
+        {
+            this.transform.position = this.sender.GetShootingPosition();
+            this.direction = RotationUtil.SetStartDirection(this);
+
+            if (this.GetComponent<SkillRotationModule>() != null) this.GetComponent<SkillRotationModule>().Initialize();
+            if (this.GetComponent<SkillPositionZModule>() != null) this.GetComponent<SkillPositionZModule>().Initialize();
+            if (this.GetComponent<SkillBlendTreeModule>() != null) this.GetComponent<SkillBlendTreeModule>().Initialize();
+        }        
     }
 
-    private void setBasicAttributes()
+    private void SetComponents()
     {
         if (this.myRigidbody == null) this.myRigidbody = GetComponent<Rigidbody2D>();
         if (this.spriteRenderer == null) this.spriteRenderer = GetComponent<SpriteRenderer>();
@@ -160,81 +170,6 @@ public class Skill : MonoBehaviour
     }
 
     #endregion
-
-
-    public void setPostionAndDirection()
-    {
-        //Bestimme Winkel und Position
-        Vector2 start = this.transform.position;
-        Vector3 rotation = this.transform.rotation.eulerAngles;
-
-        bool blendTree = false;
-        bool useOffSetToBlendTree = false;
-        bool keepOriginalRotation = false;
-        bool rotateIt = false;
-
-        float positionOffset = this.positionOffset;
-        float positionHeight = 0;
-        float colliderHeightOffset = 0;
-
-        SkillRotationModule rotationModule = this.GetComponent<SkillRotationModule>();
-        SkillBlendTreeModule blendTreeModule = this.GetComponent<SkillBlendTreeModule>();
-        SkillPositionZModule positionModule = this.GetComponent<SkillPositionZModule>();
-
-        if (rotationModule != null)
-        {
-            keepOriginalRotation = rotationModule.keepOriginalRotation;
-            rotateIt = rotationModule.rotateIt;
-        }
-
-        if (blendTreeModule != null)
-        {
-            blendTree = true;
-            useOffSetToBlendTree = blendTreeModule.useOffSetToBlendTree;
-        }
-
-        if (positionModule != null)
-        {
-            positionHeight = positionModule.positionHeight;
-            colliderHeightOffset = positionModule.colliderHeightOffset;
-        }
-
-        this.direction = RotationUtil.DegreeToVector2(this.transform.eulerAngles.z);
-
-        if (!blendTree)
-        {
-            if (!keepOriginalRotation) RotationUtil.setDirectionAndRotation(this, out start, out this.direction, out rotation);
-            else this.direction = RotationUtil.DegreeToVector2(this.transform.rotation.eulerAngles.z);
-
-            if (this.overridePosition) this.transform.position = start;
-
-            if (rotateIt && !keepOriginalRotation) transform.rotation = Quaternion.Euler(rotation);
-        }
-        else
-        {
-            if(this.sender != null) this.direction = this.sender.values.direction.normalized;
-
-            float positionX = this.sender.transform.position.x + (this.direction.x * positionOffset);
-            float positionY = this.sender.transform.position.y + (this.direction.y * positionOffset) + positionHeight;
-
-            if (useOffSetToBlendTree) this.transform.position = new Vector2(positionX, positionY);
-
-            AnimatorUtil.SetAnimDirection(this.direction, this.animator);
-        }
-
-        if (this.shadow != null)
-        {
-            float changeX = 0;
-            if (this.direction.y < 0) changeX = this.direction.y;
-            this.shadow.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + colliderHeightOffset + (colliderHeightOffset * changeX));
-        }
-    }
-
-    public bool rotateIt()
-    {
-        if (this.GetComponent<SkillRotationModule>() != null) return this.GetComponent<SkillRotationModule>().rotateIt;
-        else return false;
-    }
 
     public bool isAttachedToSender()
     {
