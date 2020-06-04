@@ -1,16 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
-public class SkillMoveItemHit : MonoBehaviour
+public class SkillMoveItemHit : SkillHitTrigger
 {
-    [SerializeField]
-    private Skill skill;
-
     private Collectable item;
 
-    private void Update()
+    public override void Updating()
     {
         if (this.item != null && this.item.GetComponent<Rigidbody2D>() != null)
         {

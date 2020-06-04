@@ -10,7 +10,7 @@ public class SkillSelfHit : SkillHitTrigger
     [MinValue(0)]
     private float invincibleTimer = 0;
 
-    private void Start()
+    public override void Initialize()
     {
         if (this.invincibleTimer > 0) this.skill.sender.setInvincible(this.invincibleTimer, false);
         this.skill.sender.gotHit(this.skill);

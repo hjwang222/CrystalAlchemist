@@ -49,9 +49,7 @@ public class SkillProjectileHit : SkillHitTrigger
     {
         if (this.skillOnImpact != null)
         {            
-            Skill fireSkill = this.skillOnImpact.InstantiateSkill(this.skill.transform.position);
-
-            if (fireSkill != null) fireSkill.sender = this.skill.sender;            
+            Skill fireSkill = this.skillOnImpact.InstantiateSkill(this.skill.transform.position, this.skill.sender);            
         }
     }
 }

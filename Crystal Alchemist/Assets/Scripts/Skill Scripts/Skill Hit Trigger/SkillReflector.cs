@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SkillReflector : SkillExtension
+public class SkillReflector : SkillHitTrigger
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {

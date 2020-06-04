@@ -2,23 +2,19 @@
 
 public class SkillProjectile : SkillExtension
 {
-    private Vector2 tempVelocity;
-
     public float speed = 1;
-
-
-    public virtual void Start()
+    
+    public override void Initialize()
     {
         if (this.skill.myRigidbody != null)
         {
             this.setVelocity();
-            this.tempVelocity = this.skill.myRigidbody.velocity;
         }
     }
 
     public void setVelocity()
     {
-        if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.speed * this.skill.getTimeDistortion();
+        if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = this.skill.direction * this.speed * this.skill.getTimeDistortion();
     }
 
     public void stopVelocity()

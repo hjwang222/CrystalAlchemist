@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5107232112540213192}
   - component: {fileID: 8081549351537926092}
   - component: {fileID: 12526804840230140}
+  - component: {fileID: 2474177357107830658}
   m_Layer: 13
   m_Name: Dornenranke
   m_TagString: Skill
@@ -74,7 +75,8 @@ MonoBehaviour:
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
+  positionOffset: 0
 --- !u!114 &8081549351537926092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,34 +90,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  AfterDelay:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8081549351537926092}
-        m_TargetAssemblyTypeName: SkillChainHit, Assembly-CSharp
-        m_MethodName: HitIt
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8081549351537926092}
-        m_TargetAssemblyTypeName: SkillChainHit, Assembly-CSharp
-        m_MethodName: DeactivateIt
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  delay: 3
   type: 0
   rangeNeeded: {x: 3, y: 4}
   distanceNeeded: 2.5
@@ -153,3 +127,50 @@ MonoBehaviour:
   affectNeutral: 0
   affectSkills: 0
   ignoreInvincibility: 0
+--- !u!114 &2474177357107830658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506642039596110728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207fca84803c3254f9e24c50973fac1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  hasDelay: 1
+  delay: 3
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8081549351537926092}
+        m_TargetAssemblyTypeName: SkillChainHit, Assembly-CSharp
+        m_MethodName: HitIt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8081549351537926092}
+        m_TargetAssemblyTypeName: SkillChainHit, Assembly-CSharp
+        m_MethodName: DeactivateIt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  hasDuration: 0
+  maxDuration: 0

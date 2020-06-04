@@ -20,7 +20,7 @@ public class SkillAnimationModule : SkillModule
 
     private CastingAnimation activeCastingAnimation;
 
-    private void Start()
+    public override void Initialize()
     {
         this.skill.sender.startAttackAnimation(this.animationTriggerName);
         if(this.useColor) this.skill.sender.ChangeColor(this.targetColor);

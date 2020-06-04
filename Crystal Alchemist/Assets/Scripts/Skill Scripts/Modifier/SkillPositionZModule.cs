@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillPositionZModule : SkillModule
+public class SkillPositionZModule : SkillModifier
 {
     [BoxGroup("Position Z")]
     [Range(-1, 2)]

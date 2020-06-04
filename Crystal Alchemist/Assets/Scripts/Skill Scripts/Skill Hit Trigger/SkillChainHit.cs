@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillChainHit : SkillMechanicHit
+public class SkillChainHit : SkillHitTrigger
 {
     public enum ChainType
     {
@@ -76,9 +76,9 @@ public class SkillChainHit : SkillMechanicHit
         Gizmos.DrawWireSphere(this.transform.position, this.rangeNeeded.x);
     }
 
-    public override void Start()
+    public override void Initialize()
     {
-        base.Start();
+        base.Initialize();
         if (this.useStartDistance) this.startDistance = Vector2.Distance(this.skill.target.GetGroundPosition(), this.skill.sender.GetGroundPosition());
     }
 

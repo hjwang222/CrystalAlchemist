@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
-public class SkillImpactHit : SkillMechanicHit
+public class SkillImpactHit : SkillHitTrigger
 {
     public enum aoeType
     {

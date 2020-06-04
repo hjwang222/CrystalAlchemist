@@ -9,10 +9,9 @@ public class TODOLIST : MonoBehaviour
 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
-    //TODO: Skill direction on rotation (SAS)
     //Mechanics: Stack (NPC)
-    //Mechanics: Stand-Alone Skills (Delay, Duration, no Sender)
     //Mechanics: Landslide (SAS), Plume (SAS)
+    //Rework: Max Duration
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

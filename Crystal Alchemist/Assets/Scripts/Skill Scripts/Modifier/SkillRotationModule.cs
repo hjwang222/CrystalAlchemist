@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillRotationModule : SkillModule
+public class SkillRotationModule : SkillModifier
 {
     [BoxGroup("Rotations")]
     [Tooltip("Soll der Projektilsprite passend zur Flugbahn rotieren?")]

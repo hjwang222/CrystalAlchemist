@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 941691078570465822}
   - component: {fileID: 1260947606639918299}
   - component: {fileID: 3900592228076399888}
+  - component: {fileID: 8991908799013891723}
   m_Layer: 13
   m_Name: Seismischer Schock
   m_TagString: Skill
@@ -78,7 +79,8 @@ MonoBehaviour:
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
+  positionOffset: 0
 --- !u!114 &5075768522131947620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,22 +94,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  AfterDelay:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5075768522131947620}
-        m_TargetAssemblyTypeName: SkillImpactHit, Assembly-CSharp
-        m_MethodName: PlayAnimation
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Hit
-          m_BoolArgument: 1
-        m_CallState: 2
-  delay: 3
   type: 1
   look: 0
   sightAngle: 90
@@ -175,6 +161,41 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8991908799013891723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3273286193611716889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207fca84803c3254f9e24c50973fac1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  hasDelay: 1
+  delay: 3
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2161489612662374538}
+        m_TargetAssemblyTypeName: Skill, Assembly-CSharp
+        m_MethodName: PlayAnimation
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Hit
+          m_BoolArgument: 0
+        m_CallState: 2
+  hasDuration: 0
+  maxDuration: 0
 --- !u!1 &5687571925759634302
 GameObject:
   m_ObjectHideFlags: 0

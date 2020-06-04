@@ -24,7 +24,7 @@ public class SkillStack : SkillHitTrigger
     private float timeLeft = 0;
     private List<Character> listOfCharacters = new List<Character>();
 
-    private void Start()
+    public override void Initialize()
     {
         this.skill.SetTriggerActive(1);
     }

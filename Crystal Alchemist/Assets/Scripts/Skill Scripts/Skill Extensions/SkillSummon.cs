@@ -1,14 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using UnityEngine;
 
 public class SkillSummon : SkillExtension
 {
     [SerializeField]
     private Character summon;
 
-    private void Start()
+    public override void Initialize()
     {
         summoning();
     }

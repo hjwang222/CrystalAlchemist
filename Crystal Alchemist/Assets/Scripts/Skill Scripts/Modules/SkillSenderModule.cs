@@ -52,7 +52,7 @@ public class SkillSenderModule : SkillModule
     private float elapsed;
 
 
-    private void Start()
+    public override void Initialize()
     {
         if (this.skill.sender != null)
         {
@@ -72,7 +72,7 @@ public class SkillSenderModule : SkillModule
         }
     }
 
-    private void Update()
+    public override void Updating()
     {
         if (this.intervallSender > 0)
         {

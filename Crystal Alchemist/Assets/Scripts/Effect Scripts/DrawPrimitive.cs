@@ -59,6 +59,7 @@ public class DrawPrimitive : MonoBehaviour
     [BoxGroup("Settings")]
     [HideIf("type", PrimitiveType.collider)]
     [HideIf("type", PrimitiveType.laser)]
+    [HideIf("type", PrimitiveType.line)]
     [SerializeField]
     private Vector2 offset;
 
@@ -107,6 +108,7 @@ public class DrawPrimitive : MonoBehaviour
         if (this.type == PrimitiveType.collider) drawColliders();
         else if (this.type == PrimitiveType.rectangle) drawRectangle(this.size, this.offset);
         else if (this.type == PrimitiveType.laser) drawLaser(this.sender, this.target);
+        else if (this.type == PrimitiveType.line) drawLine();
         else drawPrimitive();
     }
 
@@ -119,7 +121,6 @@ public class DrawPrimitive : MonoBehaviour
     {
         switch (type)
         {
-            case PrimitiveType.line: return 2;
             case PrimitiveType.triangle: return 3;
             case PrimitiveType.diamond: return 4;
             case PrimitiveType.pentagon: return 5;
@@ -192,6 +193,17 @@ public class DrawPrimitive : MonoBehaviour
         }
 
         this.line.SetPositions(points);
+    }
+
+    private void drawLine()
+    {        
+            Vector3[] points = new Vector3[2];
+
+            points[0] = Vector2.zero;
+            points[1] = new Vector2(this.radius,0);
+
+            this.line.positionCount = points.Length;
+            this.line.SetPositions(points);      
     }
 
     private void drawLaser(GameObject sender, GameObject target)

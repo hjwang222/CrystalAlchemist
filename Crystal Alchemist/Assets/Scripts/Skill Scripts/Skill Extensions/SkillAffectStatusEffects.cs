@@ -16,7 +16,7 @@ public class SkillAffectStatusEffects : SkillExtension
     [Range(0, 100)]
     private int extendTimePercentage = 0;
 
-    private void Start()
+    public override void Initialize()
     {
         changeStatusEffects(this.skill.sender);
     }

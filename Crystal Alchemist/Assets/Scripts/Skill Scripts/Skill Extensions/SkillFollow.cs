@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -16,10 +15,7 @@ public class SkillFollow : SkillProjectile
     private bool canMove = true;
     private bool startCoroutine = true;
 
-    private void Update()
-    {
-        moveIt();
-    }
+    public override void Updating() => moveIt();    
 
     private IEnumerator delayCo()
     {

@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillTimeDistortionHit : SkillExtension
+public class SkillTimeDistortionHit : SkillHitTrigger
 {
     #region Attributes
     

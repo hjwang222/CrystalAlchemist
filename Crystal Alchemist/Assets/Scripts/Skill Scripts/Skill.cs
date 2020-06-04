@@ -47,6 +47,7 @@ public class Skill : MonoBehaviour
     private float durationTimeLeft;
     private float timeDistortion = 1;
     private bool triggerIsActive = true;
+    [HideInInspector]
     public float positionOffset;
     private bool lockDirection;
     private bool canAffectedBytimeDistortion;
@@ -86,8 +87,21 @@ public class Skill : MonoBehaviour
 
             if (this.GetComponent<SkillRotationModule>() != null) this.GetComponent<SkillRotationModule>().Initialize();
             if (this.GetComponent<SkillPositionZModule>() != null) this.GetComponent<SkillPositionZModule>().Initialize();
-            if (this.GetComponent<SkillBlendTreeModule>() != null) this.GetComponent<SkillBlendTreeModule>().Initialize();
-        }        
+            if(this.GetComponent<SkillBlendTreeModule>() != null) this.GetComponent<SkillBlendTreeModule>().Initialize();
+        }
+        else
+        {
+            this.direction = RotationUtil.DegreeToVector2(this.transform.rotation.eulerAngles.z);
+        }
+
+        SkillModule[] modules = this.GetComponents<SkillModule>();
+        for (int i = 0; i < modules.Length; i++) modules[i].Initialize();
+
+        SkillExtension[] extensions = this.GetComponents<SkillExtension>();
+        for (int i = 0; i < extensions.Length; i++) extensions[i].Initialize();
+
+        SkillHitTrigger[] trigger = this.GetComponents<SkillHitTrigger>();
+        for (int i = 0; i < trigger.Length; i++) trigger[i].Initialize();
     }
 
     private void SetComponents()
@@ -129,6 +143,15 @@ public class Skill : MonoBehaviour
         }
 
         if (this.target != null && !this.target.gameObject.activeInHierarchy) this.DeactivateIt();
+
+        SkillModule[] modules = this.GetComponents<SkillModule>();
+        for (int i = 0; i < modules.Length; i++) modules[i].Updating();
+
+        SkillExtension[] extensions = this.GetComponents<SkillExtension>();
+        for (int i = 0; i < extensions.Length; i++) extensions[i].Updating();
+
+        SkillHitTrigger[] trigger = this.GetComponents<SkillHitTrigger>();
+        for (int i = 0; i < trigger.Length; i++) trigger[i].Updating();
     }
 
     public float getDurationLeft()
@@ -192,6 +215,11 @@ public class Skill : MonoBehaviour
     public void PlaySoundEffect(AudioClip audioClip)
     {
         AudioUtil.playSoundEffect(this.gameObject, audioClip);
+    }
+
+    public void PlayAnimation(string trigger)
+    {
+        AnimatorUtil.SetAnimatorParameter(this.animator, trigger);
     }
 
     public void SetTriggerActive(int value)

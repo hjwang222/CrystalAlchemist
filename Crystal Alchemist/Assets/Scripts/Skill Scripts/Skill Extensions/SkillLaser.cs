@@ -30,28 +30,20 @@ public class SkillLaser : SkillExtension
 
     private List<Skill> hitPoints = new List<Skill>();
 
+    private Vector2 position;
+
     #endregion
 
 
     #region Unity Functions
 
-    private void Start()
-    {
-        this.laserSprite.enabled = false;
-    }
+    public override void Initialize() => this.laserSprite.enabled = false;    
 
-    private void Update()
-    {
-        drawLine();
-    }
-
-    private void OnDestroy()
-    {
-        this.hitPoints.Clear();
-    }
+    public override void Updating() => drawLine();
+    
+    private void OnDestroy() => this.hitPoints.Clear();    
 
     #endregion
-
 
     #region Functions (private)
     private void drawLine()
@@ -59,21 +51,21 @@ public class SkillLaser : SkillExtension
         Collider2D hitted = null;
         Vector2 hitPoint = Vector2.zero;
 
-        Vector2 startposition = this.skill.sender.GetShootingPosition();
-
         if (this.skill.standAlone)
         {
-            startposition = this.transform.position;
+            this.position = this.transform.position;
+            this.skill.direction = RotationUtil.DegreeToVector2(this.transform.rotation.eulerAngles.z);
         }
         else
         {
+            this.position = this.skill.sender.GetShootingPosition();
             this.skill.direction = this.skill.sender.values.direction;
         }
 
         if (targetRequired && this.skill.target == null) LineRenderUtil.Renderempty(this.laserSprite);
-        else LineRenderUtil.RenderLine(this.skill.sender, this.skill.target, this.skill.direction, this.distance, this.laserSprite, startposition, out hitted, out hitPoint);
+        else LineRenderUtil.RenderLine(this.skill.sender, this.skill.target, this.skill.direction, this.distance, this.laserSprite, this.position, out hitted, out hitPoint);
 
-        if (hitted != null)
+        if (hitted != null && this.skill.GetTriggerActive())
         {
             if(CollisionUtil.checkCollision(hitted, this.skill)) this.skill.hitIt(hitted);
             setImpactEffect(hitPoint);
@@ -94,11 +86,7 @@ public class SkillLaser : SkillExtension
 
             if (impactPossible)
             {
-                Skill hitPointSkill = this.impactEffect.InstantiateSkill(hitpoint);
-                hitPointSkill.transform.position = hitpoint;
-
-                if (hitPointSkill != null) hitPointSkill.sender = this.skill.sender;                
-
+                Skill hitPointSkill = this.impactEffect.InstantiateSkill(hitpoint, this.skill.sender); 
                 this.hitPoints.Add(hitPointSkill);
             }
         }

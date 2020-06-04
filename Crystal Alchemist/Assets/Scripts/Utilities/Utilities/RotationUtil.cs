@@ -13,7 +13,10 @@ public static class RotationUtil
 
     public static Vector2 RadianToVector2(float radian)
     {
-        return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
+        float x = Mathf.Round((Mathf.Cos(radian) * 100f)) / 100f;
+        float y = Mathf.Round((Mathf.Sin(radian) * 100f)) / 100f;
+
+        return new Vector2(x, y).normalized;
     }
 
     public static Vector2 DegreeToVector2(float degree)

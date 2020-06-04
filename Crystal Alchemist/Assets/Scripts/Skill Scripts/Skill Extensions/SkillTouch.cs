@@ -2,7 +2,7 @@
 
 public class SkillTouch : SkillExtension
 {
-    private void Start()
+    public override void Initialize()
     {
         Collider2D temp = this.skill.sender.boxCollider;
 

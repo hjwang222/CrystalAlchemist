@@ -1,4 +1,4 @@
-﻿public class SkillBlendTreeModule : SkillModule
+﻿public class SkillBlendTreeModule : SkillModifier
 {
     public void Initialize()
     {

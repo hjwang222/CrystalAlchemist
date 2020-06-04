@@ -341,10 +341,12 @@ public class Ability : ScriptableObject
         return InstantiateSkill(target, this.GetSender().transform.position, reduce);
     }
 
-    public Skill InstantiateSkill(Vector2 position)
+    public Skill InstantiateSkill(Vector2 position, Character sender)
     {
         //Laser and Projectile Impact
-        return InstantiateSkill(null, position, 1, true);
+        Skill result = InstantiateSkill(null, position, 1, true);
+        result.sender = sender;
+        return result;
     }
     public Skill InstantiateSkill(Character target, Vector2 position, float reduce)
     {

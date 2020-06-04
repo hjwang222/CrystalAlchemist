@@ -15,13 +15,14 @@ GameObject:
   - component: {fileID: 941691078570465822}
   - component: {fileID: 1226416482089918756}
   - component: {fileID: 1260947606639918299}
+  - component: {fileID: 4654113867325696933}
   m_Layer: 13
   m_Name: Meteorit
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5821666021989885135
 Transform:
   m_ObjectHideFlags: 0
@@ -78,7 +79,8 @@ MonoBehaviour:
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
+  positionOffset: 0
 --- !u!114 &5075768522131947620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,22 +94,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  AfterDelay:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5075768522131947620}
-        m_TargetAssemblyTypeName: SkillImpactHit, Assembly-CSharp
-        m_MethodName: PlayAnimation
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Hit
-          m_BoolArgument: 1
-        m_CallState: 2
-  delay: 3
   type: 0
   look: 0
   sightAngle: 90
@@ -175,6 +161,41 @@ MonoBehaviour:
   affectNeutral: 1
   affectSkills: 0
   ignoreInvincibility: 0
+--- !u!114 &4654113867325696933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3273286193611716889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 207fca84803c3254f9e24c50973fac1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  hasDelay: 1
+  delay: 3
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2161489612662374538}
+        m_TargetAssemblyTypeName: Skill, Assembly-CSharp
+        m_MethodName: PlayAnimation
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Hit
+          m_BoolArgument: 0
+        m_CallState: 2
+  hasDuration: 0
+  maxDuration: 0
 --- !u!1 &5554238134657485000
 GameObject:
   m_ObjectHideFlags: 0

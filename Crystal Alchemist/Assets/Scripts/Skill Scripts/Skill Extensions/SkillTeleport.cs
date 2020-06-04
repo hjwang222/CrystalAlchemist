@@ -8,7 +8,7 @@ public class SkillTeleport : SkillExtension
     [SerializeField]
     private TeleportStats lastTeleport;
 
-    private void Start() => Teleport(this.skill.sender);    
+    public override void Initialize() => Teleport(this.skill.sender);    
 
     private void Teleport(Character character)
     {

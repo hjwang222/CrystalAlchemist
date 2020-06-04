@@ -77,7 +77,8 @@ MonoBehaviour:
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
+  positionOffset: 0
 --- !u!114 &5075768522131947620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,10 +98,6 @@ MonoBehaviour:
   deadZone: 2.5
   hitZone: 4.5
   radius: 8
-  AfterDelay:
-    m_PersistentCalls:
-      m_Calls: []
-  delay: 0
 --- !u!58 &941691078570465822
 CircleCollider2D:
   m_ObjectHideFlags: 0

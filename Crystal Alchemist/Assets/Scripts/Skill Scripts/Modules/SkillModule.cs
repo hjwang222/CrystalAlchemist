@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Skill))]
 public class SkillModule : MonoBehaviour
@@ -11,4 +10,8 @@ public class SkillModule : MonoBehaviour
     {
         this.skill = this.GetComponent<Skill>();
     }
+
+    public virtual void Initialize() { }
+
+    public virtual void Updating() { }
 }
