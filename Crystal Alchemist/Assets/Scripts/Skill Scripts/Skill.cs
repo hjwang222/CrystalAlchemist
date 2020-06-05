@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 public enum SkillType
 {
@@ -33,6 +34,15 @@ public class Skill : MonoBehaviour
     [Tooltip("Schatten")]
     public SpriteRenderer shadow;
 
+    [BoxGroup("Actions")]
+    [SerializeField]
+    public UnityEvent OnStart;
+
+    [BoxGroup("Actions")]
+    [SerializeField]
+    public UnityEvent AfterDelay;
+
+
     [BoxGroup("Debug")]
     public Character sender;
     [BoxGroup("Debug")]
@@ -45,16 +55,22 @@ public class Skill : MonoBehaviour
     ////////////////////////////////////////////////////////////////
 
     private float durationTimeLeft;
+    private float delayTimeLeft;
+
     private float timeDistortion = 1;
     private bool triggerIsActive = true;
-    [HideInInspector]
-    public float positionOffset;
+    private float positionOffset;
     private bool lockDirection;
     private bool canAffectedBytimeDistortion;
+
+    private bool hasDelay;
+    private float delay;
     private bool hasDuration;
     private float maxDuration;
+
     private bool attached;
-    
+    private float progress;
+
     #endregion
 
 
@@ -74,6 +90,12 @@ public class Skill : MonoBehaviour
         this.maxDuration = maxDuration;
     }
 
+    public void SetDelay(bool hasDelay, float delay)
+    {
+        this.hasDelay = hasDelay;
+        this.delay = delay;
+    }
+
     public void SetStandAlone(bool value) => this.standAlone = value;
 
     private void Start()
@@ -87,11 +109,12 @@ public class Skill : MonoBehaviour
 
             if (this.GetComponent<SkillRotationModule>() != null) this.GetComponent<SkillRotationModule>().Initialize();
             if (this.GetComponent<SkillPositionZModule>() != null) this.GetComponent<SkillPositionZModule>().Initialize();
-            if(this.GetComponent<SkillBlendTreeModule>() != null) this.GetComponent<SkillBlendTreeModule>().Initialize();
+            if (this.GetComponent<SkillBlendTreeModule>() != null) this.GetComponent<SkillBlendTreeModule>().Initialize();
         }
         else
         {
-            this.direction = RotationUtil.DegreeToVector2(this.transform.rotation.eulerAngles.z);
+            if (this.GetComponent<SkillRotationModule>() != null) this.GetComponent<SkillRotationModule>().Initialize();
+            this.direction = RotationUtil.DegreeToVector2(this.transform.rotation.eulerAngles.z);            
         }
 
         SkillModule[] modules = this.GetComponents<SkillModule>();
@@ -102,6 +125,8 @@ public class Skill : MonoBehaviour
 
         SkillHitTrigger[] trigger = this.GetComponents<SkillHitTrigger>();
         for (int i = 0; i < trigger.Length; i++) trigger[i].Initialize();
+
+        this.OnStart?.Invoke();
     }
 
     private void SetComponents()
@@ -112,6 +137,7 @@ public class Skill : MonoBehaviour
         if (this.shadow != null && this.spriteRenderer != null) this.shadow.sprite = this.spriteRenderer.sprite;
 
         this.durationTimeLeft = this.maxDuration;
+        this.delayTimeLeft = this.delay;
     }
 
 
@@ -132,13 +158,24 @@ public class Skill : MonoBehaviour
         SkillAnimationModule animationModule = this.GetComponent<SkillAnimationModule>();
         if (animationModule != null) animationModule.hideCastingAnimation();
 
-        //Prüfe ob der Skill eine Maximale Dauer hat
-        if (this.hasDuration)
+        if (this.hasDelay)
         {
-            if (this.durationTimeLeft > 0)
+            if (this.delayTimeLeft > 0)
             {
-                this.durationTimeLeft -= (Time.deltaTime * this.timeDistortion);
+                this.delayTimeLeft -= (Time.deltaTime * this.timeDistortion);
+                this.progress = 1 - (this.delayTimeLeft / this.delay);
             }
+            else
+            {
+                this.AfterDelay?.Invoke();
+                this.hasDelay = false;
+            }
+        }
+
+        //Prüfe ob der Skill eine Maximale Dauer hat
+        if (this.hasDuration && !this.hasDelay)
+        {
+            if (this.durationTimeLeft > 0) this.durationTimeLeft -= (Time.deltaTime * this.timeDistortion);            
             else this.DeactivateIt();
         }
 
@@ -154,14 +191,24 @@ public class Skill : MonoBehaviour
         for (int i = 0; i < trigger.Length; i++) trigger[i].Updating();
     }
 
-    public float getDurationLeft()
+    public float GetDurationLeft()
     {
         return this.durationTimeLeft;
     }
 
-    public float getMaxDuration()
+    public float GetMaxDuration()
     {
         return this.maxDuration;
+    }
+
+    public float GetOffset()
+    {
+        return this.positionOffset;
+    }
+
+    public float GetProgress()
+    {
+        return this.progress;
     }
 
     public void hitIt(Collider2D hittedObject)
@@ -203,12 +250,6 @@ public class Skill : MonoBehaviour
     {
         return this.lockDirection;
     }
-
-    public float GetOffset()
-    {
-        return this.positionOffset;
-    }
-
 
     #region AnimatorEvents
 

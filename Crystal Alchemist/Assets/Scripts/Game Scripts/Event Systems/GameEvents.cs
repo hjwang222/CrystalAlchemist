@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class GameEvents : MonoBehaviour
 {
@@ -25,6 +24,7 @@ public class GameEvents : MonoBehaviour
     public Action<StatusEffect> OnEffectAdded;
     public Action<Vector2, Action, Action> OnSleep;
     public Action<Vector2, Action, Action> OnWakeUp;
+    public Action<WarningType> OnWarning;
 
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
     public void DoMenuOpen(CharacterState state) => this.OnMenuOpen?.Invoke(state);  
@@ -35,7 +35,7 @@ public class GameEvents : MonoBehaviour
     public void DoSubmit() => this.OnSubmit?.Invoke();  
     public void DoCancel() => this.OnCancel?.Invoke();
     public void DoPage(int page) => this.OnPage?.Invoke(page);
-
+    public void DoWarning(WarningType type) => this.OnWarning?.Invoke(type);
     public void DoSleep(Vector2 position, Action before, Action after) => this.OnSleep?.Invoke(position, before, after);
     public void DoWakeUp(Vector2 position, Action before, Action after) => this.OnWakeUp?.Invoke(position, before, after);
 }

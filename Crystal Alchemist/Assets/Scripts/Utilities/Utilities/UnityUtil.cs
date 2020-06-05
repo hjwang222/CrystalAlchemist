@@ -34,12 +34,33 @@ public static class UnityUtil
     }
 
     public static bool SceneExists(string scene)
-    {   
+    {
         for (int i = 0; i < SceneManager.sceneCount; i++)
         {
-            if(SceneManager.GetSceneAt(i).name == scene) return true;
+            if (SceneManager.GetSceneAt(i).name == scene) return true;
         }
         return false;
+    }
+
+    public static Vector2 GetRandomVector(Collider2D collider)
+    {
+        Bounds bounds = collider.bounds;
+        Vector2 center = bounds.center;
+        bool found = false;
+        int attempts = 0;
+
+        do
+        {
+            float x = UnityEngine.Random.Range(center.x - bounds.extents.x, center.x + bounds.extents.x);
+            float y = UnityEngine.Random.Range(center.y - bounds.extents.y, center.y + bounds.extents.y);
+            Vector2 result = new Vector2(x, y);
+            attempts++;
+
+            if (collider.OverlapPoint(result)) return result;
+        }
+        while (!found && attempts < 50);
+
+        return Vector2.zero;
     }
 
     /// <summary>

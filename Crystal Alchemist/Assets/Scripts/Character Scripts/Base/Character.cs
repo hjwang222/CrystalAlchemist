@@ -432,10 +432,10 @@ public class Character : MonoBehaviour
     {
         if (this.myRigidbody != null && this.myRigidbody.bodyType != RigidbodyType2D.Kinematic)
         {            
-            Vector2 difference = direction.normalized * thrust;
-            //this.myRigidbody.velocity = Vector2.zero;
-            //this.myRigidbody.AddForce(difference, ForceMode2D.Impulse);
-            this.myRigidbody.DOMove(this.myRigidbody.position + difference, knockTime);
+            Vector2 difference = direction.normalized * (thrust*2);
+            this.myRigidbody.velocity = Vector2.zero;
+            this.myRigidbody.AddForce(difference, ForceMode2D.Impulse);
+            //this.myRigidbody.DOMove(this.myRigidbody.position + difference, knockTime);
             StartCoroutine(knockCo(knockTime));
         }
     }

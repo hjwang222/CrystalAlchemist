@@ -82,12 +82,18 @@ public class Ability : ScriptableObject
     [BoxGroup("Restrictions")]
     [SerializeField]
     [ShowIf("hasMaxDuration")]
+    [MinValue(0)]
     public float maxDuration = 1;
 
-    //[BoxGroup("Restrictions")]
-    //[ShowIf("isRapidFire")]
-    //[SerializeField]
-    //private float rapidFireDelay = 1;
+    [BoxGroup("Restrictions")]
+    [SerializeField]
+    public bool hasDelay;
+
+    [BoxGroup("Restrictions")]
+    [SerializeField]
+    [ShowIf("hasDelay")]
+    [MinValue(0)]
+    public float delay = 1;
 
     [BoxGroup("Restrictions")]
     [OnValueChanged("OnCastTimeChange")]
@@ -96,6 +102,7 @@ public class Ability : ScriptableObject
 
     [BoxGroup("Restrictions")]
     [ShowIf("hasCastTime")]
+    [MinValue(0)]
     public float castTime;
 
     [BoxGroup("Restrictions")]
@@ -344,25 +351,33 @@ public class Ability : ScriptableObject
     public Skill InstantiateSkill(Vector2 position, Character sender)
     {
         //Laser and Projectile Impact
-        Skill result = InstantiateSkill(null, position, 1, true);
+        return InstantiateSkill(position, sender, Quaternion.identity);
+    }
+
+    public Skill InstantiateSkill(Vector2 position, Character sender, Quaternion rotation)
+    {
+        //Boss Sequence
+        Skill result = InstantiateSkill(null, position, 1, true, rotation);
         result.sender = sender;
         return result;
     }
+
     public Skill InstantiateSkill(Character target, Vector2 position, float reduce)
     {
-        return InstantiateSkill(target, position, reduce, false);
+        return InstantiateSkill(target, position, reduce, false, Quaternion.identity);
     }    
 
-    public Skill InstantiateSkill(Character target, Vector2 position, float reduce, bool standAlone)
+    public Skill InstantiateSkill(Character target, Vector2 position, float reduce, bool standAlone, Quaternion rotation)
     {
         if (this.skill == null) return null;
 
         Character sender = this.GetSender();
-        Skill activeSkill = Instantiate(this.skill, position, Quaternion.identity);
+        Skill activeSkill = Instantiate(this.skill, position, rotation);
         activeSkill.name = this.skill.name;
         activeSkill.Initialize(this.positionOffset, this.lockDirection, this.timeDistortion, this.attachToSender);
         activeSkill.SetMaxDuration(this.hasMaxDuration, this.maxDuration);
         activeSkill.SetStandAlone(standAlone);
+        activeSkill.SetDelay(this.hasDelay, this.delay);
 
         if (target != null) activeSkill.target = target;        
 

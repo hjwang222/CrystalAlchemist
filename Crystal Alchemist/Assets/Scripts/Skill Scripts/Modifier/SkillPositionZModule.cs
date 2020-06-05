@@ -15,7 +15,7 @@ public class SkillPositionZModule : SkillModifier
 
     public void Initialize()
     {
-        this.transform.position = SetOffSet(this.skill.direction, this.transform.position, this.skill.positionOffset, positionHeight);
+        this.transform.position = SetOffSet(this.skill.direction, this.transform.position, this.skill.GetOffset(), positionHeight);
 
         if (this.skill.shadow != null)
         {

@@ -7,7 +7,7 @@ public class IndicatorObject
     [Tooltip("Soll die Reichweite bei der Zielerfassung angezeigt werden")]
     public IndicatorProperty indicatorProperty;
 
-    private List<Indicator> appliedIndicators = new List<Indicator>();
+    private List<TargetingIndicator> appliedIndicators = new List<TargetingIndicator>();
 
     private void Instantiate(Character sender, Character target)
     {
@@ -39,9 +39,9 @@ public class IndicatorObject
 
     public void RemoveIndicator(List<Character> selectedTargets)
     {
-        List<Indicator> tempAppliedList = new List<Indicator>();
+        List<TargetingIndicator> tempAppliedList = new List<TargetingIndicator>();
 
-        foreach (Indicator applied in this.appliedIndicators)
+        foreach (TargetingIndicator applied in this.appliedIndicators)
         {
             if (applied != null && !selectedTargets.Contains(applied.GetTarget())) Object.Destroy(applied.gameObject);
             else tempAppliedList.Add(applied);
@@ -51,7 +51,7 @@ public class IndicatorObject
         this.appliedIndicators.RemoveAll(item => item == null);
     }
 
-    public Indicator GetIndicator(Character target)
+    public TargetingIndicator GetIndicator(Character target)
     {
         for (int i = 0; i < this.appliedIndicators.Count; i++)
         {
@@ -71,7 +71,7 @@ public class IndicatorObject
 
     public void ChangeIndicator(Character target, Color color)
     {
-        Indicator result = GetIndicator(target);
+        TargetingIndicator result = GetIndicator(target);
         if (result != null) result.SetColor(color);
     }
 }

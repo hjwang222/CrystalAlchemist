@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -17,7 +16,7 @@ public class SkillTargetModule : SkillModule
     [BoxGroup("Ziel Attribute")]
     [MinValue(0)]
     [Tooltip("Stärke des Knockbacks")]
-    public float thrust = 4;
+    public float thrust = 2;
 
     [BoxGroup("Ziel Attribute")]
     [MinValue(0)]

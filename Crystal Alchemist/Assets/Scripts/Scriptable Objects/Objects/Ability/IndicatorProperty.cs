@@ -7,7 +7,7 @@ public class IndicatorProperty : ScriptableObject
 {
     [BoxGroup("Indikator")]
     [SerializeField]
-    private Indicator indicator;
+    private TargetingIndicator indicator;
 
     [BoxGroup("Indikator")]
     [SerializeField]
@@ -28,11 +28,11 @@ public class IndicatorProperty : ScriptableObject
     [ShowIf("overrideSprite")]
     private Sprite sprite;
 
-    public void Instantiate(Character sender, Character target, List<Indicator> appliedIndicators)
+    public void Instantiate(Character sender, Character target, List<TargetingIndicator> appliedIndicators)
     {
         if (!alreadyApplied(sender, target, appliedIndicators)) //check if already applied
         {
-            Indicator indicator = Instantiate(this.indicator);
+            TargetingIndicator indicator = Instantiate(this.indicator);
             indicator.Initialize(sender, target);
             indicator.name = this.indicator.name;
             if (this.overrideColor) indicator.SetColor(this.color);
@@ -41,9 +41,9 @@ public class IndicatorProperty : ScriptableObject
         }
     }
 
-    private bool alreadyApplied(Character sender, Character target, List<Indicator> appliedIndicators)
+    private bool alreadyApplied(Character sender, Character target, List<TargetingIndicator> appliedIndicators)
     {
-        foreach (Indicator applied in appliedIndicators)
+        foreach (TargetingIndicator applied in appliedIndicators)
         {
             if (applied.GetSender() == sender && applied.GetTarget() == target) return true;
         }

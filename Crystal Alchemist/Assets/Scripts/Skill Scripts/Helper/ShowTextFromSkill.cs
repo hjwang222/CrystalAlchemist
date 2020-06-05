@@ -14,6 +14,6 @@ public class ShowTextFromSkill : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        this.textField.text = FormatUtil.setDurationToString(skill.getDurationLeft());
+        this.textField.text = FormatUtil.setDurationToString(skill.GetDurationLeft());
     }
 }

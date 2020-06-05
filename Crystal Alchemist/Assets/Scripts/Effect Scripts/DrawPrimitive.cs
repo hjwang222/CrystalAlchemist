@@ -96,8 +96,36 @@ public class DrawPrimitive : MonoBehaviour
         Render();
     }
 
+    public void UpdateGUI()
+    {
+        OnValidate();
+    }
+
     private void FixedUpdate()
     {
+        Render();
+    }
+
+    public void SetCollider(Collider2D collider)
+    {
+        this.type = PrimitiveType.collider;
+        this.collider = collider;
+    }
+
+    public void SetLine(float distance)
+    {
+        this.type = PrimitiveType.line;
+        this.radius = distance;
+    }
+
+    public void SetPrimitive(Material material, float lineWidth, Color color)
+    {
+        this.material = material;
+        this.lineWidth = lineWidth;
+        this.color = color;
+
+        this.line = this.GetComponent<LineRenderer>();
+        this.line.useWorldSpace = false;
         Render();
     }
 
