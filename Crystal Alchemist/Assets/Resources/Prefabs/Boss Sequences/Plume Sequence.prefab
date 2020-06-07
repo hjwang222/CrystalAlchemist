@@ -43,16 +43,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d8f4d57507b664ea838dc321741507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossSequenceProperty:
-    spawnObject: {fileID: 11400000, guid: 8c050731d4165e443878d148e57a70d6, type: 2}
-    spawnPositonType: 4
-    startDelay: 0
-    spawnDelay: 1
-    amount: 10
-    spawnPoints:
-    - {fileID: 1707093620731692484}
+  selfProperty:
+    spawnPositonType: 0
     rotationType: 0
     rotationFactor: 0
+  startDelay: 0
+  childProperty:
+    spawnPositonType: 4
+    rotationType: 0
+    rotationFactor: 0
+    spawnObject: {fileID: 11400000, guid: 8c050731d4165e443878d148e57a70d6, type: 2}
+    amount: 10
+    spawnDelay: 1
+    repeat: 0
+    repeatDelay: 1
 --- !u!1 &2380671282405798094
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,16 +101,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d8f4d57507b664ea838dc321741507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossSequenceProperty:
-    spawnObject: {fileID: 11400000, guid: 8c050731d4165e443878d148e57a70d6, type: 2}
-    spawnPositonType: 3
-    startDelay: 0
-    spawnDelay: 0.5
-    amount: 20
-    spawnPoints:
-    - {fileID: 2380671282405798094}
+  selfProperty:
+    spawnPositonType: 0
     rotationType: 0
     rotationFactor: 0
+  startDelay: 0
+  childProperty:
+    spawnPositonType: 3
+    rotationType: 0
+    rotationFactor: 0
+    spawnObject: {fileID: 11400000, guid: 8c050731d4165e443878d148e57a70d6, type: 2}
+    amount: 20
+    spawnDelay: 0.5
+    repeat: 0
+    repeatDelay: 1
 --- !u!58 &2380671282405798095
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -132,7 +140,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 538213033295681315}
-  - component: {fileID: 8593012898625060700}
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Untagged
@@ -157,27 +164,6 @@ Transform:
   m_Father: {fileID: 8711121582573499618}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8593012898625060700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4362741941846625046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1d8f4d57507b664ea838dc321741507, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bossSequenceProperty:
-    spawnObject: {fileID: 0}
-    spawnPositonType: 0
-    startDelay: 0
-    spawnDelay: 0
-    amount: 1
-    spawnPoints: []
-    rotationType: 0
-    rotationFactor: 60
 --- !u!1 &7714099436851782104
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,16 +207,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d8f4d57507b664ea838dc321741507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossSequenceProperty:
-    spawnObject: {fileID: 11400000, guid: 8c050731d4165e443878d148e57a70d6, type: 2}
-    spawnPositonType: 5
-    startDelay: 0
-    spawnDelay: 2
-    amount: 5
-    spawnPoints:
-    - {fileID: 7714099436851782104}
+  selfProperty:
+    spawnPositonType: 0
     rotationType: 0
     rotationFactor: 0
+  startDelay: 0
+  childProperty:
+    spawnPositonType: 5
+    rotationType: 0
+    rotationFactor: 0
+    spawnObject: {fileID: 11400000, guid: 8c050731d4165e443878d148e57a70d6, type: 2}
+    amount: 5
+    spawnDelay: 2
+    repeat: 0
+    repeatDelay: 1
 --- !u!1 &8711121582573499631
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,8 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfdcb37e8bacd9f4b8cd9700a1a2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variants:
-  - {fileID: 4362741941846625046}
-  destroyAfter: 60
+  destroyAfter: 15
+  random: 0
+  pattern: 0
   sender: {fileID: 0}
   target: {fileID: 0}

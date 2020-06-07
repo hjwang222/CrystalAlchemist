@@ -10,10 +10,10 @@ public class TODOLIST : MonoBehaviour
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
     //Mechanics: Stack (NPC)
-    //Mechanics: Landslide (SAS), Plume (SAS) -> Set -> Delay -> Explode -> Destroy
     //Player: Indikator übern Kopf
-    //Rework: Max Duration, Target Resources, Delay (Scriptable object?)
+    //Rework: Target Resources (Scriptable object?)
     //TODO: Circle Indicator
+    
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

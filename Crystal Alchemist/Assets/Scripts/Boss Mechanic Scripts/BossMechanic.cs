@@ -5,10 +5,19 @@ using UnityEngine;
 public class BossMechanic : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> variants = new List<GameObject>(); //for initialize and random
+    [BoxGroup("Properties")]
+    private float destroyAfter = 5f;
 
     [SerializeField]
-    private float destroyAfter = 5f;
+    [BoxGroup("Properties")]
+    private bool random = false;
+
+    [SerializeField]
+    [BoxGroup("Properties")]
+    [HideIf("random")]
+    [MinValue(0)]
+    [MaxValue("GetCount")]
+    private int pattern = 0;
 
     [BoxGroup("Debug")]
     [SerializeField]
@@ -18,20 +27,35 @@ public class BossMechanic : MonoBehaviour
     [SerializeField]
     private Character target;
 
+    private List<GameObject> variants = new List<GameObject>();
+
+    private int GetCount()
+    {
+        return this.transform.childCount-1;
+    }
+
     private void Awake()
     {
-        for (int i = 0; i < this.variants.Count; i++) variants[i].SetActive(false);
+        for(int i = 0; i < this.transform.childCount; i++)
+        {
+            GameObject child = this.transform.GetChild(i).gameObject;
+            this.variants.Add(child);
+            child.SetActive(false);            
+        }        
     }
 
     private void Start()
-    {     
-        int index = Random.Range(0, variants.Count);
-        variants[index].SetActive(true);
+    {
+        int index = this.pattern;
 
-        List<BossMechanicProperty> properties = new List<BossMechanicProperty>();
-        UnityUtil.GetChildObjects<BossMechanicProperty>(this.variants[index].transform, properties);
+        if (index > GetCount()) index = GetCount();
+        if (random) index = Random.Range(0, variants.Count);
 
-        foreach (BossMechanicProperty property in properties) property.Initialize(this.sender, this.target);
+        GameObject variant = variants[index];
+
+        foreach(BossMechanicSpawn property in variant.GetComponentsInChildren<BossMechanicSpawn>(true)) property.Initialize(this.sender, this.target);
+
+        variant.SetActive(true);
 
         Destroy(this.gameObject, this.destroyAfter);
     }
