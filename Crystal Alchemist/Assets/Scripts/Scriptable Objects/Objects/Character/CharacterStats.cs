@@ -30,8 +30,13 @@ public class CharacterStats : ScriptableObject
     ////////////////////////////////////////////////////////////////
 
     [TabGroup("Start-Values")]
+    [OnValueChanged("UpdateLifeRespawn")]
+    public bool immortalObject = false;
+
+    [TabGroup("Start-Values")]
     [OnValueChanged("UpdateStats")]
     [Tooltip("Leben, mit dem der Spieler startet")]
+    [HideIf("immortalObject")]
     public float startLife = 1;
 
     [TabGroup("Start-Values")]
@@ -66,16 +71,19 @@ public class CharacterStats : ScriptableObject
     [Space(10)]
     [TabGroup("Spawn Values")]
     [Tooltip("Respawn-Zeit")]
+    [HideIf("immortalObject")]
     public bool hasRespawn = true;
 
     [TabGroup("Spawn Values")]
     [Tooltip("Respawn-Zeit")]
     [ShowIf("hasRespawn")]
+    [HideIf("immortalObject")]
     public float respawnTime = 30;
 
     [TabGroup("Spawn Values")]
     [Tooltip("Respawn-Zeit")]
     [ShowIf("hasRespawn")]
+    [HideIf("immortalObject")]
     [MaxValue(100)]
     [MinValue(1)]
     public int respawnChance = 100;
@@ -91,6 +99,7 @@ public class CharacterStats : ScriptableObject
     [Tooltip("Maximales Life")]
     [OnValueChanged("UpdateStats")]
     [MinValue(1)]
+    [HideIf("immortalObject")]
     public float maxLife = 1;
 
     [BoxGroup("Upgrades")]
@@ -188,5 +197,14 @@ public class CharacterStats : ScriptableObject
     {
         if (this.maxLife < this.startLife) this.maxLife = this.startLife;
         if (this.maxMana < this.startMana) this.maxMana = this.startMana;
+    }
+
+    private void UpdateLifeRespawn()
+    {
+        if (this.immortalObject)
+        {
+            this.hasRespawn = false;
+
+        }
     }
 }

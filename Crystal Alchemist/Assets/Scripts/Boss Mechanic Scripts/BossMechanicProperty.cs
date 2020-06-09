@@ -81,6 +81,7 @@ public class BossMechanicProperty : MonoBehaviour
     [HideInInspector]
     public int counter;
 
+
     public void Initialize(Character sender, Character target)
     {
         this.sender = sender;

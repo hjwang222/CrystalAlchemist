@@ -10,7 +10,6 @@ public class TODOLIST : MonoBehaviour
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
     //Mechanics: Stack (NPC)
-    //Player: Indikator übern Kopf
     //Experimental: Button Extension, Sprite Renderer Custom
 
     //Visual Graph (Particles)

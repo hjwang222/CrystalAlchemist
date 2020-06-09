@@ -14,6 +14,10 @@ public class BossMechanicSpawn : BossMechanicProperty
         [MinValue(1)]
         public int amount = 1;
 
+        [ShowIf("spawnPositonType", SpawnPositionType.target)]
+        [Tooltip("Set to true, if skill needs to know the target")]
+        public bool AddTargetToSkill = false;
+
         [ShowIf("spawnObject")]
         [Tooltip("Time between Spawns")]
         public float spawnDelay = 0f;
@@ -23,6 +27,7 @@ public class BossMechanicSpawn : BossMechanicProperty
         public int repeat = 0;
 
         [ShowIf("spawnObject")]
+        [HideIf("repeat", 0)]
         [Tooltip("Time between Spawns")]
         [MinValue(0.1)]
         public float repeatDelay = 1f;
@@ -62,7 +67,11 @@ public class BossMechanicSpawn : BossMechanicProperty
             this.spawnIt = false;
             this.elapsed = this.delay;
             this.amount--;
-            if (this.amount <= 0) this.isRunning = false;
+            if (this.amount <= 0)
+            {
+                this.isRunning = false;
+                Destroy(this.spawnPoint, 0.3f);
+            }
         }
     }
 
@@ -80,6 +89,7 @@ public class BossMechanicSpawn : BossMechanicProperty
     private bool isRunning = true;
 
     private List<SequenceObject> sequences = new List<SequenceObject>();
+    
 
     private void Start()
     {
@@ -132,29 +142,31 @@ public class BossMechanicSpawn : BossMechanicProperty
         if (this.counter >= this.childProperty.GetMax()) this.isRunning = false;
     }
 
-
-
     private void Instantiate(Vector2 position, Quaternion rotation)
     {
+        Character target = null;
+        if (this.childProperty.AddTargetToSkill) target = this.target;
+
         if (this.childProperty.spawnObject.GetType() == typeof(GameObject))
         {
-            GameObject spawnedObject = Instantiate(this.childProperty.spawnObject, position, rotation, this.transform) as GameObject;
-            SetSkill(spawnedObject.GetComponent<Skill>());
+            GameObject spawnedObject = Instantiate(this.childProperty.spawnObject, position, Quaternion.identity, this.transform) as GameObject;
+            SetSkill(spawnedObject.GetComponent<Skill>(), target, rotation);
         }
         else if (this.childProperty.spawnObject.GetType() == typeof(Ability))
         {
             Ability ability = Instantiate(this.childProperty.spawnObject) as Ability;
-            Skill skill = ability.InstantiateSkill(position, this.sender, rotation);
+            Skill skill = ability.InstantiateSkill(target, position, this.sender, rotation);
             skill.transform.SetParent(this.transform);
             Destroy(ability);
         }
     }
-    private void SetSkill(Skill skill)
+    private void SetSkill(Skill skill, Character target, Quaternion rotation)
     {
         if (skill != null)
         {
+            skill.transform.rotation = rotation;
             skill.sender = this.sender;
-            skill.target = this.target;
+            skill.target = target;
         }
     }
 }

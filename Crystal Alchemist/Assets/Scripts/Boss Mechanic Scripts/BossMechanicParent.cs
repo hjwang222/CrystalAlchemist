@@ -8,13 +8,17 @@ public class BossMechanicParent : BossMechanicProperty
     [BoxGroup("Main")]
     private SequenceProperty selfProperty;
 
-
-
     private void Start()
     {
         this.selfProperty.AddSpawnPoints(this.transform);
+
+        GameObject spawnpoint = GetSpawnPosition(this.selfProperty);
+        this.transform.position = spawnpoint.transform.position;
+
         this.transform.rotation = this.GetRotation(this.selfProperty.rotationType, this.selfProperty.rotationFactor, this.selfProperty.GetOffset());
-        this.transform.position = GetSpawnPosition(this.selfProperty).transform.position;
+
+        Destroy(spawnpoint, 0.3f);
+
     }
    
 }

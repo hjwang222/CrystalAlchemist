@@ -351,13 +351,13 @@ public class Ability : ScriptableObject
     public Skill InstantiateSkill(Vector2 position, Character sender)
     {
         //Laser and Projectile Impact
-        return InstantiateSkill(position, sender, Quaternion.identity);
+        return InstantiateSkill(null, position, sender, Quaternion.identity);
     }
 
-    public Skill InstantiateSkill(Vector2 position, Character sender, Quaternion rotation)
+    public Skill InstantiateSkill(Character target, Vector2 position, Character sender, Quaternion rotation)
     {
         //Boss Sequence
-        Skill result = InstantiateSkill(null, position, 1, true, rotation);
+        Skill result = InstantiateSkill(target, position, 1, true, rotation);
         result.sender = sender;
         return result;
     }

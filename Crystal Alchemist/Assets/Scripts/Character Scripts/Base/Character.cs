@@ -30,7 +30,7 @@ public class Character : MonoBehaviour
     [Tooltip("Zur Erkennung wo der Charakter steht")]
     private SpriteRenderer shadowRenderer;
 
-    [BoxGroup("Easy Access")]    
+    [BoxGroup("Easy Access")]
     public RespawnAnimation respawnAnimation;
 
     [BoxGroup("Easy Access")]
@@ -72,8 +72,8 @@ public class Character : MonoBehaviour
         this.values = new CharacterValues(); //create new Values when not already assigned (NPC)
         this.values.Initialize();
 
-        this.spawnPosition = this.transform.position;        
-        SetComponents();        
+        this.spawnPosition = this.transform.position;
+        SetComponents();
     }
 
     public virtual void OnEnable()
@@ -82,7 +82,7 @@ public class Character : MonoBehaviour
         ResetValues();
     }
 
-    public virtual void Start() => GameEvents.current.OnEffectAdded += AddStatusEffectVisuals;    
+    public virtual void Start() => GameEvents.current.OnEffectAdded += AddStatusEffectVisuals;
 
     public void SetComponents()
     {
@@ -113,8 +113,8 @@ public class Character : MonoBehaviour
         if (this.boxCollider != null) this.boxCollider.enabled = true;
     }
 
-    public virtual void OnDestroy() =>  GameEvents.current.OnEffectAdded -= AddStatusEffectVisuals;
-    
+    public virtual void OnDestroy() => GameEvents.current.OnEffectAdded -= AddStatusEffectVisuals;
+
     #endregion
 
     #region Updates
@@ -293,7 +293,7 @@ public class Character : MonoBehaviour
                     Color[] colorArray = MasterManager.staticValues.red;
                     if (value > 0) colorArray = MasterManager.staticValues.green;
 
-                    if (this.values.life > 0 
+                    if (this.values.life > 0
                         && this.values.currentState != CharacterState.dead
                         && showingDamageNumber) showDamageNumber(value, colorArray);
 
@@ -326,43 +326,41 @@ public class Character : MonoBehaviour
         SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
 
         if (this.values.currentState != CharacterState.dead
-         && targetModule != null)
+            && targetModule != null
+            && ((!this.values.cantBeHit && !this.values.isInvincible) || targetModule.ignoreInvincibility))
         {
-            if ((!this.values.cantBeHit && !this.values.isInvincible) || targetModule.ignoreInvincibility)
+            //Status Effekt hinzufügen
+            if (targetModule.statusEffects != null)
             {
-                //Status Effekt hinzufügen
-                if (targetModule.statusEffects != null)
+                foreach (StatusEffect effect in targetModule.statusEffects)
                 {
-                    foreach (StatusEffect effect in targetModule.statusEffects)
-                    {
-                        StatusEffectUtil.AddStatusEffect(effect, this);
-                    }
+                    StatusEffectUtil.AddStatusEffect(effect, this);
                 }
+            }
 
-                foreach (CharacterResource elem in targetModule.affectedResources)
+            foreach (CharacterResource elem in targetModule.affectedResources)
+            {
+                float amount = elem.amount * percentage / 100;
+
+                updateResource(elem.resourceType, elem.item, amount);
+
+                if (this.values.life > 0 && elem.resourceType == CostType.life && amount < 0)
                 {
-                    float amount = elem.amount * percentage / 100;
+                    if (this.GetComponent<AI>() != null
+                     && this.GetComponent<AI>().aggroGameObject != null)
+                        this.GetComponent<AI>().aggroGameObject.increaseAggroOnHit(skill.sender, elem.amount);
 
-                    updateResource(elem.resourceType, elem.item, amount);
-
-                    if (this.values.life > 0 && elem.resourceType == CostType.life && amount < 0)
-                    {
-                        if (this.GetComponent<AI>() != null
-                         && this.GetComponent<AI>().aggroGameObject != null)
-                            this.GetComponent<AI>().aggroGameObject.increaseAggroOnHit(skill.sender, elem.amount);
-
-                        //Charakter-Treffer (Schaden) animieren
-                        AudioUtil.playSoundEffect(this.gameObject, this.stats.hitSoundEffect);
-                        setInvincible();
-                    }
+                    //Charakter-Treffer (Schaden) animieren
+                    AudioUtil.playSoundEffect(this.gameObject, this.stats.hitSoundEffect);
+                    setInvincible();
                 }
+            }
 
-                if (this.values.life > 0 && knockback)
-                {
-                    //Rückstoß ermitteln
-                    float knockbackTrust = targetModule.thrust - (this.stats.antiKnockback / 100 * targetModule.thrust);
-                    knockBack(targetModule.knockbackTime, knockbackTrust, skill);
-                }
+            if (this.values.life > 0 && knockback)
+            {
+                //Rückstoß ermitteln
+                float knockbackTrust = targetModule.thrust - (this.stats.antiKnockback / 100 * targetModule.thrust);
+                knockBack(targetModule.knockbackTime, knockbackTrust, skill);
             }
         }
     }
@@ -430,10 +428,10 @@ public class Character : MonoBehaviour
 
     public void KnockBack(float knockTime, float thrust, Vector2 direction)
     {
-        if (this.myRigidbody != null 
+        if (this.myRigidbody != null
             && this.myRigidbody.bodyType != RigidbodyType2D.Kinematic)
-        {            
-            Vector2 difference = direction.normalized * (thrust);
+        {
+            Vector2 difference = direction.normalized * thrust;
             //this.myRigidbody.velocity = Vector2.zero;
             //this.myRigidbody.AddForce(difference, ForceMode2D.Impulse);
             this.myRigidbody.DOMove(this.myRigidbody.position + difference, knockTime);
@@ -464,13 +462,13 @@ public class Character : MonoBehaviour
     }
 
     private IEnumerator knockCo(float knockTime)
-    {        
-            this.values.currentState = CharacterState.knockedback;
-            yield return new WaitForSeconds(knockTime);
+    {
+        this.values.currentState = CharacterState.knockedback;
+        yield return new WaitForSeconds(knockTime);
 
-            //Rückstoß zurück setzten
-            this.values.currentState = CharacterState.idle;
-            this.myRigidbody.velocity = Vector2.zero;        
+        //Rückstoß zurück setzten
+        this.values.currentState = CharacterState.idle;
+        this.myRigidbody.velocity = Vector2.zero;
     }
 
     #endregion
@@ -577,15 +575,15 @@ public class Character : MonoBehaviour
 
     public virtual void SpawnOut()
     {
-        this.myRigidbody.velocity = Vector2.zero;        
+        this.myRigidbody.velocity = Vector2.zero;
         this.EnableScripts(false);
-        this.values.currentState = CharacterState.respawning;       
+        this.values.currentState = CharacterState.respawning;
     }
 
     public void SpawnIn()
-    {               
+    {
         this.values.currentState = CharacterState.idle;
-        this.EnableScripts(true);   
+        this.EnableScripts(true);
     }
 
     public void PlayDespawnAnimation()

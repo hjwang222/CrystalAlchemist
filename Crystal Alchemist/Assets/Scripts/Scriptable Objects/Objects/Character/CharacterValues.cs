@@ -83,6 +83,8 @@ public class CharacterValues : ScriptableObject
     [Button]
     public void Clear(CharacterStats stats)
     {
+        this.isInvincible = stats.immortalObject;
+
         this.maxLife = stats.maxLife;
         this.maxMana = stats.maxMana;
         this.lifeRegen = stats.lifeRegeneration;
