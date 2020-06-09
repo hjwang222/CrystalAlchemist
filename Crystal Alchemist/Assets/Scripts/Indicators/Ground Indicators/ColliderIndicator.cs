@@ -22,6 +22,10 @@ public class ColliderIndicator : GroundIndicator
     private GameObject border;
 
     [BoxGroup("Inner")]
+    [SerializeField]
+    private float size = 0.25f;
+
+    [BoxGroup("Inner")]
     [ShowIf("border")]
     [SerializeField]
     private SpriteRenderer spriteRenderer;
@@ -85,7 +89,7 @@ public class ColliderIndicator : GroundIndicator
 
             if (this.collider.GetType() == typeof(CircleCollider2D))
             {
-                float radius = this.spriteRenderer.transform.localScale.x * this.collider.GetComponent<CircleCollider2D>().radius;
+                float radius = this.size * this.collider.GetComponent<CircleCollider2D>().radius;
                 size = new Vector3(radius, radius, 1);
             }
             if (this.collider.GetType() == typeof(BoxCollider2D))

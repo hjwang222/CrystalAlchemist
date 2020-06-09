@@ -73,6 +73,20 @@ public class Skill : MonoBehaviour
 
     #endregion
 
+    [Button]
+    private void AddCharacters()
+    {
+        this.sender = FindObjectOfType<AI>();
+        this.target = FindObjectOfType<Player>();
+        this.gameObject.SetActive(false);
+    }
+
+
+    [Button]
+    private void OverrideDelay()
+    {
+        this.AfterDelay?.Invoke();
+    }
 
     #region Start Funktionen (Init, set Basics, Update Sender, set Position
 

@@ -13,7 +13,7 @@ TextureImporter:
     second: Explosion 2
   - first:
       213: 8011153499134307617
-    second: Explosion3
+    second: Explosion 3
   - first:
       213: 3829065716482607844
     second: Explosion 4
@@ -32,8 +32,11 @@ TextureImporter:
   - first:
       213: -5505784301242206033
     second: Pulse
+  - first:
+      213: 7119002349883303594
+    second: Skills_1
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -53,6 +56,7 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -87,6 +91,8 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -161,8 +167,8 @@ TextureImporter:
       name: Explosion 2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 208
+        x: 0
+        y: 176
         width: 32
         height: 32
       alignment: 0
@@ -179,13 +185,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explosion3
+      name: Explosion 3
       rect:
         serializedVersion: 2
-        x: 64
-        y: 208
-        width: 32
-        height: 32
+        x: 32
+        y: 176
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,9 +210,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 192
-        width: 48
-        height: 48
+        y: 144
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,10 +230,10 @@ TextureImporter:
       name: Explosion 5
       rect:
         serializedVersion: 2
-        x: 144
-        y: 192
-        width: 48
-        height: 48
+        x: 192
+        y: 144
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,10 +251,10 @@ TextureImporter:
       name: Explosion 6
       rect:
         serializedVersion: 2
-        x: 192
-        y: 192
-        width: 48
-        height: 48
+        x: 288
+        y: 144
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,48 +269,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explosion 7
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 192
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d55cefc2bf9ee7049ab2de0674605a53
-      internalID: 4098633181315093630
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Explosion 8
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 192
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c3d60f7735f7aea4eb0b6375bc5ff360
-      internalID: -3141772512253194134
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Pulse
       rect:
         serializedVersion: 2
@@ -313,7 +277,7 @@ TextureImporter:
         width: 7
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

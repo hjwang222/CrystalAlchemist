@@ -29,6 +29,14 @@ public class BossMechanic : MonoBehaviour
 
     private List<GameObject> variants = new List<GameObject>();
 
+    [Button]
+    private void AddCharacters()
+    {
+        this.sender = FindObjectOfType<AI>();
+        this.target = FindObjectOfType<Player>();
+        this.gameObject.SetActive(false);
+    }
+
     private int GetCount()
     {
         return this.transform.childCount-1;
@@ -53,7 +61,7 @@ public class BossMechanic : MonoBehaviour
 
         GameObject variant = variants[index];
 
-        foreach(BossMechanicSpawn property in variant.GetComponentsInChildren<BossMechanicSpawn>(true)) property.Initialize(this.sender, this.target);
+        foreach(BossMechanicProperty property in variant.GetComponentsInChildren<BossMechanicProperty>(true)) property.Initialize(this.sender, this.target);
 
         variant.SetActive(true);
 

@@ -11,9 +11,7 @@ public class TODOLIST : MonoBehaviour
     //NPC: Bosskampf (Titania)
     //Mechanics: Stack (NPC)
     //Player: Indikator übern Kopf
-    //Rework: Target Resources (Scriptable object?)
-    //TODO: Circle Indicator
-    
+    //Experimental: Button Extension, Sprite Renderer Custom
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

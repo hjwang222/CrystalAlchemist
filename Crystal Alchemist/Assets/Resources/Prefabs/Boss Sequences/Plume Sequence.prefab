@@ -43,16 +43,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d8f4d57507b664ea838dc321741507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfProperty:
-    spawnPositonType: 0
-    rotationType: 0
-    rotationFactor: 0
+  sender: {fileID: 0}
+  target: {fileID: 0}
+  counter: 0
   startDelay: 0
   childProperty:
     spawnPositonType: 4
+    spawnPoints: []
     rotationType: 0
     rotationFactor: 0
-    spawnObject: {fileID: 11400000, guid: 8c050731d4165e443878d148e57a70d6, type: 2}
+    direction: 0
+    spawnObject: {fileID: 11400000, guid: 0aee03b560131a041b13f1bbcf73bd42, type: 2}
     amount: 10
     spawnDelay: 1
     repeat: 0
@@ -101,16 +102,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d8f4d57507b664ea838dc321741507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfProperty:
-    spawnPositonType: 0
-    rotationType: 0
-    rotationFactor: 0
+  sender: {fileID: 0}
+  target: {fileID: 0}
+  counter: 0
   startDelay: 0
   childProperty:
     spawnPositonType: 3
+    spawnPoints: []
     rotationType: 0
     rotationFactor: 0
-    spawnObject: {fileID: 11400000, guid: 8c050731d4165e443878d148e57a70d6, type: 2}
+    direction: 0
+    spawnObject: {fileID: 11400000, guid: 0aee03b560131a041b13f1bbcf73bd42, type: 2}
     amount: 20
     spawnDelay: 0.5
     repeat: 0
@@ -207,16 +209,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d8f4d57507b664ea838dc321741507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfProperty:
-    spawnPositonType: 0
-    rotationType: 0
-    rotationFactor: 0
+  sender: {fileID: 0}
+  target: {fileID: 0}
+  counter: 0
   startDelay: 0
   childProperty:
     spawnPositonType: 5
+    spawnPoints: []
     rotationType: 0
     rotationFactor: 0
-    spawnObject: {fileID: 11400000, guid: 8c050731d4165e443878d148e57a70d6, type: 2}
+    direction: 0
+    spawnObject: {fileID: 11400000, guid: 0aee03b560131a041b13f1bbcf73bd42, type: 2}
     amount: 5
     spawnDelay: 2
     repeat: 0

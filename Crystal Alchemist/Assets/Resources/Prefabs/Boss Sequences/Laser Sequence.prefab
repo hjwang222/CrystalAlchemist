@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6433402088372922044}
   - component: {fileID: 4099290247708664378}
+  - component: {fileID: 334376189180931675}
+  - component: {fileID: 211785658}
   m_Layer: 0
   m_Name: Ring
   m_TagString: Untagged
@@ -51,13 +53,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d8f4d57507b664ea838dc321741507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfProperty:
-    spawnPositonType: 5
-    rotationType: 1
-    rotationFactor: 30
+  sender: {fileID: 0}
+  target: {fileID: 0}
+  counter: 0
   startDelay: 0
   childProperty:
     spawnPositonType: 1
+    spawnPoints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     rotationType: 0
     rotationFactor: 0
     spawnObject: {fileID: 11400000, guid: 9dad237fc8260c54e8bc808c772fc410, type: 2}
@@ -65,6 +75,39 @@ MonoBehaviour:
     spawnDelay: 0
     repeat: 3
     repeatDelay: 3
+--- !u!114 &334376189180931675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641150699597046848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5e398e901147840bdc9e2c3878e612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sender: {fileID: 0}
+  target: {fileID: 0}
+  counter: 0
+  selfProperty:
+    spawnPositonType: 5
+    spawnPoints: []
+    rotationType: 1
+    rotationFactor: 30
+--- !u!114 &211785658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641150699597046848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19d4148fb5f6006438395c7ef5bc5004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
 --- !u!1 &1333573692666866263
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyAfter: 60
   random: 0
-  pattern: 0
+  pattern: 1
   sender: {fileID: 0}
   target: {fileID: 0}
 --- !u!1 &5444540634077258031
@@ -515,6 +558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6664305084849382654}
   - component: {fileID: 6664305084849382655}
+  - component: {fileID: 3030675849585132086}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -555,13 +599,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1d8f4d57507b664ea838dc321741507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selfProperty:
-    spawnPositonType: 5
-    rotationType: 0
-    rotationFactor: 0
+  sender: {fileID: 0}
+  target: {fileID: 0}
+  counter: 0
   startDelay: 0
   childProperty:
     spawnPositonType: 1
+    spawnPoints:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     rotationType: 3
     rotationFactor: 0
     spawnObject: {fileID: 11400000, guid: 9dad237fc8260c54e8bc808c772fc410, type: 2}
@@ -569,6 +620,26 @@ MonoBehaviour:
     spawnDelay: 0.125
     repeat: 3
     repeatDelay: 3
+--- !u!114 &3030675849585132086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6664305084849382648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5e398e901147840bdc9e2c3878e612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sender: {fileID: 0}
+  target: {fileID: 0}
+  counter: 0
+  selfProperty:
+    spawnPositonType: 5
+    spawnPoints: []
+    rotationType: 0
+    rotationFactor: 0
 --- !u!1 &6664305085088345549
 GameObject:
   m_ObjectHideFlags: 0
