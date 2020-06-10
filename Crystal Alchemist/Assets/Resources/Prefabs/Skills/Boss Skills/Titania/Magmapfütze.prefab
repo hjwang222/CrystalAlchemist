@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 104718123155803744}
   - component: {fileID: 104718123155803746}
   - component: {fileID: 104718123155803747}
-  m_Layer: 12
+  - component: {fileID: 2628124864901156633}
+  m_Layer: 13
   m_Name: Puddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +102,22 @@ MonoBehaviour:
   selectColor: {r: 1, g: 0.8705883, b: 0.13333334, a: 1}
   precision: 0.08
   glowColor: {r: 4.237095, g: 1.1535546, b: 0, a: 1}
+--- !u!58 &2628124864901156633
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104718123155803745}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.5
 --- !u!1 &4877488329011868477
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,7 +284,7 @@ GameObject:
   - component: {fileID: 6723809354761201606}
   - component: {fileID: 6723809354761201600}
   - component: {fileID: 6723809354761201607}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Stalagtit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +386,6 @@ GameObject:
   - component: {fileID: 955749659453572614}
   - component: {fileID: 1996841691466606799}
   - component: {fileID: 6082830365809860491}
-  - component: {fileID: 4007617485004868151}
   - component: {fileID: 5931400148651378231}
   - component: {fileID: 6236902848971756059}
   - component: {fileID: 79343294633454575}
@@ -486,22 +502,6 @@ MonoBehaviour:
   affectNeutral: 1
   affectSkills: 0
   ignoreInvincibility: 0
---- !u!58 &4007617485004868151
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8134692059877465040}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.5
 --- !u!50 &5931400148651378231
 Rigidbody2D:
   serializedVersion: 4

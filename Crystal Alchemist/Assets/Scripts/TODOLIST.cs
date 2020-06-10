@@ -9,8 +9,8 @@ public class TODOLIST : MonoBehaviour
 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
-    //Mechanics: Stack (NPC)
-    //Experimental: Button Extension, Sprite Renderer Custom
+    //TODO: Pivot Reworks?
+    //TODO: Graphics and Refine Mechanics
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

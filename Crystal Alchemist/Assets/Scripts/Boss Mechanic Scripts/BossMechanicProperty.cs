@@ -39,6 +39,10 @@ public class BossMechanicProperty : MonoBehaviour
         [ShowIf("spawnPositonType", SpawnPositionType.custom)]
         public Vector2 position;
 
+
+        [ShowIf("spawnPositonType", SpawnPositionType.randomPoints)]
+        public bool uniqueSpawn = true;
+
         [HideInInspector]
         public List<GameObject> spawnPoints = new List<GameObject>();
 
@@ -72,6 +76,12 @@ public class BossMechanicProperty : MonoBehaviour
             else if (this.direction == RotationDirection.left) return 0f;
             return 0f;
         }
+
+        public bool GetDelete()
+        {
+            if (this.spawnPositonType == SpawnPositionType.randomPoints) return this.uniqueSpawn;
+            return true;
+        }
     }
 
     [HideInInspector]
@@ -95,7 +105,7 @@ public class BossMechanicProperty : MonoBehaviour
             case SpawnPositionType.sender: return CreateNewSpawnPoint(GetPositionFromCharacter(this.sender));
             case SpawnPositionType.target: return CreateNewSpawnPoint(GetPositionFromCharacter(this.target));
             case SpawnPositionType.area: return CreateNewSpawnPoint(UnityUtil.GetRandomVector(this.GetComponent<Collider2D>()));
-            case SpawnPositionType.randomPoints: return GetRandomPositionFromSpawnPoint(property.spawnPoints);
+            case SpawnPositionType.randomPoints: return GetRandomPositionFromSpawnPoint(property);
             case SpawnPositionType.spawnPoints: return GetPositionFromSpawnPoint(property.spawnPoints);
             case SpawnPositionType.custom: return CreateNewSpawnPoint(property.position);
         }
@@ -121,8 +131,11 @@ public class BossMechanicProperty : MonoBehaviour
         return spawnPoints[this.counter];
     }
 
-    private GameObject GetRandomPositionFromSpawnPoint(List<GameObject> spawnPoints)
+    private GameObject GetRandomPositionFromSpawnPoint(SequenceProperty property)
     {
+        property.AddSpawnPoints(this.transform);
+        List<GameObject> spawnPoints = property.spawnPoints;
+
         int rng = Random.Range(0, spawnPoints.Count);
         return spawnPoints[rng];
     }

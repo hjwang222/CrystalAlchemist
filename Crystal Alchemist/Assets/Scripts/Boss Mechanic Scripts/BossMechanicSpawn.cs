@@ -48,12 +48,14 @@ public class BossMechanicSpawn : BossMechanicProperty
         public bool spawnIt = false;
         public GameObject spawnPoint;
         private float elapsed;
+        private bool delete;
 
-        public SequenceObject(GameObject spawnPoint, int amount, float delay)
+        public SequenceObject(GameObject spawnPoint, int amount, float delay, bool delete)
         {
             this.spawnPoint = spawnPoint;
             this.amount = amount;
             this.delay = delay;
+            this.delete = delete;
         }
 
         public void Updating(float time)
@@ -70,7 +72,7 @@ public class BossMechanicSpawn : BossMechanicProperty
             if (this.amount <= 0)
             {
                 this.isRunning = false;
-                Destroy(this.spawnPoint, 0.3f);
+                if(this.delete) Destroy(this.spawnPoint, 0.3f);
             }
         }
     }
@@ -136,7 +138,7 @@ public class BossMechanicSpawn : BossMechanicProperty
     {
         GameObject spawnPoint = GetSpawnPosition(this.childProperty);
 
-        this.sequences.Add(new SequenceObject(spawnPoint, this.childProperty.repeat, this.childProperty.repeatDelay));
+        this.sequences.Add(new SequenceObject(spawnPoint, this.childProperty.repeat, this.childProperty.repeatDelay, this.childProperty.GetDelete()));
         this.timeLeftToSpawnNext = this.childProperty.spawnDelay;
         this.counter++;
         if (this.counter >= this.childProperty.GetMax()) this.isRunning = false;
