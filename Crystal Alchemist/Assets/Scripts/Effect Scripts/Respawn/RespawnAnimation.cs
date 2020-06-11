@@ -28,10 +28,7 @@ public class RespawnAnimation : MonoBehaviour
 
     public void ShowCharacter()
     {
-        if (this.character != null)
-        {            
-            this.character.SetCharacterSprites(true);
-        }
+        if (this.character != null) this.character.SetCharacterSprites(true);        
     }
 
     public void PlayAnimation()

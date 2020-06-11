@@ -65,9 +65,9 @@ public class SkillBoomerang : SkillProjectile
         if (this.skill.sender != null)
         {
             //Bewege den Skill zurück zum Sender
-            if (Vector3.Distance(this.skill.sender.transform.position, this.transform.position) > this.minDistance)
+            if (Vector3.Distance(this.skill.sender.GetShootingPosition(), this.transform.position) > this.minDistance)
             { 
-                this.skill.direction = this.skill.sender.transform.position - this.transform.position;
+                this.skill.SetDirection((this.skill.sender.GetShootingPosition() - (Vector2)this.transform.position));
                 this.setVelocity();
             }
             else

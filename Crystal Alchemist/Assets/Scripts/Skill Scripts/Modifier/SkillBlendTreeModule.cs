@@ -2,6 +2,6 @@
 {
     public void Initialize()
     {
-        AnimatorUtil.SetAnimDirection(this.skill.direction, this.skill.animator);
+        AnimatorUtil.SetAnimDirection(this.skill.GetDirection(), this.skill.animator);
     }
 }

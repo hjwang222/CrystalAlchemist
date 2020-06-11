@@ -130,11 +130,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 6859513477840706715}
   shadow: {fileID: 0}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
   standAlone: 1
-  positionOffset: 0
 --- !u!114 &9035295312565223651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  rotateIt: 1
+  mode: 0
   snapRotationInDegrees: 0
 --- !u!114 &1969711209088018432
 MonoBehaviour:
@@ -247,7 +252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3924551678506968723}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.32, y: 0, z: 0}
+  m_LocalPosition: {x: 1.125, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4902967834965054562}

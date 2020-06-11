@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class SkillPageSelect : MonoBehaviour
 {
@@ -55,6 +56,9 @@ public class SkillPageSelect : MonoBehaviour
         pages[this.index].SetActive(true);
 
         UpdateButtons();
+
+        if (!this.nextButton.activeInHierarchy) this.previousButton.GetComponent<ButtonExtension>().Select();
+        else if (!this.previousButton.activeInHierarchy) this.nextButton.GetComponent<ButtonExtension>().Select();
     }
 }
 

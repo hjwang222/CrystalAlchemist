@@ -14,7 +14,7 @@ public class SkillProjectile : SkillExtension
 
     public void setVelocity()
     {
-        if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = this.skill.direction * this.speed * this.skill.getTimeDistortion();
+        if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = this.skill.GetDirection() * this.speed * this.skill.getTimeDistortion();
     }
 
     public void stopVelocity()

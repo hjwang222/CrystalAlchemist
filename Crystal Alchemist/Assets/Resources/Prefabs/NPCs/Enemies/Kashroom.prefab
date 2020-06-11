@@ -383,7 +383,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.005789101, y: -0.51650083}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -394,7 +394,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6226398, y: 0.43248725}
+  m_Size: {x: 0.5, y: 0.35}
   m_EdgeRadius: 0
 --- !u!114 &6415677170383339479
 MonoBehaviour:
@@ -526,6 +526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 3560735132152297215}
   aggroStats: {fileID: 11400000, guid: 74151ff649b937b418adb75846e519d1, type: 2}
+  cluePosition: {fileID: 0}
 --- !u!60 &1188484439706488138
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -645,7 +646,7 @@ PrefabInstance:
     - target: {fileID: 8537469436013784418, guid: 6a16bd4179f071649b716a3d0358d43a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.125
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 8537469436013784418, guid: 6a16bd4179f071649b716a3d0358d43a,
         type: 3}

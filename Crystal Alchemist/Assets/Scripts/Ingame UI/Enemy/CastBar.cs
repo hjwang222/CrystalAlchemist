@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using TMPro;
 
 public class CastBar : MonoBehaviour
@@ -17,11 +14,10 @@ public class CastBar : MonoBehaviour
 
     private Ability ability;
 
-
     public void setCastBar(Character character, Ability ability)
     {
         this.transform.parent = character.transform;
-        this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 1f);
+        this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 2f);
         this.ability = ability;
         this.skillName.text = this.ability.GetName();
     }

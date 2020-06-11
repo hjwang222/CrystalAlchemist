@@ -24,7 +24,7 @@ public class SkillSummon : SkillExtension
         {
             AI pet = Instantiate(ai, this.transform.position, Quaternion.Euler(0, 0, 0));
             pet.name = ai.name;
-            pet.values.direction = this.skill.direction;
+            pet.values.direction = this.skill.GetDirection();
             pet.partner = this.skill.sender;
 
             this.skill.sender.values.activePets.Add(pet);
@@ -32,7 +32,7 @@ public class SkillSummon : SkillExtension
         else if (breakable != null)
         {
             Breakable objectPet = Instantiate(breakable, this.transform.position, Quaternion.Euler(0, 0, 0));
-            objectPet.values.direction = this.skill.direction;
+            objectPet.values.direction = this.skill.GetDirection();
             objectPet.ChangeDirection(objectPet.values.direction);
         }        
     }

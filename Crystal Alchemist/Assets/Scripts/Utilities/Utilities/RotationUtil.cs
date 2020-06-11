@@ -33,7 +33,7 @@ public static class RotationUtil
 
     public static Vector2 SetStartDirection(Skill skill)
     {
-        if (skill.sender == null) return skill.direction;
+        if (skill.sender == null) return skill.GetDirection();
         else if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null)
             return (skill.sender.GetComponent<AI>().target.GetGroundPosition() - (Vector2)skill.transform.position).normalized;
         else if (skill.target != null)
@@ -41,6 +41,6 @@ public static class RotationUtil
         else if (skill.sender != null)
             return skill.sender.values.direction.normalized;
 
-        return skill.direction;
+        return skill.GetDirection();
     }
 }

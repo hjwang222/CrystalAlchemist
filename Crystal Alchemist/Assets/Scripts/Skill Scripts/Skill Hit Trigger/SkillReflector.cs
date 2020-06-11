@@ -14,9 +14,9 @@ public class SkillReflector : SkillHitTrigger
 
                 if (skill.myRigidbody != null)
                 {
-                    skill.direction = Vector2.Reflect(skill.direction, this.skill.direction);
+                    skill.SetDirection(Vector2.Reflect(skill.GetDirection(), this.skill.GetDirection()));
                     skill.GetComponent<SkillProjectile>().setVelocity();
-                    skill.transform.rotation = RotationUtil.getRotation(skill.direction);
+                    skill.transform.rotation = RotationUtil.getRotation(skill.GetDirection());
                 }
             }
         }

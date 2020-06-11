@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,6 +34,10 @@ public class PlayerSpriteSheet : ScriptableObject
     [BoxGroup]
     [SerializeField]
     private List<string> rows = new List<string>();
+
+    [BoxGroup]
+    [SerializeField]
+    private Vector2 pivot = new Vector2(0.5f, 0.02085f);
 
 #if UNITY_EDITOR
     [Button]
@@ -213,7 +216,7 @@ public class PlayerSpriteSheet : ScriptableObject
                     string animationName = column.animTyp;
 
                     SpriteMetaData smd = new SpriteMetaData();
-                    smd.pivot = new Vector2(0.5f, 0.5f);
+                    smd.pivot = this.pivot;                   
                     smd.alignment = 9;
 
                     string spriteName = animationName + " " + direction;

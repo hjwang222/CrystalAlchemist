@@ -52,7 +52,7 @@ public class PlayerTeleport : MonoBehaviour
         if (this.player.respawnAnimation != null && animation) //Show Animation for DEspawn
         {
             this.player.SetDefaultDirection();
-            RespawnAnimation respawnObject = Instantiate(this.player.respawnAnimation, this.transform.position, Quaternion.identity);
+            RespawnAnimation respawnObject = Instantiate(this.player.respawnAnimation, this.player.GetShootingPosition(), Quaternion.identity);
             respawnObject.Reverse(this.player);  //reverse
             yield return new WaitForSeconds(respawnObject.getAnimationLength());
         }
@@ -78,7 +78,7 @@ public class PlayerTeleport : MonoBehaviour
         {
             this.player.SetDefaultDirection();
             yield return new WaitForSeconds(2f);
-            RespawnAnimation respawnObject = Instantiate(this.player.respawnAnimation, position, Quaternion.identity);
+            RespawnAnimation respawnObject = Instantiate(this.player.respawnAnimation, new Vector2(position.x, position.y+0.5f), Quaternion.identity);
             respawnObject.Initialize(this.player);          
         }
         else

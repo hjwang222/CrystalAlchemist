@@ -54,16 +54,18 @@ public class SkillLaser : SkillExtension
         if (this.skill.standAlone)
         {
             this.position = this.transform.position;
-            this.skill.direction = RotationUtil.DegreeToVector2(this.transform.rotation.eulerAngles.z);
+            this.skill.SetDirection(RotationUtil.DegreeToVector2(this.transform.rotation.eulerAngles.z));
         }
         else
         {
-            this.position = this.skill.sender.GetShootingPosition();
-            this.skill.direction = this.skill.sender.values.direction;
+            this.skill.SetDirection(this.skill.sender.values.direction);
+            this.skill.SetVectors();
+
+            this.position = this.transform.position;
         }
 
         if (targetRequired && this.skill.target == null) LineRenderUtil.Renderempty(this.laserSprite);
-        else LineRenderUtil.RenderLine(this.skill.sender, this.skill.target, this.skill.direction, this.distance, this.laserSprite, this.position, out hitted, out hitPoint);
+        else LineRenderUtil.RenderLine(this.skill.sender, this.skill.target, this.skill.GetDirection(), this.distance, this.laserSprite, this.position, out hitted, out hitPoint);
 
         if (hitted != null && this.skill.GetTriggerActive())
         {

@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 8148772775939734945}
   - component: {fileID: 5261843100729261818}
   - component: {fileID: 515671639}
+  - component: {fileID: 200945663923014254}
   m_Layer: 13
   m_Name: Bombe
   m_TagString: Skill
@@ -128,10 +129,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 515671639}
   animator: {fileID: 5261843100729261818}
   shadow: {fileID: 0}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!114 &7459062905359120726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +264,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -329,3 +336,21 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &200945663923014254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2500810980607646640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6a96ce65e495a4690ef5aa491ec319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1197dbf3c5278f947a95a75a9843c3c8, type: 2}
+  spriteRenderer: {fileID: 0}
+  useGlow: 1
+  selectColor: {r: 1, g: 0.8313726, b: 0.10196079, a: 1}
+  precision: 0.3
+  glowColor: {r: 4, g: 2.6352942, b: 0.047058824, a: 1}

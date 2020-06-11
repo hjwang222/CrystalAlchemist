@@ -59,10 +59,11 @@ public static class LineRenderUtil
 
     private static void drawLaserToTarget(Vector2 startpoint, Vector2 hitpoint, SpriteRenderer spriteRenderer)
     {
+        float distance = Vector3.Distance(hitpoint, startpoint);
         Vector2 direction = (hitpoint - startpoint).normalized;
-        Vector2 position = new Vector2((hitpoint.x - startpoint.x) / 2, (hitpoint.y - startpoint.y) / 2) + startpoint;
+        Vector2 position = new Vector2(direction.x * (distance / 2), direction.y * (distance / 2)) + startpoint;
 
-        setLaserSprite(position, Vector3.Distance(hitpoint, startpoint), GetRotation(direction), spriteRenderer);
+        setLaserSprite(position, distance, GetRotation(direction), spriteRenderer);
     }
 
     private static void drawLongLaser(Vector2 startpoint, Vector2 direction, float distance, SpriteRenderer spriteRenderer)

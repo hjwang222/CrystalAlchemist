@@ -113,7 +113,7 @@ public class SkillSenderModule : SkillModule
             int trustdirection = -1; //knockback
             if (forward) trustdirection = 1; //dash
 
-            this.skill.sender.KnockBack(selfThrustTime, selfThrust, (this.skill.direction * trustdirection));
+            this.skill.sender.KnockBack(selfThrustTime, selfThrust, (this.skill.GetDirection() * trustdirection));
         }
     }
 }

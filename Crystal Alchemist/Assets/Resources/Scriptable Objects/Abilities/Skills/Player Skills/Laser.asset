@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266771f26e0200047a77d2d39c8b8900, type: 3}
   m_Name: Laser
   m_EditorClassIdentifier: 
-  abilityName: Laser
-  abilityNameEnglish: Laser
   skill: {fileID: 6303950438319133966, guid: d6d1154f9bb87ae4fa94b5c2fe7a7c09, type: 3}
   useTargetSystem: 0
-  targetingProperty: {fileID: 11400000, guid: eb1d22aa0a408b24886902d70e1463d6, type: 2}
+  targetingProperty: {fileID: 0}
+  useIndicator: 0
+  indicator:
+    indicatorProperty: {fileID: 0}
   hasSkillBookInfo: 1
   info: {fileID: 11400000, guid: 34b6433cfa71afe48a66d9b1a6d3ec50, type: 2}
   cooldown: 1
   hasMaxDuration: 1
   maxDuration: 3
-  rapidFireDelay: 1
+  hasDelay: 0
+  delay: 1
   hasCastTime: 0
   castTime: 3
   showCastbar: 1
@@ -34,8 +36,8 @@ MonoBehaviour:
   deactivateButtonUp: 1
   keepCast: 0
   shareDamage: 0
-  positionOffset: 0.25
-  attachToSender: 0
+  positionOffset: 1
+  attachToSender: 1
   lockDirection: 0
   timeDistortion: 1
   cooldownLeft: 0

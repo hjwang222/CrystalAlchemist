@@ -5,12 +5,12 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.2):
     //--REWORKS--
     //TODO: Sound Effekte ersetzen!
-    //BUG: Cast Buggy when knockback.
+    //BUG: Cast Buggy when knockback
+    //TODO: Boss Skill Graphics
+    //TODO: Bombe Rework
 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
-    //TODO: Pivot Reworks?
-    //TODO: Graphics and Refine Mechanics
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

@@ -48,7 +48,8 @@ public class Skill : MonoBehaviour
     [BoxGroup("Debug")]
     public Character target;
     [BoxGroup("Debug")]
-    public Vector2 direction = Vector2.right;
+    [SerializeField]
+    private Vector2 direction = Vector2.right;
     [BoxGroup("Debug")]
     public bool standAlone = true;
 
@@ -118,17 +119,12 @@ public class Skill : MonoBehaviour
 
         if (!this.standAlone)
         {
-            this.transform.position = this.sender.GetShootingPosition();
-            this.direction = RotationUtil.SetStartDirection(this);
-
-            if (this.GetComponent<SkillRotationModule>() != null) this.GetComponent<SkillRotationModule>().Initialize();
-            if (this.GetComponent<SkillPositionZModule>() != null) this.GetComponent<SkillPositionZModule>().Initialize();
-            if (this.GetComponent<SkillBlendTreeModule>() != null) this.GetComponent<SkillBlendTreeModule>().Initialize();
+            SetVectors();
         }
         else
         {
             if (this.GetComponent<SkillRotationModule>() != null) this.GetComponent<SkillRotationModule>().Initialize();
-            this.direction = RotationUtil.DegreeToVector2(this.transform.rotation.eulerAngles.z);            
+            SetDirection(RotationUtil.DegreeToVector2(this.transform.rotation.eulerAngles.z));            
         }
 
         SkillModule[] modules = this.GetComponents<SkillModule>();
@@ -154,6 +150,27 @@ public class Skill : MonoBehaviour
         this.delayTimeLeft = this.delay;
     }
 
+    public void SetVectors()
+    {
+        this.transform.position = this.sender.GetShootingPosition();
+        SetDirection(RotationUtil.SetStartDirection(this));
+
+        if (this.GetComponent<SkillRotationModule>() != null) this.GetComponent<SkillRotationModule>().Initialize();
+        this.transform.position += ((Vector3)GetDirection() * this.positionOffset);
+
+        if (this.GetComponent<SkillPositionZModule>() != null) this.GetComponent<SkillPositionZModule>().Initialize();
+        if (this.GetComponent<SkillBlendTreeModule>() != null) this.GetComponent<SkillBlendTreeModule>().Initialize();
+    }
+
+    public Vector2 GetDirection()
+    {
+        return this.direction.normalized;
+    }
+
+    public void SetDirection(Vector2 direction)
+    {
+        this.direction = direction.normalized;
+    }
 
     #endregion
 
@@ -165,7 +182,7 @@ public class Skill : MonoBehaviour
         if (this.spriteRenderer != null && this.shadow != null) this.shadow.sprite = this.spriteRenderer.sprite;
 
         if (this.animator != null && !this.lockDirection)
-            AnimatorUtil.SetAnimDirection(this.direction, this.animator);
+            AnimatorUtil.SetAnimDirection(GetDirection(), this.animator);
 
         AnimatorUtil.SetAnimatorParameter(this.animator, "Active", true);
 
@@ -208,16 +225,6 @@ public class Skill : MonoBehaviour
     public float GetDurationLeft()
     {
         return this.durationTimeLeft;
-    }
-
-    public float GetMaxDuration()
-    {
-        return this.maxDuration;
-    }
-
-    public float GetOffset()
-    {
-        return this.positionOffset;
     }
 
     public float GetProgress()

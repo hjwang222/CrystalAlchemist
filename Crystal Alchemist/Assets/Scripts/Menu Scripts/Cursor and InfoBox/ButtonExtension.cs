@@ -131,26 +131,28 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         SetFirst();
     }
 
+    public void Select()
+    {
+        if (this.button == null) this.button = this.gameObject.GetComponent<Selectable>();
+
+        if (this.cursor != null
+            && this.gameObject.activeInHierarchy)
+        {
+            this.cursor.gameObject.SetActive(true);
+
+            if (EventSystem.current != null)
+            {
+                EventSystem.current.firstSelectedGameObject = this.gameObject;
+                EventSystem.current.SetSelectedGameObject(this.gameObject);
+            }
+
+            this.cursor.setCursorPosition(true, false, this.button, this.size, this.scale);
+        }
+    }
+
     public void SetFirst()
     {
-        if (this.setFirstSelected)
-        {
-            if (this.button == null) this.button = this.gameObject.GetComponent<Selectable>();
-
-            if (this.cursor != null
-                && this.gameObject.activeInHierarchy)
-            {
-                this.cursor.gameObject.SetActive(true);
-
-                if (EventSystem.current != null)
-                {
-                    EventSystem.current.firstSelectedGameObject = this.gameObject;
-                    EventSystem.current.SetSelectedGameObject(this.gameObject);
-                }
-
-                this.cursor.setCursorPosition(true, false, this.button, this.size, this.scale);
-            }
-        }
+        if (this.setFirstSelected) Select();        
     }
 
     public void OnPointerEnter(PointerEventData eventData)

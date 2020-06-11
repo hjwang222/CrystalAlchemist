@@ -56,8 +56,8 @@ MonoBehaviour:
   skill: {fileID: 0}
   impactEffect: {fileID: 0}
   distanceBetweenImpacts: 1
-  useCustomPosition: 1
   lights: {fileID: 0}
+  start: {fileID: 680506914304237522}
   distance: 50
   laserSprite: {fileID: 6508292816955024436}
   targetRequired: 1
@@ -147,10 +147,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
   shadow: {fileID: 0}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!114 &2029259155831185462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,9 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  rotateIt: 1
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
+  mode: 0
   snapRotationInDegrees: 0
 --- !u!114 &6063059781987790246
 MonoBehaviour:

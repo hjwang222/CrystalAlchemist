@@ -22,7 +22,7 @@ public class SkillHoming : SkillProjectile
             if (Vector3.Distance(this.skill.target.transform.position, this.transform.position) > 0.25f)
             {
                 //Ermittle Position des Ziels
-                Vector2 targetPosition = this.skill.target.transform.position;
+                Vector2 targetPosition = this.skill.target.GetGroundPosition();
 
                 //offSetTime und offSetStrength lassen den Skill nicht direkt, sondern in einer Kurve fliegen
                 if (this.offSetTime >= 0)
@@ -41,7 +41,7 @@ public class SkillHoming : SkillProjectile
                     this.offSetStrength -= (this.offSetStrength / this.offSetTime);
                 }
 
-                this.skill.direction = targetPosition - (Vector2)this.transform.position;
+                this.skill.SetDirection(targetPosition - (Vector2)this.transform.position);
                 this.setVelocity();
             }
             else
