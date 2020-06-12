@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266771f26e0200047a77d2d39c8b8900, type: 3}
   m_Name: Stromschlag
   m_EditorClassIdentifier: 
-  abilityName: Stromschlag
-  abilityNameEnglish: Shock
   skill: {fileID: 5889971261589698111, guid: 8d38c6d44fc7878428ee4d926eeff611, type: 3}
   useTargetSystem: 1
   targetingProperty: {fileID: 11400000, guid: 9f069becde8299f49baf9e14943581a9, type: 2}
@@ -25,6 +23,8 @@ MonoBehaviour:
   cooldown: 2
   hasMaxDuration: 0
   maxDuration: 9999
+  hasDelay: 0
+  delay: 1
   hasCastTime: 0
   castTime: 0
   showCastbar: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
   requirements: 0
   isRapidFire: 1
   remoteActivation: 0
-  deactivateButtonUp: 0
+  deactivateButtonUp: 1
   keepCast: 0
   shareDamage: 0
   positionOffset: 0

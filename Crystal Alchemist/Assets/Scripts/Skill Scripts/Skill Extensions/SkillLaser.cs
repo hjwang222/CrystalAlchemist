@@ -1,7 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
 
 public class SkillLaser : SkillExtension
 {
@@ -14,9 +13,6 @@ public class SkillLaser : SkillExtension
     [ShowIf("impactEffect")]
     [SerializeField]
     private float distanceBetweenImpacts = 1f;
-
-    [SerializeField]
-    private Light2D lights;
 
     [SerializeField]
     [MinValue(0)]

@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b22a3ebb90863458dba94076083e2b, type: 3}
   m_Name: Ice
   m_EditorClassIdentifier: 
-  statusEffectName: Eis
-  statusEffectNameEnglish: Ice
-  statusEffectDescription: "Friert ein, sodass keine Aktionen m\xF6glich sind"
-  statusEffectDescriptionEnglish: Stuns and freezes, no actions are possible
   hasDuration: 1
   maxDuration: 6
   canOverride: 1
@@ -34,7 +30,7 @@ MonoBehaviour:
       hits: 0
       requireAll: 0
     actions:
-    - actionType: 4
+    - actionType: 3
       resources: []
       speed: -100
       time: 0

@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266771f26e0200047a77d2d39c8b8900, type: 3}
   m_Name: Flammenwerfer
   m_EditorClassIdentifier: 
-  abilityName: Flammenwerfer
-  abilityNameEnglish: Flamethrower
   skill: {fileID: 3816868808247662347, guid: ee56b7a33e3364848b47f8da94c5908a, type: 3}
   useTargetSystem: 0
   targetingProperty: {fileID: 0}
+  useIndicator: 0
+  indicator:
+    indicatorProperty: {fileID: 0}
   hasSkillBookInfo: 1
   info: {fileID: 11400000, guid: 9068f1db7934a6d41a1d9f68adb95fe2, type: 2}
-  cooldown: 0.01
+  cooldown: 0.075
   hasMaxDuration: 0
   maxDuration: 1
-  rapidFireDelay: 1
+  hasDelay: 0
+  delay: 1
   hasCastTime: 0
   castTime: 0
   showCastbar: 1

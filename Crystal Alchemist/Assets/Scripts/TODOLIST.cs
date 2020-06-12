@@ -7,7 +7,7 @@ public class TODOLIST : MonoBehaviour
     //TODO: Sound Effekte ersetzen!
     //BUG: Cast Buggy when knockback
     //TODO: Boss Skill Graphics
-    //TODO: Bombe Rework
+    //TODO: Skill Multi Spawn Extension (Spread shot, Ice Spikes)
 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
