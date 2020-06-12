@@ -356,10 +356,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 8945697548278569866}
   animator: {fileID: 1969718782558145669}
   shadow: {fileID: 8613971535191392423}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!114 &6919527800721261145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,9 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 3816868808247662347}
-  rotateIt: 1
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
+  mode: 0
   snapRotationInDegrees: 0
 --- !u!114 &69357154066809696
 MonoBehaviour:
@@ -594,6 +598,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PointLightOuterRadius
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950900640928362244, guid: 42a4137c3904df94aa0b798edf1c5d6b,
+        type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a4137c3904df94aa0b798edf1c5d6b, type: 3}
