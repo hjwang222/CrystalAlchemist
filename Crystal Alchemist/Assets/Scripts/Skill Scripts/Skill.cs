@@ -153,12 +153,13 @@ public class Skill : MonoBehaviour
     public void SetVectors()
     {
         this.transform.position = this.sender.GetShootingPosition();
+        if (this.GetComponent<SkillPositionZModule>() != null) this.GetComponent<SkillPositionZModule>().Initialize();
+
         SetDirection(RotationUtil.SetStartDirection(this));
 
         if (this.GetComponent<SkillRotationModule>() != null) this.GetComponent<SkillRotationModule>().Initialize();
         this.transform.position += ((Vector3)GetDirection() * this.positionOffset);
 
-        if (this.GetComponent<SkillPositionZModule>() != null) this.GetComponent<SkillPositionZModule>().Initialize();
         if (this.GetComponent<SkillBlendTreeModule>() != null) this.GetComponent<SkillBlendTreeModule>().Initialize();
     }
 

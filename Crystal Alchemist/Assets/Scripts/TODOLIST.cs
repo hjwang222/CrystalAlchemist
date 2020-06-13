@@ -6,11 +6,12 @@ public class TODOLIST : MonoBehaviour
     //--REWORKS--
     //TODO: Sound Effekte ersetzen!
     //BUG: Cast Buggy when knockback
-    //TODO: Boss Skill Graphics
-    //TODO: Skill Multi Spawn Extension (Spread shot, Ice Spikes)
 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
+    // -> Phases (Frage: Scriptable Object vs Others)
+    // -> Graphics
+    // -> Music
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)
@@ -22,12 +23,10 @@ public class TODOLIST : MonoBehaviour
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
-    //TODO: Titania better graphics
     //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
     //GRAPHICS: TitleScreen: Background 
     //ITEM: Brille (Bool Value)
     //INPUT: Virtuelle Tastatur
-    //REWORK: Flammenerfer Skill
     //TODO: Sin Eater Race (glowing eyes, halo, wings, etc)
 
     //TODO: Stairs, Ice, Wall

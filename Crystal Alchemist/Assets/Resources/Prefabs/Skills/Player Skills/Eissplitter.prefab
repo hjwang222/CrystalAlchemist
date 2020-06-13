@@ -90,10 +90,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 8003971335365348661}
   animator: {fileID: 1781594353715446578}
   shadow: {fileID: 157402643467407502}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!114 &2890860741540156332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  type: 3
   positionHeight: 0
   colliderHeightOffset: -0.5
 --- !u!114 &3772284571761737148
@@ -174,9 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  rotateIt: 1
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
+  mode: 0
   snapRotationInDegrees: 45
 --- !u!114 &2106465046035776382
 MonoBehaviour:
@@ -374,7 +379,7 @@ MonoBehaviour:
   useGlow: 1
   selectColor: {r: 0.8196079, g: 0.9725491, b: 1, a: 1}
   precision: 0.168
-  glowColor: {r: 1.7568529, g: 3.5471697, b: 3.2536216, a: 1}
+  glowColor: {r: 1.7642993, g: 3.183131, b: 3.54717, a: 1}
 --- !u!1 &8507274686393064075
 GameObject:
   m_ObjectHideFlags: 0

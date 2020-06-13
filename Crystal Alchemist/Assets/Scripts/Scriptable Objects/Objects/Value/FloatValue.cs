@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Values/FloatValue")]
 public class FloatValue : ScriptableObject, ISerializationCallbackReceiver
