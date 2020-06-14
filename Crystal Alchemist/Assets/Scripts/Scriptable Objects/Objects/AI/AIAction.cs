@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 
 public enum AIActionType
 {
@@ -46,6 +47,7 @@ public class AIAction
     [HideIf("type", AIActionType.sequence)]
     [HideIf("type", AIActionType.kill)]
     [HideIf("type", AIActionType.signal)]
+    [HideIf("type", AIActionType.invincible)]
     [BoxGroup("Properties")]
     [SerializeField]
     private float duration = 4f;
@@ -118,6 +120,16 @@ public class AIAction
     [BoxGroup("Properties")]
     [SerializeField]
     private BossMechanic mechanic;
+
+    [ShowIf("type", AIActionType.sequence)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private List<int> patterns;
+
+    [ShowIf("type", AIActionType.invincible)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private bool value;
 
     [ShowIf("type", AIActionType.signal)]
     [BoxGroup("Properties")]
@@ -266,7 +278,7 @@ public class AIAction
     private void UpdateSequence(AI npc)
     {
         //casting here       
-        AbilityUtil.instantiateSequence(this.mechanic, npc);
+        AbilityUtil.instantiateSequence(this.mechanic, npc, this.patterns);
         Deactivate();
     }
 
@@ -315,7 +327,7 @@ public class AIAction
 
     private void StartInvinicible(AI npc)
     {
-        npc.setInvincible(this.duration, false);
+        npc.SetInvincible(this.value);
         Deactivate();
     }
 

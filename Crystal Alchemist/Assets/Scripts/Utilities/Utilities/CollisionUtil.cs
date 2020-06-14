@@ -50,18 +50,9 @@ public static class CollisionUtil
 
         if (hit && !hit.collider.isTrigger)
         {
-            if (hit.collider.gameObject != character.gameObject)
-            {
-                //Debug.DrawLine(start, hit.transform.position, Color.green);
-                return true;
-            }
-            else
-            {
-                //Debug.DrawLine(start, hit.transform.position, Color.red);
-                return false;
-            }
+            if (hit.collider.gameObject != character.gameObject) return true;            
+            else return false;            
         }
-
 
         return true;
     }

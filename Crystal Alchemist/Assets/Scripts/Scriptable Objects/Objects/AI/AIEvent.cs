@@ -65,13 +65,13 @@ public class AIEvent
         else { this.timeLeft = 0; this.eventActive = true; }
     }
 
-    private bool isTriggered(AI npc)
+    private bool isTriggered(AI npc, AIPhase phase)
     {
         int triggerCount = 0;
 
         foreach (AITrigger trigger in this.triggers)
         {
-            if (trigger.isTriggered(npc)) triggerCount++;
+            if (trigger.isTriggered(npc, phase)) triggerCount++;
         }
 
         if ((this.requirementsNeeded == RequirementType.all && triggerCount == this.triggers.Count)
@@ -82,7 +82,7 @@ public class AIEvent
 
     public void SetEventActions(AI npc, List<AIAction> actions, AIPhase phase)
     {
-        if (this.eventActive && this.isTriggered(npc))
+        if (this.eventActive && this.isTriggered(npc, phase))
         {
             this.eventActive = false;
             if(this.repeatEvent) this.timeLeft = this.eventCooldown;

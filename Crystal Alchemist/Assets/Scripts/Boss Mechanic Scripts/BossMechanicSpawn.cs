@@ -14,9 +14,8 @@ public class BossMechanicSpawn : BossMechanicProperty
         [MinValue(1)]
         public int amount = 1;
 
-        [ShowIf("spawnPositonType", SpawnPositionType.target)]
         [Tooltip("Set to true, if skill needs to know the target")]
-        public bool AddTargetToSkill = false;
+        public bool AddTarget = false;
 
         [ShowIf("spawnObject")]
         [Tooltip("Time between Spawns")]
@@ -147,12 +146,13 @@ public class BossMechanicSpawn : BossMechanicProperty
     private void Instantiate(Vector2 position, Quaternion rotation)
     {
         Character target = null;
-        if (this.childProperty.AddTargetToSkill) target = this.target;
+        if (this.childProperty.AddTarget) target = this.target;
 
         if (this.childProperty.spawnObject.GetType() == typeof(GameObject))
         {
             GameObject spawnedObject = Instantiate(this.childProperty.spawnObject, position, Quaternion.identity, this.transform) as GameObject;
             SetSkill(spawnedObject.GetComponent<Skill>(), target, rotation);
+            if (spawnedObject.GetComponent<AI>() != null) spawnedObject.GetComponent<AI>().target = target;
         }
         else if (this.childProperty.spawnObject.GetType() == typeof(Ability))
         {

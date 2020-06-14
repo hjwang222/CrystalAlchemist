@@ -84,6 +84,7 @@ MonoBehaviour:
   childProperty:
     spawnPositonType: 1
     position: {x: 0, y: 0}
+    uniqueSpawn: 1
     spawnPoints: []
     rotationType: 0
     rotationFactor: 0
@@ -246,7 +247,7 @@ Transform:
   - {fileID: 681043619506497885}
   - {fileID: 681043618483796473}
   m_Father: {fileID: 5403799806944912059}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &681043618667052544
 MonoBehaviour:
@@ -266,6 +267,7 @@ MonoBehaviour:
   selfProperty:
     spawnPositonType: 6
     position: {x: 0.5, y: 2.5}
+    uniqueSpawn: 1
     spawnPoints: []
     rotationType: 1
     rotationFactor: 45
@@ -383,6 +385,7 @@ MonoBehaviour:
   childProperty:
     spawnPositonType: 1
     position: {x: 0, y: 0}
+    uniqueSpawn: 1
     spawnPoints: []
     rotationType: 0
     rotationFactor: 0
@@ -547,7 +550,7 @@ Transform:
   - {fileID: 7957023707305862501}
   - {fileID: 7957023706526594095}
   m_Father: {fileID: 5403799806944912059}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &681043619236511198
 MonoBehaviour:
@@ -567,6 +570,7 @@ MonoBehaviour:
   selfProperty:
     spawnPositonType: 6
     position: {x: 0.5, y: 2.5}
+    uniqueSpawn: 1
     spawnPoints: []
     rotationType: 1
     rotationFactor: 90
@@ -669,6 +673,7 @@ MonoBehaviour:
   childProperty:
     spawnPositonType: 1
     position: {x: 0, y: 0}
+    uniqueSpawn: 1
     spawnPoints: []
     rotationType: 0
     rotationFactor: 0
@@ -1039,8 +1044,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4740717234467347252}
-  - {fileID: 681043619236511192}
   - {fileID: 681043618667052545}
+  - {fileID: 681043619236511192}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1057,8 +1062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyAfter: 30
-  random: 0
-  pattern: 0
+  patterns: 
   sender: {fileID: 0}
   target: {fileID: 0}
 --- !u!1 &7412552655681740138
@@ -1144,6 +1148,7 @@ MonoBehaviour:
   childProperty:
     spawnPositonType: 1
     position: {x: 0, y: 0}
+    uniqueSpawn: 1
     spawnPoints: []
     rotationType: 0
     rotationFactor: 0
@@ -1208,6 +1213,7 @@ MonoBehaviour:
   childProperty:
     spawnPositonType: 1
     position: {x: 0, y: 0}
+    uniqueSpawn: 1
     spawnPoints: []
     rotationType: 0
     rotationFactor: 0
@@ -1278,6 +1284,7 @@ MonoBehaviour:
   selfProperty:
     spawnPositonType: 6
     position: {x: 0.5, y: 2.5}
+    uniqueSpawn: 1
     spawnPoints: []
     rotationType: 1
     rotationFactor: 30
@@ -1301,6 +1308,7 @@ MonoBehaviour:
   childProperty:
     spawnPositonType: 1
     position: {x: 0, y: 0}
+    uniqueSpawn: 1
     spawnPoints: []
     rotationType: 2
     rotationFactor: 30

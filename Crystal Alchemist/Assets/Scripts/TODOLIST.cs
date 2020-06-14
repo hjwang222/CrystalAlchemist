@@ -9,7 +9,7 @@ public class TODOLIST : MonoBehaviour
 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
-    // -> Phases (Frage: Scriptable Object vs Others)
+    // -> Phases (as text?)
     // -> Graphics
     // -> Music
 

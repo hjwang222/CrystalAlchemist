@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using System.Collections;
 
 public enum AITriggerType
 {
@@ -9,7 +7,8 @@ public enum AITriggerType
     life,
     range, 
     aggro,
-    aggroLost
+    aggroLost,
+    loops
 }
 
 [System.Serializable]
@@ -25,6 +24,10 @@ public class AITrigger
     [ShowIf("type", AITriggerType.life)]
     [SerializeField]
     private float life;
+
+    [ShowIf("type", AITriggerType.loops)]
+    [SerializeField]
+    private int maxLoops;
 
     private bool timesUp = false;
     private float elapsed = 0;
@@ -43,13 +46,20 @@ public class AITrigger
         }
     }
 
-    public bool isTriggered(AI npc)
+    public bool isTriggered(AI npc, AIPhase phase)
     {
         if (this.type == AITriggerType.aggro) return checkAggro(npc);
         else if (this.type == AITriggerType.aggroLost) return checkAggroLost(npc);
         else if (this.type == AITriggerType.life) return checkLife(npc);
         else if (this.type == AITriggerType.range) return checkRange(npc);
         else if (this.type == AITriggerType.time) return checkTime();
+        else if (this.type == AITriggerType.loops) return checkLoops(phase.GetLoops());
+        return false;
+    }
+
+    private bool checkLoops(int amount)
+    {
+        if (amount >= this.maxLoops) return true;
         return false;
     }
 

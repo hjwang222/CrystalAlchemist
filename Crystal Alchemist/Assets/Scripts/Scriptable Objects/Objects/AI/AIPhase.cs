@@ -23,7 +23,7 @@ public class AIPhase : ScriptableObject
     private List<AIAction> eventActions = new List<AIAction>();
     private int index;
     private int eventIndex;
-
+    private int loops;
 
     public void Initialize(AI npc)
     {
@@ -44,6 +44,11 @@ public class AIPhase : ScriptableObject
 
         SetNextAction(npc);
         UpdatingAction(npc);
+    }
+
+    public int GetLoops()
+    {
+        return this.loops;
     }
 
     private void SetNextAction(AI npc)
@@ -70,7 +75,10 @@ public class AIPhase : ScriptableObject
                 if (this.currentAction == null
                     && this.currentDialog == null
                     && this.loopActions)
-                    this.index = 0;                
+                {
+                    this.index = 0;
+                    this.loops++;
+                }
             }
         }
         else

@@ -352,7 +352,7 @@ public class Character : MonoBehaviour
 
                     //Charakter-Treffer (Schaden) animieren
                     AudioUtil.playSoundEffect(this.gameObject, this.stats.hitSoundEffect);
-                    setInvincible();
+                    SetInvincible();
                 }
             }
 
@@ -416,12 +416,17 @@ public class Character : MonoBehaviour
 
     #region Knockback and Invincibility   
 
-    public void setInvincible() => setInvincible(this.stats.cannotBeHitTime, true);
+    public void SetInvincible() => SetInvincible(this.stats.cannotBeHitTime, true);
 
-    public void setInvincible(float delay, bool showHitcolor)
+    public void SetInvincible(float delay, bool showHitcolor)
     {
         StopCoroutine(hitCo(delay, showHitcolor));
         StartCoroutine(hitCo(delay, showHitcolor));
+    }
+
+    public void SetInvincible(bool value)
+    {
+        this.values.cantBeHit = value;
     }
 
     public void setCannotDie(bool value) => this.cannotDie = value;
