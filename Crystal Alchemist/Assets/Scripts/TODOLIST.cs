@@ -9,9 +9,11 @@ public class TODOLIST : MonoBehaviour
 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
-    // -> Phases (as text?)
+    // -> Phases testing
     // -> Graphics
     // -> Music
+
+    //TODO: Movement by AIAction
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

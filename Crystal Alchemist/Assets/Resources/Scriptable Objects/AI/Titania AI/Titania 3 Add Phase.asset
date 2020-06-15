@@ -26,16 +26,17 @@ MonoBehaviour:
     showCastBar: 0
     overrideCooldown: 0
     cooldown: 0
-    repeatSkill: 0
+    repeat: 0
     amount: 1
-    mechanic: {fileID: 0}
-    patterns: 
+    delay: 0
+    sequence: {fileID: 0}
     value: 1
     signal: {fileID: 0}
+    wait: 0
   - type: 4
     position: {x: 0, y: 0}
     translationID: 
-    duration: 4
+    duration: 0
     nextPhase: {fileID: 0}
     animations: 
     ability: {fileID: 0}
@@ -45,13 +46,13 @@ MonoBehaviour:
     showCastBar: 0
     overrideCooldown: 0
     cooldown: 0
-    repeatSkill: 0
-    amount: 1
-    mechanic: {fileID: 3845224539481360000, guid: 57352e5790b82bc4eabec1e1a453debc,
-      type: 3}
-    patterns: 
+    repeat: 0
+    amount: 3
+    delay: 10
+    sequence: {fileID: 11400000, guid: 7b8d5ac8157e054499c3a29644d2dba4, type: 2}
     value: 0
     signal: {fileID: 0}
+    wait: 0
   loopActions: 0
   events:
   - triggers:
@@ -73,12 +74,13 @@ MonoBehaviour:
       showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
-      repeatSkill: 0
+      repeat: 0
       amount: 1
-      mechanic: {fileID: 0}
-      patterns: 
+      delay: 0
+      sequence: {fileID: 0}
       value: 1
       signal: {fileID: 0}
+      wait: 0
     - type: 1
       position: {x: 0, y: 0}
       translationID: Titania4
@@ -92,12 +94,13 @@ MonoBehaviour:
       showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
-      repeatSkill: 0
+      repeat: 0
       amount: 1
-      mechanic: {fileID: 0}
-      patterns: 
+      delay: 0
+      sequence: {fileID: 0}
       value: 0
       signal: {fileID: 0}
+      wait: 0
     - type: 3
       position: {x: 0, y: 0}
       translationID: 
@@ -111,50 +114,13 @@ MonoBehaviour:
       showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
-      repeatSkill: 0
+      repeat: 0
       amount: 1
-      mechanic: {fileID: 0}
-      patterns: 
+      delay: 0
+      sequence: {fileID: 0}
       value: 0
       signal: {fileID: 0}
-    - type: 2
-      position: {x: 0, y: 0}
-      translationID: 
-      duration: 4
-      nextPhase: {fileID: 0}
-      animations: 
-      ability: {fileID: 0}
-      overrideCastTime: 0
-      castTime: 0
-      overrideShowCastBar: 0
-      showCastBar: 0
-      overrideCooldown: 0
-      cooldown: 0
-      repeatSkill: 0
-      amount: 1
-      mechanic: {fileID: 0}
-      patterns: 
-      value: 0
-      signal: {fileID: 0}
-    - type: 0
-      position: {x: 0, y: 0}
-      translationID: 
-      duration: 4
-      nextPhase: {fileID: 0}
-      animations: 
-      ability: {fileID: 0}
-      overrideCastTime: 0
-      castTime: 0
-      overrideShowCastBar: 0
-      showCastBar: 0
-      overrideCooldown: 0
-      cooldown: 0
-      repeatSkill: 0
-      amount: 1
-      mechanic: {fileID: 0}
-      patterns: 
-      value: 0
-      signal: {fileID: 0}
+      wait: 4
     - type: 7
       position: {x: 0, y: 0}
       translationID: 
@@ -168,12 +134,13 @@ MonoBehaviour:
       showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
-      repeatSkill: 0
+      repeat: 0
       amount: 1
-      mechanic: {fileID: 0}
-      patterns: 
+      delay: 0
+      sequence: {fileID: 0}
       value: 0
       signal: {fileID: 0}
+      wait: 0
     - type: 11
       position: {x: 0, y: 0}
       translationID: 
@@ -187,12 +154,13 @@ MonoBehaviour:
       showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
-      repeatSkill: 0
+      repeat: 0
       amount: 1
-      mechanic: {fileID: 0}
-      patterns: 
+      delay: 0
+      sequence: {fileID: 0}
       value: 0
       signal: {fileID: 11400000, guid: 02e9778541886904584048e6bccdc409, type: 2}
+      wait: 0
     - type: 5
       position: {x: 0, y: 0}
       translationID: 
@@ -206,12 +174,13 @@ MonoBehaviour:
       showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
-      repeatSkill: 0
+      repeat: 0
       amount: 1
-      mechanic: {fileID: 0}
-      patterns: 
+      delay: 0
+      sequence: {fileID: 0}
       value: 0
       signal: {fileID: 0}
+      wait: 0
     repeatEvent: 0
     interruptCurrentAction: 0
     eventCooldown: 0

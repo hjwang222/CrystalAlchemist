@@ -19,12 +19,6 @@ public class DeathAnimation : MonoBehaviour
         Destroy(this.gameObject, 0.1f);
     }
 
-    public void DestoryItCompletely()
-    {
-        this.character.DestroyItCompletely();
-        Destroy(this.gameObject, 0.1f);
-    }
-
     public void PlayDeathSoundEffect(AudioClip soundEffect)
     {
         AudioUtil.playSoundEffect(soundEffect);

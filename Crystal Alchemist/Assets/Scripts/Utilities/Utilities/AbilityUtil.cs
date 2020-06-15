@@ -11,11 +11,10 @@ public static class AbilityUtil
         return newAbility;
     }
 
-    public static void instantiateSequence(BossMechanic sequence, AI npc, List<int> patterns)
+    public static void instantiateSequence(BossMechanic sequence, AI npc, List<string> patterns)
     {
         BossMechanic newSequence = MonoBehaviour.Instantiate(sequence);
         newSequence.name = sequence.name;
-        newSequence.SetPattern(patterns);
         newSequence.Initialize(npc, npc.target);
     }    
 

@@ -159,7 +159,7 @@ public class Player : Character
 
     public override void updateResource(CostType type, ItemGroup item, float value, bool showingDamageNumber)
     {
-        base.updateResource(type, null, value, showingDamageNumber);
+        UpdateLifeMana(type, null, value, showingDamageNumber);
 
         switch (type)
         {
@@ -167,6 +167,8 @@ public class Player : Character
             case CostType.mana: callSignal(this.manaSignalUI, value); break;
             case CostType.item: this.GetComponent<PlayerItems>().UpdateInventory(item, Mathf.RoundToInt(value)); break;
         }
+
+        CheckDeath();
     }
 
     public void callSignal(SimpleSignal signal, float addResource)

@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class BossMechanic : MonoBehaviour
 {
-    [SerializeField]
-    [BoxGroup("Properties")]
-    private float destroyAfter = 5f;
-
-    [SerializeField]
-    [BoxGroup("Properties")]
-    private List<int> patterns = new List<int>();
-
     [BoxGroup("Debug")]
     [SerializeField]
     private Character sender;
@@ -20,7 +12,7 @@ public class BossMechanic : MonoBehaviour
     [SerializeField]
     private Character target;
 
-    private List<GameObject> variants = new List<GameObject>();
+    List<BossMechanicProperty> properties = new List<BossMechanicProperty>();
 
     [Button]
     private void AddCharacters()
@@ -30,42 +22,23 @@ public class BossMechanic : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private int GetCount()
-    {
-        return this.transform.childCount-1;
-    }
-
-    public void SetPattern(List<int> pattern)
-    {
-        this.patterns = pattern;
-    }
-
     private void Awake()
     {
-        for(int i = 0; i < this.transform.childCount; i++)
-        {
-            GameObject child = this.transform.GetChild(i).gameObject;
-            this.variants.Add(child);
-            child.SetActive(false);            
-        }        
+        foreach (BossMechanicProperty property in this.GetComponentsInChildren<BossMechanicProperty>(true)) this.properties.Add(property);        
     }
 
     private void Start()
     {
-        int index = 0;
-        if (this.patterns.Count == 1) index = this.patterns[0];
-        else if (this.patterns.Count > 1) index = this.patterns[Random.Range(0, this.patterns.Count)];
+        foreach (BossMechanicProperty property in this.properties) property.Initialize(this.sender, this.target);
+        InvokeRepeating("Updating", 0.1f, 10f);
+    }
 
-        if (index > GetCount()) index = GetCount();
-        if (index < 0) index = 0;
+    private void Updating()
+    {
+        int counter = 0;
+        foreach (BossMechanicProperty property in this.properties) if (!property.enabled) counter++;
 
-        GameObject variant = variants[index];
-
-        foreach(BossMechanicProperty property in variant.GetComponentsInChildren<BossMechanicProperty>(true)) property.Initialize(this.sender, this.target);
-
-        variant.SetActive(true);
-
-        Destroy(this.gameObject, this.destroyAfter);
+        if(counter >= this.properties.Count) Destroy(this.gameObject, 10f);
     }
 
     public void Initialize(Character sender, Character target)
@@ -73,13 +46,4 @@ public class BossMechanic : MonoBehaviour
         this.sender = sender;
         this.target = target;
     }
-
-    #region Trigger
-
-    public void DestroyIt()
-    {
-        Destroy(this.gameObject);
-    }
-
-    #endregion
 }

@@ -53,10 +53,8 @@ public class Character : MonoBehaviour
 
     private float regenTimeElapsed;
     private float manaTime;
-
     private DeathAnimation activeDeathAnimation;
     private bool cannotDie = false;
-
     private Vector3 spawnPosition;
     private CastBar activeCastbar;
     private List<StatusEffectGameObject> statusEffectVisuals = new List<StatusEffectGameObject>();
@@ -127,11 +125,9 @@ public class Character : MonoBehaviour
         Regenerate();
         UpdateLifeAnimation();
         UpdateStatusEffects();
-
-        CheckDeath();
     }
 
-    private void CheckDeath()
+    public void CheckDeath()
     {
         if (this.values.life <= 0
     && !this.cannotDie //Item
@@ -284,6 +280,12 @@ public class Character : MonoBehaviour
 
     public virtual void updateResource(CostType type, ItemGroup item, float value, bool showingDamageNumber)
     {
+        UpdateLifeMana(type, item, value, showingDamageNumber);
+        CheckDeath();
+    }
+
+    public void UpdateLifeMana(CostType type, ItemGroup item, float value, bool showingDamageNumber)
+    {
         switch (type)
         {
             case CostType.life:
@@ -377,6 +379,11 @@ public class Character : MonoBehaviour
 
     public virtual void Dead()
     {
+        Dead(true);
+    }
+
+    public void Dead(bool showAnimation)
+    {
         for (int i = 0; i < this.values.activeSkills.Count; i++)
         {
             resetCast(this.values.activeSkills[i]);
@@ -394,22 +401,24 @@ public class Character : MonoBehaviour
         this.shadowRenderer.enabled = false;
 
         //Play Death Effect
-        if (this.stats.deathAnimation != null)
+        if (showAnimation)
         {
-            PlayDeathAnimation();
+            if (this.stats.deathAnimation != null) PlayDeathAnimation();
+            else AnimatorUtil.SetAnimatorParameter(this.animator, "Dead", true);
         }
-        else AnimatorUtil.SetAnimatorParameter(this.animator, "Dead", true);
+        else DestroyItWithoutDrop();
     }
 
     public void DestroyIt()
     {
         dropItem();
-        this.gameObject.SetActive(false);
+        DestroyItWithoutDrop();
     }
 
-    public void DestroyItCompletely()
+    private void DestroyItWithoutDrop()
     {
-        Destroy(this.gameObject);
+        if (this.stats.hasRespawn) this.gameObject.SetActive(false);
+        else Destroy(this.gameObject);
     }
 
     #endregion
@@ -491,8 +500,6 @@ public class Character : MonoBehaviour
             this.activeDeathAnimation = deathObject;
         }
     }
-
-
 
     #endregion
 

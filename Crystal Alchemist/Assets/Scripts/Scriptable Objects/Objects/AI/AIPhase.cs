@@ -33,8 +33,16 @@ public class AIPhase : ScriptableObject
 
     public void Updating(AI npc)
     {
-        if (this.currentAction != null && !this.currentAction.getActive()) this.currentAction = null;
-        if (this.currentDialog != null && !this.currentDialog.getActive()) this.currentDialog = null;
+        if (this.currentAction != null && !this.currentAction.getActive())
+        {
+            if (this.currentAction.GetWait() > 0) this.currentAction = new AIAction(this.currentAction.GetWait(), npc);
+            else this.currentAction = null;
+        }
+        if (this.currentDialog != null && !this.currentDialog.getActive())
+        {
+            if (this.currentDialog.GetWait() > 0) this.currentDialog = new AIAction(this.currentDialog.GetWait(), npc);
+            else this.currentDialog = null;
+        }
 
         foreach(AIEvent aiEvent in this.events)
         {

@@ -275,11 +275,6 @@ public class Skill : MonoBehaviour
 
     #region AnimatorEvents
 
-    public void PlaySoundEffect(AudioClip audioClip)
-    {
-        AudioUtil.playSoundEffect(this.gameObject, audioClip);
-    }
-
     public void PlayAnimation(string trigger)
     {
         AnimatorUtil.SetAnimatorParameter(this.animator, trigger);
@@ -310,6 +305,8 @@ public class Skill : MonoBehaviour
         }
         else AnimatorUtil.SetAnimatorParameter(this.animator, "Explode", true);
     }
+
+    public void PlaySoundEffect(AudioClip audioClip) => AudioUtil.playSoundEffect(this.gameObject, audioClip);
 
     public void DestroyIt()
     {

@@ -26,17 +26,18 @@ MonoBehaviour:
     showCastBar: 0
     overrideCooldown: 0
     cooldown: 0
-    repeatSkill: 0
+    repeat: 0
+    keepCast: 0
     amount: 1
-    mechanic: {fileID: 1475070073694488963, guid: 1909e25a395b1814dbbfac1106eaedba,
-      type: 3}
-    patterns: 0000000001000000
+    delay: 0
+    sequence: {fileID: 11400000, guid: 68a4311efa353df4b8e8f60fbc4a45e7, type: 2}
     value: 0
     signal: {fileID: 0}
-  - type: 2
+    wait: 10
+  - type: 4
     position: {x: 0, y: 0}
     translationID: 
-    duration: 10
+    duration: 4
     nextPhase: {fileID: 0}
     animations: 
     ability: {fileID: 0}
@@ -46,12 +47,14 @@ MonoBehaviour:
     showCastBar: 0
     overrideCooldown: 0
     cooldown: 0
-    repeatSkill: 0
+    repeat: 0
+    keepCast: 0
     amount: 1
-    mechanic: {fileID: 0}
-    patterns: 
+    delay: 0
+    sequence: {fileID: 11400000, guid: b9a9b1d164df6c24a8fa78aac55d4571, type: 2}
     value: 0
     signal: {fileID: 0}
+    wait: 12
   - type: 3
     position: {x: 0, y: 0}
     translationID: 
@@ -65,12 +68,14 @@ MonoBehaviour:
     showCastBar: 0
     overrideCooldown: 0
     cooldown: 0
-    repeatSkill: 0
-    amount: 1
-    mechanic: {fileID: 0}
-    patterns: 
+    repeat: 1
+    keepCast: 0
+    amount: 3
+    delay: 4
+    sequence: {fileID: 0}
     value: 0
     signal: {fileID: 0}
+    wait: 0
   - type: 4
     position: {x: 0, y: 0}
     translationID: 
@@ -84,52 +89,14 @@ MonoBehaviour:
     showCastBar: 0
     overrideCooldown: 0
     cooldown: 0
-    repeatSkill: 0
-    amount: 1
-    mechanic: {fileID: 1606658450558534136, guid: 0d527f5bbff4e174d8503a172419b38a,
-      type: 3}
-    patterns: 01000000
+    repeat: 1
+    keepCast: 0
+    amount: 6
+    delay: 3
+    sequence: {fileID: 11400000, guid: 8b08f5afc457ece4d8d6d2143b337156, type: 2}
     value: 0
     signal: {fileID: 0}
-  - type: 2
-    position: {x: 0, y: 0}
-    translationID: 
-    duration: 12
-    nextPhase: {fileID: 0}
-    animations: 
-    ability: {fileID: 0}
-    overrideCastTime: 0
-    castTime: 0
-    overrideShowCastBar: 0
-    showCastBar: 0
-    overrideCooldown: 0
-    cooldown: 0
-    repeatSkill: 0
-    amount: 1
-    mechanic: {fileID: 0}
-    patterns: 
-    value: 0
-    signal: {fileID: 0}
-  - type: 4
-    position: {x: 0, y: 0}
-    translationID: 
-    duration: 4
-    nextPhase: {fileID: 0}
-    animations: 
-    ability: {fileID: 0}
-    overrideCastTime: 0
-    castTime: 0
-    overrideShowCastBar: 0
-    showCastBar: 0
-    overrideCooldown: 0
-    cooldown: 0
-    repeatSkill: 0
-    amount: 1
-    mechanic: {fileID: 1308964008442734180, guid: f11839600fde0434bab41b60a5083d1e,
-      type: 3}
-    patterns: 
-    value: 0
-    signal: {fileID: 0}
+    wait: 0
   - type: 3
     position: {x: 0, y: 0}
     translationID: 
@@ -138,36 +105,19 @@ MonoBehaviour:
     animations: 
     ability: {fileID: 11400000, guid: c2c6fae5b31cba447a750da370a09327, type: 2}
     overrideCastTime: 0
-    castTime: 0
+    castTime: 2
     overrideShowCastBar: 0
     showCastBar: 0
     overrideCooldown: 0
     cooldown: 0
-    repeatSkill: 1
-    amount: 3
-    mechanic: {fileID: 0}
-    patterns: 
+    repeat: 1
+    keepCast: 0
+    amount: 2
+    delay: 2
+    sequence: {fileID: 0}
     value: 0
     signal: {fileID: 0}
-  - type: 2
-    position: {x: 0, y: 0}
-    translationID: 
-    duration: 10
-    nextPhase: {fileID: 0}
-    animations: 
-    ability: {fileID: 0}
-    overrideCastTime: 0
-    castTime: 0
-    overrideShowCastBar: 0
-    showCastBar: 0
-    overrideCooldown: 0
-    cooldown: 0
-    repeatSkill: 0
-    amount: 1
-    mechanic: {fileID: 0}
-    patterns: 
-    value: 0
-    signal: {fileID: 0}
+    wait: 8
   - type: 4
     position: {x: 0, y: 0}
     translationID: 
@@ -181,13 +131,14 @@ MonoBehaviour:
     showCastBar: 0
     overrideCooldown: 0
     cooldown: 0
-    repeatSkill: 0
+    repeat: 0
+    keepCast: 0
     amount: 1
-    mechanic: {fileID: 3845224539481360000, guid: 57352e5790b82bc4eabec1e1a453debc,
-      type: 3}
-    patterns: 
+    delay: 0
+    sequence: {fileID: 11400000, guid: 4bfa116ddf5c0ac47a6035434c01731c, type: 2}
     value: 0
     signal: {fileID: 0}
+    wait: 0
   - type: 3
     position: {x: 0, y: 0}
     translationID: 
@@ -201,31 +152,14 @@ MonoBehaviour:
     showCastBar: 0
     overrideCooldown: 0
     cooldown: 0
-    repeatSkill: 0
+    repeat: 0
+    keepCast: 0
     amount: 1
-    mechanic: {fileID: 0}
-    patterns: 
+    delay: 0
+    sequence: {fileID: 0}
     value: 0
     signal: {fileID: 0}
-  - type: 2
-    position: {x: 0, y: 0}
-    translationID: 
-    duration: 15
-    nextPhase: {fileID: 0}
-    animations: 
-    ability: {fileID: 0}
-    overrideCastTime: 0
-    castTime: 0
-    overrideShowCastBar: 0
-    showCastBar: 0
-    overrideCooldown: 0
-    cooldown: 0
-    repeatSkill: 0
-    amount: 1
-    mechanic: {fileID: 0}
-    patterns: 
-    value: 0
-    signal: {fileID: 0}
+    wait: 12
   loopActions: 1
   events:
   - triggers:
@@ -247,12 +181,14 @@ MonoBehaviour:
       showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
-      repeatSkill: 0
+      repeat: 0
+      keepCast: 0
       amount: 1
-      mechanic: {fileID: 0}
-      patterns: 
+      delay: 0
+      sequence: {fileID: 0}
       value: 0
       signal: {fileID: 0}
+      wait: 0
     repeatEvent: 0
     interruptCurrentAction: 0
     eventCooldown: 0

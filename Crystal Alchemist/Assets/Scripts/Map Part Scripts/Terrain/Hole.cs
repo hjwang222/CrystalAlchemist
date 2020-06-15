@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
@@ -20,11 +19,7 @@ public class Hole : MonoBehaviour
     {
         Character character = collision.GetComponent<Character>();
 
-        if (character != null)
-        {
-            character.updateResource(cost.resourceType, -cost.amount);
-            StartCoroutine(animationCo(character));
-        }
+        if (character != null) StartCoroutine(animationCo(character));        
     }
 
     private IEnumerator animationCo(Character character)
@@ -34,8 +29,16 @@ public class Hole : MonoBehaviour
 
         yield return new WaitForSeconds(this.duration);
 
-        character.transform.position = this.position;
-        character.transform.DOScale(1, 0f);
-        character.EnableScripts(true);
+        if (character.GetComponent<Player>() != null)
+        {
+            character.transform.position = this.position;
+            character.transform.DOScale(1, 0f);
+            character.EnableScripts(true);
+            character.updateResource(cost.resourceType, -cost.amount);
+        }
+        else
+        {
+            character.Dead(false);
+        }
     }
 }

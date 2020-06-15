@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using System.Collections.Generic;
 
 public enum AIActionType
 {
@@ -65,6 +64,7 @@ public class AIAction
     [ShowIf("type", AIActionType.ability)]
     [BoxGroup("Properties")]
     [SerializeField]
+    [OnValueChanged("AbilityChanged")]
     private Ability ability;
 
     [ShowIf("type", AIActionType.ability)]
@@ -91,8 +91,6 @@ public class AIAction
     [SerializeField]
     private bool showCastBar = false;
 
-
-
     [ShowIf("type", AIActionType.ability)]
     [BoxGroup("Properties")]
     [SerializeField]
@@ -105,28 +103,73 @@ public class AIAction
     [SerializeField]
     private float cooldown = 0;
 
-    [ShowIf("type", AIActionType.ability)]
+    [HideIf("type", AIActionType.movement)]
+    [HideIf("type", AIActionType.startPhase)]
+    [HideIf("type", AIActionType.endPhase)]
+    [HideIf("type", AIActionType.animation)]
+    [HideIf("type", AIActionType.cannotDie)]
+    [HideIf("type", AIActionType.kill)]
+    [HideIf("type", AIActionType.dialog)]
+    [HideIf("type", AIActionType.wait)]
+    [HideIf("type", AIActionType.signal)]
+    [HideIf("type", AIActionType.invincible)]
     [BoxGroup("Properties")]
     [SerializeField]
-    private bool repeatSkill = false;
+    [OnValueChanged("RepeatChanged")]
+    private bool repeat = false;
 
-    [ShowIf("type", AIActionType.ability)]
-    [ShowIf("repeatSkill")]
+    [HideIf("type", AIActionType.sequence)]
+    [HideIf("type", AIActionType.movement)]
+    [HideIf("type", AIActionType.startPhase)]
+    [HideIf("type", AIActionType.endPhase)]
+    [HideIf("type", AIActionType.animation)]
+    [HideIf("type", AIActionType.cannotDie)]
+    [HideIf("type", AIActionType.kill)]
+    [HideIf("type", AIActionType.dialog)]
+    [HideIf("type", AIActionType.wait)]
+    [HideIf("type", AIActionType.signal)]
+    [HideIf("type", AIActionType.invincible)]
+    [BoxGroup("Properties")]
+    [ShowIf("repeat")]
+    [SerializeField]
+    private bool keepCast = false;
+
+    [HideIf("type", AIActionType.movement)]
+    [HideIf("type", AIActionType.startPhase)]
+    [HideIf("type", AIActionType.endPhase)]
+    [HideIf("type", AIActionType.animation)]
+    [HideIf("type", AIActionType.cannotDie)]
+    [HideIf("type", AIActionType.kill)]
+    [HideIf("type", AIActionType.dialog)]
+    [HideIf("type", AIActionType.wait)]
+    [HideIf("type", AIActionType.signal)]
+    [HideIf("type", AIActionType.invincible)]
+    [ShowIf("repeat")]
     [BoxGroup("Properties")]
     [SerializeField]
+    [MinValue(1)]
     private int amount = 1;
 
-    [ShowIf("type", AIActionType.sequence)]
+    [ShowIf("repeat")]
     [BoxGroup("Properties")]
     [SerializeField]
-    private BossMechanic mechanic;
+    private float delay = 0f;
 
     [ShowIf("type", AIActionType.sequence)]
     [BoxGroup("Properties")]
     [SerializeField]
-    private List<int> patterns;
+    private SkillSequence sequence;
 
-    [ShowIf("type", AIActionType.invincible)]
+    [HideIf("type", AIActionType.ability)]
+    [HideIf("type", AIActionType.sequence)]
+    [HideIf("type", AIActionType.movement)]
+    [HideIf("type", AIActionType.startPhase)]
+    [HideIf("type", AIActionType.endPhase)]
+    [HideIf("type", AIActionType.animation)]
+    [HideIf("type", AIActionType.kill)]
+    [HideIf("type", AIActionType.dialog)]
+    [HideIf("type", AIActionType.wait)]
+    [HideIf("type", AIActionType.signal)]
     [BoxGroup("Properties")]
     [SerializeField]
     private bool value;
@@ -136,16 +179,29 @@ public class AIAction
     [SerializeField]
     private SimpleSignal signal;
 
+    [HideIf("type", AIActionType.wait)]
+    [HideIf("type", AIActionType.kill)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private float wait = 0f;
+
     #endregion
 
-    private float waitTimer = 0;
+    private float elapsed = 0;
     private bool isActive = true;
     private Ability tempAbility;
-    private int skillCounter = 0;
+    private int counter = 0;
 
     //TODO: Add status effect
 
     #region Main Functions
+
+    public AIAction(float duration, AI npc)
+    {
+        this.type = AIActionType.wait;
+        this.duration = duration;
+        Initialize(npc);
+    }
 
     public void Initialize(AI npc)
     {
@@ -154,6 +210,7 @@ public class AIAction
         switch (this.type)
         {
             case AIActionType.ability: StartSkill(npc); break;
+            case AIActionType.sequence: StartSequence(); break;
             case AIActionType.kill: StartKill(npc); break;
             case AIActionType.animation: StartAnimation(npc); break;
             case AIActionType.cannotDie: StartCannotDie(npc); break;
@@ -196,6 +253,12 @@ public class AIAction
         return this.isActive;
     }
 
+    public float GetWait()
+    {
+        if (this.type == AIActionType.wait) return 0;
+        return this.wait;
+    }
+
     #endregion
 
 
@@ -210,8 +273,8 @@ public class AIAction
         if (this.overrideShowCastBar) this.tempAbility.showCastbar = this.showCastBar;
         if (this.overrideCooldown) this.tempAbility.cooldown = this.cooldown;
 
-        if (!this.repeatSkill) this.amount = 1;
-        this.skillCounter = 0;
+        if (!this.repeat) this.amount = 1;
+        this.counter = 0;
     }
 
     private void UpdateSkill(AI npc)
@@ -220,12 +283,16 @@ public class AIAction
 
         if (npc.values.isCharacterStunned()) this.tempAbility.ResetCharge();
 
-        if (this.tempAbility.state == AbilityState.notCharged) Charge(npc);
-        else if (this.tempAbility.state == AbilityState.targetRequired) CheckTargets(npc);
-        else if (this.tempAbility.state == AbilityState.charged
-              || this.tempAbility.state == AbilityState.ready) UseSkill(npc);
+        if (this.elapsed > 0) this.elapsed -= Time.deltaTime;
+        else
+        {
+            if (this.tempAbility.state == AbilityState.notCharged) Charge(npc);
+            else if (this.tempAbility.state == AbilityState.targetRequired) CheckTargets(npc);
+            else if (this.tempAbility.state == AbilityState.charged
+                  || this.tempAbility.state == AbilityState.ready) UseSkill(npc);
+        }
 
-        ResetAfterSkillCounter(npc);
+        if (this.counter >= this.amount) DisableSkill(npc);
     }
 
     private void Charge(AI npc)
@@ -255,12 +322,14 @@ public class AIAction
             npc.GetComponent<AIEvents>().HideTargetingSystem(this.tempAbility);
         }
 
-        this.skillCounter++;
-    }
+        this.elapsed = this.delay;
+        this.counter++;
 
-    private void ResetAfterSkillCounter(AI npc)
-    {
-        if (this.skillCounter >= this.amount) DisableSkill(npc);
+        if (!this.keepCast)
+        {
+            npc.GetComponent<AIEvents>().HideTargetingSystem(this.tempAbility);
+            npc.GetComponent<AIEvents>().UnChargeAbility(this.tempAbility, npc); //reset Charge
+        }
     }
 
     private void DisableSkill(AI npc)
@@ -275,11 +344,23 @@ public class AIAction
 
     #region Sequence
 
+    private void StartSequence()
+    {
+        if (!this.repeat) this.amount = 1;
+        this.counter = 0;
+    }
+
     private void UpdateSequence(AI npc)
     {
-        //casting here       
-        AbilityUtil.instantiateSequence(this.mechanic, npc, this.patterns);
-        Deactivate();
+        if (this.elapsed > 0) this.elapsed -= Time.deltaTime;
+        else 
+        {
+            this.sequence.InstantiateSequence(npc);
+            this.elapsed = this.delay;
+            this.counter++;
+        }
+
+        if(counter >= this.amount) Deactivate();
     }
 
     #endregion
@@ -289,12 +370,12 @@ public class AIAction
 
     private void StartWait()
     {
-        this.waitTimer = this.duration;
+        this.elapsed = this.duration;
     }
 
     private void UpdateWait()
     {
-        if (this.waitTimer > 0) this.waitTimer -= Time.deltaTime;
+        if (this.elapsed > 0) this.elapsed -= Time.deltaTime;
         else Deactivate();
     }
 
@@ -338,7 +419,7 @@ public class AIAction
 
     private void StartCannotDie(AI npc)
     {
-        npc.setCannotDie(true);
+        npc.setCannotDie(this.value);
         Deactivate();
     }
 
@@ -351,18 +432,18 @@ public class AIAction
     {
         string text = FormatUtil.GetLocalisedText(this.translationID, LocalisationFileType.dialogs);
         npc.GetComponent<AIEvents>().ShowDialog(text, this.duration);
-        this.waitTimer = this.duration;
+        this.elapsed = this.duration;
     }
 
     private void UpdateDialog()
     {
-        if (this.waitTimer > 0) this.waitTimer -= Time.deltaTime;
+        if (this.elapsed > 0) this.elapsed -= Time.deltaTime;
         else Deactivate();
     }
 
     private void DisableDialog()
     {
-        this.waitTimer = 0;
+        this.elapsed = 0;
     }
 
     #endregion
@@ -382,6 +463,7 @@ public class AIAction
 
     #endregion
 
+
     #region Signal
 
     private void StartSignal()
@@ -393,4 +475,16 @@ public class AIAction
     #endregion
 
     private void Deactivate() =>  this.isActive = false;    
+
+
+
+    private void AbilityChanged()
+    {
+        this.wait = (this.ability.castTime + this.delay) * this.amount;
+    }
+
+    private void RepeatChanged()
+    {
+        if (!this.repeat) this.amount = 1;
+    }
 }

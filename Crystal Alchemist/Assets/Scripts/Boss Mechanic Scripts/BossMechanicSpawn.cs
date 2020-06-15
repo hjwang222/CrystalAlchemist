@@ -146,13 +146,15 @@ public class BossMechanicSpawn : BossMechanicProperty
     private void Instantiate(Vector2 position, Quaternion rotation)
     {
         Character target = null;
+
         if (this.childProperty.AddTarget) target = this.target;
 
         if (this.childProperty.spawnObject.GetType() == typeof(GameObject))
         {
             GameObject spawnedObject = Instantiate(this.childProperty.spawnObject, position, Quaternion.identity, this.transform) as GameObject;
+
             SetSkill(spawnedObject.GetComponent<Skill>(), target, rotation);
-            if (spawnedObject.GetComponent<AI>() != null) spawnedObject.GetComponent<AI>().target = target;
+            SetAdd(spawnedObject.GetComponent<AI>(), target);
         }
         else if (this.childProperty.spawnObject.GetType() == typeof(Ability))
         {
@@ -162,6 +164,14 @@ public class BossMechanicSpawn : BossMechanicProperty
             Destroy(ability);
         }
     }
+
+    private void SetAdd(AI character, Character target)
+    {
+        character.PlayRespawnAnimation();
+        character.target = target;
+        character.transform.SetParent(null);
+    }
+
     private void SetSkill(Skill skill, Character target, Quaternion rotation)
     {
         if (skill != null)

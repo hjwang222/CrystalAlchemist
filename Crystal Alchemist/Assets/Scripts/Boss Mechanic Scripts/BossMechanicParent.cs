@@ -18,7 +18,7 @@ public class BossMechanicParent : BossMechanicProperty
         this.transform.rotation = this.GetRotation(this.selfProperty.rotationType, this.selfProperty.rotationFactor, this.selfProperty.GetOffset());
 
         Destroy(spawnpoint, 0.3f);
-
+        this.enabled = false;
     }
    
 }
