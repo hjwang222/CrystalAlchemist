@@ -88,10 +88,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 3912877756296141094}
   animator: {fileID: 5853850326603271721}
   shadow: {fileID: 4459175407930688011}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!114 &1807107929826497410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,9 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  rotateIt: 1
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
+  mode: 0
   snapRotationInDegrees: 0
 --- !u!1 &5124404407448343764
 GameObject:
@@ -311,7 +315,7 @@ GameObject:
   - component: {fileID: 3214083384821126128}
   - component: {fileID: 189122765788227639}
   - component: {fileID: 5853850326603271721}
-  - component: {fileID: 7981231653681903142}
+  - component: {fileID: 737512082980000110}
   m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
@@ -405,7 +409,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7981231653681903142
+--- !u!114 &737512082980000110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -414,10 +418,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5853850326603271718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
+  m_Script: {fileID: 11500000, guid: f3f5ddae41e56884489f1e37c0d76a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 1676703576389572161}
+  mainObject: {fileID: 1511520353593083073}
 --- !u!1 &7612512632417800682
 GameObject:
   m_ObjectHideFlags: 0

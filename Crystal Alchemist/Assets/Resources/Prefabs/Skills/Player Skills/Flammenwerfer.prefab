@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7418100249069785436}
   - component: {fileID: 5257727404935883419}
   - component: {fileID: 1969718782558145669}
-  - component: {fileID: 2642437566886130826}
   - component: {fileID: 8481685338697092485}
   - component: {fileID: 940192110461560283}
+  - component: {fileID: 4427129138668490009}
   m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
@@ -107,19 +107,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2642437566886130826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1969718782558145674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 3816868808247662347}
 --- !u!114 &8481685338697092485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +141,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &4427129138668490009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969718782558145674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f5ddae41e56884489f1e37c0d76a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainObject: {fileID: 6814274785137477229}
 --- !u!1 &6814274785137477229
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  type: 3
   positionHeight: 0
   colliderHeightOffset: -0.25
 --- !u!114 &7353042941051542758

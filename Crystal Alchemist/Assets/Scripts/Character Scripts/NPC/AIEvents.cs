@@ -19,7 +19,6 @@ public class AIEvents : CharacterCombat
     [Tooltip("False, wenn Animator Event verwendet wird")]
     private bool startImmediately = true;
 
-    private MiniDialogBox activeDialog;
     private AIPhase activePhase;
     private bool isActive;
     #endregion
@@ -67,15 +66,6 @@ public class AIEvents : CharacterCombat
             DestroyActivePhase();
             this.activePhase = Instantiate(phase);
             this.activePhase.Initialize(this.npc);
-        }
-    }
-
-    public void ShowDialog(string text, float duration)
-    {
-        if (this.activeDialog == null)
-        {
-            this.activeDialog = Instantiate(MasterManager.miniDialogBox, this.npc.transform);
-            this.activeDialog.setDialogBox(text, duration);
         }
     }
 }

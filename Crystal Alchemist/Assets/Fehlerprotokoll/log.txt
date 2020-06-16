@@ -1,0 +1,33 @@
+Exception 16.06.2020 12:37:52: MissingComponentException: There is no 'Animator' attached to the "Dummy" game object, but a script is trying to access it.
+You probably need to add a Animator to the game object "Dummy". Or your script needs to check if the component is attached before using it.
+Character.ResetValues () (at Assets/Scripts/Character Scripts/Base/Character.cs:99)
+Character.OnEnable () (at Assets/Scripts/Character Scripts/Base/Character.cs:80)
+
+Exception 16.06.2020 16:44:12: UnassignedReferenceException: The variable shadowRenderer of Breakable has not been assigned.
+You probably need to assign the shadowRenderer variable of the Breakable script in the inspector.
+Character.Dead (System.Boolean showAnimation) (at Assets/Scripts/Character Scripts/Base/Character.cs:407)
+Character.Dead () (at Assets/Scripts/Character Scripts/Base/Character.cs:388)
+Character.CheckDeath () (at Assets/Scripts/Character Scripts/Base/Character.cs:142)
+Character.updateResource (CostType type, ItemGroup item, System.Single value, System.Boolean showingDamageNumber) (at Assets/Scripts/Character Scripts/Base/Character.cs:290)
+Character.updateResource (CostType type, ItemGroup item, System.Single addResource) (at Assets/Scripts/Character Scripts/Base/Character.cs:279)
+Character.gotHit (Skill skill, System.Single percentage, System.Boolean knockback) (at Assets/Scripts/Character Scripts/Base/Character.cs:353)
+Character.gotHit (Skill skill, System.Single percentage) (at Assets/Scripts/Character Scripts/Base/Character.cs:383)
+Character.gotHit (Skill skill) (at Assets/Scripts/Character Scripts/Base/Character.cs:378)
+Skill.hitIt (Character target) (at Assets/Scripts/Skill Scripts/Skill.cs:247)
+Skill.hitIt (UnityEngine.Collider2D hittedObject) (at Assets/Scripts/Skill Scripts/Skill.cs:240)
+SkillStandardHit.OnTriggerEnter2D (UnityEngine.Collider2D hittedCharacter) (at Assets/Scripts/Skill Scripts/Skill Hit Trigger/SkillStandardHit.cs:12)
+
+Exception 16.06.2020 16:44:12: UnassignedReferenceException: The variable shadowRenderer of Breakable has not been assigned.
+You probably need to assign the shadowRenderer variable of the Breakable script in the inspector.
+Character.Dead (System.Boolean showAnimation) (at Assets/Scripts/Character Scripts/Base/Character.cs:407)
+Character.Dead () (at Assets/Scripts/Character Scripts/Base/Character.cs:388)
+Character.CheckDeath () (at Assets/Scripts/Character Scripts/Base/Character.cs:142)
+Character.updateResource (CostType type, ItemGroup item, System.Single value, System.Boolean showingDamageNumber) (at Assets/Scripts/Character Scripts/Base/Character.cs:290)
+Character.updateResource (CostType type, ItemGroup item, System.Single addResource) (at Assets/Scripts/Character Scripts/Base/Character.cs:279)
+Character.gotHit (Skill skill, System.Single percentage, System.Boolean knockback) (at Assets/Scripts/Character Scripts/Base/Character.cs:353)
+Character.gotHit (Skill skill, System.Single percentage) (at Assets/Scripts/Character Scripts/Base/Character.cs:383)
+Character.gotHit (Skill skill) (at Assets/Scripts/Character Scripts/Base/Character.cs:378)
+Skill.hitIt (Character target) (at Assets/Scripts/Skill Scripts/Skill.cs:247)
+Skill.hitIt (UnityEngine.Collider2D hittedObject) (at Assets/Scripts/Skill Scripts/Skill.cs:240)
+SkillStandardHit.OnTriggerEnter2D (UnityEngine.Collider2D hittedCharacter) (at Assets/Scripts/Skill Scripts/Skill Hit Trigger/SkillStandardHit.cs:12)
+

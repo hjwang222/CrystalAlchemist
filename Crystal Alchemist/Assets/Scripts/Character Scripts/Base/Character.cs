@@ -41,6 +41,12 @@ public class Character : MonoBehaviour
 
     [BoxGroup("Easy Access")]
     [Required]
+    [SerializeField]
+    [Tooltip("Position von Sprechblasen")]
+    private GameObject headPosition;
+
+    [BoxGroup("Easy Access")]
+    [Required]
     public GameObject activeSkillParent;
 
     [BoxGroup("Easy Access")]
@@ -390,15 +396,12 @@ public class Character : MonoBehaviour
             if (this.values.activeSkills[i].isAttachedToSender()) this.values.activeSkills[i].DeactivateIt();
         }
 
-        //TODO: Kill sofort (Skill noch aktiv)
-        StatusEffectUtil.RemoveAllStatusEffects(this.values.debuffs);
-        StatusEffectUtil.RemoveAllStatusEffects(this.values.buffs);
-
+        RemoveAllStatusEffects();
         this.values.currentState = CharacterState.dead;
 
         if (this.myRigidbody != null && this.myRigidbody.bodyType != RigidbodyType2D.Static) this.myRigidbody.velocity = Vector2.zero;
         if (this.boxCollider != null) this.boxCollider.enabled = false;
-        this.shadowRenderer.enabled = false;
+        if (this.shadowRenderer != null) this.shadowRenderer.enabled = false;
 
         //Play Death Effect
         if (showAnimation)
@@ -653,4 +656,18 @@ public class Character : MonoBehaviour
     }
 
     #endregion
+
+    public void ShowDialog(string text, float duration)
+    {        
+        MiniDialogBox dialogBox = Instantiate(MasterManager.miniDialogBox, this.transform);
+        float height = 0;
+        if (this.headPosition != null) height = this.headPosition.transform.localPosition.y;
+        dialogBox.setDialogBox(text, duration, height);        
+    }
+
+    public void RemoveAllStatusEffects()
+    {
+        StatusEffectUtil.RemoveAllStatusEffects(this.values.debuffs);
+        StatusEffectUtil.RemoveAllStatusEffects(this.values.buffs);
+    }
 }

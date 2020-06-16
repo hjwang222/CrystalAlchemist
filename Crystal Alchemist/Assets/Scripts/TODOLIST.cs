@@ -14,6 +14,7 @@ public class TODOLIST : MonoBehaviour
     // -> Music
 
     //TODO: Movement by AIAction
+    //IDEA: Head, Shoot, Ground Position. Vector or Gameobject?
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536248267194378282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2438936824352443029}
@@ -111,6 +111,7 @@ MonoBehaviour:
   shadowRenderer: {fileID: 4252439317337786063}
   respawnAnimation: {fileID: 0}
   skillStartPosition: {fileID: 1536248267194378282}
+  headPosition: {fileID: 0}
   activeSkillParent: {fileID: 4536096100877042891}
   activeStatusEffectParent: {fileID: 7092093423516748017}
   values: {fileID: 0}
@@ -374,7 +375,6 @@ GameObject:
   - component: {fileID: 4536096100035205209}
   - component: {fileID: 4536096100035205211}
   - component: {fileID: 4536096100035205208}
-  - component: {fileID: 4536096100035205215}
   - component: {fileID: 640011820555366839}
   m_Layer: 11
   m_Name: Sprite
@@ -470,19 +470,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4536096100035205215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4536096100035205204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcc1b5e2950c0504aae886f416523f1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 55980665602690939}
 --- !u!114 &640011820555366839
 MonoBehaviour:
   m_ObjectHideFlags: 0

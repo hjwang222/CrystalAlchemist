@@ -198,10 +198,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 1942275408024995949}
   animator: {fileID: 1421051230670556681}
   shadow: {fileID: 8280449274916686873}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!114 &6618190075303712838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  type: 3
   positionHeight: 0
   colliderHeightOffset: -0.5
 --- !u!114 &1040386303507051939
@@ -282,9 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  rotateIt: 1
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
+  mode: 0
   snapRotationInDegrees: 45
 --- !u!114 &2061831809823023025
 MonoBehaviour:
@@ -339,8 +344,8 @@ GameObject:
   - component: {fileID: 2875114918851550066}
   - component: {fileID: 712452891642831029}
   - component: {fileID: 1421051230670556681}
-  - component: {fileID: 8103579987424890013}
   - component: {fileID: 6952176598635262387}
+  - component: {fileID: 4236037004875328903}
   m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
@@ -435,19 +440,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8103579987424890013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6503707887029913252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 4944835584636789073}
 --- !u!114 &6952176598635262387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +458,19 @@ MonoBehaviour:
   selectColor: {r: 1, g: 0.9058824, b: 0.039215688, a: 1}
   precision: 0.25
   glowColor: {r: 5.03257, g: 1.6673802, b: 0, a: 1}
+--- !u!114 &4236037004875328903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6503707887029913252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f5ddae41e56884489f1e37c0d76a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainObject: {fileID: 4053507289354720650}
 --- !u!1001 &1464900554044714639
 PrefabInstance:
   m_ObjectHideFlags: 0

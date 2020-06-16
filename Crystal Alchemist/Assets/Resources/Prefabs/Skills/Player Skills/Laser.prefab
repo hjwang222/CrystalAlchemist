@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4902967834965054562}
   - component: {fileID: 6859513477840706715}
-  - component: {fileID: 4880534064240306478}
   - component: {fileID: 7727514552249890680}
+  - component: {fileID: 5106562027126882083}
   m_Layer: 13
   m_Name: Graphics
   m_TagString: Untagged
@@ -54,19 +54,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4880534064240306478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405954553086312987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 6303950438319133966}
 --- !u!210 &7727514552249890680
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -78,6 +65,19 @@ SortingGroup:
   m_SortingLayerID: -1702512615
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!114 &5106562027126882083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405954553086312987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f5ddae41e56884489f1e37c0d76a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainObject: {fileID: 1969711209088018434}
 --- !u!1 &1969711209088018434
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +221,6 @@ MonoBehaviour:
   skill: {fileID: 0}
   impactEffect: {fileID: 11400000, guid: 2c75b34599ffd2b419ab695b65005cdb, type: 2}
   distanceBetweenImpacts: 0.1
-  lights: {fileID: 0}
   distance: 99
   laserSprite: {fileID: 3924551678506968721}
   targetRequired: 0
@@ -235,7 +234,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3924551678506968722}
   - component: {fileID: 3924551678506968721}
-  - component: {fileID: 4156987265135631255}
   - component: {fileID: 834859086395696608}
   m_Layer: 13
   m_Name: Line
@@ -309,19 +307,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4156987265135631255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3924551678506968723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skill: {fileID: 6303950438319133966}
 --- !u!114 &834859086395696608
 MonoBehaviour:
   m_ObjectHideFlags: 0

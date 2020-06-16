@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6932655762072940684}
   - component: {fileID: 5634262924188748619}
   - component: {fileID: 2130774073635876181}
-  - component: {fileID: 3944331230545852029}
+  - component: {fileID: 6072457022803033972}
   m_Layer: 13
   m_Name: Sprite
   m_TagString: Skill
@@ -213,7 +213,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3944331230545852029
+--- !u!114 &6072457022803033972
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,10 +222,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2130774073635876186}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
+  m_Script: {fileID: 11500000, guid: f3f5ddae41e56884489f1e37c0d76a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 8182664675407730783}
+  mainObject: {fileID: 4053507289354720650}
 --- !u!1 &4053507289354720650
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,11 +315,16 @@ MonoBehaviour:
   myRigidbody: {fileID: 1942275408024995949}
   animator: {fileID: 2130774073635876181}
   shadow: {fileID: 8528484996259057469}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
   standAlone: 1
-  positionOffset: 0
 --- !u!114 &4990070898326458771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  type: 3
   positionHeight: 0
   colliderHeightOffset: -0.5
 --- !u!114 &6683749249998826823

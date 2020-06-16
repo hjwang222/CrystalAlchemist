@@ -105,8 +105,8 @@ GameObject:
   - component: {fileID: 1107838214050882013}
   - component: {fileID: 1107838214050882015}
   - component: {fileID: 1107838214050882012}
-  - component: {fileID: 1107838214050882011}
   - component: {fileID: 2762090324754505581}
+  - component: {fileID: 5004775229364597194}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -199,19 +199,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1107838214050882011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1107838214050882000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcc1b5e2950c0504aae886f416523f1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 3560735132152297215}
 --- !u!114 &2762090324754505581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +217,19 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0
   glowColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &5004775229364597194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107838214050882000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f5ddae41e56884489f1e37c0d76a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainObject: {fileID: 1185713049241957143}
 --- !u!1 &1185713049241957143
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +314,7 @@ MonoBehaviour:
   shadowRenderer: {fileID: 2016206444539810997}
   respawnAnimation: {fileID: 0}
   skillStartPosition: {fileID: 3892359947461909517}
+  headPosition: {fileID: 0}
   activeSkillParent: {fileID: 1107838212211391823}
   activeStatusEffectParent: {fileID: 6034976085599367541}
   values: {fileID: 0}

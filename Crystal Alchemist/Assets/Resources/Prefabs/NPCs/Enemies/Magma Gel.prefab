@@ -120,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 5026383991709977235}
   aggroStats: {fileID: 11400000, guid: 74151ff649b937b418adb75846e519d1, type: 2}
+  cluePosition: {fileID: 0}
 --- !u!58 &2711615262647934176
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -220,6 +221,7 @@ MonoBehaviour:
   shadowRenderer: {fileID: 9101974201244086688}
   respawnAnimation: {fileID: 0}
   skillStartPosition: {fileID: 7914839587969846799}
+  headPosition: {fileID: 0}
   activeSkillParent: {fileID: 8932006801567842595}
   activeStatusEffectParent: {fileID: 2840507917755813145}
   values: {fileID: 0}
@@ -499,8 +501,8 @@ GameObject:
   - component: {fileID: 8932006801801387441}
   - component: {fileID: 8932006801801387443}
   - component: {fileID: 8932006801801387440}
-  - component: {fileID: 8932006801801387447}
   - component: {fileID: 7303095536852381337}
+  - component: {fileID: 6173239842456863999}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -593,19 +595,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8932006801801387447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8932006801801387452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcc1b5e2950c0504aae886f416523f1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 5026383991709977235}
 --- !u!114 &7303095536852381337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,6 +613,19 @@ MonoBehaviour:
   selectColor: {r: 1, g: 0.9333334, b: 0.6431373, a: 1}
   precision: 0.5
   glowColor: {r: 2.9960785, g: 1.3490196, b: 0, a: 1}
+--- !u!114 &6173239842456863999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932006801801387452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f5ddae41e56884489f1e37c0d76a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainObject: {fileID: 7268659838857056123}
 --- !u!1001 &4949269460512988576
 PrefabInstance:
   m_ObjectHideFlags: 0

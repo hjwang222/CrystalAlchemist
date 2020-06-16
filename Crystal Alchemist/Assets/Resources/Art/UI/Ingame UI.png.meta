@@ -19,7 +19,7 @@ TextureImporter:
     second: Zielhilfe
   - first:
       213: 3993091532626672527
-    second: Ingame UI_5
+    second: Clock
   - first:
       213: 6916297657679757966
     second: Analyse Item
@@ -46,7 +46,7 @@ TextureImporter:
     second: Cast Fortschritt
   - first:
       213: -5506447592894993693
-    second: Ingame UI_14
+    second: Time Bar
   - first:
       213: 396192877917210399
     second: Ingame UI_15
@@ -87,7 +87,7 @@ TextureImporter:
       213: -6053560089773696622
     second: Healthbar
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -107,6 +107,7 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -141,6 +142,8 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -405,9 +408,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 208
+        y: 209
         width: 32
-        height: 16
+        height: 6
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -585,6 +588,27 @@ TextureImporter:
       bones: []
       spriteID: 2999e86eb2f6dfba0800000000000000
       internalID: -6053560089773696622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Time Bar
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 216
+        width: 32
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 10, y: 0, z: 2, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ea6033b61b2593b0800000000000000
+      internalID: -5506447592894993693
       vertices: []
       indices: 
       edges: []

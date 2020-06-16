@@ -23,4 +23,7 @@ public class AnimationHelper : MonoBehaviour
     {
         if (this.mainObject.GetComponent<Treasure>() != null) this.mainObject.GetComponent<Treasure>().SetEnabled(false);
     }
+
+    public void ResetRotation() => this.transform.rotation = Quaternion.identity;
+
 }

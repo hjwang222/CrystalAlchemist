@@ -151,22 +151,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: Boomerang
-  skillNameEnglish: Boomerang
   spriteRenderer: {fileID: 1495712679004980976}
   myRigidbody: {fileID: 3342286359297243341}
   animator: {fileID: 5144022535530275040}
   shadow: {fileID: 3387214931352689131}
-  positionOffset: 0.75
-  attachToSender: 0
-  lockDirection: 0
-  canAffectedBytimeDistortion: 1
-  hasDuration: 0
-  maxDuration: 1
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!114 &3431575031854180345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,10 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 980826649107003252}
-  rotateIt: 1
-  rotateOnUpdate: 0
-  keepOriginalRotation: 0
-  rotationModifier: 0
+  mode: 0
   snapRotationInDegrees: 0
 --- !u!114 &1017361218172941164
 MonoBehaviour:
@@ -254,6 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  type: 3
   positionHeight: 0
   colliderHeightOffset: -0.5
 --- !u!1 &5144022535530275041
@@ -267,7 +263,7 @@ GameObject:
   - component: {fileID: 4234658162770410807}
   - component: {fileID: 1495712679004980976}
   - component: {fileID: 5144022535530275040}
-  - component: {fileID: 8665095714031663844}
+  - component: {fileID: 4378419218048243685}
   m_Layer: 13
   m_Name: Boomerang
   m_TagString: Skill
@@ -304,6 +300,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -358,7 +355,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8665095714031663844
+--- !u!114 &4378419218048243685
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -367,10 +364,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5144022535530275041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d78830ebada1c8479731b7393915754, type: 3}
+  m_Script: {fileID: 11500000, guid: f3f5ddae41e56884489f1e37c0d76a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 980826649107003252}
+  mainObject: {fileID: 925074013887456554}
 --- !u!1 &8920764398535549051
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +416,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
