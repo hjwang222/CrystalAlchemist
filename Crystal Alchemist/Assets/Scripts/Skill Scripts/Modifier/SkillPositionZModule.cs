@@ -36,13 +36,5 @@ public class SkillPositionZModule : SkillModifier
             case PositionType.center: this.transform.position = this.skill.sender.GetShootingPosition(); break;
             case PositionType.custom: this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + positionHeight); break;
         }
-
-        if (this.skill.shadow != null)
-        {
-            float changeX = 0;
-            if (this.skill.GetDirection().y < 0) changeX = this.skill.GetDirection().y;
-        
-            this.skill.shadow.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + colliderHeightOffset + (colliderHeightOffset * changeX));
-        }
     }
 }

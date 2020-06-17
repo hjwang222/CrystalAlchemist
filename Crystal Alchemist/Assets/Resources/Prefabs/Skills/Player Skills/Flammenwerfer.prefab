@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5257727404935883419}
   - component: {fileID: 1969718782558145669}
   - component: {fileID: 8481685338697092485}
-  - component: {fileID: 940192110461560283}
   - component: {fileID: 4427129138668490009}
   m_Layer: 13
   m_Name: Sprite
@@ -32,6 +31,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 8837064256410170133}
   - {fileID: 2509069244965516856}
   m_Father: {fileID: 2537374611990174651}
   m_RootOrder: 0
@@ -125,22 +125,6 @@ MonoBehaviour:
   selectColor: {r: 1, g: 0.9960785, b: 0.8980393, a: 1}
   precision: 0
   glowColor: {r: 5.992157, g: 3.6705883, b: 1.3490196, a: 1}
---- !u!58 &940192110461560283
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1969718782558145674}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &4427129138668490009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +246,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5257727404935883419}
   myRigidbody: {fileID: 8945697548278569866}
   animator: {fileID: 1969718782558145669}
-  shadow: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -382,7 +365,7 @@ MonoBehaviour:
   skill: {fileID: 0}
   type: 3
   positionHeight: 0
-  colliderHeightOffset: -0.25
+  colliderHeightOffset: -0.5
 --- !u!114 &7353042941051542758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,8 +379,70 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  canBeReflected: 0
+  canBeReflected: 1
   skillOnImpact: {fileID: 0}
+  skillCollider: {fileID: 7671088143910755323}
+--- !u!1 &7790507635526815855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8837064256410170133}
+  - component: {fileID: 2898965448982412241}
+  - component: {fileID: 7671088143910755323}
+  m_Layer: 13
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8837064256410170133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790507635526815855}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7418100249069785436}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &2898965448982412241
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790507635526815855}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &7671088143910755323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790507635526815855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7c1bd38a2a9de47a7ea21879a59e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 3816868808247662347}
 --- !u!1001 &4484190714160488513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -443,7 +488,7 @@ PrefabInstance:
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2083207974102423161, guid: 42a4137c3904df94aa0b798edf1c5d6b,
         type: 3}

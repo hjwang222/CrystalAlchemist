@@ -30,10 +30,6 @@ public class Skill : MonoBehaviour
     [BoxGroup("Easy Access")]
     public Animator animator;
 
-    [BoxGroup("Easy Access")]
-    [Tooltip("Schatten")]
-    public SpriteRenderer shadow;
-
     [BoxGroup("Actions")]
     [SerializeField]
     public UnityEvent OnStart;
@@ -144,7 +140,6 @@ public class Skill : MonoBehaviour
         if (this.myRigidbody == null) this.myRigidbody = GetComponent<Rigidbody2D>();
         if (this.spriteRenderer == null) this.spriteRenderer = GetComponent<SpriteRenderer>();
         if (this.animator == null) this.animator = GetComponent<Animator>();
-        if (this.shadow != null && this.spriteRenderer != null) this.shadow.sprite = this.spriteRenderer.sprite;
 
         this.durationTimeLeft = this.maxDuration;
         this.delayTimeLeft = this.delay;
@@ -180,8 +175,6 @@ public class Skill : MonoBehaviour
 
     public void Update()
     {
-        if (this.spriteRenderer != null && this.shadow != null) this.shadow.sprite = this.spriteRenderer.sprite;
-
         if (this.animator != null && !this.lockDirection)
             AnimatorUtil.SetAnimDirection(GetDirection(), this.animator);
 

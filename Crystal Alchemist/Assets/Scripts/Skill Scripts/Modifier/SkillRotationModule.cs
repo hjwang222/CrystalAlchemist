@@ -46,9 +46,4 @@ public class SkillRotationModule : SkillModifier
 
         return angle;
     }
-
-    private void FixedUpdate()
-    {    
-        if (this.skill.spriteRenderer != null && this.skill.shadow != null) this.skill.shadow.transform.rotation = this.skill.spriteRenderer.transform.rotation;   
-    }
 }

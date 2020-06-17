@@ -9,7 +9,7 @@ public class SkillProjectileHit : SkillHitTrigger
     [InfoBox("Projektile stoppen beim Aufprall und triggern die \"Hit\"-Animation. Kein Schaden!", InfoMessageType.None)]
     [SerializeField]
     private Ability skillOnImpact;
-       
+
     private void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
         stopProjectile(hittedCharacter);
@@ -29,6 +29,7 @@ public class SkillProjectileHit : SkillHitTrigger
             || (hittedCharacter.GetComponent<Character>() == null && !hittedCharacter.isTrigger)) //Wall
             && !isReflected(hittedCharacter))
         {
+            //if(this.skillCollider != null) this.transform.position = this.skillCollider.transform.position;
             placeImpactSkill();
 
             AnimatorUtil.SetAnimatorParameter(this.skill.animator, "Hit");
@@ -38,8 +39,8 @@ public class SkillProjectileHit : SkillHitTrigger
 
     private bool isReflected(Collider2D hittedCharacter)
     {
-        if (hittedCharacter.GetComponent<SkillCollider2DHelper>() != null
-            && hittedCharacter.GetComponent<SkillCollider2DHelper>().skill.GetComponent<SkillReflector>() != null
+        if (hittedCharacter.GetComponent<SkillCollider>() != null
+            && hittedCharacter.GetComponent<SkillCollider>().skill.GetComponent<SkillReflector>() != null
             && this.canBeReflected) return true;
 
         return false;

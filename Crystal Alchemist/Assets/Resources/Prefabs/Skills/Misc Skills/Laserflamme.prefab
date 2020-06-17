@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5446557234535357358}
   - component: {fileID: 4321351672686956603}
   - component: {fileID: 5646575447307628004}
-  - component: {fileID: 1485117890447238215}
   m_Layer: 12
   m_Name: Laserflamme
   m_TagString: Untagged
@@ -50,6 +49,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -120,27 +120,16 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5446557234535357358}
   myRigidbody: {fileID: 0}
   animator: {fileID: 4321351672686956603}
-  shadow: {fileID: 0}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
---- !u!58 &1485117890447238215
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7205093712895476430}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.19401503}
-  serializedVersion: 2
-  m_Radius: 0.30598497
+  standAlone: 1
 --- !u!1001 &6553441244877042484
 PrefabInstance:
   m_ObjectHideFlags: 0

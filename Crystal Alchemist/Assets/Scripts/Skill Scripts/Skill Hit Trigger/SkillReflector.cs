@@ -4,9 +4,9 @@ public class SkillReflector : SkillHitTrigger
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<SkillCollider2DHelper>() != null)
+        if (collision.GetComponent<SkillCollider>() != null)
         {
-            Skill skill = collision.GetComponent<SkillCollider2DHelper>().skill;
+            Skill skill = collision.GetComponent<SkillCollider>().skill;
 
             if (skill != null && isReflected(skill))
             {

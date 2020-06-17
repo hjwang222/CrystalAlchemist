@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7078203054151147465}
   - component: {fileID: 8528484996259057469}
   - component: {fileID: 4929557310536244856}
+  - component: {fileID: 2631322146748977312}
   m_Layer: 13
   m_Name: shadow
   m_TagString: Untagged
@@ -109,6 +110,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.62123746, y: 0.30791843}
   m_EdgeRadius: 0
+--- !u!114 &2631322146748977312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571500076837048357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7c1bd38a2a9de47a7ea21879a59e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 8182664675407730783}
 --- !u!1 &2130774073635876186
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +328,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5634262924188748619}
   myRigidbody: {fileID: 1942275408024995949}
   animator: {fileID: 2130774073635876181}
-  shadow: {fileID: 8528484996259057469}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
