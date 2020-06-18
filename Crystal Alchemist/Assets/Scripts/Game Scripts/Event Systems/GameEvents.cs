@@ -25,6 +25,8 @@ public class GameEvents : MonoBehaviour
     public Action<Vector2, Action, Action> OnSleep;
     public Action<Vector2, Action, Action> OnWakeUp;
     public Action<WarningType> OnWarning;
+    public Action<float, float, float> OnCameraShake;
+    public Action<float> OnCameraStill;
 
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
     public void DoMenuOpen(CharacterState state) => this.OnMenuOpen?.Invoke(state);  
@@ -38,4 +40,7 @@ public class GameEvents : MonoBehaviour
     public void DoWarning(WarningType type) => this.OnWarning?.Invoke(type);
     public void DoSleep(Vector2 position, Action before, Action after) => this.OnSleep?.Invoke(position, before, after);
     public void DoWakeUp(Vector2 position, Action before, Action after) => this.OnWakeUp?.Invoke(position, before, after);
+
+    public void DoCameraShake(float strength, float duration, float speed) => this.OnCameraShake?.Invoke(strength, duration, speed);
+    public void DoCameraStill(float speed) => this.OnCameraStill?.Invoke(speed);
 }

@@ -19,6 +19,7 @@ MonoBehaviour:
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 0}
     overrideCastTime: 0
     castTime: 0
@@ -40,6 +41,7 @@ MonoBehaviour:
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 0}
     overrideCastTime: 0
     castTime: 0
@@ -61,6 +63,7 @@ MonoBehaviour:
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 0}
     overrideCastTime: 0
     castTime: 0
@@ -76,48 +79,6 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 4
-  - type: 2
-    position: {x: 0, y: 0}
-    translationID: 
-    duration: 1
-    nextPhase: {fileID: 0}
-    animations: 
-    ability: {fileID: 0}
-    overrideCastTime: 0
-    castTime: 0
-    overrideShowCastBar: 0
-    showCastBar: 0
-    overrideCooldown: 0
-    cooldown: 0
-    repeat: 0
-    keepCast: 0
-    amount: 1
-    delay: 0
-    sequence: {fileID: 0}
-    value: 0
-    signal: {fileID: 0}
-    wait: 0
-  - type: 2
-    position: {x: 0, y: 0}
-    translationID: 
-    duration: 1
-    nextPhase: {fileID: 0}
-    animations: 
-    ability: {fileID: 0}
-    overrideCastTime: 0
-    castTime: 0
-    overrideShowCastBar: 0
-    showCastBar: 0
-    overrideCooldown: 0
-    cooldown: 0
-    repeat: 0
-    keepCast: 0
-    amount: 1
-    delay: 0
-    sequence: {fileID: 0}
-    value: 0
-    signal: {fileID: 0}
-    wait: 0
   loopActions: 1
   events:
   - triggers:
@@ -132,6 +93,7 @@ MonoBehaviour:
       duration: 8
       nextPhase: {fileID: 0}
       animations: 
+      isTrigger: 0
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0
@@ -147,12 +109,35 @@ MonoBehaviour:
       value: 1
       signal: {fileID: 0}
       wait: 0
+    - type: 10
+      position: {x: 0, y: 0}
+      translationID: 
+      duration: 0
+      nextPhase: {fileID: 0}
+      animations: Resting
+      isTrigger: 0
+      ability: {fileID: 0}
+      overrideCastTime: 0
+      castTime: 0
+      overrideShowCastBar: 0
+      showCastBar: 0
+      overrideCooldown: 0
+      cooldown: 0
+      repeat: 0
+      keepCast: 0
+      amount: 0
+      delay: 0
+      sequence: {fileID: 0}
+      value: 1
+      signal: {fileID: 0}
+      wait: 0
     - type: 1
       position: {x: 0, y: 0}
       translationID: Titania5
       duration: 2
       nextPhase: {fileID: 0}
       animations: 
+      isTrigger: 0
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0
@@ -174,6 +159,7 @@ MonoBehaviour:
       duration: 4
       nextPhase: {fileID: 0}
       animations: 
+      isTrigger: 0
       ability: {fileID: 11400000, guid: b0e21482f0fd4a84196c74d2a4ca1b4b, type: 2}
       overrideCastTime: 0
       castTime: 0
@@ -188,13 +174,14 @@ MonoBehaviour:
       sequence: {fileID: 0}
       value: 0
       signal: {fileID: 0}
-      wait: 8
+      wait: 12
     - type: 7
       position: {x: 0, y: 0}
       translationID: 
       duration: 8
       nextPhase: {fileID: 0}
       animations: 
+      isTrigger: 0
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0
@@ -210,12 +197,35 @@ MonoBehaviour:
       value: 0
       signal: {fileID: 0}
       wait: 0
+    - type: 10
+      position: {x: 0, y: 0}
+      translationID: 
+      duration: 0
+      nextPhase: {fileID: 0}
+      animations: Resting
+      isTrigger: 0
+      ability: {fileID: 0}
+      overrideCastTime: 0
+      castTime: 0
+      overrideShowCastBar: 0
+      showCastBar: 0
+      overrideCooldown: 0
+      cooldown: 0
+      repeat: 0
+      keepCast: 0
+      amount: 0
+      delay: 0
+      sequence: {fileID: 0}
+      value: 0
+      signal: {fileID: 0}
+      wait: 0
     - type: 5
       position: {x: 0, y: 0}
       translationID: 
       duration: 4
       nextPhase: {fileID: 11400000, guid: 022e02d2342963249a5b807d3dd7ce01, type: 2}
       animations: 
+      isTrigger: 0
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0

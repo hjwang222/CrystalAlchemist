@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3147110848633641529}
   - component: {fileID: 7392839835140343282}
   - component: {fileID: 5295531109704958827}
+  - component: {fileID: 473215762142486901}
   m_Layer: 13
   m_Name: Nitro
   m_TagString: Skill
@@ -55,7 +56,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6809401362660781500}
   myRigidbody: {fileID: 3416433163101705802}
   animator: {fileID: 7392839835140343282}
-  shadow: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -256,6 +256,21 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0.26
   glowColor: {r: 1.4150944, g: 4, b: 1.5630821, a: 1}
+--- !u!114 &473215762142486901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999009161233943469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435f35439b15fbc4c940b73be0934a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 3
+  duration: 0.5
+  speed: 5
 --- !u!1 &3004850705707648969
 GameObject:
   m_ObjectHideFlags: 0

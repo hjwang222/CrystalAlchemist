@@ -25,5 +25,4 @@ public class AnimationHelper : MonoBehaviour
     }
 
     public void ResetRotation() => this.transform.rotation = Quaternion.identity;
-
 }

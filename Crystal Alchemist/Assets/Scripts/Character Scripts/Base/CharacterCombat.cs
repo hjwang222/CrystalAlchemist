@@ -6,8 +6,9 @@ public class CharacterCombat : MonoBehaviour
 {
     private CastBar activeCastBar;
     private TargetingSystem targetingSystem;
+    private Character chara;
 
-    public void InitializeTargeting(Character sender)
+    public void InitializeCombat(Character sender)
     {
         if (sender != null)
         {
@@ -15,12 +16,13 @@ public class CharacterCombat : MonoBehaviour
             this.targetingSystem.Initialize(sender);
             this.targetingSystem.name = MasterManager.targetingSystem.name;
             this.targetingSystem.gameObject.SetActive(false);
+            this.chara = sender;
         }
         else
         {
             Debug.Log("Character Combat missing Sender: " + this.gameObject);
         }
-    }
+    }    
 
     public TargetingSystem GetTargetingSystem()
     {
@@ -43,7 +45,7 @@ public class CharacterCombat : MonoBehaviour
         ShowCastBar(ability, character); //Show Castbar
         setSpeedDuringCasting(ability, character); //Set Speed during casting
         ability.ShowCastingIndicator(target);
-        //Animations
+        AnimatorUtil.SetAnimatorParameter(this.chara.animator, "Casting", true);
     }
 
     public void UnChargeAbility(Ability ability, Character character)
@@ -53,7 +55,7 @@ public class CharacterCombat : MonoBehaviour
         deactivatePlayerButtonUp(ability, character); //deactivate Skill when button up, Player only
         resetSpeedAfterCasting(character); //set Speed to normal
         ability.HideIndicator();
-        //Animations
+        AnimatorUtil.SetAnimatorParameter(this.chara.animator, "Casting", false);
     }
 
     private void setSpeedDuringCasting(Ability ability, Character character)

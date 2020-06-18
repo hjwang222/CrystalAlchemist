@@ -61,6 +61,11 @@ public class AIAction
     [SerializeField]
     private string animations;
 
+    [ShowIf("type", AIActionType.animation)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private bool isTrigger = true;
+
     [ShowIf("type", AIActionType.ability)]
     [BoxGroup("Properties")]
     [SerializeField]
@@ -165,11 +170,11 @@ public class AIAction
     [HideIf("type", AIActionType.movement)]
     [HideIf("type", AIActionType.startPhase)]
     [HideIf("type", AIActionType.endPhase)]
-    [HideIf("type", AIActionType.animation)]
     [HideIf("type", AIActionType.kill)]
     [HideIf("type", AIActionType.dialog)]
     [HideIf("type", AIActionType.wait)]
     [HideIf("type", AIActionType.signal)]
+    [HideIf("isTrigger")]
     [BoxGroup("Properties")]
     [SerializeField]
     private bool value;
@@ -402,7 +407,8 @@ public class AIAction
 
     private void StartAnimation(AI npc)
     {
-        AnimatorUtil.SetAnimatorParameter(npc.animator, this.animations);
+        if(this.isTrigger) AnimatorUtil.SetAnimatorParameter(npc.animator, this.animations);
+        else AnimatorUtil.SetAnimatorParameter(npc.animator, this.animations, this.value);
         Deactivate();
     }
 

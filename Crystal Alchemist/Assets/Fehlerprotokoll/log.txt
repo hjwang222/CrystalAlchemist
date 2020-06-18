@@ -812,3 +812,8 @@ AIPhase.SetNextAction (AI npc) (at Assets/Scripts/Scriptable Objects/Objects/AI/
 AIPhase.Updating (AI npc) (at Assets/Scripts/Scriptable Objects/Objects/AI/AIPhase.cs:53)
 AIEvents.Update () (at Assets/Scripts/Character Scripts/NPC/AIEvents.cs:39)
 
+Exception 18.06.2020 23:13:29: UnassignedReferenceException: The variable mainObject of AnimationHelper has not been assigned.
+You probably need to assign the mainObject variable of the AnimationHelper script in the inspector.
+UnityEngine.GameObject.GetComponent[T] () (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+AnimationHelper.DestroyIt () (at Assets/Scripts/AnimationHelper/AnimationHelper.cs:12)
+

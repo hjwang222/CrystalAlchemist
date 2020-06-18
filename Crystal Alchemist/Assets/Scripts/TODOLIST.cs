@@ -20,11 +20,9 @@ public class TODOLIST : MonoBehaviour
     //TODO: Projectile Offset
     //TODO: DialogBox Titania (NPC)
 
-    //TODO: Blick Sound
-    //ANIMATIONS: Titania Casting
-    //TODO: Splash Sound
+    //TODO: Sounds
     //REWORK: Arena Bounds
-    //TODO: Reward and Exit
+    //TODO: Reward and Exit and Animation
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

@@ -19,7 +19,7 @@ public class PlayerAbilities : CharacterCombat
     public void Initialize(Player player)
     {
         this.player = player;
-        InitializeTargeting(this.player);
+        InitializeCombat(this.player);
         this.SetTimeValue(this.timeLeftValue);
         this.skillSet.SetSender(player);
     }

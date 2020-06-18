@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5827068402827264243}
   - component: {fileID: 3147110848633641529}
   - component: {fileID: 3361751941292182264}
+  - component: {fileID: 8264988711905099936}
   m_Layer: 13
   m_Name: Explosion
   m_TagString: Skill
@@ -55,7 +56,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6809401362660781500}
   myRigidbody: {fileID: 3416433163101705802}
   animator: {fileID: 7380354942667108071}
-  shadow: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -130,7 +130,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &7380354942667108071
@@ -255,6 +255,21 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0
   glowColor: {r: 4, g: 2.9969633, b: 0.96226406, a: 1}
+--- !u!114 &8264988711905099936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999009161233943469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435f35439b15fbc4c940b73be0934a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 2
+  duration: 0.5
+  speed: 5
 --- !u!1 &3004850705707648969
 GameObject:
   m_ObjectHideFlags: 0

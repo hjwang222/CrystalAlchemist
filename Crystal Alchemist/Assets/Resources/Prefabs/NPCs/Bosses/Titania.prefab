@@ -101,7 +101,6 @@ GameObject:
   - component: {fileID: 3020177092142690267}
   - component: {fileID: 3020177092142690265}
   - component: {fileID: 8451706886356656604}
-  - component: {fileID: 8440646862610296559}
   - component: {fileID: 7433217420969690547}
   m_Layer: 11
   m_Name: Sprite
@@ -194,25 +193,6 @@ MonoBehaviour:
   selectColor: {r: 0.82745105, g: 0.9176471, b: 1, a: 1}
   precision: 0.05
   glowColor: {r: 2.7643976, g: 5.361256, b: 7.999999, a: 1}
---- !u!95 &8440646862610296559
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3020177092142690262}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7433217420969690547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 55d358f1ae5b28f45b4f5f4f5a55089c, type: 2}
   myRigidbody: {fileID: 3945848509854940437}
-  animator: {fileID: 8440646862610296559}
+  animator: {fileID: 910524742380246583}
   boxCollider: {fileID: 3020177091971815233}
   shadowRenderer: {fileID: 5485388855570139274}
   respawnAnimation: {fileID: 0}

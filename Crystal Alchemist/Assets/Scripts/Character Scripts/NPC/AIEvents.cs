@@ -24,7 +24,7 @@ public class AIEvents : CharacterCombat
     private bool isActive;
     #endregion
 
-    private void Start() => InitializeTargeting(this.npc);    
+    private void Start() => InitializeCombat(this.npc);    
 
     private void OnEnable()
     {

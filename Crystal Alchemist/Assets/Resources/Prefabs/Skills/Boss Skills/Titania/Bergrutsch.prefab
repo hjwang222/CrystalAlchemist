@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 1642011449708259747}
   - component: {fileID: 1302920919789469071}
   - component: {fileID: 5008262246791578747}
+  - component: {fileID: 2144820657493714528}
   m_Layer: 13
   m_Name: Bergrutsch
   m_TagString: Skill
@@ -280,6 +281,21 @@ MonoBehaviour:
   skill: {fileID: 0}
   mode: 1
   snapRotationInDegrees: 0
+--- !u!114 &2144820657493714528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3782235203536385092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435f35439b15fbc4c940b73be0934a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength: 1
+  duration: 0.5
+  speed: 5
 --- !u!1 &5038684798769684981
 GameObject:
   m_ObjectHideFlags: 0
