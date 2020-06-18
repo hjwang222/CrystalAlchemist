@@ -13,44 +13,6 @@ MonoBehaviour:
   m_Name: Titania 6 Enrage
   m_EditorClassIdentifier: 
   actions:
-  - type: 0
-    position: {x: 0.5, y: 2.5}
-    translationID: 
-    duration: 4
-    nextPhase: {fileID: 0}
-    animations: 
-    ability: {fileID: 0}
-    overrideCastTime: 0
-    castTime: 0
-    overrideShowCastBar: 0
-    showCastBar: 0
-    overrideCooldown: 0
-    cooldown: 0
-    repeatSkill: 0
-    amount: 1
-    mechanic: {fileID: 0}
-    patterns: 
-    value: 0
-    signal: {fileID: 0}
-  - type: 1
-    position: {x: 0, y: 0}
-    translationID: Titania6
-    duration: 4
-    nextPhase: {fileID: 0}
-    animations: 
-    ability: {fileID: 0}
-    overrideCastTime: 0
-    castTime: 0
-    overrideShowCastBar: 0
-    showCastBar: 0
-    overrideCooldown: 0
-    cooldown: 0
-    repeatSkill: 0
-    amount: 1
-    mechanic: {fileID: 0}
-    patterns: 
-    value: 0
-    signal: {fileID: 0}
   - type: 3
     position: {x: 0, y: 0}
     translationID: 
@@ -64,11 +26,13 @@ MonoBehaviour:
     showCastBar: 1
     overrideCooldown: 0
     cooldown: 0
-    repeatSkill: 0
+    repeat: 0
+    keepCast: 0
     amount: 1
-    mechanic: {fileID: 0}
-    patterns: 
+    delay: 1
+    sequence: {fileID: 0}
     value: 0
     signal: {fileID: 0}
-  loopActions: 0
+    wait: 0
+  loopActions: 1
   events: []

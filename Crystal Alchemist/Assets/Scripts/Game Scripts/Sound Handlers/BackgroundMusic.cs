@@ -16,4 +16,10 @@ public class BackgroundMusic : MonoBehaviour
         yield return new WaitForEndOfFrame();
         MusicEvents.current.PlayMusic(this.startMusic, this.loopMusic);
     }
+
+    public void PlayMusic(AudioClip music)
+    {
+        MusicEvents.current.StopMusic();
+        MusicEvents.current.PlayMusic(null, music);
+    }
 }

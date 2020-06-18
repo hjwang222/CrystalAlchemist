@@ -105,7 +105,7 @@ public class CharacterCombat : MonoBehaviour
     }
 
 
-    public void ShowTargetingSystem(Ability ability)
+    public virtual void ShowTargetingSystem(Ability ability)
     {
         if (this.targetingSystem != null &&  !this.targetingSystem.gameObject.activeInHierarchy)
         {
@@ -128,12 +128,11 @@ public class CharacterCombat : MonoBehaviour
         return 0f;
     }
 
-    public List<Character> GetTargetsFromTargeting()
+    public virtual List<Character> GetTargetsFromTargeting()
     {
         if (this.targetingSystem != null) return this.targetingSystem.getTargets();
         return null;
     }
-
 
     #region useAbility
 

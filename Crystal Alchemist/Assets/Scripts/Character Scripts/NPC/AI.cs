@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 
 public class AI : NonPlayer
 {
@@ -11,6 +12,9 @@ public class AI : NonPlayer
 
     [HideInInspector]
     public Character target;
+
+    [HideInInspector]
+    public Dictionary<Character, float[]> aggroList = new Dictionary<Character, float[]>();
 
     [HideInInspector]
     public Character partner;

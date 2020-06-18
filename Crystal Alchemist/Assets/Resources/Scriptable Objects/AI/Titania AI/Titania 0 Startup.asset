@@ -12,27 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a19f9cb4d358498823753290d243d, type: 3}
   m_Name: Titania 0 Startup
   m_EditorClassIdentifier: 
-  actions:
-  - type: 11
-    position: {x: 0, y: 0}
-    translationID: 
-    duration: 0
-    nextPhase: {fileID: 0}
-    animations: 
-    ability: {fileID: 0}
-    overrideCastTime: 0
-    castTime: 0
-    overrideShowCastBar: 0
-    showCastBar: 0
-    overrideCooldown: 0
-    cooldown: 0
-    repeat: 0
-    amount: 0
-    delay: 0
-    sequence: {fileID: 0}
-    value: 0
-    signal: {fileID: 0}
-    wait: 0
+  actions: []
   loopActions: 0
   events:
   - triggers:
@@ -41,11 +21,11 @@ MonoBehaviour:
       life: 0
       maxLoops: 0
     actions:
-    - type: 5
+    - type: 11
       position: {x: 0, y: 0}
       translationID: 
-      duration: 4
-      nextPhase: {fileID: 11400000, guid: 31d9498970ffb2d4988bb0e33a5a8ae8, type: 2}
+      duration: 0
+      nextPhase: {fileID: 0}
       animations: 
       ability: {fileID: 0}
       overrideCastTime: 0
@@ -55,6 +35,28 @@ MonoBehaviour:
       overrideCooldown: 0
       cooldown: 0
       repeat: 0
+      keepCast: 0
+      amount: 0
+      delay: 0
+      sequence: {fileID: 0}
+      value: 0
+      signal: {fileID: 11400000, guid: 2c2e9067d3add024d9a77264141b5502, type: 2}
+      wait: 0
+    - type: 5
+      position: {x: 0, y: 0}
+      translationID: 
+      duration: 4
+      nextPhase: {fileID: 11400000, guid: 97bb94c996213134a8c6d4b117ab90a1, type: 2}
+      animations: 
+      ability: {fileID: 0}
+      overrideCastTime: 0
+      castTime: 0
+      overrideShowCastBar: 0
+      showCastBar: 0
+      overrideCooldown: 0
+      cooldown: 0
+      repeat: 0
+      keepCast: 0
       amount: 1
       delay: 0
       sequence: {fileID: 0}
@@ -75,6 +77,7 @@ MonoBehaviour:
       overrideCooldown: 0
       cooldown: 0
       repeat: 0
+      keepCast: 0
       amount: 1
       delay: 0
       sequence: {fileID: 0}

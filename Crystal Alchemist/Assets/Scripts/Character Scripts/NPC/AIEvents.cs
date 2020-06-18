@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 
 public class AIEvents : CharacterCombat
 {
@@ -67,6 +68,18 @@ public class AIEvents : CharacterCombat
             this.activePhase = Instantiate(phase);
             this.activePhase.Initialize(this.npc);
         }
+    }
+
+    public override List<Character> GetTargetsFromTargeting()
+    {
+        List<Character> result = new List<Character>();
+        foreach(KeyValuePair<Character, float[]> aggro in this.npc.aggroList) result.Add(aggro.Key);
+        return result;
+    }
+
+    public override void ShowTargetingSystem(Ability ability)
+    {
+        
     }
 }
 

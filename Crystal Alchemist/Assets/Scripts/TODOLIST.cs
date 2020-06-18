@@ -16,6 +16,13 @@ public class TODOLIST : MonoBehaviour
     //TODO: Movement by AIAction
     //IDEA: Head, Shoot, Ground Position. Vector or Gameobject?
     //TODO: Projectile Offset
+    //TODO: DialogBox Titania (NPC)
+    //TODO: Sound Arena
+    //TODO: Cast Indicator
+    //TODO: Override Targeting
+    //TODO: Better Ability Override
+    //TODO: Splash Sound
+    //TODO: Smoke Effect (Arena Rand) + Sound
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

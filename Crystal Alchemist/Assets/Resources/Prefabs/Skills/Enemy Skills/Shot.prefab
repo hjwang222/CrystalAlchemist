@@ -87,7 +87,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 189122765788227639}
   myRigidbody: {fileID: 3912877756296141094}
   animator: {fileID: 5853850326603271721}
-  shadow: {fileID: 4459175407930688011}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -192,7 +191,7 @@ GameObject:
   - component: {fileID: 6021116714921555687}
   - component: {fileID: 4459175407930688011}
   - component: {fileID: 1803074669687505092}
-  - component: {fileID: 7375787680842229076}
+  - component: {fileID: 6219680248385853088}
   m_Layer: 13
   m_Name: shadow
   m_TagString: Untagged
@@ -291,7 +290,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.74026066, y: 0.17786533}
   m_EdgeRadius: 0
---- !u!114 &7375787680842229076
+--- !u!114 &6219680248385853088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -300,10 +299,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5124404407448343764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 447332f77bd7a8848bedd2b53d4e93a9, type: 3}
+  m_Script: {fileID: 11500000, guid: fb7c1bd38a2a9de47a7ea21879a59e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 1676703576389572161}
+  mode: 1
 --- !u!1 &5853850326603271718
 GameObject:
   m_ObjectHideFlags: 0

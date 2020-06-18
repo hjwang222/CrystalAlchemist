@@ -24,7 +24,7 @@ public class SkillLaser : SkillExtension
     [SerializeField]
     private bool targetRequired = false;
 
-    private List<Skill> hitPoints = new List<Skill>();
+    private List<GameObject> hitPoints = new List<GameObject>();
 
     private Vector2 position;
 
@@ -74,18 +74,14 @@ public class SkillLaser : SkillExtension
     {
         if (this.impactEffect != null)
         {
-            bool impactPossible = true;
             this.hitPoints.RemoveAll(item => item == null);
 
-            foreach (Skill skill in this.hitPoints)
-            {
-                if (Vector2.Distance(skill.transform.position, hitpoint) < this.distanceBetweenImpacts) impactPossible = false;
-            }
+            bool impactPossible = UnityUtil.CheckDistances(hitpoint, this.distanceBetweenImpacts, this.hitPoints);
 
             if (impactPossible)
             {
                 Skill hitPointSkill = this.impactEffect.InstantiateSkill(hitpoint, this.skill.sender); 
-                this.hitPoints.Add(hitPointSkill);
+                this.hitPoints.Add(hitPointSkill.gameObject);
             }
         }
     }

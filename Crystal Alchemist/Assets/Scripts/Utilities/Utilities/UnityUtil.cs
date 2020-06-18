@@ -63,6 +63,15 @@ public static class UnityUtil
         return Vector2.zero;
     }
 
+    public static bool CheckDistances(Vector2 position, float maxDistance, List<GameObject> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i] != null && Vector2.Distance(position, list[i].transform.position) < maxDistance) return false;
+        }
+        return true;
+    }
+
     /// <summary>
     /// Change Movement to Pixel Perfect (16 PPU)
     /// </summary>

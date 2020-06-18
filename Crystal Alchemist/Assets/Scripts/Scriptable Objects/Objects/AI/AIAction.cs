@@ -269,9 +269,17 @@ public class AIAction
         this.tempAbility = AbilityUtil.InstantiateAbility(this.ability);
         this.tempAbility.SetSender(npc);
 
-        if (this.overrideCastTime) this.tempAbility.castTime = this.castTime;
+        if (this.overrideCastTime)
+        {
+            this.tempAbility.castTime = this.castTime;
+            if (this.tempAbility.castTime > 0) this.tempAbility.hasCastTime = true;
+            else this.tempAbility.hasCastTime = false;
+        }
         if (this.overrideShowCastBar) this.tempAbility.showCastbar = this.showCastBar;
         if (this.overrideCooldown) this.tempAbility.cooldown = this.cooldown;
+
+        this.tempAbility = AbilityUtil.InstantiateAbility(this.tempAbility);
+        this.tempAbility.SetSender(npc);
 
         if (!this.repeat) this.amount = 1;
         this.counter = 0;
@@ -307,8 +315,7 @@ public class AIAction
     {
         if (!this.tempAbility.IsTargetRequired() && npc.target != null)
             this.tempAbility.state = AbilityState.ready; //SingleTarget
-        else if (this.tempAbility.IsTargetRequired())
-            this.tempAbility.state = AbilityState.ready; //Target from TargetingSystem
+        else this.tempAbility.state = AbilityState.ready; //Target from TargetingSystem                
     }
 
     private void UseSkill(AI npc)

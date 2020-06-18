@@ -109,7 +109,8 @@ public class TargetingSystem : MonoBehaviour
 
     public float getDelay()
     {
-        return this.properties.multiHitDelay;
+        if(this.properties != null) return this.properties.multiHitDelay;
+        return 0;
     }
 
     #endregion
