@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DeathAnimation : MonoBehaviour
 {
-    [SerializeField]
-    private AudioSource audioSource;
-
     private Character character;
     public void setCharacter(Character character)
     {

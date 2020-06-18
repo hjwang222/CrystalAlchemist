@@ -167,7 +167,9 @@ public class BossMechanicSpawn : BossMechanicProperty
 
     private void SetAdd(AI character, Character target)
     {
-        character.PlayRespawnAnimation();
+        character.IsSummoned = true;
+        character.stats = Instantiate(character.stats);
+        character.stats.hasRespawn = false;
         character.target = target;
         character.transform.SetParent(null);
     }

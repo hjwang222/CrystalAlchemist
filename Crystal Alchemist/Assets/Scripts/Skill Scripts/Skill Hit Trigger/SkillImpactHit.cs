@@ -118,28 +118,31 @@ public class SkillImpactHit : SkillHitTrigger
 
     private void hitTargetCollision(Collider2D hittedCharacter)
     {
-        if (this.type == aoeType.hide)
+        if (CollisionUtil.checkCollision(hittedCharacter, this.skill))
         {
-            //hide AOE
-            bool isHiding = CollisionUtil.checkBehindObstacle(hittedCharacter.GetComponent<Character>(), this.gameObject);
-            if (!isHiding) this.skill.hitIt(hittedCharacter);
-        }
-        else if (this.type == aoeType.range)
-        {
-            //range AOE
-            float percentage = CollisionUtil.checkDistanceReduce(hittedCharacter.GetComponent<Character>(), this.gameObject, this.deadZone, this.hitZone);
-            this.skill.hitIt(hittedCharacter, percentage);
-        }
-        else if (this.type == aoeType.view)
-        {
-            //look /away AOE
-            bool isLookingAt = CollisionUtil.checkIfGameObjectIsViewed(hittedCharacter.GetComponent<Character>(), this.gameObject, this.sightAngle);
-            if ((this.look == lookType.lookAway && isLookingAt) || (this.look == lookType.lookAtIt && !isLookingAt)) this.skill.hitIt(hittedCharacter);
-        }
-        else
-        {
-            //normal AOE
-            this.skill.hitIt(hittedCharacter);
+            if (this.type == aoeType.hide)
+            {
+                //hide AOE
+                bool isHiding = CollisionUtil.checkBehindObstacle(hittedCharacter.GetComponent<Character>(), this.gameObject);
+                if (!isHiding) this.skill.hitIt(hittedCharacter);
+            }
+            else if (this.type == aoeType.range)
+            {
+                //range AOE
+                float percentage = CollisionUtil.checkDistanceReduce(hittedCharacter.GetComponent<Character>(), this.gameObject, this.deadZone, this.hitZone);
+                this.skill.hitIt(hittedCharacter, percentage);
+            }
+            else if (this.type == aoeType.view)
+            {
+                //look /away AOE
+                bool isLookingAt = CollisionUtil.checkIfGameObjectIsViewed(hittedCharacter.GetComponent<Character>(), this.gameObject, this.sightAngle);
+                if ((this.look == lookType.lookAway && isLookingAt) || (this.look == lookType.lookAtIt && !isLookingAt)) this.skill.hitIt(hittedCharacter);
+            }
+            else
+            {
+                //normal AOE
+                this.skill.hitIt(hittedCharacter);
+            }
         }
     }
 }

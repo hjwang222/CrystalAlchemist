@@ -145,6 +145,7 @@ public class MusicObject : MonoBehaviour
     public void Stop()
     {
         this.audioSource.Stop();
+        Destroy(this.gameObject,0.3f);
     }
 
     public void Resume()

@@ -189,7 +189,7 @@ public class AIAction
 
     private float elapsed = 0;
     private bool isActive = true;
-    private Ability tempAbility;
+    private Ability activeAbility;
     private int counter = 0;
 
     //TODO: Add status effect
@@ -266,20 +266,18 @@ public class AIAction
 
     private void StartSkill(AI npc)
     {
-        this.tempAbility = AbilityUtil.InstantiateAbility(this.ability);
-        this.tempAbility.SetSender(npc);
+        this.activeAbility = Object.Instantiate(this.ability);
 
         if (this.overrideCastTime)
         {
-            this.tempAbility.castTime = this.castTime;
-            if (this.tempAbility.castTime > 0) this.tempAbility.hasCastTime = true;
-            else this.tempAbility.hasCastTime = false;
+            this.activeAbility.castTime = this.castTime;
+            if (this.activeAbility.castTime > 0) this.activeAbility.hasCastTime = true;
+            else this.activeAbility.hasCastTime = false;
         }
-        if (this.overrideShowCastBar) this.tempAbility.showCastbar = this.showCastBar;
-        if (this.overrideCooldown) this.tempAbility.cooldown = this.cooldown;
+        if (this.overrideShowCastBar) this.activeAbility.showCastbar = this.showCastBar;
+        if (this.overrideCooldown) this.activeAbility.cooldown = this.cooldown;
 
-        this.tempAbility = AbilityUtil.InstantiateAbility(this.tempAbility);
-        this.tempAbility.SetSender(npc);
+        this.activeAbility = AbilityUtil.InstantiateAbility(this.activeAbility, npc);
 
         if (!this.repeat) this.amount = 1;
         this.counter = 0;
@@ -287,17 +285,17 @@ public class AIAction
 
     private void UpdateSkill(AI npc)
     {
-        this.tempAbility.Updating();
+        this.activeAbility.Updating();
 
-        if (npc.values.isCharacterStunned()) this.tempAbility.ResetCharge();
+        if (npc.values.isCharacterStunned()) this.activeAbility.ResetCharge();
 
         if (this.elapsed > 0) this.elapsed -= Time.deltaTime;
         else
         {
-            if (this.tempAbility.state == AbilityState.notCharged) Charge(npc);
-            else if (this.tempAbility.state == AbilityState.targetRequired) CheckTargets(npc);
-            else if (this.tempAbility.state == AbilityState.charged
-                  || this.tempAbility.state == AbilityState.ready) UseSkill(npc);
+            if (this.activeAbility.state == AbilityState.notCharged) Charge(npc);
+            else if (this.activeAbility.state == AbilityState.targetRequired) CheckTargets(npc);
+            else if (this.activeAbility.state == AbilityState.charged
+                  || this.activeAbility.state == AbilityState.ready) UseSkill(npc);
         }
 
         if (this.counter >= this.amount) DisableSkill(npc);
@@ -305,28 +303,28 @@ public class AIAction
 
     private void Charge(AI npc)
     {
-        npc.GetComponent<AIEvents>().ChargeAbility(this.tempAbility, npc, npc.target);
+        npc.GetComponent<AIEvents>().ChargeAbility(this.activeAbility, npc, npc.target);
 
-        if (this.tempAbility.IsTargetRequired())
-            npc.GetComponent<AIEvents>().ShowTargetingSystem(this.tempAbility);        //Show Targeting System when needed
+        if (this.activeAbility.IsTargetRequired())
+            npc.GetComponent<AIEvents>().ShowTargetingSystem(this.activeAbility);        //Show Targeting System when needed
     }
 
     private void CheckTargets(AI npc)
     {
-        if (!this.tempAbility.IsTargetRequired() && npc.target != null)
-            this.tempAbility.state = AbilityState.ready; //SingleTarget
-        else this.tempAbility.state = AbilityState.ready; //Target from TargetingSystem                
+        if (!this.activeAbility.IsTargetRequired() && npc.target != null)
+            this.activeAbility.state = AbilityState.ready; //SingleTarget
+        else this.activeAbility.state = AbilityState.ready; //Target from TargetingSystem                
     }
 
     private void UseSkill(AI npc)
     {
         npc.GetComponent<AIEvents>().HideCastBar();
 
-        if (this.tempAbility.IsTargetRequired()) npc.GetComponent<AIEvents>().UseAbilityOnTargets(this.tempAbility);
+        if (this.activeAbility.IsTargetRequired()) npc.GetComponent<AIEvents>().UseAbilityOnTargets(this.activeAbility);
         else
         {
-            npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.tempAbility, npc.target);
-            npc.GetComponent<AIEvents>().HideTargetingSystem(this.tempAbility);
+            npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.activeAbility, npc.target);
+            npc.GetComponent<AIEvents>().HideTargetingSystem(this.activeAbility);
         }
 
         this.elapsed = this.delay;
@@ -334,15 +332,15 @@ public class AIAction
 
         if (!this.keepCast)
         {
-            npc.GetComponent<AIEvents>().HideTargetingSystem(this.tempAbility);
-            npc.GetComponent<AIEvents>().UnChargeAbility(this.tempAbility, npc); //reset Charge
+            npc.GetComponent<AIEvents>().HideTargetingSystem(this.activeAbility);
+            npc.GetComponent<AIEvents>().UnChargeAbility(this.activeAbility, npc); //reset Charge
         }
     }
 
     private void DisableSkill(AI npc)
     {
-        npc.GetComponent<AIEvents>().HideTargetingSystem(this.tempAbility);
-        npc.GetComponent<AIEvents>().UnChargeAbility(this.tempAbility, npc); //reset Charge
+        npc.GetComponent<AIEvents>().HideTargetingSystem(this.activeAbility);
+        npc.GetComponent<AIEvents>().UnChargeAbility(this.activeAbility, npc); //reset Charge
         Deactivate();
     }
 

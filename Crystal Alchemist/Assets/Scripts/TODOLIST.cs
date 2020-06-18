@@ -6,6 +6,8 @@ public class TODOLIST : MonoBehaviour
     //--REWORKS--
     //TODO: Sound Effekte ersetzen!
     //BUG: Cast Buggy when knockback
+    //BUG: Cooldown wenn kein Skill ausgeführt wurde
+    //BUG: Stromschlag nicht unterbrechen
 
     //--Boss Fight--
     //NPC: Bosskampf (Titania)
@@ -17,12 +19,12 @@ public class TODOLIST : MonoBehaviour
     //IDEA: Head, Shoot, Ground Position. Vector or Gameobject?
     //TODO: Projectile Offset
     //TODO: DialogBox Titania (NPC)
-    //TODO: Sound Arena
-    //TODO: Cast Indicator
-    //TODO: Override Targeting
-    //TODO: Better Ability Override
+
+    //TODO: Blick Sound
+    //ANIMATIONS: Titania Casting
     //TODO: Splash Sound
-    //TODO: Smoke Effect (Arena Rand) + Sound
+    //REWORK: Arena Bounds
+    //TODO: Reward and Exit
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

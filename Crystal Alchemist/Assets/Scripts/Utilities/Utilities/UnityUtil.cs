@@ -51,8 +51,8 @@ public static class UnityUtil
 
         do
         {
-            float x = UnityEngine.Random.Range(center.x - bounds.extents.x, center.x + bounds.extents.x);
-            float y = UnityEngine.Random.Range(center.y - bounds.extents.y, center.y + bounds.extents.y);
+            float x = Random.Range(center.x - bounds.extents.x, center.x + bounds.extents.x);
+            float y = Random.Range(center.y - bounds.extents.y, center.y + bounds.extents.y);
             Vector2 result = new Vector2(x, y);
             attempts++;
 
@@ -61,6 +61,35 @@ public static class UnityUtil
         while (!found && attempts < 50);
 
         return Vector2.zero;
+    }
+
+    public static List<Vector2> GetRandomVectors(Collider2D collider, int amount)
+    {
+        List<Vector2> result = new List<Vector2>();
+        Bounds bounds = collider.bounds;
+        Vector2 center = bounds.center;        
+
+        for (int i = 0; i < amount; i++)
+        {
+            bool found = false;
+            int attempts = 0;
+            do
+            {
+                float x = Random.Range(center.x - bounds.extents.x, center.x + bounds.extents.x);
+                float y = Random.Range(center.y - bounds.extents.y, center.y + bounds.extents.y);
+                Vector2 temp = new Vector2(x, y);
+                attempts++;
+
+                if (collider.OverlapPoint(temp) && !result.Contains(temp))
+                {
+                    result.Add(temp);
+                    break;
+                }
+            }
+            while (!found && attempts < 50);
+        }
+
+        return result;
     }
 
     public static bool CheckDistances(Vector2 position, float maxDistance, List<GameObject> list)

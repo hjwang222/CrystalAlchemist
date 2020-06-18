@@ -31,9 +31,15 @@ TextureImporter:
     second: Fackel hell 4
   - first:
       213: -2885109794949164627
-    second: Laser Light
+    second: Cave 1
+  - first:
+      213: -5608077648882687009
+    second: Cave 2
+  - first:
+      213: 821736840683530781
+    second: Cave 3
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -53,6 +59,7 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -87,6 +94,8 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -305,15 +314,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Laser Light
+      name: Cave 1
       rect:
         serializedVersion: 2
         x: 0
-        y: 432
-        width: 16
-        height: 16
+        y: 400
+        width: 48
+        height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -321,6 +330,48 @@ TextureImporter:
       bones: []
       spriteID: da11e0e6de706f7d0800000000000000
       internalID: -2885109794949164627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cave 2
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 400
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd32a89571b1c22b0800000000000000
+      internalID: -5608077648882687009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cave 3
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 400
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1a2bc78d45676b00800000000000000
+      internalID: 821736840683530781
       vertices: []
       indices: 
       edges: []
