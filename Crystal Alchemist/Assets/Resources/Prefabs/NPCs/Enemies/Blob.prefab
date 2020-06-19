@@ -253,8 +253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f80b21aee0d2f47a0e58afdc49b328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 4482648712296496520}
   aggroStats: {fileID: 11400000, guid: 1203e243ade06754eb7ea15f7b5138d0, type: 2}
+  npc: {fileID: 4482648712296496520}
   cluePosition: {fileID: 0}
 --- !u!58 &699278166353142346
 CircleCollider2D:
@@ -359,6 +359,7 @@ MonoBehaviour:
   activeSkillParent: {fileID: 1158493752}
   activeStatusEffectParent: {fileID: 6674156776865872386}
   values: {fileID: 0}
+  IsSummoned: 0
   aggroGameObject: {fileID: 2285685941926595743}
   flip: 1
   target: {fileID: 0}
@@ -376,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 4482648712296496520}
+  character: {fileID: 0}
   startPhase: {fileID: 11400000, guid: c11053e6988188347bc5e3d9a60d4904, type: 2}
   startImmediately: 1
 --- !u!61 &1028641328

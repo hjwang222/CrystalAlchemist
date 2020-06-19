@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 public class AI : NonPlayer
 {
-    [BoxGroup("Easy Access")]
-    public AIAggroSystem aggroGameObject;
-
     [BoxGroup("AI")]
     public bool flip = true;
 
@@ -32,6 +29,14 @@ public class AI : NonPlayer
     }
     #region Animation, StateMachine
 
+    public override void Start()
+    {
+        base.Start();
+
+        this.GetComponent<AICombat>().Initialize();
+        AIComponent[] components = this.GetComponents<AIComponent>();
+        for (int i = 0; i < components.Length; i++) components[i].Initialize();
+    }
 
     public override void Update()
     {
@@ -47,6 +52,10 @@ public class AI : NonPlayer
             AnimatorUtil.SetAnimatorParameter(this.animator, "Sleep");
             this.isSleeping = true;
         }
+
+        this.GetComponent<AICombat>().Updating();
+        AIComponent[] components = this.GetComponents<AIComponent>();
+        for (int i = 0; i < components.Length; i++) components[i].Updating();
     }
 
     public void changeState(CharacterState newState)

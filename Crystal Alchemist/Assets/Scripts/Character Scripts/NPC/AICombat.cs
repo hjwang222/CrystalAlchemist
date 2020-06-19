@@ -2,14 +2,10 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 
-public class AIEvents : CharacterCombat
+[RequireComponent(typeof(AI))]
+public class AICombat : CharacterCombat
 {
     #region Attributes
-
-    [SerializeField]
-    [Required]
-    [BoxGroup("Required")]
-    private AI npc;
 
     [BoxGroup("AI")]
     [SerializeField]
@@ -22,20 +18,27 @@ public class AIEvents : CharacterCombat
 
     private AIPhase activePhase;
     private bool isActive;
+    private AI npc;
     #endregion
 
-    private void Start() => InitializeCombat(this.npc);    
+    public override void Initialize()
+    {
+        base.Initialize();
+        this.npc = this.character.GetComponent<AI>();
+    }
 
     private void OnEnable()
     {
         if (this.startPhase != null && this.startImmediately) StartPhase();
     }
 
-    public void StartPhase() => StartPhase(this.startPhase);    
+    public void StartPhase() => StartPhase(this.startPhase);
 
-    private void Update()
+    public override void Updating()
     {
-        if (this.activePhase != null && !this.npc.values.isCharacterStunned())
+        base.Updating();
+
+        if (this.activePhase != null && !this.character.values.isCharacterStunned())
             this.activePhase.Updating(this.npc);
     }
 

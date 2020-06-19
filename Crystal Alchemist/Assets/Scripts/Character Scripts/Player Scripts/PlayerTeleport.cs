@@ -2,10 +2,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerTeleport : MonoBehaviour
+public class PlayerTeleport : PlayerComponent
 {
-    private Player player;
-
     [SerializeField]
     private TeleportStats nextTeleport;
 
@@ -21,9 +19,9 @@ public class PlayerTeleport : MonoBehaviour
     [SerializeField]
     private SimpleSignal fadeSignal;
 
-    public void Initialize(Player player)
+    public override void Initialize()
     {
-        this.player = player;
+        base.Initialize();
         this.teleportList.Initialize();
         StartCoroutine(MaterializePlayer());
     }

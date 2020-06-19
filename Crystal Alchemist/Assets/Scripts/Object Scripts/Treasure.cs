@@ -99,7 +99,7 @@ public class Treasure : Rewardable
         if (this.treasureEnabled)
         {
             if (this.player.canUseIt(this.costs)) openChest(); //open Chest
-            else this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
+            else ShowDialog(DialogTextTrigger.failed);
         }
     }
 
@@ -117,13 +117,13 @@ public class Treasure : Rewardable
         {
             //Zeige Item
             this.showTreasureItem();
-   
-            this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.success, this.itemDrop.stats);
+
+            ShowDialog(DialogTextTrigger.success, this.itemDrop.stats);
         }
         else
         {
             //Kein Item drin
-            this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.empty);
+            ShowDialog(DialogTextTrigger.empty);
         }
     }
 

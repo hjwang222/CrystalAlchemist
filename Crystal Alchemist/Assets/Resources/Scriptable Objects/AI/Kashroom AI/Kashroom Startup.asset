@@ -12,48 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a19f9cb4d358498823753290d243d, type: 3}
   m_Name: Kashroom Startup
   m_EditorClassIdentifier: 
-  actions:
-  - type: 9
-    position: {x: 0, y: 0}
-    de: 
-    en: 
-    duration: 4
-    nextPhase: {fileID: 0}
-    animations: 
-    ability: {fileID: 0}
-    overrideCastTime: 0
-    castTime: 0
-    overrideCooldown: 0
-    cooldown: 0
-    repeatSkill: 0
-    amount: 1
-    sequence: {fileID: 0}
-    sequencePositionType: 0
-    sequencePosition: {x: 0, y: 0}
+  actions: []
   loopActions: 0
   events:
   - triggers:
     - type: 1
       time: 0
       life: 0
+      maxLoops: 0
     actions:
     - type: 8
       position: {x: 0, y: 0}
-      de: 
-      en: 
+      translationID: 
       duration: 4
       nextPhase: {fileID: 0}
       animations: 
+      isTrigger: 0
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0
+      overrideShowCastBar: 0
+      showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
-      repeatSkill: 0
+      repeat: 0
+      keepCast: 0
       amount: 1
+      delay: 0
       sequence: {fileID: 0}
-      sequencePositionType: 0
-      sequencePosition: {x: 0, y: 0}
+      value: 0
+      signal: {fileID: 0}
+      wait: 0
+      mode: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     repeatEvent: 0
     interruptCurrentAction: 0
     eventCooldown: 0
@@ -62,24 +54,33 @@ MonoBehaviour:
     - type: 2
       time: 0
       life: 0
+      maxLoops: 0
     actions:
     - type: 3
       position: {x: 0, y: 0}
-      de: 
-      en: 
+      translationID: 
       duration: 4
       nextPhase: {fileID: 0}
       animations: 
+      isTrigger: 0
       ability: {fileID: 11400000, guid: 1099329dccba74c4ca3fd0034bcfe4c2, type: 2}
       overrideCastTime: 0
       castTime: 3
+      overrideShowCastBar: 0
+      showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
-      repeatSkill: 0
+      repeat: 0
+      keepCast: 0
       amount: 1
+      delay: 0
       sequence: {fileID: 0}
-      sequencePositionType: 0
-      sequencePosition: {x: 0, y: 0}
+      value: 0
+      signal: {fileID: 0}
+      wait: 0
+      mode: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     repeatEvent: 0
     interruptCurrentAction: 0
     eventCooldown: 0

@@ -12,18 +12,13 @@ public enum MovementPriority
     partner
 }
 
-public enum PatrolType
+public class AIMovement : AIComponent
 {
-    path,
-    area
-}
-
-public class AIMovement : MonoBehaviour
-{
-    [SerializeField]
-    [Required]
-    [BoxGroup("Required")]
-    private AI npc;
+    public enum PatrolType
+    {
+        path,
+        area
+    }
 
     #region Parameter fürs Verfolgen
     [BoxGroup("Character Movement")]
@@ -140,12 +135,14 @@ public class AIMovement : MonoBehaviour
 
     #endregion
 
-    private void Start()
+    public override void Initialize()
     {
+        base.Initialize();
+
         AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", false);
         if (Pathfinding.Instance != null) this.seeker = this.GetComponent<PathSeeker>();
 
-        if (this.usePathfinding && this.seeker != null) InvokeRepeating("UpdatePath",0,this.updateDelay);
+        if (this.usePathfinding && this.seeker != null) InvokeRepeating("UpdatePath", 0, this.updateDelay);
 
         this.targetPosition = MasterManager.staticValues.nullVector;
 

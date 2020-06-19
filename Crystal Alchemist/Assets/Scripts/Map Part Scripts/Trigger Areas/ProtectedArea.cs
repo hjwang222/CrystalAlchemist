@@ -33,10 +33,10 @@ public class ProtectedArea : MonoBehaviour
         {
             foreach (AI enemy in this.protectingNPCs)
             {
-                if (enemy.gameObject.activeInHierarchy && enemy.aggroGameObject != null)
+                if (enemy.gameObject.activeInHierarchy)
                 {
-                    if(!decrease) enemy.aggroGameObject.increaseAggro(character, this.aggroIncreaseFactor);
-                    else enemy.aggroGameObject.decreaseAggro(character, this.aggroDecreaseFactor);
+                    if (!decrease) GameEvents.current.DoAggroIncrease(enemy, character, this.aggroIncreaseFactor);
+                    else GameEvents.current.DoAggroDecrease(enemy, character, this.aggroDecreaseFactor);
                 }
             }
         }

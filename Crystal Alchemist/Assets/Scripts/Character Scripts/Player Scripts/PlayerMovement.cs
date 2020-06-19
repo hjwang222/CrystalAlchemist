@@ -2,15 +2,12 @@
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Player))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : PlayerComponent
 {
     private Vector2 change;
-    private Player player;
     private Vector2 position;
 
     #region Movement
-
-    private void Start() => this.player = this.GetComponent<Player>();
 
     public void MovePlayer(InputAction.CallbackContext ctx) => this.change = ctx.ReadValue<Vector2>();
 

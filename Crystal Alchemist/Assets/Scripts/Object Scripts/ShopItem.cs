@@ -44,12 +44,12 @@ public class ShopItem : Rewardable
             this.player.reduceResource(this.costs);
             ItemStats loot = itemDrop.stats;
 
-            this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.success, loot);
+            ShowDialog(DialogTextTrigger.success, loot);
             if (loot != null) GameEvents.current.DoCollect(loot);
         }
         else
         {
-            this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
+            ShowDialog(DialogTextTrigger.failed);
         }
     }
 }

@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 public enum DialogTextTrigger
 {
     none,
     success,
-    failed, 
+    failed,
     empty
 }
 
@@ -26,6 +26,13 @@ public class DialogText
 
 public class DialogSystem : MonoBehaviour
 {
+    [ButtonGroup("Add Text")]
+    private void ScriptableObjects()
+    {
+        this.textValue = Resources.Load<StringValue>("Scriptable Objects/Menu/DialogText");
+        this.eventValue = Resources.Load<EventValue>("Scriptable Objects/Menu/DialogEvent");
+    }
+
     [ButtonGroup("Add Text")]
     private void AddShopText()
     {
@@ -59,32 +66,77 @@ public class DialogSystem : MonoBehaviour
         texts.Add(text);
     }
 
+    [BoxGroup("Texts")]
     [SerializeField]
     private List<DialogText> texts = new List<DialogText>();
 
-    public void show(Player player, Interactable interactable, ItemStats loot)
+    [BoxGroup("Events")]
+    [SerializeField]
+    private UnityEvent eventOnClose;
+
+    [BoxGroup("Required")]
+    [SerializeField]
+    [Required]
+    private StringValue textValue;
+
+    [BoxGroup("Required")]
+    [SerializeField]
+    [Required]
+    private EventValue eventValue;
+
+    public void showDialog(Player player, Interactable interactable)
     {
-        if (this.texts.Count > 0)
+        showDialog(player, interactable, null);
+    }
+
+    public void showDialog(Player player, Interactable interactable, DialogTextTrigger trigger)
+    {
+        showDialog(player, interactable, trigger, null);
+    }
+
+    public void showDialog(Player player, Interactable interactable, ItemStats loot)
+    {
+        show(player, interactable, loot);
+    }
+
+    public void showDialog(Player player, Interactable interactable, DialogTextTrigger trigger, ItemStats loot)
+    {
+        show(player, trigger, interactable, loot);
+    }
+
+    private void ShowDialogBox(Player player, string text)
+    {
+        if (player.values.currentState != CharacterState.inDialog)
         {
-            player.showDialogBox(getText(this.texts[0], interactable.costs.amount, interactable.costs.item, loot, player));
+            this.textValue.SetValue(text);
+            this.eventValue.SetValue(this.eventOnClose);
+            MenuEvents.current.OpenDialogBox();
         }
     }
 
-    public void show(Player player, ItemStats item)
+    private void show(Player player, Interactable interactable, ItemStats loot)
     {
         if (this.texts.Count > 0)
         {
-            player.showDialogBox(getText(this.texts[0], item, player));
+            ShowDialogBox(player,getText(this.texts[0], interactable.costs.amount, interactable.costs.item, loot, player));
         }
     }
 
-    public void show(Player player, DialogTextTrigger trigger, Interactable interactable, ItemStats loot)
+    private void show(Player player, ItemStats item)
     {
-        foreach(DialogText text in this.texts)
+        if (this.texts.Count > 0)
         {
-            if(text.trigger == trigger)
+            ShowDialogBox(player, getText(this.texts[0], item, player));
+        }
+    }
+
+    private void show(Player player, DialogTextTrigger trigger, Interactable interactable, ItemStats loot)
+    {
+        foreach (DialogText text in this.texts)
+        {
+            if (text.trigger == trigger)
             {
-                player.showDialogBox(getText(text, interactable.costs.amount, interactable.costs.item, loot, player));
+                ShowDialogBox(player, getText(text, interactable.costs.amount, interactable.costs.item, loot, player));
                 break;
             }
         }

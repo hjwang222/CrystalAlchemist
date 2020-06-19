@@ -1,15 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine.InputSystem;
 
-public class PlayerControls : MonoBehaviour
+public class PlayerControls : PlayerComponent
 {
-    private Player player;
-
-    private void Start()
-    {
-        this.player = this.GetComponent<Player>();
-    }
-
     public void Inventory(InputAction.CallbackContext context)
     {
         if (context.performed && player.values.CanOpenMenu()) MenuEvents.current.OpenInventory();        

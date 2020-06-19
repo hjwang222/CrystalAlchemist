@@ -2,27 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Character))]
 public class CharacterCombat : MonoBehaviour
 {
     private CastBar activeCastBar;
     private TargetingSystem targetingSystem;
-    private Character chara;
 
-    public void InitializeCombat(Character sender)
+    [HideInInspector]
+    public Character character;
+
+    public virtual void Initialize()
     {
-        if (sender != null)
-        {
-            this.targetingSystem = Instantiate(MasterManager.targetingSystem, sender.transform.position, Quaternion.identity, sender.transform);
-            this.targetingSystem.Initialize(sender);
-            this.targetingSystem.name = MasterManager.targetingSystem.name;
-            this.targetingSystem.gameObject.SetActive(false);
-            this.chara = sender;
-        }
-        else
-        {
-            Debug.Log("Character Combat missing Sender: " + this.gameObject);
-        }
-    }    
+        this.character = this.GetComponent<Character>();
+        this.targetingSystem = Instantiate(MasterManager.targetingSystem, this.character.transform.position, Quaternion.identity, this.character.transform);
+        this.targetingSystem.Initialize(this.character);
+        this.targetingSystem.name = MasterManager.targetingSystem.name;
+        this.targetingSystem.gameObject.SetActive(false);
+    }
+
+    public virtual void Updating() { }
 
     public TargetingSystem GetTargetingSystem()
     {
@@ -45,7 +43,7 @@ public class CharacterCombat : MonoBehaviour
         ShowCastBar(ability, character); //Show Castbar
         setSpeedDuringCasting(ability, character); //Set Speed during casting
         ability.ShowCastingIndicator(target);
-        AnimatorUtil.SetAnimatorParameter(this.chara.animator, "Casting", true);
+        AnimatorUtil.SetAnimatorParameter(this.character.animator, "Casting", true);
     }
 
     public void UnChargeAbility(Ability ability, Character character)
@@ -55,7 +53,7 @@ public class CharacterCombat : MonoBehaviour
         deactivatePlayerButtonUp(ability, character); //deactivate Skill when button up, Player only
         resetSpeedAfterCasting(character); //set Speed to normal
         ability.HideIndicator();
-        AnimatorUtil.SetAnimatorParameter(this.chara.animator, "Casting", false);
+        AnimatorUtil.SetAnimatorParameter(this.character.animator, "Casting", false);
     }
 
     private void setSpeedDuringCasting(Ability ability, Character character)

@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 
-public class PlayerItems : MonoBehaviour
+public class PlayerItems : PlayerComponent
 {
-    private Player player;
-
     [SerializeField]
     private PlayerInventory inventory;
 
-    private void Start()
+    public override void Initialize()
     {
-        this.inventory.Initialize(); //remove null objects  
-        this.player = this.GetComponent<Player>();
+        base.Initialize();
+        this.inventory.Initialize(); //remove null objects          
     }
 
     public int GetAmount(ItemGroup group)

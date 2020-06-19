@@ -211,53 +211,6 @@ MonoBehaviour:
   - {x: 1.235353, y: -0.3899727, z: 0}
   - {x: 0.08554745, y: -0.043824196, z: 0}
   - {x: 0.576869, y: -0.3899231, z: 0}
---- !u!1 &40360413 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2759664207142220863, guid: 8d5ff37e69f760540910aa15f07fcb07,
-    type: 3}
-  m_PrefabInstance: {fileID: 6645017184433035889}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &40360414 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2759664207142220857, guid: 8d5ff37e69f760540910aa15f07fcb07,
-    type: 3}
-  m_PrefabInstance: {fileID: 6645017184433035889}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40360413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db3cee9060de5b7429eeffa15cac5edf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &40360416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40360413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 2c2e9067d3add024d9a77264141b5502, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 40360414}
-        m_TargetAssemblyTypeName: BackgroundMusic, Assembly-CSharp
-        m_MethodName: PlayMusic
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 9e8938fadf339114c89406039f4801fb,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &78582821
 GameObject:
   m_ObjectHideFlags: 0
@@ -13012,6 +12965,90 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &970640708
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3927818717087631779, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_Name
+      value: Schild
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3927818717087631781, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].type
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541492402763843799, guid: b38228c375f915f44932624529e24a1f,
+        type: 3}
+      propertyPath: texts.Array.data[0].ID
+      value: Schild_Titania
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b38228c375f915f44932624529e24a1f, type: 3}
 --- !u!1001 &988377716
 PrefabInstance:
   m_ObjectHideFlags: 0

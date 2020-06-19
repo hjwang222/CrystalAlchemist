@@ -25,11 +25,6 @@ public class Player : Character
     [Required]
     [BoxGroup("Player Objects")]
     [SerializeField]
-    private StringValue dialogText;
-
-    [Required]
-    [BoxGroup("Player Objects")]
-    [SerializeField]
     private StringValue characterName;
 
     [BoxGroup("Player Objects")]
@@ -61,8 +56,9 @@ public class Player : Character
         GameEvents.current.OnSleep += this.GoToSleep;
         GameEvents.current.OnWakeUp += this.WakeUp;
 
-        this.GetComponent<PlayerAbilities>().Initialize(this);
-        this.GetComponent<PlayerTeleport>().Initialize(this);
+        this.GetComponent<PlayerAbilities>().Initialize();
+        PlayerComponent[] components = this.GetComponents<PlayerComponent>();
+        for (int i = 0; i < components.Length; i++) components[i].Initialize();
 
         this.healthSignalUI.Raise();
         this.manaSignalUI.Raise();    
@@ -74,7 +70,9 @@ public class Player : Character
     public override void Update()
     {
         base.Update();        
-        this.GetComponent<PlayerAbilities>().Updating();       
+        this.GetComponent<PlayerAbilities>().Updating();
+        PlayerComponent[] components = this.GetComponents<PlayerComponent>();
+        for (int i = 0; i < components.Length; i++) components[i].Updating();
     }
 
     public override void OnDestroy()
@@ -174,15 +172,6 @@ public class Player : Character
     public void callSignal(SimpleSignal signal, float addResource)
     {
         if (signal != null && addResource != 0) signal.Raise();
-    }
-
-    public void showDialogBox(string text)
-    {
-        if (this.values.currentState != CharacterState.inDialog)
-        {
-            this.dialogText.SetValue(text);
-            MenuEvents.current.OpenDialogBox();
-        }
     }
 
     private void setStateMenuOpened(CharacterState newState)

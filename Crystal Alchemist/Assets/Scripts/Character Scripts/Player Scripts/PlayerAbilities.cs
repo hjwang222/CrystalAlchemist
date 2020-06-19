@@ -12,20 +12,21 @@ public class PlayerAbilities : CharacterCombat
     [Required]
     private FloatValue timeLeftValue;
 
-    private Player player;
     private bool isPressed;
     private float timer;
+    private Player player;
 
-    public void Initialize(Player player)
+    public override void Initialize()
     {
-        this.player = player;
-        InitializeCombat(this.player);
+        base.Initialize();
+        this.player = this.character.GetComponent<Player>();
         this.SetTimeValue(this.timeLeftValue);
-        this.skillSet.SetSender(player);
+        this.skillSet.SetSender(this.character);
     }
 
-    public void Updating()
+    public override void Updating()
     {
+        base.Updating();
         this.skillSet.Updating();
         this.buttons.Updating(this.player);
 

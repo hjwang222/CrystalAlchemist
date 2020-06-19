@@ -56,42 +56,63 @@ public class Interactable : MonoBehaviour
 
     private void OnDestroy() => GameEvents.current.OnSubmit -= OnSubmit;
 
+    private void OnDisable() => this.context.gameObject.SetActive(false);
+    
+
     #endregion
 
     #region Context Clue Funktionen
+
+    public void CheckInteraction(Player player)
+    {
+        if (player != null)
+        {
+            if (this.player != player) this.player = player;
+            this.isPlayerInRange = true;
+            this.isPlayerLookingAtIt = PlayerIsLooking();
+        }
+
+        if (PlayerCanInteract())
+        {
+            if (this.player.values.currentState != CharacterState.interact)
+            {
+                if (this.customActionButton) MasterManager.actionButtonText.SetValue(this.ID);
+                else MasterManager.actionButtonText.SetValue(string.Empty);
+
+                this.context.gameObject.SetActive(true);
+                this.player.values.currentState = CharacterState.interact;
+            }
+        }
+        else
+        {
+            if (this.player.values.currentState == CharacterState.interact)
+            {
+                this.context.gameObject.SetActive(false);
+                this.player.values.currentState = CharacterState.idle;
+            }
+        }
+    }
+
+    public void DeactivateInteraction()
+    {
+        if (this.player != null)
+        {
+            this.context.gameObject.SetActive(false);
+            this.player.values.currentState = CharacterState.idle;
+            this.player = null;
+        }
+
+        this.isPlayerInRange = false;
+        this.isPlayerLookingAtIt = false;
+        this.context.gameObject.SetActive(false);
+    }
 
     private void interact(Collider2D characterCollisionBox)
     {
         if (!characterCollisionBox.isTrigger)
         {
             Player player = characterCollisionBox.GetComponent<Player>();
-
-            if (player != null)
-            {
-                if (this.player != player) this.player = player;
-                this.isPlayerInRange = true;
-                this.isPlayerLookingAtIt = PlayerIsLooking();
-            }
-
-            if (PlayerCanInteract())
-            {
-                if (this.player.values.currentState != CharacterState.interact)
-                {
-                    if (this.customActionButton) MasterManager.actionButtonText.SetValue(this.ID);
-                    else MasterManager.actionButtonText.SetValue(string.Empty);
-
-                    this.context.gameObject.SetActive(true);
-                    this.player.values.currentState = CharacterState.interact;
-                }
-            }
-            else
-            {
-                if (this.player.values.currentState == CharacterState.interact)
-                {
-                    this.context.gameObject.SetActive(false);
-                    this.player.values.currentState = CharacterState.idle;
-                }
-            }
+            CheckInteraction(player);            
         }
     }
 
@@ -103,7 +124,7 @@ public class Interactable : MonoBehaviour
             && this.player.values.CanInteract());
     }
 
-    private bool PlayerIsLooking()
+    public virtual bool PlayerIsLooking()
     {
         if (this.isPlayerInRange && CollisionUtil.checkIfGameObjectIsViewed(this.player, this.gameObject)) return true;
         return false;
@@ -115,19 +136,27 @@ public class Interactable : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D characterCollisionBox)
     {
-        if (!characterCollisionBox.isTrigger)
-        {
-            if (this.player != null)
-            {
-                this.context.gameObject.SetActive(false);
-                this.player.values.currentState = CharacterState.idle;
-                this.player = null;
-            }
+        if (!characterCollisionBox.isTrigger) DeactivateInteraction();
+    }
 
-            this.isPlayerInRange = false;
-            this.isPlayerLookingAtIt = false;
-            this.context.gameObject.SetActive(false);
-        }
+    public void ShowDialog(DialogTextTrigger trigger, ItemStats stats)
+    {
+        if (this.GetComponent<DialogSystem>() != null) this.GetComponent<DialogSystem>().showDialog(this.player, this, trigger, stats);
+    }
+
+    public void ShowDialog(DialogTextTrigger trigger)
+    {
+        if(this.GetComponent<DialogSystem>() != null) this.GetComponent<DialogSystem>().showDialog(this.player, this, trigger);
+    }
+
+    public void ShowDialog()
+    {
+        if (this.GetComponent<DialogSystem>() != null) this.GetComponent<DialogSystem>().showDialog(this.player, this);
+    }
+
+    public void ShowMenuDialog()
+    {
+        if (this.GetComponent<MenuDialogBoxLauncher>() != null) this.GetComponent<MenuDialogBoxLauncher>().ShowDialogBox();
     }
     #endregion
 }

@@ -100,7 +100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6897580102996888132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.185, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7268659838857056125}
@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f80b21aee0d2f47a0e58afdc49b328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 5026383991709977235}
   aggroStats: {fileID: 11400000, guid: 74151ff649b937b418adb75846e519d1, type: 2}
+  npc: {fileID: 5026383991709977235}
   cluePosition: {fileID: 0}
 --- !u!58 &2711615262647934176
 CircleCollider2D:
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 5026383991709977235}
+  character: {fileID: 0}
   startPhase: {fileID: 0}
   startImmediately: 1
 --- !u!61 &8932006801697793323

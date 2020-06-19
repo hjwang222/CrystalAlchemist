@@ -77,19 +77,19 @@ public static class CollisionUtil
         if (other)
         {
             if (sender == null) return true;
-            if (sender.stats.characterType == CharacterType.Friend && target.stats.characterType == CharacterType.Enemy) return true;
-            if (sender.stats.characterType == CharacterType.Enemy && target.stats.characterType == CharacterType.Friend) return true;
+            if (sender.values.characterType == CharacterType.Friend && target.values.characterType == CharacterType.Enemy) return true;
+            if (sender.values.characterType == CharacterType.Enemy && target.values.characterType == CharacterType.Friend) return true;
         }
 
         if (same)
         {
             if (sender == null) return true;
-            if (sender.stats.characterType == target.stats.characterType) return true;
+            if (sender.values.characterType == target.values.characterType) return true;
         }
 
         if (neutral)
         {
-            if (target.stats.characterType == CharacterType.Object) return true;
+            if (target.values.characterType == CharacterType.Object) return true;
         }
 
         return false;
@@ -184,8 +184,8 @@ public static class CollisionUtil
         {
             if (hitted != false
                 && !hitted.collider.isTrigger
-                && hitted.collider.transform.parent != null
-                && hitted.collider.transform.parent.gameObject == gameObject) return true;
+                && ((hitted.collider.transform.gameObject == gameObject)
+                 || (hitted.collider.transform.parent != null && hitted.collider.transform.parent.gameObject == gameObject))) return true;
         }
 
         return false;

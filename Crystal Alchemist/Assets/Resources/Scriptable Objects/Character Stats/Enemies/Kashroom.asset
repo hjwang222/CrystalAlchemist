@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed50160a1f51fb4b89bf02e00ece70d, type: 3}
   m_Name: Kashroom
   m_EditorClassIdentifier: 
-  characterName: Kashroom
-  englischCharacterName: Kashroom
   characterType: 1
+  isInvincible: 0
+  cannotDie: 1
   startLife: 2
   startMana: 1
   startSpeed: 120
@@ -24,7 +24,7 @@ MonoBehaviour:
   immunityToStatusEffects: []
   hasRespawn: 1
   respawnTime: 60
-  respawnAnimation: {fileID: 0}
+  respawnChance: 100
   deathAnimation: {fileID: 8912312725720200054, guid: 97eb044421b412d479b7008552d1ea56,
     type: 3}
   maxLife: 2

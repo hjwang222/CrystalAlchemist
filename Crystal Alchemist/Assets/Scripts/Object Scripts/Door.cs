@@ -58,18 +58,18 @@ public class Door : Interactable
                         //Tür offen!
                         this.player.reduceResource(this.costs);
                         OpenCloseDoor(true, this.context);
-                        this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.success);
+                        ShowDialog(DialogTextTrigger.success);
                     }
                     else
                     {
                         //Tür kann nicht geöffnet werden
-                        this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
+                        ShowDialog(DialogTextTrigger.failed);
                     }
                 }
                 else
                 {
                     //Tür verschlossen
-                    this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.failed);
+                    ShowDialog(DialogTextTrigger.failed);
                 }
             }                       
         }
@@ -82,7 +82,7 @@ public class Door : Interactable
             //Wenn Knopf gedrückt wurde, OpenDoor()
         }
 
-        this.player.GetComponent<PlayerDialog>().showDialog(this, DialogTextTrigger.none);
+        ShowDialog(DialogTextTrigger.none);
     }
 
     private void OpenCloseDoor(bool isOpen)

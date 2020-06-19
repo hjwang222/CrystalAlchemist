@@ -28,6 +28,10 @@ public class GameEvents : MonoBehaviour
     public Action<float, float, float> OnCameraShake;
     public Action<float> OnCameraStill;
 
+    public Action<Character, Character, float> OnAggroHit;
+    public Action<Character, Character, float> OnAggroIncrease;
+    public Action<Character, Character, float> OnAggroDecrease;
+
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
     public void DoMenuOpen(CharacterState state) => this.OnMenuOpen?.Invoke(state);  
     public void DoMenuClose(CharacterState state) => this.OnMenuClose?.Invoke(state);
@@ -40,6 +44,10 @@ public class GameEvents : MonoBehaviour
     public void DoWarning(WarningType type) => this.OnWarning?.Invoke(type);
     public void DoSleep(Vector2 position, Action before, Action after) => this.OnSleep?.Invoke(position, before, after);
     public void DoWakeUp(Vector2 position, Action before, Action after) => this.OnWakeUp?.Invoke(position, before, after);
+
+    public void DoAggroHit(Character character, Character target, float value) => this.OnAggroHit?.Invoke(character, target, value);
+    public void DoAggroIncrease(Character character, Character target, float value) => this.OnAggroIncrease?.Invoke(character, target, value);
+    public void DoAggroDecrease(Character character, Character target, float value) => this.OnAggroDecrease?.Invoke(character, target, value);
 
     public void DoCameraShake(float strength, float duration, float speed) => this.OnCameraShake?.Invoke(strength, duration, speed);
     public void DoCameraStill(float speed) => this.OnCameraStill?.Invoke(speed);

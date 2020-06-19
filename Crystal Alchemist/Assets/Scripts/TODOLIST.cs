@@ -18,7 +18,11 @@ public class TODOLIST : MonoBehaviour
     //TODO: Movement by AIAction
     //IDEA: Head, Shoot, Ground Position. Vector or Gameobject?
     //TODO: Projectile Offset
-    //TODO: DialogBox Titania (NPC)
+
+    //TODO: Titanias Key (Item)
+    //TODO: Titania Damage Modell
+    //TODO: Titania Animation Layers
+    //TODO: Titania Defeat Animation
 
     //TODO: Sounds
     //REWORK: Arena Bounds
@@ -39,6 +43,8 @@ public class TODOLIST : MonoBehaviour
     //ITEM: Brille (Bool Value)
     //INPUT: Virtuelle Tastatur
     //TODO: Sin Eater Race (glowing eyes, halo, wings, etc)
+    //TODO: Skill: Explosion on enter
+    //TODO: Skill Extension Element or Scriptable Object
 
     //TODO: Stairs, Ice, Wall
     //TODO: Rule Tiles

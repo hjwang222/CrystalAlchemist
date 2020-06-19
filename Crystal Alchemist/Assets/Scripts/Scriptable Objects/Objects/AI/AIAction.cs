@@ -1,25 +1,33 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public enum AIActionType
-{
-    movement,
-    dialog,
-    wait,
-    ability,
-    sequence,
-    startPhase,
-    endPhase,
-    invincible,
-    kill,
-    cannotDie,
-    animation,
-    signal
-}
-
 [System.Serializable]
 public class AIAction
 {
+    public enum AIActionType
+    {
+        movement,
+        dialog,
+        wait,
+        ability,
+        sequence,
+        startPhase,
+        endPhase,
+        invincible,
+        kill,
+        cannotDie,
+        animation,
+        signal,
+        music
+    }
+
+    public enum MusicMode
+    {
+        play,
+        stop
+    }
+
+
     #region Attributes
 
     [BoxGroup("Properties")]
@@ -47,6 +55,7 @@ public class AIAction
     [HideIf("type", AIActionType.kill)]
     [HideIf("type", AIActionType.signal)]
     [HideIf("type", AIActionType.invincible)]
+    [HideIf("type", AIActionType.music)]
     [BoxGroup("Properties")]
     [SerializeField]
     private float duration = 4f;
@@ -118,6 +127,7 @@ public class AIAction
     [HideIf("type", AIActionType.wait)]
     [HideIf("type", AIActionType.signal)]
     [HideIf("type", AIActionType.invincible)]
+    [HideIf("type", AIActionType.music)]
     [BoxGroup("Properties")]
     [SerializeField]
     [OnValueChanged("RepeatChanged")]
@@ -134,6 +144,7 @@ public class AIAction
     [HideIf("type", AIActionType.wait)]
     [HideIf("type", AIActionType.signal)]
     [HideIf("type", AIActionType.invincible)]
+    [HideIf("type", AIActionType.music)]
     [BoxGroup("Properties")]
     [ShowIf("repeat")]
     [SerializeField]
@@ -149,6 +160,7 @@ public class AIAction
     [HideIf("type", AIActionType.wait)]
     [HideIf("type", AIActionType.signal)]
     [HideIf("type", AIActionType.invincible)]
+    [HideIf("type", AIActionType.music)]
     [ShowIf("repeat")]
     [BoxGroup("Properties")]
     [SerializeField]
@@ -174,6 +186,7 @@ public class AIAction
     [HideIf("type", AIActionType.dialog)]
     [HideIf("type", AIActionType.wait)]
     [HideIf("type", AIActionType.signal)]
+    [HideIf("type", AIActionType.music)]
     [HideIf("isTrigger")]
     [BoxGroup("Properties")]
     [SerializeField]
@@ -189,6 +202,23 @@ public class AIAction
     [BoxGroup("Properties")]
     [SerializeField]
     private float wait = 0f;
+
+    [ShowIf("type", AIActionType.music)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private MusicMode mode = MusicMode.play;
+
+    [ShowIf("type", AIActionType.music)]
+    [HideIf("mode", MusicMode.stop)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private AudioClip start;
+
+    [ShowIf("type", AIActionType.music)]
+    [HideIf("mode", MusicMode.stop)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private AudioClip loop;
 
     #endregion
 
@@ -225,6 +255,7 @@ public class AIAction
             case AIActionType.startPhase: StartPhase(npc); break;
             case AIActionType.endPhase: EndPhase(npc); break;
             case AIActionType.signal: StartSignal(); break;
+            case AIActionType.music: StartMusic(); break;
         }
     }
 
@@ -308,10 +339,10 @@ public class AIAction
 
     private void Charge(AI npc)
     {
-        npc.GetComponent<AIEvents>().ChargeAbility(this.activeAbility, npc, npc.target);
+        npc.GetComponent<AICombat>().ChargeAbility(this.activeAbility, npc, npc.target);
 
         if (this.activeAbility.IsTargetRequired())
-            npc.GetComponent<AIEvents>().ShowTargetingSystem(this.activeAbility);        //Show Targeting System when needed
+            npc.GetComponent<AICombat>().ShowTargetingSystem(this.activeAbility);        //Show Targeting System when needed
     }
 
     private void CheckTargets(AI npc)
@@ -323,13 +354,13 @@ public class AIAction
 
     private void UseSkill(AI npc)
     {
-        npc.GetComponent<AIEvents>().HideCastBar();
+        npc.GetComponent<AICombat>().HideCastBar();
 
-        if (this.activeAbility.IsTargetRequired()) npc.GetComponent<AIEvents>().UseAbilityOnTargets(this.activeAbility);
+        if (this.activeAbility.IsTargetRequired()) npc.GetComponent<AICombat>().UseAbilityOnTargets(this.activeAbility);
         else
         {
-            npc.GetComponent<AIEvents>().UseAbilityOnTarget(this.activeAbility, npc.target);
-            npc.GetComponent<AIEvents>().HideTargetingSystem(this.activeAbility);
+            npc.GetComponent<AICombat>().UseAbilityOnTarget(this.activeAbility, npc.target);
+            npc.GetComponent<AICombat>().HideTargetingSystem(this.activeAbility);
         }
 
         this.elapsed = this.delay;
@@ -337,15 +368,15 @@ public class AIAction
 
         if (!this.keepCast)
         {
-            npc.GetComponent<AIEvents>().HideTargetingSystem(this.activeAbility);
-            npc.GetComponent<AIEvents>().UnChargeAbility(this.activeAbility, npc); //reset Charge
+            npc.GetComponent<AICombat>().HideTargetingSystem(this.activeAbility);
+            npc.GetComponent<AICombat>().UnChargeAbility(this.activeAbility, npc); //reset Charge
         }
     }
 
     private void DisableSkill(AI npc)
     {
-        npc.GetComponent<AIEvents>().HideTargetingSystem(this.activeAbility);
-        npc.GetComponent<AIEvents>().UnChargeAbility(this.activeAbility, npc); //reset Charge
+        npc.GetComponent<AICombat>().HideTargetingSystem(this.activeAbility);
+        npc.GetComponent<AICombat>().UnChargeAbility(this.activeAbility, npc); //reset Charge
         Deactivate();
     }
 
@@ -464,12 +495,12 @@ public class AIAction
 
     private void StartPhase(AI npc)
     {
-        npc.GetComponent<AIEvents>().StartPhase(this.nextPhase);
+        npc.GetComponent<AICombat>().StartPhase(this.nextPhase);
     }
 
     private void EndPhase(AI npc)
     {
-        npc.GetComponent<AIEvents>().EndPhase();
+        npc.GetComponent<AICombat>().EndPhase();
     }
 
     #endregion
@@ -480,6 +511,18 @@ public class AIAction
     private void StartSignal()
     {
         if (this.signal != null) this.signal.Raise();
+        Deactivate();
+    }
+
+    #endregion
+
+
+    #region Music
+
+    private void StartMusic()
+    {
+        MusicEvents.current.StopMusic();
+        if (this.mode == MusicMode.play) MusicEvents.current.PlayMusic(this.start, this.loop);
         Deactivate();
     }
 

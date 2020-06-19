@@ -6,12 +6,10 @@ using System.Collections;
 public class MenuDialogBoxLauncher : MonoBehaviour
 {
     [BoxGroup("Main")]
-    [Required]
     [SerializeField]
     private GameObject parentMenu;
 
     [BoxGroup("Main")]
-    [Required]
     [SerializeField]
     private CustomCursor cursor;
 

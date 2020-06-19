@@ -59,7 +59,7 @@ public static class StatusEffectUtil
 
     public static void AddStatusEffect(StatusEffect statusEffect, Character character)
     {
-        if (statusEffect != null && character.stats.characterType != CharacterType.Object)
+        if (statusEffect != null && character.values.characterType != CharacterType.Object)
         {
             bool isImmune = GetImmunity(statusEffect, character);            
 

@@ -25,18 +25,22 @@ public enum Gender
 public class CharacterStats : ScriptableObject
 {
     [BoxGroup("Pflichtfelder")]
-    public CharacterType characterType = CharacterType.Object;
+    [SerializeField]
+    private CharacterType characterType = CharacterType.Object;
 
     ////////////////////////////////////////////////////////////////
 
     [TabGroup("Start-Values")]
     [OnValueChanged("UpdateLifeRespawn")]
-    public bool immortalObject = false;
+    public bool isInvincible = false;
+
+    [TabGroup("Start-Values")]
+    public bool cannotDie = false;
 
     [TabGroup("Start-Values")]
     [OnValueChanged("UpdateStats")]
     [Tooltip("Leben, mit dem der Spieler startet")]
-    [HideIf("immortalObject")]
+    [HideIf("isInvincible")]
     public float startLife = 1;
 
     [TabGroup("Start-Values")]
@@ -71,19 +75,19 @@ public class CharacterStats : ScriptableObject
     [Space(10)]
     [TabGroup("Spawn Values")]
     [Tooltip("Respawn-Zeit")]
-    [HideIf("immortalObject")]
+    [HideIf("isInvincible")]
     public bool hasRespawn = true;
 
     [TabGroup("Spawn Values")]
     [Tooltip("Respawn-Zeit")]
     [ShowIf("hasRespawn")]
-    [HideIf("immortalObject")]
+    [HideIf("isInvincible")]
     public float respawnTime = 30;
 
     [TabGroup("Spawn Values")]
     [Tooltip("Respawn-Zeit")]
     [ShowIf("hasRespawn")]
-    [HideIf("immortalObject")]
+    [HideIf("isInvincible")]
     [MaxValue(100)]
     [MinValue(1)]
     public int respawnChance = 100;
@@ -99,7 +103,7 @@ public class CharacterStats : ScriptableObject
     [Tooltip("Maximales Life")]
     [OnValueChanged("UpdateStats")]
     [MinValue(1)]
-    [HideIf("immortalObject")]
+    [HideIf("isInvincible")]
     public float maxLife = 1;
 
     [BoxGroup("Upgrades")]
@@ -187,6 +191,10 @@ public class CharacterStats : ScriptableObject
 
     ////////////////////////////////////////////////////////////////
 
+    public CharacterType GetCharacterType()
+    {
+        return this.characterType;
+    }
 
     public string GetCharacterName()
     {
@@ -201,10 +209,6 @@ public class CharacterStats : ScriptableObject
 
     private void UpdateLifeRespawn()
     {
-        if (this.immortalObject)
-        {
-            this.hasRespawn = false;
-
-        }
+        if (this.isInvincible) this.hasRespawn = false;
     }
 }

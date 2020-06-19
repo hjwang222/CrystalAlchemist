@@ -60,7 +60,6 @@ public class Character : MonoBehaviour
     private float regenTimeElapsed;
     private float manaTime;
     private DeathAnimation activeDeathAnimation;
-    private bool cannotDie = false;
     private Vector3 spawnPosition;
     private CastBar activeCastbar;
     private List<StatusEffectGameObject> statusEffectVisuals = new List<StatusEffectGameObject>();
@@ -136,7 +135,7 @@ public class Character : MonoBehaviour
     public void CheckDeath()
     {
         if (this.values.life <= 0
-    && !this.cannotDie //Item
+    && !this.values.cannotDie //Item
     && !this.values.isInvincible //Event
     && !this.values.cantBeHit) //after Hit
             Dead();
@@ -354,9 +353,7 @@ public class Character : MonoBehaviour
 
                 if (this.values.life > 0 && elem.resourceType == CostType.life && amount < 0)
                 {
-                    if (this.GetComponent<AI>() != null
-                     && this.GetComponent<AI>().aggroGameObject != null)
-                        this.GetComponent<AI>().aggroGameObject.increaseAggroOnHit(skill.sender, elem.amount);
+                    GameEvents.current.DoAggroHit(this, skill.sender, elem.amount);
 
                     //Charakter-Treffer (Schaden) animieren
                     AudioUtil.playSoundEffect(this.gameObject, this.stats.hitSoundEffect);
@@ -438,10 +435,10 @@ public class Character : MonoBehaviour
 
     public void SetInvincible(bool value)
     {
-        this.values.cantBeHit = value;
+        this.values.isInvincible = value;
     }
 
-    public void setCannotDie(bool value) => this.cannotDie = value;
+    public void setCannotDie(bool value) => this.values.cannotDie = value;
 
     public void KnockBack(float knockTime, float thrust, Vector2 direction)
     {
@@ -514,6 +511,12 @@ public class Character : MonoBehaviour
         return this.transform.position;
     }
 
+    public float GetHeight()
+    {        
+        if (this.headPosition != null) return this.headPosition.transform.localPosition.y;
+        return 0;
+    }
+
     public virtual string GetCharacterName()
     {
         return this.stats.GetCharacterName();
@@ -554,7 +557,7 @@ public class Character : MonoBehaviour
     public virtual void EnableScripts(bool value)
     {
         if (this.GetComponent<AIAggroSystem>() != null) this.GetComponent<AIAggroSystem>().enabled = value;
-        if (this.GetComponent<AIEvents>() != null) this.GetComponent<AIEvents>().enabled = value;
+        if (this.GetComponent<AICombat>() != null) this.GetComponent<AICombat>().enabled = value;
         if (this.GetComponent<AIMovement>() != null) this.GetComponent<AIMovement>().enabled = value;
 
         this.boxCollider.enabled = value;
@@ -660,9 +663,7 @@ public class Character : MonoBehaviour
     public void ShowDialog(string text, float duration)
     {        
         MiniDialogBox dialogBox = Instantiate(MasterManager.miniDialogBox, this.transform);
-        float height = 0;
-        if (this.headPosition != null) height = this.headPosition.transform.localPosition.y;
-        dialogBox.setDialogBox(text, duration, height);        
+        dialogBox.setDialogBox(text, duration, GetHeight());        
     }
 
     public void RemoveAllStatusEffects()

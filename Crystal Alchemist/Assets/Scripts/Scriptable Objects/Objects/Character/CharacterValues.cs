@@ -24,6 +24,9 @@ public class CharacterValues : ScriptableObject
     [BoxGroup]
     public bool isPlayer = false;
 
+    [BoxGroup]
+    public CharacterType characterType;
+
     [BoxGroup("Base Stats")]
     public float life;
     [BoxGroup("Base Stats")]
@@ -54,6 +57,8 @@ public class CharacterValues : ScriptableObject
     [BoxGroup("States")]
     public bool cantBeHit;
     [BoxGroup("States")]
+    public bool cannotDie = false;
+    [BoxGroup("States")]
     public bool isInvincible = false;
 
     [BoxGroup("States")]
@@ -83,7 +88,8 @@ public class CharacterValues : ScriptableObject
     [Button]
     public void Clear(CharacterStats stats)
     {
-        this.isInvincible = stats.immortalObject;
+        this.isInvincible = stats.isInvincible;
+        this.cannotDie = stats.cannotDie;
 
         this.maxLife = stats.maxLife;
         this.maxMana = stats.maxMana;
@@ -92,6 +98,7 @@ public class CharacterValues : ScriptableObject
         this.buffPlus = stats.buffPlus;
         this.debuffMinus = stats.debuffMinus;
 
+        this.characterType = stats.GetCharacterType();
         this.life = stats.startLife;
         this.mana = stats.startMana;
         this.buffs.Clear();
