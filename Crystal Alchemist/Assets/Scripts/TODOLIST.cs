@@ -9,24 +9,19 @@ public class TODOLIST : MonoBehaviour
     //BUG: Cooldown wenn kein Skill ausgeführt wurde
     //BUG: Stromschlag nicht unterbrechen
 
-    //--Boss Fight--
-    //NPC: Bosskampf (Titania)
-    // -> Phases testing
-    // -> Graphics
-    // -> Music
-
     //TODO: Movement by AIAction
     //IDEA: Head, Shoot, Ground Position. Vector or Gameobject?
     //TODO: Projectile Offset
 
     //TODO: Titanias Key (Item)
-    //TODO: Titania Damage Modell
-    //TODO: Titania Animation Layers
-    //TODO: Titania Defeat Animation
+    //TODO: Item appear/disappear Animation
+    //TODO: Titanias Door
+    //TODO: Camera Schwenk
+    //TODO: Titania Scharf Schalten
+    //TODO: Better Arena Graphics
 
     //TODO: Sounds
     //REWORK: Arena Bounds
-    //TODO: Reward and Exit and Animation
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)

@@ -86,7 +86,7 @@ MonoBehaviour:
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
   context: {fileID: 0}
-  npc: {fileID: 1719322071491950841}
+  npc: {fileID: 143027468618068661}
   onSubmit:
     m_PersistentCalls:
       m_Calls:
@@ -118,21 +118,117 @@ MonoBehaviour:
   - trigger: 0
     ID: TitaniaDialog
     type: 3
-  eventOnClose:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5667813256127185038}
-        m_TargetAssemblyTypeName: MenuDialogBoxLauncher, Assembly-CSharp
-        m_MethodName: ShowDialogBox
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+    eventOnClose:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5667813256127185038}
+          m_TargetAssemblyTypeName: MenuDialogBoxLauncher, Assembly-CSharp
+          m_MethodName: ShowDialogBox
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - trigger: 1
+    ID: TitaniaReward
+    type: 3
+    eventOnClose:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 143027468618068661}
+          m_TargetAssemblyTypeName: Goddess, Assembly-CSharp
+          m_MethodName: PlayMusic
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1797091195747348680}
+          m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
+          m_MethodName: SetDialogEmpty
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - trigger: 3
+    ID: TitaniaEmpty
+    type: 3
+    eventOnClose:
+      m_PersistentCalls:
+        m_Calls: []
   textValue: {fileID: 11400000, guid: 0dee858a55e55d64ba1bcbf52a9b3e33, type: 2}
   eventValue: {fileID: 11400000, guid: f6af316cc0916024581413a59b36461b, type: 2}
 --- !u!114 &5667813256127185038
@@ -171,18 +267,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 8991369037405528509}
-        m_TargetAssemblyTypeName: AIInteraction, Assembly-CSharp
-        m_MethodName: SetAggro
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 100
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8991369037405528509}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -212,36 +296,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
---- !u!1 &2038422217508508467
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1865575635832723718}
-  m_Layer: 15
-  m_Name: Clue Position
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1865575635832723718
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2038422217508508467}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.25, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3945848509854940439}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3020177091833525065
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +405,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -428,7 +482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3945848509854940439}
-  - component: {fileID: 1719322071491950841}
+  - component: {fileID: 143027468618068661}
   - component: {fileID: 3945848509854940424}
   - component: {fileID: 1719322071491950843}
   - component: {fileID: 3945848509854940437}
@@ -438,7 +492,7 @@ GameObject:
   - component: {fileID: 4308959334589917793}
   - component: {fileID: 4885153958641905025}
   - component: {fileID: 910524742380246583}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Titania
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,11 +517,10 @@ Transform:
   - {fileID: 5043231758160191731}
   - {fileID: 7066615533062023259}
   - {fileID: 1868238835121862846}
-  - {fileID: 1865575635832723718}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1719322071491950841
+--- !u!114 &143027468618068661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -476,7 +529,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3945848509854940433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea4884ba04434e48ab9e3678b716245, type: 3}
+  m_Script: {fileID: 11500000, guid: 594481b97dd9abf458b279f819cd0b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 55d358f1ae5b28f45b4f5f4f5a55089c, type: 2}
@@ -495,6 +548,95 @@ MonoBehaviour:
   target: {fileID: 0}
   partner: {fileID: 0}
   rangeTriggered: {fileID: 0}
+  onDefeated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1719322071491950843}
+        m_TargetAssemblyTypeName: AICombat, Assembly-CSharp
+        m_MethodName: EndPhase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8991369037405528509}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 8991369037405528509}
+        m_TargetAssemblyTypeName: AIInteraction, Assembly-CSharp
+        m_MethodName: TurnFriendly
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 143027468618068661}
+        m_TargetAssemblyTypeName: Goddess, Assembly-CSharp
+        m_MethodName: SetAnimationTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Defeated
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 143027468618068661}
+        m_TargetAssemblyTypeName: Goddess, Assembly-CSharp
+        m_MethodName: ShowMiniDialog
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: TitaniaDefeated
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1797091195747348680}
+        m_TargetAssemblyTypeName: DialogSystem, Assembly-CSharp
+        m_MethodName: SetDialogSucces
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 143027468618068661}
+        m_TargetAssemblyTypeName: Goddess, Assembly-CSharp
+        m_MethodName: StopMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  start: {fileID: 8300000, guid: 043db5b9f04adbc419870997174342ba, type: 3}
+  loop: {fileID: 8300000, guid: a60cd52489e691546811b3d541291e0a, type: 3}
 --- !u!114 &3945848509854940424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac635517652981a448863c38811bc524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 1719322071491950841}
+  npc: {fileID: 0}
   movementPriority: 0
   targetRadius: 3.5
   partnerRadius: 0.1
@@ -707,8 +849,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggroStats: {fileID: 11400000, guid: 46e049ec2b630ec40aec487f31843b9f, type: 2}
-  npc: {fileID: 1719322071491950841}
-  cluePosition: {fileID: 2038422217508508467}
+  npc: {fileID: 143027468618068661}
+  cluePosition: {fileID: 0}
 --- !u!58 &5650306304912438039
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -908,15 +1050,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a16bd4179f071649b716a3d0358d43a, type: 3}
---- !u!4 &46382055281560040 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8537469436013784418, guid: 6a16bd4179f071649b716a3d0358d43a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8565819056070435978}
-  m_PrefabAsset: {fileID: 0}
 --- !u!212 &5485388855570139274 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4251366256092687360, guid: 6a16bd4179f071649b716a3d0358d43a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8565819056070435978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &46382055281560040 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8537469436013784418, guid: 6a16bd4179f071649b716a3d0358d43a,
     type: 3}
   m_PrefabInstance: {fileID: 8565819056070435978}
   m_PrefabAsset: {fileID: 0}

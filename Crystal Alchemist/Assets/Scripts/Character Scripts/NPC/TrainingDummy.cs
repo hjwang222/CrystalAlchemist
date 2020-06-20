@@ -90,7 +90,7 @@ public class TrainingDummy : NonPlayer
 
         float DPS = this.damage / this.time;
         string text = FormatUtil.formatFloatToString(DPS, 1f) + " DPS!";
-        ShowDialog(text, this.resultTime - 1f);
+        ShowMiniDialog(text, this.resultTime - 1f);
 
         StartCoroutine(invincibleCo());
     }

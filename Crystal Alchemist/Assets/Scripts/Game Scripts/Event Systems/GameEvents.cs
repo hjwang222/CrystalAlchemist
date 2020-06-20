@@ -31,6 +31,7 @@ public class GameEvents : MonoBehaviour
     public Action<Character, Character, float> OnAggroHit;
     public Action<Character, Character, float> OnAggroIncrease;
     public Action<Character, Character, float> OnAggroDecrease;
+    public Action<Character> OnAggroClear;
 
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
     public void DoMenuOpen(CharacterState state) => this.OnMenuOpen?.Invoke(state);  
@@ -48,6 +49,7 @@ public class GameEvents : MonoBehaviour
     public void DoAggroHit(Character character, Character target, float value) => this.OnAggroHit?.Invoke(character, target, value);
     public void DoAggroIncrease(Character character, Character target, float value) => this.OnAggroIncrease?.Invoke(character, target, value);
     public void DoAggroDecrease(Character character, Character target, float value) => this.OnAggroDecrease?.Invoke(character, target, value);
+    public void DoAggroClear(Character character) => this.OnAggroClear(character);
 
     public void DoCameraShake(float strength, float duration, float speed) => this.OnCameraShake?.Invoke(strength, duration, speed);
     public void DoCameraStill(float speed) => this.OnCameraStill?.Invoke(speed);

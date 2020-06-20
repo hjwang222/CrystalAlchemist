@@ -25,7 +25,7 @@ public static class LocalisationSystem
             case Language.German: return german.GetLocalisedValue(key, type);
         }
 
-        return string.Empty;
+        return "";
     }
 
     public static void LoadFiles()

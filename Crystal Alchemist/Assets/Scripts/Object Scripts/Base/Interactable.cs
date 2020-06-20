@@ -56,7 +56,7 @@ public class Interactable : MonoBehaviour
 
     private void OnDestroy() => GameEvents.current.OnSubmit -= OnSubmit;
 
-    private void OnDisable() => this.context.gameObject.SetActive(false);
+    private void OnDisable() { if (this.context != null) this.context.gameObject.SetActive(false); }
     
 
     #endregion

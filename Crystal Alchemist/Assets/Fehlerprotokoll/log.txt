@@ -839,3 +839,281 @@ UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISubmit
 UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
 UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
 
+Exception 20.06.2020 00:20:48: NullReferenceException: Object reference not set to an instance of an object
+AIInteraction.Start () (at Assets/Scripts/Character Scripts/NPC/AIInteraction.cs:19)
+
+Exception 20.06.2020 00:21:09: NullReferenceException: Object reference not set to an instance of an object
+AIInteraction.PlayerIsLooking () (at Assets/Scripts/Character Scripts/NPC/AIInteraction.cs:47)
+Interactable.CheckInteraction (Player player) (at Assets/Scripts/Object Scripts/Base/Interactable.cs:72)
+Interactable.interact (UnityEngine.Collider2D characterCollisionBox) (at Assets/Scripts/Object Scripts/Base/Interactable.cs:115)
+Interactable.OnTriggerEnter2D (UnityEngine.Collider2D characterCollisionBox) (at Assets/Scripts/Object Scripts/Base/Interactable.cs:135)
+
+Exception 20.06.2020 00:26:55: NullReferenceException: Object reference not set to an instance of an object
+DialogSystem.getText (DialogText text, System.Single price, ItemGroup item, ItemStats loot, Player player) (at Assets/Scripts/Game Scripts/DialogSystem.cs:160)
+DialogSystem.show (Player player, Interactable interactable, ItemStats loot) (at Assets/Scripts/Game Scripts/DialogSystem.cs:134)
+DialogSystem.showDialog (Player player, Interactable interactable, ItemStats loot) (at Assets/Scripts/Game Scripts/DialogSystem.cs:109)
+DialogSystem.showDialog (Player player, Interactable interactable) (at Assets/Scripts/Game Scripts/DialogSystem.cs:98)
+Interactable.ShowDialog () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:154)
+UnityEngine.Events.InvokableCall.Invoke () (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.Events.UnityEvent.Invoke () (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+AIInteraction.DoOnSubmit () (at Assets/Scripts/Character Scripts/NPC/AIInteraction.cs:24)
+Interactable.OnSubmit () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:52)
+GameEvents.DoSubmit () (at Assets/Scripts/Game Scripts/Event Systems/GameEvents.cs:42)
+PlayerControls.Submit (UnityEngine.InputSystem.InputAction+CallbackContext context) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerControls.cs:17)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.InputSystem.Utilities.DelegateHelpers.InvokeCallbacksSafe[TValue] (UnityEngine.InputSystem.Utilities.InlinedArray`1[System.Action`1[TValue]]& callbacks, TValue argument, System.String callbackName, System.Object context) (at Library/PackageCache/com.unity.inputsystem@1.0.0/InputSystem/Utilities/DelegateHelpers.cs:51)
+UnityEngine.InputSystem.LowLevel.<>c__DisplayClass7_0:<set_onUpdate>b__0(NativeInputUpdateType, NativeInputEventBuffer*)
+UnityEngineInternal.Input.NativeInputSystem:NotifyUpdate(NativeInputUpdateType, IntPtr)
+
+Exception 20.06.2020 00:42:23: NullReferenceException: Object reference not set to an instance of an object
+DialogSystem.getText (DialogText text, System.Single price, ItemGroup item, ItemStats loot, Player player) (at Assets/Scripts/Game Scripts/DialogSystem.cs:160)
+DialogSystem.show (Player player, Interactable interactable, ItemStats loot) (at Assets/Scripts/Game Scripts/DialogSystem.cs:134)
+DialogSystem.showDialog (Player player, Interactable interactable, ItemStats loot) (at Assets/Scripts/Game Scripts/DialogSystem.cs:109)
+DialogSystem.showDialog (Player player, Interactable interactable) (at Assets/Scripts/Game Scripts/DialogSystem.cs:98)
+Interactable.ShowDialog () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:154)
+UnityEngine.Events.InvokableCall.Invoke () (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.Events.UnityEvent.Invoke () (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+AIInteraction.DoOnSubmit () (at Assets/Scripts/Character Scripts/NPC/AIInteraction.cs:24)
+Interactable.OnSubmit () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:52)
+GameEvents.DoSubmit () (at Assets/Scripts/Game Scripts/Event Systems/GameEvents.cs:42)
+PlayerControls.Submit (UnityEngine.InputSystem.InputAction+CallbackContext context) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerControls.cs:17)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.InputSystem.Utilities.DelegateHelpers.InvokeCallbacksSafe[TValue] (UnityEngine.InputSystem.Utilities.InlinedArray`1[System.Action`1[TValue]]& callbacks, TValue argument, System.String callbackName, System.Object context) (at Library/PackageCache/com.unity.inputsystem@1.0.0/InputSystem/Utilities/DelegateHelpers.cs:51)
+UnityEngine.InputSystem.LowLevel.<>c__DisplayClass7_0:<set_onUpdate>b__0(NativeInputUpdateType, NativeInputEventBuffer*)
+UnityEngineInternal.Input.NativeInputSystem:NotifyUpdate(NativeInputUpdateType, IntPtr)
+
+Exception 20.06.2020 00:42:23: NullReferenceException: Object reference not set to an instance of an object
+DialogSystem.getText (DialogText text, System.Single price, ItemGroup item, ItemStats loot, Player player) (at Assets/Scripts/Game Scripts/DialogSystem.cs:160)
+DialogSystem.show (Player player, Interactable interactable, ItemStats loot) (at Assets/Scripts/Game Scripts/DialogSystem.cs:134)
+DialogSystem.showDialog (Player player, Interactable interactable, ItemStats loot) (at Assets/Scripts/Game Scripts/DialogSystem.cs:109)
+DialogSystem.showDialog (Player player, Interactable interactable) (at Assets/Scripts/Game Scripts/DialogSystem.cs:98)
+Interactable.ShowDialog () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:154)
+UnityEngine.Events.InvokableCall.Invoke () (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.Events.UnityEvent.Invoke () (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+AIInteraction.DoOnSubmit () (at Assets/Scripts/Character Scripts/NPC/AIInteraction.cs:24)
+Interactable.OnSubmit () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:52)
+GameEvents.DoSubmit () (at Assets/Scripts/Game Scripts/Event Systems/GameEvents.cs:42)
+PlayerControls.Submit (UnityEngine.InputSystem.InputAction+CallbackContext context) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerControls.cs:17)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.InputSystem.Utilities.DelegateHelpers.InvokeCallbacksSafe[TValue] (UnityEngine.InputSystem.Utilities.InlinedArray`1[System.Action`1[TValue]]& callbacks, TValue argument, System.String callbackName, System.Object context) (at Library/PackageCache/com.unity.inputsystem@1.0.0/InputSystem/Utilities/DelegateHelpers.cs:51)
+UnityEngine.Application:InvokeFocusChanged(Boolean)
+UnityEditorInternal.InternalEditorUtility:OnGameViewFocus(Boolean)
+UnityEditor.EditorApplicationLayout:SetPausemodeLayout()
+
+Exception 20.06.2020 02:00:17: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:00:17: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:00:17: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:00:17: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:00:17: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:00:17: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:00:17: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:03:51: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:03:51: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:03:51: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:03:51: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:03:51: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:03:51: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:03:51: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:04:25: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:04:25: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:04:25: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:04:25: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:04:25: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:04:25: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:04:25: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:04:46: NullReferenceException: Object reference not set to an instance of an object
+PlayerTeleport+<loadSceneCo>d__11.MoveNext () (at Assets/Scripts/Character Scripts/Player Scripts/PlayerTeleport.cs:95)
+UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+
+Exception 20.06.2020 02:05:24: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:05:24: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:05:24: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:05:24: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:05:24: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:05:24: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:05:24: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:08:21: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:08:21: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:08:21: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:08:21: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:08:21: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:08:21: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+
+Exception 20.06.2020 02:08:21: NullReferenceException: Object reference not set to an instance of an object
+Interactable.OnDisable () (at Assets/Scripts/Object Scripts/Base/Interactable.cs:59)
+UnityEngine.GameObject:SetActive(Boolean)
+Room:setObjects(Boolean) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:46)
+Room:Awake() (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:26)
+

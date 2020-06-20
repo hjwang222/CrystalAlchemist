@@ -4,7 +4,6 @@
 public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
 {
     public string teleportName = "";
-    public string teleportNameEnglish = "";
     public string scene;
     public Vector2 position;
     public bool showAnimationIn = false;
@@ -13,7 +12,6 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
     public void Clear()
     {
         this.teleportName = "";
-        this.teleportNameEnglish = "";
         this.scene = "Haus";
         this.position = Vector2.zero;
         this.showAnimationIn = true;

@@ -6,19 +6,20 @@ public class MiniDialogBox : MonoBehaviour
     [SerializeField]
     private TextMeshPro textfield;
 
-    private float height;
     private float duration;
+
+    private Vector2 position;
 
     private void Start()
     {
-        this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + height);
+        this.transform.position = this.position;
         Destroy(this.gameObject, this.duration);
     }
 
-    public void setDialogBox(string text, float duration, float height)
+    public void setDialogBox(string text, float duration, Vector2 position)
     {
         this.duration = duration;
         this.textfield.text = text;
-        this.height = height;
+        this.position = position;
     }
 }

@@ -473,7 +473,7 @@ public class AIAction
     private void StartDialog(AI npc)
     {
         string text = FormatUtil.GetLocalisedText(this.translationID, LocalisationFileType.dialogs);
-        npc.ShowDialog(text, this.duration);
+        npc.ShowMiniDialog(text, this.duration);
         this.elapsed = this.duration;
     }
 

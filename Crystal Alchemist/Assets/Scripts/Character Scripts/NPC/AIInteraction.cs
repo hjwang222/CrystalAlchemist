@@ -16,7 +16,7 @@ public class AIInteraction : Interactable
     public override void Start()
     {
         base.Start();
-        this.context.transform.position = new Vector2(this.context.transform.position.x, this.context.transform.position.y + this.npc.GetHeight());
+        this.context.transform.position = this.npc.GetHeadPosition();
     }
 
     public override void DoOnSubmit()
@@ -27,11 +27,13 @@ public class AIInteraction : Interactable
     public void TurnHostile()
     {
         this.npc.values.characterType = CharacterType.Enemy;
+        SetAggro(999);
     }
 
     public void TurnFriendly()
     {
         this.npc.values.characterType = CharacterType.Friend;
+        GameEvents.current.DoAggroClear(this.npc);
     }
 
     public void SetAggro(float value)

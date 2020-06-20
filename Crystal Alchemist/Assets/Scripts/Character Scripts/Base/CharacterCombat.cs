@@ -94,7 +94,7 @@ public class CharacterCombat : MonoBehaviour
     {
         if (this.activeCastBar == null && ability.showCastbar && ability.hasCastTime)
         {
-            this.activeCastBar = Instantiate(MasterManager.castBar, character.transform.position, Quaternion.identity);
+            this.activeCastBar = Instantiate(MasterManager.castBar, character.GetHeadPosition(), Quaternion.identity);
             this.activeCastBar.setCastBar(character, ability);
         }
     }

@@ -33,6 +33,7 @@ public class AIAggroSystem : MonoBehaviour
         GameEvents.current.OnAggroHit += increaseAggroOnHit;
         GameEvents.current.OnAggroIncrease += increaseAggro;
         GameEvents.current.OnAggroDecrease += decreaseAggro;
+        GameEvents.current.OnAggroClear += ClearAggro;
     }
 
     private void OnDestroy()
@@ -40,6 +41,7 @@ public class AIAggroSystem : MonoBehaviour
         GameEvents.current.OnAggroHit -= increaseAggroOnHit;
         GameEvents.current.OnAggroIncrease -= increaseAggro;
         GameEvents.current.OnAggroDecrease -= decreaseAggro;
+        GameEvents.current.OnAggroClear -= ClearAggro;
     }
 
     private void Update()
@@ -241,6 +243,11 @@ public class AIAggroSystem : MonoBehaviour
     private void decreaseAggro(Character character, Character newTarget, float aggroDecrease)
     {
         if (newTarget != null && character == this.npc) setParameterOfAggrolist(newTarget, aggroDecrease);
+    }
+
+    private void ClearAggro(Character character)
+    {
+        if (character == this.npc) this.npc.aggroList.Clear();
     }
 
     #endregion

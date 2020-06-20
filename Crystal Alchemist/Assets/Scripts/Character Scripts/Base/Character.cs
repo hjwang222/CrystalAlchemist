@@ -176,9 +176,14 @@ public class Character : MonoBehaviour
 
     #region Item Functions (drop Item, Lootregeln)
 
-    public void dropItem()
+    public void DropItem()
     {
         if (this.values.itemDrop != null) this.values.itemDrop.Instantiate(this.transform.position);
+    }
+
+    public void DropItem(GameObject position)
+    {
+        if (this.values.itemDrop != null) this.values.itemDrop.Instantiate(position.transform.position);
     }
 
     #endregion
@@ -383,13 +388,12 @@ public class Character : MonoBehaviour
     public virtual void Dead()
     {
         Dead(true);
-    }
+    }    
 
-    public void Dead(bool showAnimation)
+    public virtual void Dead(bool showAnimation)
     {
         for (int i = 0; i < this.values.activeSkills.Count; i++)
         {
-            resetCast(this.values.activeSkills[i]);
             if (this.values.activeSkills[i].isAttachedToSender()) this.values.activeSkills[i].DeactivateIt();
         }
 
@@ -411,7 +415,7 @@ public class Character : MonoBehaviour
 
     public void DestroyIt()
     {
-        dropItem();
+        DropItem();
         DestroyItWithoutDrop();
     }
 
@@ -511,10 +515,10 @@ public class Character : MonoBehaviour
         return this.transform.position;
     }
 
-    public float GetHeight()
-    {        
-        if (this.headPosition != null) return this.headPosition.transform.localPosition.y;
-        return 0;
+    public Vector2 GetHeadPosition()
+    {
+        if (this.headPosition == null) return this.transform.position;
+        return this.headPosition.transform.position;
     }
 
     public virtual string GetCharacterName()
@@ -566,17 +570,6 @@ public class Character : MonoBehaviour
     public void startAttackAnimation(string parameter)
     {
         AnimatorUtil.SetAnimatorParameter(this.animator, parameter);
-    }
-
-    public void resetCast(Skill skill)
-    {
-        if (skill != null) hideCastBarAndIndicator(skill);
-    }
-
-    public void hideCastBarAndIndicator(Skill skill)
-    {
-        if (this.activeCastbar != null) this.activeCastbar.destroyIt();
-        if (skill.GetComponent<SkillAnimationModule>() != null) skill.GetComponent<SkillAnimationModule>().hideCastingAnimation();
     }
 
     #endregion
@@ -660,10 +653,10 @@ public class Character : MonoBehaviour
 
     #endregion
 
-    public void ShowDialog(string text, float duration)
+    public void ShowMiniDialog(string text, float duration)
     {        
         MiniDialogBox dialogBox = Instantiate(MasterManager.miniDialogBox, this.transform);
-        dialogBox.setDialogBox(text, duration, GetHeight());        
+        dialogBox.setDialogBox(text, duration, GetHeadPosition());        
     }
 
     public void RemoveAllStatusEffects()
