@@ -8,7 +8,7 @@ public class SaveSystem
     public static void Save(PlayerSaveGame saveGame, string slot)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/" + slot + "." + MasterManager.staticValues.saveGameFiletype;
+        string path = Application.persistentDataPath + "/" + slot + "." + MasterManager.globalValues.saveGameFiletype;
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerData data = new PlayerData(saveGame);
@@ -21,7 +21,7 @@ public class SaveSystem
     public static void SaveOptions()
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/options."+MasterManager.staticValues.saveGameFiletype;
+        string path = Application.persistentDataPath + "/options."+MasterManager.globalValues.saveGameFiletype;
         FileStream stream = new FileStream(path, FileMode.Create);
 
         GameOptions data = new GameOptions();
@@ -35,7 +35,7 @@ public class SaveSystem
     {
         if (name != null)
         {
-            string path = Application.persistentDataPath + "/" + name + "." + MasterManager.staticValues.saveGameFiletype;
+            string path = Application.persistentDataPath + "/" + name + "." + MasterManager.globalValues.saveGameFiletype;
 
             if (File.Exists(path))
             {
@@ -58,7 +58,7 @@ public class SaveSystem
 
     public static void loadOptions()
     {
-        string path = Application.persistentDataPath + "/options." + MasterManager.staticValues.saveGameFiletype;
+        string path = Application.persistentDataPath + "/options." + MasterManager.globalValues.saveGameFiletype;
 
         if (File.Exists(path))
         {

@@ -144,7 +144,7 @@ public class AIMovement : AIComponent
 
         if (this.usePathfinding && this.seeker != null) InvokeRepeating("UpdatePath", 0, this.updateDelay);
 
-        this.targetPosition = MasterManager.staticValues.nullVector;
+        this.targetPosition = MasterManager.globalValues.nullVector;
 
         if (this.isPatrol && this.patrolType == PatrolType.area) SetRandomPoint();
     }
@@ -168,7 +168,7 @@ public class AIMovement : AIComponent
         }
 
         if (MasterManager.debugSettings.showTargetPosition
-            && this.targetPosition != MasterManager.staticValues.nullVector)
+            && this.targetPosition != MasterManager.globalValues.nullVector)
             Debug.DrawLine(this.npc.GetGroundPosition(), this.targetPosition, Color.blue);
     }
 
@@ -191,9 +191,9 @@ public class AIMovement : AIComponent
 
     private void SetNextPoint()
     {
-        Vector3 patrolVector = MasterManager.staticValues.nullVector;
-        Vector3 spawnVector = MasterManager.staticValues.nullVector;
-        Vector3 chaseVector = MasterManager.staticValues.nullVector;
+        Vector3 patrolVector = MasterManager.globalValues.nullVector;
+        Vector3 spawnVector = MasterManager.globalValues.nullVector;
+        Vector3 chaseVector = MasterManager.globalValues.nullVector;
 
         if (this.isPatrol)
         {
@@ -222,7 +222,7 @@ public class AIMovement : AIComponent
 
     private void SetVector(Vector3 patrolVector, Vector3 spawnVector, Vector3 chaseVector)
     {
-        Vector3 newVector = MasterManager.staticValues.nullVector;
+        Vector3 newVector = MasterManager.globalValues.nullVector;
         float delay = 0f;
 
         SetVector(patrolVector, this.patrolDelay, ref newVector, ref delay);
@@ -238,7 +238,7 @@ public class AIMovement : AIComponent
 
     private void SetVector(Vector3 vector, float delay, ref Vector3 newVector, ref float newDelay)
     {
-        if (vector != MasterManager.staticValues.nullVector)
+        if (vector != MasterManager.globalValues.nullVector)
         {
             newVector = vector;
             newDelay = delay;
@@ -254,7 +254,7 @@ public class AIMovement : AIComponent
         else
         {
             this.enableCoroutine = true;
-            return MasterManager.staticValues.nullVector;
+            return MasterManager.globalValues.nullVector;
         }
     }
 
@@ -271,7 +271,7 @@ public class AIMovement : AIComponent
         else
         {
             if(action != null) action.Invoke();
-            return MasterManager.staticValues.nullVector;
+            return MasterManager.globalValues.nullVector;
         }
     }
 
@@ -311,7 +311,7 @@ public class AIMovement : AIComponent
             && this.npc.values.currentState != CharacterState.attack
             && this.npc.values.currentState != CharacterState.dead
             && this.npc.values.currentState != CharacterState.respawning
-            && position != MasterManager.staticValues.nullVector)
+            && position != MasterManager.globalValues.nullVector)
         {
             Vector2 direction = ((Vector2)position - this.npc.GetGroundPosition()).normalized;
 
@@ -363,7 +363,7 @@ public class AIMovement : AIComponent
     {
         if(this.patrolArea == null)
         {
-            this.randomColliderPoint = MasterManager.staticValues.nullVector;
+            this.randomColliderPoint = MasterManager.globalValues.nullVector;
             return;
         }
 

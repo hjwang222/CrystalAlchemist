@@ -9,7 +9,7 @@ public class DayNightInterior : MonoBehaviour
     
     public void switchInteriorLights()
     {        
-        if (MasterManager.time.night) lightGameObject.SetActive(true);
+        if (MasterManager.timeValue.night) lightGameObject.SetActive(true);
         else lightGameObject.SetActive(false);
     }
 }

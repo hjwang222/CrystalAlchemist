@@ -5,6 +5,8 @@ public class AnimationHelper : MonoBehaviour
     [SerializeField]
     private GameObject mainObject;
 
+    private void Start() { if (this.mainObject == null) this.mainObject = this.gameObject; }
+
     public void PlaySoundEffect(AudioClip audioClip) => AudioUtil.playSoundEffect(this.mainObject, audioClip);
     
     public void DestroyIt()

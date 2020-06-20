@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4837573728416785602}
   - component: {fileID: 4837573728416785600}
+  - component: {fileID: 2045753763685043526}
+  - component: {fileID: 7287847272893122103}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -29,7 +31,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4141743660485164850}
-  - {fileID: 2425331198311003474}
   m_Father: {fileID: 4837573728731285449}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 913c5b8c80375084d837afa00e46dfbf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,6 +86,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2045753763685043526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837573728416785603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6a96ce65e495a4690ef5aa491ec319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  useGlow: 1
+  selectColor: {r: 1, g: 1, b: 1, a: 1}
+  precision: 0
+  glowColor: {r: 2, g: 2, b: 2, a: 1}
+--- !u!114 &7287847272893122103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837573728416785603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349d93009abf5914b98f4b41d267292e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4837573728731285445
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +148,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4837573728416785602}
+  - {fileID: 2425331198311003474}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -134,6 +166,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowRenderer: {fileID: 7866748401886983216}
   itemDrop: {fileID: 11400000, guid: a26a444fd649be44aa73e836f84deb4c, type: 2}
+  showAppearAnimation: 0
+  bounceAnimation: {fileID: 7287847272893122103}
 --- !u!61 &4837573728731285451
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -272,8 +306,18 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 4837573728416785602}
+    m_TransformParent: {fileID: 4837573728731285449}
     m_Modifications:
+    - target: {fileID: 2245478228724246757, guid: 6a16bd4179f071649b716a3d0358d43a,
+        type: 3}
+      propertyPath: scaleShadow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2245478228724246757, guid: 6a16bd4179f071649b716a3d0358d43a,
+        type: 3}
+      propertyPath: reference
+      value: 
+      objectReference: {fileID: 4837573728416785603}
     - target: {fileID: 8537469436013784418, guid: 6a16bd4179f071649b716a3d0358d43a,
         type: 3}
       propertyPath: m_LocalPosition.x

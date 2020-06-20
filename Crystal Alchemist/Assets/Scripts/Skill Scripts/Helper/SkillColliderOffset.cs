@@ -29,10 +29,4 @@ public class SkillColliderOffset : SkillCollider
         else if (this.mode == Mode.ground) return this.skill.sender.GetGroundPosition();
         return this.transform.position;
     }
-
-    private void Update()
-    {
-        if (this.skill.spriteRenderer != null && this.GetComponent<SpriteRenderer>()!= null)
-            this.GetComponent<SpriteRenderer>().sprite = this.skill.spriteRenderer.sprite;
-    }
 }

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Rendering;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEditor;
 using AssetIcons;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Collectable : MonoBehaviour
 {
@@ -18,7 +16,19 @@ public class Collectable : MonoBehaviour
     [SerializeField]
     private ItemDrop itemDrop;
 
+    [Required]
+    [BoxGroup("Pflichtfeld")]
+    [SerializeField]
+    private bool bounceOnEnable = false;
+
+    [Required]
+    [BoxGroup("Pflichtfeld")]
+    [SerializeField]
+    private BounceAnimation bounceAnimation;
+
     private ItemStats itemStats;
+
+    private GameObject smoke;
 
     [AssetIcon]
     private Sprite GetSprite()
@@ -48,6 +58,20 @@ public class Collectable : MonoBehaviour
         if (this.itemStats.alreadyThere()) DestroyIt();
     }
 
+    public void SetBounce(bool value) => this.bounceOnEnable = value;
+
+    private void OnEnable()
+    {
+        if (this.bounceOnEnable && this.bounceAnimation != null) this.bounceAnimation.Bounce();
+    }
+
+    private void OnDisable() => this.smoke = Instantiate(MasterManager.itemDisappearSmoke, this.transform.position, Quaternion.identity);
+
+    private void OnDestroy()
+    {
+        if (this.smoke != null) Destroy(this.smoke); //ugly but working
+    }
+
     #endregion
 
     public void playSounds()
@@ -67,12 +91,14 @@ public class Collectable : MonoBehaviour
                 GameEvents.current.DoCollect(this.itemStats);
                 playSounds();
                 DestroyIt();
+                Instantiate(MasterManager.itemCollectGlitter, this.transform.position, Quaternion.identity);
             }
         }
     }
 
     public void SetAsTreasureItem(Transform parent)
     {
+        this.bounceOnEnable = false;
         this.transform.parent = parent;
         this.transform.position = parent.position;
         if (this.shadowRenderer != null) this.shadowRenderer.enabled = false;

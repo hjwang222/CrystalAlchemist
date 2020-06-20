@@ -32,6 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5093969796020204124}
+  - {fileID: 3453134259952367359}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,6 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowRenderer: {fileID: 7165002098903791517}
   itemDrop: {fileID: 11400000, guid: b01a220251e8a234db78886b5c5958e5, type: 2}
+  showAppearAnimation: 0
+  bounceAnimation: {fileID: 7677349151360188302}
 --- !u!61 &5093969795789574485
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -117,6 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5093969796020204124}
   - component: {fileID: 5093969796020204126}
+  - component: {fileID: 7677349151360188302}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -136,7 +140,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9108048683936791026}
-  - {fileID: 3453134259952367359}
   m_Father: {fileID: 5093969795789574487}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -192,13 +195,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7677349151360188302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5093969796020204125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349d93009abf5914b98f4b41d267292e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6453887409647655837
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5093969796020204124}
+    m_TransformParent: {fileID: 5093969795789574487}
     m_Modifications:
+    - target: {fileID: 2245478228724246757, guid: 6a16bd4179f071649b716a3d0358d43a,
+        type: 3}
+      propertyPath: scaleShadow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2245478228724246757, guid: 6a16bd4179f071649b716a3d0358d43a,
+        type: 3}
+      propertyPath: reference
+      value: 
+      objectReference: {fileID: 5093969796020204125}
     - target: {fileID: 8537469436013784418, guid: 6a16bd4179f071649b716a3d0358d43a,
         type: 3}
       propertyPath: m_LocalPosition.x

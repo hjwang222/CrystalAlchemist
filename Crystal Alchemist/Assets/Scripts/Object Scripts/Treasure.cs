@@ -117,7 +117,6 @@ public class Treasure : Rewardable
         {
             //Zeige Item
             this.showTreasureItem();
-
             ShowDialog(DialogTextTrigger.success, this.itemDrop.stats);
         }
         else

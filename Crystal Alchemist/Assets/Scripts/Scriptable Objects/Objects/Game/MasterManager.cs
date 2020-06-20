@@ -5,89 +5,99 @@ using System.Collections.Generic;
 [CreateAssetMenu(menuName = "Game/Settings/Global Game Objects")]
 public class MasterManager : SingletonScriptableObject<MasterManager>
 {
-    public static DamageNumbers damageNumber { get { return Instance.damage; } }
-    public static ContextClue contextClue { get { return Instance.context; } }
-    public static GameObject markAttack { get { return Instance.attacking; } }
-    public static GameObject markTarget { get { return Instance.targeting; } }
-    public static MiniDialogBox miniDialogBox { get { return Instance.dialog; } }
-    public static CastBar castBar { get { return Instance.cast; } }
-    public static AnalyseInfo analyseInfo { get { return Instance.analyse; } }
-    public static GameSettings settings { get { return Instance.gameSettings; } }
-    public static DebugSettings debugSettings { get { return Instance.debugging; } }
-    public static GlobalValues staticValues { get { return Instance.globalValues; } }
-    public static List<ItemDrop> itemDrops { get { return Instance.drops; } }
-    public static List<ItemGroup> itemGroups { get { return Instance.groups; } }
-    public static List<Ability> abilities { get { return Instance.skills; } }
-    public static TargetingSystem targetingSystem { get { return Instance.targetSystem; } }
-    public static TimeValue time { get { return Instance.timeValue; } }
-    public static StringValue actionButtonText { get { return Instance.actionButton; } }
+    public static DamageNumbers damageNumber { get { return Instance._damageNumber; } }
+    public static ContextClue contextClue { get { return Instance._contextClue; } }
+    public static GameObject markAttack { get { return Instance._markAttack; } }
+    public static GameObject markTarget { get { return Instance._markTargeting; } }
+    public static MiniDialogBox miniDialogBox { get { return Instance._miniDialogBox; } }
+    public static CastBar castBar { get { return Instance._castbar; } }
+    public static AnalyseInfo analyseInfo { get { return Instance._analyseInfo; } }
+    public static GameSettings settings { get { return Instance._gameSettings; } }
+    public static DebugSettings debugSettings { get { return Instance._debugSettings; } }
+    public static GlobalValues globalValues { get { return Instance._globalValues; } }
+    public static List<ItemDrop> itemDrops { get { return Instance._itemDrops; } }
+    public static List<ItemGroup> itemGroups { get { return Instance._itemGroups; } }
+    public static List<Ability> abilities { get { return Instance._abilities; } }
+    public static TargetingSystem targetingSystem { get { return Instance._targetingSystem; } }
+    public static TimeValue timeValue { get { return Instance._timeValue; } }
+    public static StringValue actionButtonText { get { return Instance._actionButtonText; } }
+    public static GameObject itemCollectGlitter { get { return Instance._itemCollectGlitter; } }
+    public static GameObject itemDisappearSmoke { get { return Instance._itemDisappearSmoke; } }
+
 
     [BoxGroup("Interaction")]
     [SerializeField]
-    private ContextClue context;
+    private ContextClue _contextClue;
     [BoxGroup("Interaction")]
     [SerializeField]
-    private AnalyseInfo analyse;
+    private AnalyseInfo _analyseInfo;
 
     [BoxGroup("Combat")]
     [SerializeField]
-    private DamageNumbers damage;
+    private DamageNumbers _damageNumber;
     [BoxGroup("Combat")]
     [SerializeField]
-    private CastBar cast;
+    private CastBar _castbar;
     [BoxGroup("Combat")]
     [SerializeField]
-    private TargetingSystem targetSystem;
+    private TargetingSystem _targetingSystem;
 
     [BoxGroup("Values")]
     [SerializeField]
-    private TimeValue timeValue;
+    private TimeValue _timeValue;
     [BoxGroup("Values")]
     [SerializeField]
-    private StringValue actionButton;
+    private StringValue _actionButtonText;
 
     [BoxGroup("Bubbles")]
     [SerializeField]
-    private MiniDialogBox dialog;
+    private MiniDialogBox _miniDialogBox;
     [BoxGroup("Bubbles")]
     [SerializeField]
-    private GameObject attacking;
+    private GameObject _markAttack;
     [BoxGroup("Bubbles")]
     [SerializeField]
-    private GameObject targeting;
+    private GameObject _markTargeting;
+
+    [BoxGroup("Item")]
+    [SerializeField]
+    private GameObject _itemCollectGlitter;
+    [BoxGroup("Item")]
+    [SerializeField]
+    private GameObject _itemDisappearSmoke;
 
     [BoxGroup("Settings")]
     [SerializeField]
-    private GameSettings gameSettings;
+    private GameSettings _gameSettings;
     [BoxGroup("Settings")]
     [SerializeField]
-    private GlobalValues globalValues;
+    private GlobalValues _globalValues;
     [BoxGroup("Settings")]
     [SerializeField]
-    private DebugSettings debugging;
+    private DebugSettings _debugSettings;
 
     [BoxGroup("Loading")]
     [SerializeField]
-    private List<ItemDrop> drops = new List<ItemDrop>();
+    private List<ItemDrop> _itemDrops = new List<ItemDrop>();
     [BoxGroup("Loading")]
     [SerializeField]
-    private List<ItemGroup> groups = new List<ItemGroup>();
+    private List<ItemGroup> _itemGroups = new List<ItemGroup>();
     [BoxGroup("Loading")]
     [SerializeField]
-    private List<Ability> skills = new List<Ability>();
+    private List<Ability> _abilities = new List<Ability>();
 
 
     [Button]
     public void LoadAll()
     {
-        this.drops.Clear();
-        this.groups.Clear();
-        this.skills.Clear();
+        this._itemDrops.Clear();
+        this._itemGroups.Clear();
+        this._abilities.Clear();
 
-        this.drops.AddRange(Resources.LoadAll<ItemDrop>("Scriptable Objects/Items/Item Drops/Key Items/"));
-        this.groups.AddRange(Resources.LoadAll<ItemGroup>("Scriptable Objects/Items/Item Groups/Inventory Items/"));
-        this.groups.AddRange(Resources.LoadAll<ItemGroup>("Scriptable Objects/Items/Item Groups/Currencies/"));
-        this.skills.AddRange(Resources.LoadAll<Ability>("Scriptable Objects/Abilities/Skills/Player Skills/"));
+        this._itemDrops.AddRange(Resources.LoadAll<ItemDrop>("Scriptable Objects/Items/Item Drops/Key Items/"));
+        this._itemGroups.AddRange(Resources.LoadAll<ItemGroup>("Scriptable Objects/Items/Item Groups/Inventory Items/"));
+        this._itemGroups.AddRange(Resources.LoadAll<ItemGroup>("Scriptable Objects/Items/Item Groups/Currencies/"));
+        this._abilities.AddRange(Resources.LoadAll<Ability>("Scriptable Objects/Abilities/Skills/Player Skills/"));
     }
 
     public static ItemDrop getItemDrop(string name)

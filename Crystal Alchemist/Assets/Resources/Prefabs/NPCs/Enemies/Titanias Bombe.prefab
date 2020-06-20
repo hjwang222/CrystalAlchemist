@@ -212,10 +212,11 @@ MonoBehaviour:
   shadowRenderer: {fileID: 2131670706679971499}
   respawnAnimation: {fileID: 0}
   skillStartPosition: {fileID: 3488678503338554899}
+  headPosition: {fileID: 0}
   activeSkillParent: {fileID: 662560065627314001}
   activeStatusEffectParent: {fileID: 6174079830825720683}
   values: {fileID: 0}
-  aggroGameObject: {fileID: 0}
+  IsSummoned: 0
   flip: 0
   target: {fileID: 0}
   partner: {fileID: 0}
@@ -232,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 3964420695413562593}
+  character: {fileID: 0}
   startPhase: {fileID: 11400000, guid: 4ce81881eb35d1a4aaed586183faa692, type: 2}
   startImmediately: 0
 --- !u!61 &662560067376231257
@@ -377,6 +378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5841726257542496201}
   - component: {fileID: 2131670706679971499}
+  - component: {fileID: 8268630369642215987}
   m_Layer: 0
   m_Name: Schatten rund
   m_TagString: Untagged
@@ -450,6 +452,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8268630369642215987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6663907168033888911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f640528268279a247a663ba73df0a696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleShadow: 1
+  reference: {fileID: 3488678503338554899}
+  maxDistance: 5
+  cloneShadow: 0
+  origin: {fileID: 0}
 --- !u!1 &8553310156559352738
 GameObject:
   m_ObjectHideFlags: 0

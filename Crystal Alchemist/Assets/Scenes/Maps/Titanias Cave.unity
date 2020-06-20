@@ -8336,12 +8336,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: Elder Stone
       objectReference: {fileID: 0}
+    - target: {fileID: 330836146565999745, guid: cb7920f833afcc8449a49b8e6a5c1c21,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 330836146565999746, guid: cb7920f833afcc8449a49b8e6a5c1c21,
         type: 3}
       propertyPath: itemDrop
       value: 
       objectReference: {fileID: 11400000, guid: bf0ec3d8071b5614b84e1785a5439e08,
         type: 2}
+    - target: {fileID: 330836146565999746, guid: cb7920f833afcc8449a49b8e6a5c1c21,
+        type: 3}
+      propertyPath: showAppearAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 330836146565999746, guid: cb7920f833afcc8449a49b8e6a5c1c21,
+        type: 3}
+      propertyPath: bounceOnEnable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 330836146565999749, guid: cb7920f833afcc8449a49b8e6a5c1c21,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13593,6 +13608,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1510168153}
     m_Modifications:
+    - target: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 807220304}
+    - target: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1,
+        type: 3}
+      propertyPath: bounceAnimation
+      value: 
+      objectReference: {fileID: 807220309}
+    - target: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1,
+        type: 3}
+      propertyPath: showAppearAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543087420962035893, guid: 12e35050d1d118544adfd912092717f1,
+        type: 3}
+      propertyPath: bounceOnEnable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6543087420962035895, guid: 12e35050d1d118544adfd912092717f1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13631,7 +13666,7 @@ PrefabInstance:
     - target: {fileID: 6543087420962035895, guid: 12e35050d1d118544adfd912092717f1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6543087420962035895, guid: 12e35050d1d118544adfd912092717f1,
         type: 3}
@@ -13652,6 +13687,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crystal Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 6543087420962035896, guid: 12e35050d1d118544adfd912092717f1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12e35050d1d118544adfd912092717f1, type: 3}
@@ -14269,6 +14309,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small Healthpotion
       objectReference: {fileID: 0}
+    - target: {fileID: 8525589707579411223, guid: 4f1623ac219c06a40aa2cbe59058c6b2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525589707579411224, guid: 4f1623ac219c06a40aa2cbe59058c6b2,
+        type: 3}
+      propertyPath: showAppearAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525589707579411224, guid: 4f1623ac219c06a40aa2cbe59058c6b2,
+        type: 3}
+      propertyPath: bounceOnEnable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8525589707579411227, guid: 4f1623ac219c06a40aa2cbe59058c6b2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14377,6 +14432,24 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!1 &807220304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6543087421468060305, guid: 12e35050d1d118544adfd912092717f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 620722192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &807220309 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9132289083279360677, guid: 12e35050d1d118544adfd912092717f1,
+    type: 3}
+  m_PrefabInstance: {fileID: 620722192}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807220304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 349d93009abf5914b98f4b41d267292e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &813588220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3492225789542622801, guid: 3ace8e77583a7a04789cf20088b7f3e7,
@@ -17365,7 +17438,7 @@ PrefabInstance:
     - target: {fileID: 8069356869073092965, guid: 6b191b04f9a7dbc49920d197f5070449,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8069356869073092965, guid: 6b191b04f9a7dbc49920d197f5070449,
         type: 3}
@@ -17382,10 +17455,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8069356869073092967, guid: 6b191b04f9a7dbc49920d197f5070449,
+        type: 3}
+      propertyPath: showAppearAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069356869073092967, guid: 6b191b04f9a7dbc49920d197f5070449,
+        type: 3}
+      propertyPath: bounceOnEnable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8069356869073092970, guid: 6b191b04f9a7dbc49920d197f5070449,
         type: 3}
       propertyPath: m_Name
       value: Crystal Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069356869073092970, guid: 6b191b04f9a7dbc49920d197f5070449,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b191b04f9a7dbc49920d197f5070449, type: 3}
@@ -18199,7 +18287,7 @@ PrefabInstance:
     - target: {fileID: 1482578370755153413, guid: ca7174dae42a3d74da40fc0c744e4f1d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1482578370755153413, guid: ca7174dae42a3d74da40fc0c744e4f1d,
         type: 3}
@@ -18216,10 +18304,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1482578370755153414, guid: ca7174dae42a3d74da40fc0c744e4f1d,
+        type: 3}
+      propertyPath: showAppearAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1482578370755153414, guid: ca7174dae42a3d74da40fc0c744e4f1d,
+        type: 3}
+      propertyPath: bounceOnEnable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1482578370755153417, guid: ca7174dae42a3d74da40fc0c744e4f1d,
         type: 3}
       propertyPath: m_Name
       value: Potion Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 1482578370755153417, guid: ca7174dae42a3d74da40fc0c744e4f1d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca7174dae42a3d74da40fc0c744e4f1d, type: 3}
@@ -18240,6 +18343,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Manapotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762527177516063713, guid: 347fe6057ce4ccb489a01d2df93a4f7c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4762527177516063725, guid: 347fe6057ce4ccb489a01d2df93a4f7c,
         type: 3}
@@ -18295,6 +18403,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762527177516063726, guid: 347fe6057ce4ccb489a01d2df93a4f7c,
+        type: 3}
+      propertyPath: showAppearAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762527177516063726, guid: 347fe6057ce4ccb489a01d2df93a4f7c,
+        type: 3}
+      propertyPath: bounceOnEnable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 347fe6057ce4ccb489a01d2df93a4f7c, type: 3}
@@ -18495,11 +18613,11 @@ Transform:
   - {fileID: 753783587}
   - {fileID: 1358057848}
   - {fileID: 535234194}
-  - {fileID: 620722193}
   - {fileID: 1026149742}
   - {fileID: 1354943657}
   - {fileID: 2134458805}
   - {fileID: 2036080779}
+  - {fileID: 620722193}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18721,7 +18839,7 @@ PrefabInstance:
     - target: {fileID: 3691230672784358425, guid: 3fdf5e3032830d74ba994cf0ef0775f0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3691230672784358425, guid: 3fdf5e3032830d74ba994cf0ef0775f0,
         type: 3}
@@ -24523,7 +24641,7 @@ PrefabInstance:
     - target: {fileID: 6577156445127767012, guid: 9eed5a7d4c3ca4f49b552c626d2d4ee7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6577156445127767012, guid: 9eed5a7d4c3ca4f49b552c626d2d4ee7,
         type: 3}
@@ -24540,10 +24658,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6577156445127767014, guid: 9eed5a7d4c3ca4f49b552c626d2d4ee7,
+        type: 3}
+      propertyPath: showAppearAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577156445127767014, guid: 9eed5a7d4c3ca4f49b552c626d2d4ee7,
+        type: 3}
+      propertyPath: bounceOnEnable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6577156445127767019, guid: 9eed5a7d4c3ca4f49b552c626d2d4ee7,
         type: 3}
       propertyPath: m_Name
       value: Time Shard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577156445127767019, guid: 9eed5a7d4c3ca4f49b552c626d2d4ee7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9eed5a7d4c3ca4f49b552c626d2d4ee7, type: 3}
@@ -27044,6 +27177,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Potion Mana
       objectReference: {fileID: 0}
+    - target: {fileID: 4837573728731285445, guid: 00971db8ee1ee5f41a174485c94f3d32,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4837573728731285449, guid: 00971db8ee1ee5f41a174485c94f3d32,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27082,7 +27220,7 @@ PrefabInstance:
     - target: {fileID: 4837573728731285449, guid: 00971db8ee1ee5f41a174485c94f3d32,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4837573728731285449, guid: 00971db8ee1ee5f41a174485c94f3d32,
         type: 3}
@@ -27098,6 +27236,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837573728731285450, guid: 00971db8ee1ee5f41a174485c94f3d32,
+        type: 3}
+      propertyPath: showAppearAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837573728731285450, guid: 00971db8ee1ee5f41a174485c94f3d32,
+        type: 3}
+      propertyPath: bounceOnEnable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00971db8ee1ee5f41a174485c94f3d32, type: 3}
@@ -27540,7 +27688,7 @@ PrefabInstance:
     - target: {fileID: 8040636200504665835, guid: c84c09cfa51ad7f4db440989403a6012,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8040636200504665835, guid: c84c09cfa51ad7f4db440989403a6012,
         type: 3}

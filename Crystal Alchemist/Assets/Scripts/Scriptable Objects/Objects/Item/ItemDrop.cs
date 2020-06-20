@@ -40,4 +40,13 @@ public class ItemDrop : ScriptableObject
         temp.SetItem(this);
         return temp;
     }
+
+    public Collectable Instantiate(Vector2 position, bool bounce)
+    {
+        Collectable temp = Instantiate(this.collectable, position, Quaternion.identity);
+        temp.SetBounce(bounce);
+        temp.name = this.name;
+        temp.SetItem(this);
+        return temp;
+    }
 }

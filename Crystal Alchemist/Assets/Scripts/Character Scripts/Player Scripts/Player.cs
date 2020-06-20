@@ -176,13 +176,13 @@ public class Player : Character
 
     private void setStateMenuOpened(CharacterState newState)
     {
-        StopCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
+        StopCoroutine(delayInputPlayerCO(MasterManager.globalValues.playerDelay, newState));
         this.values.currentState = newState;
     }
 
     private void setStateAfterMenuClose(CharacterState newState)
     {
-        StartCoroutine(delayInputPlayerCO(MasterManager.staticValues.playerDelay, newState));
+        StartCoroutine(delayInputPlayerCO(MasterManager.globalValues.playerDelay, newState));
         this.values.currentState = newState;
     }
 

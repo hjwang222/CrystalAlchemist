@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1425874259521125700}
   - component: {fileID: 6867273889031306278}
+  - component: {fileID: 1648951240469286252}
   m_Layer: 0
   m_Name: Schatten klein
   m_TagString: Untagged
@@ -46,6 +47,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,3 +84,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1648951240469286252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2207527162554324994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f640528268279a247a663ba73df0a696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleShadow: 1
+  reference: {fileID: 0}
+  maxDistance: 5
+  cloneShadow: 0
+  origin: {fileID: 0}

@@ -122,7 +122,7 @@ public static class UnityUtil
         selectable.interactable = active;
 
         if (active) SetColors(selectable, Color.white);
-        else SetColors(selectable, MasterManager.staticValues.buttonNotActive);
+        else SetColors(selectable, MasterManager.globalValues.buttonNotActive);
     }
 
     public static void SetColors(Selectable selectable, Color disabledColor)
@@ -132,7 +132,7 @@ public static class UnityUtil
             ColorBlock colors = selectable.colors;
             colors.disabledColor = disabledColor;
             colors.highlightedColor = Color.white;
-            colors.selectedColor = MasterManager.staticValues.buttonSelect;
+            colors.selectedColor = MasterManager.globalValues.buttonSelect;
             selectable.colors = colors;
         }
     }

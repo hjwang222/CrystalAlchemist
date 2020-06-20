@@ -178,12 +178,12 @@ public class Character : MonoBehaviour
 
     public void DropItem()
     {
-        if (this.values.itemDrop != null) this.values.itemDrop.Instantiate(this.transform.position);
+        if (this.values.itemDrop != null) this.values.itemDrop.Instantiate(this.transform.position, true);
     }
 
     public void DropItem(GameObject position)
     {
-        if (this.values.itemDrop != null) this.values.itemDrop.Instantiate(position.transform.position);
+        if (this.values.itemDrop != null) this.values.itemDrop.Instantiate(position.transform.position, true);
     }
 
     #endregion
@@ -302,8 +302,8 @@ public class Character : MonoBehaviour
                 {
                     this.values.life = GameUtil.setResource(this.values.life, this.values.maxLife, value);
 
-                    Color[] colorArray = MasterManager.staticValues.red;
-                    if (value > 0) colorArray = MasterManager.staticValues.green;
+                    Color[] colorArray = MasterManager.globalValues.red;
+                    if (value > 0) colorArray = MasterManager.globalValues.green;
 
                     if (this.values.life > 0
                         && this.values.currentState != CharacterState.dead
@@ -314,7 +314,7 @@ public class Character : MonoBehaviour
             case CostType.mana:
                 {
                     this.values.mana = GameUtil.setResource(this.values.mana, this.values.maxMana, value);
-                    if (showingDamageNumber && value > 0) showDamageNumber(value, MasterManager.staticValues.blue);
+                    if (showingDamageNumber && value > 0) showDamageNumber(value, MasterManager.globalValues.blue);
                     break;
                 }
         }

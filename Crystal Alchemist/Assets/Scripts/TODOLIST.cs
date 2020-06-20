@@ -8,18 +8,21 @@ public class TODOLIST : MonoBehaviour
     //BUG: Cast Buggy when knockback
     //BUG: Cooldown wenn kein Skill ausgeführt wurde
     //BUG: Stromschlag nicht unterbrechen
+    //BUG: Smoke/Glitter macht Probleme beim Szenenwechsel
 
     //TODO: Movement by AIAction
     //IDEA: Head, Shoot, Ground Position. Vector or Gameobject?
     //TODO: Projectile Offset
 
     //TODO: Titanias Key (Item)
-    //TODO: Item appear/disappear Animation
     //TODO: Titanias Door
     //TODO: Camera Schwenk
     //TODO: Titania Scharf Schalten
     //TODO: Better Arena Graphics
-
+    //TODO: Item Glitter/Smoke Better
+    //TODO: Item SelfKill
+    //TODO: Auto Updater
+    //TODO: Teleport List
     //TODO: Sounds
     //REWORK: Arena Bounds
 

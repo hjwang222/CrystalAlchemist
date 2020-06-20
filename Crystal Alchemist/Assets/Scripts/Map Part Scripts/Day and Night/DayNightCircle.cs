@@ -14,7 +14,7 @@ public class DayNightCircle : MonoBehaviour
     {
         this.Lighting = this.GetComponent<Light2D>();
         this.isActive = MasterManager.debugSettings.activateLight;
-        this.timeValue = MasterManager.time;
+        this.timeValue = MasterManager.timeValue;
         if (this.isActive) StartCoroutine(startCo());  
     }
 
