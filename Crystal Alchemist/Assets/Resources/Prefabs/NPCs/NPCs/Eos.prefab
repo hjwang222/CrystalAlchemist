@@ -345,14 +345,14 @@ MonoBehaviour:
   myRigidbody: {fileID: 4322055140194454582}
   animator: {fileID: 2652810396879462137}
   boxCollider: {fileID: 0}
-  shadowRenderer: {fileID: 3588978413753434420}
   respawnAnimation: {fileID: 0}
+  groundPosition: {fileID: 8079844414878688528}
   skillStartPosition: {fileID: 6261774556482826731}
   headPosition: {fileID: 0}
   activeSkillParent: {fileID: 2652810397108339306}
   activeStatusEffectParent: {fileID: 8669415238972280400}
   values: {fileID: 0}
-  aggroGameObject: {fileID: 0}
+  IsSummoned: 0
   flip: 1
   target: {fileID: 0}
   partner: {fileID: 0}
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f5ecf49a5ed0c4784502d8b6f90d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npc: {fileID: 1938021464261085658}
+  character: {fileID: 0}
   startPhase: {fileID: 0}
   startImmediately: 1
 --- !u!114 &7016091898417923367
@@ -596,15 +596,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a16bd4179f071649b716a3d0358d43a, type: 3}
---- !u!4 &9028117429174534230 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8537469436013784418, guid: 6a16bd4179f071649b716a3d0358d43a,
+--- !u!1 &8079844414878688528 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8867623264313772068, guid: 6a16bd4179f071649b716a3d0358d43a,
     type: 3}
   m_PrefabInstance: {fileID: 806566339374034228}
   m_PrefabAsset: {fileID: 0}
---- !u!212 &3588978413753434420 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4251366256092687360, guid: 6a16bd4179f071649b716a3d0358d43a,
+--- !u!4 &9028117429174534230 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8537469436013784418, guid: 6a16bd4179f071649b716a3d0358d43a,
     type: 3}
   m_PrefabInstance: {fileID: 806566339374034228}
   m_PrefabAsset: {fileID: 0}

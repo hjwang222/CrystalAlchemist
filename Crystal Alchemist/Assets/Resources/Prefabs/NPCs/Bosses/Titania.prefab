@@ -83,7 +83,7 @@ MonoBehaviour:
     amount: 1
   customActionButton: 1
   ID: Reden
-  showSmokeOnEnable: 0
+  showEffectOnEnable: 0
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
@@ -539,8 +539,8 @@ MonoBehaviour:
   myRigidbody: {fileID: 3945848509854940437}
   animator: {fileID: 910524742380246583}
   boxCollider: {fileID: 3020177091971815233}
-  shadowRenderer: {fileID: 5485388855570139274}
   respawnAnimation: {fileID: 0}
+  groundPosition: {fileID: 995233311224769710}
   skillStartPosition: {fileID: 325864630953995024}
   headPosition: {fileID: 9214498863456935276}
   activeSkillParent: {fileID: 3020177091833525065}
@@ -1053,15 +1053,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a16bd4179f071649b716a3d0358d43a, type: 3}
---- !u!212 &5485388855570139274 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4251366256092687360, guid: 6a16bd4179f071649b716a3d0358d43a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8565819056070435978}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &46382055281560040 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8537469436013784418, guid: 6a16bd4179f071649b716a3d0358d43a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8565819056070435978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &995233311224769710 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8867623264313772068, guid: 6a16bd4179f071649b716a3d0358d43a,
     type: 3}
   m_PrefabInstance: {fileID: 8565819056070435978}
   m_PrefabAsset: {fileID: 0}

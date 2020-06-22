@@ -89,8 +89,12 @@ public class RespawnSystem : MonoBehaviour
     private List<RespawnTimer> respawnObjects = new List<RespawnTimer>();
 
     private bool isActive = false;
+    private bool isInit = true;
 
-    private void Start() => InvokeRepeating("Updating", 0f, this.updateTime);
+    private void Start()
+    {
+        InvokeRepeating("Updating", 0f, this.updateTime);        
+    }
     
     private void SetIsActive()
     {
@@ -115,7 +119,7 @@ public class RespawnSystem : MonoBehaviour
     {
         for (int i = 0; i < this.transform.childCount; i++)
         {
-            if (MustDespawn(this.transform.GetChild(i).gameObject)) DespawnCharacter(this.transform.GetChild(i).gameObject);            
+            if (MustDespawn(this.transform.GetChild(i).gameObject)) HideGameObject(this.transform.GetChild(i).gameObject);            
         }          
     }
 
@@ -128,6 +132,8 @@ public class RespawnSystem : MonoBehaviour
             SetRespawnObjects(); //Add inactive characters to list
             UpdateRespawnObjects(); //update timer of listed characters
             if (this.isActive) SpawnObjects(); //spawn characters    
+
+            if (this.isInit) this.isInit = false;
         }
     }
 
@@ -166,7 +172,7 @@ public class RespawnSystem : MonoBehaviour
         {
             if (this.respawnObjects[i].spawnIt)
             {
-                respawnCharacter(this.respawnObjects[i].gameObject);
+                SpawnGameObject(this.respawnObjects[i].gameObject);
                 this.respawnObjects[i] = null;
             }
         }
@@ -182,7 +188,7 @@ public class RespawnSystem : MonoBehaviour
         return false;
     }
 
-    private void DespawnCharacter(GameObject gameObject)
+    private void HideGameObject(GameObject gameObject)
     {
         Character character = gameObject.GetComponent<Character>();
 
@@ -199,7 +205,7 @@ public class RespawnSystem : MonoBehaviour
             }
             else
             {
-                character.PlayDespawnAnimation();
+                if (!this.isInit) character.PlayDespawnAnimation();
                 character.SpawnOut();
                 StartCoroutine(InactiveCo(character.GetDespawnLength(), character.gameObject));
             }
@@ -208,7 +214,7 @@ public class RespawnSystem : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
+            SetGameObjectActive(gameObject, false);
         }
     }
 
@@ -218,7 +224,7 @@ public class RespawnSystem : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void respawnCharacter(GameObject gameObject)
+    private void SpawnGameObject(GameObject gameObject)
     {
         Character character = gameObject.GetComponent<Character>();
 
@@ -238,14 +244,28 @@ public class RespawnSystem : MonoBehaviour
             {
                 //spawn character immediately
                 character.SetCharacterSprites(true);
-                character.PlayRespawnAnimation();
+                if(!this.isInit) character.PlayRespawnAnimation();
                 character.SpawnIn();
             }
         }
         else
         {
-            gameObject.SetActive(true);
+            SetGameObjectActive(gameObject, true);
         }
+    }
+
+    private void SetGameObjectActive(GameObject gameObject, bool value)
+    {
+        //Prevent Effect on Initialize
+        if (gameObject.GetComponent<Collectable>() != null)
+        {
+            gameObject.GetComponent<Collectable>().SetBounce(!this.isInit);
+            gameObject.GetComponent<Collectable>().SetSmoke(!this.isInit);
+        }
+        else if (gameObject.GetComponent<Interactable>() != null)
+            gameObject.GetComponent<Interactable>().SetSmoke(!this.isInit);
+
+        gameObject.SetActive(value);
     }
 }
 

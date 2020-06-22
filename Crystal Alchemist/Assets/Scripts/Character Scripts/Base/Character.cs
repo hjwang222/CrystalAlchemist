@@ -25,31 +25,29 @@ public class Character : MonoBehaviour
     public Collider2D boxCollider;
 
     [BoxGroup("Easy Access")]
-    [Required]
-    [SerializeField]
-    [Tooltip("Zur Erkennung wo der Charakter steht")]
-    private SpriteRenderer shadowRenderer;
-
-    [BoxGroup("Easy Access")]
     public RespawnAnimation respawnAnimation;
 
-    [BoxGroup("Easy Access")]
+    [BoxGroup("Position")]
     [Required]
+    [SerializeField]
+    [Tooltip("Zur Erkennung wo der Charakter steht. Nicht Hauptsprite wählen!")]
+    private GameObject groundPosition;
+
+    [BoxGroup("Position")]
     [SerializeField]
     [Tooltip("Position des Skills")]
     private GameObject skillStartPosition;
 
-    [BoxGroup("Easy Access")]
-    [Required]
+    [BoxGroup("Position")]
     [SerializeField]
     [Tooltip("Position von Sprechblasen")]
     private GameObject headPosition;
 
-    [BoxGroup("Easy Access")]
+    [BoxGroup("Parent")]
     [Required]
     public GameObject activeSkillParent;
 
-    [BoxGroup("Easy Access")]
+    [BoxGroup("Parent")]
     [Required]
     public GameObject activeStatusEffectParent;
 
@@ -402,7 +400,7 @@ public class Character : MonoBehaviour
 
         if (this.myRigidbody != null && this.myRigidbody.bodyType != RigidbodyType2D.Static) this.myRigidbody.velocity = Vector2.zero;
         if (this.boxCollider != null) this.boxCollider.enabled = false;
-        if (this.shadowRenderer != null) this.shadowRenderer.enabled = false;
+        if (this.groundPosition != null) this.groundPosition.SetActive(false);
 
         //Play Death Effect
         if (showAnimation)
@@ -528,7 +526,7 @@ public class Character : MonoBehaviour
 
     public Vector2 GetGroundPosition()
     {
-        if (this.shadowRenderer != null) return this.shadowRenderer.transform.position;
+        if (this.groundPosition != null) return this.groundPosition.transform.position;
         return this.transform.position;
     }
 
@@ -581,7 +579,7 @@ public class Character : MonoBehaviour
         if (this.GetComponent<CharacterRenderingHandler>() != null)
             this.GetComponent<CharacterRenderingHandler>().enableSpriteRenderer(value);
 
-        if (this.shadowRenderer != null) this.shadowRenderer.enabled = value;
+        if (this.groundPosition != null) this.groundPosition.SetActive(value);
     }
 
     public virtual void SpawnOut()

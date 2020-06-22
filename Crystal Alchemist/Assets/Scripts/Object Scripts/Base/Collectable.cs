@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using AssetIcons;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Collections;
 
@@ -12,9 +11,9 @@ public class Collectable : MonoBehaviour
     [SerializeField]
     private SpriteRenderer shadowRenderer;
 
-    [Required]
     [BoxGroup("Pflichtfeld")]
     [SerializeField]
+    [Tooltip("Used for blinking")]
     private SpriteRenderer itemSprite;
 
     [Required]
@@ -25,7 +24,8 @@ public class Collectable : MonoBehaviour
     [Required]
     [BoxGroup("Pflichtfeld")]
     [SerializeField]
-    private bool bounceOnEnable = false;
+    [Tooltip("Use it for manuel effect")]
+    private bool showEffectOnEnable = false;
 
     [Required]
     [BoxGroup("Pflichtfeld")]
@@ -40,7 +40,7 @@ public class Collectable : MonoBehaviour
     private ItemStats itemStats;
     private bool hasDuration = false;
     private float elapsed;
-    private bool showSmoke = true;
+    private bool showEffectOnDisable = true;
 
     private float blinkDelay;
     private float blinkElapsed;
@@ -67,6 +67,10 @@ public class Collectable : MonoBehaviour
         this.itemStats = temp;
     }
 
+    public void SetBounce(bool value) => this.showEffectOnEnable = value;
+
+    public void SetSmoke(bool value) => this.showEffectOnDisable = value;
+
     private void Start()
     {
         setItemStats();
@@ -76,7 +80,7 @@ public class Collectable : MonoBehaviour
 
         if (this.itemStats.IsKeyItem() && GameEvents.current.HasKeyItem(itemName))
         {
-            this.showSmoke = false;
+            this.showEffectOnDisable = false;
             DestroyIt();
         }
     }
@@ -115,11 +119,9 @@ public class Collectable : MonoBehaviour
         this.itemSprite.DOColor(Color.white, delay);
     }
 
-    public void SetBounce(bool value) => this.bounceOnEnable = value;
-
     private void OnEnable()
     {
-        if (this.bounceOnEnable && this.bounceAnimation != null) this.bounceAnimation.Bounce();
+        if (this.showEffectOnEnable && this.bounceAnimation != null) this.bounceAnimation.Bounce();
     }
 
     [Button]
@@ -132,7 +134,7 @@ public class Collectable : MonoBehaviour
 
     private void OnDisable()
     {
-        if (this.showSmoke) AnimatorUtil.ShowSmoke(this.transform);
+        if (this.showEffectOnDisable) AnimatorUtil.ShowSmoke(this.transform);
     }
 
     #endregion
@@ -151,7 +153,7 @@ public class Collectable : MonoBehaviour
             Player player = character.GetComponent<Player>();
             if (player != null)
             {
-                this.showSmoke = false;
+                this.showEffectOnDisable = false;
                 GameEvents.current.DoCollect(this.itemStats);
                 playSounds();
                 DestroyIt();
@@ -162,8 +164,8 @@ public class Collectable : MonoBehaviour
 
     public void SetAsTreasureItem(Transform parent)
     {
-        this.showSmoke = false;
-        this.bounceOnEnable = false;
+        this.showEffectOnDisable = false;
+        this.showEffectOnEnable = false;
         this.transform.parent = parent;
         this.transform.position = parent.position;
         if (this.shadowRenderer != null) this.shadowRenderer.enabled = false;

@@ -10,11 +10,9 @@ public class DebugLog : ScriptableObject
     [SerializeField]
     private int maxFileSize = 5;
 
-    [SerializeField]
-    private string lastError;
+    public string lastError;
 
-    [SerializeField]
-    private int errorCount;
+    public int errorCount;
 
     public void Initialize()
     {

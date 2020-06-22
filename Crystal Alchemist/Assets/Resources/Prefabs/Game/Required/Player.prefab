@@ -507,7 +507,6 @@ GameObject:
   - component: {fileID: 956710362935593805}
   - component: {fileID: 1605216952823830739}
   - component: {fileID: 6736401842150179436}
-  - component: {fileID: 1639545866727324291}
   - component: {fileID: 7698867005937363429}
   - component: {fileID: -821142099022598398}
   - component: {fileID: 7374600907851842522}
@@ -558,9 +557,9 @@ MonoBehaviour:
   myRigidbody: {fileID: 759644400424337060}
   animator: {fileID: 7603080202167088895}
   boxCollider: {fileID: 5650224180514046960}
-  shadowRenderer: {fileID: 4196475930209643464}
   respawnAnimation: {fileID: 1140035694535706356, guid: 815950c2030167244ab889505e154cc8,
     type: 3}
+  groundPosition: {fileID: 8922514776685957100}
   skillStartPosition: {fileID: 9116587063939130167}
   headPosition: {fileID: 5528000697627867622}
   activeSkillParent: {fileID: 8638893490402070047}
@@ -569,7 +568,6 @@ MonoBehaviour:
   healthSignalUI: {fileID: 11400000, guid: d11c7130888555a4ab56121f87b16512, type: 2}
   manaSignalUI: {fileID: 11400000, guid: 64f0bebd33f960648a79a58a0047d4f2, type: 2}
   presetSignal: {fileID: 11400000, guid: 1794675380e483345a378de158326f5f, type: 2}
-  dialogText: {fileID: 11400000, guid: 0dee858a55e55d64ba1bcbf52a9b3e33, type: 2}
   characterName: {fileID: 11400000, guid: b7d7d51acc1e7fd4c825134b5aae5ec7, type: 2}
   goToBedDuration: 1
 --- !u!114 &8348133576447681433
@@ -632,19 +630,6 @@ MonoBehaviour:
   teleportList: {fileID: 11400000, guid: a5383e9eb1591254eadebe1d4ca868c7, type: 2}
   fadeDuration: {fileID: 11400000, guid: a2cc0078d349f9245bd74b3f5813a450, type: 2}
   fadeSignal: {fileID: 11400000, guid: edc5213c769d50b4397e7a6210db76a7, type: 2}
---- !u!114 &1639545866727324291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759644400424337056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b59c3b9ce3e7b74fb06fa4b00c4bc13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &7698867005937363429
 MonoBehaviour:
   m_ObjectHideFlags: 0

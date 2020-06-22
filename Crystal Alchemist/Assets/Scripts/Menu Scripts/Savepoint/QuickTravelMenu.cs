@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuickTravelMenu : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class QuickTravelMenu : MonoBehaviour
 
     private void OnEnable()
     {
+        //bool setFirst = true;
         this.template.gameObject.SetActive(false);
 
         for(int i = 0; i < this.buttons.Count; i++)
@@ -27,13 +29,23 @@ public class QuickTravelMenu : MonoBehaviour
 
         for(int i = 0; i < list.GetStats().Count; i++)
         {
+            TeleportStats stats = list.GetStats(i);
+            if (stats.scene == SceneManager.GetActiveScene().name) continue;
+
             QuickTravelButton newButton = Instantiate(template, this.content.transform);
             newButton.gameObject.SetActive(true);
-            newButton.SetLocation(list.GetStats(i));
-            this.buttons.Add(newButton);
+            newButton.SetLocation(stats);
+
+            /*if (setFirst)
+            {
+                setFirst = false;
+                newButton.GetComponent<ButtonExtension>().setFirstSelected = true;
+            }*/
+
+            this.buttons.Add(newButton);            
         }
 
-        this.buttons[0].GetComponent<ButtonExtension>().setFirstSelected = true;
-        this.buttons[0].GetComponent<ButtonExtension>().SetFirst();
+        //this.buttons[0].GetComponent<ButtonExtension>().setFirstSelected = true;
+        //this.buttons[0].GetComponent<ButtonExtension>().SetFirst();
     }
 }

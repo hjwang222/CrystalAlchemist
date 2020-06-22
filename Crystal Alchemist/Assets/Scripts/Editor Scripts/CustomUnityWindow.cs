@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
-
-
 
 public class CustomUnityWindow : EditorWindow
 {
@@ -25,3 +24,4 @@ public class CustomUnityWindow : EditorWindow
         if(sheet != null) sheet.UpdateSpritesAndAnimations();
     }
 }
+#endif

@@ -1,5 +1,4 @@
 ﻿using System;
-
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,9 +15,8 @@ public struct PatchNote
         string text = string.Format("Version {0} [{1}]", version, date);
         for (int i = 1; i <= 25; i++)
         {
-            string details = Environment.NewLine + "- " + FormatUtil.GetLocalisedText((version + i), LocalisationFileType.patchnotes);
-            if (details.Length > 1) text += details;
-            text += Environment.NewLine;
+            string details = FormatUtil.GetLocalisedText((version + i), LocalisationFileType.patchnotes);
+            if (details != null && details.Length > 1) text += Environment.NewLine + "- " + details;
         }
         return text;
     }

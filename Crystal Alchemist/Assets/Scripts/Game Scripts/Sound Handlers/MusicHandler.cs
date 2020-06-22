@@ -33,7 +33,7 @@ public class MusicHandler : MonoBehaviour
     private void PlayMusic(AudioClip start, AudioClip loop)
     {
         if (loop == null) return;
-        GameObject newGameObject = new GameObject("Main Music");
+        GameObject newGameObject = new GameObject("Music: "+loop.name);
         MusicObject musicObject = newGameObject.AddComponent<MusicObject>();
         musicObject.Instantiate(start, loop);
         this.backgroundMusic = musicObject;
@@ -55,7 +55,7 @@ public class MusicHandler : MonoBehaviour
             StopCoroutine(delayCo(music.length));
         }
 
-        GameObject newGameObject = new GameObject("Music");
+        GameObject newGameObject = new GameObject("Music: "+music.name);
         MusicObject musicObject = newGameObject.AddComponent<MusicObject>();
         musicObject.Instantiate(music);
         this.tempMusic = musicObject;
@@ -145,7 +145,6 @@ public class MusicObject : MonoBehaviour
     public void Stop()
     {
         this.audioSource.Stop();
-        Destroy(this.gameObject,0.3f);
     }
 
     public void Resume()

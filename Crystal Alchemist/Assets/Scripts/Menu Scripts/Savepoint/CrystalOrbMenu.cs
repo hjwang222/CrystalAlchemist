@@ -17,5 +17,4 @@ public class CrystalOrbMenu : MenuBehaviour
     {
         this.lastTeleport.SetValue(this.savePointInfo);
     }
-
 }

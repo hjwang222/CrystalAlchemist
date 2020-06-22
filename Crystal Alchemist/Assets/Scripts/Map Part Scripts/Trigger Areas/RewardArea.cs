@@ -4,6 +4,7 @@ using System.Collections;
 
 public class RewardArea : MonoBehaviour
 {
+    [InfoBox("Maybe set bouncing to true for items", InfoMessageType.Info)]
     [SerializeField]
     private bool collectAll;
 

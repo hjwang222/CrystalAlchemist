@@ -101,6 +101,7 @@ public class SkillImpactHit : SkillHitTrigger
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, this.deadZone);
 
+#if UNITY_EDITOR
         GUI.contentColor = Color.red;
         Handles.Label(this.transform.position + new Vector3(this.deadZone + 0.25f,3), "DEAD (100%)");
 
@@ -109,6 +110,7 @@ public class SkillImpactHit : SkillHitTrigger
 
         GUI.contentColor = Color.green;
         Handles.Label(this.transform.position + new Vector3(this.radius + 0.25f, 1), "SAFE (0%)");
+#endif
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

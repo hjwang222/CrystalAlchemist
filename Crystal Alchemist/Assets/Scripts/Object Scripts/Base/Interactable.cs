@@ -19,7 +19,9 @@ public class Interactable : MonoBehaviour
 
     [BoxGroup("Effects")]
     [SerializeField]
-    private bool showSmokeOnEnable = false;
+    private bool showEffectOnEnable = false;
+
+    private bool showEffectOnDisable = true;
 
     [HideInInspector]
     public bool isPlayerInRange = false;
@@ -62,15 +64,20 @@ public class Interactable : MonoBehaviour
 
     private void OnEnable()
     {
-        if(this.showSmokeOnEnable) AnimatorUtil.ShowSmoke(this.transform);
+        if(this.showEffectOnEnable) AnimatorUtil.ShowSmoke(this.transform);
     }
 
     private void OnDisable()
     {
-        AnimatorUtil.ShowSmoke(this.transform);
+        if (this.showEffectOnDisable) AnimatorUtil.ShowSmoke(this.transform);
         if (this.context != null) this.context.gameObject.SetActive(false);
     }
-    
+
+    public void SetSmoke(bool value)
+    {
+        this.showEffectOnEnable = value;
+        this.showEffectOnDisable = value;
+    }
 
     #endregion
 
