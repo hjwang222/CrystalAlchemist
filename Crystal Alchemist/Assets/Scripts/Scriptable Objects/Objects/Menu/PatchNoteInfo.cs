@@ -10,14 +10,16 @@ public struct PatchNote
     private string version;
     [SerializeField]
     private string date;
-    [SerializeField]
-    private int lines;
 
     public string GetText()
     {
         string text = string.Format("Version {0} [{1}]", version, date);
-        for(int i = 1; i <= lines; i++) text += Environment.NewLine + "- " + FormatUtil.GetLocalisedText((version+i), LocalisationFileType.patchnotes);
-        text += Environment.NewLine;
+        for (int i = 1; i <= 25; i++)
+        {
+            string details = Environment.NewLine + "- " + FormatUtil.GetLocalisedText((version + i), LocalisationFileType.patchnotes);
+            if (details.Length > 1) text += details;
+            text += Environment.NewLine;
+        }
         return text;
     }
 }

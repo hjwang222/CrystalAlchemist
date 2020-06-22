@@ -35,6 +35,9 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 8
+    mode: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   - type: 4
     position: {x: 0, y: 0}
     translationID: 
@@ -57,6 +60,9 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 4
+    mode: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   - type: 4
     position: {x: 0, y: 0}
     translationID: 
@@ -79,6 +85,9 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 6
+    mode: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   - type: 4
     position: {x: 0, y: 0}
     translationID: 
@@ -101,6 +110,9 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 8
+    mode: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   - type: 4
     position: {x: 0, y: 0}
     translationID: 
@@ -123,12 +135,19 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 12
+    mode: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   loopActions: 1
   events:
   - triggers:
     - type: 0
-      time: 30
-      life: 65
+      time: 120
+      life: 85
+      maxLoops: 0
+    - type: 1
+      time: 0
+      life: 60
       maxLoops: 0
     actions:
     - type: 7
@@ -153,6 +172,9 @@ MonoBehaviour:
       value: 1
       signal: {fileID: 0}
       wait: 0
+      mode: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     - type: 10
       position: {x: 0, y: 0}
       translationID: 
@@ -175,6 +197,9 @@ MonoBehaviour:
       value: 1
       signal: {fileID: 0}
       wait: 0
+      mode: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     - type: 1
       position: {x: 0, y: 0}
       translationID: Titania3
@@ -197,6 +222,9 @@ MonoBehaviour:
       value: 0
       signal: {fileID: 0}
       wait: 0
+      mode: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     - type: 3
       position: {x: 0, y: 0}
       translationID: 
@@ -219,6 +247,9 @@ MonoBehaviour:
       value: 0
       signal: {fileID: 0}
       wait: 12
+      mode: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     - type: 7
       position: {x: 0, y: 0}
       translationID: 
@@ -241,6 +272,9 @@ MonoBehaviour:
       value: 0
       signal: {fileID: 0}
       wait: 0
+      mode: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     - type: 10
       position: {x: 0, y: 0}
       translationID: 
@@ -263,6 +297,9 @@ MonoBehaviour:
       value: 0
       signal: {fileID: 0}
       wait: 0
+      mode: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     - type: 5
       position: {x: 0, y: 0}
       translationID: 
@@ -285,6 +322,9 @@ MonoBehaviour:
       value: 0
       signal: {fileID: 0}
       wait: 0
+      mode: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     repeatEvent: 0
     interruptCurrentAction: 0
     eventCooldown: 0

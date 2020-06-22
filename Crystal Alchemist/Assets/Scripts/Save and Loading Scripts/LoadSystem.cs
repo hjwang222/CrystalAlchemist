@@ -34,6 +34,8 @@ public class LoadSystem
         {
             TeleportStats stats = new TeleportStats((string)teleportData[0], (string)teleportData[1], 
                                          new Vector2((float)teleportData[2], (float)teleportData[3]));
+
+            list.AddTeleport(stats);
         }
     }
 

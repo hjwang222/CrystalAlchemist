@@ -202,7 +202,7 @@ MonoBehaviour:
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 4
   m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 0.2
+  m_ShapeLightParametricRadius: 1
   m_ShapeLightFalloffSize: 1
   m_ShapeLightFalloffOffset: {x: -3, y: -15}
   m_ShapePath:
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 4
   m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 0.2
+  m_ShapeLightParametricRadius: 0
   m_ShapeLightFalloffSize: 1
   m_ShapeLightFalloffOffset: {x: -3, y: -15}
   m_ShapePath:
@@ -17876,7 +17876,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost:
     resourceType: 1
-    item: {fileID: 0}
+    itemGroup: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 1
   position: {x: 0.5, y: -1}
   duration: 1.5
@@ -17979,7 +17980,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost:
     resourceType: 2
-    item: {fileID: 0}
+    itemGroup: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 0.1
   position: {x: 0.5, y: -12}
   duration: 1.5
@@ -18107,7 +18109,7 @@ MonoBehaviour:
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 4
   m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 0.2
+  m_ShapeLightParametricRadius: 0
   m_ShapeLightFalloffSize: 1
   m_ShapeLightFalloffOffset: {x: -3, y: -15}
   m_ShapePath:
@@ -18194,7 +18196,7 @@ MonoBehaviour:
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 4
   m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 0.2
+  m_ShapeLightParametricRadius: 0.25
   m_ShapeLightFalloffSize: 1
   m_ShapeLightFalloffOffset: {x: -3, y: -15}
   m_ShapePath:
@@ -18839,7 +18841,7 @@ PrefabInstance:
     - target: {fileID: 3691230672784358425, guid: 3fdf5e3032830d74ba994cf0ef0775f0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3691230672784358425, guid: 3fdf5e3032830d74ba994cf0ef0775f0,
         type: 3}
@@ -27396,6 +27398,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3823563925267010271, guid: 8765a7e686a0f604dac06c21e4a6fff8,
+        type: 3}
+      propertyPath: m_ShapeLightParametricRadius
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8765a7e686a0f604dac06c21e4a6fff8, type: 3}
 --- !u!1001 &4008910294512493678
@@ -27688,7 +27695,7 @@ PrefabInstance:
     - target: {fileID: 8040636200504665835, guid: c84c09cfa51ad7f4db440989403a6012,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8040636200504665835, guid: c84c09cfa51ad7f4db440989403a6012,
         type: 3}

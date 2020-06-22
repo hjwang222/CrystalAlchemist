@@ -5,6 +5,10 @@ public class PlayerItems : PlayerComponent
     [SerializeField]
     private PlayerInventory inventory;
 
+    private void Start() => GameEvents.current.OnKeyItem += hasKeyItemAlready;
+
+    private void OnDestroy() => GameEvents.current.OnKeyItem -= hasKeyItemAlready;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -27,8 +31,9 @@ public class PlayerItems : PlayerComponent
         this.inventory.UpdateInventory(item, amount);
     }
 
-    public bool hasKeyItemAlready(ItemStats item)
+    public bool hasKeyItemAlready(string name)
     {
-        return this.inventory.hasKeyItemAlready(item);
-    } 
+        foreach (ItemStats elem in this.inventory.keyItems) if (elem != null && name == elem.name) return true;      
+        return false;
+    }
 }

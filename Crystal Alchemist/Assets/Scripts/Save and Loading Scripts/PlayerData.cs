@@ -115,6 +115,8 @@ public class PlayerData
             teleportLine[1] = stat.scene;
             teleportLine[2] = stat.position.x;
             teleportLine[3] = stat.position.y;
+
+            this.teleportPoints.Add(teleportLine);
         }
     }
 

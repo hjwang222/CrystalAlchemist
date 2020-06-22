@@ -33,6 +33,8 @@ public class GameEvents : MonoBehaviour
     public Action<Character, Character, float> OnAggroDecrease;
     public Action<Character> OnAggroClear;
 
+    public Func<string, bool> OnKeyItem;
+
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
     public void DoMenuOpen(CharacterState state) => this.OnMenuOpen?.Invoke(state);  
     public void DoMenuClose(CharacterState state) => this.OnMenuClose?.Invoke(state);
@@ -53,4 +55,10 @@ public class GameEvents : MonoBehaviour
 
     public void DoCameraShake(float strength, float duration, float speed) => this.OnCameraShake?.Invoke(strength, duration, speed);
     public void DoCameraStill(float speed) => this.OnCameraStill?.Invoke(speed);
+
+    public bool HasKeyItem(string name)
+    {
+        if(this.OnKeyItem != null) return this.OnKeyItem.Invoke(name);
+        return false;
+    }
 }

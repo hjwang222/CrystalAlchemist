@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using AssetIcons;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 
 public class Collectable : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class Collectable : MonoBehaviour
     [BoxGroup("Pflichtfeld")]
     [SerializeField]
     private SpriteRenderer shadowRenderer;
+
+    [Required]
+    [BoxGroup("Pflichtfeld")]
+    [SerializeField]
+    private SpriteRenderer itemSprite;
 
     [Required]
     [BoxGroup("Pflichtfeld")]
@@ -28,7 +34,13 @@ public class Collectable : MonoBehaviour
 
     private ItemStats itemStats;
 
-    private GameObject smoke;
+    private bool hasDuration = false;
+    private float elapsed;
+    private bool showSmoke = true;
+
+    private float blinkDelay;
+    private float blinkElapsed;
+    private float blinkSpeed = 0.1f;
 
     [AssetIcon]
     private Sprite GetSprite()
@@ -53,9 +65,46 @@ public class Collectable : MonoBehaviour
 
     private void Start()
     {
-        //Check if keyItem already in Inventory
         setItemStats();
-        if (this.itemStats.alreadyThere()) DestroyIt();
+        if (GameEvents.current.HasKeyItem(this.gameObject.name))
+        {
+            this.showSmoke = false;
+            DestroyIt();
+        }
+    }
+
+    private void Update()
+    {
+        if (!this.hasDuration) return;
+
+        if (this.elapsed > 0) this.elapsed -= Time.deltaTime;
+        else DestroyIt();
+
+        BlinkAnimation();
+    }
+
+    private void BlinkAnimation()
+    {
+        if (this.elapsed < 3) this.blinkDelay = 0.25f;
+        else if (this.elapsed < 6) this.blinkDelay = 0.5f;
+        else if (this.elapsed <= 10) this.blinkDelay = 1f;
+
+        if (this.blinkDelay > 0 && this.itemSprite != null)
+        {
+            if (this.blinkElapsed > 0) this.blinkElapsed -= Time.deltaTime;
+            else
+            {
+                this.blinkElapsed = this.blinkDelay;
+                StartCoroutine(BlinkCo(blinkSpeed));
+            }
+        }
+    }
+
+    private IEnumerator BlinkCo(float delay)
+    {
+        this.itemSprite.DOColor(new Color(0,0,0,0), delay);
+        yield return new WaitForSeconds(delay);
+        this.itemSprite.DOColor(Color.white, delay);
     }
 
     public void SetBounce(bool value) => this.bounceOnEnable = value;
@@ -65,11 +114,24 @@ public class Collectable : MonoBehaviour
         if (this.bounceOnEnable && this.bounceAnimation != null) this.bounceAnimation.Bounce();
     }
 
-    private void OnDisable() => this.smoke = Instantiate(MasterManager.itemDisappearSmoke, this.transform.position, Quaternion.identity);
-
-    private void OnDestroy()
+    [Button]
+    public void SetSelfDestruction()
     {
-        if (this.smoke != null) Destroy(this.smoke); //ugly but working
+        if (this.itemStats.IsKeyItem()) return;
+        this.hasDuration = true;
+        this.elapsed = 60;
+    }
+
+    private void OnDisable()
+    {
+        //Probleme: Kein Smoke wenn zerstört oder wenn die Szene geladen/entladen wird. Nur wenn disabled
+        Scene currentScene = SceneManager.GetActiveScene();
+        
+        if (currentScene.isLoaded && this.showSmoke)
+        {
+            GameObject smoke = Instantiate(MasterManager.itemDisappearSmoke, this.transform.position, Quaternion.identity);
+            smoke.name = this.gameObject.name + " Smoke";
+        }
     }
 
     #endregion
@@ -88,6 +150,7 @@ public class Collectable : MonoBehaviour
             Player player = character.GetComponent<Player>();
             if (player != null)
             {
+                this.showSmoke = false;
                 GameEvents.current.DoCollect(this.itemStats);
                 playSounds();
                 DestroyIt();
@@ -98,6 +161,7 @@ public class Collectable : MonoBehaviour
 
     public void SetAsTreasureItem(Transform parent)
     {
+        this.showSmoke = false;
         this.bounceOnEnable = false;
         this.transform.parent = parent;
         this.transform.position = parent.position;

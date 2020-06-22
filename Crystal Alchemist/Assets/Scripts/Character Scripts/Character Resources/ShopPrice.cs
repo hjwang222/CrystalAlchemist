@@ -19,12 +19,12 @@ public class ShopPrice : MonoBehaviour
 
     public void Initialize(Costs costs)
     {
-        if (costs.resourceType == CostType.none) this.child.SetActive(false);
-        else
+        if (costs.resourceType == CostType.item && costs.item != null)
         {
             this.child.SetActive(true);
             FormatUtil.set3DText(this.priceText, costs.amount + "", true, costs.item.color, costs.item.outline, 0.25f);
             this.priceIcon.sprite = costs.item.shopIcon;
         }
+        else this.child.SetActive(false);
     }
 }

@@ -1,12 +1,12 @@
 ﻿using Sirenix.OdinInspector;
-using UnityEngine;
 
 public enum CostType
 {
     none,
     life,
     mana,
-    item
+    item,
+    keyItem
 }
 
 [System.Serializable]
@@ -16,12 +16,16 @@ public class BaseResource
 
     [ShowIf("resourceType", CostType.item)]
     public ItemGroup item;
+
+    [ShowIf("resourceType", CostType.keyItem)]
+    public ItemDrop keyItem;
 }
 
 [System.Serializable]
 public class CharacterResource : BaseResource
 {
     [HideIf("resourceType", CostType.none)]
+    [HideIf("resourceType", CostType.keyItem)]
     public float amount = 1;
 }
 
@@ -29,6 +33,7 @@ public class CharacterResource : BaseResource
 public class Costs : BaseResource
 {
     [HideIf("resourceType", CostType.none)]
+    [HideIf("resourceType", CostType.keyItem)]
     [MinValue(0)]
     public float amount = 1;
 }

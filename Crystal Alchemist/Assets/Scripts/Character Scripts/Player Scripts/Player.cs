@@ -109,7 +109,7 @@ public class Player : Character
         }
     }
 
-    public override void Dead()
+    public override void KillIt()
     {
         if (this.values.currentState != CharacterState.dead)
         {
@@ -130,7 +130,9 @@ public class Player : Character
     public override bool HasEnoughCurrency(Costs price)
     {
         if (price.resourceType == CostType.none) return true;
-        else if (this.getResource(price) - price.amount >= 0) return true;  
+        else if (price.resourceType == CostType.keyItem && this.getResource(price) > 0) return true;
+        else if (this.getResource(price) - price.amount >= 0) return true;
+
         return false;
     }
 
@@ -140,6 +142,7 @@ public class Player : Character
         if (price.resourceType == CostType.life) return this.values.life;
         else if (price.resourceType == CostType.mana) return this.values.mana;
         else if (price.resourceType == CostType.item && price.item != null) return this.GetComponent<PlayerItems>().GetAmount(price.item);
+        else if (price.resourceType == CostType.keyItem && price.keyItem != null &&this.GetComponent<PlayerItems>().hasKeyItemAlready(price.keyItem.name)) return 1;
         return 0;
     }
 

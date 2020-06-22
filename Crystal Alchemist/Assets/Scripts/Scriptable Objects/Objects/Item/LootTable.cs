@@ -56,7 +56,7 @@ public class Reward
 
     public ItemDrop GetItemDrop()
     {
-        if (this.hasAlternative && this.firstLoot.item.stats.alreadyThere()) this.loot = this.alternativeLoot;
+        if (this.hasAlternative && GameEvents.current.HasKeyItem(this.firstLoot.item.name)) this.loot = this.alternativeLoot;
         else this.loot = this.firstLoot;
 
         ItemDrop result = this.loot.item.Instantiate(this.loot.amount);

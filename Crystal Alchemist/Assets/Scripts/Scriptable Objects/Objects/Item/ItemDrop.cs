@@ -47,6 +47,7 @@ public class ItemDrop : ScriptableObject
         temp.SetBounce(bounce);
         temp.name = this.name;
         temp.SetItem(this);
+        temp.SetSelfDestruction();
         return temp;
     }
 }

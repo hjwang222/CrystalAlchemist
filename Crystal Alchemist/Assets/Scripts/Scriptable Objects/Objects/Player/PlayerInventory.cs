@@ -8,7 +8,7 @@ public class PlayerInventory : ScriptableObject
     public List<ItemStats> keyItems = new List<ItemStats>();
 
     [SerializeField]
-    public List<ItemGroup> inventoryItems = new List<ItemGroup>();
+    public List<ItemGroup> inventoryItems = new List<ItemGroup>();    
 
     public void Clear()
     {
@@ -41,14 +41,14 @@ public class PlayerInventory : ScriptableObject
 
     public void collectItem(ItemStats item)
     {
-        if (item.isKeyItem() && !this.hasKeyItemAlready(item))
+        if (item.IsKeyItem() && !this.hasKeyItemAlready(item.name))
         {           
             //add Key Item
             ItemStats keyItem = Instantiate(item);
             keyItem.name = item.name;
             this.keyItems.Add(keyItem);
         }
-        else if (!item.isKeyItem())
+        else if (!item.IsKeyItem())
         {
             //add Inventory Item or change its amount
             collectItem(item.itemGroup, item.getTotalAmount());      
@@ -128,11 +128,11 @@ public class PlayerInventory : ScriptableObject
     }
 
 
-    public bool hasKeyItemAlready(ItemStats item)
+    public bool hasKeyItemAlready(string name)
     {
         foreach (ItemStats elem in keyItems)
         {
-            if (elem != null && item.name == elem.name) return true;
+            if (elem != null && name == elem.name) return true;
         }
 
         return false;

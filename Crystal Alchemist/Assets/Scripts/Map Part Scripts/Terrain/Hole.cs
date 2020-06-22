@@ -38,7 +38,7 @@ public class Hole : MonoBehaviour
         }
         else
         {
-            character.Dead(false);
+            character.KillIt(false);
         }
     }
 }

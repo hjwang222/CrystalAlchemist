@@ -5,6 +5,10 @@ using AssetIcons;
 [CreateAssetMenu(menuName = "Game/Items/Item Group")]
 public class ItemGroup : ScriptableObject
 {
+    [BoxGroup("Time")]
+    [SerializeField]
+    public float duration = 60f;
+
     [BoxGroup("Inventory")]
     public int maxAmount;
 

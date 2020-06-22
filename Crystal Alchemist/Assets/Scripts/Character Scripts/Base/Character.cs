@@ -138,7 +138,7 @@ public class Character : MonoBehaviour
     && !this.values.cannotDie //Item
     && !this.values.isInvincible //Event
     && !this.values.cantBeHit) //after Hit
-            Dead();
+            KillIt();
     }
 
     private void UpdateStatusEffects()
@@ -385,12 +385,13 @@ public class Character : MonoBehaviour
         gotHit(skill, percentage, true);
     }
 
-    public virtual void Dead()
+    [Button]
+    public virtual void KillIt()
     {
-        Dead(true);
+        KillIt(true);
     }    
 
-    public virtual void Dead(bool showAnimation)
+    public virtual void KillIt(bool showAnimation)
     {
         for (int i = 0; i < this.values.activeSkills.Count; i++)
         {

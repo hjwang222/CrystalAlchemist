@@ -53,8 +53,6 @@ public class ItemStats : ScriptableObject
     [BoxGroup("Signals")]
     [SerializeField]
     private AudioClip collectSoundEffect;
-    
-
 
 
     public ItemInfo getInfo()
@@ -70,8 +68,6 @@ public class ItemStats : ScriptableObject
         return false;
     }
 
-    
-
     public void Initialize(int amount)
     {
         this.amount = amount;
@@ -83,7 +79,7 @@ public class ItemStats : ScriptableObject
         else return "";
     }
 
-    public bool isKeyItem()
+    public bool IsKeyItem()
     {
         if (this.itemGroup != null) return this.itemGroup.isKeyItem();
         else if (this.inventoryInfo != null) return this.inventoryInfo.isKeyItem();
@@ -94,17 +90,6 @@ public class ItemStats : ScriptableObject
     {
         if (this.itemGroup != null) return this.itemGroup.maxAmount;
         return 0;
-    }
-
-    public bool alreadyThere()
-    {
-        if (isKeyItem())
-        {
-            Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
-            if (player != null && player.GetComponent<PlayerItems>().hasKeyItemAlready(this)) return true;
-        }
-
-        return false;
     }
 
     [AssetIcon]

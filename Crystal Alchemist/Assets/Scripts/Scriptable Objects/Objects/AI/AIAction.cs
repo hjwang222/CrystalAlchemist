@@ -427,7 +427,7 @@ public class AIAction
 
     private void StartKill(AI npc)
     {
-        npc.Dead();
+        npc.KillIt();
         Deactivate();
     }
 

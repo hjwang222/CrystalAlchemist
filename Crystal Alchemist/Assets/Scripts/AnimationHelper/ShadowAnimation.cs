@@ -29,7 +29,7 @@ public class ShadowAnimation : MonoBehaviour
     {
         if (this.cloneShadow && this.spriteRenderer != null && this.origin != null) this.spriteRenderer.sprite = this.origin.sprite;
 
-        if (this.scaleShadow)
+        if (this.scaleShadow && this.reference != null)
         {
             float distance = (1 + ((reference.transform.position.y - this.transform.position.y) / this.maxDistance));
             this.transform.localScale = Vector2.one * (1 / distance);

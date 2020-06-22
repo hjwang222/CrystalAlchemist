@@ -9,6 +9,9 @@ public class QuickTravelMenu : MonoBehaviour
     [SerializeField]
     private QuickTravelButton template;
 
+    [SerializeField]
+    private GameObject content;
+
     private List<QuickTravelButton> buttons = new List<QuickTravelButton>();
 
     private void OnEnable()
@@ -24,7 +27,7 @@ public class QuickTravelMenu : MonoBehaviour
 
         for(int i = 0; i < list.GetStats().Count; i++)
         {
-            QuickTravelButton newButton = Instantiate(template, this.transform);
+            QuickTravelButton newButton = Instantiate(template, this.content.transform);
             newButton.gameObject.SetActive(true);
             newButton.SetLocation(list.GetStats(i));
             this.buttons.Add(newButton);

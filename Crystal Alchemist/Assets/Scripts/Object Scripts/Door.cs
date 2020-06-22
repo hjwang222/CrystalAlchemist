@@ -21,10 +21,6 @@ public class Door : Interactable
 
     private bool isOpen;
 
-    [FoldoutGroup("Tür-Attribute", expanded: false)]
-    [SerializeField]
-    private BoxCollider2D boxCollider;
-
     [BoxGroup("Sound")]
     [Tooltip("Standard-Soundeffekt")]
     public AudioClip soundEffect;
@@ -33,7 +29,7 @@ public class Door : Interactable
     {
         base.Start();
 
-        if (this.isOpen) AnimatorUtil.SetAnimatorParameter(this.animator, "isOpened", true);
+        if (this.isOpen) AnimatorUtil.SetAnimatorParameter(this.animator, "Close");
     }
 
     public override void DoOnUpdate()
@@ -93,8 +89,9 @@ public class Door : Interactable
     private void OpenCloseDoor(bool isOpen, ContextClue contextClueChild)
     {
         this.isOpen = isOpen;
-        AnimatorUtil.SetAnimatorParameter(this.animator, "isOpened", this.isOpen);
-        this.boxCollider.enabled = !this.isOpen;
+
+        if (this.isOpen) AnimatorUtil.SetAnimatorParameter(this.animator, "Open");
+        else AnimatorUtil.SetAnimatorParameter(this.animator, "Close");
 
         if (contextClueChild != null)
         {

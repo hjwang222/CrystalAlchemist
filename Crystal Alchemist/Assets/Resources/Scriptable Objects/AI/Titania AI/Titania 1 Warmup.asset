@@ -92,8 +92,12 @@ MonoBehaviour:
   events:
   - triggers:
     - type: 0
-      time: 30
+      time: 120
       life: 85
+      maxLoops: 0
+    - type: 1
+      time: 0
+      life: 80
       maxLoops: 0
     actions:
     - type: 7

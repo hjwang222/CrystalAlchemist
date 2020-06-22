@@ -3,28 +3,16 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.2):
-    //--REWORKS--
-    //TODO: Sound Effekte ersetzen!
     //BUG: Cast Buggy when knockback
+
     //BUG: Cooldown wenn kein Skill ausgeführt wurde
     //BUG: Stromschlag nicht unterbrechen
-    //BUG: Smoke/Glitter macht Probleme beim Szenenwechsel
 
+    //TODO: Feuerhaut Ability
     //TODO: Movement by AIAction
     //IDEA: Head, Shoot, Ground Position. Vector or Gameobject?
     //TODO: Projectile Offset
-
-    //TODO: Titanias Key (Item)
-    //TODO: Titanias Door
-    //TODO: Camera Schwenk
-    //TODO: Titania Scharf Schalten
-    //TODO: Better Arena Graphics
-    //TODO: Item Glitter/Smoke Better
-    //TODO: Item SelfKill
-    //TODO: Auto Updater
-    //TODO: Teleport List
-    //TODO: Sounds
-    //REWORK: Arena Bounds
+    //TODO: Sounds ersetzen
 
     //Visual Graph (Particles)
     //Jobs Pathfinding (Jobs!)
@@ -36,6 +24,13 @@ public class TODOLIST : MonoBehaviour
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
+    //TODO: Camera Schwenk
+    //TODO: Item Assistent
+    //TODO: Itemgroup duration
+    //REWORK: Arena Bounds
+    //TODO: Treasure Item Drop (no Dialog)
+    //TODO: Better Arena Graphics
+    //TODO: Auto Updater
     //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
     //GRAPHICS: TitleScreen: Background 
     //ITEM: Brille (Bool Value)

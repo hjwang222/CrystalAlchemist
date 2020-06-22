@@ -16,7 +16,7 @@ public class Goddess : AI
     [SerializeField]
     private AudioClip loop;
 
-    public override void Dead(bool showAnimation)
+    public override void KillIt(bool showAnimation)
     {
         for (int i = 0; i < this.values.activeSkills.Count; i++)
         {
