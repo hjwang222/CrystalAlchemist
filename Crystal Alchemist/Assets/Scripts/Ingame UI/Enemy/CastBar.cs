@@ -11,13 +11,14 @@ public class CastBar : MonoBehaviour
     private TextMeshPro skillName;
     [SerializeField]
     private TextMeshPro percentage;
-
+    [SerializeField]
+    private float offset = 1f;
     private Ability ability;
 
     public void setCastBar(Character character, Ability ability)
     {
         this.transform.parent = character.transform;
-        this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + 2f);
+        this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + this.offset);
         this.ability = ability;
         this.skillName.text = this.ability.GetName();
     }

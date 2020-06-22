@@ -56,7 +56,6 @@ MonoBehaviour:
   skill: {fileID: 0}
   impactEffect: {fileID: 0}
   distanceBetweenImpacts: 1
-  lights: {fileID: 0}
   distance: 50
   laserSprite: {fileID: 6508292816955024436}
   targetRequired: 1
@@ -145,7 +144,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6508292816955024436}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
-  shadow: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -172,6 +170,7 @@ MonoBehaviour:
   costs:
     resourceType: 2
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 0.25
   intervallSender: 0.5
   speedDuringCasting: 0
@@ -197,7 +196,8 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
-    amount: -1.5
+    keyItem: {fileID: 0}
+    amount: -0.75
   statusEffects: []
   thrust: 0
   knockbackTime: 0.2
@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  type: 3
   positionHeight: 1.5
   colliderHeightOffset: 0
 --- !u!1 &6508292816955024442

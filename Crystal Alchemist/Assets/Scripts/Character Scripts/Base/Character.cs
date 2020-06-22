@@ -61,7 +61,6 @@ public class Character : MonoBehaviour
     private float manaTime;
     private DeathAnimation activeDeathAnimation;
     private Vector3 spawnPosition;
-    private CastBar activeCastbar;
     private List<StatusEffectGameObject> statusEffectVisuals = new List<StatusEffectGameObject>();
 
     [BoxGroup("Player")]

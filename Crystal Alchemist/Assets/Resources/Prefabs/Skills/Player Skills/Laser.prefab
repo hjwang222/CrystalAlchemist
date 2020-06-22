@@ -129,7 +129,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 3924551678506968721}
   myRigidbody: {fileID: 0}
   animator: {fileID: 6859513477840706715}
-  shadow: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -156,6 +155,7 @@ MonoBehaviour:
   costs:
     resourceType: 2
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 0.25
   intervallSender: 0.25
   speedDuringCasting: 0
@@ -181,7 +181,8 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
-    amount: -2
+    keyItem: {fileID: 0}
+    amount: -1
   statusEffects: []
   thrust: 0
   knockbackTime: 0.2

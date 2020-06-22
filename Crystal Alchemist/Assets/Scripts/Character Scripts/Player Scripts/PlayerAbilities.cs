@@ -16,6 +16,7 @@ public class PlayerAbilities : CharacterCombat
     private float timer;
     private Player player;
 
+
     public override void Initialize()
     {
         base.Initialize();
@@ -87,7 +88,7 @@ public class PlayerAbilities : CharacterCombat
         if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbilityOnTarget(ability, null); //use Skill when charged
         else if (ability.state == AbilityState.lockOn && ability.isRapidFire) HideTargetingSystem(ability); //hide Targeting System when released
 
-        UnChargeAbility(ability, this.player);
+        UnChargeAbility(ability);
     }
 
     private void ButtonDown(Ability ability)

@@ -226,7 +226,6 @@ MonoBehaviour:
   activeStatusEffectParent: {fileID: 2840507917755813145}
   values: {fileID: 0}
   IsSummoned: 0
-  aggroGameObject: {fileID: 3183384280948212101}
   flip: 1
   target: {fileID: 0}
   partner: {fileID: 0}
@@ -277,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  startPhase: {fileID: 0}
+  startPhase: {fileID: 11400000, guid: ef2de5e269f04244195c2b33fe08fbd5, type: 2}
   startImmediately: 1
 --- !u!61 &8932006801697793323
 BoxCollider2D:
@@ -292,7 +291,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.002029419, y: -0.15694392}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -303,7 +302,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6241722, y: 0.43122172}
+  m_Size: {x: 0.625, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &-8954306522490569902
 MonoBehaviour:

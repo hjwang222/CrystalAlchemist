@@ -32,65 +32,72 @@ public class CharacterCombat : MonoBehaviour
         if(this.targetingSystem != null) this.targetingSystem.SetTimeValue(timeValue);
     }
 
-    public void ChargeAbility(Ability ability, Character character)
+    public void ChargeAbility(Ability ability)
     {
-        ChargeAbility(ability, character, null);
+        ChargeAbility(ability, null);
     }
 
-    public void ChargeAbility(Ability ability, Character character, Character target)
+    public void ChargeAbility(Ability ability, Character target)
     {
         ability.Charge(); //charge Skill when not full        
-        ShowCastBar(ability, character); //Show Castbar
-        setSpeedDuringCasting(ability, character); //Set Speed during casting
+        ShowCastBar(ability); //Show Castbar
+        setSpeedDuringCasting(ability); //Set Speed during casting
         ability.ShowCastingIndicator(target);
         AnimatorUtil.SetAnimatorParameter(this.character.animator, "Casting", true);
     }
 
-    public void UnChargeAbility(Ability ability, Character character)
+    public void UnChargeAbility(Ability ability)
     {
         ability.ResetCharge(); //reset charge when not full  
         HideCastBar(); //Hide Castbar
-        deactivatePlayerButtonUp(ability, character); //deactivate Skill when button up, Player only
-        resetSpeedAfterCasting(character); //set Speed to normal
+        deactivatePlayerButtonUp(ability); //deactivate Skill when button up, Player only
+        resetSpeedAfterCasting(); //set Speed to normal
         ability.HideIndicator();
         AnimatorUtil.SetAnimatorParameter(this.character.animator, "Casting", false);
     }
 
-    private void setSpeedDuringCasting(Ability ability, Character character)
+    private void setSpeedDuringCasting(Ability ability)
     {
         SkillSenderModule senderModule = ability.skill.GetComponent<SkillSenderModule>();
         if (senderModule != null) character.updateSpeed(senderModule.speedDuringCasting, senderModule.affectAnimation);
     }
 
-    private void resetSpeedAfterCasting(Character character)
+    private void resetSpeedAfterCasting()
     {
         character.updateSpeed(0); //Set Speed to normal
     }
 
-    private void deactivatePlayerButtonUp(Ability ability, Character character)
+    private void deactivatePlayerButtonUp(Ability ability)
     {
-        if (ability.state != AbilityState.onCooldown 
-         && ability.deactivateButtonUp 
+        if (ability.deactivateButtonUp 
          && character.GetComponent<Player>() != null)
-            deactivateSkill(ability, character);
+            deactivateSkill(ability);
     }
 
-    private void deactivateSkill(Ability ability, Character character)
+    private void deactivateSkill(Ability ability)
     {
-        foreach (Skill skill in character.values.activeSkills)
+        int deactivatedSkills = DeactivateSkills(ability);
+        if (deactivatedSkills > 0) ability.ResetCoolDown(); //prevent Cooldown when not used skill
+    }
+
+    private int DeactivateSkills(Ability ability)
+    {
+        int counter = 0;
+
+        for(int i = 0; i < character.values.activeSkills.Count; i++)
         {
-            if (skill.name == ability.skill.name)
+            if (character.values.activeSkills[i].name == ability.skill.name)
             {
-                skill.DeactivateIt();
-                break;
+                character.values.activeSkills[i].DeactivateIt();
+                counter++;
             }
         }
 
-        ability.ResetCoolDown();
+        return counter;
     }
 
 
-    public void ShowCastBar(Ability ability, Character character)
+    public void ShowCastBar(Ability ability)
     {
         if (this.activeCastBar == null && ability.showCastbar && ability.hasCastTime)
         {

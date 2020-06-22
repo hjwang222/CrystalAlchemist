@@ -5,10 +5,6 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.2):
     //BUG: Cast Buggy when knockback
 
-    //BUG: Cooldown wenn kein Skill ausgeführt wurde
-    //BUG: Stromschlag nicht unterbrechen
-
-    //TODO: Feuerhaut Ability
     //TODO: Movement by AIAction
     //IDEA: Head, Shoot, Ground Position. Vector or Gameobject?
     //TODO: Projectile Offset
@@ -31,6 +27,7 @@ public class TODOLIST : MonoBehaviour
     //TODO: Treasure Item Drop (no Dialog)
     //TODO: Better Arena Graphics
     //TODO: Auto Updater
+    //TODO: Remote Config (Version)
     //TODO: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
     //GRAPHICS: TitleScreen: Background 
     //ITEM: Brille (Bool Value)

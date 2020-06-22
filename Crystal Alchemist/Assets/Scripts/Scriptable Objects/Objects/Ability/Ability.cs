@@ -131,7 +131,6 @@ public class Ability : ScriptableObject
     public bool remoteActivation = false;
 
     [BoxGroup("Booleans")]
-    [HideIf("isRapidFire")]
     [SerializeField]
     public bool deactivateButtonUp = false;
 
@@ -224,7 +223,6 @@ public class Ability : ScriptableObject
     public void setStartParameters()
     {
         if (!this.hasCastTime) this.castTime = 0;
-        if (this.isRapidFire && this.deactivateButtonUp) this.deactivateButtonUp = false;
 
         this.cooldownLeft = 0;
 

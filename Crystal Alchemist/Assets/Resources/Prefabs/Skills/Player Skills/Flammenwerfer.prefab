@@ -301,7 +301,8 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
-    amount: -0.25
+    keyItem: {fileID: 0}
+    amount: -0.5
   statusEffects:
   - {fileID: 11400000, guid: 646b7065db6bd07488bb7379d6e930a2, type: 2}
   thrust: 0
@@ -328,6 +329,7 @@ MonoBehaviour:
   costs:
     resourceType: 2
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 0.025
   intervallSender: 0
   speedDuringCasting: 0
@@ -381,7 +383,6 @@ MonoBehaviour:
   skill: {fileID: 0}
   canBeReflected: 1
   skillOnImpact: {fileID: 0}
-  skillCollider: {fileID: 7671088143910755323}
 --- !u!1 &7790507635526815855
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 3816868808247662347}
+  mode: 1
 --- !u!1001 &4484190714160488513
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -108,30 +108,10 @@ public class CombatButtonUI : MonoBehaviour
             SkillSenderModule senderModule = ability.skill.GetComponent<SkillSenderModule>();
 
             if (senderModule != null && senderModule.costs.item != null)
-                 this.ammo.text = this.inventory.GetAmount(senderModule.costs.item) + "";
+                this.ammo.text = this.inventory.GetAmount(senderModule.costs.item) + "";
             else this.ammo.text = "";
 
-            if ( !ability.enabled
-              || !this.values.CanUseAbilities()                 
-              || !ability.CheckResourceAndAmount()
-                )
-            {
-                //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
-                this.disabled.SetActive(true);
-
-                this.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
-                this.iconButton.color = new Color(1f, 1f, 1f, 0.2f);
-            }
-            else if (ability.IsTargetRequired() && ability.state == AbilityState.lockOn)
-            {
-                //ist Skill in Zielerfassung
-                this.targeting.SetActive(true);
-                this.filled.fillAmount = this.targetingTimeLeft.GetValue();
-
-                this.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
-                this.iconButton.color = new Color(1f, 1f, 1f, 0.2f);
-            }
-            else if (cooldownLeft > 0 && cooldownValue > 0.5f)
+            if (cooldownLeft > 0 && cooldownValue > 0.5f)
             {
                 //Ist Skill in der Abklingzeit
                 this.cooldown.gameObject.SetActive(true);
@@ -144,6 +124,26 @@ public class CombatButtonUI : MonoBehaviour
                 this.cooldown.outlineWidth = 0.25f;
                 this.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
                 this.iconButton.color = new Color(1f, 1f, 1f, 1f);
+            }
+            else if (ability.IsTargetRequired() && ability.state == AbilityState.lockOn)
+            {
+                //ist Skill in Zielerfassung
+                this.targeting.SetActive(true);
+                this.filled.fillAmount = this.targetingTimeLeft.GetValue();
+
+                this.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
+                this.iconButton.color = new Color(1f, 1f, 1f, 0.2f);
+            }
+            else if (!ability.enabled
+                    || !this.values.CanUseAbilities()
+                    || !ability.CheckResourceAndAmount()
+    )
+            {
+                //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)
+                this.disabled.SetActive(true);
+
+                this.skillIconButton.color = new Color(1f, 1f, 1f, 0.2f);
+                this.iconButton.color = new Color(1f, 1f, 1f, 0.2f);
             }
             else
             {

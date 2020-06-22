@@ -1186,3 +1186,19 @@ Exception 22.06.2020 01:48:03: NullReferenceException: Object reference not set 
 ShopPrice.Initialize (Costs costs) (at Assets/Scripts/Character Scripts/Character Resources/ShopPrice.cs:26)
 ShopItem.Start () (at Assets/Scripts/Object Scripts/ShopItem.cs:29)
 
+Exception 22.06.2020 09:07:52: InvalidOperationException: Collection was modified; enumeration operation may not execute.
+System.ThrowHelper.ThrowInvalidOperationException (System.ExceptionResource resource) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Collections.Generic.List`1+Enumerator[T].MoveNext () (at <fb001e01371b4adca20013e0ac763896>:0)
+CharacterCombat.DeactivateSkills (Ability ability) (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:86)
+CharacterCombat.deactivateSkill (Ability ability) (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:79)
+CharacterCombat.deactivatePlayerButtonUp (Ability ability) (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:74)
+CharacterCombat.UnChargeAbility (Ability ability) (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:53)
+PlayerAbilities.ButtonUp (Ability ability) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerAbilities.cs:91)
+PlayerAbilities.OnHoldingCallback (UnityEngine.InputSystem.InputAction+CallbackContext context) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerAbilities.cs:53)
+UnityEngine.Events.InvokableCall`1[T1].Invoke (T1 args0) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.Events.UnityEvent`1[T0].Invoke (T0 arg0) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.InputSystem.Utilities.DelegateHelpers.InvokeCallbacksSafe[TValue] (UnityEngine.InputSystem.Utilities.InlinedArray`1[System.Action`1[TValue]]& callbacks, TValue argument, System.String callbackName, System.Object context) (at Library/PackageCache/com.unity.inputsystem@1.0.0/InputSystem/Utilities/DelegateHelpers.cs:51)
+UnityEngine.InputSystem.LowLevel.<>c__DisplayClass7_0:<set_onUpdate>b__0(NativeInputUpdateType, NativeInputEventBuffer*)
+UnityEngineInternal.Input.NativeInputSystem:NotifyUpdate(NativeInputUpdateType, IntPtr)
+

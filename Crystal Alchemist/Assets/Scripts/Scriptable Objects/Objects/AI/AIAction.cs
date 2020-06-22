@@ -339,7 +339,7 @@ public class AIAction
 
     private void Charge(AI npc)
     {
-        npc.GetComponent<AICombat>().ChargeAbility(this.activeAbility, npc, npc.target);
+        npc.GetComponent<AICombat>().ChargeAbility(this.activeAbility, npc.target);
 
         if (this.activeAbility.IsTargetRequired())
             npc.GetComponent<AICombat>().ShowTargetingSystem(this.activeAbility);        //Show Targeting System when needed
@@ -369,14 +369,14 @@ public class AIAction
         if (!this.keepCast)
         {
             npc.GetComponent<AICombat>().HideTargetingSystem(this.activeAbility);
-            npc.GetComponent<AICombat>().UnChargeAbility(this.activeAbility, npc); //reset Charge
+            npc.GetComponent<AICombat>().UnChargeAbility(this.activeAbility); //reset Charge
         }
     }
 
     private void DisableSkill(AI npc)
     {
         npc.GetComponent<AICombat>().HideTargetingSystem(this.activeAbility);
-        npc.GetComponent<AICombat>().UnChargeAbility(this.activeAbility, npc); //reset Charge
+        npc.GetComponent<AICombat>().UnChargeAbility(this.activeAbility); //reset Charge
         Deactivate();
     }
 
