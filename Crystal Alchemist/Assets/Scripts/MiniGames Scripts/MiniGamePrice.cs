@@ -10,6 +10,9 @@ public class MiniGamePrice : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textField;
 
+    [SerializeField]
+    private TextMeshProUGUI textLabel;
+
     public bool CheckPrice(PlayerInventory inventory, Costs price)
     {
         this.image.enabled = false;
@@ -20,6 +23,14 @@ public class MiniGamePrice : MonoBehaviour
             int inventoryAmount = inventory.GetAmount(price.item);
             this.image.sprite = price.item.info.getSprite();
             this.textField.text = price.amount + " / " + inventoryAmount;
+            this.textLabel.text = FormatUtil.GetLocalisedText("Kosten", LocalisationFileType.menues);
+        }
+        else if(price.keyItem != null && price.resourceType == CostType.keyItem)
+        {
+            this.image.enabled = true;
+            this.image.sprite = price.keyItem.stats.info.getSprite();
+            this.textField.text = "";
+            this.textLabel.text = FormatUtil.GetLocalisedText("Benötigt", LocalisationFileType.menues);
         }
         else if (price.resourceType == CostType.none)
         {

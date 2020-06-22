@@ -32,8 +32,12 @@ public class Collectable : MonoBehaviour
     [SerializeField]
     private BounceAnimation bounceAnimation;
 
-    private ItemStats itemStats;
+    //[Required]
+    //[BoxGroup("Pflichtfeld")]
+    //[SerializeField]
+    //private bool useUniqueName = false;
 
+    private ItemStats itemStats;
     private bool hasDuration = false;
     private float elapsed;
     private bool showSmoke = true;
@@ -66,7 +70,11 @@ public class Collectable : MonoBehaviour
     private void Start()
     {
         setItemStats();
-        if (GameEvents.current.HasKeyItem(this.gameObject.name))
+
+        string itemName = this.itemDrop.name;
+        //if(this.useUniqueName) itemName = this.gameObject.name;
+
+        if (this.itemStats.IsKeyItem() && GameEvents.current.HasKeyItem(itemName))
         {
             this.showSmoke = false;
             DestroyIt();
@@ -124,14 +132,7 @@ public class Collectable : MonoBehaviour
 
     private void OnDisable()
     {
-        //Probleme: Kein Smoke wenn zerstört oder wenn die Szene geladen/entladen wird. Nur wenn disabled
-        Scene currentScene = SceneManager.GetActiveScene();
-        
-        if (currentScene.isLoaded && this.showSmoke)
-        {
-            GameObject smoke = Instantiate(MasterManager.itemDisappearSmoke, this.transform.position, Quaternion.identity);
-            smoke.name = this.gameObject.name + " Smoke";
-        }
+        if (this.showSmoke) AnimatorUtil.ShowSmoke(this.transform);
     }
 
     #endregion

@@ -6240,7 +6240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &734886415
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8469,6 +8469,7 @@ GameObject:
   - component: {fileID: 919052616}
   - component: {fileID: 919052620}
   - component: {fileID: 919052619}
+  - component: {fileID: 919052621}
   m_Layer: 5
   m_Name: Skillbook
   m_TagString: Untagged
@@ -8611,6 +8612,22 @@ MonoBehaviour:
   skillDetailsStrength: {fileID: 1061131082}
   skillDetailsCost: {fileID: 922606810}
   StatusEffects: {fileID: 1299903074}
+--- !u!114 &919052621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919052614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eebb7f893c7c9024f90f0e78795a8a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamepadUI:
+  - {fileID: 734886414}
+  keyboardUI:
+  - {fileID: 2136806668}
 --- !u!1 &922606809
 GameObject:
   m_ObjectHideFlags: 0
@@ -11358,7 +11375,7 @@ GameObject:
   - component: {fileID: 1127863490}
   - component: {fileID: 1127863489}
   m_Layer: 5
-  m_Name: Skillkosten
+  m_Name: Kosten
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11453,7 +11470,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -15137,7 +15154,7 @@ GameObject:
   - component: {fileID: 1681418076}
   - component: {fileID: 1681418075}
   m_Layer: 5
-  m_Name: "SkillSt\xE4rke"
+  m_Name: "St\xE4rke"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15159,7 +15176,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -70, y: 0}
+  m_AnchoredPosition: {x: -69.96306, y: -0.011108398}
   m_SizeDelta: {x: 120, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1681418075
@@ -15232,7 +15249,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -17520,7 +17537,7 @@ GameObject:
   - component: {fileID: 1945839225}
   - component: {fileID: 1945839224}
   m_Layer: 5
-  m_Name: SkillName
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17602,7 +17619,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 17
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535

@@ -17373,6 +17373,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5667813256127185038, guid: e9f39d5ceba4a6643b52883e6a3ebe77,
+        type: 3}
+      propertyPath: price.resourceType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5667813256127185038, guid: e9f39d5ceba4a6643b52883e6a3ebe77,
+        type: 3}
+      propertyPath: price.keyItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 6d9d0b7b21a062f488da81e1c855e840,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9f39d5ceba4a6643b52883e6a3ebe77, type: 3}
 --- !u!4 &1010957374 stripped
@@ -17876,7 +17887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost:
     resourceType: 1
-    itemGroup: {fileID: 0}
+    item: {fileID: 0}
     keyItem: {fileID: 0}
     amount: 1
   position: {x: 0.5, y: -1}
@@ -17980,7 +17991,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost:
     resourceType: 2
-    itemGroup: {fileID: 0}
+    item: {fileID: 0}
     keyItem: {fileID: 0}
     amount: 0.1
   position: {x: 0.5, y: -12}

@@ -15,6 +15,9 @@ public class TODOLIST : MonoBehaviour
     //Multiplayer (Mirror?)
     //Struct vs Class (int? ref)
 
+    //TODO: RespawnSystem ShowSmoke
+    //TODO: Stromschlag Target buggy
+
     //Documentation Update (How did I... , usefull links)
 
     //-----------------------------------------------------------------------------

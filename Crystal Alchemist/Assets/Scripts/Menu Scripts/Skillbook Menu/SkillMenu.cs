@@ -62,6 +62,11 @@ public class SkillMenu : MenuBehaviour
         ShowCategory("physical");
     }
 
+    private void test()
+    {
+
+    }
+
     private Ability GetAbility()
     {
         return this.selectedAbility;

@@ -12,13 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a19f9cb4d358498823753290d243d, type: 3}
   m_Name: King Blob Startup
   m_EditorClassIdentifier: 
-  actions: []
+  actions:
+  - type: 3
+    position: {x: 0, y: 0}
+    translationID: 
+    duration: 0
+    nextPhase: {fileID: 0}
+    animations: 
+    isTrigger: 0
+    ability: {fileID: 11400000, guid: 1878fb9defd1fe546821b1e74a62233c, type: 2}
+    overrideCastTime: 0
+    castTime: 0
+    overrideShowCastBar: 0
+    showCastBar: 0
+    overrideCooldown: 0
+    cooldown: 0
+    repeat: 0
+    keepCast: 0
+    amount: 0
+    delay: 0
+    sequence: {fileID: 0}
+    value: 0
+    signal: {fileID: 0}
+    wait: 0
+    mode: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   loopActions: 0
   events:
   - triggers:
     - type: 3
       time: 0
       life: 0
+      maxLoops: 0
     actions:
     - type: 5
       position: {x: 0, y: 0}
@@ -26,6 +52,7 @@ MonoBehaviour:
       duration: 4
       nextPhase: {fileID: 11400000, guid: b62894fec5e3a46448d1a0cb2e09d40e, type: 2}
       animations: 
+      isTrigger: 0
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0
@@ -33,9 +60,17 @@ MonoBehaviour:
       showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
-      repeatSkill: 0
+      repeat: 0
+      keepCast: 0
       amount: 1
-      mechanic: {fileID: 0}
+      delay: 0
+      sequence: {fileID: 0}
+      value: 0
+      signal: {fileID: 0}
+      wait: 0
+      mode: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     repeatEvent: 0
     interruptCurrentAction: 0
     eventCooldown: 0

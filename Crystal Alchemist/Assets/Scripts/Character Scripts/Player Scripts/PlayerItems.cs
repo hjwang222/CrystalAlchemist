@@ -5,7 +5,7 @@ public class PlayerItems : PlayerComponent
     [SerializeField]
     private PlayerInventory inventory;
 
-    private void Start() => GameEvents.current.OnKeyItem += hasKeyItemAlready;
+    private void Awake() => GameEvents.current.OnKeyItem += hasKeyItemAlready; //because keyItemCheck will be called very early
 
     private void OnDestroy() => GameEvents.current.OnKeyItem -= hasKeyItemAlready;
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class AnimatorUtil
 {
@@ -127,5 +128,16 @@ public static class AnimatorUtil
         }
 
         return false;
+    }
+
+    public static void ShowSmoke(Transform transform)
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        if (currentScene.isLoaded)
+        {
+            GameObject smoke = Object.Instantiate(MasterManager.itemDisappearSmoke, transform.position, Quaternion.identity);
+            smoke.name = transform.gameObject.name + " Smoke";
+        }
     }
 }

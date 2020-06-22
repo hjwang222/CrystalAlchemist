@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7558227325428697100}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &8316381799073778946
 BoxCollider2D:
@@ -81,11 +81,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5866779669709839374}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.125, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 2.925, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7558227325428697100}
+  m_Father: {fileID: 6279967372909695065}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2164517104061693965
@@ -141,7 +141,6 @@ GameObject:
   - component: {fileID: 2758648613595575892}
   - component: {fileID: 7558227325428697102}
   - component: {fileID: 5667184397210278224}
-  - component: {fileID: 1740862200051900331}
   m_Layer: 17
   m_Name: Spiegel
   m_TagString: Object
@@ -160,8 +159,7 @@ Transform:
   m_LocalPosition: {x: 0.5, y: 2.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 5797604766717966704}
-  - {fileID: 4191204237184487337}
+  - {fileID: 6279967372909695065}
   - {fileID: 850489084852760934}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -181,6 +179,7 @@ MonoBehaviour:
   costs:
     resourceType: 0
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 1
   customActionButton: 1
   ID: Umziehen
@@ -235,17 +234,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!210 &1740862200051900331
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7558227325428697098}
-  m_Enabled: 1
-  m_SortingLayerID: -1702512615
-  m_SortingLayer: 2
-  m_SortingOrder: 0
 --- !u!1 &8396913473854708589
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,10 +261,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8396913473854708589}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 2.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7558227325428697100}
+  m_Father: {fileID: 6279967372909695065}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8778043509089608004
@@ -368,3 +356,52 @@ MonoBehaviour:
   selectColor: {r: 0.8431373, g: 1, b: 0.9686275, a: 1}
   precision: 0.084
   glowColor: {r: 1.099252, g: 2.837799, b: 4.2371163, a: 1}
+--- !u!1 &8830098471033984559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6279967372909695065}
+  - component: {fileID: 2561222772619113210}
+  m_Layer: 17
+  m_Name: Graphics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6279967372909695065
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8830098471033984559}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5797604766717966704}
+  - {fileID: 4191204237184487337}
+  m_Father: {fileID: 7558227325428697100}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.5, y: -2.8}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!210 &2561222772619113210
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8830098471033984559}
+  m_Enabled: 1
+  m_SortingLayerID: -1702512615
+  m_SortingLayer: 2
+  m_SortingOrder: 0
