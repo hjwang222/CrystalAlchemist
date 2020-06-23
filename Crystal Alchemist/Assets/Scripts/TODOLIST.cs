@@ -12,6 +12,7 @@ public class TODOLIST : MonoBehaviour
     //BUG: Feuerhaut funktioniert nicht
     //TODO: Invincible Damage Number
     //TODO: No Target when invincible
+    //ANIMATION: Camera Schwenk, Map Name Intro and Victory!
 
     //-----------------------------------------------------------------------------
 
@@ -23,7 +24,6 @@ public class TODOLIST : MonoBehaviour
     //REWORK: Death Animation (Character)?
     //REWORK: Loading on Level Start?
 
-    //ANIMATION: Camera Schwenk
     //CONTENT: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
     //ITEM: Brille (Bool Value)
     //INPUT: Virtuelle Tastatur

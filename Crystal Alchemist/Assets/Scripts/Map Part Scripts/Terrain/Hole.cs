@@ -7,11 +7,14 @@ public class Hole : MonoBehaviour
 {
     [HideLabel]
     [SerializeField]
+    [BoxGroup("Costs")]
     private Costs cost;
 
+    [BoxGroup("Hole")]
     [SerializeField]
     private Vector2 position;
 
+    [BoxGroup("Hole")]
     [SerializeField]
     private float duration = 1.5f;
 
