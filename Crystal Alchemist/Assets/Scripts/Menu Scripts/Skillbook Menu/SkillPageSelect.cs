@@ -20,9 +20,9 @@ public class SkillPageSelect : MonoBehaviour
 
     public void Initialize()
     {
-        UpdateButtons();
-        for (int i = 1; i < this.pages.Count; i++) this.pages[i].SetActive(false);
         GameEvents.current.OnPage += SetNextPage;
+        UpdateButtons();
+        for (int i = 1; i < this.pages.Count; i++) this.pages[i].SetActive(false);        
     }
 
     private void OnDestroy() => GameEvents.current.OnPage -= SetNextPage;

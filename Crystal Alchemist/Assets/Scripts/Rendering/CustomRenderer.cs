@@ -40,7 +40,10 @@ public class CustomRenderer : MonoBehaviour
 
     public void SetGlowColor(Color color)
     {
+        if (color == null) return;
         this.glowColor = color;
+
+        this.material = this.GetComponent<SpriteRenderer>().material;
         AddGlow();
     }
 

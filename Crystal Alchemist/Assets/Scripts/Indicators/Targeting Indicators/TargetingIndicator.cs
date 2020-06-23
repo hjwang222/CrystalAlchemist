@@ -23,8 +23,8 @@ public class TargetingIndicator : MonoBehaviour
 
     public virtual void SetColor(Color color)
     {
-        if (this.customRenderer != null) this.customRenderer.SetGlowColor(color);
-        else if (this.spriteRenderer != null) this.spriteRenderer.color = color;
+        if (this.customRenderer != null && color != null) this.customRenderer.SetGlowColor(color);
+        else if (this.spriteRenderer != null && color != null) this.spriteRenderer.color = color;
     }
 
     public virtual void SetSprite(Sprite sprite)
