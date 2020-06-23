@@ -41,7 +41,7 @@ public class PlayerInventory : ScriptableObject
 
     public void collectItem(ItemStats item)
     {
-        if (item.IsKeyItem() && !this.hasKeyItemAlready(item.name))
+        if (item.IsKeyItem() && !GameEvents.current.HasKeyItem(item.name))
         {           
             //add Key Item
             ItemStats keyItem = Instantiate(item);
@@ -126,18 +126,6 @@ public class PlayerInventory : ScriptableObject
         if (found != null) return found.GetAmountString();
         else return FormatUtil.formatString(0, itemGroup.maxAmount);
     }
-
-
-    public bool hasKeyItemAlready(string name)
-    {
-        foreach (ItemStats elem in keyItems)
-        {
-            if (elem != null && name == elem.name) return true;
-        }
-
-        return false;
-    }
-
 
     public bool HasEnoughCurrency(Costs price)
     {

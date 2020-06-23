@@ -5,18 +5,23 @@ public class TODOLIST : MonoBehaviour
     //TODO (0.2.5.2):
     //Bug: Projectile Offset wonky
     //BUG: Stromschlag Target buggy
-    //Graphic: Bigger Circle and Pillar
-    //TODO: Header updaten
     //TODO: AI EVENT Interrupt
-    //TODO: Sounds ersetzen
-    //BUG: Quick Travel Menu wonky
-    //REWORK: Death Animation (Character)?
+
+    //BUG: Titania Bubble nicht groß genug
+    //TODO: Cast Icon
+    //BUG: Feuerhaut funktioniert nicht
+    //TODO: Invincible Damage Number
+    //TODO: No Target when invincible
 
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
     //REWORK: Arena Bounds
     //REWORK: Treasure Item Drop (no Dialog)
+    //REWORK: Cursor Position
+    //REWORK: Header
+    //REWORK: Death Animation (Character)?
+    //REWORK: Loading on Level Start?
 
     //ANIMATION: Camera Schwenk
     //CONTENT: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
@@ -24,6 +29,8 @@ public class TODOLIST : MonoBehaviour
     //INPUT: Virtuelle Tastatur
     //CONTENT: Sin Eater Race (glowing eyes, halo, wings, etc)
 
+    //TODO: Sounds ersetzen
+    //TODO: Script Execution order
     //TODO: Movement by AIAction
     //TODO: Itemgroup duration
     //TODO: Auto Updater

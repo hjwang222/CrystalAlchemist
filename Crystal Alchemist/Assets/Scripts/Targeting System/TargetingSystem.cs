@@ -56,6 +56,7 @@ public class TargetingSystem : MonoBehaviour
     private void Update()
     {
         this.ability.SetLockOnState();
+        this.allTargetsInRange.RemoveAll(item => item == null);
         this.allTargetsInRange.RemoveAll(item => item.gameObject.activeInHierarchy == false);
         RotationUtil.rotateCollider(this.sender, this.viewCollider.gameObject);
 
@@ -102,7 +103,7 @@ public class TargetingSystem : MonoBehaviour
 
         foreach(Character target in this.selectedTargets)
         {
-            if (target.gameObject.activeInHierarchy) targets.Add(target);
+            if (target != null && target.gameObject.activeInHierarchy) targets.Add(target);
         }
         return targets;
     }
@@ -192,6 +193,7 @@ public class TargetingSystem : MonoBehaviour
             if (!this.allTargetsInRange.Contains(character)) this.allTargetsInRange.Add(character);
         }
 
+        this.allTargetsInRange.RemoveAll(item => item == null);
         this.allTargetsInRange = this.allTargetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
     }
 

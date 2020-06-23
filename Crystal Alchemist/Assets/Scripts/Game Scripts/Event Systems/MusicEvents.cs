@@ -5,12 +5,7 @@ public class MusicEvents : MonoBehaviour
 {
     public static MusicEvents current;
 
-    private void Awake() => Initialize();
-
-    private void Initialize()
-    {
-        current = this;
-    }
+    private void Awake() => current = this;    
 
     public Action<AudioClip, AudioClip> OnBackgroundMusicPlayed;
     public Action<AudioClip> OnMusicPlayed;

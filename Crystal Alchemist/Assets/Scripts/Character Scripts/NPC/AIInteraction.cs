@@ -13,6 +13,8 @@ public class AIInteraction : Interactable
     [SerializeField]
     private UnityEvent onSubmit;
 
+    private void Awake() => this.SetSmoke(false);    
+
     public override void Start()
     {
         base.Start();

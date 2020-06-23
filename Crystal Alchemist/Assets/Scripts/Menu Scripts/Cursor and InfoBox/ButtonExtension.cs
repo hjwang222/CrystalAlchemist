@@ -41,6 +41,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     [SerializeField]
     private List<Selectable> right = new List<Selectable>();
 
+    private bool isInit = true;
 
 #if UNITY_EDITOR
     [Button]
@@ -71,7 +72,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     }
 
     private void Initialize()
-    {      
+    {
         try
         {
             if (this.cursor == null) this.cursor = GameObject.FindWithTag("Cursor").GetComponent<CustomCursor>();
@@ -82,13 +83,16 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
             Debug.Log(this.gameObject.name);
         }        
 
-        this.setButtonNavigation();
         if (this.isInteractable) StartCoroutine(delayCo());
         else UnityUtil.SetInteractable(this.button, false);
-        
+
+        if (!this.isInit) return;
+
+        this.setButtonNavigation();
+
         RectTransform rt = (RectTransform)this.transform;
         this.size = new Vector2(rt.rect.width, rt.rect.height);
-        this.scale = rt.lossyScale;
+        this.scale = rt.lossyScale;        
     }
 
     private Selectable getNextSelectable(List<Selectable> nexts)
@@ -99,37 +103,17 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         }
         return null;
     }
+
+    private void Start() { Initialize(); this.isInit = false; }
+
+    public void SetCursor(CustomCursor cursor) => this.cursor = cursor;
     
-    private void Start()
-    {
-        if(this.cursor == null)
-        {
-            Debug.Log("<color=red>Cursor not found in: "+this.gameObject.name+"</color>");
-        }
-
-        /*Debug.Log(this.name + " - "
-                    + this.transform.localScale + " - "
-                    + this.transform.parent.localScale + " - "
-                    + this.transform.parent.parent.localScale + " - "
-                    + this.transform.parent.parent.parent.localScale + " - "
-                    + WordToScenePoint(this.transform.localPosition));*/
-    }
-
-    public void SetCursor(CustomCursor cursor)
-    {
-        this.cursor = cursor;
-    }
-
     public CustomCursor GetCursor()
     {
         return this.cursor;
     }
 
-    private void OnEnable()
-    {
-        Initialize();
-        SetFirst();
-    }
+    private void OnEnable() => SetFirst();    
 
     public void Select()
     {
@@ -152,19 +136,17 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     public void SetFirst()
     {
-        if (this.setFirstSelected) Select();        
+        if (this.setFirstSelected)
+        {
+            Initialize();
+            Select();
+        }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        SetCursor();
-    }
-
-    public void OnSelect(BaseEventData eventData)
-    {        
-        SetCursor();
-    } 
-
+    public void OnPointerEnter(PointerEventData eventData) => SetCursor();
+    
+    public void OnSelect(BaseEventData eventData) => SetCursor();
+    
     public void SetCursor()
     {
         if(this.cursor != null) this.cursor.setCursorPosition(true, true, this.button, this.size, this.scale);       

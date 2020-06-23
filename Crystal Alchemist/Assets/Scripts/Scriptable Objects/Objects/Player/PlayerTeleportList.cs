@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game/Player/Teleport List")]
@@ -7,11 +8,16 @@ public class PlayerTeleportList : ScriptableObject
     [SerializeField]
     private List<TeleportStats> list = new List<TeleportStats>();
 
-    public void Initialize() => this.list.RemoveAll(item => item == null);
+    public void Initialize()
+    {
+        this.list.RemoveAll(item => item == null);
+        this.list.OrderBy(o => o.scene);
+    }
 
     public void AddTeleport(TeleportStats stat)
     {
         if (!Contains(stat)) this.list.Add(new TeleportStats(stat));
+        this.list.OrderBy(o => o.scene);
     }
 
     public bool Contains(TeleportStats stat)
@@ -33,7 +39,7 @@ public class PlayerTeleportList : ScriptableObject
     }
 
     public TeleportStats GetStats(int index)
-    {
+    {        
         return this.list[index];
     }
 }

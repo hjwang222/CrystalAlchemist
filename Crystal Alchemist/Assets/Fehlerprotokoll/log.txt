@@ -6208,3 +6208,171 @@ System.Collections.Generic.List`1[T].get_Item (System.Int32 index) (at <fb001e01
 QuickTravelMenu.OnEnable () (at Assets/Scripts/Menu Scripts/Savepoint/QuickTravelMenu.cs:49)
 UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
 
+Exception 23.06.2020 02:02:37: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.<addTarget>b__29_0 (Character o) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+System.Linq.EnumerableSorter`2[TElement,TKey].ComputeKeys (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].ComputeMap (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].Sort (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].SortedMap (System.Linq.Buffer`1[TElement] buffer) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].ToList () (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.Enumerable.ToList[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+TargetingSystem.addTarget (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+TargetingCollider.OnTriggerStay2D (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingCollider.cs:15)
+
+Exception 23.06.2020 02:02:37: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.getTargets () (at Assets/Scripts/Targeting System/TargetingSystem.cs:106)
+CharacterCombat.GetTargetsFromTargeting () (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:140)
+CharacterCombat.UseAbilityOnTargets (Ability ability) (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:158)
+PlayerAbilities.ButtonHold (Ability ability) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerAbilities.cs:81)
+PlayerAbilities.Updating () (at Assets/Scripts/Character Scripts/Player Scripts/PlayerAbilities.cs:34)
+Player.Update () (at Assets/Scripts/Character Scripts/Player Scripts/Player.cs:73)
+
+Exception 23.06.2020 02:02:54: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.<addTarget>b__29_0 (Character o) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+System.Linq.EnumerableSorter`2[TElement,TKey].ComputeKeys (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].ComputeMap (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].Sort (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].SortedMap (System.Linq.Buffer`1[TElement] buffer) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].ToList () (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.Enumerable.ToList[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+TargetingSystem.addTarget (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+TargetingCollider.OnTriggerStay2D (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingCollider.cs:15)
+
+Exception 23.06.2020 02:02:54: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.<addTarget>b__29_0 (Character o) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+System.Linq.EnumerableSorter`2[TElement,TKey].ComputeKeys (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].ComputeMap (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].Sort (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].SortedMap (System.Linq.Buffer`1[TElement] buffer) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].ToList () (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.Enumerable.ToList[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+TargetingSystem.addTarget (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+TargetingCollider.OnTriggerStay2D (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingCollider.cs:15)
+
+Exception 23.06.2020 02:02:54: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.<addTarget>b__29_0 (Character o) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+System.Linq.EnumerableSorter`2[TElement,TKey].ComputeKeys (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].ComputeMap (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].Sort (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].SortedMap (System.Linq.Buffer`1[TElement] buffer) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].ToList () (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.Enumerable.ToList[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+TargetingSystem.addTarget (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+TargetingCollider.OnTriggerStay2D (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingCollider.cs:15)
+
+Exception 23.06.2020 02:02:54: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.<addTarget>b__29_0 (Character o) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+System.Linq.EnumerableSorter`2[TElement,TKey].ComputeKeys (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].ComputeMap (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].Sort (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].SortedMap (System.Linq.Buffer`1[TElement] buffer) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].ToList () (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.Enumerable.ToList[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+TargetingSystem.addTarget (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+TargetingCollider.OnTriggerStay2D (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingCollider.cs:15)
+
+Exception 23.06.2020 02:02:54: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.<addTarget>b__29_0 (Character o) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+System.Linq.EnumerableSorter`2[TElement,TKey].ComputeKeys (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].ComputeMap (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].Sort (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].SortedMap (System.Linq.Buffer`1[TElement] buffer) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].ToList () (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.Enumerable.ToList[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+TargetingSystem.addTarget (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+TargetingCollider.OnTriggerStay2D (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingCollider.cs:15)
+
+Exception 23.06.2020 02:02:54: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.<addTarget>b__29_0 (Character o) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+System.Linq.EnumerableSorter`2[TElement,TKey].ComputeKeys (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].ComputeMap (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].Sort (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].SortedMap (System.Linq.Buffer`1[TElement] buffer) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].ToList () (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.Enumerable.ToList[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+TargetingSystem.addTarget (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+TargetingCollider.OnTriggerStay2D (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingCollider.cs:15)
+
+Exception 23.06.2020 02:02:54: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.<addTarget>b__29_0 (Character o) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+System.Linq.EnumerableSorter`2[TElement,TKey].ComputeKeys (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].ComputeMap (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].Sort (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].SortedMap (System.Linq.Buffer`1[TElement] buffer) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].ToList () (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.Enumerable.ToList[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+TargetingSystem.addTarget (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+TargetingCollider.OnTriggerStay2D (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingCollider.cs:15)
+
+Exception 23.06.2020 02:02:54: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.<addTarget>b__29_0 (Character o) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+System.Linq.EnumerableSorter`2[TElement,TKey].ComputeKeys (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].ComputeMap (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].Sort (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].SortedMap (System.Linq.Buffer`1[TElement] buffer) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].ToList () (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.Enumerable.ToList[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+TargetingSystem.addTarget (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+TargetingCollider.OnTriggerStay2D (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingCollider.cs:15)
+
+Exception 23.06.2020 02:02:54: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.getTargets () (at Assets/Scripts/Targeting System/TargetingSystem.cs:106)
+CharacterCombat.GetTargetsFromTargeting () (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:140)
+CharacterCombat.UseAbilityOnTargets (Ability ability) (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:158)
+PlayerAbilities.ButtonHold (Ability ability) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerAbilities.cs:81)
+PlayerAbilities.Updating () (at Assets/Scripts/Character Scripts/Player Scripts/PlayerAbilities.cs:34)
+Player.Update () (at Assets/Scripts/Character Scripts/Player Scripts/Player.cs:73)
+
+Exception 23.06.2020 02:03:05: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.<addTarget>b__29_0 (Character o) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+System.Linq.EnumerableSorter`2[TElement,TKey].ComputeKeys (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].ComputeMap (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].Sort (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].SortedMap (System.Linq.Buffer`1[TElement] buffer) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].ToList () (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.Enumerable.ToList[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+TargetingSystem.addTarget (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+TargetingCollider.OnTriggerStay2D (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingCollider.cs:15)
+
+Exception 23.06.2020 02:03:05: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.getTargets () (at Assets/Scripts/Targeting System/TargetingSystem.cs:106)
+CharacterCombat.GetTargetsFromTargeting () (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:140)
+CharacterCombat.UseAbilityOnTargets (Ability ability) (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:158)
+PlayerAbilities.ButtonHold (Ability ability) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerAbilities.cs:81)
+PlayerAbilities.Updating () (at Assets/Scripts/Character Scripts/Player Scripts/PlayerAbilities.cs:34)
+Player.Update () (at Assets/Scripts/Character Scripts/Player Scripts/Player.cs:73)
+
+Exception 23.06.2020 02:03:05: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.<addTarget>b__29_0 (Character o) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+System.Linq.EnumerableSorter`2[TElement,TKey].ComputeKeys (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].ComputeMap (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.EnumerableSorter`1[TElement].Sort (TElement[] elements, System.Int32 count) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].SortedMap (System.Linq.Buffer`1[TElement] buffer) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.OrderedEnumerable`1[TElement].ToList () (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+System.Linq.Enumerable.ToList[TSource] (System.Collections.Generic.IEnumerable`1[T] source) (at <351e49e2a5bf4fd6beabb458ce2255f3>:0)
+TargetingSystem.addTarget (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingSystem.cs:196)
+TargetingCollider.OnTriggerStay2D (UnityEngine.Collider2D collision) (at Assets/Scripts/Targeting System/TargetingCollider.cs:15)
+
+Exception 23.06.2020 02:03:05: MissingReferenceException: The object of type 'AI' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+TargetingSystem.getTargets () (at Assets/Scripts/Targeting System/TargetingSystem.cs:106)
+CharacterCombat.GetTargetsFromTargeting () (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:140)
+CharacterCombat.UseAbilityOnTargets (Ability ability) (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:158)
+PlayerAbilities.ButtonHold (Ability ability) (at Assets/Scripts/Character Scripts/Player Scripts/PlayerAbilities.cs:81)
+PlayerAbilities.Updating () (at Assets/Scripts/Character Scripts/Player Scripts/PlayerAbilities.cs:34)
+Player.Update () (at Assets/Scripts/Character Scripts/Player Scripts/Player.cs:73)
+
