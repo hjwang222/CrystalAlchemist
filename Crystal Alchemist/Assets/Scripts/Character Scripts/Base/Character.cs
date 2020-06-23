@@ -65,7 +65,7 @@ public class Character : MonoBehaviour
     public CharacterValues values;
 
     #endregion
-
+       
     #region Start Functions (Spawn, Init)
     public virtual void Awake()
     {

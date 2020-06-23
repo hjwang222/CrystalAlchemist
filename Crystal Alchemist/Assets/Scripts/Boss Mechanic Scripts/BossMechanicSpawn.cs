@@ -152,9 +152,9 @@ public class BossMechanicSpawn : BossMechanicProperty
         if (this.childProperty.spawnObject.GetType() == typeof(GameObject))
         {
             GameObject spawnedObject = Instantiate(this.childProperty.spawnObject, position, Quaternion.identity, this.transform) as GameObject;
-
             SetSkill(spawnedObject.GetComponent<Skill>(), target, rotation);
             SetAdd(spawnedObject.GetComponent<AI>(), target);
+            SetAdd(spawnedObject.GetComponent<AddSpawn>(), target);
         }
         else if (this.childProperty.spawnObject.GetType() == typeof(Ability))
         {
@@ -165,22 +165,19 @@ public class BossMechanicSpawn : BossMechanicProperty
         }
     }
 
+    private void SetAdd(AddSpawn spawn, Character target)
+    {
+        if (spawn != null) spawn.Initialize(target);
+    }
+
     private void SetAdd(AI character, Character target)
     {
-        character.IsSummoned = true;
-        character.stats = Instantiate(character.stats);
-        character.stats.hasRespawn = false;
-        character.target = target;
-        character.transform.SetParent(null);
+        if (character != null) character.InitializeAddSpawn(target);
     }
 
     private void SetSkill(Skill skill, Character target, Quaternion rotation)
     {
-        if (skill != null)
-        {
-            skill.transform.rotation = rotation;
-            skill.sender = this.sender;
-            skill.target = target;
-        }
+        if (skill != null) skill.InitializeStandAlone(this.sender, target, rotation);
+
     }
 }

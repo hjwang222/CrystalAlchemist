@@ -79,7 +79,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfdcb37e8bacd9f4b8cd9700a1a2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyAfter: 30
   sender: {fileID: 0}
   target: {fileID: 0}
 --- !u!114 &6113533277726319404
@@ -102,8 +101,8 @@ MonoBehaviour:
     position: {x: 0.5, y: 2.5}
     uniqueSpawn: 1
     spawnPoints: []
-    rotationType: 0
-    rotationFactor: 30
+    rotationType: 1
+    rotationFactor: 45
     direction: 0
 --- !u!114 &6113533277726319405
 MonoBehaviour:
@@ -122,16 +121,16 @@ MonoBehaviour:
   counter: 0
   startDelay: 0
   childProperty:
-    spawnPositonType: 1
+    spawnPositonType: 2
     position: {x: 0, y: 0}
     uniqueSpawn: 1
     spawnPoints: []
     rotationType: 2
     rotationFactor: 30
     direction: 0
-    spawnObject: {fileID: 7268659838857056123, guid: 541e59ec760f7cb4caf119b8b3f81f76,
+    spawnObject: {fileID: 7043174730473675063, guid: 6966fd8d667e2004ca3d91e9f6df76ee,
       type: 3}
-    amount: 1
+    amount: 2
     AddTarget: 1
     spawnDelay: 0
     repeat: 0

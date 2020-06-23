@@ -21943,3 +21943,21 @@ CameraIntro.LateUpdate () (at Assets/Scripts/Game Scripts/Camera/CameraIntro.cs:
 Exception 23.06.2020 10:56:26: NullReferenceException: Object reference not set to an instance of an object
 CameraIntro.LateUpdate () (at Assets/Scripts/Game Scripts/Camera/CameraIntro.cs:60)
 
+Exception 23.06.2020 22:34:57: InvalidOperationException: Collection was modified; enumeration operation may not execute.
+System.ThrowHelper.ThrowInvalidOperationException (System.ExceptionResource resource) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Collections.Generic.List`1+Enumerator[T].MoveNext () (at <fb001e01371b4adca20013e0ac763896>:0)
+Character.UpdateStatusEffectGroup (System.Collections.Generic.List`1[T] effects) (at Assets/Scripts/Character Scripts/Base/Character.cs:639)
+Character.UpdateStatusEffects () (at Assets/Scripts/Character Scripts/Base/Character.cs:144)
+Character.Update () (at Assets/Scripts/Character Scripts/Base/Character.cs:129)
+Player.Update () (at Assets/Scripts/Character Scripts/Player Scripts/Player.cs:73)
+
+Exception 23.06.2020 22:36:51: InvalidOperationException: Collection was modified; enumeration operation may not execute.
+System.ThrowHelper.ThrowInvalidOperationException (System.ExceptionResource resource) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Collections.Generic.List`1+Enumerator[T].MoveNext () (at <fb001e01371b4adca20013e0ac763896>:0)
+Character.UpdateStatusEffectGroup (System.Collections.Generic.List`1[T] effects) (at Assets/Scripts/Character Scripts/Base/Character.cs:639)
+Character.UpdateStatusEffects () (at Assets/Scripts/Character Scripts/Base/Character.cs:144)
+Character.Update () (at Assets/Scripts/Character Scripts/Base/Character.cs:129)
+Player.Update () (at Assets/Scripts/Character Scripts/Player Scripts/Player.cs:73)
+

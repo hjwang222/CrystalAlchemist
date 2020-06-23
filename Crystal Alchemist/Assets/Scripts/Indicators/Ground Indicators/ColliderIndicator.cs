@@ -69,7 +69,7 @@ public class ColliderIndicator : GroundIndicator
 
     private void SetInner()
     {
-        if (this.border != null)
+        if (this.border != null && this.collider != null)
         {
             Vector3 innerSize = new Vector3(this.progress, this.progress, 1);
 

@@ -13,6 +13,7 @@ public class StatusEffectEvent
     private List<StatusEffectAction> actions;
 
     private float elapsed;
+    private int hitCounter;
 
     public void Initialize(Character character, StatusEffect effect)
     {
@@ -39,17 +40,46 @@ public class StatusEffectEvent
 
     private bool isTriggered(Character character)
     {
-        bool isTriggered = false;
-
         switch (this.trigger.triggerType)
             {
-                case StatusEffectTriggerType.intervall: if (this.elapsed >= trigger.intervall) { isTriggered = true; this.elapsed = 0; } break;
-                case StatusEffectTriggerType.life: if (character != null && character.values.life <= trigger.life) isTriggered = true; break;
-                case StatusEffectTriggerType.mana: if (character != null && character.values.mana <= trigger.mana) isTriggered = true; break;
-            }        
-
-        return isTriggered;
+                case StatusEffectTriggerType.intervall: return IntervallTrigger();                
+                case StatusEffectTriggerType.life: return LifeTrigger(character);
+                case StatusEffectTriggerType.mana: return ManaTrigger(character);
+                case StatusEffectTriggerType.hit: return HitTrigger(character);
+            }     
+        return false;
     }
+
+    private bool IntervallTrigger()
+    {
+        if (this.elapsed >= trigger.value)
+        {
+            this.elapsed = 0;
+            return true;
+        }
+        return false;
+    }
+
+    private bool LifeTrigger(Character character)
+    {
+        if (character != null && character.values.life <= trigger.value) return true;
+        return false;
+    }
+
+    private bool ManaTrigger(Character character)
+    {
+        if (character != null && character.values.mana <= trigger.value) return true;
+        return false;
+    }
+
+    private bool HitTrigger(Character character)
+    {
+        if (character.values.cantBeHit) this.hitCounter++;
+        if (this.hitCounter >= this.trigger.value) return true;
+        return false;
+    }
+
+
 
     public void ResetEvent(Character character, StatusEffect effect)
     {

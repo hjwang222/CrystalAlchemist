@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b22a3ebb90863458dba94076083e2b, type: 3}
   m_Name: Poison
   m_EditorClassIdentifier: 
-  statusEffectName: Gift
-  statusEffectNameEnglish: Poison
-  statusEffectDescription: "Schaden \xFCber Zeit"
-  statusEffectDescriptionEnglish: Damage over Time
   hasDuration: 1
   maxDuration: 18
   canOverride: 1
@@ -28,16 +24,14 @@ MonoBehaviour:
   statusEffectEvents:
   - trigger:
       triggerType: 1
-      intervall: 3
-      life: 0
-      mana: 0
-      hits: 0
+      value: 3
       requireAll: 0
     actions:
     - actionType: 0
       resources:
       - resourceType: 1
         item: {fileID: 0}
+        keyItem: {fileID: 0}
         amount: -0.5
       speed: 0
       time: 0
@@ -46,6 +40,7 @@ MonoBehaviour:
   destroyDelay: 0.2
   changeColor: 1
   statusEffectColor: {r: 0.65882355, g: 0.12941177, b: 0.7725491, a: 1}
+  invertColor: 0
   statusEffectObject: {fileID: 840438363010689007, guid: 12a1cb7dbe7ad25478c6b067a17a4884,
     type: 3}
   iconSprite: {fileID: 21300000, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}

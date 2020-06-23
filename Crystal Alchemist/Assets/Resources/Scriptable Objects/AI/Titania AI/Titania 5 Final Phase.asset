@@ -19,6 +19,7 @@ MonoBehaviour:
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 0}
     overrideCastTime: 0
     castTime: 0
@@ -34,12 +35,18 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 10
+    mode: 0
+    fadeIn: 0
+    fadeOut: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   - type: 4
     position: {x: 0, y: 0}
     translationID: 
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 0}
     overrideCastTime: 0
     castTime: 0
@@ -55,12 +62,18 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 12
+    mode: 0
+    fadeIn: 0
+    fadeOut: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   - type: 3
     position: {x: 0, y: 0}
     translationID: 
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 11400000, guid: 026753ea619d6c341bdd4e7e1929e785, type: 2}
     overrideCastTime: 0
     castTime: 0
@@ -76,12 +89,18 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 0
+    mode: 0
+    fadeIn: 0
+    fadeOut: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   - type: 4
     position: {x: 0, y: 0}
     translationID: 
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 0}
     overrideCastTime: 0
     castTime: 0
@@ -97,12 +116,18 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 0
+    mode: 0
+    fadeIn: 0
+    fadeOut: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   - type: 3
     position: {x: 0, y: 0}
     translationID: 
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 11400000, guid: c2c6fae5b31cba447a750da370a09327, type: 2}
     overrideCastTime: 0
     castTime: 2
@@ -118,12 +143,18 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 8
+    mode: 0
+    fadeIn: 0
+    fadeOut: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   - type: 4
     position: {x: 0, y: 0}
     translationID: 
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 0}
     overrideCastTime: 0
     castTime: 0
@@ -139,12 +170,18 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 0
+    mode: 0
+    fadeIn: 0
+    fadeOut: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   - type: 3
     position: {x: 0, y: 0}
     translationID: 
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 11400000, guid: 5036dbf0faf537e4b913a281b15a575a, type: 2}
     overrideCastTime: 0
     castTime: 0
@@ -160,6 +197,11 @@ MonoBehaviour:
     value: 0
     signal: {fileID: 0}
     wait: 12
+    mode: 0
+    fadeIn: 0
+    fadeOut: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   loopActions: 1
   events:
   - triggers:
@@ -174,6 +216,7 @@ MonoBehaviour:
       duration: 4
       nextPhase: {fileID: 0}
       animations: 
+      isTrigger: 0
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0
@@ -189,12 +232,18 @@ MonoBehaviour:
       value: 0
       signal: {fileID: 0}
       wait: 0
+      mode: 0
+      fadeIn: 0
+      fadeOut: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     - type: 5
       position: {x: 0, y: 0}
       translationID: 
       duration: 4
       nextPhase: {fileID: 11400000, guid: 97bb94c996213134a8c6d4b117ab90a1, type: 2}
       animations: 
+      isTrigger: 0
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0
@@ -210,7 +259,13 @@ MonoBehaviour:
       value: 0
       signal: {fileID: 0}
       wait: 0
+      mode: 0
+      fadeIn: 0
+      fadeOut: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     repeatEvent: 0
-    interruptCurrentAction: 0
+    interruptCurrentAction: 1
     eventCooldown: 0
     requirementsNeeded: 0
+    delay: 0.1

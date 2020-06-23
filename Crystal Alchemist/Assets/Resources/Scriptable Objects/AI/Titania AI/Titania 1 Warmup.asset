@@ -36,6 +36,8 @@ MonoBehaviour:
     signal: {fileID: 0}
     wait: 3
     mode: 0
+    fadeIn: 0
+    fadeOut: 0
     start: {fileID: 0}
     loop: {fileID: 0}
   - type: 4
@@ -61,6 +63,8 @@ MonoBehaviour:
     signal: {fileID: 0}
     wait: 12
     mode: 0
+    fadeIn: 0
+    fadeOut: 0
     start: {fileID: 0}
     loop: {fileID: 0}
   loopActions: 1
@@ -72,7 +76,7 @@ MonoBehaviour:
       maxLoops: 0
     - type: 1
       time: 0
-      life: 80
+      life: 90
       maxLoops: 0
     actions:
     - type: 7
@@ -98,6 +102,8 @@ MonoBehaviour:
       signal: {fileID: 0}
       wait: 0
       mode: 0
+      fadeIn: 0
+      fadeOut: 0
       start: {fileID: 0}
       loop: {fileID: 0}
     - type: 10
@@ -123,6 +129,8 @@ MonoBehaviour:
       signal: {fileID: 0}
       wait: 0
       mode: 0
+      fadeIn: 0
+      fadeOut: 0
       start: {fileID: 0}
       loop: {fileID: 0}
     - type: 1
@@ -148,6 +156,8 @@ MonoBehaviour:
       signal: {fileID: 0}
       wait: 0
       mode: 0
+      fadeIn: 0
+      fadeOut: 0
       start: {fileID: 0}
       loop: {fileID: 0}
     - type: 3
@@ -173,6 +183,8 @@ MonoBehaviour:
       signal: {fileID: 0}
       wait: 12
       mode: 0
+      fadeIn: 0
+      fadeOut: 0
       start: {fileID: 0}
       loop: {fileID: 0}
     - type: 7
@@ -198,6 +210,8 @@ MonoBehaviour:
       signal: {fileID: 0}
       wait: 0
       mode: 0
+      fadeIn: 0
+      fadeOut: 0
       start: {fileID: 0}
       loop: {fileID: 0}
     - type: 10
@@ -223,6 +237,8 @@ MonoBehaviour:
       signal: {fileID: 0}
       wait: 0
       mode: 0
+      fadeIn: 0
+      fadeOut: 0
       start: {fileID: 0}
       loop: {fileID: 0}
     - type: 5
@@ -248,9 +264,12 @@ MonoBehaviour:
       signal: {fileID: 0}
       wait: 0
       mode: 0
+      fadeIn: 0
+      fadeOut: 0
       start: {fileID: 0}
       loop: {fileID: 0}
     repeatEvent: 0
-    interruptCurrentAction: 0
+    interruptCurrentAction: 1
     eventCooldown: 0
     requirementsNeeded: 0
+    delay: 0.1

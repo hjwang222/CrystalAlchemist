@@ -12,11 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b22a3ebb90863458dba94076083e2b, type: 3}
   m_Name: Analysis
   m_EditorClassIdentifier: 
-  statusEffectName: Analysis
-  statusEffectNameEnglish: Analysis
-  statusEffectDescription: "Zeigt Informationen \xFCber Gegner und Gegenst\xE4nde
-    an"
-  statusEffectDescriptionEnglish: Shows informations about enemies and objects
   hasDuration: 0
   maxDuration: 1
   canOverride: 0
@@ -29,16 +24,14 @@ MonoBehaviour:
   statusEffectEvents:
   - trigger:
       triggerType: 0
-      intervall: 0
-      life: 0
-      mana: 0
-      hits: 0
+      value: 0
       requireAll: 0
     actions:
     - actionType: 5
       resources:
       - resourceType: 3
         item: {fileID: 0}
+        keyItem: {fileID: 0}
         amount: 1
       speed: 0
       time: 0
@@ -46,16 +39,14 @@ MonoBehaviour:
       StatusEffectType: 0
   - trigger:
       triggerType: 1
-      intervall: 1
-      life: 0
-      mana: 0
-      hits: 0
+      value: 3
       requireAll: 0
     actions:
     - actionType: 0
       resources:
       - resourceType: 2
         item: {fileID: 0}
+        keyItem: {fileID: 0}
         amount: -0.25
       speed: 0
       time: 0
@@ -63,10 +54,7 @@ MonoBehaviour:
       StatusEffectType: 0
   - trigger:
       triggerType: 4
-      intervall: 0
-      life: 0
-      mana: 0
-      hits: 0
+      value: 0
       requireAll: 0
     actions:
     - actionType: 2
@@ -78,6 +66,7 @@ MonoBehaviour:
   destroyDelay: 0.2
   changeColor: 0
   statusEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  invertColor: 0
   statusEffectObject: {fileID: 7056982587471594013, guid: c133ea91399c3144ab317096acc94303,
     type: 3}
   iconSprite: {fileID: 21300034, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}

@@ -67,6 +67,12 @@ public class StatusEffect : ScriptableObject
     private Color statusEffectColor;
 
     [FoldoutGroup("Visuals", expanded: false)]
+    [Tooltip("Farbe während der Dauer des Statuseffekts")]
+    [SerializeField]
+    [ShowIf("changeColor")]
+    private bool invertColor;
+
+    [FoldoutGroup("Visuals", expanded: false)]
     [SerializeField]
     [Required]
     private StatusEffectGameObject statusEffectObject;

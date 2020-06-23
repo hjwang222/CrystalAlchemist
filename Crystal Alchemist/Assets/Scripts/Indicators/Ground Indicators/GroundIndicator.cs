@@ -4,7 +4,6 @@ using Sirenix.OdinInspector;
 public class GroundIndicator : MonoBehaviour
 {
     [BoxGroup("Outer")]
-    [Required]
     public DrawPrimitive outline;
 
     [BoxGroup("Outer")]

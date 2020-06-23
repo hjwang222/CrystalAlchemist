@@ -15,19 +15,7 @@ public class StatusEffectTrigger
 {
     public StatusEffectTriggerType triggerType;
 
-    [ShowIf("triggerType", StatusEffectTriggerType.intervall)]
-    public float intervall;
-
-    [ShowIf("triggerType", StatusEffectTriggerType.life)]
-    public float life;
-
-    [ShowIf("triggerType", StatusEffectTriggerType.mana)]
-    public float mana;
-
-    [ShowIf("triggerType", StatusEffectTriggerType.hit)]
-    public float hits;
-
-    public bool requireAll = false;
-
-
+    [HideIf("triggerType", StatusEffectTriggerType.destroyed)]
+    [HideIf("triggerType", StatusEffectTriggerType.init)]
+    public float value;
 }

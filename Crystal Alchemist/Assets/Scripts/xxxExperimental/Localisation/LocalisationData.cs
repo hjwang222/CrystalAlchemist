@@ -126,7 +126,7 @@ public class LocalisationData
                 var key = fields[0];
 
                 if (dictionary.ContainsKey(key)) { continue; }
-                var value = fields[attributeIndex];
+                var value = fields[attributeIndex].Replace("<br>",Environment.NewLine);
                 dictionary.Add(key, value);
             }
         }

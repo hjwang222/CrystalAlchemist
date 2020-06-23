@@ -2,14 +2,6 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //TODO (0.2.5.2):
-    //Bug: Projectile Offset wonky
-    //BUG: Stromschlag Target buggy
-    //TODO: AI EVENT Interrupt
-
-    // icons skills
-    // stromschlag exception
-
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
@@ -25,6 +17,10 @@ public class TODOLIST : MonoBehaviour
     //INPUT: Virtuelle Tastatur
     //CONTENT: Sin Eater Race (glowing eyes, halo, wings, etc)
 
+    //TODO: Teleport + Casting Animation
+    //TODO: Time Stasis
+    //TODO: On Kill Event
+    //TODO: Boss Mechanic Duration Override
     //TODO: Victory Screen (Player Animation, Cutscene Event)
     //TODO: Balken und Symbole bei Cutscene (Intro z.B.)
     //TODO: Sounds ersetzen
@@ -40,6 +36,8 @@ public class TODOLIST : MonoBehaviour
     //TODO: Rule Tiles
     //TODO: Pathfinding
     //TODO: Checkpoints
+    //TODO: Player Mark Indicator (Blick, Kette, etc)
+
     //UTIL: Item Assistent
 
     //GRAPHIC: Rework Effect Sprites

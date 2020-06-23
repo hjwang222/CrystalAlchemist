@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b22a3ebb90863458dba94076083e2b, type: 3}
+  m_Name: Stone
+  m_EditorClassIdentifier: 
+  hasDuration: 1
+  maxDuration: 5
+  canOverride: 0
+  canBeModified: 0
+  canDeactivateIt: 0
+  canBeDispelled: 0
+  maxStacks: 1
+  stunTarget: 1
+  statusEffectType: 1
+  statusEffectEvents:
+  - trigger:
+      triggerType: 0
+      value: 0
+    actions:
+    - actionType: 3
+      resources: []
+      speed: -100
+      time: 0
+      effects: []
+      StatusEffectType: 0
+  - trigger:
+      triggerType: 1
+      value: 0.5
+    actions:
+    - actionType: 0
+      resources:
+      - resourceType: 2
+        item: {fileID: 0}
+        keyItem: {fileID: 0}
+        amount: -10
+      speed: 0
+      time: 0
+      effects: []
+      StatusEffectType: 0
+  destroyDelay: 0.2
+  changeColor: 1
+  statusEffectColor: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+  invertColor: 0
+  statusEffectObject: {fileID: 6292753503574655383, guid: 17d2efabe97ab13439d40f4eeb1d3c2f,
+    type: 3}
+  iconSprite: {fileID: -8592809787556698316, guid: 0ca4149b67557c449b0110d5938780ba,
+    type: 3}
+  updateUI: {fileID: 11400000, guid: 4318c0ff35d606e4b8e9b01338571f0b, type: 2}

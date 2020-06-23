@@ -12,10 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b22a3ebb90863458dba94076083e2b, type: 3}
   m_Name: Magika
   m_EditorClassIdentifier: 
-  statusEffectName: Magika
-  statusEffectNameEnglish: Magika
-  statusEffectDescription: Stellt schrittweise Mana her
-  statusEffectDescriptionEnglish: Restores mana slowly
   hasDuration: 1
   maxDuration: 5
   canOverride: 0
@@ -28,16 +24,14 @@ MonoBehaviour:
   statusEffectEvents:
   - trigger:
       triggerType: 1
-      intervall: 0.5
-      life: 0
-      mana: 0
-      hits: 0
+      value: 0.5
       requireAll: 0
     actions:
     - actionType: 0
       resources:
       - resourceType: 2
         item: {fileID: 0}
+        keyItem: {fileID: 0}
         amount: 0.25
       speed: 0
       time: 0
@@ -46,6 +40,7 @@ MonoBehaviour:
   destroyDelay: 0.2
   changeColor: 1
   statusEffectColor: {r: 0, g: 0.48235297, b: 0.7843138, a: 1}
+  invertColor: 0
   statusEffectObject: {fileID: 2795883837435963087, guid: 20043cd3b9d47e94bbb787341459add6,
     type: 3}
   iconSprite: {fileID: 21300022, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}

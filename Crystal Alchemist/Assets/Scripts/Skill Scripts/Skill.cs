@@ -87,6 +87,13 @@ public class Skill : MonoBehaviour
 
     #region Start Funktionen (Init, set Basics, Update Sender, set Position
 
+    public void InitializeStandAlone(Character sender, Character target, Quaternion rotation)
+    {
+        this.transform.rotation = rotation;
+        this.sender = sender;
+        this.target = target;
+    }
+
     public void Initialize(float offset, bool lockDirection, bool affectTimeDistortion, bool attached)
     {
         this.positionOffset = offset;
