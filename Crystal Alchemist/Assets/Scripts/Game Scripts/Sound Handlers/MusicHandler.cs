@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
+using DG.Tweening;
+using System;
 
 public class MusicHandler : MonoBehaviour
 {
@@ -9,8 +11,8 @@ public class MusicHandler : MonoBehaviour
     private void Start()
     {
         MusicEvents.current.OnBackgroundMusicPlayed += PlayMusic;
-        MusicEvents.current.OnMusicPlayed += PlayMusic;
-        MusicEvents.current.OnMusicPlayedResume += PlayMusic;
+        MusicEvents.current.OnMusicPlayedOnce += PlayMusicOnce;
+        MusicEvents.current.OnMusicPlayedResume += PlayTemporaryMusic;
         MusicEvents.current.OnMusicPaused += PauseMusic;
         MusicEvents.current.OnMusicVolumeChanged += ChangeVolume;
         MusicEvents.current.OnMusicResumed += ResumeMusic;
@@ -21,8 +23,8 @@ public class MusicHandler : MonoBehaviour
     private void OnDestroy()
     {
         MusicEvents.current.OnBackgroundMusicPlayed -= PlayMusic;
-        MusicEvents.current.OnMusicPlayed -= PlayMusic;
-        MusicEvents.current.OnMusicPlayedResume -= PlayMusic;
+        MusicEvents.current.OnMusicPlayedOnce -= PlayMusicOnce;
+        MusicEvents.current.OnMusicPlayedResume -= PlayTemporaryMusic;
         MusicEvents.current.OnMusicPaused -= PauseMusic;
         MusicEvents.current.OnMusicVolumeChanged -= ChangeVolume;
         MusicEvents.current.OnMusicResumed -= ResumeMusic;
@@ -30,52 +32,52 @@ public class MusicHandler : MonoBehaviour
         MusicEvents.current.OnMusicStopped -= StopMusic;
     }
 
-    private void PlayMusic(AudioClip start, AudioClip loop)
+    private void PlayMusic(AudioClip start, AudioClip loop, float fadeIn)
     {
         if (loop == null) return;
         GameObject newGameObject = new GameObject("Music: "+loop.name);
         MusicObject musicObject = newGameObject.AddComponent<MusicObject>();
-        musicObject.Instantiate(start, loop);
+        musicObject.Instantiate(start, loop, fadeIn);
         this.backgroundMusic = musicObject;
     }
 
-    private void PlayMusic(AudioClip music)
+    private void PlayMusicOnce(AudioClip music, float fadeNew, float fadeOld)
     {
-        PlayMusic(music, true);
+        PlayTemporaryMusic(music, false, fadeNew, fadeOld);
     }
 
-    private void PlayMusic(AudioClip music, bool resume)
+    private void PlayTemporaryMusic(AudioClip music, bool resume, float fadeNew, float fadeOld)
     {
         if (music == null) return;
-        PauseMusic();
+        PauseMusic(fadeOld);
 
         if(this.tempMusic != null)
         {
             Destroy(this.tempMusic.gameObject);
-            StopCoroutine(delayCo(music.length));
+            StopCoroutine(delayCo(music.length, fadeOld));
         }
 
         GameObject newGameObject = new GameObject("Music: "+music.name);
         MusicObject musicObject = newGameObject.AddComponent<MusicObject>();
-        musicObject.Instantiate(music);
+        musicObject.Instantiate(music, fadeNew);
         this.tempMusic = musicObject;
 
-        if(resume) StartCoroutine(delayCo(music.length));
+        if (resume) StartCoroutine(delayCo(music.length, fadeOld));
     }
 
-    private void PauseMusic()
+    private void PauseMusic(float fadeOut)
     {
-        if (this.backgroundMusic != null) this.backgroundMusic.Pause();
+        if (this.backgroundMusic != null) this.backgroundMusic.Pause(fadeOut);
     }
 
-    private void ResumeMusic()
+    private void ResumeMusic(float fadeIn)
     {
-        if (this.backgroundMusic != null) this.backgroundMusic.Resume();
+        if (this.backgroundMusic != null) this.backgroundMusic.Resume(fadeIn);
     }
 
-    private void RestartMusic()
+    private void RestartMusic(float fadeIn)
     {
-        if (this.backgroundMusic != null) this.backgroundMusic.RestartMusic();
+        if (this.backgroundMusic != null) this.backgroundMusic.RestartMusic(fadeIn);
     }
 
     private void ChangeVolume(float volume)
@@ -83,15 +85,15 @@ public class MusicHandler : MonoBehaviour
         if (this.backgroundMusic != null) this.backgroundMusic.ChangeVolume(volume);
     }
 
-    private void StopMusic()
+    private void StopMusic(float fadeOut)
     {
-        if (this.backgroundMusic != null) this.backgroundMusic.Stop();
+        if (this.backgroundMusic != null) this.backgroundMusic.Stop(fadeOut);
     }
 
-    private IEnumerator delayCo(float delay)
+    private IEnumerator delayCo(float delay, float fadeIn)
     {
         yield return new WaitForSeconds(delay);
-        ResumeMusic();
+        ResumeMusic(fadeIn);
     }
 }
 
@@ -102,16 +104,30 @@ public class MusicObject : MonoBehaviour
     private AudioSource audioSource;
     private float volume;
     private bool loop = false;
+    private float fadeIn;
 
-    public void Instantiate(AudioClip startMusic, AudioClip loopMusic)
+    public void Instantiate(AudioClip startMusic, AudioClip loopMusic, float fadeIn)
     {
+        this.fadeIn = fadeIn;
         this.loop = true;
         this.startMusic = startMusic;
         this.loopMusic = loopMusic;
     }
 
-    public void Instantiate(AudioClip music)
+    private void FadeIn(float value)
     {
+        this.audioSource.volume = 0;
+        this.audioSource.DOFade(this.volume, value);
+    }
+
+    private void FadeOut(float value)
+    {
+        this.audioSource.DOFade(0, value);
+    }
+
+    public void Instantiate(AudioClip music, float fadeIn)
+    {
+        this.fadeIn = fadeIn;
         this.loopMusic = music;
         Destroy(this.gameObject, music.length);
     }
@@ -119,15 +135,14 @@ public class MusicObject : MonoBehaviour
     private void Start()
     {
         this.volume = MasterManager.settings.backgroundMusicVolume;
-
         this.audioSource = this.gameObject.AddComponent<AudioSource>();
-        this.audioSource.volume = this.volume;        
 
         Initialize();
     }
     
-    public void RestartMusic()
+    public void RestartMusic(float fadeIn)
     {
+        this.fadeIn = fadeIn;
         this.audioSource.Stop();
         Initialize();
     }
@@ -137,23 +152,33 @@ public class MusicObject : MonoBehaviour
         this.audioSource.volume = volume;
     }
 
-    public void Pause()
+    public void Pause(float fadeOut)
     {
-        this.audioSource.Pause();
+        StartCoroutine(stopCO(fadeOut, this.audioSource.Pause));
     }
 
-    public void Stop()
+    public void Stop(float fadeOut)
     {
-        this.audioSource.Stop();
+        StartCoroutine(stopCO(fadeOut, this.audioSource.Stop));
     }
 
-    public void Resume()
+    private IEnumerator stopCO(float fadeOut, Action action)
+    {
+        FadeOut(fadeOut);
+        yield return new WaitForSeconds(fadeOut);
+        action?.Invoke();
+    }
+
+    public void Resume(float fadeIn)
     {
         this.audioSource.UnPause();
+        FadeIn(fadeIn);
     }
 
     private void Initialize()
     {
+        FadeIn(this.fadeIn);
+
         if (this.startMusic != null)
         {
             this.audioSource.loop = false;
@@ -170,8 +195,7 @@ public class MusicObject : MonoBehaviour
     private void playLoop()
     {
         if (this.loopMusic != null)
-        {
-            this.audioSource.volume = this.volume;
+        {            
             this.audioSource.clip = this.loopMusic;
             this.audioSource.loop = this.loop;
             this.audioSource.Play();

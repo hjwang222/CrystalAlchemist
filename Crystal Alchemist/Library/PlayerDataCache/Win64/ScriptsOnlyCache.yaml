@@ -33,6 +33,7 @@ ScriptsOnlyBuild:
     - BounceAnimation
     - Breakable
     - ButtonExtension
+    - CameraIntro
     - CameraShake
     - CameraStartUp
     - CastBar
@@ -62,7 +63,6 @@ ScriptsOnlyBuild:
     - CharacterRenderingHandler
     - CharacterStats
     - CharacterValues
-    - Cleaner
     - Cliff
     - Collectable
     - ColliderIndicator
@@ -109,6 +109,7 @@ ScriptsOnlyBuild:
     - GhostEffect
     - GlobalValues
     - Goddess
+    - HUDCutScene
     - Hole
     - HorizontalGroupSprites
     - ImpactIndicator
@@ -168,6 +169,7 @@ ScriptsOnlyBuild:
     - PlayerAbilities
     - PlayerButtons
     - PlayerControls
+    - PlayerGameProgress
     - PlayerInventory
     - PlayerItems
     - PlayerMovement
@@ -191,6 +193,7 @@ ScriptsOnlyBuild:
     - SaveSlot
     - Savepoint
     - SceneTransition
+    - ScreenTextOverlay
     - SecretArea
     - SettingsEvents
     - ShadowAnimation
@@ -275,10 +278,13 @@ ScriptsOnlyBuild:
     Cinemachine.dll:
     - Cinemachine.CinemachineBasicMultiChannelPerlin
     - Cinemachine.CinemachineBrain
+    - Cinemachine.CinemachineComposer
     - Cinemachine.CinemachineConfiner
     - Cinemachine.CinemachineFramingTransposer
     - Cinemachine.CinemachinePipeline
     - Cinemachine.CinemachinePixelPerfect
+    - Cinemachine.CinemachineSmoothPath
+    - Cinemachine.CinemachineTrackedDolly
     - Cinemachine.CinemachineVirtualCamera
     - Cinemachine.NoiseSettings
     Coffee.UIParticle.dll:
@@ -286,7 +292,6 @@ ScriptsOnlyBuild:
     DOTween.dll:
     - DG.Tweening.Core.DOTweenSettings
     Sirenix.OdinInspector.Editor.dll:
-    - Sirenix.OdinInspector.Editor.GeneralDrawerConfig
     - Sirenix.OdinInspector.Editor.ImportSettingsConfig
     - Sirenix.OdinInspector.Editor.InspectorConfig
     - Sirenix.Serialization.AOTGenerationConfig
@@ -358,7 +363,6 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.Universal.PostProcessData
     - UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
     - UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset
-    - UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResources
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -1235,7 +1239,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 20068}
     - Class: 114
-      Script: {instanceID: 30628}
+      Script: {instanceID: 167852}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1500,11 +1504,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15654}
     - Class: 114
+      Script: {instanceID: 15658}
+    - Class: 114
       Script: {instanceID: 15832}
     - Class: 114
       Script: {instanceID: 15836}
     - Class: 114
       Script: {instanceID: 15938}
+    - Class: 114
+      Script: {instanceID: 15946}
     - Class: 114
       Script: {instanceID: 15954}
     - Class: 114
@@ -1614,6 +1622,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 18038}
     - Class: 114
+      Script: {instanceID: 18050}
+    - Class: 114
       Script: {instanceID: 18100}
     - Class: 114
       Script: {instanceID: 18222}
@@ -1622,7 +1632,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 18304}
     - Class: 114
+      Script: {instanceID: 18324}
+    - Class: 114
       Script: {instanceID: 18378}
+    - Class: 114
+      Script: {instanceID: 18436}
     - Class: 114
       Script: {instanceID: 18464}
     - Class: 114
@@ -1689,6 +1703,12 @@ ScriptsOnlyBuild:
       Script: {instanceID: 20048}
     - Class: 114
       Script: {instanceID: 20068}
+    - Class: 114
+      Script: {instanceID: 37764}
+    - Class: 114
+      Script: {instanceID: 39008}
+    - Class: 114
+      Script: {instanceID: 108586}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -2298,6 +2318,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 19392}
     - Class: 114
       Script: {instanceID: 19434}
+    - Class: 114
+      Script: {instanceID: 39008}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -2962,6 +2984,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 19392}
     - Class: 114
       Script: {instanceID: 19434}
+    - Class: 114
+      Script: {instanceID: 39008}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -3399,6 +3423,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15654}
     - Class: 114
+      Script: {instanceID: 15658}
+    - Class: 114
       Script: {instanceID: 15696}
     - Class: 114
       Script: {instanceID: 15732}
@@ -3410,6 +3436,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 15836}
     - Class: 114
       Script: {instanceID: 15938}
+    - Class: 114
+      Script: {instanceID: 15946}
     - Class: 114
       Script: {instanceID: 15954}
     - Class: 114
@@ -3595,6 +3623,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 18384}
     - Class: 114
+      Script: {instanceID: 18436}
+    - Class: 114
       Script: {instanceID: 18464}
     - Class: 114
       Script: {instanceID: 18480}
@@ -3709,13 +3739,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 20068}
     - Class: 114
-      Script: {instanceID: 30628}
+      Script: {instanceID: 37764}
     - Class: 114
-      Script: {instanceID: 218754}
+      Script: {instanceID: 39008}
     - Class: 114
-      Script: {instanceID: 218778}
+      Script: {instanceID: 108586}
     - Class: 114
-      Script: {instanceID: 218852}
+      Script: {instanceID: 167852}
+    - Class: 114
+      Script: {instanceID: 325110}
+    - Class: 114
+      Script: {instanceID: 325134}
+    - Class: 114
+      Script: {instanceID: 325148}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -3834,11 +3870,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 18766}
     - Class: 114
-      Script: {instanceID: 19760}
-    - Class: 114
       Script: {instanceID: 19998}
     - Class: 114
       Script: {instanceID: 20016}
+    - Class: 114
+      Script: {instanceID: 162884}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -4382,7 +4418,7 @@ ScriptsOnlyBuild:
     className: ImpactIndicator
   - hash:
       serializedVersion: 2
-      Hash: 1ea2a5393237d4995f19a8d479c49e56
+      Hash: 20d43d9b73d5ce47174f85dbda324658
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerSaveGame
@@ -4508,7 +4544,7 @@ ScriptsOnlyBuild:
     className: TitleScreenPatchNotes
   - hash:
       serializedVersion: 2
-      Hash: 74b7d4fd74485621327d500d405e028b
+      Hash: fe303cc5db8dd027e44e2ba3a7a04dbc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Ability
@@ -5000,7 +5036,7 @@ ScriptsOnlyBuild:
     className: CharacterCreatorPreview
   - hash:
       serializedVersion: 2
-      Hash: f14b7f606672b379ad173ad03ae90347
+      Hash: 6ebe828596b0da1700f3cf1e703d086d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SaveSlot
@@ -5270,7 +5306,7 @@ ScriptsOnlyBuild:
     className: MenuManager
   - hash:
       serializedVersion: 2
-      Hash: beb14e18eb16c822c333713324febcea
+      Hash: fae4200e93fdeedcde565c1311c0c54a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Door
@@ -5648,7 +5684,7 @@ ScriptsOnlyBuild:
     className: TODOLIST
   - hash:
       serializedVersion: 2
-      Hash: 70f8c9844a6a641c71cae45535911e74
+      Hash: 8a440652495d0e9cba139bf1144351d6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MiniDialogBox
@@ -5804,7 +5840,7 @@ ScriptsOnlyBuild:
     className: DebugUIHandlerWidget
   - hash:
       serializedVersion: 2
-      Hash: 790048f17e9515cf6c45e93b19b091fd
+      Hash: 070445266ee7c52d5f4c5089485ef763
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TextMeshProExtension
@@ -6020,7 +6056,7 @@ ScriptsOnlyBuild:
     className: Sign
   - hash:
       serializedVersion: 2
-      Hash: d8581d687993b03b9a795e96562c308f
+      Hash: 81c1b69c6fb8825c35bbbac33993d47c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AIPhase
@@ -6044,7 +6080,7 @@ ScriptsOnlyBuild:
     className: InputField
   - hash:
       serializedVersion: 2
-      Hash: 0666f9eb786f0ae85e54356fe134ba89
+      Hash: ee0b08e18f2e6c860a553242a8392e33
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CastBar
@@ -6920,7 +6956,7 @@ ScriptsOnlyBuild:
     className: MiniGameUI
   - hash:
       serializedVersion: 2
-      Hash: 35a61463eb38fd309294e43cac479657
+      Hash: b47cc8c20b76141894caccdad7216e21
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GlobalValues
@@ -7572,6 +7608,30 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SkillHoming
+  - hash:
+      serializedVersion: 2
+      Hash: 95ced008b2f1d53ec550657c1ca34f8a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CameraIntro
+  - hash:
+      serializedVersion: 2
+      Hash: e3c87f714236ce75d08d23ff2fe75793
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerGameProgress
+  - hash:
+      serializedVersion: 2
+      Hash: 8ff5068f70269961cd152bc52c458ba1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ScreenTextOverlay
+  - hash:
+      serializedVersion: 2
+      Hash: 65ce975e0b1e96cdb79af3607c4c745a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HUDCutScene
   platform: 19
   scenePathNames:
   - Assets/Scenes/Title Screen/Title.unity

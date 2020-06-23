@@ -19,6 +19,7 @@ public class LoadSystem
 
             loadInventory(data, saveGame.inventory);
             loadPlayerSkills(data, saveGame.buttons, saveGame.skillSet);
+            LoadProgress(data, saveGame.progress);
 
             saveGame.startSpawnPoint.SetValue(data.startScene, data.startPosition);
             saveGame.lastTeleport.SetValue(data.lastScene, data.lastPosition);

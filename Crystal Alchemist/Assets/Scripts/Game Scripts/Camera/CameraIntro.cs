@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CameraIntro : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class CameraIntro : MonoBehaviour
     [Required]
     [SerializeField]
     private PlayerGameProgress playerProgress;
+
+    [SerializeField]
+    private UnityEvent onTrigger;
 
     private float position;
     private bool isRunning;
@@ -71,8 +75,10 @@ public class CameraIntro : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (this.isInit) return;
+
         this.room.gameObject.SetActive(false);
         GameEvents.current.DoCutScene(true);
+        this.onTrigger?.Invoke();
         this.dolly = introCamera.GetCinemachineComponent<CinemachineTrackedDolly>();
         this.isRunning = true;
     }

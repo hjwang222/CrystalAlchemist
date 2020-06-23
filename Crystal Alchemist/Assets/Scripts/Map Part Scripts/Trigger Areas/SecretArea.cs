@@ -29,7 +29,7 @@ public class SecretArea : MonoBehaviour
     {
         for (float f = .05f; f <= 1.1; f += .05f)
         {
-            setColor(f);
+            setColor(f);            
             yield return new WaitForSeconds(this.delay);
         }
     }
@@ -52,7 +52,7 @@ public class SecretArea : MonoBehaviour
     }
 
     private void setColor(float f)
-    {
+    {        
         Color newcolor = this.map.color;
         newcolor.a = f;
         this.map.color = newcolor;        

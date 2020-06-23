@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266771f26e0200047a77d2d39c8b8900, type: 3}
   m_Name: Explosion
   m_EditorClassIdentifier: 
-  abilityName: Explosion
-  abilityNameEnglish: Explosion
   skill: {fileID: 6062358614824039847, guid: 5606597b2db4c724b853aec8699a49e5, type: 3}
   useTargetSystem: 0
   targetingProperty: {fileID: 0}
+  useIndicator: 0
+  indicator:
+    indicatorProperty: {fileID: 0}
   hasSkillBookInfo: 0
+  icon: {fileID: -2682230801280520428, guid: 9d16c5cb29ddbed48ae7f8f2281d58ce, type: 3}
   info: {fileID: 0}
   cooldown: 0
   hasMaxDuration: 1
   maxDuration: 1
-  rapidFireDelay: 1
+  hasDelay: 0
+  delay: 1
   hasCastTime: 1
   castTime: 0.5
   showCastbar: 1

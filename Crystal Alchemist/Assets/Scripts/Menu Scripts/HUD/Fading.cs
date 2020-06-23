@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,12 +19,12 @@ public class Fading : MonoBehaviour
 
     private void Start() => StartCoroutine(delayCo());    
 
-    private void FadeIn() => this.image.CrossFadeAlpha(0, this.transitionDuration.GetValue(), true);
+    private void FadeIn() => this.image.DOFade(0, this.transitionDuration.GetValue());
 
-    public void FadeOut() => this.image.CrossFadeAlpha(1, this.transitionDuration.GetValue(), true);
+    public void FadeOut() => this.image.DOFade(0, this.transitionDuration.GetValue());
 
     private IEnumerator delayCo()
-    {
+    {        
         yield return new WaitForSeconds(0.1f);
         FadeIn();
     }

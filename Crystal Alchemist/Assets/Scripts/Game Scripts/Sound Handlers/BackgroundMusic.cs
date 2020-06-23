@@ -9,17 +9,23 @@ public class BackgroundMusic : MonoBehaviour
     [SerializeField]
     private AudioClip loopMusic;
 
+    [SerializeField]
+    private float fadeIn = 2f;
+
+    [SerializeField]
+    private float fadeOut;
+
     private void Start() => StartCoroutine(musicCo());
 
     private IEnumerator musicCo()
     {
         yield return new WaitForEndOfFrame();
-        MusicEvents.current.PlayMusic(this.startMusic, this.loopMusic);
+        MusicEvents.current.PlayMusic(this.startMusic, this.loopMusic, this.fadeIn);
     }
 
     public void PlayMusic(AudioClip music)
     {
-        MusicEvents.current.StopMusic();
-        MusicEvents.current.PlayMusic(null, music);
+        MusicEvents.current.StopMusic(this.fadeOut);
+        MusicEvents.current.PlayMusic(null, music, this.fadeIn);
     }
 }

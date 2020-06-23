@@ -51,9 +51,24 @@ MonoBehaviour:
   room: {fileID: 0}
   speed: 0.1
   delay: 1
-  player: {fileID: 0}
+  uniqueEvent: 1
   gameProgressID: Intro
   playerProgress: {fileID: 11400000, guid: b21df342a435de5478a191ad87a9aeaa, type: 2}
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4325830831370267853}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!61 &6425678085794187519
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -329,7 +344,7 @@ PrefabInstance:
     - target: {fileID: 3777862833354245073, guid: 074023e9e1ac9144185f12354d4efcf5,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3777862833354245085, guid: 074023e9e1ac9144185f12354d4efcf5,
         type: 3}
@@ -483,6 +498,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 074023e9e1ac9144185f12354d4efcf5, type: 3}
+--- !u!1 &4325830831370267853 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3777862833354245073, guid: 074023e9e1ac9144185f12354d4efcf5,
+    type: 3}
+  m_PrefabInstance: {fileID: 605129435371990812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4325830831370267841 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3777862833354245085, guid: 074023e9e1ac9144185f12354d4efcf5,

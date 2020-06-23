@@ -16,9 +16,17 @@ public class DeathScreen : MonoBehaviour
     [SerializeField]
     private TeleportStats nextTeleport;
 
-    [BoxGroup("Mandatory")]
+    [BoxGroup("Music")]
     [SerializeField]
     private AudioClip deathMusic;
+
+    [BoxGroup("Music")]
+    [SerializeField]
+    private float fadeIn;
+
+    [BoxGroup("Music")]
+    [SerializeField]
+    private float fadeOut = 1f;
 
     [BoxGroup("Mandatory")]
     [SerializeField]
@@ -92,13 +100,13 @@ public class DeathScreen : MonoBehaviour
     private void OnEnable()
     {
         init();
-        MusicEvents.current.PauseMusic();
+        MusicEvents.current.StopMusic(this.fadeOut);
         this.fadeSignal.Raise(showText);
     }
 
     private void showText()
     {
-        MusicEvents.current.PlayMusic(this.deathMusic);
+        MusicEvents.current.PlayMusicOnce(this.deathMusic, 0, this.fadeIn);
         this.textField.gameObject.SetActive(true);
         ShowText(this.textDelay);
     }

@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public enum DoorType
-{    
-    normal,    
-    enemy,
-    button,
-    closed
-}
-
 public class Door : Interactable
 {
+    public enum DoorType
+    {
+        normal,
+        enemy,
+        button,
+        closed
+    }
+
     [Required]
     [BoxGroup("Mandatory")]
     public Animator animator;
 
-    [FoldoutGroup("Tür-Attribute", expanded: false)]
+    [BoxGroup("Tür-Attribute")]
     [SerializeField]
     private DoorType doorType = DoorType.closed;
+
+    [BoxGroup("Tür-Attribute")]
+    [ShowIf("doorType", DoorType.normal)]
+    [SerializeField]
+    private bool autoClose = true;
 
     private bool isOpen;
 
@@ -33,7 +38,7 @@ public class Door : Interactable
         if (!this.isPlayerInRange && this.isOpen && this.doorType == DoorType.normal)
         {
             //Normale Tür fällt von alleine wieder zu
-            OpenCloseDoor(false, this.context);
+            if(this.autoClose) OpenCloseDoor(false, this.context);
         }
     }
 

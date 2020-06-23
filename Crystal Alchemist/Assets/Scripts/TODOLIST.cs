@@ -7,6 +7,9 @@ public class TODOLIST : MonoBehaviour
     //BUG: Stromschlag Target buggy
     //TODO: AI EVENT Interrupt
 
+    // icons skills
+    // stromschlag exception
+
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)

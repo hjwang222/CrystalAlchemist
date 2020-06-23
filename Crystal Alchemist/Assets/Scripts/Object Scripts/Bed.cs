@@ -34,6 +34,14 @@ public class Bed : Interactable
     [SerializeField]
     private AudioClip music;
 
+    [BoxGroup("Bett")]
+    [SerializeField]
+    private float fadeIn = 1;
+
+    [BoxGroup("Bett")]
+    [SerializeField]
+    private float fadeOut = 1;
+
     private Vector2 position;
     private bool isSleeping;
     private string oldID;
@@ -55,8 +63,8 @@ public class Bed : Interactable
             GameEvents.current.DoSleep(position, () => this.blanket.SetActive(true), () => StartSleeping()); 
             this.translationID = this.wakeUpActionID;
 
-            MusicEvents.current.StopMusic();
-            MusicEvents.current.PlayMusic(this.music, false);
+            MusicEvents.current.StopMusic(this.fadeOut);
+            MusicEvents.current.PlayMusicOnce(this.music,0,0);
         }
         else
         {
@@ -75,6 +83,6 @@ public class Bed : Interactable
     {
         this.blanket.SetActive(false);
         this.isSleeping = false;
-        MusicEvents.current.RestartMusic();
+        MusicEvents.current.RestartMusic(this.fadeIn);
     }
 }

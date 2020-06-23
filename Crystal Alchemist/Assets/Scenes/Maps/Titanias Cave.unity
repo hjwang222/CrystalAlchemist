@@ -17336,6 +17336,16 @@ PrefabInstance:
       propertyPath: texts.Array.data[1].eventOnClose.m_PersistentCalls.m_Calls.Array.data[7].m_Target
       value: 
       objectReference: {fileID: 1510168152}
+    - target: {fileID: 1797091195747348680, guid: e9f39d5ceba4a6643b52883e6a3ebe77,
+        type: 3}
+      propertyPath: texts.Array.data[1].eventOnClose.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797091195747348680, guid: e9f39d5ceba4a6643b52883e6a3ebe77,
+        type: 3}
+      propertyPath: texts.Array.data[1].eventOnClose.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3945848509854940433, guid: e9f39d5ceba4a6643b52883e6a3ebe77,
         type: 3}
       propertyPath: m_Name
@@ -17599,18 +17609,6 @@ MonoBehaviour:
   - {x: 1.235353, y: -0.3899727, z: 0}
   - {x: 0.08554745, y: -0.043824196, z: 0}
   - {x: 0.576869, y: -0.3899231, z: 0}
---- !u!114 &1068466905 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7922072021109644656, guid: 3fdf5e3032830d74ba994cf0ef0775f0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1531230989}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 946fe45f31af8544caf372295024317d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1111979166
 GameObject:
   m_ObjectHideFlags: 0
@@ -27831,11 +27829,6 @@ PrefabInstance:
       propertyPath: room
       value: 
       objectReference: {fileID: 299324002}
-    - target: {fileID: 6425678085794187517, guid: 5015d3e4c9e9da349908e3a87c8b31a7,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1068466905}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5015d3e4c9e9da349908e3a87c8b31a7, type: 3}
 --- !u!1001 &6645017184433035889
@@ -27914,6 +27907,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2759664207142220857, guid: 8d5ff37e69f760540910aa15f07fcb07,
+        type: 3}
+      propertyPath: fadeIn
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2759664207142220863, guid: 8d5ff37e69f760540910aa15f07fcb07,
         type: 3}

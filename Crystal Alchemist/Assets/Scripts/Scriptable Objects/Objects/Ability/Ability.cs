@@ -175,7 +175,7 @@ public class Ability : ScriptableObject
 
     private Character sender;
 
-#if UNITY_EDITOR
+
     [AssetIcon]
     public Sprite GetSprite()
     {
@@ -187,7 +187,7 @@ public class Ability : ScriptableObject
     {
         if (this.hasCastTime) this.deactivateButtonUp = false;
     }
-#endif
+
 
     public void SetSender(Character sender)
     {

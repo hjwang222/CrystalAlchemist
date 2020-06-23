@@ -42,13 +42,13 @@ public class Goddess : AI
         ShowMiniDialog(text, 6f);
     }
 
-    public void StopMusic()
+    public void StopMusic(float fadeOut)
     {
-        MusicEvents.current.StopMusic();
+        MusicEvents.current.StopMusic(fadeOut);
     }
 
-    public void PlayMusic()
+    public void PlayMusic(float fadeIn)
     {        
-        MusicEvents.current.PlayMusic(this.start, this.loop);
+        MusicEvents.current.PlayMusic(this.start, this.loop, fadeIn);
     }
 }

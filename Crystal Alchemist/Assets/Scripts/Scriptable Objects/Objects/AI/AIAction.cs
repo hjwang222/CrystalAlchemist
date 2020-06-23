@@ -212,6 +212,18 @@ public class AIAction
     [HideIf("mode", MusicMode.stop)]
     [BoxGroup("Properties")]
     [SerializeField]
+    private float fadeIn;
+
+    [ShowIf("type", AIActionType.music)]
+    [HideIf("mode", MusicMode.play)]
+    [BoxGroup("Properties")]
+    [SerializeField]
+    private float fadeOut;
+
+    [ShowIf("type", AIActionType.music)]
+    [HideIf("mode", MusicMode.stop)]
+    [BoxGroup("Properties")]
+    [SerializeField]
     private AudioClip start;
 
     [ShowIf("type", AIActionType.music)]
@@ -521,8 +533,8 @@ public class AIAction
 
     private void StartMusic()
     {
-        MusicEvents.current.StopMusic();
-        if (this.mode == MusicMode.play) MusicEvents.current.PlayMusic(this.start, this.loop);
+        MusicEvents.current.StopMusic(this.fadeOut);
+        if (this.mode == MusicMode.play) MusicEvents.current.PlayMusic(this.start, this.loop, this.fadeIn);
         Deactivate();
     }
 

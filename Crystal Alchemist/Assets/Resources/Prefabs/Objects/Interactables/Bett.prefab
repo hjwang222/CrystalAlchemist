@@ -280,9 +280,11 @@ MonoBehaviour:
   costs:
     resourceType: 0
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 1
   customActionButton: 1
   ID: Schlafen
+  showEffectOnEnable: 0
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
@@ -293,6 +295,8 @@ MonoBehaviour:
   blanket: {fileID: 5873029744290735160}
   wakeUpActionID: Aufstehen
   music: {fileID: 8300000, guid: 083366071dd8bbf44b24253ab3a3c344, type: 3}
+  fadeIn: 2
+  fadeOut: 0.5
 --- !u!1 &7938797964226999932
 GameObject:
   m_ObjectHideFlags: 0

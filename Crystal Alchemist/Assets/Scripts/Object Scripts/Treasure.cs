@@ -54,6 +54,14 @@ public class Treasure : Rewardable
     [Tooltip("Standard-Soundeffekt")]
     public AudioClip soundEffect;
 
+    [BoxGroup("Sound")]
+    [SerializeField]
+    private float fadeOld = 0.5f;
+
+    [BoxGroup("Sound")]
+    [SerializeField]
+    private float fadeNew = 0.5f;
+
     #endregion
 
     private bool treasureEnabled = true;
@@ -161,7 +169,7 @@ public class Treasure : Rewardable
 
     public void showTreasureItem()
     {
-        if(this.treasureMusic != null) MusicEvents.current.PlayMusic(this.treasureMusic);
+        if(this.treasureMusic != null) MusicEvents.current.PlayMusicAndResume(this.treasureMusic, true, this.fadeOld, this.fadeNew);
 
         //Item instanziieren und der Liste zurück geben und das Item anzeigen            
         this.showItem.SetActive(true);

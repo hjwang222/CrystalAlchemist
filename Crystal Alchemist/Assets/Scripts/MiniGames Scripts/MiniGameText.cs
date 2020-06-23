@@ -18,7 +18,7 @@ public class MiniGameText : MonoBehaviour
         if (this.audioClip != null && this.audioClip.length > 3) this.maxDuration = this.audioClip.length + 1f;
 
         this.duration = this.maxDuration;
-        MusicEvents.current.PlayMusic(audioClip);
+        MusicEvents.current.PlayMusicAndResume(audioClip,true,0,0);
         StartCoroutine(delayInput());
         StartCoroutine(DisableCo());
     }

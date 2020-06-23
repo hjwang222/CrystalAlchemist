@@ -26,7 +26,10 @@ public class PlayerGameProgress : ScriptableObject
         return this.keys;
     }
 
-    public void Set(List<string> value) => this.keys.AddRange(value);
+    public void Set(List<string> value)
+    {
+        if (value != null) this.keys.AddRange(value);
+    }
 
     public bool Contains(string key)
     {
