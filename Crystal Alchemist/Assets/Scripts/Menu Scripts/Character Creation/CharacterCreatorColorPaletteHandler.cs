@@ -22,13 +22,15 @@ public class CharacterCreatorColorPaletteHandler : CharacterCreatorButton
         {
             Color color = this.palette.colors[i];
 
-            GameObject newColorPicker = Instantiate(this.colorPick, this.transform);
-            newColorPicker.SetActive(true);
+            GameObject newColorPicker = Instantiate(this.colorPick, this.transform);            
 
             if (i == 0 && this.setFirst) newColorPicker.GetComponent<ButtonExtension>().setFirstSelected = true;
 
+            newColorPicker.SetActive(true);
+
             if (newColorPicker.transform.childCount > 0 && newColorPicker.transform.GetChild(0).GetComponent<Image>() != null)
                 newColorPicker.transform.GetChild(0).GetComponent<Image>().color = color;
+
         }
     }
 }

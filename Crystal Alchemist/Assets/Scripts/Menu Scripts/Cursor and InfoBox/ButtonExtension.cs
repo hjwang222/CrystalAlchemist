@@ -81,10 +81,13 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         catch
         {
             Debug.Log(this.gameObject.name);
-        }        
+        }
 
-        if (this.isInteractable) StartCoroutine(delayCo());
-        else UnityUtil.SetInteractable(this.button, false);
+        if (this.gameObject.activeInHierarchy)
+        {
+            if (this.isInteractable) StartCoroutine(delayCo());
+            else UnityUtil.SetInteractable(this.button, false);
+        }
 
         if (!this.isInit) return;
 
