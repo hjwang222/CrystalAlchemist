@@ -7,10 +7,6 @@ public class TODOLIST : MonoBehaviour
     //BUG: Stromschlag Target buggy
     //TODO: AI EVENT Interrupt
 
-    //BUG: Titania Bubble nicht groß genug (berechnen)
-    //BUG: Feuerhaut funktioniert nicht
-    //BUG: MISS
-
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)

@@ -330,7 +330,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void showDamageNumber(string value)
+    private void showDamageNumber(float value)
     {
         if (this.stats.showDamageNumbers)
         {
@@ -347,10 +347,10 @@ public class Character : MonoBehaviour
             && targetModule != null
             && ((!this.values.cantBeHit) || targetModule.ignoreInvincibility))
         {
-            if (!this.values.isInvincible)
+            if (this.values.isInvincible)
             {
-                showDamageNumber("MISS");
-                SetCannotHit();
+                showDamageNumber(0);
+                SetCannotHit(false);
             }
             else
             {
@@ -445,6 +445,8 @@ public class Character : MonoBehaviour
     #region Knockback and Invincibility   
 
     public void SetCannotHit() => SetCannotHit(this.stats.cannotBeHitTime, true);
+
+    private void SetCannotHit(bool showHitColor) => SetCannotHit(this.stats.cannotBeHitTime, showHitColor);
 
     public void SetCannotHit(float delay, bool showHitcolor)
     {

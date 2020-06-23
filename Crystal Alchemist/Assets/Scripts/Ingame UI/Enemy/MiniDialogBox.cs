@@ -6,6 +6,9 @@ public class MiniDialogBox : MonoBehaviour
     [SerializeField]
     private TextMeshPro textfield;
 
+    [SerializeField]
+    private SpriteRenderer sprite;
+
     private float duration;
 
     private Vector2 position;

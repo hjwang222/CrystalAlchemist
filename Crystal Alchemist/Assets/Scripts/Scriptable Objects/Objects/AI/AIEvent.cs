@@ -34,6 +34,9 @@ public class AIEvent
     private bool eventActive = true;
     private float timeLeft = 0;
 
+    [SerializeField]
+    [MinValue(0.1)]
+    private float delay = 0.1f; //to prevent triggering bevor initial action
 
     public void Initialize()
     {
@@ -50,19 +53,33 @@ public class AIEvent
     {
         if (this.eventActive)
         {
-            foreach (AITrigger trigger in this.triggers)
-            {
-                trigger.Updating();
-            }
-        }
+            foreach (AITrigger trigger in this.triggers) trigger.Updating();
+        }        
 
-        if (!this.eventActive && this.repeatEvent) updateTimer();              
+        if (!this.eventActive && this.repeatEvent) updateTimer();
+        if (this.delay > 0) this.delay -= Time.deltaTime;
     }
 
     private void updateTimer()
     {
         if (this.timeLeft > 0) this.timeLeft -= Time.deltaTime;
         else { this.timeLeft = 0; this.eventActive = true; }
+    }
+
+    public void SetEventActions(AI npc, List<AIAction> actions, AIPhase phase)
+    {
+        if (this.delay <= 0 && this.eventActive && this.isTriggered(npc, phase))
+        {
+            this.eventActive = false;
+            if(this.repeatEvent) this.timeLeft = this.eventCooldown;
+
+            foreach(AIAction eventAction in this.actions)
+            {
+                if (!actions.Contains(eventAction)) actions.Add(eventAction);
+            }
+
+            if (this.interruptCurrentAction) phase.ResetActions(npc);
+        }
     }
 
     private bool isTriggered(AI npc, AIPhase phase)
@@ -80,19 +97,4 @@ public class AIEvent
         return false;
     }
 
-    public void SetEventActions(AI npc, List<AIAction> actions, AIPhase phase)
-    {
-        if (this.eventActive && this.isTriggered(npc, phase))
-        {
-            this.eventActive = false;
-            if(this.repeatEvent) this.timeLeft = this.eventCooldown;
-
-            foreach(AIAction eventAction in this.actions)
-            {
-                if (!actions.Contains(eventAction)) actions.Add(eventAction);
-            }
-
-            if (this.interruptCurrentAction) phase.ResetActions(npc);
-        }
-    }
 }
