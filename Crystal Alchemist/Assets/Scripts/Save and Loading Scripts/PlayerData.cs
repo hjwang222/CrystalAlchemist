@@ -22,6 +22,7 @@ public class PlayerData
     public string race;
     public List<string[]> colorGroups = new List<string[]>();
     public List<string[]> characterParts = new List<string[]>();
+    public List<string> progress = new List<string>();
 
     public float[] startPosition;
     public string startScene;
@@ -55,6 +56,7 @@ public class PlayerData
         SetStartTeleport(saveGame.startSpawnPoint);
         SetLastTeleport(saveGame.lastTeleport);
         SetTeleportList(saveGame.teleportList);
+        SetProgress(saveGame.progress);
     }
 
     private void setInventory(PlayerInventory inventory)
@@ -102,6 +104,11 @@ public class PlayerData
             temp[1] = data.name;
             this.characterParts.Add(temp);
         }
+    }
+
+    private void SetProgress(PlayerGameProgress progress)
+    {
+        this.progress.AddRange(progress.Get());
     }
 
     private void SetTeleportList(PlayerTeleportList list)

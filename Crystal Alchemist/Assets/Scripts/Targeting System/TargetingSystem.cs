@@ -58,6 +58,8 @@ public class TargetingSystem : MonoBehaviour
         this.ability.SetLockOnState();
         this.allTargetsInRange.RemoveAll(item => item == null);
         this.allTargetsInRange.RemoveAll(item => item.gameObject.activeInHierarchy == false);
+        this.allTargetsInRange.RemoveAll(item => item.values.isInvincible);
+
         RotationUtil.rotateCollider(this.sender, this.viewCollider.gameObject);
 
         if (this.properties.targetingMode == TargetingMode.auto) selectAllNearestTargets();
@@ -123,6 +125,7 @@ public class TargetingSystem : MonoBehaviour
     {
         List<Character> result = this.allTargetsInRange.ToArray().OrderBy(o => (Vector3.Distance(o.transform.position, this.sender.transform.position))).ToList<Character>();
         result.RemoveAll(item => item.gameObject.activeInHierarchy == false);
+        result.RemoveAll(item => item.values.isInvincible);
         return result;
     }
 
@@ -178,7 +181,7 @@ public class TargetingSystem : MonoBehaviour
     public void removeTarget(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-        if (CollisionUtil.checkCollision(collision, this.ability.skill, this.sender) && character != null)
+        if (character != null && CollisionUtil.checkCollision(collision, this.ability.skill, this.sender))
         {
             if (this.allTargetsInRange.Contains(character)) this.allTargetsInRange.Remove(character);
             if (this.selectedTargets.Contains(character)) this.selectedTargets.Remove(character);
@@ -188,7 +191,7 @@ public class TargetingSystem : MonoBehaviour
     public void addTarget(Collider2D collision)
     {
         Character character = collision.GetComponent<Character>();
-        if (CollisionUtil.checkCollision(collision, this.ability.skill, this.sender) && character != null)
+        if (character != null && !character.values.isInvincible && CollisionUtil.checkCollision(collision, this.ability.skill, this.sender) )
         {
             if (!this.allTargetsInRange.Contains(character)) this.allTargetsInRange.Add(character);
         }

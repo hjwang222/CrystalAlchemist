@@ -10,6 +10,8 @@ public class GlobalValues : ScriptableObject
     [BoxGroup("Colors")]
     public Color[] blue = new Color[] { new Color32(0, 125, 255, 255), new Color32(0, 25, 125, 255) };
     [BoxGroup("Colors")]
+    public Color[] yellow = new Color[] { new Color32(0, 125, 255, 255), new Color32(0, 25, 125, 255) };
+    [BoxGroup("Colors")]
     public Color[] green = new Color[] { new Color32(0, 255, 0, 255), new Color32(0, 125, 0, 255) };
 
     [BoxGroup("Colors")]

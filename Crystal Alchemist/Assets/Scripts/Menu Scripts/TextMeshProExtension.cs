@@ -1,14 +1,9 @@
 ﻿using UnityEngine;
 using TMPro;
+using Sirenix.OdinInspector;
 
 public class TextMeshProExtension : MonoBehaviour
 {
-    [Header("Text-Objekte")]
-    [SerializeField]
-    private TextMeshPro text;
-    [SerializeField]
-    private TextMeshProUGUI textGUI;
-
     [Header("Attribute")]
     [SerializeField]
     private Color fontColor;
@@ -19,9 +14,14 @@ public class TextMeshProExtension : MonoBehaviour
     [SerializeField]
     private bool bold = false;
 
-    private void Start()
+    private void Start() => UpdateTextMesh();    
+
+    private void UpdateTextMesh()
     {
-        FormatUtil.set3DText(this.text, null, this.bold, this.fontColor, this.outlineColor, this.outlineWidth);
-        FormatUtil.set3DText(this.textGUI, null, this.bold, this.fontColor, this.outlineColor, this.outlineWidth);
+        TextMeshPro text = this.GetComponent<TextMeshPro>();
+        TextMeshProUGUI textGUI = this.GetComponent<TextMeshProUGUI>();
+
+        if (text != null) FormatUtil.set3DText(text, null, this.bold, this.fontColor, this.outlineColor, this.outlineWidth);
+        if (textGUI != null) FormatUtil.set3DText(textGUI, null, this.bold, this.fontColor, this.outlineColor, this.outlineWidth);
     }
 }

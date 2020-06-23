@@ -67,6 +67,11 @@ public class Ability : ScriptableObject
     public bool hasSkillBookInfo = false;
 
     [BoxGroup("Objects")]
+    [HideIf("hasSkillBookInfo")]
+    [SerializeField]
+    private Sprite icon;
+
+    [BoxGroup("Objects")]
     [ShowIf("hasSkillBookInfo")]
     [SerializeField]
     public SkillBookInfo info;
@@ -172,10 +177,10 @@ public class Ability : ScriptableObject
 
 #if UNITY_EDITOR
     [AssetIcon]
-    private Sprite GetSprite()
+    public Sprite GetSprite()
     {
         if (this.hasSkillBookInfo && this.info != null) return this.info.icon;
-        return null;
+        return this.icon;
     }
 
     private void OnCastTimeChange()

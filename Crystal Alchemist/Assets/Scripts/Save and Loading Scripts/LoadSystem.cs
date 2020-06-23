@@ -27,6 +27,12 @@ public class LoadSystem
         }
     }
 
+    private static void LoadProgress(PlayerData data, PlayerGameProgress progress)
+    {
+        progress.Clear();
+        progress.Set(data.progress);
+    }
+
     private static void LoadTeleportList(PlayerData data, PlayerTeleportList list)
     {
         if (data.teleportPoints == null) return;

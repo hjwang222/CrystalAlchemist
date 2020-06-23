@@ -386,7 +386,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 194821911}
-  - component: {fileID: 194821913}
   - component: {fileID: 194821912}
   m_Layer: 5
   m_Name: Crystal Slot
@@ -431,24 +430,6 @@ MonoBehaviour:
   inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   amountField: {fileID: 1210429799}
   item: {fileID: 11400000, guid: 008b2735924e65749bc1a37e8d718d0c, type: 2}
---- !u!114 &194821913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 194821910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a49409401baf742835b6dd3017735c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  textGUI: {fileID: 1210429799}
-  fontColor: {r: 0.6, g: 0.8000001, b: 0.40000004, a: 1}
-  outlineColor: {r: 0.019607844, g: 0.29803923, b: 0.03137255, a: 1}
-  outlineWidth: 0.25
-  bold: 1
 --- !u!1001 &203401332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -718,7 +699,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 278501578}
-  - component: {fileID: 278501580}
   - component: {fileID: 278501579}
   m_Layer: 5
   m_Name: Coin Slot
@@ -763,24 +743,6 @@ MonoBehaviour:
   inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   amountField: {fileID: 1248541999}
   item: {fileID: 11400000, guid: 9767790408abeac4cab04522f2a49b03, type: 2}
---- !u!114 &278501580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278501577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a49409401baf742835b6dd3017735c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  textGUI: {fileID: 1248541999}
-  fontColor: {r: 1, g: 0.87843144, b: 0, a: 1}
-  outlineColor: {r: 0.54901963, g: 0.2627451, b: 0.11764707, a: 1}
-  outlineWidth: 0.25
-  bold: 1
 --- !u!1 &303465358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,6 +1925,7 @@ GameObject:
   - component: {fileID: 770586220}
   - component: {fileID: 770586222}
   - component: {fileID: 770586221}
+  - component: {fileID: 770586223}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2105,6 +2068,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770586219}
   m_CullTransparentMesh: 0
+--- !u!114 &770586223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770586219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a49409401baf742835b6dd3017735c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+  outlineWidth: 0.25
+  bold: 1
 --- !u!1001 &789288199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3622,6 +3601,7 @@ GameObject:
   - component: {fileID: 1210429798}
   - component: {fileID: 1210429800}
   - component: {fileID: 1210429799}
+  - component: {fileID: 1210429801}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -3764,6 +3744,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210429797}
   m_CullTransparentMesh: 0
+--- !u!114 &1210429801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210429797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a49409401baf742835b6dd3017735c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0.6, g: 0.8000001, b: 0.40000004, a: 1}
+  outlineColor: {r: 0.019607844, g: 0.29803923, b: 0.03137255, a: 1}
+  outlineWidth: 0.25
+  bold: 1
 --- !u!1001 &1218863401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3905,6 +3901,7 @@ GameObject:
   - component: {fileID: 1248541998}
   - component: {fileID: 1248542000}
   - component: {fileID: 1248541999}
+  - component: {fileID: 1248542001}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -4047,6 +4044,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248541997}
   m_CullTransparentMesh: 0
+--- !u!114 &1248542001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248541997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a49409401baf742835b6dd3017735c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 1, g: 0.87843144, b: 0, a: 1}
+  outlineColor: {r: 0.54901963, g: 0.2627451, b: 0.11764707, a: 1}
+  outlineWidth: 0.25
+  bold: 1
 --- !u!1 &1292652071
 GameObject:
   m_ObjectHideFlags: 0
@@ -5137,7 +5150,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1753124519}
-  - component: {fileID: 1753124521}
   - component: {fileID: 1753124520}
   m_Layer: 5
   m_Name: Key Slot
@@ -5182,24 +5194,6 @@ MonoBehaviour:
   inventory: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   amountField: {fileID: 770586221}
   item: {fileID: 11400000, guid: 1a86842340d2910428ca17a168e85571, type: 2}
---- !u!114 &1753124521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1753124518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a49409401baf742835b6dd3017735c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  textGUI: {fileID: 770586221}
-  fontColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
-  outlineWidth: 0.25
-  bold: 1
 --- !u!1 &1759270937
 GameObject:
   m_ObjectHideFlags: 0
@@ -6611,8 +6605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a49409401baf742835b6dd3017735c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  textGUI: {fileID: 2102513378}
   fontColor: {r: 0.53333336, g: 0.53333336, b: 0.53333336, a: 1}
   outlineColor: {r: 0, g: 0, b: 0, a: 0}
   outlineWidth: 0
@@ -6797,8 +6789,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a49409401baf742835b6dd3017735c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  textGUI: {fileID: 2139312114}
   fontColor: {r: 0.87843144, g: 0.65882355, b: 0, a: 1}
   outlineColor: {r: 0, g: 0, b: 0, a: 0}
   outlineWidth: 0

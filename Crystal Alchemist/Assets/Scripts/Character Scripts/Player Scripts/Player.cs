@@ -55,6 +55,7 @@ public class Player : Character
         GameEvents.current.OnMenuClose += this.setStateAfterMenuClose;
         GameEvents.current.OnSleep += this.GoToSleep;
         GameEvents.current.OnWakeUp += this.WakeUp;
+        GameEvents.current.OnCutScene += this.SetCutScene;
 
         this.GetComponent<PlayerAbilities>().Initialize();
         PlayerComponent[] components = this.GetComponents<PlayerComponent>();
@@ -84,6 +85,7 @@ public class Player : Character
         GameEvents.current.OnMenuClose -= this.setStateAfterMenuClose;
         GameEvents.current.OnSleep -= this.GoToSleep;
         GameEvents.current.OnWakeUp -= this.WakeUp;
+        GameEvents.current.OnCutScene -= this.SetCutScene;
     }
 
     public override void SpawnOut()
@@ -170,6 +172,12 @@ public class Player : Character
         }
 
         CheckDeath();
+    }
+
+    private void SetCutScene(bool value)
+    {
+        if (value) this.values.currentState = CharacterState.respawning;
+        else this.values.currentState = CharacterState.idle;
     }
 
     public void callSignal(SimpleSignal signal, float addResource)

@@ -299,19 +299,19 @@ public class Character : MonoBehaviour
                 {
                     this.values.life = GameUtil.setResource(this.values.life, this.values.maxLife, value);
 
-                    Color[] colorArray = MasterManager.globalValues.red;
-                    if (value > 0) colorArray = MasterManager.globalValues.green;
+                    NumberColor color = NumberColor.red;
+                    if (value > 0) color = NumberColor.green;
 
                     if (this.values.life > 0
                         && this.values.currentState != CharacterState.dead
-                        && showingDamageNumber) showDamageNumber(value, colorArray);
+                        && showingDamageNumber) ShowDamageNumber(value, color);
 
                     break;
                 }
             case CostType.mana:
                 {
                     this.values.mana = GameUtil.setResource(this.values.mana, this.values.maxMana, value);
-                    if (showingDamageNumber && value > 0) showDamageNumber(value, MasterManager.globalValues.blue);
+                    if (showingDamageNumber && value > 0) ShowDamageNumber(value, NumberColor.blue);
                     break;
                 }
         }
@@ -321,12 +321,21 @@ public class Character : MonoBehaviour
 
     #region Damage Functions
 
-    private void showDamageNumber(float value, Color[] color)
+    private void ShowDamageNumber(float value, NumberColor color)
     {
         if (this.stats.showDamageNumbers)
         {
             DamageNumbers damageNumberClone = Instantiate(MasterManager.damageNumber, this.transform.position, Quaternion.identity, this.transform);
             damageNumberClone.Initialize(value, color);
+        }
+    }
+
+    private void showDamageNumber(string value)
+    {
+        if (this.stats.showDamageNumbers)
+        {
+            DamageNumbers damageNumberClone = Instantiate(MasterManager.damageNumber, this.transform.position, Quaternion.identity, this.transform);
+            damageNumberClone.Initialize(value,NumberColor.yellow);
         }
     }
 
@@ -336,38 +345,46 @@ public class Character : MonoBehaviour
 
         if (this.values.currentState != CharacterState.dead
             && targetModule != null
-            && ((!this.values.cantBeHit && !this.values.isInvincible) || targetModule.ignoreInvincibility))
+            && ((!this.values.cantBeHit) || targetModule.ignoreInvincibility))
         {
-            //Status Effekt hinzufügen
-            if (targetModule.statusEffects != null)
+            if (!this.values.isInvincible)
             {
-                foreach (StatusEffect effect in targetModule.statusEffects)
-                {
-                    StatusEffectUtil.AddStatusEffect(effect, this);
-                }
+                showDamageNumber("MISS");
+                SetCannotHit();
             }
-
-            foreach (CharacterResource elem in targetModule.affectedResources)
+            else
             {
-                float amount = elem.amount * percentage / 100;
-
-                updateResource(elem.resourceType, elem.item, amount);
-
-                if (this.values.life > 0 && elem.resourceType == CostType.life && amount < 0)
+                //Status Effekt hinzufügen
+                if (targetModule.statusEffects != null)
                 {
-                    GameEvents.current.DoAggroHit(this, skill.sender, elem.amount);
-
-                    //Charakter-Treffer (Schaden) animieren
-                    AudioUtil.playSoundEffect(this.gameObject, this.stats.hitSoundEffect);
-                    SetInvincible();
+                    foreach (StatusEffect effect in targetModule.statusEffects)
+                    {
+                        StatusEffectUtil.AddStatusEffect(effect, this);
+                    }
                 }
-            }
 
-            if (this.values.life > 0 && knockback)
-            {
-                //Rückstoß ermitteln
-                float knockbackTrust = targetModule.thrust - (this.stats.antiKnockback / 100 * targetModule.thrust);
-                knockBack(targetModule.knockbackTime, knockbackTrust, skill);
+                foreach (CharacterResource elem in targetModule.affectedResources)
+                {
+                    float amount = elem.amount * percentage / 100;
+
+                    updateResource(elem.resourceType, elem.item, amount);
+
+                    if (this.values.life > 0 && elem.resourceType == CostType.life && amount < 0)
+                    {
+                        GameEvents.current.DoAggroHit(this, skill.sender, elem.amount);
+
+                        //Charakter-Treffer (Schaden) animieren
+                        AudioUtil.playSoundEffect(this.gameObject, this.stats.hitSoundEffect);
+                        SetCannotHit();
+                    }
+                }
+
+                if (this.values.life > 0 && knockback)
+                {
+                    //Rückstoß ermitteln
+                    float knockbackTrust = targetModule.thrust - (this.stats.antiKnockback / 100 * targetModule.thrust);
+                    knockBack(targetModule.knockbackTime, knockbackTrust, skill);
+                }
             }
         }
     }
@@ -427,9 +444,9 @@ public class Character : MonoBehaviour
 
     #region Knockback and Invincibility   
 
-    public void SetInvincible() => SetInvincible(this.stats.cannotBeHitTime, true);
+    public void SetCannotHit() => SetCannotHit(this.stats.cannotBeHitTime, true);
 
-    public void SetInvincible(float delay, bool showHitcolor)
+    public void SetCannotHit(float delay, bool showHitcolor)
     {
         StopCoroutine(hitCo(delay, showHitcolor));
         StartCoroutine(hitCo(delay, showHitcolor));

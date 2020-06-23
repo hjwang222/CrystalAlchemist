@@ -43,11 +43,16 @@ public class InventoryMenu : MenuBehaviour
 
     private void ShowTopPage(bool top)
     {
-        this.top.SetActive(false);
-        this.bottom.SetActive(false);
-
-        if (top) this.top.SetActive(true);
-        else this.top.SetActive(false);
+        if (top)
+        {
+            this.top.SetActive(true);
+            this.bottom.SetActive(false);
+        }
+        else
+        {
+            this.top.SetActive(false);
+            this.bottom.SetActive(true);
+        }
     }
 
     public void OpenMap()

@@ -34,6 +34,7 @@ public class GameEvents : MonoBehaviour
     public Action<Character> OnAggroClear;
 
     public Func<string, bool> OnKeyItem;
+    public Action<bool> OnCutScene;
 
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
     public void DoMenuOpen(CharacterState state) => this.OnMenuOpen?.Invoke(state);  
@@ -47,6 +48,8 @@ public class GameEvents : MonoBehaviour
     public void DoWarning(WarningType type) => this.OnWarning?.Invoke(type);
     public void DoSleep(Vector2 position, Action before, Action after) => this.OnSleep?.Invoke(position, before, after);
     public void DoWakeUp(Vector2 position, Action before, Action after) => this.OnWakeUp?.Invoke(position, before, after);
+
+    public void DoCutScene(bool value) => this.OnCutScene?.Invoke(value);
 
     public void DoAggroHit(Character character, Character target, float value) => this.OnAggroHit?.Invoke(character, target, value);
     public void DoAggroIncrease(Character character, Character target, float value) => this.OnAggroIncrease?.Invoke(character, target, value);

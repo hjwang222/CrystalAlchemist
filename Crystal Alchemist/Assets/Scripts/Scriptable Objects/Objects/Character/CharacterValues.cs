@@ -55,11 +55,11 @@ public class CharacterValues : ScriptableObject
     [BoxGroup("States")]
     public CharacterState currentState;
     [BoxGroup("States")]
-    public bool cantBeHit;
+    public bool cantBeHit; //delay
     [BoxGroup("States")]
     public bool cannotDie = false;
     [BoxGroup("States")]
-    public bool isInvincible = false;
+    public bool isInvincible = false; //event
 
     [BoxGroup("States")]
     public Vector2 direction;

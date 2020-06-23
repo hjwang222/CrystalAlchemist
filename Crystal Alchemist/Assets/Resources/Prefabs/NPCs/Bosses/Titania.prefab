@@ -225,6 +225,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
   - trigger: 3
     ID: TitaniaEmpty
     type: 3
@@ -250,9 +262,9 @@ MonoBehaviour:
   info: {fileID: 11400000, guid: 2bcb9f36b1ec28e4a88d642592a8aa7f, type: 2}
   dialogBoxType: 0
   price:
-    resourceType: 0
+    resourceType: 4
     item: {fileID: 0}
-    keyItem: {fileID: 0}
+    keyItem: {fileID: 11400000, guid: 6d9d0b7b21a062f488da81e1c855e840, type: 2}
     amount: 1
   actionOnConfirm:
     m_PersistentCalls:
@@ -722,7 +734,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.125}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -733,7 +745,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.25, y: 0.5}
+  m_Size: {x: 1, y: 0.75}
   m_EdgeRadius: 0
 --- !u!114 &-2033235849666499790
 MonoBehaviour:

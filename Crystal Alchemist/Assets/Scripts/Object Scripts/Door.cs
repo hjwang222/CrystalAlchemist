@@ -21,10 +21,6 @@ public class Door : Interactable
 
     private bool isOpen;
 
-    [BoxGroup("Sound")]
-    [Tooltip("Standard-Soundeffekt")]
-    public AudioClip soundEffect;
-
     private new void Start()
     {
         base.Start();
@@ -100,7 +96,5 @@ public class Door : Interactable
             else if (!this.isOpen && this.isPlayerInRange) contextClueChild.gameObject.SetActive(true);
             else contextClueChild.gameObject.SetActive(false);
         }
-
-        AudioUtil.playSoundEffect(this.gameObject, this.soundEffect);
     }
 }

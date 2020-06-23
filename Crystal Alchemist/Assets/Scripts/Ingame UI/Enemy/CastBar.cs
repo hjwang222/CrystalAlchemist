@@ -12,6 +12,9 @@ public class CastBar : MonoBehaviour
     [SerializeField]
     private TextMeshPro percentage;
     [SerializeField]
+    private SpriteRenderer icon;
+    [SerializeField]
+
     private float offset = 1f;
     private Ability ability;
 
@@ -21,6 +24,7 @@ public class CastBar : MonoBehaviour
         this.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + this.offset);
         this.ability = ability;
         this.skillName.text = this.ability.GetName();
+        this.icon.sprite = ability.GetSprite();
     }
 
     private void Update()

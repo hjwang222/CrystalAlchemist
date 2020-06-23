@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 611961934307275029}
   - component: {fileID: 5196632362707604338}
   - component: {fileID: 8793106182354825631}
+  - component: {fileID: 3993855607470318713}
   m_Layer: 17
   m_Name: "Boss T\xFCr"
   m_TagString: Untagged
@@ -133,18 +134,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   costs:
     resourceType: 0
-    itemGroup: {fileID: 0}
+    item: {fileID: 0}
     keyItem: {fileID: 0}
     amount: 1
   customActionButton: 1
   ID: "\xD6ffnen"
+  showEffectOnEnable: 0
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
   context: {fileID: 0}
   animator: {fileID: 8793106182354825631}
   doorType: 0
-  soundEffect: {fileID: 8300000, guid: cb444edc073c6ed4196283631e0919d4, type: 3}
 --- !u!61 &611961934307275029
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -205,6 +206,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3993855607470318713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611961934307275026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f5ddae41e56884489f1e37c0d76a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainObject: {fileID: 611961934307275026}
 --- !u!1 &1657612909350122411
 GameObject:
   m_ObjectHideFlags: 0

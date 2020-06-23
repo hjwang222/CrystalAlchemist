@@ -12,7 +12,7 @@ public class SkillSelfHit : SkillHitTrigger
 
     public override void Initialize()
     {
-        if (this.invincibleTimer > 0) this.skill.sender.SetInvincible(this.invincibleTimer, false);
+        if (this.invincibleTimer > 0) this.skill.sender.SetCannotHit(this.invincibleTimer, false);
         this.skill.sender.gotHit(this.skill);
     }
 }

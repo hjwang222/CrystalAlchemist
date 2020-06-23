@@ -7,12 +7,9 @@ public class TODOLIST : MonoBehaviour
     //BUG: Stromschlag Target buggy
     //TODO: AI EVENT Interrupt
 
-    //BUG: Titania Bubble nicht groß genug
-    //TODO: Cast Icon
+    //BUG: Titania Bubble nicht groß genug (berechnen)
     //BUG: Feuerhaut funktioniert nicht
-    //TODO: Invincible Damage Number
-    //TODO: No Target when invincible
-    //ANIMATION: Camera Schwenk, Map Name Intro and Victory!
+    //BUG: MISS
 
     //-----------------------------------------------------------------------------
 
@@ -29,6 +26,8 @@ public class TODOLIST : MonoBehaviour
     //INPUT: Virtuelle Tastatur
     //CONTENT: Sin Eater Race (glowing eyes, halo, wings, etc)
 
+    //TODO: Victory Screen (Player Animation, Cutscene Event)
+    //TODO: Balken und Symbole bei Cutscene (Intro z.B.)
     //TODO: Sounds ersetzen
     //TODO: Script Execution order
     //TODO: Movement by AIAction
