@@ -19,9 +19,17 @@ public class Fading : MonoBehaviour
 
     private void Start() => StartCoroutine(delayCo());    
 
-    private void FadeIn() => this.image.DOFade(0, this.transitionDuration.GetValue());
+    private void FadeIn()
+    {
+        this.image.DOFade(1, 0);
+        this.image.DOFade(0, this.transitionDuration.GetValue());
+    }
 
-    public void FadeOut() => this.image.DOFade(0, this.transitionDuration.GetValue());
+    public void FadeOut()
+    {
+        this.image.DOFade(0, 0);
+        this.image.DOFade(1, this.transitionDuration.GetValue());
+    }
 
     private IEnumerator delayCo()
     {        

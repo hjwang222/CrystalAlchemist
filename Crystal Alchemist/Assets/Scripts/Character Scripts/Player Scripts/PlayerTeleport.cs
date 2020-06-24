@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,6 +27,7 @@ public class PlayerTeleport : PlayerComponent
         StartCoroutine(MaterializePlayer());
     }
 
+    [Button("Teleport Player")]
     public void SwitchScene() => StartCoroutine(DematerializePlayer());    
     
     private void LoadScene()

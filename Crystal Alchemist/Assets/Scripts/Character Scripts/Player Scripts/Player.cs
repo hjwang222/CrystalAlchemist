@@ -51,8 +51,7 @@ public class Player : Character
 
         GameEvents.current.OnCollect += this.CollectIt;
         GameEvents.current.OnReduce += this.reduceResource;
-        GameEvents.current.OnMenuOpen += this.setStateMenuOpened;
-        GameEvents.current.OnMenuClose += this.setStateAfterMenuClose;
+        GameEvents.current.OnStateChanged += this.SetState;
         GameEvents.current.OnSleep += this.GoToSleep;
         GameEvents.current.OnWakeUp += this.WakeUp;
         GameEvents.current.OnCutScene += this.SetCutScene;
@@ -81,8 +80,7 @@ public class Player : Character
         base.OnDestroy();
         GameEvents.current.OnCollect -= this.CollectIt;
         GameEvents.current.OnReduce -= this.reduceResource;
-        GameEvents.current.OnMenuOpen -= this.setStateMenuOpened;
-        GameEvents.current.OnMenuClose -= this.setStateAfterMenuClose;
+        GameEvents.current.OnStateChanged -= this.SetState;
         GameEvents.current.OnSleep -= this.GoToSleep;
         GameEvents.current.OnWakeUp -= this.WakeUp;
         GameEvents.current.OnCutScene -= this.SetCutScene;
@@ -132,15 +130,14 @@ public class Player : Character
     public override bool HasEnoughCurrency(Costs price)
     {
         if (price.resourceType == CostType.none) return true;
-        else if (price.resourceType == CostType.keyItem && this.getResource(price) > 0) return true;
-        else if (this.getResource(price) - price.amount >= 0) return true;
+        else if (price.resourceType == CostType.keyItem && this.GetAmount(price) > 0) return true;
+        else if (this.GetAmount(price) - price.amount >= 0) return true;
 
         return false;
     }
 
-    public float getResource(Costs price)
+    public float GetAmount(Costs price)
     {
-        //Buttons und hasEnoughCurrency
         if (price.resourceType == CostType.life) return this.values.life;
         else if (price.resourceType == CostType.mana) return this.values.mana;
         else if (price.resourceType == CostType.item && price.item != null) return this.GetComponent<PlayerItems>().GetAmount(price.item);
@@ -185,24 +182,14 @@ public class Player : Character
         if (signal != null && addResource != 0) signal.Raise();
     }
 
-    private void setStateMenuOpened(CharacterState newState)
-    {
-        StopCoroutine(delayInputPlayerCO(MasterManager.globalValues.playerDelay, newState));
-        this.values.currentState = newState;
-    }
 
-    private void setStateAfterMenuClose(CharacterState newState)
-    {
-        StartCoroutine(delayInputPlayerCO(MasterManager.globalValues.playerDelay, newState));
-        this.values.currentState = newState;
-    }
+    private void SetState(CharacterState state) => this.values.currentState = state;
+    
 
-    private IEnumerator delayInputPlayerCO(float delay, CharacterState newState)
-    {
-        //Damit der Spieler nicht gleich wieder die DialogBox aktiviert : /
-        yield return new WaitForSeconds(delay);
-        this.values.currentState = newState;
-    }
+
+
+
+
 
     private void CollectIt(ItemStats stats)
     {

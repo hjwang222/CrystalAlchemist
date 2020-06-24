@@ -21,9 +21,9 @@ public class ItemGroup : ScriptableObject
     [SerializeField]
     public ItemSlotInfo inventoryInfo;
 
-    [BoxGroup("Signals")]
+    [BoxGroup("Inventory")]
     [SerializeField]
-    private SimpleSignal collectSignal;
+    private bool updateCurrencyUI;
 
     [BoxGroup("Shop Price")]
     [SerializeField]
@@ -80,6 +80,6 @@ public class ItemGroup : ScriptableObject
 
     public void raiseCollectSignal()
     {
-        if (this.collectSignal != null) this.collectSignal.Raise();
+        if (this.updateCurrencyUI) GameEvents.current.DoCurrencyChange(true);
     }
 }

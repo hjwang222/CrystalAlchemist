@@ -15,11 +15,12 @@ public class GameEvents : MonoBehaviour
 
     public Action OnSubmit;
     public Action OnCancel;
+
+    public Action<bool> OnCurrencyChanged;
     public Action<ItemStats> OnCollect;
     public Action<Costs> OnReduce;
     public Action<int> OnPage;
-    public Action<CharacterState> OnMenuOpen;
-    public Action<CharacterState> OnMenuClose;
+    public Action<CharacterState> OnStateChanged;
     public Action<bool> OnMenuOverlay;
     public Action<StatusEffect> OnEffectAdded;
     public Action<Vector2, Action, Action> OnSleep;
@@ -39,9 +40,10 @@ public class GameEvents : MonoBehaviour
     public Action OnKill;
 
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
-    public void DoMenuOpen(CharacterState state) => this.OnMenuOpen?.Invoke(state);  
-    public void DoMenuClose(CharacterState state) => this.OnMenuClose?.Invoke(state);
+    public void DoChangeState(CharacterState state) => this.OnStateChanged?.Invoke(state);  
     public void DoMenuOverlay(bool value) => this.OnMenuOverlay?.Invoke(value);
+
+    public void DoCurrencyChange(bool show) => this.OnCurrencyChanged?.Invoke(show);
     public void DoCollect(ItemStats stats) => this.OnCollect?.Invoke(stats);    
     public void DoReduce(Costs costs) => this.OnReduce?.Invoke(costs);    
     public void DoSubmit() => this.OnSubmit?.Invoke();  

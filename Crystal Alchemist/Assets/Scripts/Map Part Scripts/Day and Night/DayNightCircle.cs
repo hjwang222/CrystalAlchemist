@@ -7,34 +7,31 @@ public class DayNightCircle : MonoBehaviour
 {
     private Light2D Lighting;
     private bool isRunning = false;
-    private bool isActive = true;
     private TimeValue timeValue;
 
     private void Start()
     {
         this.Lighting = this.GetComponent<Light2D>();
-        this.isActive = MasterManager.debugSettings.activateLight;
+        //this.isActive = MasterManager.debugSettings.activateLight;
         this.timeValue = MasterManager.timeValue;
-        if (this.isActive) StartCoroutine(startCo());  
+        this.Lighting.color = this.timeValue.GetColor();
     }
 
     IEnumerator startCo()
     {
-        yield return null;
+        yield return new WaitForEndOfFrame();
         this.Lighting.color = this.timeValue.GetColor();
     }
 
     public void changeColor()
     {
-        if (this.isActive)
-        {
-            Color newColor = this.timeValue.GetColor();
-            float duration = this.timeValue.factor * (this.timeValue.update - 1);
-            if (newColor != Lighting.color && !this.isRunning) StartCoroutine(lerpColor(Lighting, Lighting.color, newColor, duration));
-        }
+        StopAllCoroutines();
+        Color newColor = this.timeValue.GetColor();
+        float duration = this.timeValue.factor * (this.timeValue.update - 1);
+        if (newColor != Lighting.color && !this.isRunning) StartCoroutine(lerpColor(Lighting, Lighting.color, newColor, duration));
     }
 
-    IEnumerator lerpColor(UnityEngine.Experimental.Rendering.Universal.Light2D light, Color fromColor, Color toColor, float duration)
+    IEnumerator lerpColor(Light2D light, Color fromColor, Color toColor, float duration)
     {
         this.isRunning = true;
         float counter = 0;
@@ -47,7 +44,7 @@ public class DayNightCircle : MonoBehaviour
 
             //Change color
             light.color = Color.Lerp(fromColor, toColor, counter / duration);
-            
+
             //Wait for a frame
             yield return null;
         }

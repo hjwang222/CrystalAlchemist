@@ -269,6 +269,7 @@ ScriptsOnlyBuild:
     - TitleScreen
     - TitleScreenControls
     - TitleScreenFading
+    - TitleScreenMovement
     - TitleScreenPatchNotes
     - TitleScreenRotation
     - TitleScreenStart
@@ -300,6 +301,7 @@ ScriptsOnlyBuild:
     - Sirenix.Serialization.AOTGenerationConfig
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
+    - UnityEditor.Tilemaps.GridBrushEditor
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
     - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
@@ -1243,7 +1245,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 20082}
     - Class: 114
-      Script: {instanceID: 43974}
+      Script: {instanceID: 90810}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -3126,6 +3128,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 62
       Script: {instanceID: 0}
+    - Class: 66
+      Script: {instanceID: 0}
     - Class: 68
       Script: {instanceID: 0}
     - Class: 70
@@ -3278,6 +3282,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13580}
     - Class: 114
       Script: {instanceID: 13608}
+    - Class: 114
+      Script: {instanceID: 13650}
     - Class: 114
       Script: {instanceID: 13680}
     - Class: 114
@@ -3759,13 +3765,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 20082}
     - Class: 114
-      Script: {instanceID: 43974}
+      Script: {instanceID: 90810}
     - Class: 114
-      Script: {instanceID: 93204}
+      Script: {instanceID: 95644}
     - Class: 114
-      Script: {instanceID: 93228}
+      Script: {instanceID: 317294}
     - Class: 114
-      Script: {instanceID: 93318}
+      Script: {instanceID: 317318}
+    - Class: 114
+      Script: {instanceID: 317332}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -3793,6 +3801,10 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
     - Class: 331
+      Script: {instanceID: 0}
+    - Class: 19719996
+      Script: {instanceID: 0}
+    - Class: 156049354
       Script: {instanceID: 0}
     - Class: 483693784
       Script: {instanceID: 0}
@@ -7006,7 +7018,7 @@ ScriptsOnlyBuild:
     className: MiniGameUI
   - hash:
       serializedVersion: 2
-      Hash: b47cc8c20b76141894caccdad7216e21
+      Hash: 90b833fc53dd68ccc591ec45c25c85c8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GlobalValues
@@ -7664,6 +7676,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SkillHoming
+  - hash:
+      serializedVersion: 2
+      Hash: 3eb26a600bfe9db77495307badd4dd1a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TitleScreenMovement
   platform: 19
   scenePathNames:
   - Assets/Scenes/Title Screen/Title.unity

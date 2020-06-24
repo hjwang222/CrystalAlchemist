@@ -4,22 +4,23 @@ using Sirenix.OdinInspector;
 
 public class Room : MonoBehaviour
 {
+    [BoxGroup("Area")]
     [Required]
     [SerializeField]
     private CinemachineVirtualCamera virtualCamera;
 
+    [BoxGroup("Area")]
     [SerializeField]
     private GameObject objectsInArea;
 
     [BoxGroup("Map")]
     [SerializeField]
-    private StringSignal locationSignal;
+    [Required]
+    private StringValue stringValue;
 
     [BoxGroup("Map")]
     [SerializeField]
     private string localisationID;
-
-    private string text;
 
     private void Awake()
     {
@@ -28,17 +29,8 @@ public class Room : MonoBehaviour
     }
 
     private void Start()
-    {        
-        this.text = FormatUtil.GetLocalisedText(this.localisationID, LocalisationFileType.maps);
-        SettingsEvents.current.OnLanguangeChanged += UpdateText;
-    }
-
-    private void OnDestroy() => SettingsEvents.current.OnLanguangeChanged -= UpdateText;    
-
-    private void UpdateText()
     {
-        this.text = FormatUtil.GetLocalisedText(this.localisationID, LocalisationFileType.maps);
-        this.locationSignal.Raise(this.text);
+        this.stringValue.SetValue(this.localisationID);
     }
 
     private void setObjects(bool value)
@@ -53,7 +45,7 @@ public class Room : MonoBehaviour
             setObjects(true);
             this.virtualCamera.gameObject.SetActive(true);
 
-            this.locationSignal.Raise(this.text);
+            this.stringValue.SetValue(this.localisationID);
             if (this.virtualCamera.Follow == null) this.virtualCamera.Follow = other.transform;
         }
     }

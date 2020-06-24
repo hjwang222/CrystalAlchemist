@@ -2,6 +2,16 @@
 
 public class TODOLIST : MonoBehaviour
 {
+    //BUG: Context Clue wonky (Treasure shop)
+    //BUG: Schlafen und Fenster wonky
+    //BUG: Menu Dialog Position falsch
+    //BUG: Death Screen wonky
+    //BUG: Texte nicht richtig
+    //BUG: MapInfo buggy
+    //BUG: Intro funktioniert nicht immer + HUD Visible during Cutscene
+    //TODO: PlayerInventory und Player Resource Function mergen
+    //TODO: Better Minigameprice (KeyItems)
+  
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)

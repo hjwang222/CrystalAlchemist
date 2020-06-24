@@ -13,32 +13,38 @@ public class CurrencyUI : MonoBehaviour
     [SerializeField]
     private CharacterValues values;
 
-    private bool isRunning()
-    {
-        foreach (CurrencySlot slot in this.slots)
-        {
-            if (slot.gameObject.activeInHierarchy && slot.isItRunning()) return true;
-        }
+    [SerializeField]
+    private float delay = 5f;
 
-        return false;
+    private void Start()
+    {
+        GameEvents.current.OnCurrencyChanged += UpdateCurrency;
+        UpdateCurrency(true);
     }
 
+    private void OnDestroy()
+    {
+        GameEvents.current.OnCurrencyChanged -= UpdateCurrency;
+    }
 
-    public void ShowUI()
+    private IEnumerator hideCo()
+    {
+        yield return new WaitForSeconds(this.delay);
+        child.SetActive(false);
+    }
+
+    private void UpdateCurrency(bool show)
+    {
+        if (show) ShowUI();
+        else child.SetActive(false);
+    }
+
+    private void ShowUI()
     {
         StopAllCoroutines();
         child.SetActive(true);
+        foreach (CurrencySlot slot in this.slots) slot.UpdateCurrency();
+        if (values.currentState != CharacterState.interact) StartCoroutine(hideCo());
     }
 
-    public void HideUI(float delay)
-    {
-        if(!isRunning() && this.values.currentState != CharacterState.interact)
-            StartCoroutine(hideCo(delay));
-    }
-
-    private IEnumerator hideCo(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        child.SetActive(false);
-    }
 }

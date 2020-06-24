@@ -463,7 +463,8 @@ public class Character : MonoBehaviour
 
     public void KnockBack(float knockTime, float thrust, Vector2 direction)
     {
-        if (this.myRigidbody != null
+        if (thrust != 0
+            && this.myRigidbody != null
             && this.myRigidbody.bodyType != RigidbodyType2D.Kinematic)
         {
             Vector2 difference = direction.normalized * thrust;
@@ -636,13 +637,13 @@ public class Character : MonoBehaviour
     private void UpdateStatusEffectGroup(List<StatusEffect> effects)
     {
         effects.RemoveAll(item => item == null);
-        foreach (StatusEffect effect in effects) effect.Updating(this);
+        for(int i = 0; i < effects.Count; i++) effects[i].Updating(this);
     }
 
     private void AddStatusEffectVisuals(List<StatusEffect> effects)
     {
         effects.RemoveAll(item => item == null);
-        foreach (StatusEffect effect in effects) AddStatusEffectVisuals(effect);
+        for (int i = 0; i < effects.Count; i++) AddStatusEffectVisuals(effects[i]);
     }
 
     private void AddStatusEffectVisuals(StatusEffect effect)

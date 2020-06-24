@@ -51,7 +51,9 @@ public class SkillBoomerang : SkillProjectile
     {
         if (this.skill.sender != null
        && (
-            (!hittedCharacter.isTrigger && hittedCharacter.GetComponent<Breakable>() == null) //no breakable stop
+            (!hittedCharacter.isTrigger 
+          && hittedCharacter.GetComponent<Breakable>() == null
+          && hittedCharacter.GetComponent<Character>() != this.skill.sender) 
          || (hittedCharacter.GetComponent<Collectable>() != null)) //item stop
           )
         {

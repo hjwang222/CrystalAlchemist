@@ -576,7 +576,6 @@ GameObject:
   m_Component:
   - component: {fileID: 135195508}
   - component: {fileID: 135195510}
-  - component: {fileID: 135195509}
   m_Layer: 5
   m_Name: Coin Slot
   m_TagString: Untagged
@@ -605,34 +604,6 @@ RectTransform:
   m_AnchoredPosition: {x: 60.54998, y: 0}
   m_SizeDelta: {x: 100, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &135195509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135195507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: d5e659d2c9d6c8c4e8b090b47c1b284f, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 135195510}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: updateCurrency
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &135195510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,11 +618,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerItems: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   item: {fileID: 11400000, guid: 9767790408abeac4cab04522f2a49b03, type: 2}
-  maxValue: 99
   textField: {fileID: 696295669}
   raiseSoundEffect: {fileID: 0}
-  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
-  delay: 5
 --- !u!1 &137179040
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,7 +809,6 @@ GameObject:
   m_Component:
   - component: {fileID: 168725901}
   - component: {fileID: 168725903}
-  - component: {fileID: 168725902}
   m_Layer: 5
   m_Name: Coin Slot
   m_TagString: Untagged
@@ -870,34 +837,6 @@ RectTransform:
   m_AnchoredPosition: {x: 32, y: -3}
   m_SizeDelta: {x: 100, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &168725902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168725900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: d5e659d2c9d6c8c4e8b090b47c1b284f, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 168725903}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: updateCurrency
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &168725903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,11 +851,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerItems: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   item: {fileID: 11400000, guid: 9767790408abeac4cab04522f2a49b03, type: 2}
-  maxValue: 99
   textField: {fileID: 1847284215}
   raiseSoundEffect: {fileID: 0}
-  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
-  delay: 5
 --- !u!1 &191491088
 GameObject:
   m_ObjectHideFlags: 0
@@ -3786,7 +3722,6 @@ GameObject:
   m_Component:
   - component: {fileID: 559677906}
   - component: {fileID: 559677908}
-  - component: {fileID: 559677907}
   m_Layer: 5
   m_Name: Key Slot
   m_TagString: Untagged
@@ -3815,34 +3750,6 @@ RectTransform:
   m_AnchoredPosition: {x: 82.54999, y: 0}
   m_SizeDelta: {x: 100, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &559677907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559677905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: b71e42c586eedf644b910ec05c9d7faa, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 559677908}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: updateCurrency
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &559677908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3857,11 +3764,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerItems: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   item: {fileID: 11400000, guid: 1a86842340d2910428ca17a168e85571, type: 2}
-  maxValue: 99
   textField: {fileID: 2142145003}
   raiseSoundEffect: {fileID: 0}
-  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
-  delay: 5
 --- !u!1001 &585845384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8850,7 +8754,6 @@ GameObject:
   - component: {fileID: 1504912426}
   - component: {fileID: 1504912425}
   - component: {fileID: 1504912424}
-  - component: {fileID: 1504912423}
   m_Layer: 5
   m_Name: Location
   m_TagString: Untagged
@@ -8877,34 +8780,6 @@ RectTransform:
   m_AnchoredPosition: {x: -150, y: 40}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1504912423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504912421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3fc66ef9f32f2944bc30facf4600ca9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 607a9253355ca954388700e0704f8968, type: 2}
-  signalEventString:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1857190596}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: updateLocationText
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1504912424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9047,7 +8922,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1508040134}
   - component: {fileID: 1508040136}
-  - component: {fileID: 1508040135}
   m_Layer: 5
   m_Name: Key Slot
   m_TagString: Untagged
@@ -9076,34 +8950,6 @@ RectTransform:
   m_AnchoredPosition: {x: 32, y: -15}
   m_SizeDelta: {x: 100, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1508040135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508040133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: b71e42c586eedf644b910ec05c9d7faa, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1508040136}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: updateCurrency
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1508040136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9118,11 +8964,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerItems: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   item: {fileID: 11400000, guid: 1a86842340d2910428ca17a168e85571, type: 2}
-  maxValue: 99
   textField: {fileID: 768643866}
   raiseSoundEffect: {fileID: 0}
-  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
-  delay: 5
 --- !u!1001 &1571165517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9535,7 +9378,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1613495204}
   - component: {fileID: 1613495206}
-  - component: {fileID: 1613495205}
   m_Layer: 5
   m_Name: Crystal Slot
   m_TagString: Untagged
@@ -9564,34 +9406,6 @@ RectTransform:
   m_AnchoredPosition: {x: 28.549988, y: 0}
   m_SizeDelta: {x: 100, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1613495205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613495203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 2637d39002796b84991e8c9d3d373c17, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1613495206}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: updateCurrency
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1613495206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9606,11 +9420,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerItems: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   item: {fileID: 11400000, guid: 008b2735924e65749bc1a37e8d718d0c, type: 2}
-  maxValue: 9999
   textField: {fileID: 1332753003}
   raiseSoundEffect: {fileID: 8300000, guid: 50429a3af42ed134fadb73aa7a4a18ef, type: 3}
-  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
-  delay: 5
 --- !u!1 &1617422416
 GameObject:
   m_ObjectHideFlags: 0
@@ -10791,11 +10602,6 @@ GameObject:
   - component: {fileID: 1836344345}
   - component: {fileID: 1836344354}
   - component: {fileID: 1836344353}
-  - component: {fileID: 1836344351}
-  - component: {fileID: 1836344350}
-  - component: {fileID: 1836344349}
-  - component: {fileID: 1836344348}
-  - component: {fileID: 1836344347}
   - component: {fileID: 1836344346}
   m_Layer: 5
   m_Name: Currencies
@@ -10832,146 +10638,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836344344}
   m_CullTransparentMesh: 0
---- !u!114 &1836344347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836344344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aea8f9eb84f80884bbe19eb01afd4fcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
-  signalEventBool:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1836344353}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: HideUI
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1836344348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836344344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: b71e42c586eedf644b910ec05c9d7faa, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1836344353}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ShowUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1836344349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836344344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 2637d39002796b84991e8c9d3d373c17, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1836344353}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ShowUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1836344350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836344344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: d5e659d2c9d6c8c4e8b090b47c1b284f, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1836344353}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ShowUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1836344351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836344344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 81ab4401a7874e940be4896be7fe05a3, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1836344353}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ShowUI
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1836344353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10993,6 +10659,7 @@ MonoBehaviour:
   - {fileID: 168725903}
   - {fileID: 1508040136}
   values: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
+  delay: 5
 --- !u!114 &1836344354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11311,6 +10978,7 @@ MonoBehaviour:
   timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
   sun: {fileID: 681626528}
   moon: {fileID: 1032026296}
+  locationID: {fileID: 11400000, guid: b6bb37e9b35dfc941a13ffb844247e19, type: 2}
 --- !u!1 &1878281242
 GameObject:
   m_ObjectHideFlags: 0
@@ -11509,7 +11177,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1931560051}
   - component: {fileID: 1931560053}
-  - component: {fileID: 1931560052}
   m_Layer: 5
   m_Name: Crystal Slot
   m_TagString: Untagged
@@ -11538,34 +11205,6 @@ RectTransform:
   m_AnchoredPosition: {x: 32, y: 9}
   m_SizeDelta: {x: 100, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1931560052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931560050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 2637d39002796b84991e8c9d3d373c17, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1931560053}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: updateCurrency
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1931560053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11580,11 +11219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerItems: {fileID: 11400000, guid: 4586d542d68e26b4c9bdeb4999793087, type: 2}
   item: {fileID: 11400000, guid: 008b2735924e65749bc1a37e8d718d0c, type: 2}
-  maxValue: 9999
   textField: {fileID: 1426247613}
   raiseSoundEffect: {fileID: 8300000, guid: 50429a3af42ed134fadb73aa7a4a18ef, type: 3}
-  hideSignal: {fileID: 11400000, guid: 7acef12e95dc60b4c8fe3c633938842e, type: 2}
-  delay: 5
 --- !u!1 &1955206518
 GameObject:
   m_ObjectHideFlags: 0

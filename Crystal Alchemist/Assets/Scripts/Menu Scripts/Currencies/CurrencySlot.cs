@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class CurrencySlot : MonoBehaviour
@@ -9,63 +8,17 @@ public class CurrencySlot : MonoBehaviour
 
     [SerializeField]
     private ItemGroup item;
-    [SerializeField]
-    private int maxValue;
+
     [SerializeField]
     private TextMeshProUGUI textField;
+
     [SerializeField]
     private AudioClip raiseSoundEffect;
-    [SerializeField]
-    private FloatSignal hideSignal;
-    [SerializeField]
-    private float delay = 5f;
-    
-    private int currentValue;
-    private bool isRunning = false;
-    private bool playSound = false;
-    private int newValue;
 
-    private void Start()
+    public void UpdateCurrency()
     {
-        updateCurrency();
-        playSound = true;
-    }
-
-    public bool isItRunning()
-    {
-        return this.isRunning;
-    }
-
-    public void updateCurrency()
-    {
-        this.newValue = this.playerItems.GetAmount(this.item);
-        if (this.playSound) AudioUtil.playSoundEffect(this.raiseSoundEffect);  
-        if(!this.isRunning) StartCoroutine(Countdown());
-    }
-
-    private IEnumerator Countdown()
-    {
-        int change = Mathf.Abs(this.currentValue - this.newValue);
-        float counterDelay = 1;
-        if (change != 0) counterDelay = 0.01f / (float)change;
-        this.isRunning = true;
-
-        while (this.currentValue != this.newValue)
-        {
-            int rate = -1;
-            if (this.newValue - this.currentValue > 0) rate = 1;
-
-            this.currentValue += rate;
-            if (((rate > 0 && this.currentValue >= this.newValue)
-                || (rate < 0 && this.currentValue <= 0))) break;           
-
-            this.textField.text = FormatUtil.formatString(this.currentValue, this.maxValue);            
-            yield return new WaitForSeconds(counterDelay);
-        }
-
-        this.currentValue = this.newValue;
-        this.textField.text = FormatUtil.formatString(this.currentValue, this.maxValue);
-        this.isRunning = false;
-        this.hideSignal.Raise(this.delay);
+        int amount = this.playerItems.GetAmount(this.item);
+        AudioUtil.playSoundEffect(raiseSoundEffect);
+        this.textField.text = FormatUtil.formatString(amount, this.item.maxAmount);
     }
 }

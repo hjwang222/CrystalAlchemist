@@ -24,29 +24,30 @@ public class MenuBehaviour : PreventDeselection
     public InfoBox infoBox;
 
     public virtual void Start()
-    {
-        IngameMenuHandler.openedMenues.Add(this.gameObject);
-
-        if (IngameMenuHandler.openedMenues.Count <= 1)
+    {       
+        if (MasterManager.globalValues.openedMenues.Count == 0)
         {
             Cursor.visible = true;
 
-            IngameMenuHandler.lastState = this.playerValues.currentState;
-            GameEvents.current.DoMenuOpen(CharacterState.inMenu);
+            MasterManager.globalValues.lastState = this.playerValues.currentState;
+            GameEvents.current.DoChangeState(CharacterState.inMenu);
             if(this.showBlackBackground) GameEvents.current.DoMenuOverlay(true);
 
             if(this.changeVolume) MusicEvents.current.ChangeVolume(MasterManager.settings.GetMenuVolume());
         }
+
+        MasterManager.globalValues.openedMenues.Add(this.gameObject);
     }
 
     public virtual void OnDestroy()
     {
-        IngameMenuHandler.openedMenues.Remove(this.gameObject);
+        MasterManager.globalValues.openedMenues.Remove(this.gameObject);
 
-        if (IngameMenuHandler.openedMenues.Count <= 0)
+        if (MasterManager.globalValues.openedMenues.Count <= 0)
         {
             Cursor.visible = false;
-            GameEvents.current.DoMenuClose(IngameMenuHandler.lastState);//avoid reclick!
+
+            GameEvents.current.DoChangeState(MasterManager.globalValues.lastState);
             GameEvents.current.DoMenuOverlay(false);
 
             if (this.changeVolume) MusicEvents.current.ChangeVolume(MasterManager.settings.backgroundMusicVolume);

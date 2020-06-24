@@ -130,7 +130,16 @@ public class PlayerInventory : ScriptableObject
     public bool HasEnoughCurrency(Costs price)
     {
         if (price.resourceType == CostType.none) return true;
-        else if (this.GetAmount(price.item) - price.amount >= 0) return true;
+        else if (price.resourceType == CostType.keyItem && this.GetAmount(price) > 0) return true;
+        else if (this.GetAmount(price) - price.amount >= 0) return true;
+
         return false;
+    }
+
+    public float GetAmount(Costs price)
+    {
+        if (price.resourceType == CostType.item && price.item != null) return this.GetAmount(price.item);
+        else if (price.resourceType == CostType.keyItem && price.keyItem != null && GameEvents.current.HasKeyItem(price.keyItem.name)) return 1;
+        return 0;
     }
 }

@@ -26,11 +26,10 @@ public class GlobalValues : ScriptableObject
     [BoxGroup("Misc")]
     public Vector3 nullVector = new Vector3(0, 0, 999);
     [BoxGroup("Misc")]
-    public string saveGameFiletype = "dat";    
-}
+    public string saveGameFiletype = "dat";
 
-public static class IngameMenuHandler
-{
-    public static CharacterState lastState;
-    public static List<GameObject> openedMenues = new List<GameObject>();
+    [BoxGroup("Menues")]
+    public CharacterState lastState;
+    [BoxGroup("Menues")]
+    public List<GameObject> openedMenues = new List<GameObject>();
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class DateLocation : MonoBehaviour
@@ -20,12 +18,21 @@ public class DateLocation : MonoBehaviour
     [SerializeField]
     private GameObject moon;
 
-    private void Update()
+    [SerializeField]
+    private StringValue locationID;
+
+    private void Start()
     {
-        showTime();
+        updateLocationText();
+        SettingsEvents.current.OnLanguangeChanged += updateLocationText;
     }
 
-    private void showTime()
+    private void Update() => UpdateTime();
+
+    private void OnDestroy() => SettingsEvents.current.OnLanguangeChanged -= updateLocationText;
+
+
+    private void UpdateTime()
     {
         int hour = this.timeValue.getHour();
 
@@ -43,28 +50,8 @@ public class DateLocation : MonoBehaviour
         }
     }
 
-    /*
-    [SerializeField]
-    private TextMeshProUGUI positionField;
-
-    private Player player;
-
-    private void Start()
+    private void updateLocationText()
     {
-        
+        this.textField.text = FormatUtil.GetLocalisedText(this.locationID.GetValue(), LocalisationFileType.maps);
     }
-    
-    private void Update()
-    {
-        this.positionField.text = "X:"+ Mathf.RoundToInt(this.player.transform.position.x)+" Y:"+Mathf.RoundToInt(this.player.transform.position.y);
-    }
-    */
-
-    public void updateLocationText(string text)
-    {
-        this.textField.text = text;
-    }
-
-    
-
 }
