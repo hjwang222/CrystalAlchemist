@@ -30,7 +30,7 @@ public class ResolutionMenu : MonoBehaviour
     public void Confirm()
     {
         Screen.SetResolution(this.resolution.x, this.resolution.y, this.fullscreen);
-        this.resolutionDropDown.GetComponent<ButtonExtension>().SetCursor();
+        this.resolutionDropDown.GetComponent<ButtonExtension>().Select();
     }
 
     public void ChangeResolution()

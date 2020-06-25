@@ -31,6 +31,10 @@ public class Player : Character
     [SerializeField]
     private float goToBedDuration = 1f;
 
+    [BoxGroup("Player Objects")]
+    [SerializeField]
+    private BoolValue CutSceneValue;
+
     ///////////////////////////////////////////////////////////////
 
     public override void Awake()
@@ -55,6 +59,7 @@ public class Player : Character
         GameEvents.current.OnSleep += this.GoToSleep;
         GameEvents.current.OnWakeUp += this.WakeUp;
         GameEvents.current.OnCutScene += this.SetCutScene;
+        GameEvents.current.OnEnoughCurrency += this.HasEnoughCurrency;
 
         this.GetComponent<PlayerAbilities>().Initialize();
         PlayerComponent[] components = this.GetComponents<PlayerComponent>();
@@ -84,6 +89,7 @@ public class Player : Character
         GameEvents.current.OnSleep -= this.GoToSleep;
         GameEvents.current.OnWakeUp -= this.WakeUp;
         GameEvents.current.OnCutScene -= this.SetCutScene;
+        GameEvents.current.OnEnoughCurrency -= this.HasEnoughCurrency;
     }
 
     public override void SpawnOut()
@@ -130,20 +136,14 @@ public class Player : Character
     public override bool HasEnoughCurrency(Costs price)
     {
         if (price.resourceType == CostType.none) return true;
-        else if (price.resourceType == CostType.keyItem && this.GetAmount(price) > 0) return true;
-        else if (this.GetAmount(price) - price.amount >= 0) return true;
+        else if (price.resourceType == CostType.life && this.values.life - price.amount >= 0) return true;
+        else if (price.resourceType == CostType.mana && this.values.mana - price.amount >= 0) return true;
+        else if (price.resourceType == CostType.keyItem && price.keyItem != null && GameEvents.current.HasKeyItem(price.keyItem.name)) return true;
+        else if (price.resourceType == CostType.item && price.item != null && GameEvents.current.GetItemAmount(price.item) - price.amount >= 0) return true;
 
         return false;
     }
 
-    public float GetAmount(Costs price)
-    {
-        if (price.resourceType == CostType.life) return this.values.life;
-        else if (price.resourceType == CostType.mana) return this.values.mana;
-        else if (price.resourceType == CostType.item && price.item != null) return this.GetComponent<PlayerItems>().GetAmount(price.item);
-        else if (price.resourceType == CostType.keyItem && price.keyItem != null &&this.GetComponent<PlayerItems>().hasKeyItemAlready(price.keyItem.name)) return 1;
-        return 0;
-    }
 
     public override void reduceResource(Costs price)
     {
@@ -171,9 +171,9 @@ public class Player : Character
         CheckDeath();
     }
 
-    private void SetCutScene(bool value)
+    private void SetCutScene()
     {
-        if (value) this.values.currentState = CharacterState.respawning;
+        if (this.CutSceneValue.GetValue()) this.values.currentState = CharacterState.respawning;
         else this.values.currentState = CharacterState.idle;
     }
 

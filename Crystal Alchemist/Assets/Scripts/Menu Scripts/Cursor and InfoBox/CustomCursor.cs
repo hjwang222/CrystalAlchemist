@@ -22,7 +22,7 @@ public class CustomCursor : MonoBehaviour
     private Vector2 cursorSize;
     private float offset = 16;
     private int distance = 400;
-
+    private RectTransform rect;
     public GameObject selectedObject;
 
     private void Awake()
@@ -41,22 +41,34 @@ public class CustomCursor : MonoBehaviour
         this.cursorScale = rt.lossyScale;
     }
 
-    public void setCursorPosition(bool showCursor, bool playEffect, Selectable button, Vector2 size, Vector2 scale)
+    public void Select(bool playEffect, Selectable selectable)
     {
-        if (button != null && this.selectedObject != button.gameObject)
+        if (selectable != null && this.selectedObject != selectable.gameObject)
         {
-            this.selectedObject = button.gameObject;
+            this.selectedObject = selectable.gameObject;
 
-            float x_new = (((size.x * scale.x) + (this.cursorSize.x * this.cursorScale.x)) / 2) - this.offset;
-            float y_new = (((size.y * scale.y) + (this.cursorSize.y * this.cursorScale.y)) / 2) - this.offset;
+            this.rect = (RectTransform)selectable.transform;
 
+            if (selectable.GetComponent<Scrollbar>() != null) this.rect = selectable.GetComponent<Scrollbar>().handleRect;
+            if (selectable.GetComponent<Slider>() != null) this.rect = selectable.GetComponent<Slider>().handleRect;
+            UpdatePosition();
 
-            this.transform.position = new Vector2(button.gameObject.transform.position.x - (x_new),
-                                                  button.gameObject.transform.position.y + (y_new));
-
-            setInfoBox(button);
+            setInfoBox(selectable);
             if (playEffect) this.GetComponent<CustomCursor>().playSoundEffect();
         }
+    }
+
+    public void UpdatePosition()
+    {
+        if (rect == null) return;
+        Vector2 size = new Vector2(rect.rect.width, rect.rect.height);
+        Vector2 scale = rect.lossyScale;
+
+        float x_new = (((size.x * scale.x) + (this.cursorSize.x * this.cursorScale.x)) / 2) - this.offset;
+        float y_new = (((size.y * scale.y) + (this.cursorSize.y * this.cursorScale.y)) / 2) - this.offset;
+
+        this.transform.position = new Vector2(rect.position.x - (x_new),
+                                              rect.position.y + (y_new));
     }
 
     private void setInfoBox(Selectable button)

@@ -6,18 +6,13 @@ using System.Collections.Generic;
 using System.Collections;
 
 public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandler
-{   
+{
     [SerializeField]
     [Required]
-    private CustomCursor cursor;
-
-    private Vector2 scale;
-    private Vector2 size;
+    public CustomCursor cursor;
 
     [SerializeField]
-    public bool setFirstSelected = false;
-
-    private Selectable button;
+    public bool selectFirst = false;
 
     [SerializeField]
     private bool isInteractable = true;
@@ -42,15 +37,23 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     private List<Selectable> right = new List<Selectable>();
 
     private bool isInit = true;
+    private Selectable button;
 
-#if UNITY_EDITOR
-    [Button]
-    public void setNavigation()
+    private void OnEnable()
     {
-        setButtonNavigation();
+        if (isInit) Initialize();
+        if (selectFirst) Select();
     }
-#endif
 
+    private void Initialize()
+    {
+        this.button = this.GetComponent<Selectable>();
+        this.setButtonNavigation();
+        UnityUtil.SetColors(this.button, Color.white);
+        this.isInit = false;
+    }
+
+    [Button]
     public void setButtonNavigation()
     {
         if (this.overrideNavigation)
@@ -60,106 +63,50 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
                 Navigation nav = this.button.navigation;
                 nav.mode = Navigation.Mode.Explicit;
 
-                nav.selectOnUp = getNextSelectable(this.up);
-                nav.selectOnDown = getNextSelectable(this.down);
-                nav.selectOnLeft = getNextSelectable(this.left);
-                nav.selectOnRight = getNextSelectable(this.right);
+                nav.selectOnUp = GetNavigationNeighbor(this.up);
+                nav.selectOnDown = GetNavigationNeighbor(this.down);
+                nav.selectOnLeft = GetNavigationNeighbor(this.left);
+                nav.selectOnRight = GetNavigationNeighbor(this.right);
                 this.button.navigation = nav;
             }
         }
-
-        UnityUtil.SetColors(this.button, Color.white);
     }
 
-    private void Initialize()
+    private Selectable GetNavigationNeighbor(List<Selectable> nexts)
     {
-        try
+        foreach (Selectable next in nexts)
         {
-            if (this.cursor == null) this.cursor = GameObject.FindWithTag("Cursor").GetComponent<CustomCursor>();
-            if (this.button == null) this.button = this.gameObject.GetComponent<Selectable>();
-        }
-        catch
-        {
-            Debug.Log(this.gameObject.name);
-        }
-
-        if (this.gameObject.activeInHierarchy)
-        {
-            if (this.isInteractable) StartCoroutine(delayCo());
-            else UnityUtil.SetInteractable(this.button, false);
-        }
-
-        if (!this.isInit) return;
-
-        this.setButtonNavigation();
-
-        RectTransform rt = (RectTransform)this.transform;
-        this.size = new Vector2(rt.rect.width, rt.rect.height);
-        this.scale = rt.lossyScale;        
-    }
-
-    private Selectable getNextSelectable(List<Selectable> nexts)
-    {
-        foreach(Selectable next in nexts)
-        {
-            if (next.gameObject.activeInHierarchy)return next;
+            if (next.gameObject.activeInHierarchy) return next;
         }
         return null;
     }
 
-    private void Start() { Initialize(); this.isInit = false; }
-
-    public void SetCursor(CustomCursor cursor) => this.cursor = cursor;
-    
-    public CustomCursor GetCursor()
-    {
-        return this.cursor;
-    }
-
-    private void OnEnable() => SetFirst();    
 
     public void Select()
     {
-        if (this.button == null) this.button = this.gameObject.GetComponent<Selectable>();
-
-        if (this.cursor != null
-            && this.gameObject.activeInHierarchy)
+        if (EventSystem.current != null)
         {
-            this.cursor.gameObject.SetActive(true);
-
-            if (EventSystem.current != null)
-            {
-                EventSystem.current.firstSelectedGameObject = this.gameObject;
-                EventSystem.current.SetSelectedGameObject(this.gameObject);
-            }
-
-            this.cursor.setCursorPosition(true, false, this.button, this.size, this.scale);
+            EventSystem.current.firstSelectedGameObject = this.gameObject;
+            EventSystem.current.SetSelectedGameObject(this.gameObject);
         }
+
+        SetCursor();
     }
 
-    public void SetFirst()
-    {
-        if (this.setFirstSelected)
-        {
-            Initialize();
-            Select();
-        }
-    }
+    public void OnPointerEnter(PointerEventData eventData) => Select();
 
-    public void OnPointerEnter(PointerEventData eventData) => SetCursor();
-    
     public void OnSelect(BaseEventData eventData) => SetCursor();
-    
+
     public void SetCursor()
     {
-        if(this.cursor != null) this.cursor.setCursorPosition(true, true, this.button, this.size, this.scale);       
+        this.cursor.Select(!this.isInit, this.button);
     }
 
-    private IEnumerator delayCo()
+    public void ReSelect()
     {
-        this.button.interactable = false;
-        yield return new WaitForSeconds(0.1f);
-        this.button.interactable = true;
+        if (this.selectFirst) Select();
     }
+
+    public void SetAsFirst() => this.selectFirst = true;
 }
 

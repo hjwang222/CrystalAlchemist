@@ -35,7 +35,10 @@ public class GameEvents : MonoBehaviour
     public Action<Character> OnAggroClear;
 
     public Func<string, bool> OnKeyItem;
-    public Action<bool> OnCutScene;
+    public Func<ItemGroup, int> OnItemAmount;
+    public Func<Costs, bool> OnEnoughCurrency;
+
+    public Action OnCutScene;
 
     public Action OnKill;
 
@@ -53,7 +56,7 @@ public class GameEvents : MonoBehaviour
     public void DoSleep(Vector2 position, Action before, Action after) => this.OnSleep?.Invoke(position, before, after);
     public void DoWakeUp(Vector2 position, Action before, Action after) => this.OnWakeUp?.Invoke(position, before, after);
 
-    public void DoCutScene(bool value) => this.OnCutScene?.Invoke(value);
+    public void DoCutScene() => this.OnCutScene?.Invoke();
     public void DoKill() => this.OnKill?.Invoke();
 
     public void DoAggroHit(Character character, Character target, float value) => this.OnAggroHit?.Invoke(character, target, value);
@@ -64,9 +67,22 @@ public class GameEvents : MonoBehaviour
     public void DoCameraShake(float strength, float duration, float speed) => this.OnCameraShake?.Invoke(strength, duration, speed);
     public void DoCameraStill(float speed) => this.OnCameraStill?.Invoke(speed);
 
+
     public bool HasKeyItem(string name)
     {
         if(this.OnKeyItem != null) return this.OnKeyItem.Invoke(name);
+        return false;
+    }
+
+    public int GetItemAmount(ItemGroup item)
+    {
+        if (this.OnItemAmount != null) return this.OnItemAmount.Invoke(item);
+        return 0;
+    }
+
+    public bool HasEnoughCurrency(Costs costs)
+    {
+        if (this.OnEnoughCurrency != null) return this.OnEnoughCurrency.Invoke(costs);
         return false;
     }
 }

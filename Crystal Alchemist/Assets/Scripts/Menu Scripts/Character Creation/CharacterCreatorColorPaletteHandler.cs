@@ -24,7 +24,7 @@ public class CharacterCreatorColorPaletteHandler : CharacterCreatorButton
 
             GameObject newColorPicker = Instantiate(this.colorPick, this.transform);            
 
-            if (i == 0 && this.setFirst) newColorPicker.GetComponent<ButtonExtension>().setFirstSelected = true;
+            if (i == 0 && this.setFirst) newColorPicker.GetComponent<ButtonExtension>().SetAsFirst();
 
             newColorPicker.SetActive(true);
 

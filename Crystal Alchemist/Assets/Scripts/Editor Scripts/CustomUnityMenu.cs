@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using TMPro;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 
 public class CustomUnityMenu : MonoBehaviour
 {
@@ -11,11 +11,8 @@ public class CustomUnityMenu : MonoBehaviour
     {
         ButtonExtension[] buttons = FindObjectsOfType<ButtonExtension>(true);
         CustomCursor cursor = FindObjectOfType<CustomCursor>();
-
-        foreach(ButtonExtension button in buttons)
-        {
-            if (button.GetCursor() == null) button.SetCursor(cursor);
-        }
+        foreach (ButtonExtension ext in buttons) if (ext.cursor == null) { ext.cursor = cursor; Debug.Log(ext.gameObject.name); }
+        EditorSceneManager.SaveScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
     }
 
     private static void SetLocalisation()

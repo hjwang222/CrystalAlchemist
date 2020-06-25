@@ -12,14 +12,7 @@ public class DayNightCircle : MonoBehaviour
     private void Start()
     {
         this.Lighting = this.GetComponent<Light2D>();
-        //this.isActive = MasterManager.debugSettings.activateLight;
         this.timeValue = MasterManager.timeValue;
-        this.Lighting.color = this.timeValue.GetColor();
-    }
-
-    IEnumerator startCo()
-    {
-        yield return new WaitForEndOfFrame();
         this.Lighting.color = this.timeValue.GetColor();
     }
 

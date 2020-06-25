@@ -28,25 +28,23 @@ public class Room : MonoBehaviour
         this.virtualCamera.gameObject.SetActive(false);
     }
 
-    private void Start()
-    {
-        this.stringValue.SetValue(this.localisationID);
-    }
-
     private void setObjects(bool value)
     {
         if (this.objectsInArea != null) this.objectsInArea.SetActive(value);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other) => SetRoom(other);
+
+    private void SetRoom(Collider2D collider)
     {
-        if (!other.isTrigger)
+        if (!collider.isTrigger)
         {
             setObjects(true);
             this.virtualCamera.gameObject.SetActive(true);
 
             this.stringValue.SetValue(this.localisationID);
-            if (this.virtualCamera.Follow == null) this.virtualCamera.Follow = other.transform;
+            SettingsEvents.current.DoLanguageChange();
+            if (this.virtualCamera.Follow == null) this.virtualCamera.Follow = collider.transform;
         }
     }
 

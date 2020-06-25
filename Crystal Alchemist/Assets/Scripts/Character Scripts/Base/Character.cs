@@ -581,7 +581,7 @@ public class Character : MonoBehaviour
         if (this.GetComponent<AIAggroSystem>() != null) this.GetComponent<AIAggroSystem>().enabled = value;
         if (this.GetComponent<AICombat>() != null) this.GetComponent<AICombat>().enabled = value;
         if (this.GetComponent<AIMovement>() != null) this.GetComponent<AIMovement>().enabled = value;
-
+        
         this.boxCollider.enabled = value;
     }
 

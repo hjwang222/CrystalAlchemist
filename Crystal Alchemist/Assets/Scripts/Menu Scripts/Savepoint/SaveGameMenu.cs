@@ -25,11 +25,7 @@ public class SaveGameMenu : MonoBehaviour
     //Called from Dialogbox
     public void UpdateSaves()
     {
-        foreach (SaveSlot slot in this.slots)
-        {
-            slot.getData();
-            slot.GetComponent<ButtonExtension>().SetFirst();
-        }
+        foreach (SaveSlot slot in this.slots) slot.getData();
     }
 
     public void SaveGame(SaveSlot slot)

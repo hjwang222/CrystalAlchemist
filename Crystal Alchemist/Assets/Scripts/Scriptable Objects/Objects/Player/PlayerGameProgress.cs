@@ -6,34 +6,48 @@ using UnityEngine.SceneManagement;
 public class PlayerGameProgress : ScriptableObject
 {
     [SerializeField]
-    private List<string> keys = new List<string>();
+    private List<string> permanentProgress = new List<string>();
+
+    [SerializeField]
+    private List<string> temporaryProgress = new List<string>();
 
     public void Initialize()
     {
-        keys.RemoveAll(item => item == null);
+        permanentProgress.RemoveAll(item => item == null);
+        temporaryProgress.RemoveAll(item => item == null);
     }
 
-    public void Clear() => keys.Clear();
-
-    public void Add(string key)
+    public void Clear()
     {
-        string newKey = GetKey(key);
-        if (!keys.Contains(newKey)) keys.Add(newKey);
+        permanentProgress.Clear();
+        temporaryProgress.Clear();
     }
 
-    public List<string> Get()
+    public void AddProgress(string key, bool isPermanent)
     {
-        return this.keys;
+        if(!Contains(key, isPermanent))
+        {
+            if (isPermanent) permanentProgress.Add(GetKey(key));
+            else temporaryProgress.Add(GetKey(key));
+        }
     }
 
-    public void Set(List<string> value)
+    public List<string> GetPermanent()
     {
-        if (value != null) this.keys.AddRange(value);
+        return this.permanentProgress;
     }
 
-    public bool Contains(string key)
+    public void SetPermanent(List<string> value)
     {
-        return this.keys.Contains(GetKey(key));
+        if (value != null) this.permanentProgress.AddRange(value);
+    }
+
+    public bool Contains(string key, bool isPermanent)
+    {
+        string savedKey = GetKey(key);
+        if (isPermanent && this.permanentProgress.Contains(savedKey)) return true;
+        else if (!isPermanent && this.temporaryProgress.Contains(savedKey)) return true;
+        return false;
     }
 
     private string GetKey(string key)

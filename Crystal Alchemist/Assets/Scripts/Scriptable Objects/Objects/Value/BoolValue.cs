@@ -6,7 +6,7 @@ public class BoolValue : ScriptableObject, ISerializationCallbackReceiver
     [SerializeField]
     private bool value;
 
-    public bool getValue()
+    public bool GetValue()
     {
         return this.value;
     }

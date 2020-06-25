@@ -25,6 +25,9 @@ public class ItemGroup : ScriptableObject
     [SerializeField]
     private bool updateCurrencyUI;
 
+    [BoxGroup("Inventory")]
+    public AudioClip raiseSoundEffect;
+
     [BoxGroup("Shop Price")]
     [SerializeField]
     public Color color;
@@ -80,6 +83,10 @@ public class ItemGroup : ScriptableObject
 
     public void raiseCollectSignal()
     {
-        if (this.updateCurrencyUI) GameEvents.current.DoCurrencyChange(true);
+        if (this.updateCurrencyUI)
+        {
+            GameEvents.current.DoCurrencyChange(true);
+            AudioUtil.playSoundEffect(raiseSoundEffect);
+        }
     }
 }

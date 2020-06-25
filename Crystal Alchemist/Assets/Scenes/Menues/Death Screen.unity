@@ -369,8 +369,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a49409401baf742835b6dd3017735c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  textGUI: {fileID: 628399358}
   fontColor: {r: 1, g: 1, b: 1, a: 1}
   outlineColor: {r: 0.1981132, g: 0, b: 0, a: 1}
   outlineWidth: 0
@@ -555,8 +553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a49409401baf742835b6dd3017735c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  textGUI: {fileID: 644244300}
   fontColor: {r: 1, g: 0.29411766, b: 0.29411766, a: 1}
   outlineColor: {r: 0.1981132, g: 0, b: 0, a: 1}
   outlineWidth: 0.25
@@ -961,6 +957,8 @@ MonoBehaviour:
   lastTeleport: {fileID: 11400000, guid: 861c2af2cd801d4459e257b6f0edbc52, type: 2}
   nextTeleport: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
   deathMusic: {fileID: 8300000, guid: fbf3c3fc3b9ea0f49be22b5d3e7d997d, type: 3}
+  fadeIn: 0
+  fadeOut: 1
   cursor: {fileID: 175733141}
   textField: {fileID: 644244300}
   countDown: {fileID: 628399358}
@@ -1004,7 +1002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 175733141}
-  setFirstSelected: 1
+  selectFirst: 0
   isInteractable: 1
   overrideNavigation: 0
   up: []
@@ -1331,7 +1329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 175733141}
-  setFirstSelected: 0
+  selectFirst: 1
   isInteractable: 1
   overrideNavigation: 0
   up: []

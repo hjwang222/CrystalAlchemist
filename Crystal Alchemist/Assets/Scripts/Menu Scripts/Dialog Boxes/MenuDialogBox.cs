@@ -59,7 +59,6 @@ public class MenuDialogBox : MenuBehaviour
 
     private void Initialize()
     {
-        init();
         this.OnConfirm = this.info.OnConfirm;
         this.lastMainMenu = this.info.parent;
         this.lastCursor = this.info.cursor;
@@ -68,34 +67,27 @@ public class MenuDialogBox : MenuBehaviour
         if (this.info.type == DialogBoxType.ok) this.OKButton.gameObject.SetActive(true);        
         else
         {
-            this.YesButton.gameObject.SetActive(true);
-            this.NoButton.gameObject.SetActive(true);
-            setPrice(this.info.costs);
+            bool enabled = CanPressYes(this.info.costs);
+
+            this.YesButton.gameObject.SetActive(enabled);            
+            this.NoButton.gameObject.SetActive(true);            
         }
         
         this.EnableButtons(false);
     }
 
-    private void init()
-    {
-        this.YesButton.gameObject.SetActive(false);
-        this.NoButton.gameObject.SetActive(false);
-        this.OKButton.gameObject.SetActive(false);
-        this.price = null;
-        this.priceField.gameObject.SetActive(false);
-        UnityUtil.SetInteractable(this.YesButton.GetComponent<Selectable>(), true);
-    }
-
-    private void setPrice(Costs cost)
+    private bool CanPressYes(Costs cost)
     {
         this.price = cost;
+
         if (this.price != null && this.price.resourceType != CostType.none)
         {
             this.priceField.gameObject.SetActive(true);
-            bool enabled = this.priceField.CheckPrice(this.inventory, this.price);
-            UnityUtil.SetInteractable(this.YesButton.GetComponent<Selectable>(), enabled);
+            return this.priceField.CheckPrice(this.inventory, this.price);            
         }
-        else UnityUtil.SetInteractable(this.YesButton.GetComponent<Selectable>(), true);        
+
+        this.transform.localPosition = Vector2.zero;  
+        return true;
     }
 
     public void Yes()
@@ -123,7 +115,7 @@ public class MenuDialogBox : MenuBehaviour
 
     private void EnableButtons(bool value)
     {
-        if(this.lastCursor != null) this.lastCursor.gameObject.SetActive(value);
+        if (this.lastCursor != null) this.lastCursor.gameObject.SetActive(value);
         if (this.lastMainMenu == null) return;
 
         List<Selectable> selectables = new List<Selectable>();
@@ -139,7 +131,7 @@ public class MenuDialogBox : MenuBehaviour
                 if (buttonExtension != null)
                 {
                     buttonExtension.enabled = value;
-                    buttonExtension.SetFirst();
+                    buttonExtension.ReSelect();
                 }
             }
         }

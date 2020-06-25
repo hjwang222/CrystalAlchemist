@@ -108,7 +108,7 @@ public class PlayerData
 
     private void SetProgress(PlayerGameProgress progress)
     {
-        this.progress.AddRange(progress.Get());
+        this.progress.AddRange(progress.GetPermanent());
     }
 
     private void SetTeleportList(PlayerTeleportList list)

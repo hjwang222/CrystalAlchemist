@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class DateLocation : MonoBehaviour
 {
@@ -23,8 +24,8 @@ public class DateLocation : MonoBehaviour
 
     private void Start()
     {
-        updateLocationText();
         SettingsEvents.current.OnLanguangeChanged += updateLocationText;
+        updateLocationText();
     }
 
     private void Update() => UpdateTime();

@@ -17,7 +17,7 @@ public class AnalyseInfo : MonoBehaviour
 
     private void LateUpdate()
     {
-        this.analyseUILoot.gameObject.SetActive(this.isActive.getValue());
+        this.analyseUILoot.gameObject.SetActive(this.isActive.GetValue());
     }
 
     public void SetTarget(GameObject target)

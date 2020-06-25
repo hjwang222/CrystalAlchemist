@@ -6,12 +6,19 @@ public class HUDCutScene : MonoBehaviour
     [SerializeField]
     private List<GameObject> gameObjects = new List<GameObject>();
 
-    void Start() => GameEvents.current.OnCutScene += this.SetCutScene;    
+    [SerializeField]
+    private BoolValue CutSceneValue;
+
+    private void Start()
+    {
+        GameEvents.current.OnCutScene += this.SetCutScene;
+        SetCutScene();
+    }
 
     private void OnDestroy() => GameEvents.current.OnCutScene += this.SetCutScene;    
 
-    private void SetCutScene(bool value)
+    private void SetCutScene()
     {
-        foreach(GameObject gameObj in this.gameObjects) gameObj.SetActive(!value);        
+        foreach(GameObject gameObj in this.gameObjects) gameObj.SetActive(!this.CutSceneValue.GetValue());        
     }
 }

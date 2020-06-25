@@ -6,9 +6,20 @@ using UnityEngine.Events;
 
 public class CameraIntro : MonoBehaviour
 {
+    private enum Mode
+    {
+        always,
+        session,
+        oneTime
+    }
+
     [Required]
     [SerializeField]
     private CinemachineVirtualCamera introCamera;
+
+    [Required]
+    [SerializeField]
+    private BoolValue CutSceneValue;
 
     [Required]
     [SerializeField]
@@ -25,14 +36,14 @@ public class CameraIntro : MonoBehaviour
     private float delay = 1;
 
     [SerializeField]
-    private bool uniqueEvent = true;
+    private Mode mode;
 
-    [ShowIf("uniqueEvent")]
+    [HideIf("mode", Mode.always)]
     [Required]
     [SerializeField]
     private string gameProgressID;
 
-    [ShowIf("uniqueEvent")]
+    [HideIf("mode", Mode.always)]
     [Required]
     [SerializeField]
     private PlayerGameProgress playerProgress;
@@ -44,13 +55,15 @@ public class CameraIntro : MonoBehaviour
     private bool isRunning;
     private bool isInit = true;
     private CinemachineTrackedDolly dolly;
+    private bool isPermanent = false;
 
     private void Start() => CanPlay();
 
     private void CanPlay()
     {
-        if (this.uniqueEvent && this.playerProgress.Contains(this.gameProgressID)) this.gameObject.SetActive(false);        
-        else this.playerProgress.Add(this.gameProgressID);
+        if (this.mode == Mode.oneTime) isPermanent = true;
+
+        if (this.mode != Mode.always && this.playerProgress.Contains(this.gameProgressID, this.isPermanent)) this.gameObject.SetActive(false);        
         
         this.isInit = false;
     }
@@ -68,7 +81,10 @@ public class CameraIntro : MonoBehaviour
     {
         yield return new WaitForSeconds(this.delay);
         this.room.gameObject.SetActive(true);
-        GameEvents.current.DoCutScene(false);
+
+        this.CutSceneValue.setValue(false);
+        GameEvents.current.DoCutScene();
+
         this.gameObject.SetActive(false);
     }
 
@@ -77,9 +93,14 @@ public class CameraIntro : MonoBehaviour
         if (this.isInit) return;
 
         this.room.gameObject.SetActive(false);
-        GameEvents.current.DoCutScene(true);
+
+        this.CutSceneValue.setValue(true);
+        GameEvents.current.DoCutScene();
+
         this.onTrigger?.Invoke();
         this.dolly = introCamera.GetCinemachineComponent<CinemachineTrackedDolly>();
         this.isRunning = true;
+
+        this.playerProgress.AddProgress(this.gameProgressID, this.isPermanent);
     }
 }
