@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game/Player/Player Skillset")]
@@ -12,6 +13,7 @@ public class PlayerSkillset : ScriptableObject
         Initialize();
     }
 
+    [Button]
     public void Initialize()
     {
         this.abilities.Clear();
@@ -54,7 +56,8 @@ public class PlayerSkillset : ScriptableObject
         return null;
     }
 
-    public void AddAbility(Ability ability)
+    [Button]
+    private void AddAbility(Ability ability)
     {
         Ability newAbility = AbilityUtil.InstantiateAbility(ability);
         this.abilities.Add(newAbility);

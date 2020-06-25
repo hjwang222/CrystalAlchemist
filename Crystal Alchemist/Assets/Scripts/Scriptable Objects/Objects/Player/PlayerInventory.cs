@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game/Player/Player Inventory")]
@@ -30,7 +31,7 @@ public class PlayerInventory : ScriptableObject
         newGroup.UpdateAmount(amount);
         this.inventoryItems.Add(newGroup);
     }
-
+    
     public void collectItem(ItemGroup group, int amount)
     {
         ItemGroup found = getItemGroup(group);
@@ -38,6 +39,7 @@ public class PlayerInventory : ScriptableObject
         else found.UpdateAmount(amount); //set amount of itemgroup
     }
 
+    [Button]
     public void collectItem(ItemStats item)
     {
         if (item.IsKeyItem() && !GameEvents.current.HasKeyItem(item.name))

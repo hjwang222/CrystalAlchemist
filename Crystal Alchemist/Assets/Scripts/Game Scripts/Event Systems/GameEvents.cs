@@ -39,7 +39,7 @@ public class GameEvents : MonoBehaviour
     public Func<Costs, bool> OnEnoughCurrency;
 
     public Action OnCutScene;
-
+    public Action OnTimeChanged;
     public Action OnKill;
 
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
@@ -58,6 +58,7 @@ public class GameEvents : MonoBehaviour
 
     public void DoCutScene() => this.OnCutScene?.Invoke();
     public void DoKill() => this.OnKill?.Invoke();
+    public void DoTimeChange() => this.OnTimeChanged?.Invoke();
 
     public void DoAggroHit(Character character, Character target, float value) => this.OnAggroHit?.Invoke(character, target, value);
     public void DoAggroIncrease(Character character, Character target, float value) => this.OnAggroIncrease?.Invoke(character, target, value);

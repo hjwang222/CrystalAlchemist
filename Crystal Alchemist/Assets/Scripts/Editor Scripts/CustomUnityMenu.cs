@@ -1,7 +1,11 @@
-﻿using UnityEditor;
+﻿
 using UnityEngine;
 using System.Collections.Generic;
+
+#if UNITY_EDITOR
 using UnityEditor.SceneManagement;
+using UnityEditor;
+#endif
 
 public class CustomUnityMenu : MonoBehaviour
 {

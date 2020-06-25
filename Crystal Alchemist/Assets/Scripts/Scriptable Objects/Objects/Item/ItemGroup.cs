@@ -76,6 +76,7 @@ public class ItemGroup : ScriptableObject
         return FormatUtil.formatString(this.amount, this.maxAmount);
     }
 
+    [Button]
     public void UpdateAmount(int amount)
     {
         this.amount += amount;

@@ -2,10 +2,10 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //BUG: Context Clue wonky (Treasure shop)
-    //BUG: Death Screen wonky
-    //BUG: Schlafen und Fenster wonky (GameEvent?)
-    //TODO: Minigame Slider und Button Interactable
+    //Minor BUG: Death Screen wonky
+    //Minor BUG: Schlafen und Fenster wonky (GameEvent?)
+    //REWORK: Time Stasis
+    //BUG: Intro
 
     //-----------------------------------------------------------------------------
 

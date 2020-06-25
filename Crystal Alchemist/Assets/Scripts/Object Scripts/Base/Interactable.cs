@@ -136,7 +136,7 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    private bool PlayerCanInteract()
+    public bool PlayerCanInteract()
     {
         return (this.player != null            
             && this.isPlayerInRange

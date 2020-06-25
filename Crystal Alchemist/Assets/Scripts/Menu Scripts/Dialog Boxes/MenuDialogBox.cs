@@ -69,8 +69,9 @@ public class MenuDialogBox : MenuBehaviour
         {
             bool enabled = CanPressYes(this.info.costs);
 
-            this.YesButton.gameObject.SetActive(enabled);            
-            this.NoButton.gameObject.SetActive(true);            
+            this.YesButton.gameObject.SetActive(true);            
+            this.NoButton.gameObject.SetActive(true);
+            this.YesButton.SetInteractable(enabled);
         }
         
         this.EnableButtons(false);
@@ -123,7 +124,7 @@ public class MenuDialogBox : MenuBehaviour
 
         foreach (Selectable selectable in selectables)
         {
-            UnityUtil.SetInteractable(selectable, value);
+            selectable.interactable = value;
 
             if (value)
             {

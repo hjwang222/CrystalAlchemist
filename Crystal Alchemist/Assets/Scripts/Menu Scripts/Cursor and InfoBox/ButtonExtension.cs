@@ -37,7 +37,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     private List<Selectable> right = new List<Selectable>();
 
     private bool isInit = true;
-    private Selectable button;
+    private Selectable selectable;
 
     private void OnEnable()
     {
@@ -47,9 +47,9 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     private void Initialize()
     {
-        this.button = this.GetComponent<Selectable>();
+        this.selectable = this.GetComponent<Selectable>();
         this.setButtonNavigation();
-        UnityUtil.SetColors(this.button, Color.white);
+        SetColors();
         this.isInit = false;
     }
 
@@ -58,16 +58,16 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     {
         if (this.overrideNavigation)
         {
-            if (this.button != null)
+            if (this.selectable != null)
             {
-                Navigation nav = this.button.navigation;
+                Navigation nav = this.selectable.navigation;
                 nav.mode = Navigation.Mode.Explicit;
 
                 nav.selectOnUp = GetNavigationNeighbor(this.up);
                 nav.selectOnDown = GetNavigationNeighbor(this.down);
                 nav.selectOnLeft = GetNavigationNeighbor(this.left);
                 nav.selectOnRight = GetNavigationNeighbor(this.right);
-                this.button.navigation = nav;
+                this.selectable.navigation = nav;
             }
         }
     }
@@ -99,7 +99,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     public void SetCursor()
     {
-        this.cursor.Select(!this.isInit, this.button);
+        this.cursor.Select(!this.isInit, this.selectable);
     }
 
     public void ReSelect()
@@ -107,6 +107,20 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
         if (this.selectFirst) Select();
     }
 
+    public void SetInteractable(bool value) => this.selectable.interactable = value;
+
     public void SetAsFirst() => this.selectFirst = true;
+
+    public void SetColors()
+    {
+        if (this.selectable != null)
+        {
+            ColorBlock colors = this.selectable.colors;
+            colors.disabledColor = MasterManager.globalValues.buttonNotActive;
+            colors.highlightedColor = Color.white;
+            colors.selectedColor = MasterManager.globalValues.buttonSelect;
+            this.selectable.colors = colors;
+        }
+    }
 }
 

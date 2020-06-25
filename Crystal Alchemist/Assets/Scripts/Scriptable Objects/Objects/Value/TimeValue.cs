@@ -24,9 +24,6 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
     [SerializeField]
     private Gradient colorGradient;
 
-    [SerializeField]
-    private SimpleSignal signal;
-
     public void Clear() => SetStartTime();
 
     [Button]
@@ -91,10 +88,7 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
             this.minute += 1;
             this.seconds = 0;
 
-            if (this.minute % this.update == 0)
-            {
-                this.signal.Raise();
-            }
+            if (this.minute % this.update == 0) GameEvents.current.DoTimeChange();
 
             if (this.minute >= 60)
             {

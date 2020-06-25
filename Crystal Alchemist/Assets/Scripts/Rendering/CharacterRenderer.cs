@@ -24,11 +24,6 @@ public class CharacterRenderer : CustomRenderer
         this.material.SetColor("_Tint", color);        
     }
 
-    public void InvertColors(bool invert)
-    {
-        this.material.SetFloat("_Invert", invert ? 1f : 0f);
-    }
-
     public void ChangeTint(Color color)
     {
         if (this.colors.Contains(color))

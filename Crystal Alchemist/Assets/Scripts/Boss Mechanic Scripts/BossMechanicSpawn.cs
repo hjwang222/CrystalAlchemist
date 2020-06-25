@@ -153,6 +153,7 @@ public class BossMechanicSpawn : BossMechanicProperty
         {
             GameObject spawnedObject = Instantiate(this.childProperty.spawnObject, position, Quaternion.identity, this.transform) as GameObject;
             SetSkill(spawnedObject.GetComponent<Skill>(), target, rotation);
+            SetAdd(spawnedObject.GetComponent<Character>());
             SetAdd(spawnedObject.GetComponent<AI>(), target);
             SetAdd(spawnedObject.GetComponent<AddSpawn>(), target);
         }
@@ -170,6 +171,11 @@ public class BossMechanicSpawn : BossMechanicProperty
         if (spawn != null) spawn.Initialize(target);
     }
 
+    private void SetAdd(Character character)
+    {
+        if (character != null) character.InitializeAddSpawn();
+    }
+
     private void SetAdd(AI character, Character target)
     {
         if (character != null) character.InitializeAddSpawn(target);
@@ -178,6 +184,5 @@ public class BossMechanicSpawn : BossMechanicProperty
     private void SetSkill(Skill skill, Character target, Quaternion rotation)
     {
         if (skill != null) skill.InitializeStandAlone(this.sender, target, rotation);
-
     }
 }

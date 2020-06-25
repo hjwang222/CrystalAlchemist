@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3051716957352969399}
   - component: {fileID: 3051716957352969398}
   - component: {fileID: 4304610536748748851}
-  - component: {fileID: 2026239380713072308}
   m_Layer: 0
   m_Name: Window Light
   m_TagString: Untagged
@@ -88,33 +87,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd97da35106b1e489386748723867cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  light: {fileID: 3051716957352969398}
-  timeValue: {fileID: 11400000, guid: 2e74ee9fc7c012b4db454fc0922670d4, type: 2}
-  isActive: 1
---- !u!114 &2026239380713072308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3051716957352969393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 388394bfaa0f72d4bbf2d030cfb43013, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4304610536748748851}
-        m_MethodName: changeColor
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

@@ -27,8 +27,8 @@ public class CharacterCreatorName : CharacterCreatorButton
     {
         this.playerName.SetValue(this.inputField.text);
 
-        if (this.inputField.text.Length > 1) UnityUtil.SetInteractable(this.confirmButton, true);
-        else UnityUtil.SetInteractable(this.confirmButton, false);
+        if (this.inputField.text.Length > 1) this.confirmButton.interactable = true;
+        else this.confirmButton.interactable = false;
 
         Deactivate();
     }

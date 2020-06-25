@@ -70,7 +70,7 @@ public class MiniGameDialogbox : MonoBehaviour
         this.winUI.SetItem(match.GetItem().stats);
 
         bool canStart = this.priceUI.CheckPrice(this.inventory, match.price);
-        UnityUtil.SetInteractable(this.startButton, canStart);
+        this.startButton.interactable = canStart;
 
         this.trySlots.SetValues(match.winsNeeded, match.maxRounds);
         this.descriptionText.text = this.info.miniGameUI.GetDescription(this.text, difficulty);

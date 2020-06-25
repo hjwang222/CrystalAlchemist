@@ -164,7 +164,9 @@ public class Treasure : Rewardable
     {
         //Animator Events
         this.treasureEnabled = enable;
-        this.context.gameObject.SetActive(enable);
+
+        if(PlayerCanInteract() && enable) this.context.gameObject.SetActive(true);
+        else this.context.gameObject.SetActive(false);
     }
 
     public void showTreasureItem()

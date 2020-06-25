@@ -49,6 +49,11 @@ public class CharacterRenderingHandler : MonoBehaviour
         foreach (CharacterRenderer colorPalette in this.colorpalettes) colorPalette.RemoveTint(color);        
     }
 
+    public void Invert(bool value)
+    {
+        foreach (CharacterRenderer colorPalette in this.colorpalettes) colorPalette.InvertColors(value);
+    }
+
     public void enableSpriteRenderer(bool value) => this.characterSprite.SetActive(value);    
 
     public void ChangeTint(Color color)

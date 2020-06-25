@@ -31,11 +31,8 @@ public class AI : NonPlayer
 
     public void InitializeAddSpawn(Character target)
     {
-        this.IsSummoned = true;
-        this.stats = Instantiate(this.stats);
-        this.stats.hasRespawn = false;
+        this.InitializeAddSpawn();
         this.target = target;
-        this.transform.SetParent(null);
     }
 
     public override void Start()

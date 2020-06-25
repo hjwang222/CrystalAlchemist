@@ -47,6 +47,11 @@ public class CustomRenderer : MonoBehaviour
         AddGlow();
     }
 
+    public void InvertColors(bool invert)
+    {
+        this.material.SetFloat("_Invert", invert ? 1f : 0f);
+    }
+
     private void AddGlow()
     {
         this.material.SetFloat("_Use_Glow", this.useGlow ? 1f : 0f);

@@ -6,6 +6,13 @@ using UnityEngine.UI;
 
 public static class UnityUtil
 {
+    public static T GetComponentAll<T>(GameObject gameObject)
+    {
+        if (gameObject.GetComponentInChildren<T>() != null) return gameObject.GetComponentInChildren<T>();
+        if (gameObject.GetComponentInParent<T>() != null) return gameObject.GetComponentInParent<T>();
+        return default;
+    }
+
     public static void GetChildObjects<T>(Transform transform, List<T> childObjects)
     {
         foreach (Transform child in transform)
@@ -165,23 +172,5 @@ public static class UnityUtil
         return layerNumber - 1;
     }
 
-    public static void SetInteractable(Selectable selectable, bool active)
-    {
-        selectable.interactable = active;
 
-        if (active) SetColors(selectable, Color.white);
-        else SetColors(selectable, MasterManager.globalValues.buttonNotActive);
-    }
-
-    public static void SetColors(Selectable selectable, Color disabledColor)
-    {
-        if (selectable != null)
-        {
-            ColorBlock colors = selectable.colors;
-            colors.disabledColor = disabledColor;
-            colors.highlightedColor = Color.white;
-            colors.selectedColor = MasterManager.globalValues.buttonSelect;
-            selectable.colors = colors;
-        }
-    }
 }

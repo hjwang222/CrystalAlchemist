@@ -9,39 +9,19 @@ public class DayNightCircle : MonoBehaviour
     private bool isRunning = false;
     private TimeValue timeValue;
 
-    private void Start()
+    private void Awake()
     {
         this.Lighting = this.GetComponent<Light2D>();
         this.timeValue = MasterManager.timeValue;
-        this.Lighting.color = this.timeValue.GetColor();
     }
 
-    public void changeColor()
+    private void Start()
     {
-        StopAllCoroutines();
-        Color newColor = this.timeValue.GetColor();
-        float duration = this.timeValue.factor * (this.timeValue.update - 1);
-        if (newColor != Lighting.color && !this.isRunning) StartCoroutine(lerpColor(Lighting, Lighting.color, newColor, duration));
+        GameEvents.current.OnTimeChanged += changeColor;
+        changeColor();
     }
 
-    IEnumerator lerpColor(Light2D light, Color fromColor, Color toColor, float duration)
-    {
-        this.isRunning = true;
-        float counter = 0;
+    private void OnDestroy() => GameEvents.current.OnTimeChanged -= changeColor;
 
-        while (counter < duration)
-        {
-            counter += Time.deltaTime;
-
-            float colorTime = counter / duration;
-
-            //Change color
-            light.color = Color.Lerp(fromColor, toColor, counter / duration);
-
-            //Wait for a frame
-            yield return null;
-        }
-
-        this.isRunning = false;
-    }
+    public void changeColor() => Lighting.color = this.timeValue.GetColor();    
 }

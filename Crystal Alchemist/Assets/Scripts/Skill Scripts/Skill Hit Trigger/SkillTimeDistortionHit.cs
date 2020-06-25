@@ -26,17 +26,19 @@ public class SkillTimeDistortionHit : SkillHitTrigger
     private void OnDestroy()
     {      
         //Zeit normalisieren wenn Skill zerstört/beendet wird
-        isDestroyed = true; 
+        isDestroyed = true;        
 
-        foreach(Character character in this.affectedCharacters)
+        foreach (Character character in this.affectedCharacters)
         {
             StatusEffectUtil.RemoveStatusEffect(this.timeEffect, true, character);
+            Invert(character.gameObject, false);
         }
 
         //Skills wieder normalisieren
         foreach (Skill skill in this.affectedSkills)
         {
             skill.updateTimeDistortion(0);
+            Invert(skill.gameObject, false);
         }
 
         affectedCharacters.Clear();
@@ -70,12 +72,14 @@ public class SkillTimeDistortionHit : SkillHitTrigger
     #region Functions (private)
     private void removeTimeDistorion(GameObject hittedCharacter)
     {
-        Skill skill = AbilityUtil.getSkillByCollision(hittedCharacter);
+        Invert(hittedCharacter, false);
+        Skill skill = AbilityUtil.getSkillByCollision(hittedCharacter);        
 
         if (skill != null)
         {
             skill.updateTimeDistortion(0);
             this.affectedSkills.Remove(skill);
+            return;
         }
 
         Character character = hittedCharacter.GetComponent<Character>();
@@ -87,21 +91,32 @@ public class SkillTimeDistortionHit : SkillHitTrigger
         }
     }
 
+    private void Invert(GameObject hittedCharacter, bool value)
+    {
+        //CharacterRenderingHandler handler = UnityUtil.GetComponentAll<CharacterRenderingHandler>(hittedCharacter);
+        //CustomRenderer customRenderer = UnityUtil.GetComponentAll<CustomRenderer>(hittedCharacter);
+        //if (handler != null) handler.Invert(true);
+        //else if (customRenderer != null) customRenderer.InvertColors(true);
+    }
+
     private void setTimeDistorion(GameObject hittedCharacter, float destortion)
     {
-        Character character = hittedCharacter.GetComponent<Character>();
-        Skill skill = AbilityUtil.getSkillByCollision(hittedCharacter);
-
-        if (character != null)
-        {
-            StatusEffectUtil.AddStatusEffect(this.timeEffect, character);
-            if (!this.affectedCharacters.Contains(character)) this.affectedCharacters.Add(character);
-        }
+        Invert(hittedCharacter, true);
+        Skill skill = AbilityUtil.getSkillByCollision(hittedCharacter);        
 
         if (skill != null)
         {
             skill.updateTimeDistortion(destortion);
             if(!this.affectedSkills.Contains(skill)) this.affectedSkills.Add(skill);
+            return;
+        }
+
+        Character character = hittedCharacter.GetComponent<Character>();
+
+        if (character != null)
+        {
+            StatusEffectUtil.AddStatusEffect(this.timeEffect, character);
+            if (!this.affectedCharacters.Contains(character)) this.affectedCharacters.Add(character);
         }
     }
     #endregion

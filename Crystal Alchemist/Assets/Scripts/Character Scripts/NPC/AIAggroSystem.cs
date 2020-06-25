@@ -84,14 +84,22 @@ public class AIAggroSystem : MonoBehaviour
         this.npc.aggroList.Clear();
     }
 
+    private bool IsValidTarget(Character target)
+    {
+        if (target == null
+            || !target.gameObject.activeInHierarchy
+            || target.values.isInvincible
+            || target.values.currentState == CharacterState.dead
+            || target.values.currentState == CharacterState.respawning) return false;
+
+        return true;
+    }
+
     private void generateAggro()
     {
         List<Character> charactersToRemove = new List<Character>();
 
-        if(this.npc.target != null 
-            && (!this.npc.target.gameObject.activeInHierarchy 
-            || this.npc.target.values.currentState == CharacterState.dead
-            || this.npc.target.values.currentState == CharacterState.respawning))
+        if (this.npc.target != null && !IsValidTarget(this.npc.target))
         {
             this.npc.aggroList.Remove(this.npc.target);
             this.npc.target = null;
@@ -232,7 +240,7 @@ public class AIAggroSystem : MonoBehaviour
 
     private void increaseAggro(Character character, Character newTarget, float aggroIncrease)
     {
-        if (newTarget != null && character == this.npc)
+        if (newTarget != null && IsValidTarget(newTarget) && character == this.npc)
         {
             addToAggroList(newTarget);
             setParameterOfAggrolist(newTarget, aggroIncrease);

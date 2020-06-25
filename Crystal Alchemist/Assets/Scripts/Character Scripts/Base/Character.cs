@@ -64,8 +64,11 @@ public class Character : MonoBehaviour
     [BoxGroup("Player")]
     public CharacterValues values;
 
+    [HideInInspector]
+    public bool IsSummoned = false;
+
     #endregion
-       
+
     #region Start Functions (Spawn, Init)
     public virtual void Awake()
     {
@@ -111,6 +114,14 @@ public class Character : MonoBehaviour
 
         if (this.GetComponent<CharacterRenderingHandler>() != null) this.GetComponent<CharacterRenderingHandler>().Reset();
         if (this.boxCollider != null) this.boxCollider.enabled = true;
+    }
+
+    public void InitializeAddSpawn()
+    {
+        this.IsSummoned = true;
+        this.stats = Instantiate(this.stats);
+        this.stats.hasRespawn = false;
+        this.transform.SetParent(null);
     }
 
     public virtual void OnDestroy() => GameEvents.current.OnEffectAdded -= AddStatusEffectVisuals;

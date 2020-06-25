@@ -2,9 +2,6 @@
 
 public class NonPlayer : Character
 {
-    [HideInInspector]
-    public bool IsSummoned = false;
-
     public override void Start()
     {
         if (this.IsSummoned)

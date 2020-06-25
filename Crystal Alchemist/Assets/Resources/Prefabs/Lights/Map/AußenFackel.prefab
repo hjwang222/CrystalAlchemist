@@ -291,7 +291,6 @@ GameObject:
   - component: {fileID: 4689723426235176693}
   - component: {fileID: 778619320233682838}
   - component: {fileID: 6651327577674907994}
-  - component: {fileID: 7223656564851072886}
   - component: {fileID: 3299572065620868853}
   m_Layer: 0
   m_Name: "Au\xDFenFackel"
@@ -339,34 +338,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightGameObject: {fileID: 3442753524108193626}
---- !u!114 &7223656564851072886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7824060400919558988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ddc843b70b30a468eaa9b80f2d88d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 11400000, guid: 388394bfaa0f72d4bbf2d030cfb43013, type: 2}
-  signalEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6651327577674907994}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: switchInteriorLights
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!61 &3299572065620868853
 BoxCollider2D:
   m_ObjectHideFlags: 0
