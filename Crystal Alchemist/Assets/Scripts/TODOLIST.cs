@@ -4,8 +4,7 @@ public class TODOLIST : MonoBehaviour
 {
     //Minor BUG: Death Screen wonky
     //BUG: Intro
-
-    //REWORK: Quicktravel Drop Down Menu (cursor on Toggle and dropdown instead of buttons, sorted)
+    //TODO: sorting quicktravel + select first + platz unten
 
     //-----------------------------------------------------------------------------
 

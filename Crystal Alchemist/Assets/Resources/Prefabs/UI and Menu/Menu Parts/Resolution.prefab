@@ -299,7 +299,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  setFirstSelected: 1
+  selectFirst: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -471,6 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!1 &573261212237208022
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +782,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3330089401904643903}
   - component: {fileID: 2557122645060022247}
+  - component: {fileID: 655499577595911905}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -854,8 +857,35 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 655499577595911905}
+        m_TargetAssemblyTypeName: DropDownExtension, Assembly-CSharp
+        m_MethodName: ReSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
+--- !u!114 &655499577595911905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792340888730526795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bf652b370cf5d42b07c4c21b130e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropDown: {fileID: 2038219388492730974}
+  scrollBar: {fileID: 0}
+  cursor: {fileID: 0}
 --- !u!1 &1066038407451442032
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,7 +1061,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  setFirstSelected: 0
+  selectFirst: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -1273,7 +1304,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8125540393909061678}
+        m_TargetAssemblyTypeName: DropDownExtension, Assembly-CSharp
+        m_MethodName: ReSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!114 &8125540393909061678
 MonoBehaviour:
@@ -1289,6 +1332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropDown: {fileID: 5123368347828927426}
   scrollBar: {fileID: 7501452990839201275}
+  cursor: {fileID: 0}
 --- !u!1 &2498070978695893629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,7 +1493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  setFirstSelected: 0
+  selectFirst: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -2782,6 +2827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!1 &8261881775971982106
 GameObject:
   m_ObjectHideFlags: 0

@@ -39855,3 +39855,472 @@ Ability.CheckResourceAndAmount () (at Assets/Scripts/Scriptable Objects/Objects/
 CombatButtonUI.updateButton () (at Assets/Scripts/Menu Scripts/HUD/CombatButtonUI.cs:137)
 CombatButtonUI.FixedUpdate () (at Assets/Scripts/Menu Scripts/HUD/CombatButtonUI.cs:91)
 
+Exception 26.06.2020 16:43:59: UnassignedReferenceException: The variable template of TitleScreenPatchNotes has not been assigned.
+You probably need to assign the template variable of the TitleScreenPatchNotes script in the inspector.
+UnityEngine.Object.Instantiate (UnityEngine.Object original, UnityEngine.Transform parent, System.Boolean instantiateInWorldSpace) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.Object.Instantiate[T] (T original, UnityEngine.Transform parent, System.Boolean worldPositionStays) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.Object.Instantiate[T] (T original, UnityEngine.Transform parent) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+TitleScreenPatchNotes.OnEnable () (at Assets/Scripts/Menu Scripts/TitleScreen/TitleScreenPatchNotes.cs:16)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 16:43:59: NullReferenceException: Object reference not set to an instance of an object
+ButtonExtension.SetCursor () (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:102)
+ButtonExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:98)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:SetSelectedGameObject(GameObject)
+ButtonExtension:Select() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:90)
+ButtonExtension:OnEnable() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:45)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 16:43:59: NullReferenceException: Object reference not set to an instance of an object
+ButtonExtension.SetCursor () (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:102)
+ButtonExtension.Select () (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:93)
+ButtonExtension.OnEnable () (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:45)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 16:44:02: UnassignedReferenceException: The variable template of TitleScreenPatchNotes has not been assigned.
+You probably need to assign the template variable of the TitleScreenPatchNotes script in the inspector.
+TitleScreenPatchNotes.OnDisable () (at Assets/Scripts/Menu Scripts/TitleScreen/TitleScreenPatchNotes.cs:31)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:31: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:SetSelectedGameObject(GameObject)
+ButtonExtension:Select() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:90)
+ButtonExtension:OnPointerEnter(PointerEventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:96)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:31: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:SetSelectedGameObject(GameObject)
+ButtonExtension:Select() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:90)
+ButtonExtension:OnPointerEnter(PointerEventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:96)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:32: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:SetSelectedGameObject(GameObject)
+ButtonExtension:Select() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:90)
+ButtonExtension:OnPointerEnter(PointerEventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:96)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:32: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:SetSelectedGameObject(GameObject)
+ButtonExtension:Select() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:90)
+ButtonExtension:OnPointerEnter(PointerEventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:96)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:33: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:SetSelectedGameObject(GameObject)
+ButtonExtension:Select() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:90)
+ButtonExtension:OnPointerEnter(PointerEventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:96)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:33: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:SetSelectedGameObject(GameObject)
+ButtonExtension:Select() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:90)
+ButtonExtension:OnPointerEnter(PointerEventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:96)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:33: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:33: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:33: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:33: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:34: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:34: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:34: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:34: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:35: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:35: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:35: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:35: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:36: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:36: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:20)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:05:38: NullReferenceException: Object reference not set to an instance of an object
+DropDownExtension.OnDestroy () (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:44)
+
+Exception 26.06.2020 17:05:38: NullReferenceException: Object reference not set to an instance of an object
+DropDownExtension.OnDestroy () (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:44)
+
+Exception 26.06.2020 17:05:38: NullReferenceException: Object reference not set to an instance of an object
+DropDownExtension.OnDestroy () (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:44)
+
+Exception 26.06.2020 17:05:38: NullReferenceException: Object reference not set to an instance of an object
+DropDownExtension.OnDestroy () (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:44)
+
+Exception 26.06.2020 17:05:38: NullReferenceException: Object reference not set to an instance of an object
+DropDownExtension.OnDestroy () (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:44)
+
+Exception 26.06.2020 17:31:45: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:SetSelectedGameObject(GameObject)
+ButtonExtension:Select() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:90)
+ButtonExtension:OnPointerEnter(PointerEventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:96)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:31:57: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:SetSelectedGameObject(GameObject)
+PreventDeselection:Update() (at Assets/Scripts/Menu Scripts/Manager/PreventDeselection.cs:13)
+
+Exception 26.06.2020 17:31:58: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:SetSelectedGameObject(GameObject)
+ButtonExtension:Select() (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:90)
+ButtonExtension:OnPointerEnter(PointerEventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/ButtonExtension.cs:96)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:31:58: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:31:58: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:31:59: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:31:59: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:00: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:00: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:00: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:00: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:00: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:01: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:01: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:01: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:02: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:02: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:02: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:02: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
+Exception 26.06.2020 17:32:02: FormatException: Input string was not in a correct format.
+System.Number.StringToNumber (System.String str, System.Globalization.NumberStyles options, System.Number+NumberBuffer& number, System.Globalization.NumberFormatInfo info, System.Boolean parseDecimal) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Number.ParseInt32 (System.String s, System.Globalization.NumberStyles style, System.Globalization.NumberFormatInfo info) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Int32.Parse (System.String s, System.IFormatProvider provider) (at <fb001e01371b4adca20013e0ac763896>:0)
+System.Convert.ToInt32 (System.String value) (at <fb001e01371b4adca20013e0ac763896>:0)
+DropDownExtension.OnSelect (UnityEngine.EventSystems.BaseEventData eventData) (at Assets/Scripts/Menu Scripts/Cursor and InfoBox/DropDownExtension.cs:17)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelectHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:106)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+

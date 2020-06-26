@@ -23,7 +23,8 @@ public class CustomCursor : MonoBehaviour
     private float offset = 16;
     private int distance = 400;
     private RectTransform rect;
-    public GameObject selectedObject;
+    public Selectable selectedObject;
+    
 
     private void Awake()
     {
@@ -43,20 +44,28 @@ public class CustomCursor : MonoBehaviour
 
     public void Select(bool playEffect, Selectable selectable)
     {
-        if (selectable != null && this.selectedObject != selectable.gameObject)
+        if (selectable != null && this.selectedObject != selectable)
         {
-            this.selectedObject = selectable.gameObject;
+            this.selectedObject = selectable;
+            SetPositionToSelectable(playEffect);
 
-            this.rect = (RectTransform)selectable.transform;
-
-            if (selectable.GetComponent<Scrollbar>() != null) this.rect = selectable.GetComponent<Scrollbar>().handleRect;
-            if (selectable.GetComponent<Slider>() != null) this.rect = selectable.GetComponent<Slider>().handleRect;
-            UpdatePosition();
-
-            setInfoBox(selectable);
-            if (playEffect) this.GetComponent<CustomCursor>().playSoundEffect();
+            setInfoBox(selectable);            
         }
     }
+
+    public void SetPositionToSelectable(bool playEffect)
+    {
+        Selectable selectable = this.selectedObject;
+        this.rect = (RectTransform)selectable.transform;
+
+        if (selectable.GetComponent<Scrollbar>() != null) this.rect = selectable.GetComponent<Scrollbar>().handleRect;
+        if (selectable.GetComponent<Slider>() != null) this.rect = selectable.GetComponent<Slider>().handleRect;
+
+        UpdatePosition();
+        if (playEffect) playSoundEffect();
+    }
+
+    public void SetTransform(RectTransform rect) => this.rect = rect;
 
     public void UpdatePosition()
     {
