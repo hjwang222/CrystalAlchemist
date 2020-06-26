@@ -91,6 +91,7 @@ public class MenuDialogBox : MenuBehaviour
         return true;
     }
 
+    [Button]
     public void Yes()
     {        
         this.CloseDialog();

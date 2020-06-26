@@ -3,8 +3,8 @@
 public class TODOLIST : MonoBehaviour
 {
     //Minor BUG: Death Screen wonky
-    //BUG: Intro
-    //TODO: sorting quicktravel + select first + platz unten
+    //BUG: Intro (WHY???????)
+    //TODO: Teleport Skill
 
     //-----------------------------------------------------------------------------
 

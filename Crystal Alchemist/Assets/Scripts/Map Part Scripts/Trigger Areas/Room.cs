@@ -44,7 +44,6 @@ public class Room : MonoBehaviour
 
             this.stringValue.SetValue(this.localisationID);
             SettingsEvents.current.DoLanguageChange();
-            if (this.virtualCamera.Follow == null) this.virtualCamera.Follow = collider.transform;
         }
     }
 

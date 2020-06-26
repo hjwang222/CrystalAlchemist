@@ -18,6 +18,7 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
     public static List<ItemDrop> itemDrops { get { return Instance._itemDrops; } }
     public static List<ItemGroup> itemGroups { get { return Instance._itemGroups; } }
     public static List<Ability> abilities { get { return Instance._abilities; } }
+    public static List<TeleportStats> teleportpoints { get { return Instance._teleportPoints; } }
     public static TargetingSystem targetingSystem { get { return Instance._targetingSystem; } }
     public static TimeValue timeValue { get { return Instance._timeValue; } }
     public static StringValue actionButtonText { get { return Instance._actionButtonText; } }
@@ -85,6 +86,9 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
     [BoxGroup("Loading")]
     [SerializeField]
     private List<Ability> _abilities = new List<Ability>();
+    [BoxGroup("Loading")]
+    [SerializeField]
+    private List<TeleportStats> _teleportPoints = new List<TeleportStats>();
 
 
     [Button]
@@ -93,11 +97,13 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
         this._itemDrops.Clear();
         this._itemGroups.Clear();
         this._abilities.Clear();
+        this._teleportPoints.Clear();
 
         this._itemDrops.AddRange(Resources.LoadAll<ItemDrop>("Scriptable Objects/Items/Item Drops/Key Items/"));
         this._itemGroups.AddRange(Resources.LoadAll<ItemGroup>("Scriptable Objects/Items/Item Groups/Inventory Items/"));
         this._itemGroups.AddRange(Resources.LoadAll<ItemGroup>("Scriptable Objects/Items/Item Groups/Currencies/"));
         this._abilities.AddRange(Resources.LoadAll<Ability>("Scriptable Objects/Abilities/Skills/Player Skills/"));
+        this._teleportPoints.AddRange(Resources.LoadAll<TeleportStats>("Scriptable Objects/TeleportPoints/"));
     }
 
     public static ItemDrop getItemDrop(string name)
@@ -115,6 +121,16 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
         foreach (ItemGroup group in itemGroups)
         {
             if (group.name == name) return group;
+        }
+
+        return null;
+    }
+
+    public static TeleportStats GetTeleportStats(string teleportName)
+    {
+        foreach (TeleportStats teleport in teleportpoints)
+        {
+            if (teleport.teleportName == teleportName) return teleport;
         }
 
         return null;

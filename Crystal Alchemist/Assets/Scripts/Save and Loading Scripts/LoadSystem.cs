@@ -4,10 +4,8 @@ using System;
 
 public class LoadSystem
 {
-    public static void loadPlayerData(PlayerSaveGame saveGame, string slot)
+    public static void loadPlayerData(PlayerSaveGame saveGame, PlayerData data)
     {
-        PlayerData data = SaveSystem.loadPlayer(slot);
-
         if (data != null)
         {
             LoadPreset(data, saveGame.playerPreset);
@@ -21,9 +19,8 @@ public class LoadSystem
             loadPlayerSkills(data, saveGame.buttons, saveGame.skillSet);
             LoadProgress(data, saveGame.progress);
 
-            saveGame.startSpawnPoint.SetValue(data.startScene, data.startPosition);
-            saveGame.lastTeleport.SetValue(data.lastScene, data.lastPosition);
-
+            LoadTeleportPoint(data.startTeleport, saveGame.startSpawnPoint);
+            LoadTeleportPoint(data.lastTeleport, saveGame.lastTeleport);
             LoadTeleportList(data, saveGame.teleportList);
         }
     }
@@ -34,15 +31,19 @@ public class LoadSystem
         progress.SetPermanent(data.progress);
     }
 
+    private static void LoadTeleportPoint(string name, TeleportStats stat)
+    {
+        TeleportStats teleport = MasterManager.GetTeleportStats(name);
+        if(teleport != null) stat.SetValue(teleport);
+    }
+
     private static void LoadTeleportList(PlayerData data, PlayerTeleportList list)
     {
         if (data.teleportPoints == null) return;
-        foreach(object[] teleportData in data.teleportPoints)
+        foreach(string name in data.teleportPoints)
         {
-            TeleportStats stats = new TeleportStats((string)teleportData[0], (string)teleportData[1], 
-                                         new Vector2((float)teleportData[2], (float)teleportData[3]));
-
-            list.AddTeleport(stats);
+            TeleportStats teleport = MasterManager.GetTeleportStats(name);
+            if (teleport != null) list.AddTeleport(teleport);
         }
     }
 

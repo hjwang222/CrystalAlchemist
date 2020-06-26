@@ -23,7 +23,7 @@ public class CameraIntro : MonoBehaviour
 
     [Required]
     [SerializeField]
-    private Room room;
+    private CinemachineVirtualCamera mainCam;
 
     [SerializeField]
     [MinValue(0.05)]
@@ -62,7 +62,6 @@ public class CameraIntro : MonoBehaviour
     private void CanPlay()
     {
         if (this.mode == Mode.oneTime) isPermanent = true;
-
         if (this.mode != Mode.always && this.playerProgress.Contains(this.gameProgressID, this.isPermanent)) this.gameObject.SetActive(false);        
         
         this.isInit = false;
@@ -80,7 +79,7 @@ public class CameraIntro : MonoBehaviour
     private IEnumerator delayCo()
     {
         yield return new WaitForSeconds(this.delay);
-        this.room.gameObject.SetActive(true);
+        this.mainCam.gameObject.SetActive(true);
 
         this.CutSceneValue.setValue(false);
         GameEvents.current.DoCutScene();
@@ -92,7 +91,7 @@ public class CameraIntro : MonoBehaviour
     {
         if (this.isInit) return;
 
-        this.room.gameObject.SetActive(false);
+        this.mainCam.gameObject.SetActive(false);
 
         this.CutSceneValue.setValue(true);
         GameEvents.current.DoCutScene();

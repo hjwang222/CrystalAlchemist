@@ -36,7 +36,7 @@ public static class StatusEffectUtil
             for (int i = 0; i < character.stats.immunityToStatusEffects.Count; i++)
             {
                 StatusEffect immunityEffect = character.stats.immunityToStatusEffects[i];
-                if (statusEffect.name == immunityEffect.name) return true;
+                if (immunityEffect != null && statusEffect.name == immunityEffect.name) return true;
             }
         }
 

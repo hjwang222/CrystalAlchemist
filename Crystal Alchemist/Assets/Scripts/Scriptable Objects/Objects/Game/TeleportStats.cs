@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using AssetIcons;
 
 [CreateAssetMenu(menuName = "Game/Player/Teleport Stats")]
 public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
@@ -9,6 +10,9 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
     public bool showAnimationIn = false;
     public bool showAnimationOut = false;
 
+    [AssetIcon]
+    public Sprite icon;
+
     public void Clear()
     {
         this.teleportName = "";
@@ -18,12 +22,6 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
         this.showAnimationOut = false;
     }
 
-    public TeleportStats(string teleportName, string targetScene, Vector2 position)
-    {
-        //Called from Loadsystem
-        SetValue(teleportName, targetScene, position, true, true);
-    }
-
     public TeleportStats(TeleportStats stat)
     {
         //Called from TeleportList and Savepoint
@@ -31,7 +29,7 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
         SetValue(stat);
     }
 
-    public void SetValue(string teleportName, string targetScene, Vector2 position, bool showIn, bool showOut)
+    public void SetValue(string teleportName, string targetScene, Vector2 position, bool showIn, bool showOut, Sprite icon)
     {
         if (targetScene != null && targetScene != "")
         {
@@ -40,34 +38,32 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
             this.position = position;
             this.showAnimationIn = showIn;
             this.showAnimationOut = showOut;
+            this.icon = icon;
         }
         else Clear();
-    }
-
-    public void SetValue(string targetScene, float[] array)
-    {
-        //Start Point (Load)
-        Vector2 position = Vector2.zero;
-        if (array != null && array.Length >= 2) position = new Vector2(array[0], array[1]);
-        SetValue("",targetScene, position, true, false);
     }
 
     public void SetValue(string targetScene, Vector2 position)
     {
         //Start new Game
-        SetValue("",targetScene, position, true, false);
+        SetValue("",targetScene, position, true, false, null);
     }
 
     public void SetValue(TeleportStats stats)
     {
-        //Death Screen and Constructor
-        SetValue(stats.teleportName, stats.scene, stats.position, true, true);
+        //Death Screen and Constructor und LoadSystems
+        SetValue(stats.teleportName, stats.scene, stats.position, true, true, stats.icon);
     }
 
     public void SetValue(string targetScene, Vector2 position, bool showIn, bool showOut)
     {
         //Scene Transition
-        SetValue("", targetScene, position, showIn, showOut);
+        SetValue("", targetScene, position, showIn, showOut, null);
+    }
+
+    public string GetTeleportName()
+    {
+        return FormatUtil.GetLocalisedText(this.name, LocalisationFileType.maps);
     }
 
     public void OnAfterDeserialize() { }

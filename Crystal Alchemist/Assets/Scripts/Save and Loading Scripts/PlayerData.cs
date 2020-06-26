@@ -15,7 +15,6 @@ public class PlayerData
 
     public List<string> keyItems = new List<string>();
     public List<string[]> inventoryItems = new List<string[]>();
-    public List<object[]> teleportPoints = new List<object[]>();
     public List<string[]> abilities = new List<string[]>();
 
     public string characterName;
@@ -24,13 +23,9 @@ public class PlayerData
     public List<string[]> characterParts = new List<string[]>();
     public List<string> progress = new List<string>();
 
-    public float[] startPosition;
-    public string startScene;
-    public string startName;
-
-    public float[] lastPosition;
-    public string lastScene;
-    public string lastName;
+    public List<string> teleportPoints = new List<string>();
+    public string startTeleport;
+    public string lastTeleport;
 
     public float timePlayed;
 
@@ -115,30 +110,18 @@ public class PlayerData
     {
         this.teleportPoints.Clear();
 
-        foreach(TeleportStats stat in list.GetStats())
-        {
-            object[] teleportLine = new object[4];
-            teleportLine[0] = stat.teleportName;
-            teleportLine[1] = stat.scene;
-            teleportLine[2] = stat.position.x;
-            teleportLine[3] = stat.position.y;
-
-            this.teleportPoints.Add(teleportLine);
-        }
+        foreach(TeleportStats stat in list.GetStats()) this.teleportPoints.Add(stat.teleportName);        
     }
 
-    private void SetStartTeleport(TeleportStats stats)
-    {
-        this.startScene = stats.scene;
-        this.startName = stats.teleportName;
-        this.startPosition = new float[] { stats.position.x, stats.position.y };
-    }
+    private void SetStartTeleport(TeleportStats stats) => this.startTeleport = stats.teleportName;
 
-    private void SetLastTeleport(TeleportStats stats)
+    private void SetLastTeleport(TeleportStats stats) => this.lastTeleport = stats.teleportName;
+
+    public string GetStartTeleport()
     {
-        this.lastScene = stats.scene;
-        this.lastName = stats.teleportName;
-        this.lastPosition = new float[] { stats.position.x, stats.position.y };
+        TeleportStats stats = MasterManager.GetTeleportStats(this.startTeleport);
+        if (stats != null) return stats.GetTeleportName();
+        return "???";
     }
 }
 

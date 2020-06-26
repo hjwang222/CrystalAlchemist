@@ -289,9 +289,10 @@ public class Ability : ScriptableObject
     public bool HasEnoughResourceAndAmount()
     {
         bool enoughResource = this.isResourceEnough();
-
         bool notToMany = true;
-        if (this.hasMaxAmount) notToMany = (getAmountOfSameSkills(this.skill, sender.values.activeSkills, sender.values.activePets) < this.maxAmount);
+
+        if (this.hasMaxAmount && sender != null)
+            notToMany = (getAmountOfSameSkills(this.skill, sender.values.activeSkills, sender.values.activePets) < this.maxAmount);
 
         return (notToMany && enoughResource);
     }

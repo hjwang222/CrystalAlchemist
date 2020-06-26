@@ -237,6 +237,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: CameraTargetGroup, Assembly-CSharp
+          m_MethodName: SwitchToDefault
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
   - trigger: 3
     ID: TitaniaEmpty
     type: 3
@@ -289,6 +301,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CameraTargetGroup, Assembly-CSharp
+        m_MethodName: SwitchToGroup
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -444,6 +468,7 @@ MonoBehaviour:
   selectColor: {r: 0.82745105, g: 0.9176471, b: 1, a: 1}
   precision: 0.05
   glowColor: {r: 2.7643976, g: 5.361256, b: 7.999999, a: 1}
+  invert: 0
 --- !u!114 &7433217420969690547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,7 +587,7 @@ MonoBehaviour:
   flip: 0
   target: {fileID: 0}
   partner: {fileID: 0}
-  rangeTriggered: {fileID: 0}
+  rangeTriggered: 0
   onDefeated:
     m_PersistentCalls:
       m_Calls:

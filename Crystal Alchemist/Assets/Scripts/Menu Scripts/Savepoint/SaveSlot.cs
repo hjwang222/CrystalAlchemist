@@ -80,7 +80,7 @@ public class SaveSlot : MonoBehaviour
             string name = data.characterName;
             string race = data.race;
             float timePlayed = data.timePlayed;
-            string ort = data.startScene;
+            string ort = data.GetStartTeleport();
             float maxLife = data.maxHealth;
             float maxMana = data.maxMana;
 
