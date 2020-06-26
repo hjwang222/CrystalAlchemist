@@ -44,9 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ae96bac0480424b9b966d217af72ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 0
+  affections: {fileID: 11400000, guid: 8515c9abe3b3b1a4b8c54fc86c5e72f9, type: 2}
   npc: {fileID: 3560735132152297215}
 --- !u!58 &8454464772486696896
 CircleCollider2D:
@@ -217,6 +215,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0
   glowColor: {r: 1, g: 1, b: 1, a: 1}
+  invert: 0
 --- !u!114 &5004775229364597194
 MonoBehaviour:
   m_ObjectHideFlags: 0

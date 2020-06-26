@@ -129,6 +129,14 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""8cc5257e-8456-4270-b138-920e8cdce630"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -703,6 +711,17 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                     ""action"": ""PreviousPage"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d39f9cf-e083-41f9-a883-8f3a6d7a0d8d"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -725,6 +744,7 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
         m_Controls_Targeting = m_Controls.FindAction("Targeting", throwIfNotFound: true);
         m_Controls_NextPage = m_Controls.FindAction("NextPage", throwIfNotFound: true);
         m_Controls_PreviousPage = m_Controls.FindAction("PreviousPage", throwIfNotFound: true);
+        m_Controls_MouseClick = m_Controls.FindAction("MouseClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -788,6 +808,7 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Controls_Targeting;
     private readonly InputAction m_Controls_NextPage;
     private readonly InputAction m_Controls_PreviousPage;
+    private readonly InputAction m_Controls_MouseClick;
     public struct ControlsActions
     {
         private @PlayerInputs m_Wrapper;
@@ -806,6 +827,7 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
         public InputAction @Targeting => m_Wrapper.m_Controls_Targeting;
         public InputAction @NextPage => m_Wrapper.m_Controls_NextPage;
         public InputAction @PreviousPage => m_Wrapper.m_Controls_PreviousPage;
+        public InputAction @MouseClick => m_Wrapper.m_Controls_MouseClick;
         public InputActionMap Get() { return m_Wrapper.m_Controls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -857,6 +879,9 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                 @PreviousPage.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnPreviousPage;
                 @PreviousPage.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnPreviousPage;
                 @PreviousPage.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnPreviousPage;
+                @MouseClick.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnMouseClick;
+                @MouseClick.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnMouseClick;
+                @MouseClick.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnMouseClick;
             }
             m_Wrapper.m_ControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -903,6 +928,9 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
                 @PreviousPage.started += instance.OnPreviousPage;
                 @PreviousPage.performed += instance.OnPreviousPage;
                 @PreviousPage.canceled += instance.OnPreviousPage;
+                @MouseClick.started += instance.OnMouseClick;
+                @MouseClick.performed += instance.OnMouseClick;
+                @MouseClick.canceled += instance.OnMouseClick;
             }
         }
     }
@@ -923,5 +951,6 @@ public class @PlayerInputs : IInputActionCollection, IDisposable
         void OnTargeting(InputAction.CallbackContext context);
         void OnNextPage(InputAction.CallbackContext context);
         void OnPreviousPage(InputAction.CallbackContext context);
+        void OnMouseClick(InputAction.CallbackContext context);
     }
 }

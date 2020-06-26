@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266771f26e0200047a77d2d39c8b8900, type: 3}
   m_Name: "Beschw\xF6rung Eos"
   m_EditorClassIdentifier: 
-  abilityName: Eos
-  abilityNameEnglish: Eos
   skill: {fileID: 1079946639356011911, guid: 062ebf34934818544859af78b674eb19, type: 3}
   useTargetSystem: 0
   targetingProperty: {fileID: 0}
+  useIndicator: 0
+  indicator:
+    indicatorProperty: {fileID: 0}
   hasSkillBookInfo: 1
+  icon: {fileID: 0}
   info: {fileID: 11400000, guid: d3f8904df9abccf408dae773aafc3fc5, type: 2}
   cooldown: 1
-  hasMaxDuration: 1
+  hasMaxDuration: 0
   maxDuration: 30
-  rapidFireDelay: 1
+  hasDelay: 0
+  delay: 1
   hasCastTime: 1
   castTime: 1
   showCastbar: 1

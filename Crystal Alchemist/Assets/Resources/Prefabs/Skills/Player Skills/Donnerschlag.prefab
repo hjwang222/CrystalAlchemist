@@ -184,6 +184,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0.2
   glowColor: {r: 1.6502099, g: 5.0454345, b: 7.1396832, a: 1}
+  invert: 0
 --- !u!1 &8336147063271688726
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +287,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0.2
   glowColor: {r: 1.6502099, g: 5.0454345, b: 7.1396832, a: 1}
+  invert: 0
 --- !u!1 &8447962352314022299
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +451,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
-  shadow: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -476,6 +477,7 @@ MonoBehaviour:
   costs:
     resourceType: 2
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 1
   intervallSender: 0
   speedDuringCasting: 0
@@ -501,16 +503,12 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: -3
   statusEffects: []
   thrust: 2
   knockbackTime: 0.2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
 --- !u!114 &3952502290191180676
 MonoBehaviour:
   m_ObjectHideFlags: 0

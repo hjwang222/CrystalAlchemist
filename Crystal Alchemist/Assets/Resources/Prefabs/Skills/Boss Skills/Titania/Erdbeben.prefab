@@ -5402,12 +5402,7 @@ MonoBehaviour:
   statusEffects: []
   thrust: 0
   knockbackTime: 0.2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
 --- !u!95 &3900592228076399888
 Animator:
   serializedVersion: 3
@@ -10546,6 +10541,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0
   glowColor: {r: 6.188679, g: 3.8884304, b: 1.255251, a: 1}
+  invert: 0
 --- !u!1 &6814024518553098126
 GameObject:
   m_ObjectHideFlags: 0
@@ -15490,3 +15486,4 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0.092
   glowColor: {r: 6.188679, g: 3.8884304, b: 1.255251, a: 1}
+  invert: 0

@@ -104,6 +104,7 @@ public class CharacterValues : ScriptableObject
         this.buffs.Clear();
         this.debuffs.Clear();
         this.speed = (stats.startSpeed / 100) * this.speedFactor;
+        this.timeDistortion = 1;
 
         this.cantBeHit = false;
         this.isOnIce = false;

@@ -69,6 +69,8 @@ public class Player : Character
         this.manaSignalUI.Raise();    
         this.ChangeDirection(this.values.direction);
 
+        this.animator.speed = 1;
+        this.updateTimeDistortion(0);
         this.AddStatusEffectVisuals();
     }       
 

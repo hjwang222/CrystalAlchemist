@@ -163,7 +163,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7598260003657270786}
   myRigidbody: {fileID: 1757583206438321652}
   animator: {fileID: 8873797952626383179}
-  shadow: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -190,6 +189,7 @@ MonoBehaviour:
   costs:
     resourceType: 2
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 0.5
   intervallSender: 0
   speedDuringCasting: 0
@@ -215,16 +215,12 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: -2
   statusEffects: []
   thrust: 0
   knockbackTime: 0.2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
 --- !u!114 &7231699721397585316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +268,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 0.011764707, a: 1}
   precision: 0.2
   glowColor: {r: 2.9960785, g: 2.619608, b: 0.7058824, a: 1}
+  invert: 0
 --- !u!1001 &581691837108280069
 PrefabInstance:
   m_ObjectHideFlags: 0

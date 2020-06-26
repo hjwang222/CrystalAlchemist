@@ -139,6 +139,7 @@ public class Skill : MonoBehaviour
         SkillHitTrigger[] trigger = this.GetComponents<SkillHitTrigger>();
         for (int i = 0; i < trigger.Length; i++) trigger[i].Initialize();
 
+        if (this.lockDirection) GameEvents.current.DoDirectionLock();
         this.OnStart?.Invoke();
     }
 

@@ -30,7 +30,7 @@ public class AITrigger
     private int maxLoops;
 
     private bool timesUp = false;
-    private float elapsed = 0;
+    private float elapsed = 0;    
 
     public void Initialize()
     {
@@ -70,8 +70,7 @@ public class AITrigger
 
     private bool checkRange(AI npc)
     {
-        if (npc.rangeTriggered != null) return true;
-        return false;
+        return npc.rangeTriggered;
     }
 
     private bool checkAggro(AI npc)

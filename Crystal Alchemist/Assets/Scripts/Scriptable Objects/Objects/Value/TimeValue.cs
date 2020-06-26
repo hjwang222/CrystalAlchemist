@@ -37,7 +37,7 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
         TimeSpan diff = DateTime.Now - origin;
         double difference = Math.Floor(diff.TotalSeconds);
         float minutes = (float)(difference / (double)factor); //elapsed ingame minutes
-        float fhour = ((minutes / 60f) % 24f);
+        float fhour = ((minutes / 60f) % 24f)-1;
         float fminute = (minutes % 60f);
 
         if (fhour >= 24) fhour = 0;

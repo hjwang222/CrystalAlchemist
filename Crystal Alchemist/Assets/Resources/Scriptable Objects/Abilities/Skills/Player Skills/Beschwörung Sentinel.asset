@@ -12,17 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266771f26e0200047a77d2d39c8b8900, type: 3}
   m_Name: "Beschw\xF6rung Sentinel"
   m_EditorClassIdentifier: 
-  abilityName: "W\xE4chter"
-  abilityNameEnglish: Sentinel
   skill: {fileID: 1894471306822299025, guid: af79dc6e8669ea341b020d34b9391b34, type: 3}
   useTargetSystem: 0
   targetingProperty: {fileID: 0}
+  useIndicator: 0
+  indicator:
+    indicatorProperty: {fileID: 0}
   hasSkillBookInfo: 1
+  icon: {fileID: 0}
   info: {fileID: 11400000, guid: fbafcb68aebba554295b7b41511fc1c1, type: 2}
   cooldown: 1
-  hasMaxDuration: 1
+  hasMaxDuration: 0
   maxDuration: 30
-  rapidFireDelay: 1
+  hasDelay: 0
+  delay: 1
   hasCastTime: 1
   castTime: 2
   showCastbar: 1

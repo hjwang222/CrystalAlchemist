@@ -103,11 +103,16 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8192737785937678925}
   myRigidbody: {fileID: 0}
   animator: {fileID: 134258178168183256}
-  shadow: {fileID: 0}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!58 &3366528352554020260
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -172,17 +177,13 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: -1
   statusEffects:
   - {fileID: 11400000, guid: 646b7065db6bd07488bb7379d6e930a2, type: 2}
   thrust: 2
   knockbackTime: 0.2
-  affectSelf: 1
-  affectOther: 1
-  affectSame: 1
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: da035de99605b0842a426a0b73be8c21, type: 2}
 --- !u!1 &9016259458083899856
 GameObject:
   m_ObjectHideFlags: 0

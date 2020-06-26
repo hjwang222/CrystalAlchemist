@@ -12,27 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b22a3ebb90863458dba94076083e2b, type: 3}
   m_Name: Blind
   m_EditorClassIdentifier: 
-  statusEffectName: Blind
-  statusEffectNameEnglish: Blind
-  statusEffectDescription: 
-  statusEffectDescriptionEnglish: 
   hasDuration: 1
   maxDuration: 10
   canOverride: 0
   canBeModified: 1
   canDeactivateIt: 0
   canBeDispelled: 1
+  ignoreTimeDistortion: 0
   maxStacks: 1
   stunTarget: 0
   statusEffectType: 1
   statusEffectEvents:
   - trigger:
       triggerType: 0
-      intervall: 0
-      life: 0
-      mana: 0
-      hits: 0
-      requireAll: 0
+      value: 0
     actions:
     - actionType: 5
       resources: []
@@ -43,6 +36,7 @@ MonoBehaviour:
   destroyDelay: 0.2
   changeColor: 1
   statusEffectColor: {r: 0.65882355, g: 0.65882355, b: 0.65882355, a: 1}
+  invertColor: 0
   statusEffectObject: {fileID: 8252149507846792586, guid: 89c1e2e30ceabdb4a890342f63a46c71,
     type: 3}
   iconSprite: {fileID: 21300012, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}

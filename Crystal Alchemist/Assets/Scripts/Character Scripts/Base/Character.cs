@@ -221,6 +221,12 @@ public class Character : MonoBehaviour
             this.GetComponent<CharacterRenderingHandler>().ChangeTint(color);
     }
 
+    public void InvertColor(bool value)
+    {
+        if (this.GetComponent<CharacterRenderingHandler>() != null)
+            this.GetComponent<CharacterRenderingHandler>().Invert(value);
+    }
+
     public void setFlip()
     {
         if (this.GetComponent<CharacterRenderingHandler>() != null)
@@ -259,12 +265,12 @@ public class Character : MonoBehaviour
 
         foreach (StatusEffect effect in this.values.buffs)
         {
-            effect.updateTimeDistortion(distortion);
+            effect.UpdateTimeDistortion(distortion);
         }
 
         foreach (StatusEffect effect in this.values.debuffs)
         {
-            effect.updateTimeDistortion(distortion);
+            effect.UpdateTimeDistortion(distortion);
         }
     }
 
@@ -356,7 +362,7 @@ public class Character : MonoBehaviour
 
         if (this.values.currentState != CharacterState.dead
             && targetModule != null
-            && ((!this.values.cantBeHit) || targetModule.ignoreInvincibility))
+            && ((!this.values.cantBeHit) || targetModule.affections.CanIgnoreInvinvibility()))
         {
             if (this.values.isInvincible)
             {
@@ -661,6 +667,7 @@ public class Character : MonoBehaviour
     {
         if (effect == null || effect.GetTarget() != this) return;
         if (effect.CanChangeColor()) ChangeColor(effect.GetColor());
+        if (effect.CanInvertColor()) InvertColor(true);
         if (!ContainsEffect(effect)) this.statusEffectVisuals.Add(effect.Instantiate(this.activeStatusEffectParent));
     }
 

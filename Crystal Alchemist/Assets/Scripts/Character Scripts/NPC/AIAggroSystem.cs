@@ -209,7 +209,7 @@ public class AIAggroSystem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (CollisionUtil.checkAffections(this.npc, this.aggroStats.affectOther, this.aggroStats.affectSame, this.aggroStats.affectNeutral, collision))
+        if (this.aggroStats.affections.IsAffected(this.npc, collision))            
         {
             increaseAggro(this.npc, collision.GetComponent<Character>(), this.aggroStats.aggroIncreaseFactor);
         }
@@ -217,10 +217,7 @@ public class AIAggroSystem : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (CollisionUtil.checkAffections(this.npc, this.aggroStats.affectOther, this.aggroStats.affectSame, this.aggroStats.affectNeutral, collision))
-        {
-            decreaseAggro(this.npc, collision.GetComponent<Character>(), this.aggroStats.aggroDecreaseFactor);
-        }
+        decreaseAggro(this.npc, collision.GetComponent<Character>(), this.aggroStats.aggroDecreaseFactor);        
     }
 
     private void increaseAggroOnHit(Character character, Character newTarget, float damage)

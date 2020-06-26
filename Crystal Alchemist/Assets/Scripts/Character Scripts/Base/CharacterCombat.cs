@@ -145,7 +145,7 @@ public class CharacterCombat : MonoBehaviour
 
     public virtual void UseAbilityOnTarget(Ability ability, Character target)
     {
-        if (ability.CheckResourceAndAmount())
+        if (ability.HasEnoughResourceAndAmount())
         {
             ability.InstantiateSkill(target);
             if (!ability.deactivateButtonUp && !ability.remoteActivation) ability.ResetCoolDown();
@@ -159,7 +159,7 @@ public class CharacterCombat : MonoBehaviour
 
         if(targets.Count > 0) ability.ResetCoolDown();
 
-        if (ability.CheckResourceAndAmount())
+        if (ability.HasEnoughResourceAndAmount())
         {
             StartCoroutine(useSkill(ability, targets));
         }

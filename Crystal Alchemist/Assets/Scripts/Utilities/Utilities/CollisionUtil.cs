@@ -57,64 +57,6 @@ public static class CollisionUtil
         return true;
     }
 
-    public static bool checkAffections(Character sender, bool affectOther, bool affectSame, bool affectNeutral, Collider2D hittedCharacter)
-    {
-        Character target = hittedCharacter.GetComponent<Character>();
-
-        if (!hittedCharacter.isTrigger
-            && target != null
-            && target.values.currentState != CharacterState.dead
-            && target.values.currentState != CharacterState.respawning)
-        {
-            return checkMatrix(sender, target, affectOther, affectSame, affectNeutral);
-        }
-
-        return false;
-    }
-
-    private static bool checkMatrix(Character sender, Character target, bool other, bool same, bool neutral)
-    {
-        if (other)
-        {
-            if (sender == null) return true;
-            if (sender.values.characterType == CharacterType.Friend && target.values.characterType == CharacterType.Enemy) return true;
-            if (sender.values.characterType == CharacterType.Enemy && target.values.characterType == CharacterType.Friend) return true;
-        }
-
-        if (same)
-        {
-            if (sender == null) return true;
-            if (sender.values.characterType == target.values.characterType) return true;
-        }
-
-        if (neutral)
-        {
-            if (target.values.characterType == CharacterType.Object) return true;
-        }
-
-        return false;
-    }
-
-    public static List<Character> getAllAffectedCharacters(Skill skill)
-    {
-        List<Character> targets = new List<Character>();
-        SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
-
-        if (targetModule != null)
-        {
-            List<Character> found = MonoBehaviour.FindObjectsOfType<Character>().ToList();
-
-            foreach(Character character in found)
-            {
-                if (checkMatrix(skill.sender, character, targetModule.affectOther, targetModule.affectSame, targetModule.affectNeutral))
-                    targets.Add(character);
-            }
-            
-        }
-
-        return targets;
-    }
-
     public static bool checkCollision(Collider2D hittedCharacter, Skill skill)
     {
         return checkCollision(hittedCharacter, skill, skill.sender);
@@ -131,18 +73,11 @@ public static class CollisionUtil
                 Character hittedCharacter = null;
                 if (!other.isTrigger) hittedCharacter = other.GetComponent<Character>();
 
-                if (hittedCharacter != null)
-                {
-                    if (targetModule.affectSelf && hittedCharacter == sender) return true;
-                    if (checkAffections(sender, targetModule.affectOther, targetModule.affectSame, targetModule.affectNeutral, other)) return true;
-                }
+                if (hittedCharacter != null &&
+                    targetModule.affections.IsAffected(sender, other)) return true;                
 
                 Skill hittedSkill = AbilityUtil.getSkillByCollision(other.gameObject);
-
-                if (hittedSkill != null)
-                {
-                    if (targetModule.affectSkills && hittedSkill != skill) return true;
-                }
+                return targetModule.affections.isSkillAffected(skill, hittedSkill);                
             }
         }
 

@@ -34,6 +34,9 @@ public class StatusEffect : ScriptableObject
     public bool canBeDispelled = true;
 
     [FoldoutGroup("Basis Attribute")]
+    public bool ignoreTimeDistortion = false;
+
+    [FoldoutGroup("Basis Attribute")]
     [Tooltip("Anzahl der maximalen gleichen Effekte (Stacks)")]
     [MinValue(1)]
     public float maxStacks = 1;
@@ -69,7 +72,6 @@ public class StatusEffect : ScriptableObject
     [FoldoutGroup("Visuals", expanded: false)]
     [Tooltip("Farbe während der Dauer des Statuseffekts")]
     [SerializeField]
-    [ShowIf("changeColor")]
     private bool invertColor;
 
     [FoldoutGroup("Visuals", expanded: false)]
@@ -117,6 +119,11 @@ public class StatusEffect : ScriptableObject
         return this.changeColor;
     }
 
+    public bool CanInvertColor()
+    {
+        return this.invertColor;
+    }
+
     public StatusEffectGameObject Instantiate(GameObject parent)
     {
         StatusEffectGameObject effect = Instantiate(this.statusEffectObject, parent.transform.position, Quaternion.identity, parent.transform);
@@ -126,7 +133,10 @@ public class StatusEffect : ScriptableObject
         return effect;
     }
 
-    public void updateTimeDistortion(float distortion) => this.timeDistortion = 1 + (distortion / 100);    
+    public void UpdateTimeDistortion(float distortion)
+    {
+        if(!this.ignoreTimeDistortion) this.timeDistortion = 1 + (distortion / 100);
+    }
 
     private void setTime()
     {
@@ -186,6 +196,7 @@ public class StatusEffect : ScriptableObject
         {
             //Charakter-Farbe zurücksetzen
             if (this.changeColor) this.target.removeColor(this.statusEffectColor);
+            if (this.invertColor) this.target.InvertColor(false);
             this.resetValues();
         }
 

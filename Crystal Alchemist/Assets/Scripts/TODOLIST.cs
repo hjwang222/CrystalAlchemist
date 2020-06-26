@@ -3,9 +3,9 @@
 public class TODOLIST : MonoBehaviour
 {
     //Minor BUG: Death Screen wonky
-    //Minor BUG: Schlafen und Fenster wonky (GameEvent?)
-    //REWORK: Time Stasis
     //BUG: Intro
+
+    //REWORK: Quicktravel Drop Down Menu (cursor on Toggle and dropdown instead of buttons, sorted)
 
     //-----------------------------------------------------------------------------
 

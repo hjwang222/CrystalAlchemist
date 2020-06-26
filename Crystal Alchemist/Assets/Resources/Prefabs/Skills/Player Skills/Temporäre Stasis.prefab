@@ -228,12 +228,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5183345667786185736}
   - component: {fileID: 1800843014181641273}
-  - component: {fileID: 4199971107470901727}
   - component: {fileID: 4199971107470901697}
   - component: {fileID: 1305183267125815762}
   - component: {fileID: 5758942587671381034}
+  - component: {fileID: 7710473471238643698}
   - component: {fileID: 907840878756441047}
   - component: {fileID: 8873387076501772117}
+  - component: {fileID: 3005446792446110026}
   m_Layer: 13
   m_Name: "Tempor\xE4re Stasis"
   m_TagString: Skill
@@ -280,57 +281,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!60 &4199971107470901727
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4199971107470901726}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 24, y: 12.3125}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.9242687, y: -1.6687903}
-      - {x: -0.37771925, y: -1.7568462}
-      - {x: 0.06051954, y: -1.7601047}
-      - {x: 0.43283463, y: -1.7472023}
-      - {x: 0.9429633, y: -1.7181246}
-      - {x: 1.6319752, y: -1.4903777}
-      - {x: 2.1178825, y: -1.1644793}
-      - {x: 2.5371323, y: -0.82743394}
-      - {x: 2.6716468, y: -0.5627651}
-      - {x: 2.7204056, y: -0.18228531}
-      - {x: 2.7379875, y: 0.07797265}
-      - {x: 2.64832, y: 0.47887915}
-      - {x: 2.3289337, y: 0.9210973}
-      - {x: 1.7352518, y: 1.4404649}
-      - {x: 0.9112848, y: 1.738626}
-      - {x: -0.010562262, y: 1.7801265}
-      - {x: -0.65058327, y: 1.7685945}
-      - {x: -1.2301286, y: 1.6115744}
-      - {x: -1.8010896, y: 1.419288}
-      - {x: -2.3728995, y: 0.88664573}
-      - {x: -2.681912, y: 0.37006903}
-      - {x: -2.7457247, y: -0.047466993}
-      - {x: -2.698692, y: -0.5822131}
-      - {x: -2.3668218, y: -1.0005956}
-      - {x: -1.9531584, y: -1.3064512}
-      - {x: -1.435524, y: -1.5202049}
 --- !u!95 &4199971107470901697
 Animator:
   serializedVersion: 3
@@ -401,6 +351,19 @@ MonoBehaviour:
   selfThrust: 0
   selfThrustTime: 0
   stateType: 0
+--- !u!114 &7710473471238643698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199971107470901726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790e6050ddf4a164b8349c725a23765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
 --- !u!114 &907840878756441047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,9 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  TimeDistortion: -99
-  timeEffect: {fileID: 11400000, guid: 8ff68d8de3f11394db952a1b07fa3224, type: 2}
-  invertColor: 1
+  skillTimeValue: -99
 --- !u!114 &8873387076501772117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,15 +392,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
   affectedResources: []
-  statusEffects: []
+  statusEffects:
+  - {fileID: 11400000, guid: 8ff68d8de3f11394db952a1b07fa3224, type: 2}
   thrust: 0
   knockbackTime: 0.2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 1
-  affectNeutral: 1
-  affectSkills: 1
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
+--- !u!60 &3005446792446110026
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199971107470901726}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.9284987, y: 3.7786665}
+      - {x: 0, y: 4}
+      - {x: -1.9535749, y: 3.7823093}
+      - {x: -3.5, y: 3.25}
+      - {x: -4.538577, y: 2.6152322}
+      - {x: -5.192663, y: 1.9890285}
+      - {x: -5.864569, y: 1.0000539}
+      - {x: -6, y: 0}
+      - {x: -5.8177137, y: -1.0544796}
+      - {x: -5.1440487, y: -2.0468147}
+      - {x: -3.5, y: -3.25}
+      - {x: -1.96317, y: -3.7673728}
+      - {x: 0, y: -4}
+      - {x: 1.6271447, y: -3.857411}
+      - {x: 3.5, y: -3.25}
+      - {x: 4.475878, y: -2.6111414}
+      - {x: 5.2325625, y: -1.8524047}
+      - {x: 5.781594, y: -1.0407882}
+      - {x: 6, y: 0}
+      - {x: 5.80734, y: 1.0404909}
+      - {x: 5.2121964, y: 1.95101}
+      - {x: 4.414379, y: 2.709877}
+      - {x: 3.5, y: 3.25}
 --- !u!1 &4862701479617002115
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +547,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0
   glowColor: {r: 1.1843138, g: 0, b: 2, a: 1}
+  invert: 0
 --- !u!1 &5075986525323100902
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +650,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0
   glowColor: {r: 1.1843138, g: 0, b: 2, a: 1}
+  invert: 0
 --- !u!1 &5589731791054567799
 GameObject:
   m_ObjectHideFlags: 0

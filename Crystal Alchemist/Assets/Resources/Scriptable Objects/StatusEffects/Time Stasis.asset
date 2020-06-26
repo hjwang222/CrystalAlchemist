@@ -12,37 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b22a3ebb90863458dba94076083e2b, type: 3}
   m_Name: Time Stasis
   m_EditorClassIdentifier: 
-  statusEffectName: Temporale Stase
-  statusEffectNameEnglish: Temporal Stasis
-  statusEffectDescription: Zeit wird stark verlangsamt
-  statusEffectDescriptionEnglish: Time will heavily slowed down
-  hasDuration: 0
-  maxDuration: 0
-  canOverride: 0
+  hasDuration: 1
+  maxDuration: 1
+  canOverride: 1
   canBeModified: 0
   canDeactivateIt: 0
   canBeDispelled: 0
+  ignoreTimeDistortion: 1
   maxStacks: 1
   stunTarget: 0
   statusEffectType: 1
   statusEffectEvents:
   - trigger:
       triggerType: 0
-      intervall: 0
-      life: 0
-      mana: 0
-      hits: 0
-      requireAll: 0
+      value: 0
     actions:
-    - actionType: 5
+    - actionType: 4
       resources: []
       speed: 0
       time: -99
       effects: []
       StatusEffectType: 0
   destroyDelay: 0.2
-  changeColor: 1
+  changeColor: 0
   statusEffectColor: {r: 0.18431373, g: 0.050980397, b: 0.3019608, a: 1}
+  invertColor: 1
   statusEffectObject: {fileID: 8924175854143672294, guid: 7c83829c933de2f458035ae6dddde1d3,
     type: 3}
   iconSprite: {fileID: 21300036, guid: 0ca4149b67557c449b0110d5938780ba, type: 3}

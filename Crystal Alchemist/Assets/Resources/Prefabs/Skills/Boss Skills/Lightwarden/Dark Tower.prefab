@@ -106,6 +106,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 0.8705883, b: 0.13333334, a: 1}
   precision: 0.08
   glowColor: {r: 4.237095, g: 1.1535546, b: 0, a: 1}
+  invert: 0
 --- !u!58 &3141834174896433592
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -283,12 +284,7 @@ MonoBehaviour:
   statusEffects: []
   thrust: 2
   knockbackTime: 0.2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
 --- !u!114 &6488062298655226887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,6 +613,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 0.8705883, b: 0.13333334, a: 1}
   precision: 0.08
   glowColor: {r: 4, g: 1.082353, b: 0, a: 1}
+  invert: 0
 --- !u!58 &8620388757324972048
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -44,9 +44,11 @@ public class PlayerButtons : ScriptableObject
             {
                 if ((this.currentAbility == null
                   || this.currentAbility == playerButton.ability)
+                    && playerButton.ability.HasEnoughResourceAndAmount()
                     && canFight) playerButton.ability.enabled = true;
-
-                else if (this.currentAbility != playerButton.ability || !canFight)
+                else if (this.currentAbility != playerButton.ability 
+                    || !canFight 
+                    || !playerButton.ability.HasEnoughResourceAndAmount())
                     playerButton.ability.enabled = false;
             }
         }

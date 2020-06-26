@@ -24,6 +24,9 @@ public class CustomRenderer : MonoBehaviour
     [ColorUsage(true, true)]
     private Color glowColor = Color.white;
 
+    [SerializeField]
+    private bool invert = false;
+
     private void Start()
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -36,6 +39,7 @@ public class CustomRenderer : MonoBehaviour
     {
         this.material = this.GetComponent<SpriteRenderer>().sharedMaterial;
         AddGlow();
+        InvertColors(this.invert);
     }
 
     public void SetGlowColor(Color color)

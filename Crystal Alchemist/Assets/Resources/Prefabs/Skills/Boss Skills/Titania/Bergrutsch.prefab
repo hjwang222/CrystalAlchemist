@@ -191,12 +191,7 @@ MonoBehaviour:
   statusEffects: []
   thrust: 6
   knockbackTime: 1
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
 --- !u!95 &3431251335946046937
 Animator:
   serializedVersion: 3
@@ -397,6 +392,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0.08
   glowColor: {r: 4, g: 2.7764707, b: 1.6941177, a: 1}
+  invert: 0
 --- !u!1001 &7228650235216914828
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -28,6 +28,8 @@ public class GameEvents : MonoBehaviour
     public Action<WarningType> OnWarning;
     public Action<float, float, float> OnCameraShake;
     public Action<float> OnCameraStill;
+    public Action OnLockDirection;
+    public Action<Character, bool> OnRangeTriggered;
 
     public Action<Character, Character, float> OnAggroHit;
     public Action<Character, Character, float> OnAggroIncrease;
@@ -55,10 +57,12 @@ public class GameEvents : MonoBehaviour
     public void DoWarning(WarningType type) => this.OnWarning?.Invoke(type);
     public void DoSleep(Vector2 position, Action before, Action after) => this.OnSleep?.Invoke(position, before, after);
     public void DoWakeUp(Vector2 position, Action before, Action after) => this.OnWakeUp?.Invoke(position, before, after);
+    public void DoDirectionLock() => this.OnLockDirection?.Invoke();
 
     public void DoCutScene() => this.OnCutScene?.Invoke();
     public void DoKill() => this.OnKill?.Invoke();
     public void DoTimeChange() => this.OnTimeChanged?.Invoke();
+    public void DoRangeTrigger(Character character, bool value) => this.OnRangeTriggered?.Invoke(character, value);
 
     public void DoAggroHit(Character character, Character target, float value) => this.OnAggroHit?.Invoke(character, target, value);
     public void DoAggroIncrease(Character character, Character target, float value) => this.OnAggroIncrease?.Invoke(character, target, value);

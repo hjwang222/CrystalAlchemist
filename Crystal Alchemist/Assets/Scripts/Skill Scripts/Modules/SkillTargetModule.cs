@@ -24,27 +24,7 @@ public class SkillTargetModule : SkillModule
     [HideIf("thrust", 0f)]
     public float knockbackTime = 0.2f;
 
-    [BoxGroup("Wirkungsbereich")]
-    [Tooltip("wirkt nur auf sich selbst")]
-    public bool affectSelf = false;
-
-    [BoxGroup("Wirkungsbereich")]
-    [Tooltip("wirkt auf alle Spieler")]
-    public bool affectOther = false;
-
-    [BoxGroup("Wirkungsbereich")]
-    [Tooltip("wirkt auf alle Gegner")]
-    public bool affectSame = false;
-
-    [BoxGroup("Wirkungsbereich")]
-    [Tooltip("wirkt auf alle Gegner")]
-    public bool affectNeutral = false;
-
-    [BoxGroup("Wirkungsbereich")]
-    [Tooltip("wirkt auf alle Skills")]
-    public bool affectSkills = false;
-
-    [BoxGroup("Wirkungsbereich")]
-    [Tooltip("Unverwundbarkeit ignorieren (z.B. für Heals)?")]
-    public bool ignoreInvincibility = false;
+    [BoxGroup("Ziel Attribute")]
+    [Required]
+    public SkillAffections affections;
 }

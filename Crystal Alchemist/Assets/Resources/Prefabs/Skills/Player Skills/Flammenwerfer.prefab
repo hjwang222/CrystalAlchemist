@@ -125,6 +125,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 0.9960785, b: 0.8980393, a: 1}
   precision: 0
   glowColor: {r: 5.992157, g: 3.6705883, b: 1.3490196, a: 1}
+  invert: 0
 --- !u!114 &4427129138668490009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,12 +308,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 646b7065db6bd07488bb7379d6e930a2, type: 2}
   thrust: 0
   knockbackTime: 0.2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
 --- !u!114 &3902379296848135066
 MonoBehaviour:
   m_ObjectHideFlags: 0

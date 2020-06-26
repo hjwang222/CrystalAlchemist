@@ -4,16 +4,46 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Player))]
 public class PlayerMovement : PlayerComponent
 {
+    [SerializeField]
+    private float directionLockTime = 0.1f;
+
     private Vector2 change;
     private Vector2 position;
+    private Vector2 target;
+    private float lockDuration = 0;
+    
 
     #region Movement
 
     public void MovePlayer(InputAction.CallbackContext ctx) => this.change = ctx.ReadValue<Vector2>();
 
+    public void MouseClick(InputAction.CallbackContext context) => Set();
+
+    private void Start() => GameEvents.current.OnLockDirection += SetDirectionLock;
+
+    private void OnDestroy() => GameEvents.current.OnLockDirection -= SetDirectionLock;
+
+    private void Set()
+    {
+        /*
+        if (Camera.main != null)
+        {
+            Vector2 pos = Input.mousePosition;
+            pos = Camera.main.ScreenToWorldPoint(pos);
+            target = pos;
+        }
+
+        if (Vector2.Distance(this.player.GetGroundPosition(), target) > 0.3f)
+        {
+            this.change = (target - this.player.GetGroundPosition()).normalized;
+        }
+        else this.change = Vector2.zero;*/
+    }
+
     private void FixedUpdate()
     {
         UpdateAnimationAndMove(this.change);  //check if is menu
+        if (this.lockDuration > 0) this.lockDuration -= Time.deltaTime;
     }
 
     private void UpdateAnimationAndMove(Vector2 direction)
@@ -53,22 +83,10 @@ public class PlayerMovement : PlayerComponent
             if (!this.player.values.isOnIce) this.player.myRigidbody.velocity = velocity;
         }
 
-        SetDirection(direction);
+        if (this.lockDuration <= 0) this.player.ChangeDirection(direction);
     }
 
-    private void SetDirection(Vector2 direction)
-    {
-        if (!IsDirectionLocked()) this.player.ChangeDirection(direction);
-    }
-
-    private bool IsDirectionLocked()
-    {
-        foreach (Skill skill in this.player.values.activeSkills)
-        {
-            if (skill.isDirectionLocked()) return true;
-        }
-        return false;
-    }
+    private void SetDirectionLock() => this.lockDuration = this.directionLockTime;  
 
     #endregion
 }

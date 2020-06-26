@@ -201,12 +201,7 @@ MonoBehaviour:
   statusEffects: []
   thrust: 0
   knockbackTime: 0.2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
 --- !u!114 &8534472210655833774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +354,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0.2
   glowColor: {r: 1.6502099, g: 5.0454345, b: 7.1396832, a: 1}
+  invert: 0
 --- !u!1 &7606972994670469862
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,6 +456,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0.2
   glowColor: {r: 1.6502099, g: 5.0454345, b: 7.1396832, a: 1}
+  invert: 0
 --- !u!1001 &1840304094138339854
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -72,6 +72,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -122,17 +123,16 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
-  shadow: {fileID: 0}
-  positionOffset: 0
-  attachToSender: 1
-  lockDirection: 0
-  canAffectedBytimeDistortion: 0
-  hasDuration: 0
-  maxDuration: 1
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!114 &-1337796337901491006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +149,7 @@ MonoBehaviour:
   costs:
     resourceType: 3
     item: {fileID: 11400000, guid: b54098306a80a354987558202118c74a, type: 2}
+    keyItem: {fileID: 0}
     amount: 1
   intervallSender: 0
   speedDuringCasting: 0
@@ -174,16 +175,12 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 2
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 2
   statusEffects: []
   thrust: 0
   knockbackTime: 0.2
-  affectSelf: 1
-  affectOther: 0
-  affectSame: 0
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 1
+  affections: {fileID: 11400000, guid: dd168bb8d1990c347ab8482d6d72d84c, type: 2}
 --- !u!114 &-6258942228313112038
 MonoBehaviour:
   m_ObjectHideFlags: 0

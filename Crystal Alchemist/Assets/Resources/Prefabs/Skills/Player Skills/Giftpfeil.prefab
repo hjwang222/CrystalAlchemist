@@ -355,6 +355,7 @@ MonoBehaviour:
   costs:
     resourceType: 3
     item: {fileID: 11400000, guid: c4c6c59263410ba41a80d318974e1abb, type: 2}
+    keyItem: {fileID: 0}
     amount: 1
   intervallSender: 0
   speedDuringCasting: 0
@@ -380,17 +381,13 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: -1
   statusEffects:
   - {fileID: 11400000, guid: 56c3a03a9c810be4a8960260c51efbb5, type: 2}
   thrust: 2
   knockbackTime: 0.2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 0
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
 --- !u!114 &7040829052717372369
 MonoBehaviour:
   m_ObjectHideFlags: 0

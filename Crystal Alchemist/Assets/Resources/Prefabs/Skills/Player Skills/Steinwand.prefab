@@ -51,17 +51,16 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
-  shadow: {fileID: 0}
-  positionOffset: 2
-  attachToSender: 0
-  lockDirection: 0
-  canAffectedBytimeDistortion: 0
-  hasDuration: 1
-  maxDuration: 30
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!114 &7861167684578161149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +77,7 @@ MonoBehaviour:
   costs:
     resourceType: 2
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 1
   intervallSender: 0
   speedDuringCasting: -50
@@ -130,16 +130,12 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: -1
   statusEffects: []
   thrust: 2
   knockbackTime: 0.2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 1
-  affectSkills: 1
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
 --- !u!58 &8592746762657604845
 CircleCollider2D:
   m_ObjectHideFlags: 0

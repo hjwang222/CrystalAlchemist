@@ -17,7 +17,7 @@ public class AI : NonPlayer
     public Character partner;
 
     [HideInInspector]
-    public RangeTriggered rangeTriggered;
+    public bool rangeTriggered;
 
 
     private bool isSleeping = true;
@@ -38,11 +38,25 @@ public class AI : NonPlayer
     public override void Start()
     {
         base.Start();
+        GameEvents.current.OnRangeTriggered += SetRangeTriggered;
 
         this.GetComponent<AICombat>().Initialize();
         AIComponent[] components = this.GetComponents<AIComponent>();
         for (int i = 0; i < components.Length; i++) components[i].Initialize();
     }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        GameEvents.current.OnRangeTriggered -= SetRangeTriggered;
+    }
+
+    private void SetRangeTriggered(Character character, bool value)
+    {
+        if (character == this) this.rangeTriggered = value;
+    }
+
+
 
     public override void Update()
     {

@@ -48,17 +48,16 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
-  shadow: {fileID: 0}
-  positionOffset: 0
-  attachToSender: 1
-  lockDirection: 0
-  canAffectedBytimeDistortion: 0
-  hasDuration: 1
-  maxDuration: 30
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!114 &4504233963501539725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,8 +88,9 @@ MonoBehaviour:
   costs:
     resourceType: 2
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 2
-  intervallSender: 1
+  intervallSender: 0
   speedDuringCasting: 0
   speedDuringDuration: 0
   affectAnimation: 1

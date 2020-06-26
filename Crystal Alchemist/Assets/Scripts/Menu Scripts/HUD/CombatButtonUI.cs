@@ -136,7 +136,7 @@ public class CombatButtonUI : MonoBehaviour
             }
             else if (!ability.enabled
                     || !this.values.CanUseAbilities()
-                    || !ability.CheckResourceAndAmount()
+                    || !ability.HasEnoughResourceAndAmount()
     )
             {
                 //ist Skill nicht einsetzbar (kein Mana oder bereits aktiv)

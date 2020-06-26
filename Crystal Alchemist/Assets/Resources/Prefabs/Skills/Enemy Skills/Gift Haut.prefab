@@ -49,7 +49,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   myRigidbody: {fileID: 0}
   animator: {fileID: 0}
-  shadow: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -89,17 +88,13 @@ MonoBehaviour:
   affectedResources:
   - resourceType: 1
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: -0.5
   statusEffects:
   - {fileID: 11400000, guid: 56c3a03a9c810be4a8960260c51efbb5, type: 2}
   thrust: 2
   knockbackTime: 0.2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: 69c7063b2f9f1d741b2d138ef9b3962f, type: 2}
 --- !u!114 &4826724875888239067
 MonoBehaviour:
   m_ObjectHideFlags: 0

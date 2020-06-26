@@ -1,28 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class RangeTriggered : MonoBehaviour
 {
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
-    [Tooltip("wirkt auf alle Spieler")]
+    [Required]
     [SerializeField]
-    private bool affectOther = false;
+    private Affections affections;
 
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
-    [Tooltip("wirkt auf alle Gegner")]
-    [SerializeField]
-    private bool affectSame = false;
-
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
-    [Tooltip("wirkt auf alle Gegner")]
-    [SerializeField]
-    private bool affectNeutral = false;
-
+    [Required]
     [SerializeField]
     private AI npc;
-
 
     private void Update()
     {
@@ -31,16 +18,16 @@ public class RangeTriggered : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (CollisionUtil.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.npc.rangeTriggered = this;
+        if (this.affections.IsAffected(this.npc, collision)) GameEvents.current.DoRangeTrigger(this.npc, true);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (CollisionUtil.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.npc.rangeTriggered = this;
+        if (this.affections.IsAffected(this.npc, collision)) GameEvents.current.DoRangeTrigger(this.npc, true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (CollisionUtil.checkAffections(this.npc, this.affectOther, this.affectSame, this.affectNeutral, collision)) this.npc.rangeTriggered = null;
+        if (this.affections.IsAffected(this.npc, collision)) GameEvents.current.DoRangeTrigger(this.npc, false);
     }
 }

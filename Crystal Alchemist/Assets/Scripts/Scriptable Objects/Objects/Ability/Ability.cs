@@ -286,7 +286,7 @@ public class Ability : ScriptableObject
         this.state = AbilityState.onCooldown;
     }
 
-    public bool CheckResourceAndAmount()
+    public bool HasEnoughResourceAndAmount()
     {
         bool enoughResource = this.isResourceEnough();
 
@@ -331,6 +331,8 @@ public class Ability : ScriptableObject
 
     private bool isResourceEnough()
     {
+        if (this.sender == null) return false;
+
         SkillSenderModule senderModule = this.skill.GetComponent<SkillSenderModule>();
         if (senderModule != null)
         {

@@ -26,23 +26,13 @@ public class AggroStats : ScriptableObject
     [BoxGroup("Aggro Attributes")]
     public float targetChangeDelay = 0f;
 
-
     [BoxGroup("Aggro Object Attributes")]
     public float foundClueDuration = 1;
 
     [BoxGroup("Aggro Object Attributes")]
     public float activeClueDuration = 1;
 
-
-    [BoxGroup("Wirkungsbereich")]
-    [Tooltip("wirkt auf alle Spieler")]
-    public bool affectOther = false;
-
-    [BoxGroup("Wirkungsbereich")]
-    [Tooltip("wirkt auf alle Gegner")]
-    public bool affectSame = false;
-
-    [BoxGroup("Wirkungsbereich")]
-    [Tooltip("wirkt auf alle Gegner")]
-    public bool affectNeutral = false;
+    [BoxGroup("Aggro Object Attributes")]
+    [Required]
+    public Affections affections;
 }

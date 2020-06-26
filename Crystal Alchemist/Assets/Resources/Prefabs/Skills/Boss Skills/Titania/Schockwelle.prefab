@@ -136,12 +136,7 @@ MonoBehaviour:
   statusEffects: []
   thrust: 3
   knockbackTime: 0.2
-  affectSelf: 0
-  affectOther: 1
-  affectSame: 0
-  affectNeutral: 0
-  affectSkills: 0
-  ignoreInvincibility: 0
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
 --- !u!95 &5016046199111058279
 Animator:
   serializedVersion: 3
@@ -278,3 +273,4 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0
   glowColor: {r: 4, g: 4, b: 4, a: 1}
+  invert: 0
