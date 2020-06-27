@@ -23,8 +23,16 @@ public class PlayerTeleport : PlayerComponent
     public override void Initialize()
     {
         base.Initialize();
+        GameEvents.current.OnReturn += ReturnToLastTeleport;
+        GameEvents.current.OnHasReturn += HasReturn;
         this.teleportList.Initialize();
         StartCoroutine(MaterializePlayer());
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.current.OnReturn -= ReturnToLastTeleport;
+        GameEvents.current.OnHasReturn -= HasReturn;
     }
 
     [Button("Teleport Player")]
@@ -101,5 +109,17 @@ public class PlayerTeleport : PlayerComponent
             if (asyncOperation.progress >= 0.9f) asyncOperation.allowSceneActivation = true;            
             yield return null;
         }
+    }
+
+    public void ReturnToLastTeleport()
+    {
+        if (this.lastTeleport == null) return;
+        this.nextTeleport.SetValue(this.lastTeleport);
+        SwitchScene();
+    }
+
+    public bool HasReturn()
+    {
+        return this.lastTeleport != null;
     }
 }

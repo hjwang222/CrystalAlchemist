@@ -39,10 +39,12 @@ public class GameEvents : MonoBehaviour
     public Func<string, bool> OnKeyItem;
     public Func<ItemGroup, int> OnItemAmount;
     public Func<Costs, bool> OnEnoughCurrency;
-
+    public Func<bool> OnHasReturn;
+    
     public Action OnCutScene;
     public Action OnTimeChanged;
     public Action OnKill;
+    public Action OnReturn;
 
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
     public void DoChangeState(CharacterState state) => this.OnStateChanged?.Invoke(state);  
@@ -71,7 +73,13 @@ public class GameEvents : MonoBehaviour
 
     public void DoCameraShake(float strength, float duration, float speed) => this.OnCameraShake?.Invoke(strength, duration, speed);
     public void DoCameraStill(float speed) => this.OnCameraStill?.Invoke(speed);
+    public void DoReturn() => this.OnReturn?.Invoke();
 
+    public bool HasReturn()
+    {
+        if (this.OnHasReturn != null) return this.OnHasReturn.Invoke();
+        return false;
+    }
 
     public bool HasKeyItem(string name)
     {

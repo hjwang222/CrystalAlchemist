@@ -4,7 +4,9 @@ public class TODOLIST : MonoBehaviour
 {
     //Minor BUG: Death Screen wonky
     //BUG: Intro (WHY???????)
-    //TODO: Teleport Skill
+
+    //TODO: Teleport Animation (also Player Animation)
+    //TODO: Last Teleport Info and Check if there (Death Screen too)
 
     //-----------------------------------------------------------------------------
 
@@ -22,8 +24,6 @@ public class TODOLIST : MonoBehaviour
     //CONTENT: Sin Eater Race (glowing eyes, halo, wings, etc)
 
     //TODO: Custom Smoke for Collectable, Interactable and Warp
-    //TODO: Teleport + Casting Animation
-    //TODO: Time Stasis
     //TODO: On Kill Event
     //TODO: Boss Mechanic Duration Override
     //TODO: Victory Screen (Player Animation, Cutscene Event)

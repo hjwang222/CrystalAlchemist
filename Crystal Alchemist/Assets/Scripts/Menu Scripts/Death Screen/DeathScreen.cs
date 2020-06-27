@@ -127,16 +127,9 @@ public class DeathScreen : MonoBehaviour
         StartCoroutine(this.countDownCo());
     }
 
-    public void returnToTitleScreen()
-    {
-        SceneManager.LoadSceneAsync(0);
-    }
+    public void returnToTitleScreen() => SceneManager.LoadSceneAsync(0);    
 
-    public void returnSaveGame()
-    {
-        this.nextTeleport.SetValue(this.lastTeleport);
-        SceneManager.LoadScene(this.nextTeleport.scene);
-    }
+    public void returnSaveGame() => GameEvents.current.DoReturn();
 
     private IEnumerator ShowTextCo(float delay)
     {

@@ -40324,3 +40324,23 @@ UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISelect
 UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
 UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
 
+Exception 27.06.2020 15:48:34: NullReferenceException: Object reference not set to an instance of an object
+TeleportStats.SetValue (TeleportStats stats) (at Assets/Scripts/Scriptable Objects/Objects/Game/TeleportStats.cs:55)
+PlayerTeleport.ReturnToLastTeleport () (at Assets/Scripts/Character Scripts/Player Scripts/PlayerTeleport.cs:111)
+GameEvents.DoReturn () (at Assets/Scripts/Game Scripts/Event Systems/GameEvents.cs:75)
+SkillTeleport.Initialize () (at Assets/Scripts/Skill Scripts/Skill Extensions/SkillTeleport.cs:6)
+Skill.Start () (at Assets/Scripts/Skill Scripts/Skill.cs:137)
+
+Exception 27.06.2020 15:49:13: NullReferenceException: Object reference not set to an instance of an object
+TeleportStats.SetValue (TeleportStats stats) (at Assets/Scripts/Scriptable Objects/Objects/Game/TeleportStats.cs:55)
+PlayerTeleport.ReturnToLastTeleport () (at Assets/Scripts/Character Scripts/Player Scripts/PlayerTeleport.cs:111)
+GameEvents.DoReturn () (at Assets/Scripts/Game Scripts/Event Systems/GameEvents.cs:75)
+DeathScreen.returnSaveGame () (at Assets/Scripts/Menu Scripts/Death Screen/DeathScreen.cs:132)
+UnityEngine.Events.InvokableCall.Invoke () (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.Events.UnityEvent.Invoke () (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+UnityEngine.UI.Button.Press () (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:68)
+UnityEngine.UI.Button.OnPointerClick (UnityEngine.EventSystems.PointerEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs:110)
+UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointerClickHandler handler, UnityEngine.EventSystems.BaseEventData eventData) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:50)
+UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
+UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
+
