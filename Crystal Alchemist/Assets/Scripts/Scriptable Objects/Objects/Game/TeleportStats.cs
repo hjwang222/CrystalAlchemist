@@ -16,7 +16,7 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
     public void Clear()
     {
         this.teleportName = "";
-        this.scene = "Haus";
+        this.scene = null;
         this.position = Vector2.zero;
         this.showAnimationIn = true;
         this.showAnimationOut = false;
@@ -63,7 +63,7 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
 
     public string GetTeleportName()
     {
-        return FormatUtil.GetLocalisedText(this.name, LocalisationFileType.maps);
+        return FormatUtil.GetLocalisedText(this.teleportName, LocalisationFileType.maps);
     }
 
     public void OnAfterDeserialize() { }

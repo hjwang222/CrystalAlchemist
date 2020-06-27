@@ -11,7 +11,7 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
     private int minute = 0;
 
     [SerializeField]
-    private int hour = 12;
+    private int hour = 13;
 
     [SerializeField]
     private float normalFactor = 1;
@@ -33,6 +33,10 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
 
     private void SetStartTime()
     {
+        this.hour = 13;
+        this.minute = 0;
+        //TODO: Fixed time or Random or Saved?
+        /*
         DateTime origin = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0);
         TimeSpan diff = DateTime.Now - origin;
         double difference = Math.Floor(diff.TotalSeconds);
@@ -44,7 +48,7 @@ public class TimeValue : ScriptableObject, ISerializationCallbackReceiver
         if (fminute >= 60) fminute = 0;
 
         this.hour = Mathf.RoundToInt(fhour);
-        this.minute = Mathf.RoundToInt(fminute);
+        this.minute = Mathf.RoundToInt(fminute);*/
     }
 
     public Color GetColor()

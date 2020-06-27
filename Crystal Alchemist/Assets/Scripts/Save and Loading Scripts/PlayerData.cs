@@ -6,10 +6,10 @@ public class PlayerData
     public float health;
     public float mana;
 
-    public float maxHealth;
-    public float maxMana;
-    public float healthRegen;
-    public float manaRegen;
+    public int maxHealth;
+    public int maxMana;
+    public int healthRegen;
+    public int manaRegen;
     public int buffplus;
     public int debuffminus;
 
@@ -34,11 +34,11 @@ public class PlayerData
         this.health = saveGame.playerValue.life;
         this.mana = saveGame.playerValue.mana;
 
-        this.maxHealth = saveGame.playerValue.maxLife;
-        this.maxMana = saveGame.playerValue.maxMana;
-        this.healthRegen = saveGame.playerValue.lifeRegen;
-        this.manaRegen = saveGame.playerValue.manaRegen;
-        this.buffplus = saveGame.playerValue.buffPlus;
+        this.maxHealth = saveGame.attributes.health;
+        this.maxMana = saveGame.attributes.mana;
+        this.healthRegen = saveGame.attributes.healthRegen;
+        this.manaRegen = saveGame.attributes.manaRegen;
+        this.buffplus = saveGame.attributes.buffPlus;
         this.debuffminus = saveGame.playerValue.debuffMinus;
 
         setInventory(saveGame.inventory);
@@ -117,7 +117,7 @@ public class PlayerData
 
     private void SetLastTeleport(TeleportStats stats) => this.lastTeleport = stats.teleportName;
 
-    public string GetStartTeleport()
+    public string GetStartTeleportName()
     {
         TeleportStats stats = MasterManager.GetTeleportStats(this.startTeleport);
         if (stats != null) return stats.GetTeleportName();

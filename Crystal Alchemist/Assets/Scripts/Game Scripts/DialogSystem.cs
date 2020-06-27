@@ -131,77 +131,10 @@ public class DialogSystem : MonoBehaviour
         {
             if (text.trigger == this.internalTrigger)
             {
-                ShowDialogBox(player, getText(text, interactable.costs.amount, interactable.costs.item, loot, player), text.eventOnClose);
+                string result = FormatUtil.GetLocalisedText(text.ID, text.type, new List<object>() { player, interactable, interactable.costs, loot });
+                ShowDialogBox(player, result, text.eventOnClose);
                 break;
             }
         }
-    }
-
-    private string getText(DialogText text, ItemStats loot, Player player)
-    {
-        string result = FormatUtil.GetLocalisedText(text.ID, text.type);
-
-        result = result.Replace("<name>", player.name);
-        result = result.Replace("<interactable>", getInteractableType());
-
-        if (loot != null)
-        {
-            result = result.Replace("<loot name>", loot.getName());
-            result = result.Replace("<loot amount>", loot.amount + "");
-            result = result.Replace("<loot value>", loot.getTotalAmount() + "");
-        }
-        return result;
-    }
-
-    private string getText(DialogText text, float price, ItemGroup item, ItemStats loot, Player player)
-    {
-        string result = FormatUtil.GetLocalisedText(text.ID, text.type);
-
-        result = result.Replace("<price>", price + "");
-        result = result.Replace("<name>", player.name);
-        result = result.Replace("<interactable>", getInteractableType());
-
-        if (item != null)
-        {
-            result = result.Replace("<item name>", item.getName());
-            result = result.Replace("<item amount>", item.GetAmount() + "");
-        }
-
-        if (loot != null)
-        {
-            result = result.Replace("<loot name>", loot.getName());
-            result = result.Replace("<loot amount>", loot.amount + "");
-            result = result.Replace("<loot value>", loot.getTotalAmount() + "");
-        }
-
-        return result;
-    }
-
-    private string getInteractableType()
-    {
-        if (this.GetComponent<Door>() != null) return FormatUtil.GetLocalisedText("Door", LocalisationFileType.objects);
-        if (this.GetComponent<Treasure>() != null) return FormatUtil.GetLocalisedText("Treasure", LocalisationFileType.objects);
-        return "";
-    }
-
-    private string GetItemName(float price)
-    {
-        string result = "";
-
-        /*
-        switch (this.resourceType)
-        {
-            case ResourceType.item:
-                {
-                    string typ = this.getItemGroup();
-                    if (price == 1 && (typ != "Schlüssel" || GlobalGameObjects.settings.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
-
-                    result = typ;
-                }; break;
-            case ResourceType.life: result = "Leben"; break;
-            case ResourceType.mana: result = "Mana"; break;
-        }*/
-
-        return result;
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
 
@@ -7,20 +6,7 @@ public class CharacterAttributeMenu : MenuBehaviour
 {
     [BoxGroup("Required")]
     [Required]
-    public PlayerInventory inventory;
-
-    [BoxGroup("Required")]
-    [Required]
-    public SimpleSignal healtSignal;
-
-    [BoxGroup("Required")]
-    [Required]
-    public SimpleSignal manaSignal;
-
-    [HideInInspector]
-    public int[] percentageValues = new int[] { 0, 25, 50, 75, 100 };
-    [HideInInspector]
-    public int[] expanderValues = new int[] { 1, 3, 5, 7, 9 };
+    public PlayerAttributes attributes;
 
     [BoxGroup]
     [SerializeField]
@@ -37,25 +23,15 @@ public class CharacterAttributeMenu : MenuBehaviour
     [BoxGroup]
     [SerializeField]
     private AudioClip juwelOutSound;
-
-    [BoxGroup]
-    [SerializeField]
-    private AudioSource audiosource;
-
-    [BoxGroup]
-    [SerializeField]
-    private List<CharacterAttributeStats> statObjects = new List<CharacterAttributeStats>();
     
-    private int attributePoints = 0;
+    private int attributePoints;
     private int attributePointsMax;
-    private int pointsSpent;
-    private int pointsLeft;
 
     public override void Start()
     {
         base.Start();
-        foreach (CharacterAttributeStats statObject in this.statObjects) statObject.init();        
-        updatePoints();
+        this.attributePoints = GameEvents.current.GetItemAmount(this.item);
+        UpdatePoints();
     }
 
     public void playJuwelSound(bool insert)
@@ -64,26 +40,17 @@ public class CharacterAttributeMenu : MenuBehaviour
         else AudioUtil.playSoundEffect(this.gameObject, this.juwelOutSound);
     }
 
-    public int getPointsLeft()
+    public int GetPointsLeft()
     {
-        return this.pointsLeft;
+        return this.attributePoints - this.attributes.pointsSpent;
     }
 
-    public void updatePoints()
+    public void UpdatePoints()
     {
-        this.attributePoints = this.inventory.GetAmount(this.item);
         this.attributePointsMax = this.item.maxAmount;
+        int pointsLeft = GetPointsLeft();
 
-        this.pointsSpent = 0;
-
-        foreach (CharacterAttributeStats statObject in this.statObjects)
-        {
-            this.pointsSpent += statObject.getPointsSpent();
-        }
-
-        this.pointsLeft = this.attributePoints - this.pointsSpent;
-
-        string text = FormatUtil.formatString(this.pointsLeft, this.attributePointsMax)+" / " + FormatUtil.formatString(this.attributePointsMax, this.attributePointsMax);
+        string text = FormatUtil.formatString(pointsLeft, this.attributePointsMax)+" / " + FormatUtil.formatString(this.attributePointsMax, this.attributePointsMax);
         this.pointsField.text = text;
     }
 }

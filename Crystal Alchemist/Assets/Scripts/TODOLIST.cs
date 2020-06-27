@@ -5,9 +5,6 @@ public class TODOLIST : MonoBehaviour
     //Minor BUG: Death Screen wonky
     //BUG: Intro (WHY???????)
 
-    //TODO: Teleport Animation (also Player Animation)
-    //TODO: Last Teleport Info and Check if there (Death Screen too)
-
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
@@ -23,6 +20,9 @@ public class TODOLIST : MonoBehaviour
     //INPUT: Virtuelle Tastatur
     //CONTENT: Sin Eater Race (glowing eyes, halo, wings, etc)
 
+    //TODO: New Game Intro
+    //TODO: Teleport Animation (also Player Animation)
+    //TODO: Check if there (Death Screen too)
     //TODO: Custom Smoke for Collectable, Interactable and Warp
     //TODO: On Kill Event
     //TODO: Boss Mechanic Duration Override
@@ -44,6 +44,7 @@ public class TODOLIST : MonoBehaviour
     //TODO: Player Mark Indicator (Blick, Kette, etc)
 
     //UTIL: Item Assistent
+    //UTIL: Dev Tools
 
     //GRAPHIC: Rework Effect Sprites
     //GRAPHICS: Player: Neue Outfits (Schwarzes Gear, Schwarze Stiefel, Visier, Mundschutz, Weiße Robe, Heiligen Schein)
@@ -54,6 +55,7 @@ public class TODOLIST : MonoBehaviour
 
     //MAYBE: Empty Map Prefab Update
     //MAYBE: Wetter Script (Position und Größe)
+    //MAYBE: Trail Effects
 
     //-----------------------------------------------------------------------------
 

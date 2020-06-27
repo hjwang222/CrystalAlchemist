@@ -16,10 +16,6 @@ public class SaveGameMenu : MonoBehaviour
 
     [BoxGroup("Save Menu")]
     [SerializeField]
-    private MenuDialogBoxLauncher launcher;
-
-    [BoxGroup("Save Menu")]
-    [SerializeField]
     private PlayerSaveGame saveGame;
 
     //Called from Dialogbox
@@ -34,7 +30,6 @@ public class SaveGameMenu : MonoBehaviour
         SaveSystem.Save(this.saveGame, slot.gameObject.name); //saves savegame to data
 
         UpdateSaves();
-        if (this.launcher != null) this.launcher.ShowDialogBox();
     }
 }
 

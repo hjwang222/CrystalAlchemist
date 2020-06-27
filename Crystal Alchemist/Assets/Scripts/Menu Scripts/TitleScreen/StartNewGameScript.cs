@@ -15,9 +15,13 @@ public class StartNewGameScript : MonoBehaviour
     [SerializeField]
     private TeleportStats nextTeleport;
 
+    [SerializeField]
+    private TimeValue timeValue;
+
     public void StartNewGame()
     {
         Cursor.visible = false;
+        this.timeValue.Clear();
         this.saveGame.Clear();
         this.nextTeleport.SetValue(this.firstScene, this.position);
 

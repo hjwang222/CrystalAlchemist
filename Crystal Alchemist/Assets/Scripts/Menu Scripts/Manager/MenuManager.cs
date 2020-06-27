@@ -55,7 +55,7 @@ public class MenuManager : MonoBehaviour
 
     public void OpenDialogBox() => OpenScene("DialogBox");
 
-    public void OpenMenuDialogBox() => OpenScene("MenuDialogBox");
+    public void OpenMenuDialogBox() => OpenSceneAdditive("MenuDialogBox");
 
     public void OpenTutorial() => OpenScene("Tutorial");
 
@@ -63,5 +63,10 @@ public class MenuManager : MonoBehaviour
     {
         if (UnityUtil.SceneExists(scene)) SceneManager.UnloadSceneAsync(scene);
         else SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+    }
+
+    private void OpenSceneAdditive(string scene)
+    {
+        SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
     }
 }

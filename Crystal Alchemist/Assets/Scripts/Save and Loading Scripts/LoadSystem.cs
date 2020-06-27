@@ -9,7 +9,7 @@ public class LoadSystem
         if (data != null)
         {
             LoadPreset(data, saveGame.playerPreset);
-            LoadBasicValues(data, saveGame.playerValue);
+            LoadBasicValues(data, saveGame.playerValue, saveGame.attributes);
 
             saveGame.time.Clear();
             saveGame.timePlayed.SetValue(data.timePlayed);
@@ -47,17 +47,17 @@ public class LoadSystem
         }
     }
 
-    private static void LoadBasicValues(PlayerData data, CharacterValues playerValue)
+    private static void LoadBasicValues(PlayerData data, CharacterValues playerValue, PlayerAttributes attributes)
     {
         playerValue.life = data.health;
         playerValue.mana = data.mana;
 
-        playerValue.maxLife = data.maxHealth;
-        playerValue.maxMana = data.maxMana;
-        playerValue.lifeRegen = data.healthRegen;
-        playerValue.manaRegen = data.manaRegen;
-        playerValue.buffPlus = data.buffplus;
-        playerValue.debuffMinus = data.debuffminus;
+        attributes.SetPoints(attributeType.lifeExpander, data.maxHealth);
+        attributes.SetPoints(attributeType.lifeRegen, data.healthRegen);
+        attributes.SetPoints(attributeType.manaExpander, data.maxMana);
+        attributes.SetPoints(attributeType.manaRegen, data.manaRegen);
+        attributes.SetPoints(attributeType.buffPlus, data.buffplus);
+        attributes.SetPoints(attributeType.debuffMinus, data.debuffminus);
     }
 
     public static void loadPlayerSkills(PlayerData data, PlayerButtons buttons, PlayerSkillset skillSet)

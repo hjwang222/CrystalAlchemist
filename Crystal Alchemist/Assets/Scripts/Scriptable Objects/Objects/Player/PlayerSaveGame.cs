@@ -22,6 +22,8 @@ public class PlayerSaveGame : ScriptableObject
     [BoxGroup("Player")]
     public PlayerSkillset skillSet;
     [BoxGroup("Player")]
+    public PlayerAttributes attributes;
+    [BoxGroup("Player")]
     public PlayerGameProgress progress;
 
     [BoxGroup("Teleport")]
@@ -49,6 +51,7 @@ public class PlayerSaveGame : ScriptableObject
         this.inventory.Clear();
         this.buttons.Clear();
         this.skillSet.Clear();
+        this.attributes.Clear();
         this.startSpawnPoint.Clear();
         this.lastTeleport.Clear();
         this.progress.Clear();
