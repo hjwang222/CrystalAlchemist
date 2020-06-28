@@ -98,13 +98,14 @@ MonoBehaviour:
     amount: 1
   customActionButton: 1
   ID: Benutzen
+  showEffectOnEnable: 0
   isPlayerInRange: 0
   isPlayerLookingAtIt: 0
   player: {fileID: 0}
   context: {fileID: 0}
   teleportPoint: {fileID: 11400000, guid: b4b44137f885abc42827b4114997258c, type: 2}
   teleportList: {fileID: 11400000, guid: a5383e9eb1591254eadebe1d4ca868c7, type: 2}
-  savePointInfo: {fileID: 11400000, guid: 6d043763fe32e164fadec2b584564b99, type: 2}
+  savePointInfo: {fileID: 11400000, guid: 86c1b2182254c8b47b214e6596815b9f, type: 2}
 --- !u!61 &3428822943495909469
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -273,6 +274,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0.25
   glowColor: {r: 1.1639979, g: 2.6691675, b: 2.8364084, a: 1}
+  invert: 0
 --- !u!1 &5882018215815226729
 GameObject:
   m_ObjectHideFlags: 0

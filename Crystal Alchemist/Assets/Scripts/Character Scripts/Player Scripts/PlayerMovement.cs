@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : PlayerComponent
 {
     [SerializeField]
-    private float directionLockTime = 0.1f;
+    private float directionLockTime = 0.25f;
 
     private Vector2 change;
     private Vector2 position;

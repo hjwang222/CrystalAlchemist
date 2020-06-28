@@ -61,7 +61,7 @@ public class Player : Character
         GameEvents.current.OnCutScene += this.SetCutScene;
         GameEvents.current.OnEnoughCurrency += this.HasEnoughCurrency;
 
-        this.GetComponent<PlayerAbilities>().Initialize();
+        if( this.GetComponent<PlayerAbilities>() != null) this.GetComponent<PlayerAbilities>().Initialize();
         PlayerComponent[] components = this.GetComponents<PlayerComponent>();
         for (int i = 0; i < components.Length; i++) components[i].Initialize();
 
@@ -77,7 +77,7 @@ public class Player : Character
     public override void Update()
     {
         base.Update();        
-        this.GetComponent<PlayerAbilities>().Updating();
+        if(this.GetComponent<PlayerAbilities>() != null) this.GetComponent<PlayerAbilities>().Updating();
         PlayerComponent[] components = this.GetComponents<PlayerComponent>();
         for (int i = 0; i < components.Length; i++) components[i].Updating();
     }

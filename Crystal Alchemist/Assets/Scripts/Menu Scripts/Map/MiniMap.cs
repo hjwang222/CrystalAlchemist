@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine.UI;
@@ -9,22 +7,36 @@ public class MiniMap : MenuBehaviour
 {
     [BoxGroup]
     [SerializeField]
-    private TeleportStats lastTeleport;
+    private PlayerTeleportList teleportList;
 
     [BoxGroup]
     [SerializeField]
-    private TextMeshProUGUI teleportName;
+    private TextMeshProUGUI returnName;
 
     [BoxGroup]
     [SerializeField]
-    private Image icon;
+    private Image returnIcon;
+
+    [BoxGroup]
+    [SerializeField]
+    private TextMeshProUGUI lastName;
+
+    [BoxGroup]
+    [SerializeField]
+    private Image lastIcon;
 
     public override void Start()
     {
         base.Start();
+        SetText(teleportList.lastTeleport, this.returnIcon, this.returnName);
+        SetText(teleportList.nextTeleport, this.lastIcon, this.lastName);
+    }
 
-        if (this.lastTeleport == null) this.teleportName.text = "-";
-        this.teleportName.text = this.lastTeleport.GetTeleportName();
-        this.icon.sprite = this.lastTeleport.icon;
+    private void SetText(TeleportStats stats, Image image, TextMeshProUGUI textField)
+    {
+        if (stats == null) textField.text = "-";
+        textField.text = stats.GetTeleportName();
+        if (stats.icon == null) image.enabled = false;
+        else image.sprite = stats.icon;
     }
 }

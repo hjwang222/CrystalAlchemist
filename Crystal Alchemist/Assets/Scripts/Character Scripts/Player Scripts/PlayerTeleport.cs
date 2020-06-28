@@ -6,12 +6,6 @@ using UnityEngine.SceneManagement;
 public class PlayerTeleport : PlayerComponent
 {
     [SerializeField]
-    private TeleportStats nextTeleport;
-
-    [SerializeField]
-    private TeleportStats lastTeleport;
-
-    [SerializeField]
     private PlayerTeleportList teleportList;
 
     [SerializeField]
@@ -23,7 +17,7 @@ public class PlayerTeleport : PlayerComponent
     public override void Initialize()
     {
         base.Initialize();
-        GameEvents.current.OnReturn += ReturnToLastTeleport;
+        GameEvents.current.OnTeleport += SwitchScene;
         GameEvents.current.OnHasReturn += HasReturn;
         this.teleportList.Initialize();
         StartCoroutine(MaterializePlayer());
@@ -31,7 +25,7 @@ public class PlayerTeleport : PlayerComponent
 
     private void OnDestroy()
     {
-        GameEvents.current.OnReturn -= ReturnToLastTeleport;
+        GameEvents.current.OnTeleport -= SwitchScene;
         GameEvents.current.OnHasReturn -= HasReturn;
     }
 
@@ -42,7 +36,7 @@ public class PlayerTeleport : PlayerComponent
     {
         //AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.nextTeleport.scene);
         //asyncOperation.allowSceneActivation = true;
-        StartCoroutine(loadSceneCo(this.nextTeleport.scene));
+        StartCoroutine(loadSceneCo(this.teleportList.nextTeleport.scene));
         //SceneLoader.Load(this.nextTeleport.scene);
     }
 
@@ -55,7 +49,7 @@ public class PlayerTeleport : PlayerComponent
     private IEnumerator DematerializePlayer()
     {
         this.player.SpawnOut(); //Disable Player        
-        bool animation = this.nextTeleport.showAnimationOut;
+        bool animation = this.teleportList.nextTeleport.showAnimationOut;
 
         if (this.player.respawnAnimation != null && animation) //Show Animation for DEspawn
         {
@@ -76,9 +70,9 @@ public class PlayerTeleport : PlayerComponent
     {
         this.player.SetCharacterSprites(false);
         this.player.SpawnOut(); //Disable Player
-        
-        Vector2 position = this.nextTeleport.position;
-        bool animation = this.nextTeleport.showAnimationIn;
+
+        Vector2 position = this.teleportList.nextTeleport.position;
+        bool animation = this.teleportList.nextTeleport.showAnimationIn;
 
         SetPosition(position);
 
@@ -111,15 +105,8 @@ public class PlayerTeleport : PlayerComponent
         }
     }
 
-    public void ReturnToLastTeleport()
-    {
-        if (this.lastTeleport == null) return;
-        this.nextTeleport.SetValue(this.lastTeleport);
-        SwitchScene();
-    }
-
     public bool HasReturn()
     {
-        return this.lastTeleport != null;
+        return this.teleportList.lastTeleport != null;
     }
 }

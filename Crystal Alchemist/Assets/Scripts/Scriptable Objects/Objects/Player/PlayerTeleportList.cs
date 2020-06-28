@@ -8,6 +8,25 @@ public class PlayerTeleportList : ScriptableObject
     [SerializeField]
     private List<TeleportStats> list = new List<TeleportStats>();
 
+    public TeleportStats nextTeleport;
+    public TeleportStats lastTeleport;
+
+    public void SetNextTeleport(TeleportStats stats)
+    {
+        this.nextTeleport = stats;
+    }
+
+    public void SetLastTeleport(TeleportStats stats)
+    {
+        this.lastTeleport = stats;
+    }
+
+    public void SetReturnTeleport()
+    {
+        if (this.lastTeleport == null) return;
+        SetNextTeleport(this.lastTeleport);
+    }
+
     public void Initialize()
     {
         this.list.RemoveAll(item => item == null);
@@ -16,7 +35,7 @@ public class PlayerTeleportList : ScriptableObject
 
     public void AddTeleport(TeleportStats stat)
     {
-        if (!Contains(stat)) this.list.Add(new TeleportStats(stat));
+        if (!Contains(stat)) this.list.Add(stat);
         this.list.OrderBy(o => o.scene);
     }
 

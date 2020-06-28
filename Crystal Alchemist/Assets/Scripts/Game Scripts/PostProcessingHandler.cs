@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
 using System;
+using DG.Tweening;
 
 public class PostProcessingHandler : MonoBehaviour
 {
@@ -19,10 +20,17 @@ public class PostProcessingHandler : MonoBehaviour
 
     private void Start()
     {
+        if(MenuEvents.current != null) MenuEvents.current.OnPostProcessingFade += StartFading;
         this.volume.profile.TryGet(out this.colorGrading);
         ResetFading();
     }
 
+    private void OnDestroy()
+    {
+        if (MenuEvents.current != null) MenuEvents.current.OnPostProcessingFade -= StartFading;
+    }
+
+    [Button]
     public void StartFading(Action action)
     {
         StartCoroutine(FadeOut(this.fadingSteps, action));
@@ -33,16 +41,13 @@ public class PostProcessingHandler : MonoBehaviour
         while (this.colorGrading.saturation.value > -100)
         {
             this.colorGrading.saturation.value -= 1f;
-            if (this.colorGrading.saturation.value <= -100)
-            {
-                action.Invoke();
-                break;
-            }
-
             yield return new WaitForSeconds(delay);
         }
+
+        action?.Invoke();
     }
 
+    [Button]
     private void ResetFading()
     {
         this.colorGrading.saturation.value = 0;

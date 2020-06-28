@@ -7,14 +7,8 @@ using Sirenix.OdinInspector;
 public class DeathScreen : MonoBehaviour
 {
     [BoxGroup("Mandatory")]
-    [Required]
     [SerializeField]
-    private TeleportStats lastTeleport;
-
-    [BoxGroup("Mandatory")]
-    [Required]
-    [SerializeField]
-    private TeleportStats nextTeleport;
+    private PlayerTeleportList playerTeleport;
 
     [BoxGroup("Music")]
     [SerializeField]
@@ -50,7 +44,7 @@ public class DeathScreen : MonoBehaviour
 
     [BoxGroup("Time")]
     [SerializeField]
-    private int timer = 30;
+    private float timer = 30;
 
     [BoxGroup("Time")]
     [SerializeField]
@@ -64,72 +58,63 @@ public class DeathScreen : MonoBehaviour
     [SerializeField]
     private float inputDelay = 3f;
 
-    [BoxGroup("Signals")]
-    [SerializeField]
-    private ActionSignal fadeSignal;
-
     private string currentText;
     private string fullText;
     private bool skip = false;
     private bool inputPossible = false;
+    private bool startCountdown = false;
 
-    private void init()
+    private void Start()
     {
-        this.skip = false;
+        Invoke("ReturnToTitleScreen", 60);
         this.cursor.gameObject.SetActive(false);
         this.returnSavePoint.SetActive(false);
         this.returnTitleScreen.SetActive(false);
         this.countDown.gameObject.SetActive(false);
         this.textField.gameObject.SetActive(false);
-        SceneManager.UnloadSceneAsync("UI");
-        StartCoroutine(delayCo(this.inputDelay));
-    }
 
-    private IEnumerator delayCo(float delay)
-    {
-        this.inputPossible = false;
-        yield return new WaitForSeconds(delay);
-        this.inputPossible = true;
+        SceneManager.UnloadSceneAsync("UI");
+        MusicEvents.current.StopMusic(this.fadeOut);
+        MenuEvents.current.DoPostProcessingFade(ShowText);
     }
 
     private void Update()
     {
         if (Input.anyKeyDown && this.inputPossible) this.skip = true;
+        if (this.startCountdown)
+        {
+            if (this.timer <= 0) ReturnToTitleScreen();
+            else this.timer -= Time.deltaTime;
+            this.countDown.text = (int)this.timer + "s";
+        }
     }
 
-    private void OnEnable()
+    private void ShowText()
     {
-        init();
-        MusicEvents.current.StopMusic(this.fadeOut);
-        this.fadeSignal.Raise(showText);
-    }
-
-    private void showText()
-    {
+        this.inputPossible = true;
         MusicEvents.current.PlayMusicOnce(this.deathMusic, 0, this.fadeIn);
         this.textField.gameObject.SetActive(true);
-        ShowText(this.textDelay);
-    }
-
-    public void ShowText(float delay)
-    {
         this.fullText = this.textField.text;
-        StartCoroutine(this.ShowTextCo(delay));
+        StartCoroutine(this.ShowTextCo(this.textDelay));
     }
 
-    public void showButtons()
+    public void ShowButtons()
     {
         this.cursor.gameObject.SetActive(true);
         this.returnTitleScreen.SetActive(true);
         this.returnSavePoint.SetActive(true);
 
         this.countDown.gameObject.SetActive(true);
-        StartCoroutine(this.countDownCo());
+        startCountdown = true;
     }
 
-    public void returnToTitleScreen() => SceneManager.LoadSceneAsync(0);    
+    public void ReturnToTitleScreen() => SceneManager.LoadSceneAsync(0);
 
-    public void returnSaveGame() => GameEvents.current.DoReturn();
+    public void ReturnSaveGame()
+    {
+        this.playerTeleport.SetReturnTeleport();
+        GameEvents.current.DoTeleport();
+    }
 
     private IEnumerator ShowTextCo(float delay)
     {
@@ -158,19 +143,6 @@ public class DeathScreen : MonoBehaviour
     private IEnumerator showButtonCo(float delay)
     {
         yield return new WaitForSeconds(delay);
-        showButtons();
-    }
-
-    private IEnumerator countDownCo()
-    {
-        for (int i = 0; i < this.timer; i++)
-        {
-            if (i >= this.timer)
-            {
-                returnToTitleScreen();
-            }
-            this.countDown.text = "" + (this.timer - i) + "s";
-            yield return new WaitForSeconds(1);
-        }
+        ShowButtons();
     }
 }

@@ -954,8 +954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307181bca8f9b7244b2468343fa8acc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastTeleport: {fileID: 11400000, guid: 861c2af2cd801d4459e257b6f0edbc52, type: 2}
-  nextTeleport: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
+  playerTeleport: {fileID: 11400000, guid: a5383e9eb1591254eadebe1d4ca868c7, type: 2}
   deathMusic: {fileID: 8300000, guid: fbf3c3fc3b9ea0f49be22b5d3e7d997d, type: 3}
   fadeIn: 0
   fadeOut: 1
@@ -968,7 +967,6 @@ MonoBehaviour:
   textDelay: 0.1
   cursorDelay: 2
   inputDelay: 3
-  fadeSignal: {fileID: 11400000, guid: a76b91dd47bc63046b35dc05f9b79d12, type: 2}
 --- !u!1 &1057502418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,7 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 175733141}
-  selectFirst: 0
+  selectFirst: 1
   isInteractable: 1
   overrideNavigation: 0
   up: []
@@ -1054,7 +1052,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 919052619}
         m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
-        m_MethodName: returnToTitleScreen
+        m_MethodName: ReturnToTitleScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1329,7 +1327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 175733141}
-  selectFirst: 1
+  selectFirst: 0
   isInteractable: 1
   overrideNavigation: 0
   up: []
@@ -1381,7 +1379,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 919052619}
         m_TargetAssemblyTypeName: DeathScreen, Assembly-CSharp
-        m_MethodName: returnSaveGame
+        m_MethodName: ReturnSaveGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

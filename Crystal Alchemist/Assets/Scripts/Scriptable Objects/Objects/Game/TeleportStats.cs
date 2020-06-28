@@ -9,6 +9,7 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
     public Vector2 position;
     public bool showAnimationIn = false;
     public bool showAnimationOut = false;
+    public bool isEmpty = true;
 
     [AssetIcon]
     public Sprite icon;
@@ -20,14 +21,16 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
         this.position = Vector2.zero;
         this.showAnimationIn = true;
         this.showAnimationOut = false;
+        this.isEmpty = true;
     }
 
+    /*
     public TeleportStats(TeleportStats stat)
     {
         //Called from TeleportList and Savepoint
         this.name = stat.name;
         SetValue(stat);
-    }
+    }*/
 
     public void SetValue(string teleportName, string targetScene, Vector2 position, bool showIn, bool showOut, Sprite icon)
     {
@@ -39,10 +42,12 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
             this.showAnimationIn = showIn;
             this.showAnimationOut = showOut;
             this.icon = icon;
+            this.isEmpty = false;
         }
         else Clear();
     }
 
+    /*
     public void SetValue(string targetScene, Vector2 position)
     {
         //Start new Game
@@ -59,7 +64,7 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
     {
         //Scene Transition
         SetValue("", targetScene, position, showIn, showOut, null);
-    }
+    }*/
 
     public string GetTeleportName()
     {

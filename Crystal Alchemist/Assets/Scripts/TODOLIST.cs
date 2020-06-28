@@ -2,7 +2,8 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //Minor BUG: Death Screen wonky
+    //TODO: DELETE SAVES / CONVERT SAVES
+    //TODO: Death Screen und Teleport Skill Check for Teleport stats exists
     //BUG: Intro (WHY???????)
 
     //-----------------------------------------------------------------------------

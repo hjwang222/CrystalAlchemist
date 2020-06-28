@@ -3,42 +3,15 @@ using Sirenix.OdinInspector;
 
 public class SceneTransition : MonoBehaviour
 {
-    [Header("New Scene Variables")]
-    [Tooltip("Name der nächsten Map")]
     [BoxGroup("Required")]
     [Required]
     [SerializeField]
-    private string targetScene;
-
-    [Tooltip("Spawnpunkt des Spielers")]
-    [SerializeField]
-    [BoxGroup("Required")]
-    [Required]
-    private Vector2 playerPositionInNewScene;
-
-    [BoxGroup("Transition")]
-    [SerializeField]
-    private bool showTransition = false;
-
-    [ShowIf("showTransition", true)]
-    [BoxGroup("Transition")]
-    [SerializeField]
-    private SimpleSignal vcamSignal;
-
-    [ShowIf("showTransition", true)]
-    [BoxGroup("Transition")]
-    [SerializeField]
-    private bool showAnimationIn = false;
-
-    [ShowIf("showTransition", true)]
-    [BoxGroup("Transition")]
-    [SerializeField]
-    private bool showAnimationOut = false;
+    private TeleportStats stats;
 
     [BoxGroup("Required")]
     [Required]
     [SerializeField]
-    private TeleportStats nextTeleport;
+    private PlayerTeleportList teleportList;
 
     [BoxGroup("Required")]
     [SerializeField]
@@ -60,10 +33,8 @@ public class SceneTransition : MonoBehaviour
     {
         if (this.player != null && this.player.values.currentState != CharacterState.respawning)
         {
-            if (this.vcamSignal != null) this.vcamSignal.Raise();
-
-            this.nextTeleport.SetValue(this.targetScene, this.playerPositionInNewScene, this.showAnimationIn, this.showAnimationOut);
-            this.player.GetComponent<PlayerTeleport>().SwitchScene();
+            this.teleportList.SetNextTeleport(this.stats);
+            GameEvents.current.DoTeleport();
         }
     }
 }

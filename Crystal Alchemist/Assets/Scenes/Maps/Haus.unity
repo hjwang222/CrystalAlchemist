@@ -4804,6 +4804,12 @@ PrefabInstance:
       propertyPath: costs.amount
       value: 99
       objectReference: {fileID: 0}
+    - target: {fileID: 7808392554565731848, guid: b4cf804db010d9f478e54b7e81d263f5,
+        type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 4723a28ccb85bc3429b6f1deb2e8dd52,
+        type: 2}
     - target: {fileID: 8485219314684638392, guid: b4cf804db010d9f478e54b7e81d263f5,
         type: 3}
       propertyPath: price.resourceType
@@ -6957,7 +6963,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.020035923, y: -0.15027094}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6968,7 +6974,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9817692, y: 1.3005419}
+  m_Size: {x: 2, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &6553018103412492982
 Transform:
@@ -6978,7 +6984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9170353455517045928}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -7, z: 0}
+  m_LocalPosition: {x: 0, y: -7.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1448332028}
@@ -18925,13 +18931,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984c8cd5ec6ccb644b586222917fbfad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: Dorf
-  playerPositionInNewScene: {x: 2.5, y: 2.5}
-  showTransition: 0
-  vcamSignal: {fileID: 11400000, guid: a33ae82561921e840bfadec36a9feb04, type: 2}
-  showAnimationIn: 0
-  showAnimationOut: 0
-  nextTeleport: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
+  stats: {fileID: 11400000, guid: b365e11c494da9b49ba071fdcf7ca2c1, type: 2}
+  teleportList: {fileID: 11400000, guid: a5383e9eb1591254eadebe1d4ca868c7, type: 2}
   dialogBox: {fileID: 0}
 --- !u!1001 &8223605062821766462
 PrefabInstance:

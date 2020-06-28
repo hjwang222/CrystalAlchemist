@@ -27,10 +27,6 @@ public class PlayerSaveGame : ScriptableObject
     public PlayerGameProgress progress;
 
     [BoxGroup("Teleport")]
-    public TeleportStats startSpawnPoint;
-    [BoxGroup("Teleport")]
-    public TeleportStats lastTeleport;
-    [BoxGroup("Teleport")]
     public PlayerTeleportList teleportList;
 
     [BoxGroup("Stats")]
@@ -52,8 +48,6 @@ public class PlayerSaveGame : ScriptableObject
         this.buttons.Clear();
         this.skillSet.Clear();
         this.attributes.Clear();
-        this.startSpawnPoint.Clear();
-        this.lastTeleport.Clear();
         this.progress.Clear();
 
         GameUtil.setPreset(this.defaultPreset, this.playerPreset);

@@ -3047,6 +3047,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 919052619}
+        m_TargetAssemblyTypeName: MenuBehaviour, Assembly-CSharp
+        m_MethodName: ExitMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Haus
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 363707767}
         m_TargetAssemblyTypeName: QuickTravelButton, Assembly-CSharp
         m_MethodName: Teleport
@@ -3056,7 +3068,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Haus
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &363707765
@@ -3110,7 +3122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5ea25b65cb1ee45bfc92db4ea2251a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextTeleport: {fileID: 11400000, guid: d2971907b17b2e542a84207d10190c82, type: 2}
+  playerTeleport: {fileID: 11400000, guid: a5383e9eb1591254eadebe1d4ca868c7, type: 2}
   textField: {fileID: 1246799963}
   image: {fileID: 700012646}
 --- !u!114 &363707768
@@ -3916,8 +3928,8 @@ MonoBehaviour:
   playerValues: {fileID: 11400000, guid: 6762d3fcfc403704ab3f304728a23ccf, type: 2}
   showBlackBackground: 1
   infoBox: {fileID: 0}
-  lastTeleport: {fileID: 11400000, guid: 861c2af2cd801d4459e257b6f0edbc52, type: 2}
-  savePointInfo: {fileID: 11400000, guid: 6d043763fe32e164fadec2b584564b99, type: 2}
+  teleportList: {fileID: 11400000, guid: a5383e9eb1591254eadebe1d4ca868c7, type: 2}
+  savePointInfo: {fileID: 11400000, guid: 86c1b2182254c8b47b214e6596815b9f, type: 2}
   star: {fileID: 616933981}
 --- !u!114 &919052620
 MonoBehaviour:

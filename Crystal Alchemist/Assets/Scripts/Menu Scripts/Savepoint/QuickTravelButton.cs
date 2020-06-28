@@ -8,7 +8,7 @@ public class QuickTravelButton : MonoBehaviour
 {
     [SerializeField]
     [Required]
-    private TeleportStats nextTeleport;
+    private PlayerTeleportList playerTeleport;
 
     [SerializeField]
     [Required]
@@ -29,8 +29,7 @@ public class QuickTravelButton : MonoBehaviour
 
     public void Teleport()
     {
-        Cursor.visible = false;
-        this.nextTeleport.SetValue(this.location);
-        SceneManager.LoadScene(this.nextTeleport.scene);
+        this.playerTeleport.SetNextTeleport(this.location);
+        GameEvents.current.DoTeleport();
     }
 }

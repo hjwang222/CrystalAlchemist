@@ -19,8 +19,6 @@ public class LoadSystem
             loadPlayerSkills(data, saveGame.buttons, saveGame.skillSet);
             LoadProgress(data, saveGame.progress);
 
-            LoadTeleportPoint(data.startTeleport, saveGame.startSpawnPoint);
-            LoadTeleportPoint(data.lastTeleport, saveGame.lastTeleport);
             LoadTeleportList(data, saveGame.teleportList);
         }
     }
@@ -31,12 +29,6 @@ public class LoadSystem
         progress.SetPermanent(data.progress);
     }
 
-    private static void LoadTeleportPoint(string name, TeleportStats stat)
-    {
-        TeleportStats teleport = MasterManager.GetTeleportStats(name);
-        if(teleport != null) stat.SetValue(teleport);
-    }
-
     private static void LoadTeleportList(PlayerData data, PlayerTeleportList list)
     {
         if (data.teleportPoints == null) return;
@@ -45,6 +37,9 @@ public class LoadSystem
             TeleportStats teleport = MasterManager.GetTeleportStats(name);
             if (teleport != null) list.AddTeleport(teleport);
         }
+
+        list.nextTeleport = MasterManager.GetTeleportStats(data.startTeleport);
+        list.lastTeleport = MasterManager.GetTeleportStats(data.lastTeleport);
     }
 
     private static void LoadBasicValues(PlayerData data, CharacterValues playerValue, PlayerAttributes attributes)

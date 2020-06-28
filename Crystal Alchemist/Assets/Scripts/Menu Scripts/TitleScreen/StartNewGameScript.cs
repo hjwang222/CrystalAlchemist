@@ -7,13 +7,7 @@ public class StartNewGameScript : MonoBehaviour
     private PlayerSaveGame saveGame;
 
     [SerializeField]
-    private string firstScene = "Void";
-
-    [SerializeField]
-    private Vector2 position = Vector2.zero;
-
-    [SerializeField]
-    private TeleportStats nextTeleport;
+    private TeleportStats startTeleport;
 
     [SerializeField]
     private TimeValue timeValue;
@@ -23,8 +17,8 @@ public class StartNewGameScript : MonoBehaviour
         Cursor.visible = false;
         this.timeValue.Clear();
         this.saveGame.Clear();
-        this.nextTeleport.SetValue(this.firstScene, this.position);
+        this.saveGame.teleportList.SetNextTeleport(this.startTeleport);
 
-        SceneManager.LoadSceneAsync(this.nextTeleport.scene);
+        SceneManager.LoadSceneAsync(this.saveGame.teleportList.nextTeleport.scene);
     }
 }

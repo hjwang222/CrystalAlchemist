@@ -8,12 +8,12 @@ public class CrystalOrbMenu : MenuBehaviour
     [BoxGroup("Crystal Orb Menu")]
     [Required]
     [SerializeField]
-    private TeleportStats lastTeleport;
+    private PlayerTeleportList teleportList;
 
     [BoxGroup("Crystal Orb Menu")]
     [Required]
     [SerializeField]
-    private TeleportStats savePointInfo;
+    private SavePointInfo savePointInfo;
 
     [BoxGroup("Crystal Orb Menu")]
     [Required]
@@ -29,12 +29,12 @@ public class CrystalOrbMenu : MenuBehaviour
 
     public void SetStar()
     {
-        if (lastTeleport.teleportName == savePointInfo.teleportName) star.gameObject.SetActive(true);
+        if (teleportList.lastTeleport.teleportName == savePointInfo.stats.teleportName) star.gameObject.SetActive(true);
         else star.gameObject.SetActive(false);
     }
 
     public void SetLastTeleport()
     {
-        this.lastTeleport.SetValue(this.savePointInfo);
+        this.teleportList.SetLastTeleport(this.savePointInfo.stats);
     }
 }

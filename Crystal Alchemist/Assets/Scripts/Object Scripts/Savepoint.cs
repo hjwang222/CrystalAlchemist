@@ -16,7 +16,7 @@ public class Savepoint : Interactable
     [BoxGroup("UI")]
     [Tooltip("To store info for UI (Respawn)")]
     [SerializeField]
-    private TeleportStats savePointInfo;
+    private SavePointInfo savePointInfo;
 
     public override void DoOnSubmit()
     {
@@ -24,7 +24,7 @@ public class Savepoint : Interactable
         this.player.updateResource(CostType.mana, this.player.values.maxMana);
 
         this.teleportList.AddTeleport(this.teleportPoint); //add to teleport list    
-        this.savePointInfo.SetValue(this.teleportPoint); //set for UI (Respawn)
+        this.savePointInfo.stats =this.teleportPoint;
 
         MenuEvents.current.OpenSavepoint();
     }
