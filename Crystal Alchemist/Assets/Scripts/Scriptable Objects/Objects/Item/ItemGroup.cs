@@ -40,6 +40,8 @@ public class ItemGroup : ScriptableObject
     [SerializeField]
     public Sprite shopIcon;
 
+    [BoxGroup("Debug")]
+    [SerializeField]
     private int amount;
 
     [AssetIcon]

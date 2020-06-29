@@ -9,11 +9,14 @@ public class ChangeVolumeMenu : MonoBehaviour
     private bool isTitleScreen = false;
 
     [BoxGroup("Volume Buttons")]
-    public TextMeshProUGUI textField;
+    [SerializeField]
+    private TextMeshProUGUI textField;
     [BoxGroup("Volume Buttons")]
-    public Slider slider;
+    [SerializeField]
+    private Slider slider;
     [BoxGroup("Volume Buttons")]
-    public VolumeType volumeType;
+    [SerializeField]
+    private VolumeType volumeType;
 
     private void OnEnable()
     {        

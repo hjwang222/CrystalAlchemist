@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ResolutionMenu : MonoBehaviour
 {
@@ -13,10 +14,19 @@ public class ResolutionMenu : MonoBehaviour
     [SerializeField]
     private TMP_Dropdown screenModeDropDown;
 
+    [SerializeField]
+    private Slider slider;
+
+    [SerializeField]
+    private TextMeshProUGUI sliderValue;
+
+    private int size;
+
     private void OnEnable()
     {
         SelectDropDown(this.resolutionDropDown, GetCurrentResolution());
         SelectDropDown(this.screenModeDropDown, GetCurrentScreenMode());
+        SetSlider();
     }
 
     private void SelectDropDown(TMP_Dropdown dropDown, string text)
@@ -27,10 +37,29 @@ public class ResolutionMenu : MonoBehaviour
         }
     }
 
+    private void SetSlider()
+    {
+        this.size = MasterManager.settings.cameraDistance;
+        this.slider.value = size;
+        this.sliderValue.text = this.size + "";
+    }
+
+    public void SetValue()
+    {
+        this.size = (int)this.slider.value;
+        this.sliderValue.text = this.size + "";
+    }
+
+    public void ConfirmCamera()
+    {
+        MasterManager.settings.cameraDistance = this.size;
+        SettingsEvents.current.DoCameraChange();
+    }
+
     public void Confirm()
     {
         Screen.SetResolution(this.resolution.x, this.resolution.y, this.fullscreen);
-        this.resolutionDropDown.GetComponent<ButtonExtension>().Select();
+        this.resolutionDropDown.GetComponent<ButtonExtension>().Select();        
     }
 
     public void ChangeResolution()

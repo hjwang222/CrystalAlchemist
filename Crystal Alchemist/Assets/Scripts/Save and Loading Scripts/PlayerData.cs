@@ -137,6 +137,8 @@ public class GameOptions
     public bool useHealthBar;
     public bool useManaBar;
 
+    public int cameraDistance;
+
     public GameOptions()
     {
         this.musicVolume = MasterManager.settings.backgroundMusicVolume;
@@ -147,5 +149,7 @@ public class GameOptions
 
         this.useHealthBar = MasterManager.settings.healthBar;
         this.useManaBar = MasterManager.settings.manaBar;
+
+        this.cameraDistance = MasterManager.settings.cameraDistance;
     }
 }

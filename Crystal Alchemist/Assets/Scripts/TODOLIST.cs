@@ -4,6 +4,10 @@ public class TODOLIST : MonoBehaviour
 {
     //BUG: Intro (WHY???????)
 
+    //BUG: Attack after MenuClose (Input Delay)
+    //BUG: No Intro on Titania
+    //BUG: Auto New Start (Input Delay)
+
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
@@ -19,6 +23,7 @@ public class TODOLIST : MonoBehaviour
     //INPUT: Virtuelle Tastatur
     //CONTENT: Sin Eater Race (glowing eyes, halo, wings, etc)
 
+    //TODO: Text in UI as World Space Position?
     //TODO: New Game Intro
     //TODO: Teleport Animation (also Player Animation)
     //TODO: Check if there (Death Screen too)

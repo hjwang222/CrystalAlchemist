@@ -20,6 +20,7 @@ public class GameSettings : ScriptableObject
     public Language language = Language.German;
     public bool healthBar = false;
     public bool manaBar = false;
+    public int cameraDistance = 1;
 
     public float GetMenuVolume()
     {

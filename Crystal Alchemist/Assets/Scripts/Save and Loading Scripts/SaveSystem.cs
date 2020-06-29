@@ -78,6 +78,7 @@ public class SaveSystem
 
             MasterManager.settings.healthBar = data.useHealthBar;
             MasterManager.settings.manaBar = data.useManaBar;
+            MasterManager.settings.cameraDistance = data.cameraDistance;
         }
     }
 }
