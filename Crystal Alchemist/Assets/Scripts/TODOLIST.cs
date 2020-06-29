@@ -3,10 +3,6 @@
 public class TODOLIST : MonoBehaviour
 {
     //BUG: Still no Intro (WHY???????)
-
-    //BUG: Pages Exception (Skillbook)
-
-
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
