@@ -36,7 +36,7 @@ public class PlayerAbilities : CharacterCombat
 
     public void SelectTargetInput(InputAction.CallbackContext ctx)
     {
-        if(ctx.performed) this.GetTargetingSystem().SetTargetChange(ctx.ReadValue<Vector2>());
+        if (ctx.performed) this.GetTargetingSystem().SetTargetChange(ctx.ReadValue<Vector2>());
     }
 
     public void OnHoldingCallback(InputAction.CallbackContext context)
@@ -54,7 +54,7 @@ public class PlayerAbilities : CharacterCombat
             this.buttons.currentAbility = null;
         }
     }
-       
+
     private Ability GetAbility(InputAction.CallbackContext context)
     {
         foreach (enumButton item in Enum.GetValues(typeof(enumButton)))
@@ -84,7 +84,8 @@ public class PlayerAbilities : CharacterCombat
 
     private void ButtonUp(Ability ability)
     {
-        if (ability == null || !ability.enabled) return;
+        if (ability == null) return;
+
         if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbilityOnTarget(ability, null); //use Skill when charged
         else if (ability.state == AbilityState.lockOn && ability.isRapidFire) HideTargetingSystem(ability); //hide Targeting System when released
 

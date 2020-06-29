@@ -3,5 +3,13 @@ using Sirenix.OdinInspector;
 
 public class SkillTeleport : SkillExtension
 {
-    public override void Initialize() => GameEvents.current.DoTeleport();
+    [Required]
+    [SerializeField]
+    private PlayerTeleportList playerTeleport;
+
+    public override void Initialize()
+    {
+        this.playerTeleport.SetReturnTeleport();
+        GameEvents.current.DoTeleport();
+    }
 }

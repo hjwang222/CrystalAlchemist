@@ -42,6 +42,10 @@ public class DeathScreen : MonoBehaviour
     [SerializeField]
     private GameObject returnSavePoint;
 
+    [BoxGroup("Mandatory")]
+    [SerializeField]
+    private GameObject returnLastPoint;
+
     [BoxGroup("Time")]
     [SerializeField]
     private float timer = 30;
@@ -67,11 +71,6 @@ public class DeathScreen : MonoBehaviour
     private void Start()
     {
         Invoke("ReturnToTitleScreen", 60);
-        this.cursor.gameObject.SetActive(false);
-        this.returnSavePoint.SetActive(false);
-        this.returnTitleScreen.SetActive(false);
-        this.countDown.gameObject.SetActive(false);
-        this.textField.gameObject.SetActive(false);
 
         SceneManager.UnloadSceneAsync("UI");
         MusicEvents.current.StopMusic(this.fadeOut);
@@ -102,9 +101,8 @@ public class DeathScreen : MonoBehaviour
     {
         this.cursor.gameObject.SetActive(true);
         this.returnTitleScreen.SetActive(true);
-        this.returnSavePoint.SetActive(true);
-
-        this.countDown.gameObject.SetActive(true);
+        if (this.playerTeleport.lastTeleport != null) this.returnSavePoint.SetActive(true);
+        if (this.playerTeleport.nextTeleport != null) this.returnLastPoint.SetActive(true);
         startCountdown = true;
     }
 
@@ -113,6 +111,11 @@ public class DeathScreen : MonoBehaviour
     public void ReturnSaveGame()
     {
         this.playerTeleport.SetReturnTeleport();
+        GameEvents.current.DoTeleport();
+    }
+
+    public void ReturnLastPoint()
+    {
         GameEvents.current.DoTeleport();
     }
 

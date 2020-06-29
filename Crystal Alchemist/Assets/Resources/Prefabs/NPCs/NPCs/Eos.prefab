@@ -196,6 +196,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0.126
   glowColor: {r: 2.0862746, g: 2.9960785, b: 2.792157, a: 1}
+  invert: 0
 --- !u!114 &6464249138036433377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,7 +285,8 @@ GameObject:
   - component: {fileID: 4322055140194454571}
   - component: {fileID: 1938021464261085656}
   - component: {fileID: 7016091898417923367}
-  m_Layer: 11
+  - component: {fileID: 3574329011111965237}
+  m_Layer: 12
   m_Name: Eos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +346,7 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: acdb7e089d2b9dc449dc40f1dfdf12c5, type: 2}
   myRigidbody: {fileID: 4322055140194454582}
   animator: {fileID: 2652810396879462137}
-  boxCollider: {fileID: 0}
+  boxCollider: {fileID: 3574329011111965237}
   respawnAnimation: {fileID: 0}
   groundPosition: {fileID: 8079844414878688528}
   skillStartPosition: {fileID: 6261774556482826731}
@@ -356,7 +358,7 @@ MonoBehaviour:
   flip: 1
   target: {fileID: 0}
   partner: {fileID: 0}
-  rangeTriggered: {fileID: 0}
+  rangeTriggered: 0
 --- !u!114 &4322055140194454571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  startPhase: {fileID: 0}
+  startPhase: {fileID: 11400000, guid: 587267ba956c4e245838e42718ef2cdc, type: 2}
   startImmediately: 1
 --- !u!114 &7016091898417923367
 MonoBehaviour:
@@ -422,6 +424,32 @@ MonoBehaviour:
   delay: 0.3
   destroyAfter: 0.6
   useCharacterSprite: 0
+--- !u!61 &3574329011111965237
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4322055140194454578}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &4624666807855673779
 GameObject:
   m_ObjectHideFlags: 0

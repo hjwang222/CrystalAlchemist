@@ -53,18 +53,16 @@ public class Skill : MonoBehaviour
 
     private float durationTimeLeft;
     private float delayTimeLeft;
-
     private float timeDistortion = 1;
     private bool triggerIsActive = true;
     private float positionOffset;
     private bool lockDirection;
     private bool canAffectedBytimeDistortion;
-
     private bool hasDelay;
     private float delay;
     private bool hasDuration;
     private float maxDuration;
-
+    private bool isRapidFire;
     private bool attached;
     private float progress;
 
@@ -94,10 +92,11 @@ public class Skill : MonoBehaviour
         this.target = target;
     }
 
-    public void Initialize(float offset, bool lockDirection, bool affectTimeDistortion, bool attached)
+    public void Initialize(float offset, bool lockDirection, bool isRapidFire, bool affectTimeDistortion, bool attached)
     {
         this.positionOffset = offset;
         this.lockDirection = lockDirection;
+        this.isRapidFire = isRapidFire;
         this.canAffectedBytimeDistortion = affectTimeDistortion;
         this.attached = attached;
     }
@@ -188,9 +187,6 @@ public class Skill : MonoBehaviour
 
         AnimatorUtil.SetAnimatorParameter(this.animator, "Active", true);
 
-        SkillAnimationModule animationModule = this.GetComponent<SkillAnimationModule>();
-        if (animationModule != null) animationModule.hideCastingAnimation();
-
         if (this.hasDelay)
         {
             if (this.delayTimeLeft > 0)
@@ -222,6 +218,8 @@ public class Skill : MonoBehaviour
 
         SkillHitTrigger[] trigger = this.GetComponents<SkillHitTrigger>();
         for (int i = 0; i < trigger.Length; i++) trigger[i].Updating();
+
+        if (this.lockDirection && !this.isRapidFire) GameEvents.current.DoDirectionLock();
     }
 
     public float GetDurationLeft()

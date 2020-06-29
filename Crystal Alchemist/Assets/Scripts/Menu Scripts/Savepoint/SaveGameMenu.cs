@@ -12,7 +12,7 @@ public class SaveGameMenu : MonoBehaviour
     [BoxGroup("Save Menu")]
     [Required]
     [SerializeField]
-    private TeleportStats savePointInfo;
+    private SavePointInfo savePointInfo;
 
     [BoxGroup("Save Menu")]
     [SerializeField]
@@ -26,7 +26,7 @@ public class SaveGameMenu : MonoBehaviour
 
     public void SaveGame(SaveSlot slot)
     {
-        this.saveGame.teleportList.SetNextTeleport(this.savePointInfo); //set as new Spawnpoint
+        this.saveGame.teleportList.SetNextTeleport(this.savePointInfo.stats); //set as new Spawnpoint
         SaveSystem.Save(this.saveGame, slot.gameObject.name); //saves savegame to data
 
         UpdateSaves();

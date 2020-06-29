@@ -223,7 +223,7 @@ public class TargetingSystem : MonoBehaviour
 
     private void updateIndicator()
     {
-        this.ability.ShowTargetingIndicator(this.sender, this.selectedTargets);
+        this.ability.ShowTargetingIndicator(this.selectedTargets);
     }
 
 

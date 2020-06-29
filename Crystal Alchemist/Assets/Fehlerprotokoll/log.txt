@@ -40555,3 +40555,16 @@ UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.ISubmit
 UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
 UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
 
+Exception 29.06.2020 00:37:11: UnassignedReferenceException: The variable returnLastPoint of DeathScreen has not been assigned.
+You probably need to assign the returnLastPoint variable of the DeathScreen script in the inspector.
+DeathScreen.ShowButtons () (at Assets/Scripts/Menu Scripts/Death Screen/DeathScreen.cs:105)
+DeathScreen+<showButtonCo>d__27.MoveNext () (at Assets/Scripts/Menu Scripts/Death Screen/DeathScreen.cs:149)
+UnityEngine.SetupCoroutine.InvokeMoveNext (System.Collections.IEnumerator enumerator, System.IntPtr returnValueAddress) (at <fdd4f5823e2a41e8be8d5dcbd0bfd5b1>:0)
+
+Exception 29.06.2020 00:45:09: MissingComponentException: There is no 'Collider2D' attached to the "Eos(Clone)" game object, but a script is trying to access it.
+You probably need to add a Collider2D to the game object "Eos(Clone)". Or your script needs to check if the component is attached before using it.
+Character.EnableScripts (System.Boolean value) (at Assets/Scripts/Character Scripts/Base/Character.cs:602)
+Character.SpawnOut () (at Assets/Scripts/Character Scripts/Base/Character.cs:625)
+NonPlayer.Start () (at Assets/Scripts/Character Scripts/NPC/NonPlayer.cs:10)
+AI.Start () (at Assets/Scripts/Character Scripts/NPC/AI.cs:40)
+

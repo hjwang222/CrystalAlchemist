@@ -15,12 +15,6 @@ public enum AbilityState
     ready
 }
 
-public enum AbilityRequirements
-{
-    none,
-    teleport
-}
-
 
 [CreateAssetMenu(menuName = "Game/Ability/Ability")]
 public class Ability : ScriptableObject
@@ -115,6 +109,11 @@ public class Ability : ScriptableObject
     public bool showCastbar = true;
 
     [BoxGroup("Restrictions")]
+    [ShowIf("hasCastTime")]
+    [SerializeField]
+    private CastingAnimation castAnimation;
+
+    [BoxGroup("Restrictions")]
     [SerializeField]
     private bool hasMaxAmount = false;
 
@@ -125,7 +124,7 @@ public class Ability : ScriptableObject
 
     [BoxGroup("Restrictions")]
     [SerializeField]
-    public AbilityRequirements requirements = AbilityRequirements.none;
+    public SkillRequirement requirements;
 
     [BoxGroup("Booleans")]
     [SerializeField]
@@ -174,7 +173,7 @@ public class Ability : ScriptableObject
     public bool enabled = true;
 
     private Character sender;
-
+    private CastingAnimation activeAnimation;
 
     [AssetIcon]
     public Sprite GetSprite()
@@ -270,14 +269,36 @@ public class Ability : ScriptableObject
         if (this.useIndicator != IndicatorType.None && this.indicator != null) this.indicator.ClearIndicator();
     }
 
-    public void ShowTargetingIndicator(Character sender, List<Character> selectedTargets)
+    public void ShowTargetingIndicator(List<Character> selectedTargets) //Sender needed?
     {
-        if (this.useIndicator == IndicatorType.OnTargeting && this.indicator != null) this.indicator.UpdateIndicators(sender, selectedTargets);
+        if (this.useIndicator == IndicatorType.OnTargeting && this.indicator != null) this.indicator.UpdateIndicators(this.sender, selectedTargets);
     }
 
     public void ShowCastingIndicator(Character target)
     {
         if (this.useIndicator == IndicatorType.OnCast && this.indicator != null) this.indicator.UpdateIndicator(this.sender, target);
+    }
+
+    public void ShowCastingAnimation()
+    {
+        this.sender.PlayerCastingAnimation(true);
+
+        if (this.castAnimation != null && this.activeAnimation == null)
+        {
+            this.activeAnimation = Instantiate(this.castAnimation, sender.GetGroundPosition(), Quaternion.identity, sender.transform);
+            this.activeAnimation.Initialize(this.castTime);
+        }
+    }
+
+    public void HideCastingAnimation()
+    {
+        this.sender.PlayerCastingAnimation(false);
+
+        if (this.activeAnimation != null)
+        {
+            this.activeAnimation.DestroyIt();
+            this.activeAnimation = null;
+        }
     }
 
     public void ResetCoolDown()
@@ -290,11 +311,14 @@ public class Ability : ScriptableObject
     {
         bool enoughResource = this.isResourceEnough();
         bool notToMany = true;
+        bool granted = true;
 
         if (this.hasMaxAmount && sender != null)
             notToMany = (getAmountOfSameSkills(this.skill, sender.values.activeSkills, sender.values.activePets) < this.maxAmount);
 
-        return (notToMany && enoughResource);
+        if (this.requirements != null) granted = this.requirements.Granted();
+
+        return (notToMany && enoughResource && granted);
     }
 
     private int getAmountOfSameSkills(Skill skill, List<Skill> activeSkills, List<Character> activePets)
@@ -380,7 +404,7 @@ public class Ability : ScriptableObject
         Character sender = this.GetSender();
         Skill activeSkill = Instantiate(this.skill, position, rotation);
         activeSkill.name = this.skill.name;
-        activeSkill.Initialize(this.positionOffset, this.lockDirection, this.timeDistortion, this.attachToSender);
+        activeSkill.Initialize(this.positionOffset, this.lockDirection, this.isRapidFire, this.timeDistortion, this.attachToSender);
         activeSkill.SetMaxDuration(this.hasMaxDuration, this.maxDuration);
         activeSkill.SetStandAlone(standAlone);
         activeSkill.SetDelay(this.hasDelay, this.delay);

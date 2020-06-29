@@ -41,19 +41,19 @@ public class CharacterCombat : MonoBehaviour
     {
         ability.Charge(); //charge Skill when not full        
         ShowCastBar(ability); //Show Castbar
+        ability.ShowCastingAnimation(); //Show Animation and stuff
         setSpeedDuringCasting(ability); //Set Speed during casting
         ability.ShowCastingIndicator(target);
-        AnimatorUtil.SetAnimatorParameter(this.character.animator, "Casting", true);
     }
 
     public void UnChargeAbility(Ability ability)
     {
         ability.ResetCharge(); //reset charge when not full  
         HideCastBar(); //Hide Castbar
+        ability.HideCastingAnimation(); //Hide Animation and stuff
         deactivatePlayerButtonUp(ability); //deactivate Skill when button up, Player only
         resetSpeedAfterCasting(); //set Speed to normal
         ability.HideIndicator();
-        AnimatorUtil.SetAnimatorParameter(this.character.animator, "Casting", false);
     }
 
     private void setSpeedDuringCasting(Ability ability)
