@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 
-public class MenuBehaviour : PreventDeselection
+public class MenuBehaviour : MonoBehaviour
 {
     [BoxGroup("Menu")]
     [SerializeField]
@@ -37,6 +37,10 @@ public class MenuBehaviour : PreventDeselection
         }
 
         MasterManager.globalValues.openedMenues.Add(this.gameObject);
+    }
+
+    public virtual void Update()
+    {
     }
 
     public virtual void OnDestroy()

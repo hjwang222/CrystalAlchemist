@@ -126,6 +126,8 @@ public class CharacterValues : ScriptableObject
     {
         return (this.currentState != CharacterState.inDialog
              && this.currentState != CharacterState.inMenu
+             && this.currentState != CharacterState.knockedback
+             && this.currentState != CharacterState.attack
              && this.currentState != CharacterState.respawning
              && this.currentState != CharacterState.dead);
     }

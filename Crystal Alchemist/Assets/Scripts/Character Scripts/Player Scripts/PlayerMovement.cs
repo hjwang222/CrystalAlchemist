@@ -11,17 +11,22 @@ public class PlayerMovement : PlayerComponent
     private Vector2 position;
     private Vector2 target;
     private float lockDuration = 0;
-    
+
 
     #region Movement
 
-    public void MovePlayer(InputAction.CallbackContext ctx) => this.change = ctx.ReadValue<Vector2>();
+    public void MovePlayer(InputAction.CallbackContext ctx) => SetChange(ctx);
 
     public void MouseClick(InputAction.CallbackContext context) => Set();
 
     private void Start() => GameEvents.current.OnLockDirection += SetDirectionLock;
 
     private void OnDestroy() => GameEvents.current.OnLockDirection -= SetDirectionLock;
+
+    private void SetChange(InputAction.CallbackContext ctx)
+    {
+        if(this.player.values.CanMove()) this.change = ctx.ReadValue<Vector2>();
+    }
 
     private void Set()
     {
@@ -73,10 +78,7 @@ public class PlayerMovement : PlayerComponent
 
     private void MoveCharacter(Vector2 direction)
     {
-        if (this.player.values.currentState != CharacterState.knockedback
-            && this.player.values.currentState != CharacterState.attack
-            && this.player.values.currentState != CharacterState.dead
-            && this.player.values.currentState != CharacterState.respawning)
+        if (this.player.values.CanMove())
         {
             Vector2 movement = new Vector2(direction.x, direction.y + (this.player.values.steps * direction.x));
             Vector2 velocity = (movement * this.player.values.speed * this.player.values.timeDistortion);

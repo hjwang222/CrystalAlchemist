@@ -185,13 +185,19 @@ public class Player : Character
     }
 
 
-    private void SetState(CharacterState state) => this.values.currentState = state;
-    
+    private void SetState(CharacterState state)
+    {
+        float delay = 0;
+        if (state != CharacterState.inDialog && state != CharacterState.inMenu) delay = 0.3f;
 
+        StartCoroutine(delayCo(state, delay));
+    } 
 
-
-
-
+    private IEnumerator delayCo(CharacterState state, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        this.values.currentState = state;
+    }
 
     private void CollectIt(ItemStats stats)
     {

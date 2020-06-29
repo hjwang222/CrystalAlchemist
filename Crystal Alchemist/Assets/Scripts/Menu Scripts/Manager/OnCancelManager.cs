@@ -11,22 +11,26 @@ public class OnCancelManager : MonoBehaviour
 
     private bool inputPossible = false;
 
-    private void OnEnable()
+    private void Start()
     { 
         if (GameEvents.current != null) GameEvents.current.OnCancel += OnCancel;
-        else if (TitleScreenControls.current != null) TitleScreenControls.current.OnCancel += OnCancel;
+        if (TitleScreenControls.current != null) TitleScreenControls.current.OnCancel += OnCancel;
+    }
+
+    private void OnEnable()
+    {
         StartCoroutine(delayCo());
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (GameEvents.current != null) GameEvents.current.OnCancel -= OnCancel;
-        else if (TitleScreenControls.current != null) TitleScreenControls.current.OnCancel -= OnCancel;
+        if (TitleScreenControls.current != null) TitleScreenControls.current.OnCancel -= OnCancel;
     }
 
     public void OnCancel()
     {
-        if (this.onCancel != null && this.inputPossible) this.onCancel.Invoke();
+        if (this.gameObject.activeInHierarchy && this.onCancel != null && this.inputPossible) this.onCancel.Invoke();
     }
 
     private IEnumerator delayCo()

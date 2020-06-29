@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TitleScreen : PreventDeselection
+public class TitleScreen : MonoBehaviour
 {        
     [SerializeField]
     private GameObject mainFrame;
@@ -13,6 +13,10 @@ public class TitleScreen : PreventDeselection
         if (this.darkFrame != null) this.darkFrame.SetActive(false);
 
         Cursor.visible = true;
+    }
+
+    public virtual void Update()
+    {
     }
 
     public void exitGame()

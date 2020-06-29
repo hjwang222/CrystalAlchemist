@@ -75,11 +75,15 @@ public class DeathScreen : MonoBehaviour
         SceneManager.UnloadSceneAsync("UI");
         MusicEvents.current.StopMusic(this.fadeOut);
         MenuEvents.current.DoPostProcessingFade(ShowText);
+        GameEvents.current.OnCancel += Skip;
     }
+
+    private void OnDestroy() => GameEvents.current.OnCancel -= Skip;
+
+    private void Skip() => this.skip = true;
 
     private void Update()
     {
-        if (Input.anyKeyDown && this.inputPossible) this.skip = true;
         if (this.startCountdown)
         {
             if (this.timer <= 0) ReturnToTitleScreen();

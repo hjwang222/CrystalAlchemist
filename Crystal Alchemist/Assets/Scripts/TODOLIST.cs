@@ -2,10 +2,10 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //BUG: Intro (WHY???????)
+    //BUG: Still no Intro (WHY???????)
 
+    //BUG: Pages Exception (Skillbook)
     //BUG: Attack after MenuClose (Input Delay)
-    //BUG: No Intro on Titania
     //BUG: Auto New Start (Input Delay)
 
     //-----------------------------------------------------------------------------
@@ -23,6 +23,7 @@ public class TODOLIST : MonoBehaviour
     //INPUT: Virtuelle Tastatur
     //CONTENT: Sin Eater Race (glowing eyes, halo, wings, etc)
 
+    //TODO: Skill Animation Trigger in Ability?
     //TODO: Text in UI as World Space Position?
     //TODO: New Game Intro
     //TODO: Teleport Animation (also Player Animation)
