@@ -13,10 +13,6 @@ public class SkillMenu : MenuBehaviour
     [SerializeField]
     [Required]
     private CustomCursor cursor;
-    [BoxGroup("Mandatory")]
-    [SerializeField]
-    [Required]
-    private SkillPageSelect pageSelect;
 
     [BoxGroup("Tabs")]
     [SerializeField]
@@ -58,7 +54,6 @@ public class SkillMenu : MenuBehaviour
         InitializePages(this.magicalSkills);
         InitializePages(this.itemSkills);
 
-        this.pageSelect.Initialize();
         ShowCategory("physical");
     }
 

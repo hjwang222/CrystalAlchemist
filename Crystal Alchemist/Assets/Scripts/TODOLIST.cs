@@ -5,8 +5,7 @@ public class TODOLIST : MonoBehaviour
     //BUG: Still no Intro (WHY???????)
 
     //BUG: Pages Exception (Skillbook)
-    //BUG: Attack after MenuClose (Input Delay)
-    //BUG: Auto New Start (Input Delay)
+
 
     //-----------------------------------------------------------------------------
 

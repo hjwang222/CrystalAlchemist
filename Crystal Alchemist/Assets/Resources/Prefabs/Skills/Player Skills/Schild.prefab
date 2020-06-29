@@ -55,17 +55,16 @@ MonoBehaviour:
   spriteRenderer: {fileID: 564329192152756961}
   myRigidbody: {fileID: 8557586700020975895}
   animator: {fileID: 6086066880683234547}
-  shadow: {fileID: 0}
-  positionOffset: 0.125
-  attachToSender: 1
-  lockDirection: 1
-  canAffectedBytimeDistortion: 0
-  hasDuration: 0
-  maxDuration: 1
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
   sender: {fileID: 0}
   target: {fileID: 0}
   direction: {x: 0, y: 0}
-  overridePosition: 1
+  standAlone: 1
 --- !u!212 &564329192152756961
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -81,6 +80,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -173,6 +173,7 @@ MonoBehaviour:
   costs:
     resourceType: 0
     item: {fileID: 0}
+    keyItem: {fileID: 0}
     amount: 1
   intervallSender: 0
   speedDuringCasting: 0
@@ -195,7 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  useOffSetToBlendTree: 1
 --- !u!114 &5219678606332422380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+  type: 2
   positionHeight: 0.35
   colliderHeightOffset: 0
 --- !u!1 &8110846557276872138
@@ -264,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8110846557276872138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.65, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3013391392474220838}
@@ -283,7 +284,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.36}
+  m_Offset: {x: 0, y: -0.375}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -294,7 +295,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.85, y: 0.375}
+  m_Size: {x: 1, y: 0.25}
   m_EdgeRadius: 0
 --- !u!114 &3082277638975285726
 MonoBehaviour:

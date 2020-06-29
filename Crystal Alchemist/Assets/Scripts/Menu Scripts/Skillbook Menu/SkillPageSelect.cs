@@ -18,14 +18,17 @@ public class SkillPageSelect : MonoBehaviour
 
     private int index;
 
-    public void Initialize()
+    private void Start()
     {
         GameEvents.current.OnPage += SetNextPage;
         UpdateButtons();
-        for (int i = 1; i < this.pages.Count; i++) this.pages[i].SetActive(false);        
+        for (int i = 1; i < this.pages.Count; i++) this.pages[i].SetActive(false);
     }
 
-    private void OnDestroy() => GameEvents.current.OnPage -= SetNextPage;
+    private void OnDestroy()
+    {
+        GameEvents.current.OnPage -= SetNextPage;
+    }
 
     private void UpdateButtons()
     {
@@ -40,6 +43,8 @@ public class SkillPageSelect : MonoBehaviour
 
     public void SetNextPage(int value)
     {
+        if (!this.gameObject.activeInHierarchy) return;
+
         for(int i = 0; i < this.pages.Count; i++)
         {
             if (pages[i].activeInHierarchy) this.index = i;
