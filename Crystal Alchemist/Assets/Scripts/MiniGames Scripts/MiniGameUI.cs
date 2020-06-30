@@ -1,22 +1,18 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using TMPro;
-using UnityEngine.UI;
 
-public class MiniGameUI : MenuControls
+public class MiniGameUI : MenuBehaviour
 {
-    public MiniGameRound miniGameRound;
+    [BoxGroup("Easy Access")]
+    [SerializeField]
+    [Required]
+    private MiniGameInfo info;
 
     [BoxGroup("Easy Access")]
     [SerializeField]
     [Required]
-    private TextMeshProUGUI timeField;
-
-    [BoxGroup("Easy Access")]
-    [SerializeField]
-    [Required]
-    private Image timeImage;
+    private MiniGameDialogbox dialogBox;
 
     [BoxGroup("Easy Access")]
     [SerializeField]
@@ -26,28 +22,12 @@ public class MiniGameUI : MenuControls
     [BoxGroup("Easy Access")]
     [SerializeField]
     [Required]
-    private TextMeshProUGUI descriptionField;
-
-    [BoxGroup("Easy Access")]
-    [SerializeField]
-    [Required]
-    private GameObject mainBoard;
-
-    [BoxGroup("Easy Access")]
-    [SerializeField]
-    [Required]
-    private GameObject textGameObject;
+    private GameObject parent;
 
     [BoxGroup("Easy Access")]
     [SerializeField]
     [Required]
     private MiniGameTrys trySlots;
-
-    [BoxGroup("Easy Access")]
-    [SerializeField]
-    [Required]
-    private MiniGameDialogbox dialogBox;
-
 
     [BoxGroup("Texts")]
     [SerializeField]
@@ -69,144 +49,87 @@ public class MiniGameUI : MenuControls
     [Required]
     private MiniGameText loseText;
 
-    private MiniGame miniGameObject;
     private MiniGameRound activeRound;
-    private MiniGameMatch match;
-    private int matchIndex = 0;
+    private MiniGameMatch activeMatch;
 
-    [HideInInspector]
-    public string mainDescription = "";
-
-    private void Start()
+    public override void Start()
     {
-        showDialog();
-        this.dialogBox.setValues(this.miniGameObject.getMatches().Count);
+        base.Start();
+        MiniGameEvents.current.OnStartRound += StartMiniGame;
+        MiniGameEvents.current.OnEndRound += RoundEnd;
         
+        this.titleField.text = this.info.GetName();
+        ShowDialogBox();
     }
 
-    public override void Update()
+    public override void OnDestroy()
     {
-        base.Update();
-        if (this.activeRound != null)
-        {
-            this.timeField.text = (int)this.activeRound.getSeconds() + "s";
-            this.timeImage.fillAmount = (float)((float)this.activeRound.getSeconds() / this.match.maxDuration);
-        }
+        base.OnDestroy();
+        MiniGameEvents.current.OnStartRound -= StartMiniGame;
+        MiniGameEvents.current.OnEndRound -= RoundEnd;
     }
 
-    public void setMiniGame(MiniGame main, MiniGameRound miniGameRound, 
-                            string title, string titleEnglish, string description, string descriptionEnglish)
+    public void ShowDialogBox()
     {
-        this.miniGameObject = main;
-        this.miniGameRound = miniGameRound;        
-        this.titleField.text = CustomUtilities.Format.getLanguageDialogText(title, titleEnglish); ;
-        this.mainDescription = CustomUtilities.Format.getLanguageDialogText(description, descriptionEnglish);
+        this.trySlots.Reset();
+        this.dialogBox.gameObject.SetActive(true);
+        this.dialogBox.Show(this.info);
     }
 
-    public void startRound()
+    public void StartMiniGame(MiniGameMatch match)
+    {        
+        GameEvents.current.DoReduce(match.price);
+        this.activeMatch = match;
+        StartRound();
+    }
+
+    public void StartRound()
     {
+        if(this.activeRound != null) Destroy(this.activeRound.gameObject);
+
         MiniGameState state = this.trySlots.canStartNewRound();
 
         if (state == MiniGameState.play)
         {
-            endRound();
-
-            this.activeRound = Instantiate(this.miniGameRound, this.mainBoard.transform);
-            this.activeRound.setParameters(this.match.maxDuration, (this.matchIndex + 1), this.match.difficulty, this.cursor, this);
+            this.activeRound = Instantiate(info.miniGameUI, this.parent.transform);
+            this.activeRound.Initialize(this.activeMatch.difficulty, this.activeMatch.maxDuration);
         }
         else
         {
-            this.activeRound.stopTimer();
-
-            if (state == MiniGameState.win)
-            {
-                this.player.collect(this.match.loot, false);
-                showTexts(this.winText);
-            }
-            else if (state == MiniGameState.lose)
-            {
-                showTexts(this.loseText);
-            }
+            if (state == MiniGameState.win) PlayerWin(this.activeMatch.GetItem().stats);
+            else if (state == MiniGameState.lose) PlayerLose();
         }
     }
 
-    public void resetTrys()
-    {
-        this.trySlots.reset();
+    private void PlayerWin(ItemStats stats)
+    {        
+        GameEvents.current.DoCollect(stats);
+        ShowTextBox(this.winText);
     }
 
-    public void setMatch(int difficulty)
+    private void PlayerLose()
     {
-        this.matchIndex = difficulty - 1;
-
-        if (this.miniGameObject.getMatches().Count > 0)
-        {
-            this.match = this.miniGameObject.getMatches()[this.matchIndex];
-            this.trySlots.setValues(this.match.winsNeeded, this.match.maxRounds);
-        }
-        resetTrys();
+        ShowTextBox(this.loseText);
     }
 
-    public MiniGameMatch getMatch()
+    private void ShowTextBox(MiniGameText textObject)
     {
-        return this.match;
+        if (textObject != null) textObject.gameObject.SetActive(true);
     }
 
-    public void startMatch()
-    {
-        CustomUtilities.Items.reduceCurrency(ResourceType.item, match.item, this.player, match.price);
-        startRound();
-    }
-
-    public void setMarkAndEndRound(bool success) //SIGNAL
+    public void RoundEnd(bool success)
     {
         MiniGameState state = this.trySlots.canStartNewRound();
 
         if (success)
         {
-            this.trySlots.updateSlots(true);
-            if (state == MiniGameState.play) showTexts(this.successText);
+            this.trySlots.SetSlot(true);
+            if (state == MiniGameState.play) ShowTextBox(this.successText);
         }
         else
         {
-            this.trySlots.updateSlots(false);
-            if (state == MiniGameState.play) showTexts(this.failText);
-        }
+            this.trySlots.SetSlot(false);
+            if (state == MiniGameState.play) ShowTextBox(this.failText);
+        }            
     }
-
-    private void showTexts(MiniGameText textObject)
-    {
-        if (textObject != null) textObject.gameObject.SetActive(true);
-    }
-
-    private void endRound()
-    {
-        if (this.activeRound != null) Destroy(this.activeRound.gameObject);
-    }
-
-    public void endMiniGame()
-    {
-        this.gameObject.SetActive(false);
-    }
-
-    public void showDialog()
-    {
-        endRound();
-
-        this.miniGameObject.updateInternalMatches();
-        this.dialogBox.UpdateDialogBox();
-        this.dialogBox.gameObject.SetActive(true);
-    }
-
-    public override void OnDisable()
-    {
-        base.OnDisable();
-        this.miniGameObject.DestroyIt();
-    }
-
-    private void OnDestroy()
-    {
-        this.exitMenu();
-    }
-
 }

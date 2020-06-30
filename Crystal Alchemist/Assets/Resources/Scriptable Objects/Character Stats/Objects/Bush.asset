@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed50160a1f51fb4b89bf02e00ece70d, type: 3}
+  m_Name: Bush
+  m_EditorClassIdentifier: 
+  characterType: 2
+  isInvincible: 0
+  cannotDie: 0
+  startLife: 0.1
+  startMana: 0.1
+  startSpeed: 100
+  startSpellSpeed: 100
+  isMassive: 1
+  isImmuneToAllDebuffs: 0
+  immunityToStatusEffects: []
+  hasRespawn: 1
+  respawnTime: 30
+  respawnChance: 100
+  deathAnimation: {fileID: 0}
+  maxLife: 1
+  maxMana: 0.1
+  canRegenerate: 0
+  lifeRegeneration: 0
+  manaRegeneration: 0
+  regenerationInterval: 0
+  canChangeBuffs: 0
+  buffPlus: 0
+  debuffMinus: 0
+  showDamageNumbers: 0
+  antiKnockback: 0
+  cannotBeHitTime: 0.3
+  showHitcolor: 1
+  hitColor: {r: 1, g: 1, b: 1, a: 1}
+  lootTable: {fileID: 11400000, guid: e9522933da50f184088d7cb73c75add3, type: 2}
+  hitSoundEffect: {fileID: 0}

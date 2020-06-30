@@ -1,49 +1,55 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using TMPro;
 
 public class ShopItem : Rewardable
 {
-    [Header("Shop-Item Attribute")]
-    public SpriteRenderer childSprite;
+    [BoxGroup("Shop-Item Attribute")]
+    [SerializeField]
+    private SpriteRenderer childSprite;
 
-    [Header("Text-Attribute")]
-    public TextMeshPro priceText;
-    public Color fontColor;
-    public Color outlineColor;
-    public float outlineWidth = 0.25f;
-    public Animator anim;
+    [BoxGroup("Loot")]
+    [SerializeField]
+    [HideLabel]
+    private Reward reward;
 
-    private int index = 0;
+    [SerializeField]
+    [BoxGroup("Mandatory")]
+    [Required]
+    private ShopPrice shopPrice;
+
+    [BoxGroup("Easy Access")]
+    [SerializeField]
+    private Animator anim;
 
     private new void Start()
     {
         base.Start();
+        this.setLoot();
+        this.shopPrice.Initialize(this.costs);
 
-        CustomUtilities.Format.set3DText(this.priceText, this.price + "", true, this.fontColor, this.outlineColor, this.outlineWidth);
-
-        this.inventory.Add(this.lootTable[this.index].item);
-
-        //this.amountText.text = this.amount + "";
-        this.childSprite.sprite = this.inventory[this.index].itemSprite;
-
-        //TODO Item:
-        if (this.inventory.Count == 0) Destroy(this.gameObject);
+        this.childSprite.sprite = this.itemDrop.stats.getSprite();
+        if (this.itemDrop == null) Destroy(this.gameObject);
     }
 
-    public override void doSomethingOnSubmit()
+    private void setLoot()
     {
-        if (CustomUtilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
-        {
-            Item loot = inventory[this.index];
+        this.itemDrop = this.reward.GetItemDrop();
+    }
 
-            CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success, loot);
-            this.player.collect(loot, false);
+    public override void DoOnSubmit()
+    {
+        if (this.player.canUseIt(this.costs))
+        {
+            this.player.reduceResource(this.costs);
+            ItemStats loot = itemDrop.stats;
+
+            ShowDialog(DialogTextTrigger.success, loot);
+            if (loot != null) GameEvents.current.DoCollect(loot);
         }
         else
         {
-            CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
+            ShowDialog(DialogTextTrigger.failed);
         }
     }
 }

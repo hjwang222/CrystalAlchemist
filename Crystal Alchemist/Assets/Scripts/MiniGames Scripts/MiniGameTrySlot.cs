@@ -13,8 +13,6 @@ public class MiniGameTrySlot : MonoBehaviour
     [SerializeField]
     private GameObject goldMark;
 
-
-
     public void reset()
     {
         this.successMark.SetActive(false);

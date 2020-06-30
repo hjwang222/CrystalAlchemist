@@ -7,8 +7,8 @@ public class MiniGameAnimationHelper : MonoBehaviour
     [SerializeField]
     private MiniGameRound miniGameRound;
 
-    public void checkIfWon()
+    public void Check()
     {
-        this.miniGameRound.checkIfWon();
+        this.miniGameRound.Check();
     }
 }

@@ -1,65 +1,104 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(Player))]
+public class PlayerMovement : PlayerComponent
 {
     [SerializeField]
-    private Player player;
+    private float directionLockTime = 0.25f;
+
+    private Vector2 change;
+    private Vector2 position;
+    private Vector2 target;
+    private float lockDuration = 0;
+
 
     #region Movement
 
-    public void UpdateAnimationAndMove()
+    public void MovePlayer(InputAction.CallbackContext ctx) => SetChange(ctx);
+
+    public void MouseClick(InputAction.CallbackContext context) => Set();
+
+    private void Start()
     {
-        if (this.player.change != Vector3.zero)
+        GameEvents.current.OnCutScene += SetToZero;
+        GameEvents.current.OnLockDirection += SetDirectionLock;
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.current.OnCutScene -= SetToZero;
+        GameEvents.current.OnLockDirection -= SetDirectionLock;
+    }
+
+    private void SetChange(InputAction.CallbackContext ctx)
+    {
+        if(this.player.values.CanMove()) this.change = ctx.ReadValue<Vector2>();
+    }
+
+    private void SetToZero() => this.change = Vector2.zero;
+
+    private void Set()
+    {
+        /*
+        if (Camera.main != null)
         {
-            MoveCharacter();
+            Vector2 pos = Input.mousePosition;
+            pos = Camera.main.ScreenToWorldPoint(pos);
+            target = pos;
+        }
 
-            bool lockAnimation = false;
+        if (Vector2.Distance(this.player.GetGroundPosition(), target) > 0.3f)
+        {
+            this.change = (target - this.player.GetGroundPosition()).normalized;
+        }
+        else this.change = Vector2.zero;*/
+    }
 
-            foreach (Skill skill in this.player.activeSkills)
-            {
-                if (skill.movementLocked)
-                {
-                    lockAnimation = true;
-                    break;
-                }
-            }
+    private void FixedUpdate()
+    {
+        UpdateAnimationAndMove(this.change);  //check if is menu
+        if (this.lockDuration > 0) this.lockDuration -= Time.deltaTime;
+    }
 
-            if (!lockAnimation)
-            {
-                this.player.direction = this.player.change;
+    private void UpdateAnimationAndMove(Vector2 direction)
+    {
+        if (this.player.values.CanMove() && direction != Vector2.zero) MoveCharacter(direction);
+        else StopCharacter();        
 
-                CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "moveX", this.player.change.x);
-                CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "moveY", this.player.change.y);
-            }
-
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", true);
+        if (this.position != (Vector2)this.player.transform.position)
+        {
+            this.position = this.player.transform.position;
+            AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", true);
+            if (this.player.values.CanMove()) this.player.values.currentState = CharacterState.walk;
         }
         else
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.player.animator, "isWalking", false);
-            if (this.player.currentState == CharacterState.walk) this.player.currentState = CharacterState.idle;
+            AnimatorUtil.SetAnimatorParameter(this.player.animator, "isWalking", false);
+            if (this.player.values.currentState == CharacterState.walk) this.player.values.currentState = CharacterState.idle;
         }
     }
 
-    private void MoveCharacter()
+    private void StopCharacter()
     {
-        if (this.player.currentState != CharacterState.knockedback
-            && this.player.currentState != CharacterState.attack
-            && this.player.currentState != CharacterState.dead)
-        {
-            if (this.player.currentState != CharacterState.interact) this.player.currentState = CharacterState.walk;
-            this.player.change.Normalize(); //Diagonal-Laufen fixen
-
-            //this.myRigidbody.MovePosition(transform.position + change * this.speed * (Time.deltaTime * this.timeDistortion));
-            //this.myRigidbody.velocity = Vector2.zero;
-
-            Vector3 movement = new Vector3(this.player.change.x, this.player.change.y + (this.player.steps * this.player.change.x), 0.0f);
-            if (!this.player.isOnIce) this.player.myRigidbody.velocity = (movement * this.player.speed * this.player.timeDistortion);
-        }
+        if (this.player.values.currentState != CharacterState.knockedback
+        && !this.player.values.isOnIce
+        && this.player.myRigidbody.bodyType != RigidbodyType2D.Static) this.player.myRigidbody.velocity = Vector2.zero;
     }
+
+    private void MoveCharacter(Vector2 direction)
+    {
+        if (this.player.values.CanMove())
+        {
+            Vector2 movement = new Vector2(direction.x, direction.y + (this.player.values.steps * direction.x));
+            Vector2 velocity = (movement * this.player.values.speed * this.player.values.timeDistortion);
+            if (!this.player.values.isOnIce) this.player.myRigidbody.velocity = velocity;
+        }
+
+        if (this.lockDuration <= 0) this.player.ChangeDirection(direction);
+    }
+
+    private void SetDirectionLock() => this.lockDuration = this.directionLockTime;  
 
     #endregion
 }

@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2277580816030834969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7078582995585776847}
+  - component: {fileID: 2329490064039763128}
+  - component: {fileID: 4057020238127454048}
+  - component: {fileID: 8871098035158512558}
+  m_Layer: 13
+  m_Name: Analysis Zauber
+  m_TagString: Skill
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7078582995585776847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2329490064039763128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
+  sender: {fileID: 0}
+  target: {fileID: 0}
+  direction: {x: 0, y: 0}
+  standAlone: 1
+--- !u!114 &4057020238127454048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aacf40695e36842ad6a9e98020f65b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 2329490064039763128}
+  affectedResources: []
+  statusEffects:
+  - {fileID: 11400000, guid: 8f541562bfc667a428366e48851fef05, type: 2}
+  thrust: 0
+  knockbackTime: 0.2
+  affections: {fileID: 11400000, guid: dd168bb8d1990c347ab8482d6d72d84c, type: 2}
+--- !u!114 &8871098035158512558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277580816030834969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65144b73769891f41a72088043398bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 2329490064039763128}
+  invincibleTimer: 0

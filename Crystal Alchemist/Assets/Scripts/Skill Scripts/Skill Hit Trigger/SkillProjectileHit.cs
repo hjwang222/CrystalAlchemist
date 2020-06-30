@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class SkillProjectileHit : SkillHitTrigger
 {
+    public bool canBeReflected = false;
+
     [Space(10)]
-    [InfoBox("Projektile stoppen beim Aufprall und triggern die \"Hit\"-Animation. Kein Schaden!", InfoMessageType.None)]    
+    [InfoBox("Projektile stoppen beim Aufprall und triggern die \"Hit\"-Animation. Kein Schaden!", InfoMessageType.None)]
     [SerializeField]
-    private Skill skillOnImpact;
+    private Ability skillOnImpact;
 
     private void OnTriggerEnter2D(Collider2D hittedCharacter)
     {
@@ -23,37 +23,34 @@ public class SkillProjectileHit : SkillHitTrigger
     private void stopProjectile(Collider2D hittedCharacter)
     {
         //Stop Arrow on Hit
-        if (this.skill.sender != null
-            && hittedCharacter.tag != this.skill.sender.tag
-            && !hittedCharacter.isTrigger
-            && !hittedCharacter.CompareTag("Room"))
+        if (
+            hittedCharacter.gameObject != this.skill.sender.gameObject //not self
+            && (CollisionUtil.checkCollision(hittedCharacter, this.skill) //Character
+            || (hittedCharacter.GetComponent<Character>() == null && !hittedCharacter.isTrigger)) //Wall
+            && !isReflected(hittedCharacter))
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.skill.animator, "Hit");
-            // if (this.shadow != null) this.shadow.gameObject.SetActive(false);
-            if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = Vector2.zero;
+            //if(this.skillCollider != null) this.transform.position = this.skillCollider.transform.position;
+            placeImpactSkill();
 
-            placeFire();
-
-            this.skill.isActive = false;
+            AnimatorUtil.SetAnimatorParameter(this.skill.animator, "Hit");
+            this.skill.GetComponent<SkillProjectile>().stopVelocity();            
         }
     }
 
-    private void placeFire()
+    private bool isReflected(Collider2D hittedCharacter)
+    {
+        if (hittedCharacter.GetComponent<SkillCollider>() != null
+            && hittedCharacter.GetComponent<SkillCollider>().skill.GetComponent<SkillReflector>() != null
+            && this.canBeReflected) return true;
+
+        return false;
+    }
+
+    private void placeImpactSkill()
     {
         if (this.skillOnImpact != null)
-        {
-            //if (!Utilities.Collisions.checkCollision(hittedCharacter, this)) hitpoint = this.transform.position;
-
-            GameObject fire = Instantiate(this.skillOnImpact.gameObject, this.skill.transform.position, Quaternion.identity);
-            //fire.transform.position = hittedCharacter.transform.position;
-            Skill fireSkill = fire.GetComponent<Skill>();
-
-            if (fireSkill != null)
-            {
-                //Position nicht überschreiben
-                fireSkill.overridePosition = false;
-                fireSkill.sender = this.skill.sender;
-            }
+        {            
+            Skill fireSkill = this.skillOnImpact.InstantiateSkill(this.skill.transform.position, this.skill.sender);            
         }
     }
 }

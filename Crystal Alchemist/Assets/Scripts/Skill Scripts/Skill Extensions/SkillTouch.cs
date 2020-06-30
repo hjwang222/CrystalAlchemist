@@ -2,11 +2,11 @@
 
 public class SkillTouch : SkillExtension
 {
-    private void Start()
+    public override void Initialize()
     {
         Collider2D temp = this.skill.sender.boxCollider;
 
-        Collider2D te = CustomUtilities.UnityUtils.CopyComponent(temp, this.gameObject);
+        Collider2D te = UnityUtil.CopyComponent(temp, this.gameObject);
         te.isTrigger = true;
     }
 }

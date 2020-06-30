@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7939665493981160652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1407622991062104346}
+  - component: {fileID: 1894471306822299025}
+  - component: {fileID: 4504233963501539725}
+  - component: {fileID: 1612117791632409909}
+  m_Layer: 13
+  m_Name: "Beschw\xF6rung Sentinel"
+  m_TagString: Skill
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1407622991062104346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7939665493981160652}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1894471306822299025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7939665493981160652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110b0fe0bd6fafd469a317b4c6cea209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  animator: {fileID: 0}
+  OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  AfterDelay:
+    m_PersistentCalls:
+      m_Calls: []
+  sender: {fileID: 0}
+  target: {fileID: 0}
+  direction: {x: 0, y: 0}
+  standAlone: 1
+--- !u!114 &4504233963501539725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7939665493981160652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae77e52560de1c0439393b32f8444a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 1894471306822299025}
+  summon: {fileID: 5280788646405828722, guid: d7b9a545cd00f294aa2cd5ca992130b9, type: 3}
+--- !u!114 &1612117791632409909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7939665493981160652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f157a3318c090498a817369319f98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 1894471306822299025}
+  costs:
+    resourceType: 2
+    item: {fileID: 0}
+    keyItem: {fileID: 0}
+    amount: 2
+  intervallSender: 0
+  speedDuringCasting: 0
+  speedDuringDuration: 0
+  affectAnimation: 1
+  forward: 0
+  selfThrust: 0
+  selfThrustTime: 0
+  stateType: 0

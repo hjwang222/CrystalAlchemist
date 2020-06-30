@@ -6,44 +6,58 @@ using Sirenix.OdinInspector;
 public class AIAggroSystem : MonoBehaviour
 {
     #region attributes
-
-    [SerializeField]
-    [Required]
-    [BoxGroup("Required")]
-    private AI enemy;
-
     [SerializeField]
     [Required]
     [BoxGroup("Required")]
     private AggroStats aggroStats;
 
-    private GameObject activeClue;
-    private Dictionary<Character, float[]> aggroList = new Dictionary<Character, float[]>();
+    [SerializeField]
+    [BoxGroup("Required")]
+    [Required]
+    private AI npc;
 
+    [SerializeField]
+    [BoxGroup("Required")]
+    private GameObject cluePosition;
+
+    private GameObject activeClue;
     #endregion
 
 
     #region Start und Update
 
     private void Start()
+    {        
+        this.npc.aggroList.Clear();
+
+        GameEvents.current.OnAggroHit += increaseAggroOnHit;
+        GameEvents.current.OnAggroIncrease += increaseAggro;
+        GameEvents.current.OnAggroDecrease += decreaseAggro;
+        GameEvents.current.OnAggroClear += ClearAggro;
+    }
+
+    private void OnDestroy()
     {
-        this.aggroList.Clear();
+        GameEvents.current.OnAggroHit -= increaseAggroOnHit;
+        GameEvents.current.OnAggroIncrease -= increaseAggro;
+        GameEvents.current.OnAggroDecrease -= decreaseAggro;
+        GameEvents.current.OnAggroClear -= ClearAggro;
     }
 
     private void Update()
-    {        
-        CustomUtilities.Rotation.rotateCollider(this.enemy, this.gameObject);
+    {
+        if (this.GetComponent<CircleCollider2D>() == null) RotationUtil.rotateCollider(this.npc, this.gameObject);
         generateAggro();
     }
 
     #endregion
 
 
-    #region Aggro-System
+    #region Aggro-System    
 
-    public void addAggro(Character newTarget, float aggro)
+    private void addAggro(Character newTarget, float aggro)
     {
-        if (newTarget != null && this.aggroList.ContainsKey(newTarget)) this.aggroList[newTarget][0] += (float)(aggro / 100);
+        if (newTarget != null && this.npc.aggroList.ContainsKey(newTarget)) this.npc.aggroList[newTarget][0] += (float)(aggro / 100);
     }
 
     public void getHighestAggro(out float aggro, out string target)
@@ -51,68 +65,76 @@ public class AIAggroSystem : MonoBehaviour
         aggro = 0;
         target = "";
 
-        foreach (Character character in this.aggroList.Keys)
+        foreach (Character character in this.npc.aggroList.Keys)
         {
-            float currentAggro = this.aggroList[character][0];
+            float currentAggro = this.npc.aggroList[character][0];
 
             if (currentAggro > aggro)
             {
                 aggro = currentAggro;
-                target = CustomUtilities.Format.getLanguageDialogText(character.stats.characterName, character.stats.englischCharacterName);
+                target = character.GetCharacterName();
             }
         }
     }
 
     private void OnDisable()
     {
-        this.enemy.target = null;
+        this.npc.target = null;
         this.hideClue();
-        this.aggroList.Clear();
+        this.npc.aggroList.Clear();
     }
 
-    public void generateAggro()
+    private bool IsValidTarget(Character target)
+    {
+        if (target == null
+            || !target.gameObject.activeInHierarchy
+            || target.values.isInvincible
+            || target.values.currentState == CharacterState.dead
+            || target.values.currentState == CharacterState.respawning) return false;
+
+        return true;
+    }
+
+    private void generateAggro()
     {
         List<Character> charactersToRemove = new List<Character>();
 
-        if(this.enemy.target != null 
-            && (!this.enemy.target.gameObject.activeInHierarchy 
-            || this.enemy.target.currentState == CharacterState.dead
-            || this.enemy.target.currentState == CharacterState.respawning))
+        if (this.npc.target != null && !IsValidTarget(this.npc.target))
         {
-            this.aggroList.Remove(this.enemy.target);
-            this.enemy.target = null;
+            this.npc.aggroList.Remove(this.npc.target);
+            this.npc.target = null;
         }
 
-        foreach (Character character in this.aggroList.Keys)
+        foreach (Character character in this.npc.aggroList.Keys)
         {
             //                       amount                         factor
-            addAggro(character, this.aggroList[character][1] * (Time.deltaTime * this.enemy.timeDistortion));
+            addAggro(character, this.npc.aggroList[character][1] * (Time.deltaTime * this.npc.values.timeDistortion));
 
-            //if (this.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.aggroList[character][0] + " Aggro auf" + character.characterName);
+            //if (this.enemy.aggroList[character][0] > 0) Debug.Log(this.characterName + " hat " + this.enemy.aggroList[character][0] + " Aggro auf" + character.characterName);
 
-            if (this.aggroList[character][0] >= (this.aggroStats.aggroNeededToTarget /100))
+            if (this.npc.aggroList[character][0] >= (this.aggroStats.aggroNeededToTarget /100))
             {
-                //this.aggroList[character][0] = 1f; //aggro                             
+                //this.enemy.aggroList[character][0] = 1f; //aggro                             
 
                 //Aggro max, Target!
-                if (this.enemy.target == null)
+                if (this.npc.target == null)
                 {
                     StartCoroutine(switchTargetCo(0, character));
                 }
                 else
                 {
-                    if(this.aggroList[this.enemy.target][1] < this.aggroList[character][1])
+                    if(this.npc.aggroList[this.npc.target][1] < this.npc.aggroList[character][1])
                     {
                         StartCoroutine(switchTargetCo(this.aggroStats.targetChangeDelay, character));
                     }
                 }
             }
-            else if (this.aggroList[character][0] <= 0)
+            else if (this.npc.aggroList[character][0] <= 0)
             {
-                this.aggroList[character][0] = 0; //aggro   
+                this.npc.aggroList[character][0] = 0; //aggro   
 
                 //Aggro lost, Target lost
-                if (this.enemy.target == character) this.enemy.target = null;
+                if (this.npc.target == character) this.npc.target = null;
                 charactersToRemove.Add(character);
                 hideClue();
             }
@@ -128,8 +150,8 @@ public class AIAggroSystem : MonoBehaviour
     private IEnumerator switchTargetCo(float delay, Character character)
     {
         yield return new WaitForSeconds(delay);
-        this.enemy.target = character;
-        StartCoroutine(showClueCo(this.aggroStats.targetActiveClue, this.aggroStats.activeClueDuration));
+        this.npc.target = character;
+        StartCoroutine(showClueCo(MasterManager.markAttack, this.aggroStats.activeClueDuration));
     }
 
 
@@ -138,15 +160,17 @@ public class AIAggroSystem : MonoBehaviour
         hideClue();
         showClue(clue);
         yield return new WaitForSeconds(duration);
-        if (duration > 0) hideClue();
+        hideClue();
     }
 
     private void showClue(GameObject clue)
     {
         if (clue != null && this.activeClue == null)
         {
-            Vector3 position = new Vector3(this.enemy.transform.position.x - 0.5f, this.enemy.transform.position.y + 0.5f);
-            this.activeClue = Instantiate(clue, position, Quaternion.identity, this.enemy.transform);
+            Vector2 position = this.npc.transform.position;
+            if (this.cluePosition != null) position = cluePosition.transform.position;
+
+            this.activeClue = Instantiate(clue, position, Quaternion.identity, this.npc.transform);
         }
     }
 
@@ -164,69 +188,71 @@ public class AIAggroSystem : MonoBehaviour
         float aggroAmount = 0f;
         float factor = 0f;
 
-        if (!this.aggroList.ContainsKey(character))
+        if (!this.npc.aggroList.ContainsKey(character))
         {   
-            this.aggroList.Add(character, new float[] { aggroAmount, factor });            
+            this.npc.aggroList.Add(character, new float[] { aggroAmount, factor });            
         }
     }
 
     private void removeFromAggroList(Character character)
     {
-        if (this.aggroList.ContainsKey(character)) this.aggroList.Remove(character);
+        if (this.npc.aggroList.ContainsKey(character)) this.npc.aggroList.Remove(character);
     }
 
     private void setParameterOfAggrolist(Character character, float amount)
     {
-        if (this.aggroList.ContainsKey(character))
+        if (this.npc.aggroList.ContainsKey(character))
         {
-            this.aggroList[character][1] = amount; //set factor of increase/decreasing aggro            
+            this.npc.aggroList[character][1] = amount; //set factor of increase/decreasing aggro            
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (CustomUtilities.Collisions.checkAffections(this.enemy, this.aggroStats.affectOther, this.aggroStats.affectSame, this.aggroStats.affectNeutral, collision))
+        if (this.aggroStats.affections.IsAffected(this.npc, collision))            
         {
-            increaseAggro(collision.GetComponent<Character>(), this.aggroStats.aggroIncreaseFactor);
+            increaseAggro(this.npc, collision.GetComponent<Character>(), this.aggroStats.aggroIncreaseFactor);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (CustomUtilities.Collisions.checkAffections(this.enemy, this.aggroStats.affectOther, this.aggroStats.affectSame, this.aggroStats.affectNeutral, collision))
-        {
-            decreaseAggro(collision.GetComponent<Character>(), this.aggroStats.aggroDecreaseFactor);
-        }
+        decreaseAggro(this.npc, collision.GetComponent<Character>(), this.aggroStats.aggroDecreaseFactor);        
     }
 
-    public void increaseAggroOnHit(Character newTarget, float damage)
+    private void increaseAggroOnHit(Character character, Character newTarget, float damage)
     {
-        if (newTarget != null)
+        if (newTarget != null && character == this.npc)
         {
             addToAggroList(newTarget);
 
             addAggro(newTarget, (this.aggroStats.aggroOnHitIncreaseFactor));
-            if (this.aggroList.Count == 1 && this.aggroStats.firstHitMaxAggro) addAggro(newTarget, (this.aggroStats.aggroNeededToTarget + (this.aggroStats.aggroDecreaseFactor * (-1))));
+            if (this.npc.aggroList.Count == 1 && this.aggroStats.firstHitMaxAggro) addAggro(newTarget, (this.aggroStats.aggroNeededToTarget + (this.aggroStats.aggroDecreaseFactor * (-1))));
 
-            if (this.aggroList[newTarget][1] == 0) setParameterOfAggrolist(newTarget, this.aggroStats.aggroDecreaseFactor);
-            if (this.enemy.target == null) StartCoroutine(showClueCo(this.aggroStats.targetFoundClue, this.aggroStats.foundClueDuration));
+            if (this.npc.aggroList[newTarget][1] == 0) setParameterOfAggrolist(newTarget, this.aggroStats.aggroDecreaseFactor);
+            if (this.npc.target == null) StartCoroutine(showClueCo(MasterManager.markTarget, this.aggroStats.foundClueDuration));
         }
     }
 
 
-    public void increaseAggro(Character newTarget, float aggroIncrease)
+    private void increaseAggro(Character character, Character newTarget, float aggroIncrease)
     {
-        if (newTarget != null)
+        if (newTarget != null && IsValidTarget(newTarget) && character == this.npc)
         {
             addToAggroList(newTarget);
             setParameterOfAggrolist(newTarget, aggroIncrease);
-            if (this.enemy.target == null) StartCoroutine(showClueCo(this.aggroStats.targetFoundClue, this.aggroStats.foundClueDuration));
+            if (this.npc.target == null) StartCoroutine(showClueCo(MasterManager.markTarget, this.aggroStats.foundClueDuration));
         }
     }
 
-    public void decreaseAggro(Character newTarget, float aggroDecrease)
+    private void decreaseAggro(Character character, Character newTarget, float aggroDecrease)
     {
-        if (newTarget != null) setParameterOfAggrolist(newTarget, aggroDecrease);
+        if (newTarget != null && character == this.npc) setParameterOfAggrolist(newTarget, aggroDecrease);
+    }
+
+    private void ClearAggro(Character character)
+    {
+        if (character == this.npc) this.npc.aggroList.Clear();
     }
 
     #endregion

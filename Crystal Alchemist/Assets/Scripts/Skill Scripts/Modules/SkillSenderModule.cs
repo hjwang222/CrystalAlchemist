@@ -1,101 +1,91 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class SkillSenderModule : SkillModule
 {
-    [TabGroup("Sender Attribute")]
-    [EnumToggleButtons]
-    [Tooltip("Art der Resource")]
-    public ResourceType resourceType = ResourceType.mana;
+    [BoxGroup("Sender Attribute")]
+    [HideLabel]
+    public Costs costs;
 
-    [TabGroup("Sender Attribute")]
-    [ShowIf("resourceType", ResourceType.item)]
-    [Tooltip("Benötigtes Item")]
-    public Item item;
-
-    [TabGroup("Sender Attribute")]
-    [HideIf("resourceType", ResourceType.none)]
-    [Range(-CustomUtilities.maxFloatInfinite, CustomUtilities.maxFloatInfinite)]
-    [Tooltip("Höhe der Resource des Senders. Negativ = Schaden, Positiv = Heilung")]
-    public float addResourceSender = 0;
-
-    [TabGroup("Sender Attribute")]
-    [HideIf("resourceType", ResourceType.none)]
-    [Range(0, CustomUtilities.maxFloatInfinite)]
+    [BoxGroup("Sender Attribute")]
     [Tooltip("Intervall während der Dauer des Skills Leben oder Mana verändert werden.")]
+    [MinValue(0)]
     public float intervallSender = 0;
 
-    [TabGroup("Sender Attribute")]
+    [BoxGroup("Sender Attribute")]
     [Tooltip("Bewegungsgeschwindigkeit während eines Casts")]
-    [Range(-100, 100)]
-    public float speedDuringCasting = 0;
+    [Range(-100, 0)]
+    public int speedDuringCasting = 0;
 
-    [TabGroup("Sender Attribute")]
+    [BoxGroup("Sender Attribute")]
     [Tooltip("Bewegungsgeschwindigkeit während des Angriffs")]
-    [Range(-100, 100)]
-    public float speedDuringDuration = 0;
+    [Range(-100, 0)]
+    public int speedDuringDuration = 0;
 
-    [TabGroup("Sender Attribute")]
+    [BoxGroup("Sender Attribute")]
     [Tooltip("Soll die Geschwindigkeit auch die Animation beeinflussen?")]
     public bool affectAnimation = true;
 
     [Space(10)]
-    [TabGroup("Sender Attribute")]
+    [BoxGroup("Sender Attribute")]
     [Tooltip("True = nach vorne, False = Knockback")]
     [SerializeField]
     private bool forward = false;
 
-    [TabGroup("Sender Attribute")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
+    [BoxGroup("Sender Attribute")]
+    [MinValue(0)]
     [Tooltip("Stärke des Knockbacks")]
     [SerializeField]
     private float selfThrust = 0;
 
-    [TabGroup("Sender Attribute")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
+    [BoxGroup("Sender Attribute")]
+    [MinValue(0)]
     [Tooltip("Dauer des Knockbacks")]
     [HideIf("selfThrust", 0f)]
     [SerializeField]
     private float selfThrustTime = 0;
 
-    [FoldoutGroup("Wirkungsbereich", expanded: false)]
+    [BoxGroup("Wirkungsbereich")]
     [Tooltip("Soll der Spieler nur diesen Skill benutzen dürfen?")]
-    [EnumToggleButtons]
     public StateType stateType = StateType.none;
 
+    private float elapsed;
 
 
-
-    private void Start()
+    public override void Initialize()
     {
-        if (this.stateType == StateType.attack) this.skill.sender.currentState = CharacterState.attack;
-        else if (this.stateType == StateType.defend) this.skill.sender.currentState = CharacterState.defend;
+        if (this.skill.sender != null)
+        {
+            if (this.skill.sender.values.currentState != CharacterState.dead
+            && this.skill.sender.values.currentState != CharacterState.respawning)
+            {
+                if (this.stateType == StateType.attack) this.skill.sender.values.currentState = CharacterState.attack;
+                else if (this.stateType == StateType.defend) this.skill.sender.values.currentState = CharacterState.defend;
 
-        updateResourceSender();
-        setSelfTrust();
+                updateResourceSender();
+                setSelfTrust();
 
-        this.skill.elapsed = this.intervallSender;
+                this.elapsed = this.intervallSender;
+            }
+
+            if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(this.speedDuringDuration, this.affectAnimation);
+        }
     }
 
-    private void Update()
+    public override void Updating()
     {
-        if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(this.speedDuringDuration, this.affectAnimation);
-
         if (this.intervallSender > 0)
         {
-            if (this.skill.elapsed > 0) this.skill.elapsed -= (Time.deltaTime * this.skill.timeDistortion);
+            if (this.elapsed > 0) this.elapsed -= (Time.deltaTime * this.skill.getTimeDistortion());
             else
             {
                 if (this.skill.sender != null)
                 {
-                    if (this.skill.sender.getResource(this.resourceType, this.item) + this.addResourceSender < 0)
-                        this.skill.durationTimeLeft = 0;
+                    if (!this.skill.sender.HasEnoughCurrency(this.costs)) this.skill.DeactivateIt();
                     else
                     {
-                        this.skill.elapsed = this.intervallSender;
-                        this.skill.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
+                        this.elapsed = this.intervallSender;
+                        this.updateResourceSender();
                     }
                 }
             }
@@ -104,28 +94,26 @@ public class SkillSenderModule : SkillModule
 
     private void OnDestroy()
     {
-        if (this.stateType != StateType.none) this.skill.sender.currentState = CharacterState.idle;
-        if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(0);
+        if (this.skill.sender != null)
+        {
+            if (this.stateType != StateType.none) this.skill.sender.values.currentState = CharacterState.idle;
+            if (this.speedDuringDuration != 0) this.skill.sender.updateSpeed(0);
+        }
     }
 
     private void updateResourceSender()
     {
-        if (this.skill.sender != null)
-        {
-            this.skill.sender.updateResource(this.resourceType, this.item, this.addResourceSender);
-            //setPostionAndDirection();
-        }
+        if (this.skill.sender != null) this.skill.sender.reduceResource(this.costs);
     }
 
     private void setSelfTrust()
     {
         if (this.selfThrust > 0)
         {
-            this.skill.duration = this.selfThrustTime;
             int trustdirection = -1; //knockback
             if (forward) trustdirection = 1; //dash
 
-            this.skill.sender.knockBack(selfThrustTime, selfThrust, (this.skill.sender.direction * trustdirection));
+            this.skill.sender.KnockBack(selfThrustTime, selfThrust, (this.skill.GetDirection() * trustdirection));
         }
     }
 }

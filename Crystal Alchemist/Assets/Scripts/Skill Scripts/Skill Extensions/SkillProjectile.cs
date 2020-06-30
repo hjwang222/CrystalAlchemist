@@ -1,25 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using UnityEngine;
 
 public class SkillProjectile : SkillExtension
 {
-    private bool speedup = true;
-    private Vector2 tempVelocity;
-
-    private void Update()
+    public float speed = 1;
+    
+    public override void Initialize()
     {
-        if (this.skill.delayTimeLeft <= 0 && this.skill.isActive) setVelocity();
-    }    
-
-    private void setVelocity()
-    {
-        if (this.skill.myRigidbody != null && this.speedup)
+        if (this.skill.myRigidbody != null)
         {
-            this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
-            this.tempVelocity = this.skill.myRigidbody.velocity;
-            this.speedup = false;
+            this.setVelocity();
         }
-    }        
+    }
+
+    public void setVelocity()
+    {
+        if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = this.skill.GetDirection() * this.speed * this.skill.getTimeDistortion();
+    }
+
+    public void stopVelocity()
+    {
+        if (this.skill.myRigidbody != null) this.skill.myRigidbody.velocity = Vector2.zero;
+    }
 }

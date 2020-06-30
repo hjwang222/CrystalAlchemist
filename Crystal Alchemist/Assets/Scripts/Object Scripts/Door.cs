@@ -1,50 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-
-public enum DoorType
-{    
-    normal,    
-    enemy,
-    button,
-    closed
-}
 
 public class Door : Interactable
 {
+    public enum DoorType
+    {
+        normal,
+        enemy,
+        button,
+        closed
+    }
+
     [Required]
     [BoxGroup("Mandatory")]
     public Animator animator;
 
-    [FoldoutGroup("Tür-Attribute", expanded: false)]
-    [EnumToggleButtons]
+    [BoxGroup("Tür-Attribute")]
     [SerializeField]
     private DoorType doorType = DoorType.closed;
 
-    private bool isOpen;
-
-    [FoldoutGroup("Tür-Attribute", expanded: false)]
+    [BoxGroup("Tür-Attribute")]
+    [ShowIf("doorType", DoorType.normal)]
     [SerializeField]
-    private BoxCollider2D boxCollider;
+    private bool autoClose = true;
+
+    private bool isOpen;
 
     private new void Start()
     {
         base.Start();
 
-        if (this.isOpen) CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", true);
+        if (this.isOpen) AnimatorUtil.SetAnimatorParameter(this.animator, "Close");
     }
 
-    public override void doOnUpdate()
+    public override void DoOnUpdate()
     {
         if (!this.isPlayerInRange && this.isOpen && this.doorType == DoorType.normal)
         {
             //Normale Tür fällt von alleine wieder zu
-            OpenCloseDoor(false, this.context);
+            if(this.autoClose) OpenCloseDoor(false);
         }
     }
 
-    public override void doSomethingOnSubmit()
+    public override void DoOnSubmit()
     {
         if (this.doorType != DoorType.enemy && this.doorType != DoorType.button)
         {
@@ -52,22 +50,23 @@ public class Door : Interactable
             {
                  if (this.doorType == DoorType.normal)
                 {  
-                    if (CustomUtilities.Items.canOpenAndUpdateResource(this.currencyNeeded, this.item, this.player, this.price))
+                    if (this.player.canUseIt(this.costs))
                     {
                         //Tür offen!
-                        OpenCloseDoor(true, this.context);
-                        CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.success);
+                        this.player.reduceResource(this.costs);
+                        OpenCloseDoor(true);
+                        ShowDialog(DialogTextTrigger.success);
                     }
                     else
                     {
                         //Tür kann nicht geöffnet werden
-                        CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
+                        ShowDialog(DialogTextTrigger.failed);
                     }
                 }
                 else
                 {
                     //Tür verschlossen
-                    CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.failed);
+                    ShowDialog(DialogTextTrigger.failed);
                 }
             }                       
         }
@@ -80,28 +79,24 @@ public class Door : Interactable
             //Wenn Knopf gedrückt wurde, OpenDoor()
         }
 
-        CustomUtilities.DialogBox.showDialog(this, this.player, DialogTextTrigger.none);
+        ShowDialog(DialogTextTrigger.none);
     }
 
     private void OpenCloseDoor(bool isOpen)
     {
-        OpenCloseDoor(isOpen, null);
+        this.isOpen = isOpen;
+
+        if (this.isOpen) AnimatorUtil.SetAnimatorParameter(this.animator, "Open");
+        else AnimatorUtil.SetAnimatorParameter(this.animator, "Close");
+
+        ShowContextClue();
     }
 
-    private void OpenCloseDoor(bool isOpen, GameObject contextClueChild)
+    private void ShowContextClue()
     {
-        this.isOpen = isOpen;
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "isOpened", this.isOpen);
-        this.boxCollider.enabled = !this.isOpen;
-
-        if (contextClueChild != null)
-        {
-            //Wenn Spieler in Reichweite ist und Tür zu ist -> Context Clue anzeigen! Ansonsten nicht.
-            if (this.isOpen) contextClueChild.SetActive(false);
-            else if (!this.isOpen && this.isPlayerInRange) contextClueChild.SetActive(true);
-            else contextClueChild.SetActive(false);
-        }
-
-        CustomUtilities.Audio.playSoundEffect(this.gameObject, this.soundEffect);
+        //Wenn Spieler in Reichweite ist und Tür zu ist -> Context Clue anzeigen! Ansonsten nicht.
+        if (this.isOpen) ShowContextClue(false);
+        else if (!this.isOpen && PlayerCanInteract()) ShowContextClue(true);
+        else ShowContextClue(false);
     }
 }

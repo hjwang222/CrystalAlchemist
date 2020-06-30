@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76a19f9cb4d358498823753290d243d, type: 3}
+  m_Name: Sentinel Combat
+  m_EditorClassIdentifier: 
+  actions:
+  - type: 3
+    position: {x: 0, y: 0}
+    translationID: 
+    duration: 4
+    nextPhase: {fileID: 0}
+    animations: 
+    isTrigger: 0
+    ability: {fileID: 11400000, guid: 1c1e76da454f1d34ebf5144030287f26, type: 2}
+    overrideCastTime: 0
+    castTime: 2
+    overrideShowCastBar: 0
+    showCastBar: 0
+    overrideCooldown: 0
+    cooldown: 1
+    repeat: 0
+    keepCast: 0
+    amount: 1
+    delay: 0
+    sequence: {fileID: 0}
+    value: 0
+    signal: {fileID: 0}
+    wait: 0
+    mode: 0
+    fadeIn: 0
+    fadeOut: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
+  - type: 2
+    position: {x: 0, y: 0}
+    translationID: 
+    duration: 1
+    nextPhase: {fileID: 0}
+    animations: 
+    isTrigger: 0
+    ability: {fileID: 0}
+    overrideCastTime: 0
+    castTime: 0
+    overrideShowCastBar: 0
+    showCastBar: 0
+    overrideCooldown: 0
+    cooldown: 0
+    repeat: 0
+    keepCast: 0
+    amount: 1
+    delay: 0
+    sequence: {fileID: 0}
+    value: 0
+    signal: {fileID: 0}
+    wait: 0
+    mode: 0
+    fadeIn: 0
+    fadeOut: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
+  loopActions: 1
+  events:
+  - triggers:
+    - type: 0
+      time: 60
+      life: 50
+      maxLoops: 0
+    actions:
+    - type: 8
+      position: {x: 0, y: 0}
+      translationID: 
+      duration: 4
+      nextPhase: {fileID: 0}
+      animations: 
+      isTrigger: 0
+      ability: {fileID: 0}
+      overrideCastTime: 0
+      castTime: 0
+      overrideShowCastBar: 0
+      showCastBar: 0
+      overrideCooldown: 0
+      cooldown: 0
+      repeat: 0
+      keepCast: 0
+      amount: 1
+      delay: 0
+      sequence: {fileID: 0}
+      value: 0
+      signal: {fileID: 0}
+      wait: 0
+      mode: 0
+      fadeIn: 0
+      fadeOut: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
+    repeatEvent: 0
+    interruptCurrentAction: 0
+    eventCooldown: 5
+    requirementsNeeded: 0
+    delay: 0.1
+  - triggers:
+    - type: 4
+      time: 0
+      life: 0
+      maxLoops: 0
+    actions:
+    - type: 5
+      position: {x: 0, y: 0}
+      translationID: 
+      duration: 0
+      nextPhase: {fileID: 11400000, guid: 9e6241ad94a039b4eb88295fc09c3c29, type: 2}
+      animations: 
+      isTrigger: 0
+      ability: {fileID: 0}
+      overrideCastTime: 0
+      castTime: 0
+      overrideShowCastBar: 0
+      showCastBar: 0
+      overrideCooldown: 0
+      cooldown: 0
+      repeat: 0
+      keepCast: 0
+      amount: 0
+      delay: 0
+      sequence: {fileID: 0}
+      value: 0
+      signal: {fileID: 0}
+      wait: 0
+      mode: 0
+      fadeIn: 0
+      fadeOut: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
+    repeatEvent: 0
+    interruptCurrentAction: 0
+    eventCooldown: 0
+    requirementsNeeded: 0
+    delay: 0.1
