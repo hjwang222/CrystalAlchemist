@@ -53,7 +53,9 @@ public class ResolutionMenu : MonoBehaviour
     public void ConfirmCamera()
     {
         MasterManager.settings.cameraDistance = this.size;
+        MasterManager.settings.UISize = 1f - ((this.size - 1) * 0.25f);
         SettingsEvents.current.DoCameraChange();
+        SettingsEvents.current.DoUISizeChange();
     }
 
     public void Confirm()

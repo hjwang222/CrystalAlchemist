@@ -8,5 +8,5 @@ public class UISize : MonoBehaviour
 
     private void OnDestroy() => SettingsEvents.current.OnUISizeChanged -= UpdateLayout;
 
-    private void UpdateLayout() => this.transform.localScale = Vector2.one * MasterManager.settings.UISize;     
+    private void UpdateLayout() => this.transform.localScale = new Vector3(MasterManager.settings.UISize, MasterManager.settings.UISize,1);     
 }

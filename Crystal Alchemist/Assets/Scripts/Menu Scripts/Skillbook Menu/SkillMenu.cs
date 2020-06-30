@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using Sirenix.OdinInspector;
-using System.Collections.Generic;
 
 public class SkillMenu : MenuBehaviour
 {
