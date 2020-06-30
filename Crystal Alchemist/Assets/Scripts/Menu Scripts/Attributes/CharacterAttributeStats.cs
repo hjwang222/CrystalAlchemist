@@ -36,6 +36,7 @@ public class CharacterAttributeStats : MonoBehaviour
         else if (value > pointsLeft) value = points + pointsLeft;        
 
         this.mainMenu.attributes.SetPoints(this.type, value);
+        this.mainMenu.attributes.SetValues();
         updateUI();
         this.mainMenu.UpdatePoints();
     }

@@ -109,17 +109,30 @@ public class DeathScreen : MonoBehaviour
         if (this.playerTeleport.nextTeleport != null) this.returnLastPoint.SetActive(true);
         startCountdown = true;
     }
+    
+    private void DisableButtons()
+    {
+        this.returnLastPoint.SetActive(false);
+        this.returnSavePoint.SetActive(false);
+        this.returnTitleScreen.SetActive(false);
+    }
 
-    public void ReturnToTitleScreen() => SceneManager.LoadSceneAsync(0);
+    public void ReturnToTitleScreen()
+    {
+        DisableButtons();
+        SceneManager.LoadSceneAsync(0);
+    }
 
     public void ReturnSaveGame()
     {
+        DisableButtons();
         this.playerTeleport.SetReturnTeleport();
         GameEvents.current.DoTeleport();
     }
 
     public void ReturnLastPoint()
     {
+        DisableButtons();
         GameEvents.current.DoTeleport();
     }
 

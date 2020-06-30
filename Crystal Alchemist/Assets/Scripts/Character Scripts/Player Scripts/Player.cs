@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections;
-using DG.Tweening;
 using System;
-using UnityEngine.InputSystem;
 
 public class Player : Character
 {
@@ -35,12 +33,17 @@ public class Player : Character
     [SerializeField]
     private BoolValue CutSceneValue;
 
-    ///////////////////////////////////////////////////////////////
+    [BoxGroup("Player Objects")]
+    [SerializeField]
+    private PlayerAttributes attributes;
+
+///////////////////////////////////////////////////////////////
 
     public override void Awake()
     {        
         this.values.Initialize();    
         SetComponents();
+        this.attributes.SetValues();
     }
 
     public override void OnEnable()

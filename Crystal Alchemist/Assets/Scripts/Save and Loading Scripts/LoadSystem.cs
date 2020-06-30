@@ -57,6 +57,8 @@ public class LoadSystem
         attributes.SetPoints(attributeType.manaRegen, data.manaRegen);
         attributes.SetPoints(attributeType.buffPlus, data.buffplus);
         attributes.SetPoints(attributeType.debuffMinus, data.debuffminus);
+
+        attributes.SetValues();
     }
 
     public static void loadPlayerSkills(PlayerData data, PlayerButtons buttons, PlayerSkillset skillSet)
