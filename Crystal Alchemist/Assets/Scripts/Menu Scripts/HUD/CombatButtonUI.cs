@@ -77,10 +77,16 @@ public class CombatButtonUI : MonoBehaviour
 
     void Start()
     {
+        MenuEvents.current.OnAbilityAssigned += setButtonSkillImages;
         setButtonSkillImages();
     }
 
-    public void setButtonSkillImages()
+    private void OnDestroy()
+    {
+        MenuEvents.current.OnAbilityAssigned -= setButtonSkillImages;
+    }
+
+    private void setButtonSkillImages()
     {
         setButton(this.buttonType, this.skillIconButton, this.iconButton);
     }

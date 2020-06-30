@@ -9,8 +9,6 @@ public class SkillMenuActiveSlots : MonoBehaviour
     private Image skillImage;
     [SerializeField]
     private enumButton button;
-    [SerializeField]
-    private SimpleSignal newAssignedSkillSignal;
 
     public Ability ability;
 
@@ -38,6 +36,6 @@ public class SkillMenuActiveSlots : MonoBehaviour
         MenuEvents.current.SelectAbility(null);
 
         setImage();
-        this.newAssignedSkillSignal.Raise();
+        MenuEvents.current.AssignAbility();
     }
 }

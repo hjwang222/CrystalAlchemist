@@ -138,6 +138,7 @@ public class GameOptions
     public bool useManaBar;
 
     public int cameraDistance;
+    public float uiSize = 1f;
 
     public GameOptions()
     {
@@ -151,5 +152,6 @@ public class GameOptions
         this.useManaBar = MasterManager.settings.manaBar;
 
         this.cameraDistance = MasterManager.settings.cameraDistance;
+        this.uiSize = MasterManager.settings.UISize;
     }
 }

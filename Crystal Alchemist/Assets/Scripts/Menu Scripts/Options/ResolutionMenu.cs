@@ -15,18 +15,25 @@ public class ResolutionMenu : MonoBehaviour
     private TMP_Dropdown screenModeDropDown;
 
     [SerializeField]
-    private Slider slider;
+    private Slider cameraSlider;
 
     [SerializeField]
-    private TextMeshProUGUI sliderValue;
+    private TextMeshProUGUI cameraSliderValue;
 
-    private int size;
+    [SerializeField]
+    private Slider UISlider;
+
+    [SerializeField]
+    private TextMeshProUGUI UISliderValue;
+
+    private int cameraSize;
+    private float UIsize;
 
     private void OnEnable()
     {
         SelectDropDown(this.resolutionDropDown, GetCurrentResolution());
         SelectDropDown(this.screenModeDropDown, GetCurrentScreenMode());
-        SetSlider();
+        SetSliders();
     }
 
     private void SelectDropDown(TMP_Dropdown dropDown, string text)
@@ -37,24 +44,35 @@ public class ResolutionMenu : MonoBehaviour
         }
     }
 
-    private void SetSlider()
+    private void SetSliders()
     {
-        this.size = MasterManager.settings.cameraDistance;
-        this.slider.value = size;
-        this.sliderValue.text = this.size + "";
+        this.cameraSize = MasterManager.settings.cameraDistance;
+        this.cameraSlider.value = cameraSize;
+        this.cameraSliderValue.text = this.cameraSize + "";
+
+        this.UIsize = MasterManager.settings.UISize;
+        this.UISlider.value = UIsize*100;
+        this.UISliderValue.text = this.UIsize + "";
     }
 
-    public void SetValue()
+    public void SetCameraValue()
     {
-        this.size = (int)this.slider.value;
-        this.sliderValue.text = this.size + "";
+        this.cameraSize = (int)this.cameraSlider.value;
+        this.cameraSliderValue.text = this.cameraSize + "";
+    }
+
+    public void SetUIValue()
+    {
+        this.UIsize = (int)this.UISlider.value;
+        this.UISliderValue.text = this.UIsize + "";
     }
 
     public void ConfirmCamera()
     {
-        MasterManager.settings.cameraDistance = this.size;
-        MasterManager.settings.UISize = 1f - ((this.size - 1) * 0.25f);
+        MasterManager.settings.cameraDistance = this.cameraSize;
         SettingsEvents.current.DoCameraChange();
+
+        MasterManager.settings.UISize = this.UIsize/100f;
         SettingsEvents.current.DoUISizeChange();
     }
 

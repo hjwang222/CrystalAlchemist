@@ -79,6 +79,8 @@ public class SaveSystem
             MasterManager.settings.healthBar = data.useHealthBar;
             MasterManager.settings.manaBar = data.useManaBar;
             MasterManager.settings.cameraDistance = data.cameraDistance;
+            MasterManager.settings.UISize = data.uiSize;
+            if (MasterManager.settings.UISize < 0.5f) MasterManager.settings.UISize = 0.5f;
         }
     }
 }

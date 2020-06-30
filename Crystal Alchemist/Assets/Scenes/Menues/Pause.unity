@@ -6310,6 +6310,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 583296531}
     m_Modifications:
+    - target: {fileID: 608875276793854424, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 608875276793854424, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CustomCursor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 608875276793854424, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 608875276793854424, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 608875276793854424, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 175733141}
+    - target: {fileID: 608875276793854424, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: UpdatePosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 608875276793854424, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 655499577595911905, guid: e0b9e8d7ceadbef489d057accb1fa058,
         type: 3}
       propertyPath: cursor
@@ -6435,6 +6470,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1430516931851597121, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2038219388492730974, guid: e0b9e8d7ceadbef489d057accb1fa058,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
@@ -6515,6 +6555,11 @@ PrefabInstance:
       propertyPath: cursor
       value: 
       objectReference: {fileID: 175733141}
+    - target: {fileID: 2958083938443893982, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3248085790784130621, guid: e0b9e8d7ceadbef489d057accb1fa058,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
@@ -6550,10 +6595,20 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3256166373480657388, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4232720472934772941, guid: e0b9e8d7ceadbef489d057accb1fa058,
         type: 3}
       propertyPath: m_Name
       value: Camera value
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449931795489569926, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4801414702588050489, guid: e0b9e8d7ceadbef489d057accb1fa058,
         type: 3}
@@ -6760,6 +6815,11 @@ PrefabInstance:
       propertyPath: cursor
       value: 
       objectReference: {fileID: 175733141}
+    - target: {fileID: 6570944750256119032, guid: e0b9e8d7ceadbef489d057accb1fa058,
+        type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 175733141}
     - target: {fileID: 7208013625163643786, guid: e0b9e8d7ceadbef489d057accb1fa058,
         type: 3}
       propertyPath: cursor
@@ -6833,7 +6893,7 @@ PrefabInstance:
     - target: {fileID: 9219550132429053442, guid: e0b9e8d7ceadbef489d057accb1fa058,
         type: 3}
       propertyPath: m_Name
-      value: Camera
+      value: UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0b9e8d7ceadbef489d057accb1fa058, type: 3}

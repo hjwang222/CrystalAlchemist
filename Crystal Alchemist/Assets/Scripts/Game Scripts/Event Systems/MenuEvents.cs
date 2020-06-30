@@ -18,6 +18,7 @@ public class MenuEvents : MonoBehaviour
     public Action OnMiniGame;
     public Action<Ability> OnAbilitySelected;
     public Func<Ability> OnAbilitySet;
+    public Action OnAbilityAssigned;
     public Action OnDialogBox;
     public Action OnMenuDialogBox;
     public Action OnTutorial;
@@ -38,6 +39,7 @@ public class MenuEvents : MonoBehaviour
     public void OpenTutorial() => this.OnTutorial?.Invoke();
     public void SelectAbility(Ability ability) => this.OnAbilitySelected?.Invoke(ability);
     public Ability SetAbility() => this.OnAbilitySet?.Invoke();
+    public void AssignAbility() => this.OnAbilityAssigned?.Invoke();
     public void UpdateAttributes() => this.OnAttributeUpdate?.Invoke();
     public void DoPostProcessingFade(Action OnAfterFadeCompleted) => this.OnPostProcessingFade?.Invoke(OnAfterFadeCompleted);
 }
