@@ -10,6 +10,12 @@ public class TitleScreenStart : MonoBehaviour
     private GameObject anyKey;
 
     [SerializeField]
+    private PlayerSaveGame saveGame;
+
+    [SerializeField]
+    private TimeValue timeValue;
+
+    [SerializeField]
     private float delay = 0.3f;
 
     private bool inputPossible = false;
@@ -23,6 +29,8 @@ public class TitleScreenStart : MonoBehaviour
     private void Start()
     {
         SaveSystem.loadOptions();
+        this.timeValue.Clear();
+        this.saveGame.Clear();
     }
 
     private void Update()

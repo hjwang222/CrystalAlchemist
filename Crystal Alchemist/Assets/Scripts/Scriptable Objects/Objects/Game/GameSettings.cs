@@ -21,6 +21,7 @@ public class GameSettings : ScriptableObject
     public bool healthBar = false;
     public bool manaBar = false;
     public int cameraDistance = 1;
+    public float UISize = 1f;
 
     public float GetMenuVolume()
     {

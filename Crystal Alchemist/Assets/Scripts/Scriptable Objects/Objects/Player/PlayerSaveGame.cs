@@ -45,7 +45,7 @@ public class PlayerSaveGame : ScriptableObject
     }
 
     [Button]
-    private void Clear()
+    public void Clear()
     {
         this.time.Clear();
         this.timePlayed.SetValue(0f);

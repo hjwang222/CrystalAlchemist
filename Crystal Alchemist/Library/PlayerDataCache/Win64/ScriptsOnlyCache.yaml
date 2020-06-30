@@ -271,7 +271,6 @@ ScriptsOnlyBuild:
     - TitleScreen
     - TitleScreenControls
     - TitleScreenFading
-    - TitleScreenMovement
     - TitleScreenPatchNotes
     - TitleScreenRotation
     - TitleScreenStart
@@ -303,10 +302,10 @@ ScriptsOnlyBuild:
     - Sirenix.OdinInspector.Editor.GeneralDrawerConfig
     - Sirenix.OdinInspector.Editor.ImportSettingsConfig
     - Sirenix.OdinInspector.Editor.InspectorConfig
+    - Sirenix.OdinInspector.Editor.OdinEditor
     - Sirenix.Serialization.AOTGenerationConfig
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridBrushEditor
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
     - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
@@ -396,8 +395,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -2359,6 +2360,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 19340}
     - Class: 114
       Script: {instanceID: 19426}
+    - Class: 114
+      Script: {instanceID: 19468}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -2420,6 +2423,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 18352}
     - Class: 114
       Script: {instanceID: 18510}
+    - Class: 114
+      Script: {instanceID: 19468}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -2639,6 +2644,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 18352}
     - Class: 114
       Script: {instanceID: 19426}
+    - Class: 114
+      Script: {instanceID: 19468}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -3037,6 +3044,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 19256}
     - Class: 114
       Script: {instanceID: 19426}
+    - Class: 114
+      Script: {instanceID: 19468}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -3537,8 +3546,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 16496}
     - Class: 114
       Script: {instanceID: 16498}
-    - Class: 114
-      Script: {instanceID: 16532}
     - Class: 114
       Script: {instanceID: 16536}
     - Class: 114
@@ -6493,7 +6500,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 09c16dace3ebb6c7a530d83ccd39e8c9
+      Hash: acefdb062b435327a6acdf441831a68a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: StartNewGameScript
@@ -6577,7 +6584,7 @@ ScriptsOnlyBuild:
     className: MenuBehaviour
   - hash:
       serializedVersion: 2
-      Hash: a8f8b54e3e2a6aff63c8a6807392b4bd
+      Hash: ee844116f7f4a369d50f2e61d1584180
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TitleScreenStart
