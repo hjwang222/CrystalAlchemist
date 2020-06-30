@@ -1,19 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class Savepoint : Interactable
 {
-    public override void doSomethingOnSubmit()
+    [BoxGroup("SavePoint")]
+    [Tooltip("Teleport Info of this savepoint")]
+    [SerializeField]
+    private TeleportStats teleportPoint; 
+
+    [BoxGroup("Player")]
+    [Tooltip("To add this Teleport Point to quicktravel")]
+    [SerializeField]
+    private PlayerTeleportList teleportList; 
+
+    [BoxGroup("UI")]
+    [Tooltip("To store info for UI (Respawn)")]
+    [SerializeField]
+    private SavePointInfo savePointInfo;
+
+    public override void DoOnSubmit()
     {
-        Scene scene = SceneManager.GetActiveScene();
+        this.player.updateResource(CostType.life, this.player.values.maxLife);
+        this.player.updateResource(CostType.mana, this.player.values.maxMana);
 
-        SaveSystem.Save(this.player, scene.name);
+        this.teleportList.AddTeleport(this.teleportPoint); //add to teleport list    
+        this.savePointInfo.stats =this.teleportPoint;
 
-        this.player.GetComponent<PlayerTeleport>().setLastTeleport(scene.name, this.player.transform.position);
-
-        CustomUtilities.DialogBox.showDialog(this, this.player);
+        MenuEvents.current.OpenSavepoint();
     }
 }

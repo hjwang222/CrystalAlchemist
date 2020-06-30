@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using UnityEngine;
 
 public class SkillOrbital : SkillExtension
 {
 
-    private void Start()
+    public override void Initialize()
     {
         setPosition();
     }

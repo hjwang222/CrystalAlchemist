@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 public enum DialogTextTrigger
 {
     none,
     success,
-    failed, 
+    failed,
     empty
 }
 
@@ -16,30 +16,33 @@ public class DialogText
 {
     public DialogTextTrigger trigger;
 
-    [Tooltip("Anzeige-Text für die Dialog-Box")]
-    [TextArea]
-    public string dialogBoxText;
+    public string ID;
 
-    [Tooltip("Englischer Anzeige-Text für die Dialog-Box")]
-    [TextArea]
-    public string dialogBoxTextEnglish;
+    public LocalisationFileType type = LocalisationFileType.objects;
+
+    public UnityEvent eventOnClose;
 }
 
 
 public class DialogSystem : MonoBehaviour
 {
     [ButtonGroup("Add Text")]
+    private void ScriptableObjects()
+    {
+        this.textValue = Resources.Load<StringValue>("Scriptable Objects/Menu/DialogText");
+        this.eventValue = Resources.Load<EventValue>("Scriptable Objects/Menu/DialogEvent");
+    }
+
+    [ButtonGroup("Add Text")]
     private void AddShopText()
     {
         DialogText text = new DialogText();
-        text.dialogBoxText = "Du hast <loot amount> <loot name> für <price> <item name> gekauft!";
-        text.dialogBoxTextEnglish = "You bought <loot amount> <loot name> for <price> <item name>!";
+        text.ID = "Bought";
         text.trigger = DialogTextTrigger.success;
         texts.Add(text);
 
         text = new DialogText();
-        text.dialogBoxText = "Du kannst das nicht kaufen.\nDu benötigst <price> <item name>.";
-        text.dialogBoxTextEnglish = "You cant buy that.\nYou need <price> <item name>.";
+        text.ID = "Cannot_Buy";
         text.trigger = DialogTextTrigger.failed;
         texts.Add(text);
     }
@@ -48,103 +51,90 @@ public class DialogSystem : MonoBehaviour
     private void AddTreasureText()
     {
         DialogText text = new DialogText();
-        text.dialogBoxText = "Du hast <loot amount> <loot name> erhalten!";
-        text.dialogBoxTextEnglish = "You obtained <loot amount> <loot name>!";
+        text.ID = "Obtained";
         text.trigger = DialogTextTrigger.success;
         texts.Add(text);
 
         text = new DialogText();
-        text.dialogBoxText = "Du kannst d<interactable> nicht öffnen. Du benötigst <price> <item name>.";
-        text.dialogBoxTextEnglish = "You cant open the <interactable>. You need <price> <item name>.";
+        text.ID = "Cannot_Open";
         text.trigger = DialogTextTrigger.failed;
         texts.Add(text);
 
         text = new DialogText();
-        text.dialogBoxText = "D<interactable> ist leer... .";
-        text.dialogBoxTextEnglish = "The <interactable> is empty... .";
+        text.ID = "Empty";
         text.trigger = DialogTextTrigger.empty;
         texts.Add(text);
     }
 
+    [BoxGroup("Texts")]
     [SerializeField]
     private List<DialogText> texts = new List<DialogText>();
 
-    public void show(Player player, Interactable interactable, Item loot)
+    [BoxGroup("Required")]
+    [SerializeField]
+    [Required]
+    private StringValue textValue;
+
+    [BoxGroup("Required")]
+    [SerializeField]
+    [Required]
+    private EventValue eventValue;
+
+    private DialogTextTrigger internalTrigger = DialogTextTrigger.none;
+
+    public void SetDialogTrigger(DialogTextTrigger trigger) => this.internalTrigger = trigger;
+
+    public void SetDialogSucces() => this.internalTrigger = DialogTextTrigger.success;
+
+    public void SetDialogEmpty() => this.internalTrigger = DialogTextTrigger.empty;
+
+    public void SetDialogNone() => this.internalTrigger = DialogTextTrigger.none;
+
+    public void SetDialogFailed() => this.internalTrigger = DialogTextTrigger.failed;
+
+
+    public void showDialog(Player player, Interactable interactable)
     {
-        if (this.texts.Count > 0)
+        showDialog(player, interactable, null);
+    }
+
+    public void showDialog(Player player, Interactable interactable, DialogTextTrigger trigger)
+    {
+        SetDialogTrigger(trigger);
+        showDialog(player, interactable, null);
+    }
+
+    public void showDialog(Player player, Interactable interactable, ItemStats loot)
+    {
+        show(player, interactable, loot);
+    }
+
+    public void showDialog(Player player, Interactable interactable, DialogTextTrigger trigger, ItemStats loot)
+    {
+        SetDialogTrigger(trigger);
+        show(player, interactable, loot);
+    }
+
+    private void ShowDialogBox(Player player, string text, UnityEvent onClose)
+    {
+        if (player.values.currentState != CharacterState.inDialog)
         {
-            player.showDialogBox(getText(this.texts[0], interactable.price, interactable.item, loot, player));
+            this.textValue.SetValue(text);
+            this.eventValue.SetValue(onClose);
+            MenuEvents.current.OpenDialogBox();
         }
     }
 
-    public void show(Player player, DialogTextTrigger trigger, Interactable interactable, Item loot)
+    private void show(Player player, Interactable interactable, ItemStats loot)
     {
-        foreach(DialogText text in this.texts)
+        foreach (DialogText text in this.texts)
         {
-            if(text.trigger == trigger)
+            if (text.trigger == this.internalTrigger)
             {
-                player.showDialogBox(getText(text, interactable.price, interactable.item, loot, player));
+                string result = FormatUtil.GetLocalisedText(text.ID, text.type, new List<object>() { player, interactable, interactable.costs, loot });
+                ShowDialogBox(player, result, text.eventOnClose);
                 break;
             }
         }
-    }
-
-    private string getText(DialogText text, int price, Item item, Item loot, Player player)
-    {
-        string result = CustomUtilities.Format.getLanguageDialogText(text.dialogBoxText, text.dialogBoxTextEnglish);
-
-        result = result.Replace("<price>", price + "");
-        result = result.Replace("<name>", player.name);
-        result = result.Replace("<interactable>", getInteractableType());
-
-        if (item != null)
-        {
-            result = result.Replace("<item name>", getItemName(price, item));
-            result = result.Replace("<item amount>", item.amount + "");
-            result = result.Replace("<item value>", item.getTotalAmount() + "");
-        }
-
-        if (loot != null)
-        {
-            result = result.Replace("<loot name>", CustomUtilities.Format.getLanguageDialogText(loot.itemName, loot.itemNameEnglish));
-            result = result.Replace("<loot amount>", loot.amount + "");
-            result = result.Replace("<loot value>", loot.getTotalAmount() + "");
-        }
-
-        return result;
-    }
-
-    private string getInteractableType()
-    {
-        if (this.GetComponent<Door>() != null) return CustomUtilities.Format.getLanguageDialogText("ie Tür", "door");
-        if (this.GetComponent<Treasure>() != null) return CustomUtilities.Format.getLanguageDialogText("ie Truhe", "chest");
-        return "";
-    }
-
-    private string getItemName(int price, Item item)
-    {
-        string result = "";
-
-        switch (item.resourceType)
-        {
-            case ResourceType.item:
-                {
-                    if (item.isKeyItem)
-                    {
-                        result = CustomUtilities.Format.getLanguageDialogText(item.itemName, item.itemNameEnglish);
-                    }
-                    else
-                    {
-                        string typ = CustomUtilities.Format.getLanguageDialogText(item.itemGroup, item.itemGroupEnglish);
-                        if (price == 1 && (typ != "Schlüssel" || GlobalValues.useAlternativeLanguage)) typ = typ.Substring(0, typ.Length - 1);
-
-                        result = typ;
-                    }
-                }; break;
-            case ResourceType.life: result = "Leben"; break;
-            case ResourceType.mana: result = "Mana"; break;
-        }
-
-        return result;
     }
 }

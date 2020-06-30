@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(Skill))]
 public class SkillModule : MonoBehaviour
 {
     [HideInInspector]
@@ -12,4 +10,8 @@ public class SkillModule : MonoBehaviour
     {
         this.skill = this.GetComponent<Skill>();
     }
+
+    public virtual void Initialize() { }
+
+    public virtual void Updating() { }
 }

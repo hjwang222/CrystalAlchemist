@@ -7,13 +7,12 @@ public class SkillSelfHit : SkillHitTrigger
 {
     [InfoBox("Wirkt auf den Sender direkt (ohne Collider)")]
     [SerializeField]
-    [Range(0, 10)]
-    private float immortalTimer = 0;
+    [MinValue(0)]
+    private float invincibleTimer = 0;
 
-
-    private void Start()
+    public override void Initialize()
     {
-        if (this.immortalTimer > 0) this.skill.sender.setImmortal(this.immortalTimer);
+        if (this.invincibleTimer > 0) this.skill.sender.SetCannotHit(this.invincibleTimer, false);
         this.skill.sender.gotHit(this.skill);
     }
 }

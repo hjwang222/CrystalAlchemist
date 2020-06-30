@@ -2,197 +2,321 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
+using Unity.Mathematics;
+using Unity.Jobs;
 
-public class AIMovement : MonoBehaviour
+public enum MovementPriority
 {
-    [SerializeField]
-    [Required]
-    [BoxGroup("Required")]
-    private AI npc;
+    target,
+    partner
+}
+
+public class AIMovement : AIComponent
+{
+    public enum PatrolType
+    {
+        path,
+        area
+    }
 
     #region Parameter fürs Verfolgen
-    [FoldoutGroup("Movement Attributes", expanded: false)]
-    public bool prioritizePartner = false;
-
-    [FoldoutGroup("Movement Attributes", expanded: false)]
-    public float movementRadius = 0.1f;
-
-    [FoldoutGroup("Movement Attributes", expanded: false)]
-    public float movementRadiusPartner = 0.1f;
-
-    [FoldoutGroup("Movement Attributes", expanded: false)]
+    [BoxGroup("Character Movement")]
     [SerializeField]
-    private float movementDelay = 0;
+    private MovementPriority movementPriority = MovementPriority.target;
 
-    [FoldoutGroup("Movement Attributes", expanded: false)]
+    [BoxGroup("Character Movement")]
+    [SerializeField]
+    private float targetRadius = 0.1f;
+
+    [BoxGroup("Character Movement")]
+    [SerializeField]
+    private float partnerRadius = 0.1f;
+
+    [BoxGroup("Character Movement")]
+    [SerializeField]
+    private float delay = 0;
+
+
+
+    [BoxGroup("Movement Attributes")]
     [SerializeField]
     private bool backToStart = true;
 
-    [FoldoutGroup("Movement Attributes", expanded: false)]
+    [ShowIf("backToStart")]
+    [BoxGroup("Movement Attributes")]
     [SerializeField]
-    private List<Transform> path;
+    private float returnDelay = 3f;
 
-    [FoldoutGroup("Movement Attributes", expanded: false)]
-    [ShowIf("path")]
+
+
+    [BoxGroup("Patrol")]
+    [SerializeField]
+    [OnValueChanged("SetReturn")]
+    private bool isPatrol = false;
+
+    [ShowIf("isPatrol")]
+    [BoxGroup("Patrol")]
+    [SerializeField]
+    private PatrolType patrolType = PatrolType.path;
+
+    [ShowIf("isPatrol")]
+    [BoxGroup("Patrol")]
+    [SerializeField]
+    private float patrolDelay = 3f;
+
+    [ShowIf("isPatrol")]
+    [HideIf("patrolType", PatrolType.area)]
+    [BoxGroup("Patrol")]
+    [SerializeField]
+    private List<Transform> patrolPath = new List<Transform>();
+
+    [ShowIf("isPatrol")]
+    [HideIf("patrolType", PatrolType.path)]
+    [BoxGroup("Patrol")]
+    [SerializeField]
+    private Collider2D patrolArea;
+
+    [ShowIf("isPatrol")]
+    [HideIf("patrolType", PatrolType.path)]
+    [BoxGroup("Patrol")]
+    [SerializeField]
+    private bool hasMaxTime = false;
+
+    [ShowIf("isPatrol")]
+    [HideIf("patrolType", PatrolType.path)]
+    [ShowIf("hasMaxTime", true)]
+    [BoxGroup("Patrol")]
+    [SerializeField]
+    private float maxPatrolTime = 5f;
+
+    [ShowIf("isPatrol")]
+    [BoxGroup("Patrol")]
     [SerializeField]
     private float followPathPrecision = 0.01f;
 
-    [ShowIf("path")]
-    [FoldoutGroup("Movement Attributes", expanded: false)]
+    [ShowIf("isPatrol")]
+    [BoxGroup("Patrol")]
+    [HideIf("patrolType", PatrolType.area)]
     [SerializeField]
     private bool followPathInCircle = true;
 
-    private bool standStill = false;
+    [BoxGroup("Pathfinding")]
+    [SerializeField]
+    private bool usePathfinding = true;
+
+    [BoxGroup("Pathfinding")]
+    [ShowIf("usePathfinding")]
+    [SerializeField]
+    private float accuracy = 0.25f;
+
+    [BoxGroup("Pathfinding")]
+    [ShowIf("usePathfinding")]
+    [SerializeField]
+    private float updateDelay = 0.5f;
+
+    private PathSeeker seeker = null;
+    private List<Vector2> path;
+    private int index;
+
+    private bool wait = false;
+    private bool enableCoroutine = true;
+
     private int factor = 1;
     private int currentPoint = 0;
-    private Transform currentGoal;
-    private bool startCoroutine = true;
-    private bool activateSeeker = true;
-    private Vector2 targetPosition = Vector2.zero;
+    [BoxGroup("Debug")]
+    [SerializeField]
+    private Vector3 targetPosition;
+    private Vector3 randomColliderPoint;
 
+    [BoxGroup("Debug")]
+    [SerializeField]
+    private float areaCountdown = 0f;
 
     #endregion
 
-    private void Start()
+    public override void Initialize()
     {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+        base.Initialize();
+
+        AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", false);
+        if (Pathfinding.Instance != null) this.seeker = this.GetComponent<PathSeeker>();
+
+        if (this.usePathfinding && this.seeker != null) InvokeRepeating("UpdatePath", 0, this.updateDelay);
+
+        this.targetPosition = MasterManager.globalValues.nullVector;
+
+        if (this.isPatrol && this.patrolType == PatrolType.area) SetRandomPoint();
     }
 
     #region Update und Movement Funktionen
-    private void Update()
+    private void FixedUpdate()
     {
-        if (this.npc.currentState != CharacterState.knockedback && !this.npc.isOnIce)
+        if (this.npc.values.currentState != CharacterState.knockedback && !this.npc.values.isOnIce)
         {
             if (this.npc.myRigidbody.bodyType != RigidbodyType2D.Static) this.npc.myRigidbody.velocity = Vector2.zero;
         }
 
-        if (this.npc.currentState != CharacterState.dead
-        && this.npc.currentState != CharacterState.knockedback
-        && this.npc.currentState != CharacterState.manually) getTargetPosition();
-
-        moveTorwardsTarget(this.targetPosition);
-    }
-
-    private void setTargetPath(Vector2 position)
-    {
-        if (this.targetPosition != position) this.targetPosition = position;
-    }
-
-    private void stopMoving()
-    {
-        this.targetPosition = Vector2.zero;
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", false);
-    }
-
-    private bool movementPriority(bool priotizePartner)
-    {
-        if (priotizePartner)
+        if (!this.wait)
         {
-            //Partner > Target (loyal)
-            if (this.npc.partner != null) moveToCharacter(this.npc.partner, this.movementRadiusPartner);
-            else if (this.npc.target != null) moveToCharacter(this.npc.target, this.movementRadius);
-            else return false;
+            if (this.hasMaxTime && this.areaCountdown > 0) this.areaCountdown -= Time.fixedDeltaTime;
+
+            UpdateTargetPosition();
+
+            if (this.usePathfinding && this.seeker != null) MoveTroughPaths(); //Pathfinding
+            else MoveToPosition(this.targetPosition); //No Pathfinding
         }
+
+        if (MasterManager.debugSettings.showTargetPosition
+            && this.targetPosition != MasterManager.globalValues.nullVector)
+            Debug.DrawLine(this.npc.GetGroundPosition(), this.targetPosition, Color.blue);
+    }
+
+    private void SetReturn()
+    {
+        if (this.isPatrol) this.backToStart = false;
+    }
+
+    private void UpdateTargetPosition()
+    {
+        if (this.npc.values.currentState != CharacterState.dead
+        && this.npc.values.currentState != CharacterState.knockedback
+        && this.npc.values.currentState != CharacterState.manually
+        && this.npc.values.currentState != CharacterState.respawning)
+        {
+            SetNextPoint();
+            this.npc.values.currentState = CharacterState.idle;
+        }
+    }
+
+    private void SetNextPoint()
+    {
+        Vector3 patrolVector = MasterManager.globalValues.nullVector;
+        Vector3 spawnVector = MasterManager.globalValues.nullVector;
+        Vector3 chaseVector = MasterManager.globalValues.nullVector;
+
+        if (this.isPatrol)
+        {
+            if (this.patrolType == PatrolType.path && this.patrolPath.Count > 0)
+                patrolVector = GetNextPoint(this.patrolPath[currentPoint].position, this.followPathPrecision, SetNextWayPoint);
+            else if (this.patrolType == PatrolType.area)
+            {
+                SetNewRandomPointAfterTime();
+                patrolVector = GetNextPoint(this.randomColliderPoint, this.followPathPrecision, SetRandomPoint);
+            }
+        }
+        if (this.backToStart) spawnVector = GetNextPoint(this.npc.GetSpawnPosition(), 0.25f);
+
+        if (this.movementPriority == MovementPriority.partner)
+            chaseVector = CheckTargets(this.npc.partner, this.partnerRadius, this.npc.target, this.targetRadius);
+        else
+            chaseVector = CheckTargets(this.npc.target, this.targetRadius, this.npc.partner, this.partnerRadius);
+
+        SetVector(patrolVector, spawnVector, chaseVector);
+    }
+
+    private void SetNewRandomPointAfterTime()
+    {
+        if (this.hasMaxTime && this.areaCountdown <= 0) SetRandomPoint(); 
+    }
+
+    private void SetVector(Vector3 patrolVector, Vector3 spawnVector, Vector3 chaseVector)
+    {
+        Vector3 newVector = MasterManager.globalValues.nullVector;
+        float delay = 0f;
+
+        SetVector(patrolVector, this.patrolDelay, ref newVector, ref delay);
+        SetVector(spawnVector, this.returnDelay, ref newVector, ref delay);
+        SetVector(chaseVector, this.delay, ref newVector, ref delay);
+
+        if (newVector != this.targetPosition)
+        {
+            this.targetPosition = newVector;
+            if (this.enableCoroutine) StartCoroutine(delayMovementCo(delay));
+        }
+    }
+
+    private void SetVector(Vector3 vector, float delay, ref Vector3 newVector, ref float newDelay)
+    {
+        if (vector != MasterManager.globalValues.nullVector)
+        {
+            newVector = vector;
+            newDelay = delay;
+        }
+    }
+
+    #region Check Distances
+
+    private Vector3 CheckTargets(Character first, float firstRadius, Character second, float secondRadius)
+    {
+        if (first != null) return GetNextPoint(first.GetGroundPosition(), firstRadius);
+        else if (second != null) return GetNextPoint(second.GetGroundPosition(), secondRadius);
         else
         {
-            //Target > Partner (aggressive)
-            if (this.npc.target != null) moveToCharacter(this.npc.target, this.movementRadius);
-            else if (this.npc.partner != null) moveToCharacter(this.npc.partner, this.movementRadiusPartner);
-            else return false;
-        }
-
-        return true;
-    }
-
-    private void moveToCharacter(Character target, float radius)
-    {
-        if (target != null)
-        {
-            //Wenn der Spieler innerhalb vom Chase-Radius ist und auch nur solange bis der Gegner den Spieler nicht berührt!
-            if (Vector3.Distance(target.transform.position, this.transform.position) > radius)
-            {
-                if (this.startCoroutine) StartCoroutine(delayMovementCo());
-
-                if (!this.standStill)
-                {
-                    setTargetPath(target.transform.position);
-                    //moveTorwardsTarget(target.transform.position);
-                }
-                else
-                {
-                    this.stopMoving();
-                }
-            }
-            else
-            {
-                stopMoving();
-                this.startCoroutine = true;
-            }
+            this.enableCoroutine = true;
+            return MasterManager.globalValues.nullVector;
         }
     }
 
-    private void getTargetPosition()
+    private Vector3 GetNextPoint(Vector2 nextPosition, float maxDistance)
     {
-        //no target, no partner -> Patrol
-        if (!movementPriority(this.prioritizePartner))
-        {
-            if (!this.standStill)
-            {
-                if (this.path.Count > 0)
-                {
-                    if (Vector3.Distance(transform.position, path[currentPoint].position) > followPathPrecision)
-                    {
-                        setTargetPath(path[currentPoint].position);
-                        //moveTorwardsTarget(path[currentPoint].position);
-                    }
-                    else
-                    {
-                        stopMoving();
+        return GetNextPoint(nextPosition, maxDistance, null);
+    }
 
-                        this.startCoroutine = true;
-                        ChangeGoal();
-                        StartCoroutine(delayMovementCo());
-                    }
-                }
-                else if (this.backToStart && Vector2.Distance(this.npc.transform.position, this.npc.spawnPosition) > 0.1f) setTargetPath(this.npc.spawnPosition);
-                else stopMoving();
-            }
-            else
-            {
-                stopMoving();
-            }
-            //Utilities.SetAnimatorParameter(this.animator, "isWakeUp", false);
+    private Vector3 GetNextPoint(Vector2 nextPosition, float maxDistance, Action action)
+    {
+        float distance = Vector2.Distance(this.npc.GetGroundPosition(), nextPosition);
+
+        if (distance > maxDistance) return nextPosition;        
+        else
+        {
+            if(action != null) action.Invoke();
+            return MasterManager.globalValues.nullVector;
         }
-
-        this.npc.currentState = CharacterState.idle;
     }
 
-    private IEnumerator delayMovementCo()
+    #endregion
+
+    private IEnumerator delayMovementCo(float delay)
     {
-        this.startCoroutine = false;
-        this.standStill = true;
-        yield return new WaitForSeconds(this.movementDelay);
-        this.standStill = false;
+        this.enableCoroutine = false;
+        this.wait = true;
+        yield return new WaitForSeconds(delay);
+        this.wait = false;
     }
 
-    private IEnumerator setNewPoint()
+    private void UpdatePath()
     {
-        this.activateSeeker = false;
-        yield return new WaitForSeconds(this.movementDelay);
-        this.activateSeeker = true;
+        Vector2 currentPos = this.npc.GetGroundPosition();
+        this.path = this.seeker.FindPath(currentPos, this.targetPosition);
     }
 
-    private void moveTorwardsTarget(Vector3 position)
+    private void MoveTroughPaths()
     {
-        if (this.npc.currentState != CharacterState.knockedback
-            && this.npc.currentState != CharacterState.attack
-            && this.npc.currentState != CharacterState.dead
-            && position != Vector3.zero)
+        if (this.path != null && this.index >= this.path.Count) this.path = null;
+
+        if (path != null)
         {
-            Vector2 direction = (position - this.transform.position).normalized;
-            
-            Vector3 movement = new Vector3(this.npc.direction.x, this.npc.direction.y + (this.npc.steps * this.npc.direction.x), 0.0f);
-            if (!this.npc.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.speed * this.npc.timeDistortion);           
+            Vector2 pos = this.path[this.index];
+            Vector2 currentPos = this.npc.GetGroundPosition();
+
+            if (Vector2.Distance(currentPos, pos) > this.accuracy) MoveToPosition(pos);
+            else this.index++;
+        }
+    }
+
+    private void MoveToPosition(Vector3 position)
+    {
+        if (this.npc.values.currentState != CharacterState.knockedback
+            && this.npc.values.currentState != CharacterState.attack
+            && this.npc.values.currentState != CharacterState.dead
+            && this.npc.values.currentState != CharacterState.respawning
+            && position != MasterManager.globalValues.nullVector)
+        {
+            Vector2 direction = ((Vector2)position - this.npc.GetGroundPosition()).normalized;
+
+            Vector2 movement = new Vector2(direction.x, direction.y + (this.npc.values.steps * direction.x));
+            if (!this.npc.values.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.values.speed * this.npc.values.timeDistortion);
 
             updateAnimation(direction);
         }
@@ -200,46 +324,16 @@ public class AIMovement : MonoBehaviour
 
     private void updateAnimation(Vector2 direction)
     {
-        if (!CustomUtilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
+        if (!this.npc.values.isCharacterStunned()) this.npc.ChangeDirection(direction.normalized);
+        if (this.npc.flip) this.npc.setFlip();
 
-        if (this.npc.flip)
-        {
-            if (this.npc.direction.x < 0) this.npc.spriteRenderer.flipX = true;
-            else this.npc.spriteRenderer.flipX = false;
-        }
-
-        this.npc.currentState = CharacterState.walk;
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", true);
+        this.npc.values.currentState = CharacterState.walk;
+        AnimatorUtil.SetAnimatorParameter(this.npc.animator, "isWalking", true);
     }
-    /*
-    private void moveTorwardsTarget(Vector3 position)
+
+    private void SetNextWayPoint()
     {
-        if (this.npc.currentState != CharacterState.knockedback
-            && this.npc.currentState != CharacterState.attack
-            && this.npc.currentState != CharacterState.dead)
-        {
-            Vector2 direction = (position - this.transform.position).normalized;
-
-            if (!Utilities.StatusEffectUtil.isCharacterStunned(this.npc)) this.npc.changeAnim(direction.normalized);
-
-            if (this.npc.flip)
-            {
-                if (this.npc.direction.x < 0) this.npc.spriteRenderer.flipX = true;
-                else this.npc.spriteRenderer.flipX = false;
-            }
-
-            Vector3 movement = new Vector3(this.npc.direction.x, this.npc.direction.y + (this.npc.steps * this.npc.direction.x), 0.0f);
-            if (!this.npc.isOnIce) this.npc.myRigidbody.velocity = (movement * this.npc.speed * this.npc.timeDistortion);
-
-            this.npc.currentState = CharacterState.walk;
-            
-            Utilities.UnityUtils.SetAnimatorParameter(this.npc.animator, "isWalking", true);
-        }
-    }*/
-
-    private void ChangeGoal()
-    {
-        if (currentPoint == path.Count - 1) //letzter Knoten
+        if (currentPoint == patrolPath.Count - 1) //letzter Knoten
         {
             if (this.followPathInCircle)
             {
@@ -263,8 +357,36 @@ public class AIMovement : MonoBehaviour
         {
             currentPoint += this.factor;
         }
+    }
 
-        currentGoal = path[currentPoint];
+    private void SetRandomPoint()
+    {
+        if(this.patrolArea == null)
+        {
+            this.randomColliderPoint = MasterManager.globalValues.nullVector;
+            return;
+        }
+
+        Bounds bounds = this.patrolArea.bounds;
+        Vector2 center = bounds.center;
+        bool found = false;
+        int attempts = 0;
+
+        do
+        {
+            float x = UnityEngine.Random.Range(center.x - bounds.extents.x, center.x + bounds.extents.x);
+            float y = UnityEngine.Random.Range(center.y - bounds.extents.y, center.y + bounds.extents.y);
+            Vector2 result = new Vector2(x, y);
+            attempts++;
+
+            if (this.patrolArea.OverlapPoint(result))
+            {
+                this.randomColliderPoint = result;
+                this.areaCountdown = this.maxPatrolTime;
+                found = true;                
+            }
+        }
+        while (!found && attempts < 50);        
     }
 
     #endregion

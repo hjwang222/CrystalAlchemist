@@ -3,86 +3,71 @@ using UnityEngine;
 
 public class MiniGameRound : MonoBehaviour
 {
-    public List<GameObject> buttons = new List<GameObject>();
-
-    [HideInInspector]
-    public myCursor cursor;
-    private int roundNumber = 1;
-    private float maxDuration;
+    private int difficulty;
     private float elapsed;
-    [HideInInspector]
-    public int difficulty = 1;
-    private MiniGameUI ui;
-    private bool isTimerStopped = true;
+    private bool timerStopped = true;
 
-    public void setParameters(float time, int round, int difficulty, myCursor cursor, MiniGameUI ui)
-    {
-        this.maxDuration = time;
-        this.roundNumber = round;
-        this.difficulty = difficulty;
-        this.ui = ui;
-        this.cursor = cursor;
+    [SerializeField]
+    private FloatValue time;
 
-        foreach(GameObject button in this.buttons)
-        {
-            if (button.GetComponent<ButtonExtension>() != null)
-                button.GetComponent<ButtonExtension>().setCursor(this.cursor);
-        }
-    }
-
-    public virtual string getDifficulty(string text, int difficulty)
-    {
-        return text;
-    }
-
-    public void enableInputs(bool value)
-    {
-        foreach (GameObject button in this.buttons)
-        {
-            button.SetActive(value);
-        }
-        this.cursor.gameObject.SetActive(value);
-        this.isTimerStopped = !value;
-    }
-
+    [SerializeField]
+    private FloatValue maxTime;
 
     public virtual void Start()
     {
-        enableInputs(false);
-        this.elapsed = this.maxDuration;
+        
     }
 
-    private void Update()
+    public void Initialize(int difficulty, float time)
     {
-        if (this.isTimerStopped) return;
-
-        if(elapsed <= 0)
-        {
-            setMarkAndEndRound(false);
-        }
-        else
-        {
-            this.elapsed -= Time.deltaTime;
-        }
+        this.difficulty = difficulty;
+        this.elapsed = time;
+        this.time.SetValue(elapsed);
+        this.maxTime.SetValue(time);
     }
 
-    public void stopTimer()
+    public virtual string GetDescription(string text, int difficulty)
     {
-        this.isTimerStopped = true;
+        return "";
     }
 
-    public float getSeconds()
+    public void StartTimer()
+    {
+        this.timerStopped = false;
+    }
+
+    public void StopTimer()
+    {
+        this.timerStopped = true;
+    }
+
+    private void FixedUpdate()
+    {
+        if (timerStopped) return;
+        if (elapsed <= 0) EndRound(false);
+        else this.elapsed -= Time.fixedDeltaTime;
+
+        this.time.SetValue(this.elapsed);
+    }
+
+    public void EndRound(bool success)
+    {
+        StopTimer();
+        MiniGameEvents.current.EndMiniGameRound(success);
+    }
+
+    public virtual void Check()
+    {
+
+    }
+
+    public float GetElapsed()
     {
         return this.elapsed;
     }
 
-    public void setMarkAndEndRound(bool value) 
+    public int GetDifficulty()
     {
-        this.ui.setMarkAndEndRound(value);
-    }
-
-    public virtual void checkIfWon()
-    {
- 
+        return this.difficulty;
     }
 }

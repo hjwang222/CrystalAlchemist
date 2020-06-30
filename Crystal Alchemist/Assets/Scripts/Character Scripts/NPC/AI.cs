@@ -1,19 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-using System;
+using System.Collections.Generic;
 
-public class AI : Character
+public class AI : NonPlayer
 {
-    [Required]
-    [BoxGroup("Easy Access")]
-    public GameObject dialogPosition;
-
-    [Required]
-    [BoxGroup("Easy Access")]
-    public AIAggroSystem aggroGameObject;
-
     [BoxGroup("AI")]
     public bool flip = true;
 
@@ -21,61 +11,76 @@ public class AI : Character
     public Character target;
 
     [HideInInspector]
+    public Dictionary<Character, float[]> aggroList = new Dictionary<Character, float[]>();
+
+    [HideInInspector]
     public Character partner;
+
+    [HideInInspector]
+    public bool rangeTriggered;
+
 
     private bool isSleeping = true;
 
-    private void Awake()
+    public override void Awake()
     {
-        init();
+        base.Awake();
         this.target = null;
     }
     #region Animation, StateMachine
 
+    public void InitializeAddSpawn(Character target)
+    {
+        this.InitializeAddSpawn();
+        this.target = target;
+    }
 
-    private new void Update()
+    public override void Start()
+    {
+        base.Start();
+        GameEvents.current.OnRangeTriggered += SetRangeTriggered;
+
+        this.GetComponent<AICombat>().Initialize();
+        AIComponent[] components = this.GetComponents<AIComponent>();
+        for (int i = 0; i < components.Length; i++) components[i].Initialize();
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        GameEvents.current.OnRangeTriggered -= SetRangeTriggered;
+    }
+
+    private void SetRangeTriggered(Character character, bool value)
+    {
+        if (character == this) this.rangeTriggered = value;
+    }
+
+
+
+    public override void Update()
     {
         base.Update();
 
         if(this.target != null && this.isSleeping)
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "WakeUp");
+            AnimatorUtil.SetAnimatorParameter(this.animator, "WakeUp");
             this.isSleeping = false;
         }
         else if(this.target == null && !this.isSleeping)
         {
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Sleep");
+            AnimatorUtil.SetAnimatorParameter(this.animator, "Sleep");
             this.isSleeping = true;
         }
-    }
 
-
-    private void setAnimFloat(Vector2 setVector)
-    {
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", setVector.x);
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", setVector.y);
-    }
-
-    public void changeAnim(Vector2 direction)
-    {
-        //TODO: To be tested
-        this.direction = direction;
-
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-        {
-            if (direction.x > 0) setAnimFloat(Vector2.right);
-            else if (direction.x < 0) setAnimFloat(Vector2.left);
-        }
-        else if (Mathf.Abs(direction.x) < Mathf.Abs(direction.y))
-        {
-            if (direction.y > 0) setAnimFloat(Vector2.up);
-            else if (direction.y < 0) setAnimFloat(Vector2.down);
-        }
+        this.GetComponent<AICombat>().Updating();
+        AIComponent[] components = this.GetComponents<AIComponent>();
+        for (int i = 0; i < components.Length; i++) components[i].Updating();
     }
 
     public void changeState(CharacterState newState)
     {
-        if (this.currentState != newState) this.currentState = newState;        
+        if (this.values.currentState != newState) this.values.currentState = newState;        
     }
 
     #endregion

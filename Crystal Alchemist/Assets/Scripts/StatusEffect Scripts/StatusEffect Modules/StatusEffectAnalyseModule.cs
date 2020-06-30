@@ -1,46 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class StatusEffectAnalyseModule : StatusEffectModule
+public class StatusEffectAnalyseModule : MonoBehaviour, StatusEffectModule 
 {
-    private List<GameObject> gameObjectApplied = new List<GameObject>();
-    private List<GameObject> analyseAdded = new List<GameObject>();
-
     [SerializeField]
-    private GameObject analyseGameObject;
+    private BoolValue isActive;
 
-    public override void doAction()
-    {   
-        if (this.analyseGameObject != null)
-        {
-            List<GameObject> targets = new List<GameObject>();
-            targets.AddRange(GameObject.FindGameObjectsWithTag("Object"));
-            targets.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+    private StatusEffect activeEffect;
 
-            foreach (GameObject gameObject in targets)
-            {
-                if (!this.analyseAdded.Contains(gameObject) 
-                    && ( gameObject.GetComponent<AI>() != null 
-                    || (gameObject.GetComponent<Breakable>() != null && gameObject.GetComponent<Breakable>().inventory.Count>0))) //check if already added
-                {
-                    GameObject tmp = Instantiate(this.analyseGameObject, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                    tmp.GetComponent<AnalyseUI>().setTarget(gameObject);
-                    this.gameObjectApplied.Add(tmp);
-                    this.analyseAdded.Add(gameObject);
-                }
-            }
-        }
+    private void Start()
+    {
+        this.activeEffect = this.GetComponent<StatusEffectGameObject>().getEffect();
+        this.transform.position = this.activeEffect.GetTarget().GetGroundPosition();
     }
 
-    private void OnDestroy()
-    {
-        for (int i = 0; i < this.gameObjectApplied.Count; i++)
-        {
-            Destroy(this.gameObjectApplied[i]);
-        }
+    public void DoAction() => this.isActive.setValue(true);    
 
-        this.gameObjectApplied.Clear();
-        this.analyseAdded.Clear();
+    public void DoDestroy() => this.isActive.setValue(false);
+
+    void FixedUpdate()
+    {
+        float angle = (Mathf.Atan2(this.activeEffect.GetTarget().values.direction.y, this.activeEffect.GetTarget().values.direction.x) * Mathf.Rad2Deg) + 90;
+        Vector3 rotation = new Vector3(0, 0, angle);
+
+        this.transform.rotation = Quaternion.Euler(rotation);
     }
 }

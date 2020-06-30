@@ -1,15 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SkillMoveItemHit : MonoBehaviour
+
+public class SkillMoveItemHit : SkillHitTrigger
 {
-    [SerializeField]
-    private Skill skill;
+    private Collectable item;
 
-    private Item item;
-
-    private void Update()
+    public override void Updating()
     {
         if (this.item != null && this.item.GetComponent<Rigidbody2D>() != null)
         {
@@ -19,19 +15,11 @@ public class SkillMoveItemHit : MonoBehaviour
 
     public void moveItem(Collider2D hittedCharacter)
     {
-        Item hittedItem = hittedCharacter.GetComponent<Item>();
-        if (hittedItem != null && this.item == null)
-            this.item = hittedItem;
+        Collectable hittedItem = hittedCharacter.GetComponent<Collectable>();
+        if (hittedItem != null && this.item == null) this.item = hittedItem;
     }
 
-    private void OnTriggerEnter2D(Collider2D hittedCharacter)
-    {
-        moveItem(hittedCharacter);
-    }
-
-    private void OnTriggerStay2D(Collider2D hittedCharacter)
-    {
-        //got Hit -> Back to Target
-        moveItem(hittedCharacter);
-    }
+    private void OnTriggerEnter2D(Collider2D hittedCharacter) => moveItem(hittedCharacter);
+   
+    private void OnTriggerExit2D(Collider2D hittedCharacter) => moveItem(hittedCharacter);    
 }

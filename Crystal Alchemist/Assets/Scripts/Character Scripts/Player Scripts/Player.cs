@@ -1,167 +1,278 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
-
-
+using System.Collections;
+using DG.Tweening;
+using System;
+using UnityEngine.InputSystem;
 
 public class Player : Character
 {
-    [FoldoutGroup("Skills", expanded: false)]
-    [Tooltip("Skills, welcher der Character verwenden kann")]
-    public List<Skill> skillSet = new List<Skill>();
-
-    [BoxGroup("Pflichtfelder")]
     [Required]
-    public TimeValue timeValue;
-
-    [BoxGroup("Pflichtfelder")]
-    [Required]
-    public PlayerStats playerStats;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public StringSignal dialogBoxSignal;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal deathSignal;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal healthSignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal manaSignalUI;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal openInventorySignal;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public SimpleSignal openPauseSignal;
-
-    [Required]
-    [FoldoutGroup("Player Signals", expanded: false)]
-    public BoolSignal fadeSignal;
-
-    [Required]
-    [BoxGroup("Pflichtfelder")]
+    [BoxGroup("Player Objects")]
     [SerializeField]
-    private GameObject targetHelpObject;
+    private SimpleSignal healthSignalUI;
 
     [Required]
-    [BoxGroup("Pflichtfelder")]
-    public BoolValue loadGame;
+    [BoxGroup("Player Objects")]
+    [SerializeField]
+    private SimpleSignal manaSignalUI;
 
     [Required]
-    [BoxGroup("Pflichtfelder")]
-    public FloatValue fadingDuration;
+    [BoxGroup("Player Objects")]
+    [SerializeField]
+    private SimpleSignal presetSignal;
 
+    [Required]
+    [BoxGroup("Player Objects")]
+    [SerializeField]
+    private StringValue characterName;
 
-    [HideInInspector]
-    public Skill AButton;
-    [HideInInspector]
-    public Skill BButton;
-    [HideInInspector]
-    public Skill XButton;
-    [HideInInspector]
-    public Skill YButton;
-    [HideInInspector]
-    public Skill RBButton;
-    [HideInInspector]
-    public Vector3 change;
+    [BoxGroup("Player Objects")]
+    [SerializeField]
+    private float goToBedDuration = 1f;
 
+    [BoxGroup("Player Objects")]
+    [SerializeField]
+    private BoolValue CutSceneValue;
 
     ///////////////////////////////////////////////////////////////
 
-    private void Awake()
-    {
-        initPlayer();
+    public override void Awake()
+    {        
+        this.values.Initialize();    
+        SetComponents();
     }
 
-    public void initPlayer()
+    public override void OnEnable()
     {
-        this.playerStats.player = this;
-
-        SaveSystem.loadOptions();
-
-        this.isPlayer = true;
-        this.init();
-
-        if (this.loadGame.getValue()) LoadSystem.loadPlayerData(this);
-
-        if (this.targetHelpObject != null) setTargetHelper(this.targetHelpObject);        
-
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", false);
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
-        CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
-
-        this.direction = new Vector2(0, -1);
-        updateResource(ResourceType.life, null, 0);
-        updateResource(ResourceType.mana, null, 0);
-        //this.currencySignalUI.Raise();
+        if (this.values.life <= 0) ResetValues();
     }
 
-    public void delay(CharacterState newState)
+    public override void Start()
     {
-        StartCoroutine(CustomUtilities.Skills.delayInputPlayerCO(GlobalValues.playerDelay, this, newState));
+        base.Start();
+        this.presetSignal.Raise();
+
+        GameEvents.current.OnCollect += this.CollectIt;
+        GameEvents.current.OnReduce += this.reduceResource;
+        GameEvents.current.OnStateChanged += this.SetState;
+        GameEvents.current.OnSleep += this.GoToSleep;
+        GameEvents.current.OnWakeUp += this.WakeUp;
+        GameEvents.current.OnCutScene += this.SetCutScene;
+        GameEvents.current.OnEnoughCurrency += this.HasEnoughCurrency;
+
+        if( this.GetComponent<PlayerAbilities>() != null) this.GetComponent<PlayerAbilities>().Initialize();
+        PlayerComponent[] components = this.GetComponents<PlayerComponent>();
+        for (int i = 0; i < components.Length; i++) components[i].Initialize();
+
+        this.healthSignalUI.Raise();
+        this.manaSignalUI.Raise();    
+        this.ChangeDirection(this.values.direction);
+
+        this.animator.speed = 1;
+        this.updateTimeDistortion(0);
+        this.AddStatusEffectVisuals();
+    }       
+
+    public override void Update()
+    {
+        base.Update();        
+        if(this.GetComponent<PlayerAbilities>() != null) this.GetComponent<PlayerAbilities>().Updating();
+        PlayerComponent[] components = this.GetComponents<PlayerComponent>();
+        for (int i = 0; i < components.Length; i++) components[i].Updating();
     }
 
-    public void showDialogBox(string text)
+    public override void OnDestroy()
     {
-        if (this.currentState != CharacterState.inDialog) this.dialogBoxSignal.Raise(text);
+        base.OnDestroy();
+        GameEvents.current.OnCollect -= this.CollectIt;
+        GameEvents.current.OnReduce -= this.reduceResource;
+        GameEvents.current.OnStateChanged -= this.SetState;
+        GameEvents.current.OnSleep -= this.GoToSleep;
+        GameEvents.current.OnWakeUp -= this.WakeUp;
+        GameEvents.current.OnCutScene -= this.SetCutScene;
+        GameEvents.current.OnEnoughCurrency -= this.HasEnoughCurrency;
+    }
+
+    public override void SpawnOut()
+    {
+        base.SpawnOut();        
+        this.deactivateAllSkills();
+    }
+
+    public override void EnableScripts(bool value)
+    {
+        if (this.GetComponent<PlayerAbilities>() != null) this.GetComponent<PlayerAbilities>().enabled = value;
+        //if (this.GetComponent<PlayerControls>() != null) this.GetComponent<PlayerControls>().enabled = value;
+        if (this.GetComponent<PlayerMovement>() != null) this.GetComponent<PlayerMovement>().enabled = value;
+        //if (this.GetComponent<PlayerInput>() != null) this.GetComponent<PlayerInput>().enabled = value;        
+    }
+
+    private void deactivateAllSkills()
+    {
+        for (int i = 0; i < this.values.activeSkills.Count; i++)
+        {
+            Skill activeSkill = this.values.activeSkills[i];
+            activeSkill.DeactivateIt();
+        }
     }
 
     public override void KillIt()
     {
-        if (this.currentState != CharacterState.dead)
+        if (this.values.currentState != CharacterState.dead)
         {
-            this.change = Vector2.zero;
-            this.direction = new Vector2(0, -1);
+            this.SetDefaultDirection();
 
-            //TODO: Kill sofort (Skill noch aktiv)
-            CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.debuffs);
-            CustomUtilities.StatusEffectUtil.RemoveAllStatusEffects(this.buffs);
+            StatusEffectUtil.RemoveAllStatusEffects(this.values.debuffs);
+            StatusEffectUtil.RemoveAllStatusEffects(this.values.buffs);
+            AnimatorUtil.SetAnimatorParameter(this.animator, "Dead", true);
 
-            this.spriteRenderer.color = Color.white;
-
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveX", 0);
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "moveY", -1);
-            CustomUtilities.UnityUtils.SetAnimatorParameter(this.animator, "Dead", true);
-
-            this.currentState = CharacterState.dead;
-            this.deathSignal.Raise();
+            this.values.currentState = CharacterState.dead;
+            this.myRigidbody.bodyType = RigidbodyType2D.Kinematic; //Static causes Room to empty
+            MenuEvents.current.OpenDeath();
         }
     }
 
     ///////////////////////////////////////////////////////////////
 
-    public override void updateResource(ResourceType type, Item item, float value, bool showingDamageNumber)
+    public override bool HasEnoughCurrency(Costs price)
     {
-        base.updateResource(type, item, value, showingDamageNumber);
+        if (price.resourceType == CostType.none) return true;
+        else if (price.resourceType == CostType.life && this.values.life - price.amount >= 0) return true;
+        else if (price.resourceType == CostType.mana && this.values.mana - price.amount >= 0) return true;
+        else if (price.resourceType == CostType.keyItem && price.keyItem != null && GameEvents.current.HasKeyItem(price.keyItem.name)) return true;
+        else if (price.resourceType == CostType.item && price.item != null && GameEvents.current.GetItemAmount(price.item) - price.amount >= 0) return true;
 
-        switch (type)
-        {
-            case ResourceType.life:
-                {
-                    callSignal(this.healthSignalUI, value); break;
-                }
-            case ResourceType.mana:
-                {
-                    callSignal(this.manaSignalUI, value); break;
-                }
-        }
+        return false;
     }
 
 
+    public override void reduceResource(Costs price)
+    {
+        //Shop, Door, Treasure, MiniGame, Abilities, etc
+        if (price != null
+            && ((price.item != null && !price.item.isKeyItem())
+              || price.item == null))
+            this.updateResource(price.resourceType, price.item, -price.amount);
+    }
+
+    ///////////////////////////////////////////////////////////////
 
 
+    public override void updateResource(CostType type, ItemGroup item, float value, bool showingDamageNumber)
+    {
+        UpdateLifeMana(type, null, value, showingDamageNumber);
+
+        switch (type)
+        {
+            case CostType.life: callSignal(this.healthSignalUI, value); break;
+            case CostType.mana: callSignal(this.manaSignalUI, value); break;
+            case CostType.item: this.GetComponent<PlayerItems>().UpdateInventory(item, Mathf.RoundToInt(value)); break;
+        }
+
+        CheckDeath();
+    }
+
+    private void SetCutScene()
+    {
+        if (this.CutSceneValue.GetValue()) this.values.currentState = CharacterState.respawning;
+        else this.values.currentState = CharacterState.idle;
+    }
+
+    public void callSignal(SimpleSignal signal, float addResource)
+    {
+        if (signal != null && addResource != 0) signal.Raise();
+    }
 
 
+    private void SetState(CharacterState state)
+    {
+        this.values.currentState = state;
+        /*
+        float delay = 0;
+        if (state != CharacterState.inDialog && state != CharacterState.inMenu) delay = 0.3f;
 
+        StartCoroutine(delayCo(state, delay));*/
+    } 
 
+    private IEnumerator delayCo(CharacterState state, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        this.values.currentState = state;
+    }
+
+    private void CollectIt(ItemStats stats)
+    {
+        //Collectable, Load, MiniGame, Shop und Treasure
+
+        if (stats.resourceType == CostType.life || stats.resourceType == CostType.mana) updateResource(stats.resourceType, stats.amount, true);
+        else if (stats.resourceType == CostType.item) GetComponent<PlayerItems>().CollectInventoryItem(stats);
+        else if (stats.resourceType == CostType.none)
+        {
+            //if(this.ability != null)
+            foreach (StatusEffect effect in stats.statusEffects)
+            {
+                StatusEffectUtil.AddStatusEffect(effect, this);
+            }
+        }
+    }
+
+    public override string GetCharacterName()
+    {
+        return this.characterName.GetValue();
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+    
+
+    public void GoToSleep(Vector2 position, Action before, Action after)
+    {
+        StartCoroutine(GoToBed(goToBedDuration, position, before, after));
+    }
+
+    public void WakeUp(Vector2 position, Action before, Action after)
+    {
+        StartCoroutine(GetUp(goToBedDuration, position, before, after));
+    }
+
+    private IEnumerator GoToBed(float duration, Vector2 position, Action before, Action after)
+    {
+        this.transform.position = position;
+        yield return new WaitForEndOfFrame(); //Wait for Camera
+
+        EnablePlayer(false); //Disable Movement and Collision
+
+        before?.Invoke(); //Decke
+
+        AnimatorUtil.SetAnimatorParameter(this.animator, "GoSleep");
+        float animDuration = AnimatorUtil.GetAnimationLength(this.animator, "GoSleep");
+        yield return new WaitForSeconds(animDuration);
+        
+        after?.Invoke(); //Zeit    
+        this.boxCollider.enabled = true;
+    }
+
+    private void EnablePlayer(bool value)
+    {
+        this.EnableScripts(value); //prevent movement        
+        this.boxCollider.enabled = value; //prevent input
+
+        AnimatorUtil.SetAnimDirection(Vector2.down, this.animator);
+    }
+
+    private IEnumerator GetUp(float duration, Vector2 position, Action before, Action after)
+    {
+        this.boxCollider.enabled = false;
+        before?.Invoke(); //Zeit    
+
+        AnimatorUtil.SetAnimatorParameter(this.animator, "WakeUp");
+        float animDuration = AnimatorUtil.GetAnimationLength(this.animator, "WakeUp");
+        yield return new WaitForSeconds(animDuration);
+
+        after?.Invoke(); //Decke
+
+        EnablePlayer(true);
+
+        this.transform.position = position;
+    }
 }

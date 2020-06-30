@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 public class SkillAffectStatusEffects : SkillExtension
 {
@@ -18,7 +16,7 @@ public class SkillAffectStatusEffects : SkillExtension
     [Range(0, 100)]
     private int extendTimePercentage = 0;
 
-    private void Start()
+    public override void Initialize()
     {
         changeStatusEffects(this.skill.sender);
     }
@@ -28,14 +26,8 @@ public class SkillAffectStatusEffects : SkillExtension
         List<StatusEffect> changeEffects = new List<StatusEffect>();
 
         //all effects of a kind
-        if (this.affectAllOfKind == StatusEffectType.buff)
-        {
-            changeEffects.AddRange(character.buffs);
-        }
-        else
-        {
-            changeEffects.AddRange(character.debuffs);
-        }
+        if (this.affectAllOfKind == StatusEffectType.buff) changeEffects.AddRange(character.values.buffs);        
+        else changeEffects.AddRange(character.values.debuffs);        
 
         if (changeEffects.Count > 0)
         {
@@ -43,14 +35,14 @@ public class SkillAffectStatusEffects : SkillExtension
             {
                 foreach (StatusEffect effect in changeEffects)
                 {
-                    if (this.dispellIt) CustomUtilities.StatusEffectUtil.RemoveStatusEffect(effect, false, character);
-                    if (this.extendTimePercentage > 0) effect.statusEffectTimeLeft += (effect.statusEffectTimeLeft * extendTimePercentage) / 100;
+                    if (this.dispellIt) StatusEffectUtil.RemoveStatusEffect(effect, false, character);
+                    if (this.extendTimePercentage > 0) effect.changeTime(extendTimePercentage);
                 }
             }
             else
             {
-                if (this.dispellIt) CustomUtilities.StatusEffectUtil.RemoveStatusEffect(changeEffects[0], false, character);
-                if (this.extendTimePercentage > 0) changeEffects[0].statusEffectTimeLeft += (changeEffects[0].statusEffectTimeLeft * extendTimePercentage) / 100;
+                if (this.dispellIt) StatusEffectUtil.RemoveStatusEffect(changeEffects[0], false, character);
+                if (this.extendTimePercentage > 0) changeEffects[0].changeTime(extendTimePercentage);
             }
         }
     }

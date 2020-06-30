@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillBoomerang : SkillExtension
+public class SkillBoomerang : SkillProjectile
 {
     #region Attributes
     [Tooltip("Zeitpunkt der Scriptaktivierung")]
-    [Range(0, CustomUtilities.maxFloatSmall)]
+    [MinValue(0)]
     public float timeToMoveBack = 0;
 
     [HideInInspector]
@@ -21,16 +19,17 @@ public class SkillBoomerang : SkillExtension
     #endregion
     
 
-    private void Start()
+    public override void Initialize()
     {
+        base.Initialize();
         this.durationThenBackToSender = timeToMoveBack;
     }
 
-    private void Update()
+    public override void Updating()
     {
         if (this.durationThenBackToSender > 0)
         {
-            this.durationThenBackToSender -= (Time.deltaTime * this.skill.timeDistortion);
+            this.durationThenBackToSender -= (Time.deltaTime * this.skill.getTimeDistortion());
         }
         else
         {
@@ -47,15 +46,16 @@ public class SkillBoomerang : SkillExtension
         //got Hit -> Back to Target
         checkHit(hittedCharacter);
     }
-
-
+    
     public void checkHit(Collider2D hittedCharacter)
     {
         if (this.skill.sender != null
-            && hittedCharacter.tag != this.skill.sender.tag
-            && ((!hittedCharacter.isTrigger
-                 && !hittedCharacter.CompareTag("Object"))
-               || hittedCharacter.CompareTag("Item")))
+       && (
+            (!hittedCharacter.isTrigger 
+          && hittedCharacter.GetComponent<Breakable>() == null
+          && hittedCharacter.GetComponent<Character>() != this.skill.sender) 
+         || (hittedCharacter.GetComponent<Collectable>() != null)) //item stop
+          )
         {
             if (this.GetComponent<SkillBoomerang>() != null) this.GetComponent<SkillBoomerang>().durationThenBackToSender = 0;
         }
@@ -67,23 +67,14 @@ public class SkillBoomerang : SkillExtension
         if (this.skill.sender != null)
         {
             //Bewege den Skill zurück zum Sender
-
-            //this.skill.myRigidbody.velocity = Vector2.zero;
-            if (Vector3.Distance(this.skill.sender.transform.position, this.transform.position) > this.minDistance)
-            {
-                //Vector3 newPosition = Vector3.MoveTowards(this.transform.position, this.skill.sender.transform.position, this.skill.speed * (Time.deltaTime * this.skill.timeDistortion));
-
-                //this.skill.myRigidbody.MovePosition(newPosition);
-                //this.skill.myRigidbody.velocity = Vector2.zero;     
-
-                this.skill.direction = this.skill.sender.transform.position - this.transform.position;
-                this.skill.myRigidbody.velocity = this.skill.direction.normalized * this.skill.speed;
-                //this.tempVelocity = this.skill.myRigidbody.velocity;
-
+            if (Vector3.Distance(this.skill.sender.GetShootingPosition(), this.transform.position) > this.minDistance)
+            { 
+                this.skill.SetDirection((this.skill.sender.GetShootingPosition() - (Vector2)this.transform.position));
+                this.setVelocity();
             }
             else
             {
-                this.skill.DestroyIt();
+                this.skill.DeactivateIt();
             }
         }
     }

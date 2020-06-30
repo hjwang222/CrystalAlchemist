@@ -1,17 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using UnityEngine;
 
 public class SkillHitTrigger : MonoBehaviour
 {
     [HideInInspector]
     public Skill skill;
 
-    private void Awake()
+    private void Awake() => this.skill = this.GetComponent<Skill>();
+
+    public virtual void Initialize()
     {
-        this.skill = this.GetComponent<Skill>();
+
     }
 
-    //Interface
+    public virtual void Updating()
+    {
+
+    }
 }
+

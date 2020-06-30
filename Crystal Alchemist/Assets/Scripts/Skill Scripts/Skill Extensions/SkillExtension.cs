@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Sirenix.OdinInspector;
+﻿using UnityEngine;
 
 public class SkillExtension : MonoBehaviour
 {
@@ -11,5 +8,15 @@ public class SkillExtension : MonoBehaviour
     private void Awake()
     {
         this.skill = this.GetComponent<Skill>();
+    }
+
+    public virtual void Initialize()
+    {
+
+    }
+
+    public virtual void Updating()
+    {
+
     }
 }

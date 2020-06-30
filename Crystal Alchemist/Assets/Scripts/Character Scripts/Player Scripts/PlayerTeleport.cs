@@ -1,106 +1,119 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerTeleport : MonoBehaviour
+public class PlayerTeleport : PlayerComponent
 {
     [SerializeField]
-    private Player player;
+    private PlayerTeleportList teleportList;
 
-    private Vector2 lastSaveGamePosition;
-    private string lastSaveGameScene;
+    [SerializeField]
+    private FloatValue fadeDuration;
 
-    public void setLastTeleport(string targetScene, Vector2 position)
+    [SerializeField]
+    private SimpleSignal fadeSignal;
+
+    public override void Initialize()
     {
-        this.lastSaveGamePosition = position;
-        this.lastSaveGameScene = targetScene;
+        base.Initialize();
+        GameEvents.current.OnTeleport += SwitchScene;
+        GameEvents.current.OnHasReturn += HasReturn;
+        this.teleportList.Initialize();
+        StartCoroutine(MaterializePlayer());
+    }
 
-        foreach (Skill skill in player.skillSet)
+    private void OnDestroy()
+    {
+        GameEvents.current.OnTeleport -= SwitchScene;
+        GameEvents.current.OnHasReturn -= HasReturn;
+    }
+
+    [Button("Teleport Player")]
+    public void SwitchScene() => StartCoroutine(DematerializePlayer());    
+    
+    private void LoadScene()
+    {
+        //AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.nextTeleport.scene);
+        //asyncOperation.allowSceneActivation = true;
+        StartCoroutine(loadSceneCo(this.teleportList.nextTeleport.scene));
+        //SceneLoader.Load(this.nextTeleport.scene);
+    }
+
+    private void SetPosition(Vector2 position)
+    {
+        this.player.transform.position = position;
+        this.player.ChangeDirection(this.player.values.direction);
+    }
+
+    private IEnumerator DematerializePlayer()
+    {
+        this.player.SpawnOut(); //Disable Player        
+        bool animation = this.teleportList.nextTeleport.showAnimationOut;
+
+        if (this.player.respawnAnimation != null && animation) //Show Animation for DEspawn
         {
-            skill.preLoad();
-        }
-    }
-
-    public bool getLastTeleport()
-    {
-        return getLastTeleport(out string scene, out Vector2 position);
-    }
-
-    public bool getLastTeleport(out string scene, out Vector2 position)
-    {
-        scene = this.lastSaveGameScene;
-        position = this.lastSaveGamePosition;
-
-        if (scene != null && position != null) return true;
-        else return false;
-    }
-
-    public void teleportPlayer(string targetScene, Vector2 position, bool showAnimation)
-    {
-        StartCoroutine(LoadScene(targetScene, position, this.player.fadingDuration.getValue(), showAnimation));
-    }
-
-    public void teleportPlayer(string targetScene, Vector2 position, float duration, bool showAnimation)
-    {
-        StartCoroutine(LoadScene(targetScene, position, duration, showAnimation));
-    }
-
-    private IEnumerator LoadScene(string targetScene, Vector2 position, float duration, bool showAnimation)
-    {
-        this.player.currentState = CharacterState.respawning;
-        this.gameObject.GetComponent<PlayerAttacks>().deactivateAllSkills();
-
-        if (showAnimation && this.player.stats.respawnAnimation != null)
-        {
-            RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, this.transform.position, Quaternion.identity);
-            respawnObject.setCharacter(this.player, true);
-            respawnObject.setStatReset(false);
+            this.player.SetDefaultDirection();
+            RespawnAnimation respawnObject = Instantiate(this.player.respawnAnimation, this.player.GetShootingPosition(), Quaternion.identity);
+            respawnObject.Reverse(this.player);  //reverse
             yield return new WaitForSeconds(respawnObject.getAnimationLength());
-            this.player.enableSpriteRenderer(false);
-            //yield return new WaitForSeconds(2f);
         }
         else
         {
-            this.player.enableSpriteRenderer(false);
+            this.player.SetCharacterSprites(false);            
         }
 
-        this.player.fadeSignal.Raise(false);
+        LoadScene();
+    }
+
+    private IEnumerator MaterializePlayer()
+    {
+        this.player.SetCharacterSprites(false);
+        this.player.SpawnOut(); //Disable Player
+
+        if(this.teleportList.nextTeleport == null)
+        {
+            this.player.SetCharacterSprites(true);
+            this.player.SpawnIn();
+            yield break;
+        }
+
+        Vector2 position = this.teleportList.nextTeleport.position;
+        bool animation = this.teleportList.nextTeleport.showAnimationIn;
+
+        SetPosition(position);
+
+        if (this.player.respawnAnimation != null && animation)
+        {
+            this.player.SetDefaultDirection();
+            yield return new WaitForSeconds(2f);
+            RespawnAnimation respawnObject = Instantiate(this.player.respawnAnimation, new Vector2(position.x, position.y+0.5f), Quaternion.identity);
+            respawnObject.Initialize(this.player);          
+        }
+        else
+        {
+            this.player.SetCharacterSprites(true);
+            this.player.SpawnIn();            
+        }                
+    }
+
+    private IEnumerator loadSceneCo(string targetScene)
+    {
+        this.fadeSignal.Raise();
+        yield return new WaitForSeconds(this.fadeDuration.GetValue());
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(targetScene);
         asyncOperation.allowSceneActivation = false;
 
         while (!asyncOperation.isDone)
         {
-            if (asyncOperation.progress >= 0.9f)
-            {
-                yield return new WaitForSeconds(duration);
-
-                asyncOperation.allowSceneActivation = true;
-                StartCoroutine(positionCo(position, showAnimation));
-            }
+            if (asyncOperation.progress >= 0.9f) asyncOperation.allowSceneActivation = true;            
             yield return null;
         }
     }
 
-    private IEnumerator positionCo(Vector2 playerPositionInNewScene, bool showAnimation)
+    public bool HasReturn()
     {
-        this.transform.position = playerPositionInNewScene;
-
-        if (showAnimation && this.player.stats.respawnAnimation != null)
-        {
-            yield return new WaitForSeconds(2f);
-
-            RespawnAnimation respawnObject = Instantiate(this.player.stats.respawnAnimation, playerPositionInNewScene, Quaternion.identity);
-            respawnObject.setCharacter(this.player);
-            respawnObject.setStatReset(false);
-            yield return new WaitForSeconds((respawnObject.getAnimationLength() + 1f));
-        }
-        else
-        {
-            //this.transform.position = playerPositionInNewScene;
-            this.player.enableSpriteRenderer(true);
-            this.player.currentState = CharacterState.idle;
-        }
+        return this.teleportList.lastTeleport != null;
     }
 }

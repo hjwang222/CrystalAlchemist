@@ -20,12 +20,7 @@ public class MiniGameTrys : MonoBehaviour
 
     private int index;
 
-    private void Start()
-    {
-        reset();
-    }
-
-    public void reset()
+    public void Reset()
     {
         this.index = 0;
         this.successCounter = 0;
@@ -44,7 +39,7 @@ public class MiniGameTrys : MonoBehaviour
             return MiniGameState.lose; //lose
     }
 
-    public void updateSlots(bool success)
+    public void SetSlot(bool success)
     {
         if (success) this.successCounter++;
         this.slots[this.index].setMark(success);
@@ -52,10 +47,11 @@ public class MiniGameTrys : MonoBehaviour
         if (!success) updateNeccessary(); 
     }
 
-    public void setValues(int needed, int max)
+    public void SetValues(int needed, int max)
     {
         this.needed = needed;
         this.max = max;
+        Reset();
     }
 
     private void setSlots()
@@ -84,7 +80,4 @@ public class MiniGameTrys : MonoBehaviour
         }
         while (i < this.slots.Count && neededSlotsLeft > 0);
     }
-
-
-
 }
