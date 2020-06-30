@@ -2,7 +2,7 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //BUG: Still no Intro (WHY???????)
+
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)

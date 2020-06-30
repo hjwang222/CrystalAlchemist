@@ -70,7 +70,7 @@ public class Interactable : MonoBehaviour
     private void OnDisable()
     {
         if (this.showEffectOnDisable) AnimatorUtil.ShowSmoke(this.transform);
-        if (this.context != null) this.context.gameObject.SetActive(false);
+        ShowContextClue(false);
     }
 
     public void SetSmoke(bool value)
@@ -99,7 +99,7 @@ public class Interactable : MonoBehaviour
                 if (this.customActionButton) MasterManager.actionButtonText.SetValue(this.ID);
                 else MasterManager.actionButtonText.SetValue(string.Empty);
 
-                this.context.gameObject.SetActive(true);
+                ShowContextClue(true);
                 this.player.values.currentState = CharacterState.interact;
             }
         }
@@ -107,24 +107,28 @@ public class Interactable : MonoBehaviour
         {
             if (this.player.values.currentState == CharacterState.interact)
             {
-                this.context.gameObject.SetActive(false);
+                ShowContextClue(false);
                 this.player.values.currentState = CharacterState.idle;
             }
         }
+    }
+
+    public virtual void ShowContextClue(bool value)
+    {
+        if(this.context != null) this.context.gameObject.SetActive(value);
     }
 
     public void DeactivateInteraction()
     {
         if (this.player != null)
         {
-            this.context.gameObject.SetActive(false);
             this.player.values.currentState = CharacterState.idle;
             this.player = null;
         }
 
         this.isPlayerInRange = false;
         this.isPlayerLookingAtIt = false;
-        this.context.gameObject.SetActive(false);
+        ShowContextClue(false);
     }
 
     private void interact(Collider2D characterCollisionBox)

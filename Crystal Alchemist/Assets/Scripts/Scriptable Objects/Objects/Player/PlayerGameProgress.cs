@@ -54,4 +54,10 @@ public class PlayerGameProgress : ScriptableObject
     {
         return SceneManager.GetActiveScene().name + " " + key;
     }
+
+    public int GetAmount()
+    {
+        return this.permanentProgress.Count + this.temporaryProgress.Count;
+    }
+
 }

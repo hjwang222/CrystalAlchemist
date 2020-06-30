@@ -19,14 +19,24 @@ public class PlayerMovement : PlayerComponent
 
     public void MouseClick(InputAction.CallbackContext context) => Set();
 
-    private void Start() => GameEvents.current.OnLockDirection += SetDirectionLock;
+    private void Start()
+    {
+        GameEvents.current.OnCutScene += SetToZero;
+        GameEvents.current.OnLockDirection += SetDirectionLock;
+    }
 
-    private void OnDestroy() => GameEvents.current.OnLockDirection -= SetDirectionLock;
+    private void OnDestroy()
+    {
+        GameEvents.current.OnCutScene -= SetToZero;
+        GameEvents.current.OnLockDirection -= SetDirectionLock;
+    }
 
     private void SetChange(InputAction.CallbackContext ctx)
     {
         if(this.player.values.CanMove()) this.change = ctx.ReadValue<Vector2>();
     }
+
+    private void SetToZero() => this.change = Vector2.zero;
 
     private void Set()
     {

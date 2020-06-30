@@ -43,9 +43,13 @@ public class ScreenTextOverlay : MonoBehaviour
 
     private TextMeshProUGUI textfield;
 
-    private void Start()
+    private void Awake()
     {
-        this.textfield = this.GetComponent<TextMeshProUGUI>();
+        this.textfield = this.GetComponent<TextMeshProUGUI>();        
+    }
+
+    private void OnEnable()
+    {
         StartCoroutine(animateCo());
     }
 

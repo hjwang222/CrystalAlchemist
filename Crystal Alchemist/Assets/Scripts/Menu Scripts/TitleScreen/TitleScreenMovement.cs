@@ -5,17 +5,22 @@ using DG.Tweening;
 
 public class TitleScreenMovement : PlayerComponent
 {
+    public override void Initialize()
+    {
+        base.Initialize();
+        this.player.SetDefaultDirection();
+    }
+
+    /*
     private Vector2 change;
     private Vector2 position;
 
     [SerializeField]
     private float speedModifier = 2f;
 
-    //delay
-    //mouse steuerung für ingame
-
     private Vector2 target;
 
+    
     public override void Updating()
     {
         if (Camera.main != null)
@@ -80,5 +85,5 @@ public class TitleScreenMovement : PlayerComponent
     private void SetDirection(Vector2 direction)
     {
         this.player.ChangeDirection(direction);
-    }
+    }*/
 }

@@ -72,7 +72,7 @@ public class Character : MonoBehaviour
     #region Start Functions (Spawn, Init)
     public virtual void Awake()
     {
-        this.values = new CharacterValues(); //create new Values when not already assigned (NPC)
+        this.values = ScriptableObject.CreateInstance<CharacterValues>(); //create new Values when not already assigned (NPC)
         this.values.Initialize();
 
         this.spawnPosition = this.transform.position;

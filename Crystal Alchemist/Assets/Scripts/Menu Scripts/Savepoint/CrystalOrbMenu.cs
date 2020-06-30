@@ -29,7 +29,8 @@ public class CrystalOrbMenu : MenuBehaviour
 
     public void SetStar()
     {
-        if (teleportList.lastTeleport.teleportName == savePointInfo.stats.teleportName) star.gameObject.SetActive(true);
+        if (teleportList.lastTeleport != null 
+            && teleportList.lastTeleport.teleportName == savePointInfo.stats.teleportName) star.gameObject.SetActive(true);
         else star.gameObject.SetActive(false);
     }
 

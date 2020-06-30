@@ -4,7 +4,7 @@ using System;
 
 public class LoadSystem
 {
-    public static void loadPlayerData(PlayerSaveGame saveGame, PlayerData data)
+    public static void loadPlayerData(PlayerSaveGame saveGame, PlayerData data, Action callback)
     {
         if (data != null)
         {
@@ -20,7 +20,11 @@ public class LoadSystem
             LoadProgress(data, saveGame.progress);
 
             LoadTeleportList(data, saveGame.teleportList);
+
+            Debug.Log("Savegame loaded");
         }
+
+        callback?.Invoke();
     }
 
     private static void LoadProgress(PlayerData data, PlayerGameProgress progress)

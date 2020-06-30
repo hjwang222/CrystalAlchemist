@@ -27,13 +27,14 @@ public class ProtectedArea : MonoBehaviour
 
     private void setAggro(Collider2D collision, bool decrease)
     {
+        this.protectingNPCs.RemoveAll(x => x == null);
         Character character = collision.GetComponent<Character>();
 
         if (character != null)
         {
             foreach (AI enemy in this.protectingNPCs)
             {
-                if (enemy.gameObject.activeInHierarchy)
+                if (enemy != null && enemy.gameObject.activeInHierarchy)
                 {
                     if (!decrease) GameEvents.current.DoAggroIncrease(enemy, character, this.aggroIncreaseFactor);
                     else GameEvents.current.DoAggroDecrease(enemy, character, this.aggroDecreaseFactor);

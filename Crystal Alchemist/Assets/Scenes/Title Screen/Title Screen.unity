@@ -21302,7 +21302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speedModifier: 2
 --- !u!61 &707470525
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -60660,10 +60659,10 @@ GameObject:
   m_Component:
   - component: {fileID: 759644400256339891}
   - component: {fileID: 5074818981926127191}
-  - component: {fileID: 6736401842049839993}
   - component: {fileID: 7031345861614669109}
   - component: {fileID: 759644400256339895}
   - component: {fileID: 759644400256339894}
+  - component: {fileID: 759644400256339896}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -60718,6 +60717,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &759644400256339896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759644400256339893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5eb2e8892183c49b68fdcce8710275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!222 &778123854994698063
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -61227,7 +61239,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 5.625
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -70821,22 +70833,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &6736401842049839993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759644400256339893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92301bb61d56d9c4e92d29c25ecf4c0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  teleportList: {fileID: 11400000, guid: 0cfa6b46150103347bbedf0b6c876175, type: 2}
-  fadeDuration: {fileID: 11400000, guid: a2cc0078d349f9245bd74b3f5813a450, type: 2}
-  fadeSignal: {fileID: 11400000, guid: edc5213c769d50b4397e7a6210db76a7, type: 2}
 --- !u!224 &6746568971645564621
 RectTransform:
   m_ObjectHideFlags: 0

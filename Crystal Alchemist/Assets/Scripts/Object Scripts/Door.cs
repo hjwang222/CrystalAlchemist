@@ -38,7 +38,7 @@ public class Door : Interactable
         if (!this.isPlayerInRange && this.isOpen && this.doorType == DoorType.normal)
         {
             //Normale Tür fällt von alleine wieder zu
-            if(this.autoClose) OpenCloseDoor(false, this.context);
+            if(this.autoClose) OpenCloseDoor(false);
         }
     }
 
@@ -54,7 +54,7 @@ public class Door : Interactable
                     {
                         //Tür offen!
                         this.player.reduceResource(this.costs);
-                        OpenCloseDoor(true, this.context);
+                        OpenCloseDoor(true);
                         ShowDialog(DialogTextTrigger.success);
                     }
                     else
@@ -84,22 +84,19 @@ public class Door : Interactable
 
     private void OpenCloseDoor(bool isOpen)
     {
-        OpenCloseDoor(isOpen, null);
-    }
-
-    private void OpenCloseDoor(bool isOpen, ContextClue contextClueChild)
-    {
         this.isOpen = isOpen;
 
         if (this.isOpen) AnimatorUtil.SetAnimatorParameter(this.animator, "Open");
         else AnimatorUtil.SetAnimatorParameter(this.animator, "Close");
 
-        if (contextClueChild != null)
-        {
-            //Wenn Spieler in Reichweite ist und Tür zu ist -> Context Clue anzeigen! Ansonsten nicht.
-            if (this.isOpen) contextClueChild.gameObject.SetActive(false);
-            else if (!this.isOpen && this.isPlayerInRange) contextClueChild.gameObject.SetActive(true);
-            else contextClueChild.gameObject.SetActive(false);
-        }
+        ShowContextClue();
+    }
+
+    private void ShowContextClue()
+    {
+        //Wenn Spieler in Reichweite ist und Tür zu ist -> Context Clue anzeigen! Ansonsten nicht.
+        if (this.isOpen) ShowContextClue(false);
+        else if (!this.isOpen && PlayerCanInteract()) ShowContextClue(true);
+        else ShowContextClue(false);
     }
 }

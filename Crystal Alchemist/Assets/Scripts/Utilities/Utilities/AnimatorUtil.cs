@@ -54,7 +54,7 @@ public static class AnimatorUtil
 
     public static void SetAnimatorParameter(Animator animator, string parameter, bool value)
     {
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             foreach (AnimatorControllerParameter param in animator.parameters)
             {
@@ -73,7 +73,7 @@ public static class AnimatorUtil
 
     public static void SetAnimatorParameter(Animator animator, string parameter)
     {
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             foreach (AnimatorControllerParameter param in animator.parameters)
             {
@@ -92,7 +92,7 @@ public static class AnimatorUtil
 
     public static void SetAnimatorParameter(Animator animator, string parameter, float value)
     {
-        if (animator != null)
+        if (animator != null && animator.runtimeAnimatorController != null)
         {
             foreach (AnimatorControllerParameter param in animator.parameters)
             {

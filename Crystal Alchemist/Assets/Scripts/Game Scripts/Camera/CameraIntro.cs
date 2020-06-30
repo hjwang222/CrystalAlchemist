@@ -1,6 +1,4 @@
-﻿using Cinemachine;
-using Sirenix.OdinInspector;
-using System.Collections;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,28 +10,6 @@ public class CameraIntro : MonoBehaviour
         session,
         oneTime
     }
-
-    [Required]
-    [SerializeField]
-    private CinemachineVirtualCamera introCamera;
-
-    [Required]
-    [SerializeField]
-    private BoolValue CutSceneValue;
-
-    [Required]
-    [SerializeField]
-    private CinemachineVirtualCamera mainCam;
-
-    [SerializeField]
-    [MinValue(0.05)]
-    private float speed = 0.1f;
-
-    [Required]
-    [SerializeField]
-    [MinValue(0)]
-    [MaxValue(99)]
-    private float delay = 1;
 
     [SerializeField]
     private Mode mode;
@@ -48,58 +24,52 @@ public class CameraIntro : MonoBehaviour
     [SerializeField]
     private PlayerGameProgress playerProgress;
 
+    [Required]
+    [SerializeField]
+    private BoolValue CutSceneValue;
+
     [SerializeField]
     private UnityEvent onTrigger;
 
-    private float position;
-    private bool isRunning;
-    private bool isInit = true;
-    private CinemachineTrackedDolly dolly;
     private bool isPermanent = false;
 
-    private void Start() => CanPlay();
-
-    private void CanPlay()
+    private bool CanPlay()
     {
         if (this.mode == Mode.oneTime) isPermanent = true;
-        if (this.mode != Mode.always && this.playerProgress.Contains(this.gameProgressID, this.isPermanent)) this.gameObject.SetActive(false);        
-        
-        this.isInit = false;
+        if (this.mode != Mode.always && this.playerProgress.Contains(this.gameProgressID, this.isPermanent)) return false;
+        return true;
     }
 
-    private void LateUpdate()
+    public void CutSceneActive()
     {
-        if (!isRunning || this.dolly == null) return;
-
-        this.position += speed * Time.deltaTime;
-        this.dolly.m_PathPosition = position;
-        if (this.position >= 1) StartCoroutine(delayCo());
+        this.CutSceneValue.setValue(true);
+        GameEvents.current.DoCutScene();
     }
 
-    private IEnumerator delayCo()
+    public void CutSceneNotActive()
     {
-        yield return new WaitForSeconds(this.delay);
-        this.mainCam.gameObject.SetActive(true);
-
         this.CutSceneValue.setValue(false);
         GameEvents.current.DoCutScene();
+    }
 
-        this.gameObject.SetActive(false);
+    public void AddProgress()
+    {
+        this.playerProgress.AddProgress(this.gameProgressID, this.isPermanent);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (this.isInit) return;
+        if (this.CanPlay()) DoCutScene();
+    }
 
-        this.mainCam.gameObject.SetActive(false);
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (this.CanPlay()) DoCutScene();
+    }
 
-        this.CutSceneValue.setValue(true);
-        GameEvents.current.DoCutScene();
-
-        this.onTrigger?.Invoke();
-        this.dolly = introCamera.GetCinemachineComponent<CinemachineTrackedDolly>();
-        this.isRunning = true;
-
-        this.playerProgress.AddProgress(this.gameProgressID, this.isPermanent);
+    [Button]
+    private void DoCutScene()
+    {
+        this.onTrigger?.Invoke();        
     }
 }

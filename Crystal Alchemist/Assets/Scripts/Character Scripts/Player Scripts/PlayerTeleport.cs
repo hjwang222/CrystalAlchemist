@@ -71,6 +71,13 @@ public class PlayerTeleport : PlayerComponent
         this.player.SetCharacterSprites(false);
         this.player.SpawnOut(); //Disable Player
 
+        if(this.teleportList.nextTeleport == null)
+        {
+            this.player.SetCharacterSprites(true);
+            this.player.SpawnIn();
+            yield break;
+        }
+
         Vector2 position = this.teleportList.nextTeleport.position;
         bool animation = this.teleportList.nextTeleport.showAnimationIn;
 

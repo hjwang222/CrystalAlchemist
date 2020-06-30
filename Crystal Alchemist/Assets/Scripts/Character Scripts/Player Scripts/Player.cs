@@ -187,10 +187,12 @@ public class Player : Character
 
     private void SetState(CharacterState state)
     {
+        this.values.currentState = state;
+        /*
         float delay = 0;
         if (state != CharacterState.inDialog && state != CharacterState.inMenu) delay = 0.3f;
 
-        StartCoroutine(delayCo(state, delay));
+        StartCoroutine(delayCo(state, delay));*/
     } 
 
     private IEnumerator delayCo(CharacterState state, float delay)

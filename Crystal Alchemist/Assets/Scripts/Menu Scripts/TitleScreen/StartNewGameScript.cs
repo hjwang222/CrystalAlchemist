@@ -16,9 +16,12 @@ public class StartNewGameScript : MonoBehaviour
     {
         Cursor.visible = false;
         this.timeValue.Clear();
-        this.saveGame.Clear();
-        this.saveGame.teleportList.SetNextTeleport(this.startTeleport);
+        this.saveGame.Clear(StartEmptyGame);
+    }
 
+    private void StartEmptyGame()
+    {
+        this.saveGame.teleportList.SetNextTeleport(this.startTeleport);
         SceneManager.LoadSceneAsync(this.saveGame.teleportList.nextTeleport.scene);
     }
 }

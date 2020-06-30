@@ -1,8 +1,7 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public static class UnityUtil
 {
@@ -58,8 +57,8 @@ public static class UnityUtil
 
         do
         {
-            float x = Random.Range(center.x - bounds.extents.x, center.x + bounds.extents.x);
-            float y = Random.Range(center.y - bounds.extents.y, center.y + bounds.extents.y);
+            float x = UnityEngine.Random.Range(center.x - bounds.extents.x, center.x + bounds.extents.x);
+            float y = UnityEngine.Random.Range(center.y - bounds.extents.y, center.y + bounds.extents.y);
             Vector2 result = new Vector2(x, y);
             attempts++;
 
@@ -82,8 +81,8 @@ public static class UnityUtil
             int attempts = 0;
             do
             {
-                float x = Random.Range(center.x - bounds.extents.x, center.x + bounds.extents.x);
-                float y = Random.Range(center.y - bounds.extents.y, center.y + bounds.extents.y);
+                float x = UnityEngine.Random.Range(center.x - bounds.extents.x, center.x + bounds.extents.x);
+                float y = UnityEngine.Random.Range(center.y - bounds.extents.y, center.y + bounds.extents.y);
                 Vector2 temp = new Vector2(x, y);
                 attempts++;
 
@@ -172,5 +171,10 @@ public static class UnityUtil
         return layerNumber - 1;
     }
 
-
+    public static void ThrowException(string message, object origin, bool throwIf)
+    {
+        if (!throwIf) return;
+        Debug.Log("<color=red>"+message+"</color>");
+        throw new Exception(message + " in " + origin.ToString());
+    }
 }
