@@ -130,7 +130,7 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
     {
         foreach (TeleportStats teleport in teleportpoints)
         {
-            if (teleport.teleportName == teleportName) return teleport;
+            if (teleport.Exists(teleportName)) return teleport;
         }
 
         return null;

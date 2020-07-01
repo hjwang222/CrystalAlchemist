@@ -11,9 +11,6 @@ public class PlayerTeleport : PlayerComponent
     [SerializeField]
     private FloatValue fadeDuration;
 
-    [SerializeField]
-    private SimpleSignal fadeSignal;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -34,10 +31,7 @@ public class PlayerTeleport : PlayerComponent
     
     private void LoadScene()
     {
-        //AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(this.nextTeleport.scene);
-        //asyncOperation.allowSceneActivation = true;
-        StartCoroutine(loadSceneCo(this.teleportList.nextTeleport.scene));
-        //SceneLoader.Load(this.nextTeleport.scene);
+        StartCoroutine(loadSceneCo(this.teleportList.GetNextTeleport().scene));
     }
 
     private void SetPosition(Vector2 position)
@@ -49,7 +43,7 @@ public class PlayerTeleport : PlayerComponent
     private IEnumerator DematerializePlayer()
     {
         this.player.SpawnOut(); //Disable Player        
-        bool animation = this.teleportList.nextTeleport.showAnimationOut;
+        bool animation = this.teleportList.GetShowSpawnOut();
 
         if (this.player.respawnAnimation != null && animation) //Show Animation for DEspawn
         {
@@ -71,15 +65,15 @@ public class PlayerTeleport : PlayerComponent
         this.player.SetCharacterSprites(false);
         this.player.SpawnOut(); //Disable Player
 
-        if(this.teleportList.nextTeleport == null)
+        if(this.teleportList.GetNextTeleport() == null)
         {
             this.player.SetCharacterSprites(true);
             this.player.SpawnIn();
             yield break;
         }
 
-        Vector2 position = this.teleportList.nextTeleport.position;
-        bool animation = this.teleportList.nextTeleport.showAnimationIn;
+        Vector2 position = this.teleportList.GetNextTeleport().position;
+        bool animation = this.teleportList.GetShowSpawnIn();
 
         SetPosition(position);
 
@@ -99,7 +93,7 @@ public class PlayerTeleport : PlayerComponent
 
     private IEnumerator loadSceneCo(string targetScene)
     {
-        this.fadeSignal.Raise();
+        MenuEvents.current.DoFadeOut();
         yield return new WaitForSeconds(this.fadeDuration.GetValue());
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(targetScene);
@@ -114,6 +108,6 @@ public class PlayerTeleport : PlayerComponent
 
     public bool HasReturn()
     {
-        return this.teleportList.lastTeleport != null;
+        return this.teleportList.HasLast();
     }
 }

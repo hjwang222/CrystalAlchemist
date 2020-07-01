@@ -48,7 +48,15 @@ public class Player : Character
 
     public override void OnEnable()
     {
-        if (this.values.life <= 0) ResetValues();
+        if (this.values.life <= 0) ResetValues();        
+    }
+
+    public override void ResetValues()
+    {
+        base.ResetValues();
+        this.attributes.SetValues();
+        this.values.life = this.values.maxLife;
+        this.values.mana = this.values.maxMana;
     }
 
     public override void Start()
@@ -188,21 +196,17 @@ public class Player : Character
     }
 
 
+    public override void gotHit(Skill skill, float percentage, bool knockback)
+    {
+        GameEvents.current.DoCancel();
+        base.gotHit(skill, percentage, knockback);
+    }
+
     private void SetState(CharacterState state)
     {
+        if (this.values.currentState == CharacterState.dead) return;
         this.values.currentState = state;
-        /*
-        float delay = 0;
-        if (state != CharacterState.inDialog && state != CharacterState.inMenu) delay = 0.3f;
-
-        StartCoroutine(delayCo(state, delay));*/
     } 
-
-    private IEnumerator delayCo(CharacterState state, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        this.values.currentState = state;
-    }
 
     private void CollectIt(ItemStats stats)
     {

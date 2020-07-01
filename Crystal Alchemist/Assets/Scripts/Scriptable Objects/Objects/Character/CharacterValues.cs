@@ -122,19 +122,25 @@ public class CharacterValues : ScriptableObject
 
     #region Menu und DialogBox
 
+    public bool IsAlive()
+    {
+        return (this.currentState != CharacterState.respawning
+             && this.currentState != CharacterState.dead);
+    }
+
     public bool CanOpenMenu()
     {
         return (this.currentState != CharacterState.inDialog
              && this.currentState != CharacterState.inMenu
              && this.currentState != CharacterState.knockedback
-             && this.currentState != CharacterState.attack
-             && this.currentState != CharacterState.respawning
-             && this.currentState != CharacterState.dead);
+             && IsAlive());
     }
 
     public bool CanMove()
     {
-        return (CanOpenMenu() && !this.isCharacterStunned());
+        return (CanOpenMenu() 
+            && this.currentState != CharacterState.attack
+            && !this.isCharacterStunned());
     }
 
     public bool CanUseAbilities()

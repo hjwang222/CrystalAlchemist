@@ -16,6 +16,9 @@ public class PlayerAbilities : CharacterCombat
     private float timer;
     private Player player;
 
+    private void Start() => GameEvents.current.OnCancel += DisableAbilities;
+
+    private void OnDestroy() => GameEvents.current.OnCancel -= DisableAbilities;
 
     public override void Initialize()
     {
@@ -86,7 +89,7 @@ public class PlayerAbilities : CharacterCombat
     {
         if (ability == null) return;
 
-        if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbilityOnTarget(ability, null); //use Skill when charged
+        if (ability.enabled && ability.state == AbilityState.charged && !ability.isRapidFire) UseAbilityOnTarget(ability, null); //use Skill when charged
         else if (ability.state == AbilityState.lockOn && ability.isRapidFire) HideTargetingSystem(ability); //hide Targeting System when released
 
         UnChargeAbility(ability);
@@ -102,5 +105,16 @@ public class PlayerAbilities : CharacterCombat
             UseAbilityOnTargets(ability);//use Skill on locked Targets and hide Targeting System 
             HideTargetingSystem(ability);
         }
+    }
+
+    private void DisableAbilities()
+    {
+        this.skillSet.EnableAbility(false);
+        Invoke("EnableAbilities", this.skillSet.deactiveDelay);
+    }
+
+    private void EnableAbilities()
+    {
+        this.skillSet.EnableAbility(true);
     }
 }

@@ -171,6 +171,8 @@ public class Ability : ScriptableObject
     public AbilityState state;
     [BoxGroup("Debug")]
     public bool enabled = true;
+    [BoxGroup("Debug")]
+    public bool active = true;
 
     private Character sender;
     private CastingAnimation activeAnimation;

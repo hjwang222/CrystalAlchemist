@@ -15,11 +15,11 @@ MonoBehaviour:
   actions:
   - type: 3
     position: {x: 0, y: 0}
-    de: 
-    en: 
+    translationID: 
     duration: 4
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 11400000, guid: 017f55cb04fe1f9438ebb3f785c376bf, type: 2}
     overrideCastTime: 1
     castTime: 3
@@ -27,16 +27,26 @@ MonoBehaviour:
     showCastBar: 0
     overrideCooldown: 0
     cooldown: 1
-    repeatSkill: 1
+    repeat: 1
+    keepCast: 1
     amount: 10
-    mechanic: {fileID: 0}
+    delay: 0.5
+    sequence: {fileID: 0}
+    value: 0
+    signal: {fileID: 0}
+    wait: 2
+    mode: 0
+    fadeIn: 0
+    fadeOut: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   - type: 2
     position: {x: 0, y: 0}
-    de: 
-    en: 
+    translationID: 
     duration: 1
     nextPhase: {fileID: 0}
     animations: 
+    isTrigger: 0
     ability: {fileID: 0}
     overrideCastTime: 0
     castTime: 0
@@ -44,23 +54,34 @@ MonoBehaviour:
     showCastBar: 0
     overrideCooldown: 0
     cooldown: 0
-    repeatSkill: 0
+    repeat: 0
+    keepCast: 0
     amount: 1
-    mechanic: {fileID: 0}
+    delay: 0
+    sequence: {fileID: 0}
+    value: 0
+    signal: {fileID: 0}
+    wait: 0
+    mode: 0
+    fadeIn: 0
+    fadeOut: 0
+    start: {fileID: 0}
+    loop: {fileID: 0}
   loopActions: 1
   events:
   - triggers:
     - type: 4
       time: 0
       life: 0
+      maxLoops: 0
     actions:
     - type: 5
       position: {x: 0, y: 0}
-      de: 
-      en: 
+      translationID: 
       duration: 4
       nextPhase: {fileID: 11400000, guid: 78faa3a529e2a7d48ae42755421cd4da, type: 2}
       animations: 
+      isTrigger: 0
       ability: {fileID: 0}
       overrideCastTime: 0
       castTime: 0
@@ -68,10 +89,21 @@ MonoBehaviour:
       showCastBar: 0
       overrideCooldown: 0
       cooldown: 0
-      repeatSkill: 0
+      repeat: 0
+      keepCast: 0
       amount: 1
-      mechanic: {fileID: 0}
+      delay: 0
+      sequence: {fileID: 0}
+      value: 0
+      signal: {fileID: 0}
+      wait: 0
+      mode: 0
+      fadeIn: 0
+      fadeOut: 0
+      start: {fileID: 0}
+      loop: {fileID: 0}
     repeatEvent: 1
     interruptCurrentAction: 1
     eventCooldown: 0
     requirementsNeeded: 0
+    delay: 0.1

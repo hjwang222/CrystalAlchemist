@@ -24,7 +24,9 @@ public class MenuBehaviour : MonoBehaviour
     public InfoBox infoBox;
 
     public virtual void Start()
-    {       
+    {
+        //MenuEvents.current.OnDeath += ExitMenu;
+
         if (MasterManager.globalValues.openedMenues.Count == 0)
         {
             Cursor.visible = true;
@@ -45,6 +47,7 @@ public class MenuBehaviour : MonoBehaviour
 
     public virtual void OnDestroy()
     {
+        //MenuEvents.current.OnDeath -= ExitMenu;
         MasterManager.globalValues.openedMenues.Remove(this.gameObject);
 
         if (MasterManager.globalValues.openedMenues.Count <= 0)

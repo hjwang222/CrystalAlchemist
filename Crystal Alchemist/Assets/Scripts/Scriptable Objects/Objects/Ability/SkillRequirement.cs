@@ -21,7 +21,7 @@ public class SkillRequirement : ScriptableObject
 
     public bool Granted()
     {
-        if (this.type == Type.teleport && this.playerTeleport.lastTeleport != null) return true;
+        if (this.type == Type.teleport && this.playerTeleport.HasLast()) return true;
         return false;
     }
 }

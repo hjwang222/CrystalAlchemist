@@ -96,7 +96,7 @@ public class Character : MonoBehaviour
         if (this.boxCollider != null) this.boxCollider.gameObject.tag = this.transform.gameObject.tag;
     }
 
-    public void ResetValues()
+    public virtual void ResetValues()
     {
         this.values.Clear(this.stats);
 
@@ -356,7 +356,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void gotHit(Skill skill, float percentage, bool knockback)
+    public virtual void gotHit(Skill skill, float percentage, bool knockback)
     {
         SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
 
@@ -482,7 +482,8 @@ public class Character : MonoBehaviour
     {
         if (thrust != 0
             && this.myRigidbody != null
-            && this.myRigidbody.bodyType != RigidbodyType2D.Kinematic)
+            && this.myRigidbody.bodyType != RigidbodyType2D.Kinematic
+            && this.values.CanOpenMenu())
         {
             Vector2 difference = direction.normalized * thrust;
             //this.myRigidbody.velocity = Vector2.zero;

@@ -48,8 +48,8 @@ public class PlayerData
         this.timePlayed = saveGame.timePlayed.GetValue();
         this.characterName = saveGame.GetCharacterName();
 
-        SetStartTeleport(saveGame.teleportList.nextTeleport);
-        SetLastTeleport(saveGame.teleportList.lastTeleport);
+        SetStartTeleport(saveGame.teleportList.GetNextTeleport());
+        SetLastTeleport(saveGame.teleportList.GetLastTeleport());
         SetTeleportList(saveGame.teleportList);
         SetProgress(saveGame.progress);
     }

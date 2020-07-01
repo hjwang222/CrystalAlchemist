@@ -2,8 +2,7 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //BUG: Intro wird nicht gespeichert
-    //BUG: Blobs zu stark
+    //BUG: Kein Clear (Progress, Attributes)
 
     //-----------------------------------------------------------------------------
 

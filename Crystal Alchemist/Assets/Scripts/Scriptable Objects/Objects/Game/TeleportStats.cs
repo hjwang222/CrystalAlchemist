@@ -24,13 +24,10 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
         this.isEmpty = true;
     }
 
-    /*
-    public TeleportStats(TeleportStats stat)
+    public bool Exists(string name)
     {
-        //Called from TeleportList and Savepoint
-        this.name = stat.name;
-        SetValue(stat);
-    }*/
+        return this.teleportName == name;
+    }
 
     public void SetValue(string teleportName, string targetScene, Vector2 position, bool showIn, bool showOut, Sprite icon)
     {
@@ -46,25 +43,6 @@ public class TeleportStats : ScriptableObject, ISerializationCallbackReceiver
         }
         else Clear();
     }
-
-    /*
-    public void SetValue(string targetScene, Vector2 position)
-    {
-        //Start new Game
-        SetValue("",targetScene, position, true, false, null);
-    }
-
-    public void SetValue(TeleportStats stats)
-    {
-        //Death Screen and Constructor und LoadSystems
-        SetValue(stats.teleportName, stats.scene, stats.position, true, true, stats.icon);
-    }
-
-    public void SetValue(string targetScene, Vector2 position, bool showIn, bool showOut)
-    {
-        //Scene Transition
-        SetValue("", targetScene, position, showIn, showOut, null);
-    }*/
 
     public string GetTeleportName()
     {

@@ -42,8 +42,8 @@ public class LoadSystem
             if (teleport != null) list.AddTeleport(teleport);
         }
 
-        list.nextTeleport = MasterManager.GetTeleportStats(data.startTeleport);
-        list.lastTeleport = MasterManager.GetTeleportStats(data.lastTeleport);
+        list.SetNextTeleport(MasterManager.GetTeleportStats(data.startTeleport));
+        list.SetLastTeleport(MasterManager.GetTeleportStats(data.lastTeleport));
     }
 
     private static void LoadBasicValues(PlayerData data, CharacterValues playerValue, PlayerAttributes attributes)
