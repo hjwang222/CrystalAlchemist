@@ -1,10 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class UnityUtil
 {
+    public static void SelectDropDown(TMP_Dropdown dropDown, string text)
+    {
+        for (int i = 0; i < dropDown.options.Count; i++)
+        {
+            if (dropDown.options[i].text == text) { dropDown.value = i; break; }
+        }
+    }
+
     public static T GetComponentAll<T>(GameObject gameObject)
     {
         if (gameObject.GetComponentInChildren<T>() != null) return gameObject.GetComponentInChildren<T>();

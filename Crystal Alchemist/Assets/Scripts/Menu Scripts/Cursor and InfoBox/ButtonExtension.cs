@@ -42,7 +42,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
     private void OnEnable()
     {
         if (isInit) Initialize();
-        if (selectFirst) Select();
+        ReSelect();
     }
 
     private void Initialize()
@@ -84,7 +84,7 @@ public class ButtonExtension : MonoBehaviour, ISelectHandler, IPointerEnterHandl
 
     public void Select()
     {
-        if (EventSystem.current != null)
+        if (EventSystem.current != null && this.gameObject.activeInHierarchy)
         {
             EventSystem.current.firstSelectedGameObject = this.gameObject;
             EventSystem.current.SetSelectedGameObject(this.gameObject);

@@ -151,6 +151,8 @@ public class AIAggroSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         this.npc.target = character;
+        //AggroArrow temp = Instantiate(MasterManager.aggroArrow, this.npc.GetHeadPosition(), Quaternion.identity);
+        //temp.SetTarget(this.npc.target);
         StartCoroutine(showClueCo(MasterManager.markAttack, this.aggroStats.activeClueDuration));
     }
 
@@ -167,10 +169,7 @@ public class AIAggroSystem : MonoBehaviour
     {
         if (clue != null && this.activeClue == null)
         {
-            Vector2 position = this.npc.transform.position;
-            if (this.cluePosition != null) position = cluePosition.transform.position;
-
-            this.activeClue = Instantiate(clue, position, Quaternion.identity, this.npc.transform);
+            this.activeClue = Instantiate(clue, this.npc.GetHeadPosition(), Quaternion.identity, this.npc.transform);
         }
     }
 

@@ -139,7 +139,7 @@ public class CharacterValues : ScriptableObject
     public bool CanMove()
     {
         return (CanOpenMenu() 
-            && this.currentState != CharacterState.attack
+            //&& this.currentState != CharacterState.attack
             && !this.isCharacterStunned());
     }
 

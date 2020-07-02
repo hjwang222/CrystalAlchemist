@@ -47,14 +47,24 @@ public class PlayerAbilities : CharacterCombat
         if (context.started)
         {
             this.isPressed = true;
-            this.buttons.currentAbility = GetAbility(context);
-            ButtonDown(this.buttons.currentAbility);
+
+            Ability ability = GetAbility(context);
+            if (ability != null && this.buttons.currentAbility == null)
+            {
+                this.buttons.currentAbility = ability;
+                ButtonDown(this.buttons.currentAbility);
+            }            
         }
         else if (context.canceled)
         {
             this.isPressed = false;
-            ButtonUp(this.buttons.currentAbility);
-            this.buttons.currentAbility = null;
+
+            Ability ability = GetAbility(context);
+            if (ability != null && this.buttons.currentAbility == ability)
+            {                
+                ButtonUp(this.buttons.currentAbility);
+                this.buttons.currentAbility = null;
+            }
         }
     }
 

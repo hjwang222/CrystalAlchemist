@@ -558,8 +558,8 @@ public class Character : MonoBehaviour
 
     public Vector2 GetHeadPosition()
     {
-        if (this.headPosition == null) return this.transform.position;
-        return this.headPosition.transform.position;
+        if (this.headPosition != null) return this.headPosition.transform.position;
+        else return GetShootingPosition();
     }
 
     public virtual string GetCharacterName()

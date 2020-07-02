@@ -5,6 +5,9 @@ using Sirenix.OdinInspector;
 public class MiniDialogBox : MonoBehaviour
 {
     [SerializeField]
+    private GameObject parent;
+
+    [SerializeField]
     private TextMeshPro textfield;
 
     [SerializeField]
@@ -16,7 +19,30 @@ public class MiniDialogBox : MonoBehaviour
     private void Start()
     {
         this.transform.position = this.position;
-        Destroy(this.gameObject, this.duration);
+        CheckFlip();
+        if(duration > 0) Destroy(this.gameObject, this.duration);
+    }
+
+    [Button]
+    private void CheckFlip()
+    {
+        float pos = Camera.main.WorldToScreenPoint(this.transform.position).x;
+
+        if (pos > Screen.currentResolution.width / 2) Flip(true);
+        else Flip(false);
+    }
+
+    private void Flip(bool value)
+    {
+        this.sprite.flipX = value;
+
+        float modifier = 1;
+        if (this.sprite.flipX) modifier = -1;
+        this.parent.transform.localPosition *= new Vector2(modifier, 0);
+
+        RectTransform rt = (RectTransform)this.textfield.transform;
+        if (this.sprite.flipX) this.textfield.transform.localPosition = new Vector2(-1*(rt.sizeDelta.x+0.25f), 1);
+        else this.textfield.transform.localPosition = new Vector2(0.25f, 1);
     }
 
     public void setDialogBox(string text, float duration, Vector2 position)

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [CreateAssetMenu(menuName = "Game/Settings/Global Game Objects")]
 public class MasterManager : SingletonScriptableObject<MasterManager>
 {
+    public static AggroArrow aggroArrow { get { return Instance._aggroArrow; } }
     public static DamageNumbers damageNumber { get { return Instance._damageNumber; } }
     public static ContextClue contextClue { get { return Instance._contextClue; } }
     public static GameObject markAttack { get { return Instance._markAttack; } }
@@ -36,6 +37,9 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
     [BoxGroup("Combat")]
     [SerializeField]
     private DamageNumbers _damageNumber;
+    [BoxGroup("Combat")]
+    [SerializeField]
+    private AggroArrow _aggroArrow;
     [BoxGroup("Combat")]
     [SerializeField]
     private CastBar _castbar;

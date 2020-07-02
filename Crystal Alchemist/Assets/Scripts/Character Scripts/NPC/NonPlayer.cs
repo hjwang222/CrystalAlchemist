@@ -14,7 +14,7 @@ public class NonPlayer : Character
 
         if (this.stats.showAnalyse)
         {
-            AnalyseInfo analyse = Instantiate(MasterManager.analyseInfo, this.transform.position, Quaternion.identity, this.transform);
+            AnalyseInfo analyse = Instantiate(MasterManager.analyseInfo, this.GetHeadPosition(), Quaternion.identity, this.transform);
             analyse.SetTarget(this.gameObject);
         }
 

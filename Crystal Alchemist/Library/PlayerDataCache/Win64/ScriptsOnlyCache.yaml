@@ -11,6 +11,7 @@ ScriptsOnlyBuild:
     - ActionButtonUITranslation
     - AddSpawn
     - Affections
+    - AggroArrow
     - AggroStats
     - AnalyseEnemy
     - AnalyseInfo
@@ -258,6 +259,7 @@ ScriptsOnlyBuild:
     - StatusEffectBlindModule
     - StatusEffectGameObject
     - StatusEffectUI
+    - StringListValue
     - StringSignal
     - StringSignalListener
     - StringValue
@@ -306,7 +308,6 @@ ScriptsOnlyBuild:
     - Sirenix.Serialization.AOTGenerationConfig
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridBrushEditor
     - UnityEditor.Tilemaps.GridPaintPaletteClipboard
     - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
@@ -373,7 +374,6 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.Universal.PostProcessData
     - UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
     - UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset
-    - UnityEngine.Rendering.Universal.UniversalRenderPipelineEditorResources
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -391,11 +391,15 @@ ScriptsOnlyBuild:
     - UnityEngine.Timeline.GroupTrack
     - UnityEngine.Timeline.MarkerTrack
     - UnityEngine.Timeline.TimelineAsset
+    Unity.VisualEffectGraph.Editor.dll:
+    - UnityEditor.VFX.VFXResources
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -467,6 +471,8 @@ ScriptsOnlyBuild:
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
+      Script: {instanceID: 0}
+    - Class: 96
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -822,6 +828,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 20084}
     - Class: 114
       Script: {instanceID: 20104}
+    - Class: 114
+      Script: {instanceID: 460278}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -902,6 +910,8 @@ ScriptsOnlyBuild:
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
+      Script: {instanceID: 0}
+    - Class: 96
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -1267,6 +1277,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 20084}
     - Class: 114
       Script: {instanceID: 20104}
+    - Class: 114
+      Script: {instanceID: 460278}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1341,6 +1353,8 @@ ScriptsOnlyBuild:
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
+      Script: {instanceID: 0}
+    - Class: 96
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -1750,6 +1764,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 20084}
     - Class: 114
       Script: {instanceID: 20104}
+    - Class: 114
+      Script: {instanceID: 460278}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -1828,6 +1844,8 @@ ScriptsOnlyBuild:
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
+      Script: {instanceID: 0}
+    - Class: 96
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -2151,6 +2169,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 20084}
     - Class: 114
       Script: {instanceID: 20104}
+    - Class: 114
+      Script: {instanceID: 460278}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -2284,6 +2304,8 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 12110}
+    - Class: 114
       Script: {instanceID: 12112}
     - Class: 114
       Script: {instanceID: 12114}
@@ -2292,6 +2314,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12124}
     - Class: 114
+      Script: {instanceID: 12126}
+    - Class: 114
       Script: {instanceID: 12128}
     - Class: 114
       Script: {instanceID: 12184}
@@ -2299,6 +2323,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12230}
     - Class: 114
       Script: {instanceID: 12312}
+    - Class: 114
+      Script: {instanceID: 12360}
     - Class: 114
       Script: {instanceID: 12574}
     - Class: 114
@@ -2326,6 +2352,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15126}
     - Class: 114
+      Script: {instanceID: 15506}
+    - Class: 114
       Script: {instanceID: 15592}
     - Class: 114
       Script: {instanceID: 15608}
@@ -2343,6 +2371,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 17282}
     - Class: 114
       Script: {instanceID: 17368}
+    - Class: 114
+      Script: {instanceID: 17704}
     - Class: 114
       Script: {instanceID: 17770}
     - Class: 114
@@ -2373,6 +2403,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 19340}
     - Class: 114
       Script: {instanceID: 19426}
+    - Class: 114
+      Script: {instanceID: 178438}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -3867,6 +3899,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 52514}
     - Class: 114
       Script: {instanceID: 52544}
+    - Class: 114
+      Script: {instanceID: 178438}
+    - Class: 114
+      Script: {instanceID: 460278}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -4859,7 +4895,7 @@ ScriptsOnlyBuild:
     className: VFXPlaneBinder
   - hash:
       serializedVersion: 2
-      Hash: 0fa0848658310849efea0b3ded566b14
+      Hash: 2bd7860e092e8909474e755eaba8765d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SkillSenderModule
@@ -5681,7 +5717,7 @@ ScriptsOnlyBuild:
     className: CinemachineDollyCart
   - hash:
       serializedVersion: 2
-      Hash: 284879c74d87c656a50561ede0b70487
+      Hash: ba68ae14e44f4b7e27178e2adbd005f3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CharacterCreatorName
@@ -5849,7 +5885,7 @@ ScriptsOnlyBuild:
     className: TODOLIST
   - hash:
       serializedVersion: 2
-      Hash: 8a440652495d0e9cba139bf1144351d6
+      Hash: fa6fb442ede647310ed2dba049047511
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MiniDialogBox
@@ -6071,7 +6107,7 @@ ScriptsOnlyBuild:
     className: UniversalAdditionalLightData
   - hash:
       serializedVersion: 2
-      Hash: 5d269690b12f3fc1867d4420607aa881
+      Hash: f26a59a93d7c1ab161af7f612f6e7ec2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MasterManager
@@ -6557,7 +6593,7 @@ ScriptsOnlyBuild:
     className: AnalyseInfo
   - hash:
       serializedVersion: 2
-      Hash: 90e9dca45fe0d3013f3070268524a21c
+      Hash: c8c8335f5b907f31d69394b35c3d9a7d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CharacterCreatorMenu
@@ -7827,6 +7863,18 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SkillHoming
+  - hash:
+      serializedVersion: 2
+      Hash: 0626495d57ee07082b34fa34c1d65f88
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StringListValue
+  - hash:
+      serializedVersion: 2
+      Hash: afc5b93a7b192de2dcb3832fe35a5c7e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AggroArrow
   platform: 19
   scenePathNames:
   - Assets/Scenes/Title Screen/Title Screen.unity
