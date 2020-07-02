@@ -54273,3 +54273,52 @@ UnityEngine.EventSystems.ExecuteEvents.Execute (UnityEngine.EventSystems.IPointe
 UnityEngine.EventSystems.ExecuteEvents.Execute[T] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.ExecuteEvents+EventFunction`1[T1] functor) (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/ExecuteEvents.cs:261)
 UnityEngine.EventSystems.EventSystem:Update() (at C:/Program Files/Unity/Hub/Editor/2020.1.0b12/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs:376)
 
+Exception 01.07.2020 16:14:58: NullReferenceException: Object reference not set to an instance of an object
+Room.Awake () (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:28)
+
+Exception 01.07.2020 16:14:58: NullReferenceException: Object reference not set to an instance of an object
+Room.SetRoom (UnityEngine.Collider2D collider) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:43)
+Room.OnTriggerEnter2D (UnityEngine.Collider2D other) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:36)
+
+Exception 01.07.2020 16:15:34: NullReferenceException: Object reference not set to an instance of an object
+Room.Awake () (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:28)
+
+Exception 01.07.2020 16:15:34: NullReferenceException: Object reference not set to an instance of an object
+Room.SetRoom (UnityEngine.Collider2D collider) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:43)
+Room.OnTriggerEnter2D (UnityEngine.Collider2D other) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:36)
+
+Exception 01.07.2020 16:15:48: NullReferenceException: Object reference not set to an instance of an object
+Room.Awake () (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:28)
+
+Exception 01.07.2020 16:15:48: NullReferenceException: Object reference not set to an instance of an object
+Room.SetRoom (UnityEngine.Collider2D collider) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:43)
+Room.OnTriggerEnter2D (UnityEngine.Collider2D other) (at Assets/Scripts/Map Part Scripts/Trigger Areas/Room.cs:36)
+
+Exception 01.07.2020 16:34:03: MissingReferenceException: The object of type 'LineIndicator' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+IndicatorObject.ClearIndicator () (at Assets/Scripts/Indicators/IndicatorObject.cs:67)
+Ability.HideIndicator () (at Assets/Scripts/Scriptable Objects/Objects/Ability/Ability.cs:271)
+CharacterCombat.UnChargeAbility (Ability ability) (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:56)
+AIAction.DisableSkill (AI npc) (at Assets/Scripts/Scriptable Objects/Objects/AI/AIAction.cs:391)
+AIAction.Disable (AI npc) (at Assets/Scripts/Scriptable Objects/Objects/AI/AIAction.cs:289)
+AIPhase.ResetActions (AI npc) (at Assets/Scripts/Scriptable Objects/Objects/AI/AIPhase.cs:125)
+AICombat.DestroyActivePhase () (at Assets/Scripts/Character Scripts/NPC/AICombat.cs:59)
+AICombat.EndPhase () (at Assets/Scripts/Character Scripts/NPC/AICombat.cs:52)
+AICombat.OnDisable () (at Assets/Scripts/Character Scripts/NPC/AICombat.cs:45)
+
+Exception 01.07.2020 16:34:03: MissingReferenceException: The object of type 'LineIndicator' has been destroyed but you are still trying to access it.
+Your script should either check if it is null or you should not destroy the object.
+IndicatorObject.ClearIndicator () (at Assets/Scripts/Indicators/IndicatorObject.cs:67)
+Ability.HideIndicator () (at Assets/Scripts/Scriptable Objects/Objects/Ability/Ability.cs:271)
+CharacterCombat.UnChargeAbility (Ability ability) (at Assets/Scripts/Character Scripts/Base/CharacterCombat.cs:56)
+AIAction.DisableSkill (AI npc) (at Assets/Scripts/Scriptable Objects/Objects/AI/AIAction.cs:391)
+AIAction.Disable (AI npc) (at Assets/Scripts/Scriptable Objects/Objects/AI/AIAction.cs:289)
+AIPhase.ResetActions (AI npc) (at Assets/Scripts/Scriptable Objects/Objects/AI/AIPhase.cs:125)
+AICombat.DestroyActivePhase () (at Assets/Scripts/Character Scripts/NPC/AICombat.cs:59)
+AICombat.EndPhase () (at Assets/Scripts/Character Scripts/NPC/AICombat.cs:52)
+AICombat.OnDestroy () (at Assets/Scripts/Character Scripts/NPC/AICombat.cs:47)
+
+Exception 02.07.2020 12:11:18: NullReferenceException: Object reference not set to an instance of an object
+MiniMap.SetText (TeleportStats stats, UnityEngine.UI.Image image, TMPro.TextMeshProUGUI textField) (at Assets/Scripts/Menu Scripts/Map/MiniMap.cs:38)
+MiniMap.Start () (at Assets/Scripts/Menu Scripts/Map/MiniMap.cs:31)
+

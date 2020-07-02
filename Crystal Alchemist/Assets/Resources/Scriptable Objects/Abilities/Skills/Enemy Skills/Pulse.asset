@@ -12,23 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266771f26e0200047a77d2d39c8b8900, type: 3}
   m_Name: Pulse
   m_EditorClassIdentifier: 
-  abilityName: Puls
-  abilityNameEnglish: Pulse
   skill: {fileID: 1676703576389572161, guid: 3c796de5a8e605544b3dc6a49a9c39cc, type: 3}
   useTargetSystem: 0
   targetingProperty: {fileID: 0}
+  useIndicator: 0
+  indicator:
+    indicatorProperty: {fileID: 0}
   hasSkillBookInfo: 0
+  icon: {fileID: -5505784301242206033, guid: c8daf8e26f8383e4384684f9fc339d3c, type: 3}
   info: {fileID: 0}
   cooldown: 1
   hasMaxDuration: 1
   maxDuration: 20
-  rapidFireDelay: 1
+  hasDelay: 0
+  delay: 1
   hasCastTime: 0
   castTime: 2
   showCastbar: 1
+  castAnimation: {fileID: 0}
   hasMaxAmount: 0
   maxAmount: 1
-  requirements: 0
+  requirements: {fileID: 0}
   isRapidFire: 1
   remoteActivation: 0
   deactivateButtonUp: 0
@@ -42,3 +46,4 @@ MonoBehaviour:
   holdTimer: 0
   state: 6
   enabled: 1
+  active: 1

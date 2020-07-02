@@ -119,7 +119,7 @@ MonoBehaviour:
   flip: 0
   target: {fileID: 0}
   partner: {fileID: 0}
-  rangeTriggered: {fileID: 0}
+  rangeTriggered: 0
 --- !u!114 &55980665602690937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f80b21aee0d2f47a0e58afdc49b328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroStats: {fileID: 11400000, guid: 26f78487d44cd5347a297357369d7cb5, type: 2}
+  aggroStats: {fileID: 11400000, guid: bb622e4c94811f244af5ad122c30d82e, type: 2}
   npc: {fileID: 55980665602690939}
   cluePosition: {fileID: 0}
 --- !u!58 &3866322097961817499
@@ -488,6 +488,7 @@ MonoBehaviour:
   selectColor: {r: 1, g: 1, b: 1, a: 1}
   precision: 0
   glowColor: {r: 1, g: 1, b: 1, a: 1}
+  invert: 0
 --- !u!1 &4536096100807201265
 GameObject:
   m_ObjectHideFlags: 0

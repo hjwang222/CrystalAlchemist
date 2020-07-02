@@ -3,7 +3,10 @@
 public class TODOLIST : MonoBehaviour
 {
     //BUG: Kein Clear (Progress, Attributes)
-
+    //REWORK: Ghost Effect, Impact Hit und Effect Module 
+    //TODO: Aggro-Pfeil (Target)
+    //TODO: Titania Camera (Cutscene)
+    //TODO: Testing
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)

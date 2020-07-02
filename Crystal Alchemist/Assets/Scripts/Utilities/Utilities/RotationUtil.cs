@@ -1,9 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public static class RotationUtil
 {
+    public static float SetAngle(Vector2 direction, float snapRotationInDegrees)
+    {
+        float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+
+        if (snapRotationInDegrees > 0) angle = Mathf.Round(angle / snapRotationInDegrees) * snapRotationInDegrees;
+
+        return angle;
+    }
+
     public static Quaternion getRotation(Vector2 direction)
     {
         float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
@@ -35,9 +42,14 @@ public static class RotationUtil
     {
         if (skill.sender == null) return skill.GetDirection();
         else if (skill.sender.GetComponent<AI>() != null && skill.sender.GetComponent<AI>().target != null)
-            return (skill.sender.GetComponent<AI>().target.GetGroundPosition() - (Vector2)skill.transform.position).normalized;
+        {
+            float offset = skill.transform.position.y - skill.GetPosition().y;
+            Vector2 targetPosition = skill.sender.GetComponent<AI>().target.GetGroundPosition();
+            Vector2 position = new Vector2(targetPosition.x, targetPosition.y + offset);
+            return (position - (Vector2)skill.transform.position).normalized;
+        }
         else if (skill.target != null)
-            return (skill.target.GetGroundPosition() - (Vector2)skill.transform.position).normalized;
+            return (skill.target.GetGroundPosition() - skill.GetPosition()).normalized;
         else if (skill.sender != null)
             return skill.sender.values.direction.normalized;
 

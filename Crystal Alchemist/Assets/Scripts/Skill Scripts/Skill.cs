@@ -30,6 +30,9 @@ public class Skill : MonoBehaviour
     [BoxGroup("Easy Access")]
     public Animator animator;
 
+    [BoxGroup("Easy Access")]
+    public SkillCollider skillCollider;
+
     [BoxGroup("Actions")]
     [SerializeField]
     public UnityEvent OnStart;
@@ -168,6 +171,12 @@ public class Skill : MonoBehaviour
     public Vector2 GetDirection()
     {
         return this.direction.normalized;
+    }
+
+    public Vector2 GetPosition()
+    {
+        if (this.skillCollider == null) return this.transform.position;
+        else return this.skillCollider.GetPosition();
     }
 
     public void SetDirection(Vector2 direction)
