@@ -543,7 +543,7 @@ public class AIAction
     private void Deactivate() =>  this.isActive = false;    
 
 
-
+    /*
     private void AbilityChanged()
     {
         this.wait = (this.ability.castTime + this.delay) * this.amount;
@@ -552,5 +552,5 @@ public class AIAction
     private void RepeatChanged()
     {
         if (!this.repeat) this.amount = 1;
-    }
+    }*/
 }

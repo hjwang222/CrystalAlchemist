@@ -29,9 +29,9 @@ public class AI : NonPlayer
     }
     #region Animation, StateMachine
 
-    public void InitializeAddSpawn(Character target)
+    public void InitializeAddSpawn(Character target, bool hasMaxDuration, float maxDuration)
     {
-        this.InitializeAddSpawn();
+        this.InitializeAddSpawn(hasMaxDuration, maxDuration);
         this.target = target;
     }
 

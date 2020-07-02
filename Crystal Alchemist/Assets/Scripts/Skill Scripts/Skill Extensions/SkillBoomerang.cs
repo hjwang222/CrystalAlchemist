@@ -53,7 +53,6 @@ public class SkillBoomerang : SkillProjectile
        && (
             (!hittedCharacter.isTrigger 
           && hittedCharacter.GetComponent<Breakable>() == null
-          && hittedCharacter.GetComponent<Character>() != null
           && hittedCharacter.GetComponent<Character>() != this.skill.sender) 
          || (hittedCharacter.GetComponent<Collectable>() != null)) //item stop
           )

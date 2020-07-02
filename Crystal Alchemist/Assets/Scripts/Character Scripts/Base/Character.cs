@@ -55,6 +55,7 @@ public class Character : MonoBehaviour
 
     #region Attributes
 
+    private float selfDestructionElapsed;
     private float regenTimeElapsed;
     private float manaTime;
     private DeathAnimation activeDeathAnimation;
@@ -114,14 +115,27 @@ public class Character : MonoBehaviour
 
         if (this.GetComponent<CharacterRenderingHandler>() != null) this.GetComponent<CharacterRenderingHandler>().Reset();
         if (this.boxCollider != null) this.boxCollider.enabled = true;
+
+        if (this.stats.hasSelfDestruction) this.selfDestructionElapsed = this.stats.selfDestructionTimer;
     }
 
     public void InitializeAddSpawn()
+    {
+        InitializeAddSpawn(false, 0);
+    }
+    
+    public void InitializeAddSpawn(bool hasMaxDuration, float maxDuration)
     {
         this.IsSummoned = true;
         this.stats = Instantiate(this.stats);
         this.stats.hasRespawn = false;
         this.transform.SetParent(null);
+
+        if (hasMaxDuration && maxDuration > 0)
+        {
+            this.stats.hasSelfDestruction = true;
+            this.stats.selfDestructionTimer = maxDuration;
+        }
     }
 
     public virtual void OnDestroy() => GameEvents.current.OnEffectAdded -= AddStatusEffectVisuals;
@@ -132,12 +146,24 @@ public class Character : MonoBehaviour
 
     public virtual void Update()
     {
+        UpdateSelfDestruction();
+
         if (this.values.currentState == CharacterState.dead
          || this.values.currentState == CharacterState.respawning) return;
 
         Regenerate();
         UpdateLifeAnimation();
         UpdateStatusEffects();
+        
+    }
+
+    private void UpdateSelfDestruction()
+    {
+        if (this.stats.hasSelfDestruction)
+        {
+            if (this.selfDestructionElapsed > 0) this.selfDestructionElapsed -= (Time.deltaTime * this.values.timeDistortion);
+            else KillIt();
+        }
     }
 
     public void CheckDeath()

@@ -56,6 +56,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6809401362660781500}
   myRigidbody: {fileID: 3416433163101705802}
   animator: {fileID: 7380354942667108071}
+  skillCollider: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -208,7 +209,7 @@ MonoBehaviour:
   statusEffects: []
   thrust: 2
   knockbackTime: 0.2
-  affections: {fileID: 11400000, guid: 2b799d250264eb54aa1a06cf8054a50b, type: 2}
+  affections: {fileID: 11400000, guid: a08c2d131b1dd8b43ad91af1dcbeeec4, type: 2}
 --- !u!114 &3147110848633641529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +235,6 @@ MonoBehaviour:
   forward: 0
   selfThrust: 0
   selfThrustTime: 0
-  stateType: 0
 --- !u!114 &3361751941292182264
 MonoBehaviour:
   m_ObjectHideFlags: 0
