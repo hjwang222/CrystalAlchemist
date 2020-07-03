@@ -24,12 +24,8 @@ public class CameraIntro : MonoBehaviour
     [SerializeField]
     private PlayerGameProgress playerProgress;
 
-    [Required]
     [SerializeField]
-    private BoolValue CutSceneValue;
-
-    [SerializeField]
-    private UnityEvent onTrigger;
+    private UnityEvent onTriggered;
 
     private bool isPermanent = false;
 
@@ -38,18 +34,6 @@ public class CameraIntro : MonoBehaviour
         if (this.mode == Mode.oneTime) isPermanent = true;
         if (this.mode != Mode.always && this.playerProgress.Contains(this.gameProgressID, this.isPermanent)) return false;
         return true;
-    }
-
-    public void CutSceneActive()
-    {
-        this.CutSceneValue.setValue(true);
-        GameEvents.current.DoCutScene();
-    }
-
-    public void CutSceneNotActive()
-    {
-        this.CutSceneValue.setValue(false);
-        GameEvents.current.DoCutScene();
     }
 
     public void AddProgress()
@@ -68,8 +52,7 @@ public class CameraIntro : MonoBehaviour
     }
 
     [Button]
-    private void DoCutScene()
-    {
-        this.onTrigger?.Invoke();        
-    }
+    private void DoCutScene() => this.onTriggered?.Invoke();
+
+    private void RaiseSignal(SimpleSignal signal) => signal?.Raise();
 }

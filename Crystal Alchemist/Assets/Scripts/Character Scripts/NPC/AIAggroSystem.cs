@@ -16,10 +16,6 @@ public class AIAggroSystem : MonoBehaviour
     [Required]
     private AI npc;
 
-    [SerializeField]
-    [BoxGroup("Required")]
-    private GameObject cluePosition;
-
     private GameObject activeClue;
     #endregion
 

@@ -29,20 +29,16 @@ public class AIInteraction : Interactable
     public void TurnHostile()
     {
         this.npc.values.characterType = CharacterType.Enemy;
-        SetAggro(999);
     }
 
     public void TurnFriendly()
     {
-        this.npc.values.characterType = CharacterType.Friend;
-        GameEvents.current.DoAggroClear(this.npc);
+        this.npc.values.characterType = CharacterType.Friend;        
     }
 
-    public void SetAggro(float value)
-    {
-        if (value > 0) GameEvents.current.DoAggroIncrease(this.npc, this.player, value);
-        else GameEvents.current.DoAggroDecrease(this.npc, this.player, value);
-    }
+    public void SetMaxAggro(Character character) => GameEvents.current.DoAggroIncrease(this.npc, character, 999);
+
+    public void ClearAggro() => GameEvents.current.DoAggroClear(this.npc);
 
     public override bool PlayerIsLooking()
     {

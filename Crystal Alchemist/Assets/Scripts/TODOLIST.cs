@@ -2,38 +2,26 @@
 
 public class TODOLIST : MonoBehaviour
 {
-    //BUG: Kein Clear (Progress, Attributes)
-    //REWORK: Ghost Effect, Impact Hit und Effect Module 
-    //TODO: Aggro-Pfeil (Target)
-    //TODO: Titania Camera (Cutscene)
-    //TODO: Testing
+    //REWORK: Ghost Effect, Impact Hit und Effect Module, Clues
     //-----------------------------------------------------------------------------
 
     //TODO (0.2.5.5)
     //REWORK: Arena Bounds
     //REWORK: Treasure Item Drop (no Dialog)
-    //REWORK: Cursor Position
     //REWORK: Header
     //REWORK: Death Animation (Character)?
-    //REWORK: Loading on Level Start?
 
     //CONTENT: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, etc)
     //ITEM: Brille (Bool Value)
     //INPUT: Virtuelle Tastatur
     //CONTENT: Sin Eater Race (glowing eyes, halo, wings, etc)
 
-    //TODO: Skill Animation Trigger in Ability?
     //TODO: Text in UI as World Space Position?
     //TODO: New Game Intro
-    //TODO: Teleport Animation (also Player Animation)
-    //TODO: Check if there (Death Screen too)
+    //TODO: Player Animations
     //TODO: Custom Smoke for Collectable, Interactable and Warp
-    //TODO: On Kill Event
-    //TODO: Boss Mechanic Duration Override
-    //TODO: Victory Screen (Player Animation, Cutscene Event)
-    //TODO: Balken und Symbole bei Cutscene (Intro z.B.)
+    //TODO: Victory Screen (Player Animation)
     //TODO: Sounds ersetzen
-    //TODO: Script Execution order
     //TODO: Movement by AIAction
     //TODO: Itemgroup duration
     //TODO: Auto Updater
@@ -44,7 +32,6 @@ public class TODOLIST : MonoBehaviour
     //TODO: Stairs, Ice, Wall
     //TODO: Rule Tiles
     //TODO: Pathfinding
-    //TODO: Checkpoints
     //TODO: Player Mark Indicator (Blick, Kette, etc)
 
     //UTIL: Item Assistent

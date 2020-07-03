@@ -8,14 +8,6 @@ public class Goddess : AI
     [SerializeField]
     private UnityEvent onDefeated;
 
-    [BoxGroup("Defeat")]
-    [SerializeField]
-    private AudioClip start;
-
-    [BoxGroup("Defeat")]
-    [SerializeField]
-    private AudioClip loop;
-
     public override void KillIt(bool showAnimation)
     {
         for (int i = 0; i < this.values.activeSkills.Count; i++)
@@ -40,15 +32,5 @@ public class Goddess : AI
     {
         string text = FormatUtil.GetLocalisedText(translationID, LocalisationFileType.dialogs);
         ShowMiniDialog(text, 6f);
-    }
-
-    public void StopMusic(float fadeOut)
-    {
-        MusicEvents.current.StopMusic(fadeOut);
-    }
-
-    public void PlayMusic(float fadeIn)
-    {        
-        MusicEvents.current.PlayMusic(this.start, this.loop, fadeIn);
-    }
+    }    
 }

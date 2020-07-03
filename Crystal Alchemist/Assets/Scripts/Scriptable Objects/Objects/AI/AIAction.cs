@@ -450,8 +450,8 @@ public class AIAction
 
     private void StartAnimation(AI npc)
     {
-        if(this.isTrigger) AnimatorUtil.SetAnimatorParameter(npc.animator, this.animations);
-        else AnimatorUtil.SetAnimatorParameter(npc.animator, this.animations, this.value);
+        if(this.isTrigger) npc.PlayAnimation(this.animations);
+        else npc.PlayAnimation(this.animations, this.value);
         Deactivate();
     }
 
@@ -543,7 +543,7 @@ public class AIAction
     private void Deactivate() =>  this.isActive = false;    
 
 
-    /*
+    
     private void AbilityChanged()
     {
         this.wait = (this.ability.castTime + this.delay) * this.amount;
@@ -552,5 +552,5 @@ public class AIAction
     private void RepeatChanged()
     {
         if (!this.repeat) this.amount = 1;
-    }*/
+    }
 }

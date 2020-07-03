@@ -4,6 +4,7 @@ public class NonPlayer : Character
 {
     public override void Start()
     {
+        //GameEvents.current.OnKill += DestroyItWithoutDrop;
         if (this.IsSummoned)
         {
             SetCharacterSprites(false);
@@ -24,5 +25,11 @@ public class NonPlayer : Character
             PlayRespawnAnimation();
             SpawnIn();
         }
+    }
+
+    public override void OnDestroy()
+    {
+        //GameEvents.current.OnKill -= DestroyItWithoutDrop;
+        base.OnDestroy();
     }
 }

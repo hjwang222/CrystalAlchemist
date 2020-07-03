@@ -477,7 +477,7 @@ public class Character : MonoBehaviour
         DestroyItWithoutDrop();
     }
 
-    private void DestroyItWithoutDrop()
+    public void DestroyItWithoutDrop()
     {
         if (this.stats.hasRespawn) this.gameObject.SetActive(false);
         else Destroy(this.gameObject);
@@ -571,6 +571,10 @@ public class Character : MonoBehaviour
     {
         AnimatorUtil.SetAnimatorParameter(this.animator, "Casting", value);
     }
+
+    public void PlayAnimation(string name) => AnimatorUtil.SetAnimatorParameter(this.animator, name);
+
+    public void PlayAnimation(string name, bool value) => AnimatorUtil.SetAnimatorParameter(this.animator, name, value);
 
     #endregion
 

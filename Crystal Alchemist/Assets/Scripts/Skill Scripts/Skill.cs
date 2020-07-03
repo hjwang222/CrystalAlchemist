@@ -120,6 +120,7 @@ public class Skill : MonoBehaviour
 
     private void Start()
     {
+        //GameEvents.current.OnKill += DestroyIt;
         SetComponents();
 
         if (!this.standAlone)
@@ -144,6 +145,8 @@ public class Skill : MonoBehaviour
         if (this.lockDirection) GameEvents.current.DoDirectionLock();
         this.OnStart?.Invoke();
     }
+
+    //private void OnDestroy() => GameEvents.current.OnKill -= DestroyIt;
 
     private void SetComponents()
     {

@@ -21,7 +21,7 @@ public static class AbilityUtil
         return newAbility;
     }
 
-    public static void instantiateSequence(BossMechanic sequence, AI npc, List<string> patterns)
+    public static void instantiateSequence(BossMechanic sequence, AI npc)
     {
         BossMechanic newSequence = Object.Instantiate(sequence);
         newSequence.name = sequence.name;

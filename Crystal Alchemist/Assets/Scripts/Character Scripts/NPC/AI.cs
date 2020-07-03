@@ -7,13 +7,13 @@ public class AI : NonPlayer
     [BoxGroup("AI")]
     public bool flip = true;
 
-    [HideInInspector]
+    [BoxGroup("Debug")]
     public Character target;
 
-    [HideInInspector]
+    [BoxGroup("Debug")]
     public Dictionary<Character, float[]> aggroList = new Dictionary<Character, float[]>();
 
-    [HideInInspector]
+    [BoxGroup("Debug")]
     public Character partner;
 
     [HideInInspector]
