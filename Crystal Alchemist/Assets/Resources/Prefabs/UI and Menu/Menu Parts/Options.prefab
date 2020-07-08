@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  setFirstSelected: 0
+  selectFirst: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -378,7 +379,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  setFirstSelected: 0
+  selectFirst: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -740,7 +742,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  setFirstSelected: 1
+  selectFirst: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -912,6 +915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!1 &6009255249165984243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,6 +1082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!1 &6090170661924813513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!1 &6918100608949704705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,6 +1492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!1 &9037798146485131657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,7 +1641,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  setFirstSelected: 0
+  selectFirst: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -1800,26 +1808,6 @@ PrefabInstance:
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
       propertyPath: m_firstOverflowCharacterIndex
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
-      propertyPath: m_margin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
-      propertyPath: m_margin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
-      propertyPath: m_margin.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
-      propertyPath: m_margin.w
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858299, guid: 1a468478cc126554dbed689fa02b4eb0,

@@ -16,14 +16,6 @@ public class PlayerAttributes : ScriptableObject
 {
     [BoxGroup("Base")]
     [SerializeField]
-    private SimpleSignal healtSignal;
-
-    [BoxGroup("Base")]
-    [SerializeField]
-    private SimpleSignal manaSignal;
-
-    [BoxGroup("Base")]
-    [SerializeField]
     private CharacterValues playerValues;
 
     [BoxGroup("Attributes")]
@@ -120,11 +112,9 @@ public class PlayerAttributes : ScriptableObject
     {
         playerValues.maxLife = this.expanderValues[this.health];
         if (playerValues.life > playerValues.maxLife) playerValues.life = playerValues.maxLife;
-        this.healtSignal.Raise();
 
         playerValues.maxMana = this.expanderValues[this.mana];
         if (playerValues.mana > playerValues.maxMana) playerValues.mana = playerValues.maxMana;
-        this.manaSignal.Raise();
 
         playerValues.lifeRegen = (float)this.percentageValues[this.healthRegen] / 100f;
 
@@ -134,5 +124,6 @@ public class PlayerAttributes : ScriptableObject
 
         playerValues.debuffMinus = -this.percentageValues[this.debuffMinus];
 
+        GameEvents.current.DoManaLifeUpdate();
     }
 }

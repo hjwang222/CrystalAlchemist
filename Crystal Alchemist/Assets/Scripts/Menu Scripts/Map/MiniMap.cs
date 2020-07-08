@@ -34,7 +34,12 @@ public class MiniMap : MenuBehaviour
 
     private void SetText(TeleportStats stats, Image image, TextMeshProUGUI textField)
     {
-        if (stats == null) textField.text = "-";
+        if (stats == null)
+        {
+            textField.text = "-";
+            return;
+        }
+
         textField.text = stats.GetTeleportName();
         if (stats.icon == null) image.enabled = false;
         else image.sprite = stats.icon;

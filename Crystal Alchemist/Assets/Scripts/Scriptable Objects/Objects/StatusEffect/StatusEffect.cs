@@ -84,11 +84,6 @@ public class StatusEffect : ScriptableObject
     [AssetIcon]
     public Sprite iconSprite;
 
-    [FoldoutGroup("Visuals", expanded: false)]
-    [Tooltip("Signal zum Update der UI")]
-    [SerializeField]
-    private SimpleSignal updateUI;
-
     private Character target;
     private float statusEffectTimeLeft;
     private float timeDistortion = 1;
@@ -165,7 +160,7 @@ public class StatusEffect : ScriptableObject
 
     private void doOnUpdate()
     {
-        this.updateUI.Raise();
+        GameEvents.current.DoStatusEffectUpdate();
 
         if (this.hasDuration && this.statusEffectTimeLeft > 0)
         {
@@ -204,7 +199,7 @@ public class StatusEffect : ScriptableObject
         if (this.activeObject != null) this.activeObject.Deactivate();
 
         //GUI updaten und Objekt kurz danach zerstören
-        this.updateUI.Raise();
+        GameEvents.current.DoStatusEffectUpdate();
         Destroy(this, this.destroyDelay);
     }
 

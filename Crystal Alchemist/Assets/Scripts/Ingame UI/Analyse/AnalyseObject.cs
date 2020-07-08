@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class AnalyseObject : MonoBehaviour
 {
     [SerializeField]
-    private SpriteRenderer ImageObjectitemPreview;
+    private Image ImageObjectitemPreview;
+
+    [SerializeField]
+    private SpriteRenderer ImageObjectitemPreviewOLD;
 
     [SerializeField]
     private GameObject parent;
@@ -11,20 +15,11 @@ public class AnalyseObject : MonoBehaviour
     private Treasure treasureChest;
     private Breakable breakable;
 
-    public void Initialize(Breakable breakable)
-    {
-        this.breakable = breakable;
-    }
-
-    public void Initialize(Treasure treasure)
-    {
-        this.treasureChest = treasure;
-    }
-
-    private void LateUpdate()
-    {
-        showObjectInfo();
-    }
+    public void Initialize(Breakable breakable) => this.breakable = breakable;
+    
+    public void Initialize(Treasure treasure) => this.treasureChest = treasure;
+    
+    private void LateUpdate() => showObjectInfo();    
 
     private void showObjectInfo()
     {
@@ -47,12 +42,9 @@ public class AnalyseObject : MonoBehaviour
     private void Activate(ItemStats stats)
     {
         this.parent.SetActive(true);
-        this.ImageObjectitemPreview.sprite = stats.getSprite();
+        if (ImageObjectitemPreview != null) this.ImageObjectitemPreview.sprite = stats.getSprite();
+        if (ImageObjectitemPreviewOLD != null) this.ImageObjectitemPreviewOLD.sprite = stats.getSprite();
     }
 
-    private void Deactivate()
-    {
-        //Wenn Truhe geöffnet wurde oder Gegner tot ist
-        this.parent.SetActive(false);
-    }
+    private void Deactivate() => this.parent.SetActive(false); //Wenn Truhe geöffnet wurde oder Gegner tot ist    
 }

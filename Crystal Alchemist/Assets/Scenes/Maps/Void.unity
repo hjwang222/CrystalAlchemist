@@ -492,6 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 1078405184}
+  deactivate: 0
   objectsInArea: {fileID: 0}
   stringValue: {fileID: 11400000, guid: b6bb37e9b35dfc941a13ffb844247e19, type: 2}
   localisationID: Void
@@ -638,90 +639,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &614076254
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4008910293643553074, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: source
-      value: 
-      objectReference: {fileID: 1316875285}
-    - target: {fileID: 4008910293643553074, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553075, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553075, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553075, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553075, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553075, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553075, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553075, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553075, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553075, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553075, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553075, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553077, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_Name
-      value: Minimap Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 4008910293643553077, guid: b2ec9722d9e8d20478342cdc11da1689,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b2ec9722d9e8d20478342cdc11da1689, type: 3}
 --- !u!1001 &643666886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1809,6 +1726,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cameras
       objectReference: {fileID: 0}
+    - target: {fileID: 4535305400444159659, guid: a52d4b66ca1e50d4c805e7d017d0a585,
+        type: 3}
+      propertyPath: orthographic size
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 5087397442696590338, guid: a52d4b66ca1e50d4c805e7d017d0a585,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1847,7 +1769,7 @@ PrefabInstance:
     - target: {fileID: 5087397442696590338, guid: a52d4b66ca1e50d4c805e7d017d0a585,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5087397442696590338, guid: a52d4b66ca1e50d4c805e7d017d0a585,
         type: 3}

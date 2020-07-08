@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public static class UnityUtil
 {
@@ -12,6 +13,13 @@ public static class UnityUtil
         {
             if (dropDown.options[i].text == text) { dropDown.value = i; break; }
         }
+    }
+
+    public static void ScreenToWorld(Transform transform, GameObject parent)
+    {
+        if (Camera.main == null) return;
+        Vector2 screen = Camera.main.WorldToScreenPoint(transform.position);
+        parent.transform.DOMove(screen,0);
     }
 
     public static T GetComponentAll<T>(GameObject gameObject)

@@ -5,6 +5,9 @@ using UnityEngine;
 public class ItemDrop : ScriptableObject
 {
     [SerializeField]
+    public float duration = 60f;
+
+    [SerializeField]
     public ItemStats stats;
 
     [SerializeField]
@@ -47,7 +50,7 @@ public class ItemDrop : ScriptableObject
         temp.SetBounce(bounce);
         temp.name = this.name;
         temp.SetItem(this);
-        temp.SetSelfDestruction();
+        temp.SetSelfDestruction(this.duration);
         return temp;
     }
 }

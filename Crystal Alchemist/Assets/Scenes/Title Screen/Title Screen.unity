@@ -53923,6 +53923,49 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &2147135457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2147135459}
+  - component: {fileID: 2147135458}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2147135458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147135457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb7cbce23925f949a0e695b7398f5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2147135459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147135457}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &124279610337051760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55232,7 +55275,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -55247,9 +55290,9 @@ MonoBehaviour:
   m_fontSizeMin: 20
   m_fontSizeMax: 58
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -55282,15 +55325,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 82.47062, y: -2.8742383, z: -1.9160825, w: -0.000023403714}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 1986983661759261669}
+    characterCount: 6
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -55546,7 +55589,7 @@ PrefabInstance:
     - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
         type: 3}
       propertyPath: m_fontSize
-      value: 38.1
+      value: 35.15
       objectReference: {fileID: 0}
     - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
         type: 3}
@@ -55582,6 +55625,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Einstellungen
+      objectReference: {fileID: 0}
+    - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 648944814088963320, guid: 3d3a1b109c2fd654bafbba8cb0174383,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 933830499076304714, guid: 3d3a1b109c2fd654bafbba8cb0174383,
         type: 3}
@@ -56421,11 +56474,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
-      propertyPath: m_margin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
       propertyPath: m_textInfo.textComponent
       value: 
       objectReference: {fileID: 720347048}
@@ -56453,21 +56501,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.materialCount
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
-      propertyPath: m_margin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
-      propertyPath: m_margin.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
-      propertyPath: m_margin.w
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}
@@ -58612,6 +58645,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Spiel laden
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599967713187252476, guid: a0fea906fabfcfe429926638f98f0ac0,
+        type: 3}
+      propertyPath: m_margin.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5599967713187252476, guid: a0fea906fabfcfe429926638f98f0ac0,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5871963697063907342, guid: a0fea906fabfcfe429926638f98f0ac0,
         type: 3}
@@ -61526,7 +61569,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -61541,9 +61584,9 @@ MonoBehaviour:
   m_fontSizeMin: 20
   m_fontSizeMax: 58
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -61576,15 +61619,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 82.47062, y: -2.8742383, z: -1.9160825, w: -0.000023403714}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 7413150470681010637}
+    characterCount: 11
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -62010,7 +62053,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -62025,9 +62068,9 @@ MonoBehaviour:
   m_fontSizeMin: 20
   m_fontSizeMax: 58
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -62060,15 +62103,15 @@ MonoBehaviour:
   m_pageToDisplay: 1
   m_margin: {x: 82.47062, y: -2.8742383, z: -1.9160825, w: -0.000023403714}
   m_textInfo:
-    textComponent: {fileID: 0}
-    characterCount: 0
+    textComponent: {fileID: 8268199699485300841}
+    characterCount: 7
     spriteCount: 0
     spaceCount: 0
-    wordCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
-    materialCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -62427,7 +62470,7 @@ PrefabInstance:
     - target: {fileID: 8701098028952176975, guid: 38b4cd754ca79ab49afbecc08036defb,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8701098028952176975, guid: 38b4cd754ca79ab49afbecc08036defb,
         type: 3}
@@ -62437,7 +62480,7 @@ PrefabInstance:
     - target: {fileID: 8701098028952176975, guid: 38b4cd754ca79ab49afbecc08036defb,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8701098028952176975, guid: 38b4cd754ca79ab49afbecc08036defb,
         type: 3}

@@ -11,6 +11,11 @@ public class Room : MonoBehaviour
 
     [BoxGroup("Area")]
     [SerializeField]
+    private bool deactivate = false;
+
+    [ShowIf("deactivate")]
+    [BoxGroup("Area")]
+    [SerializeField]
     private GameObject objectsInArea;
 
     [BoxGroup("Map")]
@@ -30,7 +35,7 @@ public class Room : MonoBehaviour
 
     private void setObjects(bool value)
     {
-        if (this.objectsInArea != null) this.objectsInArea.SetActive(value);
+        if (this.objectsInArea != null && deactivate) this.objectsInArea.SetActive(value);
     }
 
     private void OnTriggerEnter2D(Collider2D other) => SetRoom(other);

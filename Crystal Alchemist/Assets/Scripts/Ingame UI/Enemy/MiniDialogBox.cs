@@ -1,17 +1,31 @@
 ﻿using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
+using UnityEngine.UI;
 
 public class MiniDialogBox : MonoBehaviour
 {
     [SerializeField]
-    private GameObject parent;
+    private GameObject bubble;
 
     [SerializeField]
-    private TextMeshPro textfield;
+    private GameObject text;
 
     [SerializeField]
-    private SpriteRenderer sprite;
+    private TextMeshProUGUI textfield;
+
+    [SerializeField]
+    private Image image;
+
+    [SerializeField]
+    private Vector2Int max;
+
+    [SerializeField]
+    private Vector2Int space;
+
+    [SerializeField]
+    private Vector2Int offset;
+
 
     private float duration;
     private Vector2 position;
@@ -19,8 +33,9 @@ public class MiniDialogBox : MonoBehaviour
     private void Start()
     {
         this.transform.position = this.position;
+        SetSize();
         CheckFlip();
-        if(duration > 0) Destroy(this.gameObject, this.duration);
+        if (duration > 0) Destroy(this.gameObject, this.duration);
     }
 
     [Button]
@@ -31,18 +46,21 @@ public class MiniDialogBox : MonoBehaviour
         if (pos > Screen.currentResolution.width / 2) Flip(true);
         else Flip(false);
     }
-
+    
     private void Flip(bool value)
     {
-        this.sprite.flipX = value;
+        RectTransform rt = (RectTransform)this.image.transform;
+        float rotation = 180;
+        float position = -rt.sizeDelta.x;
 
-        float modifier = 1;
-        if (this.sprite.flipX) modifier = -1;
-        this.parent.transform.localPosition *= new Vector2(modifier, 0);
+        if (!value)
+        {
+            rotation = 0;
+            position = 0;
+        }
 
-        RectTransform rt = (RectTransform)this.textfield.transform;
-        if (this.sprite.flipX) this.textfield.transform.localPosition = new Vector2(-1*(rt.sizeDelta.x+0.25f), 1);
-        else this.textfield.transform.localPosition = new Vector2(0.25f, 1);
+        this.bubble.transform.localRotation = Quaternion.Euler(0, rotation, 0);
+        this.text.transform.localPosition = new Vector2(position, 0);
     }
 
     public void setDialogBox(string text, float duration, Vector2 position)
@@ -50,29 +68,29 @@ public class MiniDialogBox : MonoBehaviour
         this.duration = duration;
         this.textfield.text = text;
         this.position = position;
-        SetSize();
     }
 
     [Button]
     private void SetSize()
     {
-        float x = 2.5f;
-        float y = 1.5f;
         int length = this.textfield.text.Length;
+        int lines = 1;
 
-        int xLength = length;
-        if (length > 10) xLength = 10;
-        x = (float)(xLength / 2);
-        if (x < 2.5f) x = 2.5f;
+        if (length > max.x)
+        {
+            lines = 1 + (length / max.x);
+            length = max.x;
+        }
 
-        int yLength = 1;
-        if (length > 10) yLength = 1 + (length / 10);
-        y = 1 + (0.5f * yLength);
-        if (y < 1.5f) y = 1.5f;
+        if (lines > max.y) lines = max.y;
 
-        this.sprite.size = new Vector2(x, y);
+        float y = (lines * space.y) + offset.y;
+        float x = (length * space.x) + offset.x;
 
-        RectTransform rt = (RectTransform)this.textfield.transform;
-        rt.sizeDelta = new Vector2(x - 0.5f, y - 0.5f);
+        RectTransform rt = (RectTransform)this.image.transform;
+        rt.sizeDelta = new Vector2(x + 25, y + 50);
+
+        rt = (RectTransform)this.textfield.transform;
+        rt.sizeDelta = new Vector2(x, y);
     }
 }

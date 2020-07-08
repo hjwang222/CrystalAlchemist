@@ -8,8 +8,8 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
     public static AggroArrow aggroArrow { get { return Instance._aggroArrow; } }
     public static DamageNumbers damageNumber { get { return Instance._damageNumber; } }
     public static ContextClue contextClue { get { return Instance._contextClue; } }
-    public static GameObject markAttack { get { return Instance._markAttack; } }
-    public static GameObject markTarget { get { return Instance._markTargeting; } }
+    public static AggroClue markAttack { get { return Instance._markAttack; } }
+    public static AggroClue markTarget { get { return Instance._markTargeting; } }
     public static MiniDialogBox miniDialogBox { get { return Instance._miniDialogBox; } }
     public static CastBar castBar { get { return Instance._castbar; } }
     public static AnalyseInfo analyseInfo { get { return Instance._analyseInfo; } }
@@ -59,10 +59,10 @@ public class MasterManager : SingletonScriptableObject<MasterManager>
     private MiniDialogBox _miniDialogBox;
     [BoxGroup("Bubbles")]
     [SerializeField]
-    private GameObject _markAttack;
+    private AggroClue _markAttack;
     [BoxGroup("Bubbles")]
     [SerializeField]
-    private GameObject _markTargeting;
+    private AggroClue _markTargeting;
 
     [BoxGroup("Item")]
     [SerializeField]

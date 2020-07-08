@@ -32,4 +32,9 @@ public static class AbilityUtil
     {
         return collision.GetComponentInParent<Skill>();
     }
+
+    public static void SetEffectOnHit(Skill skill, Vector2 position)
+    {
+        foreach (SkillEffectModule modules in skill.GetComponents<SkillEffectModule>()) modules.OnHit(position);
+    }
 }

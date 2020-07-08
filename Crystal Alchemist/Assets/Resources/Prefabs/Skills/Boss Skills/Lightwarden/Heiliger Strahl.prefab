@@ -303,6 +303,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 3507569413577726248}
   myRigidbody: {fileID: 0}
   animator: {fileID: 6479076858912727842}
+  skillCollider: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls:
@@ -398,7 +399,6 @@ MonoBehaviour:
   forward: 0
   selfThrust: 0
   selfThrustTime: 0
-  stateType: 0
 --- !u!114 &946612639257048975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,8 +449,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  impactEffect: {fileID: 11400000, guid: 2c75b34599ffd2b419ab695b65005cdb, type: 2}
-  distanceBetweenImpacts: 0.1
   distance: 99
   laserSprite: {fileID: 3507569413577726248}
   targetRequired: 0

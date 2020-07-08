@@ -15,7 +15,7 @@ public class DamageNumbers : MonoBehaviour
     private float factor = 1;
 
     [SerializeField]
-    private TextMeshPro textField;
+    private TMP_Text textField;
 
     public void Initialize(string value, NumberColor color)
     {
@@ -35,7 +35,7 @@ public class DamageNumbers : MonoBehaviour
         }        
 
         Initialize(text, color);        
-    }
+    }   
 
     private void SetColor(NumberColor mode)
     {

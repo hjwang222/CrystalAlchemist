@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 2061831809823023025}
   - component: {fileID: 7116430054111049167}
   - component: {fileID: 1978907326292618844}
+  - component: {fileID: 1361467450409249482}
   m_Layer: 13
   m_Name: Feuerball
   m_TagString: Skill
@@ -213,6 +214,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 712452891642831029}
   myRigidbody: {fileID: 1942275408024995949}
   animator: {fileID: 1421051230670556681}
+  skillCollider: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -248,7 +250,6 @@ MonoBehaviour:
   forward: 0
   selfThrust: 0
   selfThrustTime: 0
-  stateType: 0
 --- !u!114 &8972037604900382335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,7 +332,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
   canBeReflected: 0
-  skillOnImpact: {fileID: 11400000, guid: 451a9a9d19e9ea146938ae7472f3830a, type: 2}
 --- !u!114 &1978907326292618844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +345,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
+--- !u!114 &1361467450409249482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4053507289354720650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4198b057e60445749808a436d5119bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  effect: {fileID: 11400000, guid: 451a9a9d19e9ea146938ae7472f3830a, type: 2}
+  mode: 2
+  hasMaxDistance: 0
+  maxDistanceBetween: 1
+  delay: 0
+  autoDestroyAfter: 0
 --- !u!1 &6503707887029913252
 GameObject:
   m_ObjectHideFlags: 0
