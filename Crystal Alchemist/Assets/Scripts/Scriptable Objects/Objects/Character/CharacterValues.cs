@@ -176,5 +176,36 @@ public class CharacterValues : ScriptableObject
         else this.buffs.Add(effect);
     }
 
+    public bool HasStatusEffects(List<StatusEffectRequired> effects)
+    {
+        int count = 0;
+
+        for(int i = 0; i < effects.Count; i++)
+        {
+            if (HasStatusEffect(effects[i])) count++;
+        }
+
+        return count == effects.Count;
+    }
+
+    private bool HasStatusEffect(StatusEffectRequired required)
+    {
+        List<StatusEffect> effects = this.debuffs;
+        if (required.effect.statusEffectType == StatusEffectType.buff) effects = this.buffs;
+
+        int found = 0;
+
+        for(int i = 0; i < effects.Count; i++)
+        {
+            if (effects[i].name == required.effect.name) found++;
+        }
+
+        if ((required.type == ShareType.exact && found == required.stacks) 
+         || (required.type == ShareType.less  && found <= required.stacks) 
+         || (required.type == ShareType.more  && found >= required.stacks)) return true;
+
+        return false;
+    }
+
     #endregion
 }

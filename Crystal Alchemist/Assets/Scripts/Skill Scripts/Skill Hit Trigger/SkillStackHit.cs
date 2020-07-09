@@ -2,15 +2,16 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class SkillStack : SkillHitTrigger
+public enum ShareType
 {
-    public enum ShareType
-    {
-        less,
-        exact,
-        more
-    }
+    less,
+    exact,
+    more
+}
 
+public class SkillStackHit : SkillHitTrigger
+{
+    [InfoBox("Hits Character depending on how many characters are in the same collider")]
     [BoxGroup("Mechanics")]
     [SerializeField]
     private int amountNeeded;
@@ -19,24 +20,21 @@ public class SkillStack : SkillHitTrigger
     [SerializeField]
     private ShareType type;
 
+    //TODO: Show amount as points
+
     private List<Character> listOfCharacters = new List<Character>();
 
-    private bool hitIt = false; 
+    public void CalculateDamage()
+    {
+        if ((this.type == ShareType.exact && GetAmount() == this.amountNeeded)
+         || (this.type == ShareType.less && GetAmount() <= this.amountNeeded)
+         || (this.type == ShareType.more && GetAmount() >= this.amountNeeded)) this.skill.SetPercentage(0);
+        else this.skill.SetPercentage(100);
+    }
 
     public int GetAmount()
     {
         return this.listOfCharacters.Count;
-    }
-
-    public void HitIt() => this.hitIt = true;
-
-    private float CalculateDamage()
-    {
-        if ((this.type == ShareType.exact && GetAmount() == this.amountNeeded)
-         || (this.type == ShareType.less && GetAmount() <= this.amountNeeded)
-         || (this.type == ShareType.more && GetAmount() >= this.amountNeeded)) return 0; 
-
-        return 100; //full damage
     }
 
     private void OnTriggerEnter2D(Collider2D hittedCharacter)
@@ -46,8 +44,7 @@ public class SkillStack : SkillHitTrigger
             Character character = hittedCharacter.GetComponent<Character>();
             if (character != null)
             {
-                if (!this.hitIt && !this.listOfCharacters.Contains(character)) this.listOfCharacters.Add(character);
-                else if (this.hitIt) this.skill.hitIt(character, CalculateDamage());
+                if (!this.listOfCharacters.Contains(character)) this.listOfCharacters.Add(character);
             }             
         }
     }
@@ -57,7 +54,7 @@ public class SkillStack : SkillHitTrigger
         if (CollisionUtil.checkCollision(hittedCharacter, this.skill))
         {
             Character character = hittedCharacter.GetComponent<Character>();
-            if (character != null && !this.hitIt && this.listOfCharacters.Contains(character)) this.listOfCharacters.Remove(character);            
+            if (character != null && this.listOfCharacters.Contains(character)) this.listOfCharacters.Remove(character);            
         }
     }
 }

@@ -1,20 +1,22 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 public class SkillHitTrigger : MonoBehaviour
 {
-    [HideInInspector]
+    [InfoBox("Set this manually if Skill is not in the same gameobject",InfoMessageType.Warning)]
     public Skill skill;
 
-    private void Awake() => this.skill = this.GetComponent<Skill>();
-
-    public virtual void Initialize()
+    private void Awake()
     {
-
+        if (this.skill == null) this.skill = this.GetComponent<Skill>();
     }
 
-    public virtual void Updating()
-    {
+    private void Start() => Initialize();
 
-    }
+    private void Update() => Updating();
+
+    public virtual void Initialize() { }
+
+    public virtual void Updating() { }
 }
 

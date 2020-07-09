@@ -68,6 +68,7 @@ public class Skill : MonoBehaviour
     private bool isRapidFire;
     private bool attached;
     private float progress;
+    private float percentage;
 
     #endregion
 
@@ -138,9 +139,6 @@ public class Skill : MonoBehaviour
 
         SkillExtension[] extensions = this.GetComponents<SkillExtension>();
         for (int i = 0; i < extensions.Length; i++) extensions[i].Initialize();
-
-        SkillHitTrigger[] trigger = this.GetComponents<SkillHitTrigger>();
-        for (int i = 0; i < trigger.Length; i++) trigger[i].Initialize();
 
         if (this.lockDirection) GameEvents.current.DoDirectionLock();
         this.OnStart?.Invoke();
@@ -227,9 +225,6 @@ public class Skill : MonoBehaviour
 
         SkillExtension[] extensions = this.GetComponents<SkillExtension>();
         for (int i = 0; i < extensions.Length; i++) extensions[i].Updating();
-
-        SkillHitTrigger[] trigger = this.GetComponents<SkillHitTrigger>();
-        for (int i = 0; i < trigger.Length; i++) trigger[i].Updating();
 
         if (this.lockDirection && !this.isRapidFire) GameEvents.current.DoDirectionLock();
     }
@@ -351,6 +346,8 @@ public class Skill : MonoBehaviour
     {
         return this.timeDistortion;
     }
+
+    public void SetPercentage(float value) => this.percentage = value;
 
     #endregion
 

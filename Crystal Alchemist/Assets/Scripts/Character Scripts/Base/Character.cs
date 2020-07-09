@@ -386,6 +386,8 @@ public class Character : MonoBehaviour
     {
         SkillTargetModule targetModule = skill.GetComponent<SkillTargetModule>();
 
+
+
         if (this.values.currentState != CharacterState.dead
             && targetModule != null
             && ((!this.values.cantBeHit) || targetModule.affections.CanIgnoreInvinvibility()))
@@ -406,7 +408,7 @@ public class Character : MonoBehaviour
                     }
                 }
 
-                foreach (CharacterResource elem in targetModule.affectedResources)
+                foreach (CharacterResource elem in targetModule.GetAffectedResource(this))
                 {
                     float amount = elem.amount * percentage / 100;
 
