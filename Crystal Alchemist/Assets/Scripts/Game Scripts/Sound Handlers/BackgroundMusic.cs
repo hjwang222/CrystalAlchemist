@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class BackgroundMusic : MonoBehaviour
 {
+    [SerializeField]
+    private bool playOnAwake = true;
+
     [SerializeField]
     private AudioClip startMusic;
 
@@ -15,11 +17,22 @@ public class BackgroundMusic : MonoBehaviour
     [SerializeField]
     private float fadeOut;
 
-    private void Start() => MusicEvents.current.PlayMusic(this.startMusic, this.loopMusic, this.fadeIn);    
+    private void Start()
+    {
+        if (this.playOnAwake) PlayMusic();
+    }
+
+    public void PlayMusic()
+    {
+        StopMusic();
+        MusicEvents.current.PlayMusic(this.startMusic, this.loopMusic, this.fadeIn);
+    }
+
+    public void StopMusic() => MusicEvents.current.StopMusic(this.fadeOut);
 
     public void PlayMusic(AudioClip music)
     {
-        MusicEvents.current.StopMusic(this.fadeOut);
+        StopMusic();
         MusicEvents.current.PlayMusic(null, music, this.fadeIn);
     }
 }

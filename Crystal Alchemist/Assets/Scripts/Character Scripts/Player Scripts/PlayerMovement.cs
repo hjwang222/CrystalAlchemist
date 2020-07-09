@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 [RequireComponent(typeof(Player))]
 public class PlayerMovement : PlayerComponent
@@ -17,7 +18,7 @@ public class PlayerMovement : PlayerComponent
 
     public void MovePlayer(InputAction.CallbackContext ctx) => SetChange(ctx);
 
-    public void MouseClick(InputAction.CallbackContext context) => Set();
+    //public void MouseClick(InputAction.CallbackContext context) => Set();
 
     private void Start()
     {
@@ -38,19 +39,18 @@ public class PlayerMovement : PlayerComponent
 
     private void SetToZero() => this.change = Vector2.zero;
 
-    private void Set()
+    public void MoveToPosition()
     {
-        /*
-        if (Camera.main != null)
+        /*if (Camera.main != null)
         {
             Vector2 pos = Input.mousePosition;
             pos = Camera.main.ScreenToWorldPoint(pos);
             target = pos;
         }
 
-        if (Vector2.Distance(this.player.GetGroundPosition(), target) > 0.3f)
+        if (Vector2.Distance(this.player.GetGroundPosition(), position.transform.position) > 0.3f)
         {
-            this.change = (target - this.player.GetGroundPosition()).normalized;
+            this.change = ((Vector2)position.transform.position - this.player.GetGroundPosition()).normalized;
         }
         else this.change = Vector2.zero;*/
     }

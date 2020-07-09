@@ -28,13 +28,18 @@ public class MiniMap : MenuBehaviour
     public override void Start()
     {
         base.Start();
-        SetText(teleportList.lastTeleport, this.returnIcon, this.returnName);
-        SetText(teleportList.nextTeleport, this.lastIcon, this.lastName);
+        SetText(teleportList.GetLastTeleport(), this.returnIcon, this.returnName);
+        SetText(teleportList.GetNextTeleport(), this.lastIcon, this.lastName);
     }
 
     private void SetText(TeleportStats stats, Image image, TextMeshProUGUI textField)
     {
-        if (stats == null) textField.text = "-";
+        if (stats == null)
+        {
+            textField.text = "-";
+            return;
+        }
+
         textField.text = stats.GetTeleportName();
         if (stats.icon == null) image.enabled = false;
         else image.sprite = stats.icon;

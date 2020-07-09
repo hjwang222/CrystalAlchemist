@@ -1,10 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public static class UnityUtil
 {
+    public static void SelectDropDown(TMP_Dropdown dropDown, string text)
+    {
+        for (int i = 0; i < dropDown.options.Count; i++)
+        {
+            if (dropDown.options[i].text == text) { dropDown.value = i; break; }
+        }
+    }
+
+    public static void ScreenToWorld(Transform transform, GameObject parent)
+    {
+        if (Camera.main == null) return;
+        Vector2 screen = Camera.main.WorldToScreenPoint(transform.position);
+        parent.transform.DOMove(screen,0);
+    }
+
     public static T GetComponentAll<T>(GameObject gameObject)
     {
         if (gameObject.GetComponentInChildren<T>() != null) return gameObject.GetComponentInChildren<T>();

@@ -26,7 +26,7 @@ public class SkillSummon : SkillExtension
             pet.name = ai.name;
             pet.values.direction = this.skill.GetDirection();
             pet.partner = this.skill.sender;
-            pet.InitializeAddSpawn(null);
+            pet.InitializeAddSpawn();
 
             this.skill.sender.values.activePets.Add(pet);
         }

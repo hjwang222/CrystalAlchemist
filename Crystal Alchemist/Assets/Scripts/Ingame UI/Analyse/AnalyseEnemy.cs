@@ -1,14 +1,29 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class AnalyseEnemy : MonoBehaviour
 {
+    [BoxGroup("Text")]
     [SerializeField]
-    private TextMeshPro TMPcharacterName;
+    private TMP_Text TMPcharacterName;
+
+    [BoxGroup("UI")]
     [SerializeField]
-    private SpriteFillBar lifeBar;
+    private Image ImageitemPreview;
+    [BoxGroup("UI")]
     [SerializeField]
-    private SpriteRenderer ImageitemPreview;
+    private Image healthbar;
+
+    [BoxGroup("Local")]
+    [SerializeField]
+    private SpriteRenderer ImageitemPreviewOLD;
+    [BoxGroup("Local")]
+    [SerializeField]
+    private SpriteFillBar healthbarOLD;
+
+    [BoxGroup]
     [SerializeField]
     private StatusEffectBar statusEffectBar;
 
@@ -27,18 +42,24 @@ public class AnalyseEnemy : MonoBehaviour
 
     private void showEnemyInfo()
     {
-        this.ImageitemPreview.gameObject.SetActive(false);
+        if (ImageitemPreview != null) this.ImageitemPreview.gameObject.SetActive(false);
+        if (TMPcharacterName != null) this.TMPcharacterName.text = this.npc.GetCharacterName();
+        if (healthbar != null) this.healthbar.fillAmount = this.npc.values.life / this.npc.values.maxLife;
 
-        this.TMPcharacterName.text = this.npc.GetCharacterName();
-        this.lifeBar.fillAmount((this.npc.values.life / this.npc.values.maxLife));
+        if (ImageitemPreviewOLD != null) this.ImageitemPreviewOLD.gameObject.SetActive(false);
+        if (healthbarOLD != null) this.healthbarOLD.fillAmount(this.npc.values.life / this.npc.values.maxLife);
+
         this.statusEffectBar.setCharacter(this.npc.values);
 
         if (this.npc.values.itemDrop != null 
          && this.npc.values.currentState != CharacterState.dead
          && this.npc.values.currentState != CharacterState.respawning)
         {
-            this.ImageitemPreview.gameObject.SetActive(true);
-            this.ImageitemPreview.sprite = this.npc.values.itemDrop.stats.getSprite(); //TODONEW
+            if (ImageitemPreview != null) this.ImageitemPreview.gameObject.SetActive(true);
+            if (ImageitemPreview != null) this.ImageitemPreview.sprite = this.npc.values.itemDrop.stats.getSprite(); //TODONEW
+
+            if (ImageitemPreviewOLD != null) this.ImageitemPreviewOLD.gameObject.SetActive(true);
+            if (ImageitemPreviewOLD != null) this.ImageitemPreviewOLD.sprite = this.npc.values.itemDrop.stats.getSprite(); //TODONEW
         }
     }
 }

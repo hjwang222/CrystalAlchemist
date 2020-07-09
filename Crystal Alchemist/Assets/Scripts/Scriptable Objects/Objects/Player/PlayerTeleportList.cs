@@ -8,17 +8,61 @@ public class PlayerTeleportList : ScriptableObject
     [SerializeField]
     private List<TeleportStats> list = new List<TeleportStats>();
 
-    public TeleportStats nextTeleport;
-    public TeleportStats lastTeleport;
+    [SerializeField]
+    private TeleportStats nextTeleport;
+
+    [SerializeField]
+    private TeleportStats lastTeleport;
+
+    private bool ShowSpawnIn;
+    private bool ShowSpawnOut;
+
+    public bool GetShowSpawnIn()
+    {
+        return this.ShowSpawnIn;
+    }
+
+    public bool GetShowSpawnOut()
+    {
+        return this.ShowSpawnIn;
+    }
 
     public void SetNextTeleport(TeleportStats stats)
     {
         this.nextTeleport = stats;
+        this.ShowSpawnIn = this.nextTeleport.showAnimationIn;
+        this.ShowSpawnOut = this.nextTeleport.showAnimationOut;
+    }
+
+    public void SetAnimation(bool showIn, bool showOut)
+    {
+        this.ShowSpawnIn = showIn;
+        this.ShowSpawnOut = showOut;
     }
 
     public void SetLastTeleport(TeleportStats stats)
     {
         this.lastTeleport = stats;
+    }
+
+    public TeleportStats GetNextTeleport()
+    {
+        return this.nextTeleport;
+    }
+
+    public TeleportStats GetLastTeleport()
+    {
+        return this.lastTeleport;
+    }
+
+    public bool HasLast()
+    {
+        return this.lastTeleport != null;
+    }
+
+    public bool HasNext()
+    {
+        return this.nextTeleport != null;
     }
 
     public void SetReturnTeleport()
@@ -46,7 +90,7 @@ public class PlayerTeleportList : ScriptableObject
         for (int i = 0; i < this.list.Count; i++)
         {
             if (list[i].scene == stat.scene 
-             && list[i].teleportName == stat.teleportName) return true;
+             && list[i].Exists(stat.teleportName)) return true;
         }
 
         return false;

@@ -8,6 +8,10 @@ public class DeathScreen : MonoBehaviour
 {
     [BoxGroup("Mandatory")]
     [SerializeField]
+    private BoolValue CutSceneValue;
+
+    [BoxGroup("Mandatory")]
+    [SerializeField]
     private PlayerTeleportList playerTeleport;
 
     [BoxGroup("Music")]
@@ -72,7 +76,8 @@ public class DeathScreen : MonoBehaviour
     {
         Invoke("ReturnToTitleScreen", 60);
 
-        SceneManager.UnloadSceneAsync("UI");
+        this.CutSceneValue.setValue(true);
+        GameEvents.current.DoCutScene();
         MusicEvents.current.StopMusic(this.fadeOut);
         MenuEvents.current.DoPostProcessingFade(ShowText);
         GameEvents.current.OnCancel += Skip;
@@ -105,21 +110,37 @@ public class DeathScreen : MonoBehaviour
     {
         this.cursor.gameObject.SetActive(true);
         this.returnTitleScreen.SetActive(true);
-        if (this.playerTeleport.lastTeleport != null) this.returnSavePoint.SetActive(true);
-        if (this.playerTeleport.nextTeleport != null) this.returnLastPoint.SetActive(true);
+        if (this.playerTeleport.HasLast()) this.returnSavePoint.SetActive(true);
+        if (this.playerTeleport.HasNext()) this.returnLastPoint.SetActive(true);
         startCountdown = true;
     }
+    
+    private void DisableButtons()
+    {
+        this.returnLastPoint.SetActive(false);
+        this.returnSavePoint.SetActive(false);
+        this.returnTitleScreen.SetActive(false);
+        this.cursor.gameObject.SetActive(false);
+        this.textField.gameObject.SetActive(false);
+    }
 
-    public void ReturnToTitleScreen() => SceneManager.LoadSceneAsync(0);
+    public void ReturnToTitleScreen()
+    {
+        DisableButtons();
+        SceneManager.LoadSceneAsync(0);
+    }
 
     public void ReturnSaveGame()
     {
+        DisableButtons();
         this.playerTeleport.SetReturnTeleport();
         GameEvents.current.DoTeleport();
     }
 
     public void ReturnLastPoint()
     {
+        DisableButtons();
+        this.playerTeleport.SetAnimation(true, true);
         GameEvents.current.DoTeleport();
     }
 

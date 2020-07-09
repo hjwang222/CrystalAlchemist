@@ -307,10 +307,7 @@ public class AIMovement : AIComponent
 
     private void MoveToPosition(Vector3 position)
     {
-        if (this.npc.values.currentState != CharacterState.knockedback
-            && this.npc.values.currentState != CharacterState.attack
-            && this.npc.values.currentState != CharacterState.dead
-            && this.npc.values.currentState != CharacterState.respawning
+        if (this.npc.values.CanMove()
             && position != MasterManager.globalValues.nullVector)
         {
             Vector2 direction = ((Vector2)position - this.npc.GetGroundPosition()).normalized;

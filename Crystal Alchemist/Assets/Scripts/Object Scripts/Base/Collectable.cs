@@ -125,11 +125,11 @@ public class Collectable : MonoBehaviour
     }
 
     [Button]
-    public void SetSelfDestruction()
+    public void SetSelfDestruction(float duration)
     {
-        if (this.itemStats.IsKeyItem()) return;
+        if (this.itemStats.IsKeyItem() || duration <= 0) return;
         this.hasDuration = true;
-        this.elapsed = 60;
+        this.elapsed = duration;
     }
 
     private void OnDisable()

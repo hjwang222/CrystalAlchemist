@@ -8,13 +8,10 @@ public class StatusEffectUI : MonoBehaviour
     private Image iconUI;
 
     [SerializeField]
-    private TextMeshProUGUI textfieldUI;
+    private TMP_Text textfieldUI;
 
     [SerializeField]
     private SpriteRenderer icon;
-
-    [SerializeField]
-    private TextMeshPro textfield;
 
     private StatusEffect statusEffect;
 
@@ -29,7 +26,6 @@ public class StatusEffectUI : MonoBehaviour
     {
         string seconds = FormatUtil.setDurationToString(statusEffect.getTimeLeft());
         if (statusEffect.getTimeLeft() <= 0 || !statusEffect.hasDuration) seconds = "";
-        if (this.textfield != null) this.textfield.text = seconds;
         if (this.textfieldUI != null) this.textfieldUI.text = seconds;
     }
 

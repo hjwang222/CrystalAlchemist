@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 public class OnCancelManager : MonoBehaviour
 {
@@ -30,7 +31,16 @@ public class OnCancelManager : MonoBehaviour
 
     public void OnCancel()
     {
-        if (this.gameObject.activeInHierarchy && this.onCancel != null && this.inputPossible) this.onCancel.Invoke();
+        if (this.gameObject.activeInHierarchy 
+            && this.onCancel != null 
+            && this.inputPossible
+            && temp()) this.onCancel.Invoke();
+    }
+
+    private bool temp()
+    {
+        return (MasterManager.globalValues.openedMenues.Count <= 1 
+             || MasterManager.globalValues.openedMenues.Last() == this.gameObject);
     }
 
     private IEnumerator delayCo()

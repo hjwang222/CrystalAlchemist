@@ -4,6 +4,7 @@ public class NonPlayer : Character
 {
     public override void Start()
     {
+        //GameEvents.current.OnKill += DestroyItWithoutDrop;
         if (this.IsSummoned)
         {
             SetCharacterSprites(false);
@@ -14,7 +15,7 @@ public class NonPlayer : Character
 
         if (this.stats.showAnalyse)
         {
-            AnalyseInfo analyse = Instantiate(MasterManager.analyseInfo, this.transform.position, Quaternion.identity, this.transform);
+            AnalyseInfo analyse = Instantiate(MasterManager.analyseInfo, this.GetHeadPosition(), Quaternion.identity, this.transform);
             analyse.SetTarget(this.gameObject);
         }
 
@@ -24,5 +25,11 @@ public class NonPlayer : Character
             PlayRespawnAnimation();
             SpawnIn();
         }
+    }
+
+    public override void OnDestroy()
+    {
+        //GameEvents.current.OnKill -= DestroyItWithoutDrop;
+        base.OnDestroy();
     }
 }

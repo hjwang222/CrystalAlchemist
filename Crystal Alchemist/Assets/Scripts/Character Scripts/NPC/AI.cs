@@ -1,19 +1,20 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class AI : NonPlayer
 {
     [BoxGroup("AI")]
     public bool flip = true;
 
-    [HideInInspector]
+    [BoxGroup("Debug")]
     public Character target;
 
-    [HideInInspector]
+    [BoxGroup("Debug")]
     public Dictionary<Character, float[]> aggroList = new Dictionary<Character, float[]>();
 
-    [HideInInspector]
+    [BoxGroup("Debug")]
     public Character partner;
 
     [HideInInspector]
@@ -29,9 +30,9 @@ public class AI : NonPlayer
     }
     #region Animation, StateMachine
 
-    public void InitializeAddSpawn(Character target)
+    public void InitializeAddSpawn(Character target, bool hasMaxDuration, float maxDuration)
     {
-        this.InitializeAddSpawn();
+        this.InitializeAddSpawn(hasMaxDuration, maxDuration);
         this.target = target;
     }
 
@@ -56,8 +57,6 @@ public class AI : NonPlayer
         if (character == this) this.rangeTriggered = value;
     }
 
-
-
     public override void Update()
     {
         base.Update();
@@ -81,6 +80,11 @@ public class AI : NonPlayer
     public void changeState(CharacterState newState)
     {
         if (this.values.currentState != newState) this.values.currentState = newState;        
+    }
+
+    public void MoveCharacters(Vector2 position, float duration)
+    {
+        this.myRigidbody.DOMove(position, duration);
     }
 
     #endregion

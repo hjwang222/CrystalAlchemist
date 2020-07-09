@@ -31,28 +31,20 @@ public class ResolutionMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        SelectDropDown(this.resolutionDropDown, GetCurrentResolution());
-        SelectDropDown(this.screenModeDropDown, GetCurrentScreenMode());
+        UnityUtil.SelectDropDown(this.resolutionDropDown, GetCurrentResolution());
+        UnityUtil.SelectDropDown(this.screenModeDropDown, GetCurrentScreenMode());
         SetSliders();
-    }
-
-    private void SelectDropDown(TMP_Dropdown dropDown, string text)
-    {
-        for (int i = 0; i < dropDown.options.Count; i++)
-        {
-            if (dropDown.options[i].text == text) { dropDown.value = i; break; }
-        }
     }
 
     private void SetSliders()
     {
         this.cameraSize = MasterManager.settings.cameraDistance;
         this.cameraSlider.value = cameraSize;
-        this.cameraSliderValue.text = this.cameraSize + "";
+        this.cameraSliderValue.text = this.cameraSlider.value + "";
 
         this.UIsize = MasterManager.settings.UISize;
         this.UISlider.value = UIsize*100;
-        this.UISliderValue.text = this.UIsize + "";
+        this.UISliderValue.text = this.UISlider.value + "";
     }
 
     public void SetCameraValue()

@@ -22,7 +22,7 @@ MonoBehaviour:
   hasSkillBookInfo: 0
   icon: {fileID: -3657551050585085934, guid: 9d16c5cb29ddbed48ae7f8f2281d58ce, type: 3}
   info: {fileID: 0}
-  cooldown: 1
+  cooldown: 0.1
   hasMaxDuration: 1
   maxDuration: 2
   hasDelay: 0
@@ -30,9 +30,10 @@ MonoBehaviour:
   hasCastTime: 1
   castTime: 2
   showCastbar: 1
+  castAnimation: {fileID: 0}
   hasMaxAmount: 0
   maxAmount: 1
-  requirements: 0
+  requirements: {fileID: 0}
   isRapidFire: 1
   remoteActivation: 0
   deactivateButtonUp: 0
@@ -46,3 +47,4 @@ MonoBehaviour:
   holdTimer: 0
   state: 6
   enabled: 1
+  active: 1

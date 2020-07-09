@@ -8,13 +8,6 @@ public class SkillLaser : SkillExtension
 
     [InfoBox("Kein Hit-Script notwendig, da kein Collider verwendet wird")]
     [SerializeField]
-    private Ability impactEffect;
-
-    [ShowIf("impactEffect")]
-    [SerializeField]
-    private float distanceBetweenImpacts = 1f;
-
-    [SerializeField]
     [MinValue(0)]
     private float distance = 0;
 
@@ -66,23 +59,7 @@ public class SkillLaser : SkillExtension
         if (hitted != null && this.skill.GetTriggerActive())
         {
             if(CollisionUtil.checkCollision(hitted, this.skill)) this.skill.hitIt(hitted);
-            setImpactEffect(hitPoint);
-        }
-    }
-
-    private void setImpactEffect(Vector2 hitpoint)
-    {
-        if (this.impactEffect != null)
-        {
-            this.hitPoints.RemoveAll(item => item == null);
-
-            bool impactPossible = UnityUtil.CheckDistances(hitpoint, this.distanceBetweenImpacts, this.hitPoints);
-
-            if (impactPossible)
-            {
-                Skill hitPointSkill = this.impactEffect.InstantiateSkill(hitpoint, this.skill.sender); 
-                this.hitPoints.Add(hitPointSkill.gameObject);
-            }
+            AbilityUtil.SetEffectOnHit(this.skill, hitPoint);
         }
     }
     #endregion

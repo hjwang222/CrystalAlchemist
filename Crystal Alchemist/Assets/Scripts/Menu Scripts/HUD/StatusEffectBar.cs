@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class StatusEffectBar : MonoBehaviour
@@ -18,6 +17,12 @@ public class StatusEffectBar : MonoBehaviour
     private void Start()
     {
         this.statusEffectGameObject.gameObject.SetActive(false);
+        GameEvents.current.OnEffectUpdate += updateStatusEffect;
+    }
+
+    private void OnDestroy()
+    {
+        GameEvents.current.OnEffectUpdate -= updateStatusEffect;
     }
 
     public void setCharacter(CharacterValues characterValues)

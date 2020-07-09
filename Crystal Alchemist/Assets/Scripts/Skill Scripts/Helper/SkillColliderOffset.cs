@@ -12,9 +12,9 @@ public class SkillColliderOffset : SkillCollider
     [SerializeField]
     private Mode mode = Mode.center;
 
-    private void Start() => this.transform.position = GetPostion();    
+    private void Start() => this.transform.position = GetPosition();    
 
-    private Vector2 GetPostion()
+    public override Vector2 GetPosition()
     {
         if (this.mode == Mode.center)
         {

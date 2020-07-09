@@ -1,22 +1,10 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections;
-using DG.Tweening;
 using System;
-using UnityEngine.InputSystem;
 
 public class Player : Character
 {
-    [Required]
-    [BoxGroup("Player Objects")]
-    [SerializeField]
-    private SimpleSignal healthSignalUI;
-
-    [Required]
-    [BoxGroup("Player Objects")]
-    [SerializeField]
-    private SimpleSignal manaSignalUI;
-
     [Required]
     [BoxGroup("Player Objects")]
     [SerializeField]
@@ -35,17 +23,30 @@ public class Player : Character
     [SerializeField]
     private BoolValue CutSceneValue;
 
-    ///////////////////////////////////////////////////////////////
+    [BoxGroup("Player Objects")]
+    [SerializeField]
+    private PlayerAttributes attributes;
+
+///////////////////////////////////////////////////////////////
 
     public override void Awake()
     {        
         this.values.Initialize();    
         SetComponents();
+        this.attributes.SetValues();
     }
 
     public override void OnEnable()
     {
-        if (this.values.life <= 0) ResetValues();
+        if (this.values.life <= 0) ResetValues();        
+    }
+
+    public override void ResetValues()
+    {
+        base.ResetValues();
+        this.attributes.SetValues();
+        this.values.life = this.values.maxLife;
+        this.values.mana = this.values.maxMana;
     }
 
     public override void Start()
@@ -65,8 +66,7 @@ public class Player : Character
         PlayerComponent[] components = this.GetComponents<PlayerComponent>();
         for (int i = 0; i < components.Length; i++) components[i].Initialize();
 
-        this.healthSignalUI.Raise();
-        this.manaSignalUI.Raise();    
+        GameEvents.current.DoManaLifeUpdate();  
         this.ChangeDirection(this.values.direction);
 
         this.animator.speed = 1;
@@ -165,8 +165,8 @@ public class Player : Character
 
         switch (type)
         {
-            case CostType.life: callSignal(this.healthSignalUI, value); break;
-            case CostType.mana: callSignal(this.manaSignalUI, value); break;
+            case CostType.life: callSignal(value); break;
+            case CostType.mana: callSignal(value); break;
             case CostType.item: this.GetComponent<PlayerItems>().UpdateInventory(item, Mathf.RoundToInt(value)); break;
         }
 
@@ -179,27 +179,23 @@ public class Player : Character
         else this.values.currentState = CharacterState.idle;
     }
 
-    public void callSignal(SimpleSignal signal, float addResource)
+    public void callSignal(float addResource)
     {
-        if (signal != null && addResource != 0) signal.Raise();
+        if (addResource != 0) GameEvents.current.DoManaLifeUpdate();
     }
 
+
+    public override void gotHit(Skill skill, float percentage, bool knockback)
+    {
+        GameEvents.current.DoCancel();
+        base.gotHit(skill, percentage, knockback);
+    }
 
     private void SetState(CharacterState state)
     {
+        if (this.values.currentState == CharacterState.dead) return;
         this.values.currentState = state;
-        /*
-        float delay = 0;
-        if (state != CharacterState.inDialog && state != CharacterState.inMenu) delay = 0.3f;
-
-        StartCoroutine(delayCo(state, delay));*/
     } 
-
-    private IEnumerator delayCo(CharacterState state, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        this.values.currentState = state;
-    }
 
     private void CollectIt(ItemStats stats)
     {

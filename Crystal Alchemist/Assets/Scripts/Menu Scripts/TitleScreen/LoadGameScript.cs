@@ -17,6 +17,6 @@ public class LoadGameScript : MonoBehaviour
 
     private void AfterLoad()
     {
-        SceneManager.LoadSceneAsync(this.saveGame.teleportList.nextTeleport.scene);
+        SceneManager.LoadSceneAsync(this.saveGame.teleportList.GetNextTeleport().scene);
     }
 }

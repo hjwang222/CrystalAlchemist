@@ -152,6 +152,13 @@ public class CharacterStats : ScriptableObject
     public bool showAnalyse = true;
 
     [BoxGroup("Schaden")]
+    public bool hasSelfDestruction = false;
+
+    [BoxGroup("Schaden")]
+    [ShowIf("hasSelfDestruction")]
+    public float selfDestructionTimer;
+
+    [BoxGroup("Schaden")]
     [Tooltip("Wie stark (-) oder schwach (+) kann das Objekt zurück gestoßen werden?")]
     public float antiKnockback = 0;
 

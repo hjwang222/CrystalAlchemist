@@ -32,10 +32,11 @@ public class CharacterAttributeStats : MonoBehaviour
         int points = this.mainMenu.attributes.GetPoints(this.type);
         int pointsLeft = this.mainMenu.GetPointsLeft();
 
-        if (points == value) value--;
-        else if (value > pointsLeft) value = points + pointsLeft;        
+        if (points > 0 && points == value) value--;
+        else if (value > pointsLeft && pointsLeft >= 0) value = pointsLeft;        
 
         this.mainMenu.attributes.SetPoints(this.type, value);
+        this.mainMenu.attributes.SetValues();
         updateUI();
         this.mainMenu.UpdatePoints();
     }

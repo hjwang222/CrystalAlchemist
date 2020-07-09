@@ -24,6 +24,7 @@ public class MenuEvents : MonoBehaviour
     public Action OnTutorial;
     public Action OnAttributeUpdate;
     public Action<Action> OnPostProcessingFade;
+    public Action OnFadeOut;
     
     public void OpenMenuDialogBox() => this.OnMenuDialogBox?.Invoke();
     public void OpenDialogBox() => this.OnDialogBox?.Invoke();
@@ -42,4 +43,5 @@ public class MenuEvents : MonoBehaviour
     public void AssignAbility() => this.OnAbilityAssigned?.Invoke();
     public void UpdateAttributes() => this.OnAttributeUpdate?.Invoke();
     public void DoPostProcessingFade(Action OnAfterFadeCompleted) => this.OnPostProcessingFade?.Invoke(OnAfterFadeCompleted);
+    public void DoFadeOut() => this.OnFadeOut?.Invoke();
 }
