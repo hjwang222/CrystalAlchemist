@@ -10,7 +10,6 @@ public class TODOLIST : MonoBehaviour
     //GRAPHICS: New Nitro Animation
     //GRAPHICS: Smoke (Collectable, Interactable, Warp)
 
-    //TODO: Auto Update (remote config)
     //TODO: Skill Extension: Elements
     //TODO: Skill Extension: Explosion on Enter
 

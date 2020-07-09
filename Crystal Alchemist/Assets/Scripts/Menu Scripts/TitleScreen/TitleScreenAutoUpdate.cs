@@ -4,54 +4,91 @@ using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class TitleScreenAutoUpdate : MonoBehaviour
 {
-    //1. Check Version
-    //2. Show Info
-    //3. Download
-    //4. Launch Updater
     private UnityWebRequest www;
-
     private bool isDownloading = false;
     private string current;
 
-    private void Start()
+    [SerializeField]
+    private UnityEvent OnNewVersion;
+
+    [SerializeField]
+    private UnityEvent OnDownloadCompleted;
+
+    [SerializeField]
+    private UnityEvent NoNewVersion;
+
+    [SerializeField]
+    private Image bar;
+
+    private string updaterPath;
+
+    private void Start() => Invoke("StartUp", 1f);    
+
+    private void StartUp()
     {
         this.current = Directory.GetCurrentDirectory();
-        this.www = new UnityWebRequest("http://www.gungnir-arts.com/Download/Patch.zip");
+        updaterPath = Path.Combine(current, "CrystalAlchemistUpdater.exe");
+
+        if (File.Exists(updaterPath)) StartCoroutine(Check());
+        else NoNewVersion?.Invoke();
     }
 
-    [Button]
-    private void Download()
+    private IEnumerator Check()
     {
-        StartCoroutine(GetRequest());
+        WWW w = new WWW("http://www.gungnir-arts.com/Download/Version.txt");
+        yield return w;
+
+        bool update = false;
+
+        if (w.error == null)
+        {
+            string version = w.text;
+            string text = version.Replace(".", "");
+
+            if (text.Length > 1)
+            {
+                int onlineVersion = Convert.ToInt32(text);
+                int currentVersion = Convert.ToInt32(Application.version.Replace(".", ""));
+
+                if (onlineVersion > currentVersion) update = true;
+            }
+        }
+
+        if (update) this.OnNewVersion?.Invoke();
+        else this.NoNewVersion?.Invoke();
     }
 
-    private void Update()
-    {
-        if(this.isDownloading) UnityEngine.Debug.Log(this.www.downloadProgress);
+    public void Download() => StartCoroutine(DownloadFile());
+
+    public void UpdateGame()
+    {       
+        if (File.Exists(updaterPath))
+        {
+            Process.Start(updaterPath);
+            Application.Quit();
+        }
+        else NoNewVersion?.Invoke();
     }
 
-    IEnumerator GetRequest()
+    private void ShowProgress() => bar.fillAmount = this.www.downloadProgress;    
+
+    IEnumerator DownloadFile()
     {
-        this.isDownloading = true;
-        string path = Path.Combine(current, "Patch.zip");
+        this.www = new UnityWebRequest("http://www.gungnir-arts.com/Download/CrystalAlchemist.zip");
+        string path = Path.Combine(current, "CrystalAlchemist.zip");
         www.downloadHandler = new DownloadHandlerFile(path);
 
+        InvokeRepeating("ShowProgress", 0, 0.3f);
         yield return www.SendWebRequest();
-
-        this.isDownloading = false;
+        CancelInvoke("ShowProgress");
 
         if (www.isNetworkError || www.isHttpError) UnityEngine.Debug.Log(www.error);
-        else
-        {
-            UnityEngine.Debug.Log("Success " + path);            
-            Application.Quit();
-
-            path = Path.Combine(current, "CrystalAlchemistUpdater.exe");
-            Process.Start(path);
-        }
+        else this.OnDownloadCompleted?.Invoke();
     }
 }
