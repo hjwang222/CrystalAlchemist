@@ -14,12 +14,13 @@ public enum DialogTextTrigger
 [System.Serializable]
 public class DialogText
 {
+    [BoxGroup]
     public DialogTextTrigger trigger;
-
+    [BoxGroup]
     public string ID;
-
+    [BoxGroup]
     public LocalisationFileType type = LocalisationFileType.objects;
-
+    [BoxGroup]
     public UnityEvent eventOnClose;
 }
 

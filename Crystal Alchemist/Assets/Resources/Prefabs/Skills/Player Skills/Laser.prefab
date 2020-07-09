@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 862621948294645814}
   - component: {fileID: 965314693086916177}
   - component: {fileID: 1969711209088018432}
+  - component: {fileID: 7524939251811781075}
   m_Layer: 13
   m_Name: Laser
   m_TagString: Skill
@@ -129,6 +130,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 3924551678506968721}
   myRigidbody: {fileID: 0}
   animator: {fileID: 6859513477840706715}
+  skillCollider: {fileID: 0}
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -164,7 +166,6 @@ MonoBehaviour:
   forward: 0
   selfThrust: 0
   selfThrustTime: 0
-  stateType: 0
 --- !u!114 &862621948294645814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,11 +216,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skill: {fileID: 0}
-  impactEffect: {fileID: 11400000, guid: 2c75b34599ffd2b419ab695b65005cdb, type: 2}
-  distanceBetweenImpacts: 0.1
   distance: 99
   laserSprite: {fileID: 3924551678506968721}
   targetRequired: 0
+--- !u!114 &7524939251811781075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969711209088018434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4198b057e60445749808a436d5119bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  effect: {fileID: 11400000, guid: 2c75b34599ffd2b419ab695b65005cdb, type: 2}
+  mode: 2
+  hasMaxDistance: 1
+  maxDistanceBetween: 0.25
+  delay: 0
+  autoDestroyAfter: 0
 --- !u!1 &3924551678506968723
 GameObject:
   m_ObjectHideFlags: 0

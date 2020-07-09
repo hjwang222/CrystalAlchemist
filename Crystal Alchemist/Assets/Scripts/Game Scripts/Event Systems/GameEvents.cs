@@ -46,6 +46,9 @@ public class GameEvents : MonoBehaviour
     public Action OnKill;
     public Action OnTeleport;
 
+    public Action OnEffectUpdate;
+    public Action OnLifeManaUpdate;
+
     public void DoEffectAdded(StatusEffect effect) => this.OnEffectAdded?.Invoke(effect);  
     public void DoChangeState(CharacterState state) => this.OnStateChanged?.Invoke(state);  
     public void DoMenuOverlay(bool value) => this.OnMenuOverlay?.Invoke(value);
@@ -74,6 +77,9 @@ public class GameEvents : MonoBehaviour
     public void DoCameraShake(float strength, float duration, float speed) => this.OnCameraShake?.Invoke(strength, duration, speed);
     public void DoCameraStill(float speed) => this.OnCameraStill?.Invoke(speed);
     public void DoTeleport() => this.OnTeleport?.Invoke();
+
+    public void DoStatusEffectUpdate() => this.OnEffectUpdate?.Invoke();
+    public void DoManaLifeUpdate() => this.OnLifeManaUpdate?.Invoke();
 
     public bool HasReturn()
     {

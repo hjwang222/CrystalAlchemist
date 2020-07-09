@@ -12,23 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266771f26e0200047a77d2d39c8b8900, type: 3}
   m_Name: Dash
   m_EditorClassIdentifier: 
-  abilityName: Dash
-  abilityNameEnglish: Dash
   skill: {fileID: 6162400572210519683, guid: 689f7820c63a03148aa81b962ee64ad6, type: 3}
   useTargetSystem: 0
   targetingProperty: {fileID: 0}
+  useIndicator: 0
+  indicator:
+    indicatorProperty: {fileID: 0}
   hasSkillBookInfo: 1
+  icon: {fileID: 0}
   info: {fileID: 11400000, guid: 5c0c03559299d9745a383313c356fbab, type: 2}
   cooldown: 1
-  hasMaxDuration: 0
-  maxDuration: 1
-  rapidFireDelay: 1
+  hasMaxDuration: 1
+  maxDuration: 0.5
+  hasDelay: 0
+  delay: 1
   hasCastTime: 0
   castTime: 0
   showCastbar: 1
+  castAnimation: {fileID: 0}
   hasMaxAmount: 1
   maxAmount: 1
-  requirements: 0
+  requirements: {fileID: 0}
   isRapidFire: 0
   remoteActivation: 0
   deactivateButtonUp: 0
@@ -42,3 +46,4 @@ MonoBehaviour:
   holdTimer: 0
   state: 6
   enabled: 1
+  active: 1

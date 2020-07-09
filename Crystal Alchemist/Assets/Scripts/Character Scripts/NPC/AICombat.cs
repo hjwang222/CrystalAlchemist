@@ -13,6 +13,7 @@ public class AICombat : CharacterCombat
 
     [BoxGroup("AI")]
     [SerializeField]
+    [ShowIf("startPhase")]
     [Tooltip("False, wenn Animator Event verwendet wird")]
     private bool startImmediately = true;
 

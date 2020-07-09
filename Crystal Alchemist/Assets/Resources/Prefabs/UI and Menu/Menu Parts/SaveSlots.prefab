@@ -462,6 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &1135705853688280939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2057,7 +2058,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  setFirstSelected: 0
+  selectFirst: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -2105,12 +2107,10 @@ MonoBehaviour:
     keyItems: []
     characterName: 
     race: 
-    startPosition: []
-    startScene: 
-    startName: 
-    lastPosition: []
-    lastScene: 
-    lastName: 
+    progress: []
+    teleportPoints: []
+    startTeleport: 
+    lastTeleport: 
     timePlayed: 0
 --- !u!1 &2432446301680706510
 GameObject:
@@ -2901,7 +2901,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  setFirstSelected: 1
+  selectFirst: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -2949,12 +2950,10 @@ MonoBehaviour:
     keyItems: []
     characterName: 
     race: 
-    startPosition: []
-    startScene: 
-    startName: 
-    lastPosition: []
-    lastScene: 
-    lastName: 
+    progress: []
+    teleportPoints: []
+    startTeleport: 
+    lastTeleport: 
     timePlayed: 0
 --- !u!1 &3922032589821426600
 GameObject:
@@ -3718,6 +3717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &4381171460439264470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3894,7 +3894,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  setFirstSelected: 0
+  selectFirst: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -3955,7 +3956,7 @@ MonoBehaviour:
   - {fileID: 8107114129190850368}
   - {fileID: 6460786271911406866}
   - {fileID: 3913498333538436249}
-  launcher: {fileID: 0}
+  savePointInfo: {fileID: 0}
   saveGame: {fileID: 0}
 --- !u!1 &4381171462000307652
 GameObject:
@@ -4449,7 +4450,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 0}
-  setFirstSelected: 0
+  selectFirst: 0
+  isInteractable: 1
   overrideNavigation: 0
   up: []
   down: []
@@ -4497,12 +4499,10 @@ MonoBehaviour:
     keyItems: []
     characterName: 
     race: 
-    startPosition: []
-    startScene: 
-    startName: 
-    lastPosition: []
-    lastScene: 
-    lastName: 
+    progress: []
+    teleportPoints: []
+    startTeleport: 
+    lastTeleport: 
     timePlayed: 0
 --- !u!1 &4673675774153095879
 GameObject:
@@ -7596,6 +7596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &4718566816965952401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9010,6 +9011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9464126c7fcfbdf4c80e49e3e8dae055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 4
 --- !u!114 &5458686698548614604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9802,26 +9804,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.materialCount
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
-      propertyPath: m_margin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
-      propertyPath: m_margin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
-      propertyPath: m_margin.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
-        type: 3}
-      propertyPath: m_margin.w
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3053134388343858298, guid: 1a468478cc126554dbed689fa02b4eb0,
         type: 3}

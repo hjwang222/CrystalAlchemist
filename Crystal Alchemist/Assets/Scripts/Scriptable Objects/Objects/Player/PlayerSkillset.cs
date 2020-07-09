@@ -8,6 +8,8 @@ public class PlayerSkillset : ScriptableObject
     [SerializeField]
     private List<Ability> abilities = new List<Ability>();
 
+    public float deactiveDelay = 0.3f;
+
     public void Clear()
     {
         Initialize();
@@ -62,4 +64,11 @@ public class PlayerSkillset : ScriptableObject
         Ability newAbility = AbilityUtil.InstantiateAbility(ability);
         this.abilities.Add(newAbility);
     }
+
+    public void EnableAbility(bool value)
+    {
+        foreach (Ability ability in this.abilities) ability.active = value;
+    }
+
+
 }

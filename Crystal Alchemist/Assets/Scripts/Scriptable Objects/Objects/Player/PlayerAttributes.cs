@@ -16,14 +16,6 @@ public class PlayerAttributes : ScriptableObject
 {
     [BoxGroup("Base")]
     [SerializeField]
-    private SimpleSignal healtSignal;
-
-    [BoxGroup("Base")]
-    [SerializeField]
-    private SimpleSignal manaSignal;
-
-    [BoxGroup("Base")]
-    [SerializeField]
     private CharacterValues playerValues;
 
     [BoxGroup("Attributes")]
@@ -89,7 +81,7 @@ public class PlayerAttributes : ScriptableObject
     }
 
     [Button]
-    private void SetValues()
+    private void SetPoints()
     {
         SetPoints(attributeType.lifeExpander, this.health);
         SetPoints(attributeType.lifeRegen, this.healthRegen);
@@ -97,6 +89,8 @@ public class PlayerAttributes : ScriptableObject
         SetPoints(attributeType.manaRegen, this.manaRegen);
         SetPoints(attributeType.buffPlus, this.buffPlus);
         SetPoints(attributeType.debuffMinus, this.debuffMinus);
+
+        SetValues();
     }
 
     public void SetPoints(attributeType type, int points)
@@ -111,42 +105,25 @@ public class PlayerAttributes : ScriptableObject
             case attributeType.debuffMinus: this.debuffMinus = points; break;
         }
 
-        SetValue(type);
-
         this.pointsSpent = this.health + this.mana + this.healthRegen + this.manaRegen + this.buffPlus + this.debuffMinus;
     }
 
-    public float SetValue(attributeType type)
+    public void SetValues()
     {
-        try
-        {
-            switch (type)
-            {
-                case attributeType.lifeExpander:
-                    playerValues.maxLife = this.expanderValues[this.health];
-                    if (playerValues.life > playerValues.maxLife) playerValues.life = playerValues.maxLife;
-                    this.healtSignal.Raise();
-                    break;
-                case attributeType.manaExpander:
-                    playerValues.maxMana = this.expanderValues[this.mana];
-                    if (playerValues.mana > playerValues.maxMana) playerValues.mana = playerValues.maxMana;
-                    this.manaSignal.Raise();
-                    break;
-                case attributeType.lifeRegen:
-                    playerValues.lifeRegen = (float)this.percentageValues[this.healthRegen] / 100f;
-                    break;
-                case attributeType.manaRegen:
-                    playerValues.manaRegen = (float)this.percentageValues[this.manaRegen] / 100f;
-                    break;
-                case attributeType.buffPlus:
-                    playerValues.buffPlus = this.percentageValues[this.buffPlus];
-                    break;
-                case attributeType.debuffMinus:
-                    playerValues.debuffMinus = -this.percentageValues[this.debuffMinus];
-                    break;
-            }
-        }
-        catch { }
-        return 0;
+        playerValues.maxLife = this.expanderValues[this.health];
+        if (playerValues.life > playerValues.maxLife) playerValues.life = playerValues.maxLife;
+
+        playerValues.maxMana = this.expanderValues[this.mana];
+        if (playerValues.mana > playerValues.maxMana) playerValues.mana = playerValues.maxMana;
+
+        playerValues.lifeRegen = (float)this.percentageValues[this.healthRegen] / 100f;
+
+        playerValues.manaRegen = (float)this.percentageValues[this.manaRegen] / 100f;
+
+        playerValues.buffPlus = this.percentageValues[this.buffPlus];
+
+        playerValues.debuffMinus = -this.percentageValues[this.debuffMinus];
+
+        GameEvents.current.DoManaLifeUpdate();
     }
 }

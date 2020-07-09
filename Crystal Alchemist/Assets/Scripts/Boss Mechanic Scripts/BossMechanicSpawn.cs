@@ -16,6 +16,11 @@ public class BossMechanicSpawn : BossMechanicProperty
 
         [Tooltip("Set to true, if skill needs to know the target")]
         public bool AddTarget = false;
+        
+        public bool overrideDuration = false;
+
+        [ShowIf("overrideDuration")]
+        public float maxDuration = 0f;
 
         [ShowIf("spawnObject")]
         [Tooltip("Time between Spawns")]
@@ -159,10 +164,7 @@ public class BossMechanicSpawn : BossMechanicProperty
         }
         else if (this.childProperty.spawnObject.GetType() == typeof(Ability))
         {
-            Ability ability = Instantiate(this.childProperty.spawnObject) as Ability;
-            Skill skill = ability.InstantiateSkill(target, position, this.sender, rotation);
-            skill.transform.SetParent(this.transform);
-            Destroy(ability);
+            SetAbility(position, rotation);
         }
     }
 
@@ -173,16 +175,29 @@ public class BossMechanicSpawn : BossMechanicProperty
 
     private void SetAdd(Character character)
     {
-        if (character != null) character.InitializeAddSpawn();
+        if (character != null) character.InitializeAddSpawn(this.childProperty.overrideDuration, this.childProperty.maxDuration);
     }
 
     private void SetAdd(AI character, Character target)
     {
-        if (character != null) character.InitializeAddSpawn(target);
+        if (character != null) character.InitializeAddSpawn(target, this.childProperty.overrideDuration, this.childProperty.maxDuration);        
     }
 
     private void SetSkill(Skill skill, Character target, Quaternion rotation)
     {
-        if (skill != null) skill.InitializeStandAlone(this.sender, target, rotation);
+        if (skill != null)
+        {
+            skill.InitializeStandAlone(this.sender, target, rotation);
+            if (this.childProperty.overrideDuration) skill.SetMaxDuration(true, this.childProperty.maxDuration);
+        }
+    }
+
+    private void SetAbility(Vector2 position, Quaternion rotation)
+    {
+        Ability ability = Instantiate(this.childProperty.spawnObject) as Ability;
+        Skill skill = ability.InstantiateSkill(target, position, this.sender, rotation);
+        skill.transform.SetParent(this.transform);
+        if (this.childProperty.overrideDuration) skill.SetMaxDuration(true, this.childProperty.maxDuration);
+        Destroy(ability);
     }
 }

@@ -46,7 +46,6 @@ public class AIAction
     [SerializeField]
     private string translationID;
 
-    [HideIf("type", AIActionType.movement)]
     [HideIf("type", AIActionType.startPhase)]
     [HideIf("type", AIActionType.animation)]
     [HideIf("type", AIActionType.cannotDie)]
@@ -268,6 +267,7 @@ public class AIAction
             case AIActionType.endPhase: EndPhase(npc); break;
             case AIActionType.signal: StartSignal(); break;
             case AIActionType.music: StartMusic(); break;
+            case AIActionType.movement: StartMovement(npc); break;
         }
     }
 
@@ -450,8 +450,8 @@ public class AIAction
 
     private void StartAnimation(AI npc)
     {
-        if(this.isTrigger) AnimatorUtil.SetAnimatorParameter(npc.animator, this.animations);
-        else AnimatorUtil.SetAnimatorParameter(npc.animator, this.animations, this.value);
+        if(this.isTrigger) npc.PlayAnimation(this.animations);
+        else npc.PlayAnimation(this.animations, this.value);
         Deactivate();
     }
 
@@ -540,9 +540,13 @@ public class AIAction
 
     #endregion
 
-    private void Deactivate() =>  this.isActive = false;    
+    private void Deactivate() =>  this.isActive = false;
 
+    #region Movement
 
+    private void StartMovement(AI npc) => npc.MoveCharacters(this.position, this.duration);    
+
+    #endregion
 
     private void AbilityChanged()
     {

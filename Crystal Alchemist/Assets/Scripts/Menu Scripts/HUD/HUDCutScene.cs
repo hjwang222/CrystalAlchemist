@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HUDCutScene : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> gameObjects = new List<GameObject>();
-
-    [SerializeField]
     private BoolValue CutSceneValue;
+
+    private void Awake() => this.CutSceneValue.setValue(false);    
 
     private void Start()
     {
@@ -17,8 +15,5 @@ public class HUDCutScene : MonoBehaviour
 
     private void OnDestroy() => GameEvents.current.OnCutScene += this.SetCutScene;    
 
-    private void SetCutScene()
-    {
-        foreach(GameObject gameObj in this.gameObjects) gameObj.SetActive(!this.CutSceneValue.GetValue());        
-    }
+    private void SetCutScene() => this.gameObject.SetActive(!this.CutSceneValue.GetValue());            
 }

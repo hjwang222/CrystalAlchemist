@@ -25,25 +25,12 @@ public class CharacterCreatorMenu : MenuBehaviour
     [SerializeField]
     private List<CharacterCreatorPartProperty> properties = new List<CharacterCreatorPartProperty>();
 
-    [BoxGroup("Easy Access")]
-    [Required]
-    [SerializeField]
-    private TMP_InputField inputField;
-
-    [BoxGroup("Easy Access")]
-    [Required]
-    [SerializeField]
-    private Selectable confirmButton;
-
     public override void Start()
     {
         base.Start();
         GameUtil.setPreset(this.saveGame.playerPreset, this.creatorPreset);
         updateGear();
         updatePreview();
-
-        if (this.inputField.text.Length > 1) this.confirmButton.interactable = true;
-        else this.confirmButton.interactable = false;
     }
 
     public void Confirm()

@@ -48,8 +48,8 @@ public class PlayerData
         this.timePlayed = saveGame.timePlayed.GetValue();
         this.characterName = saveGame.GetCharacterName();
 
-        SetStartTeleport(saveGame.teleportList.nextTeleport);
-        SetLastTeleport(saveGame.teleportList.lastTeleport);
+        SetStartTeleport(saveGame.teleportList.GetNextTeleport());
+        SetLastTeleport(saveGame.teleportList.GetLastTeleport());
         SetTeleportList(saveGame.teleportList);
         SetProgress(saveGame.progress);
     }
@@ -113,9 +113,17 @@ public class PlayerData
         foreach(TeleportStats stat in list.GetStats()) this.teleportPoints.Add(stat.teleportName);        
     }
 
-    private void SetStartTeleport(TeleportStats stats) => this.startTeleport = stats.teleportName;
+    private void SetStartTeleport(TeleportStats stats)
+    {
+        if (stats == null) return;
+        this.startTeleport = stats.teleportName;
+    }
 
-    private void SetLastTeleport(TeleportStats stats) => this.lastTeleport = stats.teleportName;
+    private void SetLastTeleport(TeleportStats stats)
+    {
+        if (stats == null) return;
+        this.lastTeleport = stats.teleportName;
+    }
 
     public string GetStartTeleportName()
     {

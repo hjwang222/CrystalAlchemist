@@ -23,9 +23,14 @@ public static class FormatUtil
                 Player temp = (Player)obj;
                 result = result.Replace("<player>", temp.GetCharacterName());
             }
-            else if (obj.GetType() == typeof(Interactable))
+            else if (obj.GetType().DeclaringType == typeof(Treasure))
             {
-                string temp = GetLocalisedText(obj.GetType().ToString(), LocalisationFileType.objects);
+                string temp = GetLocalisedText("Treasure", LocalisationFileType.objects);
+                result = result.Replace("<interactable>", temp);
+            }
+            else if (obj.GetType().DeclaringType == typeof(Door))
+            {
+                string temp = GetLocalisedText("Door", LocalisationFileType.objects);
                 result = result.Replace("<interactable>", temp);
             }
             else if (obj.GetType() == typeof(ItemStats))

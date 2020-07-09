@@ -12,29 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266771f26e0200047a77d2d39c8b8900, type: 3}
   m_Name: Schild
   m_EditorClassIdentifier: 
-  abilityName: Schild
-  abilityNameEnglish: Shield
   skill: {fileID: 975855144787553018, guid: 42f53cb1b0e3a1e4c98ecc587d8dd07e, type: 3}
   useTargetSystem: 0
   targetingProperty: {fileID: 0}
+  useIndicator: 0
+  indicator:
+    indicatorProperty: {fileID: 0}
   hasSkillBookInfo: 1
+  icon: {fileID: 0}
   info: {fileID: 11400000, guid: 4b32a0c93eb66a949b10938fa261e483, type: 2}
   cooldown: 0.3
   hasMaxDuration: 0
   maxDuration: 1
-  rapidFireDelay: 1
+  hasDelay: 0
+  delay: 1
   hasCastTime: 0
   castTime: 0
   showCastbar: 1
+  castAnimation: {fileID: 0}
   hasMaxAmount: 1
   maxAmount: 1
-  requirements: 0
+  requirements: {fileID: 0}
   isRapidFire: 0
   remoteActivation: 0
   deactivateButtonUp: 1
   keepCast: 0
   shareDamage: 0
-  positionOffset: 0.125
+  positionOffset: 0
   attachToSender: 1
   lockDirection: 1
   timeDistortion: 0
@@ -42,3 +46,4 @@ MonoBehaviour:
   holdTimer: 0
   state: 6
   enabled: 1
+  active: 1

@@ -13,9 +13,6 @@ public class SkillSequence : ScriptableObject
     public void InstantiateSequence(AI npc)
     {
         BossMechanic bossMechanic = this.bossMechanics[Random.Range(0, this.bossMechanics.Count)];
-
-        BossMechanic newSequence = Instantiate(bossMechanic);
-        newSequence.name = bossMechanic.name;
-        newSequence.Initialize(npc, npc.target);
+        AbilityUtil.instantiateSequence(bossMechanic, npc);
     }
 }

@@ -17,7 +17,16 @@ public class Fading : MonoBehaviour
     [SerializeField]
     private Color colorFadeOut = Color.white;
 
-    private void Start() => StartCoroutine(delayCo());    
+    private void Start()
+    {
+        StartCoroutine(delayCo());
+        MenuEvents.current.OnFadeOut += FadeOut;
+    }
+
+    private void OnDestroy()
+    {
+        MenuEvents.current.OnFadeOut -= FadeOut;
+    }
 
     private void FadeIn()
     {

@@ -16,6 +16,9 @@ public class PlayerAbilities : CharacterCombat
     private float timer;
     private Player player;
 
+    private void Start() => GameEvents.current.OnCancel += DisableAbilities;
+
+    private void OnDestroy() => GameEvents.current.OnCancel -= DisableAbilities;
 
     public override void Initialize()
     {
@@ -44,14 +47,24 @@ public class PlayerAbilities : CharacterCombat
         if (context.started)
         {
             this.isPressed = true;
-            this.buttons.currentAbility = GetAbility(context);
-            ButtonDown(this.buttons.currentAbility);
+
+            Ability ability = GetAbility(context);
+            if (ability != null && this.buttons.currentAbility == null)
+            {
+                this.buttons.currentAbility = ability;
+                ButtonDown(this.buttons.currentAbility);
+            }            
         }
         else if (context.canceled)
         {
             this.isPressed = false;
-            ButtonUp(this.buttons.currentAbility);
-            this.buttons.currentAbility = null;
+
+            Ability ability = GetAbility(context);
+            if (ability != null && this.buttons.currentAbility == ability)
+            {                
+                ButtonUp(this.buttons.currentAbility);
+                this.buttons.currentAbility = null;
+            }
         }
     }
 
@@ -86,7 +99,7 @@ public class PlayerAbilities : CharacterCombat
     {
         if (ability == null) return;
 
-        if (ability.state == AbilityState.charged && !ability.isRapidFire) UseAbilityOnTarget(ability, null); //use Skill when charged
+        if (ability.enabled && ability.state == AbilityState.charged && !ability.isRapidFire) UseAbilityOnTarget(ability, null); //use Skill when charged
         else if (ability.state == AbilityState.lockOn && ability.isRapidFire) HideTargetingSystem(ability); //hide Targeting System when released
 
         UnChargeAbility(ability);
@@ -102,5 +115,16 @@ public class PlayerAbilities : CharacterCombat
             UseAbilityOnTargets(ability);//use Skill on locked Targets and hide Targeting System 
             HideTargetingSystem(ability);
         }
+    }
+
+    private void DisableAbilities()
+    {
+        this.skillSet.EnableAbility(false);
+        Invoke("EnableAbilities", this.skillSet.deactiveDelay);
+    }
+
+    private void EnableAbilities()
+    {
+        this.skillSet.EnableAbility(true);
     }
 }

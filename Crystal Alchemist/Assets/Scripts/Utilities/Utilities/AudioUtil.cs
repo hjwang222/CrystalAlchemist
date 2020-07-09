@@ -56,7 +56,7 @@ public static class AudioUtil
         if (soundsAlreadyPlayed.ContainsKey(clip))
         {
             float lastTimePlayed = soundsAlreadyPlayed[clip];
-            float maximum = .05f;
+            float maximum = 0.1f;
             if (lastTimePlayed + maximum < Time.time)
             {
                 soundsAlreadyPlayed[clip] = Time.time;

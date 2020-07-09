@@ -16,11 +16,7 @@ public class AIAggroSystem : MonoBehaviour
     [Required]
     private AI npc;
 
-    [SerializeField]
-    [BoxGroup("Required")]
-    private GameObject cluePosition;
-
-    private GameObject activeClue;
+    private AggroClue activeClue;
     #endregion
 
 
@@ -80,7 +76,7 @@ public class AIAggroSystem : MonoBehaviour
     private void OnDisable()
     {
         this.npc.target = null;
-        this.hideClue();
+        this.HideClue();
         this.npc.aggroList.Clear();
     }
 
@@ -136,7 +132,7 @@ public class AIAggroSystem : MonoBehaviour
                 //Aggro lost, Target lost
                 if (this.npc.target == character) this.npc.target = null;
                 charactersToRemove.Add(character);
-                hideClue();
+                HideClue();
             }
         }
 
@@ -151,36 +147,19 @@ public class AIAggroSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         this.npc.target = character;
-        StartCoroutine(showClueCo(MasterManager.markAttack, this.aggroStats.activeClueDuration));
+        //AggroArrow temp = Instantiate(MasterManager.aggroArrow, this.npc.GetHeadPosition(), Quaternion.identity);
+        //temp.SetTarget(this.npc.target);
+        ShowClue(MasterManager.markAttack);
     }
 
-
-    private IEnumerator showClueCo(GameObject clue, float duration)
+    private void ShowClue(AggroClue clue)
     {
-        hideClue();
-        showClue(clue);
-        yield return new WaitForSeconds(duration);
-        hideClue();
+        if (this.activeClue == null) this.activeClue = Instantiate(clue, this.npc.GetHeadPosition(), Quaternion.identity, this.npc.transform);        
     }
 
-    private void showClue(GameObject clue)
+    private void HideClue()
     {
-        if (clue != null && this.activeClue == null)
-        {
-            Vector2 position = this.npc.transform.position;
-            if (this.cluePosition != null) position = cluePosition.transform.position;
-
-            this.activeClue = Instantiate(clue, position, Quaternion.identity, this.npc.transform);
-        }
-    }
-
-    private void hideClue()
-    {
-        if (this.activeClue != null)
-        {
-            Destroy(this.activeClue);
-            this.activeClue = null;
-        }
+        if (this.activeClue != null) this.activeClue.Hide();
     }
 
     private void addToAggroList(Character character)
@@ -230,7 +209,7 @@ public class AIAggroSystem : MonoBehaviour
             if (this.npc.aggroList.Count == 1 && this.aggroStats.firstHitMaxAggro) addAggro(newTarget, (this.aggroStats.aggroNeededToTarget + (this.aggroStats.aggroDecreaseFactor * (-1))));
 
             if (this.npc.aggroList[newTarget][1] == 0) setParameterOfAggrolist(newTarget, this.aggroStats.aggroDecreaseFactor);
-            if (this.npc.target == null) StartCoroutine(showClueCo(MasterManager.markTarget, this.aggroStats.foundClueDuration));
+            if (this.npc.target == null) ShowClue(MasterManager.markTarget);
         }
     }
 
@@ -241,7 +220,7 @@ public class AIAggroSystem : MonoBehaviour
         {
             addToAggroList(newTarget);
             setParameterOfAggrolist(newTarget, aggroIncrease);
-            if (this.npc.target == null) StartCoroutine(showClueCo(MasterManager.markTarget, this.aggroStats.foundClueDuration));
+            if (this.npc.target == null) ShowClue(MasterManager.markTarget);
         }
     }
 

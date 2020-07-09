@@ -21,7 +21,7 @@ public static class AbilityUtil
         return newAbility;
     }
 
-    public static void instantiateSequence(BossMechanic sequence, AI npc, List<string> patterns)
+    public static void instantiateSequence(BossMechanic sequence, AI npc)
     {
         BossMechanic newSequence = Object.Instantiate(sequence);
         newSequence.name = sequence.name;
@@ -31,5 +31,10 @@ public static class AbilityUtil
     public static Skill getSkillByCollision(GameObject collision)
     {
         return collision.GetComponentInParent<Skill>();
+    }
+
+    public static void SetEffectOnHit(Skill skill, Vector2 position)
+    {
+        foreach (SkillEffectModule modules in skill.GetComponents<SkillEffectModule>()) modules.OnHit(position);
     }
 }

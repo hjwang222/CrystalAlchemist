@@ -42,12 +42,13 @@ public class PlayerButtons : ScriptableObject
         {
             if (playerButton.ability != null)
             {
-                if ((this.currentAbility == null
-                  || this.currentAbility == playerButton.ability)
+                if ((this.currentAbility == null || this.currentAbility == playerButton.ability)
                     && playerButton.ability.HasEnoughResourceAndAmount()
+                    && playerButton.ability.active
                     && canFight) playerButton.ability.enabled = true;
                 else if (this.currentAbility != playerButton.ability
                     || !canFight
+                    || !playerButton.ability.active
                     || !playerButton.ability.HasEnoughResourceAndAmount())
                     playerButton.ability.enabled = false;
             }

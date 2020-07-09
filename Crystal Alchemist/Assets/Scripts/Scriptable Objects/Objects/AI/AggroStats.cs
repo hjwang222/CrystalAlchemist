@@ -27,12 +27,6 @@ public class AggroStats : ScriptableObject
     public float targetChangeDelay = 0f;
 
     [BoxGroup("Aggro Object Attributes")]
-    public float foundClueDuration = 1;
-
-    [BoxGroup("Aggro Object Attributes")]
-    public float activeClueDuration = 1;
-
-    [BoxGroup("Aggro Object Attributes")]
     [Required]
     public Affections affections;
 }

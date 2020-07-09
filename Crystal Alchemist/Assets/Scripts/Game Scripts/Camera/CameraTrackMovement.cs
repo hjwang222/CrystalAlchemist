@@ -18,7 +18,7 @@ public class CameraTrackMovement : MonoBehaviour
     private float delay = 1;
 
     [SerializeField]
-    private UnityEvent onAfterCameraCompleted;
+    private UnityEvent OnCompleted;
 
     private CinemachineVirtualCamera vcam;
     private CinemachineTrackedDolly dolly;
@@ -33,12 +33,10 @@ public class CameraTrackMovement : MonoBehaviour
     private void LateUpdate()
     {
         this.dolly.m_PathPosition += speed * Time.deltaTime;
-        if (this.dolly.m_PathPosition >= 1) StartCoroutine(delayCo());
+        if (this.dolly.m_PathPosition >= 1) Invoke("Completed", this.delay);
     }
 
-    private IEnumerator delayCo()
-    {
-        yield return new WaitForSeconds(this.delay);
-        onAfterCameraCompleted?.Invoke();
-    }
+    public void Completed() => this.OnCompleted?.Invoke();
+
+    public void RaiseSignal(SimpleSignal signal) => signal?.Raise();
 }

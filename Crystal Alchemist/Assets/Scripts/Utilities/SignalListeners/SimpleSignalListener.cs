@@ -1,4 +1,5 @@
 ﻿
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +8,7 @@ public class SimpleSignalListener : MonoBehaviour
     public SimpleSignal signal;
     public UnityEvent signalEvent;
 
+    [Button]
     public void OnSignalRaised()
     {
         this.signalEvent.Invoke();

@@ -13,6 +13,6 @@ public class StartNewGameScript : MonoBehaviour
     {
         Cursor.visible = false;
         this.saveGame.teleportList.SetNextTeleport(this.startTeleport);
-        SceneManager.LoadSceneAsync(this.saveGame.teleportList.nextTeleport.scene);
+        SceneManager.LoadSceneAsync(this.saveGame.teleportList.GetNextTeleport().scene);
     }
 }

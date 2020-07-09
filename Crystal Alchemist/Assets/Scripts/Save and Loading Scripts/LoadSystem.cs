@@ -42,8 +42,8 @@ public class LoadSystem
             if (teleport != null) list.AddTeleport(teleport);
         }
 
-        list.nextTeleport = MasterManager.GetTeleportStats(data.startTeleport);
-        list.lastTeleport = MasterManager.GetTeleportStats(data.lastTeleport);
+        list.SetNextTeleport(MasterManager.GetTeleportStats(data.startTeleport));
+        list.SetLastTeleport(MasterManager.GetTeleportStats(data.lastTeleport));
     }
 
     private static void LoadBasicValues(PlayerData data, CharacterValues playerValue, PlayerAttributes attributes)
@@ -57,6 +57,8 @@ public class LoadSystem
         attributes.SetPoints(attributeType.manaRegen, data.manaRegen);
         attributes.SetPoints(attributeType.buffPlus, data.buffplus);
         attributes.SetPoints(attributeType.debuffMinus, data.debuffminus);
+
+        attributes.SetValues();
     }
 
     public static void loadPlayerSkills(PlayerData data, PlayerButtons buttons, PlayerSkillset skillSet)
