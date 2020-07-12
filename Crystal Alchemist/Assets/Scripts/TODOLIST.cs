@@ -4,13 +4,13 @@ public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.8)
     //REWORK: Soundeffects
-    //REWORK: Musik
 
     //GRAPHICS: New Outfits (Sci Fi, Visor, Mundschutz, Devine Robe, Halo)
     //GRAPHICS: Player Animations (Casting, Arrow, Spear, Victory)
     //GRAPHICS: New Nitro Animation
     //GRAPHICS: Smoke (Collectable, Interactable, Warp)
 
+    //CONTENT: Jukebox
     //CONTENT: New Enemies (Bat, Bee, Spider, Libelle, Flower, Crystal, Zombie, Ghost, Skeleton, Butterfly, etc)
     //CONTENT: Sin Eater Race (glowing eyes, halo, wings, etc)
     //CONTENT: New Maps

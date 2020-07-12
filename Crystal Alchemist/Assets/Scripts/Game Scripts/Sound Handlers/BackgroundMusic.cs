@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 public class BackgroundMusic : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class BackgroundMusic : MonoBehaviour
         if (this.playOnAwake) PlayMusic();
     }
 
+    [Button]
     public void PlayMusic()
     {
         StopMusic();
