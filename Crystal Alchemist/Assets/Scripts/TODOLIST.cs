@@ -3,7 +3,7 @@
 public class TODOLIST : MonoBehaviour
 {
     //TODO (0.2.5.8)
-    //REWORK: Soundeffects
+    //REWORK: Soundeffects, Music Licence and Graphics
 
     //GRAPHICS: New Outfits (Sci Fi, Visor, Mundschutz, Devine Robe, Halo)
     //GRAPHICS: Player Animations (Casting, Arrow, Spear, Victory)
